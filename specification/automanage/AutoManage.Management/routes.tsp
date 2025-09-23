@@ -13,18 +13,35 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Automanage;
 
+alias ConfigurationProfileAssignmentListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  }
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ConfigurationProfileAssignmentsOperationGroup {
   /**
    * Get list of configuration profile assignments
    */
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Automanage/configurationProfileAssignments")
-  @list
-  list(
-    ...ApiVersionParameter,
-    ...ResourceGroupParameter,
-    ...SubscriptionIdParameter,
-  ): ArmResponse<ConfigurationProfileAssignmentList> | ErrorResponse;
+  list is ConfigurationProfileAssignmentListOps.List<
+    ConfigurationProfileAssignment,
+    Response = ArmResponse<ConfigurationProfileAssignmentList>
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
