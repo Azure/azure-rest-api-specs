@@ -13,20 +13,22 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @doc("The category of the evaluator")
+@added(Versions.v2025_10_15_preview)
 union EvaluatorCategory {
   string,
 
-  @doc("Quality evaluator")
+  @doc("Quality")
   quality: "Quality",
 
-  @doc("Safety evaluator")
+  @doc("Risk & Safety")
   safety: "Safety",
 
-  @doc("Performance evaluator")
-  performance: "Performance",
+  @doc("Agents")
+  agents: "Agents",
 }
 
 @doc("The type of the evaluator")
+@added(Versions.v2025_10_15_preview)
 union EvaluatorType {
   string,
 
@@ -38,6 +40,7 @@ union EvaluatorType {
 }
 
 @doc("The type of evaluator definition")
+@added(Versions.v2025_10_15_preview)
 union EvaluatorDefinitionType {
   string,
 
@@ -62,6 +65,7 @@ union EvaluatorDefinitionType {
 
 #suppress "@azure-tools/typespec-azure-core/no-unknown"  
 @doc("Base evaluator configuration with discriminator")
+@added(Versions.v2025_10_15_preview)
 @discriminator("type")
 model EvaluatorDefinition {
   @doc("The type of evaluator definition")
@@ -78,6 +82,7 @@ model EvaluatorDefinition {
 }
 
 @doc("Code-based evaluator definition using python code")
+@added(Versions.v2025_10_15_preview)
 model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.code;
 
@@ -86,6 +91,7 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 }
 
 @doc("Prompt-based evaluator")
+@added(Versions.v2025_10_15_preview)
 model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
   type: EvaluatorDefinitionType.prompt;
 
@@ -95,7 +101,7 @@ model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
 
 @doc("Evaluator Definition")
 @resource("evaluators")
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_10_15_preview)
 model EvaluatorVersion {
   @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
   display_name?: string;
@@ -128,6 +134,7 @@ model EvaluatorVersion {
 }
 
 @doc("The success result of createEvaluatorVersion")
+@added(Versions.v2025_10_15_preview)
 model EvaluatorCreateResult {
   @doc("The Evaluator's id")
   id: string;

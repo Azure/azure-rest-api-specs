@@ -16,7 +16,7 @@ namespace Azure.AI.Projects;
 alias ListEvaluatorVersionsParameters = {};
 alias EvaluatorInputParameters = InputParameters<EvaluatorVersion, "evaluatorVersion">;
 
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_10_15_preview)
 interface Evaluators {
   // GET /evaluators/{evaluatorName}/versions
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
