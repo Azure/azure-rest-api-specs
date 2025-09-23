@@ -15,11 +15,11 @@ namespace Microsoft.AzureCis;
 @added(Versions.v2024_06_24_preview)
 @doc("DSTS service client identity (SCI) group, which is subjectName based.")
 model DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties {
+  @doc("The service client identity group name. The name cannot collide with the name of another SCI group or another service account group at the same dSTS instance. Required.")
+  groupName: string;
+
   @doc("List of common subject names for the service client identity group. Client identification is based on the combination of the Subject Name and Issuer of the certificate. For groups, the CommonSubjectNames can be explicitly specified. When creating a SubjectName-Based SCI Group and subsequently creating SCIs, the subject names associated with the group automatically appear in the SCI. Optional.")
   commonSubjectNames?: Array<string>;
-
-  @doc("The service client identity group name. The name cannot collide with the name of another service client identity group or another service account group at the same dSTS instance. Please follow dSTS guideline for naming convention. Required.")
-  groupName: string;
 
   @doc("Common service client identity name. If set, all Service Client Identities (SCIs) belonging to this group will have the same name (as set by this field). Optional.")
   commonServiceClientIdentityName?: string;

@@ -2648,16 +2648,16 @@
       "type": "object",
       "description": "DSTS service client identity (SCI) group, which is managed by DSTS.",
       "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The service client identity group name. The name cannot collide with the name of another SCI group or another service account group at the same dSTS instance. Required."
+        },
         "commonSubscriptions": {
           "type": "array",
           "description": "List of common subscriptions. Optional.",
           "items": {
             "type": "string"
           }
-        },
-        "groupName": {
-          "type": "string",
-          "description": "The service client identity group name. The name cannot collide with the name of another service client identity group or another service account group at the same dSTS instance. Please follow dSTS guideline for naming convention. Required."
         },
         "commonServiceClientIdentityName": {
           "type": "string",
@@ -3156,16 +3156,16 @@
       "type": "object",
       "description": "DSTS service client identity (SCI) group, which is subjectName based.",
       "properties": {
+        "groupName": {
+          "type": "string",
+          "description": "The service client identity group name. The name cannot collide with the name of another SCI group or another service account group at the same dSTS instance. Required."
+        },
         "commonSubjectNames": {
           "type": "array",
           "description": "List of common subject names for the service client identity group. Client identification is based on the combination of the Subject Name and Issuer of the certificate. For groups, the CommonSubjectNames can be explicitly specified. When creating a SubjectName-Based SCI Group and subsequently creating SCIs, the subject names associated with the group automatically appear in the SCI. Optional.",
           "items": {
             "type": "string"
           }
-        },
-        "groupName": {
-          "type": "string",
-          "description": "The service client identity group name. The name cannot collide with the name of another service client identity group or another service account group at the same dSTS instance. Please follow dSTS guideline for naming convention. Required."
         },
         "commonServiceClientIdentityName": {
           "type": "string",
