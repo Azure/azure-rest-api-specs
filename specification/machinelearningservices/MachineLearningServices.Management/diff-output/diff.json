@@ -11319,13 +11319,16 @@
           ]
         },
         "livenessProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "model": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "modelMountPath": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -11345,16 +11348,20 @@
           "readOnly": true
         },
         "readinessProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "requestSettings": {
-          "$ref": "#/definitions/OnlineRequestSettings"
+          "$ref": "#/definitions/OnlineRequestSettings",
+          "x-nullable": true
         },
         "scaleSettings": {
-          "$ref": "#/definitions/OnlineScaleSettings"
+          "$ref": "#/definitions/OnlineScaleSettings",
+          "x-nullable": true
         },
         "startupProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         }
       },
       "discriminator": "endpointComputeType",
@@ -11371,10 +11378,12 @@
       "type": "object",
       "properties": {
         "compute": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mirrorTraffic": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -11398,6 +11407,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -11409,6 +11419,7 @@
         },
         "traffic": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -11425,31 +11436,39 @@
       "type": "object",
       "properties": {
         "discoveryUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "intellectualPropertyPublisher": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "managedResourceGroup": {
-          "$ref": "#/definitions/ArmResourceId"
+          "$ref": "#/definitions/ArmResourceId",
+          "x-nullable": true
         },
         "managedResourceGroupSettings": {
-          "$ref": "#/definitions/ManagedResourceGroupSettings"
+          "$ref": "#/definitions/ManagedResourceGroupSettings",
+          "x-nullable": true
         },
         "mlFlowRegistryUri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "registryPrivateEndpointConnections": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryPrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
-          "type": "string"
+          "type": "string",
+          "default": "Enabled"
         },
         "regionDetails": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryRegionArmDetails"
           }
@@ -15747,16 +15766,6 @@
         }
       }
     },
-    "OnlineRequestSettings": {
-      "properties": {
-        "maxQueueWait": {
-          "default__deleted": "PT0.5S"
-        },
-        "requestTimeout": {
-          "default__deleted": "PT5S"
-        }
-      }
-    },
     "OpenAIEndpointDeploymentResourceProperties": {
       "properties__added": {
         "model": {
@@ -15796,13 +15805,6 @@
         ]
       ]
     },
-    "OsPatchingStatus": {
-      "properties": {
-        "osPatchingErrors": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "OutboundRule": {
       "properties": {
         "errorInformation": {
@@ -15822,73 +15824,16 @@
         "value"
       ]
     },
-    "OutputPathAssetReference": {
-      "properties": {
-        "jobId": {
-          "x-nullable__deleted": true
-        },
-        "path": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "PTUDeploymentUsage": {
-      "properties": {
-        "deploymentName": {
-          "x-nullable__deleted": true
-        },
-        "resourceGroup": {
-          "x-nullable__deleted": true
-        },
-        "workspaceName": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "PackageDetails": {
-      "properties": {
-        "installPath": {
-          "x-nullable__deleted": true
-        },
-        "installedVersion": {
-          "x-nullable__deleted": true
-        },
-        "name": {
-          "x-nullable__deleted": true
-        },
-        "patchedVersion": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "PaginatedComputeResourcesList": {
       "required__added": [
         "value"
       ]
     },
-    "PartialBatchDeployment": {
-      "properties": {
-        "description": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties": {
-      "properties": {
-        "tags": {
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        }
-      }
-    },
     "PartialManagedServiceIdentity": {
       "properties": {
         "userAssignedIdentities": {
           "additionalProperties": {
-            "$ref__deleted": "#/definitions/PartialUserAssignedIdentity",
-            "additionalProperties__added": {},
-            "type__added": "object"
+            "$ref__deleted": "#/definitions/PartialUserAssignedIdentity"
           }
         }
       }
@@ -15896,15 +15841,7 @@
     "PartialMinimalTrackedResource": {
       "properties": {
         "tags": {
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        }
-      }
-    },
-    "PartialRegistryPartialTrackedResource": {
-      "properties": {
-        "tags": {
+          "x-nullable__added": true,
           "additionalProperties": {
             "x-nullable__deleted": true
           }
@@ -15917,75 +15854,35 @@
           "x-ms-mutability__deleted": [
             "read"
           ],
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "value": {
           "x-ms-mutability__deleted": [
             "read"
           ],
-          "x-ms-secret__deleted": true
-        }
-      }
-    },
-    "PendingUploadRequestDto": {
-      "properties": {
-        "pendingUploadId": {
-          "x-nullable__deleted": true
-        },
-        "pendingUploadType": {
-          "default__deleted": "TemporaryBlobReference"
-        }
-      }
-    },
-    "PendingUploadResponseDto": {
-      "properties": {
-        "blobReferenceForConsumption": {
-          "x-nullable__deleted": true
-        },
-        "pendingUploadId": {
-          "x-nullable__deleted": true
-        },
-        "pendingUploadType": {
-          "default__deleted": "TemporaryBlobReference"
-        }
-      }
-    },
-    "PersonalComputeInstanceSettings": {
-      "properties": {
-        "assignedUser": {
-          "title__deleted": "Assigned User."
+          "format__added": "password"
         }
       }
     },
     "PipelineJob": {
       "properties": {
         "inputs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "description__deleted": "Command job definition.",
-            "x-nullable__deleted": true
+            "description__deleted": "Command job definition."
           }
         },
         "jobs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "x-nullable__deleted": true,
-            "additionalProperties__added": {}
+            "type__deleted": "object"
           }
         },
         "outputs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "description__deleted": "Job output definition container information on where to find job output/logs.",
-            "x-nullable__deleted": true
+            "description__deleted": "Job output definition container information on where to find job output/logs."
           }
         },
         "settings": {
-          "x-nullable__deleted": true,
           "additionalProperties__added": {}
-        },
-        "sourceJobId": {
-          "x-nullable__deleted": true
         }
       },
       "allOf": [
@@ -15995,44 +15892,6 @@
             "$ref": {
               "__old": "#/definitions/JobBase",
               "__new": "#/definitions/JobBaseProperties"
-            }
-          }
-        ]
-      ]
-    },
-    "PredictionDriftMetricThresholdBase": {
-      "properties": {
-        "threshold": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "PredictionDriftMonitoringSignal": {
-      "properties": {
-        "featureDataTypeOverride": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "PrivateEndpointConnection": {
-      "properties": {
-        "location__deleted": {
-          "type": "string"
-        },
-        "tags__deleted": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        [
-          "~",
-          {
-            "$ref": {
-              "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
             }
           }
         ]
@@ -16051,13 +15910,6 @@
         }
       }
     },
-    "PrivateEndpointResource": {
-      "properties": {
-        "subnetArmId": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "PrivateLinkResourceListResult": {
       "description__added": "[Placeholder] Discription for page model",
       "properties": {
@@ -16071,77 +15923,10 @@
         }
       }
     },
-    "ProbeSettings": {
-      "properties": {
-        "initialDelay": {
-          "x-nullable__deleted": true
-        },
-        "period": {
-          "default__deleted": "PT10S"
-        },
-        "timeout": {
-          "default__deleted": "PT2S"
-        }
-      }
-    },
-    "PropertiesBase": {
-      "properties": {
-        "description": {
-          "x-nullable__deleted": true
-        },
-        "properties": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "PyTorch": {
-      "properties": {
-        "processCountPerInstance": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "QueueSettings": {
-      "properties": {
-        "jobTier": {
-          "default__deleted": "Null"
-        }
-      }
-    },
-    "QuotaBaseProperties": {
-      "properties": {
-        "limit": {
-          "title__deleted": "Limit."
-        }
-      }
-    },
     "RaiBlocklistItemPropertiesBasicResourceArmPaginatedResult": {
       "required__added": [
         "value"
       ]
-    },
-    "RaiBlocklistItemsBulkAddRequest": {
-      "items__deleted": {
-        "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-      },
-      "x-ms-identifiers__deleted": [
-        "name"
-      ],
-      "properties__added": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      },
-      "type": {
-        "__old": "array",
-        "__new": "object"
-      }
     },
     "RaiBlocklistPropertiesBasicResourceArmPaginatedResult": {
       "required__added": [
@@ -16153,47 +15938,10 @@
         "value"
       ]
     },
-    "RandomSamplingAlgorithm": {
-      "properties": {
-        "rule": {
-          "default__deleted": "Random"
-        },
-        "seed": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "Recurrence": {
-      "properties": {
-        "startTime": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "RecurrenceSchedule": {
-      "properties": {
-        "monthDays": {
-          "x-nullable__deleted": true
-        },
-        "weekDays": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "RecurrenceTrigger": {
-      "properties": {
-        "schedule": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "RegenerateEndpointKeysRequest": {
       "properties": {
         "keyType": {
           "example__deleted": "Primary"
-        },
-        "keyValue": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -16277,41 +16025,13 @@
     },
     "RegistryPrivateEndpointConnection": {
       "properties": {
-        "id": {
-          "x-nullable__deleted": true
-        },
-        "location": {
-          "x-nullable__deleted": true
-        },
         "properties": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "RegistryPrivateEndpointConnectionProperties": {
-      "properties": {
-        "groupIds": {
-          "x-nullable__deleted": true
-        },
-        "privateEndpoint": {
-          "x-nullable__deleted": true
-        },
-        "registryPrivateLinkServiceConnectionState": {
-          "x-nullable__deleted": true
-        },
-        "provisioningState": {
           "x-nullable__deleted": true
         }
       }
     },
     "RegistryPrivateLinkServiceConnectionState": {
       "properties": {
-        "actionsRequired": {
-          "x-nullable__deleted": true
-        },
-        "description": {
-          "x-nullable__deleted": true
-        },
         "status": {
           "enum": [
             [
@@ -16331,19 +16051,6 @@
               "Timeout"
             ]
           ]
-        }
-      }
-    },
-    "RegistryRegionArmDetails": {
-      "properties": {
-        "acrDetails": {
-          "x-nullable__deleted": true
-        },
-        "location": {
-          "x-nullable__deleted": true
-        },
-        "storageAccountDetails": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -16404,12 +16111,6 @@
         "weightColumnName__added": {
           "type": "string",
           "x-nullable": true
-        },
-        "primaryMetric": {
-          "default__deleted": "NormalizedRootMeanSquaredError"
-        },
-        "trainingSettings": {
-          "x-nullable__deleted": true
         }
       },
       "allOf": [
@@ -16423,30 +16124,6 @@
           " "
         ]
       ]
-    },
-    "RegressionTrainingSettings": {
-      "properties": {
-        "allowedTrainingAlgorithms": {
-          "x-nullable__deleted": true
-        },
-        "blockedTrainingAlgorithms": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "RequestConfiguration": {
-      "properties": {
-        "requestTimeout": {
-          "default__deleted": "PT5S"
-        }
-      }
-    },
-    "RequestLogging": {
-      "properties": {
-        "captureHeaders": {
-          "x-nullable__deleted": true
-        }
-      }
     },
     "ResourceBase": {
       "properties": {

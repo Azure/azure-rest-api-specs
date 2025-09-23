@@ -16,7 +16,7 @@ namespace Microsoft.MachineLearningServices;
  */
 @parentResource(Workspace)
 model PrivateEndpointConnection
-  is Azure.ResourceManager.TrackedResource<PrivateEndpointConnectionProperties> {
+  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
   ...ResourceNameParameter<
     Resource = PrivateEndpointConnection,
     KeyName = "privateEndpointConnectionName",
@@ -25,6 +25,12 @@ model PrivateEndpointConnection
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
+  /**
+   * *Same as workspace location.
+   */
+  location?: string;
+  
+  tags?: Record<string>;
 }
 
 @armResourceOperations

@@ -26136,13 +26136,16 @@
           ]
         },
         "livenessProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "model": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "modelMountPath": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -26162,16 +26165,20 @@
           "readOnly": true
         },
         "readinessProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         },
         "requestSettings": {
-          "$ref": "#/definitions/OnlineRequestSettings"
+          "$ref": "#/definitions/OnlineRequestSettings",
+          "x-nullable": true
         },
         "scaleSettings": {
-          "$ref": "#/definitions/OnlineScaleSettings"
+          "$ref": "#/definitions/OnlineScaleSettings",
+          "x-nullable": true
         },
         "startupProbe": {
-          "$ref": "#/definitions/ProbeSettings"
+          "$ref": "#/definitions/ProbeSettings",
+          "x-nullable": true
         }
       },
       "discriminator": "endpointComputeType",
@@ -26234,10 +26241,12 @@
       "type": "object",
       "properties": {
         "compute": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "mirrorTraffic": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -26261,6 +26270,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
+          "default": "Enabled",
           "enum": [
             "Enabled",
             "Disabled"
@@ -26272,6 +26282,7 @@
         },
         "traffic": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -26315,11 +26326,13 @@
         },
         "maxQueueWait": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT0.5S"
         },
         "requestTimeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT5S"
         }
       }
     },
@@ -26415,6 +26428,7 @@
         },
         "osPatchingErrors": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
@@ -26524,10 +26538,12 @@
       "type": "object",
       "properties": {
         "jobId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "path": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -26559,17 +26575,20 @@
           "format": "int64"
         },
         "deploymentName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "resourceGroup": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "usage": {
           "type": "integer",
           "format": "int64"
         },
         "workspaceName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -26577,16 +26596,20 @@
       "type": "object",
       "properties": {
         "installPath": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "installedVersion": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "name": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "patchedVersion": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -26615,7 +26638,8 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -26628,7 +26652,8 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -26641,10 +26666,7 @@
         },
         "userAssignedIdentities": {
           "type": "object",
-          "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
-          }
+          "additionalProperties": {}
         }
       }
     },
@@ -26653,6 +26675,7 @@
       "properties": {
         "tags": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -26713,7 +26736,8 @@
         "tags": {
           "type": "object",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -26744,11 +26768,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "value": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -26775,10 +26803,12 @@
       "type": "object",
       "properties": {
         "pendingUploadId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "pendingUploadType": {
           "type": "string",
+          "default": "TemporaryBlobReference",
           "enum": [
             "None",
             "TemporaryBlobReference"
@@ -26794,13 +26824,16 @@
       "type": "object",
       "properties": {
         "blobReferenceForConsumption": {
-          "$ref": "#/definitions/BlobReferenceForConsumptionDto"
+          "$ref": "#/definitions/BlobReferenceForConsumptionDto",
+          "x-nullable": true
         },
         "pendingUploadId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "pendingUploadType": {
           "type": "string",
+          "default": "TemporaryBlobReference",
           "enum": [
             "None",
             "TemporaryBlobReference"
@@ -26816,7 +26849,8 @@
       "type": "object",
       "properties": {
         "assignedUser": {
-          "$ref": "#/definitions/AssignedUser"
+          "$ref": "#/definitions/AssignedUser",
+          "title": "Assigned User."
         }
       }
     },
@@ -26825,8 +26859,10 @@
       "properties": {
         "inputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -26835,9 +26871,9 @@
         },
         "jobs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -26846,8 +26882,10 @@
         },
         "outputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -26856,6 +26894,7 @@
         },
         "settings": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {},
           "x-ms-mutability": [
             "create",
@@ -26864,6 +26903,7 @@
         },
         "sourceJobId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -26897,6 +26937,7 @@
         },
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -26913,6 +26954,7 @@
       "properties": {
         "featureDataTypeOverride": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -26970,11 +27012,20 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "location": {
+          "type": "string"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -27074,7 +27125,8 @@
       "type": "object",
       "properties": {
         "subnetArmId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -27185,11 +27237,13 @@
         },
         "initialDelay": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "x-nullable": true
         },
         "period": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT10S"
         },
         "successThreshold": {
           "type": "integer",
@@ -27198,7 +27252,8 @@
         },
         "timeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT2S"
         }
       }
     },
@@ -27221,10 +27276,12 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StringStringKeyValuePair"
           }
@@ -27236,7 +27293,8 @@
       "properties": {
         "processCountPerInstance": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -27251,6 +27309,7 @@
       "properties": {
         "jobTier": {
           "type": "string",
+          "default": "Null",
           "enum": [
             "Null",
             "Spot",
@@ -27280,7 +27339,8 @@
         },
         "limit": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "Limit."
         },
         "unit": {
           "type": "string",
@@ -27379,18 +27439,13 @@
       ]
     },
     "RaiBlocklistItemsBulkAddRequest": {
-      "type": "object",
-      "properties": {
-        "items": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
+      "type": "array",
+      "items": {
+        "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
     },
     "RaiBlocklistProperties": {
       "type": "object",
@@ -27565,6 +27620,7 @@
       "properties": {
         "rule": {
           "type": "string",
+          "default": "Random",
           "enum": [
             "Random",
             "Sobol"
@@ -27576,7 +27632,8 @@
         },
         "seed": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -27608,7 +27665,8 @@
           "format": "int32"
         },
         "startTime": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timeZone": {
           "type": "string",
@@ -27638,6 +27696,7 @@
         },
         "monthDays": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "integer",
             "format": "int32"
@@ -27645,6 +27704,7 @@
         },
         "weekDays": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -27690,7 +27750,8 @@
           "format": "int32"
         },
         "schedule": {
-          "$ref": "#/definitions/RecurrenceSchedule"
+          "$ref": "#/definitions/RecurrenceSchedule",
+          "x-nullable": true
         }
       },
       "required": [
@@ -27719,7 +27780,8 @@
           }
         },
         "keyValue": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "required": [
@@ -27802,10 +27864,12 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "location": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -27822,18 +27886,22 @@
       "properties": {
         "groupIds": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "privateEndpoint": {
-          "$ref": "#/definitions/PrivateEndpointResource"
+          "$ref": "#/definitions/PrivateEndpointResource",
+          "x-nullable": true
         },
         "registryPrivateLinkServiceConnectionState": {
-          "$ref": "#/definitions/RegistryPrivateLinkServiceConnectionState"
+          "$ref": "#/definitions/RegistryPrivateLinkServiceConnectionState",
+          "x-nullable": true
         },
         "provisioningState": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -27841,10 +27909,12 @@
       "type": "object",
       "properties": {
         "actionsRequired": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "description": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "status": {
           "type": "string",
@@ -27866,31 +27936,39 @@
       "type": "object",
       "properties": {
         "discoveryUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "intellectualPropertyPublisher": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "managedResourceGroup": {
-          "$ref": "#/definitions/ArmResourceId"
+          "$ref": "#/definitions/ArmResourceId",
+          "x-nullable": true
         },
         "managedResourceGroupSettings": {
-          "$ref": "#/definitions/ManagedResourceGroupSettings"
+          "$ref": "#/definitions/ManagedResourceGroupSettings",
+          "x-nullable": true
         },
         "mlFlowRegistryUri": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "registryPrivateEndpointConnections": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryPrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
-          "type": "string"
+          "type": "string",
+          "default": "Enabled"
         },
         "regionDetails": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryRegionArmDetails"
           }
@@ -27902,15 +27980,18 @@
       "properties": {
         "acrDetails": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/AcrDetails"
           }
         },
         "location": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "storageAccountDetails": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StorageAccountDetails"
           }
@@ -27984,6 +28065,7 @@
         },
         "primaryMetric": {
           "type": "string",
+          "default": "NormalizedRootMeanSquaredError",
           "enum": [
             "SpearmanCorrelation",
             "NormalizedRootMeanSquaredError",
@@ -27996,7 +28078,8 @@
           }
         },
         "trainingSettings": {
-          "$ref": "#/definitions/RegressionTrainingSettings"
+          "$ref": "#/definitions/RegressionTrainingSettings",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -28011,6 +28094,7 @@
       "properties": {
         "allowedTrainingAlgorithms": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -28033,6 +28117,7 @@
         },
         "blockedTrainingAlgorithms": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -28070,7 +28155,8 @@
         },
         "requestTimeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT5S"
         }
       }
     },
@@ -28079,6 +28165,7 @@
       "properties": {
         "captureHeaders": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }

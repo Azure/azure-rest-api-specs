@@ -33830,43 +33830,6 @@
         ]
       }
     },
-    "JobTier": {
-      "type": "string",
-      "description": "Enum to determine the job tier.",
-      "enum": [
-        "Null",
-        "Spot",
-        "Basic",
-        "Standard",
-        "Premium"
-      ],
-      "x-ms-enum": {
-        "name": "JobTier",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Null",
-            "value": "Null"
-          },
-          {
-            "name": "Spot",
-            "value": "Spot"
-          },
-          {
-            "name": "Basic",
-            "value": "Basic"
-          },
-          {
-            "name": "Standard",
-            "value": "Standard"
-          },
-          {
-            "name": "Premium",
-            "value": "Premium"
-          }
-        ]
-      }
-    },
     "JobType": {
       "type": "string",
       "description": "Enum to determine the type of job.",
@@ -36878,15 +36841,18 @@
         },
         "livenessProbe": {
           "$ref": "#/definitions/ProbeSettings",
-          "description": "Liveness probe monitors the health of the container regularly."
+          "description": "Liveness probe monitors the health of the container regularly.",
+          "x-nullable": true
         },
         "model": {
           "type": "string",
-          "description": "The URI path to the model."
+          "description": "The URI path to the model.",
+          "x-nullable": true
         },
         "modelMountPath": {
           "type": "string",
-          "description": "The path to mount the model in custom container."
+          "description": "The path to mount the model in custom container.",
+          "x-nullable": true
         },
         "provisioningState": {
           "$ref": "#/definitions/DeploymentProvisioningState",
@@ -36895,19 +36861,23 @@
         },
         "readinessProbe": {
           "$ref": "#/definitions/ProbeSettings",
-          "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe."
+          "description": "Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.",
+          "x-nullable": true
         },
         "requestSettings": {
           "$ref": "#/definitions/OnlineRequestSettings",
-          "description": "Request settings for the deployment."
+          "description": "Request settings for the deployment.",
+          "x-nullable": true
         },
         "scaleSettings": {
           "$ref": "#/definitions/OnlineScaleSettings",
-          "description": "Scale settings for the deployment.\nIf it is null or not provided,\nit defaults to TargetUtilizationScaleSettings for KubernetesOnlineDeployment\nand to DefaultScaleSettings for ManagedOnlineDeployment."
+          "description": "Scale settings for the deployment.\nIf it is null or not provided,\nit defaults to TargetUtilizationScaleSettings for KubernetesOnlineDeployment\nand to DefaultScaleSettings for ManagedOnlineDeployment.",
+          "x-nullable": true
         },
         "startupProbe": {
           "$ref": "#/definitions/ProbeSettings",
-          "description": "Startup probe verify whether an application within a container has started successfully."
+          "description": "Startup probe verify whether an application within a container has started successfully.",
+          "x-nullable": true
         }
       },
       "discriminator": "endpointComputeType",
@@ -36977,11 +36947,13 @@
       "properties": {
         "compute": {
           "type": "string",
-          "description": "ARM resource ID of the compute if it exists.\noptional"
+          "description": "ARM resource ID of the compute if it exists.\noptional",
+          "x-nullable": true
         },
         "mirrorTraffic": {
           "type": "object",
           "description": "Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.",
+          "x-nullable": true,
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -36993,12 +36965,32 @@
           "readOnly": true
         },
         "publicNetworkAccess": {
-          "$ref": "#/definitions/PublicNetworkAccessType",
-          "description": "Set to \"Enabled\" for endpoints that should allow public access when Private Link is enabled."
+          "type": "string",
+          "description": "Set to \"Enabled\" for endpoints that should allow public access when Private Link is enabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccessType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
         },
         "traffic": {
           "type": "object",
           "description": "Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.",
+          "x-nullable": true,
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -37045,12 +37037,14 @@
         "maxQueueWait": {
           "type": "string",
           "format": "duration",
-          "description": "(Deprecated for Managed Online Endpoints) The maximum amount of time a request will stay in the queue in ISO 8601 format.\nDefaults to 500ms.\n(Now increase `request_timeout_ms` to account for any networking/queue delays)"
+          "description": "(Deprecated for Managed Online Endpoints) The maximum amount of time a request will stay in the queue in ISO 8601 format.\nDefaults to 500ms.\n(Now increase `request_timeout_ms` to account for any networking/queue delays)",
+          "default": "PT0.5S"
         },
         "requestTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The scoring timeout in ISO 8601 format.\nDefaults to 5000ms."
+          "description": "The scoring timeout in ISO 8601 format.\nDefaults to 5000ms.",
+          "default": "PT5S"
         }
       }
     },
@@ -37260,6 +37254,7 @@
         "osPatchingErrors": {
           "type": "array",
           "description": "Collection of errors encountered when doing os patching.",
+          "x-nullable": true,
           "items": {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
           },
@@ -37348,11 +37343,13 @@
       "properties": {
         "jobId": {
           "type": "string",
-          "description": "ARM resource ID of the job."
+          "description": "ARM resource ID of the job.",
+          "x-nullable": true
         },
         "path": {
           "type": "string",
-          "description": "The path of the file/directory in the job output."
+          "description": "The path of the file/directory in the job output.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -37386,11 +37383,13 @@
         },
         "deploymentName": {
           "type": "string",
-          "description": "Deployment name"
+          "description": "Deployment name",
+          "x-nullable": true
         },
         "resourceGroup": {
           "type": "string",
-          "description": "Resource group name"
+          "description": "Resource group name",
+          "x-nullable": true
         },
         "usage": {
           "type": "integer",
@@ -37399,7 +37398,8 @@
         },
         "workspaceName": {
           "type": "string",
-          "description": "Workspace name"
+          "description": "Workspace name",
+          "x-nullable": true
         }
       }
     },
@@ -37408,19 +37408,23 @@
       "properties": {
         "installPath": {
           "type": "string",
-          "description": "Install path."
+          "description": "Install path.",
+          "x-nullable": true
         },
         "installedVersion": {
           "type": "string",
-          "description": "Installed version."
+          "description": "Installed version.",
+          "x-nullable": true
         },
         "name": {
           "type": "string",
-          "description": "Package or dependency name."
+          "description": "Package or dependency name.",
+          "x-nullable": true
         },
         "patchedVersion": {
           "type": "string",
-          "description": "Patched version."
+          "description": "Patched version.",
+          "x-nullable": true
         }
       }
     },
@@ -37451,7 +37455,8 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Description of the endpoint deployment."
+          "description": "Description of the endpoint deployment.",
+          "x-nullable": true
         }
       }
     },
@@ -37467,7 +37472,8 @@
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -37483,10 +37489,7 @@
         "userAssignedIdentities": {
           "type": "object",
           "description": "The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.",
-          "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
-          }
+          "additionalProperties": {}
         }
       }
     },
@@ -37497,6 +37500,7 @@
         "tags": {
           "type": "object",
           "description": "Resource tags.",
+          "x-nullable": true,
           "additionalProperties": {
             "type": "string"
           }
@@ -37568,7 +37572,8 @@
           "type": "object",
           "description": "Resource tags.",
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -37605,11 +37610,15 @@
       "properties": {
         "name": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         },
         "value": {
           "type": "string",
-          "readOnly": true
+          "format": "password",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     },
@@ -37685,11 +37694,31 @@
       "properties": {
         "pendingUploadId": {
           "type": "string",
-          "description": "If PendingUploadId = null then random guid will be used."
+          "description": "If PendingUploadId = null then random guid will be used.",
+          "x-nullable": true
         },
         "pendingUploadType": {
-          "$ref": "#/definitions/PendingUploadType",
-          "description": "TemporaryBlobReference is the only supported type"
+          "type": "string",
+          "description": "TemporaryBlobReference is the only supported type",
+          "default": "TemporaryBlobReference",
+          "enum": [
+            "None",
+            "TemporaryBlobReference"
+          ],
+          "x-ms-enum": {
+            "name": "PendingUploadType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None"
+              },
+              {
+                "name": "TemporaryBlobReference",
+                "value": "TemporaryBlobReference"
+              }
+            ]
+          }
         }
       }
     },
@@ -37698,38 +37727,37 @@
       "properties": {
         "blobReferenceForConsumption": {
           "$ref": "#/definitions/BlobReferenceForConsumptionDto",
-          "description": "Container level read, write, list SAS"
+          "description": "Container level read, write, list SAS",
+          "x-nullable": true
         },
         "pendingUploadId": {
           "type": "string",
-          "description": "ID for this upload request"
+          "description": "ID for this upload request",
+          "x-nullable": true
         },
         "pendingUploadType": {
-          "$ref": "#/definitions/PendingUploadType",
-          "description": "TemporaryBlobReference is the only supported type"
-        }
-      }
-    },
-    "PendingUploadType": {
-      "type": "string",
-      "description": "Type of storage to use for the pending upload location",
-      "enum": [
-        "None",
-        "TemporaryBlobReference"
-      ],
-      "x-ms-enum": {
-        "name": "PendingUploadType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          },
-          {
-            "name": "TemporaryBlobReference",
-            "value": "TemporaryBlobReference"
+          "type": "string",
+          "description": "TemporaryBlobReference is the only supported type",
+          "default": "TemporaryBlobReference",
+          "enum": [
+            "None",
+            "TemporaryBlobReference"
+          ],
+          "x-ms-enum": {
+            "name": "PendingUploadType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None"
+              },
+              {
+                "name": "TemporaryBlobReference",
+                "value": "TemporaryBlobReference"
+              }
+            ]
           }
-        ]
+        }
       }
     },
     "PersonalComputeInstanceSettings": {
@@ -37738,6 +37766,7 @@
       "properties": {
         "assignedUser": {
           "$ref": "#/definitions/AssignedUser",
+          "title": "Assigned User.",
           "description": "A user explicitly assigned to a personal compute instance."
         }
       }
@@ -37749,8 +37778,10 @@
         "inputs": {
           "type": "object",
           "description": "Inputs for the pipeline job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -37760,9 +37791,9 @@
         "jobs": {
           "type": "object",
           "description": "Jobs construct the Pipeline Job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -37772,8 +37803,10 @@
         "outputs": {
           "type": "object",
           "description": "Outputs for the pipeline job",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -37783,6 +37816,7 @@
         "settings": {
           "type": "object",
           "description": "Pipeline settings, for things like ContinueRunOnStepFailure etc.",
+          "x-nullable": true,
           "additionalProperties": {},
           "x-ms-mutability": [
             "read",
@@ -37792,6 +37826,7 @@
         "sourceJobId": {
           "type": "string",
           "description": "ARM resource ID of source job.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -37861,6 +37896,7 @@
         "threshold": {
           "$ref": "#/definitions/MonitoringThreshold",
           "description": "The threshold value. If null, a default value will be set depending on the selected metric.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -37878,6 +37914,7 @@
         "featureDataTypeOverride": {
           "type": "object",
           "description": "A dictionary that maps feature names to their respective data types.",
+          "x-nullable": true,
           "additionalProperties": {
             "$ref": "#/definitions/MonitoringFeatureDataType"
           },
@@ -37943,11 +37980,21 @@
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "location": {
+          "type": "string",
+          "description": "*Same as workspace location."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -38067,7 +38114,8 @@
       "properties": {
         "subnetArmId": {
           "type": "string",
-          "description": "The subnetId that the private endpoint is connected to."
+          "description": "The subnetId that the private endpoint is connected to.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -38181,12 +38229,14 @@
         "initialDelay": {
           "type": "string",
           "format": "duration",
-          "description": "The delay before the first probe in ISO 8601 format."
+          "description": "The delay before the first probe in ISO 8601 format.",
+          "x-nullable": true
         },
         "period": {
           "type": "string",
           "format": "duration",
-          "description": "The length of time between probes in ISO 8601 format."
+          "description": "The length of time between probes in ISO 8601 format.",
+          "default": "PT10S"
         },
         "successThreshold": {
           "type": "integer",
@@ -38197,7 +38247,8 @@
         "timeout": {
           "type": "string",
           "format": "duration",
-          "description": "The probe timeout in ISO 8601 format."
+          "description": "The probe timeout in ISO 8601 format.",
+          "default": "PT2S"
         }
       }
     },
@@ -38222,11 +38273,13 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "Description of the resource."
+          "description": "Description of the resource.",
+          "x-nullable": true
         },
         "properties": {
           "type": "array",
           "description": "Property dictionary. Properties can be added, but not removed or altered.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StringStringKeyValuePair"
           }
@@ -38336,7 +38389,8 @@
         "processCountPerInstance": {
           "type": "integer",
           "format": "int32",
-          "description": "Number of processes per node."
+          "description": "Number of processes per node.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -38350,8 +38404,42 @@
       "type": "object",
       "properties": {
         "jobTier": {
-          "$ref": "#/definitions/JobTier",
+          "type": "string",
           "description": "Controls the compute job tier",
+          "default": "Null",
+          "enum": [
+            "Null",
+            "Spot",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "JobTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Null",
+                "value": "Null"
+              },
+              {
+                "name": "Spot",
+                "value": "Spot"
+              },
+              {
+                "name": "Basic",
+                "value": "Basic"
+              },
+              {
+                "name": "Standard",
+                "value": "Standard"
+              },
+              {
+                "name": "Premium",
+                "value": "Premium"
+              }
+            ]
+          },
           "x-ms-mutability": [
             "read",
             "create"
@@ -38374,6 +38462,7 @@
         "limit": {
           "type": "integer",
           "format": "int64",
+          "title": "Limit.",
           "description": "The maximum permitted quota of the resource."
         },
         "unit": {
@@ -38497,20 +38586,14 @@
       ]
     },
     "RaiBlocklistItemsBulkAddRequest": {
-      "type": "object",
+      "type": "array",
       "description": "The list of Cognitive Services RaiBlocklist Items for batch add.",
-      "properties": {
-        "items": {
-          "type": "array",
-          "description": "List of RAI Blocklist Items to add.",
-          "items": {
-            "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        }
-      }
+      "items": {
+        "$ref": "#/definitions/RaiBlocklistItemBulkRequest"
+      },
+      "x-ms-identifiers": [
+        "name"
+      ]
     },
     "RaiBlocklistProperties": {
       "type": "object",
@@ -38738,13 +38821,33 @@
       "description": "Defines a Sampling Algorithm that generates values randomly",
       "properties": {
         "rule": {
-          "$ref": "#/definitions/RandomSamplingAlgorithmRule",
-          "description": "The specific type of random algorithm"
+          "type": "string",
+          "description": "The specific type of random algorithm",
+          "default": "Random",
+          "enum": [
+            "Random",
+            "Sobol"
+          ],
+          "x-ms-enum": {
+            "name": "RandomSamplingAlgorithmRule",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Random",
+                "value": "Random"
+              },
+              {
+                "name": "Sobol",
+                "value": "Sobol"
+              }
+            ]
+          }
         },
         "seed": {
           "type": "integer",
           "format": "int32",
-          "description": "An optional integer to use as the seed for random number generation"
+          "description": "An optional integer to use as the seed for random number generation",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -38753,28 +38856,6 @@
         }
       ],
       "x-ms-discriminator-value": "Random"
-    },
-    "RandomSamplingAlgorithmRule": {
-      "type": "string",
-      "description": "The specific type of random algorithm",
-      "enum": [
-        "Random",
-        "Sobol"
-      ],
-      "x-ms-enum": {
-        "name": "RandomSamplingAlgorithmRule",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Random",
-            "value": "Random"
-          },
-          {
-            "name": "Sobol",
-            "value": "Sobol"
-          }
-        ]
-      }
     },
     "Recurrence": {
       "type": "object",
@@ -38791,7 +38872,8 @@
         },
         "startTime": {
           "type": "string",
-          "description": "The start time in yyyy-MM-ddTHH:mm:ss format."
+          "description": "The start time in yyyy-MM-ddTHH:mm:ss format.",
+          "x-nullable": true
         },
         "timeZone": {
           "type": "string",
@@ -38868,6 +38950,7 @@
         "monthDays": {
           "type": "array",
           "description": "List of month days for the schedule",
+          "x-nullable": true,
           "items": {
             "type": "integer",
             "format": "int32"
@@ -38876,6 +38959,7 @@
         "weekDays": {
           "type": "array",
           "description": "List of days for the schedule.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/WeekDay"
           }
@@ -38900,7 +38984,8 @@
         },
         "schedule": {
           "$ref": "#/definitions/RecurrenceSchedule",
-          "description": "The recurrence schedule."
+          "description": "The recurrence schedule.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -38950,7 +39035,8 @@
         },
         "keyValue": {
           "type": "string",
-          "description": "The value the key is set to."
+          "description": "The value the key is set to.",
+          "x-nullable": true
         }
       },
       "required": [
@@ -39035,11 +39121,13 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "This is the private endpoint connection name created on SRP\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}"
+          "description": "This is the private endpoint connection name created on SRP\nFull resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}",
+          "x-nullable": true
         },
         "location": {
           "type": "string",
           "description": "Same as workspace location.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -39059,21 +39147,25 @@
         "groupIds": {
           "type": "array",
           "description": "The group ids",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
         },
         "privateEndpoint": {
           "$ref": "#/definitions/PrivateEndpointResource",
-          "description": "The PE network resource that is linked to this PE connection."
+          "description": "The PE network resource that is linked to this PE connection.",
+          "x-nullable": true
         },
         "registryPrivateLinkServiceConnectionState": {
           "$ref": "#/definitions/RegistryPrivateLinkServiceConnectionState",
-          "description": "The connection state."
+          "description": "The connection state.",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
-          "description": "One of null, \"Succeeded\", \"Provisioning\", \"Failed\". While not approved, it's null."
+          "description": "One of null, \"Succeeded\", \"Provisioning\", \"Failed\". While not approved, it's null.",
+          "x-nullable": true
         }
       }
     },
@@ -39083,11 +39175,13 @@
       "properties": {
         "actionsRequired": {
           "type": "string",
-          "description": "Some RP chose \"None\". Other RPs use this for region expansion."
+          "description": "Some RP chose \"None\". Other RPs use this for region expansion.",
+          "x-nullable": true
         },
         "description": {
           "type": "string",
-          "description": "User-defined message that, per NRP doc, may be used for approval-related message."
+          "description": "User-defined message that, per NRP doc, may be used for approval-related message.",
+          "x-nullable": true
         },
         "status": {
           "$ref": "#/definitions/EndpointServiceConnectionStatus",
@@ -39101,38 +39195,46 @@
       "properties": {
         "discoveryUrl": {
           "type": "string",
-          "description": "Discovery URL for the Registry"
+          "description": "Discovery URL for the Registry",
+          "x-nullable": true
         },
         "intellectualPropertyPublisher": {
           "type": "string",
-          "description": "IntellectualPropertyPublisher for the registry"
+          "description": "IntellectualPropertyPublisher for the registry",
+          "x-nullable": true
         },
         "managedResourceGroup": {
           "$ref": "#/definitions/ArmResourceId",
-          "description": "ResourceId of the managed RG if the registry has system created resources"
+          "description": "ResourceId of the managed RG if the registry has system created resources",
+          "x-nullable": true
         },
         "managedResourceGroupSettings": {
           "$ref": "#/definitions/ManagedResourceGroupSettings",
-          "description": "Managed resource group specific settings"
+          "description": "Managed resource group specific settings",
+          "x-nullable": true
         },
         "mlFlowRegistryUri": {
           "type": "string",
-          "description": "MLFlow Registry URI for the Registry"
+          "description": "MLFlow Registry URI for the Registry",
+          "x-nullable": true
         },
         "registryPrivateEndpointConnections": {
           "type": "array",
           "description": "Private endpoint connections info used for pending connections in private link portal",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryPrivateEndpointConnection"
           }
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Is the Registry accessible from the internet?\nPossible values: \"Enabled\" or \"Disabled\""
+          "description": "Is the Registry accessible from the internet?\nPossible values: \"Enabled\" or \"Disabled\"",
+          "default": "Enabled"
         },
         "regionDetails": {
           "type": "array",
           "description": "Details of each region the registry is in",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegistryRegionArmDetails"
           },
@@ -39147,6 +39249,7 @@
         "acrDetails": {
           "type": "array",
           "description": "List of ACR accounts",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/AcrDetails"
           },
@@ -39154,11 +39257,13 @@
         },
         "location": {
           "type": "string",
-          "description": "The location where the registry exists"
+          "description": "The location where the registry exists",
+          "x-nullable": true
         },
         "storageAccountDetails": {
           "type": "array",
           "description": "List of storage accounts",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/StorageAccountDetails"
           },
@@ -39242,12 +39347,46 @@
           "x-nullable": true
         },
         "primaryMetric": {
-          "$ref": "#/definitions/RegressionPrimaryMetrics",
-          "description": "Primary metric for regression task."
+          "type": "string",
+          "description": "Primary metric for regression task.",
+          "default": "NormalizedRootMeanSquaredError",
+          "enum": [
+            "SpearmanCorrelation",
+            "NormalizedRootMeanSquaredError",
+            "R2Score",
+            "NormalizedMeanAbsoluteError"
+          ],
+          "x-ms-enum": {
+            "name": "RegressionPrimaryMetrics",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "SpearmanCorrelation",
+                "value": "SpearmanCorrelation",
+                "description": "The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation."
+              },
+              {
+                "name": "NormalizedRootMeanSquaredError",
+                "value": "NormalizedRootMeanSquaredError",
+                "description": "The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales."
+              },
+              {
+                "name": "R2Score",
+                "value": "R2Score",
+                "description": "The R2 score is one of the performance evaluation measures for forecasting-based machine learning models."
+              },
+              {
+                "name": "NormalizedMeanAbsoluteError",
+                "value": "NormalizedMeanAbsoluteError",
+                "description": "The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales."
+              }
+            ]
+          }
         },
         "trainingSettings": {
           "$ref": "#/definitions/RegressionTrainingSettings",
-          "description": "Inputs for training phase for an AutoML Job."
+          "description": "Inputs for training phase for an AutoML Job.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -39329,42 +39468,6 @@
         ]
       }
     },
-    "RegressionPrimaryMetrics": {
-      "type": "string",
-      "description": "Primary metrics for Regression task.",
-      "enum": [
-        "SpearmanCorrelation",
-        "NormalizedRootMeanSquaredError",
-        "R2Score",
-        "NormalizedMeanAbsoluteError"
-      ],
-      "x-ms-enum": {
-        "name": "RegressionPrimaryMetrics",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SpearmanCorrelation",
-            "value": "SpearmanCorrelation",
-            "description": "The Spearman's rank coefficient of correlation is a nonparametric measure of rank correlation."
-          },
-          {
-            "name": "NormalizedRootMeanSquaredError",
-            "value": "NormalizedRootMeanSquaredError",
-            "description": "The Normalized Root Mean Squared Error (NRMSE) the RMSE facilitates the comparison between models with different scales."
-          },
-          {
-            "name": "R2Score",
-            "value": "R2Score",
-            "description": "The R2 score is one of the performance evaluation measures for forecasting-based machine learning models."
-          },
-          {
-            "name": "NormalizedMeanAbsoluteError",
-            "value": "NormalizedMeanAbsoluteError",
-            "description": "The Normalized Mean Absolute Error (NMAE) is a validation metric to compare the Mean Absolute Error (MAE) of (time) series with different scales."
-          }
-        ]
-      }
-    },
     "RegressionTrainingSettings": {
       "type": "object",
       "description": "Regression Training related configuration.",
@@ -39372,6 +39475,7 @@
         "allowedTrainingAlgorithms": {
           "type": "array",
           "description": "Allowed models for regression task.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegressionModels"
           }
@@ -39379,6 +39483,7 @@
         "blockedTrainingAlgorithms": {
           "type": "array",
           "description": "Blocked models for regression task.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/RegressionModels"
           }
@@ -39403,7 +39508,8 @@
         "requestTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "The scoring timeout in ISO 8601 format.\nDefaults to 5000ms."
+          "description": "The scoring timeout in ISO 8601 format.\nDefaults to 5000ms.",
+          "default": "PT5S"
         }
       }
     },
@@ -39413,6 +39519,7 @@
         "captureHeaders": {
           "type": "array",
           "description": "For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }

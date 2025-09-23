@@ -3944,6 +3944,7 @@ model QuotaBaseProperties {
   /**
    * The maximum permitted quota of the resource.
    */
+  @summary("Limit.")
   limit?: int64;
 
   /**
@@ -4623,12 +4624,12 @@ model PTUDeploymentUsage {
   /**
    * Deployment name
    */
-  deploymentName?: string;
+  deploymentName?: string | null;
 
   /**
    * Resource group name
    */
-  resourceGroup?: string;
+  resourceGroup?: string | null;
 
   /**
    * Usage number from subscription level quota
@@ -4638,7 +4639,7 @@ model PTUDeploymentUsage {
   /**
    * Workspace name
    */
-  workspaceName?: string;
+  workspaceName?: string | null;
 }
 
 /**
@@ -4743,12 +4744,12 @@ model PendingUploadRequestDto {
   /**
    * If PendingUploadId = null then random guid will be used.
    */
-  pendingUploadId?: string;
+  pendingUploadId?: string | null;
 
   /**
    * TemporaryBlobReference is the only supported type
    */
-  pendingUploadType?: PendingUploadType;
+  pendingUploadType?: PendingUploadType = PendingUploadType.TemporaryBlobReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4756,17 +4757,17 @@ model PendingUploadResponseDto {
   /**
    * Container level read, write, list SAS
    */
-  blobReferenceForConsumption?: BlobReferenceForConsumptionDto;
+  blobReferenceForConsumption?: BlobReferenceForConsumptionDto | null;
 
   /**
    * ID for this upload request
    */
-  pendingUploadId?: string;
+  pendingUploadId?: string | null;
 
   /**
    * TemporaryBlobReference is the only supported type
    */
-  pendingUploadType?: PendingUploadType;
+  pendingUploadType?: PendingUploadType = PendingUploadType.TemporaryBlobReference;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5223,22 +5224,22 @@ model PackageDetails {
   /**
    * Install path.
    */
-  installPath?: string;
+  installPath?: string | null;
 
   /**
    * Installed version.
    */
-  installedVersion?: string;
+  installedVersion?: string | null;
 
   /**
    * Package or dependency name.
    */
-  name?: string;
+  name?: string | null;
 
   /**
    * Patched version.
    */
-  patchedVersion?: string;
+  patchedVersion?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5483,7 +5484,7 @@ model PartialManagedServiceIdentity {
    * The set of user assigned identities associated with the resource. The userAssignedIdentities dictionary keys will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}. The dictionary values can be empty objects ({}) in requests.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  userAssignedIdentities?: Record<Record<unknown>>;
+  userAssignedIdentities?: Record<unknown>;
 }
 
 /**
@@ -5494,7 +5495,7 @@ model PartialMinimalTrackedResource {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
+  tags?: Record<string> | null;
 }
 
 /**
@@ -5705,7 +5706,7 @@ model PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
+  tags?: Record<string | null>;
 }
 
 /**
@@ -5715,7 +5716,7 @@ model PartialBatchDeployment {
   /**
    * Description of the endpoint deployment.
    */
-  description?: string;
+  description?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -6018,7 +6019,7 @@ model RecurrenceTrigger extends TriggerBase {
   /**
    * The recurrence schedule.
    */
-  schedule?: RecurrenceSchedule;
+  schedule?: RecurrenceSchedule | null;
 
   /**
    * [Required]
@@ -6041,12 +6042,12 @@ model RecurrenceSchedule {
   /**
    * List of month days for the schedule
    */
-  monthDays?: int32[];
+  monthDays?: int32[] | null;
 
   /**
    * List of days for the schedule.
    */
-  weekDays?: WeekDay[];
+  weekDays?: WeekDay[] | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6274,12 +6275,12 @@ model PropertiesBase {
   /**
    * Description of the resource.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * Property dictionary. Properties can be added, but not removed or altered.
    */
-  properties?: StringStringKeyValuePair[];
+  properties?: StringStringKeyValuePair[] | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -6391,7 +6392,7 @@ model RequestConfiguration {
    * The scoring timeout in ISO 8601 format.
    * Defaults to 5000ms.
    */
-  requestTimeout?: duration;
+  requestTimeout?: duration = duration.fromISO("PT5S");
 }
 
 /**
@@ -6474,12 +6475,12 @@ model ProbeSettings {
   /**
    * The delay before the first probe in ISO 8601 format.
    */
-  initialDelay?: duration;
+  initialDelay?: duration | null;
 
   /**
    * The length of time between probes in ISO 8601 format.
    */
-  period?: duration;
+  period?: duration = duration.fromISO("PT10S");
 
   /**
    * The number of successful probes before returning a healthy status.
@@ -6489,7 +6490,7 @@ model ProbeSettings {
   /**
    * The probe timeout in ISO 8601 format.
    */
-  timeout?: duration;
+  timeout?: duration = duration.fromISO("PT2S");
 }
 
 /**
@@ -6963,13 +6964,13 @@ model OnlineEndpointProperties extends EndpointPropertiesBase {
    * ARM resource ID of the compute if it exists.
    * optional
    */
-  compute?: string;
+  compute?: string | null;
 
   /**
    * Percentage of traffic to be mirrored to each deployment without using returned scoring. Traffic values need to sum to utmost 50.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  mirrorTraffic?: Record<int32>;
+  mirrorTraffic?: Record<int32> | null;
 
   /**
    * Provisioning state for the endpoint.
@@ -6980,13 +6981,13 @@ model OnlineEndpointProperties extends EndpointPropertiesBase {
   /**
    * Set to "Enabled" for endpoints that should allow public access when Private Link is enabled.
    */
-  publicNetworkAccess?: PublicNetworkAccessType;
+  publicNetworkAccess?: PublicNetworkAccessType = PublicNetworkAccessType.Enabled;
 
   /**
    * Percentage of traffic from endpoint to divert to each deployment. Traffic values need to sum to 100.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  traffic?: Record<int32>;
+  traffic?: Record<int32> | null;
 }
 
 /**
@@ -7028,17 +7029,17 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Liveness probe monitors the health of the container regularly.
    */
-  livenessProbe?: ProbeSettings;
+  livenessProbe?: ProbeSettings | null;
 
   /**
    * The URI path to the model.
    */
-  `model`?: string;
+  `model`?: string | null;
 
   /**
    * The path to mount the model in custom container.
    */
-  modelMountPath?: string;
+  modelMountPath?: string | null;
 
   /**
    * Provisioning state for the endpoint deployment.
@@ -7049,12 +7050,12 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   /**
    * Readiness probe validates if the container is ready to serve traffic. The properties and defaults are the same as liveness probe.
    */
-  readinessProbe?: ProbeSettings;
+  readinessProbe?: ProbeSettings | null;
 
   /**
    * Request settings for the deployment.
    */
-  requestSettings?: OnlineRequestSettings;
+  requestSettings?: OnlineRequestSettings | null;
 
   /**
    * Scale settings for the deployment.
@@ -7062,12 +7063,12 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
    * it defaults to TargetUtilizationScaleSettings for KubernetesOnlineDeployment
    * and to DefaultScaleSettings for ManagedOnlineDeployment.
    */
-  scaleSettings?: OnlineScaleSettings;
+  scaleSettings?: OnlineScaleSettings | null;
 
   /**
    * Startup probe verify whether an application within a container has started successfully.
    */
-  startupProbe?: ProbeSettings;
+  startupProbe?: ProbeSettings | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7121,7 +7122,7 @@ model RequestLogging {
   /**
    * For payload logging, we only collect payload by default. If customers also want to collect the specified headers, they can set them in captureHeaders so that backend will collect those headers along with payload.
    */
-  captureHeaders?: string[];
+  captureHeaders?: string[] | null;
 }
 
 /**
@@ -7138,13 +7139,13 @@ model OnlineRequestSettings {
    * Defaults to 500ms.
    * (Now increase `request_timeout_ms` to account for any networking/queue delays)
    */
-  maxQueueWait?: duration;
+  maxQueueWait?: duration = duration.fromISO("PT0.5S");
 
   /**
    * The scoring timeout in ISO 8601 format.
    * Defaults to 5000ms.
    */
-  requestTimeout?: duration;
+  requestTimeout?: duration = duration.fromISO("PT5S");
 }
 
 /**
@@ -7189,7 +7190,7 @@ model RegenerateEndpointKeysRequest {
   /**
    * The value the key is set to.
    */
-  keyValue?: string;
+  keyValue?: string | null;
 }
 
 /**
@@ -7366,44 +7367,44 @@ model RegistryProperties {
   /**
    * Discovery URL for the Registry
    */
-  discoveryUrl?: string;
+  discoveryUrl?: string | null;
 
   /**
    * IntellectualPropertyPublisher for the registry
    */
-  intellectualPropertyPublisher?: string;
+  intellectualPropertyPublisher?: string | null;
 
   /**
    * ResourceId of the managed RG if the registry has system created resources
    */
-  managedResourceGroup?: ArmResourceId;
+  managedResourceGroup?: ArmResourceId | null;
 
   /**
    * Managed resource group specific settings
    */
-  managedResourceGroupSettings?: ManagedResourceGroupSettings;
+  managedResourceGroupSettings?: ManagedResourceGroupSettings | null;
 
   /**
    * MLFlow Registry URI for the Registry
    */
-  mlFlowRegistryUri?: string;
+  mlFlowRegistryUri?: string | null;
 
   /**
    * Private endpoint connections info used for pending connections in private link portal
    */
-  registryPrivateEndpointConnections?: RegistryPrivateEndpointConnection[];
+  registryPrivateEndpointConnections?: RegistryPrivateEndpointConnection[] | null;
 
   /**
    * Is the Registry accessible from the internet?
    * Possible values: "Enabled" or "Disabled"
    */
-  publicNetworkAccess?: string;
+  publicNetworkAccess?: string = "Enabled";
 
   /**
    * Details of each region the registry is in
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  regionDetails?: RegistryRegionArmDetails[];
+  regionDetails?: RegistryRegionArmDetails[] | null;
 }
 
 /**
@@ -7449,13 +7450,13 @@ model RegistryPrivateEndpointConnection {
    * This is the private endpoint connection name created on SRP
    * Full resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}
    */
-  id?: string;
+  id?: string | null;
 
   /**
    * Same as workspace location.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  location?: string;
+  location?: string | null;
 
   /**
    * Properties of the Private Endpoint Connection
@@ -7472,22 +7473,22 @@ model RegistryPrivateEndpointConnectionProperties {
   /**
    * The group ids
    */
-  groupIds?: string[];
+  groupIds?: string[] | null;
 
   /**
    * The PE network resource that is linked to this PE connection.
    */
-  privateEndpoint?: PrivateEndpointResource;
+  privateEndpoint?: PrivateEndpointResource | null;
 
   /**
    * The connection state.
    */
-  registryPrivateLinkServiceConnectionState?: RegistryPrivateLinkServiceConnectionState;
+  registryPrivateLinkServiceConnectionState?: RegistryPrivateLinkServiceConnectionState | null;
 
   /**
    * One of null, "Succeeded", "Provisioning", "Failed". While not approved, it's null.
    */
-  provisioningState?: string;
+  provisioningState?: string | null;
 }
 
 /**
@@ -7499,7 +7500,7 @@ model PrivateEndpointResource
   /**
    * The subnetId that the private endpoint is connected to.
    */
-  subnetArmId?: string;
+  subnetArmId?: string | null;
 }
 
 /**
@@ -7509,12 +7510,12 @@ model RegistryPrivateLinkServiceConnectionState {
   /**
    * Some RP chose "None". Other RPs use this for region expansion.
    */
-  actionsRequired?: string;
+  actionsRequired?: string | null;
 
   /**
    * User-defined message that, per NRP doc, may be used for approval-related message.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * Connection status of the service consumer with the service provider
@@ -7530,18 +7531,18 @@ model RegistryRegionArmDetails {
    * List of ACR accounts
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  acrDetails?: AcrDetails[];
+  acrDetails?: AcrDetails[] | null;
 
   /**
    * The location where the registry exists
    */
-  location?: string;
+  location?: string | null;
 
   /**
    * List of storage accounts
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
-  storageAccountDetails?: StorageAccountDetails[];
+  storageAccountDetails?: StorageAccountDetails[] | null;
 }
 
 /**
@@ -7636,7 +7637,7 @@ model PartialRegistryPartialTrackedResource {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
+  tags?: Record<string | null>;
 }
 
 /**
@@ -8704,13 +8705,8 @@ model RaiBlocklistProperties {
 /**
  * The list of Cognitive Services RaiBlocklist Items for batch add.
  */
-model RaiBlocklistItemsBulkAddRequest {
-  /**
-   * List of RAI Blocklist Items to add.
-   */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
-  items?: RaiBlocklistItemBulkRequest[];
-}
+@OpenAPI.extension("x-ms-identifiers", #["name"])
+model RaiBlocklistItemsBulkAddRequest is RaiBlocklistItemBulkRequest[];
 
 /**
  * The Cognitive Services RaiBlocklist Item request body.
@@ -9097,10 +9093,12 @@ model RegistryListCredentialsResult {
 model Password {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @secret
   name?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @visibility(Lifecycle.Read)
+  @secret
   value?: string;
 }
 
@@ -10068,7 +10066,7 @@ model OsPatchingStatus {
    * Collection of errors encountered when doing os patching.
    */
   @OpenAPI.extension("x-ms-identifiers", #["/error/code"])
-  osPatchingErrors?: ErrorResponse[];
+  osPatchingErrors?: ErrorResponse[] | null;
 }
 
 /**
@@ -10133,6 +10131,7 @@ model PersonalComputeInstanceSettings {
   /**
    * A user explicitly assigned to a personal compute instance.
    */
+  @summary("Assigned User.")
   assignedUser?: AssignedUser;
 }
 
@@ -10301,7 +10300,7 @@ model Recurrence {
   /**
    * The start time in yyyy-MM-ddTHH:mm:ss format.
    */
-  startTime?: string;
+  startTime?: string | null;
 
   /**
    * Specifies time zone in which the schedule runs.
@@ -11074,7 +11073,7 @@ model QueueSettings {
    * Controls the compute job tier
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  jobTier?: JobTier;
+  jobTier?: JobTier = JobTier.Null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
@@ -11701,7 +11700,7 @@ model PredictionDriftMetricThresholdBase {
    * The threshold value. If null, a default value will be set depending on the selected metric.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  threshold?: MonitoringThreshold;
+  threshold?: MonitoringThreshold | null;
 }
 
 /**
@@ -14264,12 +14263,12 @@ model OutputPathAssetReference extends AssetReferenceBase {
   /**
    * ARM resource ID of the job.
    */
-  jobId?: string;
+  jobId?: string | null;
 
   /**
    * The path of the file/directory in the job output.
    */
-  path?: string;
+  path?: string | null;
 
   /**
    * [Required] Specifies the type of asset reference.
@@ -14286,33 +14285,33 @@ model PipelineJob extends JobBaseProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputs?: Record<JobInput>;
+  inputs?: Record<JobInput | null> | null;
 
   /**
    * Jobs construct the Pipeline Job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  jobs?: Record<Record<unknown>>;
+  jobs?: Record<unknown | null> | null;
 
   /**
    * Outputs for the pipeline job
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  outputs?: Record<JobOutput>;
+  outputs?: Record<JobOutput | null> | null;
 
   /**
    * Pipeline settings, for things like ContinueRunOnStepFailure etc.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  settings?: Record<unknown>;
+  settings?: Record<unknown> | null;
 
   /**
    * ARM resource ID of source job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  sourceJobId?: string;
+  sourceJobId?: string | null;
 
   /**
    * [Required] Specifies the type of job.
@@ -14327,7 +14326,7 @@ model PredictionDriftMonitoringSignal extends MonitoringSignalBase {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  featureDataTypeOverride?: Record<MonitoringFeatureDataType>;
+  featureDataTypeOverride?: Record<MonitoringFeatureDataType> | null;
 
   /**
    * [Required] A list of metrics to calculate and their associated thresholds.
@@ -14361,7 +14360,7 @@ model PyTorch extends DistributionConfiguration {
   /**
    * Number of processes per node.
    */
-  processCountPerInstance?: int32;
+  processCountPerInstance?: int32 | null;
 
   /**
    * [Required] Specifies the type of distribution framework.
@@ -14376,12 +14375,12 @@ model RandomSamplingAlgorithm extends SamplingAlgorithm {
   /**
    * The specific type of random algorithm
    */
-  rule?: RandomSamplingAlgorithmRule;
+  rule?: RandomSamplingAlgorithmRule = RandomSamplingAlgorithmRule.Random;
 
   /**
    * An optional integer to use as the seed for random number generation
    */
-  seed?: int32;
+  seed?: int32 | null;
 
   /**
    * [Required] The algorithm used for generating hyperparameter values, along with configuration properties
@@ -14398,12 +14397,12 @@ model Regression extends AutoMLVertical {
   /**
    * Primary metric for regression task.
    */
-  primaryMetric?: RegressionPrimaryMetrics;
+  primaryMetric?: RegressionPrimaryMetrics = RegressionPrimaryMetrics.NormalizedRootMeanSquaredError;
 
   /**
    * Inputs for training phase for an AutoML Job.
    */
-  trainingSettings?: RegressionTrainingSettings;
+  trainingSettings?: RegressionTrainingSettings | null;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -14419,12 +14418,12 @@ model RegressionTrainingSettings extends TrainingSettings {
   /**
    * Allowed models for regression task.
    */
-  allowedTrainingAlgorithms?: RegressionModels[];
+  allowedTrainingAlgorithms?: RegressionModels[] | null;
 
   /**
    * Blocked models for regression task.
    */
-  blockedTrainingAlgorithms?: RegressionModels[];
+  blockedTrainingAlgorithms?: RegressionModels[] | null;
 }
 
 /**
