@@ -10,7 +10,7 @@ permissions:
 jobs:
   typespec-migration-validation:
     name: TypeSpec Migration Validation
-    if: contains(github.event.pull_request.labels.*.name, 'typespec-conversion-w1') || contains(github.event.pull_request.labels.*.name, 'typespec-conversion-w2') || contains(github.event.pull_request.labels.*.name, 'typespec-conversion-w3')
+    if: contains(join(github.event.pull_request.labels.*.name, ','), 'typespec-conversion-w')
     runs-on: ubuntu-24.04
 
     steps:
