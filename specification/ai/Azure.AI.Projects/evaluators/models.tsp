@@ -33,7 +33,6 @@ union EvaluatorCategory {
 union EvaluatorType {
   string,
 
-  @visibility(Lifecycle.Read)
   @doc("Built-in evaluator (Microsoft provided)")
   built_in: "Built-In",
 
@@ -54,19 +53,17 @@ union EvaluatorDefinitionType {
   @doc("Prompty-based definition")
   prompty: "prompty",
 
-  @visibility(Lifecycle.Read)
   @doc("Prompt & Code Based definition")
   prompt_and_code: "prompt_and_code",
   
-  @visibility(Lifecycle.Read)
   @doc("Service-based evaluator")
   service: "service",
 
-  @visibility(Lifecycle.Read)
   @doc("OpenAI graders")
   openai_graders: "openai_graders",
 }
 
+#suppress "@azure-tools/typespec-azure-core/no-unknown"  
 @doc("Base evaluator configuration with discriminator")
 @discriminator("type")
 model EvaluatorDefinition {
