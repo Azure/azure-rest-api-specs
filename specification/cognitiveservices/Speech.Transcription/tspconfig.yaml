@@ -16,7 +16,7 @@ options:
     output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
   "@azure-tools/typespec-csharp":
     package-dir: "Azure.AI.Speech.Transcription"
-    namespace: "{package-dir}"
+    namespace: "Azure.AI.Speech.Transcription"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
@@ -44,6 +44,7 @@ options:
     service-dir: "sdk/ai/azspeechtranscription"
     package-dir: "azspeechtranscription"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{project-root}/../../../azure-sdk-for-go/{service-dir}"
     flavor: "azure"
     generate-fakes: true
     inject-spans: true
