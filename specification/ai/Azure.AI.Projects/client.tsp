@@ -69,7 +69,7 @@ using Azure.ClientGenerator.Core;
   "AIProjectConnectionSasCredential",
   "csharp"
 );
-@@clientName(Azure.AI.Projects.DatasetVersion, "AIProjectDatasetVersion", "csharp");
+@@clientName(Azure.AI.Projects.DatasetVersion, "AIProjectDataset", "csharp");
 @@clientName(Azure.AI.Projects.FileDatasetVersion, "FileDataset", "csharp");
 @@clientName(Azure.AI.Projects.FolderDatasetVersion, "FolderDataset", "csharp");
 
