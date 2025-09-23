@@ -1632,3 +1632,24 @@ op restoresTrigger(
 ): ArmAcceptedLroResponse;
 
 @@override(Restores.trigger, restoresTrigger, "java,go,python");
+
+// ProtectionPolicyOperationStatuses operations
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op protectionPolicyOperationStatusesGet(
+  ...ApiVersionParameter,
+  ...SubscriptionIdParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  vaultName: string,
+  ...ResourceGroupParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  policyName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  operationId: string,
+): ArmAcceptedLroResponse;
+
+@@override(ProtectionPolicyOperationStatuses.get,
+  protectionPolicyOperationStatusesGet,
+  "java,go,python"
+);
