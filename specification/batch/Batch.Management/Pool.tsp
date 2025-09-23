@@ -51,14 +51,14 @@ interface Pools {
       /**
        * The entity state (ETag) version of the pool to update. A value of "*" can be used to apply the operation only if the pool already exists. If omitted, this operation will always be applied.
        */
-      @header
-      `If-Match`?: string;
+      @header("If-Match")
+      ifMatch?: string;
 
       /**
        * Set to '*' to allow a new pool to be created, but to prevent updating an existing pool. Other values will be ignored.
        */
-      @header
-      `If-None-Match`?: string;
+      @header("If-None-Match")
+      ifNoneMatch?: string;
     },
     Response = ArmResourceUpdatedResponse<Pool>
   >;
@@ -76,8 +76,8 @@ interface Pools {
       /**
        * The entity state (ETag) version of the pool to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
-      `If-Match`?: string;
+      @header("If-Match")
+      ifMatch?: string;
     }
   >;
 

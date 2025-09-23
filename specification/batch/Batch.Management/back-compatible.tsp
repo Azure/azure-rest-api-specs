@@ -118,3 +118,6 @@ using Microsoft.Batch;
   "Location"
 );
 @@clientLocation(LocationOperationGroup.checkNameAvailability, "Location");
+@@clientName(LocationOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);

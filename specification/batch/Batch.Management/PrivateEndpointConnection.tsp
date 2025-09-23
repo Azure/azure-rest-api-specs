@@ -47,8 +47,8 @@ interface PrivateEndpointConnections {
       /**
        * The state (ETag) version of the private endpoint connection to update. This value can be omitted or set to "*" to apply the operation unconditionally.
        */
-      @header
-      `If-Match`?: string;
+      @header("If-Match")
+      ifMatch?: string;
     },
     LroHeaders = ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
