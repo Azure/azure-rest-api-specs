@@ -642,7 +642,7 @@ model DiscoveryRuleProperties {
 }
 
 @doc("Error details for a failed discovery operation")
-model DiscoveryError{
+model DiscoveryError {
   @visibility(Lifecycle.Read)
   @doc("Error message")
   message: string;
