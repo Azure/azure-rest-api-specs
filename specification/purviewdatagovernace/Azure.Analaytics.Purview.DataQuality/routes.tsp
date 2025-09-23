@@ -78,7 +78,7 @@ op getRules is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
   },
-  RuleEntity
+  RuleEntity[]
 >;
 
 /**
@@ -652,7 +652,7 @@ op getRunsForAsset is Azure.Core.Foundations.Operation<
     @query("runType")
     runType: string;
   },
-  JobHistoryEntity
+  JobHistoryEntity[]
 >;
 
 /**
