@@ -1441,3 +1441,11 @@ model OperationList {
   @nextLink
   nextLink?: string;
 }
+
+alias ResponseETagHeader = {
+  /**
+   * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+   */
+  @header("ETag")
+  eTag: string;
+};
