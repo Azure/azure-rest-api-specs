@@ -38,8 +38,7 @@ interface DatadogMonitorResources {
   /**
    * Create a monitor resource.
    */
-  create is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
-    Extension.ResourceGroup,
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DatadogMonitorResource,
     OptionalRequestBody = true
   >;
@@ -48,19 +47,16 @@ interface DatadogMonitorResources {
    * Update a monitor resource.
    */
   @patch(#{ implicitOptionality: false })
-  update is Azure.ResourceManager.Legacy.UpdateOperation<
-    ResourceInstanceParameters<
-      DatadogMonitorResource,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<DatadogMonitorResource>
-    >,
-    DatadogMonitorResourceUpdateParameters,
+  update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    DatadogMonitorResource,
+    Request = DatadogMonitorResourceUpdateParameters,
     Response = ArmResponse<DatadogMonitorResource> | ArmResourceCreatedResponse<
       DatadogMonitorResource,
       LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
     OptionalRequestBody = true,
-    ErrorResponse = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
@@ -170,7 +166,6 @@ interface DatadogMonitorResources {
    * Reinstate integration with your Datadog organization by choosing one of the available subscription plans.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Organizations_Resubscribe")
   resubscribe is ArmResourceActionAsync<
     DatadogMonitorResource,
     ResubscribeProperties,
@@ -186,7 +181,7 @@ interface DatadogMonitorResources {
   "Properties specific to the monitor resource."
 );
 @@doc(DatadogMonitorResources.create::parameters.resource, "");
-@@doc(DatadogMonitorResources.update::parameters.properties, "");
+@@doc(DatadogMonitorResources.update::parameters.resource, "");
 @@doc(DatadogMonitorResources.setDefaultKey::parameters.body, "");
 @@doc(DatadogMonitorResources.resubscribe::parameters.body,
   "Resubscribe Properties"

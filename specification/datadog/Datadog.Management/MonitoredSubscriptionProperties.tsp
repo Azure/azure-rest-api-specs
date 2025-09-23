@@ -36,8 +36,7 @@ interface MonitoredSubscriptions {
    * Add the subscriptions that should be monitored by the Datadog monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createorUpdate is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
-    Extension.ResourceGroup,
+  createorUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
     Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
       MonitoredSubscriptionProperties,
@@ -51,16 +50,13 @@ interface MonitoredSubscriptions {
    * Updates the subscriptions that are being monitored by the Datadog monitor resource
    */
   @patch(#{ implicitOptionality: false })
-  update is Azure.ResourceManager.Legacy.UpdateOperation<
-    ResourceInstanceParameters<
-      MonitoredSubscriptionProperties,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<MonitoredSubscriptionProperties>
-    >,
+  update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MonitoredSubscriptionProperties,
+    Request = MonitoredSubscriptionProperties,
     Response = ArmResponse<MonitoredSubscriptionProperties> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
       Azure.Core.Foundations.RetryAfterHeader>,
     OptionalRequestBody = true,
-    ErrorResponse = ErrorResponse
+    Error = ErrorResponse
   >;
 
   /**
@@ -88,4 +84,4 @@ interface MonitoredSubscriptions {
   "The request to update subscriptions needed to be monitored by the Datadog monitor resource."
 );
 @@doc(MonitoredSubscriptions.createorUpdate::parameters.resource, "");
-@@doc(MonitoredSubscriptions.update::parameters.properties, "");
+@@doc(MonitoredSubscriptions.update::parameters.resource, "");

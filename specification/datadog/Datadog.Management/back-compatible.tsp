@@ -95,7 +95,7 @@ using Microsoft.Datadog;
 
 // Existing client decorators for parameters and models
 @@clientName(DatadogMonitorResources.create::parameters.resource, "body");
-@@clientName(DatadogMonitorResources.update::parameters.properties, "body");
+@@clientName(DatadogMonitorResources.update::parameters.resource, "body");
 
 @@clientName(TagRules.createOrUpdate::parameters.resource, "body");
 
@@ -104,4 +104,4 @@ using Microsoft.Datadog;
 @@clientName(MonitoredSubscriptions.createorUpdate::parameters.resource,
   "body"
 );
-@@clientName(MonitoredSubscriptions.update::parameters.properties, "body");
+@@clientName(MonitoredSubscriptions.update::parameters.resource, "body");

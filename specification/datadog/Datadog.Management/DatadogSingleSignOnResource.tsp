@@ -34,8 +34,7 @@ interface DatadogSingleSignOnResources {
   /**
    * Configures single-sign-on for this resource.
    */
-  create is Azure.ResourceManager.Legacy.Extension.CreateOrUpdateAsync<
-    Extension.ResourceGroup,
+  create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DatadogSingleSignOnResource,
     OptionalRequestBody = true
   >;
