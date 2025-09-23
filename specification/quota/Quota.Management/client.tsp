@@ -65,3 +65,91 @@ using Microsoft.Quota;
 
 // Java-specific fixes for breaking changes
 @@clientName(ResponseETagHeader.eTag, "etag", "java");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op currentQuotaLimitBasesCreateOrUpdate(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  apiVersion: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  extensionProvider: "Microsoft.Quota",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  scope: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  createQuotaRequest: CurrentQuotaLimitBase,
+): CurrentQuotaLimitBase;
+
+@@override(CurrentQuotaLimitBases.createOrUpdate,
+  currentQuotaLimitBasesCreateOrUpdate,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op currentQuotaLimitBasesGet(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  apiVersion: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  extensionProvider: "Microsoft.Quota",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  scope: string,
+): CurrentQuotaLimitBase;
+
+@@override(CurrentQuotaLimitBases.get,
+  currentQuotaLimitBasesGet,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op currentQuotaLimitBasesUpdate(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  apiVersion: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  extensionProvider: "Microsoft.Quota",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  scope: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  createQuotaRequest: CurrentQuotaLimitBase,
+): CurrentQuotaLimitBase;
+
+@@override(CurrentQuotaLimitBases.update,
+  currentQuotaLimitBasesUpdate,
+  "java,go,python"
+);
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op quotaRequestStatusGet(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  apiVersion: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  extensionProvider: "Microsoft.Quota",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  id: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  scope: string,
+): QuotaRequestDetails;
+
+@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,go,python");
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op currentUsagesBasesGet(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  apiVersion: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  extensionProvider: "Microsoft.Quota",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  resourceName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  scope: string,
+): CurrentUsagesBase;
+
+@@override(CurrentUsagesBases.get, currentUsagesBasesGet, "java,go,python");
