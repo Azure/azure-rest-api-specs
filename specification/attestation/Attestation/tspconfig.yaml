@@ -23,13 +23,13 @@ options:
     generate-test: false
     generate-sample: false
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Security.Attestation"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Security.Attestation"
     clear-output-folder: true
     model-namespace: false
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-security-attestation"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-attestation"
     namespace: "com.azure.security.attestation"
     flavor: "azure"
   "@azure-tools/typespec-ts":
