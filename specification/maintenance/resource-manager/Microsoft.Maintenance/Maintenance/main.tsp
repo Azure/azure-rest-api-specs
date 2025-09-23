@@ -39,8 +39,11 @@ namespace Microsoft.Maintenance;
 enum Versions {
   /**
    * The 2023-10-01-preview API version.
+   * The 2025-10-01-preview API version.
    */
   v2023_10_01_preview: "2023-10-01-preview",
+
+  v2025_10_01_preview: "2025-10-01-preview",
 }
 
 interface Operations
