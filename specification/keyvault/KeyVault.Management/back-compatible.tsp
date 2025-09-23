@@ -146,3 +146,8 @@ using Azure.Core;
 );
 @@clientName(VaultListResult, "ResourceListResult");
 @@clientName(MhsmServiceTagRule, "MHSMServiceTagRule");
+
+@@clientName(JsonWebKeyCurveName.`P-256`, "P256", "python");
+@@clientName(JsonWebKeyCurveName.`P-384`, "P384", "python");
+@@clientName(JsonWebKeyCurveName.`P-521`, "P521", "python");
+@@clientName(JsonWebKeyCurveName.`P-256K`, "P256_K", "python");
