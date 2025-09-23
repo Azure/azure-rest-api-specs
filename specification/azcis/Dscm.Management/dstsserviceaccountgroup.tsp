@@ -70,50 +70,6 @@ model DstsServiceAccountGroupResourceProperties {
 }
 
 @added(Versions.v2024_06_24_preview)
-@doc("Authentication requirement.")
-model AuthenticationRequirement {
-  @doc("The authentication requirement value. E.g. 'SAWEnforcement' or 'PTH'.")
-  value: string;
-
-  @doc("A list of required IP ranges.")
-  @Azure.ResourceManager.identifiers(#[])
-  requiredIpRanges: Array<RequiredIpRange>;
-}
-
-@added(Versions.v2024_06_24_preview)
-@doc("Cloud Id")
-union CloudId {
-  string,
-
-  @doc("Public cloud")
-  Public: "Public",
-
-  @doc("BlackForest cloud")
-  BlackForest: "BlackForest",
-
-  @doc("Bleu cloud")
-  Bleu: "Bleu",
-
-  @doc("Delos cloud")
-  Delos: "Delos",
-
-  @doc("Fairfax cloud")
-  Fairfax: "Fairfax",
-
-  @doc("GovSG cloud")
-  GovSG: "GovSG",
-
-  @doc("Mooncake cloud")
-  Mooncake: "Mooncake",
-
-  @doc("USNat cloud")
-  USNat: "USNat",
-
-  @doc("USSec cloud")
-  USSec: "USSec",
-}
-
-@added(Versions.v2024_06_24_preview)
 @doc("Represents a controlled resource in a JIT policy.")
 model DstsControlledResource {
   @doc("Defines if the resource should be created.")

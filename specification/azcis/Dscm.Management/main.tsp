@@ -2,13 +2,13 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
 import "./versions.tsp";
+import "./dstsmodels.tsp";
 import "./dsmsallowlist.tsp";
 import "./dsmsrootfolder.tsp";
 import "./dstsapplication.tsp";
 import "./dstsserviceaccount.tsp";
 import "./dstsserviceaccountgroup.tsp";
 import "./dstsserviceclientidentity.tsp";
-import "./dstsserviceclientidentitygroup.tsp";
 import "./dstsmanagedserviceclientidentitygroup.tsp";
 import "./dstssubjectnamebasedserviceclientidentitygroup.tsp";
 
