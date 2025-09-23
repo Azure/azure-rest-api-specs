@@ -2628,6 +2628,7 @@ model DomainValidationProperties {
 /**
  * The JSON object that contains the properties of the domain to create.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AFDDomainUpdatePropertiesParameters {
   /**
    * The name of the profile which holds the domain.
@@ -2692,6 +2693,7 @@ model AFDDomainHttpsParameters {
 /**
  * Customized cipher suite set object that will be used for Https when cipherSuiteSetType is Customized.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AFDDomainHttpsCustomizedCipherSuiteSet {
   /**
    * Cipher suites for TLS 1.2. Required at least one in minimumTlsVersion TLS 1.2.
@@ -2707,6 +2709,7 @@ model AFDDomainHttpsCustomizedCipherSuiteSet {
 /**
  * Contains the properties to configure mutual TLS for a custom domain with FQDN. Mutual TLS cannot be configured for custom domains with wildcard host names.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 @discriminator("scenario")
 model AFDDomainMtlsParameters {
@@ -2792,6 +2795,7 @@ model AFDEndpointPropertiesUpdateParameters {
 /**
  * Properties required to create or update an endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AFDEndpointUpdateParameters {
   /**
    * Endpoint tags.
@@ -5760,6 +5764,7 @@ model KnowledgeSourceProperties {
   /**
    * Format or origin of the knowledge source.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type: KnowledgeSourceType;
 
   /**
@@ -6222,6 +6227,7 @@ model ManagedRuleOverrideAfd {
   /**
    * Describes the exclusions that are applied to this specific rule.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   exclusions?: ManagedRuleExclusion[];
 }
 
@@ -6750,6 +6756,7 @@ model DeploymentVersionRouteChange extends DeploymentVersionChange {
 /**
  * Deployment change of the origin group under the profile
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 model DeploymentVersionAFDOriginGroupChange extends DeploymentVersionChange {
   /**
@@ -6771,6 +6778,7 @@ model DeploymentVersionAFDOriginGroupChange extends DeploymentVersionChange {
 /**
  * Deployment change of the origin group under the profile
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @added(Versions.v2025_09_01_preview)
 model DeploymentVersionAFDOriginChange extends DeploymentVersionChange {
   /**
