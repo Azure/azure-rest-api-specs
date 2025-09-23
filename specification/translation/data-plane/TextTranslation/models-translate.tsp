@@ -290,7 +290,7 @@ model TranslationResult {
   ...CommonResultHeaders;
 
   @doc("Array of the translated text elements.")
-  values: TranslatedTextItem[];
+  value: TranslatedTextItem[];
 
   @header("x-mt-system")
   @doc("""

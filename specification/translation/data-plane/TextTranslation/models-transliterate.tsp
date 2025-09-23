@@ -60,7 +60,7 @@ model TransliterateResult {
   ...CommonResultHeaders;
 
   @doc("Array of transliterated texts")
-  values: TransliteratedText[];
+  value: TransliteratedText[];
 }
 
 @doc("Transliterated text element.")
