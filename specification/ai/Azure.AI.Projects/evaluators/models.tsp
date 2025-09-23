@@ -55,6 +55,10 @@ union EvaluatorDefinitionType {
   prompty: "prompty",
 
   @visibility(Lifecycle.Read)
+  @doc("Prompt & Code Based definition")
+  prompt_and_code: "prompt_and_code",
+  
+  @visibility(Lifecycle.Read)
   @doc("Service-based evaluator")
   service: "service",
 
