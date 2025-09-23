@@ -505,7 +505,6 @@ op bmsPrepareDataMoveOperationResultGet(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   backupStorageConfigName: "vaultstorageconfig",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -668,7 +667,6 @@ op backupResourceStorageConfigsNonCRRGet(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   vaultName: string,
 
   ...ResourceGroupParameter,
@@ -689,7 +687,9 @@ op backupResourceStorageConfigsNonCRRGet(
 op backupResourceStorageConfigsNonCRRPatch(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -717,7 +717,9 @@ op backupResourceStorageConfigsNonCRRPatch(
 op backupResourceStorageConfigsNonCRRUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -745,7 +747,9 @@ op backupResourceStorageConfigsNonCRRUpdate(
 op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -773,7 +777,9 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
 op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -893,11 +899,9 @@ op backupWorkloadItemsList(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   fabricName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
   @path
   containerName: string,
 
@@ -927,16 +931,13 @@ op backupsTrigger(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   fabricName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   containerName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
   @path
   protectedItemName: string,
 
@@ -962,16 +963,13 @@ op recoveryPointsGet(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   fabricName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   containerName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
   @path
   protectedItemName: string,
 
@@ -997,16 +995,13 @@ op recoveryPointsList(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   fabricName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  @path
   containerName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path
   @path
   protectedItemName: string,
 
