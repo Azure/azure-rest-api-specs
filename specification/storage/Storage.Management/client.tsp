@@ -50,3 +50,18 @@ enum IntervalUnit {
 );
 
 @@clientName(ETagHeader.eTag, "etag", "java");
+
+// Fix client parameter order.
+/**
+ * Get properties of specified deleted account resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op getDeletedAccountCustomized(
+  apiVersion: string,
+  deletedAccountName: string,
+  location: Azure.Core.azureLocation,
+  provider: "Microsoft.ThisWillBeReplaced",
+  subscriptionId: Azure.Core.uuid,
+): Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount> | Microsoft.Storage.ErrorResponse;
+@@override(DeletedAccounts.get, getDeletedAccountCustomized, "java");
