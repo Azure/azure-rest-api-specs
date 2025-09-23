@@ -1,0 +1,47 @@
+{
+  "title": "ChangeStates_VerifyChangeValidityAtSubscriptionLevel",
+  "operationId": "ChangeStates_VerifyChangeValidityAtSubscriptionLevel",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "subscriptionId": "8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F",
+    "changeStateName": "subscriptionNetworkingChangeState",
+    "body": {
+      "operation": {
+        "uri": "https://management.azure.com/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.Network/virtualNetworks/enterprise-vnet",
+        "httpMethod": "PUT",
+        "body": {
+          "name": "enterprise-vnet",
+          "location": "East US",
+          "properties": {
+            "addressSpace": {
+              "addressPrefixes": [
+                "10.0.0.0/16"
+              ]
+            },
+            "subnets": [
+              {
+                "name": "default",
+                "properties": {
+                  "addressPrefix": "10.0.1.0/24"
+                }
+              }
+            ]
+          }
+        }
+      },
+      "context": {
+        "clientId": "b2c3d4e5-f6a7-4890-b123-c45678901234"
+      },
+      "changeSafetyReferenceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/changeStates/subscriptionNetworkingChangeState/stageProgressions/networkingDeployment"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "outcome": "Succeeded",
+        "message": "Change validation successful. The PUT operation for enterprise-vnet has been validated and is safe to execute. Network configuration is valid and does not conflict with existing infrastructure.",
+        "validUntil": "2025-07-09T08:30:19.442Z"
+      }
+    }
+  }
+}
