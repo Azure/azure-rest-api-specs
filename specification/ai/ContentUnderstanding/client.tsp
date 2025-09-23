@@ -15,14 +15,11 @@ using ContentUnderstanding;
 @@clientName(TimeField.type, "field_type", "python"); 
 
 // Rename 'items' to avoid conflict with Python built-in function 'items' for dictionaries.
-@@clientName(FieldDefinition.items, "item_definition", "python");
+@@clientName(ContentFieldDefinition.items, "item_definition", "python");
 
 @@clientName(AnalyzeBinaryRequest.input, "binary_input", "python");
 @@clientName(ClassifyBinaryRequest.input, "binary_input", "python");
 
-@@clientName(ClassifierCategory, "ClassifierCategoryDefinition", "python");
-
-@@clientName(FieldType, "ContentFieldType", "python");
 
 // Client-only docs clarifying that these properties accept raw binary bytes (not base64 strings) in Python SDK.
 @@clientDoc(AnalyzeInput.data, 
