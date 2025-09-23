@@ -10159,6 +10159,10 @@
             "$ref": "#/definitions/MaterializedViewDetails"
           }
         },
+        "materializedViewsProperties": {
+          "description": "Materialized Views Properties defined for source container.",
+          "$ref": "#/definitions/MaterializedViewsProperties"
+        },
         "computedProperties": {
           "description": "List of computed properties",
           "type": "array",
@@ -10662,6 +10666,26 @@
         "definition": {
           "description": "The definition should be an SQL query which would be used to fetch data from the source container to populate into the Materialized View container.",
           "type": "string"
+        },
+        "throughputBucketForBuild": {
+          "description": "ThroughputBucket assigned for the Materialized View operations on Target Container.",
+          "type": "number",
+          "format": "int32"
+        }
+      },
+      "required": [
+        "sourceCollectionId",
+        "definition"
+      ]
+    },
+    "MaterializedViewsProperties": {
+      "type": "object",
+      "description": "Materialized Views Properties for the source container.",
+      "properties": {
+        "throughputBucketForBuild": {
+          "description": "ThroughputBucket assigned for the Materialized View operations on Source Container.",
+          "type": "number",
+          "format": "int32"
         }
       },
       "required": [
