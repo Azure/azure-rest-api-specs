@@ -61,6 +61,11 @@ using Microsoft.BillingBenefits;
   armResourceIdentifier,
   "csharp"
 );
+@@alternateType(AppliedScopeProperties.tenantId,
+  uuid,
+  "csharp"
+);
+
 @@clientName(BillingPlan, "BillingBenefitsBillingPlan", "csharp");
 @@clientName(ProvisioningState, "BillingBenefitsProvisioningState", "csharp");
 @@clientName(InstanceFlexibility,
