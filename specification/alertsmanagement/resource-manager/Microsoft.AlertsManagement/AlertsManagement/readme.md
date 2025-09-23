@@ -73,8 +73,8 @@ directive:
   - suppress: MULTIPLE_API_VERSION
     reason: The AlertsManagement service requires multiple API versions for comprehensive functionality across different services.
   - suppress: OperationsAPIImplementation
-    reason: Operations API is available in Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json and not needed in preview version
-    from: Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
+    reason: Operations API is available in stable/2019-03-01/AlertsManagement.json and not needed in preview version
+    from: preview/2025-07-01-preview/PreviewAlertRule.json
   - code: ValidFormats
     where: $.definitions["Azure.Core.eTag"].format
     reason: eTag should be an allowed format
@@ -94,7 +94,7 @@ These settings apply only when `--tag=package-preview-2025-07-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-07-01-preview'
 input-file:
-  - Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
+  - preview/2025-07-01-preview/PreviewAlertRule.json
 ```
 
 ### Tag: package-preview-2025-05-25-preview
@@ -103,7 +103,7 @@ These settings apply only when `--tag=package-preview-2025-05-25-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-05-25-preview'
 input-file:
-  - Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
+  - preview/2025-05-25-preview/AlertsManagement.json
 ```
 
 #### New Features in 2025-05-25-preview
@@ -133,13 +133,13 @@ These settings apply only when `--tag=package-preview-2025-05-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-05-01-preview'
 input-file:
-  - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
-  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
-  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
-  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
-  - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
-  - Microsoft.AlertsManagement/preview/2025-05-01-preview/PreviewAlertRule.json
+  - stable/2023-03-01/PrometheusRuleGroups.json
+  - stable/2019-03-01/AlertsManagement.json
+  - preview/2019-05-05-preview/SmartGroups.json
+  - preview/2023-08-01-preview/AlertRuleRecommendations.json
+  - preview/2021-08-08-preview/AlertProcessingRules.json
+  - preview/2025-03-01-preview/Issues.json
+  - preview/2025-05-01-preview/PreviewAlertRule.json
 ```
 ### Tag: package-preview-2025-03-01-preview
 
@@ -147,7 +147,7 @@ These settings apply only when `--tag=package-preview-2025-03-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-03-01-preview'
 input-file:
-  - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
+  - preview/2025-03-01-preview/Issues.json
 ```
 ### Tag: package-preview-2023-08
 
@@ -155,7 +155,7 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json 
+  - preview/2023-08-01-preview/AlertRuleRecommendations.json 
 ```
 ### Tag: package-preview-2023-04
 
@@ -163,7 +163,7 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - Microsoft.AlertsManagement/preview/2023-04-01-preview/TenantActivityLogAlerts.json
+  - preview/2023-04-01-preview/TenantActivityLogAlerts.json
 ```
 ### Tag: package-preview-2023-01
 
@@ -171,7 +171,7 @@ These settings apply only when `--tag=package-preview-2023-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-01'
 input-file:
-  - Microsoft.AlertsManagement/preview/2023-01-01-preview/AlertRuleRecommendations.json
+  - preview/2023-01-01-preview/AlertRuleRecommendations.json
 ```
 ### Tag: package-2023-03
 
@@ -179,17 +179,17 @@ These settings apply only when `--tag=package-2023-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-03'
 input-file:
-  - Microsoft.AlertsManagement/stable/2023-03-01/PrometheusRuleGroups.json
-  - Microsoft.AlertsManagement/preview/2025-05-25-preview/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
-  - Microsoft.AlertsManagement/preview/2023-08-01-preview/AlertRuleRecommendations.json
-  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
-  - Microsoft.AlertsManagement/preview/2025-03-01-preview/Issues.json
-  - Microsoft.AlertsManagement/preview/2025-07-01-preview/PreviewAlertRule.json
+  - stable/2023-03-01/PrometheusRuleGroups.json
+  - preview/2025-05-25-preview/AlertsManagement.json
+  - preview/2019-05-05-preview/SmartGroups.json
+  - preview/2023-08-01-preview/AlertRuleRecommendations.json
+  - preview/2021-08-08-preview/AlertProcessingRules.json
+  - preview/2025-03-01-preview/Issues.json
+  - preview/2025-07-01-preview/PreviewAlertRule.json
 ```
 
 ### Important Note
-The following preview versions have been deprecated and their functionality is available in the stable version (Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json):
+The following preview versions have been deprecated and their functionality is available in the stable version (stable/2019-03-01/AlertsManagement.json):
 - 2023-07-12-preview/AlertsManagement.json
 - 2024-01-01-preview/AlertsManagement.json
 
@@ -200,12 +200,12 @@ These settings apply only when `--tag=package-2021-08` is specified on the comma
 
 ```yaml $(tag) == 'package-2021-08'
 input-file:
-  - Microsoft.AlertsManagement/stable/2021-08-08/AlertProcessingRules.json
-  - Microsoft.AlertsManagement/preview/2021-07-22-preview/PrometheusRuleGroups.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
-  - Microsoft.AlertsManagement/preview/2023-01-01-preview/AlertRuleRecommendations.json
-  - Microsoft.AlertsManagement/preview/2023-04-01-preview/TenantActivityLogAlerts.json
+  - stable/2021-08-08/AlertProcessingRules.json
+  - preview/2021-07-22-preview/PrometheusRuleGroups.json
+  - preview/2019-05-05-preview/AlertsManagement.json
+  - preview/2019-05-05-preview/SmartGroups.json
+  - preview/2023-01-01-preview/AlertRuleRecommendations.json
+  - preview/2023-04-01-preview/TenantActivityLogAlerts.json
 ```
 
 ### Tag: package-preview-2021-08
@@ -214,9 +214,9 @@ These settings apply only when `--tag=package-preview-2021-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-08'
 input-file:
-  - Microsoft.AlertsManagement/preview/2021-08-08-preview/AlertProcessingRules.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+  - preview/2021-08-08-preview/AlertProcessingRules.json
+  - preview/2019-05-05-preview/AlertsManagement.json
+  - preview/2019-05-05-preview/SmartGroups.json
 ```
 
 ### Tag: package-preview-2021-07
@@ -225,7 +225,7 @@ These settings apply only when `--tag=package-preview-2021-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-07'
 input-file:
-  - Microsoft.AlertsManagement/preview/2021-07-22-preview/PrometheusRuleGroups.json
+  - preview/2021-07-22-preview/PrometheusRuleGroups.json
 ```
 
 ### Tag: package-2021-04-only
@@ -234,8 +234,8 @@ These settings apply only when `--tag=package-2021-04-only` is specified on the 
 
 ```yaml $(tag) == 'package-2021-04-only'
 input-file:
-  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
-  - Microsoft.AlertsManagement/stable/2021-04-01/SmartDetectorAlertRulesApi.json
+  - stable/2019-03-01/AlertsManagement.json
+  - stable/2021-04-01/SmartDetectorAlertRulesApi.json
 ```
 
 ### Tag: package-preview-2021-01
@@ -244,8 +244,8 @@ These settings apply only when `--tag=package-preview-2021-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-01'
 input-file:
-  - Microsoft.AlertsManagement/preview/2021-01-01-preview/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2021-01-01-preview/MigrateFromSmartDetections.json
+  - preview/2021-01-01-preview/AlertsManagement.json
+  - preview/2021-01-01-preview/MigrateFromSmartDetections.json
 ```
 ### Tag: package-2019-06-preview
 
@@ -253,10 +253,10 @@ These settings apply only when `--tag=package-2019-06-preview` is specified on t
 
 ```yaml $(tag) == 'package-2019-06-preview'
 input-file:
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/ActionRules.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
-  - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
+  - preview/2019-05-05-preview/ActionRules.json
+  - preview/2019-05-05-preview/AlertsManagement.json
+  - preview/2019-05-05-preview/SmartGroups.json
+  - stable/2019-06-01/SmartDetectorAlertRulesApi.json
 ```
 
 ### Tag: package-2019-06
@@ -265,7 +265,7 @@ These settings apply only when `--tag=package-2019-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-06'
 input-file:
-  - Microsoft.AlertsManagement/stable/2019-06-01/SmartDetectorAlertRulesApi.json
+  - stable/2019-06-01/SmartDetectorAlertRulesApi.json
 ```
 
 ### Tag: package-2019-03
@@ -274,8 +274,8 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2019-03'
 input-file:
-  - Microsoft.AlertsManagement/stable/2019-03-01/AlertsManagement.json
-  - Microsoft.AlertsManagement/stable/2019-03-01/SmartDetectorAlertRulesApi.json
+  - stable/2019-03-01/AlertsManagement.json
+  - stable/2019-03-01/SmartDetectorAlertRulesApi.json
 ```
 
 ### Tag: package-preview-2019-05
@@ -284,9 +284,9 @@ These settings apply only when `--tag=package-preview-2019-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2019-05'
 input-file:
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/ActionRules.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/AlertsManagement.json
-  - Microsoft.AlertsManagement/preview/2019-05-05-preview/SmartGroups.json
+  - preview/2019-05-05-preview/ActionRules.json
+  - preview/2019-05-05-preview/AlertsManagement.json
+  - preview/2019-05-05-preview/SmartGroups.json
 ```
 
 ### Tag: package-2018-05
@@ -295,7 +295,7 @@ These settings apply only when `--tag=package-2018-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-05'
 input-file:
-- Microsoft.AlertsManagement/stable/2018-05-05/AlertsManagement.json
+- stable/2018-05-05/AlertsManagement.json
 ```
 
 ### Tag: package-2018-05-preview
@@ -304,7 +304,7 @@ These settings apply only when `--tag=package-2018-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-05-preview'
 input-file:
-- Microsoft.AlertsManagement/preview/2018-05-05-preview/AlertsManagement.json
+- preview/2018-05-05-preview/AlertsManagement.json
 ```
 
 ---
