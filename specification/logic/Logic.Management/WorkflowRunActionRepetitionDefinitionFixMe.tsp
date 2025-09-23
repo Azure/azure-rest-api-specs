@@ -1,0 +1,1 @@
+// You defined multiple pathes under the model WorkflowRunActionRepetitionDefinition. Some operations will be lost. Turn on isFullCompatible to keep all operations, or fix your TypeSpec manually.
