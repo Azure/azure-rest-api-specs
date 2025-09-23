@@ -6,6 +6,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.RecoveryServices;
 using Azure.ResourceManager;
+using Http;
 
 @@clientLocation(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   "Client",
@@ -495,12 +496,20 @@ op bmsPrepareDataMoveOperationResultGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   backupStorageConfigName: "vaultstorageconfig",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): VaultStorageConfigOperationResultResponse;
 
@@ -516,11 +525,17 @@ op backupEnginesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupEngineName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -535,8 +550,11 @@ op backupEnginesList(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
@@ -553,8 +571,11 @@ op backupJobsList(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
@@ -571,8 +592,11 @@ op backupPoliciesList(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
@@ -587,10 +611,15 @@ op backupResourceEncryptionConfigsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupEncryptionConfig: string,
 ): BackupResourceEncryptionConfigExtendedResource;
 
@@ -605,11 +634,17 @@ op backupResourceEncryptionConfigsUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupEncryptionConfig: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: BackupResourceEncryptionConfigResource,
 ): ArmResponse<BackupResourceEncryptionConfig>;
@@ -626,12 +661,20 @@ op backupResourceEncryptionConfigsUpdate(
 op backupResourceStorageConfigsNonCRRGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   provider: "Microsoft.ThisWillBeReplaced",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupstorageconfig: string,
 ): BackupResourceConfigResource;
 
@@ -648,11 +691,17 @@ op backupResourceStorageConfigsNonCRRPatch(
   ...SubscriptionIdParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   provider: "Microsoft.ThisWillBeReplaced",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupstorageconfig: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   properties: BackupResourceConfigResource,
 ): ArmNoContentResponse;
@@ -670,11 +719,17 @@ op backupResourceStorageConfigsNonCRRUpdate(
   ...SubscriptionIdParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   provider: "Microsoft.ThisWillBeReplaced",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupstorageconfig: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: BackupResourceConfigResource,
 ): ArmResourceUpdatedResponse<BackupResourceConfigResource>;
@@ -692,11 +747,17 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
   ...SubscriptionIdParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   provider: "Microsoft.ThisWillBeReplaced",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupstorageconfig: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: PrepareDataMoveRequest,
 ): ArmAcceptedLroResponse;
@@ -714,11 +775,17 @@ op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
   ...SubscriptionIdParameter,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   provider: "Microsoft.ThisWillBeReplaced",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupstorageconfig: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: TriggerDataMoveRequest,
 ): ArmAcceptedLroResponse;
@@ -735,10 +802,15 @@ op backupResourceVaultConfigsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupconfig: string,
 ): BackupResourceVaultConfigResource;
 
@@ -753,11 +825,17 @@ op backupResourceVaultConfigsPut(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupconfig: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: BackupResourceVaultConfigResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -776,11 +854,17 @@ op backupResourceVaultConfigsUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupconfig: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   properties: BackupResourceVaultConfigResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -800,13 +884,23 @@ op backupWorkloadItemsList(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -824,15 +918,28 @@ op backupsTrigger(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: BackupRequestResource,
 ): void;
@@ -846,16 +953,30 @@ op recoveryPointsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   recoveryPointId: string,
 ): RecoveryPointResource;
 
@@ -867,15 +988,28 @@ op recoveryPointsList(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
 ): ArmResponse<RecoveryPointResourceList>;
@@ -888,17 +1022,29 @@ op recoveryPointsMoveRecoveryPoint(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   recoveryPointId: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: MoveRPAcrossTiersRequest,
 ): ArmAcceptedLroResponse;
@@ -915,15 +1061,25 @@ op recoveryPointsRecommendedForMoveList(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: ListRecoveryPointsRecommendedForMoveRequest,
 ): ArmResponse<RecoveryPointResourceList>;
@@ -940,12 +1096,19 @@ op backupResourceConfigOperationStatusesGetOperationStatus(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   backupStorageConfigName: "vaultstorageconfig",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): ArmResponse<OperationStatus>;
 
@@ -961,11 +1124,17 @@ op exportJobsOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   backupJobs: "backupJobs",
 ): OperationResultInfoBaseResource;
@@ -982,17 +1151,29 @@ op itemLevelRecoveryConnectionsProvision(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   recoveryPointId: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: ILRRequestResource,
 ): void;
@@ -1008,17 +1189,29 @@ op itemLevelRecoveryConnectionsRevoke(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   recoveryPointId: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: void,
 ): void;
@@ -1035,11 +1228,17 @@ op jobCancellationsTrigger(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   jobName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: void,
 ): void;
@@ -1053,10 +1252,15 @@ op jobDetailsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   jobName: string,
 ): JobResource;
 
@@ -1069,12 +1273,19 @@ op jobOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   jobName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): JobResource;
 
@@ -1087,10 +1298,15 @@ op privateEndpointConnectionResourcesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   privateEndpointConnectionName: string,
 ): Microsoft.RecoveryServices.PrivateEndpointConnectionResource;
 
@@ -1105,11 +1321,17 @@ op privateEndpointConnectionResourcesPut(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   privateEndpointConnectionName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: Microsoft.RecoveryServices.PrivateEndpointConnectionResource,
 ): Microsoft.RecoveryServices.PrivateEndpointConnectionResource | ArmAcceptedLroResponse;
@@ -1125,12 +1347,17 @@ op privateEndpointConnectionResourcesDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   privateEndpointConnectionName: string,
-): ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse;
+): ArmDeletedNoContentResponse;
 
 @@override(PrivateEndpointConnectionResources.delete,
   privateEndpointConnectionResourcesDelete,
@@ -1144,12 +1371,19 @@ op privateEndpointOperationStatusesGetOperationStatus(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   privateEndpointConnectionName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): ArmResponse<OperationStatus>;
 
@@ -1165,16 +1399,27 @@ op protectedItemOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): ProtectedItemResource;
 
@@ -1190,16 +1435,27 @@ op protectedItemOperationStatusesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): ArmResponse<OperationStatus>;
 
@@ -1215,15 +1471,25 @@ op protectedItemsCreateOrUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: ProtectedItemResource,
 ): ProtectedItemResource;
@@ -1239,16 +1505,25 @@ op protectedItemsDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
-): ArmDeletedResponse | ArmDeletedNoContentResponse;
+): ArmDeletedNoContentResponse;
 
 @@override(ProtectedItems.delete, protectedItemsDelete, "java,go,python");
 
@@ -1258,15 +1533,25 @@ op protectedItemsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
 ): ProtectedItemResource;
@@ -1280,14 +1565,23 @@ op protectionContainerOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): ProtectionContainerResource;
 
@@ -1303,13 +1597,21 @@ op protectionContainersRegister(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: ProtectionContainerResource,
 ): ProtectionContainerResource;
@@ -1325,12 +1627,19 @@ op protectionContainersGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
 ): ProtectionContainerResource;
 
@@ -1342,13 +1651,21 @@ op protectionContainersInquire(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   $filter?: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1366,12 +1683,19 @@ op protectionContainersUnregister(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
 ): void;
 
@@ -1387,11 +1711,17 @@ op protectionIntentResourcesCreateOrUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   intentObjectName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1409,11 +1739,17 @@ op protectionIntentResourcesDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   intentObjectName: string,
 ): ArmDeletedNoContentResponse;
@@ -1429,11 +1765,17 @@ op protectionIntentResourcesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   intentObjectName: string,
 ): ProtectionIntentResource;
@@ -1450,10 +1792,15 @@ op protectionPoliciesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   policyName: string,
 ): ProtectionPolicyResource;
 
@@ -1465,11 +1812,17 @@ op protectionPoliciesCreateOrUpdate(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   policyName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: ProtectionPolicyResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1488,12 +1841,17 @@ op protectionPoliciesDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   policyName: string,
-): ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse;
+): ArmDeletedNoContentResponse;
 
 @@override(ProtectionPolicies.delete,
   protectionPoliciesDelete,
@@ -1507,12 +1865,19 @@ op protectionPolicyOperationResultsGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   policyName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): ProtectionPolicyResource;
 
@@ -1528,8 +1893,11 @@ op resourceGuardProxiesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
 ): ArmResponse<ResourceGuardProxyBaseResourceList>;
 
@@ -1542,10 +1910,15 @@ op resourceGuardProxyDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceGuardProxyName: string,
 ): ArmDeletedNoContentResponse;
 
@@ -1560,10 +1933,15 @@ op resourceGuardProxyGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceGuardProxyName: string,
 ): ResourceGuardProxyBaseResource;
 
@@ -1575,11 +1953,17 @@ op resourceGuardProxyPut(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceGuardProxyName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: ResourceGuardProxyBaseResource,
 ): ResourceGuardProxyBaseResource;
@@ -1592,11 +1976,17 @@ op resourceGuardProxyUnlockDelete(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   resourceGuardProxyName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: UnlockDeleteRequest,
 ): UnlockDeleteResponse;
@@ -1613,17 +2003,29 @@ op restoresTrigger(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   fabricName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   containerName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   protectedItemName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   recoveryPointId: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   body: RestoreRequestResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1640,12 +2042,19 @@ op protectionPolicyOperationStatusesGet(
   ...ApiVersionParameter,
   ...SubscriptionIdParameter,
   ...Azure.ResourceManager.Legacy.Provider,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   vaultName: string,
+
   ...ResourceGroupParameter,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   policyName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
   operationId: string,
 ): ArmAcceptedLroResponse;
 
