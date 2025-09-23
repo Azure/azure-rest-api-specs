@@ -19,8 +19,8 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "azure.ApiCenter"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "azure.ApiCenter"
     flavor: azure
     clear-output-folder: true
     model-namespace: false
@@ -33,7 +33,7 @@ options:
       name: "@azure-rest/azure-apicenter-rest"
       description: "azure.ApiCenter Service"
   "@azure-tools/typespec-java":
-    package-dir: "azure-apicenter"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-apicenter"
     namespace: com.azure.apicenter
     flavor: azure
 linter:

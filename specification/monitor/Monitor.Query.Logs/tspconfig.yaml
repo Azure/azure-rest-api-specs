@@ -24,8 +24,8 @@ options:
     flavor: azure
     namespace: azure.monitor.query
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Monitor.Query.Logs"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Monitor.Query.Logs"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
@@ -38,7 +38,7 @@ options:
       version: "1.0.0"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-monitor-query-logs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-query-logs"
     namespace: com.azure.monitor.query.logs
     flavor: azure
     use-object-for-unknown: true

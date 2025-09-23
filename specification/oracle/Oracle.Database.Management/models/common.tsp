@@ -80,7 +80,7 @@ model DayOfWeek {
 @doc("DayOfWeek resource properties")
 model DayOfWeekUpdate {
   @doc("Name of the day of the week.")
-  name: DayOfWeekName;
+  name?: DayOfWeekName;
 }
 
 @doc("The [OCID](/Content/General/Concepts/identifiers.htm) of the resource.")

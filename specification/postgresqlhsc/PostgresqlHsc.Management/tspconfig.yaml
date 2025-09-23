@@ -1,0 +1,45 @@
+parameters:
+  "service-dir":
+    default: "sdk/postgresqlhsc"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/postgresqlhsc.json"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+  "@azure-tools/typespec-python":
+    service-dir: "sdk/cosmosdbforpostgresql"
+    package-dir: "azure-mgmt-cosmosdbforpostgresql"
+    namespace: "azure.mgmt.cosmosdbforpostgresql"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-cosmosdbforpostgresql"
+    service-dir: "sdk/cosmosdbforpostgresql"
+    namespace: "com.azure.resourcemanager.cosmosdbforpostgresql"
+    service-name: "Cosmos DB for PostgreSql" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-postgresqlhsc"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-postgresqlhsc"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/postgresqlhsc"
+    package-dir: "armpostgresqlhsc"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

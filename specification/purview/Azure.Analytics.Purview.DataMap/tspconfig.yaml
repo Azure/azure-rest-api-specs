@@ -20,12 +20,13 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Analytics.Purview.DataMap"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Analytics.Purview.DataMap"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Analytics.Purview.DataMap
     model-namespace: false
   "@azure-tools/typespec-ts":
@@ -37,7 +38,7 @@ options:
       description: Purview DataMap Service"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-analytics-purview-datamap"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-analytics-purview-datamap"
     namespace: com.azure.analytics.purview.datamap
     flavor: azure
 linter:

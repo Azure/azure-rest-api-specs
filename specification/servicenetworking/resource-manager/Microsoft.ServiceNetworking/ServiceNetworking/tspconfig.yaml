@@ -1,0 +1,53 @@
+parameters:
+  "service-dir":
+    default: "sdk/servicenetworking"
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-resource-manager/arm-common-types-version": "New rule"
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "resource-manager"
+    emit-common-types-schema: "never"
+    # `arm-resource-flattening` is only used for back-compat for specs existed on July 2024. All new service spec should NOT use this flag
+    arm-resource-flattening: true
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/TrafficController.json"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    omit-unreachable-types: true
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    package-dir: "arm-servicenetworking"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-servicenetworking"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-servicenetworking"
+    namespace: "azure.mgmt.servicenetworking"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/servicenetworking"
+    package-dir: "armservicenetworking"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicenetworking"
+    namespace: "com.azure.resourcemanager.servicenetworking"
+    flavor: "azure"
+    service-name: "Traffic Controller"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "Azure.ResourceManager.ServiceNetworking"

@@ -12,11 +12,11 @@ options:
     output-file: "{version-status}/{version}/widget.json"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Widget"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Widget"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-widget"
     namespace: "azure.mgmt.widget"
@@ -24,7 +24,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-widget"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-widget"
     namespace: "com.azure.resourcemanager.widget"
     service-name: "Widget" # human-readable service name, whitespace allowed
     flavor: azure

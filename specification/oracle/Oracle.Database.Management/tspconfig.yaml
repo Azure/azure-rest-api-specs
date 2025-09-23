@@ -27,7 +27,7 @@ options:
     additionalDirectories:
       - "specification/oracle/Oracle.Database.Management/models"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-oracledatabase"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-oracledatabase"
     namespace: "com.azure.resourcemanager.oracledatabase"
     service-name: "Oracle Database"
     flavor: azure
@@ -48,11 +48,10 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.OracleDatabase"
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.OracleDatabase"
     clear-output-folder: true
     flavor: azure
-    service-dir: "sdk/oracle"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
 
 linter:
   extends:

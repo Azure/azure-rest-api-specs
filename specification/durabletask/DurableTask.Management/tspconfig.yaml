@@ -16,7 +16,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-durabletask"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-durabletask"
     namespace: "com.azure.resourcemanager.durabletask"
     service-name: "Durable Task"
     flavor: azure
@@ -31,11 +31,11 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.DurableTask"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DurableTask"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true

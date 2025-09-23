@@ -1,0 +1,44 @@
+parameters:
+  "service-dir":
+    default: "sdk/webpubsub"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/webpubsub.json"
+    examples-dir: "{project-root}/examples"
+    emit-lro-options: "all"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-webpubsub"
+    namespace: "azure.mgmt.webpubsub"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-webpubsub"
+    namespace: "com.azure.resourcemanager.webpubsub"
+    service-name: "WebPubSub" # human-readable service name, whitespace allowed
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-webpubsub"
+    service-dir: "sdk/web-pubsub"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-webpubsub"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/webpubsub"
+    package-dir: "armwebpubsub"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: false
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

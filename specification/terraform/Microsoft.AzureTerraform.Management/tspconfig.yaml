@@ -11,11 +11,11 @@ options:
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/export.json"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.Terraform"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Terraform"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/terraform"
     package-dir: "armterraform"
@@ -27,7 +27,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-terraform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-terraform"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.terraform"
     service-name: "Azure Terraform"

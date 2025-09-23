@@ -24,7 +24,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-devopsinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devopsinfrastructure"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.devopsinfrastructure"
     service-name: "DevOps Infrastructure"
@@ -36,8 +36,8 @@ options:
   "@azure-tools/typespec-csharp":
     flavor: azure
     clear-output-folder: true
-    package-dir: "Azure.ResourceManager.DevOpsInfrastructure"
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DevOpsInfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-devopsinfrastructure"

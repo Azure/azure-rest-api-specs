@@ -15,12 +15,13 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.Easm/{version-status}/{version}/easm.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Analytics.Defender.Easm"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Analytics.Defender.Easm"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Analytics.Defender.Easm
     model-namespace: false
   "@azure-tools/typespec-ts":
@@ -30,7 +31,7 @@ options:
       name: "@azure-rest/defender-easm-rest"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-analytics-defender-easm"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-analytics-defender-easm"
     namespace: com.azure.analytics.defender.easm
     partial-update: true
     flavor: azure

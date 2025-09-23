@@ -19,15 +19,15 @@ options:
     # omit the enum type Versions from being added to versioned swagger
     omit-unreachable-types: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-standbypool"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-standbypool"
     namespace: "com.azure.resourcemanager.standbypool"
     flavor: "azure"
     service-name: "Standby Pool"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.StandbyPool"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.StandbyPool"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     package-dir: "arm-standbypool"

@@ -697,7 +697,7 @@
         },
         "features": {
           "type": "array",
-          "description": "Driving and walking routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 25 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints. Truck route supports up to 150 waypoints and viaWaypoints are not supported.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. For more information on the GeoJSON format, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
+          "description": "Driving, walking, and truck routes are defined by a set of waypoints(stops) and viaWaypoints (intermediate locations that the route must pass through). You can have a maximum of 150 waypoints, and a maximum of 10 viaWaypoints between each set of waypoints.\n\nA route must have a minimum of 2 waypoints and the start and end points of the route cannot be viaWaypoints.\n\nBoth waypoint and viaWaypoint locations must be specified as a valid GeoJSON Point feature object along with pointIndex that specifies the order of the locations. For more information on the GeoJSON format, see [RFC 7946](https://www.rfc-editor.org/rfc/rfc7946).",
           "minimum": 2,
           "items": {
             "$ref": "#/definitions/InputWaypointFeaturesItem"

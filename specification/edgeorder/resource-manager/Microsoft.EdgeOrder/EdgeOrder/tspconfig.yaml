@@ -13,11 +13,11 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.EdgeOrder"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.EdgeOrder"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-edgeorder"
     namespace: "azure.mgmt.edgeorder"
@@ -25,7 +25,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-edgeorder"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-edgeorder"
     namespace: "com.azure.resourcemanager.edgeorder"
     service-name: "edgeorder" # human-readable service name, whitespace allowed
     flavor: azure

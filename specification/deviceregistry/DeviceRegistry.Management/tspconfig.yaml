@@ -14,13 +14,13 @@ options:
     use-read-only-status-schema: true
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.DeviceRegistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DeviceRegistry"
     api-version: "2024-11-01"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-deviceregistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-deviceregistry"
     namespace: "com.azure.resourcemanager.deviceregistry"
     flavor: "azure"
     service-name: "Device Registry"

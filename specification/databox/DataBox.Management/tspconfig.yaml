@@ -1,0 +1,51 @@
+parameters:
+  "service-dir":
+    default: "sdk/databox"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/databox.json"
+    examples-dir: "{project-root}/examples"
+    arm-resource-flattening: true
+    emit-lro-options: "all"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.DataBox"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-databox"
+    namespace: "azure.mgmt.databox"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-databox"
+    namespace: "com.azure.resourcemanager.databox"
+    service-name: "Data Box" # human-readable service name, whitespace allowed
+    flavor: azure
+    use-object-for-unknown: true
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-databox"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-databox"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/databox"
+    package-dir: "armdatabox"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

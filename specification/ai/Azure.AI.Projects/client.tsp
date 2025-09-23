@@ -51,6 +51,34 @@ using Azure.ClientGenerator.Core;
   "csharp"
 );
 
+// Less generic names for C# subclients
+@@clientName(Azure.AI.Projects.Connections, "ConnectionsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Datasets, "DatasetsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Deployments, "DeploymentsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Indexes, "IndexesOperations", "csharp");
+
+// Need to explicitly make all get and list methods include the object name for C#
+@@clientName(Azure.AI.Projects.Connections.get, "getConnection", "csharp");
+@@clientName(Azure.AI.Projects.Connections.getWithCredentials,
+  "getConnectionWithCredentials",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Connections.list, "listConnections", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.getVersion, "getDataset", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.listLatest, "listDatasets", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.listVersions,
+  "listDatasetVersions",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Deployments.get, "getDeployment", "csharp");
+@@clientName(Azure.AI.Projects.Deployments.list, "listDeployments", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.getVersion, "getIndex", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.listLatest, "listIndexes", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.listVersions,
+  "listIndexVersions",
+  "csharp"
+);
+
 // Make these two internal, since all SDKs hand-write a single public method with boolean "includeCredentials"
 // input parameter that calls either on these two.
 @@access(Azure.AI.Projects.Connections.get, Access.internal);

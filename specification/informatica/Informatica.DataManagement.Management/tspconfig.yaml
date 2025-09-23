@@ -18,17 +18,16 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-informaticadatamanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-informaticadatamanagement"
     namespace: "com.azure.resourcemanager.informaticadatamanagement"
     flavor: "azure"
     service-name: "Informatica DataManagement"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.InformaticaDataManagement"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
-    service-dir: "sdk/informaticadatamanagement"
+    namespace: "Azure.ResourceManager.InformaticaDataManagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     service-dir: "sdk/informatica"
     experimental-extensible-enums: true

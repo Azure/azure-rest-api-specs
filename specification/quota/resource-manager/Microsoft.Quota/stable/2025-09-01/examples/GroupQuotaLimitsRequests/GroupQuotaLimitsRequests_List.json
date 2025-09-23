@@ -1,0 +1,62 @@
+{
+  "operationId": "GroupQuotaLimitsRequests_List",
+  "parameters": {
+    "managementGroupId": "E7EC67B3-7657-4966-BFFC-41EFD36BAA09",
+    "groupQuotaName": "groupquota1",
+    "resourceProviderName": "Microsoft.Compute",
+    "resourceName": "standardav2family",
+    "api-version": "2025-09-01",
+    "$filter": "location eq westus"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId1",
+            "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+            "name": "requestId1",
+            "properties": {
+              "requestedResource": {
+                "properties": {
+                  "limit": 100,
+                  "name": {
+                    "value": "standardddv4family",
+                    "localizedValue": "standard DDv4 Family vCPUs"
+                  },
+                  "region": "westus",
+                  "comments": "Contoso requires more quota."
+                }
+              },
+              "requestSubmitTime": "2023-11-18T00:12:34.004Z",
+              "provisioningState": "Failed",
+              "faultCode": "ResourceNotAvailableForOffer"
+            }
+          },
+          {
+            "id": "/providers/Microsoft.Management/managementGroups/E7EC67B3-7657-4966-BFFC-41EFD36BAA09/providers/Microsoft.Quota/groupQuotas/groupquota1/resourceProviders/Microsoft.Compute/groupQuotaLimitsRequests/requestId2",
+            "type": "Microsoft.Quota/groupQuotas/groupQuotaLimitsRequests",
+            "name": "requestId2",
+            "properties": {
+              "requestedResource": {
+                "properties": {
+                  "region": "westus",
+                  "comments": "Contoso requires more quota.",
+                  "name": {
+                    "value": "standardav2family",
+                    "localizedValue": "standardav2family"
+                  },
+                  "limit": 150
+                }
+              },
+              "requestSubmitTime": "2023-11-17T00:57:43.410Z",
+              "provisioningState": "Succeeded",
+              "faultCode": ""
+            }
+          }
+        ],
+        "nextLink": "https://yourLinkHere.com"
+      }
+    }
+  }
+}

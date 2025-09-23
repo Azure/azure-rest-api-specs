@@ -1,0 +1,57 @@
+parameters:
+  "service-dir":
+    default: "sdk/recoveryservicesdatareplication"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    use-read-only-status-schema: true
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}"
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{version-status}/{version}/recoveryservicesdatareplication.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.RecoveryServicesDataReplication"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-recoveryservicesdatareplication"
+    namespace: "azure.mgmt.recoveryservicesdatareplication"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/recoveryservicesdatareplication"
+    package-dir: "armrecoveryservicesdatareplication"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-examples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-recoveryservicesdatareplication"
+    flavor: "azure"
+    namespace: "com.azure.resourcemanager.recoveryservicesdatareplication"
+    service-name: "Recovery Services Data Replication"
+    rename-model:
+      PrivateEndpointConnectionProxyListResult: "PrivEdpConnProxyListResult"
+      PrivateEndpointConnectionListResult: "PrivEdpConnListResult"
+      ReplicationExtensionModelListResult: "RepExtModelListResult"
+      JobModelCustomPropertiesAffectedObjectDetailsType: "AffectedObjectDetailsType"
+  "@azure-tools/typespec-ts":
+    typespec-title-map:
+      DataReplicationClient: AzureSiteRecoveryManagementServiceAPI
+    experimental-extensible-enums: true
+    package-dir: "arm-recoveryservicesdatareplication"
+    flavor: "azure"
+    package-details:
+      name: "@azure/arm-recoveryservicesdatareplication"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"

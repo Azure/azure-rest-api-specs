@@ -18,9 +18,8 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/edge/{version-status}/{version}/operations.json"
     arm-types-dir: "{project-root}/../../common-types/resource-management"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-commonedgesitemanageroperations"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-commonedgesitemanageroperations"
     namespace: "com.azure.resourcemanager.commonedgesitemanageroperations"
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-resourcemanager-commonedgesitemanageroperations"
     flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-commonedgesitemanageroperations"
@@ -35,8 +34,8 @@ options:
     package-details:
       name: "@azure/arm-commonedgesitemanageroperations"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.ResourceManager.CommonEdgeSiteManagerOperations"
     clear-output-folder: true
     model-namespace: false
     flavor: azure

@@ -397,6 +397,28 @@ input-file:
   - Microsoft.Compute/DiagnosticRP/preview/2025-02-01-preview/diagnostic.json
 ```
 
+### Tag: package-python-sdk
+
+These settings apply only when `--tag=package-python-sdk` is specified on the command line.
+
+```yaml $(tag) == 'package-python-sdk'
+input-file:
+  - Microsoft.Compute/common-types/v1/common.json
+  - Microsoft.Compute/ComputeRP/stable/2024-11-01/ComputeRP.json
+  - Microsoft.Compute/CloudserviceRP/stable/2024-11-04/cloudService.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRPCommon.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/disk.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskAccess.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskEncryptionSet.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/diskRestorePoint.json
+  - Microsoft.Compute/DiskRP/stable/2023-10-02/snapshot.json
+  - Microsoft.Compute/Skus/stable/2021-07-01/skus.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/galleryRPCommon.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/gallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/sharedGallery.json
+  - Microsoft.Compute/GalleryRP/stable/2023-07-03/communityGallery.json
+```
+
 ### Tag: package-2024-11-04
 
 These settings apply only when `--tag=package-2024-11-04` is specified on the command line.

@@ -1,36 +1,38 @@
 {
   "parameters": {
-    "location": "eastus",
     "api-version": "2025-01-01-preview",
+    "location": "eastus",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToMoreResults...",
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SignalRService/locations/eastus/usages/Usage1",
-            "currentValue": 0,
-            "limit": 100,
             "name": {
-              "value": "Usage1",
-              "localizedValue": "Usage1"
+              "localizedValue": "Usage1",
+              "value": "Usage1"
             },
+            "currentValue": 0,
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SignalRService/locations/eastus/usages/Usage1",
+            "limit": 100,
             "unit": "Count"
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SignalRService/locations/eastus/usages/Usage2",
-            "currentValue": 0,
-            "limit": 100,
             "name": {
-              "value": "Usage2",
-              "localizedValue": "Usage2"
+              "localizedValue": "Usage2",
+              "value": "Usage2"
             },
+            "currentValue": 0,
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.SignalRService/locations/eastus/usages/Usage2",
+            "limit": 100,
             "unit": "Count"
           }
-        ],
-        "nextLink": "https://management.azure.com/subscriptions/subid/providers/Microsoft.SignalRService/...pathToMoreResults..."
+        ]
       }
     }
-  }
+  },
+  "operationId": "Usages_List",
+  "title": "Usages_List"
 }

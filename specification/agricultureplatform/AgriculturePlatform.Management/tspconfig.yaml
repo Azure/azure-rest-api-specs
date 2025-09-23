@@ -20,10 +20,10 @@ options:
     code-kind: model
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.AgriculturePlatform"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.AgriculturePlatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-agricultureplatform"
     namespace: "azure.mgmt.agricultureplatform"
@@ -31,7 +31,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-agricultureplatform"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-agricultureplatform"
     namespace: "com.azure.resourcemanager.agricultureplatform"
     service-name: "Agriculture Platform"
     flavor: "azure"

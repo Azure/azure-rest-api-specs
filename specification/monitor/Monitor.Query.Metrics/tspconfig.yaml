@@ -24,8 +24,8 @@ options:
     flavor: azure
     namespace: azure.monitor.querymetrics
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.Monitor.Query.Metrics"
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Azure.Monitor.Query.Metrics"
     clear-output-folder: true
     model-namespace: false
     flavor: azure
@@ -38,7 +38,7 @@ options:
       version: "1.0.0"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-monitor-query-metrics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-query-metrics"
     namespace: com.azure.monitor.query.metrics
     flavor: azure
     use-object-for-unknown: true

@@ -13,11 +13,11 @@ options:
     version-enum-strategy: true
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    package-dir: "Azure.ResourceManager.DependencyMap"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DependencyMap"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-dependencymap"
     namespace: "azure.mgmt.dependencymap"
@@ -25,7 +25,7 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-dependencymap"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dependencymap"
     namespace: "com.azure.resourcemanager.dependencymap"
     service-name: "Dependency Map"
     flavor: azure
@@ -84,7 +84,7 @@ options:
       - where:
           verb: Set
         remove: true
-      # Remove four post operations since there are issues in tsp and response schema are not defined.
+        # Remove four post operations since there are issues in tsp and response schema are not defined.
       - where:
           subject: MapConnection|MapDependencyView
           verb: Get

@@ -14,10 +14,10 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.ComputeRecommender"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ComputeRecommender"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-computerecommender"
     namespace: "azure.mgmt.computerecommender"
@@ -25,11 +25,12 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-computerecommender"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-computerecommender"
     namespace: "com.azure.resourcemanager.computerecommender"
     service-name: "Compute Recommender"
     flavor: azure
   "@azure-tools/typespec-ts":
+    service-dir: "sdk/compute"
     package-dir: "arm-computerecommender"
     flavor: azure
     experimental-extensible-enums: true

@@ -15,10 +15,10 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/kubernetesruntime.json"
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.ContainerOrchestratorRuntime"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.ContainerOrchestratorRuntime"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-containerorchestratorruntime"
     namespace: "azure.mgmt.containerorchestratorruntime"
@@ -33,7 +33,7 @@ options:
     package-details:
       name: "@azure/arm-containerorchestratorruntime"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-containerorchestratorruntime"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerorchestratorruntime"
     namespace: "com.azure.resourcemanager.containerorchestratorruntime"
     service-name: "Container Orchestrator Runtime"
     flavor: "azure"

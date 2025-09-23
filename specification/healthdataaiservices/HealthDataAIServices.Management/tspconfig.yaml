@@ -11,9 +11,9 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     new-line: lf
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.HealthDataAIServices"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.HealthDataAIServices"
     service-name: "Health Data AI Services"
   "@azure-tools/typespec-python":
     package-dir: "azure-mgmt-healthdataaiservices"
@@ -22,7 +22,7 @@ options:
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-healthdataaiservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-healthdataaiservices"
     flavor: "azure"
     namespace: "com.azure.resourcemanager.healthdataaiservices"
     service-name: "Health Data AI Services"
