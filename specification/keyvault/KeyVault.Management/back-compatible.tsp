@@ -151,3 +151,6 @@ using Azure.Core;
 @@clientName(JsonWebKeyCurveName.`P-384`, "P384", "python");
 @@clientName(JsonWebKeyCurveName.`P-521`, "P521", "python");
 @@clientName(JsonWebKeyCurveName.`P-256K`, "P256_K", "python");
+
+@@clientName(JsonWebKeyType.`EC-HSM`, "EC_HSM", "python");
+@@clientName(JsonWebKeyType.`RSA-HSM`, "RSA_HSM", "python");
