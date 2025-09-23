@@ -353,5 +353,5 @@ using Microsoft.RecoveryServices;
 
 @@clientName(Azure.ResourceManager.CommonTypes.ErrorDetail,
   "ArmErrorDetail",
-  "python"
+  "python,javascript"
 );
