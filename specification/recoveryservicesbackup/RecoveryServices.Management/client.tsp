@@ -645,7 +645,7 @@ op backupResourceEncryptionConfigsUpdate(
   backupEncryptionConfig: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: BackupResourceEncryptionConfigResource,
+  parameters: BackupResourceEncryptionConfigResource,
 ): ArmResponse<BackupResourceEncryptionConfig>;
 
 @@override(BackupResourceEncryptionConfigs.update,
@@ -703,7 +703,7 @@ op backupResourceStorageConfigsNonCRRPatch(
   backupstorageconfig: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  properties: BackupResourceConfigResource,
+  parameters: BackupResourceConfigResource,
 ): ArmNoContentResponse;
 
 @@override(BackupResourceStorageConfigsNonCRR.patch,
@@ -733,7 +733,7 @@ op backupResourceStorageConfigsNonCRRUpdate(
   backupstorageconfig: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: BackupResourceConfigResource,
+  parameters: BackupResourceConfigResource,
 ): ArmResourceUpdatedResponse<BackupResourceConfigResource>;
 
 @@override(BackupResourceStorageConfigsNonCRR.update,
@@ -763,7 +763,7 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
   backupstorageconfig: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: PrepareDataMoveRequest,
+  parameters: PrepareDataMoveRequest,
 ): ArmAcceptedLroResponse;
 
 @@override(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
@@ -793,7 +793,7 @@ op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
   backupstorageconfig: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: TriggerDataMoveRequest,
+  parameters: TriggerDataMoveRequest,
 ): ArmAcceptedLroResponse;
 
 @@override(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
@@ -843,7 +843,7 @@ op backupResourceVaultConfigsPut(
   backupconfig: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: BackupResourceVaultConfigResource,
+  parameters: BackupResourceVaultConfigResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
   `x-ms-authorization-auxiliary`?: string,
@@ -872,7 +872,7 @@ op backupResourceVaultConfigsUpdate(
   backupconfig: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  properties: BackupResourceVaultConfigResource,
+  parameters: BackupResourceVaultConfigResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
   `x-ms-authorization-auxiliary`?: string,
@@ -942,7 +942,7 @@ op backupsTrigger(
   protectedItemName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: BackupRequestResource,
+  parameters: BackupRequestResource,
 ): void;
 
 @@override(Backups.trigger, backupsTrigger, "java,go,python");
@@ -1041,7 +1041,7 @@ op recoveryPointsMoveRecoveryPoint(
   recoveryPointId: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: MoveRPAcrossTiersRequest,
+  parameters: MoveRPAcrossTiersRequest,
 ): ArmAcceptedLroResponse;
 
 @@override(RecoveryPoints.moveRecoveryPoint,
@@ -1076,7 +1076,7 @@ op recoveryPointsRecommendedForMoveList(
   protectedItemName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: ListRecoveryPointsRecommendedForMoveRequest,
+  parameters: ListRecoveryPointsRecommendedForMoveRequest,
 ): ArmResponse<RecoveryPointResourceList>;
 
 @@override(RecoveryPointsRecommendedForMove.list,
@@ -1170,7 +1170,7 @@ op itemLevelRecoveryConnectionsProvision(
   recoveryPointId: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: ILRRequestResource,
+  parameters: ILRRequestResource,
 ): void;
 
 @@override(ItemLevelRecoveryConnections.provision,
@@ -1328,7 +1328,7 @@ op privateEndpointConnectionResourcesPut(
   privateEndpointConnectionName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: Microsoft.RecoveryServices.PrivateEndpointConnectionResource,
+  parameters: Microsoft.RecoveryServices.PrivateEndpointConnectionResource,
 ): Microsoft.RecoveryServices.PrivateEndpointConnectionResource | ArmAcceptedLroResponse;
 
 @@override(PrivateEndpointConnectionResources.put,
@@ -1486,9 +1486,10 @@ op protectedItemsCreateOrUpdate(
   protectedItemName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  `x-ms-authorization-auxiliary`?: string,
+  parameters: ProtectedItemResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: ProtectedItemResource,
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
+  `x-ms-authorization-auxiliary`?: string,
 ): ProtectedItemResource;
 
 @@override(ProtectedItems.createOrUpdate,
@@ -1610,7 +1611,7 @@ op protectionContainersRegister(
   containerName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: ProtectionContainerResource,
+  parameters: ProtectionContainerResource,
 ): ProtectionContainerResource;
 
 @@override(ProtectionContainers.register,
@@ -1722,7 +1723,7 @@ op protectionIntentResourcesCreateOrUpdate(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   intentObjectName: string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: ProtectionIntentResource,
+  parameters: ProtectionIntentResource,
 ): ProtectionIntentResource;
 
 @@override(ProtectionIntentResources.createOrUpdate,
@@ -1821,7 +1822,7 @@ op protectionPoliciesCreateOrUpdate(
   policyName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: ProtectionPolicyResource,
+  parameters: ProtectionPolicyResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
   `x-ms-authorization-auxiliary`?: string,
@@ -1962,7 +1963,7 @@ op resourceGuardProxyPut(
   resourceGuardProxyName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  resource: ResourceGuardProxyBaseResource,
+  parameters: ResourceGuardProxyBaseResource,
 ): ResourceGuardProxyBaseResource;
 
 @@override(ResourceGuardProxy.put, resourceGuardProxyPut, "java,go,python");
@@ -1985,7 +1986,7 @@ op resourceGuardProxyUnlockDelete(
   resourceGuardProxyName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: UnlockDeleteRequest,
+  parameters: UnlockDeleteRequest,
 ): UnlockDeleteResponse;
 
 @@override(ResourceGuardProxy.unlockDelete,
@@ -2024,7 +2025,7 @@ op restoresTrigger(
   recoveryPointId: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  body: RestoreRequestResource,
+  parameters: RestoreRequestResource,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "override"
   `x-ms-authorization-auxiliary`?: string,
