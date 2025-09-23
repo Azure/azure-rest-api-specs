@@ -42,7 +42,7 @@ interface Evaluators {
         "Filter evaluator versions by type. Possible values: 'all', 'custom', 'builtin'."
       )
       @Http.query
-      type?: "all" | "custom" | "builtin";
+      type?: EvaluatorType | "all";
     },
     Azure.Core.Page<EvaluatorVersion>
   >;

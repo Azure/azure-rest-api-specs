@@ -18,13 +18,13 @@ union EvaluatorCategory {
   string,
 
   @doc("Quality")
-  quality: "Quality",
+  quality: "quality",
 
   @doc("Risk & Safety")
-  safety: "Safety",
+  safety: "safety",
 
   @doc("Agents")
-  agents: "Agents",
+  agents: "agents",
 }
 
 @doc("The type of the evaluator")
@@ -33,10 +33,10 @@ union EvaluatorType {
   string,
 
   @doc("Built-in evaluator (Microsoft provided)")
-  built_in: "Built-In",
+  built_in: "builtin",
 
   @doc("Custom evaluator")
-  custom: "Custom",
+  custom: "custom",
 }
 
 @doc("The type of evaluator definition")
