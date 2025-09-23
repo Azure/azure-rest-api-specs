@@ -22,7 +22,7 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the MonitorClient API.
+These are the globals settings for the MonitorClient API.
 
 ```yaml !$(python) || !$(track2)
 title: MonitorClient
