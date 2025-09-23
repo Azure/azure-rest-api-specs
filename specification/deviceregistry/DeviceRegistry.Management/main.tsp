@@ -8,6 +8,8 @@ import "./billings.tsp";
 import "./discoveredAssets.tsp";
 import "./discoveredAssetEndpointProfiles.tsp";
 import "./namespaces.tsp";
+import "./ns_credential.tsp";
+import "./ns_policy.tsp";
 import "./ns_assets.tsp";
 import "./ns_devices.tsp";
 import "./ns_discoveredAssets.tsp";
