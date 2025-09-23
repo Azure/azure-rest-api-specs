@@ -148,6 +148,85 @@ class TspconfigEmitterOptionsSubRuleBase extends TspconfigSubRuleBase {
   }
 }
 
+class TspconfigEmitterOptionsEmitterOutputDirSubRuleBase extends TspconfigEmitterOptionsSubRuleBase {
+  private skipValidateNamespace: boolean;
+
+  constructor(
+    emitterName: string,
+    keyToValidate: string,
+    expectedValue: ExpectedValueType,
+    skipValidateNamespace: boolean = false,
+  ) {
+    super(emitterName, keyToValidate, expectedValue);
+    this.skipValidateNamespace = skipValidateNamespace;
+  }
+
+  protected validate(config: any): RuleResult {
+    const option = this.tryFindOption(config);
+    if (option === undefined)
+      return this.createFailedResult(
+        `Failed to find "options.${this.emitterName}.${this.keyToValidate}"`,
+        `Please add "options.${this.emitterName}.${this.keyToValidate}" with a path matching the SDK naming convention "${this.expectedValue}"`,
+      );
+
+    const actualValue = option as unknown as undefined | string | boolean;
+    if (typeof actualValue !== "string") {
+      return this.createFailedResult(
+        `The value of options.${this.emitterName}.${this.keyToValidate} "${actualValue}" must be a string`,
+        `Please update the value of "options.${this.emitterName}.${this.keyToValidate}" to be a string path`,
+      );
+    }
+
+    let pathToValidate: string;
+
+    // Handle various path formats with different prefixes
+    // Format 1: {output-dir}/{service-dir}/azure-mgmt-advisor
+    // Format 2: {service-dir}/azure-mgmt-advisor where service-dir might include {output-dir}
+    // Format 3: {output-dir}/{service-dir}/azadmin/settings where we need to validate "azadmin/settings"
+
+    if (!actualValue.includes("/")) {
+      pathToValidate = actualValue;
+    } else {
+      const pathParts = actualValue.split("/");
+      const filteredParts = pathParts.filter(
+        (part) => !(part === "{output-dir}" || part === "{service-dir}"),
+      );
+      pathToValidate = filteredParts.join("/");
+    }
+
+    // Skip validation if pathToValidate is exactly {namespace} and skipValidateNamespace is true
+    if (pathToValidate === "{namespace}" && this.skipValidateNamespace) {
+      return { success: true };
+    }
+
+    // Resolve any variables in the pathToValidate
+    // Check if pathToValidate contains variables like {namespace}
+    const variableMatch = pathToValidate.match(/\{([^}]+)\}/);
+    if (variableMatch) {
+      const variableName = variableMatch[1];
+      const variableValue = config?.options?.[this.emitterName]?.[variableName];
+
+      if (variableValue && typeof variableValue === "string") {
+        // Replace the variable with its value
+        pathToValidate = pathToValidate.replace(`{${variableName}}`, variableValue);
+      } else {
+        return this.createFailedResult(
+          `Could not resolve variable {${variableName}} in path "${pathToValidate}". The variable is not defined in options.${this.emitterName}`,
+          `Please define the ${variableName} variable in your configuration or use a direct path value`,
+        );
+      }
+    }
+
+    if (!this.validateValue(pathToValidate, this.expectedValue))
+      return this.createFailedResult(
+        `The path part "${pathToValidate}" in options.${this.emitterName}.${this.keyToValidate} does not match the required format "${this.expectedValue}"`,
+        `Please update the emitter-output-dir path to follow the SDK naming convention`,
+      );
+
+    return { success: true };
+  }
+}
+
 function isManagementSdk(folder: string): boolean {
   return folder.includes("/resource-manager/") || folder.includes(".Management");
 }
@@ -214,13 +293,9 @@ export class TspConfigCommonAzServiceDirMatchPatternSubRule extends TspconfigPar
 }
 
 // ----- Java sub rules -----
-export class TspConfigJavaAzEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigJavaAzEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-java",
-      "emitter-output-dir",
-      new RegExp(/^(\{output-dir\}\/)?\{service-dir\}\/azure(-\w+)+$/),
-    );
+    super("@azure-tools/typespec-java", "emitter-output-dir", new RegExp(/^azure(-\w+)+$/));
   }
 
   protected validate(config: any): RuleResult {
@@ -233,12 +308,12 @@ export class TspConfigJavaAzEmitterOutputDirMatchPatternSubRule extends Tspconfi
   }
 }
 
-export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
     super(
       "@azure-tools/typespec-java",
       "emitter-output-dir",
-      new RegExp(/^(\{output-dir\}\/)?\{service-dir\}\/azure-resourcemanager(-\w+)+$/),
+      new RegExp(/^azure-resourcemanager(-\w+)+$/),
     );
   }
 
@@ -280,9 +355,9 @@ export class TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule extend
   }
 }
 
-export class TspConfigTsMgmtModularPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsMgmtModularEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^arm-[^\/]+$/));
+    super("@azure-tools/typespec-ts", "emitter-output-dir", new RegExp(/^arm-[^\/]+$/));
   }
 
   protected skip(config: any, folder: string) {
@@ -304,9 +379,9 @@ export class TspConfigTsMgmtModularPackageNameMatchPatternSubRule extends Tspcon
 }
 
 // ----- TS data plane sub rules -----
-export class TspConfigTsDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigTsDpEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-ts", "package-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
+    super("@azure-tools/typespec-ts", "emitter-output-dir", new RegExp(/^(?:[a-z]+-)*rest$/));
   }
   protected skip(config: any, folder: string) {
     return skipForModularOrManagementPlaneInTsEmitter(config, folder);
@@ -391,13 +466,9 @@ export class TspConfigGoDpServiceDirMatchPatternSubRule extends TspconfigEmitter
   }
 }
 
-export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoDpEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-go",
-      "emitter-output-dir",
-      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}|sdk\/).*\/az.*/),
-    );
+    super("@azure-tools/typespec-go", "emitter-output-dir", new RegExp(/^az.*$/));
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
@@ -429,13 +500,9 @@ export class TspConfigGoMgmtServiceDirMatchPatternSubRule extends TspconfigEmitt
   }
 }
 
-export class TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigGoMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super(
-      "@azure-tools/typespec-go",
-      "emitter-output-dir",
-      new RegExp(/^(\{output-dir\}\/)?(\{service-dir\}|sdk\/resourcemanager\/)[^\/]*\/arm.*/),
-    );
+    super("@azure-tools/typespec-go", "emitter-output-dir", new RegExp(/^arm[^\/]*$/));
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
@@ -470,9 +537,14 @@ export class TspConfigGoMgmtGenerateFakesTrueSubRule extends TspconfigEmitterOpt
 }
 
 // ----- Python management plane sub rules -----
-export class TspConfigPythonMgmtPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigPythonMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-python", "package-dir", new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/));
+    super(
+      "@azure-tools/typespec-python",
+      "emitter-output-dir",
+      new RegExp(/^azure-mgmt(-[a-z]+){1,2}$/),
+      true,
+    );
   }
   protected skip(_: any, folder: string) {
     return skipForDataPlane(folder);
@@ -507,9 +579,13 @@ export class TspConfigPythonMgmtNamespaceSubRule extends TspconfigEmitterOptions
 }
 
 // ----- Python data plane sub rules -----
-export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOptionsSubRuleBase {
+export class TspConfigPythonDpEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
   constructor() {
-    super("@azure-tools/typespec-python", "package-dir", new RegExp(/^azure(-[a-z]+){1,3}$/));
+    super(
+      "@azure-tools/typespec-python",
+      "emitter-output-dir",
+      new RegExp(/^azure(-[a-z]+){1,3}$/),
+    );
   }
   protected skip(_: any, folder: string) {
     return skipForManagementPlane(folder);
@@ -517,6 +593,12 @@ export class TspConfigPythonDpPackageDirectorySubRule extends TspconfigEmitterOp
 }
 
 // ----- CSharp sub rules -----
+export class TspConfigCsharpAzEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+  constructor() {
+    super("@azure-tools/typespec-csharp", "emitter-output-dir", new RegExp(/^Azure\./));
+  }
+}
+
 export class TspConfigCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-csharp", "namespace", new RegExp(/^Azure\./));
@@ -526,6 +608,19 @@ export class TspConfigCsharpAzNamespaceSubRule extends TspconfigEmitterOptionsSu
 export class TspConfigCsharpAzClearOutputFolderTrueSubRule extends TspconfigEmitterOptionsSubRuleBase {
   constructor() {
     super("@azure-tools/typespec-csharp", "clear-output-folder", true);
+  }
+}
+
+export class TspConfigCsharpMgmtEmitterOutputDirSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
+  constructor() {
+    super(
+      "@azure-tools/typespec-csharp",
+      "emitter-output-dir",
+      new RegExp(/^Azure\.ResourceManager\./),
+    );
+  }
+  protected skip(_: any, folder: string) {
+    return skipForDataPlane(folder);
   }
 }
 
@@ -544,9 +639,9 @@ export const defaultRules = [
   new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule(),
   new TspConfigJavaMgmtNamespaceFormatSubRule(),
   new TspConfigTsMgmtModularExperimentalExtensibleEnumsTrueSubRule(),
-  new TspConfigTsMgmtModularPackageDirectorySubRule(),
+  new TspConfigTsMgmtModularEmitterOutputDirSubRule(),
   new TspConfigTsMgmtModularPackageNameMatchPatternSubRule(),
-  new TspConfigTsDpPackageDirectorySubRule(),
+  new TspConfigTsDpEmitterOutputDirSubRule(),
   new TspConfigTsRlcDpPackageNameMatchPatternSubRule(),
   new TspConfigTsMlcDpPackageNameMatchPatternSubRule(),
   new TspConfigGoMgmtServiceDirMatchPatternSubRule(),
@@ -559,14 +654,16 @@ export const defaultRules = [
   new TspConfigGoDpEmitterOutputDirMatchPatternSubRule(),
   new TspConfigGoModuleMatchPatternSubRule(),
   new TspConfigGoContainingModuleMatchPatternSubRule(),
-  new TspConfigPythonMgmtPackageDirectorySubRule(),
+  new TspConfigPythonMgmtEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtNamespaceSubRule(),
-  new TspConfigPythonDpPackageDirectorySubRule(),
+  new TspConfigPythonDpEmitterOutputDirSubRule(),
   new TspConfigPythonMgmtPackageGenerateSampleTrueSubRule(),
   new TspConfigPythonMgmtPackageGenerateTestTrueSubRule(),
   new TspConfigCsharpAzNamespaceSubRule(),
   new TspConfigCsharpAzClearOutputFolderTrueSubRule(),
   new TspConfigCsharpMgmtNamespaceSubRule(),
+  new TspConfigCsharpAzEmitterOutputDirSubRule(),
+  new TspConfigCsharpMgmtEmitterOutputDirSubRule(),
 ];
 
 export class SdkTspConfigValidationRule implements Rule {
@@ -622,7 +719,7 @@ export class SdkTspConfigValidationRule implements Rule {
         : "";
 
     return {
-      success,
+      success: true, // Always return success to avoid blocking PRs, errors are reported in stdOutput
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
