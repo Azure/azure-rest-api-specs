@@ -130,7 +130,7 @@ model RecurrenceSchedule {
 @doc("Hourly recurrencce schedule.")
 @added(Versions.v2025_10_15_preview)
 model HourlyRecurrenceSchedule extends RecurrenceSchedule {
-  type: RecurrenceType.Hourly
+  type: RecurrenceType.Hourly;
 }
 
 @doc("Daily recurrence schedule.")

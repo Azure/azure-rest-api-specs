@@ -17,6 +17,15 @@ alias ScheduleServiceTraits = SupportsClientRequestId &
 
 alias ScheduleOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
 alias ScheduleRunOperations = Azure.Core.ResourceOperations<ScheduleServiceTraits>;
+alias SchedulesFilterQueryParamsTraits = {
+  @query("type")
+  @doc("Filter by the type of schedule.")
+  type?: ScheduleTaskType;
+
+  @query("enabled")
+  @doc("Filter by the enabled status.")
+  enabled?: boolean;
+};
 
 @added(Versions.v2025_10_15_preview)
 interface Schedules {
@@ -27,7 +36,10 @@ interface Schedules {
   get is ScheduleOperations.ResourceRead<Schedule>;
 
   @doc("List all schedules.")
-  list is ScheduleOperations.ResourceList<Schedule>;
+  list is ScheduleOperations.ResourceList<
+    Schedule,
+    SchedulesFilterQueryParamsTraits
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or update a schedule by id.")
