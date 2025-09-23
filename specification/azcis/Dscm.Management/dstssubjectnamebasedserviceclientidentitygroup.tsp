@@ -65,7 +65,7 @@ model DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties {
 model DstsSubjectNameBasedServiceClientIdentityGroupResource
   is ProxyResource<DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties> {
   @doc("The name of resource.")
-  @pattern("^[a-zA-Z0-9-]{3,80}$")
+  @pattern("^[a-zA-Z0-9-]*$")
   @key("resourceName")
   @segment("dstsSubjectNameBasedServiceClientIdentityGroups") // Start with lower case. Should be plural
   @visibility(Lifecycle.Read)
