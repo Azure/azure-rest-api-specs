@@ -1,12 +1,9 @@
 import "../../models/autonomousdatabase/autonomousDatabase.tsp";
 import "../commons.tsp";
-import "@typespec/http";
 
 using Azure.ResourceManager;
 using Autorest;
 using TypeSpec.Versioning;
-using Http;
-
 namespace Oracle.Database;
 
 @armResourceOperations(AutonomousDatabase)
@@ -15,7 +12,6 @@ interface AutonomousDatabases
     ResourceCreateAsync<AutonomousDatabase>,
     ResourceRead<AutonomousDatabase>,
     ResourceDeleteWithoutOkAsync<AutonomousDatabase> {
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<AutonomousDatabase, AutonomousDatabaseUpdate>;
 
   listByResourceGroup is ArmResourceListByParent<AutonomousDatabase>;
@@ -96,6 +92,15 @@ interface AutonomousDatabases
   changeDisasterRecoveryConfiguration is ArmResourceActionAsync<
     AutonomousDatabase,
     DisasterRecoveryConfigurationDetails,
+    AutonomousDatabase
+  >;
+
+  //OCI Lifecycle Action - Configuration API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/{Start/Stop/Restart}AutonomousDatabase
+  @added(Versions.v20250601_preview)
+  @doc("Perform Lifecycle Management Action on Autonomous Database")
+  action is ArmResourceActionAsync<
+    AutonomousDatabase,
+    AutonomousDatabaseLifecycleAction,
     AutonomousDatabase
   >;
 }
