@@ -37,7 +37,13 @@ interface Evaluators {
   @Rest.listsResource(EvaluatorVersion)
   listVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
-    ListEvaluatorVersionsParameters,
+    {
+      @doc(
+        "Filter evaluator versions by type. Possible values: 'all', 'custom', 'builtin'."
+      )
+      @Http.query
+      type?: "all" | "custom" | "builtin";
+    },
     Azure.Core.Page<EvaluatorVersion>
   >;
 
