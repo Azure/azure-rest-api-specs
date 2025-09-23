@@ -4,8 +4,8 @@ import "@typespec/http";
 import "@typespec/rest";
 import "@typespec/versioning";
 import "@typespec/openapi";
+import "./issuesModels.tsp";
 import "./models.tsp";
-import "../../Microsoft.Monitor.Accounts.Management/typespec/models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -18,12 +18,6 @@ using Azure.Core;
 @service(#{ title: "Azure Monitor Workspaces Control Plane API" })
 @versioned(Versions)
 namespace Microsoft.Monitor;
-
-enum Versions {
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
-  @doc("API Version 2025-05-03-preview")
-  v2025_05_03: "2025-05-03-preview",
-}
 
 @doc("The issue properties")
 model IssueProperties {
