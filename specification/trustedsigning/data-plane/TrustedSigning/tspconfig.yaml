@@ -14,7 +14,7 @@ options:
     omit-unreachable-types: true
     output-file: "{version-status}/{version}/azure.developer.trustedsigning.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-developer-trustedsigning"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-trustedsigning"
     namespace: "azure.developer.trustedsigning"
     flavor: azure
     generate-test: true
@@ -30,7 +30,7 @@ options:
     namespace: Azure.Developer.TrustedSigning
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "developer-trustedsigning-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/developer-trustedsigning-rest"
     generate-metadata: true
     is-modular-library: false
     package-details:
