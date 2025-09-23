@@ -3218,7 +3218,7 @@
     },
     "ArchiveRuleset": {
       "type": "object",
-      "description": "Rules for regulating supported archive files (BZip2, Cpio, Deb, GZip, Iso9660, Rpm, Tar, Zip) during data replication. All properties are optional and only the configured options will be applied against archives. As an example, suppose minimumSizeForExpansion is 10 MiB and maximumExpansionSizeLimit is 1 GiB. Then all archives smaller than 10 MiB will be treated as though the archive ruleset is disabled, although other rulesets will apply as usual. Furthermore, all archives at least 10 MiB in size but with a decompressed size greater than 1 GiB will fail the ruleset. All other archives will have their contents extracted and each extracted element will be applied to all rulesets.",
+      "description": "Rules for regulating supported archive files (BZip2, Cpio, Deb, GZip, Rpm, Tar, Zip) during data replication. All properties are optional and only the configured options will be applied against archives. As an example, suppose minimumSizeForExpansion is 10 MiB and maximumExpansionSizeLimit is 1 GiB. Then all archives smaller than 10 MiB will be treated as though the archive ruleset is disabled, although other rulesets will apply as usual. Furthermore, all archives at least 10 MiB in size but with a decompressed size greater than 1 GiB will fail the ruleset. All other archives will have their contents extracted and each extracted element will be applied to all rulesets.",
       "properties": {
         "minimumSizeForExpansion": {
           "type": "integer",
@@ -3630,7 +3630,7 @@
           {
             "name": "Blob",
             "value": "Blob",
-            "description": "(Files/DevSecOps/Complex/Mission) Replicates generic blobs data using Azure Blob Storage."
+            "description": "(Files/SoftwareArtifacts/Complex) Replicates generic blobs data using Azure Blob Storage."
           },
           {
             "name": "Table",
@@ -3648,7 +3648,8 @@
         "API",
         "Stream",
         "Files",
-        "DevSecOps"
+        "SoftwareArtifacts",
+        "Complex"
       ],
       "x-ms-enum": {
         "name": "DataClassType",
@@ -3675,9 +3676,14 @@
             "description": "Represents standard file-based data, including Azure Blob and Table Storage, used in general-purpose replication."
           },
           {
-            "name": "DevSecOps",
-            "value": "DevSecOps",
-            "description": "Represents data related to development, security, and operations workflows subject to two-person cryptographic integrity validations."
+            "name": "SoftwareArtifacts",
+            "value": "SoftwareArtifacts",
+            "description": "Represents data related to development, security, and operations workflows such as build artifacts subject to an NCDSMO policy."
+          },
+          {
+            "name": "Complex",
+            "value": "Complex",
+            "description": "Represents rich content types such as documents (e.g., Word, PDF) and images that require specialized replication handling."
           }
         ]
       }
@@ -4606,8 +4612,15 @@
           "description": "Specifies whether the filter is an allow list or deny list. For more detail, please refer to the FilterType model."
         },
         "filters": {
-          "$ref": "#/definitions/MimeTypeFilter",
-          "description": "Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model."
+          "type": "array",
+          "description": "Defines the Media types (f.k.a MIME types) and associated file extensions to be filtered. For more detail, please refer to the MimeTypeFiler model.",
+          "items": {
+            "$ref": "#/definitions/MimeTypeFilter"
+          },
+          "x-ms-identifiers": [
+            "media",
+            "extensions"
+          ]
         }
       }
     },

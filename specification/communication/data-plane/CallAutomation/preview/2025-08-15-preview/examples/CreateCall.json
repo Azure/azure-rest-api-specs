@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "endpoint": "https://contoso.communications.azure.com",
+    "api-version": "2025-08-15-preview",
+    "createCallRequest": {
+      "targets": [
+        {
+          "kind": "communicationUser",
+          "communicationUser": {
+            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_0f50d091-5bd3-448b-884d-44be7037d9b9"
+          }
+        }
+      ],
+      "callbackUri": "https://app.contoso.com/callback",
+      "operationContext": "string",
+      "callIntelligenceOptions": {
+        "cognitiveServicesEndpoint": "string"
+      },
+      "mediaStreamingOptions": {
+        "transportUrl": "wss://contosowebsocketserver.com/",
+        "transportType": "websocket",
+        "contentType": "audio",
+        "audioChannelType": "mixed",
+        "startMediaStreaming": true,
+        "enableBidirectional": true,
+        "audioFormat": "pcm16KMono"
+      },
+      "transcriptionOptions": {
+        "transportUrl": "wss://contosowebsocketserver.com/",
+        "transportType": "websocket",
+        "locale": "en-ca",
+        "speechModelEndpointId": "afa0669c-a01e-4693-ae3a-93baf40f26d6",
+        "startTranscription": true,
+        "enableIntermediateResults": true
+      }
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "callConnectionId": "18dea47f-b081-4107-9a5c-4300819d2c6c",
+        "serverCallId": "aHR0cHM6Ly9jb252ZXJzYXRpb251cmwvdGVzdA",
+        "source": {
+          "kind": "communicationUser",
+          "communicationUser": {
+            "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_da7be3a9-8788-42a6-85c6-56b2cf784fce"
+          }
+        },
+        "targets": [
+          {
+            "kind": "communicationUser",
+            "communicationUser": {
+              "id": "8:acs:b9614373-fd0b-480c-8fd2-cb58b70eab9f_0f50d091-5bd3-448b-884d-44be7037d9b9"
+            }
+          }
+        ],
+        "callConnectionState": "connected",
+        "callbackUri": "https://app.contoso.com/callback",
+        "mediaStreamingSubscription": {
+          "id": "23dea47f-b081-4107-9a5c-4300819d2caa",
+          "state": "active",
+          "subscribedContentTypes": [
+            "audio"
+          ]
+        },
+        "transcriptionSubscription": {
+          "id": "45dea47f-b081-4107-9a5c-4300819d2caa",
+          "state": "active",
+          "subscribedResultTypes": [
+            "final"
+          ]
+        },
+        "answeredFor": {
+          "value": "+11234567890"
+        }
+      }
+    }
+  }
+}
