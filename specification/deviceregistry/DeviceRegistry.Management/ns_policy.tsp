@@ -81,7 +81,7 @@ union SupportedKeyType {
 model LeafCertificateConfiguration {
   @doc("The validity period in days.")
   @minValue(7)
-  @maxValue(30)
+  @maxValue(90)
   validityPeriodInDays: int32;
 }
 
