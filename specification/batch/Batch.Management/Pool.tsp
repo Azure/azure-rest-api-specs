@@ -37,7 +37,13 @@ interface Pools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Pool_Get")
-  get is ArmResourceRead<Pool>;
+  get is ArmResourceRead<
+    Pool,
+    Response = ArmResourceUpdatedResponse<Pool> & {
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Creates a new pool inside the specified account.
@@ -60,7 +66,10 @@ interface Pools {
       @header("If-None-Match")
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<Pool>
+    Response = ArmResourceUpdatedResponse<Pool> & {
+      @header("ETag")
+      etag?: string;
+    }
   >;
 
   /**
@@ -78,6 +87,10 @@ interface Pools {
        */
       @header("If-Match")
       ifMatch?: string;
+    },
+    Response = ArmResourceUpdatedResponse<Pool> & {
+      @header("ETag")
+      etag?: string;
     }
   >;
 
@@ -138,14 +151,28 @@ interface Pools {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Pool_DisableAutoScale")
-  disableAutoScale is ArmResourceActionSync<Pool, void, ArmResponse<Pool>>;
+  disableAutoScale is ArmResourceActionSync<
+    Pool,
+    void,
+    Response = ArmResponse<Pool> & {
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. After stopping, the pool stabilizes at the number of nodes it was at when the stop operation was done. During the stop operation, the pool allocation state changes first to stopping and then to steady. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Pool_StopResize")
-  stopResize is ArmResourceActionSync<Pool, void, ArmResponse<Pool>>;
+  stopResize is ArmResourceActionSync<
+    Pool,
+    void,
+    Response = ArmResponse<Pool> & {
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 }
 
 @@maxLength(Pool.name, 64);

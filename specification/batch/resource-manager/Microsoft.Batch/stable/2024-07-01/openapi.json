@@ -1382,9 +1382,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1467,9 +1472,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Certificate' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1547,9 +1557,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -1684,6 +1699,11 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Certificate"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2204,9 +2224,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2304,9 +2329,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'Pool' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2417,9 +2447,14 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2563,6 +2598,11 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2622,6 +2662,11 @@
             "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/Pool"
+            },
+            "headers": {
+              "ETag": {
+                "type": "string"
+              }
             }
           },
           "default": {
@@ -2820,9 +2865,9 @@
           "202": {
             "description": "Resource update request accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2844,7 +2889,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "original-uri"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       },
@@ -2889,9 +2934,9 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
-              "Azure-AsyncOperation": {
+              "Location": {
                 "type": "string",
-                "description": "A link to the status monitor"
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -2916,7 +2961,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -3550,19 +3595,6 @@
           "description": "Defer OS upgrades on the TVMs if they are running tasks."
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<PrivateEndpointConnection>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/PrivateEndpointConnection",
-          "description": "The body type of the operation request or response."
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "AzureBlobFileSystemConfiguration": {
       "type": "object",

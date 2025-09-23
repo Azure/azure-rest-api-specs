@@ -32,7 +32,13 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Certificate_Get")
-  get is ArmResourceRead<Certificate>;
+  get is ArmResourceRead<
+    Certificate,
+    Response = ArmResponse<Certificate> & {
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
@@ -55,7 +61,10 @@ interface Certificates {
       @header("If-None-Match")
       ifNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<Certificate>
+    Response = ArmResourceUpdatedResponse<Certificate> & {
+      @header("ETag")
+      etag?: string;
+    }
   >;
 
   /**
@@ -73,6 +82,10 @@ interface Certificates {
        */
       @header("If-Match")
       ifMatch?: string;
+    },
+    Response = ArmResponse<Certificate> & {
+      @header("ETag")
+      etag?: string;
     }
   >;
 
@@ -127,7 +140,10 @@ interface Certificates {
   cancelDeletion is ArmResourceActionSync<
     Certificate,
     void,
-    ArmResponse<Certificate>
+    Response = ArmResponse<Certificate> & {
+      @header("ETag")
+      etag?: string;
+    }
   >;
 }
 

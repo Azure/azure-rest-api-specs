@@ -49,9 +49,7 @@ interface PrivateEndpointConnections {
        */
       @header("If-Match")
       ifMatch?: string;
-    },
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    }
   >;
 
   /**
@@ -60,11 +58,7 @@ interface PrivateEndpointConnections {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   @operationId("PrivateEndpointConnection_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PrivateEndpointConnection,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
-  >;
+  delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
    * Lists all of the private endpoint connections in the specified account.
