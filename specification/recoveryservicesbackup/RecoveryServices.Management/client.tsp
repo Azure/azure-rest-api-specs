@@ -1486,6 +1486,8 @@ op protectedItemsCreateOrUpdate(
   protectedItemName: string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  `x-ms-authorization-auxiliary`?: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   resource: ProtectedItemResource,
 ): ProtectedItemResource;
 
