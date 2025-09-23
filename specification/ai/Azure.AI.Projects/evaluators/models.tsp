@@ -85,9 +85,6 @@ model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
 
   @doc("Inline code text for the evaluator")
   code_text: string;
-
-  @doc("Blob URI")
-  blob_uri?: string;
 }
 
 @doc("Prompt-based evaluator")
