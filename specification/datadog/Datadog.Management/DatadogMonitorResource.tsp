@@ -55,8 +55,7 @@ interface DatadogMonitorResources {
       LroHeaders = ArmLroLocationHeader<FinalResult = DatadogMonitorResource> &
         Azure.Core.Foundations.RetryAfterHeader
     >,
-    OptionalRequestBody = true,
-    Error = ErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**

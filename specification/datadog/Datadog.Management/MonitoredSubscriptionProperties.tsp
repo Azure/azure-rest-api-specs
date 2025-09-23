@@ -55,8 +55,7 @@ interface MonitoredSubscriptions {
     Request = MonitoredSubscriptionProperties,
     Response = ArmResponse<MonitoredSubscriptionProperties> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
       Azure.Core.Foundations.RetryAfterHeader>,
-    OptionalRequestBody = true,
-    Error = ErrorResponse
+    OptionalRequestBody = true
   >;
 
   /**
