@@ -2,38 +2,36 @@
   "parameters": {
     "api-version": "2024-11-01",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
+            "location": "East US",
             "name": "cache1",
             "type": "Microsoft.Cache/Redis",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.Cache/Redis/cache1",
-            "location": "East US",
+            "tags": {},
             "properties": {
-              "enableNonSslPort": true,
-              "hostName": "cache1.redis.cache.windows.net",
-              "port": 6379,
               "provisioningState": "Creating",
-              "redisConfiguration": {},
               "redisVersion": "3.2",
               "sku": {
                 "name": "Standard",
-                "capacity": 6,
-                "family": "C"
+                "family": "C",
+                "capacity": 6
               },
-              "sslPort": 6380,
-              "zonalAllocationPolicy": "Automatic"
-            },
-            "tags": {}
+              "enableNonSslPort": true,
+              "redisConfiguration": {},
+              "zonalAllocationPolicy": "Automatic",
+              "hostName": "cache1.redis.cache.windows.net",
+              "port": 6379,
+              "sslPort": 6380
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "Redis_ListByResourceGroup",
-  "title": "RedisCacheListByResourceGroup"
+  }
 }

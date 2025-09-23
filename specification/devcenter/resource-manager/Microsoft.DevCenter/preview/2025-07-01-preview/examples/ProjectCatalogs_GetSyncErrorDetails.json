@@ -1,18 +1,22 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "catalogName": "CentralCatalog",
-    "projectName": "DevProject",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     "resourceGroupName": "rg1",
-    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+    "projectName": "DevProject",
+    "catalogName": "CentralCatalog"
   },
   "responses": {
     "200": {
       "body": {
+        "operationError": {
+          "code": "Conflict",
+          "message": "The source control credentials could not be validated successfully."
+        },
         "conflicts": [
           {
-            "name": "DuplicateEnvironmentName",
-            "path": "/Environments/Duplicate/manifest.yaml"
+            "path": "/Environments/Duplicate/manifest.yaml",
+            "name": "DuplicateEnvironmentName"
           }
         ],
         "errors": [
@@ -25,14 +29,8 @@
               }
             ]
           }
-        ],
-        "operationError": {
-          "code": "Conflict",
-          "message": "The source control credentials could not be validated successfully."
-        }
+        ]
       }
     }
-  },
-  "operationId": "ProjectCatalogs_GetSyncErrorDetails",
-  "title": "ProjectCatalogs_GetSyncErrorDetails"
+  }
 }

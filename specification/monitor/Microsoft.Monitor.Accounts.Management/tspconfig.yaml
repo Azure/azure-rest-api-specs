@@ -16,32 +16,32 @@ options:
     new-line: lf
     omit-unreachable-types: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
+    package-dir: "Azure.ResourceManager.MonitorAccounts"
     clear-output-folder: true
     model-namespace: true
-    namespace: "Azure.ResourceManager.MonitorAccounts"
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-monitoraccounts"
+    package-dir: "azure-mgmt-monitoraccounts"
     namespace: "azure.mgmt.monitoraccounts"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-monitoraccounts"
+    package-dir: "azure-resourcemanager-monitoraccounts"
     namespace: "com.azure.resourcemanager.monitoraccounts"
     service-name: "Monitor Accounts"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-monitoraccounts"
+    package-dir: "arm-monitoraccounts"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-monitoraccounts"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/monitor"
-    emitter-output-dir: "{output-dir}/{service-dir}/armmonitor"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmonitor"
+    package-dir: "armmonitor"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

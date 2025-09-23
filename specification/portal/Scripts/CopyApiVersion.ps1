@@ -39,7 +39,9 @@ function EditMainTspFile {
   /**
    * The $targetApiVersion API version.
    */
-      $($versionVariableName): `"$targetApiVersion`",
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  $($versionVariableName): `"$targetApiVersion`",
 }"
     # Find the last index of "}"
     $lastIndex = $mainTspContent.LastIndexOf("}")

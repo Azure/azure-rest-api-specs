@@ -110,7 +110,6 @@ interface Galleries {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation"
   @get
   @action("versions")
-  @list
   @operationId("SoftDeletedResource_ListByArtifactName")
   listByArtifactName is ComputeResourceActionSync<
     Gallery,

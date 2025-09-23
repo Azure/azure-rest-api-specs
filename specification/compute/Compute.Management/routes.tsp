@@ -23,7 +23,6 @@ interface UsageOperationGroup {
   @autoRoute
   @get
   @action("usages")
-  @list
   list is ComputeProviderActionSync<
     Response = ListUsagesResult,
     Scope = SubscriptionActionScope,
@@ -41,7 +40,6 @@ interface VirtualMachineSizesOperationGroup {
   @autoRoute
   @get
   @action("vmSizes")
-  @list
   list is ComputeProviderActionSync<
     Response = VirtualMachineSizeListResult,
     Scope = SubscriptionActionScope,
@@ -59,7 +57,6 @@ interface VirtualMachineScaleSetsOperationGroup {
   @autoRoute
   @get
   @action("virtualMachineScaleSets")
-  @list
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineScaleSetListResult,
     Scope = SubscriptionActionScope,
@@ -77,7 +74,6 @@ interface VirtualMachinesOperationGroup {
   @autoRoute
   @get
   @action("virtualMachines")
-  @list
   listByLocation is ComputeProviderActionSync<
     Response = VirtualMachineListResult,
     Scope = SubscriptionActionScope,
@@ -596,7 +592,6 @@ interface VirtualMachineRunCommandsOperationGroup {
   @autoRoute
   @get
   @action("runCommands")
-  @list
   list is ComputeProviderActionSync<
     Response = RunCommandListResult & {
       #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
@@ -618,7 +613,7 @@ interface VirtualMachineRunCommandsOperationGroup {
     ...LocationResourceParameter,
 
     /**
-     * Specifies a commandId of predefined built-in script. Command IDs available for Linux are listed at https://aka.ms/RunCommandManagedLinux#available-commands, Windows at https://aka.ms/RunCommandManagedWindows#available-commands.
+     * The command id.
      */
     @path
     commandId: string,

@@ -2,8 +2,6 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
-using Azure.Core;
-using Azure.ResourceManager.Foundations;
 using Microsoft.StorageActions;
 
 @@clientName(Microsoft.StorageActions, "StorageActionsMgmtClient", "python");
@@ -25,23 +23,12 @@ using Microsoft.StorageActions;
   "GetStorageTaskAssignments",
   "csharp"
 );
-@@clientName(StorageTasks.list, "GetStorageTasksReports", "csharp");
 @@clientName(StorageTasksOperationGroup.previewActions,
   "PreviewActions",
   "csharp"
 );
 
-// we add this model in this namespace in order to replace some models with this model via alternateType decorator
-namespace Azure.ResourceManager.Models {
-  /** represents a reference to an existing resource by its id */
-  model SubResource {
-    /** the id */
-    id?: armResourceIdentifier;
-  }
-}
-
-@@alternateType(Microsoft.StorageActions.StorageTaskAssignmentsListResult.value,
-  Azure.ResourceManager.Models.SubResource[],
-  "csharp"
+@@clientName(StorageTasks.storageTaskAssignmentList,
+  "list",
+  "java,javascript,python,go"
 );
-@@alternateType(TrackedResource.location, azureLocation, "csharp");

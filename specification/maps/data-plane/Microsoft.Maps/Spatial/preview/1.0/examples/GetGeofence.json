@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "format": "json",
+    "api-version": "1.0",
+    "deviceId": "unique_device_name_under_account",
+    "udId": "[udId]",
+    "lat": 48.36,
+    "lon": -124.63,
+    "searchBuffer": 50,
+    "userTime": "2018-09-10T10:00:00",
+    "isAsync": true,
+    "mode": "EnterAndExit",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "geometries": [
+          {
+            "deviceId": "unique_device_name_under_account",
+            "udId": "[udId]",
+            "geometryId": "2",
+            "distance": 999,
+            "nearestLat": 47.621954,
+            "nearestLon": -122.131841
+          },
+          {
+            "deviceId": "unique_device_name_under_account",
+            "udId": "[udId]",
+            "geometryId": "1",
+            "distance": -999,
+            "nearestLat": 47.609833,
+            "nearestLon": -122.148274
+          }
+        ],
+        "expiredGeofenceGeometryId": [
+          "5"
+        ],
+        "invalidPeriodGeofenceGeometryId": [
+          "3",
+          "4"
+        ],
+        "isEventPublished": true
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "BadRequest",
+          "message": "Can't find user geofencing data with provided udid.",
+          "innererror": {
+            "code": "NoUserDataWithUdid"
+          }
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

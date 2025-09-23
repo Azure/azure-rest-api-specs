@@ -1443,9 +1443,19 @@
     "CustomCredential": {
       "type": "object",
       "description": "Custom credential definition",
-      "additionalProperties": {
-        "type": "string"
+      "properties": {
+        "keys": {
+          "type": "object",
+          "description": "The credential type",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
       },
+      "required": [
+        "keys"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseCredentials"

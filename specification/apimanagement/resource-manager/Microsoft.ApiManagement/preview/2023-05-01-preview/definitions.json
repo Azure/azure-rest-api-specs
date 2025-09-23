@@ -2058,7 +2058,7 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Runtime Url of the Backend. Required when backend type is 'Single'.",
+          "description": "Runtime Url of the Backend.",
           "minLength": 1,
           "maxLength": 2000
         },
@@ -2082,13 +2082,17 @@
               }
             ]
           },
-          "description": "Backend communication protocol. Required when backend type is 'Single'."
+          "description": "Backend communication protocol."
         }
       },
       "allOf": [
         {
           "$ref": "#/definitions/BackendBaseParameters"
         }
+      ],
+      "required": [
+        "url",
+        "protocol"
       ],
       "description": "Parameters supplied to the Create Backend operation."
     },
@@ -2269,7 +2273,7 @@
       "properties": {
         "url": {
           "type": "string",
-          "description": "Runtime Url of the Backend. Required when backend type is 'Single'.",
+          "description": "Runtime Url of the Backend.",
           "minLength": 1,
           "maxLength": 2000
         },
@@ -2293,7 +2297,7 @@
               }
             ]
           },
-          "description": "Backend communication protocol. Required when backend type is 'Single'."
+          "description": "Backend communication protocol."
         }
       },
       "allOf": [

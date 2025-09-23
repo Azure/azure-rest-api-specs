@@ -1,31 +1,51 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "devCenterName": "Contoso",
     "body": {
-      "identity": {
-        "type": "UserAssigned",
-        "userAssignedIdentities": {
-          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {}
-        }
+      "tags": {
+        "CostCode": "12345"
       },
       "location": "centralus",
       "properties": {
         "displayName": "ContosoDevCenter"
       },
-      "tags": {
-        "CostCode": "12345"
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/identityGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/testidentity1": {}
+        }
       }
-    },
-    "devCenterName": "Contoso",
-    "resourceGroupName": "rg1",
-    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso",
         "name": "Contoso",
         "type": "Microsoft.DevCenter/devcenters",
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "devCenterUri": "https://4c7c8922-78e9-4928-aa6f-75ba59355371-contoso.centralus.devcenter.azure.com",
+          "displayName": "ContosoDevCenter",
+          "networkSettings": {
+            "microsoftHostedNetworkEnableStatus": "Enabled"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -34,34 +54,34 @@
               "principalId": "2111b8fc-e123-485a-b408-bf1153189494"
             }
           }
-        },
-        "location": "centralus",
-        "properties": {
-          "devCenterUri": "https://4c7c8922-78e9-4928-aa6f-75ba59355371-contoso.centralus.devcenter.azure.com",
-          "displayName": "ContosoDevCenter",
-          "networkSettings": {
-            "microsoftHostedNetworkEnableStatus": "Enabled"
-          },
-          "provisioningState": "Succeeded"
-        },
-        "systemData": {
-          "createdAt": "2020-11-11T22:00:08.896Z",
-          "createdBy": "user1",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-11-11T22:00:10.896Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User"
-        },
-        "tags": {
-          "CostCode": "12345"
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso",
         "name": "Contoso",
         "type": "Microsoft.DevCenter/devcenters",
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/Contoso",
+        "tags": {
+          "CostCode": "12345"
+        },
+        "location": "centralus",
+        "properties": {
+          "provisioningState": "Accepted",
+          "devCenterUri": "https://4c7c8922-78e9-4928-aa6f-75ba59355371-contoso.centralus.devcenter.azure.com",
+          "displayName": "ContosoDevCenter",
+          "networkSettings": {
+            "microsoftHostedNetworkEnableStatus": "Enabled"
+          }
+        },
+        "systemData": {
+          "createdBy": "user1",
+          "createdByType": "User",
+          "createdAt": "2020-11-11T22:00:08.896Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-11T22:00:10.896Z"
+        },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -70,30 +90,8 @@
               "principalId": "2111b8fc-e123-485a-b408-bf1153189494"
             }
           }
-        },
-        "location": "centralus",
-        "properties": {
-          "devCenterUri": "https://4c7c8922-78e9-4928-aa6f-75ba59355371-contoso.centralus.devcenter.azure.com",
-          "displayName": "ContosoDevCenter",
-          "networkSettings": {
-            "microsoftHostedNetworkEnableStatus": "Enabled"
-          },
-          "provisioningState": "Accepted"
-        },
-        "systemData": {
-          "createdAt": "2020-11-11T22:00:08.896Z",
-          "createdBy": "user1",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-11-11T22:00:10.896Z",
-          "lastModifiedBy": "user2",
-          "lastModifiedByType": "User"
-        },
-        "tags": {
-          "CostCode": "12345"
         }
       }
     }
-  },
-  "operationId": "DevCenters_CreateOrUpdate",
-  "title": "DevCenters_CreateWithUserIdentity"
+  }
 }

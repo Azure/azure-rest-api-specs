@@ -1,0 +1,212 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "sku": {
+              "name": "Premium_P1",
+              "tier": "Premium",
+              "size": "P1",
+              "capacity": 1
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "externalIP": "10.0.0.1",
+              "hostName": "mysignalrservice.service.signalr.net",
+              "publicPort": 443,
+              "serverPort": 443,
+              "version": "1.0",
+              "privateEndpointConnections": [
+                {
+                  "properties": {
+                    "provisioningState": "Succeeded",
+                    "privateEndpoint": {
+                      "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
+                    },
+                    "privateLinkServiceConnectionState": {
+                      "status": "Approved",
+                      "actionsRequired": "None"
+                    }
+                  },
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService/privateEndpointConnections/mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                  "name": "mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                  "type": "Microsoft.SignalRService/SignalR/privateEndpointConnections",
+                  "systemData": {
+                    "createdBy": "string",
+                    "createdByType": "User",
+                    "createdAt": "2015-02-03T04:05:06Z",
+                    "lastModifiedBy": "string",
+                    "lastModifiedByType": "User",
+                    "lastModifiedAt": "2015-02-03T04:05:06Z"
+                  }
+                }
+              ],
+              "tls": {
+                "clientCertEnabled": true
+              },
+              "features": [
+                {
+                  "flag": "ServiceMode",
+                  "value": "Serverless",
+                  "properties": {}
+                },
+                {
+                  "flag": "EnableConnectivityLogs",
+                  "value": "True",
+                  "properties": {}
+                },
+                {
+                  "flag": "EnableMessagingLogs",
+                  "value": "False",
+                  "properties": {}
+                },
+                {
+                  "flag": "EnableLiveTrace",
+                  "value": "False",
+                  "properties": {}
+                }
+              ],
+              "liveTraceConfiguration": {
+                "enabled": "false",
+                "categories": [
+                  {
+                    "name": "ConnectivityLogs",
+                    "enabled": "true"
+                  }
+                ]
+              },
+              "resourceLogConfiguration": {
+                "categories": [
+                  {
+                    "name": "ConnectivityLogs",
+                    "enabled": "true"
+                  }
+                ]
+              },
+              "cors": {
+                "allowedOrigins": [
+                  "https://foo.com",
+                  "https://bar.com"
+                ]
+              },
+              "serverless": {
+                "connectionTimeoutInSeconds": 5,
+                "keepAliveIntervalInSeconds": 5
+              },
+              "upstream": {
+                "templates": [
+                  {
+                    "urlTemplate": "http://foo.com"
+                  }
+                ]
+              },
+              "networkACLs": {
+                "defaultAction": "Deny",
+                "publicNetwork": {
+                  "allow": [
+                    "ClientConnection"
+                  ]
+                },
+                "privateEndpoints": [
+                  {
+                    "name": "mysignalrservice.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+                    "allow": [
+                      "ServerConnection"
+                    ]
+                  }
+                ],
+                "ipRules": [
+                  {
+                    "value": "123.456.789.123/24",
+                    "action": "Allow"
+                  },
+                  {
+                    "value": "123.456.789.123",
+                    "action": "Allow"
+                  },
+                  {
+                    "value": "AppService",
+                    "action": "Allow"
+                  }
+                ]
+              },
+              "applicationFirewall": {
+                "clientConnectionCountRules": [
+                  {
+                    "type": "ThrottleByJwtSignatureRule",
+                    "maxCount": 20
+                  },
+                  {
+                    "type": "ThrottleByUserIdRule",
+                    "maxCount": 20
+                  },
+                  {
+                    "type": "ThrottleByJwtCustomClaimRule",
+                    "claimName": "claimName",
+                    "maxCount": 20
+                  }
+                ],
+                "clientTrafficControlRules": [
+                  {
+                    "type": "TrafficThrottleByJwtSignatureRule",
+                    "maxInboundMessageBytes": 1073741824,
+                    "aggregationWindowInSeconds": 60
+                  },
+                  {
+                    "type": "TrafficThrottleByUserIdRule",
+                    "maxInboundMessageBytes": 1073741824,
+                    "aggregationWindowInSeconds": 60
+                  },
+                  {
+                    "type": "TrafficThrottleByJwtCustomClaimRule",
+                    "claimName": "claimName",
+                    "maxInboundMessageBytes": 1073741824,
+                    "aggregationWindowInSeconds": 60
+                  }
+                ],
+                "maxClientConnectionLifetimeInSeconds": 5
+              },
+              "publicNetworkAccess": "Enabled",
+              "disableLocalAuth": false,
+              "disableAadAuth": false,
+              "regionEndpointEnabled": "Enabled",
+              "resourceStopped": "false",
+              "routeSettings": {
+                "serverBalanceWeight": 255,
+                "connectionBalanceWeight": 255,
+                "latencyWeight": 0
+              }
+            },
+            "kind": "SignalR",
+            "identity": {
+              "type": "SystemAssigned",
+              "principalId": "00000000-0000-0000-0000-000000000000",
+              "tenantId": "00000000-0000-0000-0000-000000000000"
+            },
+            "location": "eastus",
+            "tags": {
+              "key1": "value1"
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/SignalR/mySignalRService",
+            "name": "mySignalRService",
+            "type": "Microsoft.SignalRService/SignalR",
+            "systemData": {
+              "createdBy": "string",
+              "createdByType": "User",
+              "createdAt": "2015-02-03T04:05:06Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2015-02-03T04:05:06Z"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

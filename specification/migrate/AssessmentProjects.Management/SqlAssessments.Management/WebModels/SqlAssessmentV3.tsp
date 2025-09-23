@@ -1,6 +1,6 @@
-import "../Normalized Contract/StandardizedContracts/AssessmentProperties.tsp";
-import "../Normalized Contract/StandardizedContracts/Scope.tsp";
-import "../Normalized Contract/ArmModels/AssessmentProjectV2.tsp";
+import "../../Common/StandardizedContracts/AssessmentProperties.tsp";
+import "../../Common/StandardizedContracts/Scope.tsp";
+import "../../Common/ArmModels/AssessmentProjectV2.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

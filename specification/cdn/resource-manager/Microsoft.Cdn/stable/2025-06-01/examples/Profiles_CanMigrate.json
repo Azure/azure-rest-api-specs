@@ -1,20 +1,20 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
     "canMigrateParameters": {
       "classicResourceReference": {
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoors/frontdoorname"
       }
-    },
-    "profileName": "profile1",
-    "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
-        "type": "Microsoft.Cdn/canmigrate",
         "id": "/subscriptions/subid/resourcegroups/yaoshitest/providers/Microsoft.Cdn/operationresults/operationid/profileresults/DummyProfile/canmigrateresults/DummyProfile",
+        "type": "Microsoft.Cdn/canmigrate",
         "properties": {
           "canMigrate": true,
           "defaultSku": "Standard_AzureFrontDoor",
@@ -27,7 +27,5 @@
         "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
       }
     }
-  },
-  "operationId": "Profiles_CanMigrate",
-  "title": "Profiles_CanMigrate"
+  }
 }

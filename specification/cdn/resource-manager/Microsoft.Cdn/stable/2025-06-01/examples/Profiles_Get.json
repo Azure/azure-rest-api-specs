@@ -1,35 +1,33 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "profileName": "profile1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "profileName": "profile1"
   },
   "responses": {
     "200": {
       "body": {
         "name": "profile1",
-        "type": "Microsoft.Cdn/profiles",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
-        "kind": "frontdoor",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {},
         "location": "global",
-        "properties": {
-          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
-          "logScrubbing": {
-            "scrubbingRules": [],
-            "state": "Enabled"
-          },
-          "originResponseTimeoutSeconds": 30,
-          "provisioningState": "Succeeded",
-          "resourceState": "Active"
-        },
         "sku": {
           "name": "Premium_AzureFrontDoor"
         },
-        "tags": {}
+        "kind": "frontdoor",
+        "properties": {
+          "originResponseTimeoutSeconds": 30,
+          "logScrubbing": {
+            "state": "Enabled",
+            "scrubbingRules": []
+          },
+          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active"
+        }
       }
     }
-  },
-  "operationId": "Profiles_Get",
-  "title": "Profiles_Get"
+  }
 }

@@ -18,6 +18,7 @@ namespace Microsoft.EdgeZones;
 /** Api versions */
 enum Versions {
   /** 2024-04-01-preview api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2024-04-01-preview`,
 }
 

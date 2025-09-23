@@ -1,9 +1,9 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "profileName": "profile1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "profileName": "profile1"
   },
   "responses": {
     "200": {
@@ -11,38 +11,42 @@
         "value": [
           {
             "name": "endpoint1",
-            "type": "Microsoft.Cdn/profiles/endpoints",
             "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+            "type": "Microsoft.Cdn/profiles/endpoints",
+            "tags": {},
             "location": "CentralUs",
             "properties": {
-              "contentTypesToCompress": [],
-              "customDomains": [
+              "hostName": "endpoint1.azureedge.net",
+              "originHostHeader": "www.bing.com",
+              "provisioningState": "Succeeded",
+              "resourceState": "Running",
+              "isHttpAllowed": true,
+              "isHttpsAllowed": true,
+              "queryStringCachingBehavior": "NotSet",
+              "originPath": null,
+              "origins": [
                 {
-                  "name": "www-someDomain-net",
+                  "name": "www-bing-com",
                   "properties": {
-                    "hostName": "www.someDomain.Net",
-                    "validationData": null
+                    "hostName": "www.bing.com",
+                    "httpPort": 80,
+                    "httpsPort": 443,
+                    "originHostHeader": "www.someDomain2.net",
+                    "priority": 2,
+                    "weight": 50,
+                    "enabled": true
                   }
                 }
               ],
-              "defaultOriginGroup": {
-                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
-              },
-              "geoFilters": [],
-              "hostName": "endpoint1.azureedge.net",
-              "isCompressionEnabled": false,
-              "isHttpAllowed": true,
-              "isHttpsAllowed": true,
-              "optimizationType": "DynamicSiteAcceleration",
               "originGroups": [
                 {
                   "name": "originGroup1",
                   "properties": {
                     "healthProbeSettings": {
-                      "probeIntervalInSeconds": 120,
                       "probePath": "/health.aspx",
+                      "probeRequestType": "GET",
                       "probeProtocol": "Http",
-                      "probeRequestType": "GET"
+                      "probeIntervalInSeconds": 120
                     },
                     "origins": [
                       {
@@ -56,33 +60,27 @@
                   }
                 }
               ],
-              "originHostHeader": "www.bing.com",
-              "originPath": null,
-              "origins": [
+              "customDomains": [
                 {
-                  "name": "www-bing-com",
+                  "name": "www-someDomain-net",
                   "properties": {
-                    "enabled": true,
-                    "hostName": "www.bing.com",
-                    "httpPort": 80,
-                    "httpsPort": 443,
-                    "originHostHeader": "www.someDomain2.net",
-                    "priority": 2,
-                    "weight": 50
+                    "hostName": "www.someDomain.Net",
+                    "validationData": null
                   }
                 }
               ],
+              "contentTypesToCompress": [],
+              "isCompressionEnabled": false,
+              "optimizationType": "DynamicSiteAcceleration",
               "probePath": "/image",
-              "provisioningState": "Succeeded",
-              "queryStringCachingBehavior": "NotSet",
-              "resourceState": "Running"
-            },
-            "tags": {}
+              "geoFilters": [],
+              "defaultOriginGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+              }
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "Endpoints_ListByProfile",
-  "title": "Endpoints_ListByProfile"
+  }
 }

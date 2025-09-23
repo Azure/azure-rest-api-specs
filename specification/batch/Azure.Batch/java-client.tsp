@@ -7,6 +7,7 @@ import "@typespec/http";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
 
+@TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
 @TypeSpec.Versioning.useDependency(Azure.Batch.Versions.v2024_07_01)
 namespace JavaClient;
 
@@ -1238,7 +1239,6 @@ model BatchSubTasksListOptions {
 #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" ""
 @doc("Custom override for List SubTasks operation.")
 @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-@list
 op listSubTasksCustomization is Azure.Batch.ReadOperation<
   {
     ...Azure.Batch.ListSubTasksRequiredParameters;

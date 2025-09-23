@@ -1,4 +1,4 @@
-import "../Normalized Contract/StandardizedContracts/CommonEnums.tsp";
+import "../../Common/StandardizedContracts/CommonEnums.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

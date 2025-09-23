@@ -1,47 +1,45 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "customDomainName": "www-someDomain-net",
-    "endpointName": "endpoint1",
-    "profileName": "profile1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "profileName": "profile1",
+    "endpointName": "endpoint1",
+    "customDomainName": "www-someDomain-net"
   },
   "responses": {
     "200": {
       "body": {
         "name": "www-someDomain-net",
-        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
         "properties": {
-          "customHttpsProvisioningState": "Disabled",
-          "customHttpsProvisioningSubstate": "CertificateDeleted",
-          "hostName": "www.someDomain.net",
           "provisioningState": "Succeeded",
           "resourceState": "Active",
+          "hostName": "www.someDomain.net",
+          "customHttpsProvisioningState": "Disabled",
+          "customHttpsProvisioningSubstate": "CertificateDeleted",
           "validationData": null
         }
       }
     },
     "202": {
-      "body": {
-        "name": "www-someDomain-net",
-        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
-        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
-        "properties": {
-          "customHttpsProvisioningState": "Enabling",
-          "customHttpsProvisioningSubstate": "PendingDomainControlValidationREquestApproval",
-          "hostName": "www.someDomain.net",
-          "provisioningState": "Succeeded",
-          "resourceState": "Active",
-          "validationData": null
-        }
-      },
       "headers": {
         "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
+      },
+      "body": {
+        "name": "www-someDomain-net",
+        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/customdomains/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/customdomains",
+        "properties": {
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
+          "hostName": "www.someDomain.net",
+          "customHttpsProvisioningState": "Enabling",
+          "customHttpsProvisioningSubstate": "PendingDomainControlValidationREquestApproval",
+          "validationData": null
+        }
       }
     }
-  },
-  "operationId": "CustomDomains_DisableCustomHttps",
-  "title": "CustomDomains_DisableCustomHttps"
+  }
 }

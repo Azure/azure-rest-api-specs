@@ -13,8 +13,12 @@ namespace Microsoft.Kubernetes;
 /**
  * Represents a connected cluster.
  */
-model ConnectedCluster
-  is Azure.ResourceManager.TrackedResource<ConnectedClusterProperties, false> {
+#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@Azure.ResourceManager.Private.armResourceInternal(ConnectedClusterProperties)
+@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
+@subscriptionResource
+model ConnectedCluster extends Foundations.TrackedResource {
   ...ResourceNameParameter<
     Resource = ConnectedCluster,
     KeyName = "clusterName",
@@ -33,6 +37,13 @@ model ConnectedCluster
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: ConnectedClusterKind;
+
+  /**
+   * Properties of the connected cluster.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(false)
+  properties: ConnectedClusterProperties;
 }
 
 @armResourceOperations
@@ -40,12 +51,18 @@ interface ConnectedClusters {
   /**
    * Returns the properties of the specified connected cluster, including name, identity, properties, and additional cluster details.
    */
-  get is ArmResourceRead<ConnectedCluster>;
+  get is ArmResourceRead<
+    ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+  >;
 
   /**
    * API to register a new Kubernetes cluster and create or replace a connected cluster tracked resource in Azure Resource Manager (ARM).
    */
-  createOrReplace is ArmResourceCreateOrReplaceAsync<ConnectedCluster>;
+  createOrReplace is ArmResourceCreateOrReplaceAsync<
+    ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
+  >;
 
   /**
    * API to update certain properties of the connected cluster resource
@@ -53,7 +70,8 @@ interface ConnectedClusters {
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     ConnectedCluster,
-    PatchModel = ConnectedClusterPatch
+    PatchModel = ConnectedClusterPatch,
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 
   /**
@@ -62,6 +80,7 @@ interface ConnectedClusters {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ConnectedCluster,
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
@@ -70,6 +89,7 @@ interface ConnectedClusters {
    */
   listByResourceGroup is ArmResourceListByParent<
     ConnectedCluster,
+    Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
     Response = ArmResponse<ConnectedClusterList>
   >;
 
@@ -87,7 +107,8 @@ interface ConnectedClusters {
   listClusterUserCredential is ArmResourceActionSync<
     ConnectedCluster,
     ListClusterUserCredentialProperties,
-    ArmResponse<CredentialResults>
+    ArmResponse<CredentialResults>,
+    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters
   >;
 }
 

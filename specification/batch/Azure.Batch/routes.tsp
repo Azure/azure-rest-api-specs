@@ -23,7 +23,6 @@ interface Applications {
     API.
     """)
   @route("/applications")
-  @list
   listApplications is ListOperation<
     {
       ...CommonListParameters;
@@ -69,7 +68,6 @@ interface Pools {
     last aggregation interval is returned.
     """)
   @route("/poolusagemetrics")
-  @list
   listPoolUsageMetrics is ListOperation<
     {
       ...CommonListParameters;
@@ -95,7 +93,6 @@ interface Pools {
 
   @summary("Lists all of the Pools which be mounted.")
   @doc("Lists all of the Pools which be mounted.")
-  @list
   @route("/pools")
   listPools is ListOperation<
     {
@@ -287,7 +284,6 @@ interface Pools {
   >;
 
   @summary("Lists all Virtual Machine Images supported by the Azure Batch service.")
-  @list
   @doc("Lists all Virtual Machine Images supported by the Azure Batch service.")
   @route("/supportedimages")
   listSupportedImages is ListOperation<
@@ -304,7 +300,6 @@ interface Pools {
     use a list query.
     """)
   @route("/nodecounts")
-  @list
   listPoolNodeCounts is ListOperation<
     {
       ...CommonListParameters;
@@ -469,7 +464,6 @@ interface Jobs {
 
   @summary("Lists all of the Jobs in the specified Account.")
   @doc("Lists all of the Jobs in the specified Account.")
-  @list
   @route("/jobs")
   listJobs is ListOperation<
     {
@@ -482,7 +476,6 @@ interface Jobs {
   @summary("Lists the Jobs that have been created under the specified Job Schedule.")
   @doc("Lists the Jobs that have been created under the specified Job Schedule.")
   @route("/jobschedules/{jobScheduleId}/jobs")
-  @list
   listJobsFromSchedule is ListOperation<
     {
       ...CommonListParameters;
@@ -505,7 +498,6 @@ interface Jobs {
     JobPreparationTaskNotSpecified.
     """)
   @route("/jobs/{jobId}/jobpreparationandreleasetaskstatus")
-  @list
   listJobPreparationAndReleaseTaskStatus is ListOperation<
     {
       ...CommonListParameters;
@@ -552,7 +544,6 @@ interface Certificates {
   #deprecated "Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead."
   @summary("Lists all of the Certificates that have been added to the specified Account.")
   @doc("Lists all of the Certificates that have been added to the specified Account.")
-  @list
   @route("/certificates")
   listCertificates is ListOperation<
     {
@@ -755,7 +746,6 @@ interface JobSchedules {
   @summary("Lists all of the Job Schedules in the specified Account.")
   @doc("Lists all of the Job Schedules in the specified Account.")
   @route("/jobschedules")
-  @list
   listJobSchedules is ListOperation<
     {
       ...CommonListParameters;
@@ -793,7 +783,6 @@ interface Tasks {
     information about subtasks.
     """)
   @route("/jobs/{jobId}/tasks")
-  @list
   listTasks is ListOperation<
     {
       ...CommonListParameters;
@@ -882,7 +871,6 @@ interface Tasks {
     """)
   @doc("If the Task is not a multi-instance Task then this returns an empty collection.")
   @route("/jobs/{jobId}/tasks/{taskId}/subtasksinfo")
-  @list
   listSubTasks is ReadOperation<
     {
       ...CommonParameters;
@@ -969,7 +957,6 @@ interface Tasks {
   @summary("Lists the files in a Task's directory on its Compute Node.")
   @doc("Lists the files in a Task's directory on its Compute Node.")
   @route("/jobs/{jobId}/tasks/{taskId}/files")
-  @list
   listTaskFiles is ListOperation<
     {
       ...CommonListParameters;
@@ -1159,7 +1146,6 @@ interface Nodes {
 
   @summary("Lists the Compute Nodes in the specified Pool.")
   @doc("Lists the Compute Nodes in the specified Pool.")
-  @list
   @route("/pools/{poolId}/nodes")
   listNodes is ListOperation<
     {
@@ -1185,7 +1171,6 @@ interface Nodes {
   @summary("Lists the Compute Nodes Extensions in the specified Pool.")
   @doc("Lists the Compute Nodes Extensions in the specified Pool.")
   @route("/pools/{poolId}/nodes/{nodeId}/extensions")
-  @list
   listNodeExtensions is ListOperation<
     {
       ...CommonListParameters;
@@ -1233,7 +1218,6 @@ interface Nodes {
   @summary("Lists all of the files in Task directories on the specified Compute Node.")
   @doc("Lists all of the files in Task directories on the specified Compute Node.")
   @route("/pools/{poolId}/nodes/{nodeId}/files")
-  @list
   listNodeFiles is ListOperation<
     {
       ...CommonListParameters;

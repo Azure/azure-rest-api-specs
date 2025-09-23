@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "json",
+    "style": "absolute",
+    "zoom": 10,
+    "query": "52.41072,4.84239",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "flowSegmentData": {
+          "frc": "FRC3",
+          "currentSpeed": 79,
+          "freeFlowSpeed": 79,
+          "currentTravelTime": 33,
+          "freeFlowTravelTime": 33,
+          "confidence": 0.5,
+          "coordinates": {
+            "coordinate": [
+              {
+                "latitude": 52.404648,
+                "longitude": 4.8442388
+              },
+              {
+                "latitude": 52.408447,
+                "longitude": 4.8357286
+              }
+            ]
+          },
+          "openlr": null,
+          "@version": "1.0.53-mascoma"
+        }
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

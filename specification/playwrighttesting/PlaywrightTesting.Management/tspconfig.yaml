@@ -27,23 +27,23 @@ options:
   #     code-kind: model
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-playwrighttesting"
+    package-dir: "arm-playwrighttesting"
     flavor: azure
     package-details:
       name: "@azure/arm-playwrighttesting"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-playwrighttesting"
+    package-dir: "azure-mgmt-playwrighttesting"
     namespace: "azure.mgmt.playwrighttesting"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-dir: "Azure.ResourceManager.PlaywrightTesting"
     flavor: azure
     clear-output-folder: true
-    namespace: "Azure.ResourceManager.PlaywrightTesting"
+    namespace: "{package-dir}"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-playwrighttesting"
+    package-dir: "azure-resourcemanager-playwrighttesting"
     namespace: "com.azure.resourcemanager.playwrighttesting"
     flavor: azure
     service-name: Playwright Testing

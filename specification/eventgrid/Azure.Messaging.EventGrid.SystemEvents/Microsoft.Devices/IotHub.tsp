@@ -97,11 +97,9 @@ model DeviceTelemetryEventProperties {
   body: Record<unknown>;
 
   /** Application properties are user-defined strings that can be added to the message. These fields are optional. */
-  @visibility(Lifecycle.Read)
   properties: Record<string>;
 
   /** System properties help identify contents and source of the messages. */
-  @visibility(Lifecycle.Read)
   systemProperties: Record<string>;
 }
 

@@ -1,0 +1,58 @@
+{
+  "parameters": {
+    "api-version": "2025-01-01-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "myWebPubSubService"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "properties": {
+              "eventHandlers": [
+                {
+                  "urlTemplate": "http://host.com",
+                  "userEventPattern": "*",
+                  "systemEvents": [
+                    "connect",
+                    "connected"
+                  ],
+                  "auth": {
+                    "type": "ManagedIdentity",
+                    "managedIdentity": {
+                      "resource": "abc"
+                    }
+                  }
+                }
+              ],
+              "eventListeners": [
+                {
+                  "filter": {
+                    "type": "EventName",
+                    "systemEvents": [
+                      "connected",
+                      "disconnected"
+                    ],
+                    "userEventPattern": "*"
+                  },
+                  "endpoint": {
+                    "type": "EventHub",
+                    "fullyQualifiedNamespace": "example.servicebus.windows.net",
+                    "eventHubName": "eventHubName1"
+                  }
+                }
+              ],
+              "anonymousConnectPolicy": "allow",
+              "webSocketKeepAliveIntervalInSeconds": 50
+            },
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/myResourceGroup/providers/Microsoft.SignalRService/WebPubSub/myWebPubSubService/hubs/exampleHub",
+            "name": "exampleHub",
+            "type": "Microsoft.SignalRService/WebPubSub/hubs"
+          }
+        ]
+      }
+    }
+  }
+}

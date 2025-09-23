@@ -16,26 +16,27 @@ options:
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
     service-dir: "sdk/liftrqumulo"
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-qumulo"
+    package-dir: "arm-qumulo"
     flavor: azure
     package-details:
       name: "@azure/arm-qumulo"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-dir: "Azure.ResourceManager.Qumulo"
+    service-dir: "sdk/qumulo"
     flavor: azure
     clear-output-folder: true
-    namespace: "Azure.ResourceManager.Qumulo"
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-qumulo"
     package-name: "azure-mgmt-qumulo"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-qumulo"
     namespace: "azure.mgmt.qumulo"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/liftrqumulo"
-    emitter-output-dir: "{output-dir}/{service-dir}/armqumulo"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armqumulo"
+    package-dir: "armqumulo"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -44,7 +45,7 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-qumulo"
+    package-dir: "azure-resourcemanager-qumulo"
     namespace: "com.azure.resourcemanager.qumulo"
     service-name: "Qumulo"
     flavor: azure

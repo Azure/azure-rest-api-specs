@@ -313,7 +313,6 @@ interface DocumentModels {
   @doc("List batch document analysis results.")
   @route("/documentModels/{modelId}/analyzeBatchResults")
   @get
-  @list
   listAnalyzeBatchResults is DocumentIntelligenceOperation<
     {
       @doc("Unique document model name.")

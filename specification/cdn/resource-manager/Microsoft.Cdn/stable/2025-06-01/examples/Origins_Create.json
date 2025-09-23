@@ -1,97 +1,95 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
     "endpointName": "endpoint1",
+    "originName": "www-someDomain-net",
     "origin": {
       "properties": {
-        "enabled": true,
         "hostName": "www.someDomain.net",
         "httpPort": 80,
         "httpsPort": 443,
         "originHostHeader": "www.someDomain.net",
         "priority": 1,
-        "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
-        "privateLinkLocation": "eastus",
+        "weight": 50,
+        "enabled": true,
         "privateLinkResourceId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
-        "weight": 50
+        "privateLinkLocation": "eastus",
+        "privateLinkApprovalMessage": "Please approve the connection request for this Private Link"
       }
-    },
-    "originName": "www-someDomain-net",
-    "profileName": "profile1",
-    "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "www-someDomain-net",
-        "type": "Microsoft.Cdn/profiles/endpoints/origins",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/origins",
         "properties": {
-          "enabled": true,
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
           "hostName": "www.someDomain.net",
           "httpPort": 80,
           "httpsPort": 443,
           "originHostHeader": "www.someDomain.net",
           "priority": 1,
+          "weight": 50,
+          "enabled": true,
           "privateEndpointStatus": "Pending",
-          "privateLinkApprovalMessage": "Please approve the connection request for this Private Link",
-          "privateLinkLocation": "eastus",
           "privateLinkResourceId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
-          "provisioningState": "Succeeded",
-          "resourceState": "Active",
-          "weight": 50
+          "privateLinkLocation": "eastus",
+          "privateLinkApprovalMessage": "Please approve the connection request for this Private Link"
         }
       }
     },
     "201": {
       "body": {
         "name": "www-someDomain-net",
-        "type": "Microsoft.Cdn/profiles/endpoints/origins",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/origins",
         "properties": {
-          "enabled": true,
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
           "hostName": "www.someDomain.net",
           "httpPort": 80,
           "httpsPort": 443,
           "originHostHeader": "www.someDomain.net",
           "priority": 1,
+          "weight": 50,
+          "enabled": true,
           "privateEndpointStatus": "Pending",
           "privateLinkApprovalMessage": "",
-          "privateLinkLocation": "eastus",
           "privateLinkResourceId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
-          "provisioningState": "Succeeded",
-          "resourceState": "Active",
-          "weight": 50
+          "privateLinkLocation": "eastus"
         }
       }
     },
     "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
+      },
       "body": {
         "name": "www-someDomain-net",
-        "type": "Microsoft.Cdn/profiles/endpoints/origins",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-someDomain-net",
+        "type": "Microsoft.Cdn/profiles/endpoints/origins",
         "properties": {
-          "enabled": true,
+          "provisioningState": "Succeeded",
+          "resourceState": "Active",
           "hostName": "www.someDomain.net",
           "httpPort": 80,
           "httpsPort": 443,
           "originHostHeader": "www.someDomain.net",
           "priority": 1,
+          "weight": 50,
+          "enabled": true,
           "privateEndpointStatus": "Pending",
           "privateLinkApprovalMessage": "",
-          "privateLinkLocation": "eastus",
           "privateLinkResourceId": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.Network/privateLinkServices/pls1",
-          "provisioningState": "Succeeded",
-          "resourceState": "Active",
-          "weight": 50
+          "privateLinkLocation": "eastus"
         }
-      },
-      "headers": {
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
       }
     }
-  },
-  "operationId": "Origins_Create",
-  "title": "Origins_Create"
+  }
 }

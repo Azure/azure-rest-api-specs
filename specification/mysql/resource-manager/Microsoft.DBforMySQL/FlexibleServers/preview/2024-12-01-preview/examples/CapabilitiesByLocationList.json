@@ -1,38 +1,53 @@
 {
   "parameters": {
     "api-version": "2024-12-01-preview",
-    "locationName": "WestUS",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
+    "locationName": "WestUS"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "zone": "none",
+            "supportedHAMode": [
+              "SameZone",
+              "ZoneRedundant"
+            ],
+            "supportedGeoBackupRegions": [],
             "supportedFlexibleServerEditions": [
               {
                 "name": "Burstable",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
                   },
@@ -41,82 +56,82 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "GeneralPurpose",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
                   },
@@ -125,106 +140,106 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "MemoryOptimized",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   },
@@ -233,92 +248,92 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
-                  }
                 ]
               }
-            ],
-            "supportedGeoBackupRegions": [],
-            "supportedHAMode": [
-              "SameZone",
-              "ZoneRedundant"
-            ],
-            "zone": "none"
+            ]
           },
           {
+            "zone": "1",
+            "supportedHAMode": [
+              "SameZone",
+              "ZoneRedundant"
+            ],
+            "supportedGeoBackupRegions": [],
             "supportedFlexibleServerEditions": [
               {
                 "name": "Burstable",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
                   },
@@ -327,82 +342,82 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "GeneralPurpose",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
                   },
@@ -411,106 +426,106 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "MemoryOptimized",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   },
@@ -519,92 +534,92 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
-                  }
                 ]
               }
-            ],
-            "supportedGeoBackupRegions": [],
-            "supportedHAMode": [
-              "SameZone",
-              "ZoneRedundant"
-            ],
-            "zone": "1"
+            ]
           },
           {
+            "zone": "2",
+            "supportedHAMode": [
+              "SameZone",
+              "ZoneRedundant"
+            ],
+            "supportedGeoBackupRegions": [],
             "supportedFlexibleServerEditions": [
               {
                 "name": "Burstable",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
                   },
@@ -613,82 +628,82 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "GeneralPurpose",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
                   },
@@ -697,106 +712,106 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "MemoryOptimized",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   },
@@ -805,92 +820,92 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
-                  }
                 ]
               }
-            ],
-            "supportedGeoBackupRegions": [],
-            "supportedHAMode": [
-              "SameZone",
-              "ZoneRedundant"
-            ],
-            "zone": "2"
+            ]
           },
           {
+            "zone": "3",
+            "supportedHAMode": [
+              "SameZone",
+              "ZoneRedundant"
+            ],
+            "supportedGeoBackupRegions": [],
             "supportedFlexibleServerEditions": [
               {
                 "name": "Burstable",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
                   },
@@ -899,82 +914,82 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_B1s",
+                        "vCores": 1,
                         "supportedIops": 400,
-                        "supportedMemoryPerVCoreMB": 1024,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 1024
                       },
                       {
                         "name": "Standard_B1ms",
+                        "vCores": 1,
                         "supportedIops": 640,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 1
+                        "supportedMemoryPerVCoreMB": 2048
                       },
                       {
                         "name": "Standard_B2s",
+                        "vCores": 2,
                         "supportedIops": 1280,
-                        "supportedMemoryPerVCoreMB": 2048,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 2048
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "GeneralPurpose",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
                   },
@@ -983,106 +998,106 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_D2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 4096
                       },
                       {
                         "name": "Standard_D64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 4096,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 4096
                       }
                     ]
-                  }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
                   }
                 ]
               },
               {
                 "name": "MemoryOptimized",
+                "supportedStorageEditions": [
+                  {
+                    "name": "Premium",
+                    "minStorageSize": 20480,
+                    "maxStorageSize": 16777216,
+                    "minBackupRetentionDays": 7,
+                    "maxBackupRetentionDays": 35
+                  }
+                ],
                 "supportedServerVersions": [
                   {
                     "name": "5.7",
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   },
@@ -1091,71 +1106,54 @@
                     "supportedSkus": [
                       {
                         "name": "Standard_E2ds_v4",
+                        "vCores": 2,
                         "supportedIops": 3200,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 2
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E4ds_v4",
+                        "vCores": 4,
                         "supportedIops": 6400,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 4
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E8ds_v4",
+                        "vCores": 8,
                         "supportedIops": 12800,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 8
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E16ds_v4",
+                        "vCores": 16,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 16
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E32ds_v4",
+                        "vCores": 32,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 32
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E48ds_v4",
+                        "vCores": 48,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 48
+                        "supportedMemoryPerVCoreMB": 8192
                       },
                       {
                         "name": "Standard_E64ds_v4",
+                        "vCores": 64,
                         "supportedIops": 20000,
-                        "supportedMemoryPerVCoreMB": 8192,
-                        "vCores": 64
+                        "supportedMemoryPerVCoreMB": 8192
                       }
                     ]
                   }
-                ],
-                "supportedStorageEditions": [
-                  {
-                    "name": "Premium",
-                    "maxBackupRetentionDays": 35,
-                    "maxStorageSize": 16777216,
-                    "minBackupRetentionDays": 7,
-                    "minStorageSize": 20480
-                  }
                 ]
               }
-            ],
-            "supportedGeoBackupRegions": [],
-            "supportedHAMode": [
-              "SameZone",
-              "ZoneRedundant"
-            ],
-            "zone": "3"
+            ]
           }
         ]
       }
     }
-  },
-  "operationId": "LocationBasedCapabilities_List",
-  "title": "CapabilitiesList"
+  }
 }

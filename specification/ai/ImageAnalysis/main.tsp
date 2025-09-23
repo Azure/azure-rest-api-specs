@@ -32,5 +32,6 @@ using Azure.Core;
 namespace ImageAnalysis;
 
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_10_01: "2023-10-01",
 }

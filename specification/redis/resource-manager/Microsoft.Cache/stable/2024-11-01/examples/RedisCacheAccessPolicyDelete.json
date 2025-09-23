@@ -1,20 +1,18 @@
 {
   "parameters": {
-    "accessPolicyName": "accessPolicy1",
-    "api-version": "2024-11-01",
-    "cacheName": "cache1",
+    "subscriptionId": "subid",
     "resourceGroupName": "rg1",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "cacheName": "cache1",
+    "accessPolicyName": "accessPolicy1",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {},
+    "204": {},
     "202": {
       "headers": {
-        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Cache/...pathToOperationResult..."
+        "location": "https://management.azure.com/subscriptions/subid/providers/Microsoft.Cache/...pathToOperationResult..."
       }
-    },
-    "204": {}
-  },
-  "operationId": "AccessPolicy_Delete",
-  "title": "RedisCacheAccessPolicyDelete"
+    }
+  }
 }

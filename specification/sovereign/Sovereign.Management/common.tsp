@@ -10,6 +10,8 @@ namespace Microsoft.Sovereign;
 
 @doc("The Microsoft Sovereign Provider version.")
 enum Versions {
+  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @doc("Public preview version.")
   Preview20250227: "2025-02-27-preview",
 }

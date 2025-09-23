@@ -15,33 +15,31 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/playwrighttesting.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-microsoftplaywrighttesting"
+    package-dir: "azure-developer-microsoftplaywrighttesting"
     namespace: "azure.developer.microsoftplaywrighttesting"
     package-mode: azure-dataplane
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/microsoft-playwright-testing-rest"
+    package-dir: "microsoft-playwright-testing-rest"
     title: Microsoft Playwright Testing
     description: Microsoft Playwright Testing Client
     generate-metadata: true
-    is-modular-library: false
     package-details:
       name: "@azure-rest/microsoft-playwright-testing"
       description: "This package contains Microsoft Playwright Testing client library."
       version: 1.0.0
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-dir: "Azure.Developer.MicrosoftPlaywrightTesting"
     clear-output-folder: true
     model-namespace: false
-    namespace: "Azure.Developer.MicrosoftPlaywrightTesting"
+    namespace: "{package-dir}"
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Developer.MicrosoftPlaywrightTesting
     model-namespace: false
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-developer-microsoftplaywrighttesting"
+    package-dir: "azure-developer-microsoftplaywrighttesting"
     namespace: com.azure.developer.microsoftplaywrighttesting
     partial-update: true
     generate-tests: false

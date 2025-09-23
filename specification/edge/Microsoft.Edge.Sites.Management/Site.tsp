@@ -61,13 +61,12 @@ interface SitesByServiceGroup {
   @route("/providers/Microsoft.Management/serviceGroups/{servicegroupName}/providers/Microsoft.Edge/sites")
   @doc("list Site at SG scope")
   @added(Versions.v2025_03_01_preview)
-  @list
   listByServiceGroup(
     ...ApiVersionParameter,
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
   ): ArmResponse<ResourceListResult<Site>> | ErrorResponse;
 
@@ -79,7 +78,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path
@@ -98,7 +97,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path
@@ -125,7 +124,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path
@@ -148,7 +147,7 @@ interface SitesByServiceGroup {
 
     @path
     @doc("The name of the service group")
-    @pattern("^[a-zA-Z0-9\\-_().]{1,90}$")
+    @pattern("^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$")
     servicegroupName: string,
 
     @path

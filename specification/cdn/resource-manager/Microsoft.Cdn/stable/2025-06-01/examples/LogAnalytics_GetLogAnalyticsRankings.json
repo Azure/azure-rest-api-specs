@@ -1,18 +1,18 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "dateTimeBegin": "2020-11-04T06:49:27.554Z",
-    "dateTimeEnd": "2020-11-04T09:49:27.554Z",
-    "maxRanking": "5",
-    "metrics": [
-      "clientRequestCount"
-    ],
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
     "profileName": "profile1",
     "rankings": [
       "url"
     ],
-    "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "metrics": [
+      "clientRequestCount"
+    ],
+    "maxRanking": "5",
+    "dateTimeBegin": "2020-11-04T06:49:27.554Z",
+    "dateTimeEnd": "2020-11-04T09:49:27.554Z"
   },
   "responses": {
     "200": {
@@ -21,14 +21,15 @@
         "dateTimeEnd": "2020-11-04T17:49:27.554+08:00",
         "tables": [
           {
+            "ranking": "url",
             "data": [
               {
                 "name": "https://testdomain.com/favicon.png",
                 "metrics": [
                   {
                     "metric": "clientRequestCount",
-                    "percentage": 8.28133862733976,
-                    "value": 2336
+                    "value": 2336,
+                    "percentage": 8.28133862733976
                   }
                 ]
               },
@@ -37,8 +38,8 @@
                 "metrics": [
                   {
                     "metric": "clientRequestCount",
-                    "percentage": 7.586500283607488,
-                    "value": 2140
+                    "value": 2140,
+                    "percentage": 7.586500283607488
                   }
                 ]
               },
@@ -47,8 +48,8 @@
                 "metrics": [
                   {
                     "metric": "clientRequestCount",
-                    "percentage": 5.445263754963131,
-                    "value": 1536
+                    "value": 1536,
+                    "percentage": 5.445263754963131
                   }
                 ]
               },
@@ -57,8 +58,8 @@
                 "metrics": [
                   {
                     "metric": "clientRequestCount",
-                    "percentage": 5.246738513896767,
-                    "value": 1480
+                    "value": 1480,
+                    "percentage": 5.246738513896767
                   }
                 ]
               },
@@ -67,18 +68,15 @@
                 "metrics": [
                   {
                     "metric": "clientRequestCount",
-                    "percentage": 5.147475893363584,
-                    "value": 1452
+                    "value": 1452,
+                    "percentage": 5.147475893363584
                   }
                 ]
               }
-            ],
-            "ranking": "url"
+            ]
           }
         ]
       }
     }
-  },
-  "operationId": "LogAnalytics_GetLogAnalyticsRankings",
-  "title": "LogAnalytics_GetLogAnalyticsRankings"
+  }
 }

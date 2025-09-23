@@ -91,6 +91,18 @@ union OperationState {
   string,
 }
 
+// ------------------ Common Values ---------------
+alias Params = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+
+  @path
+  @minLength(1)
+  @segment("locations")
+  @doc("The location name.")
+  locationparameter: string;
+};
+
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {

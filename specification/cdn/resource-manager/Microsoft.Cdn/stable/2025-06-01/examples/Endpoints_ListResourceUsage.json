@@ -1,31 +1,29 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "endpointName": "endpoint1",
-    "profileName": "profile1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "profileName": "profile1",
+    "endpointName": "endpoint1"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "currentValue": 1,
-            "limit": 20,
             "resourceType": "customdomain",
-            "unit": "count"
+            "unit": "count",
+            "currentValue": 1,
+            "limit": 20
           },
           {
-            "currentValue": 0,
-            "limit": 25,
             "resourceType": "geofilter",
-            "unit": "count"
+            "unit": "count",
+            "currentValue": 0,
+            "limit": 25
           }
         ]
       }
     }
-  },
-  "operationId": "Endpoints_ListResourceUsage",
-  "title": "Endpoints_ListResourceUsage"
+  }
 }

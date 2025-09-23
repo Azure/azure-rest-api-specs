@@ -1,25 +1,25 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "customDomains": [
-      "customdomain1.azurecdn.net",
-      "customdomain2.azurecdn.net"
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
+    "metrics": [
+      "clientRequestCount"
     ],
-    "dateTimeBegin": "2020-11-04T04:30:00.000Z",
-    "dateTimeEnd": "2020-11-04T05:00:00.000Z",
     "granularity": "PT5M",
     "groupBy": [
       "protocol"
     ],
-    "metrics": [
-      "clientRequestCount"
+    "dateTimeBegin": "2020-11-04T04:30:00.000Z",
+    "dateTimeEnd": "2020-11-04T05:00:00.000Z",
+    "customDomains": [
+      "customdomain1.azurecdn.net",
+      "customdomain2.azurecdn.net"
     ],
-    "profileName": "profile1",
     "protocols": [
       "https"
-    ],
-    "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    ]
   },
   "responses": {
     "200": {
@@ -29,6 +29,14 @@
         "granularity": "PT5M",
         "series": [
           {
+            "metric": "clientRequestCount",
+            "unit": "count",
+            "groups": [
+              {
+                "name": "protocol",
+                "value": "https"
+              }
+            ],
             "data": [
               {
                 "dateTime": "2020-11-04T04:35:00+00:00",
@@ -54,20 +62,10 @@
                 "dateTime": "2020-11-04T05:00:00+00:00",
                 "value": 3565
               }
-            ],
-            "groups": [
-              {
-                "name": "protocol",
-                "value": "https"
-              }
-            ],
-            "metric": "clientRequestCount",
-            "unit": "count"
+            ]
           }
         ]
       }
     }
-  },
-  "operationId": "LogAnalytics_GetLogAnalyticsMetrics",
-  "title": "LogAnalytics_GetLogAnalyticsMetrics"
+  }
 }

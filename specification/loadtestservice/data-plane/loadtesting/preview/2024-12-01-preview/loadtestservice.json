@@ -1089,7 +1089,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1133,7 +1140,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "body",
@@ -1248,7 +1262,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "metricNamespace",
@@ -1298,7 +1319,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "name",
@@ -1363,7 +1391,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1406,7 +1441,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "aggregation",
@@ -1480,7 +1522,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           }
         ],
         "responses": {
@@ -1524,7 +1573,14 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "$ref": "#/parameters/TestRunIdParam"
+            "name": "testRunId",
+            "in": "path",
+            "description": "Unique Id for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
+            "required": true,
+            "type": "string",
+            "minLength": 2,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9_-]*$"
           },
           {
             "name": "body",
@@ -7201,17 +7257,6 @@
       "description": "Existing test run identifier that should be rerun, if this is provided, the\ntest will run with the JMX file, configuration and app components from the\nexisting test run. You can override the configuration values for new test run\nin the request body.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "TestRunIdParam": {
-      "name": "testRunId",
-      "in": "path",
-      "description": "Unique name for the load test run, must contain only lower-case alphabetic,\nnumeric, underscore or hyphen characters.",
-      "required": true,
-      "type": "string",
-      "minLength": 2,
-      "maxLength": 50,
-      "pattern": "^[a-z0-9_-]*$",
       "x-ms-parameter-location": "method"
     }
   }

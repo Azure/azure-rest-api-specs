@@ -42,9 +42,9 @@ op updateSecret is KeyVaultOperation<
     /**
      * The parameters for update secret operation.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
+    @flattenProperty
     parameters: SecretUpdateParameters;
   },
   SecretBundle
@@ -89,7 +89,6 @@ op getSecret is KeyVaultOperation<
 @summary("List secrets in a specified key vault.")
 @route("/secrets")
 @get
-@list
 op listSecretProperties is KeyVaultOperation<{}, SecretListResult>;
 
 /**
@@ -100,7 +99,6 @@ op listSecretProperties is KeyVaultOperation<{}, SecretListResult>;
 @summary("Lists deleted secrets for the specified vault.")
 @route("/deletedsecrets")
 @get
-@list
 op listDeletedSecretProperties is KeyVaultOperation<
   {},
   DeletedSecretListResult
@@ -114,7 +112,6 @@ op listDeletedSecretProperties is KeyVaultOperation<
 @summary("List all versions of the specified secret.")
 @route("/secrets/{secret-name}/versions")
 @get
-@list
 op listSecretPropertiesVersions is KeyVaultOperation<
   {
     /**
@@ -134,7 +131,7 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "go");
 @@clientName(getSecrets, "ListSecretProperties", "go");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "go");
-@@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "go");
+@@clientName(updateSecret, "UpdateSecretProperties", "go");
 
 // renaming SecretItem to SecretProperties.
 // renaming existing SecretProperties to something else
@@ -155,7 +152,6 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(SecretListResult, "SecretPropertiesListResult", "go");
 @@clientName(SecretRestoreParameters.secretBundleBackup, "SecretBackup", "go");
 @@clientName(SecretBundle.kid, "KID", "go");
-@@alternateType(SecretAttributes.recoveryLevel, string, "go");
 
 // Rust configuration
 @@clientName(SecretProperties, "OmitSecretProperties", "rust");
@@ -179,8 +175,7 @@ op listSecretPropertiesVersions is KeyVaultOperation<
 @@clientName(getDeletedSecrets, "ListDeletedSecretProperties", "rust");
 @@clientName(getSecrets, "ListSecretProperties", "rust");
 @@clientName(getSecretVersions, "ListSecretPropertiesVersions", "rust");
-// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
-@@clientName(KeyVault.updateSecret, "UpdateSecretProperties", "rust");
+@@clientName(updateSecret, "UpdateSecretProperties", "rust");
 
 @@clientName(SecretRestoreParameters.secretBundleBackup,
   "SecretBackup",

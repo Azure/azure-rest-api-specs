@@ -1,0 +1,297 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2022-02-01-preview",
+    "title": "AdvisorManagementClient",
+    "description": "REST APIs for Azure Advisor"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/providers/Microsoft.Advisor/operations": {
+      "get": {
+        "tags": [
+          "Operations"
+        ],
+        "description": "Lists all the available Advisor REST API operations.",
+        "operationId": "Operations_List",
+        "parameters": [
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully retrieved operation list.",
+            "schema": {
+              "$ref": "#/definitions/OperationEntityListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "OperationsList": {
+            "$ref": "./examples/OperationsList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Advisor/predict": {
+      "post": {
+        "tags": [
+          "Prediction"
+        ],
+        "summary": "Predicts a recommendation.",
+        "operationId": "Predict",
+        "parameters": [
+          {
+            "$ref": "#/parameters/subscriptionIdParameter"
+          },
+          {
+            "name": "predictionRequest",
+            "in": "body",
+            "description": "Parameters for predict recommendation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PredictionRequest"
+            }
+          },
+          {
+            "$ref": "#/parameters/apiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Successfully obtained prediction.",
+            "schema": {
+              "$ref": "#/definitions/PredictionResponse"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ArmErrorResponse"
+            }
+          }
+        },
+        "deprecated": false,
+        "x-ms-examples": {
+          "Predict": {
+            "$ref": "./examples/Predict.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ArmErrorResponse": {
+      "type": "object",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/ARMErrorResponseBody"
+        }
+      }
+    },
+    "ARMErrorResponseBody": {
+      "description": "ARM error response body.",
+      "type": "object",
+      "properties": {
+        "message": {
+          "description": "Gets or sets the string that describes the error in detail and provides debugging information.",
+          "type": "string"
+        },
+        "code": {
+          "description": "Gets or sets the string that can be used to programmatically identify the error.",
+          "type": "string"
+        }
+      }
+    },
+    "ShortDescription": {
+      "description": "A summary of the recommendation.",
+      "type": "object",
+      "properties": {
+        "solution": {
+          "description": "The remediation action suggested by the recommendation.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationEntityListResult": {
+      "description": "The list of Advisor operations.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of operations.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "PredictionRequest": {
+      "description": "Parameters for predict recommendation.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PredictionRequestProperties",
+          "description": "Request properties for prediction recommendation.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PredictionRequestProperties": {
+      "description": "Properties given for the predictor.",
+      "type": "object",
+      "properties": {
+        "predictionType": {
+          "description": "Type of the prediction.",
+          "enum": [
+            "PredictiveRightsizing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "predictionType",
+            "modelAsString": true
+          }
+        },
+        "extendedProperties": {
+          "description": "Extended properties are arguments specific for each prediction type.",
+          "type": "object"
+        }
+      }
+    },
+    "PredictionResponse": {
+      "description": "Response used by predictions.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PredictionResponseProperties",
+          "description": "The properties of the prediction.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "PredictionResponseProperties": {
+      "description": "Properties of the prediction",
+      "type": "object",
+      "properties": {
+        "extendedProperties": {
+          "description": "Extended properties",
+          "type": "object"
+        },
+        "predictionType": {
+          "description": "Type of the prediction.",
+          "enum": [
+            "PredictiveRightsizing"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "predictionType",
+            "modelAsString": true
+          }
+        },
+        "category": {
+          "description": "The category of the recommendation.",
+          "enum": [
+            "HighAvailability",
+            "Security",
+            "Performance",
+            "Cost",
+            "OperationalExcellence"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "category",
+            "modelAsString": true
+          }
+        },
+        "impact": {
+          "description": "The business impact of the recommendation.",
+          "enum": [
+            "High",
+            "Medium",
+            "Low"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "impact",
+            "modelAsString": true
+          }
+        },
+        "impactedField": {
+          "description": "The resource type identified by Advisor.",
+          "type": "string"
+        },
+        "lastUpdated": {
+          "format": "date-time",
+          "description": "The most recent time that Advisor checked the validity of the recommendation.",
+          "type": "string"
+        },
+        "shortDescription": {
+          "$ref": "#/definitions/ShortDescription",
+          "description": "A summary of the recommendation."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "subscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "description": "The Azure subscription ID.",
+      "required": true,
+      "type": "string"
+    },
+    "apiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The version of the API to be used with the client request.",
+      "required": true,
+      "type": "string"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

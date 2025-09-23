@@ -1,100 +1,98 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "RG",
+    "profileName": "profile1",
     "profile": {
       "location": "global",
       "sku": {
         "name": "Premium_AzureFrontDoor"
       }
-    },
-    "profileName": "profile1",
-    "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    }
   },
   "responses": {
     "200": {
       "body": {
         "name": "profile1",
-        "type": "Microsoft.Cdn/profiles",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
-        "kind": "frontdoor",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {},
         "location": "global",
-        "properties": {
-          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
-          "originResponseTimeoutSeconds": 30,
-          "provisioningState": "Succeeded",
-          "resourceState": "Active"
-        },
         "sku": {
           "name": "Premium_AzureFrontDoor"
         },
-        "tags": {}
+        "kind": "frontdoor",
+        "properties": {
+          "originResponseTimeoutSeconds": 30,
+          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active"
+        }
       }
     },
     "201": {
       "body": {
         "name": "profile1",
-        "type": "Microsoft.Cdn/profiles",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
-        "kind": "frontdoor",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {},
         "location": "global",
-        "properties": {
-          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
-          "logScrubbing": {
-            "scrubbingRules": [
-              {
-                "matchVariable": "RequestIPAddress",
-                "selector": null,
-                "selectorMatchOperator": "EqualsAny",
-                "state": "Enabled"
-              }
-            ],
-            "state": "Enabled"
-          },
-          "originResponseTimeoutSeconds": 30,
-          "provisioningState": "Succeeded",
-          "resourceState": "Active"
-        },
         "sku": {
           "name": "Premium_AzureFrontDoor"
         },
-        "tags": {}
+        "kind": "frontdoor",
+        "properties": {
+          "originResponseTimeoutSeconds": 30,
+          "logScrubbing": {
+            "state": "Enabled",
+            "scrubbingRules": [
+              {
+                "matchVariable": "RequestIPAddress",
+                "selectorMatchOperator": "EqualsAny",
+                "selector": null,
+                "state": "Enabled"
+              }
+            ]
+          },
+          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
+          "provisioningState": "Succeeded",
+          "resourceState": "Active"
+        }
       }
     },
     "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
+      },
       "body": {
         "name": "profile1",
-        "type": "Microsoft.Cdn/profiles",
         "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1",
-        "kind": "frontdoor",
+        "type": "Microsoft.Cdn/profiles",
+        "tags": {},
         "location": "global",
-        "properties": {
-          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
-          "logScrubbing": {
-            "scrubbingRules": [
-              {
-                "matchVariable": "RequestIPAddress",
-                "selector": null,
-                "selectorMatchOperator": "EqualsAny",
-                "state": "Enabled"
-              }
-            ],
-            "state": "Enabled"
-          },
-          "originResponseTimeoutSeconds": 30,
-          "provisioningState": "Creating",
-          "resourceState": "Creating"
-        },
         "sku": {
           "name": "Premium_AzureFrontDoor"
         },
-        "tags": {}
-      },
-      "headers": {
-        "azure-asyncoperation": "https://management.azure.com/subscriptions/subid/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-06-01"
+        "kind": "frontdoor",
+        "properties": {
+          "originResponseTimeoutSeconds": 30,
+          "logScrubbing": {
+            "state": "Enabled",
+            "scrubbingRules": [
+              {
+                "matchVariable": "RequestIPAddress",
+                "selectorMatchOperator": "EqualsAny",
+                "selector": null,
+                "state": "Enabled"
+              }
+            ]
+          },
+          "frontDoorId": "3b4682da-b3e2-47a1-96ca-08ab3cb7294e",
+          "provisioningState": "Creating",
+          "resourceState": "Creating"
+        }
       }
     }
-  },
-  "operationId": "Profiles_Create",
-  "title": "Profiles_Create"
+  }
 }

@@ -1,10 +1,10 @@
 {
   "parameters": {
     "api-version": "2025-06-01",
-    "endpointName": "endpoint1",
-    "profileName": "profile1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "RG",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "profileName": "profile1",
+    "endpointName": "endpoint1"
   },
   "responses": {
     "200": {
@@ -12,22 +12,22 @@
         "value": [
           {
             "name": "origingroup1",
-            "type": "Microsoft.Cdn/profiles/endpoints/origingroups",
             "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1",
+            "type": "Microsoft.Cdn/profiles/endpoints/origingroups",
             "properties": {
+              "provisioningState": "Succeeded",
+              "resourceState": "Active",
               "healthProbeSettings": {
-                "probeIntervalInSeconds": 120,
                 "probePath": "/health.aspx",
+                "probeRequestType": "GET",
                 "probeProtocol": "Http",
-                "probeRequestType": "GET"
+                "probeIntervalInSeconds": 120
               },
               "origins": [
                 {
                   "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/origin1"
                 }
               ],
-              "provisioningState": "Succeeded",
-              "resourceState": "Active",
               "responseBasedOriginErrorDetectionSettings": {
                 "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
                 "responseBasedFailoverThresholdPercentage": 10
@@ -37,7 +37,5 @@
         ]
       }
     }
-  },
-  "operationId": "OriginGroups_ListByEndpoint",
-  "title": "OriginsGroups_ListByEndpoint"
+  }
 }

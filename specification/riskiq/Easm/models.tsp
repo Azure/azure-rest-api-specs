@@ -207,6 +207,7 @@ model AsAsset extends InventoryAsset {
 }
 
 @doc("The page of assets that match the provided metric.")
+@pagedResult
 model AssetPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -219,7 +220,7 @@ model AssetPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @pageItems
+  @items
   value?: AssetResource[];
 }
 
@@ -707,6 +708,7 @@ model DiscoGroup {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
+@pagedResult
 model DiscoRunPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -716,7 +718,7 @@ model DiscoRunPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @pageItems
+  @items
   value?: DiscoRunResult[];
 }
 
@@ -1519,6 +1521,7 @@ model DeltaResult {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "Documentation will be added next preview version"
 @Versioning.added(Versions.v2024_03_01_preview)
+@pagedResult
 model DeltaPageResult {
   @doc("The total number of items available in the full result set.")
   totalElements?: int64;
@@ -1528,7 +1531,7 @@ model DeltaPageResult {
   nextLink?: string;
 
   @doc("The items in the current page of results.")
-  @pageItems
+  @items
   value?: DeltaResult[];
 }
 

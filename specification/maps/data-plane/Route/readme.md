@@ -27,7 +27,7 @@ These are the global settings for Route Client.
 ``` yaml
 title: RouteClient
 openapi-type: data-plane
-tag: package-stable-2025-01-01
+tag: package-2025-01
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: 'https://atlas.microsoft.com/.default'
@@ -39,11 +39,11 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Tag: package-stable-2025-01-01
+### Tag: package-2025-01
 
-These settings apply only when `--tag=package-stable-2025-01-01` is specified on the command line.
+These settings apply only when `--tag=package-2025-01` is specified on the command line.
 
-```yaml $(tag) == 'package-stable-2025-01-01'
+```yaml $(tag) == 'package-2025-01'
 input-file:
   - stable/2025-01-01/route.json
 
@@ -52,11 +52,11 @@ suppressions:
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 ```
 
-### Tag: package-2024-07-01-preview
+### Tag: package-preview-2024-7
 
-These settings apply only when `--tag=package-2024-07-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-07` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-07-01-preview'
+```yaml $(tag) == 'package-preview-2024-07'
 input-file:
   - preview/2024-07-01-preview/route.json
   
@@ -65,11 +65,11 @@ suppressions:
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 ```
 
-### Tag: package-retired-2024-06-01-preview
+### Tag: package-preview-2024-6
 
-These settings apply only when `--tag=package-2024-06-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-06` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-06-01-preview'
+```yaml $(tag) == 'package-preview-2024-06'
 input-file:
   - preview/2024-06-01-preview/route.json
   
@@ -78,11 +78,11 @@ suppressions:
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 ```
 
-### Tag: package-retired-2024-05-01-preview
+### Tag: package-preview-2024-5
 
-These settings apply only when `--tag=package-2024-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-05` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-05-01-preview'
+```yaml $(tag) == 'package-preview-2024-05'
 input-file:
   - preview/2024-05-01-preview/route.json
 
@@ -91,47 +91,47 @@ suppressions:
     reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Route' should not appear after the underscore.
 ```
 
-### Tag: package-2024-04-01-preview
+### Tag: package-preview-2024-04
 
-These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2024-04` is specified on the command line.
 
-```yaml $(tag) == 'package-2024-04-01-preview'
+```yaml $(tag) == 'package-preview-2024-04'
 input-file:
   - preview/2024-04-01-preview/route.json
 ```
 
-### Tag: package-retired-2023-10-01-preview
+### Tag: package-preview-2023-10
 
-These settings apply only when `--tag=package-retired-2023-10-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2023-10-01-preview'
+``` yaml $(tag) == 'package-preview-2023-10'
 input-file:
   - preview/2023-10-01-preview/route.json
 ```
 
-### Tag: package-retired-2023-09-01-preview
+### Tag: package-preview-2023-09
 
-These settings apply only when `--tag=package-retired-2023-09-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2023-09-01-preview'
+``` yaml $(tag) == 'package-preview-2023-09'
 input-file:
   - preview/2023-09-01-preview/route.json
 ```
 
-### Tag: package-retired-2023-08-01-preview
+### Tag: package-preview-2023-08
 
-These settings apply only when `--tag=package-retired-2023-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-preview-2023-08` is specified on the command line.
 
-``` yaml $(tag) == 'package-retired-2023-08-01-preview'
+``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
   - preview/2023-08-01-preview/route.json
 ```
 
-### Tag: package-stable-deprecated-1.0
+### Tag: 1.0
 
-These settings apply only when `--tag=package-stable-deprecated-1.0` is specified on the command line.
+These settings apply only when `--tag=1.0` is specified on the command line.
 
-``` yaml $(tag) == 'package-stable-deprecated-1.0'
+``` yaml $(tag) == '1.0'
 input-file:
   - preview/1.0/route.json
 ```

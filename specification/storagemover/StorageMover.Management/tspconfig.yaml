@@ -11,26 +11,25 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/storagemover.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     flavor: azure
+    package-dir: "Azure.ResourceManager.StorageMover"
     clear-output-folder: true
     model-namespace: true
-    namespace: "Azure.ResourceManager.StorageMover"
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storagemover"
+    package-dir: "azure-mgmt-storagemover"
     namespace: "azure.mgmt.storagemover"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storagemover"
+    package-dir: "azure-resourcemanager-storagemover"
     namespace: "com.azure.resourcemanager.storagemover"
-    service-name: "Storage Mover"
+    service-name: "StorageMover" # human-readable service name, whitespace allowed
     flavor: azure
-    use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     service-dir: sdk/storagemover
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-storagemover"
+    package-dir: "arm-storagemover"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -38,8 +37,8 @@ options:
       name: "@azure/arm-storagemover"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/storagemover"
-    emitter-output-dir: "{output-dir}/{service-dir}/armstoragemover"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armstoragemover"
+    package-dir: "armstoragemover"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

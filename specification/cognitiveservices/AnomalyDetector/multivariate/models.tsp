@@ -349,9 +349,10 @@ model AnomalyDetectionModel {
 }
 
 @doc("Response of listing models.")
+@pagedResult
 model ModelList {
   @doc("List of models.")
-  @pageItems
+  @items
   models: AnomalyDetectionModel[];
 
   @doc("Number of trained multivariate models.")

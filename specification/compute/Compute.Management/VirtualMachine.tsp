@@ -363,7 +363,6 @@ interface VirtualMachines {
    */
   @get
   @action("vmSizes")
-  @list
   listAvailableSizes is ComputeResourceActionSync<
     VirtualMachine,
     void,

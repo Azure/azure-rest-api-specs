@@ -163,7 +163,6 @@ interface VirtualMachineScaleSetVMS {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMs_List")
-  @list
   list is VirtualMachineScaleSetVMSOps.List<
     VirtualMachineScaleSetVM,
     Parameters = {
