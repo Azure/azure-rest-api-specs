@@ -20,3 +20,4 @@ using Microsoft.HealthBot;
 @@clientName(KeyVaultProperties.keyVaultUri, "KeyVaultUri");
 @@clientName(KeyVaultProperties.userIdentity, "UserIdentity");
 @@clientName(HealthBotKeysResponse, "HealthBotKeysResult", "csharp");
+@@clientName(ErrorDetail, "ErrorError");
