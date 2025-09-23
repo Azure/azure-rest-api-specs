@@ -13182,6 +13182,35 @@
         "ruleId"
       ]
     },
+    "ManagedRuleOverrideAfd": {
+      "type": "object",
+      "description": "Defines a managed rule group override setting.",
+      "properties": {
+        "ruleId": {
+          "type": "string",
+          "description": "Identifier for the managed rule."
+        },
+        "enabledState": {
+          "$ref": "#/definitions/ManagedRuleEnabledState",
+          "description": "Describes if the managed rule is in enabled or disabled state. Defaults to Disabled if not specified."
+        },
+        "action": {
+          "$ref": "#/definitions/ActionType",
+          "description": "Describes the override action to be applied when rule matches."
+        },
+        "exclusions": {
+          "type": "array",
+          "description": "Describes the exclusions that are applied to this specific rule.",
+          "items": {
+            "$ref": "#/definitions/ManagedRuleExclusion"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "ruleId"
+      ]
+    },
     "ManagedRuleSet": {
       "type": "object",
       "description": "Defines a managed rule set.",
