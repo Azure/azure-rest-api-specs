@@ -18,7 +18,6 @@ interface ConfigurationStoresOperationGroup {
   /**
    * Gets information about the deleted configuration stores in a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @list
   @get
@@ -34,7 +33,6 @@ interface OperationsOperationGroup {
   /**
    * Checks whether the configuration store name is available for use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = CheckNameAvailabilityParameters,
@@ -44,7 +42,6 @@ interface OperationsOperationGroup {
   /**
    * Checks whether the configuration store name is available for use.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @autoRoute
   @action("checkNameAvailability")
   regionalCheckNameAvailability is ArmProviderActionSync<
