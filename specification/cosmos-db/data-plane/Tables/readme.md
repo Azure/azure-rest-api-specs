@@ -53,26 +53,5 @@ directive:
   - suppress: HostParametersValidation
     from: table.json
     reason: Existing API contract using "url" instead of "endpoint".
-  - suppress: PageableOperation
-    from: table.json
-    reason: Tables pageable require two continuation tokens.
-  - suppress: PaginationResponse
-    from: table.json
-    reason: Tables pageable require two continuation tokens.
-  - suppress: ListInOperationName
-    from: table.json
-    reason: Existing API contract.
-  - suppress: GetInOperationName
-    from: table.json
-    reason: Existing API contract.
-  - suppress: OperationId
-    from: table.json
-    reason: Existing API contract.
-  - suppress: VersionPolicy
-    from: table.json
-    reason: Existing API with api version header.
-  - suppress: ErrorResponse
-    from: table.json
-    reason: Existing API contract.
 ```
 
