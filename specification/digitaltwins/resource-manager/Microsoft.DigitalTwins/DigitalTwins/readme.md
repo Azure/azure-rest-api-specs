@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-01` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-01'
 input-file:
-  - Microsoft.DigitalTwins/stable/2023-01-31/digitaltwins.json
+  - stable/2023-01-31/digitaltwins.json
 ```
 
 ### Tag: package-2022-10
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-  - Microsoft.DigitalTwins/stable/2022-10-31/digitaltwins.json
+  - stable/2022-10-31/digitaltwins.json
 ```
 
 ### Tag: package-2022-05
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2022-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-05'
 input-file:
-  - Microsoft.DigitalTwins/stable/2022-05-31/digitaltwins.json
+  - stable/2022-05-31/digitaltwins.json
 ```
 
 ### Tag: package-2021-06-30-preview
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2021-06-30-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-06-30-preview'
 input-file:
-  - Microsoft.DigitalTwins/preview/2021-06-30-preview/digitaltwins.json
+  - preview/2021-06-30-preview/digitaltwins.json
 ```
 
 ### Tag: package-2020-12
@@ -71,7 +71,7 @@ These settings apply only when `--tag=package-2020-12` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-12'
 input-file:
-  - Microsoft.DigitalTwins/stable/2020-12-01/digitaltwins.json
+  - stable/2020-12-01/digitaltwins.json
 ```
 
 ### Tag: package-2020-10
@@ -80,7 +80,7 @@ These settings apply only when `--tag=package-2020-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-10'
 input-file:
-  - Microsoft.DigitalTwins/stable/2020-10-31/digitaltwins.json
+  - stable/2020-10-31/digitaltwins.json
 ```
 
 ### Tag: package-2020-03-01-preview
@@ -89,7 +89,7 @@ These settings apply only when `--tag=package-2020-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
-  - Microsoft.DigitalTwins/preview/2020-03-01-preview/digitaltwins.json
+  - preview/2020-03-01-preview/digitaltwins.json
 ```
 
 ---
