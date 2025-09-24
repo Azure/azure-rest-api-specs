@@ -170,10 +170,8 @@ op VaultsGetDeletedCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path subscriptionId: uuid,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path vaultName: string,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path location: azureLocation,
 ): DeletedVault;
@@ -191,13 +189,10 @@ op VaultsPurgeDeletedCustomized(
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path subscriptionId: uuid,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path vaultName: string,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path location: azureLocation,
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body body: void,
 ): void;
@@ -258,5 +253,11 @@ op ManagedHsmsPurgeDeletedCustomized(
 
 @@override(DeletedVaults.getDeleted, VaultsGetDeletedCustomized, "python");
 @@override(DeletedVaults.purgeDeleted, VaultsPurgeDeletedCustomized, "python");
-@@override(DeletedManagedHsms.getDeleted, ManagedHsmsGetDeletedCustomized, "python");
-@@override(DeletedManagedHsms.purgeDeleted, ManagedHsmsPurgeDeletedCustomized, "python");
+@@override(DeletedManagedHsms.getDeleted,
+  ManagedHsmsGetDeletedCustomized,
+  "python"
+);
+@@override(DeletedManagedHsms.purgeDeleted,
+  ManagedHsmsPurgeDeletedCustomized,
+  "python"
+);
