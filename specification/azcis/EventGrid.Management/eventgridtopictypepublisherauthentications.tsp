@@ -32,7 +32,7 @@ model EventGridTopicTypePublisherAuthenticationsResourceProperties {
 
   @doc("Resource event argument result; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
-  properties?: string;
+  publisherAuthenticationsOutput?: string;
 }
 
 @doc("Authentication Type enum.")
