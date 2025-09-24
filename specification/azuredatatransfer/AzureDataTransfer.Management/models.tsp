@@ -1018,14 +1018,12 @@ model FlowProperties {
    * Type of FlowProfile to use for transfer via the flow.
    */
   @added(Versions.v2025_05_30_preview)
-  @visibility(Lifecycle.Read)
   flowProfile?: FlowProfileMetadata;
 
   /**
    * The Flow's data class.
    */
   @added(Versions.v2025_05_30_preview)
-  @visibility(Lifecycle.Read)
   flowDataType?: DataClass;
 
   /**
