@@ -45,3 +45,13 @@ using Azure.ClientGenerator.Core;
   "VolumeGroupMetadata",
   "java"
 );
+
+@@clientName(Microsoft.NetApp.GetGroupIdListForLdapUserRequest,
+  "GetGroupIdListForLDAPUserRequest",
+  "go"
+);
+
+@@clientName(Microsoft.NetApp.GetGroupIdListForLdapUserResponse,
+  "GetGroupIdListForLDAPUserResponse",
+  "go"
+);
