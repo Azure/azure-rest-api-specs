@@ -17,39 +17,38 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     arm-resource-flattening: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-appconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appconfiguration"
     namespace: "azure.mgmt.appconfiguration"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.AppConfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.AppConfiguration"
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.ResourceManager.AppConfiguration
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "arm-appconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appconfiguration"
     package-details:
       name: "@azure/arm-appconfiguration"
     flavor: azure
     experimental-extensible-enums: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-appconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appconfiguration"
     namespace: com.azure.resourcemanager.appconfiguration
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/resourcemanager/appconfiguration"
-    package-dir: "armappconfiguration"
-    module-version: "0.0.1"
-    generate-fakes: true
+    emitter-output-dir: "{output-dir}/{service-dir}/armappconfiguration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappconfiguration"
+    fix-const-stuttering: true
+    flavor: "azure"
     generate-samples: true
+    generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-    single-client: true
-    slice-elements-byval: true
-    flavor: azure
