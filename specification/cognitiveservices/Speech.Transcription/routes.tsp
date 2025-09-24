@@ -13,7 +13,7 @@ namespace Azure.Ai.Speech.Transcription;
 @post
 @route("/transcriptions:transcribe")
 @doc("Transcribes the provided audio stream.")
-op transcribe is Azure.Core.RpcOperation<
+op transcriptionTranscribe is Azure.Core.RpcOperation<
   TranscriptionTranscribeRequestContent,
   TranscriptionResult
 >;
