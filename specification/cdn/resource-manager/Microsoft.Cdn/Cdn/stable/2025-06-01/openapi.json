@@ -9122,6 +9122,10 @@
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
           "description": "The properties of the private link resource for private origin."
         },
+        "originCapacityResource": {
+          "$ref": "#/definitions/OriginCapacityResourceProperties",
+          "description": "Origin capacity settings for an origin"
+        },
         "enabledState": {
           "$ref": "#/definitions/EnabledState",
           "description": "Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool."
@@ -9207,6 +9211,10 @@
         "sharedPrivateLinkResource": {
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
           "description": "The properties of the private link resource for private origin."
+        },
+        "originCapacityResource": {
+          "$ref": "#/definitions/OriginCapacityResourceProperties",
+          "description": "Origin capacity settings for an origin"
         },
         "enabledState": {
           "$ref": "#/definitions/EnabledState",
@@ -14137,6 +14145,32 @@
             "value": "UserAssignedIdentity"
           }
         ]
+      }
+    },
+    "OriginCapacityResourceProperties": {
+      "type": "object",
+      "description": "Origin capacity settings for an origin",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable origin capacity for a specific origin"
+        },
+        "region": {
+          "type": "string",
+          "description": "The nearest origin capacity pop region for an origin"
+        },
+        "originRequestRateThreshold": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The request rate limit threshold for an origin per minute",
+          "minimum": 1
+        },
+        "originIngressRateThreshold": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress rate limit threshold for an origin per minute in MB",
+          "minimum": 1
+        }
       }
     },
     "OriginGroup": {

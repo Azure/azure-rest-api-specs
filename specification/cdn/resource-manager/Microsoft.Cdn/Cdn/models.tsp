@@ -3061,10 +3061,10 @@ model AFDOriginUpdatePropertiesParameters {
   sharedPrivateLinkResource?: SharedPrivateLinkResourceProperties;
 
   /**
-   * Origin shield settings for an origin
+   * Origin capacity settings for an origin
    */
   @added(Versions.v2025_09_01_preview)
-  originShieldResource?: OriginShieldResourceProperties;
+  originCapacityResource?: OriginCapacityResourceProperties;
 
   /**
    * Whether to enable health probes to be made against backends defined under backendPools. Health probes can only be disabled if there is a single enabled backend in single enabled backend pool.
@@ -3108,17 +3108,17 @@ model SharedPrivateLinkResourceProperties {
 }
 
 /**
- * Origin shield settings for an origin
+ * Origin capacity settings for an origin
  */
 @added(Versions.v2025_09_01_preview)
-model OriginShieldResourceProperties {
+model OriginCapacityResourceProperties {
   /**
-   * Whether to enable origin shield for an specific origin
+   * Whether to enable origin capacity for a specific origin
    */
   enabled?: boolean;
 
   /**
-   * The nearest origin shield pop region for an origin
+   * The nearest origin capacity pop region for an origin
    */
   region?: string;
 
