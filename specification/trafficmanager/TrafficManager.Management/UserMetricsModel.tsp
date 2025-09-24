@@ -18,6 +18,12 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @subscriptionResource
 model UserMetricsModel extends ProxyResource {
+  ...ResourceNameParameter<
+    Resource = UserMetricsModel,
+    KeyName = "trafficManagerUserMetricsKey",
+    SegmentName = "trafficManagerUserMetricsKeys",
+    NamePattern = ""
+  >;
   properties?: UserMetricsProperties;
 }
 

@@ -651,6 +651,75 @@
           }
         }
       },
+      "delete": {
+        "operationId": "Endpoints_Delete",
+        "description": "Deletes a Traffic Manager endpoint.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "endpointType",
+            "in": "path",
+            "description": "The type of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "AzureEndpoints",
+              "ExternalEndpoints",
+              "NestedEndpoints"
+            ],
+            "x-ms-enum": {
+              "name": "EndpointType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "endpointName",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DeleteOperationResult"
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Endpoint-DELETE-External": {
+            "$ref": "./examples/Endpoint-DELETE-External.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}/{endpointType}/{name}": {
       "put": {
         "operationId": "Endpoints_CreateOrUpdate",
         "description": "Create or update a Traffic Manager endpoint.",
@@ -695,12 +764,19 @@
             "type": "string"
           },
           {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "The Traffic Manager endpoint parameters supplied to the CreateOrUpdate operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointCreateOrUpdate"
             }
           }
         ],
@@ -786,12 +862,19 @@
             "type": "string"
           },
           {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the Traffic Manager endpoint.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "parameters",
             "in": "body",
             "description": "The Traffic Manager endpoint parameters supplied to the Update operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Endpoint"
+              "$ref": "#/definitions/EndpointUpdate"
             }
           }
         ],
@@ -812,73 +895,6 @@
         "x-ms-examples": {
           "Endpoint-PATCH-External-Target": {
             "$ref": "./examples/Endpoint-PATCH-External-Target.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Endpoints_Delete",
-        "description": "Deletes a Traffic Manager endpoint.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "profileName",
-            "in": "path",
-            "description": "The name of the Traffic Manager profile.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "endpointType",
-            "in": "path",
-            "description": "The type of the Traffic Manager endpoint.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "AzureEndpoints",
-              "ExternalEndpoints",
-              "NestedEndpoints"
-            ],
-            "x-ms-enum": {
-              "name": "EndpointType",
-              "modelAsString": false
-            }
-          },
-          {
-            "name": "endpointName",
-            "in": "path",
-            "description": "The name of the Traffic Manager endpoint.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DeleteOperationResult"
-            }
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Endpoint-DELETE-External": {
-            "$ref": "./examples/Endpoint-DELETE-External.json"
           }
         }
       }
@@ -1117,6 +1133,29 @@
       "type": "object",
       "description": "Class representing a Traffic Manager endpoint.",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the Traffic Manager endpoint."
+        },
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The properties of the Traffic Manager endpoint.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "required": [
+        "name"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EndpointCreateOrUpdate": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager endpoint.",
+      "properties": {
         "properties": {
           "$ref": "#/definitions/EndpointProperties",
           "description": "The properties of the Traffic Manager endpoint.",
@@ -1306,6 +1345,22 @@
           }
         ]
       }
+    },
+    "EndpointUpdate": {
+      "type": "object",
+      "description": "Class representing a Traffic Manager endpoint.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/EndpointProperties",
+          "description": "The properties of the Traffic Manager endpoint.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "GeographicHierarchyProperties": {
       "type": "object",
@@ -1762,12 +1817,18 @@
       "type": "object",
       "description": "Class representing the Geographic hierarchy used with the Geographic traffic routing method.",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "properties": {
           "$ref": "#/definitions/GeographicHierarchyProperties",
           "description": "The properties of the Geographic Hierarchy resource.",
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
@@ -1868,12 +1929,18 @@
       "type": "object",
       "description": "Class representing Traffic Manager User Metrics.",
       "properties": {
+        "name": {
+          "type": "string"
+        },
         "properties": {
           "$ref": "#/definitions/UserMetricsProperties",
           "description": "The properties of the Traffic Manager User Metrics.",
           "x-ms-client-flatten": true
         }
       },
+      "required": [
+        "name"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ProxyResource"
