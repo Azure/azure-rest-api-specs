@@ -137,7 +137,10 @@ op quotaRequestStatusGet(
   scope: string,
 ): QuotaRequestDetails;
 
-@@override(QuotaRequestStatus.get, quotaRequestStatusGet, "java,go,python");
+@@override(QuotaRequestStatus.get,
+  quotaRequestStatusGet,
+  "java,go,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
