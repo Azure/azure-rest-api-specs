@@ -62,3 +62,10 @@ using Microsoft.BillingBenefits;
 
 @@clientName(Discounts.create::parameters.resource, "body");
 @@clientName(Discounts.update::parameters.properties, "body");
+
+@@clientInitialization(Microsoft.BillingBenefits,
+  {
+    parameters: ExpandParameter,
+  },
+  "!go, !csharp"
+);

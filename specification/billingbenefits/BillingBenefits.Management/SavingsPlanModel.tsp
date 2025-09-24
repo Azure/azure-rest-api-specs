@@ -98,10 +98,3 @@ interface SavingsPlanModels {
 @@doc(SavingsPlanModels.validateUpdate::parameters.body,
   "Request body for validating a savings plan patch request"
 );
-
-@@clientInitialization(Microsoft.BillingBenefits,
-  {
-    parameters: ExpandParameter,
-  },
-  "!go"
-);
