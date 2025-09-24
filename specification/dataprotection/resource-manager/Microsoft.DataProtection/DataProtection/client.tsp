@@ -26,11 +26,11 @@ using Microsoft.DataProtection;
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "java");
 
 // Fix method name changes (PIN -> Pin in ResourceGuards)
-@@clientLocation(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
+@@clientName(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
   "getBackupSecurityPinRequestsObjects",
   "java"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
+@@clientName(DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
   "getDefaultBackupSecurityPinRequestsObject",
   "java"
 );
