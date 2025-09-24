@@ -60,7 +60,7 @@ interface KubernetesVersionProfiles {
   deleteKubernetesVersions is ArmResourceDeleteWithoutOkAsync<
     KubernetesVersionProfile,
     BaseParameters = CustomLocationResourceUriParameters,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader & ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

@@ -235,6 +235,10 @@
                 "type": "string",
                 "description": "A link to the status monitor"
               },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -261,7 +265,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -2722,7 +2726,8 @@
             "value": "Accepted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "ResourceProvisioningState": {
       "type": "string",
@@ -2779,7 +2784,8 @@
             "value": "Accepted"
           }
         ]
-      }
+      },
+      "readOnly": true
     },
     "StorageProfile": {
       "type": "object",
