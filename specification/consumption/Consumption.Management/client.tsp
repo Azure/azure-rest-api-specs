@@ -15,8 +15,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(Budget.eTag, "etag", "java");
 @@clientName(TagsResult.eTag, "etag", "java");
 @@clientName(CreditSummary.eTag, "etag", "java");
-
-// Fix additional eTag properties from models.tsp
 @@clientName(ProxyResource.eTag, "etag", "java");
 @@clientName(EventProperties.eTag, "etag", "java");
 @@clientName(LotProperties.eTag, "etag", "java");
