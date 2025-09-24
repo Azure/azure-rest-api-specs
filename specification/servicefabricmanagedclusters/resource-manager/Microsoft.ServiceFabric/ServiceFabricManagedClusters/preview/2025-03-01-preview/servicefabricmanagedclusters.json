@@ -7241,7 +7241,7 @@
     },
     "RuntimeFailureAction": {
       "type": "string",
-      "description": "Cluster level definition for the compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations. Invalid indicates the failure action is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual indicates that the upgrade will switch to UnmonitoredManual upgrade mode.",
+      "description": "Cluster level definition for the compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations.",
       "enum": [
         "Rollback",
         "Manual"
@@ -7275,7 +7275,7 @@
     },
     "RuntimeRollingUpgradeMode": {
       "type": "string",
-      "description": "Cluster level definition for the mode used to monitor health during a rolling upgrade. The values are Monitored, and UnmonitoredAuto.",
+      "description": "Cluster level definition for the mode used to monitor health during a rolling upgrade.",
       "enum": [
         "UnmonitoredAuto",
         "UnmonitoredManual",
@@ -7303,7 +7303,7 @@
         ]
       }
     },
-    "RuntimeRollingUpgradeUpdateDescription": {
+    "RuntimeRollingUpgradeUpdateMonitoringPolicy": {
       "type": "object",
       "description": "Describes the parameters for updating a rolling upgrade of application or cluster.",
       "properties": {
@@ -7345,7 +7345,8 @@
           "description": "The amount of time each upgrade domain has to complete before FailureAction is executed. It is first interpreted as a string representing an ISO 8601 duration. If that fails, then it is interpreted as a number representing the total number of milliseconds."
         },
         "instanceCloseDelayDurationInSeconds": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description."
         }
       },
@@ -7402,8 +7403,8 @@
           "description": "Defines a health policy used to evaluate the health of an application or one of its children entities."
         },
         "updateDescription": {
-          "$ref": "#/definitions/RuntimeRollingUpgradeUpdateDescription",
-          "description": "Describes the parameters for updating a rolling upgrade of application or cluster."
+          "$ref": "#/definitions/RuntimeRollingUpgradeUpdateMonitoringPolicy",
+          "description": "Describes the parameters for updating a rolling upgrade of application or cluster and a monitoring policy."
         }
       },
       "required": [

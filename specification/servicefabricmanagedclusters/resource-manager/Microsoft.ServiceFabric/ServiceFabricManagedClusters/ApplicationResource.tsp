@@ -406,7 +406,7 @@ union RollingUpgradeMode {
 /**
  * Describes the parameters for updating a rolling upgrade of application or cluster.
  */
-model RuntimeRollingUpgradeUpdateDescription {
+model RuntimeRollingUpgradeUpdateMonitoringPolicy {
   /**
    * The mode used to monitor health during a rolling upgrade.
    */
@@ -455,7 +455,7 @@ model RuntimeRollingUpgradeUpdateDescription {
   /**
    * Duration in seconds, to wait before a stateless instance is closed, to allow the active requests to drain gracefully. This would be effective when the instance is closing during the application/cluster upgrade, only for those instances which have a non-zero delay duration configured in the service description.
    */
-  instanceCloseDelayDurationInSeconds?: string;
+  instanceCloseDelayDurationInSeconds?: int64;
 }
 
 /**
@@ -556,7 +556,7 @@ model RuntimeApplicationHealthPolicy {
 }
 
 /**
- * Cluster level definition for the compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations. Invalid indicates the failure action is invalid. Rollback specifies that the upgrade will start rolling back automatically. Manual indicates that the upgrade will switch to UnmonitoredManual upgrade mode.
+ * Cluster level definition for the compensating action to perform when a Monitored upgrade encounters monitoring policy or health policy violations.
  */
 union RuntimeFailureAction {
   string,
@@ -573,7 +573,7 @@ union RuntimeFailureAction {
 }
 
 /**
- * Cluster level definition for the mode used to monitor health during a rolling upgrade. The values are Monitored, and UnmonitoredAuto.
+ * Cluster level definition for the mode used to monitor health during a rolling upgrade.
  */
 union RuntimeRollingUpgradeMode {
   string,
@@ -614,7 +614,7 @@ model RuntimeUpdateApplicationUpgradeParameters {
   applicationHealthPolicy?: RuntimeApplicationHealthPolicy;
 
   /**
-   * Describes the parameters for updating a rolling upgrade of application or cluster.
+   * Describes the parameters for updating a rolling upgrade of application or cluster and a monitoring policy.
    */
-  updateDescription?: RuntimeRollingUpgradeUpdateDescription;
+  updateDescription?: RuntimeRollingUpgradeUpdateMonitoringPolicy;
 }
