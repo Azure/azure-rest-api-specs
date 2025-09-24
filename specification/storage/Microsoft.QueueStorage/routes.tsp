@@ -440,7 +440,9 @@ namespace Storage.Queues {
         @body
         queueMessage?: QueueMessage;
       },
-      {}
+      {
+        @statusCode statusCode: 204;
+      }
     >;
 
     /**
