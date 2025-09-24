@@ -8,3 +8,4 @@ using Azure.ClientGenerator.Core;
   "javascript"
 );
 @@clientName(Microsoft.Edge, "DisconnectedOperationsMgmt", "python");
+@@clientName(Versions.v2025_06_01, "V20250601Preview", "javascript");
