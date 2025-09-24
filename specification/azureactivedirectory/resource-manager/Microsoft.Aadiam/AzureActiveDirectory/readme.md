@@ -51,7 +51,7 @@ input-file:
 
 These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-07'
+``` yaml $(tag) == 'package-preview-2020-03'
 input-file:
   - preview/2020-03-01-preview/privateLinkForAzureAD.json
   - preview/2020-03-01-preview/privateLinkResources.json
