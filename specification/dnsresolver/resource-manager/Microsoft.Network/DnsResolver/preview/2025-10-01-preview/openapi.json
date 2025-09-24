@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "DnsResolverManagementClient",
-    "version": "2025-05-01",
+    "version": "2025-10-01-preview",
     "description": "The DNS Resolver Management Client.",
     "x-typespec-generated": [
       {
@@ -2323,6 +2323,9 @@
         "x-ms-examples": {
           "Upsert DNS security rule": {
             "$ref": "./examples/DnsSecurityRule_Put.json"
+          },
+          "Upsert DNS security rule with managed domain list": {
+            "$ref": "./examples/DnsSecurityRule_ManagedDomainList_Put.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4869,6 +4872,13 @@
             "$ref": "#/definitions/SubResource"
           }
         },
+        "managedDomainLists": {
+          "type": "array",
+          "description": "Managed domain lists that the DNS security rule applies to.",
+          "items": {
+            "$ref": "#/definitions/ManagedDomainList"
+          }
+        },
         "dnsSecurityRuleState": {
           "$ref": "#/definitions/DnsSecurityRuleState",
           "description": "The state of DNS security rule."
@@ -4906,10 +4916,18 @@
         "dnsResolverDomainLists": {
           "type": "array",
           "description": "DNS resolver policy domains lists that the DNS security rule applies to.",
+          "default": [],
           "items": {
             "$ref": "#/definitions/SubResource"
-          },
-          "x-ms-identifiers": []
+          }
+        },
+        "managedDomainLists": {
+          "type": "array",
+          "description": "Managed domain lists that the DNS security rule applies to.",
+          "default": [],
+          "items": {
+            "$ref": "#/definitions/ManagedDomainList"
+          }
         },
         "dnsSecurityRuleState": {
           "$ref": "#/definitions/DnsSecurityRuleState",
@@ -4923,8 +4941,7 @@
       },
       "required": [
         "priority",
-        "action",
-        "dnsResolverDomainLists"
+        "action"
       ]
     },
     "DnsSecurityRuleState": {
@@ -5238,6 +5255,24 @@
       "required": [
         "subnet"
       ]
+    },
+    "ManagedDomainList": {
+      "type": "string",
+      "description": "Describes Managed Domain List options for DNS security rules.",
+      "enum": [
+        "AzureDnsThreatIntel"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedDomainList",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureDnsThreatIntel",
+            "value": "AzureDnsThreatIntel",
+            "description": "Domain list managed by Azure DNS Threat Intelligence."
+          }
+        ]
+      }
     },
     "OutboundEndpoint": {
       "type": "object",
