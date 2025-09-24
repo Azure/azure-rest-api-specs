@@ -2,33 +2,33 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using Attestation;
+using AttestationService;
+
+@@clientName(AttestationService, "Attestation");
 
 @@clientName(AttestationResult.`x-ms-sgx-svn`, "svn");
 @@clientName(AttestationResult.svn, "deprecatedSvn");
 
-@@clientLocation(PolicyOperationGroup.get, "Policy");
-@@clientLocation(PolicyOperationGroup.set, "Policy");
-@@clientLocation(PolicyOperationGroup.reset, "Policy");
+@@clientLocation(Policy.get, "Policy");
+@@clientLocation(Policy.set, "Policy");
+@@clientLocation(Policy.reset, "Policy");
 
-@@clientLocation(PolicyCertificatesOperationGroup.get, "PolicyCertificates");
-@@clientLocation(PolicyCertificatesOperationGroup.add, "PolicyCertificates");
-@@clientLocation(PolicyCertificatesOperationGroup.remove, "PolicyCertificates");
+@@clientLocation(PolicyCertificates.get, "PolicyCertificates");
+@@clientLocation(PolicyCertificates.add, "PolicyCertificates");
+@@clientLocation(PolicyCertificates.remove, "PolicyCertificates");
 
-@@clientLocation(AttestationOperationGroup.attestOpenEnclave, "Attestation");
-@@clientLocation(AttestationOperationGroup.attestSgxEnclave, "Attestation");
-@@clientLocation(AttestationOperationGroup.attestAzureGuest, "Attestation");
-@@clientLocation(AttestationOperationGroup.attestTpm, "Attestation");
-@@clientLocation(AttestationOperationGroup.attestSevSnpVm, "Attestation");
-@@clientLocation(AttestationOperationGroup.attestTdxVm, "Attestation");
+@@clientLocation(Attestation.attestOpenEnclave, "Attestation");
+@@clientLocation(Attestation.attestSgxEnclave, "Attestation");
+@@clientLocation(Attestation.attestAzureGuest, "Attestation");
+@@clientLocation(Attestation.attestTpm, "Attestation");
+@@clientLocation(Attestation.attestSevSnpVm, "Attestation");
+@@clientLocation(Attestation.attestTdxVm, "Attestation");
 
-@@clientLocation(TcbBaselinesOperationGroup.get, "TcbBaselines");
+@@clientLocation(TcbBaselines.get, "TcbBaselines");
 
-@@clientLocation(SigningCertificatesOperationGroup.get, "SigningCertificates");
+@@clientLocation(SigningCertificates.get, "SigningCertificates");
 
-@@clientLocation(MetadataConfigurationOperationGroup.get,
-  "MetadataConfiguration"
-);
+@@clientLocation(MetadataConfiguration.get, "MetadataConfiguration");
 
 @@usage(CertificateModification, Usage.output);
 @@usage(PolicyModification, Usage.output);

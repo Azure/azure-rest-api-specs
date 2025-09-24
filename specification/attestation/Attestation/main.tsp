@@ -37,7 +37,7 @@ using TypeSpec.Versioning;
     }
   ]>
 )
-namespace Attestation;
+namespace AttestationService;
 
 /**
  * The available API versions.
