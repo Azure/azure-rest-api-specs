@@ -23,27 +23,27 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.AppConfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.AppConfiguration"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.ResourceManager.AppConfiguration
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "arm-appconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-appconfiguration"
     package-details:
       name: "@azure/arm-appconfiguration"
     flavor: azure
     experimental-extensible-enums: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-appconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-appconfiguration"
     namespace: com.azure.resourcemanager.appconfiguration
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armappconfiguration"
     service-dir: "sdk/resourcemanager/appconfiguration"
     emitter-output-dir: "{output-dir}/{service-dir}/armappconfiguration"
     module-version: "0.0.1"
