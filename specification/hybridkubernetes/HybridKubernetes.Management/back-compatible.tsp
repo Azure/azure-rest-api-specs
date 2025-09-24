@@ -19,6 +19,9 @@ using Microsoft.Kubernetes;
 @@clientName(ConnectedClusters.update::parameters.properties,
   "ConnectedClusterPatch"
 );
+@@clientName(ConnectedClusters.updateAsync::parameters.properties,
+  "ConnectedClusterPatch"
+);
 @@clientName(ConnectedClusters.listClusterUserCredential::parameters.body,
   "Properties"
 );
