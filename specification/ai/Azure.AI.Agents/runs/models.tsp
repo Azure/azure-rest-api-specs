@@ -219,6 +219,11 @@ model CreateRunOptions {
   @doc("The overridden list of enabled tools that the agent should use to run the thread.")
   tools?: ToolDefinition[] | null;
 
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" "OpenAI uses explicit nullability, distinct from optionality"
+  @doc("The overridden enabled tool resources that the agent should use to run the thread.")
+  @encodedName("application/json", "tool_resources")
+  tool_resources?: ToolResources | null;
+
   /**
    * If `true`, returns a stream of events that happen during the Run as server-sent events,
    * terminating when the Run enters a terminal state with a `data: [DONE]` message.
@@ -353,6 +358,25 @@ model SubmitToolOutputsAction extends RequiredAction {
 model SubmitToolOutputsDetails {
   @encodedName("application/json", "tool_calls")
   @doc("The list of tool calls that must be resolved for the agent thread run to continue.")
+  toolCalls: RequiredToolCall[];
+}
+
+@doc("The details for required tool call approval that must be submitted for an agent thread run to continue.")
+@added(Versions.v2025_05_15_preview)
+model SubmitToolApprovalAction extends RequiredAction {
+  @doc("The object type, which is always 'submit_tool_approval'.")
+  type: "submit_tool_approval";
+
+  @encodedName("application/json", "submit_tool_approval")
+  @doc("The details describing tools that should be approved to continue run.")
+  submitToolApproval: SubmitToolApprovalDetails;
+}
+
+@doc("The details describing tools that should be approved.")
+@added(Versions.v2025_05_15_preview)
+model SubmitToolApprovalDetails {
+  @encodedName("application/json", "tool_calls")
+  @doc("The list of tool calls that must be approved for the agent thread run to continue.")
   toolCalls: RequiredToolCall[];
 }
 

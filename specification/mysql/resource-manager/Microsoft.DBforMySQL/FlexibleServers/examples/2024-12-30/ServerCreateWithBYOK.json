@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "api-version": "2024-12-30",
+    "parameters": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity": {}
+        }
+      },
+      "location": "southeastasia",
+      "properties": {
+        "administratorLogin": "cloudsa",
+        "administratorLoginPassword": "your_password",
+        "availabilityZone": "1",
+        "backup": {
+          "backupIntervalHours": 24,
+          "backupRetentionDays": 7,
+          "geoRedundantBackup": "Disabled"
+        },
+        "createMode": "Default",
+        "dataEncryption": {
+          "type": "AzureKeyVault",
+          "geoBackupKeyURI": "https://test-geo.vault.azure.net/keys/key/c8a92236622244c0a4fdb892666f671a",
+          "geoBackupUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-geo-identity",
+          "primaryKeyURI": "https://test.vault.azure.net/keys/key/c8a92236622244c0a4fdb892666f671a",
+          "primaryUserAssignedIdentityId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/test-identity"
+        },
+        "highAvailability": {
+          "mode": "ZoneRedundant",
+          "standbyAvailabilityZone": "3"
+        },
+        "storage": {
+          "autoGrow": "Disabled",
+          "iops": 600,
+          "storageRedundancy": "LocalRedundancy",
+          "storageSizeGB": 100
+        },
+        "version": "5.7"
+      },
+      "sku": {
+        "name": "Standard_D2ds_v4",
+        "tier": "GeneralPurpose"
+      },
+      "tags": {
+        "num": "1"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "mysqltestserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mysqltestserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "standbyAvailabilityZone": "3",
+            "state": "Healthy"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 10,
+          "replicationRole": "None",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 600,
+            "storageRedundancy": "ZoneRedundancy",
+            "storageSizeGB": 100,
+            "storageSku": "Premium_ZRS"
+          },
+          "version": "5.7"
+        },
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "num": "1"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "mysqltestserver",
+        "type": "Microsoft.DBforMySQL/flexibleServers",
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver",
+        "location": "Southeast Asia",
+        "properties": {
+          "administratorLogin": "cloudsa",
+          "availabilityZone": "1",
+          "backup": {
+            "backupRetentionDays": 7,
+            "earliestRestoreDate": "2021-06-17T06:11:38.4150019+00:00",
+            "geoRedundantBackup": "Disabled"
+          },
+          "databasePort": 3306,
+          "fullVersion": "5.7.44",
+          "fullyQualifiedDomainName": "mysqltestserver.database.mysql.azure.com",
+          "highAvailability": {
+            "mode": "ZoneRedundant",
+            "standbyAvailabilityZone": "3",
+            "state": "Healthy"
+          },
+          "maintenancePolicy": {
+            "patchStrategy": "Regular"
+          },
+          "maintenanceWindow": {
+            "batchOfMaintenance": "Default",
+            "customWindow": "Disabled",
+            "dayOfWeek": 0,
+            "startHour": 0,
+            "startMinute": 0
+          },
+          "network": {
+            "publicNetworkAccess": "Enabled"
+          },
+          "replicaCapacity": 10,
+          "replicationRole": "None",
+          "state": "Ready",
+          "storage": {
+            "autoGrow": "Enabled",
+            "iops": 600,
+            "storageRedundancy": "ZoneRedundancy",
+            "storageSizeGB": 100,
+            "storageSku": "Premium_ZRS"
+          },
+          "version": "5.7"
+        },
+        "sku": {
+          "name": "Standard_D2ds_v4",
+          "tier": "GeneralPurpose"
+        },
+        "tags": {
+          "num": "1"
+        }
+      }
+    },
+    "202": {}
+  },
+  "operationId": "Servers_Create",
+  "title": "Create a server with byok"
+}

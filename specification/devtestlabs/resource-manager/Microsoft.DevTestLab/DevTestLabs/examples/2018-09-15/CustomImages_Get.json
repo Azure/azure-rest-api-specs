@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "name": "{customImageName}",
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "{customImageName}",
+        "type": "Microsoft.DevTestLab/labs/customImages",
+        "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/customimages/{customImageName}",
+        "location": "{location}",
+        "properties": {
+          "description": "My Custom Image",
+          "author": "{authorName}",
+          "creationDate": "2021-10-10T09:59:28.7985144+00:00",
+          "provisioningState": "Succeeded",
+          "uniqueIdentifier": "{uniqueIdentifier}",
+          "vm": {
+            "linuxOsInfo": {
+              "linuxOsState": "NonDeprovisioned"
+            },
+            "sourceVmId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}"
+          }
+        },
+        "tags": {
+          "tagName1": "tagValue1"
+        }
+      }
+    }
+  },
+  "operationId": "CustomImages_Get",
+  "title": "CustomImages_Get"
+}

@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "MX",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/MX?api-version=2024-06-01&$skipToken=skipToken",
+        "value": [
+          {
+            "name": "recordmx1",
+            "type": "Microsoft.Network/privateDnsZones/MX",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx1",
+            "properties": {
+              "fqdn": "recordmx1.privatezone1.com.",
+              "isAutoRegistered": false,
+              "metadata": {
+                "key1": "value1"
+              },
+              "mxRecords": [
+                {
+                  "exchange": "mail.contoso1.com",
+                  "preference": 0
+                }
+              ],
+              "ttl": 3600
+            }
+          },
+          {
+            "name": "recordmx2",
+            "type": "Microsoft.Network/privateDnsZones/MX",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/MX/recordmx2",
+            "properties": {
+              "fqdn": "recordmx2.privatezone1.com.",
+              "isAutoRegistered": false,
+              "mxRecords": [
+                {
+                  "exchange": "mail.contoso2.com",
+                  "preference": 0
+                }
+              ],
+              "ttl": 3600
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RecordSets_ListByType",
+  "title": "GET Private DNS Zone MX Record Sets"
+}

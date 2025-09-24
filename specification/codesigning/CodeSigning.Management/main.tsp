@@ -23,8 +23,6 @@ namespace Microsoft.CodeSigning;
 @doc("The available API versions.")
 enum Versions {
   @doc("The 2024-02-05-preview API version.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_02_05_preview: "2024-02-05-preview",
 
   v2024_09_30_preview: "2024-09-30-preview",

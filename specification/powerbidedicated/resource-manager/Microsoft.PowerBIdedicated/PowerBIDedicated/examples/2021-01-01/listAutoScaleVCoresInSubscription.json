@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01",
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "testvcore1",
+            "type": "Microsoft.PowerBIDedicated/autoScaleVCores",
+            "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG1/providers/Microsoft.PowerBIDedicated/autoScaleVCores/testvcore1",
+            "location": "West US",
+            "properties": {
+              "capacityLimit": 10,
+              "capacityObjectId": "a28f00bd-5330-4572-88f1-fa883e074785",
+              "provisioningState": "Succeeded"
+            },
+            "sku": {
+              "name": "AutoScale",
+              "capacity": 5,
+              "tier": "AutoScale"
+            },
+            "tags": {
+              "testKey": "testValue"
+            }
+          },
+          {
+            "name": "testvcore2",
+            "type": "Microsoft.PowerBIDedicated/autoScaleVCores",
+            "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG2/providers/Microsoft.PowerBIDedicated/autoScaleVCores/testvcore2",
+            "location": "West US",
+            "properties": {
+              "capacityLimit": 10,
+              "capacityObjectId": "f59f226b-a313-4266-8768-a45961c2edbb",
+              "provisioningState": "Succeeded"
+            },
+            "sku": {
+              "name": "AutoScale",
+              "capacity": 0,
+              "tier": "AutoScale"
+            },
+            "tags": {
+              "testKey": "testValue"
+            }
+          }
+        ]
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "AutoScaleVCores_ListBySubscription",
+  "title": "List auto scale v-cores in subscription"
+}

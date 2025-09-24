@@ -479,8 +479,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -494,7 +493,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -654,16 +653,14 @@
           "description": "Contact details of the trial administrators, for patients that want to participate in the trial.",
           "items": {
             "$ref": "#/definitions/ContactDetails"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "facilities": {
           "type": "array",
           "description": "Research facilities where the clinical trial is conducted.",
           "items": {
             "$ref": "#/definitions/ClinicalTrialResearchFacility"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -878,16 +875,14 @@
           "description": "Trials with any of the given facility locations will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility locations.",
           "items": {
             "$ref": "#/definitions/GeographicLocation"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "facilityAreas": {
           "type": "array",
           "description": "Trials with any of the given facility area boundaries will be included in the selection (provided that other limitations are satisfied).\nLeaving this list empty will not limit the trial facility area boundaries.",
           "items": {
             "$ref": "#/definitions/GeographicArea"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -989,8 +984,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ClinicalTrialRegistryFilter"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1093,8 +1087,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/OrderedProcedure"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "encounterId": {
           "type": "string",
@@ -1441,8 +1434,7 @@
           "description": "stge/grade, usually assessed formally",
           "items": {
             "$ref": "#/definitions/Fhir.R4.ConditionStage"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "note": {
           "type": "array",
@@ -1486,8 +1478,7 @@
           "description": "Contact details for individual or organization",
           "items": {
             "$ref": "#/definitions/Fhir.R4.ContactPoint"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "allOf": [
@@ -1972,8 +1963,7 @@
           "description": "Provides guide for interpretation",
           "items": {
             "$ref": "#/definitions/Fhir.R4.ObservationReferenceRange"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "hasMember": {
           "type": "array",
@@ -2082,8 +2072,7 @@
           "description": "Provides guide for interpretation of component result",
           "items": {
             "$ref": "#/definitions/Fhir.R4.ObservationReferenceRange"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2450,8 +2439,7 @@
             "required": [
               "name"
             ]
-          },
-          "x-ms-identifiers": []
+          }
         },
         "objective": {
           "type": "array",
@@ -2471,8 +2459,7 @@
             "required": [
               "name"
             ]
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2737,8 +2724,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/RecommendationFinding"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "isConditional": {
           "type": "boolean",
@@ -2971,8 +2957,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ImagingProcedure"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -3161,8 +3146,7 @@
       "description": "Clinical information which is needed to provide better trial matching results for the patient.",
       "items": {
         "$ref": "#/definitions/ExtendedClinicalCodedElement"
-      },
-      "x-ms-identifiers": []
+      }
     },
     "OrderedProcedure": {
       "type": "object",
@@ -3448,8 +3432,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/RadiologyInsightsPatientResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "modelVersion": {
           "$ref": "#/definitions/ModelVersion",
@@ -3639,8 +3622,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/RadiologyInsightsInference"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -3665,8 +3647,7 @@
           "minItems": 1,
           "items": {
             "$ref": "#/definitions/ImagingProcedure"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "orderedProcedure": {
           "$ref": "#/definitions/OrderedProcedure",
@@ -3855,8 +3836,7 @@
           "description": "The evidence corresponding to the inference value.",
           "items": {
             "$ref": "#/definitions/TrialMatcherInferenceEvidence"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "clinicalTrialId": {
           "type": "string",
@@ -3911,8 +3891,7 @@
           "description": "Results for the patients given in the request.",
           "items": {
             "$ref": "#/definitions/TrialMatcherPatientResult"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "modelVersion": {
           "$ref": "#/definitions/ModelVersion",
@@ -4041,8 +4020,7 @@
           "description": "The inference results for the patient.",
           "items": {
             "$ref": "#/definitions/TrialMatcherInference"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "neededClinicalInfo": {
           "$ref": "#/definitions/NeededClinicalInfo",

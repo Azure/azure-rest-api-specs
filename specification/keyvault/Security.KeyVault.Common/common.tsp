@@ -2,13 +2,11 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/openapi";
 
 using Azure.Core;
-using TypeSpec.OpenAPI;
 
 alias KeyVaultOperation<
   TParams extends Reflection.Model,
   TResponse,
-  Traits extends Reflection.Model = {},
-  TError = Error
+  Traits extends Reflection.Model = {}
 > = Foundations.Operation<TParams, TResponse, Traits, KeyVaultError>;
 
 /**

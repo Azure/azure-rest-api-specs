@@ -1,0 +1,750 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-02-02-preview",
+    "title": "ContainerApps API Client",
+    "description": "Logic app is an extension resource on container app and the extension resource enables logic specific operations on the container app through the APIs listed."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}": {
+      "get": {
+        "tags": [
+          "LogicApps"
+        ],
+        "summary": "Gets a logic app extension resource.",
+        "operationId": "LogicApps_Get",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the Logic App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LogicApp"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get logic app extension by name ": {
+            "$ref": "./examples/LogicApps_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "LogicApps_CreateOrUpdate",
+        "tags": [
+          "LogicApps"
+        ],
+        "description": "Create or update a Logic App extension resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the Logic App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Logic app resource properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/LogicApp"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/LogicApp"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/LogicApp"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create logic app extension": {
+            "$ref": "./examples/LogicApps_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "LogicApps_Delete",
+        "tags": [
+          "LogicApps"
+        ],
+        "description": "Deletes a Logic App extension resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the Logic App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed"
+          },
+          "204": {
+            "description": "Extension resource does not exist"
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create logic app extension": {
+            "$ref": "./examples/LogicApps_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows": {
+      "get": {
+        "tags": [
+          "LogicApps"
+        ],
+        "summary": "List the workflows for a logic app.",
+        "operationId": "LogicApps_ListWorkflows",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the Logic App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelopeCollection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the workflows": {
+            "$ref": "./examples/LogicApps_ListWorkflows.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/workflows/{workflowName}": {
+      "get": {
+        "tags": [
+          "LogicApps"
+        ],
+        "summary": "Get workflow information by its name",
+        "operationId": "LogicApps_GetWorkflow",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the Logic App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "workflowName",
+            "in": "path",
+            "description": "Workflow name.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-z][a-z0-9]*$",
+            "minLength": 3,
+            "maxLength": 63
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Workflow information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "GET a workflow": {
+            "$ref": "./examples/LogicApps_GetWorkflow.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/deployWorkflowArtifacts": {
+      "post": {
+        "tags": [
+          "LogicApps"
+        ],
+        "description": "Creates or updates the artifacts for the logic app",
+        "operationId": "LogicApps_DeployWorkflowArtifacts",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the Logic App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "workflowArtifacts",
+            "in": "body",
+            "description": "Application settings and files of the workflow.",
+            "required": false,
+            "x-ms-secret": true,
+            "schema": {
+              "$ref": "#/definitions/WorkflowArtifacts"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Artifacts deployed."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Deploys workflow artifacts": {
+            "$ref": "./examples/LogicApps_PostDeployWorkflowArtifacts.json"
+          },
+          "Delete workflow artifacts": {
+            "$ref": "./examples/LogicApps_DeleteDeployWorkflowArtifacts.json"
+          }
+        },
+        "x-ms-long-running-operation": false
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/listWorkflowsConnections": {
+      "post": {
+        "tags": [
+          "LogicApps"
+        ],
+        "summary": "Gets logic app's connections.",
+        "operationId": "LogicApps_ListWorkflowsConnections",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the Logic App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Connections information returned.",
+            "schema": {
+              "$ref": "#/definitions/WorkflowEnvelope"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List the Workflows Configuration Connections": {
+            "$ref": "./examples/LogicApps_ListConnections.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/containerApps/{containerAppName}/providers/Microsoft.App/logicApps/{logicAppName}/invoke": {
+      "post": {
+        "tags": [
+          "LogicApps"
+        ],
+        "summary": "Proxies a the API call to the logic app backed by the container app.",
+        "operationId": "LogicApps_Invoke",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "containerAppName",
+            "in": "path",
+            "description": "Name of the Container App.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "logicAppName",
+            "in": "path",
+            "description": "Name of the LogicApp App, the extension resource.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "x-ms-logicApps-proxy-path",
+            "in": "header",
+            "description": "The proxy path for the API call",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-logicApps-proxy-method",
+            "in": "header",
+            "description": "The proxy method for the API call",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "GET",
+              "POST"
+            ],
+            "x-ms-enum": {
+              "name": "LogicAppsProxyMethod",
+              "modelAsString": true
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Logic App call response.",
+            "schema": {
+              "$ref": "#/definitions/Object"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get workflow list call back URL": {
+            "$ref": "./examples/LogicApps_ListCallbackURL.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "LogicApp": {
+      "type": "object",
+      "description": "A logic app extension resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogicAppProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LogicAppProperties": {
+      "type": "object",
+      "description": "The properties of logic apps extension."
+    },
+    "WorkflowEnvelope": {
+      "description": "Workflow properties definition.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The resource id."
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource name."
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Gets the resource type."
+        },
+        "kind": {
+          "type": "string",
+          "description": "The resource kind."
+        },
+        "location": {
+          "type": "string",
+          "description": "The resource location.",
+          "x-ms-mutability": [
+            "create",
+            "read"
+          ]
+        },
+        "properties": {
+          "description": "Additional workflow properties.",
+          "type": "object",
+          "properties": {
+            "files": {
+              "description": "Gets or sets the files.",
+              "$ref": "#/definitions/WorkflowFiles"
+            },
+            "flowState": {
+              "description": "Gets or sets the state of the workflow.",
+              "$ref": "#/definitions/WorkflowState"
+            },
+            "health": {
+              "$ref": "#/definitions/WorkflowHealth",
+              "description": "Gets or sets workflow health."
+            }
+          }
+        }
+      }
+    },
+    "WorkflowEnvelopeCollection": {
+      "description": "Collection of workflow information elements.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WorkflowEnvelope"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "WorkflowFiles": {
+      "description": "Gets or sets the files.",
+      "type": "object"
+    },
+    "WorkflowHealth": {
+      "description": "Represents the workflow health.",
+      "required": [
+        "state"
+      ],
+      "type": "object",
+      "properties": {
+        "state": {
+          "description": "Gets or sets the workflow health state.",
+          "enum": [
+            "NotSpecified",
+            "Healthy",
+            "Unhealthy",
+            "Unknown"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "WorkflowHealthState",
+            "modelAsString": false
+          }
+        },
+        "error": {
+          "$ref": "#/definitions/ErrorEntity",
+          "description": "Gets or sets the workflow error."
+        }
+      }
+    },
+    "WorkflowState": {
+      "type": "string",
+      "description": "The workflow state.",
+      "enum": [
+        "NotSpecified",
+        "Completed",
+        "Enabled",
+        "Disabled",
+        "Deleted",
+        "Suspended"
+      ],
+      "x-ms-enum": {
+        "name": "WorkflowState",
+        "modelAsString": true
+      }
+    },
+    "WorkflowArtifacts": {
+      "type": "object",
+      "properties": {
+        "appSettings": {
+          "$ref": "#/definitions/Object",
+          "description": "Application settings of the workflow."
+        },
+        "files": {
+          "$ref": "#/definitions/WorkflowFiles",
+          "description": "Files of the app."
+        },
+        "filesToDelete": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "Files of the app to delete."
+        }
+      },
+      "description": "The workflow filter."
+    },
+    "Object": {
+      "type": "object",
+      "properties": {}
+    },
+    "ErrorEntity": {
+      "description": "Body of the error response returned from the API.",
+      "type": "object",
+      "properties": {
+        "extendedCode": {
+          "description": "Type of error.",
+          "type": "string"
+        },
+        "messageTemplate": {
+          "description": "Message template.",
+          "type": "string"
+        },
+        "parameters": {
+          "description": "Parameters for the template.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "innerErrors": {
+          "description": "Inner errors.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "details": {
+          "description": "Error Details.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorEntity"
+          },
+          "x-ms-identifiers": []
+        },
+        "target": {
+          "description": "The error target.",
+          "type": "string"
+        },
+        "code": {
+          "description": "Basic error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Any details of the error.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

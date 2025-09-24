@@ -1,0 +1,55 @@
+{
+  "parameters": {
+    "api-version": "2024-06-01",
+    "privateZoneName": "privatezone1.com",
+    "recordType": "A",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "subscriptionId"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": "https://management.azure.com/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/A?api-version=2024-06-01&$skipToken=skipToken",
+        "value": [
+          {
+            "name": "recorda1",
+            "type": "Microsoft.Network/privateDnsZones/A",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda1",
+            "properties": {
+              "aRecords": [
+                {
+                  "ipv4Address": "1.2.3.4"
+                }
+              ],
+              "fqdn": "recorda1.privatezone1.com.",
+              "isAutoRegistered": false,
+              "metadata": {
+                "key1": "value1"
+              },
+              "ttl": 3600
+            }
+          },
+          {
+            "name": "recorda2",
+            "type": "Microsoft.Network/privateDnsZones/A",
+            "etag": "00000000-0000-0000-0000-000000000000",
+            "id": "/subscriptions/subscriptionId/resourceGroups/resourceGroup1/providers/Microsoft.Network/privateDnsZones/privatezone1.com/A/recorda2",
+            "properties": {
+              "aRecords": [
+                {
+                  "ipv4Address": "5.6.7.8"
+                }
+              ],
+              "fqdn": "recorda2.privatezone1.com.",
+              "isAutoRegistered": false,
+              "ttl": 3600
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "RecordSets_ListByType",
+  "title": "GET Private DNS Zone A Record Sets"
+}

@@ -418,38 +418,7 @@ model ConversationalAITask extends AnalyzeConversationTask {
 @added(Versions.v2025_05_15_preview)
 model ConversationalAIAnalysisInput {
   /** List of multiple conversations */
-  conversations: AIConversation[];
-}
-
-/** The Conversations for ai conversation analysis */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
-model AIConversation {
-  /** The ID of the conversation. */
-  id: string;
-
-  /** Default modality for all conversation items. */
-  modality: InputModality;
-
-  /** Default language for all conversation items in BCP 47 language representation. */
-  language: string;
-
-  /** List of conversation items. */
-  conversationItems: ConversationalAIItem[];
-}
-
-/** List of conversation items. */
-#suppress "@azure-tools/typespec-azure-core/casing-style"
-@added(Versions.v2025_05_15_preview)
-model ConversationalAIItem {
-  /** The ID of a conversation item. */
-  id: string;
-
-  /** The participant ID of a conversation item. */
-  participantId: string;
-
-  /** The text input */
-  text: string;
+  conversations: TextConversation[];
 }
 
 /** The input for a conversation language understanding task. */

@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./SAPDiscoverySite.tsp";
 import "./SAPInstance.tsp";
 import "./ServerInstance.tsp";
+import "./back-compatible.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
@@ -30,7 +31,5 @@ enum Versions {
   /**
    * The 2023-10-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2023_10_01_preview: "2023-10-01-preview",
 }

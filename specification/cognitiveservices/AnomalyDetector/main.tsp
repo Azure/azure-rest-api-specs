@@ -51,6 +51,5 @@ model AnomalyDetectorApiKeyAuth
   is ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
 
 enum APIVersion {
-  @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v1_1: "v1.1",
 }

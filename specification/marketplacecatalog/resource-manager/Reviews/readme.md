@@ -26,6 +26,7 @@ These are the global settings for Reviews Client.
 
 ```yaml
 openapi-type: arm
+tag: package-2023-01-01-preview
 ```
 
 ### Tag: package-2023-01-01-preview
@@ -34,4 +35,4 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-  - preview\2023-01-01-preview\reviews.json
+  - preview/2023-01-01-preview/reviews.json

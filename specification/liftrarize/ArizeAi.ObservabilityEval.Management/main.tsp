@@ -23,14 +23,10 @@ interface Operations extends Azure.ResourceManager.Operations {}
 /** The available API versions. */
 enum Versions {
   /** 2024-02-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_01_preview: "2024-10-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @useDependency(LiftrBase.Versions.v2_preview)
   v2024_10_01: "2024-10-01",
@@ -84,6 +80,7 @@ model OrganizationResourceUpdate {
 interface Organizations {
   get is ArmResourceRead<OrganizationResource>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<OrganizationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     OrganizationResource,
     OrganizationResourceUpdate

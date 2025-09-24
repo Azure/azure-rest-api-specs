@@ -8,3 +8,9 @@ using Azure.ClientGenerator.Core;
   false,
   "csharp"
 );
+
+// @azure-tools/typespec-python@0.45.0 generates an "e_tag" property, should be "etag".
+@@clientName(Azure.Analytics.OnlineExperimentation.ExperimentMetric.eTag,
+  "etag",
+  "python"
+);

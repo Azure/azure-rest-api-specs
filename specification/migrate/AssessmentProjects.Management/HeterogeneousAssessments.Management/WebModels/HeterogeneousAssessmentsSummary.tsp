@@ -1,8 +1,8 @@
-import "../../Common/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
-import "../../Common/ArmModels/AzureResourceProperties.tsp";
-import "../../Common/StandardizedContracts/CostComponent.tsp";
-import "../../Common/StandardizedContracts/SavingComponent.tsp";
-import "../../Common/StandardizedContracts/CommonModels.tsp";
+import "../Common/StandardizedContracts/CommonAssessmentPropertiesEnums.tsp";
+import "../Common/ArmModels/AzureResourceProperties.tsp";
+import "../Common/StandardizedContracts/CostComponent.tsp";
+import "../Common/StandardizedContracts/SavingComponent.tsp";
+import "../Common/StandardizedContracts/CommonModels.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

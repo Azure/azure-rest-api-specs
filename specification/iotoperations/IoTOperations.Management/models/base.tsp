@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 namespace Microsoft.IoTOperations;
 
@@ -80,7 +81,7 @@ model MetricProperties {
 @doc("Diagnostic Self tracing properties")
 model SelfTracing {
   @doc("The toggle to enable/disable self tracing.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("The self tracing interval.")
   @minValue(1)
@@ -104,7 +105,7 @@ model BatchingConfiguration {
 @doc("Tls properties")
 model TlsProperties {
   @doc("Mode for TLS.")
-  mode?: OperationalMode = OperationalMode.Enabled;
+  mode?: OperationalMode = Enabled;
 
   @doc("Trusted CA certificate config map.")
   trustedCaCertificateConfigMapRef?: string;
@@ -164,14 +165,6 @@ union CertManagerIssuerKind {
   ClusterIssuer: "ClusterIssuer",
 }
 
-alias SystemAssignedManagedIdentity = "SystemAssignedManagedIdentity";
-alias UserAssignedManagedIdentity = "UserAssignedManagedIdentity";
-alias AccessToken = "AccessToken";
-alias Sasl = "Sasl";
-alias X509Certificate = "X509Certificate";
-alias Anonymous = "Anonymous";
-alias ServiceAccountToken = "ServiceAccountToken";
-
 @doc("Managed Identity Method")
 union ManagedIdentityMethod {
   string,
@@ -227,5 +220,21 @@ scalar SchemaRegistryID
   extends Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.DeviceRegistry/schemaRegistries",
+    }
+  ]>;
+
+@added(Versions.`2025-07-01-preview`)
+scalar SecretProviderClassID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.SecretSyncController/azureKeyVaultSecretProviderClasses",
+    }
+  ]>;
+
+@added(Versions.`2025-07-01-preview`)
+scalar AzureDeviceRegistryNamespaceID
+  extends Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.DeviceRegistry/namespaces",
     }
   ]>;

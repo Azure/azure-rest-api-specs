@@ -1,9 +1,6 @@
 // @ts-check
 import { sdkLabels } from "../../shared/src/sdk-types.js";
-import {
-  getAdoBuildInfoFromUrl,
-  getAzurePipelineArtifact,
-} from "./artifacts.js";
+import { getAdoBuildInfoFromUrl, getAzurePipelineArtifact } from "./artifacts.js";
 import { extractInputs } from "./context.js";
 import { LabelAction } from "./label.js";
 
@@ -22,16 +19,14 @@ import { LabelAction } from "./label.js";
  */
 
 /**
- * @param {import('github-script').AsyncFunctionArguments} AsyncFunctionArguments
+ * @param {import('@actions/github-script').AsyncFunctionArguments} AsyncFunctionArguments
  * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, issueNumber: number}>}
  */
 export async function getLabelAndAction({ github, context, core }) {
   const inputs = await extractInputs(github, context, core);
   const details_url = inputs.details_url;
   if (!details_url) {
-    throw new Error(
-      `Required inputs are not valid: details_url:${details_url}`,
-    );
+    throw new Error(`Required inputs are not valid: details_url:${details_url}`);
   }
   return await getLabelAndActionImpl({
     details_url,
@@ -44,16 +39,13 @@ export async function getLabelAndAction({ github, context, core }) {
  * @param {string} params.details_url
  * @param {typeof import("@actions/core")} params.core
  * @param {import('./retries.js').RetryOptions} [params.retryOptions]
- * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, issueNumber: number}>}
+ * @returns {Promise<{labelName: string | undefined, labelAction: LabelAction, headSha: string, issueNumber: number}>}
  */
-export async function getLabelAndActionImpl({
-  details_url,
-  core,
-  retryOptions = {},
-}) {
+export async function getLabelAndActionImpl({ details_url, core, retryOptions = {} }) {
   // Override default logger from console.log to core.info
   retryOptions = { logger: core.info, ...retryOptions };
 
+  let head_sha = "";
   let issue_number = NaN;
   let labelAction;
   /** @type {String | undefined} */
@@ -83,6 +75,9 @@ export async function getLabelAndActionImpl({
     // Parse the JSON data
     const specGenSdkArtifactInfo = JSON.parse(result.artifactData);
     const labelActionText = specGenSdkArtifactInfo.labelAction;
+
+    head_sha = specGenSdkArtifactInfo.headSha;
+
     issue_number = parseInt(specGenSdkArtifactInfo.prNumber, 10);
     if (!issue_number) {
       core.warning(
@@ -104,10 +99,10 @@ export async function getLabelAndActionImpl({
     }
   }
 
-  if (!labelAction) {
-    core.info("No label action found, defaulting to None");
+  if (!labelAction || !labelName) {
+    core.info("No label action or name found, defaulting to None");
     labelAction = LabelAction.None;
   }
 
-  return { labelName, labelAction, issueNumber: issue_number };
+  return { labelName, labelAction, headSha: head_sha, issueNumber: issue_number };
 }

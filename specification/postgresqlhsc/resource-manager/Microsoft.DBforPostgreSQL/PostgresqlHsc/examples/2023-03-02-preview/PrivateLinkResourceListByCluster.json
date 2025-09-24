@@ -1,0 +1,62 @@
+{
+  "operationId": "PrivateLinkResources_ListByCluster",
+  "parameters": {
+    "api-version": "2023-03-02-preview",
+    "clusterName": "testcluster",
+    "resourceGroupName": "TestResourceGroup",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "title": "Gets the private link resources for cluster.",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "coordinator",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/privateLinkResources",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/privateLinkResources/coordinator",
+            "properties": {
+              "groupId": "coordinator",
+              "requiredMembers": [
+                "coordinator"
+              ],
+              "requiredZoneNames": [
+                "privatelink.testcluster.postgres.database.azure.com"
+              ]
+            },
+            "systemData": {
+              "createdAt": "2022-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2022-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "worker-0",
+            "type": "Microsoft.DBforPostgreSQL/serverGroupsv2/privateLinkResources",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestResourceGroup/providers/Microsoft.DBforPostgreSQL/serverGroupsv2/testcluster/privateLinkResources/worker-0",
+            "properties": {
+              "groupId": "worker-0",
+              "requiredMembers": [
+                "worker-0"
+              ],
+              "requiredZoneNames": [
+                "privatelink.testcluster.postgres.database.azure.com"
+              ]
+            },
+            "systemData": {
+              "createdAt": "2022-01-01T17:18:19.1234567Z",
+              "createdBy": "user1",
+              "createdByType": "User",
+              "lastModifiedAt": "2022-01-02T17:18:19.1234567Z",
+              "lastModifiedBy": "user2",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

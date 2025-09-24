@@ -6,7 +6,7 @@
 
 ## Write in Typespec
 
-Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file, you need to add `@@usage(EventGrid.YourEventName, Usage.output)` and `@@access(EventGrid.YourEventName, Access.public)`.
+Under the `Azure.Messaging.EventGrid.SystemEvents` folder find or create your service's `.tsp` file. This is where you will add your new event. For help with typespec conventions refer to [this doc](https://microsoft.github.io/typespec/) about typespec basics. Each new event will be represented as a typespec `model`. After you create your new event, in the `client.tsp` file, you need to add `@@usage(EventGrid.YourEventName, Usage.output | Usage.json)` and `@@access(EventGrid.YourEventName, Access.public)`.
 
 #### Example Event
 
@@ -23,13 +23,17 @@ model AcsChatMessageReceivedEventData {
 
   /** Optional. Field may not be present in some events. */
   optionalProperty ?: string;
+
+  /** Array properties must be decorated as read-only */
+  @visibility(Lifecycle.Read)
+  arrayProperty: string[]
 }
 ~~~
 
 Adding `@usage` and `@access` to `client.tsp`:
 ~~~ markdown
 
-@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.output);
+@@usage(EventGrid.AcsChatMessageReceivedEventData, Usage.output | Usage.json);
 @@access(EventGrid.AcsChatMessageReceivedEventData, Access.public)
 ~~~
 

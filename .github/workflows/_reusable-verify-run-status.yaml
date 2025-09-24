@@ -8,14 +8,18 @@ on:
         description: Name of the check run to verify
         required: true
         type: string
+      commit_status_name:
+        description: Name of the commit status to verify
+        type: string
       workflow_name:
         description: Name of the workflow to verify
-        required: true
         type: string
 
 permissions:
+  actions: read
   checks: read
   contents: read
+  statuses: read
 
 jobs:
   check-run-status:
@@ -27,7 +31,6 @@ jobs:
       (github.event_name == 'check_suite' && github.event.check_suite.app.name == 'openapi-pipeline-app') || 
       (github.event_name == 'check_run' && github.event.check_run.name == inputs.check_run_name)
     runs-on: ubuntu-24.04
-
     steps:
       - uses: actions/checkout@v4
         with:
@@ -42,4 +45,5 @@ jobs:
             return await verifyRunStatus({ github, context, core });
         env:
           CHECK_RUN_NAME: ${{ inputs.check_run_name }}
+          COMMIT_STATUS_NAME: ${{ inputs.commit_status_name }}
           WORKFLOW_NAME: ${{ inputs.workflow_name }}

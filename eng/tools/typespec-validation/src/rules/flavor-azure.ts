@@ -18,7 +18,7 @@ export class FlavorAzureRule implements Rule {
 
     const options = config?.options;
     for (const emitter in options) {
-      if (this.isClientEmitter(emitter)) {
+      if (this.requiresAzureFlavor(emitter)) {
         const flavor = options[emitter]?.flavor;
 
         stdOutput += `"${emitter}":\n`;
@@ -43,7 +43,12 @@ export class FlavorAzureRule implements Rule {
     };
   }
 
-  isClientEmitter(name: string): boolean {
+  requiresAzureFlavor(name: string): boolean {
+    if (name === "@typespec/http-client-csharp") {
+      // C# emitters do not require flavor:azure. Instead, there
+      // is a separate emitter for Azure - @azure-typespec/http-client-csharp
+      return false;
+    }
     const regex = new RegExp(
       "^(@azure-tools/typespec-(csharp|java|python|ts)|@typespec/http-client-.+)$",
     );

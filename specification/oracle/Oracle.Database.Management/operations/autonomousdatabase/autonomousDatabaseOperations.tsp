@@ -94,6 +94,15 @@ interface AutonomousDatabases
     DisasterRecoveryConfigurationDetails,
     AutonomousDatabase
   >;
+
+  //OCI Lifecycle Action - Configuration API doc: https://docs.oracle.com/en-us/iaas/api/#/en/database/20160918/AutonomousDatabase/{Start/Stop/Restart}AutonomousDatabase
+  @added(Versions.v20250601_preview)
+  @doc("Perform Lifecycle Management Action on Autonomous Database")
+  action is ArmResourceActionAsync<
+    AutonomousDatabase,
+    AutonomousDatabaseLifecycleAction,
+    AutonomousDatabase
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "TODO FIX - DO NOT COPY - BAD PATTERN"

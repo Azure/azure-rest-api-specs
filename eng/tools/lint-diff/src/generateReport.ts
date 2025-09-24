@@ -1,16 +1,21 @@
+import { kebabCase } from "change-case";
 import { writeFile } from "node:fs/promises";
 import { relative } from "node:path";
-import { kebabCase } from "change-case";
-import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
-import { getPathToDependency, getDependencyVersion, relativizePath } from "./util.js";
 import { getViolations } from "./correlateResults.js";
-import { isFailure, isWarning } from "./util.js";
 import {
-  AutorestRunResult,
   AutoRestMessage,
+  AutorestRunResult,
   BeforeAfter,
   LintDiffViolation,
 } from "./lintdiff-types.js";
+import { getRelatedArmRpcFromDoc } from "./markdown-utils.js";
+import {
+  getDependencyVersion,
+  getPathToDependency,
+  isFailure,
+  isWarning,
+  relativizePath,
+} from "./util.js";
 
 const LIMIT_50_MESSAGE = "Only 50 items are listed, please refer to log for more details.";
 
@@ -44,10 +49,17 @@ export async function generateLintDiffReport(
     const afterPath = getPath(after);
     const beforePath = before ? getPath(before) : "";
 
-    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(githubRepoPath, compareSha, afterPath)}) | [${beforeName}](${getFileLink(githubRepoPath, baseBranch, beforePath)}) |\n`;
+    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(githubRepoPath, compareSha, afterPath)}) | [${beforeName}](${getFileLink(githubRepoPath, baseBranch, beforePath)}) ${getAutoRestFailedMessage(before)}|\n`;
   }
 
   outputMarkdown += `\n\n`;
+
+  for (const [, { before }] of runCorrelations.entries()) {
+    if (before && before.error) {
+      outputMarkdown += `> [!WARNING]\n`;
+      outputMarkdown += `> Autorest failed checking before state of ${relative(before.rootPath, before.readme.path)} ${before.tag}\n\n`;
+    }
+  }
 
   const [newViolations, existingViolations] = getViolations(runCorrelations, affectedSwaggers);
 
@@ -277,4 +289,11 @@ export function getPath(result: AutorestRunResult) {
   const { rootPath, readme, tag } = result;
   const readmePathRelative = relative(rootPath, readme.path);
   return tag ? `${readmePathRelative}#tag-${tag}` : readmePathRelative;
+}
+
+export function getAutoRestFailedMessage(result: AutorestRunResult | null): string {
+  if (result?.error) {
+    return "Autorest Failed";
+  }
+  return "";
 }

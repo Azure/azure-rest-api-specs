@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/Models.tsp";
 import "../Common/Enums.tsp";
-import "../../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../Common/ArmModels/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;

@@ -8,4 +8,9 @@ module-name: sdk/resourcemanager/alertsmanagement/armalertsmanagement
 module: github.com/Azure/azure-sdk-for-go/$(module-name)
 output-folder: $(go-sdk-folder)/$(module-name)
 azure-arm: true
+
+directive:
+- rename-model:
+    from: 'AlertsManagementErrorResponse'
+    to: 'ErrorResponseForAlertsManagement'
 ```

@@ -12,6 +12,7 @@ using TypeSpec.Versioning;
 namespace AzureHealthInsights;
 
 @TypeSpec.Versioning.added(AzureHealthInsights.ApiVersion.v2024_08_01_preview)
+@TypeSpec.Versioning.removed(AzureHealthInsights.ApiVersion.v2024_10_01)
 interface TrialMatcher {
   @summary("Get Trial Matcher job details")
   @tag("TrialMatcher")

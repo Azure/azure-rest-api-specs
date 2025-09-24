@@ -5,6 +5,7 @@ import { access, readFile } from "fs/promises";
 import defaultPath, { join, PlatformPath } from "path";
 import { simpleGit } from "simple-git";
 import { getSuppressions as getSuppressionsImpl, Suppression } from "suppressions";
+import { context } from "./index.js";
 
 // Enable simple-git debug logging to improve console output
 debug.enable("simple-git");
@@ -41,7 +42,7 @@ export async function readTspConfig(folder: string) {
 }
 
 export async function getSuppressions(path: string): Promise<Suppression[]> {
-  return getSuppressionsImpl("TypeSpecValidation", path);
+  return getSuppressionsImpl("TypeSpecValidation", path, context);
 }
 
 export function normalizePath(folder: string, path: PlatformPath = defaultPath) {

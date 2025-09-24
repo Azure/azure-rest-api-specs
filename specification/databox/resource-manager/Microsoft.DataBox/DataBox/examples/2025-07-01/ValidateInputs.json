@@ -1,0 +1,167 @@
+{
+  "parameters": {
+    "Accept-Language": [
+      "en-US"
+    ],
+    "Content-Length": [
+      "1675"
+    ],
+    "Content-Type": [
+      "application/json; charset=utf-8"
+    ],
+    "User-Agent": [
+      "vscode-restclient"
+    ],
+    "api-version": "2025-07-01",
+    "location": "westus",
+    "subscriptionId": "YourSubscriptionId",
+    "validationRequest": {
+      "individualRequestDetails": [
+        {
+          "dataImportDetails": [
+            {
+              "accountDetails": {
+                "dataAccountType": "StorageAccount",
+                "storageAccountId": "/subscriptions/YourSubscriptionId/resourcegroups/YourResourceGroupName/providers/Microsoft.Storage/storageAccounts/YourStorageAccountName"
+              }
+            }
+          ],
+          "deviceType": "DataBox",
+          "model": "DataBox",
+          "transferType": "ImportToAzure",
+          "validationType": "ValidateDataTransferDetails"
+        },
+        {
+          "deviceType": "DataBox",
+          "model": "DataBox",
+          "shippingAddress": {
+            "addressType": "Commercial",
+            "city": "XXXX XXXX",
+            "companyName": "XXXX XXXX",
+            "country": "XX",
+            "postalCode": "00000",
+            "stateOrProvince": "XX",
+            "streetAddress1": "XXXX XXXX",
+            "streetAddress2": "XXXX XXXX"
+          },
+          "transportPreferences": {
+            "preferredShipmentType": "MicrosoftManaged"
+          },
+          "validationType": "ValidateAddress"
+        },
+        {
+          "validationType": "ValidateSubscriptionIsAllowedToCreateJob"
+        },
+        {
+          "country": "XX",
+          "deviceType": "DataBox",
+          "location": "westus",
+          "model": "DataBox",
+          "transferType": "ImportToAzure",
+          "validationType": "ValidateSkuAvailability"
+        },
+        {
+          "deviceType": "DataBox",
+          "model": "DataBox",
+          "validationType": "ValidateCreateOrderLimit"
+        },
+        {
+          "deviceType": "DataBox",
+          "model": "DataBox",
+          "preference": {
+            "transportPreferences": {
+              "preferredShipmentType": "MicrosoftManaged"
+            }
+          },
+          "validationType": "ValidatePreferences"
+        }
+      ],
+      "validationCategory": "JobCreationValidation"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "individualResponseDetails": [
+            {
+              "error": {
+                "additionalInfo": [],
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateDataTransferDetails"
+            },
+            {
+              "alternateAddresses": [
+                {
+                  "addressType": "None",
+                  "city": "XXXX XXXX",
+                  "country": "XX",
+                  "postalCode": "00000",
+                  "stateOrProvince": "XX",
+                  "streetAddress1": "XXXX XXXX",
+                  "streetAddress2": "XXXX XXXX",
+                  "streetAddress3": ""
+                }
+              ],
+              "error": {
+                "additionalInfo": [],
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": []
+              },
+              "validationStatus": "Valid",
+              "validationType": "ValidateAddress"
+            },
+            {
+              "error": {
+                "additionalInfo": [],
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateSubscriptionIsAllowedToCreateJob"
+            },
+            {
+              "error": {
+                "additionalInfo": [],
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateSkuAvailability"
+            },
+            {
+              "error": {
+                "additionalInfo": [],
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidateCreateOrderLimit"
+            },
+            {
+              "error": {
+                "additionalInfo": [],
+                "code": "Success",
+                "target": "KeyEncryptionKey",
+                "details": []
+              },
+              "status": "Valid",
+              "validationType": "ValidatePreferences"
+            }
+          ],
+          "status": "AllValidToProceed"
+        }
+      }
+    }
+  },
+  "operationId": "Service_ValidateInputs",
+  "title": "ValidateInputs"
+}

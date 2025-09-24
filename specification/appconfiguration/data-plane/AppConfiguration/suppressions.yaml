@@ -1,0 +1,18 @@
+# Suppressions for AppConfiguration data-plane service
+# These suppressions are for swagger versions that don't exist in TypeSpec
+
+- tool: TypeSpecRequirement
+  path: ./stable/1.0/*.json
+  reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecRequirement
+  path: ./stable/2023-10-01/*.json
+  reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecRequirement
+  path: ./preview/2022-11-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+
+- tool: TypeSpecRequirement
+  path: ./preview/2023-05-01-preview/*.json
+  reason: Brownfield service not ready to migrate

@@ -1,5 +1,5 @@
 import "../../Enums/Enums.tsp";
-import "../../../Common/StandardizedContracts/AssessmentProperties.tsp";
+import "../../Common/StandardizedContracts/AssessmentProperties.tsp";
 
 namespace Microsoft.Migrate;
 

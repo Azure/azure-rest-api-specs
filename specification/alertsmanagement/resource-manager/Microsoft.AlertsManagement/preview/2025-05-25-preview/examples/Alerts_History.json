@@ -1,0 +1,90 @@
+{
+  "parameters": {
+    "api-version": "2025-05-25-preview",
+    "scope": "subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a",
+    "alertId": "66114d64-d9d9-478b-95c9-b789d6502100"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/resourceGroups/someResourceGroup/providers/Microsoft.AlertsManagement/alerts/66114d64-d9d9-478b-95c9-b789d6502100",
+        "type": "Microsoft.AlertsManagement/alerts",
+        "name": "CPU Alert",
+        "properties": {
+          "alertId": "66114d64-d9d9-478b-95c9-b789d6502100",
+          "modifications": [
+            {
+              "modificationEvent": "AlertCreated",
+              "modifiedAt": "2018-06-13T06:09:01Z",
+              "modifiedBy": "System",
+              "description": "New Alert Object is created",
+              "oldValue": "",
+              "newValue": "",
+              "comments": "",
+              "details": null
+            },
+            {
+              "modificationEvent": "StateChange",
+              "modifiedAt": "2018-06-13T06:14:15.7378737Z",
+              "modifiedBy": "vikramm@microsoft.com",
+              "description": "State changed from 'New' to 'Acknowledged'",
+              "oldValue": "Fired",
+              "newValue": "Resolved",
+              "comments": "The alert has been resolved",
+              "details": {
+                "type": "PropertyChange",
+                "oldValue": "Fired",
+                "newValue": "Resolved",
+                "comment": "The alert has been resolved"
+              }
+            },
+            {
+              "modificationEvent": "ActionsTriggered",
+              "modifiedAt": "2018-06-13T06:09:01Z",
+              "modifiedBy": "System",
+              "description": "New Alert Object is created",
+              "oldValue": "",
+              "newValue": "",
+              "comments": "",
+              "details": {
+                "type": "ActionsTriggered",
+                "actionGroup": {
+                  "actionGroupId": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/resourceGroups/rg1/providers/Microsoft.Insights/actionGroups/actionGroup1",
+                  "ruleId": "RuleId1",
+                  "ruleType": "AlertRule"
+                },
+                "notificationResult": {
+                  "status": "Accepted",
+                  "statusURL": "https://management.azure.com/subscriptions/2a784a95-81bd-41c8-ba8a-362d1098a2b9/resourceGroups/AzNSTest/providers/microsoft.insights/actionGroups/ag2/notificationStatus/00000000000?api-version=2021-09-01"
+                }
+              }
+            },
+            {
+              "modificationEvent": "ActionsSuppressed",
+              "modifiedAt": "2018-06-13T06:09:01Z",
+              "modifiedBy": "System",
+              "description": "New Alert Object is created",
+              "oldValue": "",
+              "newValue": "",
+              "comments": "",
+              "details": {
+                "type": "ActionsSuppressed",
+                "suppressionActionRules": [
+                  "ActionRule 1",
+                  "ActionRule 2"
+                ],
+                "suppressedActionGroups": [
+                  {
+                    "actionGroupId": "/subscriptions/9e261de7-c804-4b9d-9ebf-6f50fe350a9a/resourceGroups/rg1/providers/Microsoft.Insights/actionGroups/actionGroup1",
+                    "ruleId": "RuleId1",
+                    "ruleType": "AlertRule"
+                  }
+                ]
+              }
+            }
+          ]
+        }
+      }
+    }
+  }
+}

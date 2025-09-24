@@ -5222,7 +5222,10 @@
           "$ref": "#/definitions/RaiMonitorConfig"
         },
         "networkInjections": {
-          "$ref": "#/definitions/NetworkInjections"
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NetworkInjection"
+          }
         },
         "allowProjectManagement": {
           "type": "boolean",
@@ -8810,7 +8813,7 @@
       },
       "additionalProperties": false
     },
-    "NetworkInjections": {
+    "NetworkInjection": {
       "description": "Specifies in AI Foundry where virtual network injection occurs to secure scenarios like Agents entirely within the user's private network, eliminating public internet exposure while maintaining control over network configurations and resources.",
       "type": "object",
       "properties": {

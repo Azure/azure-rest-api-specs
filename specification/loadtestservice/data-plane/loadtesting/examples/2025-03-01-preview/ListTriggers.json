@@ -1,0 +1,62 @@
+{
+  "operationId": "TriggerAdministration_ListTrigger",
+  "title": "Get all triggers for the specified filters.",
+  "parameters": {
+    "maxPageSize": 30,
+    "lastModifiedStartTime": "2024-05-01T16:00:46.072Z",
+    "lastModifiedEndTime": "2024-05-01T16:50:46.072Z",
+    "api-version": "2025-03-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "testIds": [
+              "12345678-1234-1234-1234-123456789012"
+            ],
+            "description": "sample description",
+            "displayName": "Sample_Trigger1",
+            "triggerId": "12345678-1234-1234-1234-123456789012",
+            "state": "Active",
+            "kind": "ScheduleTestsTrigger",
+            "recurrence": {
+              "interval": 1,
+              "frequency": "Daily",
+              "recurrenceEnd": {
+                "numberOfOccurrences": 10
+              }
+            },
+            "startDateTime": "2024-05-01T00:00:00Z",
+            "createdDateTime": "2024-05-01T16:43:46.072Z",
+            "createdBy": "user@contoso.com",
+            "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+            "lastModifiedBy": "user@contoso.com"
+          },
+          {
+            "testIds": [
+              "12345678-1234-1234-1234-123456789013"
+            ],
+            "description": "sample description",
+            "displayName": "Sample_Trigger2",
+            "triggerId": "12345678-1234-1234-1234-123456789012",
+            "state": "Paused",
+            "kind": "ScheduleTestsTrigger",
+            "recurrence": {
+              "interval": 1,
+              "frequency": "Hourly",
+              "recurrenceEnd": {
+                "numberOfOccurrences": 50
+              }
+            },
+            "startDateTime": "2024-05-01T00:00:00Z",
+            "createdDateTime": "2024-05-01T16:43:46.072Z",
+            "createdBy": "user@contoso.com",
+            "lastModifiedDateTime": "2024-05-01T16:43:46.072Z",
+            "lastModifiedBy": "user@contoso.com"
+          }
+        ]
+      }
+    }
+  }
+}

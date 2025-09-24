@@ -1,0 +1,26 @@
+{
+  "title": "Find Similar among Face IDs",
+  "operationId": "FaceRecognitionOperations_FindSimilar",
+  "parameters": {
+    "apiVersion": "v1.3-preview.1",
+    "body": {
+      "faceId": "c5c24a82-6845-4031-9d5d-978df9175426",
+      "maxNumOfCandidatesReturned": 3,
+      "mode": "matchPerson",
+      "faceIds": [
+        "015839fb-fbd9-4f79-ace9-7675fc2f1dd9",
+        "be386ab3-af91-4104-9e6d-4dae4c9fddb7"
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": [
+        {
+          "confidence": 0.9,
+          "faceId": "015839fb-fbd9-4f79-ace9-7675fc2f1dd9"
+        }
+      ]
+    }
+  }
+}

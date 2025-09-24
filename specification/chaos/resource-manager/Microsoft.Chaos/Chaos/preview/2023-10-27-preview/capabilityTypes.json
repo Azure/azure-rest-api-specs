@@ -1,0 +1,131 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Chaos Management",
+    "description": "Azure Chaos Resource Provider REST API",
+    "version": "2023-10-27-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{locationName}/targetTypes/{targetTypeName}/capabilityTypes": {
+      "get": {
+        "description": "Get a list of Capability Type resources for given Target Type and location.",
+        "tags": [
+          "CapabilityTypes"
+        ],
+        "operationId": "CapabilityTypes_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/locationName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetTypeName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Capability Type resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/capabilityTypes.json#/definitions/capabilityTypeListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all Capability Types for a virtual machine Target resource on westus2 location.": {
+            "$ref": "./examples/ListCapabilityTypes.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/locations/{locationName}/targetTypes/{targetTypeName}/capabilityTypes/{capabilityTypeName}": {
+      "get": {
+        "description": "Get a Capability Type resource for given Target Type and location.",
+        "tags": [
+          "Capabilities"
+        ],
+        "operationId": "CapabilityTypes_Get",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/locationName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/targetTypeName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/capabilityTypeName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Capability Type resource returned if request was successful.",
+            "schema": {
+              "$ref": "./types/capabilityTypes.json#/definitions/capabilityType"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a Capability Type for a virtual machine Target resource on westus2 location.": {
+            "$ref": "./examples/GetCapabilityType.json"
+          }
+        }
+      }
+    }
+  }
+}

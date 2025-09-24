@@ -1,0 +1,193 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-02-01",
+    "title": "Azure Log Analytics Network Security Perimeter APIs",
+    "description": "Provides NSP operations for working with Log Analytics."
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a list of NSP configurations for specified workspace.",
+        "operationId": "Workspaces_ListNSP",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the list of configs.",
+            "schema": {
+              "$ref": "./networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfigurationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List NSP configs by Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}": {
+      "get": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Gets a network security perimeter configuration.",
+        "operationId": "Workspaces_GetNSP",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved the config.",
+            "schema": {
+              "$ref": "./networksecurityperimeter.json#/definitions/NetworkSecurityPerimeterConfiguration"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get NSP config by name for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/networkSecurityPerimeterConfigurations/{networkSecurityPerimeterConfigurationName}/reconcile": {
+      "post": {
+        "tags": [
+          "NetworkSecurityPerimeterConfigurations"
+        ],
+        "description": "Reconcile network security perimeter configuration for Workspace resource.",
+        "operationId": "Workspaces_ReconcileNSP",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../common/v1/types.json#/parameters/WorkspaceNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/NetworkSecurityPerimeterConfigurationNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Request to reconcile the association accepted.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Reconcile NSP config for Scheduled Query Rule": {
+            "$ref": "./examples/NSPForWorkspaces_Reconcile.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {},
+  "parameters": {
+    "NetworkSecurityPerimeterConfigurationNameParameter": {
+      "name": "networkSecurityPerimeterConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "minLength": 1,
+      "maxLength": 512,
+      "x-ms-parameter-location": "method",
+      "description": "The name for a network security perimeter configuration"
+    }
+  }
+}

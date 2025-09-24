@@ -34,7 +34,6 @@ namespace Azure.Monitor.LiveMetrics;
 
 @doc("Live Metrics service versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2024-04-01-preview version of the Live Metrics service.")
   v2024_04_01_preview: "2024-04-01-preview",
 }

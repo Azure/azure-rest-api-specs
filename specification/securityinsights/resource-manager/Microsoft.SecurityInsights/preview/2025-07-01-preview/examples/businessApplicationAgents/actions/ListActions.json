@@ -1,0 +1,40 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "subscriptionId": "d0cfe6b2-9ac0-4464-9919-dccaee2e48c0",
+    "resourceGroupName": "myRg",
+    "workspaceName": "myWorkspace",
+    "agentResourceName": "247b377a-7137-4b3c-bf15-df1d3260ef1b",
+    "systemResourceName": "3d69632b-0b60-4af3-8720-77f01a25d34a"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "kind": "UnlockUser",
+            "actionId": "e85000a3-de69-41a4-b347-c6b823e6ec79",
+            "status": "Pending",
+            "user": "someuser@someorg.com",
+            "lastModifiedTimeUtc": "2023-07-01T00:00:00Z"
+          },
+          {
+            "kind": "LockUser",
+            "actionId": "56b70fa0-9afd-4916-9ab9-e79de3e24add",
+            "status": "Pending",
+            "user": "someuser1@someorg.com",
+            "lastModifiedTimeUtc": "2024-02-01T00:00:00Z"
+          },
+          {
+            "kind": "LockUser",
+            "actionId": "56b70fa0-9afd-4916-9ab9-e79de3e24add",
+            "status": "Failed",
+            "user": "someuser1@someorg.com",
+            "lastModifiedTimeUtc": "2024-02-01T00:00:00Z",
+            "failureReason": "Some reason for failure"
+          }
+        ]
+      }
+    }
+  }
+}

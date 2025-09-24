@@ -1,0 +1,47 @@
+{
+  "parameters": {
+    "api-version": "2025-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "managedNamespaceName": "namespace1",
+    "parameters": {
+      "tags": {
+        "tagKey1": "tagValue1",
+        "tagKey2": "tagValue2"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "tagKey1": "tagValue1",
+          "tagKey2": "tagValue2"
+        },
+        "location": "eastus2",
+        "properties": {
+          "labels": {
+            "kubernetes.azure.com/managedByArm": "true"
+          },
+          "annotations": {
+            "annatationKey": "annatationValue"
+          },
+          "provisioningState": "Succeeded",
+          "defaultResourceQuota": {
+            "cpuRequest": "3m",
+            "cpuLimit": "3m",
+            "memoryRequest": "5Gi",
+            "memoryLimit": "5Gi"
+          },
+          "defaultNetworkPolicy": {
+            "ingress": "AllowSameNamespace",
+            "egress": "AllowAll"
+          },
+          "adoptionPolicy": "IfIdentical",
+          "deletePolicy": "Keep"
+        }
+      }
+    }
+  }
+}

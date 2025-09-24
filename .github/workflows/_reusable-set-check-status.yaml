@@ -1,0 +1,83 @@
+# Prefix with "~" to sort last in Actions list
+name: ~Templates - Set Run Status
+
+on:
+  workflow_call:
+    inputs:
+      monitored_workflow_name:
+        description: Name of the workflow to monitor
+        required: true
+        type: string
+      required_check_name:
+        description: Name of the required check to update
+        required: true
+        type: string
+      overriding_label:
+        description: Comma-separated list of labels that, when any is set, causes the check to always pass
+        required: true
+        type: string
+
+permissions:
+  actions: read
+  contents: read
+  issues: read
+  pull-requests: read
+  statuses: write
+
+jobs:
+  set-status:
+    name: "${{ inputs.required_check_name }} - Set Status"
+
+    if: |
+      github.event_name == 'workflow_run' ||
+      (github.event_name == 'pull_request_target' &&
+       ((github.event.action == 'opened' ||
+         github.event.action == 'synchronize' ||
+         github.event.action == 'reopened') ||
+        ((github.event.action == 'labeled' || github.event.action == 'unlabeled') &&
+         inputs.overriding_label && contains(inputs.overriding_label, github.event.label.name))))
+
+    runs-on: ubuntu-24.04
+
+    steps:
+      # *** IMPORTANT ***
+      # For workflows that are triggered by the pull_request_target event, the workflow runs in the
+      # context of the base of the pull request.  You should make sure that you do not check out,
+      # build, or run untrusted code from the head of the pull request.
+      - uses: actions/checkout@v4
+        with:
+          # Only needs .github folder for automation, not the files in the PR (analyzed in a
+          # separate workflow).
+          #
+          # Uses the .github folder from the PR base branch (pull_request_target trigger),
+          # or the repo default branch (other triggers).
+          sparse-checkout: |
+            .github
+
+      - name: "Set Status"
+        uses: actions/github-script@v7
+        id: set-status
+        with:
+          script: |
+            const { default: setStatus } =
+                await import('${{ github.workspace }}/.github/workflows/src/set-status.js');
+            return await setStatus(
+              { github, context, core },
+              '${{ inputs.monitored_workflow_name }}',
+              '${{ inputs.required_check_name }}',
+              '${{ inputs.overriding_label }}'
+            );
+
+      - if: ${{ always() && steps.set-status.outputs.head_sha }}
+        name: Upload artifact with head SHA
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: head-sha
+          value: ${{ steps.set-status.outputs.head_sha }}
+
+      - if: ${{ always() && steps.set-status.outputs.issue_number }}
+        name: Upload artifact with issue number
+        uses: ./.github/actions/add-empty-artifact
+        with:
+          name: issue-number
+          value: ${{ steps.set-status.outputs.issue_number }}

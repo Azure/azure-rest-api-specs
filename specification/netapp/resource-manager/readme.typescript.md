@@ -10,4 +10,49 @@ typescript:
   payload-flattening-threshold: 2
   output-folder: "$(typescript-sdks-folder)/sdk/netapp/arm-netapp"
   generate-metadata: true
+
+directive:
+- from: swagger-document
+  where: $.definitions.replicationObject.properties.replicationSchedule
+  transform: >
+    $['x-ms-enum'] = {
+        "name": "ReplicationSchedule",
+        "modelAsString": true,
+        "values": [
+          {
+              "value": "_10minutely",
+              "name": "TenMinutely"
+          },
+          {
+              "value": "hourly",
+              "name": "Hourly"
+          },
+          {
+              "value": "daily",
+              "name": "Daily"
+          }
+        ]
+      };
+
+- from: swagger-document
+  where: $.definitions.replication.properties.replicationSchedule
+  transform: >
+    $['x-ms-enum'] = {
+        "name": "ReplicationSchedule",
+        "modelAsString": true,
+        "values": [
+          {
+              "value": "_10minutely",
+              "name": "TenMinutely"
+          },
+          {
+              "value": "hourly",
+              "name": "Hourly"
+          },
+          {
+              "value": "daily",
+              "name": "Daily"
+          }
+        ]
+      };
 ```

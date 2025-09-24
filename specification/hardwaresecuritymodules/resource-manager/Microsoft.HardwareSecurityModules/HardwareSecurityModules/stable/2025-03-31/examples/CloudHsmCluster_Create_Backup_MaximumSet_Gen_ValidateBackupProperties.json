@@ -1,0 +1,34 @@
+{
+  "operationId": "CloudHsmClusters_ValidateBackupProperties",
+  "parameters": {
+    "api-version": "2025-03-31",
+    "body": {
+      "azureStorageBlobContainerUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+      "token": "se=2018-02-01T00%3A00Z&spr=https&sv=2017-04-17&sr=b&sig=REDACTED"
+    },
+    "cloudHsmClusterName": "chsm1",
+    "resourceGroupName": "rgcloudhsm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "CloudHsmCluster_ValidateBackup_Validation_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "azureStorageBlobContainerUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+          "endTime": "2022-09-12T12:00:00.0000000Z",
+          "jobId": "572a45927fc240e1ac075de27371680b",
+          "startTime": "2022-09-12T12:00:00.0000000Z",
+          "status": "InProgress",
+          "statusDetails": "Backup operation is in progress"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/chsm1?api-version=2022-03-31&operation=abJjb2RkIjoiAGVsZXRlTWFuYWdlZEhzbUFzeW5jYm9",
+        "Retry-After": 5
+      }
+    }
+  }
+}

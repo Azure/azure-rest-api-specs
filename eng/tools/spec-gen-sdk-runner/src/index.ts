@@ -1,12 +1,12 @@
-import { exit } from "node:process";
-import path from "node:path";
 import { existsSync, mkdirSync } from "node:fs";
-import { getArgumentValue } from "./utils.js";
+import path from "node:path";
+import { exit } from "node:process";
 import {
   generateSdkForBatchSpecs,
   generateSdkForSingleSpec,
   generateSdkForSpecPr,
 } from "./commands.js";
+import { getArgumentValue } from "./utils.js";
 
 export async function main() {
   // Get the arguments passed to the script

@@ -19,7 +19,6 @@ namespace Microsoft.ManufacturingPlatform;
 @doc("Supported API versions for the Microsoft.ManufacturingPlatform resource provider.")
 enum Versions {
   @doc("The 2025-03-01 version.")
-  @Versioning.useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_03_01: "2025-03-01",
 }
 
@@ -381,6 +380,7 @@ interface ManufacturingDataServices {
   createOrUpdate is ArmResourceCreateOrUpdateAsync<MdsResource>;
   // update is ArmResourcePatchAsync<MdsResource, MdsResourceProperties>;
   //temporary fix until typespec fix the issue of generating update classes
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     MdsResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

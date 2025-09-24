@@ -1,8 +1,8 @@
-import { spawn, spawnSync, exec } from "node:child_process";
-import path from "node:path";
+import { exec, spawn, spawnSync } from "node:child_process";
 import fs from "node:fs";
-import { LogLevel, logMessage } from "./log.js";
+import path from "node:path";
 import { promisify } from "node:util";
+import { LogLevel, logMessage } from "./log.js";
 
 type Dirent = fs.Dirent;
 
@@ -177,8 +177,9 @@ export function getChangedFiles(
   specRepoPath: string,
   baseCommitish: string = "HEAD^",
   targetCommitish: string = "HEAD",
-  diffFilter: string = "d",
 ): string[] | undefined {
+  // set diff filter to include added, copied, modified, deleted, renamed, and type changed files
+  const diffFilter = "ACMDRT";
   const scriptPath = path.resolve(specRepoPath, "eng/scripts/ChangedFiles-Functions.ps1");
   const args = [
     "-Command",

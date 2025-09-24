@@ -1,0 +1,23 @@
+{
+  "parameters": {
+    "name": "{diskName}",
+    "api-version": "2018-09-15",
+    "attachDiskProperties": {
+      "leasedByLabVmId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/virtualmachines/{vmName}"
+    },
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "userName": "{userId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "Disks_Attach",
+  "title": "Disks_Attach"
+}

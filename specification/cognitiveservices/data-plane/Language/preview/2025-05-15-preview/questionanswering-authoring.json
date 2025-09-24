@@ -1148,8 +1148,7 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/UpdateSourceRecord"
-              },
-              "x-ms-identifiers": []
+              }
             }
           }
         ],
@@ -1405,6 +1404,179 @@
       }
     }
   },
+  "x-ms-paths": {
+    "/authoring/query-knowledgebases/projects/{projectName}/:import?_overload=importFromFiles": {
+      "post": {
+        "operationId": "QuestionAnsweringProjects_ImportFromFiles",
+        "description": "Import project assets from file.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "assetKind",
+            "in": "query",
+            "description": "Kind of the asset of the project.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "qnas",
+              "synonyms"
+            ],
+            "x-ms-enum": {
+              "name": "AssestKind",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "qnas",
+                  "value": "qnas",
+                  "description": "Question and Answers."
+                },
+                {
+                  "name": "synonyms",
+                  "value": "synonyms",
+                  "description": "Synonyms."
+                }
+              ]
+            }
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Collection of files where the fileName is required.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create project from file": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulImportProjectFromFile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/authoring/query-knowledgebases/projects/{projectName}/sources?_overload=updateSourcesFromFiles": {
+      "patch": {
+        "operationId": "QuestionAnsweringProjects_UpdateSourcesFromFiles",
+        "description": "Updates the sources of a project from files.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "projectName",
+            "in": "path",
+            "description": "The name of the project to use.",
+            "required": true,
+            "type": "string",
+            "maxLength": 100,
+            "pattern": "^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "files",
+            "in": "formData",
+            "description": "Collection of files where the fileName is required.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string",
+              "format": "binary"
+            }
+          },
+          {
+            "name": "fileOperations",
+            "in": "formData",
+            "description": "Collection of file operations to perform during update of sources.",
+            "required": true,
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update sources from files": {
+            "$ref": "./examples/questionanswering/authoring/SuccessfulUpdateSourcesFromFile.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
   "definitions": {
     "AcceptedResponse": {
       "type": "object",
@@ -1419,8 +1591,7 @@
           "description": "A list of Feedback Records for Active Learning.",
           "items": {
             "$ref": "#/definitions/FeedbackRecord"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -1462,8 +1633,7 @@
           "maxItems": 10000,
           "items": {
             "$ref": "#/definitions/WordAlterations"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "qnas": {
           "type": "array",
@@ -1495,8 +1665,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
@@ -1510,7 +1679,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1543,8 +1712,7 @@
           "description": "An array of details about specific errors that led to this reported error.",
           "items": {
             "$ref": "#/definitions/Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "innererror": {
           "$ref": "#/definitions/InnerErrorModel",
@@ -1723,7 +1891,7 @@
     },
     "ImportJobOptions": {
       "type": "object",
-      "description": "Project assets the needs to be imported.",
+      "description": "Project assets that need to be imported.",
       "properties": {
         "metadata": {
           "$ref": "#/definitions/QuestionAnsweringProjectMetadata",
@@ -1788,8 +1956,7 @@
           "description": "List of Active Learning suggestions for the QnA.",
           "items": {
             "$ref": "#/definitions/SuggestedQuestionsCluster"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "lastUpdatedDateTime": {
           "type": "string",
@@ -1960,8 +2127,7 @@
           "description": "The ProjectDeployment items on this page",
           "items": {
             "$ref": "#/definitions/ProjectDeployment"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -1982,8 +2148,7 @@
           "description": "The QnaSourceRecord items on this page",
           "items": {
             "$ref": "#/definitions/QnaSourceRecord"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2004,8 +2169,7 @@
           "description": "The QuestionAnsweringProjectMetadata items on this page",
           "items": {
             "$ref": "#/definitions/QuestionAnsweringProjectMetadata"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2047,8 +2211,7 @@
           "description": "The WordAlterations items on this page",
           "items": {
             "$ref": "#/definitions/WordAlterations"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2103,8 +2266,7 @@
           "maxItems": 20,
           "items": {
             "$ref": "#/definitions/QnaPrompt"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2182,8 +2344,7 @@
           "description": "List of Active Learning suggestions for the QnA.",
           "items": {
             "$ref": "#/definitions/SuggestedQuestionsCluster"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2336,8 +2497,7 @@
           "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "resultUrl": {
           "type": "string",
@@ -2385,8 +2545,7 @@
           "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2429,8 +2588,7 @@
           "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2473,8 +2631,7 @@
           "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2517,8 +2674,7 @@
           "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2561,8 +2717,7 @@
           "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2605,8 +2760,7 @@
           "description": "The errors encountered while executing the job.",
           "items": {
             "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          },
-          "x-ms-identifiers": []
+          }
         }
       },
       "required": [
@@ -2755,8 +2909,7 @@
           "description": "List of Active Learning suggestions for the QnA.",
           "items": {
             "$ref": "#/definitions/SuggestedQuestionsCluster"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "lastUpdatedDateTime": {
           "type": "string",
@@ -2813,8 +2966,7 @@
           "description": "List of all suggested questions for the QnA.",
           "items": {
             "$ref": "#/definitions/SuggestedQuestion"
-          },
-          "x-ms-identifiers": []
+          }
         }
       }
     },
@@ -2827,8 +2979,7 @@
           "description": "The WordAlterations items on this page",
           "items": {
             "$ref": "#/definitions/WordAlterations"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2845,8 +2996,7 @@
       "description": "A list of QnAs to be updated.",
       "items": {
         "$ref": "#/definitions/UpdateQnaRecord"
-      },
-      "x-ms-identifiers": []
+      }
     },
     "UpdateQnaRecord": {
       "type": "object",
@@ -2922,6 +3072,34 @@
         "source",
         "sourceUri",
         "sourceKind"
+      ]
+    },
+    "UpdateSourceFromFileOperationRecord": {
+      "type": "object",
+      "description": "A single file operation for updating sources for a project. Used to add, remove or replace a source from a knowledgebase.",
+      "properties": {
+        "operation": {
+          "$ref": "#/definitions/updateOperationKind",
+          "description": "Update operation type for assets."
+        },
+        "fileDisplayName": {
+          "type": "string",
+          "description": "Friendly name of the Source. If not provided, would be equal to fileSource",
+          "minLength": 1,
+          "maxLength": 200
+        },
+        "fileName": {
+          "type": "string",
+          "description": "This would be name of the file. This links to the fileName of the file being sent in multipart."
+        },
+        "refresh": {
+          "type": "boolean",
+          "description": "Bool value for refresh."
+        }
+      },
+      "required": [
+        "operation",
+        "fileName"
       ]
     },
     "UpdateSourceRecord": {

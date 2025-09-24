@@ -1,8 +1,8 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import {
-  getAzurePipelineArtifact,
-  getAdoBuildInfoFromUrl,
   fetchFailedArtifact,
+  getAdoBuildInfoFromUrl,
+  getAzurePipelineArtifact,
 } from "../src/artifacts.js";
 import { createMockCore } from "./mocks.js";
 
@@ -64,8 +64,7 @@ describe("getAzurePipelineArtifact function", () => {
       ok: true,
       json: vi.fn().mockResolvedValue({
         resource: {
-          downloadUrl:
-            "https://example.com/failed-artifact-download?format=zip",
+          downloadUrl: "https://example.com/failed-artifact-download?format=zip",
         },
       }),
       status: 200,
@@ -86,24 +85,15 @@ describe("getAzurePipelineArtifact function", () => {
       }
 
       // First attempted artifact request with 404
-      if (
-        url.includes(
-          `artifacts?artifactName=${inputs.artifactName}&api-version=7.0`,
-        )
-      ) {
+      if (url.includes(`artifacts?artifactName=${inputs.artifactName}&api-version=7.0`)) {
         return mockInitialResponse;
       }
       // List all artifacts request
-      else if (
-        url.includes("artifacts?api-version=7.0") &&
-        !url.includes("artifactName=")
-      ) {
+      else if (url.includes("artifacts?api-version=7.0") && !url.includes("artifactName=")) {
         return mockListResponse;
       }
       // Request for failed artifact
-      else if (
-        url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt1")
-      ) {
+      else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt1")) {
         return mockFailedArtifactResponse;
       }
       // Content download request
@@ -165,17 +155,11 @@ describe("getAzurePipelineArtifact function", () => {
     global.fetch.mockImplementation((url, options) => {
       if (url.includes("artifacts?artifactName=")) {
         // Verify headers contain Authorization
-        expect(options.headers).toHaveProperty(
-          "Authorization",
-          `Bearer ${testToken}`,
-        );
+        expect(options.headers).toHaveProperty("Authorization", `Bearer ${testToken}`);
         return mockArtifactResponse;
       } else {
         // Verify headers contain Authorization for the content download as well
-        expect(options.headers).toHaveProperty(
-          "Authorization",
-          `Bearer ${testToken}`,
-        );
+        expect(options.headers).toHaveProperty("Authorization", `Bearer ${testToken}`);
         return mockContentResponse;
       }
     });
@@ -287,8 +271,7 @@ describe("getAzurePipelineArtifact function", () => {
       ok: true,
       json: vi.fn().mockResolvedValue({
         resource: {
-          downloadUrl:
-            "https://example.com/failed-artifact-download?format=zip",
+          downloadUrl: "https://example.com/failed-artifact-download?format=zip",
         },
       }),
       status: 200,
@@ -308,24 +291,15 @@ describe("getAzurePipelineArtifact function", () => {
     // Setup fetch to return different responses based on the URL
     global.fetch.mockImplementation((url) => {
       // First attempted artifact request with 404
-      if (
-        url.includes(
-          `artifacts?artifactName=${inputs.artifactName}&api-version=7.0`,
-        )
-      ) {
+      if (url.includes(`artifacts?artifactName=${inputs.artifactName}&api-version=7.0`)) {
         return mockInitialResponse;
       }
       // List all artifacts request
-      else if (
-        url.includes("artifacts?api-version=7.0") &&
-        !url.includes("artifactName=")
-      ) {
+      else if (url.includes("artifacts?api-version=7.0") && !url.includes("artifactName=")) {
         return mockListResponse;
       }
       // Request for failed artifact - notice we use the first item from mockListResponse
-      else if (
-        url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt2")
-      ) {
+      else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt2")) {
         return mockFailedArtifactResponse;
       }
       // Content download request
@@ -531,8 +505,7 @@ describe("getAdoBuildInfoFromUrl function", () => {
   });
 
   it("should extract project URL and build ID from a valid URL", () => {
-    const buildUrl =
-      "https://dev.azure.com/azure-sdk/_build/results?buildId=12345&view=logs";
+    const buildUrl = "https://dev.azure.com/azure-sdk/_build/results?buildId=12345&view=logs";
     const result = getAdoBuildInfoFromUrl(buildUrl);
 
     expect(result).toEqual({
@@ -542,8 +515,7 @@ describe("getAdoBuildInfoFromUrl function", () => {
   });
 
   it("should extract build ID when it's not the first parameter", () => {
-    const buildUrl =
-      "https://dev.azure.com/azure-sdk/_build/results?view=logs&buildId=54321";
+    const buildUrl = "https://dev.azure.com/azure-sdk/_build/results?view=logs&buildId=54321";
     const result = getAdoBuildInfoFromUrl(buildUrl);
 
     expect(result).toEqual({
@@ -561,8 +533,7 @@ describe("getAdoBuildInfoFromUrl function", () => {
   });
 
   it("should throw error when buildId is missing", () => {
-    const invalidUrl =
-      "https://dev.azure.com/azure-sdk/_build/results?view=logs";
+    const invalidUrl = "https://dev.azure.com/azure-sdk/_build/results?view=logs";
 
     expect(() => {
       getAdoBuildInfoFromUrl(invalidUrl);
@@ -620,10 +591,7 @@ describe("fetchFailedArtifact function", () => {
       // Verify that the custom headers are included in all requests
       expect(options.headers).toEqual(customHeaders);
 
-      if (
-        url.includes("artifacts?api-version") &&
-        !url.includes("artifactName=")
-      ) {
+      if (url.includes("artifacts?api-version") && !url.includes("artifactName=")) {
         return mockListResponse;
       } else {
         return mockFetchResponse;
@@ -689,9 +657,7 @@ describe("fetchFailedArtifact function", () => {
     global.fetch.mockImplementation((url) => {
       if (url.includes("artifacts?api-version")) {
         return mockListResponse;
-      } else if (
-        url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt2")
-      ) {
+      } else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt2")) {
         return mockFetchResponse;
       }
     });
@@ -788,9 +754,7 @@ describe("fetchFailedArtifact function", () => {
     global.fetch.mockImplementation((url) => {
       if (url.includes("artifacts?api-version")) {
         return mockListResponse;
-      } else if (
-        url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt3")
-      ) {
+      } else if (url.includes("artifactName=spec-gen-sdk-artifact-FailedAttempt3")) {
         return mockFetchResponse;
       }
     });

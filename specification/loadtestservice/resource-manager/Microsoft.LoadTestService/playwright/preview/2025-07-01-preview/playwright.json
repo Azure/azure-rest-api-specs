@@ -3,7 +3,7 @@
   "info": {
     "title": "Playwright Service Management API",
     "version": "2025-07-01-preview",
-    "description": "Playwright service provides access to Playwright workspace resource and it's operations.",
+    "description": "Playwright Service Management API provides access to Playwright workspace resources and their operations through Azure Resource Manager.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -95,7 +95,7 @@
         "tags": [
           "PlaywrightWorkspaces"
         ],
-        "description": "Implements global CheckNameAvailability operations",
+        "description": "Checks if a Playwright workspace name is available globally.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -140,7 +140,7 @@
         "tags": [
           "PlaywrightQuotas"
         ],
-        "description": "List Playwright quota resources for a given subscription Id.",
+        "description": "Lists Playwright quota resources for a given subscription ID.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -182,7 +182,7 @@
         "tags": [
           "PlaywrightQuotas"
         ],
-        "description": "Get subscription-level location-based Playwright quota resource by name.",
+        "description": "Gets a subscription-level location-based Playwright quota resource by name.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -443,7 +443,7 @@
         "tags": [
           "PlaywrightWorkspaces"
         ],
-        "description": "Update a PlaywrightWorkspace",
+        "description": "Updates a Playwright workspace resource synchronously.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -497,7 +497,7 @@
         "tags": [
           "PlaywrightWorkspaces"
         ],
-        "description": "Delete a PlaywrightWorkspace",
+        "description": "Deletes a Playwright workspace resource asynchronously.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -559,7 +559,7 @@
         "tags": [
           "PlaywrightWorkspaceQuotas"
         ],
-        "description": "List quota resources for a given Playwright workspace resource.",
+        "description": "Lists quota resources for a given Playwright workspace.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -609,7 +609,7 @@
         "tags": [
           "PlaywrightWorkspaceQuotas"
         ],
-        "description": "Get Playwright workspace quota resource by name.",
+        "description": "Gets a Playwright workspace quota resource by name.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -687,28 +687,31 @@
           {
             "name": "Enabled",
             "value": "Enabled",
-            "description": "The feature is Enabled."
+            "description": "The feature is enabled."
           },
           {
             "name": "Disabled",
             "value": "Disabled",
-            "description": "The feature is Disabled."
+            "description": "The feature is disabled."
           }
         ]
       }
     },
     "FreeTrialProperties": {
       "type": "object",
-      "description": "Subscription-level location-based Playwright quota resource free-trial properties.",
+      "description": "Subscription-level location-based Playwright quota free trial properties.",
       "properties": {
         "workspaceId": {
           "type": "string",
-          "description": "Playwright workspace-id that has free-trial in the subscription.",
+          "description": "The workspace ID in GUID format that has free trial enabled in the subscription.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
           "readOnly": true
         },
         "state": {
           "$ref": "#/definitions/FreeTrialState",
-          "description": "The free-trial state.",
+          "description": "The free trial state.",
           "readOnly": true
         }
       },
@@ -719,7 +722,7 @@
     },
     "FreeTrialState": {
       "type": "string",
-      "description": "The free-trial state.",
+      "description": "The free trial state.",
       "enum": [
         "Active",
         "Expired",
@@ -732,17 +735,17 @@
           {
             "name": "Active",
             "value": "Active",
-            "description": "The free-trial is Active."
+            "description": "The free trial is active and available for use."
           },
           {
             "name": "Expired",
             "value": "Expired",
-            "description": "The free-trial is Expired."
+            "description": "The free trial has expired and is no longer available."
           },
           {
             "name": "NotApplicable",
             "value": "NotApplicable",
-            "description": "The free-trial is Not Applicable."
+            "description": "The free trial is not applicable for this resource."
           }
         ]
       }
@@ -790,7 +793,7 @@
       "properties": {
         "freeTrial": {
           "$ref": "#/definitions/FreeTrialProperties",
-          "description": "The subscription-level location-based Playwright quota resource free-trial properties.",
+          "description": "The subscription-level location-based Playwright quota free trial properties.",
           "readOnly": true
         },
         "provisioningState": {
@@ -818,36 +821,36 @@
     },
     "PlaywrightWorkspaceFreeTrialProperties": {
       "type": "object",
-      "description": "Playwright workspace quota resource resource free-trial properties.",
+      "description": "Playwright workspace quota free trial properties.",
       "properties": {
         "createdAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The free-trial createdAt utcDateTime.",
+          "description": "The free trial creation timestamp in UTC.",
           "readOnly": true
         },
         "expiryAt": {
           "type": "string",
           "format": "date-time",
-          "description": "The free-trial expiryAt utcDateTime.",
+          "description": "The free trial expiration timestamp in UTC.",
           "readOnly": true
         },
         "allocatedValue": {
           "type": "integer",
           "format": "int32",
-          "description": "The free-trial allocated limit value eg. allocated free execution minutes.",
+          "description": "The allocated limit value (e.g., allocated free execution minutes).",
           "readOnly": true
         },
         "usedValue": {
           "type": "number",
           "format": "float",
-          "description": "The free-trial used value eg. used free execution minutes.",
+          "description": "The used value (e.g., used free execution minutes).",
           "readOnly": true
         },
         "percentageUsed": {
           "type": "number",
           "format": "float",
-          "description": "The free-trial percentage used.",
+          "description": "The percentage of the free trial quota used.",
           "minimum": 0,
           "maximum": 100,
           "readOnly": true
@@ -894,12 +897,12 @@
         "dataplaneUri": {
           "type": "string",
           "format": "uri",
-          "description": "The workspace data plane URI.",
+          "description": "The workspace data plane service API URI.",
           "readOnly": true
         },
         "regionalAffinity": {
           "type": "string",
-          "description": "This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created.",
+          "description": "Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -912,19 +915,19 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "The feature is Enabled."
+                "description": "The feature is enabled."
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "The feature is Disabled."
+                "description": "The feature is disabled."
               }
             ]
           }
         },
         "localAuth": {
           "type": "string",
-          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations.",
+          "description": "Enables the workspace to use local authentication through service access tokens for operations.",
           "default": "Disabled",
           "enum": [
             "Enabled",
@@ -937,15 +940,23 @@
               {
                 "name": "Enabled",
                 "value": "Enabled",
-                "description": "The feature is Enabled."
+                "description": "The feature is enabled."
               },
               {
                 "name": "Disabled",
                 "value": "Disabled",
-                "description": "The feature is Disabled."
+                "description": "The feature is disabled."
               }
             ]
           }
+        },
+        "workspaceId": {
+          "type": "string",
+          "description": "The workspace ID in GUID format.",
+          "minLength": 3,
+          "maxLength": 36,
+          "pattern": "[A-Za-z0-9]+(-[A-Za-z0-9]+)+",
+          "readOnly": true
         }
       }
     },
@@ -992,7 +1003,7 @@
       "properties": {
         "freeTrial": {
           "$ref": "#/definitions/PlaywrightWorkspaceFreeTrialProperties",
-          "description": "The Playwright workspace quota resource free-trial properties.",
+          "description": "The Playwright workspace quota free trial properties.",
           "readOnly": true
         },
         "provisioningState": {
@@ -1026,11 +1037,11 @@
       "properties": {
         "regionalAffinity": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "This property sets the connection region for client workers to cloud-hosted browsers. If enabled, workers connect to browsers in the closest Azure region, ensuring lower latency. If disabled, workers connect to browsers in the Azure region in which the workspace was initially created."
+          "description": "Controls the connection region for client workers to cloud-hosted browsers. When enabled, workers connect to browsers in the closest Azure region for lower latency. When disabled, workers connect to browsers in the Azure region where the workspace was created."
         },
         "localAuth": {
           "$ref": "#/definitions/EnablementStatus",
-          "description": "When enabled, this feature allows the workspace to use local auth (through service access token) for executing operations."
+          "description": "Enables the workspace to use local authentication through service access tokens for operations."
         }
       }
     },
@@ -1067,17 +1078,17 @@
           {
             "name": "Creating",
             "value": "Creating",
-            "description": "Creation in progress.."
+            "description": "Resource creation is in progress."
           },
           {
             "name": "Deleting",
             "value": "Deleting",
-            "description": "Deletion in progress.."
+            "description": "Resource deletion is in progress."
           },
           {
             "name": "Accepted",
             "value": "Accepted",
-            "description": "Request accepted for processing.."
+            "description": "Request has been accepted for processing."
           }
         ]
       },

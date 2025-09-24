@@ -1,0 +1,83 @@
+{
+  "operationId": "StorageDiscoveryWorkspaces_ListByResourceGroup",
+  "title": "List StorageDiscoveryWorkspaces by Resource Group",
+  "parameters": {
+    "resourceGroupName": "sample-rg",
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "b79cb3ba-745e-5d9a-8903-4a02327a7e09"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/Primary-Analytics-Workspace",
+            "name": "Primary-Analytics-Workspace",
+            "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
+            "location": "westeurope",
+            "tags": {
+              "tag1": "value1",
+              "tag2": "value2"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sku": "Standard",
+              "workspaceRoots": [
+                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09"
+              ],
+              "description": "Sample Storage Discovery Workspace",
+              "scopes": [
+                {
+                  "displayName": "Sample-Collection-1",
+                  "resourceTypes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+                  ],
+                  "tagKeysOnly": [
+                    "filterTag1",
+                    "filterTag2"
+                  ],
+                  "tags": {
+                    "filterTag3": "value3",
+                    "filterTag4": "value4"
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.StorageDiscovery/storageDiscoveryWorkspaces/Secondary-Analytics-Workspace",
+            "name": "Secondary-Analytics-Workspace",
+            "type": "Microsoft.StorageDiscovery/storageDiscoveryWorkspaces",
+            "location": "westeurope",
+            "tags": {
+              "tag3": "value1",
+              "tag4": "value2"
+            },
+            "properties": {
+              "provisioningState": "Succeeded",
+              "sku": "Free",
+              "workspaceRoots": [
+                "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09"
+              ],
+              "description": "Sample Storage Discovery Workspace",
+              "scopes": [
+                {
+                  "displayName": "Sample-Collection-2",
+                  "resourceTypes": [
+                    "/subscriptions/b79cb3ba-745e-5d9a-8903-4a02327a7e09/resourceGroups/sample-rg/providers/Microsoft.Storage/storageAccounts/sample-storageAccount"
+                  ],
+                  "tagKeysOnly": [
+                    "filterTag5"
+                  ],
+                  "tags": {
+                    "filterTag6": "value6"
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}

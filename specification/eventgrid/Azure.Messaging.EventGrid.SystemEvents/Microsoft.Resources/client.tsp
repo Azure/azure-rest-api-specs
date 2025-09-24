@@ -3,62 +3,66 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 //Models
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteSuccessEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceWriteSuccessEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteFailureEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceWriteFailureEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceWriteCancelEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceWriteCancelEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteSuccessEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteSuccessEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteFailureEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteFailureEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceDeleteCancelEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceDeleteCancelEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceActionSuccessEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceActionSuccessEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceActionFailureEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceActionFailureEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceActionCancelEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.ResourceActionCancelEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceHttpRequest, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceHttpRequest,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.ResourceHttpRequest, Access.public);
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceAuthorization, Usage.output);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceAuthorization,
+  Usage.output | Usage.json
+);
 @@access(Microsoft.EventGrid.SystemEvents.ResourceAuthorization, Access.public);
 //Enums
 

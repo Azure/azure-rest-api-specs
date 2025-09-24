@@ -1,4 +1,4 @@
-import "../Common/DataModels/DownloadUrl.tsp";
+import "./Common/DataModels/DownloadUrl.tsp";
 import "./WebModels/WebAppCompoundAssessments.tsp";
 import "./WebModels/WacaSummary.tsp";
 

@@ -1,4 +1,4 @@
-import "../../Common/ArmModels/AssessmentProjectV2.tsp";
+import "../Common/ArmModels/AssessmentProjectV2.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;

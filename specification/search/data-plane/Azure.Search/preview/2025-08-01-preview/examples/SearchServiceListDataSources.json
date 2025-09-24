@@ -1,0 +1,45 @@
+{
+  "operationId": "DataSources_List",
+  "title": "SearchServiceListDataSources",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "$select": null,
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "@odata.etag": "0x1234568AE7E58A1",
+            "name": "mydocdbdatasource",
+            "description": "My Azure Adls Gen2 data source with ACLs.",
+            "type": "adlsgen2",
+            "indexerPermissionOptions": [
+              "userIds",
+              "groupIds",
+              "rbacScope"
+            ],
+            "credentials": {
+              "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net "
+            },
+            "container": {
+              "name": "adls-gen2-doc-extraction-acl",
+              "query": "folder_has_final_acl"
+            },
+            "dataChangeDetectionPolicy": {
+              "@odata.type": "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy",
+              "highWaterMarkColumnName": "metadata_storage_last_modified"
+            },
+            "dataDeletionDetectionPolicy": {
+              "@odata.type": "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy",
+              "softDeleteColumnName": "isDeleted",
+              "softDeleteMarkerValue": "true"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

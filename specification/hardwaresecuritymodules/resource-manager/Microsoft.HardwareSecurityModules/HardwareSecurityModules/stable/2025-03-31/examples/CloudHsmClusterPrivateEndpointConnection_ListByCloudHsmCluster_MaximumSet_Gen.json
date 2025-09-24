@@ -1,0 +1,66 @@
+{
+  "operationId": "PrivateEndpointConnections_ListByCloudHsmCluster",
+  "parameters": {
+    "api-version": "2025-03-31",
+    "cloudHsmClusterName": "chsm1",
+    "resourceGroupName": "rgcloudhsm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "CloudHsmClusterPrivateEndpointConnection_ListByResource_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "chsm1",
+            "type": "Microsoft.HardwareSecurityModules/cloudHsmClusters/privateEndpointConnections",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/chsm1/privateEndpointConnections/sample-pec1",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.Network/privateEndpoints/sample-pec1"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "This was automatically approved by user1234@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:00:00.0000000Z",
+              "createdBy": "User1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
+              "lastModifiedBy": "User2",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "chsm2",
+            "type": "Microsoft.HardwareSecurityModules/cloudHsmClusters/privateEndpointConnections",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.HardwareSecurityModules/cloudHsmClusters/chsm2/privateEndpointConnections/sample-pec2",
+            "properties": {
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgcloudhsm/providers/Microsoft.Network/privateEndpoints/sample-pec2"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "This was automatically approved by user1234@contoso.com",
+                "actionsRequired": "None",
+                "status": "Approved"
+              },
+              "provisioningState": "Succeeded"
+            },
+            "systemData": {
+              "createdAt": "2020-01-01T12:00:00.0000000Z",
+              "createdBy": "User1",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-01-01T12:00:00.0000000Z",
+              "lastModifiedBy": "User2",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  }
+}

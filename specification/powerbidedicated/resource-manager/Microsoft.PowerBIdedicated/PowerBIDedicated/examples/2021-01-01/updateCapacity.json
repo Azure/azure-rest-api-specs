@@ -1,0 +1,98 @@
+{
+  "parameters": {
+    "api-version": "2021-01-01",
+    "capacityUpdateParameters": {
+      "properties": {
+        "administration": {
+          "members": [
+            "azsdktest@microsoft.com",
+            "azsdktest2@microsoft.com"
+          ]
+        }
+      },
+      "sku": {
+        "name": "A1",
+        "tier": "PBIE_Azure"
+      },
+      "tags": {
+        "testKey": "testValue"
+      }
+    },
+    "dedicatedCapacityName": "azsdktest",
+    "resourceGroupName": "TestRG",
+    "subscriptionId": "613192d7-503f-477a-9cfe-4efc3ee2bd60"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "azsdktest",
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/capacities/azsdktest",
+        "location": "West US",
+        "properties": {
+          "administration": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "provisioningState": "Provisioning",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "name": "A1",
+          "tier": "PBIE_Azure"
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "testKey": "testValue"
+        }
+      },
+      "headers": {}
+    },
+    "202": {
+      "body": {
+        "name": "azsdktest",
+        "id": "/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/resourceGroups/TestRG/providers/Microsoft.PowerBIDedicated/capacities/azsdktest",
+        "location": "West US",
+        "properties": {
+          "administration": {
+            "members": [
+              "azsdktest@microsoft.com",
+              "azsdktest2@microsoft.com"
+            ]
+          },
+          "provisioningState": "Provisioning",
+          "state": "Provisioning"
+        },
+        "sku": {
+          "name": "A1",
+          "tier": "PBIE_Azure"
+        },
+        "systemData": {
+          "createdAt": "2021-01-01T00:00:19.1234567Z",
+          "createdBy": "user1",
+          "createdByType": "User",
+          "lastModifiedAt": "2021-01-01T00:00:19.1234567Z",
+          "lastModifiedBy": "user2",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "testKey": "testValue"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/providers/Microsoft.PowerBIDedicated/locations/westus/operationstatuses/7e4f488e-f071-4b1a-ae84-e25682d09e4c?api-version=2021-01-01",
+        "Location": "https://management.azure.com/subscriptions/613192d7-503f-477a-9cfe-4efc3ee2bd60/providers/Microsoft.PowerBIDedicated/locations/westus/operationresults/7e4f488e-f071-4b1a-ae84-e25682d09e4c?api-version=2021-01-01"
+      }
+    }
+  },
+  "operationId": "Capacities_Update",
+  "title": "Update capacity parameters"
+}
