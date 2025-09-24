@@ -246,7 +246,7 @@
           "$ref": "#/definitions/TpmAttestation"
         },
         "csr": {
-            "description": "A Base64-encoded DER certificate signing request (CSR) in PKCS #10 format, excluding PEM headers and footers. The Common Name (CN) must match the device registrationId. Including this field in the RuntimeRegistration_DeviceRegistrationStatusLookup operation will result in a bad request.",
+          "description": "A Base64-encoded DER certificate signing request (CSR) in PKCS #10 format, excluding PEM headers and footers. The Common Name (CN) must match the device registrationId. Including this field in the RuntimeRegistration_DeviceRegistrationStatusLookup operation will result in a bad request.",
           "type": "string"
         },
         "payload": {
@@ -338,7 +338,7 @@
           "readOnly": true
         },
         "issuedCertificateChain": {
-            "description": "An array containing the full certificate chain for the issued certificate. The first element is the issued leaf certificate, followed by any intermediate certification authorities (ICAs), and ending with the root certification authority (CA). Each certificate in the array is the issuer of the previous certificate. This property is not included in responses for the RuntimeRegistration_DeviceRegistrationStatusLookup operation.",
+          "description": "An array containing the full certificate chain for the issued certificate. The first element is the issued leaf certificate, followed by any intermediate certification authorities (ICAs), and ending with the root certification authority (CA). Each certificate in the array is the issuer of the previous certificate. This property is not included in responses for the RuntimeRegistration_DeviceRegistrationStatusLookup operation.",
           "type": "array",
           "items": {
             "type": "string",
