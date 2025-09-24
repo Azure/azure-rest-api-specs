@@ -15,8 +15,7 @@ namespace Microsoft.DeviceRegistry;
 @added(Versions.v2025_11_01_preview)
 @doc("A Credential Resource")
 @parentResource(Namespace)
-model Credential
-  is Azure.ResourceManager.TrackedResource<CredentialProperties> {
+model Credential is TrackedResource<CredentialProperties> {
   @doc("The name of the Credential tracked resource.")
   @key("credentialName")
   @segment("credentials")
@@ -38,7 +37,17 @@ interface Credentials {
   get is ArmResourceRead<Credential>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Credential>;
   delete is ArmResourceDeleteWithoutOkAsync<Credential>;
-  update is ArmResourcePatchAsync<Credential, CredentialProperties>;
+  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
+  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+  // since otherwise it extends the ARM TrackedResource type.
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    Credential,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Credential,
+      CredentialProperties
+    >
+  >;
   listByResourceGroup is ArmResourceListByParent<Credential>;
   synchronize is ArmResourceActionNoResponseContentAsync<Credential, void>;
 }

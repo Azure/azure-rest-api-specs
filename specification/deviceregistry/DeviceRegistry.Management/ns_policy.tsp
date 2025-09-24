@@ -15,7 +15,7 @@ namespace Microsoft.DeviceRegistry;
 @added(Versions.v2025_11_01_preview)
 @doc("A Credential Policy")
 @parentResource(Credential)
-model Policy is Azure.ResourceManager.TrackedResource<PolicyProperties> {
+model Policy is TrackedResource<PolicyProperties> {
   @doc("The name of the Policy tracked resource.")
   @minLength(3)
   @maxLength(63)
@@ -91,6 +91,16 @@ interface Policies {
   get is ArmResourceRead<Policy>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<Policy>;
   delete is ArmResourceDeleteWithoutOkAsync<Policy>;
-  update is ArmResourcePatchAsync<Policy, PolicyProperties>;
+  // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
+  // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
+  // since otherwise it extends the ARM TrackedResource type.
+  @patch(#{ implicitOptionality: true })
+  update is ArmCustomPatchAsync<
+    Policy,
+    Azure.ResourceManager.Foundations.ResourceUpdateModel<
+      Policy,
+      PolicyProperties
+    >
+  >;
   listByResourceGroup is ArmResourceListByParent<Policy>;
 }

@@ -2407,6 +2407,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Credentials_Synchronize": {
+            "$ref": "./examples/Credentials_Synchronize.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -5280,19 +5285,16 @@
     },
     "CredentialUpdate": {
       "type": "object",
-      "description": "A Credential Resource",
+      "description": "The type used for update operations of the Credential.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/CredentialProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
+      }
     },
     "DataPoint": {
       "type": "object",
@@ -8522,31 +8524,33 @@
         }
       }
     },
-    "PolicyPropertiesUpdate": {
+    "PolicyUpdate": {
       "type": "object",
-      "description": "Details of the Credential Policy.",
+      "description": "The type used for update operations of the Policy.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/PolicyUpdateProperties",
+          "description": "The resource-specific properties for this resource.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "PolicyUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Policy.",
       "properties": {
         "certificate": {
           "$ref": "#/definitions/CertificateConfigurationUpdate",
           "description": "The certificate configuration."
         }
       }
-    },
-    "PolicyUpdate": {
-      "type": "object",
-      "description": "A Credential Policy",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PolicyPropertiesUpdate",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
-        }
-      ]
     },
     "ProvisioningState": {
       "type": "string",
