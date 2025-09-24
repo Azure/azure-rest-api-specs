@@ -369,7 +369,10 @@ namespace Storage.Queues {
         @body
         queueMessage: QueueMessage;
       },
-      ListOfSentMessage
+      {
+        @statusCode statusCode: 201;
+        ...ListOfSentMessage;
+      }
     >;
 
     /**
