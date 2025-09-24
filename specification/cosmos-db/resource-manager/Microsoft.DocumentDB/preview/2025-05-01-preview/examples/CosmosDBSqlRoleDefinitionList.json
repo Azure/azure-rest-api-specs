@@ -1,20 +1,19 @@
 {
   "parameters": {
-    "subscriptionId": "mySubscriptionId",
-    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
-    "api-version": "2025-05-01-preview"
+    "api-version": "2025-05-01-preview",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
             "name": "myRoleDefinitionId",
             "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions",
+            "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
             "properties": {
-              "roleName": "myRoleName",
               "type": "CustomRole",
               "assignableScopes": [
                 "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
@@ -28,11 +27,14 @@
                   ],
                   "notDataActions": []
                 }
-              ]
+              ],
+              "roleName": "myRoleName"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "SqlResources_ListSqlRoleDefinitions",
+  "title": "CosmosDBSqlRoleDefinitionList"
 }

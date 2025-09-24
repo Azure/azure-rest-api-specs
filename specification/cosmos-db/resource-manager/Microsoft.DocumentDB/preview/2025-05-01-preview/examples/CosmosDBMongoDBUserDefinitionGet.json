@@ -1,31 +1,33 @@
 {
   "parameters": {
-    "mongoUserDefinitionId": "myMongoUserDefinitionId",
-    "databaseName": "sales",
-    "subscriptionId": "mySubscriptionId",
-    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
-    "api-version": "2025-05-01-preview"
+    "api-version": "2025-05-01-preview",
+    "databaseName": "sales",
+    "mongoUserDefinitionId": "myMongoUserDefinitionId",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbUserDefinitions/myUserId",
         "name": "myUserId",
         "type": "Microsoft.DocumentDB/databaseAccounts/mongodbUserDefinitions",
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbUserDefinitions/myUserId",
         "properties": {
-          "userName": "myUserName",
-          "databaseName": "sales",
           "customData": "My custom data",
+          "databaseName": "sales",
+          "mechanisms": "SCRAM-SHA-256",
           "roles": [
             {
               "db": "sales",
               "role": "myReadRole"
             }
           ],
-          "mechanisms": "SCRAM-SHA-256"
+          "userName": "myUserName"
         }
       }
     }
-  }
+  },
+  "operationId": "MongoDBResources_GetMongoUserDefinition",
+  "title": "CosmosDBMongoDBUserDefinitionGet"
 }

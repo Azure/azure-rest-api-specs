@@ -1,13 +1,9 @@
 {
   "parameters": {
-    "roleDefinitionId": "myRoleDefinitionId",
-    "subscriptionId": "mySubscriptionId",
-    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
     "api-version": "2025-05-01-preview",
     "createUpdateSqlRoleDefinitionParameters": {
       "properties": {
-        "roleName": "myRoleName",
         "type": "CustomRole",
         "assignableScopes": [
           "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
@@ -21,18 +17,21 @@
             ],
             "notDataActions": []
           }
-        ]
+        ],
+        "roleName": "myRoleName"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroupName",
+    "roleDefinitionId": "myRoleDefinitionId",
+    "subscriptionId": "mySubscriptionId"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
         "name": "myRoleDefinitionId",
         "type": "Microsoft.DocumentDB/databaseAccounts/sqlRoleDefinitions",
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/sqlRoleDefinitions/myRoleDefinitionId",
         "properties": {
-          "roleName": "myRoleName",
           "type": "CustomRole",
           "assignableScopes": [
             "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/dbs/sales",
@@ -45,7 +44,8 @@
                 "Microsoft.DocumentDB/databaseAccounts/sqlDatabases/containers/items/read"
               ]
             }
-          ]
+          ],
+          "roleName": "myRoleName"
         }
       }
     },
@@ -55,5 +55,7 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  }
+  },
+  "operationId": "SqlResources_CreateUpdateSqlRoleDefinition",
+  "title": "CosmosDBSqlRoleDefinitionCreateUpdate"
 }

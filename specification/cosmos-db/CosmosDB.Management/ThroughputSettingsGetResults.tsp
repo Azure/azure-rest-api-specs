@@ -132,7 +132,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
     ArmResponse<PhysicalPartitionThroughputInfoResult>
   >;
 }
-alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ThroughputSettingsGetResultsOperationGroupOps_2 = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -168,13 +168,13 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
 >;
 
 @armResourceOperations
-interface ThroughputSettingsGetResultsOperationGroup {
+interface ThroughputSettingsGetResultsOperationGroup_2 {
   /**
    * Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlResources_GetSqlContainerThroughput")
-  getSqlContainerThroughput is ThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
+  getSqlContainerThroughput is ThroughputSettingsGetResultsOperationGroupOps_2.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB SQL container
@@ -182,7 +182,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("SqlResources_UpdateSqlContainerThroughput")
-  updateSqlContainerThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
+  updateSqlContainerThroughput is ThroughputSettingsGetResultsOperationGroupOps_2.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
     Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
@@ -196,7 +196,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlResources_MigrateSqlContainerToAutoscale")
   @action("migrateToAutoscale")
-  migrateSqlContainerToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateSqlContainerToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -208,7 +208,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlResources_MigrateSqlContainerToManualThroughput")
   @action("migrateToManualThroughput")
-  migrateSqlContainerToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateSqlContainerToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -220,7 +220,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlResources_SqlContainerRetrieveThroughputDistribution")
   @action("retrieveThroughputDistribution")
-  sqlContainerRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  sqlContainerRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
     ArmResponse<PhysicalPartitionThroughputInfoResult>
@@ -232,7 +232,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlResources_SqlContainerRedistributeThroughput")
   @action("redistributeThroughput")
-  sqlContainerRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  sqlContainerRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
     ArmResponse<PhysicalPartitionThroughputInfoResult>
@@ -326,7 +326,7 @@ interface MongoDBResources {
     ArmResponse<PhysicalPartitionThroughputInfoResult>
   >;
 }
-alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ThroughputSettingsGetResultsOperationGroupOps_3 = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -362,13 +362,13 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
 >;
 
 @armResourceOperations
-interface ThroughputSettingsGetResultsOperationGroup {
+interface ThroughputSettingsGetResultsOperationGroup_3 {
   /**
    * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_GetMongoDBCollectionThroughput")
-  getMongoDBCollectionThroughput is ThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
+  getMongoDBCollectionThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update the RUs per second of an Azure Cosmos DB MongoDB collection
@@ -376,7 +376,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("MongoDBResources_UpdateMongoDBCollectionThroughput")
-  updateMongoDBCollectionThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
+  updateMongoDBCollectionThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
     Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
@@ -390,7 +390,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_MongoDBContainerRetrieveThroughputDistribution")
   @action("retrieveThroughputDistribution")
-  mongoDBContainerRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  mongoDBContainerRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
     ArmResponse<PhysicalPartitionThroughputInfoResult>
@@ -402,7 +402,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_MongoDBContainerRedistributeThroughput")
   @action("redistributeThroughput")
-  mongoDBContainerRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  mongoDBContainerRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
     ArmResponse<PhysicalPartitionThroughputInfoResult>
@@ -414,7 +414,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_MigrateMongoDBCollectionToAutoscale")
   @action("migrateToAutoscale")
-  migrateMongoDBCollectionToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateMongoDBCollectionToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -426,7 +426,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_MigrateMongoDBCollectionToManualThroughput")
   @action("migrateToManualThroughput")
-  migrateMongoDBCollectionToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateMongoDBCollectionToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -568,7 +568,7 @@ interface CassandraResources {
     ArmResponse<ThroughputSettingsGetResults>
   >;
 }
-alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ThroughputSettingsGetResultsOperationGroupOps_4 = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -604,13 +604,13 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
 >;
 
 @armResourceOperations
-interface ThroughputSettingsGetResultsOperationGroup {
+interface ThroughputSettingsGetResultsOperationGroup_4 {
   /**
    * Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraResources_GetCassandraTableThroughput")
-  getCassandraTableThroughput is ThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
+  getCassandraTableThroughput is ThroughputSettingsGetResultsOperationGroupOps_4.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB Cassandra table
@@ -618,7 +618,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("CassandraResources_UpdateCassandraTableThroughput")
-  updateCassandraTableThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
+  updateCassandraTableThroughput is ThroughputSettingsGetResultsOperationGroupOps_4.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
     Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
@@ -632,7 +632,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraResources_MigrateCassandraTableToAutoscale")
   @action("migrateToAutoscale")
-  migrateCassandraTableToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateCassandraTableToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_4.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -644,13 +644,13 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraResources_MigrateCassandraTableToManualThroughput")
   @action("migrateToManualThroughput")
-  migrateCassandraTableToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateCassandraTableToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_4.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
   >;
 }
-alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ThroughputSettingsGetResultsOperationGroupOps_5 = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -686,13 +686,13 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
 >;
 
 @armResourceOperations
-interface ThroughputSettingsGetResultsOperationGroup {
+interface ThroughputSettingsGetResultsOperationGroup_5 {
   /**
    * Gets the RUs per second of the Cassandra view under an existing Azure Cosmos DB database account with the provided name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraResources_GetCassandraViewThroughput")
-  getCassandraViewThroughput is ThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
+  getCassandraViewThroughput is ThroughputSettingsGetResultsOperationGroupOps_5.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB Cassandra view
@@ -700,7 +700,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("CassandraResources_UpdateCassandraViewThroughput")
-  updateCassandraViewThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
+  updateCassandraViewThroughput is ThroughputSettingsGetResultsOperationGroupOps_5.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
     Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
@@ -714,7 +714,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraResources_MigrateCassandraViewToAutoscale")
   @action("migrateToAutoscale")
-  migrateCassandraViewToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateCassandraViewToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_5.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -726,7 +726,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraResources_MigrateCassandraViewToManualThroughput")
   @action("migrateToManualThroughput")
-  migrateCassandraViewToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateCassandraViewToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_5.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -800,7 +800,7 @@ interface GremlinResources {
     ArmResponse<ThroughputSettingsGetResults>
   >;
 }
-alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
+alias ThroughputSettingsGetResultsOperationGroupOps_6 = Azure.ResourceManager.Legacy.LegacyOperations<
   {
     ...ApiVersionParameter;
     ...SubscriptionIdParameter;
@@ -836,13 +836,13 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
 >;
 
 @armResourceOperations
-interface ThroughputSettingsGetResultsOperationGroup {
+interface ThroughputSettingsGetResultsOperationGroup_6 {
   /**
    * Gets the Gremlin graph throughput under an existing Azure Cosmos DB database account with the provided name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GremlinResources_GetGremlinGraphThroughput")
-  getGremlinGraphThroughput is ThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
+  getGremlinGraphThroughput is ThroughputSettingsGetResultsOperationGroupOps_6.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB Gremlin graph
@@ -850,7 +850,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("GremlinResources_UpdateGremlinGraphThroughput")
-  updateGremlinGraphThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
+  updateGremlinGraphThroughput is ThroughputSettingsGetResultsOperationGroupOps_6.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
     Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
@@ -864,7 +864,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GremlinResources_MigrateGremlinGraphToAutoscale")
   @action("migrateToAutoscale")
-  migrateGremlinGraphToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateGremlinGraphToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_6.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -876,7 +876,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("GremlinResources_MigrateGremlinGraphToManualThroughput")
   @action("migrateToManualThroughput")
-  migrateGremlinGraphToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
+  migrateGremlinGraphToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_6.ActionAsync<
     ThroughputSettingsGetResults,
     void,
     ArmResponse<ThroughputSettingsGetResults>
@@ -896,48 +896,48 @@ interface ThroughputSettingsGetResultsOperationGroup {
 @@doc(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
   "The parameters to provide for redistributing throughput for the current SQL database."
 );
-@@doc(ThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
-  "The parameters to provide for the RUs per second of the current SQL container."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
-  "The parameters to provide for retrieving throughput distribution for the current SQL container."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
-  "The parameters to provide for redistributing throughput for the current SQL container."
-);
-@@doc(MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current MongoDB database."
-);
-@@doc(MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
-  "The parameters to provide for retrieving throughput distribution for the current MongoDB database."
-);
-@@doc(MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
-  "The parameters to provide for redistributing throughput for the current MongoDB database."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current MongoDB collection."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
-  "The parameters to provide for retrieving throughput distribution for the current MongoDB container."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
-  "The parameters to provide for redistributing throughput for the current MongoDB container."
-);
-@@doc(TableResources.updateTableThroughput::parameters.resource,
-  "The parameters to provide for the RUs per second of the current Table."
-);
-@@doc(CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current Cassandra table."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current Cassandra view."
-);
-@@doc(GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current Gremlin database."
-);
-@@doc(ThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
-  "The RUs per second of the parameters to provide for the current Gremlin graph."
-);
+// @@doc(ThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
+//   "The parameters to provide for the RUs per second of the current SQL container."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
+//   "The parameters to provide for retrieving throughput distribution for the current SQL container."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
+//   "The parameters to provide for redistributing throughput for the current SQL container."
+// );
+// @@doc(MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
+//   "The RUs per second of the parameters to provide for the current MongoDB database."
+// );
+// @@doc(MongoDBResources.mongoDBDatabaseRetrieveThroughputDistribution::parameters.body,
+//   "The parameters to provide for retrieving throughput distribution for the current MongoDB database."
+// );
+// @@doc(MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
+//   "The parameters to provide for redistributing throughput for the current MongoDB database."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
+//   "The RUs per second of the parameters to provide for the current MongoDB collection."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
+//   "The parameters to provide for retrieving throughput distribution for the current MongoDB container."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
+//   "The parameters to provide for redistributing throughput for the current MongoDB container."
+// );
+// @@doc(TableResources.updateTableThroughput::parameters.resource,
+//   "The parameters to provide for the RUs per second of the current Table."
+// );
+// @@doc(CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
+//   "The RUs per second of the parameters to provide for the current Cassandra Keyspace."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
+//   "The RUs per second of the parameters to provide for the current Cassandra table."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
+//   "The RUs per second of the parameters to provide for the current Cassandra view."
+// );
+// @@doc(GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
+//   "The RUs per second of the parameters to provide for the current Gremlin database."
+// );
+// @@doc(ThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
+//   "The RUs per second of the parameters to provide for the current Gremlin graph."
+// );

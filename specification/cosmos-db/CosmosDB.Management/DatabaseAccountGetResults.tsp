@@ -511,7 +511,7 @@ interface DatabaseAccounts {
   @operationId("Percentile_ListMetrics")
   @list
   @get
-  @action("metrics")
+  @action("percentile/metrics")
   percentileListMetrics is ArmResourceActionSync<
     DatabaseAccountGetResults,
     void,
@@ -532,7 +532,7 @@ interface DatabaseAccounts {
   @operationId("CollectionPartitionRegion_ListMetrics")
   @list
   @get
-  @action("metrics")
+  @action("partitions/metrics")
   collectionPartitionRegionListMetrics is ArmResourceActionSync<
     DatabaseAccountGetResults,
     void,
@@ -571,7 +571,7 @@ interface DatabaseAccounts {
   @operationId("CollectionPartition_ListMetrics")
   @list
   @get
-  @action("metrics")
+  @action("partitions/metrics")
   collectionPartitionListMetrics is ArmResourceActionSync<
     DatabaseAccountGetResults,
     void,
@@ -604,7 +604,7 @@ interface DatabaseAccounts {
   @operationId("CollectionPartition_ListUsages")
   @list
   @get
-  @action("usages")
+  @action("partitions/usages")
   collectionPartitionListUsages is ArmResourceActionSync<
     DatabaseAccountGetResults,
     void,

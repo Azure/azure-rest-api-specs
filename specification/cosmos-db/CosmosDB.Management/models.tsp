@@ -11,6 +11,8 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
 
+model NetworkSecurityPerimeterConfigurationProperties {}
+
 /**
  * The type of identity that created the resource.
  */

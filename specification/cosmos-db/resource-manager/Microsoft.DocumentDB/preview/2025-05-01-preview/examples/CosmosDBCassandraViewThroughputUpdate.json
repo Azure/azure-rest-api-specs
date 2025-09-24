@@ -1,31 +1,31 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
-    "subscriptionId": "subid",
     "keyspaceName": "keyspacename",
-    "viewName": "viewname",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "subid",
     "updateThroughputParameters": {
-      "tags": {},
       "properties": {
         "resource": {
           "throughput": 400
         }
-      }
-    }
+      },
+      "tags": {}
+    },
+    "viewName": "viewname"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/views/viewName/throughputSettings/default",
         "name": "default",
         "type": "Microsoft.DocumentDB/databaseAccounts/cassandraKeyspaces/views/throughputSettings",
+        "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/cassandraKeyspaces/keyspaceName/views/viewName/throughputSettings/default",
         "properties": {
           "resource": {
-            "throughput": 400,
             "minimumThroughput": "400",
-            "offerReplacePending": "true"
+            "offerReplacePending": "true",
+            "throughput": 400
           }
         }
       }
@@ -36,5 +36,7 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  }
+  },
+  "operationId": "CassandraResources_UpdateCassandraViewThroughput",
+  "title": "CosmosDBCassandraViewThroughputUpdate"
 }

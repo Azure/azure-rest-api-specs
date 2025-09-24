@@ -1,29 +1,29 @@
 {
   "parameters": {
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
-    "chaosFault": "ServiceUnavailability",
     "api-version": "2025-05-01-preview",
+    "chaosFault": "ServiceUnavailability",
     "chaosFaultRequest": {
       "properties": {
         "action": "Enable",
-        "region": "EastUS",
+        "containerName": "testCollection",
         "databaseName": "testDatabase",
-        "containerName": "testCollection"
+        "region": "EastUS"
       }
-    }
+    },
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/ServiceUnavailability",
         "properties": {
-          "provisioningState": "Completed",
           "action": "Enable",
-          "region": "EastUS",
+          "containerName": "testCollection",
           "databaseName": "testDatabase",
-          "containerName": "testCollection"
+          "provisioningState": "Completed",
+          "region": "EastUS"
         }
       }
     },
@@ -31,13 +31,15 @@
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.DocumentDB/databaseAccounts/ddb1/chaosFaults/ServiceUnavailability",
         "properties": {
-          "provisioningState": "Completed",
           "action": "Enable",
-          "region": "EastUS",
+          "containerName": "testCollection",
           "databaseName": "testDatabase",
-          "containerName": "testCollection"
+          "provisioningState": "Completed",
+          "region": "EastUS"
         }
       }
     }
-  }
+  },
+  "operationId": "ChaosFault_EnableDisable",
+  "title": "ChaosFaultEnableDisable"
 }

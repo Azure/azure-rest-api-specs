@@ -1,11 +1,10 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
-    "subscriptionId": "subid",
-    "databaseName": "databaseName",
     "containerName": "containerName",
+    "databaseName": "databaseName",
+    "resourceGroupName": "rg1",
     "retrieveThroughputParameters": {
       "properties": {
         "resource": {
@@ -19,7 +18,8 @@
           ]
         }
       }
-    }
+    },
+    "subscriptionId": "subid"
   },
   "responses": {
     "200": {
@@ -29,13 +29,13 @@
             "physicalPartitionThroughputInfo": [
               {
                 "id": "0",
-                "throughput": 5000,
-                "targetThroughput": 5000
+                "targetThroughput": 5000,
+                "throughput": 5000
               },
               {
                 "id": "1",
-                "throughput": 5000,
-                "targetThroughput": 5000
+                "targetThroughput": 5000,
+                "throughput": 5000
               }
             ]
           }
@@ -48,5 +48,7 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  }
+  },
+  "operationId": "SqlResources_SqlContainerRetrieveThroughputDistribution",
+  "title": "CosmosDBSqlContainerRetrieveThroughputDistribution"
 }

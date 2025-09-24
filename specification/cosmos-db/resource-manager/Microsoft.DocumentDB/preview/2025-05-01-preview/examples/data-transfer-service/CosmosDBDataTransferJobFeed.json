@@ -1,8 +1,8 @@
 {
   "parameters": {
     "accountName": "ddb1",
-    "resourceGroupName": "rg1",
     "api-version": "2025-05-01-preview",
+    "resourceGroupName": "rg1",
     "subscriptionId": "subid"
   },
   "responses": {
@@ -10,29 +10,31 @@
       "body": {
         "value": [
           {
-            "id": "ab1b6f34-b33c-46b1-98c7-3a0a63fd0d16",
             "type": "Microsoft.DocumentDB/databaseAccounts/dataTransferJobs",
+            "id": "ab1b6f34-b33c-46b1-98c7-3a0a63fd0d16",
             "properties": {
-              "jobName": "j1",
-              "source": {
-                "tableName": "table",
-                "keyspaceName": "keyspace",
-                "component": "CosmosDBCassandra"
-              },
               "destination": {
                 "component": "AzureBlobStorage",
-                "endpointUrl": "https://blob.windows.net",
-                "containerName": "blob_container"
+                "containerName": "blob_container",
+                "endpointUrl": "https://blob.windows.net"
+              },
+              "duration": "00:00:00",
+              "jobName": "j1",
+              "lastUpdatedUtcTime": "2021-06-12T12:04:23.1530000Z",
+              "processedCount": 100,
+              "source": {
+                "component": "CosmosDBCassandra",
+                "keyspaceName": "keyspace",
+                "tableName": "table"
               },
               "status": "Completed",
-              "processedCount": 100,
-              "totalCount": 100,
-              "lastUpdatedUtcTime": "2021-06-12T12:04:23.1530000Z",
-              "duration": "00:00:00"
+              "totalCount": 100
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "DataTransferJobs_ListByDatabaseAccount",
+  "title": "CosmosDBDataTransferJobFeed"
 }

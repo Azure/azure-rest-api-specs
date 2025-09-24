@@ -1,57 +1,57 @@
 {
   "parameters": {
-    "mongoRoleDefinitionId": "myMongoRoleDefinitionId",
-    "subscriptionId": "mySubscriptionId",
-    "resourceGroupName": "myResourceGroupName",
     "accountName": "myAccountName",
     "api-version": "2025-05-01-preview",
     "createUpdateMongoRoleDefinitionParameters": {
       "properties": {
-        "roleName": "myRoleName",
         "databaseName": "sales",
         "privileges": [
           {
-            "resource": {
-              "db": "sales",
-              "collection": "sales"
-            },
             "actions": [
               "insert",
               "find"
-            ]
+            ],
+            "resource": {
+              "collection": "sales",
+              "db": "sales"
+            }
           }
         ],
+        "roleName": "myRoleName",
         "roles": [
           {
-            "role": "myInheritedRole",
-            "db": "sales"
+            "db": "sales",
+            "role": "myInheritedRole"
           }
         ]
       }
-    }
+    },
+    "mongoRoleDefinitionId": "myMongoRoleDefinitionId",
+    "resourceGroupName": "myResourceGroupName",
+    "subscriptionId": "mySubscriptionId"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myMongoDbRoleDefinitionId",
         "name": "myMongoDbRoleDefinitionId",
         "type": "Microsoft.DocumentDB/databaseAccounts/mongoDbRoleDefinitionId",
+        "id": "/subscriptions/mySubscriptionId/resourceGroups/myResourceGroupName/providers/Microsoft.DocumentDB/databaseAccounts/myAccountName/mongodbRoleDefinitions/myMongoDbRoleDefinitionId",
         "properties": {
-          "roleName": "myRoleName",
           "type": "CustomRole",
           "databaseName": "sales",
           "privileges": [
             {
-              "resource": {
-                "db": "sales",
-                "collection": "coll"
-              },
               "actions": [
                 "find",
                 "insert"
-              ]
+              ],
+              "resource": {
+                "collection": "coll",
+                "db": "sales"
+              }
             }
           ],
+          "roleName": "myRoleName",
           "roles": [
             {
               "db": "sales",
@@ -67,5 +67,7 @@
         "location": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/operationsStatus/{operationId}?api-version=2025-05-01-preview"
       }
     }
-  }
+  },
+  "operationId": "MongoDBResources_CreateUpdateMongoRoleDefinition",
+  "title": "CosmosDBMongoDBRoleDefinitionCreateUpdate"
 }
