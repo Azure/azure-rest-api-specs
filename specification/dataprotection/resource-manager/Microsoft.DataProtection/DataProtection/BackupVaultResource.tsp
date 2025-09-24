@@ -104,7 +104,7 @@ interface BackupVaultResources {
       `x-ms-authorization-auxiliary`?: string;
 
       /**
-       * ID of the deleted backup vault to restore from
+       * The ID of the deleted backup vault to restore from during undelete flow.
        */
       @added(Versions.v2025_09_01)
       @header

@@ -589,7 +589,7 @@
           {
             "name": "x-ms-deleted-vault-id",
             "in": "header",
-            "description": "ID of the deleted backup vault to restore from",
+            "description": "The ID of the deleted backup vault to restore from during undelete flow.",
             "required": false,
             "type": "string"
           },
@@ -643,6 +643,9 @@
           },
           "Create BackupVault With MSI": {
             "$ref": "./examples/VaultCRUD/PutBackupVaultWithMSI.json"
+          },
+          "Restore Deleted BackupVault": {
+            "$ref": "./examples/VaultCRUD/PutBackupVaultWithUndelete.json"
           }
         },
         "x-ms-long-running-operation-options": {
