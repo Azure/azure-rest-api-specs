@@ -15,14 +15,14 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.SignalR"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.SignalR"
     examples-dir: "{project-root}/examples"
     enable-bicep-serialization: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-signalr"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-signalr"
     namespace: "azure.mgmt.signalr"
     generate-test: true
     generate-sample: true
@@ -36,7 +36,7 @@ options:
       - resource: SignalRResource
         collection: SignalR
   "@azure-tools/typespec-ts":
-    package-dir: "arm-signalr"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-signalr"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

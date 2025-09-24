@@ -18,7 +18,7 @@ options:
   "@azure-tools/typespec-python":
     package-pprint-name: '"Azure Event Grid"'
     package-version: 4.20.0
-    package-dir: "azure-eventgrid"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-eventgrid"
     namespace: "azure.eventgrid"
     flavor: azure
     generate-test: true
@@ -48,7 +48,7 @@ options:
       loglevel: info
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "eventgrid-namespaces"
+    emitter-output-dir: "{output-dir}/{service-dir}/eventgrid-namespaces"
     package-details:
       name: "@azure/eventgrid-namespaces"
     flavor: azure
