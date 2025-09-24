@@ -10731,12 +10731,20 @@
       "properties": {
         "value": {
           "type": "array",
-          "description": "List of volumes",
+          "description": "The Volume items on this page",
           "items": {
             "$ref": "#/definitions/Volume"
           }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "SnapshotProperties": {
       "type": "object",

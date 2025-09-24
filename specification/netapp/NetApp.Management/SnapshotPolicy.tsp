@@ -217,12 +217,7 @@ model SnapshotPolicyPatch {
 /**
  * Volumes associated with snapshot policy
  */
-model SnapshotPolicyVolumeList {
-  /**
-   * List of volumes
-   */
-  value?: Volume[];
-}
+model SnapshotPolicyVolumeList is Azure.Core.Page<Volume>;
 
 @armResourceOperations
 interface SnapshotPolicies {
