@@ -3,32 +3,39 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DBforPostgreSQL;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AdministratorMicrosoftEntraAdd.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdministratorMicrosoftEntraAdd.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(CapturedLog.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapturedLog.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ConfigurationForUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationForUpdate.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(LtrPreBackupResponse.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LtrPreBackupResponse.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BackupsLongTermRetentionResponse.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupsLongTermRetentionResponse.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(MigrationResourceForPatch.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(MigrationResourceForPatch.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ServerForPatch.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServerForPatch.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ObjectRecommendation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ObjectRecommendation.properties
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(VirtualEndpointResourceForPatch.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualEndpointResourceForPatch.properties
+);
 
 @@clientLocation(AdministratorMicrosoftEntras.get,
   "AdministratorsMicrosoftEntra"
@@ -45,8 +52,9 @@ using Microsoft.DBforPostgreSQL;
 @@clientLocation(AdministratorMicrosoftEntras.listByServer,
   "AdministratorsMicrosoftEntra"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AdministratorMicrosoftEntra.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdministratorMicrosoftEntra.properties
+);
 
 @@clientLocation(AdvancedThreatProtectionSettingsModels.get,
   "AdvancedThreatProtectionSettings"
@@ -60,8 +68,9 @@ using Microsoft.DBforPostgreSQL;
 @@clientLocation(AdvancedThreatProtectionSettingsModels.listByServer,
   "AdvancedThreatProtectionSettings"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AdvancedThreatProtectionSettingsModel.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AdvancedThreatProtectionSettingsModel.properties
+);
 
 @@clientLocation(BackupAutomaticAndOnDemands.get,
   "BackupsAutomaticAndOnDemand"
@@ -75,21 +84,22 @@ using Microsoft.DBforPostgreSQL;
 @@clientLocation(BackupAutomaticAndOnDemands.listByServer,
   "BackupsAutomaticAndOnDemand"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BackupAutomaticAndOnDemand.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupAutomaticAndOnDemand.properties
+);
 
 @@clientName(Configurations.put::parameters.resource, "parameters");
 @@clientName(Configurations.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Configuration.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Configuration.properties);
 
 @@clientName(Databases.create::parameters.resource, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Database.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Database.properties);
 
 @@clientName(FirewallRules.createOrUpdate::parameters.resource, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(FirewallRule.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(FirewallRule.properties);
 
 @@clientLocation(BackupsLongTermRetentionOperations.get,
   "BackupsLongTermRetention"
@@ -97,22 +107,24 @@ using Microsoft.DBforPostgreSQL;
 @@clientLocation(BackupsLongTermRetentionOperations.listByServer,
   "BackupsLongTermRetention"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(BackupsLongTermRetentionOperation.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackupsLongTermRetentionOperation.properties
+);
 
 @@clientName(Migrations.create::parameters.resource, "parameters");
 @@clientName(Migrations.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Migration.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Migration.properties);
 
 @@clientName(PrivateEndpointConnections.update::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateEndpointConnection.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PrivateLinkResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientName(Servers.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Servers.update::parameters.properties, "parameters");
@@ -128,8 +140,8 @@ using Microsoft.DBforPostgreSQL;
 @@clientName(Servers.replicasListByServer, "ListByServer");
 @@clientName(Servers.restart::parameters.body, "parameters");
 @@clientName(Servers.serversStart, "Start");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Server.properties);
+
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Server.properties);
 
 @@clientLocation(TuningOptionsOperationGroup.get, "TuningOptions");
 @@clientLocation(TuningOptionsOperationGroup.listByServer, "TuningOptions");

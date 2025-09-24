@@ -40,16 +40,12 @@ interface AdministratorMicrosoftEntras {
    */
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @put
-  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    ResourceInstanceParameters<
-      AdministratorMicrosoftEntra,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<AdministratorMicrosoftEntra>
-    >,
-    AdministratorMicrosoftEntraAdd,
+  createOrUpdate is Legacy.CreateOrReplaceAsync<
+    AdministratorMicrosoftEntra,
+    Request = AdministratorMicrosoftEntraAdd,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
-    ErrorResponse = ErrorResponse
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
