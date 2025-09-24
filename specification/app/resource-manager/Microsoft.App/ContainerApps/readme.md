@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-07-01
+tag: package-2025-11-01
 ```
 
 ### Suppression
@@ -41,6 +41,38 @@ directive:
     from: ManagedEnvironments.json
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}"].patch.parameters[3].schema.properties.identity
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
+```
+
+### Tag: package-2025-11-01
+
+These settings apply only when `--tag=package-2025-11-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-11-01'
+input-file:
+  - Microsoft.App/ContainerApps/stable/2025-11-01/AuthConfigs.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/BillingMeters.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/CommonDefinitions.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ConnectedEnvironments.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ContainerApps.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ContainerAppsRevisions.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/Diagnostics.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/Global.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/JavaComponents.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/Jobs.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/LogicAppsExtension.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ManagedEnvironments.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ManagedEnvironmentsHttpRouteConfig.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ManagedEnvironmentsMaintenanceConfigurations.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/SessionPools.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/SourceControls.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/Subscriptions.json
+  - Microsoft.App/ContainerApps/stable/2025-11-01/Usages.json
 ```
 
 ### Tag: package-2025-07-01
