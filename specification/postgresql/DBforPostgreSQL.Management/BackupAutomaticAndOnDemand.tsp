@@ -4,7 +4,6 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 import "./Server.tsp";
-import "./legacy.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -39,8 +38,9 @@ interface BackupAutomaticAndOnDemands {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is CustomArmResourceCreateOrReplaceAsync<
+  create is Legacy.CreateOrReplaceAsync<
     BackupAutomaticAndOnDemand,
+    Request = void,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader>
