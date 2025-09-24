@@ -5,9 +5,9 @@ import "@typespec/openapi";
 
 using TypeSpec.Http;
 
-namespace Attestation;
+namespace AttestationService;
 
-interface PolicyOperationGroup {
+interface Policy {
   /**
    * Retrieves the current policy for an attestation type.
    */
@@ -80,7 +80,7 @@ interface PolicyOperationGroup {
   >;
 }
 
-interface PolicyCertificatesOperationGroup {
+interface PolicyCertificates {
   /**
    * Retrieves the set of certificates used to express policy for the current tenant.
    */
@@ -123,7 +123,7 @@ interface PolicyCertificatesOperationGroup {
   >;
 }
 
-interface AttestationOperationGroup {
+interface Attestation {
   /**
    * Processes an OpenEnclave report , producing an artifact. The type of artifact
    * produced is dependent upon attestation policy.
@@ -204,7 +204,7 @@ interface AttestationOperationGroup {
   >;
 }
 
-interface TcbBaselinesOperationGroup {
+interface TcbBaselines {
   /**
    * Retrieves a list of all Azure supported baseline details for the a TEE type
    * along with an indication of which one is in enforced for the attestation
@@ -230,7 +230,7 @@ interface TcbBaselinesOperationGroup {
   >;
 }
 
-interface SigningCertificatesOperationGroup {
+interface SigningCertificates {
   /**
    * Retrieves metadata signing certificates in use by the attestation service
    */
@@ -247,7 +247,7 @@ interface SigningCertificatesOperationGroup {
   >;
 }
 
-interface MetadataConfigurationOperationGroup {
+interface MetadataConfiguration {
   /**
    * Retrieves metadata about the attestation signing keys in use by the attestation
    * service
