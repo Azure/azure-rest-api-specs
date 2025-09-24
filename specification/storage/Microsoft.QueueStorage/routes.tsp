@@ -228,7 +228,7 @@ namespace Storage.Queues {
         ...MetadataHeaders;
       },
       {
-        @statusCode statusCode: 202;
+        @statusCode statusCode: 204;
       }
     >;
 
