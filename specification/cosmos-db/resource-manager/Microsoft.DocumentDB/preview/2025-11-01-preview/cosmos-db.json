@@ -10354,6 +10354,31 @@
             "name": "VectorIndexType",
             "modelAsString": true
           }
+        },
+        "quantizationByteSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of bytes used in product quantization of the vectors. A larger value may result in better recall for vector searches at the expense of latency. This is only applicable for the quantizedFlat and diskANN vector index types.",
+          "minimum": 4
+        },
+        "indexingSearchListSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "This is the size of the candidate list of approximate neighbors stored while building the DiskANN index as part of the optimization processes. Large values may improve recall at the expense of latency. This is only applicable for the diskANN vector index type.",
+          "default": 100,
+          "minimum": 25,
+          "maximum": 500
+        },
+        "vectorIndexShardKey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "/vectorShardKey1",
+            "/vectorShardKey2"
+          ],
+          "description": "Array of shard keys for the vector index. This is only applicable for the quantizedFlat and diskANN vector index types."
         }
       },
       "required": [
