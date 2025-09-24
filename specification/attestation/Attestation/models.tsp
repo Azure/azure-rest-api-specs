@@ -115,6 +115,18 @@ union PolicyModification {
   Removed: "Removed",
 }
 
+/** Request model for adding a policy certificate */
+model AddPolicyCertificateRequest {
+  /** The certificate to add, as a string (e.g., PEM or JWK) */
+  policyCertificateToAdd: string;
+}
+
+/** Request model for removing a policy certificate */
+model RemovePolicyCertificateRequest {
+  /** The certificate to remove, as a string (e.g., PEM or JWK) */
+  policyCertificateToRemove: string;
+}
+
 /**
  * The response to an attestation policy operation
  */

@@ -80,18 +80,6 @@ interface PolicyOperationGroup {
   >;
 }
 
-/** Request model for adding a policy certificate */
-model AddPolicyCertificateRequest {
-  /** The certificate to add, as a string (e.g., PEM or JWK) */
-  policyCertificateToAdd: string;
-}
-
-/** Request model for removing a policy certificate */
-model RemovePolicyCertificateRequest {
-  /** The certificate to remove, as a string (e.g., PEM or JWK) */
-  policyCertificateToRemove: string;
-}
-
 interface PolicyCertificatesOperationGroup {
   /**
    * Retrieves the set of certificates used to express policy for the current tenant.
