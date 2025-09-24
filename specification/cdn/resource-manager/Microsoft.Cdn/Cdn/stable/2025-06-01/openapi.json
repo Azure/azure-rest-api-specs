@@ -12971,6 +12971,205 @@
         ]
       }
     },
+    "KnowledgeSource": {
+      "type": "object",
+      "description": "Defines a knowledge source resource for a web agent.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KnowledgeSourceProperties",
+          "description": "Properties of the knowledge source.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "KnowledgeSourceList": {
+      "type": "object",
+      "description": "Defines a list of knowledge sources. It contains a list of KnowledgeSource objects and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The KnowledgeSource items on this page",
+          "items": {
+            "$ref": "#/definitions/KnowledgeSource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "KnowledgeSourceProperties": {
+      "type": "object",
+      "description": "Defines properties of a knowledge source.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the knowledge source."
+        },
+        "sourceType": {
+          "$ref": "#/definitions/KnowledgeSourceType",
+          "description": "Format or origin of the knowledge source."
+        },
+        "url": {
+          "type": "string",
+          "description": "Endpoint or location of the knowledge source."
+        },
+        "updateFrequency": {
+          "$ref": "#/definitions/KnowledgeSourceUpdateFrequency",
+          "description": "Specifies the units of time for scheduling update intervals for the knowledge source."
+        },
+        "lastRefreshedTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the knowledge source was updated.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/KnowledgeSourceProvisioningState",
+          "description": "Provisioning status of the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "sourceType",
+        "url"
+      ]
+    },
+    "KnowledgeSourcePropertiesUpdateParameters": {
+      "type": "object",
+      "description": "Defines properties of a knowledge source that can be updated.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of the knowledge source."
+        },
+        "url": {
+          "type": "string",
+          "description": "Endpoint or location of the knowledge source."
+        },
+        "updateFrequency": {
+          "$ref": "#/definitions/KnowledgeSourceUpdateFrequency",
+          "description": "Specifies the units of time for scheduling update intervals for the knowledge source."
+        }
+      }
+    },
+    "KnowledgeSourceProvisioningState": {
+      "type": "string",
+      "description": "Provisioning status of the knowledge source.",
+      "enum": [
+        "Creating",
+        "Succeeded",
+        "Failed",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceType": {
+      "type": "string",
+      "description": "Format or origin of the knowledge source.",
+      "enum": [
+        "SchemaOrgMarkup",
+        "RssFeeds",
+        "Sitemap"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SchemaOrgMarkup",
+            "value": "SchemaOrgMarkup"
+          },
+          {
+            "name": "RssFeeds",
+            "value": "RssFeeds"
+          },
+          {
+            "name": "Sitemap",
+            "value": "Sitemap"
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceUpdateFrequency": {
+      "type": "string",
+      "description": "Specifies the units of time for scheduling update intervals for the knowledge source.",
+      "enum": [
+        "EverySixHours",
+        "Daily",
+        "Weekly",
+        "Monthly"
+      ],
+      "x-ms-enum": {
+        "name": "KnowledgeSourceUpdateFrequency",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "EverySixHours",
+            "value": "EverySixHours"
+          },
+          {
+            "name": "Daily",
+            "value": "Daily"
+          },
+          {
+            "name": "Weekly",
+            "value": "Weekly"
+          },
+          {
+            "name": "Monthly",
+            "value": "Monthly"
+          }
+        ]
+      }
+    },
+    "KnowledgeSourceUpdateParameters": {
+      "type": "object",
+      "description": "Properties required to update a knowledge source.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/KnowledgeSourcePropertiesUpdateParameters",
+          "description": "Properties of the knowledge source to be updated.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
     "LoadBalancingSettingsParameters": {
       "type": "object",
       "description": "Round-Robin load balancing settings for a backend pool",
