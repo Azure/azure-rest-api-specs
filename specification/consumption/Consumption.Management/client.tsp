@@ -16,6 +16,12 @@ using Azure.ClientGenerator.Core;
 @@clientName(TagsResult.eTag, "etag", "java");
 @@clientName(CreditSummary.eTag, "etag", "java");
 
+// Fix additional eTag properties from models.tsp
+@@clientName(ProxyResource.eTag, "etag", "java");
+@@clientName(EventProperties.eTag, "etag", "java");
+@@clientName(LotProperties.eTag, "etag", "java");
+@@clientName(CreditSummaryProperties.eTag, "etag", "java");
+
 // Fix USD property name changes (costInUSD -> costInUsd, paygCostInUSD -> paygCostInUsd)
 @@clientName(ModernUsageDetailProperties.costInUSD, "costInUsd", "java");
 @@clientName(ModernUsageDetailProperties.paygCostInUSD,
