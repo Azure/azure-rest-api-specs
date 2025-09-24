@@ -29,7 +29,7 @@ title: EdgeMarketplaceClient
 description: Edge marketplace extensions
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2023-08-01
+tag: package-2024-10-01
 ```
 
 ``` yaml
@@ -37,29 +37,15 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-2023-08-01-preview
+### Tag: package-2024-10-01
 
-These settings apply only when `--tag=package-2023-08-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2024-10-01` is specified on the command line.
 
-```yaml $(tag) == 'package-2023-08-01-preview'
+```yaml $(tag) == 'package-2024-10-01'
 input-file:
-  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/publishers.json
-  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/operations.json
-  - Microsoft.EdgeMarketplace/preview/2023-08-01-preview/offers.json
+  - Microsoft.EdgeMarketplace/stable/2024-10-01/edgemarketplace.json
 ```
 
-### Tag: package-2023-08-01
-
-These settings apply only when `--tag=package-2023-08-01` is specified on the command line.
-
-```yaml $(tag) == 'package-2023-08-01'
-input-file:
-  - Microsoft.EdgeMarketplace/stable/2023-08-01/publishers.json
-  - Microsoft.EdgeMarketplace/stable/2023-08-01/operations.json
-  - Microsoft.EdgeMarketplace/stable/2023-08-01/offers.json
-```
-
----
 
 # Code Generation
 

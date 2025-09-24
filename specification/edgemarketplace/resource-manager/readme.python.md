@@ -17,3 +17,23 @@ clear-output-folder: true
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/edgemarketplace/azure-mgmt-edgemarketplace/azure/mgmt/edgemarketplace
 ```
+
+### Python multi-api
+
+Generate all API versions currently shipped for this package
+
+```yaml $(python) && $(multiapi)
+batch:
+  - tag: package-2024-10-01
+```
+
+### Tag: package-2024-01-01 and python
+
+These settings apply only when `--tag=package-2024-10-01 --python` is specified on the command line.
+Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
+
+``` yaml $(tag) == 'package-2024-10-01' && $(python)
+python:
+  namespace: azure.mgmt.edgemarketplace.v2024_10_01_preview
+  output-folder: $(python-sdks-folder)/edgemarketplace/azure-mgmt-edgemarketplace/azure/mgmt/edgemarketplace/v2024_10_01
+```
