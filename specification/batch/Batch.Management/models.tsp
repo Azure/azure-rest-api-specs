@@ -916,7 +916,7 @@ model BatchAccountCreateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  allowedAuthenticationModes?: AuthenticationMode[];
+  allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
 
 /**
@@ -1134,13 +1134,13 @@ model BatchAccountProperties {
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
    */
-  networkProfile?: NetworkProfile;
+  networkProfile?: NetworkProfile | null;
 
   /**
    * List of private endpoint connections associated with the Batch account
    */
   @visibility(Lifecycle.Read)
-  privateEndpointConnections?: PrivateEndpointConnection[];
+  privateEndpointConnections?: PrivateEndpointConnection[] | null;
 
   /**
    * Contains information about the auto-storage account associated with a Batch account.
@@ -1158,20 +1158,20 @@ model BatchAccountProperties {
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
   @visibility(Lifecycle.Read)
-  dedicatedCoreQuota?: int32;
+  dedicatedCoreQuota?: int32 | null;
 
   /**
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
   @visibility(Lifecycle.Read)
-  lowPriorityCoreQuota?: int32;
+  lowPriorityCoreQuota?: int32 | null;
 
   /**
    * A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
-  dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[];
+  dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[] | null;
 
   /**
    * If this flag is true, dedicated core quota is enforced via both the dedicatedCoreQuotaPerVMFamily and dedicatedCoreQuota properties on the account. If this flag is false, dedicated core quota is enforced only via the dedicatedCoreQuota property on the account and does not consider Virtual Machine family.
@@ -1195,7 +1195,7 @@ model BatchAccountProperties {
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
   @visibility(Lifecycle.Read)
-  allowedAuthenticationModes?: AuthenticationMode[];
+  allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
 
 /**
@@ -1435,7 +1435,7 @@ model BatchAccountUpdateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
-  allowedAuthenticationModes?: AuthenticationMode[];
+  allowedAuthenticationModes?: AuthenticationMode[] | null;
 
   /**
    * If not specified, the default value is 'enabled'.
@@ -2048,7 +2048,7 @@ model PoolProperties {
    * Determines how a pool communicates with the Batch service.
    */
   @visibility(Lifecycle.Read)
-  currentNodeCommunicationMode?: NodeCommunicationMode;
+  currentNodeCommunicationMode?: NodeCommunicationMode | null;
 
   /**
    * Describes an upgrade policy - automatic, manual, or rolling.
