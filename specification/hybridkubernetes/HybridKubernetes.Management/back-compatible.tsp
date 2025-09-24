@@ -32,6 +32,7 @@ using Microsoft.Kubernetes;
 @@clientLocation(ConnectedClusters.get, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.createOrReplace, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.update, "ConnectedCluster");
+@@clientLocation(ConnectedClusters.updateAsync, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.delete, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.listByResourceGroup, "ConnectedCluster");
 @@clientLocation(ConnectedClusters.listBySubscription, "ConnectedCluster");
