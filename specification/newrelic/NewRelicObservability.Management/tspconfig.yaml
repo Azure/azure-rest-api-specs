@@ -11,33 +11,32 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/NewRelic.json"
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.NewRelicObservability"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.NewRelicObservability"
+    namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-newrelic"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-newrelic"
     namespace: "azure.mgmt.newrelic"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-newrelic"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-newrelic"
     namespace: "com.azure.resourcemanager.newrelic"
     service-name: "NewRelic" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-newrelic"
-    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-newrelic"
+    is-modular-library: true
+    flavor: "azure"
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-newrelic"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/newrelic"
-    package-dir: "armnewrelic"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnewrelic"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnewrelic"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
