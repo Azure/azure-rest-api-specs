@@ -16,12 +16,12 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-chaos"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-chaos"
     flavor: azure
     package-details:
       name: "@azure/arm-chaos"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-chaos"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-chaos"
     namespace: "azure.mgmt.chaos"
     flavor: "azure"
     generate-test: true
