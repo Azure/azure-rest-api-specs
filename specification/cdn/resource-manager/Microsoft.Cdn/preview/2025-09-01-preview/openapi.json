@@ -10606,9 +10606,9 @@
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
           "description": "The properties of the private link resource for private origin."
         },
-        "originShieldResource": {
-          "$ref": "#/definitions/OriginShieldResourceProperties",
-          "description": "Origin shield settings for an origin"
+        "originCapacityResource": {
+          "$ref": "#/definitions/OriginCapacityResourceProperties",
+          "description": "Origin capacity settings for an origin"
         },
         "enabledState": {
           "$ref": "#/definitions/EnabledState",
@@ -10696,9 +10696,9 @@
           "$ref": "#/definitions/SharedPrivateLinkResourceProperties",
           "description": "The properties of the private link resource for private origin."
         },
-        "originShieldResource": {
-          "$ref": "#/definitions/OriginShieldResourceProperties",
-          "description": "Origin shield settings for an origin"
+        "originCapacityResource": {
+          "$ref": "#/definitions/OriginCapacityResourceProperties",
+          "description": "Origin capacity settings for an origin"
         },
         "enabledState": {
           "$ref": "#/definitions/EnabledState",
@@ -16809,6 +16809,32 @@
         ]
       }
     },
+    "OriginCapacityResourceProperties": {
+      "type": "object",
+      "description": "Origin capacity settings for an origin",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable origin capacity for a specific origin"
+        },
+        "region": {
+          "type": "string",
+          "description": "The nearest origin capacity pop region for an origin"
+        },
+        "originRequestRateThreshold": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The request rate limit threshold for an origin per minute",
+          "minimum": 1
+        },
+        "originIngressRateThreshold": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The ingress rate limit threshold for an origin per minute in MB",
+          "minimum": 1
+        }
+      }
+    },
     "OriginGroup": {
       "type": "object",
       "description": "Origin group comprising of origins is used for load balancing to origins when the content cannot be served from CDN.",
@@ -17138,32 +17164,6 @@
             "value": "Deleting"
           }
         ]
-      }
-    },
-    "OriginShieldResourceProperties": {
-      "type": "object",
-      "description": "Origin shield settings for an origin",
-      "properties": {
-        "enabled": {
-          "type": "boolean",
-          "description": "Whether to enable origin shield for an specific origin"
-        },
-        "region": {
-          "type": "string",
-          "description": "The nearest origin shield pop region for an origin"
-        },
-        "originRequestRateThreshold": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The request rate limit threshold for an origin per minute",
-          "minimum": 1
-        },
-        "originIngressRateThreshold": {
-          "type": "integer",
-          "format": "int64",
-          "description": "The ingress rate limit threshold for an origin per minute in MB",
-          "minimum": 1
-        }
       }
     },
     "OriginUpdateParameters": {
