@@ -83,6 +83,10 @@ model BulkPublishSolutionParameter {
   @doc("Solution dependencies")
   @Azure.ResourceManager.identifiers(#[])
   solutionDependencies?: SolutionDependencyParameter[];
+
+  @added(Versions.v2025_08_01)
+  @doc("Configuration of solution")
+  solutionConfiguration?: string;
 }
 
 @doc("Bulk publish target details")
@@ -97,6 +101,55 @@ model BulkPublishTargetDetails {
   @doc("Name of the solution instance")
   @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
   solutionInstanceName?: string;
+
+  @added(Versions.v2025_08_01)
+  @doc("ArmId of Target Solution Version")
+  solutionVersionId?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Targets/Solutions/Versions";
+    }
+  ]>;
+
+  @added(Versions.v2025_08_01)
+  @doc("Configuration of solution")
+  solutionConfiguration?: string;
+}
+
+@added(Versions.v2025_08_01)
+@doc("Bulk publish solution parameter")
+model BulkReviewSolutionParameter {
+  @doc("Targets to which solution needs to be published")
+  @Azure.ResourceManager.identifiers(#[])
+  targets: BulkReviewTargetDetails[];
+
+  @doc("Name of the solution instance")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @doc("Solution dependencies")
+  @Azure.ResourceManager.identifiers(#[])
+  solutionDependencies?: SolutionDependencyParameter[];
+
+  @doc("Configuration of solution")
+  solutionConfiguration?: string;
+}
+
+@added(Versions.v2025_08_01)
+@doc("Bulk publish target details")
+model BulkReviewTargetDetails {
+  @doc("ArmId of Target")
+  targetId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Targets";
+    }
+  ]>;
+
+  @doc("Name of the solution instance")
+  @pattern("^(?!v-)(?!.*-v-)[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?(\\.[a-zA-Z0-9]([-a-zA-Z0-9]*[a-zA-Z0-9])?)*$")
+  solutionInstanceName?: string;
+
+  @doc("Configuration of solution")
+  solutionConfiguration?: string;
 }
 
 @armResourceOperations
@@ -117,5 +170,12 @@ interface SolutionTemplateVersions {
   bulkPublishSolution is ArmResourceActionNoResponseContentAsync<
     SolutionTemplateVersion,
     BulkPublishSolutionParameter
+  >;
+
+  @added(Versions.v2025_08_01)
+  @doc("Post request for bulk review")
+  bulkReviewSolution is ArmResourceActionNoResponseContentAsync<
+    SolutionTemplateVersion,
+    BulkReviewSolutionParameter
   >;
 }

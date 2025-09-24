@@ -7507,25 +7507,6 @@
         ]
       }
     },
-    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
-      "type": "object",
-      "title": "Tracked Resource",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
-        }
-      ]
-    },
     "BulkDeploySolutionParameter": {
       "type": "object",
       "description": "Bulk deploy solution parameter",
@@ -7622,7 +7603,7 @@
     },
     "Capability": {
       "type": "object",
-      "description": "Capability, to match in Solution Templates & Targets",
+      "description": "Capability, to match in Solution Templates and Targets",
       "properties": {
         "name": {
           "type": "string",
@@ -7720,30 +7701,32 @@
         "description"
       ]
     },
-    "ConfigTemplatePropertiesUpdate": {
+    "ConfigTemplateUpdate": {
       "type": "object",
-      "description": "Config Template Properties",
+      "description": "The type used for update operations of the ConfigTemplate.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ConfigTemplateUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ConfigTemplateUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the ConfigTemplate.",
       "properties": {
         "description": {
           "type": "string",
           "description": "Description of config template"
         }
       }
-    },
-    "ConfigTemplateUpdate": {
-      "type": "object",
-      "description": "Config Template Resource. Contains configuration expressions using the predefined expression language.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConfigTemplatePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "ConfigTemplateVersion": {
       "type": "object",
@@ -7941,9 +7924,26 @@
         "hierarchies"
       ]
     },
-    "ContextPropertiesUpdate": {
+    "ContextUpdate": {
       "type": "object",
-      "description": "Context Properties",
+      "description": "The type used for update operations of the Context.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ContextUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "ContextUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Context.",
       "properties": {
         "capabilities": {
           "type": "array",
@@ -7962,21 +7962,6 @@
           "x-ms-identifiers": []
         }
       }
-    },
-    "ContextUpdate": {
-      "type": "object",
-      "description": "Context Resource",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ContextPropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "DeployJobParameter": {
       "type": "object",
@@ -8128,18 +8113,24 @@
     },
     "DiagnosticUpdate": {
       "type": "object",
-      "description": "A Diagnostic resource.",
+      "description": "The type used for update operations of the Diagnostic.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DiagnosticProperties",
+          "$ref": "#/definitions/DiagnosticUpdateProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
+    },
+    "DiagnosticUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Diagnostic."
     },
     "DynamicSchema": {
       "type": "object",
@@ -9295,18 +9286,24 @@
     },
     "SchemaUpdate": {
       "type": "object",
-      "description": "Schema Resource",
+      "description": "The type used for update operations of the Schema.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SchemaProperties",
+          "$ref": "#/definitions/SchemaUpdateProperties",
           "description": "The resource-specific properties for this resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
+      }
+    },
+    "SchemaUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Schema."
     },
     "SchemaVersion": {
       "type": "object",
@@ -9745,9 +9742,26 @@
         "capabilities"
       ]
     },
-    "SolutionTemplatePropertiesUpdate": {
+    "SolutionTemplateUpdate": {
       "type": "object",
-      "description": "Solution Template Properties",
+      "description": "The type used for update operations of the SolutionTemplate.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/SolutionTemplateUpdateProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      }
+    },
+    "SolutionTemplateUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the SolutionTemplate.",
       "properties": {
         "description": {
           "type": "string",
@@ -9769,21 +9783,6 @@
           "description": "Flag to enable external validation"
         }
       }
-    },
-    "SolutionTemplateUpdate": {
-      "type": "object",
-      "description": "Solution Template Resource. Contains capabilities and operations for creating versions.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/SolutionTemplatePropertiesUpdate",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
-        }
-      ]
     },
     "SolutionTemplateVersion": {
       "type": "object",
@@ -9878,18 +9877,17 @@
     },
     "SolutionUpdate": {
       "type": "object",
-      "description": "Solution Resource attached to a Target",
+      "description": "The type used for update operations of the Solution.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SolutionProperties",
+          "$ref": "#/definitions/SolutionUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
+      }
+    },
+    "SolutionUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Solution."
     },
     "SolutionVersion": {
       "type": "object",
@@ -10356,57 +10354,6 @@
         "hierarchyLevel"
       ]
     },
-    "TargetPropertiesUpdate": {
-      "type": "object",
-      "description": "Target Properties",
-      "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of target"
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display name of target"
-        },
-        "contextId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ArmId of Context",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Edge/contexts"
-              }
-            ]
-          }
-        },
-        "targetSpecification": {
-          "type": "object",
-          "description": "target spec",
-          "additionalProperties": {}
-        },
-        "capabilities": {
-          "type": "array",
-          "description": "List of capabilities",
-          "items": {
-            "type": "string"
-          }
-        },
-        "hierarchyLevel": {
-          "type": "string",
-          "description": "Hierarchy Level"
-        },
-        "solutionScope": {
-          "type": "string",
-          "description": "Scope of the target resource",
-          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
-        },
-        "state": {
-          "$ref": "#/definitions/ResourceState",
-          "description": "State of resource"
-        }
-      }
-    },
     "TargetSnapshot": {
       "type": "object",
       "description": "Target Snapshot",
@@ -10458,18 +10405,71 @@
     },
     "TargetUpdate": {
       "type": "object",
-      "description": "Target Resource. Represents a resource to be deployed on the edge.",
+      "description": "The type used for update operations of the Target.",
       "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
         "properties": {
-          "$ref": "#/definitions/TargetPropertiesUpdate",
+          "$ref": "#/definitions/TargetUpdateProperties",
           "description": "The resource-specific properties for this resource."
         }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+      }
+    },
+    "TargetUpdateProperties": {
+      "type": "object",
+      "description": "The updatable properties of the Target.",
+      "properties": {
+        "description": {
+          "type": "string",
+          "description": "Description of target"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of target"
+        },
+        "contextId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ArmId of Context",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Edge/contexts"
+              }
+            ]
+          }
+        },
+        "targetSpecification": {
+          "type": "object",
+          "description": "target spec",
+          "additionalProperties": {}
+        },
+        "capabilities": {
+          "type": "array",
+          "description": "List of capabilities",
+          "items": {
+            "type": "string"
+          }
+        },
+        "hierarchyLevel": {
+          "type": "string",
+          "description": "Hierarchy Level"
+        },
+        "solutionScope": {
+          "type": "string",
+          "description": "Scope of the target resource",
+          "pattern": "^[a-z0-9]([-a-z0-9]*[a-z0-9])?$"
+        },
+        "state": {
+          "$ref": "#/definitions/ResourceState",
+          "description": "State of resource"
         }
-      ]
+      }
     },
     "TaskOption": {
       "type": "object",
