@@ -515,7 +515,7 @@ op bmsPrepareDataMoveOperationResultGet(
 
 @@override(BMSPrepareDataMoveOperationResult.get,
   bmsPrepareDataMoveOperationResultGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // BackupEngines operations
@@ -542,7 +542,7 @@ op backupEnginesGet(
   $skipToken?: string,
 ): BackupEngineBaseResource;
 
-@@override(BackupEngines.get, backupEnginesGet, "java,go,python");
+@@override(BackupEngines.get, backupEnginesGet, "java,go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -562,7 +562,7 @@ op backupEnginesList(
   $skipToken?: string,
 ): ArmResponse<BackupEngineBaseResourceList>;
 
-@@override(BackupEngines.list, backupEnginesList, "java,go,python");
+@@override(BackupEngines.list, backupEnginesList, "java,go,python,javascript");
 
 // BackupJobs operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -583,7 +583,7 @@ op backupJobsList(
   $skipToken?: string,
 ): ArmResponse<JobResourceList>;
 
-@@override(BackupJobs.list, backupJobsList, "java,go,python");
+@@override(BackupJobs.list, backupJobsList, "java,go,python,javascript");
 
 // BackupPolicies operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -602,7 +602,10 @@ op backupPoliciesList(
   $filter?: string,
 ): ArmResponse<ProtectionPolicyResourceList>;
 
-@@override(BackupPolicies.list, backupPoliciesList, "java,go,python");
+@@override(BackupPolicies.list,
+  backupPoliciesList,
+  "java,go,python,javascript"
+);
 
 // BackupResourceEncryptionConfigs operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -625,7 +628,7 @@ op backupResourceEncryptionConfigsGet(
 
 @@override(BackupResourceEncryptionConfigs.get,
   backupResourceEncryptionConfigsGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -651,7 +654,7 @@ op backupResourceEncryptionConfigsUpdate(
 
 @@override(BackupResourceEncryptionConfigs.update,
   backupResourceEncryptionConfigsUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // BackupResourceStorageConfigsNonCRR operations
@@ -679,7 +682,7 @@ op backupResourceStorageConfigsNonCRRGet(
 
 @@override(BackupResourceStorageConfigsNonCRR.get,
   backupResourceStorageConfigsNonCRRGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -709,7 +712,7 @@ op backupResourceStorageConfigsNonCRRPatch(
 
 @@override(BackupResourceStorageConfigsNonCRR.patch,
   backupResourceStorageConfigsNonCRRPatch,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -739,7 +742,7 @@ op backupResourceStorageConfigsNonCRRUpdate(
 
 @@override(BackupResourceStorageConfigsNonCRR.update,
   backupResourceStorageConfigsNonCRRUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -769,7 +772,7 @@ op backupResourceStorageConfigsNonCRRBmsPrepareDataMove(
 
 @@override(BackupResourceStorageConfigsNonCRR.bmsPrepareDataMove,
   backupResourceStorageConfigsNonCRRBmsPrepareDataMove,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -799,7 +802,7 @@ op backupResourceStorageConfigsNonCRRBmsTriggerDataMove(
 
 @@override(BackupResourceStorageConfigsNonCRR.bmsTriggerDataMove,
   backupResourceStorageConfigsNonCRRBmsTriggerDataMove,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // BackupResourceVaultConfigs operations
@@ -823,7 +826,7 @@ op backupResourceVaultConfigsGet(
 
 @@override(BackupResourceVaultConfigs.get,
   backupResourceVaultConfigsGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -852,7 +855,7 @@ op backupResourceVaultConfigsPut(
 
 @@override(BackupResourceVaultConfigs.put,
   backupResourceVaultConfigsPut,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -881,7 +884,7 @@ op backupResourceVaultConfigsUpdate(
 
 @@override(BackupResourceVaultConfigs.update,
   backupResourceVaultConfigsUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // BackupWorkloadItems operations
@@ -914,7 +917,10 @@ op backupWorkloadItemsList(
   body: void,
 ): ArmResponse<WorkloadItemResourceList>;
 
-@@override(BackupWorkloadItems.list, backupWorkloadItemsList, "java,go,python");
+@@override(BackupWorkloadItems.list,
+  backupWorkloadItemsList,
+  "java,go,python,javascript"
+);
 
 // Backups operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -946,7 +952,7 @@ op backupsTrigger(
   parameters: BackupRequestResource,
 ): void;
 
-@@override(Backups.trigger, backupsTrigger, "java,go,python");
+@@override(Backups.trigger, backupsTrigger, "java,go,python,javascript");
 
 // RecoveryPoints operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -979,7 +985,7 @@ op recoveryPointsGet(
   recoveryPointId: string,
 ): RecoveryPointResource;
 
-@@override(RecoveryPoints.get, recoveryPointsGet, "java,go,python");
+@@override(RecoveryPoints.get, recoveryPointsGet, "java,go,python,javascript");
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1010,7 +1016,10 @@ op recoveryPointsList(
   $filter?: string,
 ): ArmResponse<RecoveryPointResourceList>;
 
-@@override(RecoveryPoints.list, recoveryPointsList, "java,go,python");
+@@override(RecoveryPoints.list,
+  recoveryPointsList,
+  "java,go,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1047,7 +1056,7 @@ op recoveryPointsMoveRecoveryPoint(
 
 @@override(RecoveryPoints.moveRecoveryPoint,
   recoveryPointsMoveRecoveryPoint,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // RecoveryPointsRecommendedForMove operations
@@ -1082,7 +1091,7 @@ op recoveryPointsRecommendedForMoveList(
 
 @@override(RecoveryPointsRecommendedForMove.list,
   recoveryPointsRecommendedForMoveList,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // BackupResourceConfigOperationStatuses operations
@@ -1110,7 +1119,7 @@ op backupResourceConfigOperationStatusesGetOperationStatus(
 
 @@override(BackupResourceConfigOperationStatuses.getOperationStatus,
   backupResourceConfigOperationStatusesGetOperationStatus,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ExportJobsOperationResults operations
@@ -1137,7 +1146,7 @@ op exportJobsOperationResultsGet(
 
 @@override(ExportJobsOperationResults.get,
   exportJobsOperationResultsGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ItemLevelRecoveryConnections operations
@@ -1176,7 +1185,7 @@ op itemLevelRecoveryConnectionsProvision(
 
 @@override(ItemLevelRecoveryConnections.provision,
   itemLevelRecoveryConnectionsProvision,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1214,7 +1223,7 @@ op itemLevelRecoveryConnectionsRevoke(
 
 @@override(ItemLevelRecoveryConnections.revoke,
   itemLevelRecoveryConnectionsRevoke,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // JobCancellations operations
@@ -1239,7 +1248,10 @@ op jobCancellationsTrigger(
   body: void,
 ): void;
 
-@@override(JobCancellations.trigger, jobCancellationsTrigger, "java,go,python");
+@@override(JobCancellations.trigger,
+  jobCancellationsTrigger,
+  "java,go,python,javascript"
+);
 
 // JobDetails operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1260,7 +1272,7 @@ op jobDetailsGet(
   jobName: string,
 ): JobResource;
 
-@@override(JobDetails.get, jobDetailsGet, "java,go,python");
+@@override(JobDetails.get, jobDetailsGet, "java,go,python,javascript");
 
 // JobOperationResults operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1285,7 +1297,10 @@ op jobOperationResultsGet(
   operationId: string,
 ): JobResource;
 
-@@override(JobOperationResults.get, jobOperationResultsGet, "java,go,python");
+@@override(JobOperationResults.get,
+  jobOperationResultsGet,
+  "java,go,python,javascript"
+);
 
 // PrivateEndpointConnectionResources operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1308,7 +1323,7 @@ op privateEndpointConnectionResourcesGet(
 
 @@override(PrivateEndpointConnectionResources.get,
   privateEndpointConnectionResourcesGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1334,7 +1349,7 @@ op privateEndpointConnectionResourcesPut(
 
 @@override(PrivateEndpointConnectionResources.put,
   privateEndpointConnectionResourcesPut,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1357,7 +1372,7 @@ op privateEndpointConnectionResourcesDelete(
 
 @@override(PrivateEndpointConnectionResources.delete,
   privateEndpointConnectionResourcesDelete,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // PrivateEndpointOperationStatuses operations
@@ -1385,7 +1400,7 @@ op privateEndpointOperationStatusesGetOperationStatus(
 
 @@override(PrivateEndpointOperationStatuses.getOperationStatus,
   privateEndpointOperationStatusesGetOperationStatus,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ProtectedItemOperationResults operations
@@ -1421,7 +1436,7 @@ op protectedItemOperationResultsGet(
 
 @@override(ProtectedItemOperationResults.get,
   protectedItemOperationResultsGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ProtectedItemOperationStatuses operations
@@ -1457,7 +1472,7 @@ op protectedItemOperationStatusesGet(
 
 @@override(ProtectedItemOperationStatuses.get,
   protectedItemOperationStatusesGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ProtectedItems operations
@@ -1495,7 +1510,7 @@ op protectedItemsCreateOrUpdate(
 
 @@override(ProtectedItems.createOrUpdate,
   protectedItemsCreateOrUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1524,7 +1539,10 @@ op protectedItemsDelete(
   protectedItemName: string,
 ): ArmDeletedNoContentResponse;
 
-@@override(ProtectedItems.delete, protectedItemsDelete, "java,go,python");
+@@override(ProtectedItems.delete,
+  protectedItemsDelete,
+  "java,go,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1555,7 +1573,7 @@ op protectedItemsGet(
   $filter?: string,
 ): ProtectedItemResource;
 
-@@override(ProtectedItems.get, protectedItemsGet, "java,go,python");
+@@override(ProtectedItems.get, protectedItemsGet, "java,go,python,javascript");
 
 // ProtectionContainerOperationResults operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1586,7 +1604,7 @@ op protectionContainerOperationResultsGet(
 
 @@override(ProtectionContainerOperationResults.get,
   protectionContainerOperationResultsGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ProtectionContainers operations
@@ -1617,7 +1635,7 @@ op protectionContainersRegister(
 
 @@override(ProtectionContainers.register,
   protectionContainersRegister,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1642,7 +1660,10 @@ op protectionContainersGet(
   containerName: string,
 ): ProtectionContainerResource;
 
-@@override(ProtectionContainers.get, protectionContainersGet, "java,go,python");
+@@override(ProtectionContainers.get,
+  protectionContainersGet,
+  "java,go,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1673,7 +1694,7 @@ op protectionContainersInquire(
 
 @@override(ProtectionContainers.inquire,
   protectionContainersInquire,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1700,7 +1721,7 @@ op protectionContainersUnregister(
 
 @@override(ProtectionContainers.unregister,
   protectionContainersUnregister,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ProtectionIntentResources operations
@@ -1729,7 +1750,7 @@ op protectionIntentResourcesCreateOrUpdate(
 
 @@override(ProtectionIntentResources.createOrUpdate,
   protectionIntentResourcesCreateOrUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1755,7 +1776,7 @@ op protectionIntentResourcesDelete(
 
 @@override(ProtectionIntentResources.delete,
   protectionIntentResourcesDelete,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1781,7 +1802,7 @@ op protectionIntentResourcesGet(
 
 @@override(ProtectionIntentResources.get,
   protectionIntentResourcesGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ProtectionPolicies operations
@@ -1803,7 +1824,10 @@ op protectionPoliciesGet(
   policyName: string,
 ): ProtectionPolicyResource;
 
-@@override(ProtectionPolicies.get, protectionPoliciesGet, "java,go,python");
+@@override(ProtectionPolicies.get,
+  protectionPoliciesGet,
+  "java,go,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1831,7 +1855,7 @@ op protectionPoliciesCreateOrUpdate(
 
 @@override(ProtectionPolicies.createOrUpdate,
   protectionPoliciesCreateOrUpdate,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1854,7 +1878,7 @@ op protectionPoliciesDelete(
 
 @@override(ProtectionPolicies.delete,
   protectionPoliciesDelete,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ProtectionPolicyOperationResults operations
@@ -1882,7 +1906,7 @@ op protectionPolicyOperationResultsGet(
 
 @@override(ProtectionPolicyOperationResults.get,
   protectionPolicyOperationResultsGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // ResourceGuardProxies operations
@@ -1900,7 +1924,10 @@ op resourceGuardProxiesGet(
   ...ResourceGroupParameter,
 ): ArmResponse<ResourceGuardProxyBaseResourceList>;
 
-@@override(ResourceGuardProxies.get, resourceGuardProxiesGet, "java,go,python");
+@@override(ResourceGuardProxies.get,
+  resourceGuardProxiesGet,
+  "java,go,python,javascript"
+);
 
 // ResourceGuardProxy operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1923,7 +1950,7 @@ op resourceGuardProxyDelete(
 
 @@override(ResourceGuardProxy.delete,
   resourceGuardProxyDelete,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -1944,7 +1971,10 @@ op resourceGuardProxyGet(
   resourceGuardProxyName: string,
 ): ResourceGuardProxyBaseResource;
 
-@@override(ResourceGuardProxy.get, resourceGuardProxyGet, "java,go,python");
+@@override(ResourceGuardProxy.get,
+  resourceGuardProxyGet,
+  "java,go,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1967,7 +1997,10 @@ op resourceGuardProxyPut(
   parameters: ResourceGuardProxyBaseResource,
 ): ResourceGuardProxyBaseResource;
 
-@@override(ResourceGuardProxy.put, resourceGuardProxyPut, "java,go,python");
+@@override(ResourceGuardProxy.put,
+  resourceGuardProxyPut,
+  "java,go,python,javascript"
+);
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
@@ -1992,7 +2025,7 @@ op resourceGuardProxyUnlockDelete(
 
 @@override(ResourceGuardProxy.unlockDelete,
   resourceGuardProxyUnlockDelete,
-  "java,go,python"
+  "java,go,python,javascript"
 );
 
 // Restores operations
@@ -2032,7 +2065,7 @@ op restoresTrigger(
   `x-ms-authorization-auxiliary`?: string,
 ): ArmAcceptedLroResponse;
 
-@@override(Restores.trigger, restoresTrigger, "java,go,python");
+@@override(Restores.trigger, restoresTrigger, "java,go,python,javascript");
 
 // ProtectionPolicyOperationStatuses operations
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
@@ -2059,5 +2092,5 @@ op protectionPolicyOperationStatusesGet(
 
 @@override(ProtectionPolicyOperationStatuses.get,
   protectionPolicyOperationStatusesGet,
-  "java,go,python"
+  "java,go,python,javascript"
 );
