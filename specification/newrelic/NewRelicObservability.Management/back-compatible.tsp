@@ -7,13 +7,16 @@ using NewRelic.Observability;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccountResource.properties);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrganizationResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrganizationResource.properties
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PlanDataResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PlanDataResource.properties
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResourceUpdate.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResourceUpdate.properties
+);
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRuleUpdate.properties);
@@ -52,7 +55,8 @@ using NewRelic.Observability;
 @@clientLocation(NewRelicMonitorResources.billingInfoGet, "BillingInfo");
 @@clientName(NewRelicMonitorResources.billingInfoGet, "Get");
 @@clientLocation(NewRelicMonitorResources.list, "ConnectedPartnerResources");
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResource.properties
+);
 
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRule.properties);
 

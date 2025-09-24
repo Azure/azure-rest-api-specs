@@ -26,7 +26,6 @@ model MonitoredSubscriptionProperties
   >;
 }
 
-
 @armResourceOperations
 interface MonitoredSubscriptions {
   /**

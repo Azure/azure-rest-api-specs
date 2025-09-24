@@ -41,10 +41,7 @@ interface TagRules {
    * Updates the tag rules for a specific New Relic monitor resource, allowing you to modify the rules that control which Azure resources are monitored
    */
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
-    TagRule,
-    PatchModel = TagRuleUpdate
-  >;
+  update is ArmCustomPatchSync<TagRule, PatchModel = TagRuleUpdate>;
 
   /**
    * Deletes a tag rule set for a given New Relic monitor resource, removing fine-grained control over observability based on resource tags
