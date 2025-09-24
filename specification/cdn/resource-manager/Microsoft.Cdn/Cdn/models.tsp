@@ -5768,7 +5768,7 @@ model KnowledgeSourceProperties {
    * Format or origin of the knowledge source.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  type: KnowledgeSourceType;
+  sourceType: KnowledgeSourceType;
 
   /**
    * Endpoint or location of the knowledge source.
