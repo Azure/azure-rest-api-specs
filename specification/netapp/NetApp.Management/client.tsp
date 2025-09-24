@@ -4,6 +4,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.NetApp, "NetAppManagementClient", "java");
+@@clientName(Microsoft.NetApp, "NetAppManagementClient", "python");
 
 // Fix property name case changes
 @@clientName(Microsoft.NetApp.AccountProperties.nfsV4IDDomain,

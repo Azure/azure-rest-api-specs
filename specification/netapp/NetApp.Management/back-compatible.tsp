@@ -172,3 +172,5 @@ using Microsoft.NetApp;
 @@clientLocation(NetAppResourceUsagesOperationGroup.get,
   "NetAppResourceUsages"
 );
+
+@@clientName(ApplicationType.`SAP-HANA`, "SAP_HANA", "python");
