@@ -18,14 +18,6 @@ To see additional help and options, run:
 
 ---
 
-## Swagger LintDiff Configuration
-
-When running LintDiff on this API specification, compare changes against the following base version:
-
-**Base Tag/Version for Diff:** `package-2024-04-03`
-
-To change the diff base, update this value and ensure your CI workflow references it.
-
 ## Configuration
 
 ### Basic Information
