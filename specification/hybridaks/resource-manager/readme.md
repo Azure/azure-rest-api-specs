@@ -27,7 +27,7 @@ These are the global settings for the hybridaks.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01
+tag: package-preview-2025-02
 ```
 
 ``` yaml
@@ -35,6 +35,21 @@ modelerfour:
   flatten-models: false
 ```
 
+### Tag: package-preview-2025-02
+
+These settings apply only when `--tag=package-preview-2025-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-02'
+input-file:
+  - Microsoft.HybridContainerService/preview/2025-02-01-preview/openapi.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Consistent with azure aks
+    where:
+        - $.definitions.AgentPoolProperties.properties.nodeLabels
+        - $.definitions.KubernetesVersionProperties.properties.patchVersions
+        - $.definitions.NamedAgentPoolProfile.properties.nodeLabels
+```
 ### Tag: package-2024-01
 
 These settings apply only when `--tag=package-2024-01` is specified on the command line.

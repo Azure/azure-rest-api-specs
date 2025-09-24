@@ -1,0 +1,70 @@
+{
+  "title": "VmSkuProfiles_GetVmSkus_MinimumSet_Gen",
+  "operationId": "VmSkuProfiles_GetVmSkus",
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "customLocationResourceUri": "subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/testrg/providers/Microsoft.Kubernetes/connectedClusters/test-hybridakscluster"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "values": [
+            {
+              "resourceType": "VirtualMachines",
+              "capabilities": [
+                {
+                  "name": "vCpu",
+                  "value": "2"
+                },
+                {
+                  "name": "MemoryMb",
+                  "value": "2345"
+                },
+                {
+                  "name": "DiskSizeGb",
+                  "value": "128"
+                },
+                {
+                  "name": "GpuCount",
+                  "value": "1"
+                },
+                {
+                  "name": "GpuNameType",
+                  "value": "NVIDIA Tesla T4"
+                },
+                {
+                  "name": "GpuAssignMode",
+                  "value": "1"
+                },
+                {
+                  "name": "Provider",
+                  "value": "HCI"
+                }
+              ],
+              "name": "Standard_A0",
+              "tier": "Standard",
+              "size": "A0"
+            }
+          ]
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation"
+        },
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.ExtendedLocation/customLocations/testcustomlocation/providers/Microsoft.HybridContainerService/skus/default",
+        "name": "default",
+        "type": "microsoft.hybridcontainerservice/skus",
+        "systemData": {
+          "createdBy": "usrname1",
+          "createdByType": "User",
+          "createdAt": "2024-08-26T06:06:04.872Z",
+          "lastModifiedBy": "usrname1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-26T06:06:04.872Z"
+        }
+      }
+    }
+  }
+}

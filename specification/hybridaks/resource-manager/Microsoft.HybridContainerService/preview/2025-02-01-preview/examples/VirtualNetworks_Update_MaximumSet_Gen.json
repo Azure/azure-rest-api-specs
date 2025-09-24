@@ -1,0 +1,73 @@
+{
+  "title": "VirtualNetworks_Update_MaximumSet_Gen",
+  "operationId": "VirtualNetworks_Update",
+  "parameters": {
+    "api-version": "2025-02-01-preview",
+    "subscriptionId": "a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b",
+    "resourceGroupName": "test-arcappliance-resgrp",
+    "virtualNetworkName": "test-vnet-static",
+    "properties": {
+      "tags": {
+        "tag1": "tagvalue"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "infraVnetProfile": {
+            "hci": {
+              "mocGroup": "target-group",
+              "mocLocation": "MocLocation",
+              "mocVnetName": "vnet1"
+            }
+          },
+          "vipPool": [
+            {
+              "startIP": "192.168.0.10",
+              "endIP": "192.168.0.50"
+            }
+          ],
+          "vmipPool": [
+            {
+              "startIP": "192.168.0.110",
+              "endIP": "192.168.0.130"
+            }
+          ],
+          "dnsServers": [
+            "192.168.0.1"
+          ],
+          "gateway": "192.168.0.1",
+          "ipAddressPrefix": "192.168.0.0/16",
+          "vlanID": 10,
+          "provisioningState": "Succeeded"
+        },
+        "extendedLocation": {
+          "type": "CustomLocation",
+          "name": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourcegroups/test-arcappliance-resgrp/providers/microsoft.extendedlocation/customlocations/testcustomlocation"
+        },
+        "location": "westus",
+        "id": "/subscriptions/a3e42606-29b1-4d7d-b1d9-9ff6b9d3c71b/resourceGroups/test-arcappliance-resgrp/providers/Microsoft.HybridContainerService/virtualNetworks/test-vnet-static",
+        "name": "test-vnet-static",
+        "type": "microsoft.hybridcontainerservice/virtualnetworks",
+        "tags": {
+          "tag1": "tagvalue"
+        },
+        "systemData": {
+          "createdBy": "usrname1",
+          "createdByType": "User",
+          "createdAt": "2024-08-26T06:06:04.872Z",
+          "lastModifiedBy": "usrname1",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-08-26T06:06:04.872Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
