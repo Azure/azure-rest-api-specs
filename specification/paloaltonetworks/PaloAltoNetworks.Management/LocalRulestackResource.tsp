@@ -170,6 +170,7 @@ interface LocalRulestackResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listCountries")
+  @list
   listCountries is ArmResourceActionSync<
     LocalRulestackResource,
     void,
@@ -201,6 +202,7 @@ interface LocalRulestackResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("LocalRulestacks_listPredefinedUrlCategories")
+  @list
   listPredefinedUrlCategories is ArmResourceActionSync<
     LocalRulestackResource,
     void,

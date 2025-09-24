@@ -1,6 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using PaloAltoNetworks.Cloudngfw;
 
 @@clientLocation(GlobalRulestackResources.get, "GlobalRulestack");
