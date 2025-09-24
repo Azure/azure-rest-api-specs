@@ -1,0 +1,99 @@
+{
+  "parameters": {
+    "api-version": "2024-09-01",
+    "providerNamespace": "Microsoft.Contoso",
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
+  },
+  "responses": {
+    "200": {
+      "description": "List of custom rollouts for given subscription id.",
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Contoso/canaryTesting99",
+            "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/canaryTesting99",
+            "properties": {
+              "provisioningState": "Succeeded",
+              "specification": {
+                "autoProvisionConfig": {
+                  "resourceGraph": true,
+                  "storage": true
+                },
+                "canary": {
+                  "regions": [
+                    "eastus2euap",
+                    "centraluseuap"
+                  ]
+                },
+                "refreshSubscriptionRegistration": true
+              },
+              "status": {
+                "completedRegions": [
+                  "eastus2euap",
+                  "centraluseuap"
+                ],
+                "manifestCheckinStatus": {
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
+                  "isCheckedIn": true,
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
+                }
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "name": "Microsoft.Contoso/brazilustesting",
+            "type": "Microsoft.ProviderHub/providerRegistrations/customRollouts",
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/customRollouts/brazilustesting",
+            "properties": {
+              "provisioningState": "Failed",
+              "specification": {
+                "autoProvisionConfig": {
+                  "resourceGraph": true,
+                  "storage": true
+                },
+                "canary": {
+                  "regions": [
+                    "brazilus"
+                  ]
+                },
+                "refreshSubscriptionRegistration": true
+              },
+              "status": {
+                "failedOrSkippedRegions": {
+                  "brazilus": {
+                    "code": "RolloutTimedout",
+                    "message": "Failed to rollout to specified region."
+                  }
+                },
+                "manifestCheckinStatus": {
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
+                  "isCheckedIn": true,
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
+                }
+              }
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CustomRollouts_ListByProviderRegistration",
+  "title": "CustomRollouts_ListByProviderRegistration"
+}
