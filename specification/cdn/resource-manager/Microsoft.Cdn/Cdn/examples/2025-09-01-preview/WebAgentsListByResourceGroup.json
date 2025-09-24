@@ -16,14 +16,6 @@
             "location": "WestUs",
             "properties": {
               "description": "Primary web agent for content processing",
-              "configuration": {
-                "maxConcurrentRequests": 100,
-                "retryPolicy": {
-                  "maxRetries": 3,
-                  "retryDelayInSeconds": 5
-                },
-                "timeoutInSeconds": 30
-              },
               "paths": [
                 {
                   "type": "Chat",
@@ -36,17 +28,11 @@
               ],
               "profileAgentLinks": [
                 {
-                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1",
-                  "profileName": "profile1",
-                  "resourceGroupName": "RG"
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/agents/agent1"
                 }
               ],
               "provisioningState": "Succeeded",
-              "resourceState": "Running",
               "systemPrompt": "You are a helpful AI assistant for customer support. Please provide accurate and friendly responses."
-            },
-            "sku": {
-              "name": "Standard_Microsoft"
             },
             "tags": {
               "key1": "value1"
