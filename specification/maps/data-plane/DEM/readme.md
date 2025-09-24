@@ -25,9 +25,10 @@ To see additional help and options, run:
 These are the global settings for Elevation Client.
 
 ``` yaml
+# The Azure Maps Elevation service is retired as of 2023
 title: ElevationClient
 openapi-type: data-plane
-tag: 1.0-preview
+tag: package-retired-1.0-preview
 # at some point those credentials will move away to Swagger according to [this](https://github.com/Azure/autorest/issues/3718)
 add-credentials: true
 credential-default-policy-type: BearerTokenCredentialPolicy
@@ -35,11 +36,11 @@ credential-scopes: https://atlas.microsoft.com/.default
 ```
 
 
-### Tag: 1.0-preview
+### Tag: package-retired-1.0-preview
 
-These settings apply only when `--tag=1.0-preview` is specified on the command line.
+These settings apply only when `--tag=package-retired-1.0-preview` is specified on the command line.
 
-``` yaml $(tag) == '1.0-preview'
+``` yaml $(tag) == 'package-retired-1.0-preview'
 input-file:
   - preview/1.0/elevation.json
 ```

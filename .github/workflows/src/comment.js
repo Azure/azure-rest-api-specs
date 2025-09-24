@@ -63,50 +63,38 @@ export async function commentOrUpdate(
   body,
   commentIdentifier,
 ) {
-  try {
-    // Get the authenticated user to know who we are
-    const { data: user } = await github.rest.users.getAuthenticated();
-    const authenticatedUsername = user.login;
-    const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
+  const computedBody = body + `\n<!-- ${commentIdentifier} -->`;
 
-    /** @type {IssueComment[]} */
-    const comments = await github.paginate(github.rest.issues.listComments, {
+  /** @type {IssueComment[]} */
+  const comments = await github.paginate(github.rest.issues.listComments, {
+    owner,
+    repo,
+    issue_number,
+    per_page: PER_PAGE_MAX,
+  });
+
+  const [commentId, commentBody] = parseExistingComments(comments, commentIdentifier);
+
+  if (commentId) {
+    if (commentBody === computedBody) {
+      core.info(`No update needed for comment ${commentId}.`);
+      return; // No-op if the body is the same
+    }
+    await github.rest.issues.updateComment({
+      owner,
+      repo,
+      comment_id: commentId,
+      body: computedBody,
+    });
+    core.info(`Updated existing comment ${commentId}.`);
+  } else {
+    // Create a new comment
+    const { data: newComment } = await github.rest.issues.createComment({
       owner,
       repo,
       issue_number,
-      per_page: PER_PAGE_MAX,
+      body: computedBody,
     });
-
-    // only examine the comments from user in our current GITHUB_TOKEN context
-    const existingComments = comments.filter(
-      (comment) => comment.user?.login === authenticatedUsername,
-    );
-
-    const [commentId, commentBody] = parseExistingComments(existingComments, commentIdentifier);
-
-    if (commentId) {
-      if (commentBody === computedBody) {
-        core.info(`No update needed for comment ${commentId} by ${authenticatedUsername}`);
-        return; // No-op if the body is the same
-      }
-      await github.rest.issues.updateComment({
-        owner,
-        repo,
-        comment_id: commentId,
-        body: computedBody,
-      });
-      core.info(`Updated existing comment ${commentId} by ${authenticatedUsername}`);
-    } else {
-      // Create a new comment
-      const { data: newComment } = await github.rest.issues.createComment({
-        owner,
-        repo,
-        issue_number,
-        body: computedBody,
-      });
-      core.info(`Created new comment #${newComment.id}`);
-    }
-  } catch (/** @type {any} */ error) {
-    core.error(`Failed to comment or update: ${error.message}`);
+    core.info(`Created new comment #${newComment.id}`);
   }
 }

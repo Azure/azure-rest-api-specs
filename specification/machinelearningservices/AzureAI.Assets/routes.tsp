@@ -62,6 +62,7 @@ interface Indexes {
   @doc("List the versions of an Index given the name.")
   @route("/indexes/{name}/versions")
   @get
+  @list
   list is Azure.Core.Foundations.Operation<
     {
       @doc("Name of the index.")
@@ -127,6 +128,7 @@ interface Indexes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
   @doc("List the latest version of each index. Latest is defined by most recent created by date.")
   @route("/indexes")
+  @list
   @get
   listLatest is Azure.Core.Foundations.Operation<
     {
@@ -183,6 +185,7 @@ interface Prompts {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
   @doc("List the versions of a Prompt given the name.")
+  @list
   @route("/prompts/{name}/versions")
   @get
   list is Azure.Core.Foundations.Operation<
@@ -241,6 +244,7 @@ interface Prompts {
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to define route."
+  @list
   @doc("List the latest version of each prompt. Latest is defined by most recent created by date.")
   @route("/prompts")
   @get

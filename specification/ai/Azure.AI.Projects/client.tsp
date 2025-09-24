@@ -29,13 +29,6 @@ using Azure.ClientGenerator.Core;
 // More accurate naming
 @@clientName(Azure.AI.Projects.AssetCredentialResponse, "DatasetCredential");
 
-// In Python, the emitter changes "keys" to "keys_property", since there is already
-// a "keys" method in the generated code due to usage of MutableMapping. Call it credential_keys instead.
-@@clientName(Azure.AI.Projects.CustomCredential.keys,
-  "credential_keys",
-  "python"
-);
-
 // Less generic names for C# SDK (avoid one-word class names)
 @@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
 @@clientName(Azure.AI.Projects.Deployment, "AssetDeployment", "csharp");
@@ -48,6 +41,34 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(Azure.AI.Projects.PendingUploadResponse,
   "PendingUploadResult",
+  "csharp"
+);
+
+// Less generic names for C# subclients
+@@clientName(Azure.AI.Projects.Connections, "ConnectionsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Datasets, "DatasetsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Deployments, "DeploymentsOperations", "csharp");
+@@clientName(Azure.AI.Projects.Indexes, "IndexesOperations", "csharp");
+
+// Need to explicitly make all get and list methods include the object name for C#
+@@clientName(Azure.AI.Projects.Connections.get, "getConnection", "csharp");
+@@clientName(Azure.AI.Projects.Connections.getWithCredentials,
+  "getConnectionWithCredentials",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Connections.list, "listConnections", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.getVersion, "getDataset", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.listLatest, "listDatasets", "csharp");
+@@clientName(Azure.AI.Projects.Datasets.listVersions,
+  "listDatasetVersions",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Deployments.get, "getDeployment", "csharp");
+@@clientName(Azure.AI.Projects.Deployments.list, "listDeployments", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.getVersion, "getIndex", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.listLatest, "listIndexes", "csharp");
+@@clientName(Azure.AI.Projects.Indexes.listVersions,
+  "listIndexVersions",
   "csharp"
 );
 

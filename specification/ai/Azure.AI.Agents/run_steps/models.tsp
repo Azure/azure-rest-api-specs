@@ -104,6 +104,10 @@ union RunStepType {
 
   @doc("Represents a run step that calls tools.")
   toolCalls: "tool_calls",
+
+  @doc("Represents a run step with activities information.")
+  @added(Versions.v2025_05_15_preview)
+  activities: "activities",
 }
 
 @discriminator("type")
@@ -142,6 +146,17 @@ model RunStepMessageCreationReference {
   @encodedName("application/json", "message_id")
   @doc("The ID of the message created by this run step.")
   messageId: string;
+}
+
+@doc("The detailed information associated with a run step activities.")
+@added(Versions.v2025_05_15_preview)
+model RunStepActivityDetails extends RunStepDetails {
+  @doc("The object type, which is always 'activities'.")
+  type: RunStepType.activities;
+
+  @encodedName("application/json", "activities")
+  @doc("A list of activities for this run step.")
+  activities: RunStepDetailsActivity[];
 }
 
 @doc("Possible values for the status of a run step.")
@@ -273,6 +288,17 @@ model RunStepDeltaOpenAPIObject extends RunStepDeltaDetail {
   toolCalls?: RunStepDeltaOpenAPIToolCall[];
 }
 
+/** Represents the invocation of connected agent as a part of a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaConnectedAgentToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "connected_agent". */
+  type: "connected_agent";
+
+  /** The collection of tool calls for the tool call detail item. */
+  @encodedName("application/json", "connected_agent")
+  connectedAgent: RunStepConnectedAgent;
+}
+
 /** The abstract base representation of a single tool call within a streaming run step's delta tool call details. */
 @discriminator("type")
 @added(Versions.v2025_05_01)
@@ -320,7 +346,7 @@ model RunStepDeltaCodeInterpreterToolCall extends RunStepDeltaToolCall {
   codeInterpreter?: RunStepDeltaCodeInterpreterDetailItemObject;
 }
 
-/** Represents the function data in a streaming run step MCP call.* */
+/** Represents the function data in a streaming run step MCP call. */
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaMcpToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "mcp". */
@@ -350,9 +376,30 @@ model RunStepDeltaBingGroundingToolCall extends RunStepDeltaToolCall {
   /** The object type, which is always "bing_grounding". */
   type: "bing_grounding";
 
-  @doc("Reserved for future use.")
+  @doc("The dictionary with request and response from Bing Grounding search tool.")
   @encodedName("application/json", "bing_grounding")
   bingGrounding: Record<string>;
+}
+
+@doc("Represents the Bing Custom Search tool call in a streaming run step.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaCustomBingGroundingToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'bing_custom_search'.")
+  type: "bing_custom_search";
+
+  @doc("The dictionary with request and response from Bing Custom Search tool.")
+  @encodedName("application/json", "bing_custom_search")
+  bingCustomSearch: Record<string>;
+}
+
+@doc("Represents the Azure Function tool call in a streaming run step.")
+@added(Versions.v1)
+model RunStepDeltaAzureFunctionToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'azure_function'.")
+  type: "azure_function";
+
+  @doc("Partial description of an Azure function call.")
+  azure_function: AzureFunctionToolCallDetails;
 }
 
 /** Represents the Deep research in a streaming run step. */
@@ -375,6 +422,56 @@ model RunStepDeltaAzureAISearchToolCall extends RunStepDeltaToolCall {
   @doc("Reserved for future use.")
   @encodedName("application/json", "azure_ai_search")
   azureAISearch: Record<string>;
+}
+
+/** Represents the Computer Use tool call in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaComputerUseToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "computer_use_preview". */
+  type: "computer_use_preview";
+
+  /** The computer use data for the tool call. */
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview?: RunStepDeltaComputerUseDetails;
+}
+
+/** Represents the Computer Use tool call details in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaComputerUseDetails {
+  /** The action to be performed by the computer use tool. */
+  action?: ComputerUseAction;
+
+  /** Safety checks that are pending acknowledgment by the developer. */
+  @encodedName("application/json", "pending_safety_checks")
+  pendingSafetyChecks?: SafetyCheck[];
+
+  /** The output from the computer use tool, null if outputs have not yet been submitted. */
+  output?: ComputerScreenshot;
+
+  /** Safety checks that have been acknowledged by the developer, null if outputs have not yet been submitted. */
+  @encodedName("application/json", "acknowledged_safety_checks")
+  acknowledgedSafetyChecks?: SafetyCheck[];
+}
+
+@doc("Represents the Microsoft Fabric tool call in a streaming run step.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaMicrosoftFabricToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'fabric_dataagent'")
+  type: "fabric_dataagent";
+
+  @doc("Fabric input and output.")
+  @encodedName("application/json", "fabric_dataagent")
+  microsoftFabric: Record<string>;
+}
+
+@doc("Represents the SharePoint tool call in a streaming run step.")
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaSharepointToolCall extends RunStepDeltaToolCall {
+  @doc("The object type, which is always 'sharepoint_grounding'")
+  type: "sharepoint_grounding";
+
+  @doc("SharePoint tool input and output.")
+  sharepoint_grounding: Record<string>;
 }
 
 /** Represents the function data in a streaming run step delta's function tool call. */
@@ -453,4 +550,57 @@ union RunAdditionalFieldList {
 
   /** File search result content. */
   FileSearchContents: "step_details.tool_calls[*].file_search.results[*].content",
+}
+
+/** Represents the list of activities, associated with the given step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDetailsActivity {
+  @doc("The activity type, which is always 'mcp_list_tools'.")
+  type: "mcp_list_tools";
+
+  @doc("The activity ID.")
+  id: string;
+
+  @doc("Server label.")
+  @encodedName("application/json", "server_label")
+  serverLabel: string;
+
+  @doc("The supported function list.")
+  tools: Record<ActivityFunctionDefinition>;
+}
+
+@doc("The activity definition information for a function.")
+@added(Versions.v2025_05_15_preview)
+model ActivityFunctionDefinition {
+  @doc("A description of what the function does, used by the model to choose when and how to call the function.")
+  description?: string;
+
+  @doc("The parameters the functions accepts, described as a JSON Schema object.")
+  parameters: ActivityFunctionParameters;
+}
+
+@doc("The parameters used for activity function definition.")
+@added(Versions.v2025_05_15_preview)
+model ActivityFunctionParameters {
+  @doc("The parameter type, it is always object.")
+  type: "object";
+
+  @doc("The dictionary of function arguments.")
+  properties: Record<FunctionArgument>;
+
+  @doc("The list of the required parameters.")
+  required: string[];
+
+  @doc("If true the function has additional parameters.")
+  additionalProperties?: boolean;
+}
+
+@doc("The function argument and description.")
+@added(Versions.v2025_05_15_preview)
+model FunctionArgument {
+  @doc("The type of an argument, for example 'string' or 'number'.")
+  type: string;
+
+  @doc("The argument description.")
+  description?: string;
 }
