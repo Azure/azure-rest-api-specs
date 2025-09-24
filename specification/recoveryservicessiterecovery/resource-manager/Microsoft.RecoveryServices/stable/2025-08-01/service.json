@@ -4648,8 +4648,7 @@
             "in": "path",
             "description": "The name of the container containing the protected item.",
             "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]*[A-Za-z0-9]$"
+            "type": "string"
           },
           {
             "name": "replicatedProtectedItemName",
@@ -4665,7 +4664,7 @@
             "description": "Request to update the mobility service on the protected item.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/UpdateMobilityServiceRequest"
+              "$ref": "#/definitions/ReinstallMobilityServiceRequest"
             }
           }
         ],
@@ -4682,6 +4681,12 @@
               "Location": {
                 "type": "string"
               }
+            }
+          },
+          "default": {
+            "description": "Automation error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
