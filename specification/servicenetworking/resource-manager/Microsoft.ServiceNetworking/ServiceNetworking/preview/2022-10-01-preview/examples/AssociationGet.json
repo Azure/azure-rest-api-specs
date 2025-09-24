@@ -1,0 +1,26 @@
+{
+  "parameters": {
+    "api-version": "2022-10-01-preview",
+    "subscriptionId": "subid",
+    "resourceGroupName": "rg1",
+    "trafficControllerName": "tc1",
+    "associationName": "as1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "as1",
+        "type": "Microsoft.ServiceNetworking/trafficControllers/associations",
+        "id": "/subscriptions/subid/resourcegroups/rg1/providers/Microsoft.ServiceNetworking/trafficControllers/tc1/associations/as1",
+        "location": "NorthCentralUS",
+        "properties": {
+          "associationType": "subnets",
+          "subnet": {
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.Network/virtualNetworks/vnet-tc/subnets/tc-subnet"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}

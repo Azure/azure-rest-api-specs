@@ -1118,6 +1118,51 @@
             "$ref": "./examples/Messages_UpdateMessage_MinimumSet_Gen.json"
           }
         }
+      },
+      "delete": {
+        "operationId": "Messages_Delete",
+        "description": "Deletes an existing message on an existing thread.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "threadId",
+            "in": "path",
+            "description": "Identifier of the thread.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "messageId",
+            "in": "path",
+            "description": "Identifier of the message.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/MessageDeletionStatus"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/AgentV1Error"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Messages_Delete_MaximumSet": {
+            "$ref": "./examples/Messages_Delete_MaximumSet_Gen.json"
+          },
+          "Messages_Delete_MinimumSet": {
+            "$ref": "./examples/Messages_Delete_MinimumSet_Gen.json"
+          }
+        }
       }
     },
     "/threads/{threadId}/runs": {
@@ -1725,7 +1770,7 @@
                   "type": "array",
                   "description": "A list of tools for which the outputs are being submitted",
                   "items": {
-                    "$ref": "#/definitions/ToolOutput"
+                    "$ref": "#/definitions/StructuredToolOutput"
                   },
                   "x-ms-client-name": "toolOutputs"
                 },
@@ -4526,6 +4571,35 @@
         "type"
       ]
     },
+    "MessageDeletionStatus": {
+      "type": "object",
+      "description": "The status of a thread message deletion operation.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the resource specified for deletion."
+        },
+        "deleted": {
+          "type": "boolean",
+          "description": "A value indicating whether deletion was successful."
+        },
+        "object": {
+          "type": "string",
+          "description": "The object type, which is always 'thread.message.deleted'.",
+          "enum": [
+            "thread.message.deleted"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        }
+      },
+      "required": [
+        "id",
+        "deleted",
+        "object"
+      ]
+    },
     "MessageDelta": {
       "type": "object",
       "description": "Represents the typed 'delta' payload within a streaming message delta chunk.",
@@ -6837,6 +6911,26 @@
         ]
       }
     },
+    "StructuredToolOutput": {
+      "type": "object",
+      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type for the tool output. Defaults to `function_call_output` if not provided.",
+          "default": "function_call_output"
+        },
+        "tool_call_id": {
+          "type": "string",
+          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
+          "x-ms-client-name": "toolCallId"
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
     "SubmitToolOutputsAction": {
       "type": "object",
       "description": "The details for required tool calls that must be submitted for an agent thread run to continue.",
@@ -7314,18 +7408,19 @@
     },
     "ToolOutput": {
       "type": "object",
-      "description": "The data provided during a tool outputs submission to resolve pending tool calls and allow the model to continue.",
+      "description": "The output from a function tool to be submitted.",
       "properties": {
-        "tool_call_id": {
-          "type": "string",
-          "description": "The ID of the tool call being resolved, as provided in the tool calls of a required action from a run.",
-          "x-ms-client-name": "toolCallId"
-        },
         "output": {
           "type": "string",
-          "description": "The output from the tool to be submitted."
+          "description": "The output from the function tool to be submitted."
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/StructuredToolOutput"
+        }
+      ],
+      "x-ms-discriminator-value": "function_call_output"
     },
     "ToolResources": {
       "type": "object",

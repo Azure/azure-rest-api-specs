@@ -1,0 +1,20 @@
+{
+  "title": "Delete NSP resource association",
+  "parameters": {
+    "api-version": "2024-10-01",
+    "subscriptionId": "subId",
+    "resourceGroupName": "rg1",
+    "networkSecurityPerimeterName": "nsp1",
+    "associationName": "association1",
+    "operationId": "operationId1"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{subscriptionId}/providers/Microsoft.Network/locations/{location}/networkSecurityPerimeterOperationStatuses/{operationId}?api-version={api-version}"
+      }
+    },
+    "204": {}
+  }
+}

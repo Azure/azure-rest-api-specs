@@ -175,6 +175,9 @@
           },
           "ContainerGroupsCreateWithPriority": {
             "$ref": "./examples/ContainerGroupsCreatePriority.json"
+          },
+          "ContainerGroupCreateOrUpdateWithStandbyPool": {
+            "$ref": "./examples/ContainerGroupCreateOrUpdateStandbyPool.json"
           }
         },
         "summary": "Create or update container groups.",
@@ -1453,13 +1456,13 @@
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/ContainerGroupProfileNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1501,19 +1504,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "x-ms-correlation-request-id": {
-                "type": "string"
-              },
-              "Location": {
-                "type": "string"
-              }
-            }
+          "200": {
+            "description": "OK - Delete started"
           },
           "204": {
-            "description": "No Content"
+            "description": "No Content - the specified container group profile was not found."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -1521,8 +1516,7 @@
               "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-long-running-operation": true
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}/revisions": {
@@ -1589,10 +1583,10 @@
             "$ref": "#/parameters/ContainerGroupProfileNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/RevisionNumberParameter"
           },
           {
-            "$ref": "#/parameters/RevisionNumberParameter"
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -1660,10 +1654,6 @@
     "ContainerProperties": {
       "description": "The container instance properties.",
       "type": "object",
-      "required": [
-        "image",
-        "resources"
-      ],
       "properties": {
         "image": {
           "description": "The name of the image used to create the container instance.",
@@ -1756,6 +1746,24 @@
         "securityContext": {
           "description": "The container security properties.",
           "$ref": "#/definitions/SecurityContextDefinition"
+        },
+        "configMap": {
+          "description": "The config map.",
+          "$ref": "#/definitions/ConfigMap"
+        }
+      }
+    },
+    "ConfigMap": {
+      "description": "The container config map.",
+      "type": "object",
+      "properties": {
+        "keyValuePairs": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string",
+            "description": "The list of key value pairs associated with the config map of the container."
+          },
+          "description": "The key value pairs dictionary in the config map."
         }
       }
     },
@@ -2379,11 +2387,23 @@
             "identityAcls": {
               "description": "The access control levels of the identities.",
               "$ref": "#/definitions/IdentityAcls"
+            },
+            "containerGroupProfile": {
+              "description": "The reference container group profile properties.",
+              "$ref": "#/definitions/ContainerGroupProfileReferenceDefinition"
+            },
+            "standbyPoolProfile": {
+              "description": "The reference standby pool profile properties.",
+              "$ref": "#/definitions/StandbyPoolProfileDefinition"
+            },
+            "isCreatedFromStandbyPool": {
+              "readOnly": true,
+              "type": "boolean",
+              "description": "The flag to determine whether the container group is created from standby pool."
             }
           },
           "required": [
-            "containers",
-            "osType"
+            "containers"
           ]
         }
       }
@@ -2571,12 +2591,56 @@
             "identityAcls": {
               "description": "The access control levels of the identities.",
               "$ref": "#/definitions/IdentityAcls"
+            },
+            "containerGroupProfile": {
+              "description": "The reference container group profile properties.",
+              "$ref": "#/definitions/ContainerGroupProfileReferenceDefinition"
+            },
+            "standbyPoolProfile": {
+              "description": "The reference standby pool profile properties.",
+              "$ref": "#/definitions/StandbyPoolProfileDefinition"
+            },
+            "isCreatedFromStandbyPool": {
+              "readOnly": true,
+              "type": "boolean",
+              "description": "The flag to determine whether the container group is created from standby pool."
             }
           },
           "required": [
             "containers",
             "osType"
           ]
+        }
+      }
+    },
+    "ContainerGroupProfileReferenceDefinition": {
+      "description": "The container group profile reference.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The container group profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerInstance/containerGroupProfiles/{containerGroupProfileName}'."
+        },
+        "revision": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The container group profile reference revision."
+        }
+      }
+    },
+    "StandbyPoolProfileDefinition": {
+      "description": "The standby pool profile reference.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The standby pool profile reference id.This will be an ARM resource id in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StandbyPool/standbyContainerGroupPools/{standbyPoolName}'."
+        },
+        "failContainerGroupCreateOnReuseFailure": {
+          "type": "boolean",
+          "description": "The flag to determine whether ACI should fail the create request if the container group can not be obtained from standby pool."
         }
       }
     },
@@ -4149,7 +4213,7 @@
       }
     },
     "ContainerGroupProfile": {
-      "description": "container group profile object",
+      "description": "A container group profile object",
       "type": "object",
       "properties": {
         "systemData": {
@@ -4170,6 +4234,10 @@
     "ContainerGroupProfileProperties": {
       "type": "object",
       "description": "The container group profile properties",
+      "required": [
+        "containers",
+        "osType"
+      ],
       "properties": {
         "sku": {
           "description": "The SKU for a container group.",
@@ -4268,15 +4336,17 @@
           "$ref": "#/definitions/SecurityContextDefinition"
         },
         "revision": {
+          "readOnly": true,
           "description": "Container group profile current revision number",
           "type": "integer",
-          "format": "int64"
+          "format": "int32"
         },
         "registeredRevisions": {
+          "readOnly": true,
           "type": "array",
           "items": {
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           "description": "Registered revisions are calculated at request time based off the records in the table logs."
         },
