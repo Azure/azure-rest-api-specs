@@ -139,8 +139,8 @@ model TranscribedWord {
 }
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Support streaming input files"
-@doc("Request model for transcription operation.")
-model TranscribeRequestContent {
+@doc("Multipart content payload for transcription operation.")
+model TranscriptionTranscribeContent {
   @header @doc("request content type") contentType: "multipart/form-data";
 
   @doc("The body of the multipart request.")
