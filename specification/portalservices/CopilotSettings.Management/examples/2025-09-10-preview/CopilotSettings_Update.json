@@ -1,0 +1,40 @@
+{
+  "operationId": "CopilotSettings_Update",
+  "title": "Update Copilot settings with agent mode configuration",
+  "parameters": {
+    "name": "default",
+    "api-version": "2025-09-10-preview",
+    "properties": {
+      "properties": {
+        "accessControlEnabled": false,
+        "agentMode": {
+          "registration": "Unregistered"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "accessControlEnabled": false,
+          "agentMode": {
+            "registration": "Unregistered",
+            "state": "Disabled"
+          },
+          "cosmosResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.DocumentDB/databaseAccounts/testCosmosAccount",
+          "provisioningState": "Succeeded"
+        },
+        "location": "global",
+        "identity": {
+          "type": "SystemAssigned",
+          "tenantId": "b932977f-6277-4ab7-a2cd-5bd21f07aaf4",
+          "principalId": "faabad1f-4876-463c-af9d-6ba2d2d2394c"
+        },
+        "id": "/providers/Microsoft.Portal/copilotSettings/default",
+        "name": "default",
+        "type": "Microsoft.PortalServices/copilotSettings"
+      }
+    }
+  }
+}

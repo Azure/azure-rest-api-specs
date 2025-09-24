@@ -167,6 +167,12 @@ model MachineAssistantJobProperties extends EdgeMachineJobProperties {
   @doc("The user intent to be checked on the device.")
   intent: string;
 
+  @doc("The source of the model used for analysis.")
+  source: string;
+
+  @doc("The type of model used for analysis.")
+  type: string;
+
   @doc("Machine Assistant job reported properties.")
   @visibility(Lifecycle.Read)
   reportedProperties?: MachineAssistantReportedProperties;
@@ -614,6 +620,9 @@ model DeviceConfiguration {
 
   @doc("Time configuration.")
   time?: TimeConfiguration;
+
+  @doc("Storage configuration.")
+  storage?: StorageConfiguration;
 }
 
 @doc("Network configuration.")
@@ -621,6 +630,12 @@ model NetworkConfiguration {
   @Azure.ResourceManager.identifiers(#[])
   @doc("List of network adapters.")
   networkAdapters?: NetworkAdapter[];
+}
+
+@doc("Storage configuration.")
+model StorageConfiguration {
+  @doc("Partition size.")
+  partitionSize?: string;
 }
 
 @doc("Network adapter configuration.")
