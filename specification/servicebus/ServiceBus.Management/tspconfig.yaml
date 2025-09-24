@@ -12,13 +12,13 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-servicebus"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicebus"
     namespace: "azure.mgmt.servicebus"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-servicebus-generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-servicebus-generated"
     namespace: "com.azure.resourcemanager.servicebus.generated"
     service-name: "Service Bus" # human-readable service name, whitespace allowed
     premium: false
@@ -28,7 +28,7 @@ options:
     use-object-for-unknown: true
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-servicebus"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-servicebus"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
