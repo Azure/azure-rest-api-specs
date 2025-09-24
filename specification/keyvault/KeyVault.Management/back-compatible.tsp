@@ -163,12 +163,17 @@ using Azure.Core;
 op VaultsGetDeletedCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path provider: "Microsoft.KeyVault",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version") apiVersion: string,
+  @query("api-version")
+  apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path subscriptionId: uuid,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path vault_name: string,
+  @path vaultName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path location: azureLocation,
 ): DeletedVault;
@@ -179,14 +184,20 @@ op VaultsGetDeletedCustomized(
 op VaultsPurgeDeletedCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path provider: "Microsoft.KeyVault",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query("api-version") apiVersion: string,
+  @query("api-version")
+  apiVersion: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path subscriptionId: uuid,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path vault_name: string,
+  @path vaultName: string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path location: azureLocation,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @body body: void,
 ): void;
