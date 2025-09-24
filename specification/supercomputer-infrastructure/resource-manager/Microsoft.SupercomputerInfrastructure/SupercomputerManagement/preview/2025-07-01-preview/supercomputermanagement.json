@@ -1206,6 +1206,88 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/switches/{switchName}/packetCapture": {
+      "post": {
+        "operationId": "Switches_PacketCapture",
+        "tags": [
+          "Switches"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "supercomputerName",
+            "in": "path",
+            "description": "The name of the Supercomputer",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "switchName",
+            "in": "path",
+            "description": "The name of the Switch",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SwitchPacketCaptureRequest"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SwitchPacketCaptureResult"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Switches_PacketCapture": {
+            "$ref": "./examples/Switches_PacketCapture.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SupercomputerInfrastructure/supercomputers/{supercomputerName}/switches/{switchName}/retrieveData": {
       "post": {
         "operationId": "Switches_RetrieveData",
@@ -1245,7 +1327,7 @@
             "description": "The content of the action request",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RetrieveDataRequest"
+              "$ref": "#/definitions/SwitchRetrieveDataRequest"
             }
           }
         ],
@@ -1253,7 +1335,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RetrieveDataResult"
+              "$ref": "#/definitions/SwitchRetrieveDataResult"
             }
           },
           "202": {
@@ -1413,9 +1495,19 @@
           "description": "The status of the last operation on this port.",
           "readOnly": true
         },
+        "busDeviceFunction": {
+          "type": "string",
+          "description": "The bus:device:function of the port.",
+          "readOnly": true
+        },
         "deviceId": {
           "$ref": "#/definitions/DeviceResourceId",
           "description": "The Azure resource ID of the device (e.g., NIC or Switch) this port resides on.",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the port.",
           "readOnly": true
         },
         "nameOnDevice": {
@@ -1433,11 +1525,7 @@
           "description": "The Azure resource ID of the cluster that the port is associated with, if any.",
           "readOnly": true
         }
-      },
-      "required": [
-        "deviceId",
-        "nameOnDevice"
-      ]
+      }
     },
     "DeviceLogicalPortResourceId": {
       "type": "string",
@@ -1461,7 +1549,7 @@
             "type": "Microsoft.SupercomputerInfrastructure/supercomputers/switches"
           },
           {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nics"
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nics"
           }
         ]
       }
@@ -1543,11 +1631,7 @@
         }
       },
       "required": [
-        "deviceOneId",
-        "deviceLogicalPortOneId",
-        "deviceTwoId",
-        "deviceLogicalPortTwoId",
-        "planeId"
+        "deviceOneId"
       ]
     },
     "LinkResourceId": {
@@ -1562,20 +1646,14 @@
         ]
       }
     },
-    "NetworkType": {
+    "MaintenanceRequestResourceId": {
       "type": "string",
-      "description": "The type of the network the switch resides in.",
-      "enum": [
-        "Backend"
-      ],
-      "x-ms-enum": {
-        "name": "NetworkType",
-        "modelAsString": true,
-        "values": [
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
           {
-            "name": "Backend",
-            "value": "Backend",
-            "description": "The switch is within a backend network."
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/maintenanceRequests"
           }
         ]
       }
@@ -1620,20 +1698,32 @@
       "type": "object",
       "description": "The properties of a NIC.",
       "properties": {
-        "provisioningState": {
-          "$ref": "#/definitions/TopologicalProvisioningState",
-          "description": "The status of the last operation on this NIC.",
+        "hardwareSku": {
+          "type": "string",
+          "description": "The SKU of the physical NIC hardware.",
+          "readOnly": true
+        },
+        "macAddress": {
+          "type": "string",
+          "description": "The MAC address of the NIC.",
           "readOnly": true
         },
         "parentDeviceId": {
           "$ref": "#/definitions/NodeResourceId",
           "description": "The Azure resource ID of the device that the NIC resides within.",
           "readOnly": true
+        },
+        "busDeviceFunction": {
+          "type": "string",
+          "description": "The bus:device:function of the NIC.",
+          "readOnly": true
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/TopologicalProvisioningState",
+          "description": "The status of the last operation on this NIC.",
+          "readOnly": true
         }
-      },
-      "required": [
-        "parentDeviceId"
-      ]
+      }
     },
     "Node": {
       "type": "object",
@@ -1675,6 +1765,26 @@
       "type": "object",
       "description": "The properties of a node.",
       "properties": {
+        "assetId": {
+          "type": "string",
+          "description": "The asset ID of the node.",
+          "readOnly": true
+        },
+        "hardwareSku": {
+          "type": "string",
+          "description": "The SKU of the physical node hardware.",
+          "readOnly": true
+        },
+        "hostname": {
+          "type": "string",
+          "description": "The hostname of the node in the logical network.",
+          "readOnly": true
+        },
+        "nodeId": {
+          "type": "string",
+          "description": "The unique identifier of the logical node.",
+          "readOnly": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/TopologicalProvisioningState",
           "description": "The status of the last operation on this node.",
@@ -1689,7 +1799,7 @@
       "x-ms-arm-id-details": {
         "allowedResources": [
           {
-            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/nodes"
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nodes"
           }
         ]
       }
@@ -1746,59 +1856,35 @@
         }
       }
     },
-    "RetrieveDataOutput": {
-      "type": "object",
-      "description": "The output of a retrieve data action over a switch.",
-      "properties": {
-        "path": {
-          "type": "string",
-          "description": "The gNMI path of the read operation."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the read operation."
-        }
-      },
-      "required": [
-        "path",
-        "value"
-      ]
-    },
-    "RetrieveDataRequest": {
-      "type": "object",
-      "description": "The request body a retrieve data action over a switch.",
-      "properties": {
-        "paths": {
-          "type": "array",
-          "description": "The gNMI paths of the read operation.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "paths"
-      ]
-    },
-    "RetrieveDataResult": {
-      "type": "object",
-      "description": "The result of a retrieve data action over a switch.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The value of the retrieve data action.",
-          "items": {
-            "$ref": "#/definitions/RetrieveDataOutput"
+    "ReportableWithinMaintenanceRequestResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/clusters"
           },
-          "x-ms-identifiers": [
-            "path",
-            "value"
-          ]
-        }
-      },
-      "required": [
-        "value"
-      ]
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/switches"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nics"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/links"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/racks/nodes"
+          },
+          {
+            "type": "Microsoft.SupercomputerInfrastructure/supercomputers/deviceLogicalPorts"
+          },
+          {
+            "type": "Microsoft.Compute/virtualMachines"
+          }
+        ]
+      }
     },
     "Supercomputer": {
       "type": "object",
@@ -1845,6 +1931,14 @@
           "description": "The identifier of the physical site where the supercomputer hardware is located.",
           "readOnly": true
         },
+        "tier": {
+          "$ref": "#/definitions/SupercomputerTier",
+          "description": "The SKU of the supercomputer.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "provisioningState": {
           "$ref": "#/definitions/SupercomputerProvisioningState",
           "description": "The status of the last operation on the supercomputer.",
@@ -1852,7 +1946,7 @@
         }
       },
       "required": [
-        "siteId"
+        "tier"
       ]
     },
     "SupercomputerPropertiesUpdate": {
@@ -1920,6 +2014,24 @@
       },
       "readOnly": true
     },
+    "SupercomputerTier": {
+      "type": "string",
+      "description": "The available tiers of supercomputers.",
+      "enum": [
+        "Fairwater"
+      ],
+      "x-ms-enum": {
+        "name": "SupercomputerTier",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Fairwater",
+            "value": "Fairwater",
+            "description": "A supercomputer in a Fairwater site."
+          }
+        ]
+      }
+    },
     "SupercomputerUpdate": {
       "type": "object",
       "description": "A supercomputer composed of topological entities.",
@@ -1971,6 +2083,245 @@
         "value"
       ]
     },
+    "SwitchNetworkType": {
+      "type": "string",
+      "description": "The type of the network the switch resides in.",
+      "enum": [
+        "BackendScaleUp",
+        "BackendScaleOut",
+        "Frontend"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchNetworkType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "BackendScaleUp",
+            "value": "BackendScaleUp",
+            "description": "The switch is within a scale-up backend network."
+          },
+          {
+            "name": "BackendScaleOut",
+            "value": "BackendScaleOut",
+            "description": "The switch is within a scale-out backend network."
+          },
+          {
+            "name": "Frontend",
+            "value": "Frontend",
+            "description": "The switch is within a frontend network."
+          }
+        ]
+      }
+    },
+    "SwitchPacketCaptureMatchRule": {
+      "type": "object",
+      "description": "A match rule to filter packets upon capture.",
+      "properties": {
+        "destinationIpPrefix": {
+          "type": "string",
+          "description": "The allowed destination prefix of the packets to capture."
+        },
+        "destinationPort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The allowed destination port of the packets to capture."
+        },
+        "dscp": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The differentiated services code point (DSCP) of the packets to match."
+        },
+        "protocol": {
+          "$ref": "#/definitions/SwitchPacketCaptureMatchRuleProtocol",
+          "description": "The header protocol of the packets to capture."
+        },
+        "sourceIpPrefix": {
+          "type": "string",
+          "description": "The allowed source prefix of the packets to capture."
+        },
+        "sourcePort": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The allowed source port of the packets to capture."
+        },
+        "tcpFlags": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The TCP flags of the packets to capture."
+        }
+      }
+    },
+    "SwitchPacketCaptureMatchRuleProtocol": {
+      "type": "string",
+      "description": "The available header protocols for packet captures.",
+      "enum": [
+        "Ipv4",
+        "Ipv6",
+        "Tcp",
+        "Udp",
+        "Icmp"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchPacketCaptureMatchRuleProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Ipv4",
+            "value": "Ipv4",
+            "description": "Match over IPv4 headers."
+          },
+          {
+            "name": "Ipv6",
+            "value": "Ipv6",
+            "description": "Match over IPv6 headers."
+          },
+          {
+            "name": "Tcp",
+            "value": "Tcp",
+            "description": "Match over TCP headers."
+          },
+          {
+            "name": "Udp",
+            "value": "Udp",
+            "description": "Match over UDP headers."
+          },
+          {
+            "name": "Icmp",
+            "value": "Icmp",
+            "description": "Match over ICMP headers."
+          }
+        ]
+      }
+    },
+    "SwitchPacketCaptureRequest": {
+      "type": "object",
+      "description": "The request body for a packet capture action over a switch.",
+      "properties": {
+        "destinationLocation": {
+          "type": "string",
+          "description": "The location to store captured packets, such as a Storage Account Blob URI."
+        },
+        "durationInSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The duration of the packet capture in seconds."
+        },
+        "interfaces": {
+          "type": "array",
+          "description": "The interfaces over which to capture packets.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "matchRules": {
+          "type": "array",
+          "description": "The match rules to apply to the packet capture.",
+          "items": {
+            "$ref": "#/definitions/SwitchPacketCaptureMatchRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "trafficDirection": {
+          "$ref": "#/definitions/SwitchPacketCaptureTrafficDirection",
+          "description": "The traffic direction to capture."
+        }
+      },
+      "required": [
+        "destinationLocation",
+        "durationInSeconds",
+        "interfaces",
+        "matchRules",
+        "trafficDirection"
+      ]
+    },
+    "SwitchPacketCaptureResult": {
+      "type": "object",
+      "description": "The result of a packet capture action over a switch.",
+      "properties": {
+        "faultCode": {
+          "type": "string",
+          "description": "The fault code, if the operation failed."
+        },
+        "faultMessage": {
+          "type": "string",
+          "description": "The fault message, if the operation failed."
+        },
+        "status": {
+          "$ref": "#/definitions/SwitchPacketCaptureResultStatus",
+          "description": "The status of the packet capture action."
+        }
+      },
+      "required": [
+        "status"
+      ]
+    },
+    "SwitchPacketCaptureResultStatus": {
+      "type": "string",
+      "description": "The status of a packet capture action over a switch.",
+      "enum": [
+        "Accepted",
+        "Running",
+        "Succeeded",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchPacketCaptureResultStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "The packet capture request has been accepted."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The packet capture is still in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The packet capture completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The packet capture failed."
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "SwitchPacketCaptureTrafficDirection": {
+      "type": "string",
+      "description": "The traffic directions to filter over when performing packet capture.",
+      "enum": [
+        "All",
+        "Egress",
+        "Ingress"
+      ],
+      "x-ms-enum": {
+        "name": "SwitchPacketCaptureTrafficDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Match all traffic."
+          },
+          {
+            "name": "Egress",
+            "value": "Egress",
+            "description": "Match only egress traffic from the switch."
+          },
+          {
+            "name": "Ingress",
+            "value": "Ingress",
+            "description": "Match only ingress traffic to the switch."
+          }
+        ]
+      }
+    },
     "SwitchProperties": {
       "type": "object",
       "description": "The properties of a switch.",
@@ -1980,8 +2331,13 @@
           "description": "The status of the last operation on this switch",
           "readOnly": true
         },
+        "hardwareSku": {
+          "type": "string",
+          "description": "The SKU of the switch hardware.",
+          "readOnly": true
+        },
         "networkType": {
-          "$ref": "#/definitions/NetworkType",
+          "$ref": "#/definitions/SwitchNetworkType",
           "description": "The network type of the switch.",
           "readOnly": true
         },
@@ -1990,9 +2346,68 @@
           "description": "The Azure resource ID of the cluster that the switch is associated with, if any.",
           "readOnly": true
         }
+      }
+    },
+    "SwitchRetrieveDataOutput": {
+      "type": "object",
+      "description": "The output of a retrieve data action over a switch.",
+      "properties": {
+        "faultCode": {
+          "type": "string",
+          "description": "The fault code, if the operation failed."
+        },
+        "faultMessage": {
+          "type": "string",
+          "description": "The fault message, if the operation failed."
+        },
+        "path": {
+          "type": "string",
+          "description": "The gNMI path of the read operation."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the read operation."
+        }
       },
       "required": [
-        "networkType"
+        "path",
+        "value"
+      ]
+    },
+    "SwitchRetrieveDataRequest": {
+      "type": "object",
+      "description": "The request body a retrieve data action over a switch.",
+      "properties": {
+        "paths": {
+          "type": "array",
+          "description": "The gNMI paths of the read operation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "paths"
+      ]
+    },
+    "SwitchRetrieveDataResult": {
+      "type": "object",
+      "description": "The result of a retrieve data action over a switch.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The value of the retrieve data action.",
+          "items": {
+            "$ref": "#/definitions/SwitchRetrieveDataOutput"
+          },
+          "x-ms-identifiers": [
+            "path",
+            "value"
+          ]
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "TopologicalProvisioningState": {
@@ -2031,6 +2446,18 @@
         ]
       },
       "readOnly": true
+    },
+    "WorkloadImpactResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Impact/workloadImpacts"
+          }
+        ]
+      }
     }
   },
   "parameters": {}
