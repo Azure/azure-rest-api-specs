@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Kubernetes;
@@ -51,7 +53,22 @@ interface ConnectedClusters {
    * API to update certain properties of the connected cluster resource
    */
   @patch(#{ implicitOptionality: false })
+  @removed(Versions.v2025_12_01_preview)
+  @sharedRoute
   update is ArmCustomPatchSync<
+    ConnectedCluster,
+    PatchModel = ConnectedClusterPatch
+  >;
+
+  /**
+   * API to update certain properties of the connected cluster resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "Keep explicit operationId for back-compat"
+  @patch(#{ implicitOptionality: false })
+  @added(Versions.v2025_12_01_preview)
+  @sharedRoute
+  @operationId("ConnectedCluster_Update")
+  updateAsync is ArmCustomPatchAsync<
     ConnectedCluster,
     PatchModel = ConnectedClusterPatch
   >;
@@ -103,6 +120,9 @@ interface ConnectedClusters {
 @@doc(ConnectedClusters.update::parameters.properties,
   "Parameters supplied to update Connected Cluster."
 );
+@@doc(ConnectedClusters.updateAsync::parameters.properties,
+  "Parameters supplied to update Connected Cluster."
+);
 @@doc(ConnectedClusters.listClusterUserCredential::parameters.body,
   "ListClusterUserCredential properties"
 );
@@ -116,6 +136,7 @@ interface ConnectedClusters {
   "Register a new Kubernetes cluster with Azure Resource Manager."
 );
 @@summary(ConnectedClusters.update, "Updates a connected cluster.");
+@@summary(ConnectedClusters.updateAsync, "Updates a connected cluster.");
 @@summary(ConnectedClusters.delete, "Delete a connected cluster.");
 @@summary(ConnectedClusters.listClusterUserCredential,
   "Gets cluster user credentials of a connected cluster"
