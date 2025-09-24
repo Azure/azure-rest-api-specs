@@ -1,4 +1,5 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.Consumption;
@@ -137,3 +138,8 @@ using TypeSpec.Http;
 @@clientName(ResourceScopeActionScope.scope, "resourceScope");
 
 @@clientName(Amount, "amount");
+
+@@clientName(Azure.ResourceManager.CommonTypes.Resource,
+  "ArmResource",
+  "python"
+);
