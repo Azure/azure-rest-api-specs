@@ -167,7 +167,6 @@ interface GlobalRulestackResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GlobalRulestack_listCountries")
-  @list
   listCountries is ArmResourceActionSync<
     GlobalRulestackResource,
     void,
