@@ -102,6 +102,13 @@ interface BackupVaultResources {
       #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @header
       `x-ms-authorization-auxiliary`?: string;
+
+      /**
+       * ID of the deleted backup vault to restore from
+       */
+      @added(Versions.v2025_09_01)
+      @header
+      `x-ms-deleted-vault-id`?: string;
     },
     LroHeaders = ArmLroLocationHeader<FinalResult = BackupVaultResource> &
       Azure.Core.Foundations.RetryAfterHeader,
@@ -292,22 +299,6 @@ interface DeletedBackupVaults {
     ...SubscriptionIdParameter,
     ...LocationParameter,
   ): Azure.Core.Page<DeletedBackupVaultResource> | ErrorResponse;
-
-  /**
-   * Undeletes a soft deleted backup vault
-   */
-  @post
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults/{deletedVaultName}/undelete")
-  undelete(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationParameter,
-
-    /**
-     * Name of the deleted backup vault
-     */
-    @path deletedVaultName: string,
-  ): ArmResponse<BackupVaultResource> | ErrorResponse | ArmAcceptedLroResponse<"Location">;
 }
 
 @@doc(BackupVaultResource.name, "The name of the backup vault.");

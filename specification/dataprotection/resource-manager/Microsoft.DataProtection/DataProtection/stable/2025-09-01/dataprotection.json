@@ -324,67 +324,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults/{deletedVaultName}/undelete": {
-      "post": {
-        "operationId": "DeletedBackupVaults_Undelete",
-        "description": "Undeletes a soft deleted backup vault",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
-          },
-          {
-            "name": "deletedVaultName",
-            "in": "path",
-            "description": "Name of the deleted backup vault",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/BackupVaultResource"
-            }
-          },
-          "202": {
-            "description": "Location",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Undelete a soft deleted backup vault": {
-            "$ref": "./examples/DeletedBackupVaults_Undelete.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/operationResults/{operationId}": {
       "get": {
         "operationId": "OperationResult_Get",
@@ -644,6 +583,13 @@
           {
             "name": "x-ms-authorization-auxiliary",
             "in": "header",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "x-ms-deleted-vault-id",
+            "in": "header",
+            "description": "ID of the deleted backup vault to restore from",
             "required": false,
             "type": "string"
           },
