@@ -38,13 +38,7 @@
   },
   "tags": [
     {
-      "name": "Ingestion Management"
-    },
-    {
       "name": "SpatioTemporal Asset Catalog (STAC) API"
-    },
-    {
-      "name": "Ingestion Sources"
     },
     {
       "name": "STAC Collection Configuration"
@@ -69,6 +63,12 @@
     },
     {
       "name": "Sign an HREF for read access"
+    },
+    {
+      "name": "Ingestion Management"
+    },
+    {
+      "name": "Ingestion Sources"
     }
   ],
   "paths": {
@@ -7271,7 +7271,7 @@
                   "type": "array",
                   "description": "The items on the page",
                   "items": {
-                    "$ref": "#/definitions/Ingestions.IngestionDefinition"
+                    "$ref": "#/definitions/IngestionDefinition"
                   }
                 },
                 "nextLink": {
@@ -7323,7 +7323,7 @@
             "description": "Definition of the ingestion",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionDefinition"
+              "$ref": "#/definitions/IngestionDefinition"
             }
           }
         ],
@@ -7331,7 +7331,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionDefinition"
+              "$ref": "#/definitions/IngestionDefinition"
             },
             "headers": {
               "location": {
@@ -7376,14 +7376,14 @@
             "$ref": "#/parameters/CollectionParameters.collectionId"
           },
           {
-            "$ref": "#/parameters/Ingestions.IngestionParameters.ingestionId"
+            "$ref": "#/parameters/IngestionParameters.ingestionId"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionDefinition"
+              "$ref": "#/definitions/IngestionDefinition"
             }
           },
           "default": {
@@ -7422,7 +7422,7 @@
             "$ref": "#/parameters/CollectionParameters.collectionId"
           },
           {
-            "$ref": "#/parameters/Ingestions.IngestionParameters.ingestionId"
+            "$ref": "#/parameters/IngestionParameters.ingestionId"
           },
           {
             "name": "definition",
@@ -7430,7 +7430,7 @@
             "description": "Ingestion properties to update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionDefinitionUpdate"
+              "$ref": "#/definitions/IngestionDefinitionUpdate"
             }
           }
         ],
@@ -7438,7 +7438,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionDefinition"
+              "$ref": "#/definitions/IngestionDefinition"
             }
           },
           "default": {
@@ -7474,7 +7474,7 @@
             "$ref": "#/parameters/CollectionParameters.collectionId"
           },
           {
-            "$ref": "#/parameters/Ingestions.IngestionParameters.ingestionId"
+            "$ref": "#/parameters/IngestionParameters.ingestionId"
           }
         ],
         "responses": {
@@ -7535,7 +7535,7 @@
             "$ref": "#/parameters/CollectionParameters.collectionId"
           },
           {
-            "$ref": "#/parameters/Ingestions.IngestionParameters.ingestionId"
+            "$ref": "#/parameters/IngestionParameters.ingestionId"
           },
           {
             "$ref": "#/parameters/OdataQuery.top"
@@ -7555,7 +7555,7 @@
                   "type": "array",
                   "description": "The items on the page",
                   "items": {
-                    "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRun"
+                    "$ref": "#/definitions/IngestionRun"
                   }
                 },
                 "nextLink": {
@@ -7602,14 +7602,14 @@
             "$ref": "#/parameters/CollectionParameters.collectionId"
           },
           {
-            "$ref": "#/parameters/Ingestions.IngestionParameters.ingestionId"
+            "$ref": "#/parameters/IngestionParameters.ingestionId"
           }
         ],
         "responses": {
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRun"
+              "$ref": "#/definitions/IngestionRun"
             },
             "headers": {
               "location": {
@@ -7654,17 +7654,17 @@
             "$ref": "#/parameters/CollectionParameters.collectionId"
           },
           {
-            "$ref": "#/parameters/Ingestions.IngestionParameters.ingestionId"
+            "$ref": "#/parameters/IngestionParameters.ingestionId"
           },
           {
-            "$ref": "#/parameters/Ingestions.IngestionRuns.IngestionRunParameters.runId"
+            "$ref": "#/parameters/IngestionRunParameters.runId"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRun"
+              "$ref": "#/definitions/IngestionRun"
             }
           },
           "default": {
@@ -7716,7 +7716,7 @@
                   "type": "array",
                   "description": "The items on the page",
                   "items": {
-                    "$ref": "#/definitions/IngestionSources.IngestionSourceSummary"
+                    "$ref": "#/definitions/IngestionSourceSummary"
                   }
                 },
                 "nextLink": {
@@ -7765,7 +7765,7 @@
             "description": "Definition of the ingestion source",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IngestionSources.IngestionSource"
+              "$ref": "#/definitions/IngestionSource"
             }
           }
         ],
@@ -7773,7 +7773,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/IngestionSources.IngestionSource"
+              "$ref": "#/definitions/IngestionSource"
             },
             "headers": {
               "location": {
@@ -7812,7 +7812,7 @@
         "description": "Get an ingestion source in a geo-catalog",
         "parameters": [
           {
-            "$ref": "#/parameters/IngestionSources.IngestionSourceParameters"
+            "$ref": "#/parameters/IngestionSourceParameters"
           },
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -7822,7 +7822,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IngestionSources.IngestionSource"
+              "$ref": "#/definitions/IngestionSource"
             }
           },
           "default": {
@@ -7869,7 +7869,7 @@
             "description": "Definition of the ingestion source",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IngestionSources.IngestionSource"
+              "$ref": "#/definitions/IngestionSource"
             }
           }
         ],
@@ -7877,7 +7877,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/IngestionSources.IngestionSource"
+              "$ref": "#/definitions/IngestionSource"
             },
             "headers": {
               "location": {
@@ -7890,7 +7890,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/IngestionSources.IngestionSource"
+              "$ref": "#/definitions/IngestionSource"
             },
             "headers": {
               "location": {
@@ -7986,7 +7986,7 @@
                   "type": "array",
                   "description": "The items on the page",
                   "items": {
-                    "$ref": "#/definitions/IngestionSources.ManagedIdentityMetadata"
+                    "$ref": "#/definitions/ManagedIdentityMetadata"
                   }
                 },
                 "nextLink": {
@@ -13185,216 +13185,7 @@
         "data"
       ]
     },
-    "IngestionSources.IngestionSource": {
-      "type": "object",
-      "description": "Ingestion Source",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Ingestion source id"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Created time in UTC format",
-          "readOnly": true
-        },
-        "kind": {
-          "$ref": "#/definitions/IngestionSources.IngestionSourceType",
-          "description": "Discriminator for the ingestion source"
-        }
-      },
-      "discriminator": "kind",
-      "required": [
-        "id",
-        "created",
-        "kind"
-      ]
-    },
-    "IngestionSources.IngestionSourceSummary": {
-      "type": "object",
-      "description": "Ingestion source summary",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Ingestion source id"
-        },
-        "kind": {
-          "$ref": "#/definitions/IngestionSources.IngestionSourceType",
-          "description": "Ingestion source type"
-        },
-        "created": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Created time in UTC format"
-        }
-      },
-      "required": [
-        "id",
-        "kind",
-        "created"
-      ]
-    },
-    "IngestionSources.IngestionSourceType": {
-      "type": "string",
-      "description": "Ingestion source type",
-      "enum": [
-        "SasToken",
-        "BlobManagedIdentity"
-      ],
-      "x-ms-enum": {
-        "name": "IngestionSourceType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "SharedAccessSignatureToken",
-            "value": "SasToken",
-            "description": "Azure Blob Storage SAS token"
-          },
-          {
-            "name": "BlobManagedIdentity",
-            "value": "BlobManagedIdentity",
-            "description": "Azure Blob Managed Identity"
-          }
-        ]
-      }
-    },
-    "IngestionSources.IngestionSourcesPagedResponse": {
-      "type": "object",
-      "description": "Ingestion Sources paged response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Ingestion sources",
-          "items": {
-            "$ref": "#/definitions/IngestionSources.IngestionSourceSummary"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Next page"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "IngestionSources.ManagedIdentityConnection": {
-      "type": "object",
-      "description": "Managed Identity connection information",
-      "properties": {
-        "containerUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Azure Blob Storage container URL",
-          "x-ms-client-name": "containerUri"
-        },
-        "objectId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Azure Managed Identity configured in the Geo-Catalog with access to the container"
-        }
-      },
-      "required": [
-        "containerUrl",
-        "objectId"
-      ]
-    },
-    "IngestionSources.ManagedIdentityIngestionSource": {
-      "type": "object",
-      "description": "Managed Identity ingestion source",
-      "properties": {
-        "connectionInfo": {
-          "$ref": "#/definitions/IngestionSources.ManagedIdentityConnection",
-          "description": "Managed identity connection information"
-        }
-      },
-      "required": [
-        "connectionInfo"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/IngestionSources.IngestionSource"
-        }
-      ],
-      "x-ms-discriminator-value": "BlobManagedIdentity"
-    },
-    "IngestionSources.ManagedIdentityMetadata": {
-      "type": "object",
-      "description": "Managed Identity metadata",
-      "properties": {
-        "objectId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Object id of the managed identity"
-        },
-        "resourceId": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM path or resource id of the managed identity",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-              }
-            ]
-          }
-        }
-      },
-      "required": [
-        "objectId",
-        "resourceId"
-      ]
-    },
-    "IngestionSources.SharedAccessSignatureTokenConnection": {
-      "type": "object",
-      "description": "SAS Token connection information",
-      "properties": {
-        "containerUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Azure Blob Storage container URL",
-          "x-ms-client-name": "containerUri"
-        },
-        "sasToken": {
-          "type": "string",
-          "description": "SAS token",
-          "x-ms-client-name": "haredAccessSignatureToken",
-          "x-ms-mutability": [
-            "update",
-            "create"
-          ]
-        },
-        "expiration": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Azure Blob Storage SAS token expiration in UTC format",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "containerUrl"
-      ]
-    },
-    "IngestionSources.SharedAccessSignatureTokenIngestionSource": {
-      "type": "object",
-      "description": "SAS Token ingestion source",
-      "properties": {
-        "connectionInfo": {
-          "$ref": "#/definitions/IngestionSources.SharedAccessSignatureTokenConnection",
-          "description": "SAS token connection information"
-        }
-      },
-      "required": [
-        "connectionInfo"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/IngestionSources.IngestionSource"
-        }
-      ],
-      "x-ms-discriminator-value": "SasToken"
-    },
-    "Ingestions.IngestionDefinition": {
+    "IngestionDefinition": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
       "properties": {
@@ -13404,7 +13195,7 @@
           "readOnly": true
         },
         "importType": {
-          "$ref": "#/definitions/Ingestions.IngestionType",
+          "$ref": "#/definitions/IngestionType",
           "description": "Ingestion type",
           "x-ms-mutability": [
             "read",
@@ -13435,7 +13226,7 @@
           "readOnly": true
         },
         "status": {
-          "$ref": "#/definitions/Ingestions.IngestionStatus",
+          "$ref": "#/definitions/IngestionStatus",
           "description": "Ingestion status",
           "readOnly": true
         }
@@ -13447,7 +13238,7 @@
         "status"
       ]
     },
-    "Ingestions.IngestionDefinitionUpdate": {
+    "IngestionDefinitionUpdate": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
       "properties": {
@@ -13470,7 +13261,7 @@
         }
       }
     },
-    "Ingestions.IngestionRuns.IngestionRun": {
+    "IngestionRun": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion run",
       "properties": {
@@ -13483,7 +13274,7 @@
           "description": "Run id which this run is associated to because it has been retried or rerun"
         },
         "operation": {
-          "$ref": "#/definitions/Ingestions.IngestionRuns.IngestionRunOperation",
+          "$ref": "#/definitions/IngestionRunOperation",
           "description": "Operation"
         },
         "creationTime": {
@@ -13511,7 +13302,7 @@
         "creationTime"
       ]
     },
-    "Ingestions.IngestionRuns.IngestionRunOperation": {
+    "IngestionRunOperation": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion run operation",
       "properties": {
@@ -13577,7 +13368,102 @@
         "totalFailedItems"
       ]
     },
-    "Ingestions.IngestionStatus": {
+    "IngestionSource": {
+      "type": "object",
+      "description": "Ingestion Source",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Ingestion source id"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created time in UTC format",
+          "readOnly": true
+        },
+        "kind": {
+          "$ref": "#/definitions/IngestionSourceType",
+          "description": "Discriminator for the ingestion source"
+        }
+      },
+      "discriminator": "kind",
+      "required": [
+        "id",
+        "created",
+        "kind"
+      ]
+    },
+    "IngestionSourceSummary": {
+      "type": "object",
+      "description": "Ingestion source summary",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Ingestion source id"
+        },
+        "kind": {
+          "$ref": "#/definitions/IngestionSourceType",
+          "description": "Ingestion source type"
+        },
+        "created": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Created time in UTC format"
+        }
+      },
+      "required": [
+        "id",
+        "kind",
+        "created"
+      ]
+    },
+    "IngestionSourceType": {
+      "type": "string",
+      "description": "Ingestion source type",
+      "enum": [
+        "SasToken",
+        "BlobManagedIdentity"
+      ],
+      "x-ms-enum": {
+        "name": "IngestionSourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "SharedAccessSignatureToken",
+            "value": "SasToken",
+            "description": "Azure Blob Storage SAS token"
+          },
+          {
+            "name": "BlobManagedIdentity",
+            "value": "BlobManagedIdentity",
+            "description": "Azure Blob Managed Identity"
+          }
+        ]
+      }
+    },
+    "IngestionSourcesPagedResponse": {
+      "type": "object",
+      "description": "Ingestion Sources paged response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Ingestion sources",
+          "items": {
+            "$ref": "#/definitions/IngestionSourceSummary"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "Next page"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IngestionStatus": {
       "type": "string",
       "description": "Ingestion status",
       "enum": [
@@ -13601,7 +13487,7 @@
         ]
       }
     },
-    "Ingestions.IngestionType": {
+    "IngestionType": {
       "type": "string",
       "description": "Ingestion type",
       "enum": [
@@ -14195,6 +14081,71 @@
           }
         ]
       }
+    },
+    "ManagedIdentityConnection": {
+      "type": "object",
+      "description": "Managed Identity connection information",
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Azure Blob Storage container URL",
+          "x-ms-client-name": "containerUri"
+        },
+        "objectId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Azure Managed Identity configured in the Geo-Catalog with access to the container"
+        }
+      },
+      "required": [
+        "containerUrl",
+        "objectId"
+      ]
+    },
+    "ManagedIdentityIngestionSource": {
+      "type": "object",
+      "description": "Managed Identity ingestion source",
+      "properties": {
+        "connectionInfo": {
+          "$ref": "#/definitions/ManagedIdentityConnection",
+          "description": "Managed identity connection information"
+        }
+      },
+      "required": [
+        "connectionInfo"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IngestionSource"
+        }
+      ],
+      "x-ms-discriminator-value": "BlobManagedIdentity"
+    },
+    "ManagedIdentityMetadata": {
+      "type": "object",
+      "description": "Managed Identity metadata",
+      "properties": {
+        "objectId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Object id of the managed identity"
+        },
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "ARM path or resource id of the managed identity",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+              }
+            ]
+          }
+        }
+      },
+      "required": [
+        "objectId",
+        "resourceId"
+      ]
     },
     "ManagedStorageSharedAccessSignatureToken": {
       "type": "object",
@@ -15334,6 +15285,55 @@
           }
         }
       }
+    },
+    "SharedAccessSignatureTokenConnection": {
+      "type": "object",
+      "description": "SAS Token connection information",
+      "properties": {
+        "containerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Azure Blob Storage container URL",
+          "x-ms-client-name": "containerUri"
+        },
+        "sasToken": {
+          "type": "string",
+          "description": "SAS token",
+          "x-ms-client-name": "sharedAccessSignatureToken",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "expiration": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Azure Blob Storage SAS token expiration in UTC format",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "containerUrl"
+      ]
+    },
+    "SharedAccessSignatureTokenIngestionSource": {
+      "type": "object",
+      "description": "SAS Token ingestion source",
+      "properties": {
+        "connectionInfo": {
+          "$ref": "#/definitions/SharedAccessSignatureTokenConnection",
+          "description": "SAS token connection information"
+        }
+      },
+      "required": [
+        "connectionInfo"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/IngestionSource"
+        }
+      ],
+      "x-ms-discriminator-value": "SasToken"
     },
     "SignedHrefResponse": {
       "type": "object",
@@ -17040,16 +17040,7 @@
       "format": "int32",
       "x-ms-parameter-location": "method"
     },
-    "IngestionSources.IngestionSourceParameters": {
-      "name": "id",
-      "in": "path",
-      "description": "Ingestion source id",
-      "required": true,
-      "type": "string",
-      "format": "uuid",
-      "x-ms-parameter-location": "method"
-    },
-    "Ingestions.IngestionParameters.ingestionId": {
+    "IngestionParameters.ingestionId": {
       "name": "ingestionId",
       "in": "path",
       "description": "Ingestion id",
@@ -17059,10 +17050,19 @@
       "pattern": "^[a-zA-Za0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$",
       "x-ms-parameter-location": "method"
     },
-    "Ingestions.IngestionRuns.IngestionRunParameters.runId": {
+    "IngestionRunParameters.runId": {
       "name": "runId",
       "in": "path",
       "description": "Run id",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "IngestionSourceParameters": {
+      "name": "id",
+      "in": "path",
+      "description": "Ingestion source id",
       "required": true,
       "type": "string",
       "format": "uuid",

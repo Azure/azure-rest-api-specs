@@ -21,24 +21,29 @@ model Page<T> {
   nextLink?: url;
 }
 
-@route("/inma/collections/{collectionId}/ingestions")
 @tag("Ingestion Management")
-namespace Ingestions {
+interface Ingestions {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
   @doc("Get ingestions of a catalog")
-  op list(
+  @route("/inma/collections/{collectionId}/ingestions")
+  @get
+  list(
     ...CollectionParameters,
     ...OdataQuery,
   ): Page<IngestionDefinition> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get the definition of an ingestion")
-  op get(...IngestionParameters): IngestionDefinition | ErrorResponse;
+  @route("/inma/collections/{collectionId}/ingestions/{ingestionId}")
+  @get
+  get(...IngestionParameters): IngestionDefinition | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create a new ingestion")
-  op create(
+  @route("/inma/collections/{collectionId}/ingestions")
+  @post
+  create(
     ...CollectionParameters,
 
     @doc("Definition of the ingestion")
@@ -58,8 +63,9 @@ namespace Ingestions {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Update an existing ingestion")
+  @route("/inma/collections/{collectionId}/ingestions/{ingestionId}")
   @patch(#{ implicitOptionality: true })
-  op update(
+  update(
     @doc("Content type for PATCH request")
     @header
     contentType: "application/merge-patch+json",
@@ -78,9 +84,10 @@ namespace Ingestions {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Delete an ingestion from a catalog. All runs of the ingestion will be deleted. Ingestion must not have any runs in progress or queued.")
+  @route("/inma/collections/{collectionId}/ingestions/{ingestionId}")
   @delete
   @pollingOperation(IngestionOperations.get)
-  op delete(...IngestionParameters): {
+  delete(...IngestionParameters): {
     @pollingLocation
     @doc("Url used to monitor the background operation")
     @header
@@ -97,164 +104,168 @@ namespace Ingestions {
     @body
     _: Operation;
   } | ErrorResponse;
-
-  @doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
-  model IngestionDefinition {
-    @doc("Ingestion id")
-    @visibility(Lifecycle.Read)
-    id: uuid;
-
-    @doc("Ingestion type")
-    @visibility(Lifecycle.Create, Lifecycle.Read)
-    importType: IngestionType;
-
-    @doc("Ingestion name")
-    displayName?: string;
-
-    @doc("Source catalog URL. Required for StaticCatalog ingestion type")
-    sourceCatalogUrl?: url;
-
-    @doc("Skip processing existing items in the catalog")
-    skipExistingItems?: boolean;
-
-    @doc("Keep original source assets")
-    keepOriginalAssets?: boolean;
-
-    @doc("Ingestion creation time")
-    @visibility(Lifecycle.Read)
-    creationTime: utcDateTime;
-
-    @doc("Ingestion status")
-    @visibility(Lifecycle.Read)
-    status: IngestionStatus;
-  }
-
-  @doc("Ingestion type")
-  union IngestionType {
-    string,
-
-    @doc("Static STAC Catalog")
-    StaticCatalog: "StaticCatalog",
-  }
-
-  @doc("Ingestion status")
-  union IngestionStatus {
-    string,
-
-    @doc("Ingestion accepted and ready to be run")
-    Ready: "Ready",
-
-    @doc("Ingestion is being deleting in the background")
-    Deleting: "Deleting",
-  }
-
-  @doc("Ingestion parameters")
-  model IngestionParameters is CollectionParameters {
-    @doc("Ingestion id")
-    @path
-    @maxLength(500)
-    @pattern("^[a-zA-Za0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
-    ingestionId: string;
-  }
-
-  @route("{ingestionId}/runs")
-  namespace IngestionRuns {
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
-    @doc("Get the runs of an ingestion")
-    op list(
-      ...IngestionParameters,
-      ...OdataQuery,
-    ): Page<IngestionRun> | ErrorResponse;
-
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-    @doc("Get a run of an ingestion")
-    op get(...IngestionRunParameters): IngestionRun | ErrorResponse;
-
-    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-    @doc("Create a new run of an ingestion")
-    @post
-    op create(...IngestionParameters): {
-      @doc("Url of the created ingestion run")
-      @header
-      location: url;
-
-      @statusCode statusCode: 201;
-
-      @doc("Ingestion run")
-      @body
-      _: IngestionRun;
-    } | ErrorResponse;
-
-    @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
-    model IngestionRun {
-      @doc("Run id")
-      id: uuid;
-
-      @doc("Run id which this run is associated to because it has been retried or rerun")
-      parentRunId?: uuid;
-
-      @doc("Operation")
-      operation: IngestionRunOperation;
-
-      @doc("Creation time")
-      creationTime: utcDateTime;
-
-      @doc("URL of the source catalog")
-      sourceCatalogUrl?: url;
-
-      @doc("Skip any item that already exist in the GeoCatalog")
-      skipExistingItems?: boolean;
-
-      @doc("Keep original source assets")
-      keepOriginalAssets?: boolean;
-    }
-
-    @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run operation")
-    model IngestionRunOperation {
-      @doc("Operation id")
-      id: uuid;
-
-      @doc("Operation status")
-      status: OperationStatus;
-
-      @doc("The UTC time at which the operation was created")
-      creationTime: utcDateTime;
-
-      @doc("The history of the operation status in time")
-      statusHistory: OperationStatusHistoryItem[];
-
-      @doc("The UTC time at which the operation was started")
-      startTime?: utcDateTime;
-
-      @doc("The UTC time at which the operation finished its execution")
-      finishTime?: utcDateTime;
-
-      @doc("The number of total items to be processed")
-      totalItems: int32;
-
-      @doc("The number of items pending to be processed")
-      totalPendingItems: int32;
-
-      @doc("The number of items successfully processed")
-      totalSuccessfulItems: int32;
-
-      @doc("The number of items that have failed to be processed")
-      totalFailedItems: int32;
-    }
-
-    @doc("Ingestion run parameters")
-    model IngestionRunParameters is IngestionParameters {
-      @doc("Run id")
-      @path
-      runId: uuid;
-    }
-  }
 }
 
-@route("/stac/collections/{collectionId}/items")
+@doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
+model IngestionDefinition {
+  @doc("Ingestion id")
+  @visibility(Lifecycle.Read)
+  id: uuid;
+
+  @doc("Ingestion type")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  importType: IngestionType;
+
+  @doc("Ingestion name")
+  displayName?: string;
+
+  @doc("Source catalog URL. Required for StaticCatalog ingestion type")
+  sourceCatalogUrl?: url;
+
+  @doc("Skip processing existing items in the catalog")
+  skipExistingItems?: boolean;
+
+  @doc("Keep original source assets")
+  keepOriginalAssets?: boolean;
+
+  @doc("Ingestion creation time")
+  @visibility(Lifecycle.Read)
+  creationTime: utcDateTime;
+
+  @doc("Ingestion status")
+  @visibility(Lifecycle.Read)
+  status: IngestionStatus;
+}
+
+@doc("Ingestion type")
+union IngestionType {
+  string,
+
+  @doc("Static STAC Catalog")
+  StaticCatalog: "StaticCatalog",
+}
+
+@doc("Ingestion status")
+union IngestionStatus {
+  string,
+
+  @doc("Ingestion accepted and ready to be run")
+  Ready: "Ready",
+
+  @doc("Ingestion is being deleting in the background")
+  Deleting: "Deleting",
+}
+
+@doc("Ingestion parameters")
+model IngestionParameters is CollectionParameters {
+  @doc("Ingestion id")
+  @path
+  @maxLength(500)
+  @pattern("^[a-zA-Za0-9]{8}-([a-zA-Z0-9]{4}-){3}[a-zA-Z0-9]{12}$")
+  ingestionId: string;
+}
+
+@tag("Ingestion Management")
+interface IngestionRuns {
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
+  @doc("Get the runs of an ingestion")
+  @route("/inma/collections/{collectionId}/ingestions/{ingestionId}/runs")
+  @get
+  list(
+    ...IngestionParameters,
+    ...OdataQuery,
+  ): Page<IngestionRun> | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @doc("Get a run of an ingestion")
+  @route("/inma/collections/{collectionId}/ingestions/{ingestionId}/runs/{runId}")
+  @get
+  get(...IngestionRunParameters): IngestionRun | ErrorResponse;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+  @doc("Create a new run of an ingestion")
+  @route("/inma/collections/{collectionId}/ingestions/{ingestionId}/runs")
+  @post
+  create(...IngestionParameters): {
+    @doc("Url of the created ingestion run")
+    @header
+    location: url;
+
+    @statusCode statusCode: 201;
+
+    @doc("Ingestion run")
+    @body
+    _: IngestionRun;
+  } | ErrorResponse;
+}
+
+@doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
+model IngestionRun {
+  @doc("Run id")
+  id: uuid;
+
+  @doc("Run id which this run is associated to because it has been retried or rerun")
+  parentRunId?: uuid;
+
+  @doc("Operation")
+  operation: IngestionRunOperation;
+
+  @doc("Creation time")
+  creationTime: utcDateTime;
+
+  @doc("URL of the source catalog")
+  sourceCatalogUrl?: url;
+
+  @doc("Skip any item that already exist in the GeoCatalog")
+  skipExistingItems?: boolean;
+
+  @doc("Keep original source assets")
+  keepOriginalAssets?: boolean;
+}
+
+@doc("Microsoft Planetary Computer Pro geo-catalog ingestion run operation")
+model IngestionRunOperation {
+  @doc("Operation id")
+  id: uuid;
+
+  @doc("Operation status")
+  status: OperationStatus;
+
+  @doc("The UTC time at which the operation was created")
+  creationTime: utcDateTime;
+
+  @doc("The history of the operation status in time")
+  statusHistory: OperationStatusHistoryItem[];
+
+  @doc("The UTC time at which the operation was started")
+  startTime?: utcDateTime;
+
+  @doc("The UTC time at which the operation finished its execution")
+  finishTime?: utcDateTime;
+
+  @doc("The number of total items to be processed")
+  totalItems: int32;
+
+  @doc("The number of items pending to be processed")
+  totalPendingItems: int32;
+
+  @doc("The number of items successfully processed")
+  totalSuccessfulItems: int32;
+
+  @doc("The number of items that have failed to be processed")
+  totalFailedItems: int32;
+}
+
+@doc("Ingestion run parameters")
+model IngestionRunParameters is IngestionParameters {
+  @doc("Run id")
+  @path
+  runId: uuid;
+}
+
 @tag("SpatioTemporal Asset Catalog (STAC) API")
-namespace StacItems {
+interface StacItems {
   /**
    * Fetch features of the feature collection with id `collectionId`.
    *
@@ -263,7 +274,9 @@ namespace StacItems {
    * collection of features of a similar type, based on a common schema.")
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
-  op getFeatures(
+  @route("/stac/collections/{collectionId}/items")
+  @get
+  getFeatures(
     ...CollectionParameters,
 
     /**
@@ -335,7 +348,9 @@ namespace StacItems {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Fetch a single STAC Item")
-  op get(
+  @route("/stac/collections/{collectionId}/items/{itemId}")
+  @get
+  get(
     ...CollectionParameters,
 
     @doc("STAC Item id")
@@ -347,8 +362,10 @@ namespace StacItems {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create a new STAC item or a set of items in a collection")
+  @route("/stac/collections/{collectionId}/items")
+  @post
   @pollingOperation(IngestionOperations.get)
-  op create(
+  create(
     ...CollectionParameters,
 
     /**
@@ -387,9 +404,10 @@ namespace StacItems {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create or replace a STAC item in a collection")
+  @route("/stac/collections/{collectionId}/items/{itemId}")
   @put
   @pollingOperation(IngestionOperations.get)
-  op createOrReplace(
+  createOrReplace(
     ...CollectionParameters,
 
     @doc("STAC Item id")
@@ -420,9 +438,10 @@ namespace StacItems {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Update a STAC item in a collection")
+  @route("/stac/collections/{collectionId}/items/{itemId}")
   @patch(#{ implicitOptionality: true })
   @pollingOperation(IngestionOperations.get)
-  op update(
+  update(
     @header
     @doc("Content type for PATCH request")
     contentType: "application/merge-patch+json",
@@ -457,9 +476,10 @@ namespace StacItems {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Delete a STAC item from a collection")
+  @route("/stac/collections/{collectionId}/items/{itemId}")
   @delete
   @pollingOperation(IngestionOperations.get)
-  op delete(
+  delete(
     ...CollectionParameters,
 
     @doc("STAC Item id")
@@ -485,27 +505,32 @@ namespace StacItems {
   } | ErrorResponse;
 }
 
-@route("/inma/ingestion-sources")
 @tag("Ingestion Sources")
-namespace IngestionSources {
+interface IngestionSources {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
   @doc("Get ingestion sources in a geo-catalog")
-  op list(
+  @route("/inma/ingestion-sources")
+  @get
+  list(
     ...ApiVersionParameter,
     ...OdataQuery,
   ): Page<IngestionSourceSummary> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get an ingestion source in a geo-catalog")
-  op get(
+  @route("/inma/ingestion-sources/{id}")
+  @get
+  get(
     ...IngestionSourceParameters,
     ...ApiVersionParameter,
   ): IngestionSource | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create a new ingestion source in a geo-catalog")
-  op create(
+  @route("/inma/ingestion-sources")
+  @post
+  create(
     ...ApiVersionParameter,
 
     @doc("Definition of the ingestion source")
@@ -525,8 +550,9 @@ namespace IngestionSources {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Update an existing ingestion source in a geo-catalog")
+  @route("/inma/ingestion-sources/{id}")
   @put
-  op createOrReplace(
+  createOrReplace(
     ...ApiVersionParameter,
 
     @doc("Ingestion source id")
@@ -553,8 +579,9 @@ namespace IngestionSources {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Delete an ingestion source from a geo-catalog")
+  @route("/inma/ingestion-sources/{id}")
   @delete
-  op delete(
+  delete(
     ...ApiVersionParameter,
 
     @doc("Ingestion source id")
@@ -568,128 +595,130 @@ namespace IngestionSources {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
-  @route("managed-identities")
   @doc("Get all managed identities with access to storage accounts configured for a geo-catalog")
-  op listManagedIdentities(
+  @route("/inma/ingestion-sources/managed-identities")
+  @get
+  listManagedIdentities(
     ...ApiVersionParameter,
   ): Page<ManagedIdentityMetadata> | ErrorResponse;
-
-  @doc("Ingestion Sources paged response")
-  model IngestionSourcesPagedResponse {
-    @doc("Ingestion sources")
-    value: IngestionSourceSummary[];
-
-    @doc("Next page")
-    nextLink?: url;
-  }
-
-  @doc("Ingestion source summary")
-  model IngestionSourceSummary {
-    @doc("Ingestion source id")
-    id: uuid;
-
-    @doc("Ingestion source type")
-    kind: IngestionSourceType;
-
-    @doc("Created time in UTC format")
-    created: utcDateTime;
-  }
-
-  @doc("Ingestion Source")
-  @discriminator("kind")
-  model IngestionSource {
-    @doc("Ingestion source id")
-    id: uuid;
-
-    @doc("Created time in UTC format")
-    @visibility(Lifecycle.Read)
-    created: utcDateTime;
-
-    @doc("Discriminator for the ingestion source")
-    kind: IngestionSourceType;
-  }
-
-  @doc("Ingestion source type")
-  union IngestionSourceType {
-    string,
-
-    @doc("Azure Blob Storage SAS token")
-    SharedAccessSignatureToken: "SasToken",
-
-    @doc("Azure Blob Managed Identity")
-    BlobManagedIdentity: "BlobManagedIdentity",
-  }
-
-  @doc("SAS Token ingestion source")
-  model SharedAccessSignatureTokenIngestionSource extends IngestionSource {
-    kind: IngestionSourceType.SharedAccessSignatureToken;
-
-    @doc("SAS token connection information")
-    connectionInfo: SharedAccessSignatureTokenConnection;
-  }
-
-  @doc("SAS Token connection information")
-  model SharedAccessSignatureTokenConnection {
-    @doc("Azure Blob Storage container URL")
-    @encodedName("application/json", "containerUrl")
-    containerUri: url;
-
-    @doc("SAS token")
-    @visibility(Lifecycle.Create, Lifecycle.Update)
-    @encodedName("application/json", "sasToken")
-    haredAccessSignatureToken?: string;
-
-    @doc("Azure Blob Storage SAS token expiration in UTC format")
-    @visibility(Lifecycle.Read)
-    expiration?: utcDateTime;
-  }
-
-  @doc("Managed Identity ingestion source")
-  model ManagedIdentityIngestionSource extends IngestionSource {
-    kind: IngestionSourceType.BlobManagedIdentity;
-
-    @doc("Managed identity connection information")
-    connectionInfo: ManagedIdentityConnection;
-  }
-
-  @doc("Managed Identity connection information")
-  model ManagedIdentityConnection {
-    @doc("Azure Blob Storage container URL")
-    @encodedName("application/json", "containerUrl")
-    containerUri: url;
-
-    @doc("Azure Managed Identity configured in the Geo-Catalog with access to the container")
-    objectId: uuid;
-  }
-
-  @doc("Managed Identity metadata")
-  model ManagedIdentityMetadata {
-    @doc("Object id of the managed identity")
-    objectId: uuid;
-
-    @doc("ARM path or resource id of the managed identity")
-    resourceId: Azure.Core.armResourceIdentifier<[
-      {
-        type: "Microsoft.ManagedIdentity/userAssignedIdentities";
-      }
-    ]>;
-  }
-
-  @doc("Ingestion source parameters")
-  model IngestionSourceParameters {
-    @doc("Ingestion source id")
-    @path
-    id: uuid;
-  }
 }
 
-@route("/inma/operations")
+@doc("Ingestion Sources paged response")
+model IngestionSourcesPagedResponse {
+  @doc("Ingestion sources")
+  value: IngestionSourceSummary[];
+
+  @doc("Next page")
+  nextLink?: url;
+}
+
+@doc("Ingestion source summary")
+model IngestionSourceSummary {
+  @doc("Ingestion source id")
+  id: uuid;
+
+  @doc("Ingestion source type")
+  kind: IngestionSourceType;
+
+  @doc("Created time in UTC format")
+  created: utcDateTime;
+}
+
+@doc("Ingestion Source")
+@discriminator("kind")
+model IngestionSource {
+  @doc("Ingestion source id")
+  id: uuid;
+
+  @doc("Created time in UTC format")
+  @visibility(Lifecycle.Read)
+  created: utcDateTime;
+
+  @doc("Discriminator for the ingestion source")
+  kind: IngestionSourceType;
+}
+
+@doc("Ingestion source type")
+union IngestionSourceType {
+  string,
+
+  @doc("Azure Blob Storage SAS token")
+  SharedAccessSignatureToken: "SasToken",
+
+  @doc("Azure Blob Managed Identity")
+  BlobManagedIdentity: "BlobManagedIdentity",
+}
+
+@doc("SAS Token ingestion source")
+model SharedAccessSignatureTokenIngestionSource extends IngestionSource {
+  kind: IngestionSourceType.SharedAccessSignatureToken;
+
+  @doc("SAS token connection information")
+  connectionInfo: SharedAccessSignatureTokenConnection;
+}
+
+@doc("SAS Token connection information")
+model SharedAccessSignatureTokenConnection {
+  @doc("Azure Blob Storage container URL")
+  @encodedName("application/json", "containerUrl")
+  containerUri: url;
+
+  @doc("SAS token")
+  @visibility(Lifecycle.Create, Lifecycle.Update)
+  @encodedName("application/json", "sasToken")
+  sharedAccessSignatureToken?: string;
+
+  @doc("Azure Blob Storage SAS token expiration in UTC format")
+  @visibility(Lifecycle.Read)
+  expiration?: utcDateTime;
+}
+
+@doc("Managed Identity ingestion source")
+model ManagedIdentityIngestionSource extends IngestionSource {
+  kind: IngestionSourceType.BlobManagedIdentity;
+
+  @doc("Managed identity connection information")
+  connectionInfo: ManagedIdentityConnection;
+}
+
+@doc("Managed Identity connection information")
+model ManagedIdentityConnection {
+  @doc("Azure Blob Storage container URL")
+  @encodedName("application/json", "containerUrl")
+  containerUri: url;
+
+  @doc("Azure Managed Identity configured in the Geo-Catalog with access to the container")
+  objectId: uuid;
+}
+
+@doc("Managed Identity metadata")
+model ManagedIdentityMetadata {
+  @doc("Object id of the managed identity")
+  objectId: uuid;
+
+  @doc("ARM path or resource id of the managed identity")
+  resourceId: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.ManagedIdentity/userAssignedIdentities";
+    }
+  ]>;
+}
+
+@doc("Ingestion source parameters")
+model IngestionSourceParameters {
+  @doc("Ingestion source id")
+  @path
+  id: uuid;
+}
+
 @tag("Ingestion Management")
-namespace IngestionOperations {
+interface IngestionOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "The operation is returning an array."
   @doc("Get operations of a geo-catalog collection")
-  op list(
+  @route("/inma/operations")
+  @get
+  list(
     ...ApiVersionParameter,
     ...OdataQuery,
 
@@ -704,7 +733,9 @@ namespace IngestionOperations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get an operation of a geo-catalog collection")
-  op get(
+  @route("/inma/operations/{operationId}")
+  @get
+  get(
     ...ApiVersionParameter,
 
     @doc("Operation id")
@@ -715,8 +746,9 @@ namespace IngestionOperations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Cancel a running operation of a geo-catalog collection")
+  @route("/inma/operations/{operationId}")
   @delete
-  op delete(
+  delete(
     ...ApiVersionParameter,
 
     @doc("Operation id")
@@ -729,8 +761,9 @@ namespace IngestionOperations {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Cancel all running operations of a geo-catalog collection")
+  @route("/inma/operations")
   @delete
-  op deleteAll(...ApiVersionParameter): {
+  deleteAll(...ApiVersionParameter): {
     @statusCode statusCode: 204;
   } | ErrorResponse;
 }
@@ -830,7 +863,6 @@ model OdataQuery {
   skip?: int64;
 }
 
-@route("/stac")
 interface StacCollectionOperations {
   /**
    * Endpoint.
@@ -838,7 +870,7 @@ interface StacCollectionOperations {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Collections")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
-  @route("/collections")
+  @route("/stac/collections")
   @get
   getAll is Azure.Core.Foundations.Operation<
     {
@@ -861,7 +893,7 @@ interface StacCollectionOperations {
   @doc("Create a new collection in the GeoCatalog instance")
   @summary("Create Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
-  @route("/collections")
+  @route("/stac/collections")
   @post
   @pollingOperation(IngestionOperations.get)
   create(
