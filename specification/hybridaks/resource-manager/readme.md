@@ -42,6 +42,13 @@ These settings apply only when `--tag=package-2024-01` is specified on the comma
 ```yaml $(tag) == 'package-2024-01'
 input-file:
   - Microsoft.HybridContainerService/stable/2024-01-01/openapi.json
+suppressions:
+  - code: AvoidAdditionalProperties
+    reason: Consistent with azure aks, they are pass thru (user defined) and not subject to any validations. 
+    where: 
+      - $.definitions.AgentPoolProperties.properties.nodeLabels
+      - $.definitions.KubernetesVersionProperties.properties.patchVersions
+      - $.definitions.NamedAgentPoolProfile.properties.nodeLabels
 ```
 ### Tag: package-preview-2023-11
 

@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./ProvisionedCluster.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 
 namespace Microsoft.HybridContainerService;
@@ -51,6 +52,7 @@ interface HybridIdentityMetadataOperationGroup {
     hybridIdentityMetadata,
     BaseParameters = ConnectedClusterResourceUriParameters,
     LroHeaders = ArmAsyncOperationHeader &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

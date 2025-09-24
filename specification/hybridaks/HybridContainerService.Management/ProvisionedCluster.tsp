@@ -62,6 +62,7 @@ interface ProvisionedClusters {
     provisionedCluster,
     BaseParameters = ConnectedClusterResourceUriParameters,
     LroHeaders = ArmAsyncOperationHeader &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -88,6 +89,7 @@ interface ProvisionedClusters {
     ListCredentialResponse,
     BaseParameters = ConnectedClusterResourceUriParameters,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ListCredentialResponse> &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -103,6 +105,7 @@ interface ProvisionedClusters {
     ListCredentialResponse,
     BaseParameters = ConnectedClusterResourceUriParameters,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = ListCredentialResponse> &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 }

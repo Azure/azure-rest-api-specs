@@ -67,7 +67,8 @@ interface AgentPools {
   delete is ArmResourceDeleteWithoutOkAsync<
     agentPool,
     BaseParameters = ConnectedClusterResourceUriParameters,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = LocationHeader &
+      ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

@@ -65,6 +65,7 @@ interface VmSkuProfiles {
     VmSkuProfile,
     BaseParameters = CustomLocationResourceUriParameters,
     LroHeaders = ArmAsyncOperationHeader &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
   /**

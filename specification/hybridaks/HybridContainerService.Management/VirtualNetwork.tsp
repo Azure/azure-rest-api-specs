@@ -58,6 +58,7 @@ interface VirtualNetworks {
     virtualNetwork,
     PatchModel = VirtualNetworksPatch,
     LroHeaders = ArmAsyncOperationHeader<FinalResult = virtualNetwork> &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -70,6 +71,7 @@ interface VirtualNetworks {
   delete is ArmResourceDeleteWithoutOkAsync<
     virtualNetwork,
     LroHeaders = ArmAsyncOperationHeader &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 

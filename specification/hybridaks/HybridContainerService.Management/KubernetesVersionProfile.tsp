@@ -61,7 +61,7 @@ interface KubernetesVersionProfiles {
     KubernetesVersionProfile,
     BaseParameters = CustomLocationResourceUriParameters,
     LroHeaders = ArmAsyncOperationHeader &
-      ArmLroLocationHeader &
+      LocationHeader &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
