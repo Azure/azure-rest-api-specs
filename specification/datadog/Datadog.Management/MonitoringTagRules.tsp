@@ -31,12 +31,14 @@ interface TagRules {
   /**
    * Get a tag rule set for a given monitor resource.
    */
+  @summary("Get a tag rule set for a given monitor resource.")
   get is ArmResourceRead<MonitoringTagRules>;
 
   /**
    * Create or update a tag rule set for a given monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a tag rule set for a given monitor resource.")
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MonitoringTagRules,
     Response = ArmResourceUpdatedResponse<MonitoringTagRules>,
@@ -45,6 +47,7 @@ interface TagRules {
   /**
    * List the tag rules for a given monitor resource.
    */
+  @summary("List the tag rules for a given monitor resource.")
   list is ArmResourceListByParent<
     MonitoringTagRules,
     Response = ArmResponse<MonitoringTagRulesListResponse>

@@ -33,11 +33,13 @@ interface DatadogMonitorResources {
   /**
    * Get the properties of a specific monitor resource.
    */
+  @summary("Get the properties of a specific monitor resource.")
   get is ArmResourceRead<DatadogMonitorResource>;
 
   /**
    * Create a monitor resource.
    */
+  @summary("Create a monitor resource.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DatadogMonitorResource,
     OptionalRequestBody = true
@@ -46,6 +48,7 @@ interface DatadogMonitorResources {
   /**
    * Update a monitor resource.
    */
+  @summary("Update a monitor resource.")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     DatadogMonitorResource,
@@ -62,6 +65,7 @@ interface DatadogMonitorResources {
    * Delete a monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a monitor resource.")
   delete is ArmResourceDeleteWithoutOkAsync<
     DatadogMonitorResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -70,6 +74,7 @@ interface DatadogMonitorResources {
   /**
    * List all monitors under the specified resource group.
    */
+  @summary("List all monitors under the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
     DatadogMonitorResource,
     Response = ArmResponse<DatadogMonitorResourceListResponse>
@@ -78,6 +83,7 @@ interface DatadogMonitorResources {
   /**
    * List all monitors under the specified subscription.
    */
+  @summary("List all monitors under the specified subscription.")
   list is ArmListBySubscription<
     DatadogMonitorResource,
     Response = ArmResponse<DatadogMonitorResourceListResponse>
@@ -87,6 +93,7 @@ interface DatadogMonitorResources {
    * List the api keys for a given monitor resource.
    */
   @list
+  @summary("List the api keys for a given monitor resource.")
   listApiKeys is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -96,6 +103,7 @@ interface DatadogMonitorResources {
   /**
    * Get the default api key.
    */
+  @summary("Get the default api key.")
   getDefaultKey is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -105,6 +113,7 @@ interface DatadogMonitorResources {
   /**
    * Set the default api key.
    */
+  @summary("Set the default api key.")
   setDefaultKey is ArmResourceActionSync<
     DatadogMonitorResource,
     DatadogApiKey,
@@ -116,6 +125,7 @@ interface DatadogMonitorResources {
    * List the hosts for a given monitor resource.
    */
   @list
+  @summary("List the hosts for a given monitor resource.")
   listHosts is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -126,6 +136,7 @@ interface DatadogMonitorResources {
    * List all Azure resources associated to the same Datadog organization as the target resource.
    */
   @list
+  @summary("List all Azure resources associated to the same Datadog organization as the target resource.")
   listLinkedResources is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -136,6 +147,7 @@ interface DatadogMonitorResources {
    * List the resources currently being monitored by the Datadog monitor resource.
    */
   @list
+  @summary("List the resources currently being monitored by the Datadog monitor resource.")
   listMonitoredResources is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -145,6 +157,7 @@ interface DatadogMonitorResources {
   /**
    * Refresh the set password link and return a latest one.
    */
+  @summary("Refresh the set password link and return a latest one.")
   refreshSetPasswordLink is ArmResourceActionSync<
     DatadogMonitorResource,
     void,
@@ -154,6 +167,7 @@ interface DatadogMonitorResources {
   /**
    * Get marketplace and organization info mapped to the given monitor.
    */
+  @summary("Get marketplace and organization info mapped to the given monitor.")
   @action("getBillingInfo")
   billingInfoGet is ArmResourceActionSync<
     DatadogMonitorResource,
@@ -165,6 +179,7 @@ interface DatadogMonitorResources {
    * Reinstate integration with your Datadog organization by choosing one of the available subscription plans.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @summary("Reinstate integration with your Datadog organization by choosing one of the available subscription plans.")
   resubscribe is ArmResourceActionAsync<
     DatadogMonitorResource,
     ResubscribeProperties,

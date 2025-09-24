@@ -29,11 +29,13 @@ interface DatadogSingleSignOnResources {
   /**
    * Gets the datadog single sign-on resource for the given Monitor.
    */
+  @summary("Gets the datadog single sign-on resource for the given Monitor.")
   get is ArmResourceRead<DatadogSingleSignOnResource>;
 
   /**
    * Configures single-sign-on for this resource.
    */
+  @summary("Configures single-sign-on for this resource.")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DatadogSingleSignOnResource,
     OptionalRequestBody = true
@@ -42,6 +44,7 @@ interface DatadogSingleSignOnResources {
   /**
    * List the single sign-on configurations for a given monitor resource.
    */
+  @summary("List the single sign-on configurations for a given monitor resource.")
   list is ArmResourceListByParent<
     DatadogSingleSignOnResource,
     Response = ArmResponse<DatadogSingleSignOnResourceListResponse>

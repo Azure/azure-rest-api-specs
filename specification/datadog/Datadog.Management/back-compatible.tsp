@@ -105,3 +105,9 @@ using Microsoft.Datadog;
   "body"
 );
 @@clientName(MonitoredSubscriptions.update::parameters.resource, "body");
+@@summary(Operations.list,
+  "List all operations provided by Microsoft.Datadog for the 2025-06-11 api version."
+);
+@@doc(Operations.list,
+  "List all operations provided by Microsoft.Datadog for the 2025-06-11 api version."
+);

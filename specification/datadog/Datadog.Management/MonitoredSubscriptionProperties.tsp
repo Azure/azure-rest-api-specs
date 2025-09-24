@@ -30,12 +30,14 @@ interface MonitoredSubscriptions {
   /**
    * List the subscriptions currently being monitored by the Datadog monitor resource.
    */
+  @summary("List the subscriptions currently being monitored by the Datadog monitor resource.")
   get is ArmResourceRead<MonitoredSubscriptionProperties>;
 
   /**
    * Add the subscriptions that should be monitored by the Datadog monitor resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Add the subscriptions that should be monitored by the Datadog monitor resource.")
   createorUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
     Response = ArmResourceUpdatedResponse<MonitoredSubscriptionProperties> | ArmResourceCreatedResponse<
@@ -49,6 +51,7 @@ interface MonitoredSubscriptions {
   /**
    * Updates the subscriptions that are being monitored by the Datadog monitor resource
    */
+  @summary("Updates the subscriptions that are being monitored by the Datadog monitor resource")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
     MonitoredSubscriptionProperties,
@@ -62,6 +65,7 @@ interface MonitoredSubscriptions {
    * Updates the subscriptions that are being monitored by the Datadog monitor resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the subscriptions that are being monitored by the Datadog monitor resource")
   delete is ArmResourceDeleteWithoutOkAsync<
     MonitoredSubscriptionProperties,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -70,6 +74,7 @@ interface MonitoredSubscriptions {
   /**
    * List the subscriptions currently being monitored by the Datadog monitor resource.
    */
+  @summary("List the subscriptions currently being monitored by the Datadog monitor resource.")
   list is ArmResourceListByParent<
     MonitoredSubscriptionProperties,
     Response = ArmResponse<MonitoredSubscriptionPropertiesList>
