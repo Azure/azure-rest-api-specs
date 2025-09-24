@@ -1,11 +1,54 @@
-import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
+import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ResourceManager;
+using Microsoft.Edge;
 
 @@clientName(Microsoft.Edge,
   "DisconnectedOperationsManagementClient",
   "javascript"
 );
 @@clientName(Microsoft.Edge, "DisconnectedOperationsMgmt", "python");
-@@clientName(Versions.v2025_06_01, "V20250601Preview", "javascript");
+@@clientName(Microsoft.Edge.Versions.v2025_06_01,
+  "V20250601Preview",
+  "javascript"
+);
+
+@@clientName(Artifact, "DisconnectedOperationsArtifact", "csharp");
+@@clientName(Image, "DisconnectedOperationsImage", "csharp");
+@@clientName(ArtifactDownloadResult,
+  "DisconnectedOperationsArtifactDownloadResult",
+  "csharp"
+);
+@@clientName(ArtifactProperties,
+  "DisconnectedOperationsArtifactProperties",
+  "csharp"
+);
+@@clientName(BillingModel, "DisconnectedOperationsBillingModel", "csharp");
+@@clientName(ConnectionIntent,
+  "DisconnectedOperationsConnectionIntent",
+  "csharp"
+);
+@@clientName(ConnectionStatus,
+  "DisconnectedOperationsConnectionStatus",
+  "csharp"
+);
+@@clientName(ImageDownloadResult,
+  "DisconnectedOperationsImageDownloadResult",
+  "csharp"
+);
+@@clientName(ImageProperties,
+  "DisconnectedOperationsImageProperties",
+  "csharp"
+);
+@@clientName(RegistrationStatus,
+  "DisconnectedOperationsRegistrationStatus",
+  "csharp"
+);
+@@clientName(ReleaseType, "DisconnectedOperationsReleaseType", "csharp");
+@@clientName(ResourceProvisioningState,
+  "DisconnectedOperationsResourceProvisioningState",
+  "csharp"
+);
