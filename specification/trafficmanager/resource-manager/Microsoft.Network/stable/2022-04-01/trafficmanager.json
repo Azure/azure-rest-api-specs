@@ -551,7 +551,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Traffic Manager profile.",
+            "description": "The name of the Profile",
             "required": true,
             "type": "string"
           }
@@ -1125,7 +1125,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -1344,7 +1344,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -1495,26 +1495,11 @@
           "$ref": "#/definitions/ProfileProperties",
           "description": "The properties of the Traffic Manager profile.",
           "x-ms-client-flatten": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+          "$ref": "#/definitions/TrackedResource"
         }
       ]
     },
@@ -1643,6 +1628,15 @@
         ]
       }
     },
+    "ProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "QueryExperience": {
       "type": "object",
       "description": "Class representing a Traffic Manager HeatMap query experience properties.",
@@ -1689,6 +1683,54 @@
         }
       }
     },
+    "Resource": {
+      "type": "object",
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
+        },
+        "name": {
+          "type": "string"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
+        }
+      }
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "TrafficFlow": {
       "type": "object",
       "description": "Class representing a Traffic Manager HeatMap traffic flow properties.",
@@ -1728,7 +1770,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },
@@ -1834,7 +1876,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "#/definitions/ProxyResource"
         }
       ]
     },

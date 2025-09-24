@@ -13,21 +13,12 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager profile.
  */
-// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-model Profile
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProfileProperties> {
-  ...ResourceNameParameter<
-    Resource = Profile,
-    KeyName = "profileName",
-    SegmentName = "trafficmanagerprofiles",
-    NamePattern = ""
-  >;
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+model Profile extends TrackedResource {
+  properties?: ProfileProperties;
 }
-// model Profile extends TrackedResource {
-//   properties?: ProfileProperties;
-// }
 
 alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -81,11 +72,9 @@ interface Profiles {
   /**
    * Deletes a Traffic Manager profile.
    */
-  delete is ArmResourceDeleteSync<
+  delete is ProfileOps.DeleteSync<
     Profile,
-    BaseParameters = Azure.ResourceManager.Foundations.ResourceGroupBaseParameters,
-    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse,
-    Error = CloudError
+    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse
   >;
 
   /**

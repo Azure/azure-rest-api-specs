@@ -13,23 +13,13 @@ namespace Microsoft.Network;
 /**
  * Class representing Traffic Manager User Metrics.
  */
-// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-@singleton("default")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @subscriptionResource
-model UserMetricsModel
-  is Azure.ResourceManager.ProxyResource<UserMetricsProperties> {
-  ...ResourceNameParameter<
-    Resource = UserMetricsModel,
-    KeyName = "trafficManagerUserMetricsKey",
-    SegmentName = "trafficManagerUserMetricsKeys",
-    NamePattern = ""
-  >;
+model UserMetricsModel extends ProxyResource {
+  properties?: UserMetricsProperties;
 }
-// model UserMetricsModel extends ProxyResource {
-//   properties?: UserMetricsProperties;
-// }
 
 alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -69,12 +59,9 @@ interface UserMetricsModels {
   /**
    * Delete a subscription-level key used for Real User Metrics collection.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteSync<
+  delete is UserMetricsModelOps.DeleteSync<
     UserMetricsModel,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<DeleteOperationResult>,
-    Error = CloudError
+    Response = ArmResponse<DeleteOperationResult>
   >;
 }
 

@@ -14,21 +14,13 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager endpoint.
  */
-// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(Profile)
-model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
-  ...ResourceNameParameter<
-    Resource = Endpoint,
-    KeyName = "endpointName",
-    SegmentName = "{endpointType}",
-    NamePattern = ""
-  >;
+model Endpoint extends ProxyResource {
+  properties?: EndpointProperties;
 }
-// model Endpoint extends ProxyResource {
-//   properties?: EndpointProperties;
-// }
 
 alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
   {
@@ -83,8 +75,7 @@ interface Endpoints {
    */
   delete is EndpointsOps.DeleteSync<
     Endpoint,
-    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse,
-    OverrideErrorType = CloudError
+    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse
   >;
 }
 
