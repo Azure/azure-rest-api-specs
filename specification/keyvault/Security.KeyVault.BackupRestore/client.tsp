@@ -26,16 +26,25 @@ interface Client {
   preFullRestore is KeyVault.preFullRestoreOperation;
 }
 
-@@clientName(KeyVault.SASTokenParameter, "SASTokenParameters", "go");
-@@clientName(KeyVault.RestoreOperationParameters.sasTokenParameters,
+using KeyVault;
+
+@@clientName(SASTokenParameter, "SASTokenParameters", "go");
+@@clientName(RestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
-@@clientName(KeyVault.SelectiveKeyRestoreOperationParameters.sasTokenParameters,
+@@clientName(SelectiveKeyRestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
-@@clientName(KeyVault.PreRestoreOperationParameters.sasTokenParameters,
+@@clientName(PreRestoreOperationParameters.sasTokenParameters,
   "SASTokenParameters",
   "go"
 );
+
+@@alternateType(FullBackupOperation.status, string, "go");
+@@alternateType(RestoreOperation.status, string, "go");
+@@alternateType(SelectiveKeyRestoreOperation.status, string, "go");
+@@alternateType(FullBackupOperation.error, string, "go");
+@@alternateType(RestoreOperation.error, string, "go");
+@@alternateType(SelectiveKeyRestoreOperation.error, string, "go");
