@@ -10,8 +10,8 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/databasefleetmanager.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-databasefleetmanager"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-databasefleetmanager"
+    package-name: "azure-mgmt-databasefleetmanager"
     flavor: "azure"
     generate-test: true
     generate-sample: true
@@ -23,8 +23,8 @@ options:
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/databasefleetmanager"
-    package-dir: "armdatabasefleetmanager"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdatabasefleetmanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdatabasefleetmanager"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -34,11 +34,11 @@ options:
     remove-unreferenced-types: true
     generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.DatabaseFleetManager"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.DatabaseFleetManager"
     flavor: azure
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.DatabaseFleetManager}"
   "@azure-tools/typespec-ts":
     azureSdkForJs: true
     isModularLibrary: true
@@ -46,7 +46,7 @@ options:
     hierarchyClient: false
     experimentalExtensibleEnums: true
     enableOperationGroup: true
-    package-dir: "arm-databasefleetmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-databasefleetmanager"
     flavor: "azure"
     packageDetails:
       name: "@azure/arm-databasefleetmanager"
