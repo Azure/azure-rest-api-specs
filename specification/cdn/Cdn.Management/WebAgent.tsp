@@ -53,9 +53,8 @@ interface WebAgents {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     WebAgent,
-    Response = ArmResourceUpdatedResponse<WebAgent> 
-      | ArmResourceCreatedResponse<WebAgent> 
-      | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent>> & WebAgentAcceptedBody)
+    Response = ArmResourceUpdatedResponse<WebAgent> | ArmResourceCreatedResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = WebAgent>> &
+      WebAgentAcceptedBody)
   >;
 
   /**
@@ -66,7 +65,8 @@ interface WebAgents {
   update is ArmCustomPatchAsync<
     WebAgent,
     PatchModel = WebAgentUpdateParameters,
-    Response = ArmResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> & WebAgentAcceptedBody)
+    Response = ArmResponse<WebAgent> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader> &
+      WebAgentAcceptedBody)
   >;
 
   /**

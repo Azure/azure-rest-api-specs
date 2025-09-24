@@ -539,9 +539,11 @@ union DeliveryRuleActionName {
   OriginGroupOverride: "OriginGroupOverride",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   RouteConfigurationOverride: "RouteConfigurationOverride",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   EdgeAction: "EdgeAction",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   AfdUrlSigning: "AfdUrlSigning",
@@ -565,6 +567,7 @@ union SecurityPolicyType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   WebApplicationFirewall: "WebApplicationFirewall",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @added(Versions.v2025_09_01_preview)
   WebApplicationFirewallEmbedded: "WebApplicationFirewallEmbedded",
