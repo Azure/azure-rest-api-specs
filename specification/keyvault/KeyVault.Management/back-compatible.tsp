@@ -154,3 +154,97 @@ using Azure.Core;
 
 @@clientName(JsonWebKeyType.`EC-HSM`, "EC_HSM", "python");
 @@clientName(JsonWebKeyType.`RSA-HSM`, "RSA_HSM", "python");
+
+// Override the order of path parameters
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op VaultsGetDeletedCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path provider: "Microsoft.KeyVault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version") apiVersion: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path subscriptionId: uuid,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path vault_name: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path location: azureLocation,
+): DeletedVault;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op VaultsPurgeDeletedCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path provider: "Microsoft.KeyVault",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version") apiVersion: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path subscriptionId: uuid,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path vault_name: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path location: azureLocation,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body body: void,
+): void;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op ManagedHsmsGetDeletedCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.KeyVault",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version")
+  apiVersion: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  subscriptionId: uuid,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  location: azureLocation,
+): DeletedManagedHsm;
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op ManagedHsmsPurgeDeletedCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.KeyVault",
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @query("api-version")
+  apiVersion: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  subscriptionId: uuid,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  name: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  location: azureLocation,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @body
+  body: void,
+): void;
+
+@@override(DeletedVaults.getDeleted, VaultsGetDeletedCustomized, "python");
+@@override(DeletedVaults.purgeDeleted, VaultsPurgeDeletedCustomized, "python");
+@@override(DeletedManagedHsms.getDeleted, ManagedHsmsGetDeletedCustomized, "python");
+@@override(DeletedManagedHsms.purgeDeleted, ManagedHsmsPurgeDeletedCustomized, "python");
