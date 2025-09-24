@@ -522,7 +522,6 @@ model ConnectedClusterPatch {
   /**
    * Describes the connected cluster resource properties that can be updated during PATCH operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ConnectedClusterPatchProperties;
 }
 
