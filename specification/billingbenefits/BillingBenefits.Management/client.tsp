@@ -165,3 +165,4 @@ using Microsoft.BillingBenefits;
 @@clientName(SavingsPlanOperationGroup.listAll, "GetBillingBenefitsSavingsPlans", "csharp");
 @@clientName(AppliedScopeType, "BillingBenefitsAppliedScopeType", "csharp");
 @@clientName(ReservationOrderAliasRequest, "BillingBenefitsReservationOrderAliasCreateOrUpdateContent", "csharp");
+@@clientName(SavingsPlanPurchaseValidateRequest, "SavingsPlanPurchaseValidateContent", "csharp");
