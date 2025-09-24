@@ -42,9 +42,6 @@ input-file:
 suppressions:
   - code: PatchBodyParametersSchema
     reason: This is the API design and therefore exempted
-    where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/customDomains/{customDomainName}"].patch
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/afdEndpoints/{endpointName}/routes/{routeName}"].patch
   - code: ProvisioningStateMustBeReadOnly
     reason: These errors are from the previous API versions
   - code: PutResponseCodes
@@ -68,7 +65,6 @@ suppressions:
     where: $.definitions.KnowledgeSource
   - code: ConsistentPatchProperties
     reason: This is the API design and therefore exempted
-    where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/profiles/{profileName}/keyGroups/{keyGroupName}"].patch
 modelerfour:
   lenient-model-deduplication: true
   prenamer: true
