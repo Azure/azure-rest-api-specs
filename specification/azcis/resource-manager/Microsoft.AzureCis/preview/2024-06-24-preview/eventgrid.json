@@ -718,24 +718,6 @@
     }
   },
   "definitions": {
-    "AuthenticationType": {
-      "type": "string",
-      "description": "Authentication Type enum.",
-      "enum": [
-        "Certificate"
-      ],
-      "x-ms-enum": {
-        "name": "AuthenticationType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Certificate",
-            "value": "Certificate",
-            "description": "Certificate Authentication Type"
-          }
-        ]
-      }
-    },
     "Azure.Core.azureLocation": {
       "type": "string",
       "description": "Represents an Azure geography region where supported resource providers live."
@@ -838,8 +820,15 @@
           "description": "SchemaUrl of the EventType. Required."
         },
         "isInDefaultSet": {
-          "$ref": "#/definitions/IsInDefaultSet",
-          "description": "If True, the eventType is pre-selected as part of Event Subscription creation process. Optional."
+          "type": "string",
+          "description": "If True, the eventType is pre-selected as part of Event Subscription creation process. Optional.",
+          "enum": [
+            "False",
+            "True"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "azureLocation": {
           "$ref": "#/definitions/Azure.Core.azureLocation",
@@ -909,12 +898,18 @@
           "description": "Name of the Topic Type. Required."
         },
         "authenticationType": {
-          "$ref": "#/definitions/AuthenticationType",
-          "description": "Gets the Authentication Type. Required."
+          "type": "string",
+          "description": "Authentication Type. Required.",
+          "enum": [
+            "Certificate"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          }
         },
         "certificateSubjectNames": {
           "type": "array",
-          "description": "List of certificate subject names that's used while publishing events to EventGrid. e.g., [\"CN=test.domain.com\", \"CN=test2.domain.net\"]. Required.",
+          "description": "List of certificate subject names that's used while publishing events to EventGrid. e.g., [\"CN=test.domain.com\"]. Required.",
           "items": {
             "type": "string"
           }
@@ -1010,30 +1005,6 @@
         "topicTypeName",
         "supportedLocations"
       ]
-    },
-    "IsInDefaultSet": {
-      "type": "string",
-      "description": "IsInDefaultSet enum.",
-      "enum": [
-        "False",
-        "True"
-      ],
-      "x-ms-enum": {
-        "name": "IsInDefaultSet",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "False",
-            "value": "False",
-            "description": "False State"
-          },
-          {
-            "name": "True",
-            "value": "True",
-            "description": "True State"
-          }
-        ]
-      }
     }
   },
   "parameters": {}

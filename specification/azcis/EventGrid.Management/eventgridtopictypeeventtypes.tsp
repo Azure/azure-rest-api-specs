@@ -28,7 +28,7 @@ model EventGridTopicTypeEventTypesResourceProperties {
   schemaUrl: string;
 
   @doc("If True, the eventType is pre-selected as part of Event Subscription creation process. Optional.")
-  isInDefaultSet?: IsInDefaultSet;
+  isInDefaultSet?: string | "False" | "True";
 
   @doc("The Azure location.")
   azureLocation?: azureLocation;
@@ -40,17 +40,6 @@ model EventGridTopicTypeEventTypesResourceProperties {
   @doc("Resource event argument result; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   eventTypeOutput?: string;
-}
-
-@doc("IsInDefaultSet enum.")
-union IsInDefaultSet {
-  string,
-
-  @doc("False State")
-  False: "False",
-
-  @doc("True State")
-  True: "True",
 }
 
 @doc("EventGridTopicTypeEventTypes Resource")

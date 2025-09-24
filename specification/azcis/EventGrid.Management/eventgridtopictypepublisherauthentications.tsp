@@ -15,10 +15,10 @@ model EventGridTopicTypePublisherAuthenticationsResourceProperties {
   @doc("Name of the Topic Type. Required.")
   topicTypeName: string;
 
-  @doc("Gets the Authentication Type. Required.")
-  authenticationType: AuthenticationType;
+  @doc("Authentication Type. Required.")
+  authenticationType: string | "Certificate";
 
-  @doc("List of certificate subject names that's used while publishing events to EventGrid. e.g., [\"CN=test.domain.com\", \"CN=test2.domain.net\"]. Required.")
+  @doc("List of certificate subject names that's used while publishing events to EventGrid. e.g., [\"CN=test.domain.com\"]. Required.")
   certificateSubjectNames: Array<string>;
 
   @doc("The Azure location.")
@@ -31,14 +31,6 @@ model EventGridTopicTypePublisherAuthenticationsResourceProperties {
   @doc("Resource event argument result; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   publisherAuthenticationsOutput?: string;
-}
-
-@doc("Authentication Type enum.")
-union AuthenticationType {
-  string,
-
-  @doc("Certificate Authentication Type")
-  Certificate: "Certificate",
 }
 
 @doc("EventGridTopicTypePublisherAuthentications Resource")
