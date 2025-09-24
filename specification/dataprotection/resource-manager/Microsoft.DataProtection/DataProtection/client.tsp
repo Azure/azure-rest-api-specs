@@ -9,6 +9,8 @@ using Microsoft.DataProtection;
 @@clientName(Datasource.resourceID, "resourceId", "java");
 @@clientName(DeletionInfo.deleteActivityID, "deleteActivityId", "java");
 @@clientName(RetentionTag.eTag, "etag", "java");
+@@clientName(BackupVaultResource.eTag, "etag", "java");
+@@clientName(ResourceGuardResource.eTag, "etag", "java");
 @@clientName(RestoreJobRecoveryPointDetails.recoveryPointID,
   "recoveryPointId",
   "java"
