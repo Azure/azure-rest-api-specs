@@ -147,3 +147,7 @@ using TypeSpec.Http;
   "ArmProxyResource",
   "python"
 );
+@@clientName(Azure.ResourceManager.CommonTypes.ErrorResponse,
+  "ArmErrorResponse",
+  "python"
+);
