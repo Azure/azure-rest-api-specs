@@ -1,19 +1,58 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "api-version": "2024-09-01",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2024-09-01"
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
       "description": "Generates the manifest for the given provider.",
       "body": {
+        "capabilities": [
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_2015-05-01"
+          },
+          {
+            "effect": "Allow",
+            "quotaId": "CSP_MG_2017-12-01"
+          }
+        ],
+        "crossTenantTokenValidation": "EnsureSecureValidation",
+        "globalNotificationEndpoints": [
+          {
+            "enabled": true,
+            "endpointUri": "https://notificationendpoint.com"
+          }
+        ],
+        "management": {
+          "authorizationOwners": [
+            "authorizationOwners-group"
+          ],
+          "incidentContactEmail": "helpme@contoso.com",
+          "incidentRoutingService": "",
+          "incidentRoutingTeam": "",
+          "manifestOwners": [
+            "manifestOwners-group"
+          ],
+          "resourceAccessPolicy": "NotSpecified"
+        },
+        "metadata": {
+          "onboardedVia": "ProviderHub"
+        },
+        "namespace": "microsoft.contoso",
         "providerAuthorizations": [
           {
             "applicationId": "1a3b5c7d-8e9f-10g1-1h12-i13j14k1",
             "roleDefinitionId": "123456bf-gkur-2098-b890-98da392a00b2"
           }
         ],
+        "providerType": "Internal, Hidden",
+        "providerVersion": "2.0",
+        "reRegisterSubscriptionMetadata": {
+          "concurrencyLimit": 100,
+          "enabled": true
+        },
         "resourceProviderAuthorizationRules": {
           "asyncOperationPollingRules": {
             "authorizationActions": [
@@ -21,22 +60,9 @@
             ]
           }
         },
-        "namespace": "microsoft.contoso",
-        "serviceName": "root",
-        "services": [
-          {
-            "serviceName": "tags",
-            "status": "Inactive"
-          }
-        ],
-        "providerVersion": "2.0",
-        "providerType": "Internal, Hidden",
-        "crossTenantTokenValidation": "EnsureSecureValidation",
         "resourceTypes": [
           {
             "name": "Operations",
-            "routingType": "ProxyOnly, Tenant",
-            "resourceValidation": "ReservedWords, ProfaneWords",
             "allowedUnauthorizedActions": [
               "microsoft.contoso/operations/read"
             ],
@@ -64,12 +90,12 @@
                 "notificationType": "SubscriptionNotification",
                 "skipNotifications": "Disabled"
               }
-            ]
+            ],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly, Tenant"
           },
           {
             "name": "Locations",
-            "routingType": "ProxyOnly",
-            "resourceValidation": "ReservedWords, ProfaneWords",
             "endpoints": [
               {
                 "apiVersions": [
@@ -82,12 +108,12 @@
                 "timeout": "PT20S"
               }
             ],
-            "linkedOperationRules": []
+            "linkedOperationRules": [],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly"
           },
           {
             "name": "Locations/OperationStatuses",
-            "routingType": "ProxyOnly, LocationBased",
-            "resourceValidation": "ReservedWords, ProfaneWords",
             "additionalOptions": "ProtectedAsyncOperationPolling",
             "endpoints": [
               {
@@ -101,45 +127,21 @@
                 "timeout": "PT20S"
               }
             ],
-            "linkedOperationRules": []
+            "linkedOperationRules": [],
+            "resourceValidation": "ReservedWords, ProfaneWords",
+            "routingType": "ProxyOnly, LocationBased"
           }
         ],
-        "management": {
-          "manifestOwners": [
-            "manifestOwners-group"
-          ],
-          "authorizationOwners": [
-            "authorizationOwners-group"
-          ],
-          "incidentRoutingService": "",
-          "incidentRoutingTeam": "",
-          "incidentContactEmail": "helpme@contoso.com",
-          "resourceAccessPolicy": "NotSpecified"
-        },
-        "capabilities": [
+        "serviceName": "root",
+        "services": [
           {
-            "quotaId": "CSP_2015-05-01",
-            "effect": "Allow"
-          },
-          {
-            "quotaId": "CSP_MG_2017-12-01",
-            "effect": "Allow"
+            "serviceName": "tags",
+            "status": "Inactive"
           }
-        ],
-        "metadata": {
-          "onboardedVia": "ProviderHub"
-        },
-        "globalNotificationEndpoints": [
-          {
-            "enabled": true,
-            "endpointUri": "https://notificationendpoint.com"
-          }
-        ],
-        "reRegisterSubscriptionMetadata": {
-          "enabled": true,
-          "concurrencyLimit": 100
-        }
+        ]
       }
     }
-  }
+  },
+  "operationId": "GenerateManifest",
+  "title": "GenerateManifest"
 }

@@ -3,15 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ProviderHub;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationsContentProperties.contents);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ResourceManagementAction.resources);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationsContent.properties);
-
 @@clientName(CustomRollouts.createOrUpdate::parameters.resource, "properties");
 
 @@clientName(ProviderRegistrations.createOrUpdate::parameters.resource,
@@ -79,17 +70,17 @@ using Microsoft.ProviderHub;
 @@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeSecond,
   "Skus"
 );
-@@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeThird, "Skus");
-@@clientLocation(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird,
+@@clientLocation(SkuResourceOperationGroup.getNestedResourceTypeSecond, "Skus");
+@@clientLocation(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond,
   "Skus"
 );
-@@clientName(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird::parameters.resource,
+@@clientName(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "properties"
 );
-@@clientLocation(SkuResourceOperationGroup.deleteNestedResourceTypeThird,
+@@clientLocation(SkuResourceOperationGroup.deleteNestedResourceTypeSecond,
   "Skus"
 );
-@@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeThird,
+@@clientLocation(SkuResourceOperationGroup.listByResourceTypeRegistrationsNestedResourceTypeSecond,
   "Skus"
 );
 

@@ -30,12 +30,6 @@ interface DefaultRolloutOps
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
 
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
-
         /** The name of the resource provider hosted within ProviderHub. */
         @path
         @segment("providerRegistrations")
@@ -89,12 +83,6 @@ interface NewRegionFrontloadReleaseOps
       {
         ...ApiVersionParameter,
         ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path

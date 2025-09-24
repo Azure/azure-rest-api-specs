@@ -1,8 +1,8 @@
 {
   "parameters": {
-    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77",
+    "api-version": "2024-09-01",
     "providerNamespace": "Microsoft.Contoso",
-    "api-version": "2024-09-01"
+    "subscriptionId": "ab7a8701-f7ef-471a-a2f4-d0ebbf494f77"
   },
   "responses": {
     "200": {
@@ -10,29 +10,28 @@
       "body": {
         "value": [
           {
-            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week01",
             "name": "Microsoft.Contoso/2020week01",
             "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
-            "systemData": {
-              "createdBy": "string",
-              "createdByType": "User",
-              "createdAt": "2020-02-01T01:01:01.1075056Z",
-              "lastModifiedBy": "string",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-            },
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week01",
             "properties": {
               "provisioningState": "Succeeded",
               "specification": {
-                "expeditedRollout": {
-                  "enabled": true
-                },
                 "canary": {
                   "regions": [
                     "brazilus",
                     "eastus2euap",
                     "centraluseuap"
                   ]
+                },
+                "expeditedRollout": {
+                  "enabled": true
+                },
+                "highTraffic": {
+                  "regions": [
+                    "australiasoutheast",
+                    "otherhightraficregions"
+                  ],
+                  "waitDuration": "PT24H"
                 },
                 "lowTraffic": {
                   "regions": [
@@ -44,13 +43,6 @@
                   "regions": [
                     "uksouth",
                     "indiawest"
-                  ],
-                  "waitDuration": "PT24H"
-                },
-                "highTraffic": {
-                  "regions": [
-                    "australiasoutheast",
-                    "otherhightraficregions"
                   ],
                   "waitDuration": "PT24H"
                 },
@@ -81,25 +73,25 @@
                   "allcompletedregions"
                 ],
                 "manifestCheckinStatus": {
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
                   "isCheckedIn": true,
-                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
-                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
                 }
               }
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
             }
           },
           {
-            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
             "name": "Microsoft.Contoso/2020week10",
             "type": "Microsoft.ProviderHub/providerRegistrations/defaultRollouts",
-            "systemData": {
-              "createdBy": "string",
-              "createdByType": "User",
-              "createdAt": "2020-02-01T01:01:01.1075056Z",
-              "lastModifiedBy": "string",
-              "lastModifiedByType": "User",
-              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z"
-            },
+            "id": "/subscriptions/ab7a8701-f7ef-471a-a2f4-d0ebbf494f77/providers/Microsoft.ProviderHub/providerRegistrations/Microsoft.Contoso/defaultRollouts/2020week10",
             "properties": {
               "provisioningState": "Cancelled",
               "specification": {
@@ -109,6 +101,13 @@
                     "eastus2euap",
                     "centraluseuap"
                   ]
+                },
+                "highTraffic": {
+                  "regions": [
+                    "australiasoutheast",
+                    "otherhightraficregions"
+                  ],
+                  "waitDuration": "PT24H"
                 },
                 "lowTraffic": {
                   "regions": [
@@ -120,13 +119,6 @@
                   "regions": [
                     "uksouth",
                     "indiawest"
-                  ],
-                  "waitDuration": "PT24H"
-                },
-                "highTraffic": {
-                  "regions": [
-                    "australiasoutheast",
-                    "otherhightraficregions"
                   ],
                   "waitDuration": "PT24H"
                 },
@@ -163,15 +155,25 @@
                   }
                 },
                 "manifestCheckinStatus": {
+                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7",
                   "isCheckedIn": true,
-                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM.",
-                  "commitId": "47317892d4edf22f08704f6b595105c4fd7a8db7"
+                  "statusMessage": "Manifest is successfully merged. Use the Default/Custom rollout (http://aka.ms/rpaasrollout) to roll out the manifest in ARM."
                 }
               }
+            },
+            "systemData": {
+              "createdAt": "2020-02-01T01:01:01.1075056Z",
+              "createdBy": "string",
+              "createdByType": "User",
+              "lastModifiedAt": "2020-02-01T01:01:01.1075056Z",
+              "lastModifiedBy": "string",
+              "lastModifiedByType": "User"
             }
           }
         ]
       }
     }
-  }
+  },
+  "operationId": "DefaultRollouts_ListByProviderRegistration",
+  "title": "DefaultRollouts_ListByProviderRegistration"
 }

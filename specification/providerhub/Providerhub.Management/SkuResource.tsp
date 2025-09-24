@@ -34,12 +34,6 @@ interface SkuResourceOps
         @path
         @segment("providers")
         @key
-        providerNamespace: "Microsoft.ProviderHub",
-
-        /** The name of the resource provider hosted within ProviderHub. */
-        @path
-        @segment("providerRegistrations")
-        @key
         providerNamespace: string,
 
         /** The resource type. */
@@ -106,12 +100,6 @@ interface SkusOps
         @path
         @segment("providers")
         @key
-        providerNamespace: "Microsoft.ProviderHub",
-
-        /** The name of the resource provider hosted within ProviderHub. */
-        @path
-        @segment("providerRegistrations")
-        @key
         providerNamespace: string,
 
         /** The resource type. */
@@ -175,12 +163,6 @@ interface SkuResourceOperationGroupOps
         /** the provider namespace */
         @path
         @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
-
-        /** The name of the resource provider hosted within ProviderHub. */
-        @path
-        @segment("providerRegistrations")
         @key
         providerNamespace: string,
 
@@ -249,96 +231,6 @@ interface SkuResourceOperationGroup {
     Response = ArmResponse<SkuResourceArrayResponseWithContinuation>
   >;
 }
-@armResourceOperations
-interface SkuResourceOperationGroupOps
-  extends Azure.ResourceManager.Legacy.ExtensionOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-
-        /** the provider namespace */
-        @path
-        @segment("providers")
-        @key
-        providerNamespace: "Microsoft.ProviderHub",
-
-        /** The name of the resource provider hosted within ProviderHub. */
-        @path
-        @segment("providerRegistrations")
-        @key
-        providerNamespace: string,
-
-        /** The resource type. */
-        @path
-        @segment("resourcetypeRegistrations")
-        @key
-        resourceType: string,
-
-        /** The first child resource type. */
-        @path
-        @segment("resourcetypeRegistrations")
-        @key
-        nestedResourceTypeFirst: string,
-
-        /** The second child resource type. */
-        @path
-        @segment("resourcetypeRegistrations")
-        @key
-        nestedResourceTypeSecond: string,
-
-        /** The third child resource type. */
-        @path
-        @segment("resourcetypeRegistrations")
-        @key
-        nestedResourceTypeThird: string,
-      },
-      {},
-      {
-        /** The SKU. */
-        @path
-        @segment("skus")
-        @key
-        sku: string,
-      }
-    > {}
-
-@armResourceOperations
-interface SkuResourceOperationGroup {
-  /**
-   * Gets the sku details for the given resource type and sku name.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Skus_GetNestedResourceTypeThird")
-  getNestedResourceTypeThird is SkuResourceOperationGroupOps.Read<SkuResource>;
-
-  /**
-   * Creates or updates the resource type skus in the given resource type.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Skus_CreateOrUpdateNestedResourceTypeThird")
-  createOrUpdateNestedResourceTypeThird is SkuResourceOperationGroupOps.CreateOrUpdateSync<
-    SkuResource,
-    Response = ArmResourceUpdatedResponse<SkuResource>
-  >;
-
-  /**
-   * Deletes a resource type sku.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Skus_DeleteNestedResourceTypeThird")
-  deleteNestedResourceTypeThird is SkuResourceOperationGroupOps.DeleteSync<SkuResource>;
-
-  /**
-   * Gets the list of skus for the given resource type.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Skus_ListByResourceTypeRegistrationsNestedResourceTypeThird")
-  listByResourceTypeRegistrationsNestedResourceTypeThird is SkuResourceOperationGroupOps.List<
-    SkuResource,
-    Response = ArmResponse<SkuResourceArrayResponseWithContinuation>
-  >;
-}
 
 @@doc(SkuResource.name, "The SKU.");
 @@doc(SkuResource.properties, "");
@@ -351,6 +243,6 @@ interface SkuResourceOperationGroup {
 @@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
-@@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeThird::parameters.resource,
+@@doc(SkuResourceOperationGroup.createOrUpdateNestedResourceTypeSecond::parameters.resource,
   "The required body parameters supplied to the resource sku operation."
 );
