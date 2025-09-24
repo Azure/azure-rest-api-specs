@@ -13,32 +13,47 @@ namespace Microsoft.Network;
 /**
  * Class representing the Geographic hierarchy used with the Geographic traffic routing method.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @singleton("default")
 @tenantResource
-model TrafficManagerGeographicHierarchy extends ProxyResource {
-  properties?: GeographicHierarchyProperties;
+model TrafficManagerGeographicHierarchy
+  is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
+  ...ResourceNameParameter<
+    Resource = TrafficManagerGeographicHierarchy,
+    KeyName = "trafficManagerGeographicHierarchy",
+    SegmentName = "trafficManagerGeographicHierarchies",
+    NamePattern = ""
+  >;
 }
+// model TrafficManagerGeographicHierarchy extends ProxyResource {
+//   properties?: GeographicHierarchyProperties;
+// }
+
+alias TrafficManagerGeographicHierarchyOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...Azure.ResourceManager.Legacy.Provider<TrafficManagerGeographicHierarchy>;
+  },
+  {
+    /**
+     * The name of the Geographic Hierarchy resource. Must be 'default'.
+     */
+    @path
+    @segment("trafficManagerGeographicHierarchies")
+    @key("trafficManagerGeographicHierarchies")
+    trafficManagerGeographicHierarchy: "default";
+  },
+  ErrorType = CloudError
+>;
 
 @armResourceOperations
 interface TrafficManagerGeographicHierarchies {
   /**
    * Gets the default Geographic Hierarchy used by the Geographic traffic routing method.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  getDefault is ArmResourceRead<
-    TrafficManagerGeographicHierarchy,
-    BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
-    Parameters = {
-      #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-      @path
-      @segment("trafficManagerGeographicHierarchies")
-      trafficManagerGeographicHierarchy: "default";
-    },
-    Error = CloudError
-  >;
+  getDefault is TrafficManagerGeographicHierarchyOps.Read<TrafficManagerGeographicHierarchy>;
 }
 
 @@doc(TrafficManagerGeographicHierarchy.name, "");

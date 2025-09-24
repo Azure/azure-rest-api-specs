@@ -52,6 +52,9 @@ using Microsoft.Network;
 @@clientLocation(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
   Profiles
 );
+@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
+  "CheckTrafficManagerRelativeDnsNameAvailability"
+);
 @@clientLocation(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
   Profiles
 );

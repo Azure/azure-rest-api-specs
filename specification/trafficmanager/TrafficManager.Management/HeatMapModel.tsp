@@ -14,58 +14,72 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager HeatMap.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
+// #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(Profile)
-model HeatMapModel extends ProxyResource {
-  properties?: HeatMapProperties;
+model HeatMapModel is Azure.ResourceManager.ProxyResource<HeatMapProperties> {
+  ...ResourceNameParameter<
+    Resource = HeatMapModel,
+    KeyName = "heatMap",
+    SegmentName = "heatMaps",
+    NamePattern = ""
+  >;
 }
+// model HeatMapModel extends ProxyResource {
+//   properties?: HeatMapProperties;
+// }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/heatMaps/{heatMapType}")
-interface HeatMapModels {
-  /**
-   * Gets latest heatmap for Traffic Manager profile.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @get
-  @armResourceRead(HeatMapModel)
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-
+alias HeatMapModelsOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider<HeatMapModel>;
+  },
+  {
     /**
      * The name of the Traffic Manager profile.
      */
-    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
-    profileName?: string,
+    @segment("trafficmanagerprofiles")
+    profileName: string;
 
     /**
      * The type of the heatmap.
      */
-    #suppress "@azure-tools/typespec-autorest/unsupported-optional-path-param" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
     @path
-    heatMapType?: HeatMapType,
+    @segment("heatMaps")
+    heatMapType: HeatMapType;
+  },
+  ErrorType = CloudError
+>;
 
-    /**
-     * The top left latitude,longitude pair of the rectangular viewport to query for.
-     */
-    @query("topLeft")
-    @minItems(2)
-    @maxItems(2)
-    topLeft?: float64[],
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface HeatMapModels {
+  /**
+   * Gets latest heatmap for Traffic Manager profile.
+   */
+  get is HeatMapModelsOps.Read<
+    HeatMapModel,
+    Parameters = {
+      /**
+       * The top left latitude,longitude pair of the rectangular viewport to query for.
+       */
+      @query("topLeft")
+      @minItems(2)
+      @maxItems(2)
+      topLeft?: float64[];
 
-    /**
-     * The bottom right latitude,longitude pair of the rectangular viewport to query for.
-     */
-    @query("botRight")
-    @minItems(2)
-    @maxItems(2)
-    botRight?: float64[],
-  ): ArmResponse<HeatMapModel> | CloudError;
+      /**
+       * The bottom right latitude,longitude pair of the rectangular viewport to query for.
+       */
+      @query("botRight")
+      @minItems(2)
+      @maxItems(2)
+      botRight?: float64[];
+    }
+  >;
 }
 
 @@doc(HeatMapModel.name, "");

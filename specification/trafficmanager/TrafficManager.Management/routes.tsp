@@ -18,8 +18,6 @@ interface ProfilesOperationGroup {
   /**
    * Checks the availability of a Traffic Manager Relative DNS name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Profiles_CheckTrafficManagerRelativeDnsNameAvailability")
   @autoRoute
   @action("checkTrafficManagerNameAvailability")
   checkTrafficManagerRelativeDnsNameAvailability is ArmProviderActionSync<
