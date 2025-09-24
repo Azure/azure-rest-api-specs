@@ -393,12 +393,12 @@ union RollingUpgradeMode {
   string,
 
   /**
-   * The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding. The value is 0.
+   * The upgrade will stop after completing each upgrade domain and automatically monitor health before proceeding.
    */
   Monitored: "Monitored",
 
   /**
-   * The upgrade will proceed automatically without performing any health monitoring. The value is 1.
+   * The upgrade will proceed automatically without performing any health monitoring.
    */
   UnmonitoredAuto: "UnmonitoredAuto",
 }
@@ -475,7 +475,7 @@ union RuntimeUpgradeKind {
   string,
 
   /**
-   * The upgrade progresses one upgrade domain at a time. The value is 1.
+   * The upgrade progresses one upgrade domain at a time.
    */
   Rolling: "Rolling",
 }
