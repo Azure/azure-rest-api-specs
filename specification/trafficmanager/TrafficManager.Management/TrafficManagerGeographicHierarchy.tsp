@@ -16,17 +16,7 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-@singleton("default")
 @tenantResource
-// model TrafficManagerGeographicHierarchy
-//   is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
-//   ...ResourceNameParameter<
-//     Resource = TrafficManagerGeographicHierarchy,
-//     KeyName = "trafficManagerGeographicHierarchy",
-//     SegmentName = "trafficManagerGeographicHierarchies",
-//     NamePattern = ""
-//   >;
-// }
 model TrafficManagerGeographicHierarchy extends ProxyResource {
   properties?: GeographicHierarchyProperties;
 }
