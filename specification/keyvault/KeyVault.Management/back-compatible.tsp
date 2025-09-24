@@ -162,7 +162,7 @@ using Azure.Core;
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op VaultsGetDeletedCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path provider: "Microsoft.KeyVault",
+  @path provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -183,7 +183,7 @@ op VaultsGetDeletedCustomized(
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
 op VaultsPurgeDeletedCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @path provider: "Microsoft.KeyVault",
+  @path provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -208,7 +208,7 @@ op VaultsPurgeDeletedCustomized(
 op ManagedHsmsGetDeletedCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  provider: "Microsoft.KeyVault",
+  provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
@@ -233,7 +233,7 @@ op ManagedHsmsGetDeletedCustomized(
 op ManagedHsmsPurgeDeletedCustomized(
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @path
-  provider: "Microsoft.KeyVault",
+  provider: "Microsoft.ThisWillBeReplaced",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
   @query("api-version")
