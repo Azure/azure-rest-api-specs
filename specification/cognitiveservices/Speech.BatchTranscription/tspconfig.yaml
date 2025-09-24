@@ -25,6 +25,7 @@ options:
     package-dir: "azure-ai-speech-batchtranscription"
     namespace: com.azure.ai.speech.batchtranscription
     partial-update: true
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription"
     flavor: azure
   "@azure-tools/typespec-ts":
     package-dir: "ai-speech-batchtranscription-rest"
@@ -32,12 +33,14 @@ options:
       name: "@azure-rest/ai-speech-batchtranscription"
       version: "1.0.0"
       description: "Speech BatchTranscription Service"
+    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/ai-speech-batchtranscription-rest"
     flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-batchtranscription"
     package-version: "1.0.0"
     package-name: "{package-dir}"
     package-pprint-name: '"Azure AI Speech BatchTranscription"'
+    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/azure-ai-batchtranscription"
     flavor: azure
     generate-test: true
     generate-sample: true
