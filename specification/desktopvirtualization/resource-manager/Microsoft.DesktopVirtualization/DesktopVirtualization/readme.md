@@ -36,6 +36,13 @@ These settings apply only when `--tag=package-2025-10-10` is specified on the co
 ```yaml $(tag) == 'package-2025-10-10'
 input-file:
   - stable/2025-10-10/desktopvirtualization.json
+suppressions:
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
 ```
 
 ### Tag: package-preview-2025-04-01-preview
