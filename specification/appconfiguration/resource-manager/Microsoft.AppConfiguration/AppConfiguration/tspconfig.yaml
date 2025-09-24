@@ -17,7 +17,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     arm-resource-flattening: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-appconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-appconfiguration"
     namespace: "azure.mgmt.appconfiguration"
     generate-test: true
     generate-sample: true
@@ -29,6 +29,7 @@ options:
     namespace: "{package-dir}"
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.ResourceManager.AppConfiguration
     model-namespace: false
   "@azure-tools/typespec-ts":
@@ -44,7 +45,7 @@ options:
   "@azure-tools/typespec-go":
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/resourcemanager/appconfiguration"
-    package-dir: "armappconfiguration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armappconfiguration"
     module-version: "0.0.1"
     generate-fakes: true
     generate-samples: true
