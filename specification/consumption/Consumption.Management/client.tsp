@@ -4,8 +4,6 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.Consumption;
 using Azure.ClientGenerator.Core;
 
-// Java SDK client customizations for breaking change mitigations
-
 // Fix property name changes from lowercase to uppercase (etag -> eTag)
 @@clientName(LotSummary.eTag, "etag", "java");
 @@clientName(ModernChargeSummary.eTag, "etag", "java");
