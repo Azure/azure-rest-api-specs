@@ -466,7 +466,7 @@ using Http;
   "list",
   "java"
 );
-@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxies.get,
+@@clientLocation(Microsoft.RecoveryServices.ResourceGuardProxy.get,
   "ResourceGuardProxyOperation",
   "java"
 );
@@ -482,6 +482,7 @@ using Http;
   "ResourceGuardProxyOperation",
   "java"
 );
+
 @@clientName(Microsoft.RecoveryServices,
   "RecoveryServicesBackupClient",
   "javascript"
