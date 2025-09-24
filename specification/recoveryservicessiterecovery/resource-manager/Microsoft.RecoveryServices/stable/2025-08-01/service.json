@@ -4648,7 +4648,8 @@
             "in": "path",
             "description": "The name of the container containing the protected item.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": ".*"
           },
           {
             "name": "replicatedProtectedItemName",
@@ -4686,7 +4687,7 @@
           "default": {
             "description": "Automation error response describing why the operation failed.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -10960,7 +10961,7 @@
           "type": "string"
         },
         "distroNameForWhichAgentIsInstalled": {
-          "description": "Distro name for which agent is installed.",
+          "description": "The agent os name last agent reinstall was attempted.",
           "type": "string"
         },
         "isAgentUpgradeable": {
