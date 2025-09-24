@@ -49,12 +49,12 @@ using Azure.ClientGenerator.Core;
 
 @@clientName(Microsoft.NetApp.GetGroupIdListForLdapUserRequest,
   "GetGroupIdListForLDAPUserRequest",
-  "go"
+  "go,python"
 );
 
 @@clientName(Microsoft.NetApp.GetGroupIdListForLdapUserResponse,
   "GetGroupIdListForLDAPUserResponse",
-  "go"
+  "go,python"
 );
 
 @@clientName(Microsoft.NetApp.NetAppProvisioningState,
