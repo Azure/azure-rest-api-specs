@@ -3,20 +3,20 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using NewRelic.Observability;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(AccountResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccountResource.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(OrganizationResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OrganizationResource.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(PlanDataResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PlanDataResource.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NewRelicMonitorResourceUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResourceUpdate.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(TagRuleUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRuleUpdate.properties);
 
 @@clientLocation(NewRelicMonitorResources.get, "Monitors");
 @@clientLocation(NewRelicMonitorResources.createOrUpdate, "Monitors");
@@ -52,11 +52,9 @@ using NewRelic.Observability;
 @@clientLocation(NewRelicMonitorResources.billingInfoGet, "BillingInfo");
 @@clientName(NewRelicMonitorResources.billingInfoGet, "Get");
 @@clientLocation(NewRelicMonitorResources.list, "ConnectedPartnerResources");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(NewRelicMonitorResource.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NewRelicMonitorResource.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(TagRule.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagRule.properties);
 
 @@clientName(MonitoredSubscriptions.createOrUpdate::parameters.resource,
   "body"

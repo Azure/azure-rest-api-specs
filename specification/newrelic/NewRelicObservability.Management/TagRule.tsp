@@ -26,45 +26,22 @@ model TagRule
 }
 
 @armResourceOperations
-interface TagRulesOperations
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** Name of the Monitors resource */
-        @path
-        @segment("monitors")
-        @pattern("")
-        monitorName: string,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = TagRule,
-        KeyName = "ruleSetName",
-        SegmentName = "tagRules",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface TagRules {
   /**
    * Retrieves the details of the tag rules for a specific New Relic monitor resource, providing insight into its setup and status
    */
-  get is TagRulesOperations.Read<TagRule>;
+  get is ArmResourceRead<TagRule>;
 
   /**
    * Creates a new set of tag rules for a specific New Relic monitor resource, determining which Azure resources are monitored based on their tags
    */
-  createOrUpdate is TagRulesOperations.CreateOrUpdateAsync<TagRule>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<TagRule>;
 
   /**
    * Updates the tag rules for a specific New Relic monitor resource, allowing you to modify the rules that control which Azure resources are monitored
    */
   @patch(#{ implicitOptionality: false })
-  update is TagRulesOperations.CustomPatchSync<
+  update is ArmCustomPatchSync<
     TagRule,
     PatchModel = TagRuleUpdate
   >;
@@ -74,7 +51,7 @@ interface TagRules {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is TagRulesOperations.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     TagRule,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
@@ -83,7 +60,7 @@ interface TagRules {
   /**
    * Lists all tag rules associated with a specific New Relic monitor resource, helping you manage and audit the rules that control resource monitoring
    */
-  listByNewRelicMonitorResource is TagRulesOperations.List<TagRule>;
+  listByNewRelicMonitorResource is ArmResourceListByParent<TagRule>;
 }
 
 @@doc(TagRule.name, "Name of the TagRule");

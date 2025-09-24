@@ -28,39 +28,22 @@ model NewRelicMonitorResource
 }
 
 @armResourceOperations
-interface NewRelicMonitorResourceWithoutPatternOperations
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-      },
-      KeysOf<ResourceNameParameter<
-        Resource = NewRelicMonitorResource,
-        KeyName = "monitorName",
-        SegmentName = "monitors",
-        NamePattern = ""
-      >>
-    > {}
-
-@armResourceOperations
 interface NewRelicMonitorResources {
   /**
    * Retrieves the properties and configuration details of a specific New Relic monitor resource, providing insight into its setup and status
    */
-  get is NewRelicMonitorResourceWithoutPatternOperations.Read<NewRelicMonitorResource>;
+  get is ArmResourceRead<NewRelicMonitorResource>;
 
   /**
    * Creates a new or updates an existing New Relic monitor resource in your Azure subscription. This sets up the integration between Azure and your New Relic account, enabling observability and monitoring of your Azure resources through New Relic
    */
-  createOrUpdate is NewRelicMonitorResourceWithoutPatternOperations.CreateOrUpdateAsync<NewRelicMonitorResource>;
+  createOrUpdate is ArmResourceCreateOrUpdateAsync<NewRelicMonitorResource>;
 
   /**
    * Updates an existing New Relic monitor resource from your Azure subscription
    */
   @patch(#{ implicitOptionality: false })
-  update is NewRelicMonitorResourceWithoutPatternOperations.CustomPatchAsync<
+  update is ArmCustomPatchAsync<
     NewRelicMonitorResource,
     PatchModel = NewRelicMonitorResourceUpdate
   >;
@@ -70,7 +53,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is NewRelicMonitorResourceWithoutPatternOperations.DeleteWithoutOkAsync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     NewRelicMonitorResource,
     Parameters = {
       /**
@@ -96,7 +79,7 @@ interface NewRelicMonitorResources {
   /**
    * Retrieves the metric rules that are configured in the New Relic monitor resource
    */
-  getMetricRules is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  getMetricRules is ArmResourceActionSync<
     NewRelicMonitorResource,
     MetricsRequest,
     ArmResponse<MetricRules>
@@ -105,7 +88,7 @@ interface NewRelicMonitorResources {
   /**
    * Retrieves the metric status that are configured in the New Relic monitor resource
    */
-  getMetricStatus is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  getMetricStatus is ArmResourceActionSync<
     NewRelicMonitorResource,
     MetricsStatusRequest,
     ArmResponse<MetricsStatusResponse>
@@ -115,7 +98,7 @@ interface NewRelicMonitorResources {
    * Lists the app service resources currently being monitored by the New Relic resource, helping you understand which app services are under monitoring
    */
   @list
-  listAppServices is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  listAppServices is ArmResourceActionSync<
     NewRelicMonitorResource,
     AppServicesGetRequest,
     ArmResponse<AppServicesListResponse>
@@ -126,7 +109,7 @@ interface NewRelicMonitorResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  switchBilling is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  switchBilling is ArmResourceActionSync<
     NewRelicMonitorResource,
     SwitchBillingRequest,
     ArmResponse<NewRelicMonitorResource> | AcceptedResponse | NoContentResponse
@@ -136,7 +119,7 @@ interface NewRelicMonitorResources {
    * Lists all VM resources currently being monitored by the New Relic monitor resource, helping you manage observability
    */
   @list
-  listHosts is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  listHosts is ArmResourceActionSync<
     NewRelicMonitorResource,
     HostsGetRequest,
     ArmResponse<VMHostsListResponse>
@@ -145,7 +128,7 @@ interface NewRelicMonitorResources {
   /**
    * Refreshes the ingestion key for all monitors linked to the same account associated to the underlying monitor.
    */
-  refreshIngestionKey is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  refreshIngestionKey is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
     NoContentResponse
@@ -156,7 +139,7 @@ interface NewRelicMonitorResources {
    */
   @list
   @action("monitoredResources")
-  listMonitoredResources is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  listMonitoredResources is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
     ArmResponse<MonitoredResourceListResponse>
@@ -176,7 +159,7 @@ interface NewRelicMonitorResources {
    * Returns the payload that needs to be passed in the request body for installing the New Relic agent on a VM, providing the necessary configuration details
    */
   @action("vmHostPayloads")
-  vmHostPayload is NewRelicMonitorResourceWithoutPatternOperations.ActionSync<
+  vmHostPayload is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
     ArmResponse<VMExtensionPayload>

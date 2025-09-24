@@ -26,30 +26,6 @@ model MonitoredSubscriptionProperties
   >;
 }
 
-@armResourceOperations
-interface MonitoredSubscriptionOps
-  extends Azure.ResourceManager.Legacy.LegacyOperations<
-      {
-        ...ApiVersionParameter,
-        ...SubscriptionIdParameter,
-        ...ResourceGroupParameter,
-        ...Azure.ResourceManager.Legacy.Provider,
-
-        /** Name of the Monitors resource */
-        @path
-        @segment("monitors")
-        @pattern("^.*$")
-        monitorName: string,
-      },
-      {
-        /**
-         * The configuration name. Only 'default' value is supported.
-         */
-        @path
-        @segment("monitoredSubscriptions")
-        configurationName: ConfigurationName,
-      }
-    > {}
 
 @armResourceOperations
 interface MonitoredSubscriptions {
@@ -61,7 +37,7 @@ interface MonitoredSubscriptions {
   /**
    * Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.
    */
-  createOrUpdate is MonitoredSubscriptionOps.CreateOrUpdateAsync<
+  createOrUpdate is Legacy.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
     LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader,
