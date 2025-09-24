@@ -6,7 +6,7 @@ using Azure.ClientGenerator.Core;
 
 // Java SDK client customizations for breaking change mitigations
 
-// Fix property name changes from lowercase to uppercase
+// Fix property name changes from lowercase to uppercase (etag -> eTag)
 @@clientName(LotSummary.eTag, "etag", "java");
 @@clientName(ModernChargeSummary.eTag, "etag", "java");
 @@clientName(ChargeSummary.eTag, "etag", "java");
@@ -15,3 +15,10 @@ using Azure.ClientGenerator.Core;
 @@clientName(Budget.eTag, "etag", "java");
 @@clientName(TagsResult.eTag, "etag", "java");
 @@clientName(CreditSummary.eTag, "etag", "java");
+
+// Fix USD property name changes (costInUSD -> costInUsd, paygCostInUSD -> paygCostInUsd)
+@@clientName(ModernUsageDetailProperties.costInUSD, "costInUsd", "java");
+@@clientName(ModernUsageDetailProperties.paygCostInUSD,
+  "paygCostInUsd",
+  "java"
+);
