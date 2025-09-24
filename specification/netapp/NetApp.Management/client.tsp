@@ -55,3 +55,8 @@ using Azure.ClientGenerator.Core;
   "GetGroupIdListForLDAPUserResponse",
   "go"
 );
+
+@@clientName(Microsoft.NetApp.NetAppProvisioningState,
+  "NetappProvisioningState",
+  "go"
+);
