@@ -166,3 +166,6 @@ using Microsoft.BillingBenefits;
 @@clientName(AppliedScopeType, "BillingBenefitsAppliedScopeType", "csharp");
 @@clientName(ReservationOrderAliasRequest, "BillingBenefitsReservationOrderAliasCreateOrUpdateContent", "csharp");
 @@clientName(SavingsPlanPurchaseValidateRequest, "SavingsPlanPurchaseValidateContent", "csharp");
+@@clientName(BillingPlanInformation.nextPaymentDueDate, "NextPaymentDueOn", "csharp");
+@@clientName(BillingPlanInformation.startDate, "StartOn", "csharp");
+@@clientName(SavingsPlanOrderModelProperties.benefitStartTime, "BenefitStartOn", "csharp");
