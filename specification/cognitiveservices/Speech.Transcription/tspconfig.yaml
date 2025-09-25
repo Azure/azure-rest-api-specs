@@ -3,6 +3,7 @@ parameters:
     default: "sdk/cognitiveservices"
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
@@ -15,23 +16,23 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{project-root}/tsp-output/{service-dir}/Azure.AI.Speech.Transcription"
+    emitter-output-dir: "{project-root}/tsp-output/csharp"
+    clear-output-folder: true
     namespace: "Azure.AI.Speech.Transcription"
     model-namespace: false
     flavor: azure
     generate-protocol-methods: true
     generate-convenience-methods: true
-    clear-output-folder: false
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{project-root}/tsp-output/{service-dir}/azure-ai-speech-transcription"
+    package-dir: "azure-ai-speech-transcription"
     namespace: com.azure.ai.speech.transcription
     partial-update: true
     flavor: azure
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{project-root}/tsp-output/{service-dir}/azure-ai-transcription"
+    package-dir: "azure-ai-transcription"
     package-version: "1.0.0"
-    package-name: "azure-ai-transcription"
-    package-pprint-name: "Azure AI Speech Transcription"
+    package-name: "{package-dir}"
+    package-pprint-name: '"Azure AI Speech Transcription"'
     flavor: azure
     generate-test: true
     generate-sample: true
@@ -44,8 +45,9 @@ options:
   #   flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/ai/azspeechtranscription"
-    emitter-output-dir: "{project-root}/tsp-output/{service-dir}/azspeechtranscription"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azspeechtranscription"
+    package-dir: "azspeechtranscription"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/sdk/ai/azspeechtranscription/azspeechtranscription"
     flavor: "azure"
     generate-fakes: true
     inject-spans: true
