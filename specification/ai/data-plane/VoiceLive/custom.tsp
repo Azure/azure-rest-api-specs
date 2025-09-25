@@ -239,17 +239,8 @@ model EOUDetection {
 model AzureSemanticDetection extends EOUDetection {
   `model`: "semantic_detection_v1";
 
-  @doc("To be deprecated: use `threshold_level` instead.")
-  @minValue(0.0)
-  @maxValue(1.0)
-  threshold?: float32;
-
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
   threshold_level?: "low" | "medium" | "high" | "default";
-
-  @doc("To be deprecated: use `timeout_ms` instead. Timeout in seconds.")
-  @minValue(0.0)
-  timeout?: float32;
 
   @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
   @minValue(0)
@@ -261,17 +252,8 @@ model AzureSemanticDetection extends EOUDetection {
 model AzureSemanticDetectionEn extends EOUDetection {
   `model`: "semantic_detection_v1_en";
 
-  @doc("To be deprecated: use `threshold_level` instead.")
-  @minValue(0.0)
-  @maxValue(1.0)
-  threshold?: float32;
-
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
   threshold_level?: "low" | "medium" | "high" | "default";
-
-  @doc("To be deprecated: use `timeout_ms` instead. Timeout in seconds.")
-  @minValue(0.0)
-  timeout?: float32;
 
   @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
   @minValue(0)
@@ -283,17 +265,8 @@ model AzureSemanticDetectionEn extends EOUDetection {
 model AzureSemanticDetectionMultilingual extends EOUDetection {
   `model`: "semantic_detection_v1_multilingual";
 
-  @doc("To be deprecated: use `threshold_level` instead.")
-  @minValue(0.0)
-  @maxValue(1.0)
-  threshold?: float32;
-
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
   threshold_level?: "low" | "medium" | "high" | "default";
-
-  @doc("To be deprecated: use `timeout_ms` instead. Timeout in seconds.")
-  @minValue(0.0)
-  timeout?: float32;
 
   @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
   @minValue(0)
