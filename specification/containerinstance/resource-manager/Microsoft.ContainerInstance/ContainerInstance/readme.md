@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-09-01'
 input-file:
-  - Microsoft.ContainerInstance/stable/2025-09-01/containerInstance.json
+  - ./stable/2025-09-01/containerInstance.json
 ```
 
 ### Tag: package-preview-2024-11
