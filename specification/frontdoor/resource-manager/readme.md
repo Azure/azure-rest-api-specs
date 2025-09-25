@@ -38,8 +38,8 @@ These settings apply only when `--tag=package-2025-05` is specified on the comma
 input-file:
   - Microsoft.Network/preview/2025-05-16-preview/network.json
   - Microsoft.Network/preview/2025-05-16-preview/webapplicationfirewall.json
-  - Microsoft.Network/stable/2021-06-01/frontdoor.json
-  - Microsoft.Network/stable/2019-11-01/networkexperiment.json
+  - Microsoft.Network/preview/2025-05-16-preview/frontdoor.json
+  - Microsoft.Network/preview/2025-05-16-preview/networkexperiment.json
 ```
 
 ### Tag: package-2025-03
