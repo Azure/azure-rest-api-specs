@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB MongoDB database.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @parentResource(DatabaseAccountGetResults)
 model MongoDBDatabaseGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MongoDBDatabaseGetProperties> {
@@ -30,12 +31,13 @@ model MongoDBDatabaseGetResults
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   identity?: ManagedServiceIdentity;
 }
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_GetMongoDBDatabase")
   getMongoDBDatabase is ArmResourceRead<MongoDBDatabaseGetResults>;
@@ -43,6 +45,7 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Create or updates Azure Cosmos DB MongoDB database
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("MongoDBResources_CreateUpdateMongoDBDatabase")
@@ -57,6 +60,7 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB MongoDB database.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_DeleteMongoDBDatabase")
   deleteMongoDBDatabase is ArmResourceDeleteWithoutOkAsync<MongoDBDatabaseGetResults>;
@@ -64,6 +68,7 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Lists the MongoDB databases under an existing Azure Cosmos DB database account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_ListMongoDBDatabases")
   listMongoDBDatabases is ArmResourceListByParent<
@@ -74,6 +79,7 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   /**
    * Merges the partitions of a MongoDB database
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_MongoDBDatabasePartitionMerge")
   @action("partitionMerge")

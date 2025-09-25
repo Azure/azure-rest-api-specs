@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB MongoDB collection.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @parentResource(MongoDBDatabaseGetResults)
 model MongoDBCollectionGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<MongoDBCollectionGetProperties> {
@@ -31,6 +32,7 @@ model MongoDBCollectionGetResults
   identity?: ManagedServiceIdentity;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface MongoDBCollectionGetResultsOperationGroup {
   /**
@@ -57,6 +59,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB MongoDB Collection.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_DeleteMongoDBCollection")
   deleteMongoDBCollection is ArmResourceDeleteWithoutOkAsync<MongoDBCollectionGetResults>;
@@ -64,6 +67,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
   /**
    * Lists the MongoDB collection under an existing Azure Cosmos DB database account.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_ListMongoDBCollections")
   listMongoDBCollections is ArmResourceListByParent<
@@ -74,6 +78,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
   /**
    * Merges the partitions of a MongoDB Collection
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_ListMongoDBCollectionPartitionMerge")
   @action("partitionMerge")

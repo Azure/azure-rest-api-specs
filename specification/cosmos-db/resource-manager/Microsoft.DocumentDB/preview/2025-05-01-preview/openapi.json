@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "CosmosDBManagementClient",
+    "title": "Cosmos DB",
     "version": "2025-05-01-preview",
-    "description": "Azure Cosmos DB Chaos Fault REST API",
+    "description": "Azure Cosmos DB Throughput Pool REST API",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -20749,7 +20749,8 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/Certificate"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "connectionTimeoutInMs": {
           "type": "integer",
@@ -21282,7 +21283,8 @@
           "description": "Copy Job tasks.",
           "items": {
             "$ref": "#/definitions/BlobToCassandraRUCopyJobTask"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -21455,14 +21457,16 @@
           "description": "List relevant information about any connection errors to the Datacenters.",
           "items": {
             "$ref": "#/definitions/ConnectionError"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "errors": {
           "type": "array",
           "description": "List relevant information about any errors about cluster, data center and connection error.",
           "items": {
             "$ref": "#/definitions/CassandraError"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "dataCenters": {
           "type": "array",
@@ -21485,13 +21489,15 @@
           "description": "A list of all seed nodes in the cluster, managed and unmanaged.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "nodes": {
           "type": "array",
           "items": {
             "$ref": "#/definitions/ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -21692,7 +21698,8 @@
           "description": "Copy Job tasks.",
           "items": {
             "$ref": "#/definitions/CassandraRUToBlobCopyJobTask"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -21745,7 +21752,8 @@
           "description": "Copy Job tasks.",
           "items": {
             "$ref": "#/definitions/CassandraRUToCassandraRUCopyJobTask"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -22639,14 +22647,16 @@
           "description": "List of TLS certificates used to authorize clients connecting to the cluster. All connections are TLS encrypted whether clientCertificates is set or not, but if clientCertificates is set, the managed Cassandra cluster will reject all connections not bearing a TLS client certificate that can be validated from one or more of the public certificates in this property.",
           "items": {
             "$ref": "#/definitions/Certificate"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "externalGossipCertificates": {
           "type": "array",
           "description": "List of TLS certificates used to authorize gossip from unmanaged data centers. The TLS certificates of all nodes in unmanaged data centers must be verifiable using one of the certificates provided in this property.",
           "items": {
             "$ref": "#/definitions/Certificate"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "gossipCertificates": {
           "type": "array",
@@ -22654,14 +22664,16 @@
           "items": {
             "$ref": "#/definitions/Certificate"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "externalSeedNodes": {
           "type": "array",
           "description": "List of IP addresses of seed nodes in unmanaged data centers. These will be added to the seed node lists of all managed nodes.",
           "items": {
             "$ref": "#/definitions/SeedNode"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "seedNodes": {
           "type": "array",
@@ -22669,7 +22681,8 @@
           "items": {
             "$ref": "#/definitions/SeedNode"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "externalDataCenters": {
           "type": "array",
@@ -22704,14 +22717,16 @@
           "description": "Extensions to be added or updated on cluster.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "backupSchedules": {
           "type": "array",
           "description": "List of backup schedules that define when you want to back up your data.",
           "items": {
             "$ref": "#/definitions/BackupSchedule"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "scheduledEventStrategy": {
           "$ref": "#/definitions/ScheduledEventStrategy",
@@ -23807,7 +23822,8 @@
           "items": {
             "$ref": "#/definitions/SeedNode"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "base64EncodedCassandraYamlFragment": {
           "type": "string",
@@ -24145,7 +24161,8 @@
           "description": "List of IpRules.",
           "items": {
             "$ref": "#/definitions/IpAddressOrRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "isVirtualNetworkFilterEnabled": {
           "type": "boolean",
@@ -24245,7 +24262,8 @@
           "description": "The CORS policy for the Cosmos DB database account.",
           "items": {
             "$ref": "#/definitions/CorsPolicy"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "networkAclBypass": {
           "$ref": "#/definitions/NetworkAclBypass",
@@ -24355,7 +24373,8 @@
           "description": "List of IpRules.",
           "items": {
             "$ref": "#/definitions/IpAddressOrRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "isVirtualNetworkFilterEnabled": {
           "type": "boolean",
@@ -24508,7 +24527,8 @@
           "description": "The CORS policy for the Cosmos DB database account.",
           "items": {
             "$ref": "#/definitions/CorsPolicy"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "networkAclBypass": {
           "$ref": "#/definitions/NetworkAclBypass",
@@ -24687,7 +24707,8 @@
           "description": "An array that contains the connection strings for the Cosmos DB account.",
           "items": {
             "$ref": "#/definitions/DatabaseAccountConnectionString"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -24787,7 +24808,8 @@
           "description": "List of IpRules.",
           "items": {
             "$ref": "#/definitions/IpAddressOrRange"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "isVirtualNetworkFilterEnabled": {
           "type": "boolean",
@@ -24864,7 +24886,8 @@
           "description": "The CORS policy for the Cosmos DB database account.",
           "items": {
             "$ref": "#/definitions/CorsPolicy"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "networkAclBypass": {
           "$ref": "#/definitions/NetworkAclBypass",
@@ -25108,7 +25131,8 @@
           "description": "List of failover policies.",
           "items": {
             "$ref": "#/definitions/FailoverPolicy"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -25495,7 +25519,8 @@
           "description": "List of FullText Paths",
           "items": {
             "$ref": "#/definitions/FullTextPath"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -26292,7 +26317,8 @@
           "description": "List of indexes for this path",
           "items": {
             "$ref": "#/definitions/Indexes"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -26419,14 +26445,16 @@
           "description": "List of paths to include in the indexing",
           "items": {
             "$ref": "#/definitions/IncludedPath"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "excludedPaths": {
           "type": "array",
           "description": "List of paths to exclude from indexing",
           "items": {
             "$ref": "#/definitions/ExcludedPath"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "compositeIndexes": {
           "type": "array",
@@ -26436,21 +26464,24 @@
             "items": {
               "$ref": "#/definitions/CompositePath"
             }
-          }
+          },
+          "x-ms-identifiers": []
         },
         "spatialIndexes": {
           "type": "array",
           "description": "List of spatial specifics",
           "items": {
             "$ref": "#/definitions/SpatialSpec"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "vectorIndexes": {
           "type": "array",
           "description": "List of paths to include in the vector indexing",
           "items": {
             "$ref": "#/definitions/VectorIndex"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -26560,7 +26591,8 @@
           "items": {
             "$ref": "#/definitions/BackupResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -26587,7 +26619,8 @@
           "items": {
             "$ref": "#/definitions/CommandPublicResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -26964,7 +26997,8 @@
           "items": {
             "$ref": "#/definitions/MetricValue"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -26994,7 +27028,8 @@
           "items": {
             "$ref": "#/definitions/MetricAvailability"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "primaryAggregationType": {
           "$ref": "#/definitions/PrimaryAggregationType",
@@ -27207,7 +27242,8 @@
           "description": "List of index keys",
           "items": {
             "$ref": "#/definitions/MongoIndex"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "analyticalStorageTtl": {
           "type": "integer",
@@ -27334,7 +27370,8 @@
           "description": "List of index keys",
           "items": {
             "$ref": "#/definitions/MongoIndex"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "analyticalStorageTtl": {
           "type": "integer",
@@ -27764,7 +27801,8 @@
           "description": "Copy Job tasks.",
           "items": {
             "$ref": "#/definitions/MongoRUToMongoRUCopyJobTask"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -27816,7 +27854,8 @@
           "description": "Copy Job tasks.",
           "items": {
             "$ref": "#/definitions/MongoRUToMongoVCoreCopyJobTask"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -27914,14 +27953,16 @@
           "description": "A set of privileges contained by the Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Scopes higher than Database are not enforceable as privilege.",
           "items": {
             "$ref": "#/definitions/Privilege"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "roles": {
           "type": "array",
           "description": "The set of roles inherited by this Role Definition.",
           "items": {
             "$ref": "#/definitions/Role"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -27996,14 +28037,16 @@
         },
         "customData": {
           "type": "string",
-          "description": "A custom definition for the USer Definition."
+          "description": "A custom definition for the USer Definition.",
+          "x-ms-identifiers": []
         },
         "roles": {
           "type": "array",
           "description": "The set of roles inherited by the User Definition.",
           "items": {
             "$ref": "#/definitions/Role"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "mechanisms": {
           "type": "string",
@@ -28093,7 +28136,8 @@
           "description": "Copy Job tasks.",
           "items": {
             "$ref": "#/definitions/NoSqlRUToNoSqlRUCopyJobTask"
-          }
+          },
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -28394,7 +28438,8 @@
           "items": {
             "$ref": "#/definitions/PercentileMetricValue"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -29165,7 +29210,8 @@
           "items": {
             "$ref": "#/definitions/RestorableLocationResource"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       }
     },
@@ -30264,14 +30310,16 @@
           "description": "List of specific databases available for restore.",
           "items": {
             "$ref": "#/definitions/DatabaseRestoreResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "gremlinDatabasesToRestore": {
           "type": "array",
           "description": "List of specific gremlin databases available for restore.",
           "items": {
             "$ref": "#/definitions/GremlinDatabaseRestoreResource"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "tablesToRestore": {
           "type": "array",
@@ -31418,14 +31466,16 @@
           "description": "A set of fully qualified Scopes at or below which Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist.",
           "items": {
             "type": "string"
-          }
+          },
+          "x-ms-identifiers": []
         },
         "permissions": {
           "type": "array",
           "description": "The set of operations allowed through this Role Definition.",
           "items": {
             "$ref": "#/definitions/Permission"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -32798,7 +32848,8 @@
           "description": "List of unique keys on that enforces uniqueness constraint on documents in the collection in the Azure Cosmos DB service.",
           "items": {
             "$ref": "#/definitions/UniqueKey"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },
@@ -32961,7 +33012,8 @@
           "description": "List of vector embeddings",
           "items": {
             "$ref": "#/definitions/VectorEmbedding"
-          }
+          },
+          "x-ms-identifiers": []
         }
       }
     },

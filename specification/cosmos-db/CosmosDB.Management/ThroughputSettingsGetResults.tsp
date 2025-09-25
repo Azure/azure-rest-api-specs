@@ -166,7 +166,8 @@ alias ThroughputSettingsGetResultsOperationGroupOps_2 = Azure.ResourceManager.Le
     default: string;
   }
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface ThroughputSettingsGetResultsOperationGroup_2 {
   /**
@@ -266,12 +267,13 @@ alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     default: string;
   }
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface MongoDBResources {
   /**
    * Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   getMongoDBDatabaseThroughput is MongoDBResourceOps.Read<ThroughputSettingsGetResults>;
 
   /**
@@ -289,6 +291,7 @@ interface MongoDBResources {
   /**
    * Migrate an Azure Cosmos DB MongoDB database from manual throughput to autoscale
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   @action("migrateToAutoscale")
   migrateMongoDBDatabaseToAutoscale is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -299,6 +302,7 @@ interface MongoDBResources {
   /**
    * Migrate an Azure Cosmos DB MongoDB database from autoscale to manual throughput
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   @action("migrateToManualThroughput")
   migrateMongoDBDatabaseToManualThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -360,12 +364,13 @@ alias ThroughputSettingsGetResultsOperationGroupOps_3 = Azure.ResourceManager.Le
     default: string;
   }
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface ThroughputSettingsGetResultsOperationGroup_3 {
   /**
    * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_GetMongoDBCollectionThroughput")
   getMongoDBCollectionThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.Read<ThroughputSettingsGetResults>;
@@ -373,6 +378,7 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   /**
    * Update the RUs per second of an Azure Cosmos DB MongoDB collection
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("MongoDBResources_UpdateMongoDBCollectionThroughput")
@@ -399,6 +405,7 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   /**
    * Redistribute throughput for an Azure Cosmos DB MongoDB container
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_MongoDBContainerRedistributeThroughput")
   @action("redistributeThroughput")
@@ -423,6 +430,7 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   /**
    * Migrate an Azure Cosmos DB MongoDB collection from autoscale to manual throughput
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoDBResources_MigrateMongoDBCollectionToManualThroughput")
   @action("migrateToManualThroughput")
@@ -602,7 +610,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps_4 = Azure.ResourceManager.Le
     default: string;
   }
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface ThroughputSettingsGetResultsOperationGroup_4 {
   /**
@@ -684,7 +692,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps_5 = Azure.ResourceManager.Le
     default: string;
   }
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface ThroughputSettingsGetResultsOperationGroup_5 {
   /**
@@ -834,7 +842,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps_6 = Azure.ResourceManager.Le
     default: string;
   }
 >;
-
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface ThroughputSettingsGetResultsOperationGroup_6 {
   /**

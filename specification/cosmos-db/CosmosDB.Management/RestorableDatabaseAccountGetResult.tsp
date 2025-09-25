@@ -48,7 +48,7 @@ interface RestorableDatabaseAccountGetResults {
    * Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("RestorableDatabaseAccounts_ListByLocation")
+  @list
   listByLocation is ArmResourceListByParent<
     RestorableDatabaseAccountGetResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

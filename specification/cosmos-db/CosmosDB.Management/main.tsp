@@ -69,10 +69,11 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Azure Cosmos DB Chaos Fault REST API
+ * Azure Cosmos DB Throughput Pool REST API
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armProviderNamespace
-@service(#{ title: "CosmosDBManagementClient" })
+@service(#{ title: "Cosmos DB" })
 @versioned(Versions)
 // FIXME: Common type version v1 is not supported for now. Set to v3.
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)

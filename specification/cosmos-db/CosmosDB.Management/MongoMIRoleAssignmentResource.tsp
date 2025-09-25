@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * Parameters to create and update an Azure Cosmos DB MongoMI Role Assignment.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @parentResource(DatabaseAccountGetResults)
 model MongoMIRoleAssignmentResource
   is Azure.ResourceManager.ProxyResource<MongoMIRoleAssignmentResourceProperties> {
@@ -25,11 +26,13 @@ model MongoMIRoleAssignmentResource
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface MongoMIRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Assignment with the given Id.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoMIResources_GetMongoMIRoleAssignment")
   getMongoMIRoleAssignment is ArmResourceRead<MongoMIRoleAssignmentResource>;
@@ -39,6 +42,7 @@ interface MongoMIRoleAssignmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   @operationId("MongoMIResources_CreateUpdateMongoMIRoleAssignment")
   createUpdateMongoMIRoleAssignment is ArmResourceCreateOrReplaceAsync<
     MongoMIRoleAssignmentResource,
@@ -52,6 +56,7 @@ interface MongoMIRoleAssignmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   @operationId("MongoMIResources_DeleteMongoMIRoleAssignment")
   deleteMongoMIRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     MongoMIRoleAssignmentResource,
@@ -61,6 +66,7 @@ interface MongoMIRoleAssignmentResources {
   /**
    * Retrieves the list of all Azure Cosmos DB MongoMI Role Assignments.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("MongoMIResources_ListMongoMIRoleAssignments")
   listMongoMIRoleAssignments is ArmResourceListByParent<MongoMIRoleAssignmentResource>;
