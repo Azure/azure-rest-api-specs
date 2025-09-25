@@ -1157,7 +1157,46 @@
         }
       }
     },
-    "/evaluators/{name}": {
+    "/evaluators/{name}/versions": {
+      "get": {
+        "operationId": "Evaluators_ListEvaluatorVersions",
+        "description": "List all versions of the given EvaluatorVersion",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
       "post": {
         "operationId": "Evaluators_CreateEvaluatorVersion",
         "description": "Create an existing EvaluatorVersion with the given version id",
@@ -1198,47 +1237,6 @@
               }
             }
           }
-        }
-      }
-    },
-    "/evaluators/{name}/versions": {
-      "get": {
-        "operationId": "Evaluators_ListEvaluatorVersions",
-        "description": "List all versions of the given EvaluatorVersion",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedEvaluatorVersion"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },

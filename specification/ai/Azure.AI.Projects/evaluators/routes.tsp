@@ -88,6 +88,7 @@ interface Evaluators {
   // POST /evaluators/{evaluatorName}/versions
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create an existing {name} with the given version id", EvaluatorVersion)
+  @Rest.segment("versions")
   @Http.post
   createEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
