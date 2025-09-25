@@ -7895,7 +7895,7 @@
     },
     "Capability": {
       "type": "object",
-      "description": "Capability, to match in Solution Templates & Targets",
+      "description": "Capability, to match in Solution Templates and Targets",
       "properties": {
         "name": {
           "type": "string",
@@ -9249,6 +9249,7 @@
       "description": "JobType for the job. Supports extensibility via string values.",
       "enum": [
         "deploy",
+        "publish",
         "staging",
         "externalValidation"
       ],
@@ -9260,6 +9261,11 @@
             "name": "Deploy",
             "value": "deploy",
             "description": "A deployment job."
+          },
+          {
+            "name": "Publish",
+            "value": "publish",
+            "description": "A publish job."
           },
           {
             "name": "Staging",
@@ -9340,6 +9346,48 @@
         ]
       },
       "readOnly": true
+    },
+    "PublishJobParameter": {
+      "type": "object",
+      "description": "Parameters for a publish job.",
+      "properties": {
+        "parameter": {
+          "$ref": "#/definitions/SolutionVersionParameter"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobParameterBase"
+        }
+      ],
+      "x-ms-discriminator-value": "publish"
+    },
+    "PublishJobStepStatistics": {
+      "type": "object",
+      "description": "Publish statistics for a job step, including total, success, and failed counts.",
+      "properties": {
+        "totalCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Total count of items processed in this step"
+        },
+        "successCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of successful items in this step"
+        },
+        "failedCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Count of failed items in this step"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/JobStepStatisticsBase"
+        }
+      ],
+      "x-ms-discriminator-value": "publish"
     },
     "ReconciliationPolicyProperties": {
       "type": "object",

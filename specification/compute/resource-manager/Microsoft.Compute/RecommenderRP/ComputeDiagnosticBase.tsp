@@ -12,7 +12,6 @@ namespace Microsoft.Compute;
  * Contains metadata of a diagnostic type
  */
 @singleton("spot")
-@subscriptionResource
 @parentResource(SubscriptionLocationResource)
 model ComputeDiagnosticBase
   is Azure.ResourceManager.ProxyResource<DiagnosticProperties> {
@@ -29,10 +28,7 @@ interface ComputeDiagnosticBases {
   /**
    * Gets Spot Placement Scores metadata.
    */
-  get is ArmResourceRead<
-    ComputeDiagnosticBase,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
-  >;
+  get is ArmResourceRead<ComputeDiagnosticBase>;
 
   /**
    * Generates placement scores for Spot VM skus.
@@ -41,8 +37,7 @@ interface ComputeDiagnosticBases {
   post is ArmResourceActionSync<
     ComputeDiagnosticBase,
     SpotPlacementScoresInput,
-    ArmResponse<SpotPlacementScoresResponse>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    ArmResponse<SpotPlacementScoresResponse>
   >;
 }
 
