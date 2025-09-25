@@ -1,0 +1,57 @@
+{
+  "title": "NodePools_Get",
+  "operationId": "NodePools_Get",
+  "parameters": {
+    "api-version": "2024-06-10-preview",
+    "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
+    "resourceGroupName": "rgopenapi",
+    "hcpOpenShiftClusterName": "hcpCluster-name",
+    "nodePoolName": "nodepool-name"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "version": {
+            "channelGroup": "stable",
+            "id": "4.12" 
+          },
+          "platform": {
+            "subnetId": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/hcp-network-example/subnets/example-subnet",
+            "vmSize": "Standard_D2s_v3",
+            "availabilityZone": "australiaeast-az1",
+            "enableEncryptionAtHost": true,
+            "osDisk": {
+              "sizeGiB": 10,
+              "diskStorageAccountType": "Premium_LRS",
+              "encryptionSetId": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/resourceGroupName/providers/Microsoft.Compute/diskEncryptionSets/hcp-disk-encryption-set-example"
+
+            }
+          },
+          "replicas": 18,
+          "autoRepair": true,
+          "autoScaling": {
+            "min": 6,
+            "max": 29
+          }
+        },
+        "tags": {
+          "key": "value"
+        },
+        "location": "mqewzbuvnyxnwbmir",
+        "id": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/resourceGroupName/providers/Microsoft.RedHatOpenShift/resourceType/resourceName",
+        "name": "riywfucwvfwoepzliopnphdfjw",
+        "type": "znmdhkzcopsephiyom",
+        "systemData": {
+          "createdBy": "lsrkqcuijqfp",
+          "createdByType": "User",
+          "createdAt": "2024-03-27T14:57:32.578Z",
+          "lastModifiedBy": "tgpmwu",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-03-27T14:57:32.578Z"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,126 @@
+{
+  "title": "HcpOpenShiftClusters_Update",
+  "operationId": "HcpOpenShiftClusters_Update",
+  "parameters": {
+    "api-version": "2024-06-10-preview",
+    "subscriptionId": "FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D",
+    "resourceGroupName": "rgopenapi",
+    "hcpOpenShiftClusterName": "hcpCluster-name",
+    "properties": {
+      "identity": {
+        "type": "UserAssigned",
+        "userAssignedIdentities": {
+          "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/serviceMI": {}
+        }
+      },
+      "tags": {
+        "key4965": "gadonynrfuc"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "version": {
+            "channelGroup": "stable",
+            "id": "4.12"
+          },
+          "dns": {
+            "baseDomainPrefix": "jcldjrtyebhrlxs",
+            "baseDomain": "yubrqcgqdhgqfkobjqm"
+          },
+          "network": {
+            "networkType": "OVNKubernetes",
+            "podCidr": "10.128.0.0/14",
+            "serviceCidr": "172.30.0.0/16",
+            "machineCidr": "10.0.0.0/16",
+            "hostPrefix": 21
+          },
+          "api": {
+            "visibility": "Public",
+            "url": "https://api.test.shrd.usw3test.hcp.osadev.cloud:443",
+            "authorizedCidrs": [
+              "172.16.0.0/12",
+              "203.0.113.0/24"
+            ]
+          },
+          "platform": {
+            "managedResourceGroup": "nhyhywrxupo",
+            "subnetId": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/resourceGroupName/providers/Microsoft.Network/virtualNetworks/hcp-network-example/subnets/example-subnet",
+            "outboundType": "LoadBalancer",
+            "networkSecurityGroupId": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/resourceGroupName/providers/Microsoft.Network/networkSecurityGroups/nsg-example",
+            "operatorsAuthentication": {
+              "userAssignedIdentities": {
+                "controlPlaneOperators": {},
+                "dataPlaneOperators": {},
+                "serviceManagedIdentity": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/serviceMI"
+              }
+            },
+            "issuerUrl": "https://oidc.contoso.com"
+          },
+          "provisioningState": "Succeeded",
+          "console": {
+            "url": "https://console.test.shrd.usw3test.hcp.osadev.cloud"
+          },
+          "autoscaling": {
+            "maxNodesTotal": 0,
+            "maxPodGracePeriodSeconds": 0,
+            "maxNodeProvisionTimeSeconds": 0,
+            "podPriorityThreshold": 1
+          },
+          "etcd": {
+            "dataEncryption": {
+              "keyManagementMode": "CustomerManaged",
+              "customerManaged": {
+                "encryptionType": "KMS",
+                "kms": {
+                  "activeKey": {
+                    "vaultName": "my-cool-vault",
+                    "name": "my-cool-key",
+                    "version": "8e73e7d1fd7d4a87b730f676fc77d3a6"
+                  }
+                }
+              }
+            }
+          },
+          "nodeDrainTimeoutMinutes": 20,
+          "clusterImageRegistry": {
+            "state": "Enabled"
+          }
+        },
+        "identity": {
+          "principalId": "e5867472-f0ed-4fc1-80e1-59b4c0256adb",
+          "tenantId": "2a58de3b-8a38-44cd-8f33-4bd5b91479c1",
+          "type": "UserAssigned",
+          "userAssignedIdentities": {
+            "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/rgopenapi/providers/Microsoft.ManagedIdentity/userAssignedIdentities/serviceMI": {
+              "principalId": "15a1e2d8-41ae-4068-8ea9-a80f2cdd94c3",
+              "clientId": "a60f3156-367f-4303-bb21-7a41b3c41cb9"
+            }
+          }
+        },
+        "tags": {
+          "key4181": "leaswtidajsjtgmqawhdl"
+        },
+        "location": "ayecbdqonsqfowbq",
+        "id": "/subscriptions/FDEA43EA-0230-4A7D-BDEE-F3AFF2183B1D/resourceGroups/resourceGroupName/providers/Microsoft.RedHatOpenShift/resourceType/resourceName",
+        "name": "vuwzuwooutjavgdhoatz",
+        "type": "utiyj",
+        "systemData": {
+          "createdBy": "lsrkqcuijqfp",
+          "createdByType": "User",
+          "createdAt": "2024-03-27T14:57:32.578Z",
+          "lastModifiedBy": "tgpmwu",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2024-03-27T14:57:32.578Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
