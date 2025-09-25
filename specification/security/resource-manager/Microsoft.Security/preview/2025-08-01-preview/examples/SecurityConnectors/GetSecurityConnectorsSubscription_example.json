@@ -1,0 +1,248 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "a5caac9c-5c04-49af-b3d0-e204f40345d5"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup1/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAws",
+            "name": "exampleSecurityConnectorAws",
+            "type": "Microsoft.Security/securityConnectors",
+            "etag": "etag value",
+            "kind": "",
+            "location": "Central US",
+            "tags": {},
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2021-08-31T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-08-31T13:47:50.328Z"
+            },
+            "properties": {
+              "hierarchyIdentifier": "exampleHierarchyId",
+              "environmentData": {
+                "environmentType": "AwsAccount",
+                "scanInterval": 4
+              },
+              "environmentName": "AWS",
+              "offerings": [
+                {
+                  "offeringType": "DefenderCspmAws",
+                  "ciem": {
+                    "ciemDiscovery": {
+                      "cloudRoleArn": "arn:aws:iam::00000000:role/ASCMonitor",
+                      "enableAuditLogIngestion": true
+                    },
+                    "logCollectionOidc": {
+                      "cloudRoleArn": "arn:aws:iam::00000000:role/LogCollection"
+                    },
+                    "ciemOidc": {
+                      "cloudRoleArn": "arn:aws:iam::00000000:role/CiemProvisioner"
+                    },
+                    "cloudTrailAuditLogIngestion": {
+                      "provisioningType": "BringYourOwn",
+                      "resourceNamePrefix": "",
+                      "deploymentRegion": "",
+                      "cloudTrailResourceSets": [
+                        {
+                          "resourceRegion": "us-east-1",
+                          "s3BucketArn": "arn:aws:s3:::trail-bucket",
+                          "sqsQueueArn": "arn:aws:sqs:us-east-1:111122223333:trail-queue",
+                          "kmsKeyArn": "arn:aws:kms:us-east-1:111122223333:key/abcde-fghi"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup2/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAwsOrganization",
+            "name": "exampleSecurityConnectorAwsOrganization",
+            "type": "Microsoft.Security/securityConnectors",
+            "etag": "etag value",
+            "kind": "",
+            "location": "Central US",
+            "tags": {},
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
+            },
+            "properties": {
+              "hierarchyIdentifier": "exampleHierarchyId",
+              "environmentData": {
+                "environmentType": "AwsAccount",
+                "scanInterval": 4,
+                "organizationalData": {
+                  "organizationMembershipType": "Organization",
+                  "stacksetName": "myStackSetName",
+                  "excludedAccountIds": [
+                    "excludedAccountIdExample"
+                  ]
+                }
+              },
+              "environmentName": "AWS",
+              "offerings": [
+                {
+                  "offeringType": "DefenderCspmAws",
+                  "ciem": {
+                    "ciemDiscovery": {
+                      "cloudRoleArn": "arn:aws:iam::00000000:role/ASCMonitor",
+                      "enableAuditLogIngestion": true
+                    },
+                    "logCollectionOidc": {
+                      "cloudRoleArn": "arn:aws:iam::00000000:role/LogCollection"
+                    },
+                    "ciemOidc": {
+                      "cloudRoleArn": "arn:aws:iam::00000000:role/CiemProvisioner"
+                    },
+                    "cloudTrailAuditLogIngestion": {
+                      "provisioningType": "BringYourOwn",
+                      "resourceNamePrefix": "",
+                      "deploymentRegion": "",
+                      "cloudTrailResourceSets": [
+                        {
+                          "resourceRegion": "us-east-1",
+                          "s3BucketArn": "arn:aws:s3:::trail-bucket",
+                          "sqsQueueArn": "arn:aws:sqs:us-east-1:111122223333:trail-queue",
+                          "kmsKeyArn": "arn:aws:kms:us-east-1:111122223333:key/abcde-fghi"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorGithub",
+            "name": "githubTest",
+            "etag": "etag value",
+            "type": "Microsoft.Security/securityconnectors",
+            "location": "centralus",
+            "kind": "",
+            "tags": {},
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
+            },
+            "properties": {
+              "hierarchyIdentifier": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.SecurityDevops/githubConnectors/exampleGithubConnector",
+              "environmentName": "Github",
+              "environmentData": {
+                "environmentType": "GithubScope"
+              },
+              "offerings": [
+                {
+                  "offeringType": "CspmMonitorGithub"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorAzureDevOpsConnectors",
+            "name": "AzureDevOpsTest",
+            "etag": "etag value",
+            "type": "Microsoft.Security/securityconnectors",
+            "location": "centralus",
+            "kind": "",
+            "tags": {},
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
+            },
+            "properties": {
+              "hierarchyIdentifier": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.SecurityDevops/azureDevOpsConnectors/exampleAzureDevOpsConnector",
+              "environmentName": "Github",
+              "environmentData": {
+                "environmentType": "GithubScope"
+              },
+              "offerings": [
+                {
+                  "offeringType": "CspmMonitorGithub"
+                }
+              ]
+            }
+          },
+          {
+            "id": "/subscriptions/a5caac9c-5c04-49af-b3d0-e204f40345d5/resourceGroups/exampleResourceGroup3/providers/Microsoft.Security/securityConnectors/exampleSecurityConnectorGcp",
+            "name": "exampleSecurityConnectorGcp",
+            "type": "Microsoft.Security/securityConnectors",
+            "etag": "etag value",
+            "kind": "",
+            "location": "Central US",
+            "tags": {},
+            "systemData": {
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "createdAt": "2021-12-15T13:47:50.328Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2021-12-15T13:47:50.328Z"
+            },
+            "properties": {
+              "hierarchyIdentifier": "exampleHierarchyId",
+              "environmentData": {
+                "environmentType": "GcpProject",
+                "projectDetails": {
+                  "projectNumber": "exampleHierarchyId",
+                  "projectId": "My-0GCP-Project",
+                  "workloadIdentityPoolId": "6c78da41157548d3b1d8b3c72effdf8c"
+                }
+              },
+              "environmentName": "GCP",
+              "offerings": [
+                {
+                  "offeringType": "DefenderCspmGcp",
+                  "ciemDiscovery": {
+                    "workloadIdentityProviderId": "My workload identity provider Id",
+                    "serviceAccountEmailAddress": "capm@projectName.com",
+                    "azureActiveDirectoryAppName": "GcpCiemApp",
+                    "enableAuditLogIngestion": true
+                  },
+                  "ciem": {
+                    "logCollectionOidc": {
+                      "workloadIdentityProviderId": "My log collection workload identity provider Id",
+                      "serviceAccountEmailAddress": "logcollection@projectName.com"
+                    },
+                    "ciemOidc": {
+                      "workloadIdentityProviderId": "My ciem workload identity provider Id",
+                      "serviceAccountEmailAddress": "ciem@projectName.com"
+                    },
+                    "gcpAuditLogIngestion": {
+                      "provisioningType": "BringYourOwn",
+                      "resourceNamePrefix": "",
+                      "resourceSets": [
+                        {
+                          "pubSubSubscriptionName": "my-pub-sub-subscription"
+                        }
+                      ]
+                    }
+                  }
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  }
+}
