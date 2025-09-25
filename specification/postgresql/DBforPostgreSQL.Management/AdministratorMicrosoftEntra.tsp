@@ -38,6 +38,7 @@ interface AdministratorMicrosoftEntras {
   /**
    * Creates a new server administrator associated to a Microsoft Entra principal.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @Azure.Core.useFinalStateVia("azure-async-operation")
   @put
   createOrUpdate is Legacy.CreateOrReplaceAsync<

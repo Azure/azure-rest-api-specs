@@ -26,6 +26,7 @@ model Configuration
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface Configurations {
   /**
@@ -39,16 +40,12 @@ interface Configurations {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @useFinalStateVia("azure-async-operation")
   @put
-  put is Azure.ResourceManager.Foundations.ArmCreateOperation<
-    ResourceInstanceParameters<
-      Configuration,
-      Azure.ResourceManager.Foundations.DefaultBaseParameters<Configuration>
-    >,
+  put is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    Configuration,
     ConfigurationForUpdate,
     Response = ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
       ArmLroLocationHeader &
-      Azure.Core.Foundations.RetryAfterHeader>,
-    ErrorResponse = ErrorResponse
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
