@@ -117,6 +117,10 @@ using Microsoft.Cdn;
   "TwoHundred",
   "javascript,go"
 );
+@@clientName(CdnWebApplicationFirewallPolicy, "CdnWebApplicationFirewallPolicy", "go");
+@@clientName(WebApplicationFirewallPolicy, "WebApplicationFirewallPolicy", "go");
+@@clientName(CdnWebApplicationFirewallPolicyProperties, "CdnWebApplicationFirewallPolicyProperties", "go");
+@@clientName(WebApplicationFirewallPolicyProperties, "WebApplicationFirewallPolicyProperties", "go");
 
 @@clientLocation(checkEndpointNameAvailability, "ManagementClient", "go");
 @@clientLocation(checkNameAvailability, "ManagementClient", "go");
