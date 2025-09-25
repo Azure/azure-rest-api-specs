@@ -59,7 +59,7 @@ model NodeCustomizationScript {
     Must be unique within the node customization resource.
     Can only contain lowercase alphanumeric,'-' or '.' characters.
     """)
-  @pattern("^[a-z0-9]([\\.-a-z0-9]*[a-z0-9])?$")
+  @pattern("^[a-z0-9]([a-z0-9\\.\\-]*[a-z0-9])?$")
   @maxLength(263)
   @key("nodeCustomizationScriptName")
   @visibility(Lifecycle.Create, Lifecycle.Read)
