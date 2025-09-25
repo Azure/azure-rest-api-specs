@@ -12,25 +12,23 @@ options:
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.PostgreSql"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.PostgreSql"
+    namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-postgresql"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-postgresql"
     namespace: "azure.mgmt.postgresql"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-postgresql"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-postgresql"
     namespace: "com.azure.resourcemanager.postgresql"
     service-name: "PostgreSql" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-postgresql"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-postgresql"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -38,8 +36,8 @@ options:
       name: "@azure/arm-postgresql"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/postgresql"
-    package-dir: "armstorageactions"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpostgresql"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpostgresql"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
