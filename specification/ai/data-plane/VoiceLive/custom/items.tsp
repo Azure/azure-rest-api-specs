@@ -76,7 +76,7 @@ model UserMessageItem extends MessageItem {
   content: UserContentPart[];
 }
 
-@usage(RequestUsage)
+@usage(DualUsage)
 model AssistantMessageItem extends MessageItem {
   role: "assistant";
   content: OutputTextContentPart[];
