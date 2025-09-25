@@ -759,6 +759,16 @@
       "type": "object",
       "description": "Node customization script",
       "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name for the customization script. \nMust be unique within the node customization resource.\nCan only contain lowercase alphanumeric,'-' or '.' characters.",
+          "maxLength": 263,
+          "pattern": "^[a-z0-9]([\\.-a-z0-9]*[a-z0-9])?$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "executionPoint": {
           "$ref": "#/definitions/ExecutionPoint",
           "description": "The stage at which the script is executed.\nSpecifying `NodeImageBuildTime` will ensure changes are persisted into the node image."
@@ -773,6 +783,7 @@
         }
       },
       "required": [
+        "name",
         "executionPoint",
         "scriptType",
         "script"
