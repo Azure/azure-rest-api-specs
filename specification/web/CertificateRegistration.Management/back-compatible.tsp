@@ -4,19 +4,15 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.CertificateRegistration;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateOrderPatchResource.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificatePatchResource.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(ReissueCertificateOrderRequest.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(RenewCertificateOrderRequest.properties);
 
@@ -38,7 +34,6 @@ using Microsoft.CertificateRegistration;
 @@clientName(AppServiceCertificateOrders.retrieveSiteSeal::parameters.body,
   "siteSealRequest"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateOrder.properties);
 
@@ -63,7 +58,6 @@ using Microsoft.CertificateRegistration;
 @@clientLocation(AppServiceCertificateResources.listCertificates,
   "AppServiceCertificateOrders"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(AppServiceCertificateResource.properties);
 
@@ -73,7 +67,6 @@ using Microsoft.CertificateRegistration;
 @@clientLocation(CertificateOrdersDiagnostics.listAppServiceCertificateOrderDetectorResponse,
   "CertificateOrdersDiagnostics"
 );
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DetectorResponse.properties);
 
