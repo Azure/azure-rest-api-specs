@@ -74,7 +74,7 @@ model NodeCustomizationScript {
 
   @doc("The script content to be executed in plain text. Do not include secrets.")
   @example("touch /hello_world.txt")
-  script: string;
+  script?: string;
 
   @doc("Whether the node should reboot after successful script execution.")
   rebootAfter?: boolean;
