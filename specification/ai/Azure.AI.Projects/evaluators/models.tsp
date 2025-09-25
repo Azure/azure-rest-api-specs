@@ -1,0 +1,131 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@azure-tools/typespec-autorest";
+import "@typespec/versioning";
+import "@azure-tools/typespec-azure-core";
+import "../common/models.tsp";
+import "../main.tsp";
+import "@typespec/openapi";
+
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+
+namespace Azure.AI.Projects;
+
+@doc("The category of the evaluator")
+@added(Versions.v2025_10_15_preview)
+union EvaluatorCategory {
+  string,
+
+  @doc("Quality")
+  quality: "quality",
+
+  @doc("Risk & Safety")
+  safety: "safety",
+
+  @doc("Agents")
+  agents: "agents",
+}
+
+@doc("The type of the evaluator")
+@added(Versions.v2025_10_15_preview)
+union EvaluatorType {
+  string,
+
+  @doc("Built-in evaluator (Microsoft provided)")
+  built_in: "builtin",
+
+  @doc("Custom evaluator")
+  custom: "custom",
+}
+
+@doc("The type of evaluator definition")
+@added(Versions.v2025_10_15_preview)
+union EvaluatorDefinitionType {
+  string,
+
+  @doc("Prompt-based definition")
+  prompt: "prompt",
+
+  @doc("Code-based definition")
+  code: "code",
+
+  @doc("Prompt & Code Based definition")
+  prompt_and_code: "prompt_and_code",
+  
+  @doc("Service-based evaluator")
+  service: "service",
+
+  @doc("OpenAI graders")
+  openai_graders: "openai_graders",
+}
+
+#suppress "@azure-tools/typespec-azure-core/no-unknown"  
+@doc("Base evaluator configuration with discriminator")
+@added(Versions.v2025_10_15_preview)
+@discriminator("type")
+model EvaluatorDefinition {
+  @doc("The type of evaluator definition")
+  type: EvaluatorDefinitionType;
+
+  @doc("The JSON schema (Draft 2020-12) for the evaluator's input parameters")
+  init_parameters?: unknown;
+
+  @doc("The JSON schema (Draft 2020-12) for the data mapping of the evaluator to the dataset")
+  data_schema?: unknown;
+
+  @doc("The JSON schema (Draft 2020-12) for the resulting metrics of the evaluator")
+  results?: unknown;
+}
+
+@doc("Code-based evaluator definition using python code")
+@added(Versions.v2025_10_15_preview)
+model CodeBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.code;
+
+  @doc("Inline code text for the evaluator")
+  code_text: string;
+}
+
+@doc("Prompt-based evaluator")
+@added(Versions.v2025_10_15_preview)
+model PromptBasedEvaluatorDefinition extends EvaluatorDefinition {
+  type: EvaluatorDefinitionType.prompt;
+
+  @doc("The prompt text used for evaluation")
+  prompt_text: string;
+}
+
+@doc("Evaluator Definition")
+@resource("evaluators")
+@added(Versions.v2025_10_15_preview)
+model EvaluatorVersion {
+  @doc("Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique.")
+  display_name?: string;
+
+  @doc("Metadata about the evaluator")
+  metadata?: Record<string>;
+
+  @doc("The type of the evaluator")
+  evaluator_type: EvaluatorType;
+
+  @doc("The category of the evaluator")
+  categories: EvaluatorCategory[];
+
+  @doc("Definition of the evaluator")
+  definition: EvaluatorDefinition;
+
+  @visibility(Lifecycle.Read)
+  @doc("Creator of the evaluator")
+  created_by: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Creation date of the evaluator")
+  created_at: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("Last modified date of the evaluator")
+  modified_at: string;
+
+  ...AssetBase;
+}
