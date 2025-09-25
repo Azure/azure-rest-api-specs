@@ -72,7 +72,7 @@ model CertificateAuthorityConfiguration {
 union SupportedKeyType {
   string,
 
-  @doc("Indicate the ECC key type.")
+  @doc("Indicates the ECC key type.")
   ECC: "ECC",
 }
 
