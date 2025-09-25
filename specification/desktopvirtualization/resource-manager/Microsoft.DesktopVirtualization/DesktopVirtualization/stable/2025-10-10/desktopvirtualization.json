@@ -4889,7 +4889,7 @@
       "description": "HostPool properties that can be patched.",
       "allOf": [
         {
-          "$ref": "#/definitions/ResourceModelWithAllowedPropertySetWithoutIdentity"
+          "$ref": "#/definitions/HostPoolUpdateResourceModel"
         }
       ],
       "properties": {
@@ -7736,53 +7736,33 @@
         }
       }
     },
-    "ResourceModelWithAllowedPropertySetWithoutIdentity": {
+    "HostPoolUpdateResourceModel": {
       "type": "object",
-      "description": "The resource model definition containing the full set of allowed properties for a resource, without the identity. Copied from ../../../../../../common-types/resource-management/v6/types.json#/definitions.ResourceModelWithAllowedPropertySet",
+      "title": "Resource",
+      "description": "Fields for HostPool update",
       "properties": {
-        "managedBy": {
+        "id": {
           "type": "string",
-          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ]
-        },
-        "kind": {
-          "type": "string",
-          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
-          "pattern": "^[-\\w\\._,\\(\\)]+$",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. ",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
           "readOnly": true
         },
-        "sku": {
-          "allOf": [
-            {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku"
-            }
-          ]
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
         },
-        "plan": {
-          "allOf": [
-            {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan"
-            }
-          ]
+        "type": {
+          "type": "string",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
-        }
-      ],
       "x-ms-azure-resource": true
     }
   },
