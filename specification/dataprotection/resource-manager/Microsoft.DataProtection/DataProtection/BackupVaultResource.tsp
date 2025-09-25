@@ -14,8 +14,6 @@ namespace Microsoft.DataProtection;
 /**
  * Backup Vault Resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-missing-delete" "BackupVaultResource has delete operation in dataprotection.json lines 707-774, but automated check doesn't detect it"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-missing-patch" "BackupVaultResource has patch operation in dataprotection.json lines 707-774, but automated check doesn't detect it"
 model BackupVaultResource
   is Azure.ResourceManager.TrackedResource<BackupVault, false> {
   ...ResourceNameParameter<
