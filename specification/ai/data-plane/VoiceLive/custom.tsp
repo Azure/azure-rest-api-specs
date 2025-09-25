@@ -32,7 +32,7 @@ model RequestSession {
   input_audio_noise_reduction?: AudioNoiseReduction;
   input_audio_echo_cancellation?: AudioEchoCancellation;
   avatar?: AvatarConfig;
-  input_audio_transcription?: AudioInputTranscriptionSettings;
+  input_audio_transcription?: AudioInputTranscriptionOptions;
   output_audio_timestamp_types?: AudioTimestampType[];
   tools?: Tool[];
   tool_choice?: ToolChoice;
@@ -196,7 +196,7 @@ union AudioInputTranscriptionModel {
 
 @doc("Configuration for input audio transcription.")
 @usage(RequestUsage)
-model AudioInputTranscriptionSettings {
+model AudioInputTranscriptionOptions {
   @doc("""
     The transcription model to use. Supported values:
     'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
