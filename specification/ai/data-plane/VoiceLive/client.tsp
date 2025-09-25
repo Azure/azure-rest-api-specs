@@ -79,7 +79,7 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ToolChoiceObject, Access.internal, "csharp");
 
 
-@@clientName(VoiceLive.Modality, "InputModality", "csharp");
+@@clientName(VoiceLive.Modality, "InteractionModality", "csharp");
 @@clientName(VoiceLive.Animation, "AnimationOptions", "csharp");
 @@clientName(VoiceLive.Tool, "VoiceLiveToolInvocation", "csharp");
 @@clientName(VoiceLive.AzureCustomVoice.custom_lexicon_url, "CustomLexiconUri", "csharp");
