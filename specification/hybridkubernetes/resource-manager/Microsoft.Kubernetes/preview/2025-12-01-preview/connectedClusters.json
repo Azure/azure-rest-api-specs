@@ -346,6 +346,20 @@
               "$ref": "#/definitions/ConnectedCluster"
             }
           },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -357,7 +371,11 @@
           "UpdateClusterExample": {
             "$ref": "./examples/UpdateClusterByPatchExample.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "ConnectedCluster_Delete",
@@ -668,6 +686,11 @@
       "type": "object",
       "description": "Represents a connected cluster.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectedClusterProperties",
+          "description": "Describes the connected cluster resource properties.",
+          "x-ms-client-flatten": true
+        },
         "identity": {
           "$ref": "#/definitions/ConnectedClusterIdentity",
           "description": "The identity of the connected cluster."
@@ -675,16 +698,11 @@
         "kind": {
           "$ref": "#/definitions/ConnectedClusterKind",
           "description": "The kind of connected cluster."
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectedClusterProperties",
-          "description": "Describes the connected cluster resource properties.",
-          "x-ms-client-flatten": true
         }
       },
       "required": [
-        "identity",
-        "properties"
+        "properties",
+        "identity"
       ],
       "allOf": [
         {
