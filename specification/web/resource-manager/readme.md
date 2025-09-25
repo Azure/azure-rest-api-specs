@@ -96,6 +96,17 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
+  - Microsoft.CertificateRegistration/stable/2025-05-01/AppServiceCertificateOrders.json
+  - Microsoft.CertificateRegistration/stable/2025-05-01/CertificateOrdersDiagnostics.json
+  - Microsoft.CertificateRegistration/stable/2025-05-01/CertificateRegistrationProvider.json
+```
+
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
   - Microsoft.DomainRegistration/stable/2025-05-01/DomainRegistrationProvider.json
   - Microsoft.DomainRegistration/stable/2025-05-01/Domains.json
   - Microsoft.DomainRegistration/stable/2025-05-01/TopLevelDomains.json
