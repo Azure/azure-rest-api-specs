@@ -112,7 +112,7 @@ interface MapsLegends {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Legend")
   @tag("Map Legends")
-  @route("/data/legend/colormap/{cmapName}")
+  @route("/data/legend/colormap/{colorMapName}")
   @get
   get is Azure.Core.Foundations.Operation<
     {
@@ -122,7 +122,7 @@ interface MapsLegends {
       @path
       @maxLength(500)
       @pattern(".*")
-      cmapName: string;
+      colorMapName: string;
 
       /**
        * The output height of the legend image

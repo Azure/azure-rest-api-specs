@@ -247,7 +247,7 @@ model TilerInfo {
    */
   @summary("Nodata Type")
   @encodedName("application/json", "nodata_type")
-  nodataType?: NoDataType;
+  noDataType?: NoDataType;
 
   /**
    * Color interpretation

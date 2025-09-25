@@ -185,7 +185,7 @@ interface Stac {
   createOrReplaceItem is StacItems.createOrReplace;
   deleteItem is StacItems.delete;
   getItem is StacItems.get;
-  getItemsAsFeatures is StacItems.getFeatures;
+  listItems is StacItems.getFeatures;
   updateItem is StacItems.update;
 
   // STAC Landing Pages

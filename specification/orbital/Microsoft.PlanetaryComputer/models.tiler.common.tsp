@@ -477,7 +477,7 @@ model AssetQueryParameters {
    * Overwrite internal Nodata value
    */
   @query("nodata")
-  nodata?: float32;
+  noData?: float32;
 
   /**
    * Apply internal Scale or Offset
@@ -518,13 +518,13 @@ model MiscTileQueryParameters {
    * Colormap name
    */
   @query("colormap_name")
-  colormapName?: ColorMapNames;
+  colorMapName?: ColorMapNames;
 
   /**
    * JSON encoded custom Colormap
    */
   @query("colormap")
-  colormap?: string;
+  colorMap?: string;
 
   /**
    * Add mask to the output data.
