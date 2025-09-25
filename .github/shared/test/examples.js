@@ -28,30 +28,30 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/widgets.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-contoso-widgetmanager"
+    package-dir: "azure-contoso-widgetmanager"
     namespace: "azure.contoso.widgetmanager"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Template.Contoso"
+    package-dir: "Azure.Template.Contoso"
     clear-output-folder: true
     model-namespace: false
-    namespace: "Azure.Template.Contoso"
+    namespace: "{package-dir}"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/contosowidgetmanager-rest"
+    package-dir: "contosowidgetmanager-rest"
     package-details:
       name: "@azure-rest/contoso-widgetmanager-rest"
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-contoso-widgetmanager"
+    package-dir: "azure-contoso-widgetmanager"
     namespace: com.azure.contoso.widgetmanager
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/contosowidget"
-    emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
+    package-dir: "azmanager"
     module-version: "0.0.1"
     generate-fakes: true
     inject-spans: true
