@@ -1189,8 +1189,6 @@ model VolumePatch {
   /**
    * Patchable volume properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VolumePatchProperties;
 }
 
@@ -2243,8 +2241,6 @@ interface Volumes {
   /**
    * Get the latest status of the backup for a volume
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backups_GetLatestStatus")
   @get
   @action("latestBackupStatus/current")
   getLatestStatus is ArmResourceActionSync<
@@ -2256,8 +2252,6 @@ interface Volumes {
   /**
    * Get the latest status of the restore for a volume
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Backups_GetVolumeLatestRestoreStatus")
   @get
   @action("latestRestoreStatus/current")
   getVolumeLatestRestoreStatus is ArmResourceActionSync<
@@ -2269,8 +2263,6 @@ interface Volumes {
   /**
    * Migrate the backups under volume to backup vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupsUnderVolume_MigrateBackups")
   migrateBackups is ArmResourceActionAsyncBase<
     Volume,
     BackupsMigrationRequest,

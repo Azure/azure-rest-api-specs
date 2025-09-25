@@ -144,8 +144,10 @@ using Microsoft.NetApp;
 
 @@clientName(Buckets.createOrUpdate::parameters.resource, "body");
 @@clientName(Buckets.update::parameters.properties, "body");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(Bucket.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+@@flattenProperty(BucketPatch.properties);
 
 @@clientLocation(NetAppResourceOperationGroup.checkNameAvailability,
   "NetAppResource"

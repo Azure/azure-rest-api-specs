@@ -166,8 +166,6 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Bucket properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BucketPatchProperties;
 }
 

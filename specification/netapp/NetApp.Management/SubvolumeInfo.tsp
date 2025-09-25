@@ -66,8 +66,6 @@ model SubvolumePatchRequest {
   /**
    * Subvolume Properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubvolumePatchParams;
 }
 
@@ -112,8 +110,6 @@ model SubvolumeModel {
   /**
    * It represents the minimal properties of the subvolume.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubvolumeModelProperties;
 }
 
@@ -181,16 +177,12 @@ interface SubvolumeInfos {
   /**
    * Returns the path associated with the subvolumeName provided
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subvolumes_Get")
   get is ArmResourceRead<SubvolumeInfo>;
 
   /**
    * Creates a subvolume in the path or clones the subvolume mentioned in the parentPath
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("Subvolumes_Create")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   create is ArmResourceCreateOrReplaceAsync<
     SubvolumeInfo,
@@ -204,9 +196,7 @@ interface SubvolumeInfos {
   /**
    * Patch a subvolume
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("Subvolumes_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     SubvolumeInfo,
@@ -218,10 +208,8 @@ interface SubvolumeInfos {
   /**
    * Delete subvolume
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("Subvolumes_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     SubvolumeInfo,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
@@ -231,8 +219,6 @@ interface SubvolumeInfos {
   /**
    * Returns a list of the subvolumes in the volume
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subvolumes_ListByVolume")
   listByVolume is ArmResourceListByParent<
     SubvolumeInfo,
     Response = ArmResponse<SubvolumesList>
@@ -241,9 +227,7 @@ interface SubvolumeInfos {
   /**
    * Get details of the specified subvolume
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("Subvolumes_GetMetadata")
   getMetadata is ArmResourceActionAsync<
     SubvolumeInfo,
     void,

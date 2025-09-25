@@ -34,8 +34,6 @@ interface RegionInfoResources {
   /**
    * Provides storage to network proximity and logical zone mapping information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetAppResourceRegionInfos_Get")
   get is ArmResourceRead<
     RegionInfoResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -44,8 +42,6 @@ interface RegionInfoResources {
   /**
    * Provides region specific information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetAppResourceRegionInfos_List")
   list is ArmResourceListByParent<
     RegionInfoResource,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

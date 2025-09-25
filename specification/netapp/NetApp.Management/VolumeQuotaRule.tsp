@@ -99,8 +99,6 @@ model VolumeQuotaRulePatch {
   /**
    * Volume Quota Rule Properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VolumeQuotaRulesProperties;
 }
 

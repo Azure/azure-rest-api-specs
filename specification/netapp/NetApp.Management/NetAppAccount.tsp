@@ -407,8 +407,6 @@ model NetAppAccountPatch {
   /**
    * NetApp Account properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AccountProperties;
 
   /**
@@ -501,23 +499,17 @@ interface NetAppAccounts {
   /**
    * Get the NetApp account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Accounts_Get")
   get is ArmResourceRead<NetAppAccount>;
 
   /**
    * Create or update the specified NetApp account within the resource group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Accounts_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<NetAppAccount>;
 
   /**
    * Patch the specified NetApp account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  @operationId("Accounts_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     NetAppAccount,
@@ -532,15 +524,11 @@ interface NetAppAccounts {
   /**
    * Delete the specified NetApp account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Accounts_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<NetAppAccount>;
 
   /**
    * List and describe all NetApp accounts in the resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Accounts_List")
   list is ArmResourceListByParent<
     NetAppAccount,
     Response = ArmResponse<NetAppAccountList>
@@ -549,8 +537,6 @@ interface NetAppAccounts {
   /**
    * List and describe all NetApp accounts in the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Accounts_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     NetAppAccount,
     Response = ArmResponse<NetAppAccountList>
@@ -559,9 +545,7 @@ interface NetAppAccounts {
   /**
    * Renew identity credentials that are used to authenticate to key vault, for customer-managed key encryption. If encryption.identity.principalId does not match identity.principalId, running this operation will fix it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("Accounts_RenewCredentials")
   renewCredentials is ArmResourceActionAsync<
     NetAppAccount,
     void,
@@ -575,8 +559,6 @@ interface NetAppAccounts {
   /**
    * Transitions all volumes in a VNet to a different encryption key source (Microsoft-managed key or Azure Key Vault). Operation fails if targeted volumes share encryption sibling set with volumes from another account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Accounts_TransitionToCmk")
   @action("transitiontocmk")
   transitionToCmk is ArmResourceActionAsyncBase<
     NetAppAccount,
@@ -589,9 +571,7 @@ interface NetAppAccounts {
   /**
    * Contains data from encryption.keyVaultProperties as well as information about which private endpoint is used by each encryption sibling set. Response from this endpoint can be modified and used as request body for POST request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
-  @operationId("Accounts_GetChangeKeyVaultInformation")
   @action("getKeyVaultStatus")
   @Azure.Core.useFinalStateVia("azure-async-operation")
   getChangeKeyVaultInformation is ArmResourceActionAsync<
@@ -605,8 +585,6 @@ interface NetAppAccounts {
   /**
    * Affects existing volumes that are encrypted with Key Vault/Managed HSM, and new volumes. Supports HSM to Key Vault, Key Vault to HSM, HSM to HSM and Key Vault to Key Vault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Accounts_ChangeKeyVault")
   changeKeyVault is ArmResourceActionAsyncBase<
     NetAppAccount,
     ChangeKeyVault,
@@ -618,8 +596,6 @@ interface NetAppAccounts {
   /**
    * List all volume groups for given account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("VolumeGroups_ListByNetAppAccount")
   @list
   @get
   @action("volumeGroups")
@@ -632,8 +608,6 @@ interface NetAppAccounts {
   /**
    * Migrate the backups under a NetApp account to backup vault
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupsUnderAccount_MigrateBackups")
   migrateBackups is ArmResourceActionAsyncBase<
     NetAppAccount,
     BackupsMigrationRequest,

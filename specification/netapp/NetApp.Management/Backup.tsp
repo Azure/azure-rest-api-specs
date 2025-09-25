@@ -195,8 +195,6 @@ model BackupPatch {
   /**
    * Backup Patch Properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BackupPatchProperties;
 }
 
@@ -261,8 +259,6 @@ interface Backups {
   /**
    * Restore the specified files from the specified backup to the active filesystem
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("BackupsUnderBackupVault_RestoreFiles")
   restoreFiles is ArmResourceActionAsyncBase<
     Backup,
     BackupRestoreFiles,

@@ -133,8 +133,6 @@ model CapacityPoolPatch {
   /**
    * Capacity pool properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PoolPatchProperties;
 }
 
@@ -235,15 +233,11 @@ interface CapacityPools {
   /**
    * Get details of the specified capacity pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pools_Get")
   get is ArmResourceRead<CapacityPool>;
 
   /**
    * Create or Update a capacity pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pools_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CapacityPool,
     LroHeaders = ArmLroLocationHeader<FinalResult = CapacityPool> &
@@ -253,23 +247,17 @@ interface CapacityPools {
   /**
    * Patch the specified capacity pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pools_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<CapacityPool, PatchModel = CapacityPoolPatch>;
 
   /**
    * Delete the specified capacity pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pools_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<CapacityPool>;
 
   /**
    * List all capacity pools in the NetApp Account
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Pools_List")
   list is ArmResourceListByParent<
     CapacityPool,
     Response = ArmResponse<CapacityPoolList>

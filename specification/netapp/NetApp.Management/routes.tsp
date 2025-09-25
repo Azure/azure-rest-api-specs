@@ -18,9 +18,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Check if a resource name is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Check resource name availability")
-  @operationId("NetAppResource_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = ResourceNameAvailabilityRequest,
@@ -31,9 +29,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Check if a file path is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Check file path availability")
-  @operationId("NetAppResource_CheckFilePathAvailability")
   @autoRoute
   checkFilePathAvailability is ArmProviderActionSync<
     Request = FilePathAvailabilityRequest,
@@ -44,9 +40,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Check if a quota is available.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Check quota availability")
-  @operationId("NetAppResource_CheckQuotaAvailability")
   @autoRoute
   checkQuotaAvailability is ArmProviderActionSync<
     Request = QuotaAvailabilityRequest,
@@ -57,9 +51,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Provides storage to network proximity and logical zone mapping information.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Describes region specific information.")
-  @operationId("NetAppResource_QueryRegionInfo")
   @autoRoute
   @get
   @action("regionInfo")
@@ -71,9 +63,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Get details of the specified network sibling set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Describe a network sibling set")
-  @operationId("NetAppResource_QueryNetworkSiblingSet")
   @autoRoute
   queryNetworkSiblingSet is ArmProviderActionSync<
     Request = QueryNetworkSiblingSetRequest,
@@ -84,9 +74,7 @@ interface NetAppResourceOperationGroup {
   /**
    * Update the network features of the specified network sibling set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Update the network features of a network sibling set")
-  @operationId("NetAppResource_UpdateNetworkSiblingSet")
   @autoRoute
   updateNetworkSiblingSet is ArmProviderActionAsync<
     Request = UpdateNetworkSiblingSetRequest,
@@ -101,9 +89,7 @@ interface NetAppResourceUsagesOperationGroup {
   /**
    * Get current subscription usages
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get usages")
-  @operationId("NetAppResourceUsages_List")
   @autoRoute
   @get
   @action("usages")
@@ -116,9 +102,7 @@ interface NetAppResourceUsagesOperationGroup {
   /**
    * Get current subscription usage of the specific type
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @summary("Get specific type of usage")
-  @operationId("NetAppResourceUsages_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.NetApp/locations/{location}/usages/{usageType}")
   @get
   get(

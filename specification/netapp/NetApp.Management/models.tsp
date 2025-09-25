@@ -283,8 +283,6 @@ model Operation {
   /**
    * Properties of operation, include metric specifications.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationProperties;
 }
 
@@ -561,8 +559,6 @@ model UsageResult {
   /**
    * Usage properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UsageProperties;
 }
 
@@ -785,8 +781,6 @@ model GetKeyVaultStatusResponse {
   /**
    * Represents the properties of the getKeyVaultStatus.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GetKeyVaultStatusResponseProperties;
 }
 

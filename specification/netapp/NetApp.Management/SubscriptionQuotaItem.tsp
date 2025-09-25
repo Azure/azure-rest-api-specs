@@ -63,8 +63,6 @@ interface SubscriptionQuotaItems {
   /**
    * Get the default and current quota limit
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetAppResourceQuotaLimits_Get")
   get is ArmResourceRead<
     QuotaItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -73,8 +71,6 @@ interface SubscriptionQuotaItems {
   /**
    * Get the default and current limits for quotas
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NetAppResourceQuotaLimits_List")
   list is ArmResourceListByParent<
     QuotaItem,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

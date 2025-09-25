@@ -68,8 +68,6 @@ model VolumeGroup {
   /**
    * Volume group properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: VolumeGroupListProperties;
 }
 
@@ -190,8 +188,6 @@ model VolumeGroupVolumeProperties {
   /**
    * Volume properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties: VolumeProperties;
 }
 

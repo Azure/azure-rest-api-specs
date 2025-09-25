@@ -209,8 +209,6 @@ model SnapshotPolicyPatch {
   /**
    * Snapshot Policy properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SnapshotPolicyProperties;
 }
 
