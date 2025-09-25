@@ -10,13 +10,16 @@ using TypeSpec.Http;
 namespace Azure.Ai.Speech.Transcription;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "Support streaming input files"
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Custom operation for transcription"
 @post
 @route("/transcriptions:transcribe")
 @doc("Transcribes the provided audio stream.")
-op transcribe is Azure.Core.RpcOperation<
-  TranscriptionTranscribeRequestContent,
-  TranscriptionResult
->;
+op transcribe(
+  @query("api-version") @doc("The API version") apiVersion: string,
+  @multipartBody
+  @doc("The transcription content including audio and configuration")
+  body: TranscriptionContent,
+): TranscriptionResult | Azure.Core.Foundations.ErrorResponse;
 
 /**
  * DOCUMENTATION ENDPOINT - NOT FOR IMPLEMENTATION
