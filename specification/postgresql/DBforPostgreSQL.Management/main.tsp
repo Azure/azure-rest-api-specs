@@ -62,20 +62,9 @@ enum Versions {
  * Azure Resource Manager service. It implements
  *   GET "/providers/Microsoft.ContosoProviderHub/operations"
  */
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @list
-  @get
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationList> | ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationList>,
+      ErrorResponse
+    > {}
+@@doc(Operations.list, "Lists all available REST API operations.");

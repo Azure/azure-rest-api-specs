@@ -69,7 +69,11 @@ interface Servers {
   /**
    * Deletes or drops an existing server.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Server>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Server,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all servers in a resource group.
@@ -149,6 +153,7 @@ interface Servers {
    * Checks if a proposed migration name is valid and available.
    */
   @action("checkMigrationNameAvailability")
+  @summary("Check the validity and availability of the given name, to assign it to a new migration.")
   checkNameAvailability is ArmResourceActionSync<
     Server,
     MigrationNameAvailability,
@@ -173,7 +178,8 @@ interface Servers {
   restart is ArmResourceActionAsyncBase<
     Server,
     RestartParameter,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>,
     OptionalRequestBody = true
   >;
@@ -185,7 +191,8 @@ interface Servers {
   serversStart is ArmResourceActionAsyncBase<
     Server,
     void,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
   >;
 
@@ -195,7 +202,8 @@ interface Servers {
   stop is ArmResourceActionAsyncBase<
     Server,
     void,
-    ArmAcceptedLroResponse,
+    ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader>,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Server>
   >;
 }

@@ -64,7 +64,11 @@ interface VirtualEndpoints {
   /**
    * Deletes a pair of virtual endpoints.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<VirtualEndpoint>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    VirtualEndpoint,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists pair of virtual endpoints associated to a server.

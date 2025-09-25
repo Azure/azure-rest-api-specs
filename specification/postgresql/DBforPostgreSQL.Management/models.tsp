@@ -3500,3 +3500,7 @@ model OperationList is Azure.Core.Page<Operation>;
 @@OpenAPI.extension(OperationList.value, "x-ms-identifiers", #["name"]);
 @@OpenAPI.extension(QuotaUsageList.value, "x-ms-identifiers", #["name"]);
 @@OpenAPI.extension(TuningOptionsList.value, "x-ms-identifiers", #["name"]);
+@@doc(HighAvailabilityForPatch.mode, "High availability mode for a server.");
+@@doc(Network.publicNetworkAccess,
+  "Indicates if public network access is enabled or not. This is only supported for servers that are not integrated into a virtual network which is owned and provided by customer when server is deployed."
+);

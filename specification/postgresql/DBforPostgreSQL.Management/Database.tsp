@@ -47,7 +47,11 @@ interface Databases {
   /**
    * Deletes an existing database.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<Database>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    Database,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all databases in a server.

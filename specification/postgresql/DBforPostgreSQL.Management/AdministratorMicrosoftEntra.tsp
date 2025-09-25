@@ -52,7 +52,11 @@ interface AdministratorMicrosoftEntras {
   /**
    * Deletes an existing server administrator associated to a Microsoft Entra principal.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<AdministratorMicrosoftEntra>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    AdministratorMicrosoftEntra,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List all server administrators associated to a Microsoft Entra principal.

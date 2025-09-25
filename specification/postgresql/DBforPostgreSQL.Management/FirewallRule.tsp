@@ -47,7 +47,11 @@ interface FirewallRules {
   /**
    * Deletes an existing firewall rule.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<FirewallRule>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    FirewallRule,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists information about all firewall rules in a server.

@@ -49,7 +49,11 @@ interface BackupAutomaticAndOnDemands {
   /**
    * Deletes a specific backup, given its name.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<BackupAutomaticAndOnDemand>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    BackupAutomaticAndOnDemand,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all available backups of a server.
