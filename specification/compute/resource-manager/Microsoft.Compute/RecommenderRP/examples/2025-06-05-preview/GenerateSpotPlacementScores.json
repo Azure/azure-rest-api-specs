@@ -1,0 +1,87 @@
+{
+  "operationId": "SpotPlacementScores_Post",
+  "parameters": {
+    "api-version": "2025-06-05-preview",
+    "location": "eastus",
+    "spotPlacementScoresInput": {
+      "availabilityZones": true,
+      "desiredCount": 1,
+      "desiredLocations": [
+        "eastus",
+        "eastus2"
+      ],
+      "desiredSizes": [
+        {
+          "sku": "Standard_D2_v2"
+        }
+      ]
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Returns spot VM placement scores for given configurations.",
+  "responses": {
+    "200": {
+      "body": {
+        "availabilityZones": true,
+        "desiredCount": 1,
+        "desiredLocations": [
+          "eastus",
+          "eastus2"
+        ],
+        "desiredSizes": [
+          {
+            "sku": "Standard_D2_v2"
+          }
+        ],
+        "placementScores": [
+          {
+            "availabilityZone": "1",
+            "isQuotaAvailable": true,
+            "region": "eastus",
+            "score": "High",
+            "sku": "Standard_D2_v2"
+          },
+          {
+            "availabilityZone": "2",
+            "isQuotaAvailable": true,
+            "region": "eastus",
+            "score": "High",
+            "sku": "Standard_D2_v2"
+          },
+          {
+            "availabilityZone": "3",
+            "isQuotaAvailable": true,
+            "region": "eastus",
+            "score": "High",
+            "sku": "Standard_D2_v2"
+          },
+          {
+            "availabilityZone": "1",
+            "isQuotaAvailable": true,
+            "region": "eastus2",
+            "score": "DataNotFoundOrStale",
+            "sku": "Standard_D2_v2"
+          },
+          {
+            "availabilityZone": "2",
+            "isQuotaAvailable": true,
+            "region": "eastus2",
+            "score": "High",
+            "sku": "Standard_D2_v2"
+          },
+          {
+            "availabilityZone": "3",
+            "isQuotaAvailable": true,
+            "region": "eastus2",
+            "score": "High",
+            "sku": "Standard_D2_v2"
+          }
+        ]
+      },
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/locations/eastus/placementScores/spot/generate?api-version=2025-06-05",
+        "x-ms-request-id": "57b891ab-1fb7-4f5a-b002-71eb6854961f"
+      }
+    }
+  }
+}
