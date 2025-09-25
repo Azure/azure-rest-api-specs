@@ -6,14 +6,8 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.Transcription;
 
-@@clientName(TranscriptionTranscribeRequestContent,
-  "TranscriptionTranscribeRequestContent",
-  "csharp"
-);
-@@clientName(submitTranscriptionContent,
-  "SubmitTranscriptionContent",
-  "csharp"
-);
+// Rename the request model to follow .NET naming conventions (AZC0030)
+@@clientName(TranscribeRequestContent, "TranscribeContent", "csharp");
 
 @@clientName(TranscriptionOptions.diarization, "diarizationOptions");
 @@clientName(TranscriptionOptions.channels, "activeChannels");
