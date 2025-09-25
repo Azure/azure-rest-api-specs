@@ -9,4 +9,4 @@ using Azure.ClientGenerator.Core;
   "DecompileOperationSuccessResult",
   "csharp"
 );
-@@clientName(BicepClient.FileDefinition, "DecompiledFile", "csharp");
+@@clientName(BicepClient.FileDefinition, "DecompiledFileDefinition", "csharp");

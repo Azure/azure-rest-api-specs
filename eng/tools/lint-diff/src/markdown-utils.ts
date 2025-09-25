@@ -1,5 +1,4 @@
 import { Readme } from "@azure-tools/specs-shared/readme";
-import axios from "axios";
 import { kebabCase } from "change-case";
 import { marked } from "marked";
 
@@ -85,7 +84,10 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   const rpcRules: string[] = [];
   let response;
   try {
-    response = await axios.get(docUrl);
+    response = await fetch(docUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   } catch (e: any) {
     // TODO: Retry? Fail ungracefully?
     console.log(`GET ${docUrl} failed with ${e.message} .`);
@@ -94,7 +96,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   }
 
   // Use marked to parse the markdown and extract the related ARM guideline codes
-  const tokens = marked.lexer(response.data);
+  const tokens = marked.lexer(await response.text());
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
     if (

@@ -12,7 +12,7 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/azure.apicenter.dataapi.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-apicenter"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-apicenter"
     namespace: "azure.apicenter"
     package-mode: dataplane
     flavor: azure
@@ -25,7 +25,7 @@ options:
     clear-output-folder: true
     model-namespace: false
   "@azure-tools/typespec-ts":
-    package-dir: "azure-apicenter-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-apicenter-rest"
     generate-metadata: true
     is-modular-library: false
     flavor: azure
@@ -33,7 +33,7 @@ options:
       name: "@azure-rest/azure-apicenter-rest"
       description: "azure.ApiCenter Service"
   "@azure-tools/typespec-java":
-    package-dir: "azure-apicenter"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-apicenter"
     namespace: com.azure.apicenter
     flavor: azure
 linter:
