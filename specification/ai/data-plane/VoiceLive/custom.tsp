@@ -85,8 +85,14 @@ model AzureVoice {
 @doc("Azure custom voice configuration.")
 model AzureCustomVoice extends AzureVoice {
   type: "azure-custom";
-  @minLength(1) @doc("Voice name cannot be empty.") name: string;
-  @minLength(1) @doc("Endpoint ID cannot be empty.") endpoint_id: string;
+
+  @minLength(1)
+  @doc("Voice name cannot be empty.")
+  name: string;
+
+  @minLength(1)
+  @doc("Endpoint ID cannot be empty.")
+  endpoint_id: string;
 
   @minValue(0)
   @maxValue(1)
@@ -106,7 +112,10 @@ model AzureCustomVoice extends AzureVoice {
 @usage(DualUsage)
 model AzureStandardVoice extends AzureVoice {
   type: "azure-standard";
-  @minLength(1) @doc("Voice name cannot be empty.") name: string;
+
+  @minLength(1)
+  @doc("Voice name cannot be empty.")
+  name: string;
 
   @minValue(0)
   @maxValue(1)
@@ -134,7 +143,7 @@ model AzurePersonalVoice extends AzureVoice {
   temperature?: float32;
 
   @doc("Underlying neural model to use for personal voice.")
-  `model`: PersonalVoiceModels
+  `model`: PersonalVoiceModels;
 }
 
 @doc("PersonalVoice models")
@@ -142,7 +151,7 @@ union PersonalVoiceModels {
   string,
   "DragonLatestNeural",
   "PhoenixLatestNeural",
-  "PhoenixV2Neural"
+  "PhoenixV2Neural",
 }
 
 // --- Top-level Voice union -------------------------------------------------
@@ -230,11 +239,21 @@ model EOUDetection {
 model AzureSemanticDetection extends EOUDetection {
   `model`: "semantic_detection_v1";
 
-  @minValue(0)
-  @maxValue(1)
+  @doc("To be deprecated: use `threshold_level` instead.")
+  @minValue(0.0)
+  @maxValue(1.0)
   threshold?: float32;
 
+  @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
+  threshold_level?: "low" | "medium" | "high" | "default";
+
+  @doc("To be deprecated: use `timeout_ms` instead. Timeout in seconds.")
+  @minValue(0.0)
   timeout?: float32;
+
+  @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
+  @minValue(0)
+  timeout_ms?: int32;
 }
 
 @doc("Azure semantic end-of-utterance detection (English-optimized).")
@@ -242,19 +261,43 @@ model AzureSemanticDetection extends EOUDetection {
 model AzureSemanticDetectionEn extends EOUDetection {
   `model`: "semantic_detection_v1_en";
 
-  @minValue(0)
-  @maxValue(1)
+  @doc("To be deprecated: use `threshold_level` instead.")
+  @minValue(0.0)
+  @maxValue(1.0)
   threshold?: float32;
 
+  @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
+  threshold_level?: "low" | "medium" | "high" | "default";
+
+  @doc("To be deprecated: use `timeout_ms` instead. Timeout in seconds.")
+  @minValue(0.0)
   timeout?: float32;
+
+  @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
+  @minValue(0)
+  timeout_ms?: int32;
 }
 
 @doc("Azure semantic end-of-utterance detection (multilingual).")
 @usage(RequestUsage)
 model AzureSemanticDetectionMultilingual extends EOUDetection {
   `model`: "semantic_detection_v1_multilingual";
+
+  @doc("To be deprecated: use `threshold_level` instead.")
+  @minValue(0.0)
+  @maxValue(1.0)
   threshold?: float32;
+
+  @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
+  threshold_level?: "low" | "medium" | "high" | "default";
+
+  @doc("To be deprecated: use `timeout_ms` instead. Timeout in seconds.")
+  @minValue(0.0)
   timeout?: float32;
+
+  @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
+  @minValue(0)
+  timeout_ms?: int32;
 }
 
 @discriminator("type")
@@ -285,6 +328,8 @@ model ServerVad extends TurnDetection {
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
   auto_truncate?: boolean = false;
+  create_response?: boolean = false;
+  interrupt_response?: boolean = false;
 }
 
 @doc("Server Speech Detection (Azure semantic VAD, default variant).")
@@ -303,6 +348,8 @@ model AzureSemanticVad extends TurnDetection {
   remove_filler_words?: boolean = false;
   languages?: string[];
   auto_truncate?: boolean = false;
+  create_response?: boolean = false;
+  interrupt_response?: boolean = false;
 }
 
 @doc("Server Speech Detection (Azure semantic VAD, English-only).")
@@ -313,12 +360,15 @@ model AzureSemanticVadEn extends TurnDetection {
   @minValue(0)
   @maxValue(1)
   threshold?: float32;
+
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
   end_of_utterance_detection?: EOUDetection;
   speech_duration_ms?: int32;
   remove_filler_words?: boolean = false;
   auto_truncate?: boolean = false;
+  create_response?: boolean = false;
+  interrupt_response?: boolean = false;
 }
 
 @doc("Server Speech Detection (Azure semantic VAD).")
@@ -337,6 +387,8 @@ model AzureSemanticVadMultilingual extends TurnDetection {
   remove_filler_words?: boolean = false;
   languages?: string[];
   auto_truncate?: boolean = false;
+  create_response?: boolean = false;
+  interrupt_response?: boolean = false;
 }
 
 @doc("Configuration for input audio noise reduction.")
@@ -432,6 +484,14 @@ model VideoParams {
 
   @doc("Optional resolution settings for the video stream.")
   resolution?: VideoResolution;
+
+  @doc("Optional background settings for the video. Allows specifying either a solid color or an image URL.")
+  background?: Background;
+
+  @doc("Group of Pictures (GOP) size for video encoding. Controls the interval between keyframes, affecting compression efficiency and seeking performance.")
+  @minValue(1)
+  @maxValue(2000)
+  gop_size?: int32 = 10;
 }
 
 @doc("Defines a video crop rectangle using top-left and bottom-right coordinates.")
@@ -456,4 +516,14 @@ model VideoResolution {
 
   @doc("Height of the video in pixels. Must be greater than 0.")
   height: int32;
+}
+
+@doc("Defines a video background, either a solid color or an image URL (mutually exclusive).")
+@usage(RequestUsage)
+model Background {
+  @doc("Background color in hex format (e.g., `#00FF00FF`). Cannot be set if `image_url` is provided.")
+  color?: string;
+
+  @doc("Background image URL. Cannot be set if `color` is provided.")
+  image_url?: string;
 }
