@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-07-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-07-01'
 input-file:
-  - Microsoft.Cache/stable/2025-07-01/redisenterprise.json
+  - stable/2025-07-01/redisenterprise.json
 ```
 
 ### Tag: package-preview-2025-05-01
