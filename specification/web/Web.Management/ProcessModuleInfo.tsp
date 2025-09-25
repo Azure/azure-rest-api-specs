@@ -75,6 +75,7 @@ interface ProcessModuleInfos {
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
+  @summary("List module information for a process by its ID for a specific scaled-out instance in a web site.")
   listInstanceProcessModules is ProcessModuleInfoOps.List<
     ProcessModuleInfo,
     Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse,
@@ -116,6 +117,7 @@ interface ProcessModuleInfoOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
+  @summary("Get process information by its ID for a specific scaled-out instance in a web site.")
   getProcessModule is ProcessModuleInfoOperationGroupOps.Read<
     ProcessModuleInfo,
     Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse,
@@ -125,6 +127,7 @@ interface ProcessModuleInfoOperationGroup {
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
+  @summary("List module information for a process by its ID for a specific scaled-out instance in a web site.")
   listProcessModules is ProcessModuleInfoOperationGroupOps.List<
     ProcessModuleInfo,
     Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse,
@@ -187,6 +190,7 @@ interface InstanceProcessModuleSlotOperationGroup {
   /**
    * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
+  @summary("List module information for a process by its ID for a specific scaled-out instance in a web site.")
   @segment("modules")
   listInstanceProcessModulesSlot is InstanceProcessModuleSlotOperationGroupOps.List<
     ProcessModuleInfo,
@@ -235,6 +239,7 @@ interface ProcessModuleSlotOperationGroup {
   /**
    * Description for Get process information by its ID for a specific scaled-out instance in a web site.
    */
+  @summary("Get process information by its ID for a specific scaled-out instance in a web site.")
   getProcessModuleSlot is ProcessModuleSlotOperationGroupOps.Read<
     ProcessModuleInfo,
     Response = ArmResponse<ProcessModuleInfo> | ArmNotFoundResponse,
@@ -242,8 +247,10 @@ interface ProcessModuleSlotOperationGroup {
   >;
 
   /**
-   * Description for List module information for a process by its ID for a specific scaled-out instance in a web site.
+   * Des
+   * cription for List module information for a process by its ID for a specific scaled-out instance in a web site.
    */
+  @summary("List module information for a process by its ID for a specific scaled-out instance in a web site.")
   listProcessModulesSlot is ProcessModuleSlotOperationGroupOps.List<
     ProcessModuleInfo,
     Response = ArmResponse<ProcessModuleInfoCollection> | ArmNotFoundResponse,

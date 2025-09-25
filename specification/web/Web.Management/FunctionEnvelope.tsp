@@ -301,6 +301,7 @@ interface FunctionEnvelopeOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a function secret.")
   @delete
   deleteFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.DeleteSync<
     FunctionEnvelope,
@@ -311,6 +312,7 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function keys for a function in a web site, or a deployment slot.
    */
+  @summary("Get function keys for a function in a web site, or a deployment slot.")
   @action("listkeys")
   listFunctionKeysSlot is FunctionEnvelopeSlotOperationWithoutKeysGroupOps.ActionSync<
     FunctionEnvelope,
@@ -322,6 +324,7 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function secrets for a function in a web site, or a deployment slot.
    */
+  @summary("Get function secrets for a function in a web site, or a deployment slot.")
   @action("listsecrets")
   listFunctionSecretsSlot is FunctionEnvelopeOperationGroupOps.ActionSync<
     FunctionEnvelope,

@@ -95,6 +95,7 @@ interface SiteSourceControls {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the source control configuration of an app.")
   @patch(#{ implicitOptionality: false })
   updateSourceControlSlot is SiteSourceControlOps.CustomPatchSync<
     SiteSourceControl,
@@ -153,6 +154,7 @@ interface SiteSourceControlOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the source control configuration of an app.")
   getSourceControl is SiteSourceControlOperationGroupOps.Read<
     SiteSourceControl,
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
@@ -167,6 +169,7 @@ interface SiteSourceControlOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the source control configuration of an app.")
   createOrUpdateSourceControl is SiteSourceControlOperationGroupOps.CreateOrUpdateAsync<
     SiteSourceControl,
     Response = ArmResourceUpdatedResponse<SiteSourceControl> | ArmResourceCreatedResponse<
@@ -185,6 +188,7 @@ interface SiteSourceControlOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the source control configuration of an app.")
   @patch(#{ implicitOptionality: false })
   updateSourceControl is SiteSourceControlOperationGroupOps.CustomPatchSync<
     SiteSourceControl,
@@ -201,6 +205,7 @@ interface SiteSourceControlOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes the source control configuration of an app.")
   deleteSourceControl is SiteSourceControlOperationGroupOps.DeleteSync<
     SiteSourceControl,
     Parameters = {

@@ -55,6 +55,7 @@ interface SiteLogsConfigs {
   /**
    * Description for Gets the logging configuration of an app.
    */
+  @summary("Gets the logging configuration of an app.")
   getDiagnosticLogsConfiguration is SiteLogsConfigOps.Read<
     SiteLogsConfig,
     OverrideErrorType = DefaultErrorResponse
@@ -64,6 +65,7 @@ interface SiteLogsConfigs {
    * Description for Updates the logging configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the logging configuration of an app.")
   updateDiagnosticLogsConfig is SiteLogsConfigOps.CreateOrUpdateSync<
     SiteLogsConfig,
     Response = ArmResourceUpdatedResponse<SiteLogsConfig>,
@@ -106,6 +108,7 @@ interface SiteLogsConfigOperationGroup {
   /**
    * Description for Gets the logging configuration of an app.
    */
+  @summary("Gets the logging configuration of an app.")
   getDiagnosticLogsConfigurationSlot is SiteLogsConfigOperationGroupOps.Read<
     SiteLogsConfig,
     OverrideErrorType = DefaultErrorResponse
@@ -115,6 +118,7 @@ interface SiteLogsConfigOperationGroup {
    * Description for Updates the logging configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the logging configuration of an app.")
   updateDiagnosticLogsConfigSlot is SiteLogsConfigOperationGroupOps.CreateOrUpdateSync<
     SiteLogsConfig,
     Response = ArmResourceUpdatedResponse<SiteLogsConfig>,

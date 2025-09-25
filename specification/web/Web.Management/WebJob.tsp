@@ -59,6 +59,7 @@ interface WebJobs {
   /**
    * Description for Get webjob information for an app, or a deployment slot.
    */
+  @summary("Get webjob information for an app, or a deployment slot.")
   getWebJobSlot is WebJobOps.Read<
     WebJob,
     OverrideErrorType = DefaultErrorResponse
@@ -67,6 +68,7 @@ interface WebJobs {
   /**
    * Description for List webjobs for an app, or a deployment slot.
    */
+  @summary("List webjobs for an app, or a deployment slot.")
   listWebJobsSlot is WebJobOps.List<
     WebJob,
     Response = ArmResponse<WebJobCollection>,
@@ -102,6 +104,7 @@ interface WebJobOperationGroup {
   /**
    * Description for Get webjob information for an app, or a deployment slot.
    */
+  @summary("Get webjob information for an app, or a deployment slot.")
   getWebJob is WebJobOperationGroupOps.Read<
     WebJob,
     OverrideErrorType = DefaultErrorResponse
@@ -110,6 +113,7 @@ interface WebJobOperationGroup {
   /**
    * Description for List webjobs for an app, or a deployment slot.
    */
+  @summary("List webjobs for an app, or a deployment slot.")
   listWebJobs is WebJobOperationGroupOps.List<
     WebJob,
     Response = ArmResponse<WebJobCollection>,

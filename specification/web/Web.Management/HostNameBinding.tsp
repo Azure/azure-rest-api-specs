@@ -54,6 +54,7 @@ interface HostNameBindings {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).
    */
+  @summary("Get the named hostname binding for an app (or deployment slot, if specified).")
   getHostNameBinding is HostNameBindingOps.Read<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -63,6 +64,7 @@ interface HostNameBindings {
    * Description for Creates a hostname binding for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a hostname binding for an app.")
   createOrUpdateHostNameBinding is HostNameBindingOps.CreateOrUpdateSync<
     HostNameBinding,
     Response = ArmResourceUpdatedResponse<HostNameBinding>,
@@ -72,6 +74,7 @@ interface HostNameBindings {
   /**
    * Description for Deletes a hostname binding for an app.
    */
+  @summary("Deletes a hostname binding for an app.")
   deleteHostNameBinding is HostNameBindingOps.DeleteSync<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -80,6 +83,7 @@ interface HostNameBindings {
   /**
    * Description for Get hostname bindings for an app or a deployment slot.
    */
+  @summary("Get hostname bindings for an app or a deployment slot.")
   listHostNameBindings is HostNameBindingOps.List<
     HostNameBinding,
     Response = ArmResponse<HostNameBindingCollection>,
@@ -121,6 +125,7 @@ interface HostNameBindingOperationGroup {
   /**
    * Description for Get the named hostname binding for an app (or deployment slot, if specified).
    */
+  @summary("Get the named hostname binding for an app (or deployment slot, if specified).")
   getHostNameBindingSlot is HostNameBindingOperationGroupOps.Read<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -130,6 +135,8 @@ interface HostNameBindingOperationGroup {
    * Description for Creates a hostname binding for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a hostname binding for an app.")
+  @summary("Creates a hostname binding for an app.")
   createOrUpdateHostNameBindingSlot is HostNameBindingOperationGroupOps.CreateOrUpdateSync<
     HostNameBinding,
     Response = ArmResourceUpdatedResponse<HostNameBinding>,
@@ -139,6 +146,7 @@ interface HostNameBindingOperationGroup {
   /**
    * Description for Deletes a hostname binding for an app.
    */
+  @summary("Deletes a hostname binding for an app.")
   deleteHostNameBindingSlot is HostNameBindingOperationGroupOps.DeleteSync<
     HostNameBinding,
     OverrideErrorType = DefaultErrorResponse
@@ -147,6 +155,7 @@ interface HostNameBindingOperationGroup {
   /**
    * Description for Get hostname bindings for an app or a deployment slot.
    */
+  @summary("Get hostname bindings for an app or a deployment slot.")
   listHostNameBindingsSlot is HostNameBindingOperationGroupOps.List<
     HostNameBinding,
     Response = ArmResponse<HostNameBindingCollection>,

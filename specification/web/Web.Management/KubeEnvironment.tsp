@@ -34,11 +34,13 @@ interface KubeEnvironments {
   /**
    * Description for Get the properties of a Kubernetes Environment.
    */
+  @summary("Get the properties of a Kubernetes Environment.")
   get is ArmResourceRead<KubeEnvironment, Error = DefaultErrorResponse>;
 
   /**
    * Description for Creates or updates a Kubernetes Environment.
    */
+  @summary("Creates or updates a Kubernetes Environment.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     KubeEnvironment,
     LroHeaders = ArmLroLocationHeader<FinalResult = KubeEnvironment> &
@@ -49,6 +51,7 @@ interface KubeEnvironments {
   /**
    * Description for Creates or updates a Kubernetes Environment.
    */
+  @summary("Creates or updates a Kubernetes Environment.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     KubeEnvironment,
@@ -61,6 +64,7 @@ interface KubeEnvironments {
    * Description for Delete a Kubernetes Environment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a Kubernetes Environment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     KubeEnvironment,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -70,6 +74,7 @@ interface KubeEnvironments {
   /**
    * Description for Get all the Kubernetes Environments in a resource group.
    */
+  @summary("Get all the Kubernetes Environments in a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     KubeEnvironment,
     Response = ArmResponse<KubeEnvironmentCollection>,

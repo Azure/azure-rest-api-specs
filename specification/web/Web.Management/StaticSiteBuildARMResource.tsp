@@ -32,6 +32,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Gets the details of a static site build.
    */
+  @summary("Gets the details of a static site build.")
   getStaticSiteBuild is ArmResourceRead<
     StaticSiteBuildARMResource,
     Error = DefaultErrorResponse
@@ -41,6 +42,7 @@ interface StaticSiteBuildARMResources {
    * Description for Deletes a static site build.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a static site build.")
   deleteStaticSiteBuild is ArmResourceDeleteWithoutOkAsync<
     StaticSiteBuildARMResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -50,6 +52,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Gets all static site builds for a particular static site.
    */
+  @summary("Gets all static site builds for a particular static site.")
   getStaticSiteBuilds is ArmResourceListByParent<
     StaticSiteBuildARMResource,
     Response = ArmResponse<StaticSiteBuildCollection>,
@@ -60,6 +63,7 @@ interface StaticSiteBuildARMResources {
    * Description for Creates or updates the app settings of a static site build.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates the app settings of a static site build.")
   @put
   @action("config/appsettings")
   createOrUpdateStaticSiteBuildAppSettings is ArmResourceActionSync<
@@ -73,6 +77,7 @@ interface StaticSiteBuildARMResources {
    * Description for Creates or updates the function app settings of a static site build.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates the function app settings of a static site build.")
   @put
   @action("config/functionappsettings")
   createOrUpdateStaticSiteBuildFunctionAppSettings is ArmResourceActionSync<
@@ -85,6 +90,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Gets the functions of a particular static site build.
    */
+  @summary("Gets the functions of a particular static site build.")
   @get
   @action("functions")
   @list
@@ -98,6 +104,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Gets the application settings of a static site build.
    */
+  @summary("Gets the application settings of a static site build.")
   @action("listAppSettings")
   listStaticSiteBuildAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
@@ -109,6 +116,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Gets the application settings of a static site build.
    */
+  @summary("Gets the application settings of a static site build.")
   @action("listFunctionAppSettings")
   listStaticSiteBuildFunctionAppSettings is ArmResourceActionSync<
     StaticSiteBuildARMResource,
@@ -132,6 +140,7 @@ interface StaticSiteBuildARMResources {
   /**
    * Description for Deploys zipped content to a specific environment of a static site.
    */
+  @summary("Deploys zipped content to a specific environment of a static site.")
   @action("zipdeploy")
   createZipDeploymentForStaticSiteBuild is ArmResourceActionAsync<
     StaticSiteBuildARMResource,

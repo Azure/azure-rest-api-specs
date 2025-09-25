@@ -55,6 +55,7 @@ interface MigrateMySqlStatuses {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled
    */
+  @summary("Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled")
   getMigrateMySqlStatus is MigrateMySqlStatusOps.Read<
     MigrateMySqlStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -95,6 +96,7 @@ interface MigrateMySqlStatusOperationGroup {
   /**
    * Description for Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled
    */
+  @summary("Returns the status of MySql in app migration, if one is active, and whether or not MySql in app is enabled")
   getMigrateMySqlStatusSlot is MigrateMySqlStatusOperationGroupOps.Read<
     MigrateMySqlStatus,
     OverrideErrorType = DefaultErrorResponse

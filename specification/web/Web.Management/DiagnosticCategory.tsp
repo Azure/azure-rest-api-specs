@@ -52,6 +52,7 @@ interface DiagnosticCategories {
   /**
    * Description for Get Diagnostics Category
    */
+  @summary("Get Diagnostics Category")
   getSiteDiagnosticCategory is DiagnosticCategoryOps.Read<
     DiagnosticCategory,
     OverrideErrorType = DefaultErrorResponse
@@ -60,6 +61,7 @@ interface DiagnosticCategories {
   /**
    * Description for Get Diagnostics Categories
    */
+  @summary("Get Diagnostics Categories")
   listSiteDiagnosticCategories is DiagnosticCategoryOps.List<
     DiagnosticCategory,
     Response = ArmResponse<DiagnosticCategoryCollection>,
@@ -101,6 +103,7 @@ interface DiagnosticCategoryOperationGroup {
   /**
    * Description for Get Diagnostics Category
    */
+  @summary("Get Diagnostics Category")
   getSiteDiagnosticCategorySlot is DiagnosticCategoryOperationGroupOps.Read<
     DiagnosticCategory,
     OverrideErrorType = DefaultErrorResponse
@@ -109,6 +112,7 @@ interface DiagnosticCategoryOperationGroup {
   /**
    * Description for Get Diagnostics Categories
    */
+  @summary("Get Diagnostics Categories")
   listSiteDiagnosticCategoriesSlot is DiagnosticCategoryOperationGroupOps.List<
     DiagnosticCategory,
     Response = ArmResponse<DiagnosticCategoryCollection>,

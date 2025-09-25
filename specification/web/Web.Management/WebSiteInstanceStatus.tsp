@@ -52,6 +52,7 @@ interface WebSiteInstanceStatuses {
   /**
    * Description for Gets all scale-out instances of an app.
    */
+  @summary("Gets all scale-out instances of an app.")
   getInstanceInfo is WebSiteInstanceStatusOps.Read<
     WebSiteInstanceStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -60,6 +61,7 @@ interface WebSiteInstanceStatuses {
   /**
    * Description for Gets all scale-out instances of an app.
    */
+  @summary("Gets all scale-out instances of an app.")
   listInstanceIdentifiers is WebSiteInstanceStatusOps.List<
     WebSiteInstanceStatus,
     Response = ArmResponse<WebAppInstanceStatusCollection>,
@@ -101,6 +103,7 @@ interface WebSiteInstanceStatusOperationGroup {
   /**
    * Description for Gets all scale-out instances of an app.
    */
+  @summary("Gets all scale-out instances of an app.")
   getInstanceInfoSlot is WebSiteInstanceStatusOperationGroupOps.Read<
     WebSiteInstanceStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -109,6 +112,7 @@ interface WebSiteInstanceStatusOperationGroup {
   /**
    * Description for Gets all scale-out instances of an app.
    */
+  @summary("Gets all scale-out instances of an app.")
   listInstanceIdentifiersSlot is WebSiteInstanceStatusOperationGroupOps.List<
     WebSiteInstanceStatus,
     Response = ArmResponse<WebAppInstanceStatusCollection>,

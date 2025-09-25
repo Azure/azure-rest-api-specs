@@ -40,6 +40,7 @@ interface AppServicePlans {
   /**
    * Description for Get an App Service plan.
    */
+  @summary("Get an App Service plan.")
   get is ArmResourceRead<
     AppServicePlan,
     Response = ArmResponse<AppServicePlan> | ArmNotFoundResponse,
@@ -51,6 +52,7 @@ interface AppServicePlans {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates an App Service Plan.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServicePlan,
     Response = ArmResourceUpdatedResponse<AppServicePlan> | (ArmAcceptedLroResponse & {
@@ -67,6 +69,7 @@ interface AppServicePlans {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates an App Service Plan.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AppServicePlan,
@@ -81,11 +84,13 @@ interface AppServicePlans {
   /**
    * Description for Delete an App Service plan.
    */
+  @summary("Delete an App Service plan.")
   delete is ArmResourceDeleteSync<AppServicePlan, Error = DefaultErrorResponse>;
 
   /**
    * Description for Get all App Service plans in a resource group.
    */
+  @summary("Get all App Service plans in a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     AppServicePlan,
     Response = ArmResponse<AppServicePlanCollection>,
@@ -113,6 +118,7 @@ interface AppServicePlans {
   /**
    * Description for List all capabilities of an App Service plan.
    */
+  @summary("List all capabilities of an App Service plan.")
   @get
   @action("capabilities")
   listCapabilities is ArmResourceActionSync<
@@ -125,6 +131,7 @@ interface AppServicePlans {
   /**
    * Description for Retrieve all Hybrid Connections in use in an App Service plan.
    */
+  @summary("Retrieve all Hybrid Connections in use in an App Service plan.")
   @get
   @action("hybridConnectionRelays")
   @list
@@ -138,6 +145,7 @@ interface AppServicePlans {
   /**
    * Description for Restart all apps in an App Service plan.
    */
+  @summary("Restart all apps in an App Service plan.")
   @action("restartSites")
   restartWebApps is ArmResourceActionSync<
     AppServicePlan,
@@ -156,6 +164,7 @@ interface AppServicePlans {
   /**
    * Description for Get all apps associated with an App Service plan.
    */
+  @summary("Get all apps associated with an App Service plan.")
   @get
   @action("sites")
   @list
@@ -188,6 +197,7 @@ interface AppServicePlans {
   /**
    * Description for Gets all selectable SKUs for a given App Service Plan
    */
+  @summary("Gets all selectable SKUs for a given App Service Plan")
   @get
   @action("skus")
   getServerFarmSkus is ArmResourceActionSync<
@@ -203,6 +213,7 @@ interface AppServicePlans {
   @get
   @action("usages")
   @list
+  @summary("Gets server farm usage information")
   listUsages is ArmResourceActionSync<
     AppServicePlan,
     void,
@@ -220,6 +231,7 @@ interface AppServicePlans {
   /**
    * Description for Reboot a worker machine in an App Service plan.
    */
+  @summary("Reboot a worker machine in an App Service plan.")
   @action("reboot")
   rebootWorker is ArmResourceActionSync<
     AppServicePlan,

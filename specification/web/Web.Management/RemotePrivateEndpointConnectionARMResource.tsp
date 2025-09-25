@@ -57,6 +57,7 @@ interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Gets a private endpoint connection
    */
+  @summary("Gets a private endpoint connection")
   getPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.Read<
     RemotePrivateEndpointConnectionARMResource,
     OverrideErrorType = DefaultErrorResponse
@@ -67,6 +68,7 @@ interface RemotePrivateEndpointConnectionARMResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
@@ -82,6 +84,7 @@ interface RemotePrivateEndpointConnectionARMResources {
    * Description for Deletes a private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is RemotePrivateEndpointConnectionARMResourceOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
@@ -99,6 +102,7 @@ interface RemotePrivateEndpointConnectionARMResources {
   /**
    * Description for Gets the list of private endpoints associated with a hosting environment
    */
+  @summary("Gets the list of private endpoints associated with a hosting environment")
   getPrivateEndpointConnectionList is RemotePrivateEndpointConnectionARMResourceOps.List<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<PrivateEndpointConnectionCollection>,
@@ -176,6 +180,7 @@ interface StaticSites {
   /**
    * Description for Gets the list of private endpoint connections associated with a static site
    */
+  @summary("Gets the list of private endpoint connections associated with a static site")
   getPrivateEndpointConnectionList is StaticSiteOps.List<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<PrivateEndpointConnectionCollection>,
@@ -212,6 +217,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Gets a private endpoint connection
    */
+  @summary("Gets a private endpoint connection")
   getPrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.Read<
     RemotePrivateEndpointConnectionARMResource,
     OverrideErrorType = DefaultErrorResponse
@@ -237,6 +243,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
    * Description for Deletes a private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
@@ -254,6 +261,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
   /**
    * Description for Gets the list of private endpoint connections associated with a site
    */
+  @summary("Gets the list of private endpoint connections associated with a site")
   getPrivateEndpointConnectionList is PrivateEndpointConnectionOperationGroupOps.List<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<PrivateEndpointConnectionCollection>,
@@ -305,6 +313,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
@@ -321,6 +330,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
@@ -338,6 +348,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Gets the list of private endpoint connections associated with a site
    */
+  @summary("Gets the list of private endpoint connections associated with a site")
   @segment("privateEndpointConnections")
   getPrivateEndpointConnectionListSlot is PrivateEndpointConnectionSlotOperationGroupOps.List<
     RemotePrivateEndpointConnectionARMResource,

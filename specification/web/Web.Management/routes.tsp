@@ -18,6 +18,7 @@ namespace Microsoft.Web;
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @summary("Validate whether a resource can be moved.")
+@summary("Validate whether a resource can be moved.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/validateMoveResources")
 @post
 op validateMove(
@@ -35,6 +36,7 @@ op validateMove(
  * Description for Validate if a resource can be created.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@summary("Validate if a resource can be created.")
 @summary("Validate if a resource can be created.")
 @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/validate")
 @post

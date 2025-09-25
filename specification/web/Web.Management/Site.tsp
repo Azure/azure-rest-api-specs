@@ -145,6 +145,7 @@ interface Sites {
   /**
    * Description for Gets the details of a web, mobile, or API app.
    */
+  @summary("Gets the details of a web, mobile, or API app.")
   get is SiteOps.Read<
     Site,
     Response = ArmResponse<Site> | ArmNotFoundResponse,
@@ -156,6 +157,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdate is SiteOps.CreateOrUpdateAsync<
     Site,
     Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
@@ -172,6 +174,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   update is SiteOps.CustomPatchSync<
     Site,
     PatchModel = SitePatchResource,
@@ -186,6 +189,7 @@ interface Sites {
    * Description for Deletes a web, mobile, or API app, or one of the deployment slots.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a web, mobile, or API app, or one of the deployment slots.")
   delete is SiteOps.DeleteSync<
     Site,
     Parameters = {
@@ -222,6 +226,7 @@ interface Sites {
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get past recommendations for an app, optionally specified by the time range.")
   @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
   @get
   @list
@@ -250,6 +255,7 @@ interface Sites {
    * Description for Get all recommendations for an app.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get all recommendations for an app.")
   @Azure.ResourceManager.Legacy.renamePathParameter("name", "siteName")
   @get
   @list
@@ -278,6 +284,7 @@ interface Sites {
    * Description for Disable all recommendations for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Disable all recommendations for an app.")
   @post
   disableAllForWebApp(
     ...ApiVersionParameter,
@@ -303,6 +310,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @post
+  @summary("Reset all recommendation opt-out settings for an app.")
   resetAllFiltersForWebApp(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -325,6 +333,7 @@ interface Sites {
   /**
    * Description for Analyze a custom hostname.
    */
+  @summary("Analyze a custom hostname.")
   @get
   analyzeCustomHostname is SiteOps.ActionSync<
     Site,
@@ -343,6 +352,7 @@ interface Sites {
   /**
    * Description for Applies the configuration settings from the target slot onto the current slot.
    */
+  @summary("Applies the configuration settings from the target slot onto the current slot.")
   @action("applySlotConfig")
   applySlotConfigToProduction is SiteOps.ActionSync<
     Site,
@@ -356,6 +366,7 @@ interface Sites {
   /**
    * Description for Creates a backup of an app.
    */
+  @summary("Creates a backup of an app.")
   backup is SiteOps.ActionSync<
     Site,
     BackupRequest,
@@ -367,6 +378,7 @@ interface Sites {
    * Description for Replaces the application settings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Replaces the application settings of an app.")
   @put
   @action("config/appsettings")
   updateApplicationSettings is SiteOps.ActionSync<
@@ -379,6 +391,7 @@ interface Sites {
   /**
    * Description for Gets the application settings of an app.
    */
+  @summary("Gets the application settings of an app.")
   @action("config/appsettings/list")
   listApplicationSettings is SiteOps.ActionSync<
     Site,
@@ -391,6 +404,7 @@ interface Sites {
    * Description for Updates the Authentication / Authorization settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the Authentication / Authorization settings associated with web app.")
   @put
   @action("config/authsettings")
   updateAuthSettings is SiteOps.ActionSync<
@@ -403,6 +417,7 @@ interface Sites {
   /**
    * Description for Gets the Authentication/Authorization settings of an app.
    */
+  @summary("Gets the Authentication/Authorization settings of an app.")
   @action("config/authsettings/list")
   getAuthSettings is SiteOps.ActionSync<
     Site,
@@ -415,6 +430,7 @@ interface Sites {
    * Description for Updates the Azure storage account configurations of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the Azure storage account configurations of an app.")
   @put
   @action("config/azurestorageaccounts")
   updateAzureStorageAccounts is SiteOps.ActionSync<
@@ -427,6 +443,7 @@ interface Sites {
   /**
    * Description for Gets the Azure storage account configurations of an app.
    */
+  @summary("Gets the Azure storage account configurations of an app.")
   @action("config/azurestorageaccounts/list")
   listAzureStorageAccounts is SiteOps.ActionSync<
     Site,
@@ -439,6 +456,7 @@ interface Sites {
    * Description for Updates the backup configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the backup configuration of an app.")
   @put
   @action("config/backup")
   updateBackupConfiguration is SiteOps.ActionSync<
@@ -451,6 +469,7 @@ interface Sites {
   /**
    * Description for Deletes the backup configuration of an app.
    */
+  @summary("Deletes the backup configuration of an app.")
   @delete
   @action("config/backup")
   deleteBackupConfiguration is SiteOps.ActionSync<
@@ -465,6 +484,7 @@ interface Sites {
   /**
    * Description for Gets the backup configuration of an app.
    */
+  @summary("Gets the backup configuration of an app.")
   @action("config/backup/list")
   getBackupConfiguration is SiteOps.ActionSync<
     Site,
@@ -477,6 +497,7 @@ interface Sites {
    * Description for Replaces the connection strings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Replaces the connection strings of an app.")
   @put
   @action("config/connectionstrings")
   updateConnectionStrings is SiteOps.ActionSync<
@@ -489,6 +510,7 @@ interface Sites {
   /**
    * Description for Gets the connection strings of an app.
    */
+  @summary("Gets the connection strings of an app.")
   @action("config/connectionstrings/list")
   listConnectionStrings is SiteOps.ActionSync<
     Site,
@@ -501,6 +523,7 @@ interface Sites {
    * Description for Replaces the metadata of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Replaces the metadata of an app.")
   @put
   @action("config/metadata")
   updateMetadata is SiteOps.ActionSync<
@@ -513,6 +536,7 @@ interface Sites {
   /**
    * Description for Gets the metadata of an app.
    */
+  @summary("Gets the metadata of an app.")
   @action("config/metadata/list")
   listMetadata is SiteOps.ActionSync<
     Site,
@@ -526,6 +550,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentials is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
@@ -539,6 +564,7 @@ interface Sites {
    * Description for Updates the Push settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the Push settings associated with web app.")
   @put
   @action("config/pushsettings")
   updateSitePushSettings is SiteOps.ActionSync<
@@ -551,6 +577,7 @@ interface Sites {
   /**
    * Description for Gets the Push settings associated with web app.
    */
+  @summary("Gets the Push settings associated with web app.")
   @action("config/pushsettings/list")
   listSitePushSettings is SiteOps.ActionSync<
     Site,
@@ -563,6 +590,7 @@ interface Sites {
    * Description for Gets the last lines of docker logs for the given site
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the last lines of docker logs for the given site")
   @action("containerlogs")
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
@@ -575,6 +603,7 @@ interface Sites {
    * Description for Gets the ZIP archived docker log files for the given site
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the ZIP archived docker log files for the given site")
   @action("containerlogs/zip/download")
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
@@ -586,6 +615,7 @@ interface Sites {
   /**
    * Description for Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.
    */
+  @summary("Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.")
   @action("discoverbackup")
   discoverBackup is SiteOps.ActionSync<
     Site,
@@ -597,6 +627,7 @@ interface Sites {
   /**
    * Description for Invoke onedeploy status API /api/deployments and gets the deployment status for the site
    */
+  @summary("Invoke onedeploy status API /api/deployments and gets the deployment status for the site")
   @get
   @action("extensions/onedeploy")
   getOneDeployStatus is SiteOps.ActionSync<
@@ -610,6 +641,7 @@ interface Sites {
    * Description for Invoke the OneDeploy publish web app extension.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Invoke the OneDeploy publish web app extension.")
   @put
   @action("extensions/onedeploy")
   createOneDeployOperation is SiteOps.ActionSync<
@@ -622,6 +654,7 @@ interface Sites {
   /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
+  @summary("Fetch a short lived token that can be exchanged for a master key.")
   @get
   @action("functions/admin/token")
   getFunctionsAdminToken is SiteOps.ActionSync<
@@ -634,6 +667,7 @@ interface Sites {
   /**
    * Description for Get host secrets for a function app.
    */
+  @summary("Get host secrets for a function app.")
   @action("host/default/listkeys")
   listHostKeys is SiteOps.ActionSync<
     Site,
@@ -645,6 +679,7 @@ interface Sites {
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
+  @summary("This is to allow calling via powershell and ARM template.")
   @action("host/default/listsyncstatus")
   listSyncStatus is SiteOps.ActionSync<
     Site,
@@ -656,6 +691,7 @@ interface Sites {
   /**
    * Description for Syncs function trigger metadata to the management database
    */
+  @summary("Syncs function trigger metadata to the management database")
   @action("host/default/sync")
   syncFunctions is SiteOps.ActionSync<
     Site,
@@ -668,6 +704,7 @@ interface Sites {
    * Description for Add or update a host level secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Add or update a host level secret.")
   @put
   createOrUpdateHostSecret(
     ...HostSecretParameters,
@@ -679,6 +716,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a host level secret.")
   @delete
   deleteHostSecret(
     ...HostSecretParameters,
@@ -687,6 +725,7 @@ interface Sites {
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
+  @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
   listHybridConnections is SiteOps.ActionSync<
@@ -699,6 +738,7 @@ interface Sites {
   /**
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
+  @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
   listRelayServiceConnections is SiteOps.ActionSync<
@@ -711,6 +751,7 @@ interface Sites {
   /**
    * Description for Shows whether an app can be cloned to another resource group or subscription.
    */
+  @summary("Shows whether an app can be cloned to another resource group or subscription.")
   @action("iscloneable")
   isCloneable is SiteOps.ActionSync<
     Site,
@@ -734,6 +775,7 @@ interface Sites {
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
+  @summary("This is to allow calling via powershell and ARM template.")
   @action("listsyncfunctiontriggerstatus")
   listSyncFunctionTriggers is SiteOps.ActionSync<
     Site,
@@ -757,6 +799,7 @@ interface Sites {
    * Description for Restores a web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Restores a web app.")
   @put
   @action("migrate")
   migrateStorage is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -779,6 +822,7 @@ interface Sites {
    * Description for Migrates a local (in-app) MySql database to a remote MySql database.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Migrates a local (in-app) MySql database to a remote MySql database.")
   @action("migratemysql")
   migrateMySql is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
@@ -793,6 +837,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTraceOperation is SiteOps.Read<
     Site,
@@ -815,6 +860,7 @@ interface Sites {
   /**
    * Description for Start capturing network packets for the site (To be deprecated).
    */
+  @summary("Start capturing network packets for the site (To be deprecated).")
   @action("networkTrace/start")
   startWebSiteNetworkTrace is SiteOps.ActionSync<
     Site,
@@ -846,6 +892,7 @@ interface Sites {
    * Description for Start capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Start capturing network packets for the site.")
   @action("networkTrace/startOperation")
   startWebSiteNetworkTraceOperation is SiteOps.ActionSync<
     Site,
@@ -881,6 +928,7 @@ interface Sites {
    * Description for Stop ongoing capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Stop ongoing capturing network packets for the site.")
   @action("networkTrace/stop")
   stopWebSiteNetworkTrace is SiteOps.ActionSync<
     Site,
@@ -896,6 +944,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTraces(
     ...ResourceInstanceParameters<Site>,
@@ -912,6 +961,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTraceOperationV2 is SiteOps.Read<
     Site,
@@ -940,6 +990,7 @@ interface Sites {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTracesV2(
     ...ResourceInstanceParameters<Site>,
@@ -955,6 +1006,7 @@ interface Sites {
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Generates a new publishing password for an app (or deployment slot, if specified).")
   @action("newpassword")
   generateNewSitePublishingPassword is SiteOps.ActionSync<
     Site,
@@ -968,6 +1020,7 @@ interface Sites {
   /**
    * Description for Gets perfmon counters for web app.
    */
+  @summary("Gets perfmon counters for web app.")
   @get
   @action("perfcounters")
   @list
@@ -988,6 +1041,7 @@ interface Sites {
   /**
    * Description for Gets web app's event logs.
    */
+  @summary("Gets web app's event logs.")
   @get
   @action("phplogging")
   getSitePhpErrorLogFlag is SiteOps.ActionSync<
@@ -1000,6 +1054,7 @@ interface Sites {
   /**
    * Description for Gets the premier add-ons of an app.
    */
+  @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
   listPremierAddOns is SiteOps.ActionSync<
@@ -1024,6 +1079,7 @@ interface Sites {
   /**
    * Description for Gets the publishing profile for an app (or deployment slot, if specified).
    */
+  @summary("Gets the publishing profile for an app (or deployment slot, if specified).")
   @action("publishxml")
   listPublishingProfileXmlWithSecrets is SiteOps.ActionSync<
     Site,
@@ -1035,6 +1091,7 @@ interface Sites {
   /**
    * Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
    */
+  @summary("Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.")
   @action("resetSlotConfig")
   resetProductionSlotConfig is SiteOps.ActionSync<
     Site,
@@ -1048,6 +1105,7 @@ interface Sites {
   /**
    * Description for Restarts an app (or deployment slot, if specified).
    */
+  @summary("Restarts an app (or deployment slot, if specified).")
   restart is SiteOps.ActionSync<
     Site,
     void,
@@ -1073,6 +1131,7 @@ interface Sites {
   /**
    * Description for Restores an app from a backup blob in Azure Storage.
    */
+  @summary("Restores an app from a backup blob in Azure Storage.")
   restoreFromBackupBlob is SiteOps.ActionAsync<
     Site,
     RestoreRequest,
@@ -1087,6 +1146,7 @@ interface Sites {
   /**
    * Description for Restores a deleted web app to this web app.
    */
+  @summary("Restores a deleted web app to this web app.")
   restoreFromDeletedApp is SiteOps.ActionAsync<
     Site,
     DeletedAppRestoreRequest,
@@ -1101,6 +1161,7 @@ interface Sites {
   /**
    * Description for Restores a web app from a snapshot.
    */
+  @summary("Restores a web app from a snapshot.")
   restoreSnapshot is SiteOps.ActionAsync<
     Site,
     SnapshotRestoreRequest,
@@ -1115,6 +1176,7 @@ interface Sites {
   /**
    * Description for Get the difference in configuration settings between two web app slots.
    */
+  @summary("Get the difference in configuration settings between two web app slots.")
   @action("slotsdiffs")
   @list
   listSlotDifferencesFromProduction is SiteOps.ActionSync<
@@ -1127,6 +1189,7 @@ interface Sites {
   /**
    * Description for Swaps two deployment slots of an app.
    */
+  @summary("Swaps two deployment slots of an app.")
   @action("slotsswap")
   swapSlotWithProduction is SiteOps.ActionAsync<
     Site,
@@ -1142,6 +1205,7 @@ interface Sites {
   /**
    * Description for Returns all Snapshots to the user.
    */
+  @summary("Returns all Snapshots to the user.")
   @get
   @action("snapshots")
   @list
@@ -1156,6 +1220,7 @@ interface Sites {
    * Description for Returns all Snapshots to the user from DRSecondary endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Returns all Snapshots to the user from DRSecondary endpoint.")
   @get
   @list
   @action("snapshotsdr")
@@ -1169,6 +1234,7 @@ interface Sites {
   /**
    * Description for Starts an app (or deployment slot, if specified).
    */
+  @summary("Starts an app (or deployment slot, if specified).")
   start is ArmResourceActionSync<
     Site,
     void,
@@ -1183,6 +1249,7 @@ interface Sites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Start capturing network packets for the site.")
   @operationId("WebApps_StartNetworkTrace")
   startNetworkTrace is SiteOps.ActionSync<
     Site,
@@ -1217,6 +1284,7 @@ interface Sites {
   /**
    * Description for Stops an app (or deployment slot, if specified).
    */
+  @summary("Stops an app (or deployment slot, if specified).")
   @action("stop")
   stop is SiteOps.ActionSync<
     Site,
@@ -1231,6 +1299,7 @@ interface Sites {
    * Description for Stop ongoing capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Stop ongoing capturing network packets for the site.")
   stopNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
@@ -1243,6 +1312,7 @@ interface Sites {
   /**
    * Description for Sync web app repository.
    */
+  @summary("Sync web app repository.")
   @action("sync")
   syncRepository is SiteOps.ActionSync<
     Site,
@@ -1256,6 +1326,7 @@ interface Sites {
   /**
    * Description for Syncs function trigger metadata to the management database
    */
+  @summary("Syncs function trigger metadata to the management database")
   @action("syncfunctiontriggers")
   syncFunctionTriggers is SiteOps.ActionSync<
     Site,
@@ -1267,6 +1338,7 @@ interface Sites {
   /**
    * Description for Gets the quota usage information of an app (or deployment slot, if specified).
    */
+  @summary("Gets the quota usage information of an app (or deployment slot, if specified).")
   @get
   @action("usages")
   @list
@@ -1287,6 +1359,7 @@ interface Sites {
   /**
    * Description for Creates the artifacts for web site, or a deployment slot.
    */
+  @summary("Creates the artifacts for web site, or a deployment slot.")
   deployWorkflowArtifacts is SiteOps.ActionSync<
     Site,
     WorkflowArtifacts,
@@ -1358,6 +1431,8 @@ interface WebAppOps
 
 @armResourceOperations
 interface WebApps {
+  @summary("Gets an app's deployment slots.")
+  @doc("Description for Gets an app's deployment slots.")
   listSlots is WebAppOps.List<
     Site,
     Response = ArmResponse<WebAppCollection>,
@@ -1367,6 +1442,7 @@ interface WebApps {
   /**
    * Description for Gets the details of a web, mobile, or API app.
    */
+  @summary("Gets the details of a web, mobile, or API app.")
   getSlot is WebAppOps.Read<
     Site,
     Response = ArmResponse<Site> | ArmNotFoundResponse,
@@ -1378,6 +1454,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   createOrUpdateSlot is WebAppOps.CreateOrUpdateAsync<
     Site,
     Response = ArmResourceUpdatedResponse<Site> | (ArmAcceptedLroResponse & {
@@ -1394,6 +1471,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new web, mobile, or API app in an existing resource group, or updates an existing app.")
   @patch(#{ implicitOptionality: false })
   updateSlot is WebAppOps.CustomPatchSync<
     Site,
@@ -1408,6 +1486,7 @@ interface WebApps {
   /**
    * Description for Deletes a web, mobile, or API app, or one of the deployment slots.
    */
+  @summary("Deletes a web, mobile, or API app, or one of the deployment slots.")
   deleteSlot is WebAppOps.DeleteSync<
     Site,
     Parameters = {
@@ -1432,6 +1511,7 @@ interface WebApps {
   /**
    * Description for Gets all web, mobile, and API apps in the specified resource group.
    */
+  @summary("Gets all web, mobile, and API apps in the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Site,
     Parameters = {
@@ -1448,6 +1528,7 @@ interface WebApps {
   /**
    * Description for Analyze a custom hostname.
    */
+  @summary("Analyze a custom hostname.")
   @get
   @action("analyzeCustomHostname")
   analyzeCustomHostnameSlot is WebAppOps.ActionSync<
@@ -1467,6 +1548,7 @@ interface WebApps {
   /**
    * Description for Applies the configuration settings from the target slot onto the current slot.
    */
+  @summary("Applies the configuration settings from the target slot onto the current slot.")
   @action("applySlotConfig")
   applySlotConfigurationSlot is WebAppOps.ActionSync<
     Site,
@@ -1480,6 +1562,7 @@ interface WebApps {
   /**
    * Description for Creates a backup of an app.
    */
+  @summary("Creates a backup of an app.")
   @action("backup")
   backupSlot is WebAppOps.ActionSync<
     Site,
@@ -1492,6 +1575,7 @@ interface WebApps {
    * Description for Replaces the application settings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Replaces the application settings of an app.")
   @put
   @action("config/appsettings")
   updateApplicationSettingsSlot is WebAppOps.ActionSync<
@@ -1504,6 +1588,7 @@ interface WebApps {
   /**
    * Description for Gets the application settings of an app.
    */
+  @summary("Gets the application settings of an app.")
   @action("config/appsettings/list")
   listApplicationSettingsSlot is WebAppOps.ActionSync<
     Site,
@@ -1516,6 +1601,7 @@ interface WebApps {
    * Description for Updates the Authentication / Authorization settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the Authentication / Authorization settings associated with web app.")
   @put
   @action("config/authsettings")
   updateAuthSettingsSlot is WebAppOps.ActionSync<
@@ -1528,6 +1614,7 @@ interface WebApps {
   /**
    * Description for Gets the Authentication/Authorization settings of an app.
    */
+  @summary("Gets the Authentication/Authorization settings of an app.")
   @action("config/authsettings/list")
   getAuthSettingsSlot is WebAppOps.ActionSync<
     Site,
@@ -1540,6 +1627,7 @@ interface WebApps {
    * Description for Updates the Azure storage account configurations of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the Azure storage account configurations of an app.")
   @put
   @action("config/azurestorageaccounts")
   updateAzureStorageAccountsSlot is WebAppOps.ActionSync<
@@ -1552,6 +1640,7 @@ interface WebApps {
   /**
    * Description for Gets the Azure storage account configurations of an app.
    */
+  @summary("Gets the Azure storage account configurations of an app.")
   @action("config/azurestorageaccounts/list")
   listAzureStorageAccountsSlot is WebAppOps.ActionSync<
     Site,
@@ -1564,6 +1653,7 @@ interface WebApps {
    * Description for Updates the backup configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the backup configuration of an app.")
   @put
   @action("config/backup")
   updateBackupConfigurationSlot is WebAppOps.ActionSync<
@@ -1576,6 +1666,7 @@ interface WebApps {
   /**
    * Description for Deletes the backup configuration of an app.
    */
+  @summary("Deletes the backup configuration of an app.")
   @delete
   @action("backup")
   deleteBackupConfigurationSlot is WebAppOps.ActionSync<
@@ -1590,6 +1681,7 @@ interface WebApps {
   /**
    * Description for Gets the backup configuration of an app.
    */
+  @summary("Gets the backup configuration of an app.")
   @action("config/backup/list")
   getBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
@@ -1602,6 +1694,7 @@ interface WebApps {
    * Description for Replaces the connection strings of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Replaces the connection strings of an app.")
   @put
   @action("config/connectionstrings")
   updateConnectionStringsSlot is WebAppOps.ActionSync<
@@ -1614,6 +1707,7 @@ interface WebApps {
   /**
    * Description for Gets the connection strings of an app.
    */
+  @summary("Gets the connection strings of an app.")
   @action("config/connectionstrings/list")
   listConnectionStringsSlot is WebAppOps.ActionSync<
     Site,
@@ -1626,6 +1720,7 @@ interface WebApps {
    * Description for Replaces the metadata of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Replaces the metadata of an app.")
   @put
   @action("config/metadata")
   updateMetadataSlot is WebAppOps.ActionSync<
@@ -1638,6 +1733,7 @@ interface WebApps {
   /**
    * Description for Gets the metadata of an app.
    */
+  @summary("Gets the metadata of an app.")
   @action("config/metadata/list")
   listMetadataSlot is WebAppOps.ActionSync<
     Site,
@@ -1651,6 +1747,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the Git/FTP publishing credentials of an app.")
   @action("config/publishingcredentials/list")
   listPublishingCredentialsSlot is Azure.ResourceManager.ArmResourceActionAsyncBase<
     Site,
@@ -1672,6 +1769,7 @@ interface WebApps {
    * Description for Updates the Push settings associated with web app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the Push settings associated with web app.")
   @put
   @action("config/pushsettings")
   updateSitePushSettingsSlot is WebAppOps.ActionSync<
@@ -1684,6 +1782,7 @@ interface WebApps {
   /**
    * Description for Gets the Push settings associated with web app.
    */
+  @summary("Gets the Push settings associated with web app.")
   @action("config/pushsettings/list")
   listSitePushSettingsSlot is WebAppOps.ActionSync<
     Site,
@@ -1697,6 +1796,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the last lines of docker logs for the given site")
   @action("containerlogs")
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
@@ -1710,6 +1810,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the ZIP archived docker log files for the given site")
   @action("containerlogs/zip/download")
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
@@ -1721,6 +1822,7 @@ interface WebApps {
   /**
    * Description for Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.
    */
+  @summary("Discovers an existing app backup that can be restored from a blob in Azure storage. Use this to get information about the databases stored in a backup.")
   @action("discoverbackup")
   discoverBackupSlot is WebAppOps.ActionSync<
     Site,
@@ -1732,6 +1834,7 @@ interface WebApps {
   /**
    * Description for Fetch a short lived token that can be exchanged for a master key.
    */
+  @summary("Fetch a short lived token that can be exchanged for a master key.")
   @get
   @action("functions/admin/token")
   getFunctionsAdminTokenSlot is WebAppOps.ActionSync<
@@ -1744,6 +1847,7 @@ interface WebApps {
   /**
    * Description for Get host secrets for a function app.
    */
+  @summary("Get host secrets for a function app.")
   @action("host/default/listkeys")
   listHostKeysSlot is WebAppOps.ActionSync<
     Site,
@@ -1755,6 +1859,7 @@ interface WebApps {
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
+  @summary("This is to allow calling via powershell and ARM template.")
   @action("host/default/listsyncstatus")
   listSyncStatusSlot is WebAppOps.ActionSync<
     Site,
@@ -1766,6 +1871,7 @@ interface WebApps {
   /**
    * Description for Syncs function trigger metadata to the management database
    */
+  @summary("Syncs function trigger metadata to the management database")
   @action("host/default/sync")
   syncFunctionsSlot is WebAppOps.ActionSync<
     Site,
@@ -1778,6 +1884,7 @@ interface WebApps {
    * Description for Add or update a host level secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Add or update a host level secret.")
   @put
   createOrUpdateHostSecretSlot(
     ...HostSecretSlotParameters,
@@ -1788,6 +1895,7 @@ interface WebApps {
    * Description for Delete a host level secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a host level secret.")
   @delete
   deleteHostSecretSlot is WebAppOps.DeleteSync<
     Site,
@@ -1816,6 +1924,7 @@ interface WebApps {
   /**
    * Description for Retrieves all Service Bus Hybrid Connections used by this Web App.
    */
+  @summary("Retrieves all Service Bus Hybrid Connections used by this Web App.")
   @get
   @action("hybridConnectionRelays")
   listHybridConnectionsSlot is WebAppOps.ActionSync<
@@ -1828,6 +1937,7 @@ interface WebApps {
   /**
    * Description for Gets hybrid connections configured for an app (or deployment slot, if specified).
    */
+  @summary("Gets hybrid connections configured for an app (or deployment slot, if specified).")
   @get
   @action("hybridconnection")
   listRelayServiceConnectionsSlot is WebAppOps.ActionSync<
@@ -1840,6 +1950,7 @@ interface WebApps {
   /**
    * Description for Shows whether an app can be cloned to another resource group or subscription.
    */
+  @summary("Shows whether an app can be cloned to another resource group or subscription.")
   @action("iscloneable")
   isCloneableSlot is WebAppOps.ActionSync<
     Site,
@@ -1863,6 +1974,7 @@ interface WebApps {
   /**
    * Description for This is to allow calling via powershell and ARM template.
    */
+  @summary("This is to allow calling via powershell and ARM template.")
   @action("listsyncfunctiontriggerstatus")
   listSyncFunctionTriggersSlot is WebAppOps.ActionSync<
     Site,
@@ -1876,6 +1988,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTraceOperationSlot is WebAppOps.Read<
     Site,
@@ -1898,6 +2011,7 @@ interface WebApps {
   /**
    * Description for Start capturing network packets for the site (To be deprecated).
    */
+  @summary("Start capturing network packets for the site (To be deprecated).")
   @action("networkTrace/start")
   startWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
@@ -1929,6 +2043,7 @@ interface WebApps {
    * Description for Start capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Start capturing network packets for the site.")
   @action("networkTrace/startOperation")
   startWebSiteNetworkTraceOperationSlot is WebAppOps.ActionSync<
     Site,
@@ -1964,6 +2079,7 @@ interface WebApps {
    * Description for Stop ongoing capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Stop ongoing capturing network packets for the site.")
   @action("networkTrace/stop")
   stopWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
@@ -1977,6 +2093,7 @@ interface WebApps {
   /**
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTracesSlot is WebAppOps.Read<
     Site,
@@ -1997,6 +2114,7 @@ interface WebApps {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTraceOperationSlotV2 is WebAppOps.Read<
     Site,
@@ -2020,6 +2138,7 @@ interface WebApps {
    * Description for Gets a named operation for a network trace capturing (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets a named operation for a network trace capturing (or deployment slot, if specified).")
   @get
   getNetworkTracesSlotV2(
     ...ResourceInstanceParameters<Site>,
@@ -2041,6 +2160,7 @@ interface WebApps {
    * Description for Generates a new publishing password for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Generates a new publishing password for an app (or deployment slot, if specified).")
   @action("newpassword")
   generateNewSitePublishingPasswordSlot is WebAppOps.ActionSync<
     Site,
@@ -2054,6 +2174,7 @@ interface WebApps {
   /**
    * Description for Gets perfmon counters for web app.
    */
+  @summary("Gets perfmon counters for web app.")
   @get
   @action("perfcounters")
   @list
@@ -2074,6 +2195,7 @@ interface WebApps {
   /**
    * Description for Gets web app's event logs.
    */
+  @summary("Gets web app's event logs.")
   @get
   @action("phplogging")
   getSitePhpErrorLogFlagSlot is WebAppOps.ActionSync<
@@ -2086,6 +2208,7 @@ interface WebApps {
   /**
    * Description for Gets the premier add-ons of an app.
    */
+  @summary("Gets the premier add-ons of an app.")
   @get
   @action("premieraddons")
   listPremierAddOnsSlot is WebAppOps.ActionSync<
@@ -2098,6 +2221,7 @@ interface WebApps {
   /**
    * Description for Gets the private link resources
    */
+  @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
   getPrivateLinkResourcesSlot is WebAppOps.ActionSync<
@@ -2110,6 +2234,7 @@ interface WebApps {
   /**
    * Description for Gets the publishing profile for an app (or deployment slot, if specified).
    */
+  @summary("Gets the publishing profile for an app (or deployment slot, if specified).")
   @action("publishxml")
   listPublishingProfileXmlWithSecretsSlot is WebAppOps.ActionSync<
     Site,
@@ -2121,6 +2246,7 @@ interface WebApps {
   /**
    * Description for Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.
    */
+  @summary("Resets the configuration settings of the current slot if they were previously modified by calling the API with POST.")
   @action("resetSlotConfig")
   resetSlotConfigurationSlot is WebAppOps.ActionSync<
     Site,
@@ -2134,6 +2260,7 @@ interface WebApps {
   /**
    * Description for Restarts an app (or deployment slot, if specified).
    */
+  @summary("Restarts an app (or deployment slot, if specified).")
   @action("restart")
   restartSlot is WebAppOps.ActionSync<
     Site,
@@ -2160,6 +2287,7 @@ interface WebApps {
   /**
    * Description for Restores an app from a backup blob in Azure Storage.
    */
+  @summary("Restores an app from a backup blob in Azure Storage.")
   @action("restoreFromBackupBlob")
   restoreFromBackupBlobSlot is WebAppOps.ActionAsync<
     Site,
@@ -2175,6 +2303,7 @@ interface WebApps {
   /**
    * Description for Restores a deleted web app to this web app.
    */
+  @summary("Restores a deleted web app to this web app.")
   @action("restoreFromDeletedApp")
   restoreFromDeletedAppSlot is WebAppOps.ActionAsync<
     Site,
@@ -2190,6 +2319,7 @@ interface WebApps {
   /**
    * Description for Restores a web app from a snapshot.
    */
+  @summary("Restores a web app from a snapshot.")
   @action("restoreSnapshot")
   restoreSnapshotSlot is WebAppOps.ActionAsync<
     Site,
@@ -2205,6 +2335,7 @@ interface WebApps {
   /**
    * Description for Get the difference in configuration settings between two web app slots.
    */
+  @summary("Get the difference in configuration settings between two web app slots.")
   @action("slotsdiffs")
   @list
   listSlotDifferencesSlot is WebAppOps.ActionSync<
@@ -2217,6 +2348,7 @@ interface WebApps {
   /**
    * Description for Swaps two deployment slots of an app.
    */
+  @summary("Swaps two deployment slots of an app.")
   @action("slotsswap")
   swapSlotSlot is WebAppOps.ActionAsync<
     Site,
@@ -2232,6 +2364,7 @@ interface WebApps {
   /**
    * Description for Returns all Snapshots to the user.
    */
+  @summary("Returns all Snapshots to the user.")
   @get
   @action("snapshots")
   @list
@@ -2246,6 +2379,7 @@ interface WebApps {
    * Description for Returns all Snapshots to the user from DRSecondary endpoint.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Returns all Snapshots to the user from DRSecondary endpoint.")
   @get
   @list
   @action("snapshotsdr")
@@ -2259,6 +2393,7 @@ interface WebApps {
   /**
    * Description for Starts an app (or deployment slot, if specified).
    */
+  @summary("Starts an app (or deployment slot, if specified).")
   @action("start")
   startSlot is WebAppOps.ActionSync<
     Site,
@@ -2273,6 +2408,7 @@ interface WebApps {
    * Description for Start capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Start capturing network packets for the site.")
   @action("startNetworkTrace")
   startNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
@@ -2307,6 +2443,7 @@ interface WebApps {
   /**
    * Description for Stops an app (or deployment slot, if specified).
    */
+  @summary("Stops an app (or deployment slot, if specified).")
   @action("stop")
   stopSlot is WebAppOps.ActionSync<
     Site,
@@ -2321,6 +2458,7 @@ interface WebApps {
    * Description for Stop ongoing capturing network packets for the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Stop ongoing capturing network packets for the site.")
   @action("stopNetworkTrace")
   stopNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
@@ -2334,6 +2472,7 @@ interface WebApps {
   /**
    * Description for Sync web app repository.
    */
+  @summary("Sync web app repository.")
   @action("sync")
   syncRepositorySlot is WebAppOps.ActionSync<
     Site,
@@ -2347,6 +2486,7 @@ interface WebApps {
   /**
    * Description for Syncs function trigger metadata to the management database
    */
+  @summary("Syncs function trigger metadata to the management database")
   @action("syncfunctiontriggers")
   syncFunctionTriggersSlot is WebAppOps.ActionSync<
     Site,
@@ -2358,6 +2498,7 @@ interface WebApps {
   /**
    * Description for Gets the quota usage information of an app (or deployment slot, if specified).
    */
+  @summary("Gets the quota usage information of an app (or deployment slot, if specified).")
   @get
   @action("usages")
   @list
@@ -2378,6 +2519,7 @@ interface WebApps {
   /**
    * Description for Creates the artifacts for web site, or a deployment slot.
    */
+  @summary("Creates the artifacts for web site, or a deployment slot.")
   @action("deployWorkflowArtifacts")
   deployWorkflowArtifactsSlot is WebAppOps.ActionSync<
     Site,

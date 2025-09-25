@@ -32,6 +32,7 @@ interface StaticSiteCustomDomainOverviewARMResources {
   /**
    * Description for Gets an existing custom domain for a particular static site.
    */
+  @summary("Gets an existing custom domain for a particular static site.")
   getStaticSiteCustomDomain is ArmResourceRead<
     StaticSiteCustomDomainOverviewARMResource,
     Error = DefaultErrorResponse
@@ -42,6 +43,7 @@ interface StaticSiteCustomDomainOverviewARMResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new static site custom domain in an existing resource group and static site.")
   createOrUpdateStaticSiteCustomDomain is ArmResourceCreateOrReplaceAsync<
     StaticSiteCustomDomainOverviewARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteCustomDomainOverviewARMResource> | (ArmAcceptedLroResponse & {
@@ -57,6 +59,7 @@ interface StaticSiteCustomDomainOverviewARMResources {
    * Description for Deletes a custom domain.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a custom domain.")
   deleteStaticSiteCustomDomain is ArmResourceDeleteWithoutOkAsync<
     StaticSiteCustomDomainOverviewARMResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse,
@@ -66,6 +69,7 @@ interface StaticSiteCustomDomainOverviewARMResources {
   /**
    * Description for Gets all static site custom domains for a particular static site.
    */
+  @summary("Gets all static site custom domains for a particular static site.")
   listStaticSiteCustomDomains is ArmResourceListByParent<
     StaticSiteCustomDomainOverviewARMResource,
     Response = ArmResponse<StaticSiteCustomDomainOverviewCollection>,
@@ -75,6 +79,7 @@ interface StaticSiteCustomDomainOverviewARMResources {
   /**
    * Description for Validates a particular custom domain can be added to a static site.
    */
+  @summary("Validates a particular custom domain can be added to a static site.")
   @action("validate")
   validateCustomDomainCanBeAddedToStaticSite is ArmResourceActionAsync<
     StaticSiteCustomDomainOverviewARMResource,

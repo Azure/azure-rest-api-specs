@@ -31,6 +31,7 @@ interface AddressResponses {
   /**
    * Description for Get IP addresses assigned to an App Service Environment.
    */
+  @summary("Get IP addresses assigned to an App Service Environment.")
   getVipInfo is ArmResourceRead<AddressResponse, Error = DefaultErrorResponse>;
 }
 

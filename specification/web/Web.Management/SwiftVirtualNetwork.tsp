@@ -55,6 +55,7 @@ interface SwiftVirtualNetworks {
   /**
    * Description for Gets a Swift Virtual Network connection.
    */
+  @summary("Gets a Swift Virtual Network connection.")
   getSwiftVirtualNetworkConnection is SwiftVirtualNetworkOps.Read<
     SwiftVirtualNetwork,
     OverrideErrorType = DefaultErrorResponse
@@ -75,6 +76,7 @@ interface SwiftVirtualNetworks {
    * Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
    * in use by another App Service Plan other than the one this App is in.
    */
+  @summary("Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.")
   @patch(#{ implicitOptionality: false })
   updateSwiftVirtualNetworkConnectionWithCheck is SwiftVirtualNetworkOps.CustomPatchSync<
     SwiftVirtualNetwork,
@@ -86,6 +88,7 @@ interface SwiftVirtualNetworks {
    * Description for Deletes a Swift Virtual Network connection from an app (or deployment slot).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a Swift Virtual Network connection from an app (or deployment slot).")
   deleteSwiftVirtualNetwork is SwiftVirtualNetworkOps.DeleteSync<
     SwiftVirtualNetwork,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -127,6 +130,7 @@ interface SwiftVirtualNetworkOperationGroup {
   /**
    * Description for Gets a Swift Virtual Network connection.
    */
+  @summary("Gets a Swift Virtual Network connection.")
   getSwiftVirtualNetworkConnectionSlot is SwiftVirtualNetworkOperationGroupOps.Read<
     SwiftVirtualNetwork,
     OverrideErrorType = DefaultErrorResponse
@@ -137,6 +141,7 @@ interface SwiftVirtualNetworkOperationGroup {
    * in use by another App Service Plan other than the one this App is in.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.")
   createOrUpdateSwiftVirtualNetworkConnectionWithCheckSlot is SwiftVirtualNetworkOperationGroupOps.CreateOrUpdateSync<
     SwiftVirtualNetwork,
     Response = ArmResourceUpdatedResponse<SwiftVirtualNetwork>,
@@ -147,6 +152,7 @@ interface SwiftVirtualNetworkOperationGroup {
    * Description for Integrates this Web App with a Virtual Network. This requires that 1) "swiftSupported" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not
    * in use by another App Service Plan other than the one this App is in.
    */
+  @summary("Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.")
   @patch(#{ implicitOptionality: false })
   updateSwiftVirtualNetworkConnectionWithCheckSlot is SwiftVirtualNetworkOperationGroupOps.CustomPatchSync<
     SwiftVirtualNetwork,
@@ -158,6 +164,7 @@ interface SwiftVirtualNetworkOperationGroup {
    * Description for Deletes a Swift Virtual Network connection from an app (or deployment slot).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a Swift Virtual Network connection from an app (or deployment slot).")
   deleteSwiftVirtualNetworkSlot is SwiftVirtualNetworkOperationGroupOps.DeleteSync<
     SwiftVirtualNetwork,
     Response = ArmDeletedResponse | ArmNotFoundResponse,

@@ -41,6 +41,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the details of a static site.
    */
+  @summary("Gets the details of a static site.")
   getStaticSite is ArmResourceRead<
     StaticSiteARMResource,
     Error = DefaultErrorResponse
@@ -67,6 +68,7 @@ interface StaticSiteARMResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new static site in an existing resource group, or updates an existing static site.")
   @patch(#{ implicitOptionality: false })
   updateStaticSite is ArmCustomPatchSync<
     StaticSiteARMResource,
@@ -82,6 +84,7 @@ interface StaticSiteARMResources {
    * Description for Deletes a static site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a static site.")
   deleteStaticSite is ArmResourceDeleteWithoutOkAsync<
     StaticSiteARMResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse,
@@ -91,6 +94,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets all static sites in the specified resource group.
    */
+  @summary("Gets all static sites in the specified resource group.")
   getStaticSitesByResourceGroup is ArmResourceListByParent<
     StaticSiteARMResource,
     Response = ArmResponse<StaticSiteCollection>,
@@ -110,6 +114,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the list of users of a static site.
    */
+  @summary("Gets the list of users of a static site.")
   @action("listUsers")
   @list
   listStaticSiteUsers is ArmResourceActionSync<
@@ -131,6 +136,7 @@ interface StaticSiteARMResources {
    * Description for Deletes the user entry from the static site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes the user entry from the static site.")
   @delete
   deleteStaticSiteUser is ArmResourceDeleteSync<
     StaticSiteARMResource,
@@ -160,6 +166,7 @@ interface StaticSiteARMResources {
    * Description for Updates a user entry with the listed roles
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates a user entry with the listed roles")
   @patch(#{ implicitOptionality: true })
   updateStaticSiteUser(
     ...ResourceInstanceParameters<StaticSiteARMResource>,
@@ -186,6 +193,7 @@ interface StaticSiteARMResources {
    * Description for Creates or updates the app settings of a static site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates the app settings of a static site.")
   @put
   @action("config/appsettings")
   createOrUpdateStaticSiteAppSettings is ArmResourceActionSync<
@@ -199,6 +207,7 @@ interface StaticSiteARMResources {
    * Description for Creates or updates the function app settings of a static site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates or updates the function app settings of a static site.")
   @put
   @action("config/functionappsettings")
   createOrUpdateStaticSiteFunctionAppSettings is ArmResourceActionSync<
@@ -211,6 +220,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Creates an invitation link for a user with the role
    */
+  @summary("Creates an invitation link for a user with the role")
   @action("createUserInvitation")
   createUserRolesInvitationLink is ArmResourceActionSync<
     StaticSiteARMResource,
@@ -222,6 +232,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Detaches a static site.
    */
+  @summary("Detaches a static site.")
   @action("detach")
   detachStaticSite is ArmResourceActionAsync<
     StaticSiteARMResource,
@@ -235,6 +246,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the functions of a static site.
    */
+  @summary("Gets the functions of a static site.")
   @get
   @action("functions")
   @list
@@ -248,6 +260,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the application settings of a static site.
    */
+  @summary("Gets the application settings of a static site.")
   @action("listAppSettings")
   listStaticSiteAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
@@ -259,6 +272,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Lists the roles configured for the static site.
    */
+  @summary("Lists the roles configured for the static site.")
   @action("listConfiguredRoles")
   listStaticSiteConfiguredRoles is ArmResourceActionSync<
     StaticSiteARMResource,
@@ -270,6 +284,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the application settings of a static site.
    */
+  @summary("Gets the application settings of a static site.")
   @action("listFunctionAppSettings")
   listStaticSiteFunctionAppSettings is ArmResourceActionSync<
     StaticSiteARMResource,
@@ -281,6 +296,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Lists the secrets for an existing static site.
    */
+  @summary("Lists the secrets for an existing static site.")
   @action("listSecrets")
   listStaticSiteSecrets is ArmResourceActionSync<
     StaticSiteARMResource,
@@ -292,6 +308,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Gets the private link resources
    */
+  @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
   getPrivateLinkResources is ArmResourceActionSync<
@@ -304,6 +321,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Resets the api key for an existing static site.
    */
+  @summary("Resets the api key for an existing static site.")
   @action("resetapikey")
   resetStaticSiteApiKey is ArmResourceActionSync<
     StaticSiteARMResource,
@@ -329,6 +347,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Deploys zipped content to a static site.
    */
+  @summary("Deploys zipped content to a static site.")
   @action("zipdeploy")
   createZipDeploymentForStaticSite is ArmResourceActionAsync<
     StaticSiteARMResource,

@@ -54,6 +54,7 @@ interface PublicCertificates {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).
    */
+  @summary("Get the named public certificate for an app (or deployment slot, if specified).")
   getPublicCertificate is PublicCertificateOps.Read<
     PublicCertificate,
     OverrideErrorType = DefaultErrorResponse
@@ -63,6 +64,7 @@ interface PublicCertificates {
    * Description for Creates a hostname binding for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a hostname binding for an app.")
   createOrUpdatePublicCertificate is PublicCertificateOps.CreateOrUpdateSync<
     PublicCertificate,
     Response = ArmResourceUpdatedResponse<PublicCertificate>,
@@ -72,6 +74,7 @@ interface PublicCertificates {
   /**
    * Description for Deletes a hostname binding for an app.
    */
+  @summary("Deletes a hostname binding for an app.")
   deletePublicCertificate is PublicCertificateOps.DeleteSync<
     PublicCertificate,
     OverrideErrorType = DefaultErrorResponse
@@ -80,6 +83,7 @@ interface PublicCertificates {
   /**
    * Description for Get public certificates for an app or a deployment slot.
    */
+  @summary("Get public certificates for an app or a deployment slot.")
   listPublicCertificates is PublicCertificateOps.List<
     PublicCertificate,
     Response = ArmResponse<PublicCertificateCollection>,
@@ -121,6 +125,7 @@ interface PublicCertificateOperationGroup {
   /**
    * Description for Get the named public certificate for an app (or deployment slot, if specified).
    */
+  @summary("Get the named public certificate for an app (or deployment slot, if specified).")
   getPublicCertificateSlot is PublicCertificateOperationGroupOps.Read<
     PublicCertificate,
     OverrideErrorType = DefaultErrorResponse
@@ -139,6 +144,7 @@ interface PublicCertificateOperationGroup {
   /**
    * Description for Deletes a hostname binding for an app.
    */
+  @summary("Deletes a hostname binding for an app.")
   deletePublicCertificateSlot is PublicCertificateOperationGroupOps.DeleteSync<
     PublicCertificate,
     OverrideErrorType = DefaultErrorResponse
@@ -147,6 +153,7 @@ interface PublicCertificateOperationGroup {
   /**
    * Description for Get public certificates for an app or a deployment slot.
    */
+  @summary("Get public certificates for an app or a deployment slot.")
   listPublicCertificatesSlot is PublicCertificateOperationGroupOps.List<
     PublicCertificate,
     Response = ArmResponse<PublicCertificateCollection>,

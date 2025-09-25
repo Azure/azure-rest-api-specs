@@ -54,6 +54,7 @@ interface SiteConfigResources {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
    */
+  @summary("Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.")
   getConfiguration is SiteConfigResourceOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -63,6 +64,8 @@ interface SiteConfigResources {
    * Description for Updates the configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the configuration of an app.")
+  @summary("Updates the configuration of an app.")
   createOrUpdateConfiguration is SiteConfigResourceOps.CreateOrUpdateSync<
     SiteConfigResource,
     Response = ArmResourceUpdatedResponse<SiteConfigResource>,
@@ -82,6 +85,7 @@ interface SiteConfigResources {
   /**
    * Description for Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.
    */
+  @summary("Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.")
   @get
   @action("snapshots")
   @list
@@ -151,6 +155,7 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
    */
+  @summary("Gets a snapshot of the configuration of an app at a previous point in time.")
   getConfigurationSnapshot is SiteConfigResourceOperationGroupOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -159,6 +164,7 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for List the configurations of an app
    */
+  @summary("List the configurations of an app")
   listConfigurations is ListConfigurationsOps.List<
     SiteConfigResource,
     Response = ArmResponse<SiteConfigResourceCollection>,
@@ -168,6 +174,7 @@ interface SiteConfigResourceOperationGroup {
   /**
    * Description for Reverts the configuration of an app to a previous snapshot.
    */
+  @summary("Reverts the configuration of an app to a previous snapshot.")
   @action("recover")
   recoverSiteConfigurationSnapshot is SiteConfigResourceOperationGroupOps.ActionSync<
     SiteConfigResource,
@@ -211,6 +218,7 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.
    */
+  @summary("Gets the configuration of an app, such as platform version and bitness, default documents, virtual applications, Always On, etc.")
   getConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -220,6 +228,7 @@ interface SiteConfigSlotResourceOperationGroup {
    * Description for Updates the configuration of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the configuration of an app.")
   createOrUpdateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CreateOrUpdateSync<
     SiteConfigResource,
     Response = ArmResourceUpdatedResponse<SiteConfigResource>,
@@ -239,6 +248,7 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.
    */
+  @summary("Gets a list of web app configuration snapshots identifiers. Each element of the list contains a timestamp and the ID of the snapshot.")
   @get
   @action("snapshots")
   @list
@@ -322,6 +332,7 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Gets a snapshot of the configuration of an app at a previous point in time.
    */
+  @summary("Gets a snapshot of the configuration of an app at a previous point in time.")
   getConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.Read<
     SiteConfigResource,
     OverrideErrorType = DefaultErrorResponse
@@ -330,6 +341,7 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for List the configurations of an app
    */
+  @summary("List the configurations of an app")
   listConfigurationsSlot is ListConfigurationsSlotOps.List<
     SiteConfigResource,
     Response = ArmResponse<SiteConfigResourceCollection>,
@@ -339,6 +351,7 @@ interface SiteConfigSnapshotSlotResourceOperationGroup {
   /**
    * Description for Reverts the configuration of an app to a previous snapshot.
    */
+  @summary("Reverts the configuration of an app to a previous snapshot.")
   @action("recover")
   recoverSiteConfigurationSnapshotSlot is SiteConfigResourceSnapshotSlotOperationGroupOps.ActionSync<
     SiteConfigResource,

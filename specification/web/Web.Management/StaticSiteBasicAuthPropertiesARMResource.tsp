@@ -34,6 +34,7 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   /**
    * Description for Gets the basic auth properties for a static site.
    */
+  @summary("Gets the basic auth properties for a static site.")
   getBasicAuth is ArmResourceRead<
     StaticSiteBasicAuthPropertiesARMResource,
     Error = DefaultErrorResponse
@@ -43,6 +44,7 @@ interface StaticSiteBasicAuthPropertiesARMResources {
    * Description for Adds or updates basic auth for a static site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Adds or updates basic auth for a static site.")
   createOrUpdateBasicAuth is ArmResourceCreateOrReplaceSync<
     StaticSiteBasicAuthPropertiesARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteBasicAuthPropertiesARMResource>,
@@ -52,6 +54,7 @@ interface StaticSiteBasicAuthPropertiesARMResources {
   /**
    * Description for Gets the basic auth properties for a static site as a collection.
    */
+  @summary("Gets the basic auth properties for a static site as a collection.")
   listBasicAuth is ArmResourceListByParent<
     StaticSiteBasicAuthPropertiesARMResource,
     Response = ArmResponse<StaticSiteBasicAuthPropertiesCollection>,

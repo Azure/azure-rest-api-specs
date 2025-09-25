@@ -31,6 +31,7 @@ interface HybridConnectionLimitsOperationGroup {
   /**
    * Description for Get the maximum number of Hybrid Connections allowed in an App Service plan.
    */
+  @summary("Get the maximum number of Hybrid Connections allowed in an App Service plan.")
   getHybridConnectionPlanLimit is ArmResourceRead<
     HybridConnectionLimits,
     Error = DefaultErrorResponse

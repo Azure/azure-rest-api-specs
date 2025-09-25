@@ -71,6 +71,7 @@ interface DatabaseConnections {
    * Description for Create or update a database connection for a static site build
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a database connection for a static site build")
   createOrUpdateBuildDatabaseConnection is DatabaseConnectionOps.CreateOrUpdateSync<
     DatabaseConnection,
     Response = ArmResourceUpdatedResponse<DatabaseConnection>,
@@ -80,6 +81,7 @@ interface DatabaseConnections {
   /**
    * Description for Create or update a database connection for a static site build
    */
+  @summary("Create or update a database connection for a static site build")
   @patch(#{ implicitOptionality: false })
   updateBuildDatabaseConnection is DatabaseConnectionOps.CustomPatchSync<
     DatabaseConnection,
@@ -154,6 +156,7 @@ interface DatabaseConnectionOperationGroup {
    * Description for Create or update a database connection for a static site
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a database connection for a static site")
   createOrUpdateDatabaseConnection is DatabaseConnectionOperationGroupOps.CreateOrUpdateSync<
     DatabaseConnection,
     Response = ArmResourceUpdatedResponse<DatabaseConnection>,
@@ -163,6 +166,7 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Description for Create or update a database connection for a static site
    */
+  @summary("Create or update a database connection for a static site")
   @patch(#{ implicitOptionality: false })
   updateDatabaseConnection is DatabaseConnectionOperationGroupOps.CustomPatchSync<
     DatabaseConnection,

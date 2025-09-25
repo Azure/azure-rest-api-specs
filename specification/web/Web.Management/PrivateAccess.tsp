@@ -55,6 +55,7 @@ interface PrivateAccesses {
   /**
    * Description for Gets data around private site access enablement and authorized Virtual Networks that can access the site.
    */
+  @summary("Gets data around private site access enablement and authorized Virtual Networks that can access the site.")
   getPrivateAccess is PrivateAccessOps.Read<
     PrivateAccess,
     OverrideErrorType = DefaultErrorResponse
@@ -64,6 +65,7 @@ interface PrivateAccesses {
    * Description for Sets data around private site access enablement and authorized Virtual Networks that can access the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Sets data around private site access enablement and authorized Virtual Networks that can access the site.")
   putPrivateAccessVnet is PrivateAccessOps.CreateOrUpdateSync<
     PrivateAccess,
     Response = ArmResourceUpdatedResponse<PrivateAccess>,
@@ -106,6 +108,7 @@ interface PrivateAccessOperationGroup {
   /**
    * Description for Gets data around private site access enablement and authorized Virtual Networks that can access the site.
    */
+  @summary("Gets data around private site access enablement and authorized Virtual Networks that can access the site.")
   getPrivateAccessSlot is PrivateAccessOperationGroupOps.Read<
     PrivateAccess,
     OverrideErrorType = DefaultErrorResponse
@@ -115,6 +118,7 @@ interface PrivateAccessOperationGroup {
    * Description for Sets data around private site access enablement and authorized Virtual Networks that can access the site.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Sets data around private site access enablement and authorized Virtual Networks that can access the site.")
   putPrivateAccessVnetSlot is PrivateAccessOperationGroupOps.CreateOrUpdateSync<
     PrivateAccess,
     Response = ArmResourceUpdatedResponse<PrivateAccess>,

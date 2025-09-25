@@ -61,6 +61,7 @@ interface WorkerPoolResources {
   /**
    * Description for Get properties of a multi-role pool.
    */
+  @summary("Get properties of a multi-role pool.")
   getMultiRolePool is WorkerPoolResourceOps.Read<
     WorkerPoolResource,
     OverrideErrorType = DefaultErrorResponse
@@ -71,6 +72,7 @@ interface WorkerPoolResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a multi-role pool.")
   createOrUpdateMultiRolePool is WorkerPoolResourceOps.CreateOrUpdateAsync<
     WorkerPoolResource,
     Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse & {
@@ -87,6 +89,7 @@ interface WorkerPoolResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a multi-role pool.")
   @patch(#{ implicitOptionality: false })
   updateMultiRolePool is WorkerPoolResourceOps.CustomPatchSync<
     WorkerPoolResource,
@@ -101,6 +104,7 @@ interface WorkerPoolResources {
   /**
    * Description for Get all multi-role pools.
    */
+  @summary("Get all multi-role pools.")
   @segment("multiRolePools")
   listMultiRolePools is WorkerPoolResourceOps.List<
     WorkerPoolResource,
@@ -111,6 +115,7 @@ interface WorkerPoolResources {
   /**
    * Description for Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.
    */
+  @summary("Get metric definitions for a specific instance of a multi-role pool of an App Service Environment.")
   @get
   @action("metricdefinitions")
   @list
@@ -132,6 +137,7 @@ interface WorkerPoolResources {
   /**
    * Description for Get metric definitions for a multi-role pool of an App Service Environment.
    */
+  @summary("Get metric definitions for a multi-role pool of an App Service Environment.")
   @get
   @action("metricdefinitions")
   @list
@@ -145,6 +151,7 @@ interface WorkerPoolResources {
   /**
    * Description for Get available SKUs for scaling a multi-role pool.
    */
+  @summary("Get available SKUs for scaling a multi-role pool.")
   @get
   @action("skus")
   @list
@@ -158,6 +165,7 @@ interface WorkerPoolResources {
   /**
    * Description for Get usage metrics for a multi-role pool of an App Service Environment.
    */
+  @summary("Get usage metrics for a multi-role pool of an App Service Environment.")
   @get
   @action("usages")
   @list
@@ -197,6 +205,7 @@ interface AppServiceEnvironments {
   /**
    * Description for Get properties of a worker pool.
    */
+  @summary("Get properties of a worker pool.")
   getWorkerPool is AppServiceEnvironmentOps.Read<
     WorkerPoolResource,
     OverrideErrorType = DefaultErrorResponse
@@ -207,6 +216,7 @@ interface AppServiceEnvironments {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a worker pool.")
   createOrUpdateWorkerPool is AppServiceEnvironmentOps.CreateOrUpdateAsync<
     WorkerPoolResource,
     Response = ArmResourceUpdatedResponse<WorkerPoolResource> | (ArmAcceptedLroResponse & {
@@ -237,6 +247,7 @@ interface AppServiceEnvironments {
   /**
    * Description for Get all worker pools of an App Service Environment.
    */
+  @summary("Get all worker pools of an App Service Environment.")
   @segment("workerPools")
   listWorkerPools is AppServiceEnvironmentOps.List<
     WorkerPoolResource,
@@ -247,6 +258,7 @@ interface AppServiceEnvironments {
   /**
    * Description for Get metric definitions for a specific instance of a worker pool of an App Service Environment.
    */
+  @summary("Get metric definitions for a specific instance of a worker pool of an App Service Environment.")
   @get
   @action("metricdefinitions")
   @list
@@ -268,6 +280,7 @@ interface AppServiceEnvironments {
   /**
    * Description for Get metric definitions for a worker pool of an App Service Environment.
    */
+  @summary("Get metric definitions for a worker pool of an App Service Environment.")
   @get
   @action("metricdefinitions")
   @list
@@ -281,6 +294,7 @@ interface AppServiceEnvironments {
   /**
    * Description for Get available SKUs for scaling a worker pool.
    */
+  @summary("Get available SKUs for scaling a worker pool.")
   @get
   @action("skus")
   @list
@@ -294,6 +308,7 @@ interface AppServiceEnvironments {
   /**
    * Description for Get usage metrics for a worker pool of an App Service Environment.
    */
+  @summary("Get usage metrics for a worker pool of an App Service Environment.")
   @get
   @action("usages")
   @list

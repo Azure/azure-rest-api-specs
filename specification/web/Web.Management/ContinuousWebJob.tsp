@@ -63,6 +63,7 @@ interface ContinuousWebJobs {
   /**
    * Description for Delete a continuous web job by its ID for an app, or a deployment slot.
    */
+  @summary("Delete a continuous web job by its ID for an app, or a deployment slot.")
   deleteContinuousWebJob is ContinuousWebJobOps.DeleteSync<
     ContinuousWebJob,
     OverrideErrorType = DefaultErrorResponse
@@ -71,6 +72,7 @@ interface ContinuousWebJobs {
   /**
    * Description for List continuous web jobs for an app, or a deployment slot.
    */
+  @summary("Gets a continuous web job by its ID for an app, or a deployment slot.")
   listContinuousWebJobs is ContinuousWebJobOps.List<
     ContinuousWebJob,
     Response = ArmResponse<ContinuousWebJobCollection>,
@@ -81,6 +83,7 @@ interface ContinuousWebJobs {
    * Description for Start a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Start a continuous web job for an app, or a deployment slot.")
   @action("start")
   startContinuousWebJob is ContinuousWebJobOps.ActionSync<
     ContinuousWebJob,
@@ -95,6 +98,7 @@ interface ContinuousWebJobs {
    * Description for Stop a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Stop a continuous web job for an app, or a deployment slot.")
   @action("stop")
   stopContinuousWebJob is ContinuousWebJobOps.ActionSync<
     ContinuousWebJob,
@@ -140,6 +144,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for Gets a continuous web job by its ID for an app, or a deployment slot.
    */
+  @summary("Gets a continuous web job by its ID for an app, or a deployment slot.")
   getContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.Read<
     ContinuousWebJob,
     Response = ArmResponse<ContinuousWebJob> | ArmNotFoundResponse,
@@ -149,6 +154,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for Delete a continuous web job by its ID for an app, or a deployment slot.
    */
+  @summary("Delete a continuous web job by its ID for an app, or a deployment slot.")
   deleteContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.DeleteSync<
     ContinuousWebJob,
     OverrideErrorType = DefaultErrorResponse
@@ -157,6 +163,7 @@ interface ContinuousWebJobOperationGroup {
   /**
    * Description for List continuous web jobs for an app, or a deployment slot.
    */
+  @summary("List continuous web jobs for an app, or a deployment slot.")
   listContinuousWebJobsSlot is ContinuousWebJobOperationGroupOps.List<
     ContinuousWebJob,
     Response = ArmResponse<ContinuousWebJobCollection>,
@@ -167,6 +174,7 @@ interface ContinuousWebJobOperationGroup {
    * Description for Start a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Start a continuous web job for an app, or a deployment slot.")
   @action("start")
   startContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,
@@ -181,6 +189,7 @@ interface ContinuousWebJobOperationGroup {
    * Description for Stop a continuous web job for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Stop a continuous web job for an app, or a deployment slot.")
   @action("stop")
   stopContinuousWebJobSlot is ContinuousWebJobOperationGroupOps.ActionSync<
     ContinuousWebJob,

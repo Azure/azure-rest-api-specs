@@ -32,6 +32,7 @@ interface AseV3NetworkingConfigurations {
   /**
    * Description for Get networking configuration of an App Service Environment
    */
+  @summary("Get networking configuration of an App Service Environment")
   getAseV3NetworkingConfiguration is ArmResourceRead<
     AseV3NetworkingConfiguration,
     Error = DefaultErrorResponse
@@ -41,6 +42,7 @@ interface AseV3NetworkingConfigurations {
    * Description for Update networking configuration of an App Service Environment
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update networking configuration of an App Service Environment")
   updateAseNetworkingConfiguration is ArmResourceCreateOrReplaceSync<
     AseV3NetworkingConfiguration,
     Response = ArmResourceUpdatedResponse<AseV3NetworkingConfiguration>,

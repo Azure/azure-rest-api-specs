@@ -54,6 +54,7 @@ interface SiteExtensionInfos {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.
    */
+  @summary("Get site extension information by its ID for a web site, or a deployment slot.")
   getSiteExtension is SiteExtensionInfoOps.Read<
     SiteExtensionInfo,
     Response = ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse,
@@ -64,6 +65,7 @@ interface SiteExtensionInfos {
   /**
    * Description for Install site extension on a web site, or a deployment slot.
    */
+  @summary("Install site extension on a web site, or a deployment slot.")
   installSiteExtension is SiteExtensionInfoOps.CreateOrUpdateAsync<
     SiteExtensionInfo,
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
@@ -82,6 +84,7 @@ interface SiteExtensionInfos {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Remove a site extension from a web site, or a deployment slot.")
   deleteSiteExtension is SiteExtensionInfoOps.DeleteSync<
     SiteExtensionInfo,
     Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
@@ -91,6 +94,7 @@ interface SiteExtensionInfos {
   /**
    * Description for Get list of siteextensions for a web site, or a deployment slot.
    */
+  @summary("Get list of siteextensions for a web site, or a deployment slot.")
   listSiteExtensions is SiteExtensionInfoOps.List<
     SiteExtensionInfo,
     Response = ArmResponse<SiteExtensionInfoCollection> | ArmNotFoundResponse,
@@ -132,6 +136,7 @@ interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Get site extension information by its ID for a web site, or a deployment slot.
    */
+  @summary("Get site extension information by its ID for a web site, or a deployment slot.")
   getSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.Read<
     SiteExtensionInfo,
     Response = ArmResponse<SiteExtensionInfo> | ArmNotFoundResponse,
@@ -143,6 +148,7 @@ interface SiteExtensionInfoOperationGroup {
    * Description for Install site extension on a web site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Install site extension on a web site, or a deployment slot.")
   installSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.CreateOrUpdateAsync<
     SiteExtensionInfo,
     LroHeaders = ArmLroLocationHeader<FinalResult = SiteExtensionInfo> &
@@ -160,6 +166,7 @@ interface SiteExtensionInfoOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Remove a site extension from a web site, or a deployment slot.")
   deleteSiteExtensionSlot is SiteExtensionInfoOperationGroupOps.DeleteSync<
     SiteExtensionInfo,
     Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
@@ -169,6 +176,7 @@ interface SiteExtensionInfoOperationGroup {
   /**
    * Description for Get list of siteextensions for a web site, or a deployment slot.
    */
+  @summary("Get list of siteextensions for a web site, or a deployment slot.")
   listSiteExtensionsSlot is SiteExtensionInfoOperationGroupOps.List<
     SiteExtensionInfo,
     Response = ArmResponse<SiteExtensionInfoCollection> | ArmNotFoundResponse,

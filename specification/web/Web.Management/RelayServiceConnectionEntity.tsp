@@ -54,6 +54,7 @@ interface RelayServiceConnectionEntities {
   /**
    * Description for Gets a hybrid connection configuration by its name.
    */
+  @summary("Gets a hybrid connection configuration by its name.")
   getRelayServiceConnection is RelayServiceConnectionEntityOps.Read<
     RelayServiceConnectionEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -63,6 +64,7 @@ interface RelayServiceConnectionEntities {
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).")
   createOrUpdateRelayServiceConnection is RelayServiceConnectionEntityOps.CreateOrUpdateSync<
     RelayServiceConnectionEntity,
     Response = ArmResourceUpdatedResponse<RelayServiceConnectionEntity>,
@@ -83,6 +85,7 @@ interface RelayServiceConnectionEntities {
    * Description for Deletes a relay service connection by its name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a relay service connection by its name.")
   deleteRelayServiceConnection is RelayServiceConnectionEntityOps.DeleteSync<
     RelayServiceConnectionEntity,
     Response = ArmDeletedResponse | ArmNotFoundResponse,
@@ -124,6 +127,7 @@ interface RelayServiceConnectionEntityOperationGroup {
   /**
    * Description for Gets a hybrid connection configuration by its name.
    */
+  @summary("Gets a hybrid connection configuration by its name.")
   getRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.Read<
     RelayServiceConnectionEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -133,6 +137,7 @@ interface RelayServiceConnectionEntityOperationGroup {
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).")
   createOrUpdateRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.CreateOrUpdateSync<
     RelayServiceConnectionEntity,
     Response = ArmResourceUpdatedResponse<RelayServiceConnectionEntity>,
@@ -153,6 +158,7 @@ interface RelayServiceConnectionEntityOperationGroup {
    * Description for Deletes a relay service connection by its name.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a relay service connection by its name.")
   deleteRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.DeleteSync<
     RelayServiceConnectionEntity,
     Response = ArmDeletedResponse | ArmNotFoundResponse,

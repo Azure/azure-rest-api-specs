@@ -53,6 +53,7 @@ interface Identifiers {
   /**
    * Description for Get domain ownership identifier for web app.
    */
+  @summary("Get domain ownership identifier for web app.")
   getDomainOwnershipIdentifier is IdentifierOps.Read<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -62,6 +63,8 @@ interface Identifiers {
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a domain ownership identifier for web app, or updates an existing ownership identifier.")
+  @summary("Creates a domain ownership identifier for web app, or updates an existing ownership identifier.")
   createOrUpdateDomainOwnershipIdentifier is IdentifierOps.CreateOrUpdateSync<
     Identifier,
     Response = ArmResourceUpdatedResponse<Identifier>,
@@ -81,6 +84,7 @@ interface Identifiers {
   /**
    * Description for Deletes a domain ownership identifier for a web app.
    */
+  @summary("Deletes a domain ownership identifier for a web app.")
   deleteDomainOwnershipIdentifier is IdentifierOps.DeleteSync<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -89,6 +93,7 @@ interface Identifiers {
   /**
    * Description for Lists ownership identifiers for domain associated with web app.
    */
+  @summary("Lists ownership identifiers for domain associated with web app.")
   listDomainOwnershipIdentifiers is IdentifierOps.List<
     Identifier,
     Response = ArmResponse<IdentifierCollection>,
@@ -130,6 +135,7 @@ interface IdentifierOperationGroup {
   /**
    * Description for Get domain ownership identifier for web app.
    */
+  @summary("Get domain ownership identifier for web app.")
   getDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.Read<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -139,6 +145,7 @@ interface IdentifierOperationGroup {
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a domain ownership identifier for web app, or updates an existing ownership identifier.")
   createOrUpdateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CreateOrUpdateSync<
     Identifier,
     Response = ArmResourceUpdatedResponse<Identifier>,
@@ -158,6 +165,7 @@ interface IdentifierOperationGroup {
   /**
    * Description for Deletes a domain ownership identifier for a web app.
    */
+  @summary("Deletes a domain ownership identifier for a web app.")
   deleteDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.DeleteSync<
     Identifier,
     OverrideErrorType = DefaultErrorResponse
@@ -166,6 +174,7 @@ interface IdentifierOperationGroup {
   /**
    * Description for Lists ownership identifiers for domain associated with web app.
    */
+  @summary("Lists ownership identifiers for domain associated with web app.")
   listDomainOwnershipIdentifiersSlot is IdentifierOperationGroupOps.List<
     Identifier,
     Response = ArmResponse<IdentifierCollection>,

@@ -54,6 +54,7 @@ interface DetectorResponses {
   /**
    * Description for Get Hosting Environment Detector Response
    */
+  @summary("Get Hosting Environment Detector Response")
   getHostingEnvironmentDetectorResponse is DetectorResponseOps.Read<
     DetectorResponse,
     Parameters = {
@@ -82,6 +83,7 @@ interface DetectorResponses {
   /**
    * Description for List Hosting Environment Detector Responses
    */
+  @summary("List Hosting Environment Detector Responses")
   listHostingEnvironmentDetectorResponses is DetectorResponseOps.List<
     DetectorResponse,
     Response = ArmResponse<DetectorResponseCollection>,
@@ -117,6 +119,7 @@ interface Diagnostics {
   /**
    * Description for Get site detector response
    */
+  @summary("Get site detector response")
   getSiteDetectorResponse is DiagnosticOps.Read<
     DetectorResponse,
     Parameters = {
@@ -145,6 +148,7 @@ interface Diagnostics {
   /**
    * Description for List Site Detector Responses
    */
+  @summary("List Site Detector Responses")
   listSiteDetectorResponses is DiagnosticOps.List<
     DetectorResponse,
     Response = ArmResponse<DetectorResponseCollection>,
@@ -186,6 +190,7 @@ interface DetectorResponseOperationGroup {
   /**
    * Description for Get site detector response
    */
+  @summary("Get site detector response")
   getSiteDetectorResponseSlot is DetectorResponseOperationGroupOps.Read<
     DetectorResponse,
     Parameters = {
@@ -214,6 +219,7 @@ interface DetectorResponseOperationGroup {
   /**
    * Description for List Site Detector Responses
    */
+  @summary("List Site Detector Responses")
   listSiteDetectorResponsesSlot is DetectorResponseOperationGroupOps.List<
     DetectorResponse,
     Response = ArmResponse<DetectorResponseCollection>,

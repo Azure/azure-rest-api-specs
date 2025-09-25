@@ -32,6 +32,7 @@ interface SlotConfigNamesResources {
   /**
    * Description for Gets the names of app settings and connection strings that stick to the slot (not swapped).
    */
+  @summary("Gets the names of app settings and connection strings that stick to the slot (not swapped).")
   listSlotConfigurationNames is ArmResourceRead<
     SlotConfigNamesResource,
     Error = DefaultErrorResponse
@@ -41,6 +42,7 @@ interface SlotConfigNamesResources {
    * Description for Updates the names of application settings and connection string that remain with the slot during swap operation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the names of application settings and connection string that remain with the slot during swap operation.")
   updateSlotConfigurationNames is ArmResourceCreateOrReplaceSync<
     SlotConfigNamesResource,
     Response = ArmResourceUpdatedResponse<SlotConfigNamesResource>,

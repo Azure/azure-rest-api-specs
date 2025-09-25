@@ -60,6 +60,7 @@ interface VnetGateways {
   /**
    * Description for Get a Virtual Network gateway.
    */
+  @summary("Get a Virtual Network gateway.")
   getVnetGateway is VnetGatewayOps.Read<
     VnetGateway,
     OverrideErrorType = DefaultErrorResponse
@@ -69,6 +70,7 @@ interface VnetGateways {
    * Description for Update a Virtual Network gateway.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Update a Virtual Network gateway.")
   updateVnetGateway is VnetGatewayOps.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>,
@@ -116,6 +118,7 @@ interface VnetGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
    */
+  @summary("Gets an app's Virtual Network gateway.")
   getVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.Read<
     VnetGateway,
     Response = ArmResponse<VnetGateway> | ArmNotFoundResponse,
@@ -126,6 +129,7 @@ interface VnetGatewayOperationGroup {
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).")
   createOrUpdateVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>,
@@ -135,6 +139,7 @@ interface VnetGatewayOperationGroup {
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
+  @summary("Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).")
   @patch(#{ implicitOptionality: false })
   updateVnetConnectionGatewaySlot is VnetGatewayOperationGroupOps.CustomPatchSync<
     VnetGateway,
@@ -178,6 +183,7 @@ interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Gets an app's Virtual Network gateway.
    */
+  @summary("Gets an app's Virtual Network gateway.")
   getVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.Read<
     VnetGateway,
     Response = ArmResponse<VnetGateway> | ArmNotFoundResponse,
@@ -188,6 +194,7 @@ interface VnetConnectionGatewayOperationGroup {
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).")
   createOrUpdateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CreateOrUpdateSync<
     VnetGateway,
     Response = ArmResourceUpdatedResponse<VnetGateway>,
@@ -197,6 +204,7 @@ interface VnetConnectionGatewayOperationGroup {
   /**
    * Description for Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).
    */
+  @summary("Adds a gateway to a connected Virtual Network (PUT) or updates it (PATCH).")
   @patch(#{ implicitOptionality: false })
   updateVnetConnectionGateway is VnetConnectionGatewayOperationGroupOps.CustomPatchSync<
     VnetGateway,

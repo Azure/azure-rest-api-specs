@@ -53,6 +53,7 @@ interface Deployments {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.
    */
+  @summary("Get a deployment by its ID for an app, or a deployment slot.")
   getDeployment is DeploymentOps.Read<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -62,6 +63,7 @@ interface Deployments {
    * Description for Create a deployment for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create a deployment for an app, or a deployment slot.")
   createDeployment is DeploymentOps.CreateOrUpdateSync<
     Deployment,
     Response = ArmResourceUpdatedResponse<Deployment>,
@@ -71,6 +73,7 @@ interface Deployments {
   /**
    * Description for Delete a deployment by its ID for an app, or a deployment slot.
    */
+  @summary("Delete a deployment by its ID for an app, or a deployment slot.")
   deleteDeployment is DeploymentOps.DeleteSync<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -79,6 +82,7 @@ interface Deployments {
   /**
    * Description for List deployments for an app, or a deployment slot.
    */
+  @summary("List deployments for an app, or a deployment slot.")
   listDeployments is DeploymentOps.List<
     Deployment,
     Response = ArmResponse<DeploymentCollection>,
@@ -88,6 +92,7 @@ interface Deployments {
   /**
    * Description for List deployment log for specific deployment for an app, or a deployment slot.
    */
+  @summary("List deployment log for specific deployment for an app, or a deployment slot.")
   @get
   @action("log")
   listDeploymentLog is DeploymentOps.ActionSync<
@@ -132,6 +137,7 @@ interface DeploymentOperationGroup {
   /**
    * Description for Get a deployment by its ID for an app, or a deployment slot.
    */
+  @summary("Get a deployment by its ID for an app, or a deployment slot.")
   getDeploymentSlot is DeploymentOperationGroupOps.Read<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -141,6 +147,7 @@ interface DeploymentOperationGroup {
    * Description for Create a deployment for an app, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create a deployment for an app, or a deployment slot.")
   createDeploymentSlot is DeploymentOperationGroupOps.CreateOrUpdateSync<
     Deployment,
     Response = ArmResourceUpdatedResponse<Deployment>,
@@ -150,6 +157,7 @@ interface DeploymentOperationGroup {
   /**
    * Description for Delete a deployment by its ID for an app, or a deployment slot.
    */
+  @summary("Delete a deployment by its ID for an app, or a deployment slot.")
   deleteDeploymentSlot is DeploymentOperationGroupOps.DeleteSync<
     Deployment,
     OverrideErrorType = DefaultErrorResponse
@@ -158,6 +166,7 @@ interface DeploymentOperationGroup {
   /**
    * Description for List deployments for an app, or a deployment slot.
    */
+  @summary("List deployments for an app, or a deployment slot.")
   listDeploymentsSlot is DeploymentOperationGroupOps.List<
     Deployment,
     Response = ArmResponse<DeploymentCollection>,
@@ -167,6 +176,7 @@ interface DeploymentOperationGroup {
   /**
    * Description for List deployment log for specific deployment for an app, or a deployment slot.
    */
+  @summary("List deployment log for specific deployment for an app, or a deployment slot.")
   @get
   @action("log")
   listDeploymentLogSlot is DeploymentOperationGroupOps.ActionSync<

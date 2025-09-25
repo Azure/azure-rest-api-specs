@@ -55,6 +55,7 @@ interface ResourceHealthMetadataOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
    */
+  @summary("Gets the category of ResourceHealthMetadata to use for the given site")
   getBySite is ResourceHealthMetadataOperationGroupOps.Read<
     ResourceHealthMetadata,
     OverrideErrorType = DefaultErrorResponse
@@ -63,6 +64,7 @@ interface ResourceHealthMetadataOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
    */
+  @summary("Gets the category of ResourceHealthMetadata to use for the given site as a collection")
   listBySite is ResourceHealthMetadataOperationGroupOps.List<
     ResourceHealthMetadata,
     Response = ArmResponse<ResourceHealthMetadataCollection>,
@@ -104,6 +106,7 @@ interface BySiteSlotOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site
    */
+  @summary("Gets the category of ResourceHealthMetadata to use for the given site")
   getBySiteSlot is BySiteSlotOperationGroupOps.Read<
     ResourceHealthMetadata,
     OverrideErrorType = DefaultErrorResponse

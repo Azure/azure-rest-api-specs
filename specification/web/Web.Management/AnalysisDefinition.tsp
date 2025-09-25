@@ -60,6 +60,7 @@ interface AnalysisDefinitions {
   /**
    * Description for Get Site Analysis
    */
+  @summary("Get Site Analysis")
   getSiteAnalysis is AnalysisDefinitionOps.Read<
     AnalysisDefinition,
     OverrideErrorType = DefaultErrorResponse
@@ -68,6 +69,7 @@ interface AnalysisDefinitions {
   /**
    * Description for Get Site Analyses
    */
+  @summary("Get Site Analyses")
   listSiteAnalyses is AnalysisDefinitionOps.List<
     AnalysisDefinition,
     Response = ArmResponse<DiagnosticAnalysisCollection>,
@@ -77,6 +79,7 @@ interface AnalysisDefinitions {
   /**
    * Description for Execute Analysis
    */
+  @summary("Execute Analysis")
   @action("execute")
   executeSiteAnalysis is AnalysisDefinitionOps.ActionSync<
     AnalysisDefinition,
@@ -146,6 +149,7 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analysis
    */
+  @summary("Get Site Analysis")
   getSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.Read<
     AnalysisDefinition,
     OverrideErrorType = DefaultErrorResponse
@@ -154,6 +158,7 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Get Site Analyses
    */
+  @summary("Get Site Analyses")
   listSiteAnalysesSlot is AnalysisDefinitionOperationGroupOps.List<
     AnalysisDefinition,
     Response = ArmResponse<DiagnosticAnalysisCollection>,
@@ -163,6 +168,7 @@ interface AnalysisDefinitionOperationGroup {
   /**
    * Description for Execute Analysis
    */
+  @summary("Execute Analysis")
   @action("execute")
   executeSiteAnalysisSlot is AnalysisDefinitionOperationGroupOps.ActionSync<
     AnalysisDefinition,

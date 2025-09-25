@@ -54,6 +54,7 @@ interface PremierAddOns {
   /**
    * Description for Gets a named add-on of an app.
    */
+  @summary("Gets a named add-on of an app.")
   getPremierAddOn is PremierAddOnOps.Read<
     PremierAddOn,
     OverrideErrorType = DefaultErrorResponse
@@ -63,6 +64,7 @@ interface PremierAddOns {
    * Description for Updates a named add-on of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates a named add-on of an app.")
   addPremierAddOn is PremierAddOnOps.CreateOrUpdateSync<
     PremierAddOn,
     Response = ArmResourceUpdatedResponse<PremierAddOn>,
@@ -72,6 +74,7 @@ interface PremierAddOns {
   /**
    * Description for Updates a named add-on of an app.
    */
+  @summary("Updates a named add-on of an app.")
   @patch(#{ implicitOptionality: false })
   updatePremierAddOn is PremierAddOnOps.CustomPatchSync<
     PremierAddOn,
@@ -83,6 +86,7 @@ interface PremierAddOns {
    * Description for Delete a premier add-on from an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a premier add-on from an app.")
   deletePremierAddOn is PremierAddOnOps.DeleteSync<
     PremierAddOn,
     Response = ArmDeletedResponse,
@@ -124,6 +128,7 @@ interface PremierAddOnOperationGroup {
   /**
    * Description for Gets a named add-on of an app.
    */
+  @summary("Gets a named add-on of an app.")
   getPremierAddOnSlot is PremierAddOnOperationGroupOps.Read<
     PremierAddOn,
     OverrideErrorType = DefaultErrorResponse
@@ -133,6 +138,7 @@ interface PremierAddOnOperationGroup {
    * Description for Updates a named add-on of an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates a named add-on of an app.")
   addPremierAddOnSlot is PremierAddOnOperationGroupOps.CreateOrUpdateSync<
     PremierAddOn,
     Response = ArmResourceUpdatedResponse<PremierAddOn>,
@@ -142,6 +148,7 @@ interface PremierAddOnOperationGroup {
   /**
    * Description for Updates a named add-on of an app.
    */
+  @summary("Updates a named add-on of an app.")
   @patch(#{ implicitOptionality: false })
   updatePremierAddOnSlot is PremierAddOnOperationGroupOps.CustomPatchSync<
     PremierAddOn,
@@ -153,6 +160,7 @@ interface PremierAddOnOperationGroup {
    * Description for Delete a premier add-on from an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a premier add-on from an app.")
   deletePremierAddOnSlot is PremierAddOnOperationGroupOps.DeleteSync<
     PremierAddOn,
     Response = ArmDeletedResponse,

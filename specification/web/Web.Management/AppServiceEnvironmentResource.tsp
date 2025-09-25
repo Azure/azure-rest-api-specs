@@ -38,6 +38,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the properties of an App Service Environment.
    */
+  @summary("Get the properties of an App Service Environment.")
   get is ArmResourceRead<
     AppServiceEnvironmentResource,
     Error = DefaultErrorResponse
@@ -48,6 +49,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update an App Service Environment.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     AppServiceEnvironmentResource,
     Response = ArmResourceUpdatedResponse<AppServiceEnvironmentResource> | ArmResourceCreatedResponse<
@@ -67,6 +69,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update an App Service Environment.")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AppServiceEnvironmentResource,
@@ -97,7 +100,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all App Service Environments in a resource group.
    */
-  @summary("AppServiceEnvironments_ListByResourceGroup")
+  @summary("Get all App Service Environments in a resource group.")
   listByResourceGroup is ArmResourceListByParent<
     AppServiceEnvironmentResource,
     Response = ArmResponse<AppServiceEnvironmentCollection>,
@@ -118,6 +121,7 @@ interface AppServiceEnvironmentResources {
    * Description for Get the used, available, and total worker capacity an App Service Environment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get the used, available, and total worker capacity an App Service Environment.")
   @get
   @list
   listCapacities(
@@ -134,6 +138,7 @@ interface AppServiceEnvironmentResources {
    * Description for Move an App Service Environment to a different VNET.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Move an App Service Environment to a different VNET.")
   @action("changeVirtualNetwork")
   @list
   changeVnet is Azure.ResourceManager.ArmResourceActionAsyncBase<
@@ -150,6 +155,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get diagnostic information for an App Service Environment.
    */
+  @summary("Get diagnostic information for an App Service Environment.")
   @get
   @action("diagnostics")
   listDiagnostics is ArmResourceActionSync<
@@ -163,6 +169,7 @@ interface AppServiceEnvironmentResources {
    * Description for Get a diagnostics item for an App Service Environment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get a diagnostics item for an App Service Environment.")
   @get
   getDiagnosticsItem(
     ...DiagnosticsParameters,
@@ -171,6 +178,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the network endpoints of all inbound dependencies of an App Service Environment.
    */
+  @summary("Get the network endpoints of all inbound dependencies of an App Service Environment.")
   @get
   @action("inboundNetworkDependenciesEndpoints")
   @list
@@ -196,6 +204,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Initiate an upgrade of an App Service Environment if one is available.
    */
+  @summary("Initiate an upgrade of an App Service Environment if one is available.")
   upgrade is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
     void,
@@ -207,6 +216,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for List all currently running operations on the App Service Environment.
    */
+  @summary("List all currently running operations on the App Service Environment.")
   @get
   @action("operations")
   listOperations is ArmResourceActionSync<
@@ -219,6 +229,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get the network endpoints of all outbound dependencies of an App Service Environment.
    */
+  @summary("Get the network endpoints of all outbound dependencies of an App Service Environment.")
   @get
   @action("outboundNetworkDependenciesEndpoints")
   @list
@@ -232,6 +243,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Gets the private link resources
    */
+  @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
   getPrivateLinkResources is ArmResourceActionSync<
@@ -246,6 +258,7 @@ interface AppServiceEnvironmentResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Reboot all machines in an App Service Environment.")
   reboot is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,
@@ -257,6 +270,7 @@ interface AppServiceEnvironmentResources {
    * Description for Resume an App Service Environment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Resume an App Service Environment.")
   @list
   resume is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
@@ -272,6 +286,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all App Service plans in an App Service Environment.
    */
+  @summary("Get all App Service plans in an App Service Environment.")
   @get
   @action("serverfarms")
   @list
@@ -285,6 +300,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all apps in an App Service Environment.
    */
+  @summary("Get all apps in an App Service Environment.")
   @get
   @action("sites")
   @list
@@ -306,6 +322,7 @@ interface AppServiceEnvironmentResources {
    * Description for Suspend an App Service Environment.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Suspend an App Service Environment.")
   @list
   suspend is ArmResourceActionAsyncBase<
     AppServiceEnvironmentResource,
@@ -321,6 +338,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get global usage metrics of an App Service Environment.
    */
+  @summary("Get global usage metrics of an App Service Environment.")
   @get
   @action("usages")
   @list
@@ -342,6 +360,7 @@ interface AppServiceEnvironmentResources {
    * Description for Get past recommendations for an app, optionally specified by the time range.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get past recommendations for an app, optionally specified by the time range.")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "name",
     "hostingEnvironmentName"
@@ -373,6 +392,7 @@ interface AppServiceEnvironmentResources {
    * Description for Get all recommendations for a hosting environment.
    */
   #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Get all recommendations for a hosting environment.")
   @Azure.ResourceManager.Legacy.renamePathParameter(
     "name",
     "hostingEnvironmentName"
@@ -403,6 +423,7 @@ interface AppServiceEnvironmentResources {
    * Description for Disable all recommendations for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Disable all recommendations for an app.")
   @post
   disableAllForHostingEnvironment(
     ...ApiVersionParameter,
@@ -433,6 +454,7 @@ interface AppServiceEnvironmentResources {
    * Description for Reset all recommendation opt-out settings for an app.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Reset all recommendation opt-out settings for an app.")
   @post
   resetAllFiltersForHostingEnvironment(
     ...ApiVersionParameter,

@@ -55,6 +55,7 @@ interface SiteAuthSettingsV2s {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
+  @summary("Gets site's Authentication / Authorization settings for apps via the V2 format")
   getAuthSettingsV2WithoutSecrets is SiteAuthSettingsV2Ops.Read<
     SiteAuthSettingsV2,
     OverrideErrorType = DefaultErrorResponse
@@ -64,6 +65,7 @@ interface SiteAuthSettingsV2s {
    * Description for Updates site's Authentication / Authorization settings for apps via the V2 format
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates site's Authentication / Authorization settings for apps via the V2 format")
   updateAuthSettingsV2 is SiteAuthSettingsV2Ops.CreateOrUpdateSync<
     SiteAuthSettingsV2,
     Response = ArmResourceUpdatedResponse<SiteAuthSettingsV2>,
@@ -73,6 +75,7 @@ interface SiteAuthSettingsV2s {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
+  @summary("Gets site's Authentication / Authorization settings for apps via the V2 format")
   @get
   @action("list")
   getAuthSettingsV2 is SiteAuthSettingsV2Ops.ActionSync<
@@ -127,6 +130,7 @@ interface SiteAuthSettingsV2OperationGroup {
    * Description for Updates site's Authentication / Authorization settings for apps via the V2 format
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates site's Authentication / Authorization settings for apps via the V2 format")
   updateAuthSettingsV2Slot is SiteAuthSettingsV2OperationGroupOps.CreateOrUpdateSync<
     SiteAuthSettingsV2,
     Response = ArmResourceUpdatedResponse<SiteAuthSettingsV2>,
@@ -136,6 +140,7 @@ interface SiteAuthSettingsV2OperationGroup {
   /**
    * Description for Gets site's Authentication / Authorization settings for apps via the V2 format
    */
+  @summary("Gets site's Authentication / Authorization settings for apps via the V2 format")
   @get
   @action("list")
   getAuthSettingsV2Slot is SiteAuthSettingsV2OperationGroupOps.ActionSync<

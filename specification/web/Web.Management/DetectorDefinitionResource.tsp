@@ -60,6 +60,7 @@ interface DetectorDefinitionResources {
   /**
    * Description for Get Detector
    */
+  @summary("Get Detector")
   getSiteDetector is DetectorDefinitionResourceOps.Read<
     DetectorDefinitionResource,
     OverrideErrorType = DefaultErrorResponse
@@ -68,6 +69,7 @@ interface DetectorDefinitionResources {
   /**
    * Description for Get Detectors
    */
+  @summary("Get Detectors")
   listSiteDetectors is DetectorDefinitionResourceOps.List<
     DetectorDefinitionResource,
     Response = ArmResponse<DiagnosticDetectorCollection>,
@@ -77,6 +79,7 @@ interface DetectorDefinitionResources {
   /**
    * Description for Execute Detector
    */
+  @summary("Execute Detector")
   @action("execute")
   executeSiteDetector is DetectorDefinitionResourceOps.ActionSync<
     DetectorDefinitionResource,
@@ -146,6 +149,7 @@ interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Get Detector
    */
+  @summary("Get Detector")
   getSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.Read<
     DetectorDefinitionResource,
     OverrideErrorType = DefaultErrorResponse
@@ -154,6 +158,7 @@ interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Get Detectors
    */
+  @summary("Get Detectors")
   listSiteDetectorsSlot is DetectorDefinitionResourceOperationGroupOps.List<
     DetectorDefinitionResource,
     Response = ArmResponse<DiagnosticDetectorCollection>,
@@ -163,6 +168,7 @@ interface DetectorDefinitionResourceOperationGroup {
   /**
    * Description for Execute Detector
    */
+  @summary("Execute Detector")
   @action("execute")
   executeSiteDetectorSlot is DetectorDefinitionResourceOperationGroupOps.ActionSync<
     DetectorDefinitionResource,

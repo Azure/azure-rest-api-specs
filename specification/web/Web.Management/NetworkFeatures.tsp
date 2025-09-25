@@ -54,6 +54,7 @@ interface NetworkFeaturesOperationGroup {
   /**
    * Description for Gets all network features used by the app (or deployment slot, if specified).
    */
+  @summary("Gets all network features used by the app (or deployment slot, if specified).")
   listNetworkFeatures is NetworkFeaturesOperationGroupOps.Read<
     NetworkFeatures,
     Response = ArmResponse<NetworkFeatures> | ArmNotFoundResponse,

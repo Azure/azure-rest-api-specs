@@ -52,6 +52,7 @@ interface RecommendationRules {
   /**
    * Description for Get a recommendation rule for an app.
    */
+  @summary("Get a recommendation rule for an app.")
   getRuleDetailsByHostingEnvironment is RecommendationRuleOps.Read<
     RecommendationRule,
     Parameters = {
@@ -73,6 +74,7 @@ interface RecommendationRules {
   /**
    * Description for Disables the specific rule for a web site permanently.
    */
+  @summary("Disables the specific rule for a web site permanently.")
   @action("disable")
   disableRecommendationForHostingEnvironment is RecommendationRuleOps.ActionSync<
     RecommendationRule,
@@ -119,6 +121,7 @@ interface Recommendations {
   /**
    * Description for Get a recommendation rule for an app.
    */
+  @summary("Get a recommendation rule for an app.")
   getRuleDetailsByWebApp is RecommendationOps.Read<
     RecommendationRule,
     Parameters = {
@@ -140,6 +143,7 @@ interface Recommendations {
   /**
    * Description for Disables the specific rule for a web site permanently.
    */
+  @summary("Disables the specific rule for a web site permanently.")
   @action("disable")
   disableRecommendationForSite is RecommendationOps.ActionSync<
     RecommendationRule,

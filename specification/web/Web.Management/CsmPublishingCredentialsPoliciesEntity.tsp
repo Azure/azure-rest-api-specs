@@ -55,6 +55,7 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
    */
+  @summary("Returns whether FTP is allowed on the site or not.")
   getFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -64,6 +65,7 @@ interface CsmPublishingCredentialsPoliciesEntities {
    * Description for Updates whether FTP is allowed on the site or not.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates whether FTP is allowed on the site or not.")
   updateFtpAllowed is CsmPublishingCredentialsPoliciesEntityOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
@@ -73,6 +75,7 @@ interface CsmPublishingCredentialsPoliciesEntities {
   /**
    * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
    */
+  @summary("Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.")
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPolicies is CsmPublishingCredentialsPoliciesEntityOps.List<
     CsmPublishingCredentialsPoliciesEntity,
@@ -109,6 +112,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
    */
+  @summary("Returns whether Scm basic auth is allowed on the site or not.")
   getScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -118,6 +122,7 @@ interface CsmPublishingCredentialsPoliciesEntityOperationGroup {
    * Description for Updates whether user publishing credentials are allowed on the site or not.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates whether user publishing credentials are allowed on the site or not.")
   updateScmAllowed is CsmPublishingCredentialsPoliciesEntityOperationGroupOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
@@ -159,6 +164,7 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether FTP is allowed on the site or not.
    */
+  @summary("Returns whether FTP is allowed on the site or not.")
   getFtpAllowedSlot is FtpAllowedSlotOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -168,6 +174,7 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
    * Description for Updates whether FTP is allowed on the site or not.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates whether FTP is allowed on the site or not.")
   updateFtpAllowedSlot is FtpAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
@@ -177,6 +184,7 @@ interface CsmPublishingCredentialsPoliciesEntityFtpAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.
    */
+  @summary("Returns whether Scm basic auth is allowed and whether Ftp is allowed for a given site.")
   @segment("basicPublishingCredentialsPolicies")
   listBasicPublishingCredentialsPoliciesSlot is FtpAllowedSlotOps.List<
     CsmPublishingCredentialsPoliciesEntity,
@@ -220,6 +228,7 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
   /**
    * Description for Returns whether Scm basic auth is allowed on the site or not.
    */
+  @summary("Returns whether Scm basic auth is allowed on the site or not.")
   getScmAllowedSlot is ScmAllowedSlotOps.Read<
     CsmPublishingCredentialsPoliciesEntity,
     OverrideErrorType = DefaultErrorResponse
@@ -229,6 +238,7 @@ interface CsmPublishingCredentialsPoliciesEntityScmAllowedSlot {
    * Description for Updates whether user publishing credentials are allowed on the site or not.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates whether user publishing credentials are allowed on the site or not.")
   updateScmAllowedSlot is ScmAllowedSlotOps.CreateOrUpdateSync<
     CsmPublishingCredentialsPoliciesEntity,
     Response = ArmResourceUpdatedResponse<CsmPublishingCredentialsPoliciesEntity>,
