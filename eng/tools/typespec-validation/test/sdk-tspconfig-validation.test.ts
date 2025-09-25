@@ -399,7 +399,7 @@ const javaAzEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "{output-dir}/{service-dir}/azure-aaa",
   "{output-dir}/{service-dir}/aaa",
   [new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule()],
-  true,
+  false,
 );
 
 const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
@@ -409,7 +409,7 @@ const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "{output-dir}/{service-dir}/azure-resourcemanager-aaa-bbb",
   "{output-dir}/{service-dir}/azure-aaa",
   [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
-  true,
+  false,
 );
 
 const javaMgmtNamespaceTestCases = createEmitterOptionTestCases(
