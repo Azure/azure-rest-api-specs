@@ -38,11 +38,12 @@ model BackupVaultResource
  * Deleted Backup Vault Resource (available from version 2025-09-01)
  */
 @added(Versions.v2025_09_01)
+@parentResource(ArmLocationResource<"Subscription">)
 model DeletedBackupVaultResource
   is Azure.ResourceManager.ProxyResource<DeletedBackupVault> {
   ...ResourceNameParameter<
     Resource = DeletedBackupVaultResource,
-    KeyName = "deletedVaultName",
+    KeyName = "deletedVaultName", 
     SegmentName = "deletedVaults",
     NamePattern = ""
   >;
@@ -268,37 +269,18 @@ interface BackupVaultOperationResults {
 /**
  * Deleted backup vault operations (available from version 2025-09-01)
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "DeletedBackupVaults interface uses manual routing for location-scoped resources"
+@armResourceOperations
 @added(Versions.v2025_09_01)
 interface DeletedBackupVaults {
   /**
    * Gets a deleted backup vault
    */
-  @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults/{deletedVaultName}")
-  get(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationParameter,
-
-    /**
-     * Name of the deleted backup vault
-     */
-    @path deletedVaultName: string,
-  ): ArmResponse<DeletedBackupVaultResource> | ErrorResponse;
+  get is ArmResourceRead<DeletedBackupVaultResource>;
 
   /**
    * Lists deleted backup vaults by location
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "Manual routing required for location-scoped resource listing"
-  @list
-  @get
-  @route("/subscriptions/{subscriptionId}/providers/Microsoft.DataProtection/locations/{location}/deletedVaults")
-  listByLocation(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...LocationParameter,
-  ): Azure.Core.Page<DeletedBackupVaultResource> | ErrorResponse;
+  listByLocation is ArmResourceListByParent<DeletedBackupVaultResource>;
 }
 
 @@doc(BackupVaultResource.name, "The name of the backup vault.");
