@@ -33,6 +33,9 @@ namespace Azure.Developer.TrustedSigning;
 enum Versions {
   @doc("The 2023-06-15-preview version.")
   v2023_06_15_preview: "2023-06-15-preview",
+
+  @doc("The 2024-06-15 version.")
+  v2024_06_15: "2024-06-15",
 }
 
 interface CertificateProfileOperations {
