@@ -40,30 +40,17 @@ using Microsoft.DomainRegistration;
   "identifier"
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainOwnershipIdentifier.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(DomainPatchResource.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(TopLevelDomain.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(Domain.properties);
-
-@@OpenAPI.extension(NameIdentifierCollection.value,
-  "x-ms-identifiers",
-  #["name"]
-);
-@@OpenAPI.extension(TldLegalAgreementCollection.value,
-  "x-ms-identifiers",
-  #["agreementKey"]
-);
 
 @@clientLocation(Operations.list, "DomainRegistrationProvider");
 @@clientName(Operations.list, "ListOperations");

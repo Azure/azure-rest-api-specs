@@ -815,6 +815,10 @@ model DomainRecommendationSearchParameters {
 /**
  * Collection of domain name identifiers.
  */
+@@OpenAPI.extension(NameIdentifierCollection.value,
+  "x-ms-identifiers",
+  #["name"]
+);
 model NameIdentifierCollection is Azure.Core.Page<NameIdentifier>;
 
 /**
@@ -1033,6 +1037,10 @@ model TopLevelDomainAgreementOption {
 /**
  * Collection of top-level domain legal agreements.
  */
+@@OpenAPI.extension(TldLegalAgreementCollection.value,
+  "x-ms-identifiers",
+  #["agreementKey"]
+);
 model TldLegalAgreementCollection is Azure.Core.Page<TldLegalAgreement>;
 
 /**

@@ -13,24 +13,24 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Web"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Web"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Web"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-web"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-web"
     namespace: "azure.mgmt.web"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-web"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-web"
     namespace: "com.azure.resourcemanager.web"
     service-name: "Web" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/web
-    package-dir: "arm-web"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-web"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
