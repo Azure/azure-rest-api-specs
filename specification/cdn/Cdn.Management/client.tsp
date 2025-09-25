@@ -117,10 +117,7 @@ using Microsoft.Cdn;
   "TwoHundred",
   "javascript,go"
 );
-@@clientName(CdnWebApplicationFirewallPolicy,
-  "CdnWafPolicy",
-  "go"
-);
+@@clientName(CdnWebApplicationFirewallPolicy, "CdnWafPolicy", "go");
 @@clientName(WebApplicationFirewallPolicy,
   "WebApplicationFirewallPolicy",
   "go"
