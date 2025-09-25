@@ -18,12 +18,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @tenantResource
 model TrafficManagerGeographicHierarchy extends ProxyResource {
-  ...ResourceNameParameter<
-    Resource = TrafficManagerGeographicHierarchy,
-    KeyName = "trafficManagerGeographicHierarchies",
-    SegmentName = "trafficManagerGeographicHierarchies",
-    NamePattern = ""
-  >;
   properties?: GeographicHierarchyProperties;
 }
 
@@ -38,7 +32,7 @@ alias TrafficManagerGeographicHierarchyOps = Azure.ResourceManager.Legacy.Legacy
      */
     @path
     @segment("trafficManagerGeographicHierarchies")
-    @key("trafficManagerGeographicHierarchies")
+    @key("trafficManagerGeographicHierarchy")
     trafficManagerGeographicHierarchy: "default";
   },
   ErrorType = CloudError

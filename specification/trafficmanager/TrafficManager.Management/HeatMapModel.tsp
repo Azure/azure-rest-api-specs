@@ -19,12 +19,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(Profile)
 model HeatMapModel extends ProxyResource {
-  ...ResourceNameParameter<
-    Resource = HeatMapModel,
-    KeyName = "heatMapType",
-    SegmentName = "heatMaps",
-    NamePattern = ""
-  >;
   properties?: HeatMapProperties;
 }
 

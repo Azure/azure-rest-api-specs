@@ -17,12 +17,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 model Profile extends TrackedResource {
-  ...ResourceNameParameter<
-    Resource = Profile,
-    KeyName = "profileName",
-    SegmentName = "trafficmanagerprofiles",
-    NamePattern = ""
-  >;
   properties?: ProfileProperties;
 }
 
@@ -33,14 +27,12 @@ alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  {
-    /**
-     * The name of the Traffic Manager profile.
-     */
-    @path
-    @segment("trafficmanagerprofiles")
-    profileName: string;
-  },
+  KeysOf<ResourceNameParameter<
+    Resource = Profile,
+    KeyName = "profileName",
+    SegmentName = "trafficmanagerprofiles",
+    NamePattern = ""
+  >>,
   ErrorType = CloudError
 >;
 
@@ -50,14 +42,12 @@ alias ProfileSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  {
-    /**
-     * The name of the Traffic Manager profile.
-     */
-    @path
-    @segment("trafficmanagerprofiles")
-    profileName: string;
-  },
+  KeysOf<ResourceNameParameter<
+    Resource = Profile,
+    KeyName = "profileName",
+    SegmentName = "trafficmanagerprofiles",
+    NamePattern = ""
+  >>,
   ErrorType = CloudError
 >;
 

@@ -19,12 +19,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(Profile)
 model Endpoint extends ProxyResource {
-  ...ResourceNameParameter<
-    Resource = Endpoint,
-    KeyName = "endpoint",
-    SegmentName = "{endpointType}",
-    NamePattern = ""
-  >;
   properties?: EndpointProperties;
 }
 

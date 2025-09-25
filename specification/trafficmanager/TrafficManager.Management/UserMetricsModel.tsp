@@ -18,12 +18,6 @@ namespace Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @subscriptionResource
 model UserMetricsModel extends ProxyResource {
-  ...ResourceNameParameter<
-    Resource = UserMetricsModel,
-    KeyName = "trafficManagerUserMetricsKey",
-    SegmentName = "trafficManagerUserMetricsKeys",
-    NamePattern = ""
-  >;
   properties?: UserMetricsProperties;
 }
 
@@ -39,8 +33,8 @@ alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<
      */
     @path
     @segment("trafficManagerUserMetricsKeys")
-    @key("trafficManagerUserMetricsKeys")
-    trafficManagerUserMetricsKeys: "default";
+    @key("trafficManagerUserMetricsKey")
+    trafficManagerUserMetricsKey: "default";
   },
   ErrorType = CloudError
 >;
