@@ -92,6 +92,7 @@ interface DiscountsOperationGroup {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @autoRoute
+@list
 @action("validate")
 op validatePurchase is ArmProviderActionSync<
   Request = SavingsPlanPurchaseValidateRequest,
