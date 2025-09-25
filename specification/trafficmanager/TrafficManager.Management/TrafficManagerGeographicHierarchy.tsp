@@ -14,7 +14,8 @@ namespace Microsoft.Network;
  * Class representing the Geographic hierarchy used with the Geographic traffic routing method.
  */
 @tenantResource
-model TrafficManagerGeographicHierarchy is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
+model TrafficManagerGeographicHierarchy
+  is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
   ...ResourceNameParameter<
     Resource = TrafficManagerGeographicHierarchy,
     KeyName = "trafficManagerGeographicHierarchy",

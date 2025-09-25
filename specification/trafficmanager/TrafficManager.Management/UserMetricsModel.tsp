@@ -14,7 +14,8 @@ namespace Microsoft.Network;
  * Class representing Traffic Manager User Metrics.
  */
 @subscriptionResource
-model UserMetricsModel is Azure.ResourceManager.ProxyResource<UserMetricsProperties> {
+model UserMetricsModel
+  is Azure.ResourceManager.ProxyResource<UserMetricsProperties> {
   ...ResourceNameParameter<
     Resource = UserMetricsModel,
     KeyName = "trafficManagerUserMetricsKey",
