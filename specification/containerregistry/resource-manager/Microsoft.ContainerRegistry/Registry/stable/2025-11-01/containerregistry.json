@@ -4254,6 +4254,11 @@
             "modelAsString": true
           }
         },
+        "networkRuleBypassAllowedForTasks": {
+          "description": "Whether or not Tasks allowed to bypass the network rules for this container registry.",
+          "default": false,
+          "type": "boolean"
+        },
         "zoneRedundancy": {
           "description": "Whether or not zone redundancy is enabled for this container registry",
           "default": "Disabled",
@@ -4271,6 +4276,19 @@
           "description": "Enables registry-wide pull from unauthenticated clients.",
           "default": false,
           "type": "boolean"
+        },
+        "roleAssignmentMode": {
+          "description": "Determines registry role assignment mode.",
+          "default": "LegacyRegistryPermissions",
+          "enum": [
+            "AbacRepositoryPermissions",
+            "LegacyRegistryPermissions"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoleAssignmentMode",
+            "modelAsString": true
+          }
         }
       }
     },
@@ -4722,9 +4740,25 @@
             "modelAsString": true
           }
         },
+        "networkRuleBypassAllowedForTasks": {
+          "description": "Whether to allow ACR Tasks service to access a network restricted registry.",
+          "type": "boolean"
+        },
         "anonymousPullEnabled": {
           "description": "Enables registry-wide pull from unauthenticated clients.",
           "type": "boolean"
+        },
+        "roleAssignmentMode": {
+          "description": "Determines registry role assignment mode.",
+          "enum": [
+            "AbacRepositoryPermissions",
+            "LegacyRegistryPermissions"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RoleAssignmentMode",
+            "modelAsString": true
+          }
         }
       }
     },
