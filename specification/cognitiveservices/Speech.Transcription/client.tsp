@@ -6,9 +6,12 @@ using Azure.ClientGenerator.Core;
 
 namespace Azure.Ai.Speech.Transcription;
 
-// Explicit C# client naming to ensure AZC0030 compliance
 @@clientName(TranscriptionTranscribeRequestContent,
   "TranscriptionTranscribeRequestContent",
+  "csharp"
+);
+@@clientName(submitTranscriptionContent,
+  "SubmitTranscriptionContent",
   "csharp"
 );
 
