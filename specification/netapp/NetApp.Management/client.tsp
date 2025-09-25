@@ -3,8 +3,10 @@ import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.NetApp, "NetAppManagementClient", "java");
-@@clientName(Microsoft.NetApp, "NetAppManagementClient", "python");
+@@clientName(Microsoft.NetApp,
+  "NetAppManagementClient",
+  "java,python,javascript"
+);
 
 // Fix property name case changes
 @@clientName(Microsoft.NetApp.AccountProperties.nfsV4IDDomain,
@@ -60,4 +62,9 @@ using Azure.ClientGenerator.Core;
 @@clientName(Microsoft.NetApp.NetAppProvisioningState,
   "NetappProvisioningState",
   "go"
+);
+
+@@clientName(Microsoft.NetApp.ReplicationSchedule._10minutely,
+  "10Minutely",
+  "javascript"
 );
