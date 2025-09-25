@@ -96,24 +96,25 @@ namespace Customizations;
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 @operationGroup
 interface Ingestion {
   // Ingestion operations management
   deleteIngestionOperation is IngestionOperations.delete;
   deleteAllIngestionOperations is IngestionOperations.deleteAll;
   getIngestionOperation is IngestionOperations.get;
-  getIngestionOperations is IngestionOperations.list;
+  listIngestionOperations is IngestionOperations.list;
 
   // Ingestion runs operations
   createIngestionRun is IngestionRuns.create;
   getIngestionRun is IngestionRuns.get;
-  getIngestionRuns is IngestionRuns.list;
+  listIngestionRuns is IngestionRuns.list;
 
   // Ingestion operations
   createIngestion is Ingestions.create;
   deleteIngestion is Ingestions.delete;
   getIngestion is Ingestions.get;
-  getIngestions is Ingestions.list;
+  listIngestions is Ingestions.list;
   updateIngestion is Ingestions.update;
 
   // Ingestion sources
@@ -121,8 +122,8 @@ interface Ingestion {
   createOrReplaceIngestionSource is IngestionSources.createOrReplace;
   deleteIngestionSource is IngestionSources.delete;
   getIngestionSource is IngestionSources.get;
-  getIngestionSources is IngestionSources.list;
-  getManagedIdentities is IngestionSources.listManagedIdentities;
+  listIngestionSources is IngestionSources.list;
+  listManagedIdentities is IngestionSources.listManagedIdentities;
 }
 
 // === SpatioTemporal Asset Catalog (STAC) API ===
