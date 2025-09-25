@@ -1,0 +1,3671 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Red Hat OpenShift Hosted Control Planes Service",
+    "version": "2024-06-10-preview",
+    "description": "Microsoft.RedHatOpenShift Resource Provider management API.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "HcpOpenShiftClusters"
+    },
+    {
+      "name": "NodePools"
+    },
+    {
+      "name": "ExternalAuths"
+    },
+    {
+      "name": "HcpOpenShiftVersions"
+    },
+    {
+      "name": "HcpOperatorIdentityRoleSets"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.RedHatOpenShift/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List_Maximum": {
+            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
+          },
+          "Operations_List_Minimum": {
+            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters": {
+      "get": {
+        "operationId": "HcpOpenShiftClusters_ListBySubscription",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "List HcpOpenShiftCluster resources by subscription ID",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_ListBySubscription": {
+            "$ref": "./examples/HcpOpenShiftClusters_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/hcpOpenShiftVersions": {
+      "get": {
+        "operationId": "HcpOpenShiftVersions_List",
+        "tags": [
+          "HcpOpenShiftVersions"
+        ],
+        "description": "List HcpOpenShiftVersion resources by SubscriptionLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftVersionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftVersions_List_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/HcpOpenShiftVersions_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/hcpOpenShiftVersions/{hcpOpenShiftVersionName}": {
+      "get": {
+        "operationId": "HcpOpenShiftVersions_Get",
+        "tags": [
+          "HcpOpenShiftVersions"
+        ],
+        "description": "Get a HcpOpenShiftVersion",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "hcpOpenShiftVersionName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftVersion",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-\\.]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftVersions_Get_MaximumSet - generated by [MaximumSet] rule": {
+            "$ref": "./examples/HcpOpenShiftVersions_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/hcpOperatorIdentityRoleSets": {
+      "get": {
+        "operationId": "HcpOperatorIdentityRoleSets_List",
+        "tags": [
+          "HcpOperatorIdentityRoleSets"
+        ],
+        "description": "List HcpOperatorIdentityRoleSet resources by SubscriptionLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOperatorIdentityRoleSetListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOperatorIdentityRoleSets_List_MaximumSet": {
+            "$ref": "./examples/HcpOperatorIdentityRoleSets_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.RedHatOpenShift/locations/{location}/hcpOperatorIdentityRoleSets/{hcpOperatorIdentityRoleSetName}": {
+      "get": {
+        "operationId": "HcpOperatorIdentityRoleSets_Get",
+        "tags": [
+          "HcpOperatorIdentityRoleSets"
+        ],
+        "description": "Get a HcpOperatorIdentityRoleSet",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "hcpOperatorIdentityRoleSetName",
+            "in": "path",
+            "description": "The OpenShift minor version these identities are required for.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-\\.]{3,24}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOperatorIdentityRoleSet"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOperatorIdentityRoleSets_Get_MaximumSet": {
+            "$ref": "./examples/HcpOperatorIdentityRoleSets_Get_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters": {
+      "get": {
+        "operationId": "HcpOpenShiftClusters_ListByResourceGroup",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "List HcpOpenShiftCluster resources by resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftClusterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_ListByResourceGroup": {
+            "$ref": "./examples/HcpOpenShiftClusters_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}": {
+      "get": {
+        "operationId": "HcpOpenShiftClusters_Get",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "Get a HcpOpenShiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftCluster"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_Get": {
+            "$ref": "./examples/HcpOpenShiftClusters_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "HcpOpenShiftClusters_CreateOrUpdate",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "Create a HcpOpenShiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftCluster"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'HcpOpenShiftCluster' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftCluster"
+            }
+          },
+          "201": {
+            "description": "Resource 'HcpOpenShiftCluster' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftCluster"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_CreateOrUpdate": {
+            "$ref": "./examples/HcpOpenShiftClusters_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "HcpOpenShiftClusters_Update",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "Update a HcpOpenShiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftClusterUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftCluster"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_Update": {
+            "$ref": "./examples/HcpOpenShiftClusters_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "HcpOpenShiftClusters_Delete",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "Delete a HcpOpenShiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_Delete": {
+            "$ref": "./examples/HcpOpenShiftClusters_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}/externalAuths": {
+      "get": {
+        "operationId": "ExternalAuths_ListByParent",
+        "tags": [
+          "ExternalAuths"
+        ],
+        "description": "List ExternalAuth resources by HcpOpenShiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExternalAuthListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExternalAuths_ListByParent_MaximumSet": {
+            "$ref": "./examples/ExternalAuths_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}/externalAuths/{externalAuthName}": {
+      "get": {
+        "operationId": "ExternalAuths_Get",
+        "tags": [
+          "ExternalAuths"
+        ],
+        "description": "Get a ExternalAuth",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "externalAuthName",
+            "in": "path",
+            "description": "The name of the ExternalAuth",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,15}$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExternalAuth"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExternalAuths_Get_MaximumSet": {
+            "$ref": "./examples/ExternalAuths_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ExternalAuths_CreateOrUpdate",
+        "tags": [
+          "ExternalAuths"
+        ],
+        "description": "Create a ExternalAuth",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "externalAuthName",
+            "in": "path",
+            "description": "The name of the ExternalAuth",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,15}$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExternalAuth"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ExternalAuth' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExternalAuth"
+            }
+          },
+          "201": {
+            "description": "Resource 'ExternalAuth' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ExternalAuth"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExternalAuths_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/ExternalAuths_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ExternalAuths_Update",
+        "tags": [
+          "ExternalAuths"
+        ],
+        "description": "Update a ExternalAuth",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "externalAuthName",
+            "in": "path",
+            "description": "The name of the ExternalAuth",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,15}$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ExternalAuthUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ExternalAuth"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExternalAuths_Update_MaximumSet": {
+            "$ref": "./examples/ExternalAuths_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ExternalAuths_Delete",
+        "tags": [
+          "ExternalAuths"
+        ],
+        "description": "Delete a ExternalAuth",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "externalAuthName",
+            "in": "path",
+            "description": "The name of the ExternalAuth",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,15}$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ExternalAuths_Delete_MaximumSet": {
+            "$ref": "./examples/ExternalAuths_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}/nodePools": {
+      "get": {
+        "operationId": "NodePools_ListByParent",
+        "tags": [
+          "NodePools"
+        ],
+        "description": "List NodePool resources by HcpOpenShiftCluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodePoolListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodePools_ListByParent": {
+            "$ref": "./examples/NodePools_ListByParent_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}/nodePools/{nodePoolName}": {
+      "get": {
+        "operationId": "NodePools_Get",
+        "tags": [
+          "NodePools"
+        ],
+        "description": "Get a NodePool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "The name of the NodePool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,13}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodePool"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodePools_Get": {
+            "$ref": "./examples/NodePools_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NodePools_CreateOrUpdate",
+        "tags": [
+          "NodePools"
+        ],
+        "description": "Create a NodePool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "The name of the NodePool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,13}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodePool"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'NodePool' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NodePool"
+            }
+          },
+          "201": {
+            "description": "Resource 'NodePool' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/NodePool"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodePools_CreateOrUpdate": {
+            "$ref": "./examples/NodePools_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "NodePools_Update",
+        "tags": [
+          "NodePools"
+        ],
+        "description": "Update a NodePool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "The name of the NodePool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,13}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The resource properties to be updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NodePoolUpdate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/NodePool"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodePools_Update": {
+            "$ref": "./examples/NodePools_Update_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "NodePools_Delete",
+        "tags": [
+          "NodePools"
+        ],
+        "description": "Delete a NodePool",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "nodePoolName",
+            "in": "path",
+            "description": "The name of the NodePool",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,13}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NodePools_Delete": {
+            "$ref": "./examples/NodePools_Delete_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}/requestAdminCredential": {
+      "post": {
+        "operationId": "HcpOpenShiftClusters_RequestAdminCredential",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "Request a temporary admin kubeconfig for the cluster",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HcpOpenShiftClusterAdminCredential"
+            }
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_RequestAdminCredential_MaximumSet": {
+            "$ref": "./examples/HcpOpenShiftClusters_RequestAdminCredential_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RedHatOpenShift/hcpOpenShiftClusters/{hcpOpenShiftClusterName}/revokeCredentials": {
+      "post": {
+        "operationId": "HcpOpenShiftClusters_RevokeCredentials",
+        "tags": [
+          "HcpOpenShiftClusters"
+        ],
+        "description": "Revoke all credentials issued by requestAdminCredential",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "hcpOpenShiftClusterName",
+            "in": "path",
+            "description": "The name of the HcpOpenShiftCluster",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][-a-zA-Z0-9]{1,52}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HcpOpenShiftClusters_RevokeCredentials_MaximumSet": {
+            "$ref": "./examples/HcpOpenShiftClusters_RevokeCredentials_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ApiProfile": {
+      "type": "object",
+      "description": "Information about the API of a cluster.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL endpoint for the API server",
+          "readOnly": true
+        },
+        "visibility": {
+          "type": "string",
+          "description": "The internet visibility of the OpenShift API server",
+          "default": "Public",
+          "enum": [
+            "Public",
+            "Private"
+          ],
+          "x-ms-enum": {
+            "name": "Visibility",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Public",
+                "value": "Public",
+                "description": "The API server is visible from the internet."
+              },
+              {
+                "name": "Private",
+                "value": "Private",
+                "description": "The API server is not visible from the internet."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "authorizedCidrs": {
+          "type": "array",
+          "description": "The list of authorized IPv4 CIDR blocks allowed to access the API server. Maximum 500 entries.",
+          "maxItems": 500,
+          "items": {
+            "type": "string"
+          },
+          "x-ms-client-name": "authorizedCIDRs",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate": {
+      "type": "object",
+      "description": "Managed service identity (system assigned and/or user assigned identities)",
+      "properties": {
+        "type": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentityType",
+          "description": "The type of managed identity assigned to this resource."
+        },
+        "userAssignedIdentities": {
+          "type": "object",
+          "description": "The identities assigned to this resource by the user.",
+          "additionalProperties": {
+            "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/UserAssignedIdentity",
+            "x-nullable": true
+          }
+        }
+      }
+    },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+        }
+      ]
+    },
+    "ClusterAutoscalingProfile": {
+      "type": "object",
+      "description": "ClusterAutoscaling specifies auto-scaling behavior that\napplies to all NodePools associated with a control plane.",
+      "properties": {
+        "maxNodesTotal": {
+          "type": "integer",
+          "format": "int32",
+          "description": "maxNodesTotal is the maximum allowable number of nodes for the Autoscaler scale out to be operational.\nThe autoscaler will not grow the cluster beyond this number. If omitted, the autoscaler will not have a maximum limit.",
+          "minimum": 0
+        },
+        "maxPodGracePeriodSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "maxPodGracePeriod is the maximum seconds to wait for graceful pod termination before scaling down a NodePool.\nThe default is 600 seconds.",
+          "default": 600,
+          "minimum": 0
+        },
+        "maxNodeProvisionTimeSeconds": {
+          "type": "integer",
+          "format": "int32",
+          "description": "maxNodeProvisionTimeSeconds is the maximum time to wait for node provisioning before considering the\nprovisioning to be unsuccessful. The default is 900 seconds, or 15 minutes.",
+          "default": 900,
+          "minimum": 0
+        },
+        "podPriorityThreshold": {
+          "type": "integer",
+          "format": "int32",
+          "description": "podPriorityThreshold enables users to schedule “best-effort” pods, which shouldn’t trigger autoscaler actions,\nbut only run when there are spare resources available. The default is -10.\nSee the following for more details:\nhttps://github.com/kubernetes/autoscaler/blob/master/cluster-autoscaler/FAQ.md#how-does-cluster-autoscaler-work-with-pod-priority-and-preemption",
+          "default": -10
+        }
+      }
+    },
+    "ClusterImageRegistryProfile": {
+      "type": "object",
+      "description": "OpenShift cluster image registry",
+      "properties": {
+        "state": {
+          "type": "string",
+          "description": "state indicates the desired ImageStream-backed cluster image registry installation mode.\nThis can only be set during cluster creation and cannot be changed after cluster creation.\nEnabled means the ImageStream-backed image registry will be run as pods on worker nodes in\nthe cluster. Disabled means the ImageStream-backed image registry will not be present in\nthe cluster. The default is Enabled.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ConsoleProfile": {
+      "type": "object",
+      "description": "Configuration of the cluster web console",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "The cluster web console URL endpoint",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "url"
+      ]
+    },
+    "CustomerManagedEncryptionProfile": {
+      "type": "object",
+      "description": "Customer managed encryption key profile.",
+      "properties": {
+        "encryptionType": {
+          "type": "string",
+          "description": "The encryption type used.\nBy default, \"KMS\" is used.",
+          "default": "KMS",
+          "enum": [
+            "KMS"
+          ],
+          "x-ms-enum": {
+            "name": "CustomerManagedEncryptionType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Kms",
+                "value": "KMS",
+                "description": "KMS encryption type."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "kms": {
+          "$ref": "#/definitions/KmsEncryptionProfile",
+          "description": "The Key Management Service (KMS) encryption key details.\n\nRequired when encryptionType is \"KMS\".",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "DiskEncryptionSetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Compute/diskEncryptionSets"
+          }
+        ]
+      }
+    },
+    "DnsProfile": {
+      "type": "object",
+      "description": "DNS contains the DNS settings of the cluster",
+      "properties": {
+        "baseDomain": {
+          "type": "string",
+          "description": "BaseDomain is the base DNS domain of the cluster.",
+          "readOnly": true
+        },
+        "baseDomainPrefix": {
+          "type": "string",
+          "description": "BaseDomainPrefix is the unique name of the cluster representing the OpenShift's cluster name.\nBaseDomainPrefix is the name that will appear in the cluster's DNS, provisioned cloud providers resources",
+          "maxLength": 15,
+          "pattern": "^[a-z]([-a-z0-9]*[a-z0-9])?$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "Effect": {
+      "type": "string",
+      "description": "The taint effect the same as in Kubernetes",
+      "enum": [
+        "NoSchedule",
+        "PreferNoSchedule",
+        "NoExecute"
+      ],
+      "x-ms-enum": {
+        "name": "Effect",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NoSchedule",
+            "value": "NoSchedule",
+            "description": "NoSchedule taint effect"
+          },
+          {
+            "name": "PreferNoSchedule",
+            "value": "PreferNoSchedule",
+            "description": "PreferNoSchedule taint effect"
+          },
+          {
+            "name": "NoExecute",
+            "value": "NoExecute",
+            "description": "NoExecute taint effect"
+          }
+        ]
+      }
+    },
+    "EtcdDataEncryptionProfile": {
+      "type": "object",
+      "description": "The ETCD data encryption settings.",
+      "properties": {
+        "keyManagementMode": {
+          "type": "string",
+          "description": "Specify the key management strategy used for the encryption key that encrypts the ETCD data.\nBy default, \"PlatformManaged\" is used.",
+          "default": "PlatformManaged",
+          "enum": [
+            "CustomerManaged",
+            "PlatformManaged"
+          ],
+          "x-ms-enum": {
+            "name": "EtcdDataEncryptionKeyManagementModeType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CustomerManaged",
+                "value": "CustomerManaged",
+                "description": "Customer managed encryption key management mode type."
+              },
+              {
+                "name": "PlatformManaged",
+                "value": "PlatformManaged",
+                "description": "Platform managed encryption key management mode type."
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "customerManaged": {
+          "$ref": "#/definitions/CustomerManagedEncryptionProfile",
+          "description": "Specify customer managed encryption key details.\nRequired when keyManagementMode is \"CustomerManaged\".",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "EtcdProfile": {
+      "type": "object",
+      "description": "The ETCD settings and configuration options.",
+      "properties": {
+        "dataEncryption": {
+          "$ref": "#/definitions/EtcdDataEncryptionProfile",
+          "description": "ETCD Data Encryption settings.\nIf not specified platform managed keys are used.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "ExternalAuth": {
+      "type": "object",
+      "description": "ExternalAuth resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExternalAuthProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ExternalAuthClaimProfile": {
+      "type": "object",
+      "description": "External Auth claim profile",
+      "properties": {
+        "mappings": {
+          "$ref": "#/definitions/TokenClaimMappingsProfile",
+          "description": "The claim mappings"
+        },
+        "validationRules": {
+          "type": "array",
+          "description": "The claim validation rules",
+          "items": {
+            "$ref": "#/definitions/TokenClaimValidationRule"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "requiredClaim"
+          ]
+        }
+      },
+      "required": [
+        "mappings"
+      ]
+    },
+    "ExternalAuthClaimProfileUpdate": {
+      "type": "object",
+      "description": "External Auth claim profile",
+      "properties": {
+        "mappings": {
+          "$ref": "#/definitions/TokenClaimMappingsProfileUpdate",
+          "description": "The claim mappings"
+        },
+        "validationRules": {
+          "type": "array",
+          "description": "The claim validation rules",
+          "items": {
+            "$ref": "#/definitions/TokenClaimValidationRule"
+          },
+          "x-ms-identifiers": [
+            "type",
+            "requiredClaim"
+          ]
+        }
+      }
+    },
+    "ExternalAuthClientComponentProfile": {
+      "type": "object",
+      "description": "External Auth component profile\nMust have unique namespace/name pairs.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the external auth client\n\nThis specifies the name of the platform component being configured to use\nthe identity provider as an authentication mode.\nIt is used in combination with namespace as a unique identifier.",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "authClientNamespace": {
+          "type": "string",
+          "description": "The namespace of the external Auth client\nThis specifies the namespace in which the platform component being configured\nto use the identity provider as an authentication mode is running.\n\nIt is used in combination with name as a unique identifier.",
+          "minLength": 1,
+          "maxLength": 63
+        }
+      },
+      "required": [
+        "name",
+        "authClientNamespace"
+      ]
+    },
+    "ExternalAuthClientProfile": {
+      "type": "object",
+      "description": "External Auth client profile\nThis configures how on-cluster, platform clients should request tokens from the identity provider.",
+      "properties": {
+        "component": {
+          "$ref": "#/definitions/ExternalAuthClientComponentProfile",
+          "description": "External Auth client component"
+        },
+        "clientId": {
+          "type": "string",
+          "description": "External Auth client id\nThe clientId must appear in the audience field of the TokenIssuerProfile.",
+          "minLength": 1
+        },
+        "extraScopes": {
+          "type": "array",
+          "description": "external auth client scopes\n\nThis is useful if you have configured claim mappings that requires specific\nscopes to be requested beyond the standard OIDC scopes.\nWhen omitted, no additional scopes are requested.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/ExternalAuthClientType",
+          "description": "Determines the OIDC provider client type."
+        }
+      },
+      "required": [
+        "component",
+        "clientId",
+        "type"
+      ]
+    },
+    "ExternalAuthClientType": {
+      "type": "string",
+      "description": "Representation of the possible values of an external authentication client's type",
+      "enum": [
+        "Confidential",
+        "Public"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalAuthClientType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Confidential",
+            "value": "Confidential",
+            "description": "Indicates that the client is confidential.\nConfidential clients must provide a client secret.\nThe secret should be provided within the cluster itself."
+          },
+          {
+            "name": "Public",
+            "value": "Public",
+            "description": "Indicates that the client is public.\nPublic clients must not provide a client secret."
+          }
+        ]
+      }
+    },
+    "ExternalAuthCondition": {
+      "type": "object",
+      "description": "Condition defines an observation of the external auth state.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ExternalAuthConditionType",
+          "description": "This is a PascalCase (or in foo.example.com/PascalCase) code to represent the type of condition.",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/StatusType",
+          "description": "The status of the condition.",
+          "readOnly": true
+        },
+        "lastTransitionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The last time the condition transitioned from one status to another.",
+          "readOnly": true
+        },
+        "reason": {
+          "type": "string",
+          "description": "This contains a programmatic identifier indicating the reason for the condition's last transition.",
+          "readOnly": true
+        },
+        "message": {
+          "type": "string",
+          "description": "This is a human readable message indicating details about the transition.\nThis may be an empty string.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "type",
+        "status",
+        "lastTransitionTime",
+        "reason",
+        "message"
+      ]
+    },
+    "ExternalAuthConditionType": {
+      "type": "string",
+      "description": "Representation of the possible types of a external auths condition.",
+      "enum": [
+        "Available",
+        "Degraded",
+        "Progressing"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalAuthConditionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "Indicates that the external auth resource is available."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Indicates that the external auth resource is in a degraded state."
+          },
+          {
+            "name": "Progressing",
+            "value": "Progressing",
+            "description": "Indicates that the external auth resource is in a progressing state."
+          }
+        ]
+      }
+    },
+    "ExternalAuthListResult": {
+      "type": "object",
+      "description": "The response of a ExternalAuth list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ExternalAuth items on this page",
+          "items": {
+            "$ref": "#/definitions/ExternalAuth"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ExternalAuthProperties": {
+      "type": "object",
+      "description": "External Auth profile",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ExternalAuthProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "condition": {
+          "$ref": "#/definitions/ExternalAuthCondition",
+          "description": "An observation of the current state with additional information.",
+          "readOnly": true
+        },
+        "issuer": {
+          "$ref": "#/definitions/TokenIssuerProfile",
+          "description": "Token Issuer profile"
+        },
+        "clients": {
+          "type": "array",
+          "description": "External Auth OIDC clients\nThere must not be more than 20 entries and entries must have unique namespace/name pairs.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/ExternalAuthClientProfile"
+          },
+          "x-ms-identifiers": [
+            "component",
+            "clientId",
+            "extraScopes"
+          ]
+        },
+        "claim": {
+          "$ref": "#/definitions/ExternalAuthClaimProfile",
+          "description": "External Auth claim\nThis configures how claims are validated and applied."
+        }
+      },
+      "required": [
+        "issuer",
+        "claim"
+      ]
+    },
+    "ExternalAuthPropertiesUpdate": {
+      "type": "object",
+      "description": "External Auth profile",
+      "properties": {
+        "issuer": {
+          "$ref": "#/definitions/TokenIssuerProfileUpdate",
+          "description": "Token Issuer profile"
+        },
+        "clients": {
+          "type": "array",
+          "description": "External Auth OIDC clients\nThere must not be more than 20 entries and entries must have unique namespace/name pairs.",
+          "maxItems": 20,
+          "items": {
+            "$ref": "#/definitions/ExternalAuthClientProfile"
+          },
+          "x-ms-identifiers": [
+            "component",
+            "clientId",
+            "extraScopes"
+          ]
+        },
+        "claim": {
+          "$ref": "#/definitions/ExternalAuthClaimProfileUpdate",
+          "description": "External Auth claim\nThis configures how claims are validated and applied."
+        }
+      }
+    },
+    "ExternalAuthProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting",
+        "Provisioning",
+        "Updating",
+        "AwaitingSecret"
+      ],
+      "x-ms-enum": {
+        "name": "ExternalAuthProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Non-terminal state indicating the resource has been accepted"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Non-terminal state indicating the resource is deleting"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Non-terminal state indicating the resource is provisioning"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Non-terminal state indicating the resource is updating"
+          },
+          {
+            "name": "AwaitingSecret",
+            "value": "AwaitingSecret",
+            "description": "Non-terminal state indicating the resource is awaiting secret"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ExternalAuthUpdate": {
+      "type": "object",
+      "description": "ExternalAuth resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExternalAuthPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GroupClaimProfile": {
+      "type": "object",
+      "description": "External Auth claim profile\nThis configures how the groups of a cluster identity should be constructed\nfrom the claims in a JWT token issued by the identity provider. When\nreferencing a claim, if the claim is present in the JWT token, its value\nmust be a list of groups separated by a comma (',').\n\nFor example - '\"example\"' and '\"exampleOne\", \"exampleTwo\", \"exampleThree\"' are valid claim values.",
+      "properties": {
+        "claim": {
+          "type": "string",
+          "description": "Claim name of the external profile",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the claim external profile\nIf this is specified prefixPolicy will be set to \"Prefix\" by default"
+        }
+      },
+      "required": [
+        "claim"
+      ]
+    },
+    "GroupClaimProfileUpdate": {
+      "type": "object",
+      "description": "External Auth claim profile\nThis configures how the groups of a cluster identity should be constructed\nfrom the claims in a JWT token issued by the identity provider. When\nreferencing a claim, if the claim is present in the JWT token, its value\nmust be a list of groups separated by a comma (',').\n\nFor example - '\"example\"' and '\"exampleOne\", \"exampleTwo\", \"exampleThree\"' are valid claim values.",
+      "properties": {
+        "claim": {
+          "type": "string",
+          "description": "Claim name of the external profile",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the claim external profile\nIf this is specified prefixPolicy will be set to \"Prefix\" by default"
+        }
+      }
+    },
+    "HcpOpenShiftCluster": {
+      "type": "object",
+      "description": "HCP cluster resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HcpOpenShiftClusterProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "HcpOpenShiftClusterAdminCredential": {
+      "type": "object",
+      "description": "HCP cluster admin credential",
+      "properties": {
+        "kubeconfig": {
+          "type": "string",
+          "format": "password",
+          "description": "Admin kubeconfig with a temporary client certificate",
+          "readOnly": true,
+          "x-ms-secret": true
+        },
+        "expirationTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Expiration timestamp for the kubeconfig's client certificate",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "kubeconfig",
+        "expirationTimestamp"
+      ]
+    },
+    "HcpOpenShiftClusterListResult": {
+      "type": "object",
+      "description": "The response of a HcpOpenShiftCluster list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HcpOpenShiftCluster items on this page",
+          "items": {
+            "$ref": "#/definitions/HcpOpenShiftCluster"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HcpOpenShiftClusterProperties": {
+      "type": "object",
+      "description": "HCP cluster properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The status of the last operation.",
+          "readOnly": true
+        },
+        "version": {
+          "$ref": "#/definitions/VersionProfile",
+          "description": "Version of the control plane components",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dns": {
+          "$ref": "#/definitions/DnsProfile",
+          "description": "Cluster DNS configuration",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "network": {
+          "$ref": "#/definitions/NetworkProfile",
+          "description": "Cluster network configuration",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "console": {
+          "$ref": "#/definitions/ConsoleProfile",
+          "description": "Shows the cluster web console information",
+          "readOnly": true
+        },
+        "api": {
+          "$ref": "#/definitions/ApiProfile",
+          "description": "Shows the cluster API server profile",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProfile",
+          "description": "Azure platform configuration",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "autoscaling": {
+          "$ref": "#/definitions/ClusterAutoscalingProfile",
+          "description": "Configure ClusterAutoscaling .",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "etcd": {
+          "$ref": "#/definitions/EtcdProfile",
+          "description": "Configure ETCD.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "nodeDrainTimeoutMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "nodeDrainTimeoutMinutes is the grace period for how long Pod Disruption Budget-protected workloads will be\nrespected during any node draining operation. After this grace period, any workloads protected by Pod Disruption\nBudgets that have not been successfully drained from a node will be forcibly evicted. This is\nespecially relevant to cluster upgrades.\n\nValid values are in minutes and from 0 to 10080 minutes (1 week).\n0 means that the MachinePool can be drained without any time limitation.\n\nThis is the value is used a default for all NodePools. It can be overridden\nby specifying nodeDrainTimeoutMinutes for a given NodePool",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 10080,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "clusterImageRegistry": {
+          "$ref": "#/definitions/ClusterImageRegistryProfile",
+          "description": "OpenShift internal image registry",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "platform"
+      ]
+    },
+    "HcpOpenShiftClusterPropertiesUpdate": {
+      "type": "object",
+      "description": "HCP cluster properties",
+      "properties": {
+        "version": {
+          "$ref": "#/definitions/VersionProfile",
+          "description": "Version of the control plane components",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "platform": {
+          "$ref": "#/definitions/PlatformProfileUpdate",
+          "description": "Azure platform configuration",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "autoscaling": {
+          "$ref": "#/definitions/ClusterAutoscalingProfile",
+          "description": "Configure ClusterAutoscaling .",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "nodeDrainTimeoutMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "nodeDrainTimeoutMinutes is the grace period for how long Pod Disruption Budget-protected workloads will be\nrespected during any node draining operation. After this grace period, any workloads protected by Pod Disruption\nBudgets that have not been successfully drained from a node will be forcibly evicted. This is\nespecially relevant to cluster upgrades.\n\nValid values are in minutes and from 0 to 10080 minutes (1 week).\n0 means that the MachinePool can be drained without any time limitation.\n\nThis is the value is used a default for all NodePools. It can be overridden\nby specifying nodeDrainTimeoutMinutes for a given NodePool",
+          "default": 0,
+          "minimum": 0,
+          "maximum": 10080,
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "HcpOpenShiftClusterUpdate": {
+      "type": "object",
+      "description": "HCP cluster resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HcpOpenShiftClusterPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "HcpOpenShiftVersion": {
+      "type": "object",
+      "description": "HcpOpenShiftVersion represents a location based available HCP OpenShift version",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HcpOpenShiftVersionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HcpOpenShiftVersionListResult": {
+      "type": "object",
+      "description": "The response of a HcpOpenShiftVersion list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HcpOpenShiftVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/HcpOpenShiftVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HcpOpenShiftVersionProperties": {
+      "type": "object",
+      "description": "HcpOpenShiftVersionProperties contains details of an available HCP Openshift version",
+      "properties": {
+        "channelGroup": {
+          "type": "string",
+          "description": "ChannelGroup is the name of the group where this version belongs."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Enabled indicates if this version can be used to create clusters."
+        },
+        "endOfLifeTimestamp": {
+          "type": "string",
+          "format": "date-time",
+          "description": "EndOfLifeTimestamp is the date and time when this version will reach End of Life."
+        }
+      },
+      "required": [
+        "channelGroup",
+        "enabled",
+        "endOfLifeTimestamp"
+      ]
+    },
+    "HcpOperatorIdentityRoleSet": {
+      "type": "object",
+      "description": "HcpOperatorIdentityRoles represents a location based representation of\nthe required platform workload identities and their required roles for a given\nOpenShift version",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/HcpOperatorIdentityRoleSetProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "HcpOperatorIdentityRoleSetListResult": {
+      "type": "object",
+      "description": "The response of a HcpOperatorIdentityRoleSet list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The HcpOperatorIdentityRoleSet items on this page",
+          "items": {
+            "$ref": "#/definitions/HcpOperatorIdentityRoleSet"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "HcpOperatorIdentityRoleSetProperties": {
+      "type": "object",
+      "description": "HCP Operator Identity Roles properties",
+      "properties": {
+        "controlPlaneOperators": {
+          "type": "array",
+          "description": "The role definitions required for the User-Assigned managed identities used\nby Control Plane operators on a cluster.",
+          "items": {
+            "$ref": "#/definitions/OperatorIdentityRoles"
+          }
+        },
+        "dataPlaneOperators": {
+          "type": "array",
+          "description": "The role definitions required for the User-Assigned managed identities used\nby Data Plane operators on a cluster.",
+          "items": {
+            "$ref": "#/definitions/OperatorIdentityRoles"
+          }
+        }
+      },
+      "required": [
+        "controlPlaneOperators",
+        "dataPlaneOperators"
+      ]
+    },
+    "KmsEncryptionProfile": {
+      "type": "object",
+      "description": "Configure etcd encryption Key Management Service (KMS) key.\nYour Microsoft Entra application used to create the cluster must be authorized to access this keyvault,\ne.g using the AzureCLI: `az keyvault set-policy -n $KEYVAULT_NAME --key-permissions decrypt encrypt --spn <YOUR APPLICATION CLIENT ID>`",
+      "properties": {
+        "activeKey": {
+          "$ref": "#/definitions/KmsKey",
+          "description": "The details of the active key.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "activeKey"
+      ]
+    },
+    "KmsKey": {
+      "type": "object",
+      "description": "A representation of a KeyVault Secret.",
+      "properties": {
+        "vaultName": {
+          "type": "string",
+          "description": "vaultName is the name of the keyvault that contains the secret.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "name": {
+          "type": "string",
+          "description": "name is the name of the keyvault key used for encryption/decryption.",
+          "minLength": 1,
+          "maxLength": 255
+        },
+        "version": {
+          "type": "string",
+          "description": "version contains the version of the key to use.",
+          "minLength": 1,
+          "maxLength": 255
+        }
+      },
+      "required": [
+        "vaultName",
+        "name",
+        "version"
+      ]
+    },
+    "Label": {
+      "type": "object",
+      "description": "Label represents the Kubernetes label",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the label"
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the label"
+        }
+      },
+      "required": [
+        "key"
+      ]
+    },
+    "NetworkProfile": {
+      "type": "object",
+      "description": "OpenShift networking configuration",
+      "properties": {
+        "networkType": {
+          "type": "string",
+          "description": "The main controller responsible for rendering the core networking components",
+          "default": "OVNKubernetes",
+          "enum": [
+            "OVNKubernetes",
+            "Other"
+          ],
+          "x-ms-enum": {
+            "name": "NetworkType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "OVNKubernetes",
+                "value": "OVNKubernetes",
+                "description": "The OVN network plugin for the OpenShift cluster"
+              },
+              {
+                "name": "Other",
+                "value": "Other",
+                "description": "Other network plugins"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "podCidr": {
+          "type": "string",
+          "description": "The CIDR of the pod IP addresses",
+          "default": "10.128.0.0/14",
+          "x-ms-client-name": "podCIDR",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "serviceCidr": {
+          "type": "string",
+          "description": "The CIDR block for assigned service IPs",
+          "default": "172.30.0.0/16",
+          "x-ms-client-name": "serviceCIDR",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "machineCidr": {
+          "type": "string",
+          "description": "The CIDR block from which to assign machine IP addresses",
+          "default": "10.0.0.0/16",
+          "x-ms-client-name": "machineCIDR",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "hostPrefix": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Network host prefix",
+          "default": 23,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "NetworkSecurityGroupResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/networkSecurityGroups"
+          }
+        ]
+      }
+    },
+    "NodePool": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NodePoolProperties",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "../../../../../../common-types/resource-management/v6/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "NodePoolAutoScaling": {
+      "type": "object",
+      "description": "Node pool autoscaling",
+      "properties": {
+        "min": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The minimum number of nodes in the node pool",
+          "minimum": 0
+        },
+        "max": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The maximum number of nodes in the node pool",
+          "minimum": 0
+        }
+      }
+    },
+    "NodePoolListResult": {
+      "type": "object",
+      "description": "The response of a NodePool list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The NodePool items on this page",
+          "items": {
+            "$ref": "#/definitions/NodePool"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "NodePoolPlatformProfile": {
+      "type": "object",
+      "description": "Azure node pool platform configuration",
+      "properties": {
+        "subnetId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The Azure resource ID of the worker subnet\nNote that a subnet cannot be reused between ARO-HCP Clusters, however the\nsame subnet can be used for NodePools of the same cluster.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "vmSize": {
+          "type": "string",
+          "description": "The VM size according to the documentation:\n- https://learn.microsoft.com/en-us/azure/virtual-machines/sizes",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "enableEncryptionAtHost": {
+          "type": "boolean",
+          "description": "Whether to enable host based OS and data drive encryption.\n- https://learn.microsoft.com/en-us/azure/virtual-machines/disk-encryption#encryption-at-host---end-to-end-encryption-for-your-vm-data",
+          "default": false,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "osDisk": {
+          "$ref": "#/definitions/OsDiskProfile",
+          "description": "The settings and configuration options for OSDisk",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "availabilityZone": {
+          "type": "string",
+          "description": "The availability zone for the node pool.\nPlease read the documentation to see which regions support availability zones\n- https://learn.microsoft.com/en-us/azure/availability-zones/az-overview",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "vmSize"
+      ]
+    },
+    "NodePoolProperties": {
+      "type": "object",
+      "description": "Represents the node pool properties",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        },
+        "version": {
+          "$ref": "#/definitions/NodePoolVersionProfile",
+          "description": "OpenShift version for the nodepool",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "platform": {
+          "$ref": "#/definitions/NodePoolPlatformProfile",
+          "description": "Azure node pool platform configuration",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of worker nodes, it cannot be used together with autoscaling",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "autoRepair": {
+          "type": "boolean",
+          "description": "Auto-repair",
+          "default": true,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "autoScaling": {
+          "$ref": "#/definitions/NodePoolAutoScaling",
+          "description": "Representation of a autoscaling in a node pool.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "labels": {
+          "type": "array",
+          "description": "Kubernetes labels to propagate to the NodePool Nodes\nNote that when the labels are updated this is only applied to newly\ncreate nodes in the Nodepool, existing node labels remain unchanged.",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "taints": {
+          "type": "array",
+          "description": "Taints for the nodes",
+          "items": {
+            "$ref": "#/definitions/Taint"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value",
+            "effect"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "nodeDrainTimeoutMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "nodeDrainTimeoutMinutes is the grace period for how long Pod Disruption Budget-protected workloads will be\nrespected during any node draining operation. After this grace period, any workloads protected by Pod Disruption\nBudgets that have not been successfully drained from a node will be forcibly evicted. This is\nespecially relevant to cluster upgrades.\n\nValid values are from 0 to 10080 minutes (1 week) .\n0 means that the NodePool can be drained without any time limitation.\n\nIf unset the cluster nodeDrainTimeoutMinutes value is used as a default.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "platform"
+      ]
+    },
+    "NodePoolPropertiesUpdate": {
+      "type": "object",
+      "description": "Represents the node pool properties",
+      "properties": {
+        "version": {
+          "$ref": "#/definitions/NodePoolVersionProfile",
+          "description": "OpenShift version for the nodepool",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "replicas": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of worker nodes, it cannot be used together with autoscaling",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "autoScaling": {
+          "$ref": "#/definitions/NodePoolAutoScaling",
+          "description": "Representation of a autoscaling in a node pool.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "labels": {
+          "type": "array",
+          "description": "Kubernetes labels to propagate to the NodePool Nodes\nNote that when the labels are updated this is only applied to newly\ncreate nodes in the Nodepool, existing node labels remain unchanged.",
+          "items": {
+            "$ref": "#/definitions/Label"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "taints": {
+          "type": "array",
+          "description": "Taints for the nodes",
+          "items": {
+            "$ref": "#/definitions/Taint"
+          },
+          "x-ms-identifiers": [
+            "key",
+            "value",
+            "effect"
+          ],
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "nodeDrainTimeoutMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "nodeDrainTimeoutMinutes is the grace period for how long Pod Disruption Budget-protected workloads will be\nrespected during any node draining operation. After this grace period, any workloads protected by Pod Disruption\nBudgets that have not been successfully drained from a node will be forcibly evicted. This is\nespecially relevant to cluster upgrades.\n\nValid values are from 0 to 10080 minutes (1 week) .\n0 means that the NodePool can be drained without any time limitation.\n\nIf unset the cluster nodeDrainTimeoutMinutes value is used as a default.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "NodePoolUpdate": {
+      "type": "object",
+      "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/NodePoolPropertiesUpdate",
+          "description": "The resource-specific properties for this resource."
+        },
+        "identity": {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.ManagedServiceIdentityUpdate",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
+        }
+      ]
+    },
+    "NodePoolVersionProfile": {
+      "type": "object",
+      "description": "Versions represents an OpenShift version.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID is the unique identifier of the version.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "channelGroup": {
+          "type": "string",
+          "description": "ChannelGroup is the name of the set to which this version belongs. Each version belongs to only a single set.",
+          "default": "stable",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "OperatorIdentityRequired": {
+      "type": "string",
+      "description": "Indicates if the identity is required",
+      "enum": [
+        "Always",
+        "OnEnablement"
+      ],
+      "x-ms-enum": {
+        "name": "OperatorIdentityRequired",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Always",
+            "value": "Always",
+            "description": "Indicates the identity is always required."
+          },
+          {
+            "name": "OnEnablement",
+            "value": "OnEnablement",
+            "description": "Indicates the identity is only required when a functionality that leverages the operator is enabled."
+          }
+        ]
+      }
+    },
+    "OperatorIdentityRoles": {
+      "type": "object",
+      "description": "Role definitions for a specific operator",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the operator"
+        },
+        "required": {
+          "$ref": "#/definitions/OperatorIdentityRequired",
+          "description": "Whether or not the operator is required for installation"
+        },
+        "roleDefinitions": {
+          "type": "array",
+          "description": "The role definitions required to be assigned to the identity assumed by this operator",
+          "items": {
+            "$ref": "#/definitions/RoleDefinition"
+          }
+        }
+      },
+      "required": [
+        "name",
+        "required",
+        "roleDefinitions"
+      ]
+    },
+    "OperatorsAuthenticationProfile": {
+      "type": "object",
+      "description": "The configuration that the operators of the cluster have to authenticate to Azure.",
+      "properties": {
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentitiesProfile",
+          "description": "Represents the information related to Azure User-Assigned managed identities needed\nto perform Operators authentication based on Azure User-Assigned Managed Identities"
+        }
+      },
+      "required": [
+        "userAssignedIdentities"
+      ]
+    },
+    "OperatorsAuthenticationProfileUpdate": {
+      "type": "object",
+      "description": "The configuration that the operators of the cluster have to authenticate to Azure.",
+      "properties": {
+        "userAssignedIdentities": {
+          "$ref": "#/definitions/UserAssignedIdentitiesProfileUpdate",
+          "description": "Represents the information related to Azure User-Assigned managed identities needed\nto perform Operators authentication based on Azure User-Assigned Managed Identities"
+        }
+      }
+    },
+    "OsDiskProfile": {
+      "type": "object",
+      "description": "The settings and configuration options for OSDisk",
+      "properties": {
+        "sizeGiB": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The OS disk size in GiB",
+          "default": 64,
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "diskStorageAccountType": {
+          "type": "string",
+          "description": "The type of the disk storage account\n- https://learn.microsoft.com/en-us/azure/virtual-machines/disks-types",
+          "default": "Premium_LRS",
+          "enum": [
+            "Premium_LRS",
+            "StandardSSD_LRS",
+            "Standard_LRS"
+          ],
+          "x-ms-enum": {
+            "name": "DiskStorageAccountType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Premium_LRS",
+                "value": "Premium_LRS",
+                "description": "Premium SSD with Locally Redundant Storage (LRS)"
+              },
+              {
+                "name": "StandardSSD_LRS",
+                "value": "StandardSSD_LRS",
+                "description": "Standard SSD with Locally Redundant Storage (LRS)"
+              },
+              {
+                "name": "Standard_LRS",
+                "value": "Standard_LRS",
+                "description": "Standard HDD with Locally Redundant Storage (LRS)"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "encryptionSetId": {
+          "$ref": "#/definitions/DiskEncryptionSetResourceId",
+          "description": "The ID of the DiskEncryptionSet resource to use to encrypt the OS disks for the VMs.\nThis needs to exist in the same subscription id listed in the Hosted Cluster, HostedCluster.Spec.Platform.Azure.SubscriptionID.\nDiskEncryptionSetID should also exist in a resource group under the same subscription id and the same location\nlisted in the Hosted Cluster, HostedCluster.Spec.Platform.Azure.Location.\n\nDetails on how to create a Disk Encryption Set can be found here:\nhttps://learn.microsoft.com/en-us/azure/virtual-machines/disks-enable-customer-managed-keys-portal#set-up-your-disk-encryption-set",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "PlatformProfile": {
+      "type": "object",
+      "description": "Azure specific configuration",
+      "properties": {
+        "managedResourceGroup": {
+          "type": "string",
+          "description": "Resource group to put cluster resources",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "subnetId": {
+          "$ref": "#/definitions/SubnetResourceId",
+          "description": "The Azure resource ID of the worker subnet\nNote that a subnet cannot be reused between ARO-HCP Clusters.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "outboundType": {
+          "type": "string",
+          "description": "The core outgoing configuration",
+          "default": "LoadBalancer",
+          "enum": [
+            "LoadBalancer"
+          ],
+          "x-ms-enum": {
+            "name": "OutboundType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "LoadBalancer",
+                "value": "LoadBalancer",
+                "description": "The load balancer configuration"
+              }
+            ]
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "networkSecurityGroupId": {
+          "$ref": "#/definitions/NetworkSecurityGroupResourceId",
+          "description": "ResourceId for the NSG (network security group) attached to the cluster subnet\n\nNote that NSGs cannot be reused for other ARO-HCP clusters.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "operatorsAuthentication": {
+          "$ref": "#/definitions/OperatorsAuthenticationProfile",
+          "description": "The configuration that the operators of the cluster have to authenticate to Azure",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "issuerUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "URL for the OIDC provider to be used for authentication\nto authenticate against user Azure cloud account",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "subnetId",
+        "networkSecurityGroupId",
+        "operatorsAuthentication",
+        "issuerUrl"
+      ]
+    },
+    "PlatformProfileUpdate": {
+      "type": "object",
+      "description": "Azure specific configuration",
+      "properties": {
+        "operatorsAuthentication": {
+          "$ref": "#/definitions/OperatorsAuthenticationProfileUpdate",
+          "description": "The configuration that the operators of the cluster have to authenticate to Azure",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "description": "The resource provisioning state.",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Accepted",
+        "Deleting",
+        "Provisioning",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "Resource has been created."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Resource creation failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "Resource creation was canceled."
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted",
+            "description": "Non-terminal state indicating the resource has been accepted"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting",
+            "description": "Non-terminal state indicating the resource is deleting"
+          },
+          {
+            "name": "Provisioning",
+            "value": "Provisioning",
+            "description": "Non-terminal state indicating the resource is provisioning"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating",
+            "description": "Non-terminal state indicating the resource is updating"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "RoleDefinition": {
+      "type": "object",
+      "description": "A single role definition required by a given operator",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the required role definition"
+        },
+        "resourceId": {
+          "$ref": "#/definitions/RoleDefinitionResourceId",
+          "description": "The resource ID of the role definition"
+        }
+      },
+      "required": [
+        "name",
+        "resourceId"
+      ]
+    },
+    "RoleDefinitionResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Authorization/roleDefinitions",
+            "scopes": [
+              "Tenant"
+            ]
+          }
+        ]
+      }
+    },
+    "StatusType": {
+      "type": "string",
+      "description": "Representation of the possible values of a external auths condition status.",
+      "enum": [
+        "True",
+        "False",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "StatusType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "True",
+            "value": "True",
+            "description": "Indicates that the condition status is True."
+          },
+          {
+            "name": "False",
+            "value": "False",
+            "description": "Indicates that the condition status is False."
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown",
+            "description": "Indicates that the condition status is unknown."
+          }
+        ]
+      }
+    },
+    "SubnetResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.Network/virtualNetworks/subnets"
+          }
+        ]
+      }
+    },
+    "Taint": {
+      "type": "object",
+      "description": "Taint is controlling the node taint and its effects",
+      "properties": {
+        "key": {
+          "type": "string",
+          "description": "The key of the taint",
+          "minLength": 1,
+          "maxLength": 316
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the taint",
+          "maxLength": 63
+        },
+        "effect": {
+          "$ref": "#/definitions/Effect",
+          "description": "The effect of the taint"
+        }
+      },
+      "required": [
+        "key",
+        "effect"
+      ]
+    },
+    "TokenClaimMappingsProfile": {
+      "type": "object",
+      "description": "External Auth claim mappings profile.\nAt a minimum username or groups must be defined.",
+      "properties": {
+        "username": {
+          "$ref": "#/definitions/UsernameClaimProfile",
+          "description": "The claim mappings username."
+        },
+        "groups": {
+          "$ref": "#/definitions/GroupClaimProfile",
+          "description": "The claim mappings groups."
+        }
+      },
+      "required": [
+        "username"
+      ]
+    },
+    "TokenClaimMappingsProfileUpdate": {
+      "type": "object",
+      "description": "External Auth claim mappings profile.\nAt a minimum username or groups must be defined.",
+      "properties": {
+        "username": {
+          "$ref": "#/definitions/UsernameClaimProfileUpdate",
+          "description": "The claim mappings username."
+        },
+        "groups": {
+          "$ref": "#/definitions/GroupClaimProfileUpdate",
+          "description": "The claim mappings groups."
+        }
+      }
+    },
+    "TokenClaimValidationRule": {
+      "type": "object",
+      "description": "External Auth claim validation rule",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "This configures the type of the validation rule.\nIt defaults to \"RequiredClaim\"",
+          "default": "RequiredClaim",
+          "enum": [
+            "RequiredClaim"
+          ],
+          "x-ms-enum": {
+            "name": "TokenValidationRuleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "RequiredClaim",
+                "value": "RequiredClaim",
+                "description": "Indicates that a Required Claim validation rule.\n\nWhen set to 'RequiredClaim', the Kubernetes API server will be configured to validate that the incoming JWT\ncontains the required claim and that its value matches the required value."
+              }
+            ]
+          }
+        },
+        "requiredClaim": {
+          "$ref": "#/definitions/TokenRequiredClaim",
+          "description": "The required claim rule to be applied."
+        }
+      }
+    },
+    "TokenIssuerProfile": {
+      "type": "object",
+      "description": "Token issuer profile\nThis configures how the platform interacts with the identity provider and\nhow tokens issued from the identity provider are evaluated by the Kubernetes API server.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "This configures the URL used to issue tokens by the identity provider.\nThe Kubernetes API server determines how authentication tokens should be handled\nby matching the 'iss' claim in the JWT to the issuerURL of configured identity providers.\n\nissuerURL must use the 'https' scheme."
+        },
+        "audiences": {
+          "type": "array",
+          "description": "This configures the acceptable audiences the JWT token, issued by the identity\nprovider, must be issued to. At least one of the entries must match the\n'aud' claim in the JWT token.\n\naudiences must contain at least one entry and must not exceed ten entries.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ca": {
+          "type": "string",
+          "description": "The issuer of the token\n\nCertificate bundle to use to validate server certificates for the configured URL.\nIt must be PEM encoded and when not specified, the system trust is used.",
+          "x-ms-client-name": "CA"
+        }
+      },
+      "required": [
+        "url",
+        "audiences"
+      ]
+    },
+    "TokenIssuerProfileUpdate": {
+      "type": "object",
+      "description": "Token issuer profile\nThis configures how the platform interacts with the identity provider and\nhow tokens issued from the identity provider are evaluated by the Kubernetes API server.",
+      "properties": {
+        "url": {
+          "type": "string",
+          "format": "uri",
+          "description": "This configures the URL used to issue tokens by the identity provider.\nThe Kubernetes API server determines how authentication tokens should be handled\nby matching the 'iss' claim in the JWT to the issuerURL of configured identity providers.\n\nissuerURL must use the 'https' scheme."
+        },
+        "audiences": {
+          "type": "array",
+          "description": "This configures the acceptable audiences the JWT token, issued by the identity\nprovider, must be issued to. At least one of the entries must match the\n'aud' claim in the JWT token.\n\naudiences must contain at least one entry and must not exceed ten entries.",
+          "minItems": 1,
+          "maxItems": 10,
+          "items": {
+            "type": "string"
+          }
+        },
+        "ca": {
+          "type": "string",
+          "description": "The issuer of the token\n\nCertificate bundle to use to validate server certificates for the configured URL.\nIt must be PEM encoded and when not specified, the system trust is used.",
+          "x-ms-client-name": "CA"
+        }
+      }
+    },
+    "TokenRequiredClaim": {
+      "type": "object",
+      "description": "Token required claim validation rule.",
+      "properties": {
+        "claim": {
+          "type": "string",
+          "description": "Claim name for the validation profile\nclaim is a required field that configures the name of the required claim.",
+          "minLength": 1
+        },
+        "requiredValue": {
+          "type": "string",
+          "description": "Required value\nrequiredValue is a required field that configures the value that 'claim' must\nhave when taken from the incoming JWT claims.\nIf the value in the JWT claims does not match, the token\nwill be rejected for authentication.",
+          "minLength": 1
+        }
+      },
+      "required": [
+        "claim",
+        "requiredValue"
+      ]
+    },
+    "UserAssignedIdentitiesProfile": {
+      "type": "object",
+      "description": "Represents the information related to Azure User-Assigned managed identities needed\nto perform Operators authentication based on Azure User-Assigned Managed Identities",
+      "properties": {
+        "controlPlaneOperators": {
+          "type": "object",
+          "description": "The set of Azure User-Assigned Managed Identities leveraged for the Control Plane\noperators of the cluster. The set of required managed identities is dependent on the\nCluster's OpenShift version.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityResourceId"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dataPlaneOperators": {
+          "type": "object",
+          "description": "The set of Azure User-Assigned Managed Identities leveraged for the Data Plane\noperators of the cluster. The set of required managed identities is dependent on the\nCluster's OpenShift version.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityResourceId"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "serviceManagedIdentity": {
+          "$ref": "#/definitions/UserAssignedIdentityResourceId",
+          "description": "Represents the information associated to an Azure User-Assigned Managed Identity whose\npurpose is to perform service level actions.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "controlPlaneOperators",
+        "dataPlaneOperators",
+        "serviceManagedIdentity"
+      ]
+    },
+    "UserAssignedIdentitiesProfileUpdate": {
+      "type": "object",
+      "description": "Represents the information related to Azure User-Assigned managed identities needed\nto perform Operators authentication based on Azure User-Assigned Managed Identities",
+      "properties": {
+        "controlPlaneOperators": {
+          "type": "object",
+          "description": "The set of Azure User-Assigned Managed Identities leveraged for the Control Plane\noperators of the cluster. The set of required managed identities is dependent on the\nCluster's OpenShift version.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityResourceId"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "dataPlaneOperators": {
+          "type": "object",
+          "description": "The set of Azure User-Assigned Managed Identities leveraged for the Data Plane\noperators of the cluster. The set of required managed identities is dependent on the\nCluster's OpenShift version.",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityResourceId"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "serviceManagedIdentity": {
+          "$ref": "#/definitions/UserAssignedIdentityResourceId",
+          "description": "Represents the information associated to an Azure User-Assigned Managed Identity whose\npurpose is to perform service level actions.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    },
+    "UserAssignedIdentityResourceId": {
+      "type": "string",
+      "format": "arm-id",
+      "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+      "x-ms-arm-id-details": {
+        "allowedResources": [
+          {
+            "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+          }
+        ]
+      }
+    },
+    "UsernameClaimPrefixPolicy": {
+      "type": "string",
+      "description": "UsernameClaimPrefixPolicy configures whether to add a prefix to a JWT claim.",
+      "enum": [
+        "None",
+        "Prefix",
+        "NoPrefix"
+      ],
+      "x-ms-enum": {
+        "name": "UsernameClaimPrefixPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "No opinion; the platform is left to choose a prefix for the JWT claim"
+          },
+          {
+            "name": "Prefix",
+            "value": "Prefix",
+            "description": "Add a user-provided prefix to the JWT claim"
+          },
+          {
+            "name": "NoPrefix",
+            "value": "NoPrefix",
+            "description": "Do not add a prefix to the JWT claim"
+          }
+        ]
+      }
+    },
+    "UsernameClaimProfile": {
+      "type": "object",
+      "description": "External Auth claim profile\nThis configures how the username of a cluster identity should be constructed\nfrom the claims in a JWT token issued by the identity provider.",
+      "properties": {
+        "claim": {
+          "type": "string",
+          "description": "Claim name of the external profile",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the claim external profile\nMust be set when the prefixPolicy field is set to 'Prefix' and must be unset\notherwise."
+        },
+        "prefixPolicy": {
+          "$ref": "#/definitions/UsernameClaimPrefixPolicy",
+          "description": "Prefix policy is an optional field that configures how a prefix should be\napplied to the value of the JWT claim specified in the 'claim' field.\n\nAllowed values are 'Prefix', 'NoPrefix', and 'None'.\n\nWhen set to 'Prefix', the value specified in the prefix field will be\nprepended to the value of the JWT claim.\nThe prefix field must be set when prefixPolicy is 'Prefix'.\n\nWhen set to 'NoPrefix', no prefix will be prepended to the value\nof the JWT claim.\n\nWhen set to 'None', this means no opinion and the platform is left to choose\nany prefixes that are applied which is subject to change over time.\nCurrently, the platform prepends `{issuerURL}#` to the value of the JWT claim\nwhen the claim is not 'email'.\nAs an example, consider the following scenario:\n`prefix` is unset, `issuerURL` is set to `https://myoidc.tld`,\nthe JWT claims include \"username\":\"userA\" and \"email\":\"userA"
+        }
+      },
+      "required": [
+        "claim"
+      ]
+    },
+    "UsernameClaimProfileUpdate": {
+      "type": "object",
+      "description": "External Auth claim profile\nThis configures how the username of a cluster identity should be constructed\nfrom the claims in a JWT token issued by the identity provider.",
+      "properties": {
+        "claim": {
+          "type": "string",
+          "description": "Claim name of the external profile",
+          "minLength": 1,
+          "maxLength": 256
+        },
+        "prefix": {
+          "type": "string",
+          "description": "Prefix for the claim external profile\nMust be set when the prefixPolicy field is set to 'Prefix' and must be unset\notherwise."
+        },
+        "prefixPolicy": {
+          "$ref": "#/definitions/UsernameClaimPrefixPolicy",
+          "description": "Prefix policy is an optional field that configures how a prefix should be\napplied to the value of the JWT claim specified in the 'claim' field.\n\nAllowed values are 'Prefix', 'NoPrefix', and 'None'.\n\nWhen set to 'Prefix', the value specified in the prefix field will be\nprepended to the value of the JWT claim.\nThe prefix field must be set when prefixPolicy is 'Prefix'.\n\nWhen set to 'NoPrefix', no prefix will be prepended to the value\nof the JWT claim.\n\nWhen set to 'None', this means no opinion and the platform is left to choose\nany prefixes that are applied which is subject to change over time.\nCurrently, the platform prepends `{issuerURL}#` to the value of the JWT claim\nwhen the claim is not 'email'.\nAs an example, consider the following scenario:\n`prefix` is unset, `issuerURL` is set to `https://myoidc.tld`,\nthe JWT claims include \"username\":\"userA\" and \"email\":\"userA"
+        }
+      }
+    },
+    "VersionProfile": {
+      "type": "object",
+      "description": "Versions represents an OpenShift version.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "ID is the unique identifier of the version.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "channelGroup": {
+          "type": "string",
+          "description": "ChannelGroup is the name of the set to which this version belongs. Each version belongs to only a single set.",
+          "default": "stable",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
