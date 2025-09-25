@@ -50,9 +50,6 @@ union EvaluatorDefinitionType {
   @doc("Code-based definition")
   code: "code",
 
-  @doc("Prompty-based definition")
-  prompty: "prompty",
-
   @doc("Prompt & Code Based definition")
   prompt_and_code: "prompt_and_code",
   
