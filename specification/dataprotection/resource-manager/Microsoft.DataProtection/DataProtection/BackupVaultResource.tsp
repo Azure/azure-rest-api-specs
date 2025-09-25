@@ -105,6 +105,7 @@ interface BackupVaultResources {
       /**
        * The ID of the deleted backup vault to restore from during undelete flow.
        */
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
       @added(Versions.v2025_09_01)
       @header
       `x-ms-deleted-vault-id`?: string;
