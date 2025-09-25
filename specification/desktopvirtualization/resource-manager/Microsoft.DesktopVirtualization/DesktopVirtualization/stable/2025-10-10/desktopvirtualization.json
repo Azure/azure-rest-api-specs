@@ -28,16 +28,11 @@
   "paths": {
     "/providers/Microsoft.DesktopVirtualization/operations": {
       "get": {
+        "operationId": "Operations_List",
         "tags": [
           "Operations"
         ],
-        "operationId": "Operations_List",
-        "description": "List all of the available operations the Desktop Virtualization resource provider supports.",
-        "x-ms-examples": {
-          "OperationDescription_List": {
-            "$ref": "./examples/OperationDescription_List.json"
-          }
-        },
+        "description": "List the operations for the provider",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -45,16 +40,21 @@
         ],
         "responses": {
           "200": {
-            "description": "Successfully retrieved operations.",
+            "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderOperationList"
+              "$ref": "#/definitions/ResourceProviderOperationListResult"
             }
           },
           "default": {
-            "description": "Automation error response describing why the operation failed.",
+            "description": "An unexpected error response.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Provider Operations": {
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -3028,7 +3028,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages/{msixPackageFullName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages/{msixPackageFullName}": {
       "get": {
         "tags": [
           "MSIXPackage"
@@ -3226,7 +3226,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourcegroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/msixPackages": {
       "get": {
         "tags": [
           "MSIXPackage"
@@ -4260,24 +4260,27 @@
         }
       }
     },
-    "ResourceProviderOperationList": {
+    "ResourceProviderOperationListResult": {
       "type": "object",
-      "description": "Result of the request to list operations.",
-      "readOnly": true,
+      "description": "A list of REST API operations supported by an Azure Resource Provider. It contains an URL link to get the next set of results.",
       "properties": {
         "value": {
           "type": "array",
+          "description": "The ResourceProviderOperation items on this page",
           "items": {
             "$ref": "#/definitions/ResourceProviderOperation"
           },
-          "description": "List of operations supported by this resource provider."
+          "x-ms-identifiers": []
         },
         "nextLink": {
           "type": "string",
-          "readOnly": true,
-          "description": "Link to the next page of results."
+          "format": "uri",
+          "description": "The link to the next page of items"
         }
-      }
+      },
+      "required": [
+        "value"
+      ]
     },
     "ResourceProviderOperation": {
       "type": "object",
@@ -4886,7 +4889,7 @@
       "description": "HostPool properties that can be patched.",
       "allOf": [
         {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
+          "$ref": "#/definitions/ResourceModelWithAllowedPropertySetWithoutIdentity"
         }
       ],
       "properties": {
@@ -5939,14 +5942,6 @@
       "type": "object",
       "description": "Application properties that can be patched.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "tags to be updated",
-          "x-nullable": true
-        },
         "properties": {
           "description": "Detailed properties for Application",
           "x-ms-client-flatten": true,
@@ -6097,14 +6092,6 @@
       "type": "object",
       "description": "Desktop properties that can be patched.",
       "properties": {
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "description": "tags to be updated",
-          "x-nullable": true
-        },
         "properties": {
           "description": "Detailed properties for Desktop",
           "x-ms-client-flatten": true,
@@ -6895,7 +6882,11 @@
               "Friday",
               "Saturday"
             ],
-            "type": "string"
+            "type": "string",
+            "x-ms-enum": {
+              "name": "DayOfWeek",
+              "modelAsString": true
+            }
           }
         },
         "rampUpStartTime": {
@@ -7744,6 +7735,55 @@
           "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period."
         }
       }
+    },
+    "ResourceModelWithAllowedPropertySetWithoutIdentity": {
+      "type": "object",
+      "description": "The resource model definition containing the full set of allowed properties for a resource, without the identity. Copied from ../../../../../../common-types/resource-management/v6/types.json#/definitions.ResourceModelWithAllowedPropertySet",
+      "properties": {
+        "managedBy": {
+          "type": "string",
+          "description": "The fully qualified resource ID of the resource that manages this resource. Indicates if this resource is managed by another Azure resource. If this is present, complete mode deployment will not delete the resource if it is removed from the template since it is managed by another resource.",
+          "x-ms-mutability": [
+            "read",
+            "create",
+            "update"
+          ]
+        },
+        "kind": {
+          "type": "string",
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "pattern": "^[-\\w\\._,\\(\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag field is *not* required. If it is provided in the response body, it must also be provided as a header per the normal etag convention.  Entity tags are used for comparing two or more entities from the same requested resource. HTTP/1.1 uses entity tags in the etag (section 14.19), If-Match (section 14.24), If-None-Match (section 14.26), and If-Range (section 14.27) header fields. ",
+          "readOnly": true
+        },
+        "sku": {
+          "allOf": [
+            {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Sku"
+            }
+          ]
+        },
+        "plan": {
+          "allOf": [
+            {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Plan"
+            }
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "x-ms-azure-resource": true
     }
   },
   "parameters": {
