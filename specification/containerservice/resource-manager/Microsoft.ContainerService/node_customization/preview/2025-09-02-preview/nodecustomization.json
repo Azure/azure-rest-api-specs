@@ -744,7 +744,7 @@
         },
         "customizationScripts": {
           "type": "array",
-          "description": "The scripts to customize the node before or after image capture.\nWhen there are multiple scripts specified for the same execution point, the node is rebooted between executing each script.",
+          "description": "The scripts to customize the node before or after image capture.",
           "items": {
             "$ref": "#/definitions/NodeCustomizationScript"
           },
@@ -780,6 +780,10 @@
         "script": {
           "type": "string",
           "description": "The script content to be executed in plain text. Do not include secrets."
+        },
+        "rebootAfter": {
+          "type": "boolean",
+          "description": "Whether the node should reboot after successful script execution."
         }
       },
       "required": [
@@ -823,7 +827,7 @@
         },
         "customizationScripts": {
           "type": "array",
-          "description": "The scripts to customize the node before or after image capture.\nWhen there are multiple scripts specified for the same execution point, the node is rebooted between executing each script.",
+          "description": "The scripts to customize the node before or after image capture.",
           "items": {
             "$ref": "#/definitions/NodeCustomizationScript"
           },

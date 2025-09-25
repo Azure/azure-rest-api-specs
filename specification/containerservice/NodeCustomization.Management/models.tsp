@@ -44,10 +44,7 @@ model NodeCustomizationProperties {
   @doc("The provisioning state of the node customization.")
   provisioningState?: ProvisioningState;
 
-  @doc("""
-    The scripts to customize the node before or after image capture.
-    When there are multiple scripts specified for the same execution point, the node is rebooted between executing each script.
-    """)
+  @doc("The scripts to customize the node before or after image capture.")
   @extension("x-ms-identifiers", #[])
   customizationScripts?: NodeCustomizationScript[];
 }
@@ -78,6 +75,9 @@ model NodeCustomizationScript {
   @doc("The script content to be executed in plain text. Do not include secrets.")
   @example("touch /hello_world.txt")
   script: string;
+
+  @doc("Whether the node should reboot after successful script execution.")
+  rebootAfter?: boolean;
 }
 
 @doc("The execution point for the script.")
