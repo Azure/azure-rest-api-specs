@@ -13,12 +13,14 @@ namespace Microsoft.Network;
 /**
  * Class representing the Geographic hierarchy used with the Geographic traffic routing method.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @tenantResource
-model TrafficManagerGeographicHierarchy extends ProxyResource {
-  properties?: GeographicHierarchyProperties;
+model TrafficManagerGeographicHierarchy is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
+  ...ResourceNameParameter<
+    Resource = TrafficManagerGeographicHierarchy,
+    KeyName = "trafficManagerGeographicHierarchy",
+    SegmentName = "trafficManagerGeographicHierarchies",
+    NamePattern = ""
+  >;
 }
 
 alias TrafficManagerGeographicHierarchyOps = Azure.ResourceManager.Legacy.LegacyOperations<

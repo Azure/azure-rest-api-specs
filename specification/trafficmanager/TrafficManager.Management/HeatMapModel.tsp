@@ -14,12 +14,14 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager HeatMap.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 @parentResource(Profile)
-model HeatMapModel extends ProxyResource {
-  properties?: HeatMapProperties;
+model HeatMapModel is Azure.ResourceManager.ProxyResource<HeatMapProperties> {
+  ...ResourceNameParameter<
+    Resource = HeatMapModel,
+    KeyName = "heatMap",
+    SegmentName = "heatMaps",
+    NamePattern = ""
+  >;
 }
 
 alias HeatMapModelsOps = Azure.ResourceManager.Legacy.LegacyOperations<

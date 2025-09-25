@@ -13,11 +13,13 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-model Profile extends TrackedResource {
-  properties?: ProfileProperties;
+model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
+  ...ResourceNameParameter<
+    Resource = Profile,
+    KeyName = "profileName",
+    SegmentName = "trafficmanagerprofiles",
+    NamePattern = ""
+  >;
 }
 
 alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -27,7 +29,8 @@ alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  KeysOf<ResourceNameParameter<
+  KeysOf<
+  ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",
     SegmentName = "trafficmanagerprofiles",
@@ -42,7 +45,8 @@ alias ProfileSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  KeysOf<ResourceNameParameter<
+  KeysOf<
+  ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",
     SegmentName = "trafficmanagerprofiles",
