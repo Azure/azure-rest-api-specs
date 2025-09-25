@@ -1,9 +1,9 @@
-import "../../../Common/StandardizedContracts/CommonEnums.tsp";
-import "../../../Common/StandardizedContracts/Scope.tsp";
-import "../../../Common/StandardizedContracts/CommonModels.tsp";
-import "../../../Common/StandardizedContracts/AssessmentProperties.tsp";
+import "../../Common/StandardizedContracts/CommonEnums.tsp";
+import "../../Common/StandardizedContracts/Scope.tsp";
+import "../../Common/StandardizedContracts/CommonModels.tsp";
+import "../../Common/StandardizedContracts/AssessmentProperties.tsp";
 import "../../DataModels/Assessment/AKSAssessmentSettings.tsp";
-import "../../../Common/ArmModels/AssessmentProjectV2.tsp";
+import "../../Common/ArmModels/AssessmentProjectV2.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
