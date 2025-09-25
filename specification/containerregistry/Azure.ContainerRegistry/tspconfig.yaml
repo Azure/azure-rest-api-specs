@@ -1,0 +1,61 @@
+parameters:
+  "service-dir":
+    default: "sdk/containerregistry"
+
+emit:
+  - "@azure-tools/typespec-autorest"
+
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/data-plane"
+
+options:
+  "@azure-tools/typespec-autorest":
+    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/Registry/{version-status}/{version}/containerregistry.json"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-containerregistry"
+    package-name: "azure-containerregistry"
+    package-pprint-name: "Azure Container Registry"
+    namespace: "azure.containerregistry"
+    package-version: "1.2.0"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-containers-containerregistry"
+    package-name: "com.azure.containers.containerregistry"
+    package-version: "1.2.19"
+    namespace: "com.azure.containers.containerregistry"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-csharp":
+    package-name: "Azure.Containers.ContainerRegistry"
+    package-dir: "Azure.Containers.ContainerRegistry"
+    package-version: "1.1.1"
+    namespace: "Azure.Containers.ContainerRegistry"
+    clear-output-folder: true
+    model-namespace: false
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-ts":
+    service-dir: "sdk/containerregistry/"
+    is-modular-library: true
+    package-dir: "container-registry"
+    package-details:
+      name: "@azure/container-registry"
+      version: "1.1.0"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/azcontainerregistry"
+    service-dir: "sdk/containers"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azcontainerregistry"
+    enerate-fakes: true
+    inject-spans: true
+    flavor: "azure"
