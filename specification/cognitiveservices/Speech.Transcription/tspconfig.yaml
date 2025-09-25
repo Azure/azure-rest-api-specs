@@ -3,6 +3,7 @@ parameters:
     default: "sdk/cognitiveservices"
 emit:
   - "@azure-tools/typespec-autorest"
+  - "@azure-tools/typespec-csharp"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
@@ -15,7 +16,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Speech.Transcription"
+    emitter-output-dir: "{project-root}/tsp-output/csharp"
     namespace: "Azure.AI.Speech.Transcription"
     model-namespace: false
     flavor: azure
