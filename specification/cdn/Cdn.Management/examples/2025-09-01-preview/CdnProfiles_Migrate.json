@@ -1,0 +1,33 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "migrationParameters": {
+      "sku": {
+        "name": "Standard_AzureFrontDoor"
+      }
+    },
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.Cdn/profiles/migrate",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/operationresults/operationid/profileresults/profile1/migrateresults/profile1",
+        "properties": {
+          "migratedProfileResourceId": {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "azure-asyncoperation": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resourceGroupName/providers/Microsoft.Cdn/operationresults/operationId?api-version=2025-09-01-preview"
+      }
+    }
+  },
+  "operationId": "Profiles_CdnMigrateToAfd",
+  "title": "Profiles_CdnMigrate"
+}
