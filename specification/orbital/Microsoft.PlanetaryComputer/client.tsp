@@ -59,7 +59,7 @@ namespace Customizations;
 );
 @@clientName(StatisticsResponse, "StatisticsResult", "csharp");
 @@clientName(TileJsonResponse, "TileJsonResult", "csharp");
-@@clientName(IngestionSources.IngestionSourcesPagedResponse,
+@@clientName(IngestionSourcesPagedResponse,
   "IngestionSourcesPagedResult",
   "csharp"
 );
@@ -70,17 +70,11 @@ namespace Customizations;
 
 // Models ending with "Definition" - rename appropriately
 @@clientName(StacQueryable, "QueryableProperty", "csharp");
-@@clientName(Ingestions.IngestionDefinition,
-  "IngestionConfiguration",
-  "csharp"
-);
+@@clientName(IngestionDefinition, "IngestionConfiguration", "csharp");
 
 // Models ending with "Operation" - rename to "Info"
 @@clientName(Operation, "LongRunningOperation", "csharp");
-@@clientName(Ingestions.IngestionRuns.IngestionRunOperation,
-  "IngestionRunInfo",
-  "csharp"
-);
+@@clientName(IngestionRunOperation, "IngestionRunInfo", "csharp");
 
 // Generic single-word class names - add descriptive prefixes
 @@clientName(Asset, "StacAsset", "csharp");
@@ -111,9 +105,9 @@ interface Ingestion {
   getIngestionOperations is IngestionOperations.list;
 
   // Ingestion runs operations
-  createIngestionRun is Ingestions.IngestionRuns.create;
-  getIngestionRun is Ingestions.IngestionRuns.get;
-  getIngestionRuns is Ingestions.IngestionRuns.list;
+  createIngestionRun is IngestionRuns.create;
+  getIngestionRun is IngestionRuns.get;
+  getIngestionRuns is IngestionRuns.list;
 
   // Ingestion operations
   createIngestion is Ingestions.create;

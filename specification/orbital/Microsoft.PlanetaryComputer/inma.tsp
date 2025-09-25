@@ -3,10 +3,9 @@ import "@typespec/openapi";
 import "./models.stac.spec.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using Azure.Core;
 using Azure.Core.Foundations;
-using Azure.Core.Traits;
-
 @service(#{ title: "MPCPro Ingestion and Management API" })
 namespace Microsoft.PlanetaryComputer;
 
@@ -107,9 +106,12 @@ interface Ingestions {
 }
 
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
+@parentResource(StacCollection)
+@resource("ingestions")
 model IngestionDefinition {
   @doc("Ingestion id")
   @visibility(Lifecycle.Read)
+  @key("ingestionId")
   id: uuid;
 
   @doc("Ingestion type")
@@ -201,8 +203,12 @@ interface IngestionRuns {
 }
 
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
+@resource("runs")
+@parentResource(IngestionDefinition)
 model IngestionRun {
   @doc("Run id")
+  @key("runId")
+  @visibility(Lifecycle.Create, Lifecycle.Update, Lifecycle.Read)
   id: uuid;
 
   @doc("Run id which this run is associated to because it has been retried or rerun")
@@ -919,12 +925,23 @@ interface StacCollectionOperations {
     _: Operation;
   } | ErrorResponse;
 
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get a collection in the GeoCatalog instance")
   @summary("Get Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
-  get is StandardOperations.ResourceRead<
-    StacCollection,
-    QueryParametersTrait<{
+  @route("/stac/collections/{collectionId}")
+  @get
+  get is Azure.Core.Foundations.Operation<
+    {
+      /**
+       * Catalog collection id
+       */
+      @doc("Catalog collection id")
+      @path
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
       /**
        * Whether to sign asset URLs in the response.
        */
@@ -936,14 +953,15 @@ interface StacCollectionOperations {
        */
       @query("duration")
       durationInMinutes?: int32;
-    }>
+    },
+    StacCollection
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create or replace a collection in the GeoCatalog instance")
   @summary("Create or update Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
-  @route("/collections")
+  @route("/stac/collections")
   @put
   @pollingOperation(IngestionOperations.get)
   createOrReplace(
@@ -973,7 +991,7 @@ interface StacCollectionOperations {
   @doc("Delete a collection in the GeoCatalog instance")
   @summary("Delete Collection")
   @tag("SpatioTemporal Asset Catalog (STAC) API")
-  @route("/collections")
+  @route("/stac/collections")
   @delete
   @pollingOperation(IngestionOperations.get)
   delete(...CollectionParameters): {

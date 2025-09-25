@@ -8618,10 +8618,9 @@
           {
             "name": "collectionId",
             "in": "path",
-            "description": "Unique identifier for the collection.",
+            "description": "Catalog collection id",
             "required": true,
             "type": "string",
-            "minLength": 1,
             "maxLength": 500,
             "pattern": ".*"
           },
@@ -13267,7 +13266,12 @@
       "properties": {
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Run id"
+          "description": "Run id",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
         },
         "parentRunId": {
           "$ref": "#/definitions/Azure.Core.uuid",
