@@ -100,6 +100,7 @@ interface StaticSiteARMResources {
   /**
    * Description for Get all Static Sites for a subscription.
    */
+  @summary("Get all Static Sites for a subscription.")
   list is ArmListBySubscription<
     StaticSiteARMResource,
     Response = ArmResponse<StaticSiteCollection>,

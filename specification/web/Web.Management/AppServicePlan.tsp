@@ -95,6 +95,7 @@ interface AppServicePlans {
   /**
    * Description for Get all App Service plans for a subscription.
    */
+  @summary("Get all App Service plans for a subscription.")
   list is ArmListBySubscription<
     AppServicePlan,
     Parameters = {

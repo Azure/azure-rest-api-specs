@@ -210,6 +210,7 @@ interface Sites {
   /**
    * Description for Get all apps for a subscription.
    */
+  @summary("Get all apps for a subscription.")
   list is Azure.ResourceManager.Extension.ListByTarget<
     Extension.Subscription,
     Site,
@@ -566,7 +567,7 @@ interface Sites {
   getWebSiteContainerLogs is SiteOps.ActionSync<
     Site,
     void,
-    File | NoContentResponse,
+    File<"application/octet-stream"> | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -578,7 +579,7 @@ interface Sites {
   getContainerLogsZip is SiteOps.ActionSync<
     Site,
     void,
-    File | NoContentResponse,
+    File<"application/zip"> | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -818,7 +819,7 @@ interface Sites {
   startWebSiteNetworkTrace is SiteOps.ActionSync<
     Site,
     void,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -1027,7 +1028,7 @@ interface Sites {
   listPublishingProfileXmlWithSecrets is SiteOps.ActionSync<
     Site,
     CsmPublishingProfileOptions,
-    File,
+    File<"application/xml">,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1700,7 +1701,7 @@ interface WebApps {
   getWebSiteContainerLogsSlot is WebAppOps.ActionSync<
     Site,
     void,
-    File | NoContentResponse,
+    File<"application/octet-stream"> | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1713,7 +1714,7 @@ interface WebApps {
   getContainerLogsZipSlot is WebAppOps.ActionSync<
     Site,
     void,
-    File | NoContentResponse,
+    File<"application/zip"> | NoContentResponse,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1736,7 +1737,7 @@ interface WebApps {
   getFunctionsAdminTokenSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     OverrideErrorType = DefaultErrorResponse
   >;
 
@@ -1901,7 +1902,7 @@ interface WebApps {
   startWebSiteNetworkTraceSlot is WebAppOps.ActionSync<
     Site,
     void,
-    ArmResponse<string>,
+    ArmResponse<stringApplicationJson>,
     Parameters = {
       /**
        * The duration to keep capturing in seconds.
@@ -2113,7 +2114,7 @@ interface WebApps {
   listPublishingProfileXmlWithSecretsSlot is WebAppOps.ActionSync<
     Site,
     CsmPublishingProfileOptions,
-    File,
+    File<"application/xml">,
     OverrideErrorType = DefaultErrorResponse
   >;
 

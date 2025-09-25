@@ -79,6 +79,7 @@ interface KubeEnvironments {
   /**
    * Description for Get all Kubernetes Environments for a subscription.
    */
+  @summary("Get all Kubernetes Environments for a subscription.")
   listBySubscription is ArmListBySubscription<
     KubeEnvironment,
     Response = ArmResponse<KubeEnvironmentCollection>,

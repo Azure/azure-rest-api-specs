@@ -46,6 +46,7 @@ interface Certificates {
   /**
    * Description for Get a certificate.
    */
+  @summary("Get a certificate.")
   get is CertificateOps.Read<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -55,6 +56,7 @@ interface Certificates {
    * Description for Create or update a certificate.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a certificate.")
   createOrUpdate is CertificateOps.CreateOrUpdateSync<
     Certificate,
     Response = ArmResourceUpdatedResponse<Certificate>,
@@ -64,6 +66,7 @@ interface Certificates {
   /**
    * Description for Create or update a certificate.
    */
+  @summary("Create or update a certificate.")
   @patch(#{ implicitOptionality: false })
   update is CertificateOps.CustomPatchSync<
     Certificate,
@@ -74,6 +77,7 @@ interface Certificates {
   /**
    * Description for Delete a certificate.
    */
+  @summary("Delete a certificate.")
   delete is CertificateOps.DeleteSync<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -82,6 +86,7 @@ interface Certificates {
   /**
    * Description for Get all certificates in a resource group.
    */
+  @summary("Get all certificates in a resource group.")
   listByResourceGroup is CertificateOps.List<
     Certificate,
     Response = ArmResponse<CertificateCollection>,
@@ -91,6 +96,7 @@ interface Certificates {
   /**
    * Description for Get all certificates for a subscription.
    */
+  @summary("Get all certificates for a subscription.")
   list is Azure.ResourceManager.Extension.ListByTarget<
     Extension.Subscription,
     Certificate,

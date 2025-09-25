@@ -81,6 +81,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Delete an App Service Environment.
    */
+  @summary("Delete an App Service Environment.")
   delete is ArmResourceDeleteWithoutOkAsync<
     AppServiceEnvironmentResource,
     Parameters = {
@@ -96,6 +97,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all App Service Environments in a resource group.
    */
+  @summary("AppServiceEnvironments_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     AppServiceEnvironmentResource,
     Response = ArmResponse<AppServiceEnvironmentCollection>,
@@ -105,6 +107,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Description for Get all App Service Environments for a subscription.
    */
+  @summary("Get all App Service Environments for a subscription.")
   list is ArmListBySubscription<
     AppServiceEnvironmentResource,
     Response = ArmResponse<AppServiceEnvironmentCollection>,

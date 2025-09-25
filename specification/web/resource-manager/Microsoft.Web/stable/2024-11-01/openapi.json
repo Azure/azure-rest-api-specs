@@ -723,7 +723,8 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "summary": "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
+        "description": "Description for Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -759,6 +760,7 @@
         "tags": [
           "Users"
         ],
+        "summary": "Gets publishing user",
         "description": "Description for Gets publishing user",
         "parameters": [
           {
@@ -785,6 +787,7 @@
         "tags": [
           "Users"
         ],
+        "summary": "Updates publishing user",
         "description": "Description for Updates publishing user",
         "parameters": [
           {
@@ -822,6 +825,7 @@
         "tags": [
           "SourceControls"
         ],
+        "summary": "Gets the source controls available for Azure websites.",
         "description": "Description for Gets the source controls available for Azure websites.",
         "parameters": [
           {
@@ -853,6 +857,7 @@
         "tags": [
           "SourceControls"
         ],
+        "summary": "Gets source control token",
         "description": "Description for Gets source control token",
         "parameters": [
           {
@@ -886,6 +891,7 @@
         "tags": [
           "SourceControls"
         ],
+        "summary": "Updates source control token",
         "description": "Description for Updates source control token",
         "parameters": [
           {
@@ -1148,6 +1154,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Get all certificates for a subscription.",
         "description": "Description for Get all certificates for a subscription.",
         "parameters": [
           {
@@ -1279,6 +1286,7 @@
         "tags": [
           "Global"
         ],
+        "summary": "Get all deleted apps for a subscription.",
         "description": "Description for Get all deleted apps for a subscription.",
         "parameters": [
           {
@@ -1313,6 +1321,7 @@
         "tags": [
           "Global"
         ],
+        "summary": "Get deleted app for a subscription.",
         "description": "Description for Get deleted app for a subscription.",
         "parameters": [
           {
@@ -1356,6 +1365,7 @@
         "tags": [
           "Global"
         ],
+        "summary": "Get all deleted apps for a subscription.",
         "description": "Description for Get all deleted apps for a subscription.",
         "parameters": [
           {
@@ -1569,6 +1579,7 @@
         "tags": [
           "AppServiceEnvironmentResources"
         ],
+        "summary": "Get all App Service Environments for a subscription.",
         "description": "Description for Get all App Service Environments for a subscription.",
         "parameters": [
           {
@@ -1608,6 +1619,7 @@
         "tags": [
           "KubeEnvironments"
         ],
+        "summary": "Get all Kubernetes Environments for a subscription.",
         "description": "Description for Get all Kubernetes Environments for a subscription.",
         "parameters": [
           {
@@ -1729,6 +1741,7 @@
         "tags": [
           "DeletedSites"
         ],
+        "summary": "Get all deleted apps for a subscription at location",
         "description": "Description for Get all deleted apps for a subscription at location",
         "parameters": [
           {
@@ -1771,6 +1784,7 @@
         "tags": [
           "DeletedSites"
         ],
+        "summary": "Get deleted app for a subscription at location.",
         "description": "Description for Get deleted app for a subscription at location.",
         "parameters": [
           {
@@ -2118,6 +2132,7 @@
         "tags": [
           "AppServicePlans"
         ],
+        "summary": "Get all App Service plans for a subscription.",
         "description": "Description for Get all App Service plans for a subscription.",
         "parameters": [
           {
@@ -2164,6 +2179,7 @@
         "tags": [
           "Sites"
         ],
+        "summary": "Get all apps for a subscription.",
         "description": "Description for Get all apps for a subscription.",
         "parameters": [
           {
@@ -2232,6 +2248,7 @@
         "tags": [
           "StaticSiteARMResources"
         ],
+        "summary": "Get all Static Sites for a subscription.",
         "description": "Description for Get all Static Sites for a subscription.",
         "parameters": [
           {
@@ -2352,6 +2369,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Get all certificates in a resource group.",
         "description": "Description for Get all certificates in a resource group.",
         "parameters": [
           {
@@ -2394,6 +2412,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Get a certificate.",
         "description": "Description for Get a certificate.",
         "parameters": [
           {
@@ -2438,6 +2457,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Create or update a certificate.",
         "description": "Description for Create or update a certificate.",
         "parameters": [
           {
@@ -2491,6 +2511,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Create or update a certificate.",
         "description": "Description for Create or update a certificate.",
         "parameters": [
           {
@@ -2544,6 +2565,7 @@
         "tags": [
           "Certificates"
         ],
+        "summary": "Delete a certificate.",
         "description": "Description for Delete a certificate.",
         "parameters": [
           {
@@ -2590,6 +2612,7 @@
         "tags": [
           "AppServiceEnvironmentResources"
         ],
+        "summary": "AppServiceEnvironments_ListByResourceGroup",
         "description": "Description for Get all App Service Environments in a resource group.",
         "parameters": [
           {
@@ -2833,6 +2856,7 @@
         "tags": [
           "AppServiceEnvironmentResources"
         ],
+        "summary": "Delete an App Service Environment.",
         "description": "Description for Delete an App Service Environment.",
         "parameters": [
           {
@@ -10258,7 +10282,7 @@
         ],
         "description": "Description for Gets the last lines of docker logs for the given site",
         "produces": [
-          "*/*",
+          "application/octet-stream",
           "application/json"
         ],
         "parameters": [
@@ -10306,7 +10330,7 @@
         ],
         "description": "Description for Gets the ZIP archived docker log files for the given site",
         "produces": [
-          "*/*",
+          "application/zip",
           "application/json"
         ],
         "parameters": [
@@ -16721,10 +16745,6 @@
           "Sites"
         ],
         "description": "Description for Start capturing network packets for the site (To be deprecated).",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -16770,7 +16790,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "default": {
@@ -18373,7 +18393,7 @@
         ],
         "description": "Description for Gets the publishing profile for an app (or deployment slot, if specified).",
         "produces": [
-          "*/*",
+          "application/xml",
           "application/json"
         ],
         "parameters": [
@@ -22601,7 +22621,7 @@
         ],
         "description": "Description for Gets the last lines of docker logs for the given site",
         "produces": [
-          "*/*",
+          "application/octet-stream",
           "application/json"
         ],
         "parameters": [
@@ -22656,7 +22676,7 @@
         ],
         "description": "Description for Gets the ZIP archived docker log files for the given site",
         "produces": [
-          "*/*",
+          "application/zip",
           "application/json"
         ],
         "parameters": [
@@ -25172,10 +25192,6 @@
           "WebApps"
         ],
         "description": "Description for Fetch a short lived token that can be exchanged for a master key.",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -25205,7 +25221,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "default": {
@@ -27735,10 +27751,6 @@
           "WebApps"
         ],
         "description": "Description for Start capturing network packets for the site (To be deprecated).",
-        "produces": [
-          "text/plain",
-          "application/json"
-        ],
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -27791,7 +27803,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/stringApplicationJson"
             }
           },
           "default": {
@@ -29605,7 +29617,7 @@
         ],
         "description": "Description for Gets the publishing profile for an app (or deployment slot, if specified).",
         "produces": [
-          "*/*",
+          "application/xml",
           "application/json"
         ],
         "parameters": [

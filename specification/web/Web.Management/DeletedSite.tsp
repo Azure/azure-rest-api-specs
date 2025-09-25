@@ -55,6 +55,7 @@ interface DeletedSites {
   /**
    * Description for Get deleted app for a subscription at location.
    */
+  @summary("Get deleted app for a subscription at location.")
   getDeletedWebAppByLocation is DeletedSiteOps.Read<
     DeletedSite,
     ErrorType = DefaultErrorResponse
@@ -63,6 +64,7 @@ interface DeletedSites {
   /**
    * Description for Get all deleted apps for a subscription at location
    */
+  @summary("Get all deleted apps for a subscription at location")
   listByLocation is DeletedSiteOps.List<
     DeletedSite,
     Response = ArmResponse<DeletedWebAppCollection>,
@@ -97,6 +99,7 @@ interface Global {
   /**
    * Description for Get deleted app for a subscription.
    */
+  @summary("Get deleted app for a subscription.")
   getDeletedWebApp is GlobalOps.Read<
     DeletedSite,
     ErrorType = DefaultErrorResponse
@@ -105,6 +108,7 @@ interface Global {
   /**
    * Description for Get all deleted apps for a subscription.
    */
+  @summary("Get all deleted apps for a subscription.")
   list is GlobalOps.List<
     DeletedSite,
     Response = ArmResponse<DeletedWebAppCollection>,
@@ -116,6 +120,7 @@ interface Global {
    */
   @get
   @action("snapshots")
+  @summary("Get all deleted apps for a subscription.")
   getDeletedWebAppSnapshots is GlobalOps.ActionSync<
     DeletedSite,
     void,

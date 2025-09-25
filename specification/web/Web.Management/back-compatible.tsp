@@ -2128,4 +2128,9 @@ using Microsoft.Web;
   "x-ms-identifiers",
   #["category"]
 );
-
+@@summary(Operations.list,
+  "Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions"
+);
+@@doc(Operations.list,
+  "Description for Gets all available operations for the Microsoft.Web resource provider. Also exposes resource metric definitions"
+);

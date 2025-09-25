@@ -32,6 +32,7 @@ interface Users {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GetPublishingUser")
+  @summary("Gets publishing user")
   getPublishingUser is ArmResourceRead<
     User,
     BaseParameters = Azure.ResourceManager.Foundations.TenantBaseParameters,
@@ -43,6 +44,7 @@ interface Users {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates publishing user")
   @operationId("UpdatePublishingUser")
   updatePublishingUser is ArmResourceCreateOrReplaceSync<
     User,
