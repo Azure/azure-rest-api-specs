@@ -31,8 +31,10 @@
         "tag": "testSmsRequest",
         "deliveryReportTimeoutInSeconds": 300,
         "messagingConnect": {
-          "apiKey": "FAKE_API_KEY_1234567890abcdef",
-          "partner": "Connect_Partner"
+          "partner": "Connect_Partner",
+          "partnerParams": {
+            "apiKey": "FAKE_API_KEY_1234567890abcdef"
+          }
         }
       }
     },
@@ -46,13 +48,13 @@
         "value": [
           {
             "to": "+11234567890",
-            "messageId": "Outgoing_20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
+            "messageId": "20200610203725bfd4ba70-70bf-4f77-925d-c0bdb5161bb3",
             "httpStatusCode": 202,
             "successful": true
           },
           {
             "to": "+11234567891",
-            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822",
+            "messageId": "2020061020025100d1-d07e-4b19-b25d-13525d552822",
             "httpStatusCode": 202,
             "successful": true
           },
@@ -70,7 +72,7 @@
           },
           {
             "to": "+11234567893",
-            "messageId": "Outgoing_2020061020025100d1-d07e-4b19-b25d-13525d552822_noam",
+            "messageId": "2020061020025100d1-d07e-4b19-b25d-13525d552822",
             "httpStatusCode": 202,
             "repeatabilityResult": "accepted",
             "successful": true

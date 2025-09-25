@@ -271,18 +271,22 @@
     "MessagingConnectOptions": {
       "description": "Defines optional parameters for connecting with the Messaging Connect Partner to deliver SMS.",
       "required": [
-        "apiKey",
-        "partner"
+        "partner",
+        "partnerParams"
       ],
       "type": "object",
       "properties": {
-        "apiKey": {
-          "description": "Represents the API key associated with the customer's account in the Messaging Connect Partner portal.",
+        "partner": {
+          "description": "Specifies the partner name for message delivery.",
           "type": "string"
         },
-        "partner": {
-          "description": "Specifies the partner associated with the API key.",
-          "type": "string"
+        "partnerParams": {
+          "description": "Partner-specific parameters as key-value pairs. Must contain at least one parameter required by the messaging connect partner (e.g., apiKey, servicePlanId, authToken, etc.).",
+          "type": "object",
+          "minProperties": 1,
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
