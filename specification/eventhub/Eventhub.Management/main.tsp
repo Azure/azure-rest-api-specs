@@ -57,3 +57,6 @@ interface Operations
       ArmResponse<OperationListResult>,
       ErrorResponse
     > {}
+@@doc(Operations.list,
+  "Lists all of the available Event Hub REST API operations."
+);

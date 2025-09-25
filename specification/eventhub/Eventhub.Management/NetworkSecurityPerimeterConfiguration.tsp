@@ -32,6 +32,7 @@ model NetworkSecurityPerimeterConfiguration
   location?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface NetworkSecurityPerimeterConfigurations {
   /**
@@ -55,13 +56,13 @@ interface NetworkSecurityPerimeterConfigurations {
    * Refreshes any information about the association.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @post
   @action("reconcile")
-  createOrUpdate is ArmResourceActionAsync<
+  createOrUpdate is Legacy.CreateOrReplaceAsync<
     NetworkSecurityPerimeterConfiguration,
     void,
-    OkResponse,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = OkResponse | ArmAcceptedLroResponse<LroHeaders = ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = ErrorResponse
   >;
 }

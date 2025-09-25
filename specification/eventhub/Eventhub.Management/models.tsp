@@ -709,6 +709,7 @@ model Sku {
   /**
    * The Event Hubs throughput units for Basic or Standard tiers, where value should be 0 to 20 throughput units. The Event Hubs premium units for Premium tier, where value should be 0 to 10 premium units.
    */
+  @minValue(0)
   capacity?: int32;
 }
 
