@@ -16,30 +16,30 @@ options:
     emitter-output-dir: "{project-root}"
     output-file: "{version-status}/{version}/widgets.json"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-widget"
+    package-dir: "azure-widget"
     namespace: "azure.widget"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.Widget"
+    package-dir: "Azure.Widget"
     clear-output-folder: true
     model-namespace: false
-    namespace: "Azure.Widget"
+    namespace: "{package-dir}"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/widget-rest"
+    package-dir: "widget-rest"
     package-details:
       name: "@azure-rest/azure-widget"
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-widget"
+    package-dir: "azure-widget"
     namespace: com.azure.widget
     flavor: azure
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmanager"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/widget"
-    emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
+    package-dir: "azmanager"
     module-version: "0.0.1"
     generate-fakes: true
     inject-spans: true
