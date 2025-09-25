@@ -709,8 +709,7 @@
       "type": "string",
       "description": "The exporter type.",
       "enum": [
-        "AzureMonitorWorkspaceLogs",
-        "PipelineGroup"
+        "AzureMonitorWorkspaceLogs"
       ],
       "x-ms-enum": {
         "name": "ExporterType",
@@ -720,11 +719,6 @@
             "name": "AzureMonitorWorkspaceLogs",
             "value": "AzureMonitorWorkspaceLogs",
             "description": "Export logs to Azure Monitor Workspace."
-          },
-          {
-            "name": "PipelineGroup",
-            "value": "PipelineGroup",
-            "description": "Export data to another pipeline group instance."
           }
         ]
       }
@@ -1277,7 +1271,6 @@
       "enum": [
         "Syslog",
         "Ama",
-        "PipelineGroup",
         "OTLP",
         "UDP"
       ],
@@ -1294,11 +1287,6 @@
             "name": "Ama",
             "value": "Ama",
             "description": "Receives data from azure monitor agent receiver."
-          },
-          {
-            "name": "PipelineGroup",
-            "value": "PipelineGroup",
-            "description": "Receives data from another pipeline group."
           },
           {
             "name": "OTLP",
