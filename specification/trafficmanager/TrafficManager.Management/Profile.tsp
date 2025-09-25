@@ -29,8 +29,7 @@ alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  KeysOf<
-  ResourceNameParameter<
+  KeysOf<ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",
     SegmentName = "trafficmanagerprofiles",
@@ -45,8 +44,7 @@ alias ProfileSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...Azure.ResourceManager.Legacy.Provider<Profile>;
   },
-  KeysOf<
-  ResourceNameParameter<
+  KeysOf<ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",
     SegmentName = "trafficmanagerprofiles",
