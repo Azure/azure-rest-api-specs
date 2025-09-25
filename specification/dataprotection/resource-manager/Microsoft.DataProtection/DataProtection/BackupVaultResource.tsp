@@ -41,7 +41,7 @@ model DeletedBackupVaultResource
   is Azure.ResourceManager.ProxyResource<DeletedBackupVault> {
   ...ResourceNameParameter<
     Resource = DeletedBackupVaultResource,
-    KeyName = "deletedVaultName", 
+    KeyName = "deletedVaultName",
     SegmentName = "deletedVaults",
     NamePattern = ""
   >;
