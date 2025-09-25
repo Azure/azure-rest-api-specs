@@ -2527,28 +2527,6 @@
         }
       }
     },
-    "ProxyResource": {
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "Metadata pertaining to creation and last modification of the resource.",
-          "readOnly": true
-        }
-      }
-    },
     "SqlDbMigrationStatusDetails": {
       "description": "Detailed status of current Sql Db migration.",
       "type": "object",
@@ -3044,7 +3022,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3060,7 +3038,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3076,7 +3054,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3092,7 +3070,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3108,7 +3086,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3124,7 +3102,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -3272,52 +3250,6 @@
         }
       }
     },
-    "SystemData": {
-      "type": "object",
-      "readOnly": true,
-      "properties": {
-        "createdBy": {
-          "type": "string"
-        },
-        "createdByType": {
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "createdAt": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "lastModifiedBy": {
-          "type": "string"
-        },
-        "lastModifiedByType": {
-          "enum": [
-            "User",
-            "Application",
-            "ManagedIdentity",
-            "Key"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "name": "createdByType",
-            "modelAsString": true
-          }
-        },
-        "lastModifiedAt": {
-          "format": "date-time",
-          "type": "string"
-        }
-      }
-    },
     "MigrationServiceProperties": {
       "description": "The Migration Service properties.",
       "type": "object",
@@ -3350,7 +3282,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
@@ -3406,47 +3338,12 @@
         }
       }
     },
-    "TrackedResource": {
-      "type": "object",
-      "properties": {
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "id": {
-          "type": "string",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
-    },
     "SqlMigrationService": {
       "description": "A SQL Migration Service.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
