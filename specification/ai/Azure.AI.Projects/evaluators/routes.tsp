@@ -92,7 +92,7 @@ interface Evaluators {
   createEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters,
-    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluatorCreateResult>
+    Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluatorVersion>
   >;
 
   // PATCH /evaluators/{evaluatorName}/versions/{version}

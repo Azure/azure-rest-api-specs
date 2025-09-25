@@ -71,13 +71,13 @@ model EvaluatorDefinition {
   @doc("The type of evaluator definition")
   type: EvaluatorDefinitionType;
 
-  @doc("The JSON schema for the evaluator's input parameters")
+  @doc("The JSON schema (Draft 2020-12) for the evaluator's input parameters")
   init_parameters?: unknown;
 
-  @doc("The JSON schema for the data mapping of the evaluator to the dataset")
+  @doc("The JSON schema (Draft 2020-12) for the data mapping of the evaluator to the dataset")
   data_schema?: unknown;
 
-  @doc("The JSON schema for the resulting metrics of the evaluator")
+  @doc("The JSON schema (Draft 2020-12) for the resulting metrics of the evaluator")
   results?: unknown;
 }
 
@@ -131,17 +131,4 @@ model EvaluatorVersion {
   modified_at: string;
 
   ...AssetBase;
-}
-
-@doc("The success result of createEvaluatorVersion")
-@added(Versions.v2025_10_15_preview)
-model EvaluatorCreateResult {
-  @doc("The Evaluator's id")
-  id: string;
-
-  @doc("The Evaluator's version")
-  version: string;
-
-  @doc("The Evaluator's name")
-  name: string;
 }

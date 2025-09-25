@@ -1177,13 +1177,13 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EvaluatorCreateResult"
+              "$ref": "#/definitions/EvaluatorVersion"
             }
           },
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/EvaluatorCreateResult"
+              "$ref": "#/definitions/EvaluatorVersion"
             }
           },
           "default": {
@@ -3357,29 +3357,6 @@
         "id"
       ]
     },
-    "EvaluatorCreateResult": {
-      "type": "object",
-      "description": "The success result of createEvaluatorVersion",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The Evaluator's id"
-        },
-        "version": {
-          "type": "string",
-          "description": "The Evaluator's version"
-        },
-        "name": {
-          "type": "string",
-          "description": "The Evaluator's name"
-        }
-      },
-      "required": [
-        "id",
-        "version",
-        "name"
-      ]
-    },
     "EvaluatorDefinition": {
       "type": "object",
       "description": "Base evaluator configuration with discriminator",
@@ -3389,13 +3366,13 @@
           "description": "The type of evaluator definition"
         },
         "init_parameters": {
-          "description": "The JSON schema for the evaluator's input parameters"
+          "description": "The JSON schema (Draft 2020-12) for the evaluator's input parameters"
         },
         "data_schema": {
-          "description": "The JSON schema for the data mapping of the evaluator to the dataset"
+          "description": "The JSON schema (Draft 2020-12) for the data mapping of the evaluator to the dataset"
         },
         "results": {
-          "description": "The JSON schema for the resulting metrics of the evaluator"
+          "description": "The JSON schema (Draft 2020-12) for the resulting metrics of the evaluator"
         }
       },
       "discriminator": "type",
