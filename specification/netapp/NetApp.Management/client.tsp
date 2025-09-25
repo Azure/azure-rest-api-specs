@@ -65,6 +65,6 @@ using Azure.ClientGenerator.Core;
 );
 
 @@clientName(Microsoft.NetApp.ReplicationSchedule._10minutely,
-  "10Minutely",
+  "$DO_NOT_NORMALIZE$\"10Minutely\"",
   "javascript"
 );
