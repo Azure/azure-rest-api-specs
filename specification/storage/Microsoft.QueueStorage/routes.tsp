@@ -228,7 +228,7 @@ namespace Storage.Queues {
         ...MetadataHeaders;
       },
       {
-        @statusCode statusCode: 202;
+        @statusCode statusCode: 204;
       }
     >;
 
@@ -369,7 +369,10 @@ namespace Storage.Queues {
         @body
         queueMessage: QueueMessage;
       },
-      ListOfSentMessage
+      {
+        @statusCode statusCode: 201;
+        ...ListOfSentMessage;
+      }
     >;
 
     /**
@@ -437,7 +440,9 @@ namespace Storage.Queues {
         @body
         queueMessage?: QueueMessage;
       },
-      {}
+      {
+        @statusCode statusCode: 204;
+      }
     >;
 
     /**
