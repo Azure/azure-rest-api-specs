@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-10-10` is specified on the co
 input-file:
   - stable/2025-10-10/desktopvirtualization.json
 suppressions:
-  - code: PutResponseCodes
+  - code: PutRequestResponseSchemeArm
     from: desktopvirtualization.json
     reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
     where:
