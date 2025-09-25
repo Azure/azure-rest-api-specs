@@ -13,7 +13,7 @@ options:
     examples-dir: "{project-root}/examples"
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-webpubsub"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-webpubsub"
     namespace: "azure.mgmt.webpubsub"
     generate-test: true
     generate-sample: true
@@ -24,7 +24,7 @@ options:
     service-name: "WebPubSub" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-webpubsub"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-webpubsub"
     service-dir: "sdk/web-pubsub"
     flavor: azure
     experimental-extensible-enums: true

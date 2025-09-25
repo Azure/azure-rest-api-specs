@@ -31,13 +31,7 @@ interface CurrentUsagesBases {
   get is Extension.Read<
     Extension.ScopeParameter,
     CurrentUsagesBase,
-    Response = ArmResponse<CurrentUsagesBase> & {
-      /**
-       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<CurrentUsagesBase> & ResponseETagHeader,
     Error = ExceptionResponse
   >;
 
@@ -47,13 +41,7 @@ interface CurrentUsagesBases {
   list is Extension.ListByTarget<
     Extension.ScopeParameter,
     CurrentUsagesBase,
-    Response = ArmResponse<UsagesLimits> & {
-      /**
-       * Current entity state version. It should be treated as opaque and used to make conditional HTTP requests.
-       */
-      @header("ETag")
-      eTag: string;
-    },
+    Response = ArmResponse<UsagesLimits> & ResponseETagHeader,
     Error = ExceptionResponse
   >;
 }
