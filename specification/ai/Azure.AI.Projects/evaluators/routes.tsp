@@ -14,7 +14,10 @@ using Azure.ClientGenerator.Core;
 namespace Azure.AI.Projects;
 
 alias ListEvaluatorVersionsParameters = {};
-alias EvaluatorInputParameters = InputParameters<EvaluatorVersion, "evaluatorVersion">;
+alias EvaluatorInputParameters = InputParameters<
+  EvaluatorVersion,
+  "evaluatorVersion"
+>;
 
 @added(Versions.v2025_10_15_preview)
 interface Evaluators {
@@ -38,9 +41,7 @@ interface Evaluators {
   listVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
     {
-      @doc(
-        "Filter evaluator versions by type. Possible values: 'all', 'custom', 'builtin'."
-      )
+      @doc("Filter evaluator versions by type. Possible values: 'all', 'custom', 'builtin'.")
       @Http.query
       type?: EvaluatorType | "all";
     },

@@ -52,7 +52,7 @@ union EvaluatorDefinitionType {
 
   @doc("Prompt & Code Based definition")
   prompt_and_code: "prompt_and_code",
-  
+
   @doc("Service-based evaluator")
   service: "service",
 
@@ -60,7 +60,7 @@ union EvaluatorDefinitionType {
   openai_graders: "openai_graders",
 }
 
-#suppress "@azure-tools/typespec-azure-core/no-unknown"  
+#suppress "@azure-tools/typespec-azure-core/no-unknown"
 @doc("Base evaluator configuration with discriminator")
 @added(Versions.v2025_10_15_preview)
 @discriminator("type")
@@ -68,14 +68,14 @@ model EvaluatorDefinition {
   @doc("The type of evaluator definition")
   type: EvaluatorDefinitionType;
 
-  @doc("The JSON schema (Draft 2020-12) for the evaluator's input parameters")
+  @doc("The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required.")
   init_parameters?: unknown;
 
-  @doc("The JSON schema (Draft 2020-12) for the data mapping of the evaluator to the dataset")
+  @doc("The JSON schema (Draft 2020-12) for the data mapping of the evaluator to the dataset. This includes parameters like type, properties, required.")
   data_schema?: unknown;
 
-  @doc("The JSON schema (Draft 2020-12) for the resulting metrics of the evaluator")
-  results?: unknown;
+  @doc("List of output metrics produced by this evaluator")
+  metrics?: Record<EvaluatorMetric>;
 }
 
 @doc("Code-based evaluator definition using python code")
@@ -128,4 +128,50 @@ model EvaluatorVersion {
   modified_at: string;
 
   ...AssetBase;
+}
+
+@doc("Evaluator Metric")
+@added(Versions.v2025_10_15_preview)
+model EvaluatorMetric {
+  @doc("Type of the metric. It can be `Continuous`, `Ordinal`, `Boolean`, etc.")
+  type?: EvaluatorMetricType;
+
+  @doc("It indicates whether a higher value is better or a lower value is better for this metric. Possible values are `Increase` and `Decrease`.")
+  desirable_direction?: string;
+
+  @doc("Minimum value for the metric")
+  min_value: float32;
+
+  @doc("Maximum value for the metric. If not specified, it is assumed to be unbounded.")
+  max_value?: float32;
+}
+
+@doc("The type of the evaluator")
+@added(Versions.v2025_10_15_preview)
+union EvaluatorMetricType {
+  string,
+
+  @doc("Ordinal")
+  ordinal: "ordinal",
+
+  @doc("Continuous")
+  continuous: "continuous",
+
+  @doc("Boolean metric representing true/false values")
+  boolean: "boolean",
+}
+
+@doc("The type of the evaluator")
+@added(Versions.v2025_10_15_preview)
+union EvaluatorMetricDirection {
+  string,
+
+  @doc("It indicates a higher value is better for this metric")
+  increase: "increase",
+
+  @doc("It indicates a lower value is better for this metric")
+  decrease: "decrease",
+
+  @doc("It indicates no preference for this metric")
+  neutral: "neutral",
 }
