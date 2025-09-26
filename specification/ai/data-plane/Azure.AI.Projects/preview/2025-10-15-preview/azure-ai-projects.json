@@ -2373,6 +2373,46 @@
           }
         }
       }
+    },
+    "/sync_evals:run": {
+      "post": {
+        "operationId": "SyncEvals_Create",
+        "description": "Synchronize evaluation runs from connected resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "eval",
+            "in": "body",
+            "description": "Creates a sync eval run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvalJsonlInputData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvalRunOutputItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -3250,6 +3290,31 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
+    "CreateEvalJsonlRunDataSource": {
+      "type": "object",
+      "description": "Eval jsonl input data.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of data source. Always `jsonl`.",
+          "default": "jsonl",
+          "enum": [
+            "jsonl"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/EvalJsonlFileContentSource",
+          "description": "Determines what populates the `item` namespace in the data source."
+        }
+      },
+      "required": [
+        "type",
+        "source"
+      ]
+    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -3612,32 +3677,57 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
-    "EvalCompareReport": {
+    "EvalJsonlFileContentSource": {
       "type": "object",
-      "description": "Insights from the evaluation comparison.",
+      "description": "OpenAI definintion: Eval inline file content or jsonl input data.",
       "properties": {
-        "comparisons": {
-          "type": "array",
-          "description": "Comparison results for each treatment run against the baseline.",
-          "items": {
-            "$ref": "#/definitions/EvalRunResultComparison"
+        "type": {
+          "type": "string",
+          "description": "The type of jsonl source. Always `file_content`.",
+          "default": "file_content",
+          "enum": [
+            "file_content"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
           }
         },
-        "method": {
-          "type": "string",
-          "description": "The statistical method used for comparison."
+        "content": {
+          "type": "array",
+          "description": "The content of the jsonl file.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "object"
+              },
+              "sample": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "item"
+            ]
+          }
         }
       },
       "required": [
-        "comparisons",
-        "method"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InsightResult"
+        "type",
+        "content"
+      ]
+    },
+    "EvalJsonlInputData": {
+      "type": "object",
+      "description": "OpenAI Input data source definition for eval.",
+      "properties": {
+        "data_source": {
+          "$ref": "#/definitions/CreateEvalJsonlRunDataSource",
+          "description": "Identifier of the evaluator."
         }
-      ],
-      "x-ms-discriminator-value": "EvaluationComparison"
+      },
+      "required": [
+        "data_source"
+      ]
     },
     "EvalResult": {
       "type": "object",
@@ -3668,106 +3758,74 @@
         "passed"
       ]
     },
-    "EvalRunResultCompareItem": {
+    "EvalRunOutputItem": {
       "type": "object",
-      "description": "Metric comparison for a treatment against the baseline.",
+      "description": "OpenAI definition: Eval output results.",
       "properties": {
-        "treatmentRunId": {
+        "object": {
           "type": "string",
-          "description": "The treatment run ID."
-        },
-        "treatmentRunSummary": {
-          "$ref": "#/definitions/EvalRunResultSummary",
-          "description": "Summary statistics of the treatment run."
-        },
-        "deltaEstimate": {
-          "type": "number",
-          "format": "float",
-          "description": "Estimated difference between treatment and baseline."
-        },
-        "pValue": {
-          "type": "number",
-          "format": "float",
-          "description": "P-value for the treatment effect."
-        },
-        "treatmentEffect": {
-          "$ref": "#/definitions/TreatmentEffectType",
-          "description": "Type of treatment effect."
-        }
-      },
-      "required": [
-        "treatmentRunId",
-        "treatmentRunSummary",
-        "deltaEstimate",
-        "pValue",
-        "treatmentEffect"
-      ]
-    },
-    "EvalRunResultComparison": {
-      "type": "object",
-      "description": "Comparison results for treatment runs against the baseline.",
-      "properties": {
-        "testingCriteria": {
-          "type": "string",
-          "description": "Name of the testing criteria."
-        },
-        "metric": {
-          "type": "string",
-          "description": "Metric being evaluated."
-        },
-        "evaluator": {
-          "type": "string",
-          "description": "Name of the evaluator for this testing criteria."
-        },
-        "baselineRunSummary": {
-          "$ref": "#/definitions/EvalRunResultSummary",
-          "description": "Summary statistics of the baseline run."
-        },
-        "compareItems": {
-          "type": "array",
-          "description": "List of comparison results for each treatment run.",
-          "items": {
-            "$ref": "#/definitions/EvalRunResultCompareItem"
+          "description": "The type of the object. Always \"eval.run.output_item\".",
+          "default": "eval.run.output_item",
+          "enum": [
+            "eval.run.output_item"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
           }
-        }
-      },
-      "required": [
-        "testingCriteria",
-        "metric",
-        "evaluator",
-        "baselineRunSummary",
-        "compareItems"
-      ]
-    },
-    "EvalRunResultSummary": {
-      "type": "object",
-      "description": "Summary statistics of a metric in an evaluation run.",
-      "properties": {
-        "runId": {
+        },
+        "id": {
           "type": "string",
-          "description": "The evaluation run ID."
+          "description": "Unique identifier for the evaluation run output item."
         },
-        "sampleCount": {
+        "run_id": {
+          "type": "string",
+          "description": "The identifier of the evaluation run associated with this output item."
+        },
+        "eval_id": {
+          "type": "string",
+          "description": "The identifier of the evaluation group."
+        },
+        "created_at": {
           "type": "integer",
-          "format": "int32",
-          "description": "Number of samples in the evaluation run."
+          "format": "int64",
+          "description": "Unix timestamp (in seconds) when the evaluation run was created."
         },
-        "average": {
-          "type": "number",
-          "format": "float",
-          "description": "Average value of the metric in the evaluation run."
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation run."
         },
-        "standardDeviation": {
-          "type": "number",
-          "format": "float",
-          "description": "Standard deviation of the metric in the evaluation run."
+        "datasource_item_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The identifier for the data source item."
+        },
+        "datasource_item": {
+          "type": "object",
+          "description": "Details of the input data source item."
+        },
+        "results": {
+          "type": "array",
+          "description": "A list of results from the evaluation run.",
+          "items": {
+            "type": "object"
+          }
+        },
+        "sample": {
+          "type": "object",
+          "description": "A sample containing the input and output of the evaluation run."
         }
       },
       "required": [
-        "runId",
-        "sampleCount",
-        "average",
-        "standardDeviation"
+        "object",
+        "id",
+        "run_id",
+        "eval_id",
+        "created_at",
+        "status",
+        "datasource_item_id",
+        "datasource_item",
+        "results",
+        "sample"
       ]
     },
     "Evaluation": {

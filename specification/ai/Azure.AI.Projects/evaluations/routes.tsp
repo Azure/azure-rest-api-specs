@@ -16,6 +16,21 @@ alias ServiceTraits = SupportsClientRequestId &
 
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
+@added(Versions.v2025_10_15_preview)
+interface SyncEvals {
+  @doc("Synchronize evaluation runs from connected resources.")
+  @route("sync_evals:run")
+  @post
+  create is Azure.Core.Foundations.Operation<
+    {
+      @doc("Creates a sync eval run.")
+      @body
+      eval: EvalJsonlInputData;
+    },
+    EvalRunOutputItem
+  >;
+}
+
 @route("evaluations")
 @added(Versions.v2025_05_15_preview)
 interface Evaluations {
