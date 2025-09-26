@@ -1329,6 +1329,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "ListCertificates": {
             "$ref": "./examples/CertificateList.json"
@@ -1399,6 +1400,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "Get Certificate": {
             "$ref": "./examples/CertificateGet.json"
@@ -1489,6 +1491,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "CreateCertificate - Full": {
             "$ref": "./examples/CertificateCreate_Full.json"
@@ -1574,6 +1577,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "UpdateCertificate": {
             "$ref": "./examples/CertificateUpdate.json"
@@ -1645,6 +1649,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "CertificateDelete": {
             "$ref": "./examples/CertificateDelete.json"
@@ -1713,6 +1718,7 @@
             }
           }
         },
+        "deprecated": true,
         "x-ms-examples": {
           "CertificateCancelDeletion": {
             "$ref": "./examples/CertificateCancelDeletion.json"
@@ -3854,11 +3860,13 @@
         },
         "networkProfile": {
           "$ref": "#/definitions/NetworkProfile",
-          "description": "The network profile only takes effect when publicNetworkAccess is enabled."
+          "description": "The network profile only takes effect when publicNetworkAccess is enabled.",
+          "x-nullable": true
         },
         "privateEndpointConnections": {
           "type": "array",
           "description": "List of private endpoint connections associated with the Batch account",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/PrivateEndpointConnection"
           },
@@ -3878,17 +3886,20 @@
           "type": "integer",
           "format": "int32",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.",
+          "x-nullable": true,
           "readOnly": true
         },
         "lowPriorityCoreQuota": {
           "type": "integer",
           "format": "int32",
           "description": "For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.",
+          "x-nullable": true,
           "readOnly": true
         },
         "dedicatedCoreQuotaPerVMFamily": {
           "type": "array",
           "description": "A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/VirtualMachineFamilyCoreQuota"
           },
@@ -3917,6 +3928,7 @@
         "allowedAuthenticationModes": {
           "type": "array",
           "description": "List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/AuthenticationMode"
           },
@@ -3974,6 +3986,7 @@
         "allowedAuthenticationModes": {
           "type": "array",
           "description": "List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/AuthenticationMode"
           }
@@ -6315,6 +6328,7 @@
         "currentNodeCommunicationMode": {
           "$ref": "#/definitions/NodeCommunicationMode",
           "description": "Determines how a pool communicates with the Batch service.",
+          "x-nullable": true,
           "readOnly": true
         },
         "upgradePolicy": {

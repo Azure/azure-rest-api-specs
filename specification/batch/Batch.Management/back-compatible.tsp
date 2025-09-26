@@ -1,15 +1,13 @@
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Batch;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BatchAccountCreateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BatchAccountUpdateParameters.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(CertificateCreateOrUpdateParameters.properties);
 
 @@clientName(ContainerRegistry.username, "userName");
@@ -29,7 +27,6 @@ using Microsoft.Batch;
 @@clientLocation(BatchAccounts.listOutboundNetworkDependenciesEndpoints,
   "BatchAccount"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(BatchAccount.properties);
 
 @@clientLocation(PrivateEndpointConnections.get, "PrivateEndpointConnection");
@@ -45,7 +42,6 @@ using Microsoft.Batch;
 @@clientLocation(PrivateEndpointConnections.listByBatchAccount,
   "PrivateEndpointConnection"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientLocation(ApplicationPackages.get, "ApplicationPackage");
@@ -55,7 +51,6 @@ using Microsoft.Batch;
 @@clientLocation(ApplicationPackages.list, "ApplicationPackage");
 @@clientLocation(ApplicationPackages.activate, "ApplicationPackage");
 @@clientName(ApplicationPackages.activate::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ApplicationPackage.properties);
 
 @@clientLocation(Applications.get, "Application");
@@ -65,7 +60,6 @@ using Microsoft.Batch;
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientLocation(Applications.delete, "Application");
 @@clientLocation(Applications.list, "Application");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Application.properties);
 
 @@clientLocation(Certificates.get, "Certificate");
@@ -76,19 +70,16 @@ using Microsoft.Batch;
 @@clientLocation(Certificates.delete, "Certificate");
 @@clientLocation(Certificates.listByBatchAccount, "Certificate");
 @@clientLocation(Certificates.cancelDeletion, "Certificate");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Certificate.properties);
 
 @@clientLocation(DetectorResponses.getDetector, "BatchAccount");
 @@clientLocation(DetectorResponses.listDetectors, "BatchAccount");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(DetectorResponse.properties);
 
 @@clientLocation(PrivateLinkResources.get, "PrivateLinkResource");
 @@clientLocation(PrivateLinkResources.listByBatchAccount,
   "PrivateLinkResource"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(PrivateLinkResource.properties);
 
 @@clientLocation(Pools.get, "Pool");
@@ -100,7 +91,6 @@ using Microsoft.Batch;
 @@clientLocation(Pools.listByBatchAccount, "Pool");
 @@clientLocation(Pools.disableAutoScale, "Pool");
 @@clientLocation(Pools.stopResize, "Pool");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(Pool.properties);
 
 @@clientLocation(NetworkSecurityPerimeterConfigurations.getConfiguration,

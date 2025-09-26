@@ -31,6 +31,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #deprecated "true"
   @operationId("Certificate_Get")
   get is ArmResourceRead<
     Certificate,
@@ -45,6 +46,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #deprecated "true"
   @operationId("Certificate_Create")
   create is ArmResourceCreateOrReplaceSync<
     Certificate,
@@ -71,6 +73,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #deprecated "true"
   @operationId("Certificate_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -94,6 +97,7 @@ interface Certificates {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #deprecated "true"
   @operationId("Certificate_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     Certificate,
@@ -104,6 +108,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #deprecated "true"
   @operationId("Certificate_ListByBatchAccount")
   listByBatchAccount is ArmResourceListByParent<
     Certificate,
@@ -135,6 +140,7 @@ interface Certificates {
    * Warning: This operation is deprecated and will be removed after February, 2024. Please use the [Azure KeyVault Extension](https://learn.microsoft.com/azure/batch/batch-certificate-migration-guide) instead.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #deprecated "true"
   @operationId("Certificate_CancelDeletion")
   @action("cancelDelete")
   cancelDeletion is ArmResourceActionSync<
