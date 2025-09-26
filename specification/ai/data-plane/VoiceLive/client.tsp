@@ -144,11 +144,11 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.AzureSemanticDetectionMultilingual.timeout_ms, "TimeoutMs", "csharp");
 @@clientName(VoiceLive.ServerVad, "ServerVadTurnDetection", "csharp");
 @@clientName(VoiceLive.AzureSemanticVad, "AzureSemanticVadTurnDetection", "csharp");
-@@clientName(VoiceLive.AzureSemanticVadEn, "AzureSemanticVadEnTurnDetection", "csharp");
-@@clientName(VoiceLive.AzureSemanticVadMultilingual, "AzureSemanticVadMultilingualTurnDetection", "csharp");
+@@clientName(VoiceLive.AzureSemanticVadEn, "AzureSemanticVadTurnDetectionEn", "csharp");
+@@clientName(VoiceLive.AzureSemanticVadMultilingual, "AzureSemanticVadTurnDetectionMultilingual", "csharp");
 @@clientName(VoiceLive.AzureSemanticDetection, "AzureSemanticEouDetection", "csharp");
-@@clientName(VoiceLive.AzureSemanticDetectionEn, "AzureSemanticEnEouDetection", "csharp");
-@@clientName(VoiceLive.AzureSemanticDetectionMultilingual, "AzureSemanticMultilingualEouDetection", "csharp");
-
+@@clientName(VoiceLive.AzureSemanticDetectionEn, "AzureSemanticEouDetectionEn", "csharp");
+@@clientName(VoiceLive.AzureSemanticDetectionMultilingual, "AzureSemanticEouDetectionMultilingual", "csharp");
+@@clientName(VoiceLive.Background, "VideoBackground", "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
 

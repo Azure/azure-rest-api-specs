@@ -13,6 +13,7 @@ alias DualUsage = RequestUsage | ResponseUsage;
 
 @doc("Error object returned in case of API failure.")
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model VoiceLiveErrorDetails {
   @doc("Error code, or null if unspecified.")
   code?: string;

@@ -2,7 +2,6 @@ import "./content_parts.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
 
@@ -16,19 +15,23 @@ union ItemType {
 // Base for user content parts
 @discriminator("type")
 @usage(RequestUsage)
-model UserContentPart {
+@doc("Base for any message content part; discriminated by `type`.")
+model MessageContentPart {
+  @doc("The type of the content part.")
   type: string;
 }
 
 // Variants
 @usage(RequestUsage)
-model InputTextContentPart extends UserContentPart {
+@doc("Input text content part.")
+model InputTextContentPart extends MessageContentPart {
   type: "input_text";
   text: string;
 }
 
 @usage(RequestUsage)
-model InputAudioContentPart extends UserContentPart {
+@doc("Input audio content part.")
+model InputAudioContentPart extends MessageContentPart {
   type: "input_audio";
   audio: string;
   transcript?: string;
@@ -36,14 +39,20 @@ model InputAudioContentPart extends UserContentPart {
 
 @doc("Output text content part.")
 @usage(ResponseUsage)
-model OutputTextContentPart {
+model OutputTextContentPart extends MessageContentPart {
+  @doc("The type of the content part.")
   type: "text";
+  @doc("The text content.")
   text: string;
 }
 
 // Status enum
-enum ItemParamStatus {
+@doc("Indicates the processing status of an item or parameter.")
+union ItemParamStatus {
+  string,
+  @doc("Item or parameter is still being processed.")
   completed: "completed",
+  @doc("Item or parameter is not yet complete.")
   incomplete: "incomplete",
 }
 
@@ -58,32 +67,40 @@ model ConversationRequestItem {
 // ----- Message Items -----
 @discriminator("role")
 @usage(RequestUsage)
+@doc("A message item within a conversation.")
 model MessageItem extends ConversationRequestItem {
+  @doc("The type of the item; must be 'message' for message items.")
   type: ItemType.message;
-  role: string;
+  @doc("The role of the message origionator.")
+  role: MessageRole;
+  @doc("The content parts of the message.")
+  content: MessageContentPart[];
+  @doc("Processing status of the message item.")
   status?: ItemParamStatus;
 }
 
 @usage(RequestUsage)
+@doc("A system message item within a conversation.")
 model SystemMessageItem extends MessageItem {
-  role: "system";
-  content: InputTextContentPart[];
+  role: MessageRole.system;
 }
 
 @usage(RequestUsage)
+@doc("A user message item within a conversation.")
 model UserMessageItem extends MessageItem {
-  role: "user";
-  content: UserContentPart[];
+  role: MessageRole.user;
 }
 
 @usage(DualUsage)
+@doc("An assistant message item within a conversation.")
 model AssistantMessageItem extends MessageItem {
-  role: "assistant";
-  content: OutputTextContentPart[];
+  role: MessageRole.assistant;
 }
 
 // ----- Function Call Items -----
 @usage(RequestUsage)
+@doc("A function call item within a conversation.")
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model FunctionCallItem extends ConversationRequestItem {
   type: ItemType.function_call;
   name: string;
@@ -93,6 +110,8 @@ model FunctionCallItem extends ConversationRequestItem {
 }
 
 @usage(RequestUsage)
+@doc("A function call output item within a conversation.")
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model FunctionCallOutputItem extends ConversationRequestItem {
   type: ItemType.function_call_output;
   call_id: string;
@@ -101,6 +120,7 @@ model FunctionCallOutputItem extends ConversationRequestItem {
 }
 
 @discriminator("type")
+@doc("Base for any response item; discriminated by `type`.")
 @usage(ResponseUsage)
 model ResponseItem {
   // must stay here, required, broad type
@@ -110,6 +130,7 @@ model ResponseItem {
 }
 
 @usage(ResponseUsage)
+@doc("Base type for message item within a conversation.")
 model ResponseMessageItem extends ResponseItem {
   type: ItemType.message;
   role: MessageRole;
@@ -118,6 +139,8 @@ model ResponseMessageItem extends ResponseItem {
 }
 
 @usage(ResponseUsage)
+@doc("A function call item within a conversation.")
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ResponseFunctionCallItem
   extends ResponseItem {
   type: ItemType.function_call;
@@ -128,6 +151,8 @@ model ResponseFunctionCallItem
 }
 
 @usage(ResponseUsage)
+@doc("A function call output item within a conversation.")
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model ResponseFunctionCallOutputItem
   extends ResponseItem {
   type: ItemType.function_call_output;
@@ -136,10 +161,15 @@ model ResponseFunctionCallOutputItem
 }
 
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
+@doc("Indicates the processing status of a response item.")
 union ResponseItemStatus {
   string,
+  @doc("Item that is in progress.")
   in_progress: "in_progress",
+  @doc("Item has been fully processed and is complete.")
   completed: "completed",
+  @doc("Item has been processed but is incomplete.")
   incomplete: "incomplete",
 }
 
@@ -173,14 +203,14 @@ model ResponseStatusDetails {
 model ResponseCancelledDetails extends ResponseStatusDetails {
   // Narrow the discriminator to a literal in each child:
   type: "cancelled";
-  reason: "turn_detected" | "client_cancelled";
+  reason: "turn_detected" | "client_cancelled" | string;
 }
 
 @doc("Details for an incomplete response.")
 @usage(ResponseUsage)
 model ResponseIncompleteDetails extends ResponseStatusDetails {
   type: "incomplete";
-  reason: "max_output_tokens" | "content_filter";
+  reason: "max_output_tokens" | "content_filter" | string;
 }
 
 @doc("Details for a failed response.")
@@ -192,6 +222,7 @@ model ResponseFailedDetails extends ResponseStatusDetails {
 
 @doc("Details of input token usage.")
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model InputTokenDetails {
   @doc("Number of cached tokens used in the input.")
   cached_tokens: int32;
@@ -208,6 +239,7 @@ model InputTokenDetails {
 
 @doc("Details of output token usage.")
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model OutputTokenDetails {
   @doc("Number of text tokens generated in the output.")
   text_tokens: int32;
@@ -218,6 +250,7 @@ model OutputTokenDetails {
 
 @doc("Details of output token usage.")
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model CachedTokenDetails {
   @doc("Number of cached text tokens.")
   text_tokens: int32;
@@ -228,6 +261,7 @@ model CachedTokenDetails {
 
 @doc("Overall usage statistics for a response.")
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model TokenUsage {
   @doc("Total number of tokens (input + output).")
   total_tokens: int32;
