@@ -282,7 +282,7 @@ op CreateDataAssetAsync is RpcOperation<
   {
     @doc("The data asset payload")
     @bodyRoot
-    dataAsset: DataAsset;
+    dataAsset: DataAssetRequestBody;
   },
   CreateDataAssetResponse
 >;
@@ -320,7 +320,7 @@ op UpdateDataAssetAsync is RpcOperation<
   DataAssetIdParameter & {
     @doc("Updated data asset payload.")
     @bodyRoot
-    dataAsset: DataAsset;
+    dataAsset: DataAssetRequestBody;
   },
   DataAsset
 >;

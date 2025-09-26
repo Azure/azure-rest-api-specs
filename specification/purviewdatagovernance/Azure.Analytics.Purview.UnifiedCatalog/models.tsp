@@ -470,6 +470,52 @@ model DataAsset {
   typeProperties?: Record<string>;
 }
 
+@doc("DataAssetRequestBody.")
+model DataAssetRequestBody {
+  @doc("The data asset identifier.")
+  @key("dataAssetId")
+  @visibility(Lifecycle.Read)
+  id: uuid;
+
+  @doc("Name of the asset.")
+  name: string;
+
+  @doc("System data associated with the asset.")
+  systemData?: CatalogModelSystemDataWithExpired;
+
+  @doc("A description about the relationship.")
+  description?: string;
+
+  @doc("Link to the owning domain.")
+  domain?: string;
+
+  @doc("Source of the asset.")
+  source?: CatalogModelDataAssetSource;
+
+  @doc("Contacts associated with the asset.")
+  contacts?: Record<CatalogModelContactsValueInner[]>;
+
+  @doc("A list of classification labels.")
+  classifications?: string[];
+
+  @doc("Only one label is allowed. A GUID of the information protection label.")
+  sensitivityLabel?: uuid;
+
+  @doc("type of the data asset.")
+  type?: string;
+
+  @doc("Schema of the asset.")
+  schema?: CatalogModelDataAssetSchema[];
+
+  @doc("Data quality score for the data asset.")
+  dataQualityScore?: float64;
+
+  @doc("A redirection link..")
+  openInUrl?: url;
+
+  @doc("Type properties of the asset.")
+  typeProperties?: Record<string>;
+}
 @doc("DataAssetQueryRequest.")
 model DataAssetQueryRequest {
   @doc("Number of items to skip.")

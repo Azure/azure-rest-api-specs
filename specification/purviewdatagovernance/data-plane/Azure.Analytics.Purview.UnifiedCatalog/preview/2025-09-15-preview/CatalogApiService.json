@@ -1815,7 +1815,7 @@
             "description": "The data asset payload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataAsset"
+              "$ref": "#/definitions/DataAssetRequestBody"
             }
           }
         ],
@@ -1916,7 +1916,7 @@
             "description": "Updated data asset payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataAsset"
+              "$ref": "#/definitions/DataAssetRequestBody"
             }
           }
         ],
@@ -6249,6 +6249,90 @@
         "entityId"
       ]
     },
+    "DataAssetRequestBody": {
+      "type": "object",
+      "description": "DataAssetRequestBody.",
+      "properties": {
+        "id": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "The data asset identifier.",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the asset."
+        },
+        "systemData": {
+          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
+          "description": "System data associated with the asset."
+        },
+        "description": {
+          "type": "string",
+          "description": "A description about the relationship."
+        },
+        "domain": {
+          "type": "string",
+          "description": "Link to the owning domain."
+        },
+        "source": {
+          "$ref": "#/definitions/CatalogModelDataAssetSource",
+          "description": "Source of the asset."
+        },
+        "contacts": {
+          "type": "object",
+          "description": "Contacts associated with the asset.",
+          "additionalProperties": {
+            "items": {
+              "$ref": "#/definitions/CatalogModelContactsValueInner"
+            },
+            "type": "array"
+          }
+        },
+        "classifications": {
+          "type": "array",
+          "description": "A list of classification labels.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "sensitivityLabel": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Only one label is allowed. A GUID of the information protection label."
+        },
+        "type": {
+          "type": "string",
+          "description": "type of the data asset."
+        },
+        "schema": {
+          "type": "array",
+          "description": "Schema of the asset.",
+          "items": {
+            "$ref": "#/definitions/CatalogModelDataAssetSchema"
+          }
+        },
+        "dataQualityScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Data quality score for the data asset."
+        },
+        "openInUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "A redirection link.."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "Type properties of the asset.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "name"
+      ]
+    },
     "DataAssetsResponse": {
       "type": "object",
       "description": "Response containing a list of data assets.",
@@ -7876,7 +7960,7 @@
       "x-ms-client-name": "apiVersion"
     },
     "Azure.Core.OrderByQueryParameter": {
-      "name": "orderby",
+      "name": "orderBy",
       "in": "query",
       "description": "Expressions that specify the order of returned results.",
       "required": false,
