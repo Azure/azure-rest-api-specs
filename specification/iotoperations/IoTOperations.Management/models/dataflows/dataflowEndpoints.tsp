@@ -68,6 +68,8 @@ model DataflowEndpointProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("DataflowEndpoint Type properties")

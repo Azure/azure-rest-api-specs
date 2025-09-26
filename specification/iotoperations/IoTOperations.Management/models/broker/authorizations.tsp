@@ -42,6 +42,8 @@ model BrokerAuthorizationProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("Broker AuthorizationConfig properties")
