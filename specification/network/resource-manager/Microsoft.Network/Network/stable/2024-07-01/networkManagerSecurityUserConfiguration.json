@@ -1,8 +1,8 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "RoutingConfiguration",
-    "version": "2024-10-01"
+    "title": "SecurityUserConfiguration",
+    "version": "2024-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -33,22 +33,22 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations": {
       "get": {
         "tags": [
-          "NetworkManagerRoutingConfigurations"
+          "SecurityUserConfigurations"
         ],
-        "operationId": "NetworkManagerRoutingConfigurations_List",
-        "description": "Lists all the network manager routing configurations in a network manager, in a paginated format.",
+        "operationId": "SecurityUserConfigurations_List",
+        "description": "Lists all the network manager security user configurations in a network manager, in a paginated format.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -62,9 +62,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Get successful. The operation returns all routing configuration resources in the specified network manager, in a paginated format",
+            "description": "Get successful. The operation returns all security user configurations in the specified network manager, in a paginated format",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerRoutingConfigurationListResult"
+              "$ref": "#/definitions/SecurityUserConfigurationListResult"
             }
           },
           "default": {
@@ -78,41 +78,41 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List routing configurations in a network manager": {
-            "$ref": "./examples/NetworkManagerRoutingConfigurationList.json"
+          "List security user configurations in a network manager": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+          "$ref": "#/parameters/SecurityConfigurationParameter"
         }
       ],
       "get": {
         "tags": [
-          "NetworkManagerRoutingConfigurations"
+          "SecurityUserConfigurations"
         ],
-        "description": "Retrieves a network manager routing configuration.",
-        "operationId": "NetworkManagerRoutingConfigurations_Get",
+        "description": "Retrieves a network manager security user configuration.",
+        "operationId": "SecurityUserConfigurations_Get",
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             }
           },
           "default": {
@@ -123,39 +123,39 @@
           }
         },
         "x-ms-examples": {
-          "Get routing configurations": {
-            "$ref": "./examples/NetworkManagerRoutingConfigurationGet.json"
+          "Get security user configurations": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "NetworkManagerRoutingConfigurations"
+          "SecurityUserConfigurations"
         ],
-        "description": "Creates or updates a network manager routing configuration.",
-        "operationId": "NetworkManagerRoutingConfigurations_CreateOrUpdate",
+        "description": "Creates or updates a network manager security user configuration.",
+        "operationId": "SecurityUserConfigurations_CreateOrUpdate",
         "parameters": [
           {
-            "name": "routingConfiguration",
+            "name": "securityUserConfiguration",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             },
-            "description": "The routing configuration to create or update"
+            "description": "The security user configuration to create or update"
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated Routing Configuration",
+            "description": "Updated Configuration",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             }
           },
           "201": {
-            "description": "Created Routing Configuration",
+            "description": "Created Configuration",
             "schema": {
-              "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+              "$ref": "#/definitions/SecurityUserConfiguration"
             }
           },
           "default": {
@@ -166,17 +166,17 @@
           }
         },
         "x-ms-examples": {
-          "Create network manager routing configuration": {
-            "$ref": "./examples/NetworkManagerRoutingConfigurationPut.json"
+          "Create network manager security user configuration": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationPut.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "NetworkManagerRoutingConfigurations"
+          "SecurityUserConfigurations"
         ],
-        "description": "Deletes a network manager routing configuration.",
-        "operationId": "NetworkManagerRoutingConfigurations_Delete",
+        "description": "Deletes a network manager security user configuration.",
+        "operationId": "SecurityUserConfigurations_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
@@ -184,7 +184,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Delete Succeed."
+            "description": "OK"
           },
           "202": {
             "description": "Accepted and will complete asynchronously.",
@@ -210,34 +210,34 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Delete network manager routing configuration": {
-            "$ref": "./examples/NetworkManagerRoutingConfigurationDelete.json"
+          "Delete network manager security user configuration": {
+            "$ref": "./examples/NetworkManagerSecurityUserConfigurationDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections": {
       "get": {
         "tags": [
-          "RoutingRuleCollections"
+          "SecurityUserRuleCollections"
         ],
-        "operationId": "RoutingRuleCollections_List",
-        "description": "Lists all the rule collections in a routing configuration, in a paginated format.",
+        "operationId": "SecurityUserRuleCollections_List",
+        "description": "Lists all the security user rule collections in a security configuration, in a paginated format.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/NetworkManagerNameParameter"
           },
           {
-            "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+            "$ref": "#/parameters/SecurityConfigurationParameter"
           },
           {
             "$ref": "#/parameters/ListTopParameter"
@@ -248,9 +248,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Get successful. The operation returns all ruleCollections in the specified routing configuration, in a paginated format",
+            "description": "Get successful. The operation returns all ruleCollections in the specified security configuration, in a paginated format",
             "schema": {
-              "$ref": "#/definitions/RoutingRuleCollectionListResult"
+              "$ref": "#/definitions/SecurityUserRuleCollectionListResult"
             }
           },
           "default": {
@@ -264,28 +264,28 @@
           "nextLinkName": "nextLink"
         },
         "x-ms-examples": {
-          "List routing rule collections": {
-            "$ref": "./examples/NetworkManagerRoutingRuleCollectionList.json"
+          "List rule collections in a security configuration": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionList.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+          "$ref": "#/parameters/SecurityConfigurationParameter"
         },
         {
           "$ref": "#/parameters/RuleCollectionParameter"
@@ -293,15 +293,15 @@
       ],
       "get": {
         "tags": [
-          "RoutingRuleCollections"
+          "SecurityUserRuleCollections"
         ],
-        "description": "Gets a network manager routing configuration rule collection.",
-        "operationId": "RoutingRuleCollections_Get",
+        "description": "Gets a network manager security user configuration rule collection.",
+        "operationId": "SecurityUserRuleCollections_Get",
         "responses": {
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/RoutingRuleCollection"
+              "$ref": "#/definitions/SecurityUserRuleCollection"
             }
           },
           "default": {
@@ -312,39 +312,39 @@
           }
         },
         "x-ms-examples": {
-          "Gets routing rule collection": {
-            "$ref": "./examples/NetworkManagerRoutingRuleCollectionGet.json"
+          "Gets security user rule collection": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "RoutingRuleCollections"
+          "SecurityUserRuleCollections"
         ],
-        "description": "Creates or updates a routing rule collection.",
-        "operationId": "RoutingRuleCollections_CreateOrUpdate",
+        "description": "Creates or updates a security user rule collection.",
+        "operationId": "SecurityUserRuleCollections_CreateOrUpdate",
         "parameters": [
           {
-            "name": "ruleCollection",
+            "name": "securityUserRuleCollection",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoutingRuleCollection"
+              "$ref": "#/definitions/SecurityUserRuleCollection"
             },
-            "description": "The Rule Collection to create or update"
+            "description": "The Security User Rule Collection to create or update"
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated Rule Collection",
+            "description": "Updated Security User Rule Collection",
             "schema": {
-              "$ref": "#/definitions/RoutingRuleCollection"
+              "$ref": "#/definitions/SecurityUserRuleCollection"
             }
           },
           "201": {
-            "description": "Created Rule Collection",
+            "description": "Created Security User Rule Collection",
             "schema": {
-              "$ref": "#/definitions/RoutingRuleCollection"
+              "$ref": "#/definitions/SecurityUserRuleCollection"
             }
           },
           "default": {
@@ -355,25 +355,25 @@
           }
         },
         "x-ms-examples": {
-          "Create or Update a routing rule collection": {
-            "$ref": "./examples/NetworkManagerRoutingRuleCollectionPut.json"
+          "Create or Update a Security User Rule Collection": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionPut.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "RoutingRuleCollections"
+          "SecurityUserRuleCollections"
         ],
-        "description": "Deletes an routing rule collection.",
-        "operationId": "RoutingRuleCollections_Delete",
+        "description": "Deletes a Security User Rule collection.",
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
           }
         ],
+        "operationId": "SecurityUserRuleCollections_Delete",
         "responses": {
           "200": {
-            "description": "Delete Succeed."
+            "description": "OK"
           },
           "202": {
             "description": "Accepted and will complete asynchronously.",
@@ -399,28 +399,28 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Deletes an routing rule collection": {
-            "$ref": "./examples/NetworkManagerRoutingRuleCollectionDelete.json"
+          "Deletes a Security User Rule collection": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleCollectionDelete.json"
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+          "$ref": "#/parameters/SecurityConfigurationParameter"
         },
         {
           "$ref": "#/parameters/RuleCollectionParameter"
@@ -434,15 +434,15 @@
       ],
       "get": {
         "tags": [
-          "RoutingRules"
+          "SecurityUserRules"
         ],
-        "description": "List all network manager routing configuration routing rules.",
-        "operationId": "RoutingRules_List",
+        "description": "Lists all Security User Rules in a rule collection.",
+        "operationId": "SecurityUserRules_List",
         "responses": {
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/RoutingRuleListResult"
+              "$ref": "#/definitions/SecurityUserRuleListResult"
             }
           },
           "default": {
@@ -453,8 +453,8 @@
           }
         },
         "x-ms-examples": {
-          "List routing rules": {
-            "$ref": "./examples/NetworkManagerRoutingRuleList.json"
+          "List security user rules": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleList.json"
           }
         },
         "x-ms-pageable": {
@@ -462,41 +462,41 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/securityUserConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerRoutingConfigurationParameter"
+          "$ref": "#/parameters/SecurityConfigurationParameter"
         },
         {
           "$ref": "#/parameters/RuleCollectionParameter"
         },
         {
-          "$ref": "#/parameters/NetworkManagerRoutingConfigurationsRuleParameter"
+          "$ref": "#/parameters/SecurityConfigurationsRuleParameter"
         }
       ],
       "get": {
         "tags": [
-          "RoutingRules"
+          "SecurityUserRules"
         ],
-        "description": "Gets a network manager routing configuration routing rule.",
-        "operationId": "RoutingRules_Get",
+        "description": "Gets a security user rule.",
+        "operationId": "SecurityUserRules_Get",
         "responses": {
           "200": {
             "description": "Successful operation",
             "schema": {
-              "$ref": "#/definitions/RoutingRule"
+              "$ref": "#/definitions/SecurityUserRule"
             }
           },
           "default": {
@@ -507,39 +507,39 @@
           }
         },
         "x-ms-examples": {
-          "Gets routing rule": {
-            "$ref": "./examples/NetworkManagerRoutingRuleGet.json"
+          "Gets a security user rule": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleGet.json"
           }
         }
       },
       "put": {
         "tags": [
-          "RoutingRules"
+          "SecurityUserRules"
         ],
-        "description": "Creates or updates an routing rule.",
-        "operationId": "RoutingRules_CreateOrUpdate",
+        "description": "Creates or updates a security user rule.",
+        "operationId": "SecurityUserRules_CreateOrUpdate",
         "parameters": [
           {
-            "name": "routingRule",
+            "name": "securityUserRule",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/RoutingRule"
+              "$ref": "#/definitions/SecurityUserRule"
             },
-            "description": "The routing rule to create or update"
+            "description": "The security user rule to create or update"
           }
         ],
         "responses": {
           "200": {
-            "description": "Updated rule",
+            "description": "Updated security user rule",
             "schema": {
-              "$ref": "#/definitions/RoutingRule"
+              "$ref": "#/definitions/SecurityUserRule"
             }
           },
           "201": {
             "description": "Created rule",
             "schema": {
-              "$ref": "#/definitions/RoutingRule"
+              "$ref": "#/definitions/SecurityUserRule"
             }
           },
           "default": {
@@ -550,20 +550,17 @@
           }
         },
         "x-ms-examples": {
-          "Create an routing rule": {
-            "$ref": "./examples/NetworkManagerRoutingRulePut.json"
-          },
-          "Create a default routing rule": {
-            "$ref": "./examples/NetworkManagerRoutingRulePut.json"
+          "Create a security user rule": {
+            "$ref": "./examples/NetworkManagerSecurityUserRulePut.json"
           }
         }
       },
       "delete": {
         "tags": [
-          "RoutingRules"
+          "SecurityUserRules"
         ],
-        "description": "Deletes a routing rule.",
-        "operationId": "RoutingRules_Delete",
+        "description": "Deletes a security user rule.",
+        "operationId": "SecurityUserRules_Delete",
         "parameters": [
           {
             "$ref": "#/parameters/ForceDeleteParameter"
@@ -597,21 +594,21 @@
           "final-state-via": "location"
         },
         "x-ms-examples": {
-          "Deletes a routing rule": {
-            "$ref": "./examples/NetworkManagerRoutingRuleDelete.json"
+          "Delete a security user rule": {
+            "$ref": "./examples/NetworkManagerSecurityUserRuleDelete.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "NetworkManagerRoutingConfiguration": {
+    "SecurityUserConfiguration": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/NetworkManagerRoutingConfigurationPropertiesFormat",
-          "description": "Indicates the properties for the network manager routing configuration."
+          "$ref": "#/definitions/SecurityUserConfigurationPropertiesFormat",
+          "description": "Indicates the properties for the network manager security user configuration."
         },
         "systemData": {
           "readOnly": true,
@@ -624,14 +621,14 @@
           "$ref": "./network.json#/definitions/ChildResource"
         }
       ],
-      "description": "Defines the routing configuration"
+      "description": "Defines the security user configuration"
     },
-    "NetworkManagerRoutingConfigurationPropertiesFormat": {
+    "SecurityUserConfigurationPropertiesFormat": {
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description of the routing configuration."
+          "description": "A description of the security user configuration."
         },
         "provisioningState": {
           "readOnly": true,
@@ -644,32 +641,49 @@
           "description": "Unique identifier for this resource."
         }
       },
-      "description": "Defines the routing configuration properties."
+      "description": "Defines the security user configuration properties."
     },
-    "NetworkManagerRoutingConfigurationListResult": {
+    "SecurityUserConfigurationListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NetworkManagerRoutingConfiguration"
+            "$ref": "#/definitions/SecurityUserConfiguration"
           },
-          "description": "Gets a page of routing configurations"
+          "description": "Gets a page of security user configurations"
         },
         "nextLink": {
           "type": "string",
           "description": "Gets the URL to get the next page of results."
         }
       },
-      "description": "A list of network manager routing configurations"
+      "description": "A list of network manager security user configurations"
     },
-    "RoutingRuleCollection": {
+    "SecurityUserRuleCollectionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SecurityUserRuleCollection"
+          },
+          "description": "A list of network manager security user configuration rule collections"
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "Gets the URL to get the next set of results."
+        }
+      },
+      "description": "Security user configuration rule collection list result."
+    },
+    "SecurityUserRuleCollection": {
       "type": "object",
       "properties": {
         "properties": {
           "x-ms-client-flatten": true,
-          "$ref": "#/definitions/RoutingRuleCollectionPropertiesFormat",
-          "description": "Indicates the properties for the network manager routing rule collection."
+          "$ref": "#/definitions/SecurityUserRuleCollectionPropertiesFormat",
+          "description": "Indicates the properties for the network manager security user rule collection."
         },
         "systemData": {
           "readOnly": true,
@@ -682,14 +696,24 @@
           "$ref": "./network.json#/definitions/ChildResource"
         }
       ],
-      "description": "Defines the routing rule collection."
+      "description": "Defines the security user rule collection."
     },
-    "RoutingRuleCollectionPropertiesFormat": {
+    "SecurityUserRuleCollectionPropertiesFormat": {
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
-          "description": "A description of the routing rule collection."
+          "description": "A description of the security user rule collection."
+        },
+        "appliesToGroups": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "networkGroupId"
+          ],
+          "items": {
+            "$ref": "#/definitions/SecurityUserGroupItem"
+          },
+          "description": "Groups for configuration"
         },
         "provisioningState": {
           "readOnly": true,
@@ -700,36 +724,14 @@
           "type": "string",
           "readOnly": true,
           "description": "Unique identifier for this resource."
-        },
-        "appliesTo": {
-          "type": "array",
-          "x-ms-identifiers": [
-            "networkGroupId"
-          ],
-          "items": {
-            "$ref": "#/definitions/NetworkManagerRoutingGroupItem"
-          },
-          "description": "Groups for configuration"
-        },
-        "disableBgpRoutePropagation": {
-          "type": "string",
-          "enum": [
-            "False",
-            "True"
-          ],
-          "x-ms-enum": {
-            "name": "DisableBgpRoutePropagation",
-            "modelAsString": true
-          },
-          "description": "Determines whether BGP route propagation is enabled. Defaults to true."
         }
       },
       "required": [
-        "appliesTo"
+        "appliesToGroups"
       ],
-      "description": "Defines the routing rule collection properties."
+      "description": "Defines the security user rule collection properties."
     },
-    "NetworkManagerRoutingGroupItem": {
+    "SecurityUserGroupItem": {
       "type": "object",
       "properties": {
         "networkGroupId": {
@@ -740,32 +742,32 @@
       "required": [
         "networkGroupId"
       ],
-      "description": "Network manager routing group item."
+      "description": "Network manager security user group item."
     },
-    "RoutingRuleCollectionListResult": {
+    "SecurityUserRuleListResult": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RoutingRuleCollection"
+            "$ref": "#/definitions/SecurityUserRule"
           },
-          "description": "A list of network manager routing configuration rule collections"
+          "description": "A list of security user rules"
         },
         "nextLink": {
           "type": "string",
-          "description": "Gets the URL to get the next set of results."
+          "description": "The URL to get the next set of results."
         }
       },
-      "description": "Routing configuration rule collection list result."
+      "description": "security user rule list result."
     },
-    "RoutingRule": {
+    "SecurityUserRule": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/RoutingRulePropertiesFormat",
+          "$ref": "#/definitions/SecurityUserRulePropertiesFormat",
           "x-ms-client-flatten": true,
-          "description": "Indicates the properties of the routing rule"
+          "description": "Indicates the properties of the security user rule"
         },
         "systemData": {
           "readOnly": true,
@@ -778,125 +780,83 @@
           "$ref": "./network.json#/definitions/ChildResource"
         }
       ],
-      "description": "Network routing rule."
+      "description": "Network security user rule."
     },
-    "RoutingRulePropertiesFormat": {
+    "SecurityUserRulePropertiesFormat": {
       "type": "object",
       "properties": {
         "description": {
           "type": "string",
           "description": "A description for this rule."
         },
+        "protocol": {
+          "type": "string",
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/RuleProtocol",
+          "description": "Network protocol this rule applies to."
+        },
+        "sources": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ],
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
+          },
+          "description": "The CIDR or source IP ranges."
+        },
+        "destinations": {
+          "type": "array",
+          "x-ms-identifiers": [
+            "addressPrefix"
+          ],
+          "items": {
+            "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/AddressPrefixItem"
+          },
+          "description": "The destination address prefixes. CIDR or destination IP ranges."
+        },
+        "sourcePortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The source port."
+          },
+          "description": "The source port ranges."
+        },
+        "destinationPortRanges": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "The destination port."
+          },
+          "description": "The destination port ranges."
+        },
+        "direction": {
+          "$ref": "./networkManagerSecurityAdminConfiguration.json#/definitions/SecurityConfigurationRuleDirection",
+          "description": "Indicates if the traffic matched against the rule in inbound or outbound."
+        },
         "provisioningState": {
           "readOnly": true,
           "$ref": "./network.json#/definitions/ProvisioningState",
-          "description": "The provisioning state of the resource."
+          "description": "The provisioning state of the security configuration user rule resource."
         },
         "resourceGuid": {
           "type": "string",
           "readOnly": true,
           "description": "Unique identifier for this resource."
-        },
-        "destination": {
-          "$ref": "#/definitions/RoutingRuleRouteDestination",
-          "description": "Indicates the destination for this particular rule."
-        },
-        "nextHop": {
-          "$ref": "#/definitions/RoutingRuleNextHop",
-          "description": "Indicates the next hop for this particular rule."
         }
       },
       "required": [
-        "destination",
-        "nextHop"
+        "protocol",
+        "direction"
       ],
-      "description": "Routing rule resource."
-    },
-    "RoutingRuleRouteDestination": {
-      "type": "object",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/RoutingRuleDestinationType",
-          "description": "Destination type."
-        },
-        "destinationAddress": {
-          "type": "string",
-          "description": "Destination address."
-        }
-      },
-      "required": [
-        "type",
-        "destinationAddress"
-      ],
-      "description": "Route destination."
-    },
-    "RoutingRuleNextHop": {
-      "type": "object",
-      "properties": {
-        "nextHopType": {
-          "$ref": "#/definitions/RoutingRuleNextHopType",
-          "description": "Next hop type."
-        },
-        "nextHopAddress": {
-          "type": "string",
-          "description": "Next hop address. Only required if the next hop type is VirtualAppliance."
-        }
-      },
-      "required": [
-        "nextHopType"
-      ],
-      "description": "Next hop."
-    },
-    "RoutingRuleNextHopType": {
-      "type": "string",
-      "description": "Routing rule next hop type.",
-      "enum": [
-        "Internet",
-        "NoNextHop",
-        "VirtualAppliance",
-        "VirtualNetworkGateway",
-        "VnetLocal"
-      ],
-      "x-ms-enum": {
-        "name": "RoutingRuleNextHopType",
-        "modelAsString": true
-      }
-    },
-    "RoutingRuleDestinationType": {
-      "type": "string",
-      "description": "Routing rule destination type.",
-      "enum": [
-        "AddressPrefix",
-        "ServiceTag"
-      ],
-      "x-ms-enum": {
-        "name": "RoutingRuleDestinationType",
-        "modelAsString": true
-      }
-    },
-    "RoutingRuleListResult": {
-      "type": "object",
-      "properties": {
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RoutingRule"
-          },
-          "description": "A list of routing rules."
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "The URL to get the next set of results."
-        }
-      },
-      "description": "Routing configuration rule list result."
+      "description": "Security rule resource."
     }
   },
   "parameters": {
-    "NetworkManagerRoutingConfigurationParameter": {
+    "SecurityConfigurationParameter": {
       "name": "configurationName",
       "in": "path",
-      "description": "The name of the network manager Routing Configuration.",
+      "description": "The name of the network manager Security Configuration.",
       "pattern": "^[a-zA-Z0-9_.-]*$",
       "required": true,
       "type": "string",
@@ -905,13 +865,13 @@
     "RuleCollectionParameter": {
       "name": "ruleCollectionName",
       "in": "path",
-      "description": "The name of the network manager routing Configuration rule collection.",
+      "description": "The name of the network manager security Configuration rule collection.",
       "pattern": "^[a-zA-Z0-9_.-]*$",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
-    "NetworkManagerRoutingConfigurationsRuleParameter": {
+    "SecurityConfigurationsRuleParameter": {
       "name": "ruleName",
       "in": "path",
       "description": "The name of the rule.",

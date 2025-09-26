@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "RoutingConfiguration",
-    "version": "2024-09-01-preview"
+    "version": "2024-05-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -42,13 +42,13 @@
         "description": "Lists all the network manager routing configurations in a network manager, in a paginated format.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -87,13 +87,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -225,13 +225,13 @@
         "description": "Lists all the rule collections in a routing configuration, in a paginated format.",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -273,13 +273,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -408,13 +408,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -465,13 +465,13 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/networkManagers/{networkManagerName}/routingConfigurations/{configurationName}/ruleCollections/{ruleCollectionName}/rules/{ruleName}": {
       "parameters": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
         },
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
         },
         {
           "$ref": "#/parameters/NetworkManagerNameParameter"
@@ -722,16 +722,6 @@
             "modelAsString": true
           },
           "description": "Determines whether BGP route propagation is enabled. Defaults to true."
-        },
-        "peeringRoutePropagationRules": {
-          "type": "array",
-          "x-ms-identifiers": [
-            "peeringRoutePropagationRule"
-          ],
-          "items": {
-            "$ref": "#/definitions/PeeringRoutePropagationRule"
-          },
-          "description": "Rule to define peering route propagation behavior."
         }
       },
       "required": [
@@ -749,27 +739,6 @@
       },
       "required": [
         "networkGroupId"
-      ],
-      "description": "Network manager routing group item."
-    },
-    "PeeringRoutePropagationRule": {
-      "type": "object",
-      "properties": {
-        "propagationOption": {
-          "type": "string",
-          "enum": [
-            "Default",
-            "DisableAllPeeringPrefixes"
-          ],
-          "x-ms-enum": {
-            "name": "PropagationOption",
-            "modelAsString": true
-          },
-          "description": "Determines the peering route propogation rule behavior. Defaults to 'Default'."
-        }
-      },
-      "required": [
-        "propagationOption"
       ],
       "description": "Network manager routing group item."
     },
