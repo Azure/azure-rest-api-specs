@@ -41,9 +41,9 @@ namespace Microsoft.HybridContainerService;
  */
 enum Versions {
   /**
-   * The 2024-01-01 API version.
+   * The 2025-02-01-preview API version.
    */
-  v2024_01_01: "2024-01-01",
+  v2025_02_01_preview: "2025-02-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

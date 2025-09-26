@@ -485,6 +485,11 @@ model AgentPoolUpdateProfile {
   vmSize?: string;
 
   /**
+   * Number of GPUs attached to each node of the agent pool. The default value is 0.
+   */
+  gpuCountPerNode?: int32 = 0;
+
+  /**
    * Version of Kubernetes in use by the agent pool. This is inherited from the kubernetesVersion of the provisioned cluster.
    */
   @visibility(Lifecycle.Read)
