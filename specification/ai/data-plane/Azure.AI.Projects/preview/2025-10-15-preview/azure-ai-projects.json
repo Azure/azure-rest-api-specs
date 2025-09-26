@@ -2034,6 +2034,46 @@
           }
         }
       }
+    },
+    "/sync_evals:run": {
+      "post": {
+        "operationId": "SyncEvals_Create",
+        "description": "Synchronize evaluation runs from connected resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "eval",
+            "in": "body",
+            "description": "Creates a sync eval run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvalJsonlInputData"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvalRunOutputItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -2866,6 +2906,31 @@
       ],
       "x-ms-discriminator-value": "CosmosDBNoSqlVectorStore"
     },
+    "CreateEvalJsonlRunDataSource": {
+      "type": "object",
+      "description": "Eval jsonl input data.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of data source. Always `jsonl`.",
+          "default": "jsonl",
+          "enum": [
+            "jsonl"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "source": {
+          "$ref": "#/definitions/EvalJsonlFileContentSource",
+          "description": "Determines what populates the `item` namespace in the data source."
+        }
+      },
+      "required": [
+        "type",
+        "source"
+      ]
+    },
     "CredentialType": {
       "type": "string",
       "description": "The credential type used by the connection",
@@ -3228,6 +3293,58 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "EvalJsonlFileContentSource": {
+      "type": "object",
+      "description": "OpenAI definintion: Eval inline file content or jsonl input data.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of jsonl source. Always `file_content`.",
+          "default": "file_content",
+          "enum": [
+            "file_content"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "content": {
+          "type": "array",
+          "description": "The content of the jsonl file.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "item": {
+                "type": "object"
+              },
+              "sample": {
+                "type": "object"
+              }
+            },
+            "required": [
+              "item"
+            ]
+          }
+        }
+      },
+      "required": [
+        "type",
+        "content"
+      ]
+    },
+    "EvalJsonlInputData": {
+      "type": "object",
+      "description": "OpenAI Input data source definition for eval.",
+      "properties": {
+        "data_source": {
+          "$ref": "#/definitions/CreateEvalJsonlRunDataSource",
+          "description": "Identifier of the evaluator."
+        }
+      },
+      "required": [
+        "data_source"
+      ]
+    },
     "EvalResult": {
       "type": "object",
       "description": "Result of the evaluation.",
@@ -3255,6 +3372,76 @@
         "type",
         "score",
         "passed"
+      ]
+    },
+    "EvalRunOutputItem": {
+      "type": "object",
+      "description": "OpenAI definition: Eval output results.",
+      "properties": {
+        "object": {
+          "type": "string",
+          "description": "The type of the object. Always \"eval.run.output_item\".",
+          "default": "eval.run.output_item",
+          "enum": [
+            "eval.run.output_item"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the evaluation run output item."
+        },
+        "run_id": {
+          "type": "string",
+          "description": "The identifier of the evaluation run associated with this output item."
+        },
+        "eval_id": {
+          "type": "string",
+          "description": "The identifier of the evaluation group."
+        },
+        "created_at": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Unix timestamp (in seconds) when the evaluation run was created."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the evaluation run."
+        },
+        "datasource_item_id": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The identifier for the data source item."
+        },
+        "datasource_item": {
+          "type": "object",
+          "description": "Details of the input data source item."
+        },
+        "results": {
+          "type": "array",
+          "description": "A list of results from the evaluation run.",
+          "items": {
+            "type": "object"
+          }
+        },
+        "sample": {
+          "type": "object",
+          "description": "A sample containing the input and output of the evaluation run."
+        }
+      },
+      "required": [
+        "object",
+        "id",
+        "run_id",
+        "eval_id",
+        "created_at",
+        "status",
+        "datasource_item_id",
+        "datasource_item",
+        "results",
+        "sample"
       ]
     },
     "Evaluation": {
