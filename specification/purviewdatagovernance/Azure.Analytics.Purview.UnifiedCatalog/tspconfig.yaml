@@ -16,15 +16,18 @@ options:
     output-file: "{azure-resource-provider-folder}/Azure.Analytics.Purview.UnifiedCatalog/{version-status}/{version}/CatalogApiService.json"
     omit-unreachable-types: true
   "@azure-tools/typespec-python":
+    emitter-output-dir: "{project-root}/sdk/purview/azure-purview-unifiedcatalog"
     package-dir: "azure-purview-unifiedcatalog"
     namespace: "azure.purview.unifiedcatalog"
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{project-root}/sdk/purview/Azure.Analytics.Purview.UnifiedCatalog"
     namespace: Azure.Analytics.Purview.UnifiedCatalog
     model-namespace: false
   "@azure-tools/typespec-ts":
+    emitter-output-dir: "{project-root}/sdk/purview/purview-unifiedcatalog-rest"
     package-dir: "purview-unifiedcatalog-rest"
     package-details:
       name: "@azure-rest/purview-unifiedcatalog"
