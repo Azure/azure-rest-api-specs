@@ -169,8 +169,8 @@ These settings apply only when `--tag=package-2018-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2018-04-01'
 input-file:
-  - Microsoft.Databricks/stable/2018-04-01/databricks.json
-  - Microsoft.Databricks/stable/2018-04-01/vnetpeering.json
+  - stable/2018-04-01/databricks.json
+  - stable/2018-04-01/vnetpeering.json
 ```
 
 ### Tag: package-2021-04-01-preview
@@ -179,8 +179,8 @@ These settings apply only when `--tag=package-2021-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-04-01-preview'
 input-file:
-  - Microsoft.Databricks/preview/2021-04-01-preview/databricks.json
-  - Microsoft.Databricks/preview/2021-04-01-preview/vnetpeering.json
+  - preview/2021-04-01-preview/databricks.json
+  - preview/2021-04-01-preview/vnetpeering.json
 ```
 
 ### Tag: package-2022-04-01-preview
@@ -189,9 +189,9 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
-  - Microsoft.Databricks/preview/2022-04-01-preview/databricks.json
-  - Microsoft.Databricks/preview/2022-04-01-preview/vnetpeering.json
-  - Microsoft.Databricks/preview/2022-04-01-preview/accessconnector.json
+  - preview/2022-04-01-preview/databricks.json
+  - preview/2022-04-01-preview/vnetpeering.json
+  - preview/2022-04-01-preview/accessconnector.json
 ```
 
 ### Tag: package-2023-02-01
@@ -200,9 +200,9 @@ These settings apply only when `--tag=package-2023-02-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-02-01'
 input-file:
-  - Microsoft.Databricks/stable/2023-02-01/databricks.json
-  - Microsoft.Databricks/stable/2023-02-01/vnetpeering.json
-  - Microsoft.Databricks/preview/2022-10-01-preview/accessconnector.json
+  - stable/2023-02-01/databricks.json
+  - stable/2023-02-01/vnetpeering.json
+  - preview/2022-10-01-preview/accessconnector.json
 ```
 
 ### Tag: package-2023-05-01
@@ -211,9 +211,9 @@ These settings apply only when `--tag=package-2023-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-05-01'
 input-file:
-  - Microsoft.Databricks/stable/2023-02-01/databricks.json
-  - Microsoft.Databricks/stable/2023-02-01/vnetpeering.json
-  - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
+  - stable/2023-02-01/databricks.json
+  - stable/2023-02-01/vnetpeering.json
+  - stable/2023-05-01/accessconnector.json
 ```
 
 ### Tag: package-2023-09-15-preview
@@ -222,9 +222,9 @@ These settings apply only when `--tag=package-2023-09-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-09-15-preview'
 input-file:
-  - Microsoft.Databricks/preview/2023-09-15-preview/databricks.json
-  - Microsoft.Databricks/preview/2023-09-15-preview/vnetpeering.json
-  - Microsoft.Databricks/stable/2023-05-01/accessconnector.json
+  - preview/2023-09-15-preview/databricks.json
+  - preview/2023-09-15-preview/vnetpeering.json
+  - stable/2023-05-01/accessconnector.json
 ```
 
 ### Tag: package-2024-05-01
@@ -233,9 +233,9 @@ These settings apply only when `--tag=package-2024-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-05-01'
 input-file:
-  - Microsoft.Databricks/stable/2024-05-01/databricks.json
-  - Microsoft.Databricks/stable/2024-05-01/vnetpeering.json
-  - Microsoft.Databricks/stable/2024-05-01/accessconnector.json
+  - stable/2024-05-01/databricks.json
+  - stable/2024-05-01/vnetpeering.json
+  - stable/2024-05-01/accessconnector.json
 ```
 
 ### Tag: package-2024-09-01-preview
@@ -244,9 +244,9 @@ These settings apply only when `--tag=package-2024-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-01-preview'
 input-file:
-  - Microsoft.Databricks/preview/2024-09-01-preview/databricks.json
-  - Microsoft.Databricks/preview/2024-09-01-preview/vnetpeering.json
-  - Microsoft.Databricks/preview/2024-09-01-preview/accessconnector.json
+  - preview/2024-09-01-preview/databricks.json
+  - preview/2024-09-01-preview/vnetpeering.json
+  - preview/2024-09-01-preview/accessconnector.json
 ```
 
 ### Tag: package-2025-03-01-preview
@@ -255,9 +255,9 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
-  - Microsoft.Databricks/preview/2025-03-01-preview/databricks.json
-  - Microsoft.Databricks/preview/2025-03-01-preview/vnetpeering.json
-  - Microsoft.Databricks/preview/2025-03-01-preview/accessconnector.json
+  - preview/2025-03-01-preview/databricks.json
+  - preview/2025-03-01-preview/vnetpeering.json
+  - preview/2025-03-01-preview/accessconnector.json
 ```
 
 ---
