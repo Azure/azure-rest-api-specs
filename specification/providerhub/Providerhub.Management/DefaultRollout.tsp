@@ -32,7 +32,7 @@ interface DefaultRolloutOps
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
-        @segment("providerRegistrations")
+        @segment("providers/microsoft.ProviderHub/providerRegistrations")
         @key
         providerNamespace: string,
       },
@@ -42,6 +42,7 @@ interface DefaultRolloutOps
         @path
         @segment("defaultRollouts")
         @key
+        @maxLength(260)
         @pattern("^[-\\w\\._\\(\\)]+$")
         rolloutName: string,
       }
@@ -86,7 +87,7 @@ interface NewRegionFrontloadReleaseOps
 
         /** The name of the resource provider hosted within ProviderHub. */
         @path
-        @segment("providerRegistrations")
+        @segment("providers/microsoft.ProviderHub/providerRegistrations")
         @key
         providerNamespace: string,
       },
@@ -111,7 +112,7 @@ interface NewRegionFrontloadRelease {
   /**
    * Creates or updates a new region frontload release.
    */
-  createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<DefaultRollout>;
+  createOrUpdate is NewRegionFrontloadReleaseOps.CreateOrUpdateSync<FrontloadPayload, Response = DefaultRollout>;
 
   /**
    * Stops a new region frontload release.

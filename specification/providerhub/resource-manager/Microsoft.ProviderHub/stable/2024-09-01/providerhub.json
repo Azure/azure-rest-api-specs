@@ -3,7 +3,7 @@
   "info": {
     "title": "ProviderHub",
     "version": "2024-09-01",
-    "description": "Provider Hub",
+    "description": "Microsoft ProviderHub",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -113,1213 +113,6 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providerRegistrations/{providerNamespace}/defaultRollouts": {
-      "get": {
-        "operationId": "DefaultRollouts_ListByProviderRegistration",
-        "tags": [
-          "DefaultRollouts"
-        ],
-        "description": "Gets the list of the rollouts for the given provider.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRolloutArrayResponseWithContinuation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DefaultRollouts_ListByProviderRegistration": {
-            "$ref": "./examples/DefaultRollouts_ListByProviderRegistration.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}": {
-      "get": {
-        "operationId": "DefaultRollouts_Get",
-        "tags": [
-          "DefaultRollouts"
-        ],
-        "description": "Gets the default rollout details.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "rolloutName",
-            "in": "path",
-            "description": "The rollout name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DefaultRollouts_Get": {
-            "$ref": "./examples/DefaultRollouts_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "DefaultRollouts_CreateOrUpdate",
-        "tags": [
-          "DefaultRollouts"
-        ],
-        "description": "Creates or updates the rollout details.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "rolloutName",
-            "in": "path",
-            "description": "The rollout name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The Default rollout properties supplied to the CreateOrUpdate operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'DefaultRollout' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "201": {
-            "description": "Resource 'DefaultRollout' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            },
-            "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DefaultRollouts_CreateOrUpdate": {
-            "$ref": "./examples/DefaultRollouts_CreateOrUpdate.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "DefaultRollouts_Delete",
-        "tags": [
-          "DefaultRollouts"
-        ],
-        "description": "Deletes the rollout resource. Rollout must be in terminal state.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "rolloutName",
-            "in": "path",
-            "description": "The rollout name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DefaultRollouts_Delete": {
-            "$ref": "./examples/DefaultRollouts_Delete.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}/stop": {
-      "post": {
-        "operationId": "DefaultRollouts_Stop",
-        "tags": [
-          "DefaultRollouts"
-        ],
-        "description": "Stops or cancels the rollout, if in progress.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "rolloutName",
-            "in": "path",
-            "description": "The rollout name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[-\\w\\._\\(\\)]+$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "DefaultRollouts_Stop": {
-            "$ref": "./examples/DefaultRollouts_Stop.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}": {
-      "get": {
-        "operationId": "NewRegionFrontloadRelease_Get",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Gets a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_Get": {
-            "$ref": "./examples/NewRegionFrontloadRelease_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "NewRegionFrontloadRelease_CreateOrUpdate",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Creates or updates a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'DefaultRollout' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "201": {
-            "description": "Resource 'DefaultRollout' create operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/DefaultRollout"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_CreateOrUpdate": {
-            "$ref": "./examples/NewRegionFrontloadRelease_CreateOrUpdate.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}/stop": {
-      "post": {
-        "operationId": "NewRegionFrontloadRelease_Stop",
-        "tags": [
-          "NewRegionFrontloadRelease"
-        ],
-        "description": "Stops a new region frontload release.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "releaseName",
-            "in": "path",
-            "description": "The name of the release.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "NewRegionFrontloadRelease_Stop": {
-            "$ref": "./examples/NewRegionFrontloadRelease_Stop.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus": {
-      "get": {
-        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond",
-        "tags": [
-          "SkuResourceOperationGroup"
-        ],
-        "description": "Gets the list of skus for the given resource type.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeSecond",
-            "in": "path",
-            "description": "The second child resource type.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond": {
-            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus/{sku}": {
-      "get": {
-        "operationId": "Skus_GetNestedResourceTypeSecond",
-        "tags": [
-          "SkuResourceOperationGroup"
-        ],
-        "description": "Gets the sku details for the given resource type and sku name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeSecond",
-            "in": "path",
-            "description": "The second child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_GetNestedResourceTypeSecond": {
-            "$ref": "./examples/Skus_GetNestedResourceTypeSecond.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Skus_CreateOrUpdateNestedResourceTypeSecond",
-        "tags": [
-          "SkuResourceOperationGroup"
-        ],
-        "description": "Creates or updates the resource type skus in the given resource type.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeSecond",
-            "in": "path",
-            "description": "The second child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The required body parameters supplied to the resource sku operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SkuResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_CreateOrUpdateNestedResourceTypeSecond": {
-            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeSecond.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Skus_DeleteNestedResourceTypeSecond",
-        "tags": [
-          "SkuResourceOperationGroup"
-        ],
-        "description": "Deletes a resource type sku.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeSecond",
-            "in": "path",
-            "description": "The second child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_DeleteNestedResourceTypeSecond": {
-            "$ref": "./examples/Skus_DeleteNestedResourceTypeSecond.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus": {
-      "get": {
-        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst",
-        "tags": [
-          "Skus"
-        ],
-        "description": "Gets the list of skus for the given resource type.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst": {
-            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus/{sku}": {
-      "get": {
-        "operationId": "Skus_GetNestedResourceTypeFirst",
-        "tags": [
-          "Skus"
-        ],
-        "description": "Gets the sku details for the given resource type and sku name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_GetNestedResourceTypeFirst": {
-            "$ref": "./examples/Skus_GetNestedResourceTypeFirst.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Skus_CreateOrUpdateNestedResourceTypeFirst",
-        "tags": [
-          "Skus"
-        ],
-        "description": "Creates or updates the resource type skus in the given resource type.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The required body parameters supplied to the resource sku operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SkuResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_CreateOrUpdateNestedResourceTypeFirst": {
-            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeFirst.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Skus_DeleteNestedResourceTypeFirst",
-        "tags": [
-          "Skus"
-        ],
-        "description": "Deletes a resource type sku.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "nestedResourceTypeFirst",
-            "in": "path",
-            "description": "The first child resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_DeleteNestedResourceTypeFirst": {
-            "$ref": "./examples/Skus_DeleteNestedResourceTypeFirst.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus": {
-      "get": {
-        "operationId": "Skus_ListByResourceTypeRegistrations",
-        "tags": [
-          "SkuResources"
-        ],
-        "description": "Gets the list of skus for the given resource type.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_ListByResourceTypeRegistrations": {
-            "$ref": "./examples/Skus_ListByResourceTypeRegistrations.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus/{sku}": {
-      "get": {
-        "operationId": "Skus_Get",
-        "tags": [
-          "SkuResources"
-        ],
-        "description": "Gets the sku details for the given resource type and sku name.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_Get": {
-            "$ref": "./examples/Skus_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "Skus_CreateOrUpdate",
-        "tags": [
-          "SkuResources"
-        ],
-        "description": "Creates or updates the resource type skus in the given resource type.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The required body parameters supplied to the resource sku operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource 'SkuResource' update operation succeeded",
-            "schema": {
-              "$ref": "#/definitions/SkuResource"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_CreateOrUpdate": {
-            "$ref": "./examples/Skus_CreateOrUpdate.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Skus_Delete",
-        "tags": [
-          "SkuResources"
-        ],
-        "description": "Deletes a resource type sku.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "the provider namespace",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceType",
-            "in": "path",
-            "description": "The resource type.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "sku",
-            "in": "path",
-            "description": "The SKU.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
-          },
-          "204": {
-            "description": "Resource does not exist."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Skus_Delete": {
-            "$ref": "./examples/Skus_Delete.json"
-          }
         }
       }
     },
@@ -1557,80 +350,6 @@
             "$ref": "./examples/ProviderRegistrations_Delete.json"
           }
         }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/{resourceActionName}/deleteResources": {
-      "post": {
-        "operationId": "ResourceActions_DeleteResources",
-        "tags": [
-          "ProviderRegistrations"
-        ],
-        "description": "Deletes resources.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "providerNamespace",
-            "in": "path",
-            "description": "The name of the resource provider hosted within ProviderHub.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "resourceActionName",
-            "in": "path",
-            "description": "The resource action name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 63,
-            "pattern": "^[a-z][a-z0-9]*$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The properties supplied to the DeleteResources operation.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ResourceManagementAction"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Resource operation accepted.",
-            "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "ResourceActions_DeleteResources": {
-            "$ref": "./examples/ResourceActions_DeleteResources.json"
-          }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
-        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/authorizedApplications": {
@@ -2666,6 +1385,80 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourceActions/{resourceActionName}/deleteResources": {
+      "post": {
+        "operationId": "ResourceActions_DeleteResources",
+        "tags": [
+          "ProviderRegistrations"
+        ],
+        "description": "Deletes resources.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceActionName",
+            "in": "path",
+            "description": "The resource action name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 63,
+            "pattern": "^[a-z][a-z0-9]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The properties supplied to the DeleteResources operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ResourceManagementAction"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ResourceActions_DeleteResources": {
+            "$ref": "./examples/ResourceActions_DeleteResources.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations": {
       "get": {
         "operationId": "ResourceTypeRegistrations_ListByProviderRegistration",
@@ -2906,6 +1699,1211 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts": {
+      "get": {
+        "operationId": "DefaultRollouts_ListByProviderRegistration",
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Gets the list of the rollouts for the given provider.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRolloutArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_ListByProviderRegistration": {
+            "$ref": "./examples/DefaultRollouts_ListByProviderRegistration.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}": {
+      "get": {
+        "operationId": "DefaultRollouts_Get",
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Gets the default rollout details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rolloutName",
+            "in": "path",
+            "description": "The rollout name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_Get": {
+            "$ref": "./examples/DefaultRollouts_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "DefaultRollouts_CreateOrUpdate",
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Creates or updates the rollout details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rolloutName",
+            "in": "path",
+            "description": "The rollout name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The Default rollout properties supplied to the CreateOrUpdate operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'DefaultRollout' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "201": {
+            "description": "Resource 'DefaultRollout' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_CreateOrUpdate": {
+            "$ref": "./examples/DefaultRollouts_CreateOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "DefaultRollouts_Delete",
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Deletes the rollout resource. Rollout must be in terminal state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rolloutName",
+            "in": "path",
+            "description": "The rollout name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_Delete": {
+            "$ref": "./examples/DefaultRollouts_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/defaultRollouts/{rolloutName}/stop": {
+      "post": {
+        "operationId": "DefaultRollouts_Stop",
+        "tags": [
+          "DefaultRollouts"
+        ],
+        "description": "Stops or cancels the rollout, if in progress.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "rolloutName",
+            "in": "path",
+            "description": "The rollout name.",
+            "required": true,
+            "type": "string",
+            "maxLength": 260,
+            "pattern": "^[-\\w\\._\\(\\)]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DefaultRollouts_Stop": {
+            "$ref": "./examples/DefaultRollouts_Stop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}": {
+      "get": {
+        "operationId": "NewRegionFrontloadRelease_Get",
+        "tags": [
+          "NewRegionFrontloadRelease"
+        ],
+        "description": "Gets a new region frontload release.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "releaseName",
+            "in": "path",
+            "description": "The name of the release.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NewRegionFrontloadRelease_Get": {
+            "$ref": "./examples/NewRegionFrontloadRelease_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "NewRegionFrontloadRelease_CreateOrUpdate",
+        "tags": [
+          "NewRegionFrontloadRelease"
+        ],
+        "description": "Creates or updates a new region frontload release.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "releaseName",
+            "in": "path",
+            "description": "The name of the release.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FrontloadPayload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NewRegionFrontloadRelease_CreateOrUpdate": {
+            "$ref": "./examples/NewRegionFrontloadRelease_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}/stop": {
+      "post": {
+        "operationId": "NewRegionFrontloadRelease_Stop",
+        "tags": [
+          "NewRegionFrontloadRelease"
+        ],
+        "description": "Stops a new region frontload release.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "The name of the resource provider hosted within ProviderHub.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "releaseName",
+            "in": "path",
+            "description": "The name of the release.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NewRegionFrontloadRelease_Stop": {
+            "$ref": "./examples/NewRegionFrontloadRelease_Stop.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus": {
+      "get": {
+        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond",
+        "tags": [
+          "SkuResourceOperationGroup"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/resourcetypeRegistrations/{nestedResourceTypeSecond}/skus/{sku}": {
+      "get": {
+        "operationId": "Skus_GetNestedResourceTypeSecond",
+        "tags": [
+          "SkuResourceOperationGroup"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_GetNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_GetNestedResourceTypeSecond.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Skus_CreateOrUpdateNestedResourceTypeSecond",
+        "tags": [
+          "SkuResourceOperationGroup"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The required body parameters supplied to the resource sku operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SkuResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_CreateOrUpdateNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeSecond.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Skus_DeleteNestedResourceTypeSecond",
+        "tags": [
+          "SkuResourceOperationGroup"
+        ],
+        "description": "Deletes a resource type sku.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeSecond",
+            "in": "path",
+            "description": "The second child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_DeleteNestedResourceTypeSecond": {
+            "$ref": "./examples/Skus_DeleteNestedResourceTypeSecond.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus": {
+      "get": {
+        "operationId": "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst",
+        "tags": [
+          "Skus"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrationsNestedResourceTypeFirst.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/resourcetypeRegistrations/{nestedResourceTypeFirst}/skus/{sku}": {
+      "get": {
+        "operationId": "Skus_GetNestedResourceTypeFirst",
+        "tags": [
+          "Skus"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_GetNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_GetNestedResourceTypeFirst.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Skus_CreateOrUpdateNestedResourceTypeFirst",
+        "tags": [
+          "Skus"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The required body parameters supplied to the resource sku operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SkuResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_CreateOrUpdateNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_CreateOrUpdateNestedResourceTypeFirst.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Skus_DeleteNestedResourceTypeFirst",
+        "tags": [
+          "Skus"
+        ],
+        "description": "Deletes a resource type sku.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "nestedResourceTypeFirst",
+            "in": "path",
+            "description": "The first child resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_DeleteNestedResourceTypeFirst": {
+            "$ref": "./examples/Skus_DeleteNestedResourceTypeFirst.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus": {
+      "get": {
+        "operationId": "Skus_ListByResourceTypeRegistrations",
+        "tags": [
+          "SkuResources"
+        ],
+        "description": "Gets the list of skus for the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResourceArrayResponseWithContinuation"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_ListByResourceTypeRegistrations": {
+            "$ref": "./examples/Skus_ListByResourceTypeRegistrations.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/resourcetypeRegistrations/{resourceType}/skus/{sku}": {
+      "get": {
+        "operationId": "Skus_Get",
+        "tags": [
+          "SkuResources"
+        ],
+        "description": "Gets the sku details for the given resource type and sku name.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_Get": {
+            "$ref": "./examples/Skus_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Skus_CreateOrUpdate",
+        "tags": [
+          "SkuResources"
+        ],
+        "description": "Creates or updates the resource type skus in the given resource type.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "properties",
+            "in": "body",
+            "description": "The required body parameters supplied to the resource sku operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'SkuResource' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/SkuResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_CreateOrUpdate": {
+            "$ref": "./examples/Skus_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Skus_Delete",
+        "tags": [
+          "SkuResources"
+        ],
+        "description": "Deletes a resource type sku.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "providerNamespace",
+            "in": "path",
+            "description": "the provider namespace",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The resource type.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "sku",
+            "in": "path",
+            "description": "The SKU.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Skus_Delete": {
+            "$ref": "./examples/Skus_Delete.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ProviderHub/providerMonitorSettings": {
       "get": {
         "operationId": "ProviderMonitorSettings_ListByResourceGroup",
@@ -3099,7 +3097,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "type": "object"
+              "$ref": "#/definitions/ProviderMonitorSettingTagsUpdate"
             }
           }
         ],
@@ -6223,6 +6221,19 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state.",
           "readOnly": true
+        }
+      }
+    },
+    "ProviderMonitorSettingTagsUpdate": {
+      "type": "object",
+      "description": "The type used for updating tags in ProviderMonitorSetting resources.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },

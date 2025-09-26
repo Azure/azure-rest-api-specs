@@ -115,6 +115,7 @@ interface ProviderRegistrations {
       @minLength(3)
       @pattern("^[a-z][a-z0-9]*$")
       @path
+      @segment("resourceActions")
       resourceActionName: string;
     }
   >;

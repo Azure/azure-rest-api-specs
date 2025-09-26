@@ -30,7 +30,7 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * Provider Hub
+ * Microsoft ProviderHub
  */
 @armProviderNamespace
 @service(#{ title: "ProviderHub" })

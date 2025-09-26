@@ -32,7 +32,7 @@ interface SkuResourceOps
 
         /** the provider namespace */
         @path
-        @segment("providers")
+        @segment("providers/microsoft.ProviderHub/providerRegistrations")
         @key
         providerNamespace: string,
 
@@ -98,7 +98,7 @@ interface SkusOps
 
         /** the provider namespace */
         @path
-        @segment("providers")
+        @segment("providers/microsoft.ProviderHub/providerRegistrations")
         @key
         providerNamespace: string,
 
@@ -162,7 +162,7 @@ interface SkuResourceOperationGroupOps
 
         /** the provider namespace */
         @path
-        @segment("providers")
+        @segment("providers/microsoft.ProviderHub/providerRegistrations")
         @key
         providerNamespace: string,
 
