@@ -28,10 +28,10 @@ namespace Microsoft.Monitor {
    * Metrics container resource for an Azure Monitor Workspace.
    */
   @parentResource(AzureMonitorWorkspaceResource)
-  model MacMetricsContainerResource
-    is Azure.ResourceManager.ProxyResource<MacMetricsContainer> {
+  model MetricsContainerResource
+    is Azure.ResourceManager.ProxyResource<MetricsContainer> {
     ...ResourceNameParameter<
-      Resource = MacMetricsContainer,
+      Resource = MetricsContainer,
       KeyName = "metricsContainerName",
       SegmentName = "metricsContainers",
       /**
@@ -83,17 +83,17 @@ namespace Microsoft.Monitor {
     /**
      * Gets metrics container settings for a monitoring account.
      */
-    get is ArmResourceRead<MacMetricsContainerResource>;
+    get is ArmResourceRead<MetricsContainerResource>;
 
     /**
      * Creates or updates metrics container settings for a monitoring account.
      */
-    createOrUpdate is ArmResourceCreateOrReplaceSync<MacMetricsContainerResource>;
+    createOrUpdate is ArmResourceCreateOrReplaceSync<MetricsContainerResource>;
 
     /**
      * Lists metrics containers for a monitoring account.
      */
-    listByAzureMonitorWorkspace is ArmResourceListByParent<MacMetricsContainerResource>;
+    listByAzureMonitorWorkspace is ArmResourceListByParent<MetricsContainerResource>;
   }
 
   @@doc(AzureMonitorWorkspaceResource.name,

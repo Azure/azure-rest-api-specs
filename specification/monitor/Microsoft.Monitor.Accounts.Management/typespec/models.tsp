@@ -133,7 +133,7 @@ namespace Microsoft.Monitor {
   /**
    * Definition of Geneva Metrics limits
    */
-  model MacMetricsLimits {
+  model MetricsLimits {
     /**
      * Maximum number of active time series allowed on the metrics containers.
      */
@@ -148,7 +148,7 @@ namespace Microsoft.Monitor {
   /**
    * Properties of a metrics container.
    */
-  model MacMetricsContainer {
+  model MetricsContainer {
     /**
      * The provisioning state of the metrics container.
      */
@@ -158,6 +158,6 @@ namespace Microsoft.Monitor {
     /**
      * Geneva Metrics limits.
      */
-    limits?: MacMetricsLimits;
+    limits?: MetricsLimits;
   }
 }
