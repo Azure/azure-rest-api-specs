@@ -376,8 +376,7 @@
             "in": "path",
             "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_.]+$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -427,8 +426,7 @@
             "in": "path",
             "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_.]+$"
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -502,8 +500,7 @@
             "in": "path",
             "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_.]+$"
+            "type": "string"
           },
           {
             "name": "parameters",
@@ -556,8 +553,7 @@
             "in": "path",
             "description": "The name of the Traffic Manager profile.",
             "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_.]+$"
+            "type": "string"
           }
         ],
         "responses": {
@@ -1034,10 +1030,6 @@
         ]
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "CheckTrafficManagerRelativeDnsNameAvailabilityParameters": {
       "type": "object",
       "description": "Parameters supplied to check Traffic Manager name operation.",
@@ -1129,21 +1121,11 @@
           "$ref": "#/definitions/EndpointProperties",
           "description": "The properties of the Traffic Manager endpoint.",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1361,21 +1343,11 @@
           "$ref": "#/definitions/HeatMapProperties",
           "description": "The properties of the Traffic Manager HeatMap.",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1544,21 +1516,11 @@
             "read",
             "create"
           ]
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
@@ -1767,21 +1729,11 @@
           "$ref": "#/definitions/GeographicHierarchyProperties",
           "description": "The properties of the Geographic Hierarchy resource.",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
@@ -1886,21 +1838,11 @@
           "$ref": "#/definitions/UserMetricsProperties",
           "description": "The properties of the Traffic Manager User Metrics.",
           "x-ms-client-flatten": true
-        },
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\""
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
         }
       },
+      "required": [
+        "properties"
+      ],
       "allOf": [
         {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"

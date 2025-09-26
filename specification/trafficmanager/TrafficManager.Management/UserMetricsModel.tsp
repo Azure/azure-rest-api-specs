@@ -15,25 +15,13 @@ namespace Microsoft.Network;
  */
 @subscriptionResource
 model UserMetricsModel
-  is Azure.ResourceManager.ProxyResource<UserMetricsProperties> {
-  /** Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName} */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  id?: Azure.Core.armResourceIdentifier;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @key("trafficManagerUserMetricsKey")
-  @segment("trafficManagerUserMetricsKeys")
-  @pattern("^[a-zA-Z0-9-_.]+$")
-  @path
-  name: string;
-
-  /** The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts" */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  type?: Azure.Core.armResourceType;
-
-  /** Azure Resource Manager metadata containing createdBy and modifiedBy information. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+  is Azure.ResourceManager.ProxyResource<UserMetricsProperties, false> {
+  ...ResourceNameParameter<
+    Resource = UserMetricsModel,
+    KeyName = "trafficManagerUserMetricsKey",
+    SegmentName = "trafficManagerUserMetricsKeys",
+    NamePattern = ""
+  >;
 }
 
 alias UserMetricsModelOps = Azure.ResourceManager.Legacy.LegacyOperations<

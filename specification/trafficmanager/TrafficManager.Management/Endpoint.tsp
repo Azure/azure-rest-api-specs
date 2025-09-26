@@ -15,25 +15,14 @@ namespace Microsoft.Network;
  * Class representing a Traffic Manager endpoint.
  */
 @parentResource(Profile)
-model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
-  /** Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName} */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  id?: Azure.Core.armResourceIdentifier;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @key("endpointName")
-  @segment("{endpointType}")
-  @pattern("^[a-zA-Z0-9-_.]+$")
-  @path
-  name: string;
-
-  /** The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts" */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  type?: Azure.Core.armResourceType;
-
-  /** Azure Resource Manager metadata containing createdBy and modifiedBy information. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+model Endpoint
+  is Azure.ResourceManager.ProxyResource<EndpointProperties, false> {
+  ...ResourceNameParameter<
+    Resource = Endpoint,
+    KeyName = "endpointName",
+    SegmentName = "{endpointType}",
+    NamePattern = ""
+  >;
 }
 
 alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
