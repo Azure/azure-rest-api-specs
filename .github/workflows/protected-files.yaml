@@ -1,6 +1,14 @@
 name: Protected Files
 
-on: pull_request
+on:
+  pull_request:
+    types:
+      # default
+      - opened
+      - synchronize
+      - reopened
+      # re-run if base branch is changed, since previous merge commit may generate incorrect diff
+      - edited
 
 permissions:
   contents: read
@@ -33,9 +41,16 @@ jobs:
           . eng/scripts/ChangedFiles-Functions.ps1
 
           $protectedFiles = @("cspell.json", "cspell.yaml", "package.json", "package-lock.json", ".github/*", "eng/*")
+          $excludedFiles = @(".github/CODEOWNERS")
           $changedFiles = @(Get-ChangedFiles -baseCommitish HEAD^ -headCommitish HEAD -diffFilter "")
 
-          $matchedFiles = @($changedFiles | Where-Object { $changedFile = $_; $protectedFiles | Where-Object { $changedFile -like $_ } })
+          $matchedFiles = @(
+            $changedFiles | Where-Object {
+              $changedFile = $_; 
+              ($protectedFiles | Where-Object { $changedFile -like $_ }) -and
+              -not ($excludedFiles | Where-Object { $changedFile -like $_ })
+            }
+          )
 
           if ($matchedFiles.Count -gt 0) {
             foreach ($file in $matchedFiles) {

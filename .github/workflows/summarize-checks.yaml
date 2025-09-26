@@ -1,14 +1,16 @@
-name: "[TEST-IGNORE] Summarize Checks"
+name: "Summarize Checks"
 
 on:
   workflow_run:
     workflows:
-      - "\\[TEST-IGNORE\\] Swagger SemanticValidation - Set Status"
-      - "\\[TEST-IGNORE\\] Swagger ModelValidation - Set Status"
-      - "\\[TEST-IGNORE\\] Summarize PR Impact"
+      - "Swagger SemanticValidation - Set Status"
+      - "Swagger ModelValidation - Set Status"
+      - "Summarize PR Impact"
       - "Swagger Avocado - Set Status"
       - "Swagger LintDiff - Set Status"
       - "SDK Validation Status"
+      - "TypeSpec Validation"
+      - "Update Labels"
     types:
       - completed
   pull_request_target: # when a PR is labeled. NOT pull_request, because that would run on the PR branch, not the base branch.
@@ -18,6 +20,9 @@ on:
       - opened
       - synchronize
       - reopened
+      - edited
+      - ready_for_review
+      - converted_to_draft
 
 permissions:
   actions: read # to inspect workflow_run metadata
@@ -30,7 +35,7 @@ permissions:
 jobs:
   run-summarize-checks:
     if: ${{ github.event_name == 'pull_request_target' || github.event.workflow_run.conclusion != 'skipped' }}
-    name: "[TEST-IGNORE] Summarize Checks"
+    name: "Summarize Checks"
     runs-on: ubuntu-24.04
 
     steps:
@@ -67,3 +72,13 @@ jobs:
             const { default: summarizeChecks } =
               await import('${{ github.workspace }}/.github/workflows/src/summarize-checks/summarize-checks.js');
             return await summarizeChecks({ github, context, core });
+
+      # May be used by downstream workflows
+      - name: Set job-summary artifact
+        if: ${{ always() && steps.summarize-checks.outputs.summary }}
+        uses: actions/upload-artifact@v4
+        with:
+          name: job-summary
+          path: ${{ steps.summarize-checks.outputs.summary }}
+          # If the file doesn't exist, just don't add the artifact
+          if-no-files-found: ignore
