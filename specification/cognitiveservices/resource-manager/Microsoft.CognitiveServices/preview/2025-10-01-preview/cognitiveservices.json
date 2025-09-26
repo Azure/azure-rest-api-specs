@@ -10783,20 +10783,22 @@
       "x-ms-parameter-location": "method"
     },
     "ManagedNetworkNameParameter": {
-      "name": "managedNetworkName",
       "in": "path",
+      "name": "managedNetworkName",
+      "description": "Name of the managedNetwork associated with the cognitive services account. Only 'default' is supported.",
       "required": true,
       "type": "string",
-      "description": "The name of the managed network associated with the cognitive services account.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     },
     "RuleName": {
-      "name": "ruleName",
       "in": "path",
+      "name": "ruleName",
+      "description": "Name of the cognitive services account managed network outbound rule",
       "required": true,
       "type": "string",
-      "description": "The name of the outbound rule.",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     }
   }
 }
