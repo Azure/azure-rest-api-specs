@@ -83,6 +83,7 @@ interface SavingsPlanModels {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("validate")
+  @list
   validateUpdate is ArmResourceActionSync<
     SavingsPlanModel,
     SavingsPlanUpdateValidateRequest,
@@ -97,11 +98,4 @@ interface SavingsPlanModels {
 );
 @@doc(SavingsPlanModels.validateUpdate::parameters.body,
   "Request body for validating a savings plan patch request"
-);
-
-@@clientInitialization(Microsoft.BillingBenefits,
-  {
-    parameters: ExpandParameter,
-  },
-  "!go"
 );
