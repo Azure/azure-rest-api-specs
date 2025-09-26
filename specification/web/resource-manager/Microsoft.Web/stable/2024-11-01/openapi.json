@@ -40006,7 +40006,8 @@
         },
         "perSiteScaling": {
           "type": "boolean",
-          "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan."
+          "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
+          "default": false
         },
         "elasticScaleEnabled": {
           "type": "boolean",
@@ -40045,6 +40046,7 @@
         "reserved": {
           "type": "boolean",
           "description": "If Linux app service plan <code>true</code>, <code>false</code> otherwise.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -40053,6 +40055,7 @@
         "isXenon": {
           "type": "boolean",
           "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -40061,6 +40064,7 @@
         "hyperV": {
           "type": "boolean",
           "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -40087,7 +40091,8 @@
         },
         "zoneRedundant": {
           "type": "boolean",
-          "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing."
+          "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing.",
+          "default": false
         }
       }
     },
@@ -40136,7 +40141,8 @@
         },
         "perSiteScaling": {
           "type": "boolean",
-          "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan."
+          "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
+          "default": false
         },
         "elasticScaleEnabled": {
           "type": "boolean",
@@ -40175,6 +40181,7 @@
         "reserved": {
           "type": "boolean",
           "description": "If Linux app service plan <code>true</code>, <code>false</code> otherwise.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -40183,6 +40190,7 @@
         "isXenon": {
           "type": "boolean",
           "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -40191,6 +40199,7 @@
         "hyperV": {
           "type": "boolean",
           "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -40217,7 +40226,8 @@
         },
         "zoneRedundant": {
           "type": "boolean",
-          "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing."
+          "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing.",
+          "default": false
         },
         "asyncScalingEnabled": {
           "type": "boolean",
@@ -50297,7 +50307,7 @@
         },
         "ignoreConflictingHostNames": {
           "type": "boolean",
-          "description": "Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to\nthe app's object when it is being restored, but that might fail due to conflicts during the operation.",
+          "description": "Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to \\nthe app's object when it is being restored, but that might fail due to conflicts during the operation.",
           "default": false
         },
         "ignoreDatabases": {
@@ -51908,6 +51918,7 @@
         "reserved": {
           "type": "boolean",
           "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -51916,6 +51927,7 @@
         "isXenon": {
           "type": "boolean",
           "description": "Obsolete: Hyper-V sandbox.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -51924,6 +51936,7 @@
         "hyperV": {
           "type": "boolean",
           "description": "Hyper-V sandbox.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -51953,7 +51966,8 @@
         },
         "scmSiteAlsoStopped": {
           "type": "boolean",
-          "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>."
+          "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
+          "default": false
         },
         "targetSwapSlot": {
           "type": "string",
@@ -51990,7 +52004,7 @@
         },
         "hostNamesDisabled": {
           "type": "boolean",
-          "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\nIf <code>true</code>, the app is only accessible via API management process."
+          "description": "<code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\\n If <code>true</code>, the app is only accessible via API management process."
         },
         "customDomainVerificationId": {
           "type": "string",
@@ -52182,6 +52196,7 @@
         "reserved": {
           "type": "boolean",
           "description": "<code>true</code> if reserved; otherwise, <code>false</code>.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -52190,6 +52205,7 @@
         "isXenon": {
           "type": "boolean",
           "description": "Obsolete: Hyper-V sandbox.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -52198,6 +52214,7 @@
         "hyperV": {
           "type": "boolean",
           "description": "Hyper-V sandbox.",
+          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -52251,7 +52268,8 @@
         },
         "scmSiteAlsoStopped": {
           "type": "boolean",
-          "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>."
+          "description": "<code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.",
+          "default": false
         },
         "targetSwapSlot": {
           "type": "string",
@@ -52268,7 +52286,8 @@
         },
         "clientAffinityEnabled": {
           "type": "boolean",
-          "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>."
+          "description": "<code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.",
+          "default": false
         },
         "clientAffinityPartitioningEnabled": {
           "type": "boolean",
@@ -54394,6 +54413,7 @@
         "switchSiteAfterMigration": {
           "type": "boolean",
           "description": "<code>true</code>if the app should be switched over; otherwise, <code>false</code>.",
+          "default": false,
           "x-ms-mutability": [
             "create"
           ]
@@ -54401,6 +54421,7 @@
         "blockWriteAccessToSite": {
           "type": "boolean",
           "description": "<code>true</code> if the app should be read only during copy operation; otherwise, <code>false</code>.",
+          "default": false,
           "x-ms-mutability": [
             "create"
           ]

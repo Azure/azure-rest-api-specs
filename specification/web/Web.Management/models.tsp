@@ -2090,19 +2090,19 @@ model SiteProperties {
    * <code>true</code> if reserved; otherwise, <code>false</code>.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  reserved?: boolean;
+  reserved?: boolean = false;
 
   /**
    * Obsolete: Hyper-V sandbox.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isXenon?: boolean;
+  isXenon?: boolean = false;
 
   /**
    * Hyper-V sandbox.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hyperV?: boolean;
+  hyperV?: boolean = false;
 
   /**
    * Last time the app was modified, in UTC. Read-only.
@@ -2156,7 +2156,7 @@ model SiteProperties {
   /**
    * <code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.
    */
-  scmSiteAlsoStopped?: boolean;
+  scmSiteAlsoStopped?: boolean = false;
 
   /**
    * Specifies which deployment slot this app will swap into. Read-only.
@@ -2173,7 +2173,7 @@ model SiteProperties {
   /**
    * <code>true</code> to enable client affinity; <code>false</code> to stop sending session affinity cookies, which route client requests in the same session to the same instance. Default is <code>true</code>.
    */
-  clientAffinityEnabled?: boolean;
+  clientAffinityEnabled?: boolean = false;
 
   /**
    * <code>true</code> to enable client affinity partitioning using CHIPS cookies, this will add the <code>partitioned</code> property to the affinity cookies; <code>false</code> to stop sending partitioned affinity cookies. Default is <code>false</code>.
@@ -4468,7 +4468,7 @@ model AppServicePlanProperties {
    * If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
    * If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
    */
-  perSiteScaling?: boolean;
+  perSiteScaling?: boolean = false;
 
   /**
    * ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku
@@ -4513,19 +4513,19 @@ model AppServicePlanProperties {
    * If Linux app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  reserved?: boolean;
+  reserved?: boolean = false;
 
   /**
    * Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isXenon?: boolean;
+  isXenon?: boolean = false;
 
   /**
    * If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hyperV?: boolean;
+  hyperV?: boolean = false;
 
   /**
    * Scaling worker count.
@@ -4552,7 +4552,7 @@ model AppServicePlanProperties {
    * If <code>true</code>, this App Service Plan will perform availability zone balancing.
    * If <code>false</code>, this App Service Plan will not perform availability zone balancing.
    */
-  zoneRedundant?: boolean;
+  zoneRedundant?: boolean = false;
 
   /**
    * If <code>true</code>, this App Service Plan will attempt to scale asynchronously if there are insufficient workers to scale synchronously.
@@ -4696,7 +4696,7 @@ model AppServicePlanPatchResourceProperties {
    * If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
    * If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
    */
-  perSiteScaling?: boolean;
+  perSiteScaling?: boolean = false;
 
   /**
    * ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku
@@ -4741,19 +4741,19 @@ model AppServicePlanPatchResourceProperties {
    * If Linux app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  reserved?: boolean;
+  reserved?: boolean = false;
 
   /**
    * Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isXenon?: boolean;
+  isXenon?: boolean = false;
 
   /**
    * If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hyperV?: boolean;
+  hyperV?: boolean = false;
 
   /**
    * Scaling worker count.
@@ -4780,7 +4780,7 @@ model AppServicePlanPatchResourceProperties {
    * If <code>true</code>, this App Service Plan will perform availability zone balancing.
    * If <code>false</code>, this App Service Plan will not perform availability zone balancing.
    */
-  zoneRedundant?: boolean;
+  zoneRedundant?: boolean = false;
 }
 
 /**
@@ -9380,19 +9380,19 @@ model SitePatchResourceProperties {
    * <code>true</code> if reserved; otherwise, <code>false</code>.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  reserved?: boolean;
+  reserved?: boolean = false;
 
   /**
    * Obsolete: Hyper-V sandbox.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isXenon?: boolean;
+  isXenon?: boolean = false;
 
   /**
    * Hyper-V sandbox.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hyperV?: boolean;
+  hyperV?: boolean = false;
 
   /**
    * Last time the app was modified, in UTC. Read-only.
@@ -9420,7 +9420,7 @@ model SitePatchResourceProperties {
   /**
    * <code>true</code> to stop SCM (KUDU) site when the app is stopped; otherwise, <code>false</code>. The default is <code>false</code>.
    */
-  scmSiteAlsoStopped?: boolean;
+  scmSiteAlsoStopped?: boolean = false;
 
   /**
    * Specifies which deployment slot this app will swap into. Read-only.
@@ -9463,8 +9463,7 @@ model SitePatchResourceProperties {
   clientCertExclusionPaths?: string;
 
   /**
-   * <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.
-   *  If <code>true</code>, the app is only accessible via API management process.
+   * <code>true</code> to disable the public hostnames of the app; otherwise, <code>false</code>.\n If <code>true</code>, the app is only accessible via API management process.
    */
   hostNamesDisabled?: boolean;
 
@@ -9918,8 +9917,7 @@ model RestoreRequestProperties {
   databases?: DatabaseBackupSetting[];
 
   /**
-   * Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to
-   * the app's object when it is being restored, but that might fail due to conflicts during the operation.
+   * Changes a logic when restoring an app with custom domains. <code>true</code> to remove custom domains automatically. If <code>false</code>, custom domains are added to \nthe app's object when it is being restored, but that might fail due to conflicts during the operation.
    */
   ignoreConflictingHostNames?: boolean = false;
 
@@ -12489,13 +12487,13 @@ model StorageMigrationOptionsProperties {
    * <code>true</code>if the app should be switched over; otherwise, <code>false</code>.
    */
   @visibility(Lifecycle.Create)
-  switchSiteAfterMigration?: boolean;
+  switchSiteAfterMigration?: boolean = false;
 
   /**
    * <code>true</code> if the app should be read only during copy operation; otherwise, <code>false</code>.
    */
   @visibility(Lifecycle.Create)
-  blockWriteAccessToSite?: boolean;
+  blockWriteAccessToSite?: boolean = false;
 }
 
 /**
