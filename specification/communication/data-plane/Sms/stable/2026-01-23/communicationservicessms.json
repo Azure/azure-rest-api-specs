@@ -63,14 +63,7 @@
           "400": {
             "description": "Bad Request",
             "schema": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/ValidationErrorResponse"
-                },
-                {
-                  "$ref": "#/definitions/StandardErrorResponse"
-                }
-              ]
+              "$ref": "#/definitions/BadRequestErrorResponse"
             }
           },
           "401": {
@@ -127,14 +120,7 @@
           "400": {
             "description": "Bad Request",
             "schema": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/ValidationErrorResponse"
-                },
-                {
-                  "$ref": "#/definitions/StandardErrorResponse"
-                }
-              ]
+              "$ref": "#/definitions/BadRequestErrorResponse"
             }
           },
           "401": {
@@ -191,14 +177,7 @@
           "400": {
             "description": "Bad Request",
             "schema": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/ValidationErrorResponse"
-                },
-                {
-                  "$ref": "#/definitions/StandardErrorResponse"
-                }
-              ]
+              "$ref": "#/definitions/BadRequestErrorResponse"
             }
           },
           "401": {
@@ -255,14 +234,7 @@
           "400": {
             "description": "Bad Request",
             "schema": {
-              "oneOf": [
-                {
-                  "$ref": "#/definitions/ValidationErrorResponse"
-                },
-                {
-                  "$ref": "#/definitions/StandardErrorResponse"
-                }
-              ]
+              "$ref": "#/definitions/BadRequestErrorResponse"
             }
           },
           "401": {
@@ -668,30 +640,25 @@
         }
       }
     },
-    "ValidationErrorResponse": {
-      "description": "Validation error response following RFC 9110 format.",
-      "required": [
-        "type",
-        "title",
-        "status"
-      ],
+    "BadRequestErrorResponse": {
+      "description": "Bad Request error response that can represent both validation errors and standard API errors.",
       "type": "object",
       "properties": {
         "type": {
-          "description": "A URI reference that identifies the problem type.",
+          "description": "A URI reference that identifies the problem type (for validation errors).",
           "type": "string"
         },
         "title": {
-          "description": "A short, human-readable summary of the problem type.",
+          "description": "A short, human-readable summary of the problem type (for validation errors).",
           "type": "string"
         },
         "status": {
-          "description": "The HTTP status code.",
+          "description": "The HTTP status code (for validation errors).",
           "type": "integer",
           "format": "int32"
         },
         "errors": {
-          "description": "Dictionary of field-specific validation errors.",
+          "description": "Dictionary of field-specific validation errors (for validation errors).",
           "type": "object",
           "additionalProperties": {
             "type": "array",
@@ -701,8 +668,12 @@
           }
         },
         "traceId": {
-          "description": "The trace identifier for the request.",
+          "description": "The trace identifier for the request (for validation errors).",
           "type": "string"
+        },
+        "error": {
+          "description": "Error detail information (for standard API errors).",
+          "$ref": "#/definitions/ErrorDetail"
         }
       }
     },
