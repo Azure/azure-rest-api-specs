@@ -26,6 +26,7 @@ options:
     package-dir: "azure-ai-speech-transcription"
     namespace: com.azure.ai.speech.transcription
     partial-update: true
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
     flavor: azure
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-speech-transcription"
@@ -45,10 +46,10 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/ai-speech-transcription-rest"
     flavor: azure
   "@azure-tools/typespec-go":
-    service-dir: "sdk/ai/azspeechtranscription"
-    package-dir: "azspeechtranscription"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
-    flavor: "azure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azspeechtranscription"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azspeechtranscription"
     generate-fakes: true
     inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
