@@ -28184,18 +28184,23 @@
       "type": "object",
       "properties": {
         "description": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "properties": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "tags": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -28214,6 +28219,7 @@
         },
         "instanceType": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -28221,9 +28227,9 @@
         },
         "properties": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -28278,6 +28284,7 @@
         "limit": {
           "type": "integer",
           "format": "int64",
+          "title": "Limit.",
           "readOnly": true
         },
         "unit": {
@@ -28298,6 +28305,7 @@
       "properties": {
         "preprocessingComponentId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -28368,7 +28376,8 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "format": "uri"
+          "format": "uri",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -28383,7 +28392,9 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "format": "uri"
+          "format": "password",
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -28439,7 +28450,8 @@
       "type": "object",
       "properties": {
         "sasToken": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -28458,7 +28470,8 @@
         },
         "minNodeCount": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "nodeIdleTimeBeforeScaleDown": {
           "type": "string",
@@ -28473,7 +28486,8 @@
       "type": "object",
       "properties": {
         "scaleSettings": {
-          "$ref": "#/definitions/ScaleSettings"
+          "$ref": "#/definitions/ScaleSettings",
+          "title": "Scale settings."
         }
       }
     },
@@ -28481,10 +28495,12 @@
       "type": "object",
       "properties": {
         "disablePublicEgress": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "registries": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -28537,7 +28553,8 @@
       "type": "object",
       "properties": {
         "id": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "provisioningStatus": {
           "type": "string",
@@ -28577,6 +28594,7 @@
         },
         "displayName": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -28703,7 +28721,8 @@
       "type": "object",
       "properties": {
         "expirableSecret": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "expireAfterHours": {
           "type": "integer",
@@ -28834,7 +28853,8 @@
           }
         },
         "contentSafety": {
-          "$ref": "#/definitions/ContentSafety"
+          "$ref": "#/definitions/ContentSafety",
+          "x-nullable": true
         },
         "endpointState": {
           "type": "string",
@@ -28857,14 +28877,17 @@
         },
         "inferenceEndpoint": {
           "$ref": "#/definitions/ServerlessInferenceEndpoint",
+          "x-nullable": true,
           "readOnly": true
         },
         "marketplaceSubscriptionId": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "modelSettings": {
-          "$ref": "#/definitions/ModelSettings"
+          "$ref": "#/definitions/ModelSettings",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -28973,8 +28996,10 @@
       "properties": {
         "headers": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "readOnly": true
         },
@@ -29033,17 +29058,20 @@
       "type": "object",
       "properties": {
         "authorityUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "clientId": {
           "type": "string",
           "format": "uuid"
         },
         "resourceUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "secrets": {
           "$ref": "#/definitions/ServicePrincipalDatastoreSecrets",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "update"
@@ -29070,7 +29098,8 @@
       "type": "object",
       "properties": {
         "clientSecret": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -29178,18 +29207,22 @@
       "properties": {
         "default": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "maximum": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "minimum": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         },
         "scaleType": {
           "type": "string",
+          "default": "Automatic",
           "enum": [
             "Automatic",
             "Manual",
@@ -29206,14 +29239,17 @@
       "type": "object",
       "properties": {
         "capacity": {
-          "$ref": "#/definitions/SkuCapacity"
+          "$ref": "#/definitions/SkuCapacity",
+          "x-nullable": true
         },
         "resourceType": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "sku": {
-          "$ref": "#/definitions/SkuSetting"
+          "$ref": "#/definitions/SkuSetting",
+          "x-nullable": true
         }
       }
     },
@@ -29247,7 +29283,18 @@
           "pattern": "[a-zA-Z0-9_]"
         },
         "tier": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier"
+          "type": "string",
+          "default": "Basic",
+          "enum": [
+            "Free",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false
+          }
         }
       },
       "required": [
@@ -29259,6 +29306,7 @@
       "properties": {
         "archives": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -29269,6 +29317,7 @@
         },
         "args": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29277,6 +29326,8 @@
         "codeId": {
           "type": "string",
           "format": "arm-id",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
           "x-ms-mutability": [
             "create",
             "read"
@@ -29284,8 +29335,10 @@
         },
         "conf": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -29302,6 +29355,7 @@
         "environmentId": {
           "type": "string",
           "format": "arm-id",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29309,8 +29363,10 @@
         },
         "environmentVariables": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -29319,6 +29375,7 @@
         },
         "files": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -29329,8 +29386,10 @@
         },
         "inputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -29339,6 +29398,7 @@
         },
         "jars": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -29349,8 +29409,10 @@
         },
         "outputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -29359,6 +29421,7 @@
         },
         "pyFiles": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -29369,6 +29432,7 @@
         },
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29376,6 +29440,7 @@
         },
         "resources": {
           "$ref": "#/definitions/SparkResourceConfiguration",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29468,6 +29533,7 @@
       "properties": {
         "instanceType": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29543,16 +29609,24 @@
           }
         },
         "cert": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "key": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "cname": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "leafDomainLabel": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "overwriteExistingDomain": {
           "type": "boolean"
@@ -29563,8 +29637,7 @@
       "type": "object",
       "properties": {
         "stackMetaLearnerKWargs": {
-          "type": "object",
-          "additionalProperties": {}
+          "x-nullable": true
         },
         "stackMetaLearnerTrainPercentage": {
           "type": "number",
@@ -29573,6 +29646,7 @@
         },
         "stackMetaLearnerType": {
           "type": "string",
+          "default": "None",
           "enum": [
             "None",
             "LogisticRegression",
@@ -29595,6 +29669,7 @@
       "properties": {
         "preprocessingComponentId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29632,7 +29707,8 @@
       "type": "object",
       "properties": {
         "systemCreatedStorageAccount": {
-          "$ref": "#/definitions/SystemCreatedStorageAccount"
+          "$ref": "#/definitions/SystemCreatedStorageAccount",
+          "x-nullable": true
         }
       }
     },
@@ -29674,21 +29750,21 @@
         "string": {
           "type": "string"
         }
-      },
-      "required": [
-        "string"
-      ]
+      }
     },
     "SweepJob": {
       "type": "object",
       "properties": {
         "earlyTermination": {
-          "$ref": "#/definitions/EarlyTerminationPolicy"
+          "$ref": "#/definitions/EarlyTerminationPolicy",
+          "x-nullable": true
         },
         "inputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -29707,8 +29783,10 @@
         },
         "outputs": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -29717,6 +29795,7 @@
         },
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -29751,15 +29830,18 @@
       "properties": {
         "maxConcurrentTrials": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "maxTotalTrials": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "x-nullable": true
         },
         "trialTimeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -29823,13 +29905,16 @@
       "type": "object",
       "properties": {
         "acrAccountName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "acrAccountSku": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "armResourceId": {
-          "$ref": "#/definitions/ArmResourceId"
+          "$ref": "#/definitions/ArmResourceId",
+          "x-nullable": true
         }
       }
     },
@@ -29840,16 +29925,19 @@
           "type": "boolean"
         },
         "armResourceId": {
-          "$ref": "#/definitions/ArmResourceId"
+          "$ref": "#/definitions/ArmResourceId",
+          "x-nullable": true
         },
         "storageAccountHnsEnabled": {
           "type": "boolean"
         },
         "storageAccountName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "storageAccountType": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -29875,6 +29963,7 @@
       "properties": {
         "blockedTransformers": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "type": "string",
             "enum": [
@@ -29897,15 +29986,19 @@
         },
         "columnNameAndTypes": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "enableDnnFeaturization": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "mode": {
           "type": "string",
+          "default": "Auto",
           "enum": [
             "Auto",
             "Custom",
@@ -29918,11 +30011,13 @@
         },
         "transformerParams": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
             "items": {
               "$ref": "#/definitions/ColumnTransformer"
             },
-            "type": "array"
+            "type": "array",
+            "x-nullable": true
           }
         }
       },
@@ -29941,7 +30036,8 @@
         },
         "exitScore": {
           "type": "number",
-          "format": "double"
+          "format": "double",
+          "x-nullable": true
         },
         "maxConcurrentTrials": {
           "type": "integer",
@@ -29960,11 +30056,13 @@
         },
         "timeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT6H"
         },
         "trialTimeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT30M"
         }
       }
     },
@@ -30031,7 +30129,8 @@
         },
         "pollingInterval": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT1S"
         },
         "targetUtilizationPercentage": {
           "type": "integer",
@@ -30050,7 +30149,8 @@
       "type": "object",
       "properties": {
         "endpointName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -30071,12 +30171,15 @@
       "type": "object",
       "properties": {
         "teacherModelEndpointRequestSettings": {
-          "$ref": "#/definitions/TeacherModelEndpointRequestSettings"
+          "$ref": "#/definitions/TeacherModelEndpointRequestSettings",
+          "x-nullable": true
         },
         "teacherModelInferenceParameters": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -30087,6 +30190,7 @@
         "parameterServerCount": {
           "type": "integer",
           "format": "int32",
+          "default": 0,
           "x-ms-mutability": [
             "create",
             "read"
@@ -30095,6 +30199,7 @@
         "workerCount": {
           "type": "integer",
           "format": "int32",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -30125,6 +30230,7 @@
         },
         "primaryMetric": {
           "type": "string",
+          "default": "Accuracy",
           "enum": [
             "AUCWeighted",
             "Accuracy",
@@ -30255,14 +30361,16 @@
       "type": "object",
       "properties": {
         "enableDnnTraining": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "enableModelExplainability": {
           "type": "boolean",
           "default": true
         },
         "enableOnnxCompatibleModels": {
-          "type": "boolean"
+          "type": "boolean",
+          "default": false
         },
         "enableStackEnsemble": {
           "type": "boolean",
@@ -30274,10 +30382,12 @@
         },
         "ensembleModelDownloadTimeout": {
           "type": "string",
-          "format": "duration"
+          "format": "duration",
+          "default": "PT5M"
         },
         "stackEnsembleSettings": {
-          "$ref": "#/definitions/StackEnsembleSettings"
+          "$ref": "#/definitions/StackEnsembleSettings",
+          "x-nullable": true
         }
       }
     },
@@ -30286,6 +30396,7 @@
       "properties": {
         "codeId": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -30302,6 +30413,7 @@
         },
         "distribution": {
           "$ref": "#/definitions/DistributionConfiguration",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -30314,8 +30426,10 @@
         },
         "environmentVariables": {
           "type": "object",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "create",
@@ -30339,10 +30453,12 @@
       "type": "object",
       "properties": {
         "endTime": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "startTime": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "timeZone": {
           "type": "string",
@@ -30450,7 +30566,8 @@
       "properties": {
         "truncationPercentage": {
           "type": "integer",
-          "format": "int32"
+          "format": "int32",
+          "default": 0
         }
       },
       "allOf": [
@@ -30479,7 +30596,8 @@
         },
         "limit": {
           "type": "integer",
-          "format": "int64"
+          "format": "int64",
+          "title": "Limit."
         },
         "unit": {
           "type": "string",
@@ -30494,6 +30612,7 @@
         },
         "status": {
           "type": "string",
+          "title": "Update Workspace Quota Status.",
           "enum": [
             "Undefined",
             "Success",

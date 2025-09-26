@@ -7,6 +7,7 @@
 | `definitions.DiagnoseResponseResult.properties.value.$ref__added` | added | `#/definitions/DiagnoseResponseResultValue` |
 | `definitions.InstanceTypeSchema.properties.resources.$ref__added` | added | `#/definitions/InstanceTypeSchemaResources` |
 | `definitions.PartialManagedServiceIdentity.properties.userAssignedIdentities.additionalProperties.$ref__deleted` | deleted | `#/definitions/PartialUserAssignedIdentity` |
+| `definitions.SkuSetting.properties.tier.$ref__deleted` | deleted | `../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier` |
 | `definitions.StringArmPaginatedResult.properties.value.items.$ref__added` | added | `#/definitions/Stringforlist` |
 | `definitions.SynapseSpark.properties.properties.$ref__added` | added | `#/definitions/SynapseSparkProperties` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota'].get.parameters[1].$ref__deleted` | deleted | `machineLearningServices.json#/parameters/PaginationParameter` |
@@ -107,6 +108,9 @@
 | `definitions.InstanceTypeSchema.properties.resources.type__deleted` | deleted | `object` |
 | `definitions.Kubernetes.type__added` | added | `object` |
 | `definitions.PipelineJob.properties.jobs.additionalProperties.type__deleted` | deleted | `object` |
+| `definitions.ResourceConfiguration.properties.properties.additionalProperties.type__deleted` | deleted | `object` |
+| `definitions.SkuSetting.properties.tier.type__added` | added | `string` |
+| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.type__deleted` | deleted | `object` |
 | `definitions.StringArmPaginatedResult.properties.value.items.type__deleted` | deleted | `string` |
 | `definitions.SynapseSpark.properties.properties.type__deleted` | deleted | `object` |
 | `definitions.VirtualMachine.type__added` | added | `object` |
@@ -290,7 +294,6 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SparkJob.properties.codeId.pattern__deleted` | deleted | `[a-zA-Z0-9_]` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes'].get.parameters[0].pattern__added` | added | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components'].get.parameters[0].pattern__added` | added | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data'].get.parameters[0].pattern__added` | added | `^[a-zA-Z0-9][a-zA-Z0-9\\-_]{2,32}$` |
@@ -922,7 +925,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Stringforlist__added` | added | `{"type":"object","properties":{"string":{"type":"string"}},"required":["string"]}` |
+| `definitions.Stringforlist__added` | added | `{"type":"object","properties":{"string":{"type":"string"}}}` |
 
 ### Changes for `SynapseSparkProperties`
 
@@ -1031,6 +1034,8 @@
 | `definitions.NotebookAccessTokenResult.properties.refreshToken.format__added` | added | `password` |
 | `definitions.Password.properties.name.format__added` | added | `password` |
 | `definitions.Password.properties.value.format__added` | added | `password` |
+| `definitions.SslConfiguration.properties.cert.format__added` | added | `password` |
+| `definitions.SslConfiguration.properties.key.format__added` | added | `password` |
 
 ### Changes for `x-ms-secret`
 
@@ -1040,11 +1045,8 @@
 | `definitions.CertificateDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.EndpointKeys.properties.keys['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.EndpointPropertiesBase.properties.keys['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.SASCredentialDto.properties.sasUri['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.SasDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.SslConfiguration.properties.cert['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.SslConfiguration.properties.key['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.UserAccountCredentials.properties.adminUserPassword['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.UserAccountCredentials.properties.adminUserSshPublicKey['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.VirtualMachineSshCredentials.properties.privateKeyData['x-ms-secret__deleted']` | deleted | `true` |
@@ -1125,28 +1127,8 @@
 | `definitions.FineTuningJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.ForecastingSettings.properties.forecastHorizon.default__deleted` | deleted | `{"Mode": "Custom", "Value": 1}` |
 | `definitions.ForecastingSettings.properties.seasonality.default__deleted` | deleted | `{"Mode": "Auto"}` |
-| `definitions.ScaleSettings.properties.minNodeCount.default__deleted` | deleted | `0` |
-| `definitions.ScaleUnitConfiguration.properties.disablePublicEgress.default__deleted` | deleted | `false` |
-| `definitions.SecretExpiry.properties.expirableSecret.default__deleted` | deleted | `false` |
-| `definitions.SkuCapacity.properties.default.default__deleted` | deleted | `0` |
-| `definitions.SkuCapacity.properties.maximum.default__deleted` | deleted | `0` |
-| `definitions.SkuCapacity.properties.minimum.default__deleted` | deleted | `0` |
-| `definitions.SkuCapacity.properties.scaleType.default__deleted` | deleted | `Automatic` |
-| `definitions.SkuSetting.properties.tier.default__deleted` | deleted | `Basic` |
-| `definitions.StackEnsembleSettings.properties.stackMetaLearnerType.default__deleted` | deleted | `None` |
 | `definitions.SweepJob.properties.limits.default__deleted` | deleted | `{}` |
-| `definitions.TableVerticalFeaturizationSettings.properties.enableDnnFeaturization.default__deleted` | deleted | `false` |
-| `definitions.TableVerticalFeaturizationSettings.properties.mode.default__deleted` | deleted | `Auto` |
-| `definitions.TableVerticalLimitSettings.properties.timeout.default__deleted` | deleted | `PT6H` |
-| `definitions.TableVerticalLimitSettings.properties.trialTimeout.default__deleted` | deleted | `PT30M` |
-| `definitions.TargetUtilizationScaleSettings.properties.pollingInterval.default__deleted` | deleted | `PT1S` |
-| `definitions.TensorFlow.properties.parameterServerCount.default__deleted` | deleted | `0` |
-| `definitions.TextClassification.properties.primaryMetric.default__deleted` | deleted | `Accuracy` |
-| `definitions.TrainingSettings.properties.enableDnnTraining.default__deleted` | deleted | `false` |
-| `definitions.TrainingSettings.properties.enableOnnxCompatibleModels.default__deleted` | deleted | `false` |
-| `definitions.TrainingSettings.properties.ensembleModelDownloadTimeout.default__deleted` | deleted | `PT5M` |
 | `definitions.TrialComponent.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.TruncationSelectionPolicy.properties.truncationPercentage.default__deleted` | deleted | `0` |
 
 ### Changes for `resourceGroup`
 
@@ -1574,8 +1556,6 @@
 | `definitions.ComputeInstanceContainer.properties.services.items.additionalProperties__added` | added | `{}` |
 | `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.additionalProperties__added` | added | `{}` |
 | `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
-| `definitions.ResourceConfiguration.properties.properties.additionalProperties.additionalProperties__added` | added | `{}` |
-| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs.additionalProperties__added` | added | `{}` |
 | `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
 
 ### Changes for `x-nullable`
@@ -1594,85 +1574,7 @@
 | `definitions.PartialMinimalTrackedResource.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
 | `definitions.PartialMinimalTrackedResource.properties.tags['x-nullable__added']` | added | `true` |
 | `definitions.RegistryPrivateEndpointConnection.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceBase.properties.description['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceBase.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceBase.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceBase.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceBase.properties.tags['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceConfiguration.properties.instanceType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceConfiguration.properties.properties.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ResourceConfiguration.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.RollingInputData.properties.preprocessingComponentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SASCredential.properties.sasUri['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SASCredentialDto.properties.sasUri['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SasDatastoreSecrets.properties.sasToken['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ScaleUnitConfiguration.properties.registries['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ScheduleBase.properties.id['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ServerlessInferenceEndpoint.properties.headers.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ServerlessInferenceEndpoint.properties.headers['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ServicePrincipalDatastoreCredentials.properties.authorityUrl['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ServicePrincipalDatastoreCredentials.properties.resourceUrl['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ServicePrincipalDatastoreSecrets.properties.clientSecret['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SkuResource.properties.capacity['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SkuResource.properties.resourceType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SkuResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.archives['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.args['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.conf.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.conf['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.environmentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.environmentVariables.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.environmentVariables['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.files['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.inputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.inputs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.jars['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.outputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.outputs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.pyFiles['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.queueSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkJob.properties.resources['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SparkResourceConfiguration.properties.instanceType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SslConfiguration.properties.cert['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SslConfiguration.properties.cname['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SslConfiguration.properties.key['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SslConfiguration.properties.leafDomainLabel['x-nullable__deleted']` | deleted | `true` |
-| `definitions.StackEnsembleSettings.properties.stackMetaLearnerKWargs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.StaticInputData.properties.preprocessingComponentId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.StorageAccountDetails.properties.systemCreatedStorageAccount['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJob.properties.earlyTermination['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJob.properties.inputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJob.properties.inputs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJob.properties.outputs.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJob.properties.outputs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJob.properties.queueSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJobLimits.properties.maxConcurrentTrials['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJobLimits.properties.maxTotalTrials['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SweepJobLimits.properties.trialTimeout['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SystemCreatedAcrAccount.properties.acrAccountName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SystemCreatedAcrAccount.properties.acrAccountSku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SystemCreatedAcrAccount.properties.armResourceId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SystemCreatedStorageAccount.properties.armResourceId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SystemCreatedStorageAccount.properties.storageAccountName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.SystemCreatedStorageAccount.properties.storageAccountType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TableVerticalFeaturizationSettings.properties.blockedTransformers['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TableVerticalFeaturizationSettings.properties.columnNameAndTypes.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TableVerticalFeaturizationSettings.properties.columnNameAndTypes['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TableVerticalFeaturizationSettings.properties.transformerParams.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TableVerticalFeaturizationSettings.properties.transformerParams['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TableVerticalLimitSettings.properties.exitScore['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TeacherModelEndpoint.properties.endpointName['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TeacherModelSettings.properties.teacherModelEndpointRequestSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TeacherModelSettings.properties.teacherModelInferenceParameters.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TeacherModelSettings.properties.teacherModelInferenceParameters['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TensorFlow.properties.workerCount['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TrainingSettings.properties.stackEnsembleSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TrialComponent.properties.codeId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TrialComponent.properties.distribution['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TrialComponent.properties.environmentVariables.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TrialComponent.properties.environmentVariables['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TriggerBase.properties.endTime['x-nullable__deleted']` | deleted | `true` |
-| `definitions.TriggerBase.properties.startTime['x-nullable__deleted']` | deleted | `true` |
+| `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-nullable__added']` | added | `true` |
 | `definitions.UsageAndQuotaDetails.properties.modelCollection['x-nullable__deleted']` | deleted | `true` |
 | `definitions.UsageAndQuotaDetails.properties.usageDetails['x-nullable__deleted']` | deleted | `true` |
 | `definitions.VolumeDefinition.properties.bind['x-nullable__deleted']` | deleted | `true` |
@@ -2182,30 +2084,6 @@
 |------|------------|-------|
 | `definitions.Registry.properties.regionDetails__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/RegistryRegionArmDetails"}}` |
 
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ResourceQuota.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.ScaleSettingsInformation.properties.scaleSettings.title__deleted` | deleted | `Scale settings.` |
-| `definitions.UpdateWorkspaceQuotas.properties.limit.title__deleted` | deleted | `Limit.` |
-| `definitions.UpdateWorkspaceQuotas.properties.status.title__deleted` | deleted | `Update Workspace Quota Status.` |
-| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
-| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
-| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
-| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
-| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
-| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
-| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
-| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
-| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
-| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
-| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
-| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
-| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
-| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
-| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
-
 ### Changes for `action`
 
 | Path | Change Type | Value |
@@ -2248,17 +2126,43 @@
 |------|------------|-------|
 | `definitions.ServerlessEndpoint.properties.marketplaceSubscriptionId__deleted` | deleted | `{"type":"string","x-nullable":true,"readOnly":true,"x-ms-mutability":["read"]}` |
 
-### Changes for `minLength`
+### Changes for `enum`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SparkJob.properties.codeId.minLength__deleted` | deleted | `1` |
+| `definitions.SkuSetting.properties.tier.enum__added` | added | `["Free","Basic","Standard","Premium"]` |
+
+### Changes for `x-ms-enum`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.SkuSetting.properties.tier['x-ms-enum__added']` | added | `{"name":"SkuTier","modelAsString":false}` |
 
 ### Changes for `x-ms-identifiers`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.TableVerticalFeaturizationSettings.properties.transformerParams.additionalProperties['x-ms-identifiers__deleted']` | deleted | `[]` |
+
+### Changes for `title`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
+| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
+| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
+| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
+| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
+| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
+| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
+| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
+| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
+| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
+| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
+| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
+| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
+| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
+| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
 
 ## Modified Values
 
@@ -2337,6 +2241,7 @@
 | `definitions.OnlineEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/OnlineEndpointTrackedResource` | `#/definitions/OnlineEndpoint` |
 | `definitions.PipelineJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.RegistryTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |
+| `definitions.SASCredentialDto.properties.sasUri.format` | `uri` | `password` |
 | `definitions.Schedule.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.ScheduleResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ScheduleResource` | `#/definitions/Schedule` |
 | `definitions.ServerlessEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |

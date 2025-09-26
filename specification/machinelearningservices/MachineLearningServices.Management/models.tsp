@@ -3989,6 +3989,7 @@ model UpdateWorkspaceQuotas {
   /**
    * The maximum permitted quota of the resource.
    */
+  @summary("Limit.")
   limit?: int64;
 
   /**
@@ -4000,6 +4001,7 @@ model UpdateWorkspaceQuotas {
   /**
    * Status of update workspace quota.
    */
+  @summary("Update Workspace Quota Status.")
   status?: Status;
 }
 
@@ -4040,6 +4042,7 @@ model ResourceQuota {
    * The maximum permitted quota of the resource.
    */
   @visibility(Lifecycle.Read)
+  @summary("Limit.")
   limit?: int64;
 
   /**
@@ -4174,6 +4177,7 @@ model ScaleSettingsInformation {
   /**
    * scale settings for AML Compute
    */
+  @summary("Scale settings.")
   scaleSettings?: ScaleSettings;
 }
 
@@ -4189,7 +4193,7 @@ model ScaleSettings {
   /**
    * Min number of nodes to use
    */
-  minNodeCount?: int32;
+  minNodeCount?: int32 = 0;
 
   /**
    * Node Idle Time before scaling down amlCompute. This string needs to be in the RFC Format.
@@ -4686,19 +4690,19 @@ model ResourceBase {
   /**
    * The asset description text.
    */
-  description?: string;
+  description?: string | null;
 
   /**
    * The asset property dictionary.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  properties?: Record<string>;
+  properties?: Record<string | null> | null;
 
   /**
    * Tag dictionary. Tags can be added, removed, and updated.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
+  tags?: Record<string | null> | null;
 }
 
 /**
@@ -5617,14 +5621,14 @@ model ResourceConfiguration {
    * Optional type of VM used as supported by the compute target.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  instanceType?: string;
+  instanceType?: string | null;
 
   /**
    * Additional properties bag.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  properties?: Record<Record<unknown>>;
+  properties?: Record<unknown | null> | null;
 }
 
 /**
@@ -5826,7 +5830,7 @@ model SecretExpiry {
   /**
    * Indicates if the secret is expirable.
    */
-  expirableSecret?: boolean;
+  expirableSecret?: boolean = false;
 
   /**
    * Number of hours after which the secret will expire.
@@ -6058,12 +6062,12 @@ model TriggerBase {
    * Recommented format would be "2022-06-01T00:00:01"
    * If not present, the schedule will run indefinitely
    */
-  endTime?: string;
+  endTime?: string | null;
 
   /**
    * Specifies start time of schedule in ISO 8601 format, but without a UTC offset.
    */
-  startTime?: string;
+  startTime?: string | null;
 
   /**
    * Specifies time zone in which the schedule runs.
@@ -6260,12 +6264,12 @@ model ScaleUnitConfiguration {
   /**
    * Gets or sets a value indicating whether PublicEgress is disabled.
    */
-  disablePublicEgress?: boolean;
+  disablePublicEgress?: boolean = false;
 
   /**
    * Gets or sets a list of Registry sources that will be used to confirm identity, storage, ACR.
    */
-  registries?: string[];
+  registries?: string[] | null;
 }
 
 /**
@@ -6604,7 +6608,7 @@ model StringArmPaginatedResult is Azure.Core.Page<Stringforlist>;
 
 //Fix Me: Compile Error
 model Stringforlist {
-  string: string;
+  string?: string;
 }
 
 /**
@@ -6687,18 +6691,18 @@ model SkuResource {
   /**
    * Gets or sets the Sku Capacity.
    */
-  capacity?: SkuCapacity;
+  capacity?: SkuCapacity | null;
 
   /**
    * The resource type name.
    */
   @visibility(Lifecycle.Read)
-  resourceType?: string;
+  resourceType?: string | null;
 
   /**
    * Gets or sets the Sku.
    */
-  sku?: SkuSetting;
+  sku?: SkuSetting | null;
 }
 
 /**
@@ -6708,22 +6712,22 @@ model SkuCapacity {
   /**
    * Gets or sets the default capacity.
    */
-  default?: int32;
+  default?: int32 = 0;
 
   /**
    * Gets or sets the maximum.
    */
-  maximum?: int32;
+  maximum?: int32 = 0;
 
   /**
    * Gets or sets the minimum.
    */
-  minimum?: int32;
+  minimum?: int32 = 0;
 
   /**
    * Gets or sets the type of the scale.
    */
-  scaleType?: SkuScaleType;
+  scaleType?: SkuScaleType = SkuScaleType.Automatic;
 }
 
 /**
@@ -6740,7 +6744,7 @@ model SkuSetting {
   /**
    * This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.
    */
-  tier?: Azure.ResourceManager.CommonTypes.SkuTier;
+  tier?: Azure.ResourceManager.CommonTypes.SkuTier = Azure.ResourceManager.CommonTypes.SkuTier.Basic;
 }
 
 /**
@@ -7238,7 +7242,7 @@ model ScheduleProperties extends ResourceBase {
    * Display name of schedule.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  displayName?: string;
+  displayName?: string | null;
 
   /**
    * Is the schedule enabled?
@@ -7285,7 +7289,7 @@ model ServerlessEndpointProperties {
   /**
    * Specifies the content safety options. If omitted, the default content safety settings will be configured
    */
-  contentSafety?: ContentSafety;
+  contentSafety?: ContentSafety | null;
 
   /**
    * The current state of the ServerlessEndpoint.
@@ -7297,18 +7301,18 @@ model ServerlessEndpointProperties {
    * The inference uri to target when making requests against the serverless endpoint
    */
   @visibility(Lifecycle.Read)
-  inferenceEndpoint?: ServerlessInferenceEndpoint;
+  inferenceEndpoint?: ServerlessInferenceEndpoint | null;
 
   /**
    * The MarketplaceSubscription Azure ID associated to this ServerlessEndpoint.
    */
   @visibility(Lifecycle.Read)
-  marketplaceSubscriptionId?: string;
+  marketplaceSubscriptionId?: string | null;
 
   /**
    * The model settings (model id) for the model being serviced on the ServerlessEndpoint.
    */
-  modelSettings?: ModelSettings;
+  modelSettings?: ModelSettings | null;
 
   /**
    * Provisioning state for the endpoint.
@@ -7337,7 +7341,7 @@ model ServerlessInferenceEndpoint {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  headers?: Record<string>;
+  headers?: Record<string | null> | null;
 
   /**
    * [Required] The inference uri to target when making requests against the Serverless Endpoint.
@@ -7560,17 +7564,17 @@ model SystemCreatedAcrAccount {
   /**
    * Name of the ACR account
    */
-  acrAccountName?: string;
+  acrAccountName?: string | null;
 
   /**
    * SKU of the ACR account
    */
-  acrAccountSku?: string;
+  acrAccountSku?: string | null;
 
   /**
    * This is populated once the ACR account is created.
    */
-  armResourceId?: ArmResourceId;
+  armResourceId?: ArmResourceId | null;
 }
 
 /**
@@ -7580,7 +7584,7 @@ model StorageAccountDetails {
   /**
    * Details of system created storage account to be used for the registry
    */
-  systemCreatedStorageAccount?: SystemCreatedStorageAccount;
+  systemCreatedStorageAccount?: SystemCreatedStorageAccount | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -7593,7 +7597,7 @@ model SystemCreatedStorageAccount {
   /**
    * This is populated once the storage account is created.
    */
-  armResourceId?: ArmResourceId;
+  armResourceId?: ArmResourceId | null;
 
   /**
    * HNS enabled for storage account
@@ -7603,7 +7607,7 @@ model SystemCreatedStorageAccount {
   /**
    * Name of the storage account
    */
-  storageAccountName?: string;
+  storageAccountName?: string | null;
 
   /**
    * Allowed values:
@@ -7616,7 +7620,7 @@ model SystemCreatedStorageAccount {
    * "Premium_LRS",
    * "Premium_ZRS"
    */
-  storageAccountType?: string;
+  storageAccountType?: string | null;
 }
 
 /**
@@ -9447,22 +9451,24 @@ model SslConfiguration {
   /**
    * Cert data
    */
-  cert?: string;
+  @secret
+  cert?: string | null;
 
   /**
    * Key data
    */
-  key?: string;
+  @secret
+  key?: string | null;
 
   /**
    * CNAME of the cert
    */
-  cname?: string;
+  cname?: string | null;
 
   /**
    * Leaf domain label of public endpoint
    */
-  leafDomainLabel?: string;
+  leafDomainLabel?: string | null;
 
   /**
    * Indicates whether to overwrite existing domain label.
@@ -10364,7 +10370,7 @@ model ScheduleBase {
   /**
    * A system assigned id for the schedule.
    */
-  id?: string;
+  id?: string | null;
 
   /**
    * The current deployment state of schedule.
@@ -11815,7 +11821,7 @@ model TrainingSettings {
   /**
    * Enable recommendation of DNN models.
    */
-  enableDnnTraining?: boolean;
+  enableDnnTraining?: boolean = false;
 
   /**
    * Flag to turn on explainability on best model.
@@ -11825,7 +11831,7 @@ model TrainingSettings {
   /**
    * Flag for enabling onnx compatible models.
    */
-  enableOnnxCompatibleModels?: boolean;
+  enableOnnxCompatibleModels?: boolean = false;
 
   /**
    * Enable stack ensemble run.
@@ -11841,12 +11847,12 @@ model TrainingSettings {
    * During VotingEnsemble and StackEnsemble model generation, multiple fitted models from the previous child runs are downloaded.
    * Configure this parameter with a higher value than 300 secs, if more time is needed.
    */
-  ensembleModelDownloadTimeout?: duration;
+  ensembleModelDownloadTimeout?: duration = duration.fromISO("PT5M");
 
   /**
    * Stack ensemble settings for stack ensemble run.
    */
-  stackEnsembleSettings?: StackEnsembleSettings;
+  stackEnsembleSettings?: StackEnsembleSettings | null;
 }
 
 /**
@@ -11856,7 +11862,7 @@ model StackEnsembleSettings {
   /**
    * Optional parameters to pass to the initializer of the meta-learner.
    */
-  stackMetaLearnerKWargs?: Record<unknown>;
+  stackMetaLearnerKWargs?: unknown | null;
 
   /**
    * Specifies the proportion of the training set (when choosing train and validation type of training) to be reserved for training the meta-learner. Default value is 0.2.
@@ -11866,7 +11872,7 @@ model StackEnsembleSettings {
   /**
    * The meta-learner is a model trained on the output of the individual heterogeneous models.
    */
-  stackMetaLearnerType?: StackMetaLearnerType;
+  stackMetaLearnerType?: StackMetaLearnerType = StackMetaLearnerType.None;
 }
 
 /**
@@ -11932,31 +11938,31 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
   /**
    * These transformers shall not be used in featurization.
    */
-  blockedTransformers?: BlockedTransformers[];
+  blockedTransformers?: BlockedTransformers[] | null;
 
   /**
    * Dictionary of column name and its type (int, float, string, datetime etc).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  columnNameAndTypes?: Record<string>;
+  columnNameAndTypes?: Record<string | null> | null;
 
   /**
    * Determines whether to use Dnn based featurizers for data featurization.
    */
-  enableDnnFeaturization?: boolean;
+  enableDnnFeaturization?: boolean = false;
 
   /**
    * Featurization mode - User can keep the default 'Auto' mode and AutoML will take care of necessary transformation of the data in featurization phase.
    * If 'Off' is selected then no featurization is done.
    * If 'Custom' is selected then user can specify additional inputs to customize how featurization is done.
    */
-  mode?: FeaturizationMode;
+  mode?: FeaturizationMode = FeaturizationMode.Auto;
 
   /**
    * User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  transformerParams?: Record<ColumnTransformer[]>;
+  transformerParams?: Record<ColumnTransformer[] | null> | null;
 }
 
 /**
@@ -11997,7 +12003,7 @@ model TableVerticalLimitSettings {
   /**
    * Exit score for the AutoML job.
    */
-  exitScore?: float64;
+  exitScore?: float64 | null;
 
   /**
    * Maximum Concurrent iterations.
@@ -12017,12 +12023,12 @@ model TableVerticalLimitSettings {
   /**
    * AutoML job timeout.
    */
-  timeout?: duration;
+  timeout?: duration = duration.fromISO("PT6H");
 
   /**
    * Iteration timeout.
    */
-  trialTimeout?: duration;
+  trialTimeout?: duration = duration.fromISO("PT30M");
 }
 
 /**
@@ -12613,7 +12619,7 @@ model PromptSettings {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model TeacherModelEndpoint {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  endpointName?: string;
+  endpointName?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -12621,13 +12627,13 @@ model TeacherModelSettings {
   /**
    * Teacher Model Request Settings.
    */
-  teacherModelEndpointRequestSettings?: TeacherModelEndpointRequestSettings;
+  teacherModelEndpointRequestSettings?: TeacherModelEndpointRequestSettings | null;
 
   /**
    * Teacher Model Inference Settings.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  teacherModelInferenceParameters?: Record<string>;
+  teacherModelInferenceParameters?: Record<string | null> | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -14434,7 +14440,7 @@ model RollingInputData extends MonitoringInputDataBase {
    * Reference to the component asset used to preprocess the data.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  preprocessingComponentId?: string;
+  preprocessingComponentId?: string | null;
 
   /**
    * [Required] The time offset between the end of the data window and the monitor's current run time.
@@ -14461,7 +14467,7 @@ model SASCredential extends DataReferenceCredential {
   /**
    * Full SAS Uri, including the storage, container/blob path and SAS token
    */
-  sasUri?: url;
+  sasUri?: url | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -14474,7 +14480,8 @@ model SASCredentialDto extends PendingUploadCredentialDto {
   /**
    * Full SAS Uri, including the storage, container/blob path and SAS token
    */
-  sasUri?: url;
+  @secret
+  sasUri?: url | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -14505,7 +14512,7 @@ model SasDatastoreSecrets extends DatastoreSecrets {
   /**
    * Storage container SAS token.
    */
-  sasToken?: string;
+  sasToken?: string | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -14520,7 +14527,7 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
    * Authority URL used for authentication.
    */
-  authorityUrl?: string;
+  authorityUrl?: string | null;
 
   /**
    * [Required] Service principal client ID.
@@ -14532,13 +14539,13 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
   /**
    * Resource the service principal has access to.
    */
-  resourceUrl?: string;
+  resourceUrl?: string | null;
 
   /**
    * [Required] Service principal secrets.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  secrets: ServicePrincipalDatastoreSecrets;
+  secrets: ServicePrincipalDatastoreSecrets | null;
 
   /**
    * [Required] ID of the tenant to which the service principal belongs.
@@ -14560,7 +14567,7 @@ model ServicePrincipalDatastoreSecrets extends DatastoreSecrets {
   /**
    * Service principal secret.
    */
-  clientSecret?: string;
+  clientSecret?: string | null;
 
   /**
    * [Required] Credential type used to authentication with storage.
@@ -14576,18 +14583,20 @@ model SparkJob extends JobBaseProperties {
    * Archive files used in the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  archives?: string[];
+  archives?: string[] | null;
 
   /**
    * Arguments for the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  args?: string;
+  args?: string | null;
 
   /**
    * [Required] arm-id of the code asset.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
+  @minLength(1)
+  @pattern("[a-zA-Z0-9_]")
   codeId: Azure.Core.armResourceIdentifier;
 
   /**
@@ -14595,7 +14604,7 @@ model SparkJob extends JobBaseProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  conf?: Record<string>;
+  conf?: Record<string | null> | null;
 
   /**
    * [Required] The entry to execute on startup of the job.
@@ -14607,58 +14616,58 @@ model SparkJob extends JobBaseProperties {
    * The ARM resource ID of the Environment specification for the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  environmentId?: Azure.Core.armResourceIdentifier;
+  environmentId?: Azure.Core.armResourceIdentifier | null;
 
   /**
    * Environment variables included in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  environmentVariables?: Record<string>;
+  environmentVariables?: Record<string | null> | null;
 
   /**
    * Files used in the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  files?: string[];
+  files?: string[] | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputs?: Record<JobInput>;
+  inputs?: Record<JobInput | null> | null;
 
   /**
    * Jar files used in the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  jars?: string[];
+  jars?: string[] | null;
 
   /**
    * Mapping of output data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  outputs?: Record<JobOutput>;
+  outputs?: Record<JobOutput | null> | null;
 
   /**
    * Python files used in the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  pyFiles?: string[];
+  pyFiles?: string[] | null;
 
   /**
    * Queue settings for the job
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  queueSettings?: QueueSettings;
+  queueSettings?: QueueSettings | null;
 
   /**
    * Compute Resource configuration for the job.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  resources?: SparkResourceConfiguration;
+  resources?: SparkResourceConfiguration | null;
 
   /**
    * [Required] Specifies the type of job.
@@ -14684,7 +14693,7 @@ model SparkResourceConfiguration {
    * Optional type of VM used as supported by the compute target.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  instanceType?: string;
+  instanceType?: string | null;
 
   /**
    * Version of spark runtime used for the job.
@@ -14733,7 +14742,7 @@ model StaticInputData extends MonitoringInputDataBase {
    * Reference to the component asset used to preprocess the data.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  preprocessingComponentId?: string;
+  preprocessingComponentId?: string | null;
 
   /**
    * [Required] The end date of the data window.
@@ -14762,14 +14771,14 @@ model SweepJob extends JobBaseProperties {
   /**
    * Early termination policies enable canceling poor-performing runs before they complete
    */
-  earlyTermination?: EarlyTerminationPolicy;
+  earlyTermination?: EarlyTerminationPolicy | null;
 
   /**
    * Mapping of input data bindings used in the job.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputs?: Record<JobInput>;
+  inputs?: Record<JobInput | null> | null;
 
   /**
    * Sweep Job limit.
@@ -14787,13 +14796,13 @@ model SweepJob extends JobBaseProperties {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  outputs?: Record<JobOutput>;
+  outputs?: Record<JobOutput | null> | null;
 
   /**
    * Queue settings for the job
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  queueSettings?: QueueSettings;
+  queueSettings?: QueueSettings | null;
 
   /**
    * [Required] The hyperparameter sampling algorithm
@@ -14823,17 +14832,17 @@ model SweepJobLimits extends JobLimits {
   /**
    * Sweep Job max concurrent trials.
    */
-  maxConcurrentTrials?: int32;
+  maxConcurrentTrials?: int32 | null;
 
   /**
    * Sweep Job max total trials.
    */
-  maxTotalTrials?: int32;
+  maxTotalTrials?: int32 | null;
 
   /**
    * Sweep Job Trial timeout value.
    */
-  trialTimeout?: duration;
+  trialTimeout?: duration | null;
 
   /**
    * [Required] JobLimit type.
@@ -14849,7 +14858,7 @@ model TrialComponent {
    * ARM resource ID of the code asset.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  codeId?: string;
+  codeId?: string | null;
 
   /**
    * [Required] The command to execute on startup of the job. eg. "python train.py"
@@ -14863,7 +14872,7 @@ model TrialComponent {
    * Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  distribution?: DistributionConfiguration;
+  distribution?: DistributionConfiguration | null;
 
   /**
    * [Required] The ARM resource ID of the Environment specification for the job.
@@ -14877,7 +14886,7 @@ model TrialComponent {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  environmentVariables?: Record<string>;
+  environmentVariables?: Record<string | null> | null;
 
   /**
    * Compute Resource configuration for the job.
@@ -14901,7 +14910,7 @@ model TargetUtilizationScaleSettings extends OnlineScaleSettings {
   /**
    * The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.
    */
-  pollingInterval?: duration;
+  pollingInterval?: duration = duration.fromISO("PT1S");
 
   /**
    * Target CPU usage for the autoscaler.
@@ -14922,13 +14931,13 @@ model TensorFlow extends DistributionConfiguration {
    * Number of parameter server tasks.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  parameterServerCount?: int32;
+  parameterServerCount?: int32 = 0;
 
   /**
    * Number of workers. If not specified, will default to the instance count.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  workerCount?: int32;
+  workerCount?: int32 | null;
 
   /**
    * [Required] Specifies the type of distribution framework.
@@ -14946,7 +14955,7 @@ model TextClassification extends AutoMLVertical {
   /**
    * Primary metric for Text-Classification task.
    */
-  primaryMetric?: ClassificationPrimaryMetrics;
+  primaryMetric?: ClassificationPrimaryMetrics = ClassificationPrimaryMetrics.Accuracy;
 
   /**
    * [Required] Task type for AutoMLJob.
@@ -15036,7 +15045,7 @@ model TruncationSelectionPolicy extends EarlyTerminationPolicy {
   /**
    * The percentage of runs to cancel at each evaluation interval.
    */
-  truncationPercentage?: int32;
+  truncationPercentage?: int32 = 0;
 
   /**
    * [Required] Name of policy configuration

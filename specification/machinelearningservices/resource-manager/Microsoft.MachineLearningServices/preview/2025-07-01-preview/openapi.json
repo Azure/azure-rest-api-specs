@@ -30657,36 +30657,6 @@
         "value"
       ]
     },
-    "FeaturizationMode": {
-      "type": "string",
-      "description": "Featurization mode - determines data featurization mode.",
-      "enum": [
-        "Auto",
-        "Custom",
-        "Off"
-      ],
-      "x-ms-enum": {
-        "name": "FeaturizationMode",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Auto",
-            "value": "Auto",
-            "description": "Auto mode, system performs featurization without any custom featurization inputs."
-          },
-          {
-            "name": "Custom",
-            "value": "Custom",
-            "description": "Custom featurization."
-          },
-          {
-            "name": "Off",
-            "value": "Off",
-            "description": "Featurization off. 'Forecasting' task cannot use this value."
-          }
-        ]
-      }
-    },
     "FeaturizationSettings": {
       "type": "object",
       "description": "Featurization Configuration.",
@@ -39541,20 +39511,25 @@
       "properties": {
         "description": {
           "type": "string",
-          "description": "The asset description text."
+          "description": "The asset description text.",
+          "x-nullable": true
         },
         "properties": {
           "type": "object",
           "description": "The asset property dictionary.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "tags": {
           "type": "object",
           "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -39575,6 +39550,7 @@
         "instanceType": {
           "type": "string",
           "description": "Optional type of VM used as supported by the compute target.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -39583,9 +39559,9 @@
         "properties": {
           "type": "object",
           "description": "Additional properties bag.",
+          "x-nullable": true,
           "additionalProperties": {
-            "additionalProperties": {},
-            "type": "object"
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -39650,6 +39626,7 @@
         "limit": {
           "type": "integer",
           "format": "int64",
+          "title": "Limit.",
           "description": "The maximum permitted quota of the resource.",
           "readOnly": true
         },
@@ -39667,6 +39644,7 @@
         "preprocessingComponentId": {
           "type": "string",
           "description": "Reference to the component asset used to preprocess the data.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -39861,7 +39839,8 @@
         "sasUri": {
           "type": "string",
           "format": "uri",
-          "description": "Full SAS Uri, including the storage, container/blob path and SAS token"
+          "description": "Full SAS Uri, including the storage, container/blob path and SAS token",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -39876,8 +39855,10 @@
       "properties": {
         "sasUri": {
           "type": "string",
-          "format": "uri",
-          "description": "Full SAS Uri, including the storage, container/blob path and SAS token"
+          "format": "password",
+          "description": "Full SAS Uri, including the storage, container/blob path and SAS token",
+          "x-nullable": true,
+          "x-ms-secret": true
         }
       },
       "allOf": [
@@ -39956,7 +39937,8 @@
       "properties": {
         "sasToken": {
           "type": "string",
-          "description": "Storage container SAS token."
+          "description": "Storage container SAS token.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -39978,7 +39960,8 @@
         "minNodeCount": {
           "type": "integer",
           "format": "int32",
-          "description": "Min number of nodes to use"
+          "description": "Min number of nodes to use",
+          "default": 0
         },
         "nodeIdleTimeBeforeScaleDown": {
           "type": "string",
@@ -39996,6 +39979,7 @@
       "properties": {
         "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
+          "title": "Scale settings.",
           "description": "scale settings for AML Compute"
         }
       }
@@ -40027,11 +40011,13 @@
       "properties": {
         "disablePublicEgress": {
           "type": "boolean",
-          "description": "Gets or sets a value indicating whether PublicEgress is disabled."
+          "description": "Gets or sets a value indicating whether PublicEgress is disabled.",
+          "default": false
         },
         "registries": {
           "type": "array",
           "description": "Gets or sets a list of Registry sources that will be used to confirm identity, storage, ACR.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           }
@@ -40105,7 +40091,8 @@
       "properties": {
         "id": {
           "type": "string",
-          "description": "A system assigned id for the schedule."
+          "description": "A system assigned id for the schedule.",
+          "x-nullable": true
         },
         "provisioningStatus": {
           "$ref": "#/definitions/ScheduleProvisioningState",
@@ -40133,6 +40120,7 @@
         "displayName": {
           "type": "string",
           "description": "Display name of schedule.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -40368,7 +40356,8 @@
       "properties": {
         "expirableSecret": {
           "type": "boolean",
-          "description": "Indicates if the secret is expirable."
+          "description": "Indicates if the secret is expirable.",
+          "default": false
         },
         "expireAfterHours": {
           "type": "integer",
@@ -40526,7 +40515,8 @@
         },
         "contentSafety": {
           "$ref": "#/definitions/ContentSafety",
-          "description": "Specifies the content safety options. If omitted, the default content safety settings will be configured"
+          "description": "Specifies the content safety options. If omitted, the default content safety settings will be configured",
+          "x-nullable": true
         },
         "endpointState": {
           "$ref": "#/definitions/ServerlessEndpointState",
@@ -40536,16 +40526,19 @@
         "inferenceEndpoint": {
           "$ref": "#/definitions/ServerlessInferenceEndpoint",
           "description": "The inference uri to target when making requests against the serverless endpoint",
+          "x-nullable": true,
           "readOnly": true
         },
         "marketplaceSubscriptionId": {
           "type": "string",
           "description": "The MarketplaceSubscription Azure ID associated to this ServerlessEndpoint.",
+          "x-nullable": true,
           "readOnly": true
         },
         "modelSettings": {
           "$ref": "#/definitions/ModelSettings",
-          "description": "The model settings (model id) for the model being serviced on the ServerlessEndpoint."
+          "description": "The model settings (model id) for the model being serviced on the ServerlessEndpoint.",
+          "x-nullable": true
         },
         "provisioningState": {
           "$ref": "#/definitions/EndpointProvisioningState",
@@ -40680,8 +40673,10 @@
         "headers": {
           "type": "object",
           "description": "Specifies any required headers to target this serverless endpoint.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "readOnly": true
         },
@@ -40790,7 +40785,8 @@
       "properties": {
         "authorityUrl": {
           "type": "string",
-          "description": "Authority URL used for authentication."
+          "description": "Authority URL used for authentication.",
+          "x-nullable": true
         },
         "clientId": {
           "type": "string",
@@ -40799,11 +40795,13 @@
         },
         "resourceUrl": {
           "type": "string",
-          "description": "Resource the service principal has access to."
+          "description": "Resource the service principal has access to.",
+          "x-nullable": true
         },
         "secrets": {
           "$ref": "#/definitions/ServicePrincipalDatastoreSecrets",
           "description": "[Required] Service principal secrets.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "update",
             "create"
@@ -40833,7 +40831,8 @@
       "properties": {
         "clientSecret": {
           "type": "string",
-          "description": "Service principal secret."
+          "description": "Service principal secret.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -40938,21 +40937,51 @@
         "default": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the default capacity."
+          "description": "Gets or sets the default capacity.",
+          "default": 0
         },
         "maximum": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the maximum."
+          "description": "Gets or sets the maximum.",
+          "default": 0
         },
         "minimum": {
           "type": "integer",
           "format": "int32",
-          "description": "Gets or sets the minimum."
+          "description": "Gets or sets the minimum.",
+          "default": 0
         },
         "scaleType": {
-          "$ref": "#/definitions/SkuScaleType",
-          "description": "Gets or sets the type of the scale."
+          "type": "string",
+          "description": "Gets or sets the type of the scale.",
+          "default": "Automatic",
+          "enum": [
+            "Automatic",
+            "Manual",
+            "None"
+          ],
+          "x-ms-enum": {
+            "name": "SkuScaleType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Automatic",
+                "value": "Automatic",
+                "description": "Automatically scales node count."
+              },
+              {
+                "name": "Manual",
+                "value": "Manual",
+                "description": "Node count scaled upon user request."
+              },
+              {
+                "name": "None",
+                "value": "None",
+                "description": "Fixed set of nodes."
+              }
+            ]
+          }
         }
       }
     },
@@ -40962,16 +40991,19 @@
       "properties": {
         "capacity": {
           "$ref": "#/definitions/SkuCapacity",
-          "description": "Gets or sets the Sku Capacity."
+          "description": "Gets or sets the Sku Capacity.",
+          "x-nullable": true
         },
         "resourceType": {
           "type": "string",
           "description": "The resource type name.",
+          "x-nullable": true,
           "readOnly": true
         },
         "sku": {
           "$ref": "#/definitions/SkuSetting",
-          "description": "Gets or sets the Sku."
+          "description": "Gets or sets the Sku.",
+          "x-nullable": true
         }
       }
     },
@@ -40996,36 +41028,6 @@
         "value"
       ]
     },
-    "SkuScaleType": {
-      "type": "string",
-      "description": "Node scaling setting for the compute sku.",
-      "enum": [
-        "Automatic",
-        "Manual",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "SkuScaleType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Automatic",
-            "value": "Automatic",
-            "description": "Automatically scales node count."
-          },
-          {
-            "name": "Manual",
-            "value": "Manual",
-            "description": "Node count scaled upon user request."
-          },
-          {
-            "name": "None",
-            "value": "None",
-            "description": "Fixed set of nodes."
-          }
-        ]
-      }
-    },
     "SkuSetting": {
       "type": "object",
       "description": "SkuSetting fulfills the need for stripped down SKU info in ARM contract.",
@@ -41037,8 +41039,41 @@
           "pattern": "[a-zA-Z0-9_]"
         },
         "tier": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
-          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT."
+          "type": "string",
+          "description": "This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT.",
+          "default": "Basic",
+          "enum": [
+            "Free",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum": {
+            "name": "SkuTier",
+            "modelAsString": false,
+            "values": [
+              {
+                "name": "Free",
+                "value": "Free",
+                "description": "The Free service tier."
+              },
+              {
+                "name": "Basic",
+                "value": "Basic",
+                "description": "The Basic service tier."
+              },
+              {
+                "name": "Standard",
+                "value": "Standard",
+                "description": "The Standard service tier."
+              },
+              {
+                "name": "Premium",
+                "value": "Premium",
+                "description": "The Premium service tier."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -41079,6 +41114,7 @@
         "archives": {
           "type": "array",
           "description": "Archive files used in the job.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -41090,6 +41126,7 @@
         "args": {
           "type": "string",
           "description": "Arguments for the job.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -41099,6 +41136,8 @@
           "type": "string",
           "format": "arm-id",
           "description": "[Required] arm-id of the code asset.",
+          "minLength": 1,
+          "pattern": "[a-zA-Z0-9_]",
           "x-ms-mutability": [
             "read",
             "create"
@@ -41107,8 +41146,10 @@
         "conf": {
           "type": "object",
           "description": "Spark configured properties.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -41127,6 +41168,7 @@
           "type": "string",
           "format": "arm-id",
           "description": "The ARM resource ID of the Environment specification for the job.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -41135,8 +41177,10 @@
         "environmentVariables": {
           "type": "object",
           "description": "Environment variables included in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -41146,6 +41190,7 @@
         "files": {
           "type": "array",
           "description": "Files used in the job.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -41157,8 +41202,10 @@
         "inputs": {
           "type": "object",
           "description": "Mapping of input data bindings used in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -41168,6 +41215,7 @@
         "jars": {
           "type": "array",
           "description": "Jar files used in the job.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -41179,8 +41227,10 @@
         "outputs": {
           "type": "object",
           "description": "Mapping of output data bindings used in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -41190,6 +41240,7 @@
         "pyFiles": {
           "type": "array",
           "description": "Python files used in the job.",
+          "x-nullable": true,
           "items": {
             "type": "string"
           },
@@ -41201,6 +41252,7 @@
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
           "description": "Queue settings for the job",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -41209,6 +41261,7 @@
         "resources": {
           "$ref": "#/definitions/SparkResourceConfiguration",
           "description": "Compute Resource configuration for the job.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -41319,6 +41372,7 @@
         "instanceType": {
           "type": "string",
           "description": "Optional type of VM used as supported by the compute target.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -41410,19 +41464,27 @@
         },
         "cert": {
           "type": "string",
-          "description": "Cert data"
+          "format": "password",
+          "description": "Cert data",
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "key": {
           "type": "string",
-          "description": "Key data"
+          "format": "password",
+          "description": "Key data",
+          "x-nullable": true,
+          "x-ms-secret": true
         },
         "cname": {
           "type": "string",
-          "description": "CNAME of the cert"
+          "description": "CNAME of the cert",
+          "x-nullable": true
         },
         "leafDomainLabel": {
           "type": "string",
-          "description": "Leaf domain label of public endpoint"
+          "description": "Leaf domain label of public endpoint",
+          "x-nullable": true
         },
         "overwriteExistingDomain": {
           "type": "boolean",
@@ -41435,9 +41497,8 @@
       "description": "Advances setting to customize StackEnsemble run.",
       "properties": {
         "stackMetaLearnerKWargs": {
-          "type": "object",
           "description": "Optional parameters to pass to the initializer of the meta-learner.",
-          "additionalProperties": {}
+          "x-nullable": true
         },
         "stackMetaLearnerTrainPercentage": {
           "type": "number",
@@ -41446,65 +41507,62 @@
           "default": 0.2
         },
         "stackMetaLearnerType": {
-          "$ref": "#/definitions/StackMetaLearnerType",
-          "description": "The meta-learner is a model trained on the output of the individual heterogeneous models."
-        }
-      }
-    },
-    "StackMetaLearnerType": {
-      "type": "string",
-      "description": "The meta-learner is a model trained on the output of the individual heterogeneous models.\nDefault meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).\nThis parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression",
-      "enum": [
-        "None",
-        "LogisticRegression",
-        "LogisticRegressionCV",
-        "LightGBMClassifier",
-        "ElasticNet",
-        "ElasticNetCV",
-        "LightGBMRegressor",
-        "LinearRegression"
-      ],
-      "x-ms-enum": {
-        "name": "StackMetaLearnerType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None"
-          },
-          {
-            "name": "LogisticRegression",
-            "value": "LogisticRegression",
-            "description": "Default meta-learners are LogisticRegression for classification tasks."
-          },
-          {
-            "name": "LogisticRegressionCV",
-            "value": "LogisticRegressionCV",
-            "description": "Default meta-learners are LogisticRegression for classification task when CV is on."
-          },
-          {
-            "name": "LightGBMClassifier",
-            "value": "LightGBMClassifier"
-          },
-          {
-            "name": "ElasticNet",
-            "value": "ElasticNet",
-            "description": "Default meta-learners are LogisticRegression for regression task."
-          },
-          {
-            "name": "ElasticNetCV",
-            "value": "ElasticNetCV",
-            "description": "Default meta-learners are LogisticRegression for regression task when CV is on."
-          },
-          {
-            "name": "LightGBMRegressor",
-            "value": "LightGBMRegressor"
-          },
-          {
-            "name": "LinearRegression",
-            "value": "LinearRegression"
+          "type": "string",
+          "description": "The meta-learner is a model trained on the output of the individual heterogeneous models.",
+          "default": "None",
+          "enum": [
+            "None",
+            "LogisticRegression",
+            "LogisticRegressionCV",
+            "LightGBMClassifier",
+            "ElasticNet",
+            "ElasticNetCV",
+            "LightGBMRegressor",
+            "LinearRegression"
+          ],
+          "x-ms-enum": {
+            "name": "StackMetaLearnerType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None"
+              },
+              {
+                "name": "LogisticRegression",
+                "value": "LogisticRegression",
+                "description": "Default meta-learners are LogisticRegression for classification tasks."
+              },
+              {
+                "name": "LogisticRegressionCV",
+                "value": "LogisticRegressionCV",
+                "description": "Default meta-learners are LogisticRegression for classification task when CV is on."
+              },
+              {
+                "name": "LightGBMClassifier",
+                "value": "LightGBMClassifier"
+              },
+              {
+                "name": "ElasticNet",
+                "value": "ElasticNet",
+                "description": "Default meta-learners are LogisticRegression for regression task."
+              },
+              {
+                "name": "ElasticNetCV",
+                "value": "ElasticNetCV",
+                "description": "Default meta-learners are LogisticRegression for regression task when CV is on."
+              },
+              {
+                "name": "LightGBMRegressor",
+                "value": "LightGBMRegressor"
+              },
+              {
+                "name": "LinearRegression",
+                "value": "LinearRegression"
+              }
+            ]
           }
-        ]
+        }
       }
     },
     "StaticInputData": {
@@ -41514,6 +41572,7 @@
         "preprocessingComponentId": {
           "type": "string",
           "description": "Reference to the component asset used to preprocess the data.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -41607,7 +41666,8 @@
       "properties": {
         "systemCreatedStorageAccount": {
           "$ref": "#/definitions/SystemCreatedStorageAccount",
-          "description": "Details of system created storage account to be used for the registry"
+          "description": "Details of system created storage account to be used for the registry",
+          "x-nullable": true
         }
       }
     },
@@ -41649,10 +41709,7 @@
         "string": {
           "type": "string"
         }
-      },
-      "required": [
-        "string"
-      ]
+      }
     },
     "SweepJob": {
       "type": "object",
@@ -41660,13 +41717,16 @@
       "properties": {
         "earlyTermination": {
           "$ref": "#/definitions/EarlyTerminationPolicy",
-          "description": "Early termination policies enable canceling poor-performing runs before they complete"
+          "description": "Early termination policies enable canceling poor-performing runs before they complete",
+          "x-nullable": true
         },
         "inputs": {
           "type": "object",
           "description": "Mapping of input data bindings used in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobInput"
+            "$ref": "#/definitions/JobInput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -41688,8 +41748,10 @@
         "outputs": {
           "type": "object",
           "description": "Mapping of output data bindings used in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "$ref": "#/definitions/JobOutput"
+            "$ref": "#/definitions/JobOutput",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -41699,6 +41761,7 @@
         "queueSettings": {
           "$ref": "#/definitions/QueueSettings",
           "description": "Queue settings for the job",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -41738,17 +41801,20 @@
         "maxConcurrentTrials": {
           "type": "integer",
           "format": "int32",
-          "description": "Sweep Job max concurrent trials."
+          "description": "Sweep Job max concurrent trials.",
+          "x-nullable": true
         },
         "maxTotalTrials": {
           "type": "integer",
           "format": "int32",
-          "description": "Sweep Job max total trials."
+          "description": "Sweep Job max total trials.",
+          "x-nullable": true
         },
         "trialTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "Sweep Job Trial timeout value."
+          "description": "Sweep Job Trial timeout value.",
+          "x-nullable": true
         }
       },
       "allOf": [
@@ -41824,15 +41890,18 @@
       "properties": {
         "acrAccountName": {
           "type": "string",
-          "description": "Name of the ACR account"
+          "description": "Name of the ACR account",
+          "x-nullable": true
         },
         "acrAccountSku": {
           "type": "string",
-          "description": "SKU of the ACR account"
+          "description": "SKU of the ACR account",
+          "x-nullable": true
         },
         "armResourceId": {
           "$ref": "#/definitions/ArmResourceId",
-          "description": "This is populated once the ACR account is created."
+          "description": "This is populated once the ACR account is created.",
+          "x-nullable": true
         }
       }
     },
@@ -41845,7 +41914,8 @@
         },
         "armResourceId": {
           "$ref": "#/definitions/ArmResourceId",
-          "description": "This is populated once the storage account is created."
+          "description": "This is populated once the storage account is created.",
+          "x-nullable": true
         },
         "storageAccountHnsEnabled": {
           "type": "boolean",
@@ -41853,11 +41923,13 @@
         },
         "storageAccountName": {
           "type": "string",
-          "description": "Name of the storage account"
+          "description": "Name of the storage account",
+          "x-nullable": true
         },
         "storageAccountType": {
           "type": "string",
-          "description": "Allowed values:\n\"Standard_LRS\",\n\"Standard_GRS\",\n\"Standard_RAGRS\",\n\"Standard_ZRS\",\n\"Standard_GZRS\",\n\"Standard_RAGZRS\",\n\"Premium_LRS\",\n\"Premium_ZRS\""
+          "description": "Allowed values:\n\"Standard_LRS\",\n\"Standard_GRS\",\n\"Standard_RAGRS\",\n\"Standard_ZRS\",\n\"Standard_GZRS\",\n\"Standard_RAGZRS\",\n\"Premium_LRS\",\n\"Premium_ZRS\"",
+          "x-nullable": true
         }
       }
     },
@@ -41916,6 +41988,7 @@
         "blockedTransformers": {
           "type": "array",
           "description": "These transformers shall not be used in featurization.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/BlockedTransformers"
           }
@@ -41923,26 +41996,58 @@
         "columnNameAndTypes": {
           "type": "object",
           "description": "Dictionary of column name and its type (int, float, string, datetime etc).",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         },
         "enableDnnFeaturization": {
           "type": "boolean",
-          "description": "Determines whether to use Dnn based featurizers for data featurization."
+          "description": "Determines whether to use Dnn based featurizers for data featurization.",
+          "default": false
         },
         "mode": {
-          "$ref": "#/definitions/FeaturizationMode",
-          "description": "Featurization mode - User can keep the default 'Auto' mode and AutoML will take care of necessary transformation of the data in featurization phase.\nIf 'Off' is selected then no featurization is done.\nIf 'Custom' is selected then user can specify additional inputs to customize how featurization is done."
+          "type": "string",
+          "description": "Featurization mode - User can keep the default 'Auto' mode and AutoML will take care of necessary transformation of the data in featurization phase.\nIf 'Off' is selected then no featurization is done.\nIf 'Custom' is selected then user can specify additional inputs to customize how featurization is done.",
+          "default": "Auto",
+          "enum": [
+            "Auto",
+            "Custom",
+            "Off"
+          ],
+          "x-ms-enum": {
+            "name": "FeaturizationMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Auto",
+                "value": "Auto",
+                "description": "Auto mode, system performs featurization without any custom featurization inputs."
+              },
+              {
+                "name": "Custom",
+                "value": "Custom",
+                "description": "Custom featurization."
+              },
+              {
+                "name": "Off",
+                "value": "Off",
+                "description": "Featurization off. 'Forecasting' task cannot use this value."
+              }
+            ]
+          }
         },
         "transformerParams": {
           "type": "object",
           "description": "User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.",
+          "x-nullable": true,
           "additionalProperties": {
             "items": {
               "$ref": "#/definitions/ColumnTransformer"
             },
-            "type": "array"
+            "type": "array",
+            "x-nullable": true
           }
         }
       },
@@ -41964,7 +42069,8 @@
         "exitScore": {
           "type": "number",
           "format": "double",
-          "description": "Exit score for the AutoML job."
+          "description": "Exit score for the AutoML job.",
+          "x-nullable": true
         },
         "maxConcurrentTrials": {
           "type": "integer",
@@ -41987,12 +42093,14 @@
         "timeout": {
           "type": "string",
           "format": "duration",
-          "description": "AutoML job timeout."
+          "description": "AutoML job timeout.",
+          "default": "PT6H"
         },
         "trialTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "Iteration timeout."
+          "description": "Iteration timeout.",
+          "default": "PT30M"
         }
       }
     },
@@ -42098,7 +42206,8 @@
         "pollingInterval": {
           "type": "string",
           "format": "duration",
-          "description": "The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds."
+          "description": "The polling interval in ISO 8691 format. Only supports duration with precision as low as Seconds.",
+          "default": "PT1S"
         },
         "targetUtilizationPercentage": {
           "type": "integer",
@@ -42190,7 +42299,8 @@
       "type": "object",
       "properties": {
         "endpointName": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -42212,13 +42322,16 @@
       "properties": {
         "teacherModelEndpointRequestSettings": {
           "$ref": "#/definitions/TeacherModelEndpointRequestSettings",
-          "description": "Teacher Model Request Settings."
+          "description": "Teacher Model Request Settings.",
+          "x-nullable": true
         },
         "teacherModelInferenceParameters": {
           "type": "object",
           "description": "Teacher Model Inference Settings.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           }
         }
       }
@@ -42231,6 +42344,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of parameter server tasks.",
+          "default": 0,
           "x-ms-mutability": [
             "read",
             "create"
@@ -42240,6 +42354,7 @@
           "type": "integer",
           "format": "int32",
           "description": "Number of workers. If not specified, will default to the instance count.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -42273,8 +42388,47 @@
           "x-nullable": true
         },
         "primaryMetric": {
-          "$ref": "#/definitions/ClassificationPrimaryMetrics",
-          "description": "Primary metric for Text-Classification task."
+          "type": "string",
+          "description": "Primary metric for Text-Classification task.",
+          "default": "Accuracy",
+          "enum": [
+            "AUCWeighted",
+            "Accuracy",
+            "NormMacroRecall",
+            "AveragePrecisionScoreWeighted",
+            "PrecisionScoreWeighted"
+          ],
+          "x-ms-enum": {
+            "name": "ClassificationPrimaryMetrics",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "AUCWeighted",
+                "value": "AUCWeighted",
+                "description": "AUC is the Area under the curve.\nThis metric represents arithmetic mean of the score for each class,\nweighted by the number of true instances in each class."
+              },
+              {
+                "name": "Accuracy",
+                "value": "Accuracy",
+                "description": "Accuracy is the ratio of predictions that exactly match the true class labels."
+              },
+              {
+                "name": "NormMacroRecall",
+                "value": "NormMacroRecall",
+                "description": "Normalized macro recall is recall macro-averaged and normalized, so that random\nperformance has a score of 0, and perfect performance has a score of 1."
+              },
+              {
+                "name": "AveragePrecisionScoreWeighted",
+                "value": "AveragePrecisionScoreWeighted",
+                "description": "The arithmetic mean of the average precision score for each class, weighted by\nthe number of true instances in each class."
+              },
+              {
+                "name": "PrecisionScoreWeighted",
+                "value": "PrecisionScoreWeighted",
+                "description": "The arithmetic mean of precision for each class, weighted by number of true instances in each class."
+              }
+            ]
+          }
         }
       },
       "allOf": [
@@ -42385,7 +42539,8 @@
       "properties": {
         "enableDnnTraining": {
           "type": "boolean",
-          "description": "Enable recommendation of DNN models."
+          "description": "Enable recommendation of DNN models.",
+          "default": false
         },
         "enableModelExplainability": {
           "type": "boolean",
@@ -42394,7 +42549,8 @@
         },
         "enableOnnxCompatibleModels": {
           "type": "boolean",
-          "description": "Flag for enabling onnx compatible models."
+          "description": "Flag for enabling onnx compatible models.",
+          "default": false
         },
         "enableStackEnsemble": {
           "type": "boolean",
@@ -42409,11 +42565,13 @@
         "ensembleModelDownloadTimeout": {
           "type": "string",
           "format": "duration",
-          "description": "During VotingEnsemble and StackEnsemble model generation, multiple fitted models from the previous child runs are downloaded.\nConfigure this parameter with a higher value than 300 secs, if more time is needed."
+          "description": "During VotingEnsemble and StackEnsemble model generation, multiple fitted models from the previous child runs are downloaded.\nConfigure this parameter with a higher value than 300 secs, if more time is needed.",
+          "default": "PT5M"
         },
         "stackEnsembleSettings": {
           "$ref": "#/definitions/StackEnsembleSettings",
-          "description": "Stack ensemble settings for stack ensemble run."
+          "description": "Stack ensemble settings for stack ensemble run.",
+          "x-nullable": true
         }
       }
     },
@@ -42424,6 +42582,7 @@
         "codeId": {
           "type": "string",
           "description": "ARM resource ID of the code asset.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -42442,6 +42601,7 @@
         "distribution": {
           "$ref": "#/definitions/DistributionConfiguration",
           "description": "Distribution configuration of the job. If set, this should be one of Mpi, Tensorflow, PyTorch, or null.",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -42456,8 +42616,10 @@
         "environmentVariables": {
           "type": "object",
           "description": "Environment variables included in the job.",
+          "x-nullable": true,
           "additionalProperties": {
-            "type": "string"
+            "type": "string",
+            "x-nullable": true
           },
           "x-ms-mutability": [
             "read",
@@ -42483,11 +42645,13 @@
       "properties": {
         "endTime": {
           "type": "string",
-          "description": "Specifies end time of schedule in ISO 8601, but without a UTC offset. Refer https://en.wikipedia.org/wiki/ISO_8601.\nRecommented format would be \"2022-06-01T00:00:01\"\nIf not present, the schedule will run indefinitely"
+          "description": "Specifies end time of schedule in ISO 8601, but without a UTC offset. Refer https://en.wikipedia.org/wiki/ISO_8601.\nRecommented format would be \"2022-06-01T00:00:01\"\nIf not present, the schedule will run indefinitely",
+          "x-nullable": true
         },
         "startTime": {
           "type": "string",
-          "description": "Specifies start time of schedule in ISO 8601 format, but without a UTC offset."
+          "description": "Specifies start time of schedule in ISO 8601 format, but without a UTC offset.",
+          "x-nullable": true
         },
         "timeZone": {
           "type": "string",
@@ -42657,7 +42821,8 @@
         "truncationPercentage": {
           "type": "integer",
           "format": "int32",
-          "description": "The percentage of runs to cancel at each evaluation interval."
+          "description": "The percentage of runs to cancel at each evaluation interval.",
+          "default": 0
         }
       },
       "allOf": [
@@ -42709,6 +42874,7 @@
         "limit": {
           "type": "integer",
           "format": "int64",
+          "title": "Limit.",
           "description": "The maximum permitted quota of the resource."
         },
         "unit": {
@@ -42718,6 +42884,7 @@
         },
         "status": {
           "$ref": "#/definitions/Status",
+          "title": "Update Workspace Quota Status.",
           "description": "Status of update workspace quota."
         }
       }

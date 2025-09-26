@@ -11488,6 +11488,7 @@
         },
         "displayName": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -11553,7 +11554,8 @@
           }
         },
         "contentSafety": {
-          "$ref": "#/definitions/ContentSafety"
+          "$ref": "#/definitions/ContentSafety",
+          "x-nullable": true
         },
         "endpointState": {
           "type": "string",
@@ -11576,14 +11578,17 @@
         },
         "inferenceEndpoint": {
           "$ref": "#/definitions/ServerlessInferenceEndpoint",
+          "x-nullable": true,
           "readOnly": true
         },
         "marketplaceSubscriptionId": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "modelSettings": {
-          "$ref": "#/definitions/ModelSettings"
+          "$ref": "#/definitions/ModelSettings",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -11612,10 +11617,7 @@
         "string": {
           "type": "string"
         }
-      },
-      "required": [
-        "string"
-      ]
+      }
     },
     "SynapseSparkProperties__added": {
       "type": "object",
@@ -16125,65 +16127,22 @@
         ]
       ]
     },
-    "ResourceBase": {
-      "properties": {
-        "description": {
-          "x-nullable__deleted": true
-        },
-        "properties": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
-        "tags": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        }
-      }
-    },
     "ResourceConfiguration": {
       "properties": {
-        "instanceType": {
-          "x-nullable__deleted": true
-        },
         "properties": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "x-nullable__deleted": true,
-            "additionalProperties__added": {}
+            "type__deleted": "object"
           }
-        }
-      }
-    },
-    "ResourceQuota": {
-      "properties": {
-        "limit": {
-          "title__deleted": "Limit."
-        }
-      }
-    },
-    "RollingInputData": {
-      "properties": {
-        "preprocessingComponentId": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "SASCredential": {
-      "properties": {
-        "sasUri": {
-          "x-nullable__deleted": true
         }
       }
     },
     "SASCredentialDto": {
       "properties": {
         "sasUri": {
-          "x-nullable__deleted": true,
-          "x-ms-secret__deleted": true
+          "format": {
+            "__old": "uri",
+            "__new": "password"
+          }
         }
       }
     },
@@ -16191,37 +16150,6 @@
       "properties": {
         "secrets": {
           "x-ms-secret__deleted": true
-        }
-      }
-    },
-    "SasDatastoreSecrets": {
-      "properties": {
-        "sasToken": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "ScaleSettings": {
-      "properties": {
-        "minNodeCount": {
-          "default__deleted": 0
-        }
-      }
-    },
-    "ScaleSettingsInformation": {
-      "properties": {
-        "scaleSettings": {
-          "title__deleted": "Scale settings."
-        }
-      }
-    },
-    "ScaleUnitConfiguration": {
-      "properties": {
-        "disablePublicEgress": {
-          "default__deleted": false
-        },
-        "registries": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -16310,13 +16238,6 @@
         ]
       ]
     },
-    "ScheduleBase": {
-      "properties": {
-        "id": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "ScheduleResourceArmPaginatedResult": {
       "required__added": [
         "value"
@@ -16329,13 +16250,6 @@
               "__new": "#/definitions/Schedule"
             }
           }
-        }
-      }
-    },
-    "SecretExpiry": {
-      "properties": {
-        "expirableSecret": {
-          "default__deleted": false
         }
       }
     },
@@ -16481,13 +16395,9 @@
     "ServerlessInferenceEndpoint": {
       "properties": {
         "headers": {
-          "x-nullable__deleted": true,
           "x-ms-mutability__deleted": [
             "read"
-          ],
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
+          ]
         },
         "uri": {
           "x-ms-mutability__deleted": [
@@ -16499,53 +16409,18 @@
     },
     "ServicePrincipalDatastoreCredentials": {
       "properties": {
-        "authorityUrl": {
-          "x-nullable__deleted": true
-        },
-        "resourceUrl": {
-          "x-nullable__deleted": true
-        },
         "secrets": {
-          "x-ms-secret__deleted": true
-        }
-      }
-    },
-    "ServicePrincipalDatastoreSecrets": {
-      "properties": {
-        "clientSecret": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "SkuCapacity": {
-      "properties": {
-        "default": {
-          "default__deleted": 0
-        },
-        "maximum": {
-          "default__deleted": 0
-        },
-        "minimum": {
-          "default__deleted": 0
-        },
-        "scaleType": {
-          "default__deleted": "Automatic"
+          "x-ms-secret__deleted": true,
+          "x-nullable__added": true
         }
       }
     },
     "SkuResource": {
       "properties": {
-        "capacity": {
-          "x-nullable__deleted": true
-        },
         "resourceType": {
-          "x-nullable__deleted": true,
           "x-ms-mutability__deleted": [
             "read"
           ]
-        },
-        "sku": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -16557,71 +16432,42 @@
     "SkuSetting": {
       "properties": {
         "tier": {
-          "default__deleted": "Basic"
+          "$ref__deleted": "../../../../../common-types/resource-management/v3/types.json#/definitions/SkuTier",
+          "type__added": "string",
+          "enum__added": [
+            "Free",
+            "Basic",
+            "Standard",
+            "Premium"
+          ],
+          "x-ms-enum__added": {
+            "name": "SkuTier",
+            "modelAsString": false
+          }
         }
       }
     },
     "SparkJob": {
       "properties": {
-        "archives": {
-          "x-nullable__deleted": true
-        },
         "args": {
-          "x-nullable__deleted": true,
           "example__deleted": " --input abfss://blob-container@testgen2.dfs.core.windows.net/mltable"
         },
-        "codeId": {
-          "minLength__deleted": 1,
-          "pattern__deleted": "[a-zA-Z0-9_]"
-        },
         "conf": {
-          "x-nullable__deleted": true,
           "example__deleted": [
             {
               "spark.driver.memory": "2g"
             }
-          ],
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
-        "environmentId": {
-          "x-nullable__deleted": true
-        },
-        "environmentVariables": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
-        "files": {
-          "x-nullable__deleted": true
+          ]
         },
         "inputs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "description__deleted": "Command job definition.",
-            "x-nullable__deleted": true
+            "description__deleted": "Command job definition."
           }
-        },
-        "jars": {
-          "x-nullable__deleted": true
         },
         "outputs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "description__deleted": "Job output definition container information on where to find job output/logs.",
-            "x-nullable__deleted": true
+            "description__deleted": "Job output definition container information on where to find job output/logs."
           }
-        },
-        "pyFiles": {
-          "x-nullable__deleted": true
-        },
-        "queueSettings": {
-          "x-nullable__deleted": true
-        },
-        "resources": {
-          "x-nullable__deleted": true
         }
       },
       "allOf": [
@@ -16647,13 +16493,6 @@
       "properties": {
         "className": {
           "example__deleted": "microsoft.aml.sample.myapp"
-        }
-      }
-    },
-    "SparkResourceConfiguration": {
-      "properties": {
-        "instanceType": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -16699,43 +16538,17 @@
     "SslConfiguration": {
       "properties": {
         "cert": {
-          "x-nullable__deleted": true,
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "key": {
-          "x-nullable__deleted": true,
-          "x-ms-secret__deleted": true
-        },
-        "cname": {
-          "x-nullable__deleted": true
-        },
-        "leafDomainLabel": {
-          "x-nullable__deleted": true
+          "format__added": "password"
         }
       }
     },
     "StackEnsembleSettings": {
       "properties": {
         "stackMetaLearnerKWargs": {
-          "x-nullable__deleted": true,
-          "additionalProperties__added": {}
-        },
-        "stackMetaLearnerType": {
-          "default__deleted": "None"
-        }
-      }
-    },
-    "StaticInputData": {
-      "properties": {
-        "preprocessingComponentId": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "StorageAccountDetails": {
-      "properties": {
-        "systemCreatedStorageAccount": {
-          "x-nullable__deleted": true
+          "type__deleted": "object"
         }
       }
     },
@@ -16754,28 +16567,18 @@
     },
     "SweepJob": {
       "properties": {
-        "earlyTermination": {
-          "x-nullable__deleted": true
-        },
         "inputs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "description__deleted": "Command job definition.",
-            "x-nullable__deleted": true
+            "description__deleted": "Command job definition."
           }
         },
         "limits": {
           "default__deleted": "{}"
         },
         "outputs": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "description__deleted": "Job output definition container information on where to find job output/logs.",
-            "x-nullable__deleted": true
+            "description__deleted": "Job output definition container information on where to find job output/logs."
           }
-        },
-        "queueSettings": {
-          "x-nullable__deleted": true
         },
         "searchSpace": {
           "additionalProperties__added": {}
@@ -16792,19 +16595,6 @@
           }
         ]
       ]
-    },
-    "SweepJobLimits": {
-      "properties": {
-        "maxConcurrentTrials": {
-          "x-nullable__deleted": true
-        },
-        "maxTotalTrials": {
-          "x-nullable__deleted": true
-        },
-        "trialTimeout": {
-          "x-nullable__deleted": true
-        }
-      }
     },
     "SynapseSpark": {
       "properties": {
@@ -16857,105 +16647,12 @@
         }
       }
     },
-    "SystemCreatedAcrAccount": {
-      "properties": {
-        "acrAccountName": {
-          "x-nullable__deleted": true
-        },
-        "acrAccountSku": {
-          "x-nullable__deleted": true
-        },
-        "armResourceId": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "SystemCreatedStorageAccount": {
-      "properties": {
-        "armResourceId": {
-          "x-nullable__deleted": true
-        },
-        "storageAccountName": {
-          "x-nullable__deleted": true
-        },
-        "storageAccountType": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "TableVerticalFeaturizationSettings": {
       "properties": {
-        "blockedTransformers": {
-          "x-nullable__deleted": true
-        },
-        "columnNameAndTypes": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
-        "enableDnnFeaturization": {
-          "default__deleted": false
-        },
-        "mode": {
-          "default__deleted": "Auto"
-        },
         "transformerParams": {
-          "x-nullable__deleted": true,
           "additionalProperties": {
-            "x-ms-identifiers__deleted": [],
-            "x-nullable__deleted": true
+            "x-ms-identifiers__deleted": []
           }
-        }
-      }
-    },
-    "TableVerticalLimitSettings": {
-      "properties": {
-        "exitScore": {
-          "x-nullable__deleted": true
-        },
-        "timeout": {
-          "default__deleted": "PT6H"
-        },
-        "trialTimeout": {
-          "default__deleted": "PT30M"
-        }
-      }
-    },
-    "TargetUtilizationScaleSettings": {
-      "properties": {
-        "pollingInterval": {
-          "default__deleted": "PT1S"
-        }
-      }
-    },
-    "TeacherModelEndpoint": {
-      "properties": {
-        "endpointName": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "TeacherModelSettings": {
-      "properties": {
-        "teacherModelEndpointRequestSettings": {
-          "x-nullable__deleted": true
-        },
-        "teacherModelInferenceParameters": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        }
-      }
-    },
-    "TensorFlow": {
-      "properties": {
-        "parameterServerCount": {
-          "default__deleted": 0
-        },
-        "workerCount": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -16972,9 +16669,6 @@
         "validationData__added": {
           "$ref": "#/definitions/MLTableJobInput",
           "x-nullable": true
-        },
-        "primaryMetric": {
-          "default__deleted": "Accuracy"
         }
       },
       "allOf": [
@@ -17048,48 +16742,10 @@
         "filterType"
       ]
     },
-    "TrainingSettings": {
-      "properties": {
-        "enableDnnTraining": {
-          "default__deleted": false
-        },
-        "enableOnnxCompatibleModels": {
-          "default__deleted": false
-        },
-        "ensembleModelDownloadTimeout": {
-          "default__deleted": "PT5M"
-        },
-        "stackEnsembleSettings": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
     "TrialComponent": {
       "properties": {
-        "codeId": {
-          "x-nullable__deleted": true
-        },
-        "distribution": {
-          "x-nullable__deleted": true
-        },
-        "environmentVariables": {
-          "x-nullable__deleted": true,
-          "additionalProperties": {
-            "x-nullable__deleted": true
-          }
-        },
         "resources": {
           "default__deleted": "{}"
-        }
-      }
-    },
-    "TriggerBase": {
-      "properties": {
-        "endTime": {
-          "x-nullable__deleted": true
-        },
-        "startTime": {
-          "x-nullable__deleted": true
         }
       }
     },
@@ -17176,20 +16832,9 @@
         ]
       ]
     },
-    "TruncationSelectionPolicy": {
-      "properties": {
-        "truncationPercentage": {
-          "default__deleted": 0
-        }
-      }
-    },
     "UpdateWorkspaceQuotas": {
       "properties": {
-        "limit": {
-          "title__deleted": "Limit."
-        },
         "status": {
-          "title__deleted": "Update Workspace Quota Status.",
           "readOnly__deleted": false
         }
       }
