@@ -121,6 +121,7 @@ interface SiteAuthSettingsV2OperationGroup {
   /**
    * Gets site's Authentication / Authorization settings for apps via the V2 format
    */
+  @summary("Gets site's Authentication / Authorization settings for apps via the V2 format")
   getAuthSettingsV2WithoutSecretsSlot is SiteAuthSettingsV2OperationGroupOps.Read<
     SiteAuthSettingsV2,
     OverrideErrorType = DefaultErrorResponse

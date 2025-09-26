@@ -763,6 +763,7 @@ interface Sites {
   /**
    * Description for Gets existing backups of an app.
    */
+  @summary("Gets existing backups of an app.")
   @action("listbackups")
   @list
   listSiteBackups is SiteOps.ActionSync<
@@ -787,6 +788,7 @@ interface Sites {
   /**
    * Updates the machine key of an app.
    */
+  @summary("Updates the machine key of an app.")
   @action("updatemachinekey")
   updateMachineKey is SiteOps.ActionSync<
     Site,
@@ -1067,6 +1069,7 @@ interface Sites {
   /**
    * Description for Gets the private link resources
    */
+  @summary("Gets the private link resources")
   @get
   @action("privateLinkResources")
   getPrivateLinkResources is SiteOps.ActionSync<
@@ -1373,6 +1376,7 @@ interface Sites {
   /**
    * Lists logic app's connections for web site, or a deployment slot.
    */
+  @summary("Lists logic app's connections for web site, or a deployment slot.")
   listWorkflowsConnections is SiteOps.ActionSync<
     Site,
     void,
@@ -1962,6 +1966,7 @@ interface WebApps {
   /**
    * Description for Gets existing backups of an app.
    */
+  @summary("Gets existing backups of an app.")
   @list
   @action("listbackups")
   listSiteBackupsSlot is WebAppOps.ActionSync<
@@ -2534,6 +2539,7 @@ interface WebApps {
   /**
    * Lists logic app's connections for web site, or a deployment slot.
    */
+  @summary("Lists logic app's connections for web site, or a deployment slot.")
   @action("listWorkflowsConnections")
   listWorkflowsConnectionsSlot is WebAppOps.ActionSync<
     Site,

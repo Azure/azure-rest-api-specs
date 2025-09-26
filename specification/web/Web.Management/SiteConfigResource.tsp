@@ -75,6 +75,7 @@ interface SiteConfigResources {
   /**
    * Description for Updates the configuration of an app.
    */
+  @summary("Updates the configuration of an app.")
   @patch(#{ implicitOptionality: false })
   updateConfiguration is SiteConfigResourceOps.CustomPatchSync<
     SiteConfigResource,
@@ -238,6 +239,7 @@ interface SiteConfigSlotResourceOperationGroup {
   /**
    * Description for Updates the configuration of an app.
    */
+  @summary("Updates the configuration of an app.")
   @patch(#{ implicitOptionality: false })
   updateConfigurationSlot is SiteConfigSlotResourceOperationGroupOps.CustomPatchSync<
     SiteConfigResource,

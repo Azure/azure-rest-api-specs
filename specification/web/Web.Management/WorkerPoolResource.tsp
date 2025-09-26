@@ -233,6 +233,7 @@ interface AppServiceEnvironments {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create or update a worker pool.")
   @patch(#{ implicitOptionality: false })
   updateWorkerPool is AppServiceEnvironmentOps.CustomPatchSync<
     WorkerPoolResource,

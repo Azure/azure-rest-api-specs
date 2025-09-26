@@ -183,6 +183,7 @@ interface VnetConnectionOperationGroup {
   /**
    * Description for Gets a virtual network the app (or deployment slot) is connected to by name.
    */
+  @summary("Gets a virtual network the app (or deployment slot) is connected to by name.")
   getVnetConnection is VnetConnectionOperationGroupOps.Read<
     VnetInfoResource,
     OverrideErrorType = DefaultErrorResponse

@@ -57,6 +57,7 @@ interface StaticSiteLinkedBackendARMResources {
   /**
    * Returns the details of a linked backend linked to a static site by name
    */
+  @summary("Returns the details of a linked backend linked to a static site by name")
   getLinkedBackend is StaticSiteLinkedBackendARMResourceOps.Read<
     StaticSiteLinkedBackendARMResource,
     OverrideErrorType = DefaultErrorResponse
@@ -66,6 +67,7 @@ interface StaticSiteLinkedBackendARMResources {
    * Link backend to a static site
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Link backend to a static site")
   linkBackend is StaticSiteLinkedBackendARMResourceOps.CreateOrUpdateAsync<
     StaticSiteLinkedBackendARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource> &
@@ -78,6 +80,7 @@ interface StaticSiteLinkedBackendARMResources {
   /**
    * Unlink a backend from a static site
    */
+  @summary("Unlink a backend from a static site")
   unlinkBackend is StaticSiteLinkedBackendARMResourceOps.DeleteSync<
     StaticSiteLinkedBackendARMResource,
     Parameters = {
@@ -93,6 +96,7 @@ interface StaticSiteLinkedBackendARMResources {
   /**
    * Returns details of all backends linked to a static site
    */
+  @summary("Returns details of all backends linked to a static site")
   getLinkedBackends is StaticSiteLinkedBackendARMResourceOps.List<
     StaticSiteLinkedBackendARMResource,
     Response = ArmResponse<StaticSiteLinkedBackendsCollection>,
@@ -103,6 +107,7 @@ interface StaticSiteLinkedBackendARMResources {
    * Validates that a backend can be linked to a static site
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Validates that a backend can be linked to a static site")
   @action("validate")
   validateBackend is StaticSiteLinkedBackendARMResourceOps.ActionAsync<
     StaticSiteLinkedBackendARMResource,
@@ -150,6 +155,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Returns the details of a linked backend linked to a static site build by name
    */
+  @summary("Returns the details of a linked backend linked to a static site build by name")
   getLinkedBackendForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.Read<
     StaticSiteLinkedBackendARMResource,
     OverrideErrorType = DefaultErrorResponse
@@ -159,6 +165,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
    * Link backend to a static site build
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Link backend to a static site build")
   linkBackendToBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.CreateOrUpdateAsync<
     StaticSiteLinkedBackendARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteLinkedBackendARMResource> &
@@ -171,6 +178,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Unlink a backend from a static site build
    */
+  @summary("Unlink a backend from a static site build")
   unlinkBackendFromBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.DeleteSync<
     StaticSiteLinkedBackendARMResource,
     Parameters = {
@@ -186,6 +194,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
   /**
    * Returns details of all backends linked to a static site build
    */
+  @summary("Returns details of all backends linked to a static site build")
   getLinkedBackendsForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.List<
     StaticSiteLinkedBackendARMResource,
     Response = ArmResponse<StaticSiteLinkedBackendsCollection>,
@@ -196,6 +205,7 @@ interface StaticSiteLinkedBackendARMResourceOperationGroup {
    * Validates that a backend can be linked to a static site build
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Validates that a backend can be linked to a static site build")
   @action("validate")
   validateBackendForBuild is StaticSiteLinkedBackendARMResourceOperationGroupOps.ActionAsync<
     StaticSiteLinkedBackendARMResource,

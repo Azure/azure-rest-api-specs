@@ -142,6 +142,7 @@ interface SiteCertificates {
   /**
    * Get a certificate belonging to a given site.
    */
+  @summary("Get a certificate belonging to a given site.")
   get is SiteCertificateOps.Read<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -150,6 +151,7 @@ interface SiteCertificates {
   /**
    * Create or update a certificate under a given site.
    */
+  @summary("Create or update a certificate under a given site.")
   createOrUpdate is SiteCertificateOps.CreateOrUpdateSync<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -158,6 +160,7 @@ interface SiteCertificates {
   /**
    * Create or update a certificate under a given site.
    */
+  @summary("Create or update a certificate under a given site.")
   @patch(#{ implicitOptionality: false })
   update is SiteCertificateOps.CustomPatchSync<
     Certificate,
@@ -168,6 +171,7 @@ interface SiteCertificates {
   /**
    * Delete a certificate from the site.
    */
+  @summary("Delete a certificate from the site.")
   delete is SiteCertificateOps.DeleteSync<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -176,6 +180,7 @@ interface SiteCertificates {
   /**
    * Get all certificates in a resource group under a site.
    */
+  @summary("Get all certificates in a resource group under a site.")
   list is SiteCertificateOps.List<
     Certificate,
     Response = ArmResponse<CertificateCollection>,
@@ -219,6 +224,7 @@ interface CertificateOperationGroup {
   /**
    * Get a certificate for a given site and deployment slot.
    */
+  @summary("Get a certificate for a given site and deployment slot.")
   getSlot is CertificateOperationGroupOps.Read<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -227,6 +233,7 @@ interface CertificateOperationGroup {
   /**
    * Create or update a certificate in a given site and deployment slot.
    */
+  @summary("Create or update a certificate in a given site and deployment slot.")
   createOrUpdateSlot is CertificateOperationGroupOps.CreateOrUpdateSync<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -235,6 +242,7 @@ interface CertificateOperationGroup {
   /**
    * Create or update a certificate for a site and deployment slot.
    */
+  @summary("Create or update a certificate for a site and deployment slot.")
   @patch(#{ implicitOptionality: false })
   updateSlot is CertificateOperationGroupOps.CustomPatchSync<
     Certificate,
@@ -245,6 +253,7 @@ interface CertificateOperationGroup {
   /**
    * Delete a certificate for a given site and deployment slot.
    */
+  @summary("Delete a certificate for a given site and deployment slot.")
   deleteSlot is CertificateOperationGroupOps.DeleteSync<
     Certificate,
     OverrideErrorType = DefaultErrorResponse
@@ -253,6 +262,7 @@ interface CertificateOperationGroup {
   /**
    * Get all certificates in a resource group for a given site and a deployment slot.
    */
+  @summary("Get all certificates in a resource group for a given site and a deployment slot.")
   listSlot is CertificateOperationGroupOps.List<
     Certificate,
     Response = ArmResponse<CertificateCollection>,

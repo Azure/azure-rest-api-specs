@@ -74,7 +74,6 @@ interface BackupItems {
    * Description for Gets existing backups of an app.
    */
   @summary("Gets existing backups of an app.")
-  @summary("Gets existing backups of an app.")
   listBackups is BackupItemOps.List<
     BackupItem,
     Response = ArmResponse<BackupItemCollection>,

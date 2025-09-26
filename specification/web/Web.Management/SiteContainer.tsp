@@ -55,6 +55,7 @@ interface SiteContainers {
   /**
    * Gets a site container of a site, or a deployment slot.
    */
+  @summary("Gets a site container of a site, or a deployment slot.")
   getSiteContainer is SiteContainerOps.Read<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -63,6 +64,7 @@ interface SiteContainers {
   /**
    * Creates or Updates a site container for a site, or a deployment slot.
    */
+  @summary("Creates or Updates a site container for a site, or a deployment slot.")
   createOrUpdateSiteContainer is SiteContainerOps.CreateOrUpdateSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -71,6 +73,7 @@ interface SiteContainers {
   /**
    * Deletes a site container for a site, or a deployment slot.
    */
+  @summary("Deletes a site container for a site, or a deployment slot.")
   deleteSiteContainer is SiteContainerOps.DeleteSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -79,6 +82,7 @@ interface SiteContainers {
   /**
    * Lists all the site containers of a site, or a deployment slot.
    */
+  @summary("Lists all the site containers of a site, or a deployment slot.")
   listSiteContainers is SiteContainerOps.List<
     SiteContainer,
     Response = ArmResponse<SiteContainerCollection>,
@@ -121,6 +125,7 @@ interface SiteContainerOperationGroup {
   /**
    * Gets a site container of a site, or a deployment slot.
    */
+  @summary("Gets a site container of a site, or a deployment slot.")
   getSiteContainerSlot is SiteContainerOperationGroupOps.Read<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -129,6 +134,7 @@ interface SiteContainerOperationGroup {
   /**
    * Creates or Updates a site container for a site, or a deployment slot.
    */
+  @summary("Creates or Updates a site container for a site, or a deployment slot.")
   createOrUpdateSiteContainerSlot is SiteContainerOperationGroupOps.CreateOrUpdateSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -137,6 +143,7 @@ interface SiteContainerOperationGroup {
   /**
    * Deletes a site container for a site, or a deployment slot.
    */
+  @summary("Deletes a site container for a site, or a deployment slot.")
   deleteSiteContainerSlot is SiteContainerOperationGroupOps.DeleteSync<
     SiteContainer,
     OverrideErrorType = DefaultErrorResponse
@@ -145,6 +152,7 @@ interface SiteContainerOperationGroup {
   /**
    * Lists all the site containers of a site, or a deployment slot.
    */
+  @summary("Lists all the site containers of a site, or a deployment slot.")
   listSiteContainersSlot is SiteContainerOperationGroupOps.List<
     SiteContainer,
     Response = ArmResponse<SiteContainerCollection>,

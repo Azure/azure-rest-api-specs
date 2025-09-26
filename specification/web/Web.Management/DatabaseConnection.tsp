@@ -62,6 +62,7 @@ interface DatabaseConnections {
   /**
    * Returns overview of a database connection for a static site build by name
    */
+  @summary("Returns overview of a database connection for a static site build by name")
   getBuildDatabaseConnection is DatabaseConnectionOps.Read<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -92,6 +93,7 @@ interface DatabaseConnections {
   /**
    * Delete a database connection for a static site build
    */
+  @summary("Delete a database connection for a static site build")
   deleteBuildDatabaseConnection is DatabaseConnectionOps.DeleteSync<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -100,6 +102,7 @@ interface DatabaseConnections {
   /**
    * Returns overviews of database connections for a static site build
    */
+  @summary("Returns overviews of database connections for a static site build")
   getBuildDatabaseConnections is DatabaseConnectionOps.List<
     DatabaseConnection,
     Response = ArmResponse<DatabaseConnectionCollection>,
@@ -109,6 +112,7 @@ interface DatabaseConnections {
   /**
    * Returns details of a database connection for a static site build by name
    */
+  @summary("Returns details of a database connection for a static site build by name")
   @action("show")
   getBuildDatabaseConnectionWithDetails is DatabaseConnectionOps.ActionSync<
     DatabaseConnection,
@@ -147,6 +151,7 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Returns overview of a database connection for a static site by name
    */
+  @summary("Returns overview of a database connection for a static site by name")
   getDatabaseConnection is DatabaseConnectionOperationGroupOps.Read<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -177,6 +182,7 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Delete a database connection for a static site
    */
+  @summary("Delete a database connection for a static site")
   deleteDatabaseConnection is DatabaseConnectionOperationGroupOps.DeleteSync<
     DatabaseConnection,
     OverrideErrorType = DefaultErrorResponse
@@ -185,6 +191,7 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Returns overviews of database connections for a static site
    */
+  @summary("Returns overviews of database connections for a static site")
   getDatabaseConnections is DatabaseConnectionOperationGroupOps.List<
     DatabaseConnection,
     Response = ArmResponse<DatabaseConnectionCollection>,
@@ -194,6 +201,7 @@ interface DatabaseConnectionOperationGroup {
   /**
    * Returns details of a database connection for a static site by name
    */
+  @summary("Returns details of a database connection for a static site by name")
   @action("show")
   getDatabaseConnectionWithDetails is DatabaseConnectionOperationGroupOps.ActionSync<
     DatabaseConnection,

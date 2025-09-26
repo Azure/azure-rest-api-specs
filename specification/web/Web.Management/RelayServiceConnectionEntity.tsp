@@ -74,6 +74,7 @@ interface RelayServiceConnectionEntities {
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
+  @summary("Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).")
   @patch(#{ implicitOptionality: false })
   updateRelayServiceConnection is RelayServiceConnectionEntityOps.CustomPatchSync<
     RelayServiceConnectionEntity,
@@ -147,6 +148,7 @@ interface RelayServiceConnectionEntityOperationGroup {
   /**
    * Description for Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).
    */
+  @summary("Creates a new hybrid connection configuration (PUT), or updates an existing one (PATCH).")
   @patch(#{ implicitOptionality: false })
   updateRelayServiceConnectionSlot is RelayServiceConnectionEntityOperationGroupOps.CustomPatchSync<
     RelayServiceConnectionEntity,

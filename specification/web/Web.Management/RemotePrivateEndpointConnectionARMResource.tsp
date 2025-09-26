@@ -138,6 +138,7 @@ interface StaticSites {
   /**
    * Description for Gets a private endpoint connection
    */
+  @summary("Gets a private endpoint connection")
   getPrivateEndpointConnection is StaticSiteOps.Read<
     RemotePrivateEndpointConnectionARMResource,
     OverrideErrorType = DefaultErrorResponse
@@ -148,6 +149,7 @@ interface StaticSites {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is StaticSiteOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
@@ -163,6 +165,7 @@ interface StaticSites {
    * Description for Deletes a private endpoint connection
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes a private endpoint connection")
   deletePrivateEndpointConnection is StaticSiteOps.DeleteWithoutOkAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResponse<unknown> | (ArmDeleteAcceptedLroResponse & {
@@ -228,6 +231,7 @@ interface RemotePrivateEndpointConnectionARMResourceOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Approves or rejects a private endpoint connection")
   approveOrRejectPrivateEndpointConnection is PrivateEndpointConnectionOperationGroupOps.CreateOrUpdateAsync<
     RemotePrivateEndpointConnectionARMResource,
     Response = ArmResourceUpdatedResponse<RemotePrivateEndpointConnectionARMResource> | (ArmAcceptedLroResponse & {
@@ -303,6 +307,7 @@ interface PrivateEndpointConnectionSlotOperationGroup {
   /**
    * Description for Gets a private endpoint connection
    */
+  @summary("Gets a private endpoint connection")
   getPrivateEndpointConnectionSlot is PrivateEndpointConnectionSlotOperationGroupOps.Read<
     RemotePrivateEndpointConnectionARMResource,
     OverrideErrorType = DefaultErrorResponse

@@ -79,6 +79,7 @@ interface TriggeredWebJobs {
   /**
    * Description for List triggered web jobs for an app, or a deployment slot.
    */
+  @summary("List triggered web jobs for an app, or a deployment slot.")
   listTriggeredWebJobsSlot is TriggeredWebJobOps.List<
     TriggeredWebJob,
     Response = ArmResponse<TriggeredWebJobCollection>,

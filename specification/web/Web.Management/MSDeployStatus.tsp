@@ -287,6 +287,7 @@ interface InstanceMSDeployStatusOperationGroup {
   /**
    * Description for Get the status of the last MSDeploy operation.
    */
+  @summary("Get the status of the last MSDeploy operation.")
   getInstanceMsDeployStatusSlot is InstanceMSDeployStatusOperationGroupOps.Read<
     MSDeployStatus,
     OverrideErrorType = DefaultErrorResponse
@@ -297,6 +298,7 @@ interface InstanceMSDeployStatusOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Invoke the MSDeploy web app extension.")
   createInstanceMSDeployOperationSlot is InstanceMSDeployStatusOperationGroupOps.CreateOrUpdateAsync<
     MSDeployStatus,
     Response = ArmResourceCreatedResponse<

@@ -167,6 +167,7 @@ interface ProcessInfoOperationGroup {
   /**
    * Description for Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.
    */
+  @summary("Get list of processes for a web site, or a deployment slot, or for a specific scaled-out instance in a web site.")
   listProcesses is ProcessInfoOperationGroupOps.List<
     ProcessInfo,
     Response = ArmResponse<ProcessInfoCollection> | ArmNotFoundResponse,

@@ -74,6 +74,7 @@ interface Identifiers {
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
+  @summary("Creates a domain ownership identifier for web app, or updates an existing ownership identifier.")
   @patch(#{ implicitOptionality: false })
   updateDomainOwnershipIdentifier is IdentifierOps.CustomPatchSync<
     Identifier,
@@ -155,6 +156,7 @@ interface IdentifierOperationGroup {
   /**
    * Description for Creates a domain ownership identifier for web app, or updates an existing ownership identifier.
    */
+  @summary("Creates a domain ownership identifier for web app, or updates an existing ownership identifier.")
   @patch(#{ implicitOptionality: false })
   updateDomainOwnershipIdentifierSlot is IdentifierOperationGroupOps.CustomPatchSync<
     Identifier,

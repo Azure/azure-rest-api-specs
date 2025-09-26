@@ -54,6 +54,7 @@ interface ContinuousWebJobs {
   /**
    * Description for Gets a continuous web job by its ID for an app, or a deployment slot.
    */
+  @summary("Gets a continuous web job by its ID for an app, or a deployment slot.")
   getContinuousWebJob is ContinuousWebJobOps.Read<
     ContinuousWebJob,
     Response = ArmResponse<ContinuousWebJob> | ArmNotFoundResponse,
@@ -72,7 +73,7 @@ interface ContinuousWebJobs {
   /**
    * Description for List continuous web jobs for an app, or a deployment slot.
    */
-  @summary("Gets a continuous web job by its ID for an app, or a deployment slot.")
+  @summary("List continuous web jobs for an app, or a deployment slot.")
   listContinuousWebJobs is ContinuousWebJobOps.List<
     ContinuousWebJob,
     Response = ArmResponse<ContinuousWebJobCollection>,

@@ -72,7 +72,6 @@ interface AppSettingKeyVaultReference {
    * Description for Gets the config reference app settings and status of an app
    */
   @summary("Gets the config reference app settings and status of an app")
-  @summary("Gets the config reference app settings and status of an app")
   getAppSettingsKeyVaultReferences is ApiKVReferenceOps.List<
     ApiKVReference,
     Response = ArmResponse<ApiKVReferenceCollection>,
@@ -116,6 +115,7 @@ interface SiteConnectionStringKeyVaultReference {
   /**
    * Description for Gets the config reference and status of an app
    */
+  @summary("Gets the config reference and status of an app")
   getSiteConnectionStringKeyVaultReference is ApiKVReferenceOperationGroupOps.Read<
     ApiKVReference,
     OverrideErrorType = DefaultErrorResponse
@@ -124,6 +124,7 @@ interface SiteConnectionStringKeyVaultReference {
   /**
    * Description for Gets the config reference app settings and status of an app
    */
+  @summary("Gets the config reference app settings and status of an app")
   @segment("connectionstrings")
   getSiteConnectionStringKeyVaultReferences is ApiKVReferenceOperationGroupOps.List<
     ApiKVReference,
@@ -239,6 +240,7 @@ interface SiteConnectionStringKeyVaultReferenceSlot {
   /**
    * Description for Gets the config reference app settings and status of an app
    */
+  @summary("Gets the config reference app settings and status of an app")
   @segment("connectionstrings")
   getSiteConnectionStringKeyVaultReferencesSlot is SiteConnectionStringKeyVaultReferenceSlotOps.List<
     ApiKVReference,

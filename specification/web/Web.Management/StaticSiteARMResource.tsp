@@ -52,6 +52,7 @@ interface StaticSiteARMResources {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new static site in an existing resource group, or updates an existing static site.")
   createOrUpdateStaticSite is ArmResourceCreateOrReplaceAsync<
     StaticSiteARMResource,
     Response = ArmResourceUpdatedResponse<StaticSiteARMResource> | (ArmAcceptedLroResponse & {
@@ -335,6 +336,7 @@ interface StaticSiteARMResources {
   /**
    * Returns details of database connections for a static site
    */
+  @summary("Returns details of database connections for a static site")
   @action("showDatabaseConnections")
   @list
   getDatabaseConnectionsWithDetails is ArmResourceActionSync<

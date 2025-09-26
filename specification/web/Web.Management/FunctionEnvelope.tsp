@@ -129,6 +129,7 @@ interface FunctionEnvelopes {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
    */
+  @summary("Get function information by its ID for web site, or a deployment slot.")
   getFunction is FunctionEnvelopeOps.Read<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse,
@@ -139,6 +140,7 @@ interface FunctionEnvelopes {
    * Description for Create function for web site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create function for web site, or a deployment slot.")
   createFunction is FunctionEnvelopeOps.CreateOrUpdateAsync<
     FunctionEnvelope,
     Response = ArmResourceCreatedResponse<
@@ -153,6 +155,7 @@ interface FunctionEnvelopes {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a function for web site, or a deployment slot.")
   deleteFunction is FunctionEnvelopeOps.DeleteSync<
     FunctionEnvelope,
     Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
@@ -162,6 +165,7 @@ interface FunctionEnvelopes {
   /**
    * Description for List the functions for a web site, or a deployment slot.
    */
+  @summary("List the functions for a web site, or a deployment slot.")
   listFunctions is FunctionEnvelopeOps.List<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse,
@@ -172,6 +176,7 @@ interface FunctionEnvelopes {
    * Description for Add or update a function secret.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Add or update a function secret.")
   @put
   createOrUpdateFunctionSecret(
     ...FunctionEnvelopesParameters,
@@ -182,6 +187,7 @@ interface FunctionEnvelopes {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a function secret.")
   @delete
   deleteFunctionSecret(
     ...FunctionEnvelopesParameters,
@@ -190,6 +196,7 @@ interface FunctionEnvelopes {
   /**
    * Description for Get function keys for a function in a web site, or a deployment slot.
    */
+  @summary("Get function keys for a function in a web site, or a deployment slot.")
   @action("listkeys")
   listFunctionKeys is FunctionEnvelopeOps.ActionSync<
     FunctionEnvelope,
@@ -201,6 +208,7 @@ interface FunctionEnvelopes {
   /**
    * Description for Get function secrets for a function in a web site, or a deployment slot.
    */
+  @summary("Get function secrets for a function in a web site, or a deployment slot.")
   @action("listsecrets")
   listFunctionSecrets is FunctionEnvelopeOps.ActionSync<
     FunctionEnvelope,
@@ -244,6 +252,7 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for Get function information by its ID for web site, or a deployment slot.
    */
+  @summary("Get function information by its ID for web site, or a deployment slot.")
   getInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.Read<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelope> | ArmNotFoundResponse,
@@ -254,6 +263,7 @@ interface FunctionEnvelopeOperationGroup {
    * Description for Create function for web site, or a deployment slot.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Create function for web site, or a deployment slot.")
   createInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.CreateOrUpdateAsync<
     FunctionEnvelope,
     Response = ArmResourceCreatedResponse<
@@ -268,6 +278,7 @@ interface FunctionEnvelopeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Delete a function for web site, or a deployment slot.")
   deleteInstanceFunctionSlot is FunctionEnvelopeOperationGroupOps.DeleteSync<
     FunctionEnvelope,
     Response = ArmDeletedNoContentResponse | ArmNotFoundResponse,
@@ -277,6 +288,7 @@ interface FunctionEnvelopeOperationGroup {
   /**
    * Description for List the functions for a web site, or a deployment slot.
    */
+  @summary("List the functions for a web site, or a deployment slot.")
   listInstanceFunctionsSlot is FunctionEnvelopeOperationGroupOps.List<
     FunctionEnvelope,
     Response = ArmResponse<FunctionEnvelopeCollection> | ArmNotFoundResponse,
@@ -288,6 +300,7 @@ interface FunctionEnvelopeOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
+  @summary("Add or update a function secret.")
   createOrUpdateFunctionSecretSlot is FunctionEnvelopeSlotOperationGroupOps.CreateOrUpdateAsync<
     FunctionEnvelope,
     Request = KeyInfo,

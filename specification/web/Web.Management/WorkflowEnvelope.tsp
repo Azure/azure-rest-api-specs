@@ -76,6 +76,7 @@ interface WorkflowEnvelopes {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.
    */
+  @summary("Get workflow information by its ID for web site, or a deployment slot.")
   getInstanceWorkflowSlot is WorkflowEnvelopeOps.Read<
     WorkflowEnvelope,
     Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse,
@@ -85,6 +86,7 @@ interface WorkflowEnvelopes {
   /**
    * List the workflows for a web site, or a deployment slot.
    */
+  @summary("List the workflows for a web site, or a deployment slot.")
   listInstanceWorkflowsSlot is WorkflowEnvelopeOps.List<
     WorkflowEnvelope,
     Response = ArmResponse<WorkflowEnvelopeCollection>,
@@ -123,6 +125,7 @@ interface WorkflowEnvelopeOperationGroup {
   /**
    * Get workflow information by its ID for web site, or a deployment slot.
    */
+  @summary("Get workflow information by its ID for web site, or a deployment slot.")
   getWorkflow is WorkflowEnvelopeOperationGroupOps.Read<
     WorkflowEnvelope,
     Response = ArmResponse<WorkflowEnvelope> | ArmNotFoundResponse,
@@ -132,6 +135,7 @@ interface WorkflowEnvelopeOperationGroup {
   /**
    * List the workflows for a web site, or a deployment slot.
    */
+  @summary("List the workflows for a web site, or a deployment slot.")
   listWorkflows is WorkflowEnvelopeOperationGroupOps.List<
     WorkflowEnvelope,
     Response = ArmResponse<WorkflowEnvelopeCollection>,

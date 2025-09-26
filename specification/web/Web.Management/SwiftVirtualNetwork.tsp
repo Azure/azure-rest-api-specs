@@ -66,6 +66,7 @@ interface SwiftVirtualNetworks {
    * in use by another App Service Plan other than the one this App is in.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Integrates this Web App with a Virtual Network. This requires that 1) \"swiftSupported\" is true when doing a GET against this resource, and 2) that the target Subnet has already been delegated, and is not\r\nin use by another App Service Plan other than the one this App is in.")
   createOrUpdateSwiftVirtualNetworkConnectionWithCheck is SwiftVirtualNetworkOps.CreateOrUpdateSync<
     SwiftVirtualNetwork,
     Response = ArmResourceUpdatedResponse<SwiftVirtualNetwork>,

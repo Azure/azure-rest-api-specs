@@ -157,6 +157,7 @@ interface HybridConnectionOperationGroup {
   /**
    * Description for Creates a new Hybrid Connection using a Service Bus relay.
    */
+  @summary("Creates a new Hybrid Connection using a Service Bus relay.")
   @patch(#{ implicitOptionality: false })
   updateHybridConnection is HybridConnectionOperationGroupOps.CustomPatchSync<
     HybridConnection,

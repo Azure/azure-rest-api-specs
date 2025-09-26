@@ -55,6 +55,7 @@ interface CsmDeploymentStatuses {
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the deployment status for an app (or deployment slot, if specified).")
   getProductionSiteDeploymentStatus is CsmDeploymentStatusOps.Read<
     CsmDeploymentStatus,
     Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CsmDeploymentStatus>> & {
@@ -67,6 +68,7 @@ interface CsmDeploymentStatuses {
   /**
    * List deployment statuses for an app (or deployment slot, if specified).
    */
+  @summary("List deployment statuses for an app (or deployment slot, if specified).")
   listProductionSiteDeploymentStatuses is CsmDeploymentStatusOps.List<
     CsmDeploymentStatus,
     Response = ArmResponse<CsmDeploymentStatusCollection>,
@@ -109,6 +111,7 @@ interface CsmDeploymentStatusOperationGroup {
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the deployment status for an app (or deployment slot, if specified).")
   getSlotSiteDeploymentStatusSlot is CsmDeploymentStatusOperationGroupOps.Read<
     CsmDeploymentStatus,
     Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CsmDeploymentStatus>> & {
@@ -121,6 +124,7 @@ interface CsmDeploymentStatusOperationGroup {
   /**
    * List deployment statuses for an app (or deployment slot, if specified).
    */
+  @summary("List deployment statuses for an app (or deployment slot, if specified).")
   listSlotSiteDeploymentStatusesSlot is CsmDeploymentStatusOperationGroupOps.List<
     CsmDeploymentStatus,
     Response = ArmResponse<CsmDeploymentStatusCollection>,

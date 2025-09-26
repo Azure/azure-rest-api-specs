@@ -63,6 +63,7 @@ interface SiteSourceControls {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Gets the source control configuration of an app.")
   getSourceControlSlot is SiteSourceControlOps.Read<
     SiteSourceControl,
     Response = ArmResponse<SiteSourceControl> | ArmResourceCreatedSyncResponse<SiteSourceControl> | (AcceptedResponse & {
@@ -77,6 +78,7 @@ interface SiteSourceControls {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Updates the source control configuration of an app.")
   createOrUpdateSourceControlSlot is SiteSourceControlOps.CreateOrUpdateAsync<
     SiteSourceControl,
     Response = ArmResourceUpdatedResponse<SiteSourceControl> | ArmResourceCreatedResponse<
@@ -112,6 +114,7 @@ interface SiteSourceControls {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes the source control configuration of an app.")
   deleteSourceControlSlot is SiteSourceControlOps.DeleteSync<
     SiteSourceControl,
     Parameters = {

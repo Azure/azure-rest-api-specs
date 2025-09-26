@@ -192,6 +192,7 @@ interface AppServiceEnvironmentResources {
   /**
    * Send a test notification that an upgrade is available for this App Service Environment.
    */
+  @summary("Send a test notification that an upgrade is available for this App Service Environment.")
   testUpgradeAvailableNotification is ArmResourceActionSync<
     AppServiceEnvironmentResource,
     void,

@@ -115,6 +115,7 @@ interface BySiteSlotOperationGroup {
   /**
    * Description for Gets the category of ResourceHealthMetadata to use for the given site as a collection
    */
+  @summary("Gets the category of ResourceHealthMetadata to use for the given site as a collection")
   @segment("resourceHealthMetadata")
   listBySiteSlot is BySiteSlotOperationGroupOps.List<
     ResourceHealthMetadata,
