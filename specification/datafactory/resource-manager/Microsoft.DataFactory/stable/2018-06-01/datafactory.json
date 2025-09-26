@@ -1846,6 +1846,9 @@
             }
           }
         },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
         "x-ms-long-running-operation": true
       }
     },
@@ -1879,6 +1882,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationRuntimeResource"
+            }
+          },
           "204": {
             "description": "OK."
           },
