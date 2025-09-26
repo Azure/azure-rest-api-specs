@@ -1672,7 +1672,7 @@ interface WebApps {
    */
   @summary("Deletes the backup configuration of an app.")
   @delete
-  @action("backup")
+  @action("config/backup")
   deleteBackupConfigurationSlot is WebAppOps.ActionSync<
     Site,
     void,

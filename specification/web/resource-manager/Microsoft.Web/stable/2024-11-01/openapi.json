@@ -20325,50 +20325,6 @@
             }
           }
         }
-      },
-      "delete": {
-        "operationId": "WebApps_DeleteBackupConfigurationSlot",
-        "tags": [
-          "WebApps"
-        ],
-        "summary": "Deletes the backup configuration of an app.",
-        "description": "Description for Deletes the backup configuration of an app.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the app.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "slot",
-            "in": "path",
-            "description": "Name of the deployment slot. By default, this API returns the production slot.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/DefaultErrorResponse"
-            }
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/backups": {
@@ -21864,6 +21820,50 @@
             "schema": {
               "$ref": "#/definitions/BackupRequest"
             }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "WebApps_DeleteBackupConfigurationSlot",
+        "tags": [
+          "WebApps"
+        ],
+        "summary": "Deletes the backup configuration of an app.",
+        "description": "Description for Deletes the backup configuration of an app.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the app.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "slot",
+            "in": "path",
+            "description": "Name of the deployment slot. By default, this API returns the production slot.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
