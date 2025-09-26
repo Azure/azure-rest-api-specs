@@ -19,7 +19,7 @@ options:
     namespace: "Azure.ResourceManager.DeviceProvisioningServices"
   "@azure-tools/typespec-python":
     service-dir: "sdk/iothub"
-    package-dir: "azure-mgmt-iothubprovisioningservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-iothubprovisioningservices"
     namespace: "azure.mgmt.iothubprovisioningservices"
     generate-test: true
     generate-sample: true
@@ -30,7 +30,7 @@ options:
     service-name: "DeviceProvisioningServices" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-deviceprovisioningservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-deviceprovisioningservices"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
