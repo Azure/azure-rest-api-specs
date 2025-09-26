@@ -574,7 +574,55 @@
       },
       "readOnly": true
     },
-    "AzureMonitorWorkspace": {
+    "AzureMonitorWorkspaceDefaultIngestionSettings": {
+      "type": "object",
+      "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
+      "properties": {
+        "dataCollectionRuleResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource Id of the default data collection rule for this Azure Monitor Workspace.",
+          "readOnly": true
+        },
+        "dataCollectionEndpointResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The Azure resource Id of the default data collection endpoint for this Azure Monitor Workspace.",
+          "readOnly": true
+        },
+        "dataCollectionRuleImmutableId": {
+          "type": "string",
+          "description": "The immutable Id of the default data collection rule for this Azure Monitor Workspace.",
+          "readOnly": true
+        },
+        "ingestionEndpoints": {
+          "$ref": "#/definitions/IngestionEndpoints",
+          "description": "The ingestion endpoints for this Azure Monitor Workspace.",
+          "readOnly": true
+        }
+      }
+    },
+    "AzureMonitorWorkspaceMetrics": {
+      "type": "object",
+      "description": "Properties related to the metrics container in the Azure Monitor Workspace",
+      "properties": {
+        "prometheusQueryEndpoint": {
+          "type": "string",
+          "description": "The Prometheus query endpoint for the Azure Monitor Workspace",
+          "readOnly": true
+        },
+        "internalId": {
+          "type": "string",
+          "description": "An internal identifier for the metrics container. Only to be used by the system.",
+          "readOnly": true
+        },
+        "enableAccessUsingResourcePermissions": {
+          "type": "boolean",
+          "description": "Flag that indicates whether to enable access using resource permissions."
+        }
+      }
+    },
+    "AzureMonitorWorkspaceProperties": {
       "type": "object",
       "description": "Properties of an Azure Monitor Workspace",
       "properties": {
@@ -615,58 +663,12 @@
         }
       }
     },
-    "AzureMonitorWorkspaceDefaultIngestionSettings": {
-      "type": "object",
-      "description": "The Data Collection Rule and Endpoint used for ingestion by default.",
-      "properties": {
-        "dataCollectionRuleResourceId": {
-          "type": "string",
-          "description": "The Azure resource Id of the default data collection rule for this Azure Monitor Workspace.",
-          "readOnly": true
-        },
-        "dataCollectionEndpointResourceId": {
-          "type": "string",
-          "description": "The Azure resource Id of the default data collection endpoint for this Azure Monitor Workspace.",
-          "readOnly": true
-        },
-        "dataCollectionRuleImmutableId": {
-          "type": "string",
-          "description": "The immutable Id of the default data collection rule for this Azure Monitor Workspace.",
-          "readOnly": true
-        },
-        "ingestionEndpoints": {
-          "$ref": "#/definitions/IngestionEndpoints",
-          "description": "The ingestion endpoints for this Azure Monitor Workspace.",
-          "readOnly": true
-        }
-      }
-    },
-    "AzureMonitorWorkspaceMetrics": {
-      "type": "object",
-      "description": "Properties related to the metrics container in the Azure Monitor Workspace",
-      "properties": {
-        "prometheusQueryEndpoint": {
-          "type": "string",
-          "description": "The Prometheus query endpoint for the Azure Monitor Workspace",
-          "readOnly": true
-        },
-        "internalId": {
-          "type": "string",
-          "description": "An internal identifier for the metrics container. Only to be used by the system.",
-          "readOnly": true
-        },
-        "enableAccessUsingResourcePermissions": {
-          "type": "boolean",
-          "description": "Flag that indicates whether to enable access using resource permissions."
-        }
-      }
-    },
     "AzureMonitorWorkspaceResource": {
       "type": "object",
       "description": "An Azure Monitor Workspace definition",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureMonitorWorkspace",
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
           "description": "Resource properties"
         }
       },
@@ -702,7 +704,7 @@
       "description": "An Azure Monitor Workspace definition",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AzureMonitorWorkspace",
+          "$ref": "#/definitions/AzureMonitorWorkspaceProperties",
           "description": "Resource properties"
         }
       },

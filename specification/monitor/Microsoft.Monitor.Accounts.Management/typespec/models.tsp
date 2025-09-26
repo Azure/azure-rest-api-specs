@@ -30,7 +30,7 @@ namespace Microsoft.Monitor {
   /**
    * Properties of an Azure Monitor Workspace
    */
-  model AzureMonitorWorkspace {
+  model AzureMonitorWorkspaceProperties {
     /**
      * The immutable Id of the Azure Monitor Workspace. This property is read-only.
      */
@@ -98,13 +98,13 @@ namespace Microsoft.Monitor {
      * The Azure resource Id of the default data collection rule for this Azure Monitor Workspace.
      */
     @visibility(Lifecycle.Read)
-    dataCollectionRuleResourceId?: string;
+    dataCollectionRuleResourceId?: Azure.Core.armResourceIdentifier;
 
     /**
      * The Azure resource Id of the default data collection endpoint for this Azure Monitor Workspace.
      */
     @visibility(Lifecycle.Read)
-    dataCollectionEndpointResourceId?: string;
+    dataCollectionEndpointResourceId?: Azure.Core.armResourceIdentifier;
 
     /**
      * The immutable Id of the default data collection rule for this Azure Monitor Workspace.

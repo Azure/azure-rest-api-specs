@@ -15,7 +15,7 @@ namespace Microsoft.Monitor {
    * An Azure Monitor Workspace definition
    */
   model AzureMonitorWorkspaceResource
-    is Azure.ResourceManager.TrackedResource<AzureMonitorWorkspace> {
+    is Azure.ResourceManager.TrackedResource<AzureMonitorWorkspaceProperties> {
     ...ResourceNameParameter<
       Resource = AzureMonitorWorkspaceResource,
       KeyName = "azureMonitorWorkspaceName",
@@ -58,7 +58,7 @@ namespace Microsoft.Monitor {
      */
     update is ArmResourcePatchSync<
       AzureMonitorWorkspaceResource,
-      AzureMonitorWorkspace
+      AzureMonitorWorkspaceProperties
     >;
 
     /**
