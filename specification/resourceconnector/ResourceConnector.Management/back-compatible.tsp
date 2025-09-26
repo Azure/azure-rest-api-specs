@@ -3,13 +3,12 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ResourceConnector;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(ApplianceOperation.display);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplianceOperation.display);
 
 @@clientName(Appliances.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Appliances.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(Appliance.properties);
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Appliance.properties);
 
 @@clientLocation(AppliancesOperationGroup.getTelemetryConfig, Appliances);
 @@clientLocation(Operations.list, Appliances);
