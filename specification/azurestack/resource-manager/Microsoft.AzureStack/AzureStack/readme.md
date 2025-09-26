@@ -44,10 +44,10 @@ These settings apply only when `--tag=package-2022-06` is specified on the comma
 
 ```yaml $(tag) == 'package-2022-06'
 input-file:
-  - Microsoft.AzureStack/stable/2022-06-01/AzureStack.json
-  - Microsoft.AzureStack/stable/2022-06-01/CustomerSubscription.json
-  - Microsoft.AzureStack/stable/2022-06-01/Product.json
-  - Microsoft.AzureStack/stable/2022-06-01/Registration.json
+  - stable/2022-06-01/AzureStack.json
+  - stable/2022-06-01/CustomerSubscription.json
+  - stable/2022-06-01/Product.json
+  - stable/2022-06-01/Registration.json
 ```
 ### Tag: package-2016-01
 
@@ -55,9 +55,9 @@ These settings apply only when `--tag=package-2016-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-01'
 input-file:
-  - Microsoft.AzureStack/stable/2016-01-01/AzureStack.json
-  - Microsoft.AzureStack/stable/2016-01-01/Product.json
-  - Microsoft.AzureStack/stable/2016-01-01/Registration.json
+  - stable/2016-01-01/AzureStack.json
+  - stable/2016-01-01/Product.json
+  - stable/2016-01-01/Registration.json
 ```
 
 ### Tag: package-2017-06-01
@@ -66,10 +66,10 @@ These settings apply only when `--tag=package-2017-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-06-01'
 input-file:
-- Microsoft.AzureStack/stable/2017-06-01/AzureStack.json
-- Microsoft.AzureStack/stable/2017-06-01/Product.json
-- Microsoft.AzureStack/stable/2017-06-01/Registration.json
-- Microsoft.AzureStack/stable/2017-06-01/CustomerSubscription.json
+- stable/2017-06-01/AzureStack.json
+- stable/2017-06-01/Product.json
+- stable/2017-06-01/Registration.json
+- stable/2017-06-01/CustomerSubscription.json
 ```
 
 ### Tag: package-preview-2020-06
@@ -78,11 +78,11 @@ These settings apply only when `--tag=package-preview-2020-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-06'
 input-file:
-  - Microsoft.AzureStack/preview/2020-06-01-preview/AzureStack.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/CustomerSubscription.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/Product.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/Registration.json
-  - Microsoft.AzureStack/preview/2020-06-01-preview/LinkedSubscription.json
+  - preview/2020-06-01-preview/AzureStack.json
+  - preview/2020-06-01-preview/CustomerSubscription.json
+  - preview/2020-06-01-preview/Product.json
+  - preview/2020-06-01-preview/Registration.json
+  - preview/2020-06-01-preview/LinkedSubscription.json
 ```
 
 ---
