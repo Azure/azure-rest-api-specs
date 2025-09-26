@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2018-10-01'
 input-file:
-  - Microsoft.Portal/stable/2018-10-01/CloudShell.json
+  - stable/2018-10-01/CloudShell.json
 ```
 
 ---
@@ -49,9 +49,6 @@ This is not used by Autorest itself.
 
 ```yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
-  - repo: azure-sdk-for-java
-  - repo: azure-sdk-for-go
   - repo: azure-sdk-for-js
   - repo: azure-sdk-for-ruby
     after_scripts:
