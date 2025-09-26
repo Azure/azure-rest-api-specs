@@ -46,3 +46,4 @@ interface Operations
       ArmResponse<ApplianceOperationsList>,
       ErrorResponse
     > {}
+@@doc(Operations.list, "Lists all available Appliances operations.");

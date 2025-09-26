@@ -33,23 +33,27 @@ interface Appliances {
   /**
    * Gets the details of an Appliance with a specified resource group and name.
    */
+  @summary("Gets an Appliance.")
   get is ArmResourceRead<Appliance>;
 
   /**
    * Creates or updates an Appliance in the specified Subscription and Resource Group.
    */
+  @summary("Creates or updates an Appliance.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Appliance>;
 
   /**
    * Updates an Appliance with the specified Resource Name in the specified Resource Group and Subscription.
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Updates an Appliance.")
   update is ArmCustomPatchSync<Appliance, PatchModel = PatchableAppliance>;
 
   /**
    * Deletes an Appliance with the specified Resource Name, Resource Group, and Subscription Id.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Deletes an Appliance.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Appliance,
     LroHeaders = ArmAsyncOperationHeader &
@@ -61,6 +65,7 @@ interface Appliances {
    * Gets a list of Appliances in the specified subscription and resource group. The operation returns properties of each Appliance.
 
    */
+  @summary("Gets a list of Appliances in the specified subscription and resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Appliance,
     Response = ApplianceListResult
@@ -71,6 +76,7 @@ interface Appliances {
    * Gets a list of Appliances in the specified subscription. The operation returns properties of each Appliance
 
    */
+  @summary("Gets a list of Appliances in a subscription.")
   listBySubscription is ArmListBySubscription<
     Appliance,
     Response = ApplianceListResult
@@ -79,6 +85,7 @@ interface Appliances {
   /**
    * Returns the cluster user credentials for the dedicated appliance.
    */
+  @summary("Returns the cluster user credential.")
   listClusterUserCredential is ArmResourceActionSync<
     Appliance,
     void,
@@ -89,6 +96,7 @@ interface Appliances {
    * Returns the cluster customer credentials for the dedicated appliance.
    */
   @action("listkeys")
+  @summary("Gets the management config.")
   listKeys is ArmResourceActionSync<
     Appliance,
     void,
@@ -106,6 +114,7 @@ interface Appliances {
    * Gets the upgrade graph of an Appliance with a specified resource group and name and specific release train.
    */
   @get
+  @summary("Gets an Appliance upgrade graph.")
   getUpgradeGraph is ArmResourceRead<
     Appliance,
     Parameters = {
