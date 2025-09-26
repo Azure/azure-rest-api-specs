@@ -16,7 +16,7 @@ options:
     namespace: "Azure.ResourceManager.HealthDataAIServices"
     service-name: "Health Data AI Services"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-healthdataaiservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-healthdataaiservices"
     flavor: "azure"
     namespace: "azure.mgmt.healthdataaiservices"
     generate-test: true
@@ -28,8 +28,7 @@ options:
     service-name: "Health Data AI Services"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-healthdataaiservices"
-    emitter-output-dir: "{project-root}/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-healthdataaiservices"
     flavor: "azure"
     package-details:
       name: "@azure/arm-healthdataaiservices"
