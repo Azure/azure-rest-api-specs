@@ -21,6 +21,11 @@ model Site is ProxyResource<SiteProperties> {
   >;
 }
 
+alias SiteOps = Azure.ResourceManager.Legacy.LegacyOperations<
+  ResourceInstanceParameters<Extension.ResourceGroup>,
+  KeysOf<Site>
+>;
+
 @armResourceOperations
 interface Sites {
   get is Extension.Read<Extension.ResourceGroup, Site>;
