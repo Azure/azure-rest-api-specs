@@ -1,0 +1,48 @@
+{
+  "parameters": {
+    "api-version": "2021-06-01",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "subid"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "securityPolicy1",
+            "type": "Microsoft.Cdn/profiles/securitypolicies",
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/securitypolicies/securityPolicy1",
+            "properties": {
+              "deploymentStatus": "NotStarted",
+              "parameters": {
+                "type": "WebApplicationFirewall",
+                "associations": [
+                  {
+                    "domains": [
+                      {
+                        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain1"
+                      },
+                      {
+                        "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/customdomains/testdomain2"
+                      }
+                    ],
+                    "patternsToMatch": [
+                      "/*"
+                    ]
+                  }
+                ],
+                "wafPolicy": {
+                  "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Network/frontdoorwebapplicationfirewallpolicies/wafTest"
+                }
+              },
+              "provisioningState": "Succeeded"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FrontDoorSecurityPolicies_ListByProfile",
+  "title": "SecurityPolicies_ListByProfile"
+}
