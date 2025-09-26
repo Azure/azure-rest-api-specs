@@ -9751,7 +9751,7 @@
         },
         "throughputBuckets": {
           "type": "array",
-          "description": "Array of Throughput Bucket limits to be applied to the Cosmos DB container",
+          "description": "Array of throughput bucket limits to be applied to the Cosmos DB container",
           "items": {
             "$ref": "#/definitions/ThroughputBucketResource"
           }
@@ -10158,6 +10158,10 @@
           "items": {
             "$ref": "#/definitions/MaterializedViewDetails"
           }
+        },
+        "materializedViewsProperties": {
+          "description": "Materialized Views Properties defined for source container.",
+          "$ref": "#/definitions/MaterializedViewsProperties"
         },
         "computedProperties": {
           "description": "List of computed properties",
@@ -10662,12 +10666,28 @@
         "definition": {
           "description": "The definition should be an SQL query which would be used to fetch data from the source container to populate into the Materialized View container.",
           "type": "string"
+        },
+        "throughputBucketForBuild": {
+          "description": "Throughput bucket assigned for the materialized view operations on target container.",
+          "type": "number",
+          "format": "int32"
         }
       },
       "required": [
         "sourceCollectionId",
         "definition"
       ]
+    },
+    "MaterializedViewsProperties": {
+      "type": "object",
+      "description": "Materialized Views Properties for the source container.",
+      "properties": {
+        "throughputBucketForBuild": {
+          "description": "Throughput bucket assigned for the materialized view operations on source container.",
+          "type": "number",
+          "format": "int32"
+        }
+      }
     },
     "MaterializedViewDetails": {
       "type": "object",
