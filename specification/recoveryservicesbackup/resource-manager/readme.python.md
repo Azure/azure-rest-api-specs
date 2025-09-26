@@ -5,7 +5,6 @@ These settings apply only when `--track2` is specified on the command line.
 ``` yaml $(python)
 azure-arm: true
 license-header: MICROSOFT_MIT_NO_VERSION
-package-name: azure-mgmt-recoveryservicesbackup
 package-version: 1.0.0b1
 no-namespace-folders: true
 ```
@@ -29,7 +28,8 @@ Please also specify `--python-sdks-folder=<path to the root directory of your az
 ``` yaml $(tag) == 'package-passivestamp-2021-11-15'
 title: Recovery Services Backup Passive Client
 namespace: azure.mgmt.recoveryservicesbackup.passivestamp
-output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/passivestamp
+package-name: azure-mgmt-recoveryservicesbackup-passivestamp
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup-passivestamp/azure/mgmt/recoveryservicesbackup/passivestamp
 ```
 
 ### Tag: package-2025-02-01 and python
@@ -38,8 +38,9 @@ These settings apply only when `--package-2025-02-01 --python` is specified on t
 Please also specify `--python-sdks-folder=<path to the root directory of your azure-sdk-for-python clone>`.
 
 ``` yaml $(tag) == 'package-2025-02-01'
-namespace: azure.mgmt.recoveryservicesbackup.activestamp
-output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup/activestamp
+namespace: azure.mgmt.recoveryservicesbackup
+package-name: azure-mgmt-recoveryservicesbackup
+output-folder: $(python-sdks-folder)/recoveryservices/azure-mgmt-recoveryservicesbackup/azure/mgmt/recoveryservicesbackup
 ```
 
 ``` yaml $(python)
