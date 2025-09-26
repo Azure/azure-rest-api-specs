@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-03'
 input-file:
-- Microsoft.Addons/preview/2018-03-01/addons-swagger.json
+- preview/2018-03-01/addons-swagger.json
 ```
 
 ### Tag: package-2017-05
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2017-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-05'
 input-file:
-- Microsoft.Addons/preview/2017-05-15/Addons.json
+- preview/2017-05-15/Addons.json
 ```
 
 ---
