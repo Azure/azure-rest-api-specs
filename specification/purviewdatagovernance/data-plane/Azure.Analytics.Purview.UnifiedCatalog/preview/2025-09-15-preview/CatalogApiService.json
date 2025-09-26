@@ -3985,6 +3985,62 @@
         }
       }
     },
+    "/policies/{policyId}": {
+      "put": {
+        "operationId": "UpdatePolicyAsync",
+        "tags": [
+          "Policy"
+        ],
+        "description": "Updates a policy by its identifier.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "policyId",
+            "in": "path",
+            "description": "The unique identifier of the policy.",
+            "required": true,
+            "type": "string",
+            "format": "uuid"
+          },
+          {
+            "name": "request",
+            "in": "body",
+            "description": "Updated policy payload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CatalogValue"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CatalogValue"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "UpdatePolicyAsync_MaximumSet": {
+            "$ref": "./examples/UpdatePolicyAsync_MaximumSet_Gen - Copy.json"
+          }
+        }
+      }
+    },
     "/terms": {
       "get": {
         "operationId": "ListTermAsync",

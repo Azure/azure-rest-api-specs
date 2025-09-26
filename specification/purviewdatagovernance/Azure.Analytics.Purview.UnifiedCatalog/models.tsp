@@ -1688,3 +1688,8 @@ model EntityReference {
   @doc("The reference name of the entity.")
   referenceName: string;
 }
+
+alias PolicyIdParameters = {
+  @doc("The unique identifier of the policy.")
+  policyId: uuid;
+};

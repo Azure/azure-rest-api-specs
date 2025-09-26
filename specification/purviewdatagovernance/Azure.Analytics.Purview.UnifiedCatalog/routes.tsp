@@ -943,3 +943,18 @@ op ListPolicies is RpcOperation<
   },
   CatalogResponse
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+@tag("Policy")
+@doc("Updates a policy by its identifier.")
+@route("/policies/{policyId}")
+@put
+op UpdatePolicyAsync is RpcOperation<
+  PolicyIdParameters & {
+    @doc("Updated policy payload.")
+    @bodyRoot
+    request: CatalogValue;
+  },
+  CatalogValue
+>;
