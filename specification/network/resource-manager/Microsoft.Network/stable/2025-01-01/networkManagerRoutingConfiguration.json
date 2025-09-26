@@ -649,11 +649,24 @@
             "ManagedOnly",
             "UseExisting"
           ],
+          "default": "ManagedOnly",
           "x-ms-enum": {
             "name": "RouteTableUsageMode",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ManagedOnly",
+                "value": "ManagedOnly",
+                "description": "Only route tables managed by the routing configuration will be used."
+              },
+              {
+                "name": "UseExisting",
+                "value": "UseExisting",
+                "description": "Use existing user-defined route tables already associated with resources."
+              }
+            ]
           },
-          "description": "Route table usage mode defines which route table will be used by the configuration. If not defined, this will default to 'ManagedOnly'."
+            "description": "Route table usage mode defines which route table will be used by the configuration. If not defined, this will default to 'ManagedOnly'."
         }
       },
       "description": "Defines the routing configuration properties."
@@ -731,7 +744,19 @@
           ],
           "x-ms-enum": {
             "name": "DisableBgpRoutePropagation",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "False",
+                "value": "False",
+                "description": "BGP route propagation is enabled."
+              },
+              {
+                "name": "True",
+                "value": "True",
+                "description": "BGP route propagation is disabled."
+              }
+            ]
           },
           "description": "Determines whether BGP route propagation is enabled. Defaults to true."
         }
@@ -871,7 +896,14 @@
       ],
       "x-ms-enum": {
         "name": "RoutingRuleNextHopType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          { "name": "Internet", "value": "Internet", "description": "Forward traffic to the Internet." },
+          { "name": "NoNextHop", "value": "NoNextHop", "description": "No next hop will be used." },
+          { "name": "VirtualAppliance", "value": "VirtualAppliance", "description": "Forward traffic to a specified virtual appliance IP address." },
+          { "name": "VirtualNetworkGateway", "value": "VirtualNetworkGateway", "description": "Forward traffic to the virtual network gateway." },
+          { "name": "VnetLocal", "value": "VnetLocal", "description": "Keep traffic within the local virtual network" }
+        ]
       }
     },
     "RoutingRuleDestinationType": {
@@ -883,7 +915,11 @@
       ],
       "x-ms-enum": {
         "name": "RoutingRuleDestinationType",
-        "modelAsString": true
+        "modelAsString": true,
+        "values": [
+          { "name": "AddressPrefix", "value": "AddressPrefix", "description": "Destination specified as an IP address prefix (CIDR)." },
+          { "name": "ServiceTag", "value": "ServiceTag", "description": "Destination specified as an Azure service tag." }
+        ]
       }
     },
     "RoutingRuleListResult": {
