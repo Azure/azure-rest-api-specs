@@ -105,15 +105,15 @@ union ConfigurationCheckConfigurationDeviation {
   /**
    * Indicates that there is a deviation between the actual and recommended/customized state.
    */
-  @doc("A configuration deviation between the actual state and the recommended/customized state.")
-  Yes: "Yes",
+  @doc("A configuration deviation between the actual state and the recommended/customized state is detected.")
+  DeviationDetected: "DeviationDetected",
 
   /**
    * Indicates that there is no deviation, and the actual state matches the recommended/customized
    * state.
    */
   @doc("No deviation; the actual state matches the recommended/customized state.")
-  No: "No",
+  NoDeviation: "NoDeviation",
 
   /**
    * Used when the deviation status cannot be determined due to the configuration checks not being
@@ -121,6 +121,13 @@ union ConfigurationCheckConfigurationDeviation {
    */
   @doc("The deviation status is evaluation failed as the configuration checks couldn't be evaluated.")
   EvaluationFailed: "EvaluationFailed",
+
+  /**
+   * Used when the deviation status cannot be determined due to the configuration checks not being
+   * evaluated.
+   */
+  @doc("The deviation status is evaluation skipped as the configuration checks couldn't be evaluated.")
+  EvaluationSkipped: "EvaluationSkipped",
 
   @doc("Allows for custom or additional deviation states.")
   string,
