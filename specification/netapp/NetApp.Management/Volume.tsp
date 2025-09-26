@@ -1520,9 +1520,24 @@ model RelocateVolumeRequest {
 }
 
 /**
- * Status of the mirror relationship
+ * Status of the volume restore relationship
  */
-union RelationshipStatus {
+union VolumeRestoreRelationshipStatus {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Idle: "Idle",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Transferring: "Transferring",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Failed: "Failed",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  Unknown: "Unknown",
+}
+
+/**
+ * Status of the volume backup relationship
+ */
+union VolumeBackupRelationshipStatus {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   Idle: "Idle",
@@ -1559,7 +1574,7 @@ model RestoreStatus {
    * Status of the restore SnapMirror relationship
    */
   @visibility(Lifecycle.Read)
-  relationshipStatus?: RelationshipStatus;
+  relationshipStatus?: VolumeRestoreRelationshipStatus;
 
   /**
    * The status of the restore
@@ -1600,7 +1615,7 @@ model BackupStatus {
    * Status of the backup mirror relationship
    */
   @visibility(Lifecycle.Read)
-  relationshipStatus?: RelationshipStatus;
+  relationshipStatus?: VolumeBackupRelationshipStatus;
 
   /**
    * The status of the backup

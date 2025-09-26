@@ -8185,7 +8185,7 @@
           "readOnly": true
         },
         "relationshipStatus": {
-          "$ref": "#/definitions/RelationshipStatus",
+          "$ref": "#/definitions/VolumeBackupRelationshipStatus",
           "description": "Status of the backup mirror relationship",
           "readOnly": true
         },
@@ -10221,38 +10221,6 @@
         ]
       }
     },
-    "RelationshipStatus": {
-      "type": "string",
-      "description": "Status of the mirror relationship",
-      "enum": [
-        "Idle",
-        "Transferring",
-        "Failed",
-        "Unknown"
-      ],
-      "x-ms-enum": {
-        "name": "RelationshipStatus",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Idle",
-            "value": "Idle"
-          },
-          {
-            "name": "Transferring",
-            "value": "Transferring"
-          },
-          {
-            "name": "Failed",
-            "value": "Failed"
-          },
-          {
-            "name": "Unknown",
-            "value": "Unknown"
-          }
-        ]
-      }
-    },
     "RelocateVolumeRequest": {
       "type": "object",
       "description": "Relocate volume request",
@@ -10480,7 +10448,7 @@
           "readOnly": true
         },
         "relationshipStatus": {
-          "$ref": "#/definitions/RelationshipStatus",
+          "$ref": "#/definitions/VolumeRestoreRelationshipStatus",
           "description": "Status of the restore SnapMirror relationship",
           "readOnly": true
         },
@@ -11320,6 +11288,38 @@
             ]
           }
         }
+      }
+    },
+    "VolumeBackupRelationshipStatus": {
+      "type": "string",
+      "description": "Status of the volume backup relationship",
+      "enum": [
+        "Idle",
+        "Transferring",
+        "Failed",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeBackupRelationshipStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Idle",
+            "value": "Idle"
+          },
+          {
+            "name": "Transferring",
+            "value": "Transferring"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown"
+          }
+        ]
       }
     },
     "VolumeBackups": {
@@ -12516,6 +12516,38 @@
           {
             "name": "Transferring",
             "value": "Transferring"
+          }
+        ]
+      }
+    },
+    "VolumeRestoreRelationshipStatus": {
+      "type": "string",
+      "description": "Status of the volume restore relationship",
+      "enum": [
+        "Idle",
+        "Transferring",
+        "Failed",
+        "Unknown"
+      ],
+      "x-ms-enum": {
+        "name": "VolumeRestoreRelationshipStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Idle",
+            "value": "Idle"
+          },
+          {
+            "name": "Transferring",
+            "value": "Transferring"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Unknown",
+            "value": "Unknown"
           }
         ]
       }
