@@ -13,7 +13,8 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager profile.
  */
-model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
+model Profile
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProfileProperties> {
   ...ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",
@@ -22,72 +23,54 @@ model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
   >;
 }
 
-alias ProfileOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-    ...Azure.ResourceManager.Legacy.Provider<Profile>;
-  },
-  KeysOf<ResourceNameParameter<
-    Resource = Profile,
-    KeyName = "profileName",
-    SegmentName = "trafficmanagerprofiles",
-    NamePattern = ""
-  >>,
-  ErrorType = CloudError
->;
-
-alias ProfileSubscriptionOps = Azure.ResourceManager.Legacy.LegacyOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...Azure.ResourceManager.Legacy.Provider<Profile>;
-  },
-  KeysOf<ResourceNameParameter<
-    Resource = Profile,
-    KeyName = "profileName",
-    SegmentName = "trafficmanagerprofiles",
-    NamePattern = ""
-  >>,
-  ErrorType = CloudError
->;
-
 @armResourceOperations
 interface Profiles {
   /**
    * Gets a Traffic Manager profile.
    */
-  get is ProfileOps.Read<Profile>;
+  get is ArmResourceRead<Profile, Error = CloudError>;
 
   /**
    * Create or update a Traffic Manager profile.
    */
-  createOrUpdate is ProfileOps.CreateOrUpdateSync<Profile>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Profile, Error = CloudError>;
 
   /**
    * Update a Traffic Manager profile.
    */
   @patch(#{ implicitOptionality: false })
-  update is ProfileOps.CustomPatchSync<Profile, PatchModel = Profile>;
+  update is ArmCustomPatchSync<
+    Profile,
+    PatchModel = Profile,
+    Error = CloudError
+  >;
 
   /**
    * Deletes a Traffic Manager profile.
    */
-  delete is ProfileOps.DeleteSync<
+  delete is ArmResourceDeleteSync<
     Profile,
-    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse
+    Response = ArmResponse<DeleteOperationResult> | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
    * Lists all Traffic Manager profiles within a resource group.
    */
-  listByResourceGroup is ProfileOps.List<Profile>;
+  listByResourceGroup is ArmResourceListByParent<
+    Profile,
+    Response = ArmResponse<ProfileListResult>,
+    Error = CloudError
+  >;
 
   /**
    * Lists all Traffic Manager profiles within a subscription.
    */
-  listBySubscription is ProfileSubscriptionOps.List<Profile>;
+  listBySubscription is ArmListBySubscription<
+    Profile,
+    Response = ArmResponse<ProfileListResult>,
+    Error = CloudError
+  >;
 }
 
 @@doc(Profile.name, "The name of the Traffic Manager profile.");

@@ -374,7 +374,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           }
@@ -424,7 +424,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           },
@@ -498,7 +498,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           },
@@ -551,7 +551,7 @@
           {
             "name": "profileName",
             "in": "path",
-            "description": "The name of the Profile",
+            "description": "The name of the Traffic Manager profile.",
             "required": true,
             "type": "string"
           }
@@ -1495,34 +1495,45 @@
           "$ref": "#/definitions/ProfileProperties",
           "description": "The properties of the Traffic Manager profile.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
     "ProfileListResult": {
       "type": "object",
-      "description": "The response of a Profile list operation.",
+      "description": "The list Traffic Manager profiles operation response.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The Profile items on this page",
+          "description": "Gets the list of Traffic manager profiles.",
           "items": {
             "$ref": "#/definitions/Profile"
           }
         },
         "nextLink": {
           "type": "string",
-          "format": "uri",
           "description": "The link to the next page of items"
         }
-      },
-      "required": [
-        "value"
-      ]
+      }
     },
     "ProfileMonitorStatus": {
       "type": "string",
