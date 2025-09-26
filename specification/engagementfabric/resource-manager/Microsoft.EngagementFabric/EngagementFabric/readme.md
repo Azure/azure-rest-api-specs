@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2018-09-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2018-09-preview'
 input-file:
-- Microsoft.EngagementFabric/preview/2018-09-01/EngagementFabric.json
+- preview/2018-09-01/EngagementFabric.json
 ```
 
 
@@ -51,7 +51,6 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python
   - repo: azure-sdk-for-java
   - repo: azure-sdk-for-go
   - repo: azure-sdk-for-node
