@@ -35,15 +35,15 @@ These settings apply only when `--tag=package-preview-2019-07` is specified on t
 
 ```yaml $(tag) == 'package-preview-2019-07'
 input-file:
-  - Microsoft.AzureData/preview/2019-07-24-preview/azuredata.json
+  - preview/2019-07-24-preview/azuredata.json
 ```
 ### Tag: package-2017-03-01-preview
 
-These settings apply only when `--tag=package-2019-07-24` is specified on the command line.
+These settings apply only when `--tag=package-2017-03-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2017-03-01-preview'
 input-file:
-  - Microsoft.AzureData/preview/2019-07-24-preview/azuredata.json
+  - preview/2017-03-01-preview/azuredata.json
 ```
 
 ---
