@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2018-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2018-09-01'
 input-file:
-- Microsoft.Attestation/stable/2018-09-01-preview/attestation.json
+- stable/2018-09-01-preview/attestation.json
 ```
 
 ### Tag: package-2020-10-01
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-2020-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-10-01'
 input-file:
-- Microsoft.Attestation/stable/2020-10-01/attestation.json
+- stable/2020-10-01/attestation.json
 ```
 
 ### Tag: package-2021-06-01-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-- Microsoft.Attestation/preview/2021-06-01-preview/attestation.json
+- preview/2021-06-01-preview/attestation.json
 ```
 
 ### Tag: package-2021-06-01
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-06-01'
 input-file:
-- Microsoft.Attestation/stable/2021-06-01/attestation.json
+- stable/2021-06-01/attestation.json
 ```
 
 ---
