@@ -16,7 +16,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{project-root}/tsp-output/csharp"
+    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/Azure.AI.Speech.Transcription"
     clear-output-folder: true
     namespace: "Azure.AI.Speech.Transcription"
     model-namespace: false
@@ -33,21 +33,23 @@ options:
     package-version: "1.0.0"
     package-name: "{package-dir}"
     package-pprint-name: '"Azure AI Speech Transcription"'
+    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/azure-ai-transcription"
     flavor: azure
     generate-test: true
     generate-sample: true
-  # "@azure-tools/typespec-ts":
-  #   package-dir: "ai-speech-transcription-rest"
-  #   package-details:
-  #     name: "@azure-rest/ai-speech-transcription"
-  #     version: "1.0.0"
-  #     description: "Speech Transcription Service"
-  #   flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "ai-speech-transcription-rest"
+    package-details:
+      name: "@azure-rest/ai-speech-transcription"
+      version: "1.0.0"
+      description: "Speech Transcription Service"
+    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/ai-speech-transcription-rest"
+    flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/ai/azspeechtranscription"
     package-dir: "azspeechtranscription"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
-    emitter-output-dir: "{output-dir}/sdk/ai/azspeechtranscription/azspeechtranscription"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
     flavor: "azure"
     generate-fakes: true
     inject-spans: true
