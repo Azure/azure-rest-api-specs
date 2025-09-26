@@ -81,6 +81,26 @@ alias ConfigurationProfileAssignmentOps = Azure.ResourceManager.Legacy.Extension
   }
 >;
 
+alias ConfigurationProfileAssignmentListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+  },
+  {
+    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
+
+    /** The configuration profile assignment name. */
+    @path
+    @segment("configurationProfileAssignments")
+    @key
+    configurationProfileAssignmentName: string;
+  }
+>;
+
 @armResourceOperations
 interface ConfigurationProfileAssignments {
   /**
@@ -110,6 +130,14 @@ interface ConfigurationProfileAssignments {
    * Get list of configuration profile assignments under a given subscription
    */
   listBySubscription is ConfigurationProfileAssignmentBySubscriptionOps.List<
+    ConfigurationProfileAssignment,
+    Response = ArmResponse<ConfigurationProfileAssignmentList>
+  >;
+
+  /**
+   * Get list of configuration profile assignments
+   */
+  list is ConfigurationProfileAssignmentListOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;

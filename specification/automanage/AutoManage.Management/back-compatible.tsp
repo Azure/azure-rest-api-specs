@@ -61,10 +61,10 @@ using Microsoft.Automanage;
 @@clientLocation(Reports.get, "reports");
 @@clientLocation(Reports.listByConfigurationProfileAssignments, "reports");
 
-@@clientLocation(ConfigurationProfileAssignmentsOperationGroup.list,
+@@clientLocation(ConfigurationProfileAssignments.list,
   ConfigurationProfileAssignments
 );
-@@clientName(ConfigurationProfileAssignmentsOperationGroup.list, "List");
+@@clientName(ConfigurationProfileAssignments.list, "List");
 
 @@clientLocation(ConfigurationProfileAssignments.listBySubscription,
   ConfigurationProfileAssignments
