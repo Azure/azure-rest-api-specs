@@ -666,7 +666,7 @@
               }
             ]
           },
-            "description": "Route table usage mode defines which route table will be used by the configuration. If not defined, this will default to 'ManagedOnly'."
+          "description": "Route table usage mode defines which route table will be used by the configuration. If not defined, this will default to 'ManagedOnly'."
         }
       },
       "description": "Defines the routing configuration properties."
@@ -898,11 +898,31 @@
         "name": "RoutingRuleNextHopType",
         "modelAsString": true,
         "values": [
-          { "name": "Internet", "value": "Internet", "description": "Forward traffic to the Internet." },
-          { "name": "NoNextHop", "value": "NoNextHop", "description": "No next hop will be used." },
-          { "name": "VirtualAppliance", "value": "VirtualAppliance", "description": "Forward traffic to a specified virtual appliance IP address." },
-          { "name": "VirtualNetworkGateway", "value": "VirtualNetworkGateway", "description": "Forward traffic to the virtual network gateway." },
-          { "name": "VnetLocal", "value": "VnetLocal", "description": "Keep traffic within the local virtual network" }
+          {
+            "name": "Internet",
+            "value": "Internet",
+            "description": "Forward traffic to the Internet."
+          },
+          {
+            "name": "NoNextHop",
+            "value": "NoNextHop",
+            "description": "No next hop will be used."
+          },
+          {
+            "name": "VirtualAppliance",
+            "value": "VirtualAppliance",
+            "description": "Forward traffic to a specified virtual appliance IP address."
+          },
+          {
+            "name": "VirtualNetworkGateway",
+            "value": "VirtualNetworkGateway",
+            "description": "Forward traffic to the virtual network gateway."
+          },
+          {
+            "name": "VnetLocal",
+            "value": "VnetLocal",
+            "description": "Keep traffic within the local virtual network"
+          }
         ]
       }
     },
@@ -917,8 +937,16 @@
         "name": "RoutingRuleDestinationType",
         "modelAsString": true,
         "values": [
-          { "name": "AddressPrefix", "value": "AddressPrefix", "description": "Destination specified as an IP address prefix (CIDR)." },
-          { "name": "ServiceTag", "value": "ServiceTag", "description": "Destination specified as an Azure service tag." }
+          {
+            "name": "AddressPrefix",
+            "value": "AddressPrefix",
+            "description": "Destination specified as an IP address prefix (CIDR)."
+          },
+          {
+            "name": "ServiceTag",
+            "value": "ServiceTag",
+            "description": "Destination specified as an Azure service tag."
+          }
         ]
       }
     },
