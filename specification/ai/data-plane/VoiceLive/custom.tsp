@@ -296,6 +296,19 @@ model EOUDetection {
   `model`: "semantic_detection_v1" | "semantic_detection_v1_en" | "semantic_detection_v1_multilingual" | string;
 }
 
+@doc("Threshold level settings for Azure semantic end-of-utterance detection.")
+union EouThresholdLevel
+{
+  string,
+  @doc("Low sensitivity threshold level.")
+  "low",
+  @doc("Medium sensitivity threshold level.")
+  "medium",
+  @doc("High sensitivity threshold level.")
+  "high",
+  @doc("Default sensitivity threshold level.")
+  "default"
+}
 @doc("Azure semantic end-of-utterance detection (default).")
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style"
@@ -303,7 +316,7 @@ model AzureSemanticDetection extends EOUDetection {
   `model`: "semantic_detection_v1";
 
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
-  threshold_level?: "low" | "medium" | "high" | "default" | string;
+  threshold_level?: EouThresholdLevel; 
 
   @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
   @minValue(0)
@@ -317,7 +330,7 @@ model AzureSemanticDetectionEn extends EOUDetection {
   `model`: "semantic_detection_v1_en";
 
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
-  threshold_level?: "low" | "medium" | "high" | "default" | string;
+  threshold_level?: EouThresholdLevel;
 
   @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
   @minValue(0)
@@ -331,7 +344,7 @@ model AzureSemanticDetectionMultilingual extends EOUDetection {
   `model`: "semantic_detection_v1_multilingual";
 
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
-  threshold_level?: "low" | "medium" | "high" | "default" | string;
+  threshold_level?: EouThresholdLevel;
 
   @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
   @minValue(0)
