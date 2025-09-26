@@ -15,8 +15,7 @@ namespace Microsoft.Network;
  * Class representing a Traffic Manager HeatMap.
  */
 @parentResource(Profile)
-model HeatMapModel
-  is Azure.ResourceManager.ProxyResource<HeatMapProperties, false> {
+model HeatMapModel is Azure.ResourceManager.ProxyResource<HeatMapProperties> {
   ...ResourceNameParameter<
     Resource = HeatMapModel,
     KeyName = "heatMap",

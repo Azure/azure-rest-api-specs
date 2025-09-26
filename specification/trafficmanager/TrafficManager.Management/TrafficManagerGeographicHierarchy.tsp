@@ -15,7 +15,7 @@ namespace Microsoft.Network;
  */
 @tenantResource
 model TrafficManagerGeographicHierarchy
-  is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties, false> {
+  is Azure.ResourceManager.ProxyResource<GeographicHierarchyProperties> {
   ...ResourceNameParameter<
     Resource = TrafficManagerGeographicHierarchy,
     KeyName = "trafficManagerGeographicHierarchy",

@@ -14,10 +14,7 @@ namespace Microsoft.Network;
  * Class representing a Traffic Manager profile.
  */
 model Profile
-  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
-    ProfileProperties,
-    false
-  > {
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<ProfileProperties> {
   ...ResourceNameParameter<
     Resource = Profile,
     KeyName = "profileName",

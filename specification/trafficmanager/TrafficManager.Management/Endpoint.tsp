@@ -15,8 +15,7 @@ namespace Microsoft.Network;
  * Class representing a Traffic Manager endpoint.
  */
 @parentResource(Profile)
-model Endpoint
-  is Azure.ResourceManager.ProxyResource<EndpointProperties, false> {
+model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
   ...ResourceNameParameter<
     Resource = Endpoint,
     KeyName = "endpointName",
