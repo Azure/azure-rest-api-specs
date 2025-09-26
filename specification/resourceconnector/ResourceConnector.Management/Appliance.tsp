@@ -106,20 +106,19 @@ interface Appliances {
    * Gets the upgrade graph of an Appliance with a specified resource group and name and specific release train.
    */
   @get
-  @armResourceRead(Appliance)
-  getUpgradeGraph(
-    ...ResourceInstanceParameters<Appliance>,
-
-    /**
-
-     * Upgrade graph version, ex - stable
-
-     */
-    @path
-    @key
-    @segment("upgradeGraphs")
-    upgradeGraph: string,
-  ): UpgradeGraph | ErrorResponse;
+  getUpgradeGraph is ArmResourceRead<
+    Appliance,
+    Parameters = {
+      /**
+       * Upgrade graph version, ex - stable
+       */
+      @path
+      @key
+      @segment("upgradeGraphs")
+      upgradeGraph: string;
+    },
+    Response = ArmResponse<UpgradeGraph>,
+  >;
 }
 
 @@maxLength(Appliance.name, 63);
