@@ -3,7 +3,7 @@
   "info": {
     "title": "VirtualMachineImageTemplate",
     "description": "Virtual Machine Image Template",
-    "version": "2022-07-01"
+    "version": "2023-07-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -59,7 +59,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -101,7 +101,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -161,7 +161,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -220,7 +220,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -267,7 +267,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -298,9 +298,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The operation was successful."
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -316,7 +313,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -365,7 +362,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -414,7 +411,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -460,7 +457,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -508,7 +505,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -550,7 +547,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -598,7 +595,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -656,7 +653,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -694,9 +691,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "The operation was successful."
-          },
           "202": {
             "description": "The operation will be completed asynchronously.",
             "headers": {
@@ -712,7 +706,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -749,7 +743,7 @@
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
-              "$ref": "#/definitions/CloudError"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1397,6 +1391,18 @@
       },
       "description": "Provisioning state of the resource"
     },
+    "onBuildError": {
+      "type": "string",
+      "enum": [
+        "cleanup",
+        "abort"
+      ],
+      "x-ms-enum": {
+        "name": "onBuildError",
+        "modelAsString": true
+      },
+      "description": "Error handling behavior upon build failure"
+    },
     "ProvisioningError": {
       "type": "object",
       "description": "Describes the error happened when create or update an image template",
@@ -1556,6 +1562,22 @@
           "x-ms-identifiers": [],
           "description": "The distribution targets where the image output needs to go to."
         },
+        "errorHandling": {
+          "type": "object",
+          "description": "Error handling options upon a build failure",
+          "properties": {
+            "onCustomizerError": {
+              "$ref": "#/definitions/onBuildError",
+              "default": "cleanup",
+              "description": "If there is a customizer error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a customizer error and this field is set to 'abort', the build VM will be preserved."
+            },
+            "onValidationError": {
+              "$ref": "#/definitions/onBuildError",
+              "default": "cleanup",
+              "description": "If there is a validation error and this field is set to 'cleanup', the build VM and associated network resources will be cleaned up. This is the default behavior. If there is a validation error and this field is set to 'abort', the build VM will be preserved."
+            }
+          }
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of the resource",
@@ -1678,7 +1700,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ],
       "required": [
@@ -1698,6 +1720,20 @@
             "type": "string"
           },
           "description": "The user-specified tags associated with the image template."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Parameters for updating an image template.",
+          "properties": {
+            "distribute": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ImageTemplateDistributor"
+              },
+              "x-ms-identifiers": [],
+              "description": "The distribution targets where the image output needs to go to."
+            }
+          }
         }
       },
       "description": "Parameters for updating an image template."
@@ -1707,7 +1743,7 @@
       "description": "Represents an output that was created by running an image template.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1801,7 +1837,7 @@
       "description": "Represents a trigger that can invoke an image template build.",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -1895,44 +1931,6 @@
           "title": "The URL to get the next set of operation list results if there are any."
         }
       }
-    },
-    "CloudError": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "error": {
-          "$ref": "#/definitions/CloudErrorBody",
-          "description": "Details about the error."
-        }
-      },
-      "description": "An error response from the Azure VM Image Builder service."
-    },
-    "CloudErrorBody": {
-      "type": "object",
-      "x-ms-external": true,
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "An identifier for the error. Codes are invariant and are intended to be consumed programmatically."
-        },
-        "message": {
-          "type": "string",
-          "description": "A message describing the error, intended to be suitable for display in a user interface."
-        },
-        "target": {
-          "type": "string",
-          "description": "The target of the particular error. For example, the name of the property in error."
-        },
-        "details": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/CloudErrorBody"
-          },
-          "x-ms-identifiers": [],
-          "description": "A list of additional details about the error."
-        }
-      },
-      "description": "An error response from the Azure VM Image Builder service."
     },
     "DistributeVersioner": {
       "type": "object",
