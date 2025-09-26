@@ -39524,7 +39524,10 @@
           "type": "array",
           "description": "Additional Source Data",
           "items": {
-            "$ref": "#/definitions/NameValuePair"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NameValuePair"
+            }
           },
           "x-ms-identifiers": [
             "name"
@@ -43873,7 +43876,10 @@
           "type": "array",
           "description": "Downtime metadata",
           "items": {
-            "$ref": "#/definitions/NameValuePair"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NameValuePair"
+            }
           },
           "x-ms-identifiers": [
             "name"
@@ -47067,7 +47073,7 @@
       "description": "MSDeploy ARM PUT information",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/MSDeployCore",
+          "$ref": "#/definitions/MSDeployProperties",
           "description": "Core resource properties",
           "x-ms-client-flatten": true
         }
@@ -47180,6 +47186,26 @@
           "x-ms-identifiers": []
         }
       }
+    },
+    "MSDeployProperties": {
+      "type": "object",
+      "properties": {
+        "addOnPackages": {
+          "type": "array",
+          "description": "List of Add-On packages. Add-On packages implicitly enable the Do Not Delete MSDeploy rule.",
+          "items": {
+            "$ref": "#/definitions/MSDeployCore"
+          },
+          "x-ms-identifiers": [
+            "packageUri"
+          ]
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/MSDeployCore"
+        }
+      ]
     },
     "MSDeployProvisioningState": {
       "type": "string",
@@ -52922,7 +52948,10 @@
           "type": "array",
           "description": "Solution Data.",
           "items": {
-            "$ref": "#/definitions/NameValuePair"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NameValuePair"
+            }
           },
           "x-ms-identifiers": [
             "name"
@@ -52932,7 +52961,10 @@
           "type": "array",
           "description": "Solution Metadata.",
           "items": {
-            "$ref": "#/definitions/NameValuePair"
+            "type": "array",
+            "items": {
+              "$ref": "#/definitions/NameValuePair"
+            }
           },
           "x-ms-identifiers": [
             "name"
@@ -55445,7 +55477,7 @@
         },
         "certBlob": {
           "type": "string",
-          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a\nPoint-To-Site VPN connection."
+          "description": "A certificate file (.cer) blob containing the public key of the private key used to authenticate a \\nPoint-To-Site VPN connection."
         },
         "routes": {
           "type": "array",
