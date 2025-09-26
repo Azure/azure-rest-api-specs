@@ -351,13 +351,17 @@
             "format": "uuid"
           },
           {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -963,13 +967,17 @@
             "type": "string"
           },
           {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1761,13 +1769,17 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "string"
+          },
+          {
             "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
           }
         ],
         "responses": {
@@ -1815,7 +1827,7 @@
             "description": "The data asset payload",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataAssetRequestBody"
+              "$ref": "#/definitions/DataAsset"
             }
           }
         ],
@@ -1916,7 +1928,7 @@
             "description": "Updated data asset payload.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/DataAssetRequestBody"
+              "$ref": "#/definitions/DataAsset"
             }
           }
         ],
@@ -2509,15 +2521,19 @@
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
-          },
-          {
             "name": "domainId",
             "in": "query",
             "description": "Optional domain identifier filter.",
             "required": false,
             "type": "string",
             "format": "uuid"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -3322,9 +3338,6 @@
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
-          },
-          {
             "name": "keyword",
             "in": "query",
             "description": "Optional search keyword to match objective definition.",
@@ -3335,6 +3348,13 @@
             "name": "domainId",
             "in": "query",
             "description": "Optional domain identifier filter.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
             "required": false,
             "type": "string"
           }
@@ -4059,9 +4079,6 @@
             "$ref": "#/parameters/Azure.Core.TopQueryParameter"
           },
           {
-            "$ref": "#/parameters/Azure.Core.OrderByQueryParameter"
-          },
-          {
             "name": "domainId",
             "in": "query",
             "description": "The unique identifier of the domain.",
@@ -4091,6 +4108,13 @@
             "required": false,
             "type": "integer",
             "format": "int32"
+          },
+          {
+            "name": "orderBy",
+            "in": "query",
+            "description": "Expressions that specify the order of returned results.",
+            "required": false,
+            "type": "string"
           }
         ],
         "responses": {
@@ -6135,16 +6159,6 @@
             "$ref": "#/definitions/CatalogModelDataAssetSchema"
           }
         },
-        "lineage": {
-          "type": "object",
-          "description": "Lineage information associated with the asset.",
-          "additionalProperties": {
-            "items": {
-              "type": "string"
-            },
-            "type": "array"
-          }
-        },
         "dataQualityScore": {
           "type": "number",
           "format": "double",
@@ -6247,90 +6261,6 @@
       },
       "required": [
         "entityId"
-      ]
-    },
-    "DataAssetRequestBody": {
-      "type": "object",
-      "description": "DataAssetRequestBody.",
-      "properties": {
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The data asset identifier.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the asset."
-        },
-        "systemData": {
-          "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
-          "description": "System data associated with the asset."
-        },
-        "description": {
-          "type": "string",
-          "description": "A description about the relationship."
-        },
-        "domain": {
-          "type": "string",
-          "description": "Link to the owning domain."
-        },
-        "source": {
-          "$ref": "#/definitions/CatalogModelDataAssetSource",
-          "description": "Source of the asset."
-        },
-        "contacts": {
-          "type": "object",
-          "description": "Contacts associated with the asset.",
-          "additionalProperties": {
-            "items": {
-              "$ref": "#/definitions/CatalogModelContactsValueInner"
-            },
-            "type": "array"
-          }
-        },
-        "classifications": {
-          "type": "array",
-          "description": "A list of classification labels.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "sensitivityLabel": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Only one label is allowed. A GUID of the information protection label."
-        },
-        "type": {
-          "type": "string",
-          "description": "type of the data asset."
-        },
-        "schema": {
-          "type": "array",
-          "description": "Schema of the asset.",
-          "items": {
-            "$ref": "#/definitions/CatalogModelDataAssetSchema"
-          }
-        },
-        "dataQualityScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Data quality score for the data asset."
-        },
-        "openInUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "A redirection link.."
-        },
-        "typeProperties": {
-          "type": "object",
-          "description": "Type properties of the asset.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "name"
       ]
     },
     "DataAssetsResponse": {
@@ -7958,18 +7888,6 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
-    },
-    "Azure.Core.OrderByQueryParameter": {
-      "name": "orderBy",
-      "in": "query",
-      "description": "Expressions that specify the order of returned results.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "multi",
-      "x-ms-parameter-location": "method"
     },
     "Azure.Core.SkipQueryParameter": {
       "name": "skip",

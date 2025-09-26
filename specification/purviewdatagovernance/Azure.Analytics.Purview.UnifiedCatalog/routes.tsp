@@ -29,9 +29,12 @@ op ListCriticalDataElementAsync is UnifiedCatalogOperations.ResourceList<
     @doc("Search keyword.")
     @query
     keyword?: string;
+
+    @doc("Expressions that specify the order of returned results.")
+    @query
+    orderBy?: string;
   } & SkipQueryParameter &
-    TopQueryParameter &
-    OrderByQueryParameter>
+    TopQueryParameter>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -191,9 +194,12 @@ op ListCriticalDataColumnAsync is UnifiedCatalogOperations.ResourceList<
     @doc("The unique identifier of the critical data column.")
     @query
     assetId?: uuid;
+
+    @doc("Expressions that specify the order of returned results.")
+    @query
+    orderBy?: string;
   } & SkipQueryParameter &
-    TopQueryParameter &
-    OrderByQueryParameter>
+    TopQueryParameter>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -267,9 +273,12 @@ op DeleteCriticalDataColumnRelationshipAsync is RpcOperation<
 @get
 op ListDataAssetsAsync is UnifiedCatalogOperations.ResourceList<
   DataAsset,
-  ListQueryParametersTrait<SkipQueryParameter &
-    TopQueryParameter &
-    OrderByQueryParameter>
+  ListQueryParametersTrait<{
+    @doc("Expressions that specify the order of returned results.")
+    @query
+    orderBy?: string;
+  } & SkipQueryParameter &
+    TopQueryParameter>
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -282,7 +291,7 @@ op CreateDataAssetAsync is RpcOperation<
   {
     @doc("The data asset payload")
     @bodyRoot
-    dataAsset: DataAssetRequestBody;
+    dataAsset: DataAsset;
   },
   CreateDataAssetResponse
 >;
@@ -320,7 +329,7 @@ op UpdateDataAssetAsync is RpcOperation<
   DataAssetIdParameter & {
     @doc("Updated data asset payload.")
     @bodyRoot
-    dataAsset: DataAssetRequestBody;
+    dataAsset: DataAsset;
   },
   DataAsset
 >;
@@ -392,11 +401,14 @@ op DeleteDataAssetRelationshipAsync is RpcOperation<
 op ListDataProductsAsync is UnifiedCatalogOperations.ResourceList<
   DataProduct,
   ListQueryParametersTrait<SkipQueryParameter &
-    TopQueryParameter &
-    OrderByQueryParameter & {
+    TopQueryParameter & {
       @doc("Optional domain identifier filter.")
       @query
       domainId?: uuid;
+
+      @doc("Expressions that specify the order of returned results.")
+      @query
+      orderBy?: string;
     }>
 >;
 
@@ -620,8 +632,7 @@ op CreateTermAsync is RpcOperation<
 op ListTermAsync is UnifiedCatalogOperations.ResourceList<
   Term,
   ListQueryParametersTrait<SkipQueryParameter &
-    TopQueryParameter &
-    OrderByQueryParameter & {
+    TopQueryParameter & {
       @doc("The unique identifier of the domain.")
       @query
       domainId?: uuid;
@@ -637,6 +648,10 @@ op ListTermAsync is UnifiedCatalogOperations.ResourceList<
       @doc("The depth of the term.")
       @query
       depth?: int32;
+
+      @doc("Expressions that specify the order of returned results.")
+      @query
+      orderBy?: string;
     }>
 >;
 
@@ -781,8 +796,7 @@ op ListRelatedEntitiesAsync is UnifiedCatalogOperations.ResourceList<
 op ListObjectivesAsync is UnifiedCatalogOperations.ResourceList<
   ObjectiveWithAdditionalProperties,
   ListQueryParametersTrait<SkipQueryParameter &
-    TopQueryParameter &
-    OrderByQueryParameter & {
+    TopQueryParameter & {
       @doc("Optional search keyword to match objective definition.")
       @query
       keyword?: string;
@@ -790,6 +804,10 @@ op ListObjectivesAsync is UnifiedCatalogOperations.ResourceList<
       @doc("Optional domain identifier filter.")
       @query
       domainId?: string;
+
+      @doc("Expressions that specify the order of returned results.")
+      @query
+      orderBy?: string;
     }>
 >;
 
