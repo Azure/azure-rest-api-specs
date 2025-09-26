@@ -16,7 +16,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/Azure.AI.Speech.Transcription"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Speech.Transcription"
     clear-output-folder: true
     namespace: "Azure.AI.Speech.Transcription"
     model-namespace: false
@@ -29,11 +29,11 @@ options:
     partial-update: true
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-transcription"
+    package-dir: "azure-ai-speech-transcription"
     package-version: "1.0.0"
     package-name: "{package-dir}"
     package-pprint-name: '"Azure AI Speech Transcription"'
-    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/azure-ai-transcription"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
     flavor: azure
     generate-test: true
     generate-sample: true
@@ -43,7 +43,7 @@ options:
       name: "@azure-rest/ai-speech-transcription"
       version: "1.0.0"
       description: "Speech Transcription Service"
-    emitter-output-dir: "{output-dir}/sdk/cognitiveservices/ai-speech-transcription-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-speech-transcription-rest"
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/ai/azspeechtranscription"
