@@ -2431,7 +2431,7 @@
             "in": "body",
             "required": false,
             "schema": {
-              "$ref": "#/definitions/HostPoolPatch"
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
             }
           }
         ],
@@ -7735,35 +7735,6 @@
           "description": "The time in minutes to wait before performing the desired session handling action when a user logs off during the off-peak period."
         }
       }
-    },
-    "HostPoolResourceModel": {
-      "type": "object",
-      "title": "Resource",
-      "description": "Fields for HostPool update",
-      "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. E.g. \"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}\"",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      },
-      "x-ms-azure-resource": true
     }
   },
   "parameters": {
