@@ -7,7 +7,76 @@
     "locationparameter": "eastus2euap",
     "requestBody": {
       "resourceConfigParameters": {
-        "baseProfile": {},
+        "baseProfile": {
+          "zones": [
+            "useast2euap-AZ03",
+            "useast2euap-AZ01",
+            "useast2euap-AZ02"
+          ],
+          "properties": {
+            "vmExtensions": [
+              {
+                "name": "Microsoft.Azure.Geneva.GenevaMonitoring",
+                "location": "eastus2euap",
+                "properties": {
+                  "autoUpgradeMinorVersion": true,
+                  "enableAutomaticUpgrade": true,
+                  "suppressFailures": true,
+                  "publisher": "Microsoft.Azure.Geneva",
+                  "type": "GenevaMonitoring",
+                  "typeHandlerVersion": "2.0"
+                }
+              }
+            ],
+            "hardwareProfile": {
+              "vmSize": "Standard_D2ads_v5"
+            },
+            "storageProfile": {
+              "imageReference": {
+                "publisher": "MicrosoftWindowsServer",
+                "offer": "WindowsServer",
+                "sku": "2022-datacenter-azure-edition",
+                "version": "latest"
+              },
+              "osDisk": {
+                "osType": "Windows",
+                "createOption": "FromImage",
+                "caching": "ReadWrite",
+                "managedDisk": {
+                  "storageAccountType": "Standard_LRS"
+                },
+                "deleteOption": "Detach",
+                "diskSizeGB": 127
+              },
+              "diskControllerType": "SCSI"
+            },
+            "networkProfile": {
+              "networkInterfaceConfigurations": [
+                {
+                  "name": "vmTest",
+                  "properties": {
+                    "primary": true,
+                    "enableIPForwarding": true,
+                    "ipConfigurations": [
+                      {
+                        "name": "vmTest",
+                        "properties": {
+                          "subnet": {
+                            "id": "/subscriptions/1d04e8f1-ee04-4056-b0b2-718f5bb45b04/resourceGroups/resource-group-name/providers/Microsoft.Network/virtualNetworks/vnet-name/subnets/subnet-name"
+                          },
+                          "primary": true,
+                          "applicationGatewayBackendAddressPools": [],
+                          "loadBalancerBackendAddressPools": []
+                        }
+                      }
+                    ]
+                  }
+                }
+              ],
+              "networkApiVersion": "2022-07-01"
+            }
+          }
+        },
         "resourceOverrides": [
           {}
         ],
