@@ -770,6 +770,17 @@
     - options.@azure-tools/typespec-java.*
     - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
+  paths:
+    - marketplacecatalog/Products/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-ts.*
     - parameters.service-dir.default
   paths:
     - manufacturingplatform/Manufacturingplatform.Management/tspconfig.yaml
@@ -1042,6 +1053,14 @@
   reason: Suppress until spec can be updated
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - options.@azure-tools/typespec-csharp.*
+  paths:
+    - servicebus/ServiceBus.Management/tspconfig.yaml
+
+- tool: TypeSpecValidation
+  reason: Suppress until spec can be updated
+  rules: [SdkTspConfigValidation]
+  sub-rules:
     - options.@azure-tools/typespec-go.flavor
     - options.@azure-tools/typespec-go.generate-samples
   paths:
@@ -1214,7 +1233,6 @@
     - loadtestservice/data-plane/playwright/tspconfig.yaml
     - machinelearning/Azure.AI.ChatProtocol/tspconfig.yaml
     - machinelearningservices/AzureAI.Assets/tspconfig.yaml
-    - marketplacecatalog/Products/tspconfig.yaml
     - orbital/Microsoft.PlanetaryComputer/tspconfig.yaml
     - playwrighttesting/PlaywrightTesting.AuthManager/tspconfig.yaml
     - programmableconnectivity/Azure.ProgrammableConnectivity/tspconfig.yaml
