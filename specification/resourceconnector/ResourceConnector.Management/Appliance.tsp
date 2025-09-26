@@ -117,7 +117,7 @@ interface Appliances {
       @segment("upgradeGraphs")
       upgradeGraph: string;
     },
-    Response = ArmResponse<UpgradeGraph>,
+    Response = ArmResponse<UpgradeGraph>
   >;
 }
 
