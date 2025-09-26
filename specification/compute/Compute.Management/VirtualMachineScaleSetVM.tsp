@@ -70,6 +70,13 @@ model VirtualMachineScaleSetVM
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @visibility(Lifecycle.Read)
   etag?: string;
+
+  /**
+   * The identity of the standalone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-04-01
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @visibility(Lifecycle.Read)
+  virtualMachineResourceId?: string;
 }
 
 alias VirtualMachineScaleSetPath = {
