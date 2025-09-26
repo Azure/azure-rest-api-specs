@@ -58,7 +58,7 @@ suppressions:
     from: desktopvirtualization.json
     reason: Our service doesn't support update the identity in the patch method.  
     where:
-      - $.definitions.HostPoolPatch
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}'].*
 ```
 
 ### Tag: package-preview-2025-04-01-preview
