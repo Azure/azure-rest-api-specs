@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2016-01` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-01'
 input-file:
-- Microsoft.PowerBI/stable/2016-01-29/powerbiembedded.json
+- stable/2016-01-29/powerbiembedded.json
 ```
 
 
