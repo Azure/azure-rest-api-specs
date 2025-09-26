@@ -648,7 +648,8 @@
         "tags": [
           "NewRelicMonitorResources"
         ],
-        "description": "Retrieves marketplace and organization information mapped to the given New Relic monitor resource",
+        "summary": "Retrieves marketplace and organization information mapped to the given New Relic monitor resource",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -863,6 +864,7 @@
         "tags": [
           "NewRelicMonitorResources"
         ],
+        "summary": "Links a new SaaS to the newrelic organization of the underlying monitor.",
         "description": "Links a new SaaS to the newrelic organization of the underlying monitor.",
         "parameters": [
           {
@@ -904,7 +906,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -926,7 +933,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NewRelicMonitorResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -999,7 +1007,8 @@
         "tags": [
           "NewRelicMonitorResources"
         ],
-        "description": "List of all active deployments that are associated with the marketplace subscription linked to the given monitor.",
+        "summary": "List of all active deployments that are associated with the marketplace subscription linked to the given monitor.",
+        "description": "A synchronous resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1120,6 +1129,7 @@
         "tags": [
           "NewRelicMonitorResources"
         ],
+        "summary": "Lists all Azure resources that are linked to the same New Relic organization as the specified monitor resource, helping you understand the scope of integration",
         "description": "Lists all Azure resources that are linked to the same New Relic organization as the specified monitor resource, helping you understand the scope of integration",
         "parameters": [
           {
@@ -1223,7 +1233,8 @@
         "tags": [
           "MonitoredSubscriptions"
         ],
-        "description": "Lists all the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "summary": "Lists all the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "description": "List MonitoredSubscriptionProperties resources by NewRelicMonitorResource",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1273,7 +1284,8 @@
         "tags": [
           "MonitoredSubscriptions"
         ],
-        "description": "Lists all the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "summary": "Lists all the subscriptions currently being monitored by the NewRelic monitor resource.",
+        "description": "Get a MonitoredSubscriptionProperties",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1338,7 +1350,8 @@
         "tags": [
           "MonitoredSubscriptions"
         ],
-        "description": "Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.",
+        "summary": "Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.",
+        "description": "Create a MonitoredSubscriptionProperties",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1424,7 +1437,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/MonitoredSubscriptionProperties"
         },
         "x-ms-long-running-operation": true
       },
@@ -1433,7 +1447,8 @@
         "tags": [
           "MonitoredSubscriptions"
         ],
-        "description": "Update subscriptions to be monitored by the New Relic monitor resource, ensuring optimal observability and performance",
+        "summary": "Update subscriptions to be monitored by the New Relic monitor resource, ensuring optimal observability and performance",
+        "description": "Update a MonitoredSubscriptionProperties",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1526,7 +1541,8 @@
         "tags": [
           "MonitoredSubscriptions"
         ],
-        "description": "Delete subscriptions being monitored by the New Relic monitor resource, removing their observability and monitoring capabilities",
+        "summary": "Delete subscriptions being monitored by the New Relic monitor resource, removing their observability and monitoring capabilities",
+        "description": "Delete a MonitoredSubscriptionProperties",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1652,7 +1668,8 @@
         "tags": [
           "NewRelicMonitorResources"
         ],
-        "description": "Resubscribes the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace",
+        "summary": "Resubscribes the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace",
+        "description": "A long-running resource action.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -1693,7 +1710,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -1715,7 +1737,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/NewRelicMonitorResource"
         },
         "x-ms-long-running-operation": true
       }
@@ -2205,7 +2228,7 @@
         "ingestionKey": {
           "type": "string",
           "format": "password",
-          "description": "ingestion key of account",
+          "description": "Credential string.",
           "x-ms-secret": true
         },
         "region": {
@@ -2326,7 +2349,7 @@
         },
         "userEmail": {
           "type": "string",
-          "description": "User Email",
+          "description": "Reusable representation of an email address",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       },
@@ -2479,7 +2502,7 @@
         },
         "userEmail": {
           "type": "string",
-          "description": "User Email",
+          "description": "Reusable representation of an email address",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       },
@@ -2656,7 +2679,7 @@
         },
         "userEmail": {
           "type": "string",
-          "description": "User Email",
+          "description": "Reusable representation of an email address",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       }
@@ -2667,7 +2690,7 @@
       "properties": {
         "userEmail": {
           "type": "string",
-          "description": "User Email",
+          "description": "Reusable representation of an email address",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       },
@@ -2688,7 +2711,7 @@
         },
         "userEmail": {
           "type": "string",
-          "description": "User Email",
+          "description": "Reusable representation of an email address",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       },
@@ -3665,7 +3688,7 @@
         },
         "userEmail": {
           "type": "string",
-          "description": "User Email",
+          "description": "Reusable representation of an email address",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         }
       },
@@ -3804,7 +3827,7 @@
         },
         "emailAddress": {
           "type": "string",
-          "description": "User Email",
+          "description": "Reusable representation of an email address",
           "pattern": "^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$"
         },
         "phoneNumber": {

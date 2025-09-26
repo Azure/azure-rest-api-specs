@@ -149,6 +149,7 @@ interface NewRelicMonitorResources {
    * Lists all Azure resources that are linked to the same New Relic organization as the specified monitor resource, helping you understand the scope of integration
    */
   @list
+  @summary("Lists all Azure resources that are linked to the same New Relic organization as the specified monitor resource, helping you understand the scope of integration")
   listLinkedResources is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
@@ -178,42 +179,39 @@ interface NewRelicMonitorResources {
    * Links a new SaaS to the newrelic organization of the underlying monitor.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Links a new SaaS to the newrelic organization of the underlying monitor.")
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   linkSaaS is ArmResourceActionAsync<
     NewRelicMonitorResource,
     SaaSData,
     ArmResponse<NewRelicMonitorResource>,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = NewRelicMonitorResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
-  /**
-   * Resubscribes the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  @summary("Resubscribes the New Relic Organization of the underline Monitor Resource to be billed by Azure Marketplace")
   resubscribe is ArmResourceActionAsync<
     NewRelicMonitorResource,
     ResubscribeProperties,
     ArmResponse<NewRelicMonitorResource>,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = NewRelicMonitorResource> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
-  /**
-   * Retrieves marketplace and organization information mapped to the given New Relic monitor resource
-   */
   @action("getBillingInfo")
+  @summary("Retrieves marketplace and organization information mapped to the given New Relic monitor resource")
   billingInfoGet is ArmResourceActionSync<
     NewRelicMonitorResource,
     void,
     ArmResponse<BillingInfoResponse>
   >;
 
-  /**
-   * List of all active deployments that are associated with the marketplace subscription linked to the given monitor.
-   */
   @list
   @action("listConnectedPartnerResources")
+  @summary("List of all active deployments that are associated with the marketplace subscription linked to the given monitor.")
   list is ArmResourceActionSync<
     NewRelicMonitorResource,
     {

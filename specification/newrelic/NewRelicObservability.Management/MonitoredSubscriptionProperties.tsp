@@ -28,24 +28,18 @@ model MonitoredSubscriptionProperties
 
 @armResourceOperations
 interface MonitoredSubscriptions {
-  /**
-   * Lists all the subscriptions currently being monitored by the NewRelic monitor resource.
-   */
+  @summary("Lists all the subscriptions currently being monitored by the NewRelic monitor resource.")
   get is ArmResourceRead<MonitoredSubscriptionProperties>;
 
-  /**
-   * Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.
-   */
+  @summary("Add subscriptions to be monitored by the New Relic monitor resource, enabling observability and monitoring.")
   createOrUpdate is Legacy.CreateOrUpdateAsync<
     MonitoredSubscriptionProperties,
-    LroHeaders = ArmLroLocationHeader &
+    LroHeaders = ArmLroLocationHeader<FinalResult = MonitoredSubscriptionProperties> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
 
-  /**
-   * Update subscriptions to be monitored by the New Relic monitor resource, ensuring optimal observability and performance
-   */
+  @summary("Update subscriptions to be monitored by the New Relic monitor resource, ensuring optimal observability and performance")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     MonitoredSubscriptionProperties,
@@ -53,14 +47,10 @@ interface MonitoredSubscriptions {
     OptionalRequestBody = true
   >;
 
-  /**
-   * Delete subscriptions being monitored by the New Relic monitor resource, removing their observability and monitoring capabilities
-   */
+  @summary("Delete subscriptions being monitored by the New Relic monitor resource, removing their observability and monitoring capabilities")
   delete is ArmResourceDeleteWithoutOkAsync<MonitoredSubscriptionProperties>;
 
-  /**
-   * Lists all the subscriptions currently being monitored by the NewRelic monitor resource.
-   */
+  @summary("Lists all the subscriptions currently being monitored by the NewRelic monitor resource.")
   list is ArmResourceListByParent<
     MonitoredSubscriptionProperties,
     Response = ArmResponse<MonitoredSubscriptionPropertiesList>

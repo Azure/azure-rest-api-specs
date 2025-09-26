@@ -530,7 +530,7 @@ model AccountInfo {
   accountId?: string;
 
   /**
-   * ingestion key of account
+   * Credential string.
    */
   @secret
   ingestionKey?: string;
@@ -593,7 +593,7 @@ model UserInfo {
   lastName?: string;
 
   /**
-   * User Email
+   * Reusable representation of an email address
    */
   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   emailAddress?: string;
@@ -814,7 +814,7 @@ model NewRelicMonitorResourceUpdateProperties {
  */
 model MetricsRequest {
   /**
-   * User Email
+   * Reusable representation of an email address
    */
   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   userEmail: string;
@@ -836,7 +836,7 @@ model MetricRules {
   filteringTags?: FilteringTag[];
 
   /**
-   * User Email
+   * Reusable representation of an email address
    */
   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   userEmail?: string;
@@ -872,7 +872,7 @@ model MetricsStatusRequest {
   azureResourceIds?: string[];
 
   /**
-   * User Email
+   * Reusable representation of an email address
    */
   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   userEmail: string;
@@ -898,7 +898,7 @@ model AppServicesGetRequest {
   azureResourceIds?: string[];
 
   /**
-   * User Email
+   * Reusable representation of an email address
    */
   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   userEmail: string;
@@ -949,7 +949,7 @@ model SwitchBillingRequest {
   planData?: PlanData;
 
   /**
-   * User Email
+   * Reusable representation of an email address
    */
   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   userEmail: string;
@@ -965,7 +965,7 @@ model HostsGetRequest {
   vmIds?: string[];
 
   /**
-   * User Email
+   * Reusable representation of an email address
    */
   @pattern("^[A-Za-z0-9._%+-]+@(?:[A-Za-z0-9-]+\\.)+[A-Za-z]{2,}$")
   userEmail: string;
