@@ -21,6 +21,10 @@ model Certificate
     SegmentName = "certificates",
     NamePattern = ""
   >;
+
+  /** Kind of resource. If the resource is an app, you can refer to https://github.com/Azure/app-service-linux-docs/blob/master/Things_You_Should_Know/kind_property.md#app-service-resource-kind-reference for details supported values for kind. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  kind?: string;
 }
 
 @armResourceOperations
