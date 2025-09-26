@@ -661,7 +661,6 @@ model DnsResourceReferenceRequest {
   /**
    * The properties of the Resource Reference Request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DnsResourceReferenceRequestProperties;
 }
 
@@ -682,7 +681,6 @@ model DnsResourceReferenceResult {
   /**
    * The result of dns resource reference request. Returns a list of dns resource references for each of the azure resource in the request.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: DnsResourceReferenceResultProperties;
 }
 

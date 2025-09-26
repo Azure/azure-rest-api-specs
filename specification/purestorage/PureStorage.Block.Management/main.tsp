@@ -19,19 +19,16 @@ using TypeSpec.Versioning;
 @doc("Supported versions for PureStorage.Block.")
 enum Versions {
   @doc("Version 1 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_preview: "2024-10-01-preview",
 
   @doc("Version 2 preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v2_preview)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v2_preview: "2024-11-01-preview",
 
   @doc("Version 1 stable")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(LiftrBase.Versions.v1_stable)
   @useDependency(LiftrBase.Storage.Versions.v1_preview)
   v1_stable: "2024-11-01",
@@ -259,6 +256,7 @@ interface StoragePools {
   @doc("Create a storage pool")
   create is ArmResourceCreateOrUpdateAsync<StoragePool>;
   @doc("Update a storage pool")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     StoragePool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -741,6 +739,7 @@ model AvsDiskDetails {
 @armResourceOperations
 interface AvsStorageContainerVolumes {
   @doc("Update a volume in an AVS storage container")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsStorageContainerVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -857,6 +856,7 @@ union VolumeContainerType {
 @armResourceOperations
 interface AvsVms {
   @doc("Update an AVS VM")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsVm,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -888,6 +888,7 @@ model AvsVmVolume is ProxyResource<VolumeProperties> {
 @armResourceOperations
 interface AvsVmVolumes {
   @doc("Update a volume in an AVS VM")
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     AvsVmVolume,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -8,18 +8,14 @@ import "./Zone.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using Azure.ResourceManager.Private;
 
 namespace Microsoft.Network;
 /**
  * Describes a DNS record set (a collection of DNS records with the same name and type).
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(RecordSetProperties)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @parentResource(Zone)
-model RecordSet extends Foundations.ProxyResource {
+model RecordSet is Azure.ResourceManager.ProxyResource<RecordSetProperties> {
   ...ResourceNameParameter<
     Resource = RecordSet,
     KeyName = "relativeRecordSetName",
@@ -32,10 +28,6 @@ model RecordSet extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   etag?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @Azure.ResourceManager.Private.armResourcePropertiesOptionality(true)
-  properties?: RecordSetProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

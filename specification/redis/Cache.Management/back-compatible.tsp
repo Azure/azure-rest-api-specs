@@ -105,8 +105,9 @@ using Microsoft.Cache;
 );
 
 // Existing client decorators and properties
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisCreateParameters.properties
+);
 
 @@clientName(RedisCommonPropertiesRedisConfiguration.`rdb-backup-enabled`,
   "rdbBackupEnabled"
@@ -160,11 +161,13 @@ using Microsoft.Cache;
   "aadEnabled"
 );
 
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisUpdateParameters.properties
+);
 
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisLinkedServerCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisLinkedServerCreateParameters.properties
+);
 
 @@clientName(RedisResources.create::parameters.resource, "parameters");
 @@clientName(RedisResources.update::parameters.properties, "parameters");
@@ -172,40 +175,46 @@ using Microsoft.Cache;
 @@clientName(RedisResources.forceReboot::parameters.body, "parameters");
 @@clientName(RedisResources.importData::parameters.body, "parameters");
 @@clientName(RedisResources.exportData::parameters.body, "parameters");
-#suppress "deprecated" "FIXME: using flattening for SDK backwards compatibility"
-@@flattenProperty(RedisResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: using flattening for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisResource.properties);
 
 @@clientName(PrivateEndpointConnections.put::parameters.resource, "properties");
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientName(RedisFirewallRules.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisFirewallRule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisFirewallRule.properties
+);
 
 @@clientName(RedisPatchSchedules.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisPatchSchedule.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisPatchSchedule.properties
+);
 
 @@clientName(LinkedServer.create::parameters.resource, "parameters");
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisLinkedServerWithProperties.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisLinkedServerWithProperties.properties
+);
 
 @@clientName(RedisCacheAccessPolicies.createUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisCacheAccessPolicy.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisCacheAccessPolicy.properties
+);
 
 @@clientName(RedisCacheAccessPolicyAssignments.createUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
-@@flattenProperty(RedisCacheAccessPolicyAssignment.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FORNOW: using flattened 'properties' for SDK backwards compatibility"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RedisCacheAccessPolicyAssignment.properties
+);
 @@clientName(ScheduleEntries.scheduleEntries, "ScheduleEntries");
 @@clientName(RedisOperationGroup.checkNameAvailability::parameters.body,
   "parameters"
