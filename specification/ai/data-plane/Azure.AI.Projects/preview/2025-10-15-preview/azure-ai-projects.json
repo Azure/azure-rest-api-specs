@@ -3424,11 +3424,11 @@
       "properties": {
         "type": {
           "$ref": "#/definitions/EvaluatorMetricType",
-          "description": "Type of the metric. It can be `Continuous`, `Ordinal`, `Boolean`, etc."
+          "description": "Type of the metric."
         },
         "desirable_direction": {
-          "type": "string",
-          "description": "It indicates whether a higher value is better or a lower value is better for this metric. Possible values are `Increase` and `Decrease`."
+          "$ref": "#/definitions/EvaluatorMetricDirection",
+          "description": "It indicates whether a higher value is better or a lower value is better for this metric."
         },
         "min_value": {
           "type": "number",
@@ -3447,7 +3447,7 @@
     },
     "EvaluatorMetricDirection": {
       "type": "string",
-      "description": "The type of the evaluator",
+      "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral",
       "enum": [
         "increase",
         "decrease",
@@ -3470,7 +3470,7 @@
           {
             "name": "neutral",
             "value": "neutral",
-            "description": "It indicates no preference for this metric"
+            "description": "It indicates no preference for this metric direction"
           }
         ]
       }
@@ -3490,12 +3490,12 @@
           {
             "name": "ordinal",
             "value": "ordinal",
-            "description": "Ordinal"
+            "description": "Ordinal metric representing bounded values"
           },
           {
             "name": "continuous",
             "value": "continuous",
-            "description": "Continuous"
+            "description": "Continuous metric representing unbounded values"
           },
           {
             "name": "boolean",

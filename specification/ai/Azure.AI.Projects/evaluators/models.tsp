@@ -133,11 +133,11 @@ model EvaluatorVersion {
 @doc("Evaluator Metric")
 @added(Versions.v2025_10_15_preview)
 model EvaluatorMetric {
-  @doc("Type of the metric. It can be `Continuous`, `Ordinal`, `Boolean`, etc.")
+  @doc("Type of the metric.")
   type?: EvaluatorMetricType;
 
-  @doc("It indicates whether a higher value is better or a lower value is better for this metric. Possible values are `Increase` and `Decrease`.")
-  desirable_direction?: string;
+  @doc("It indicates whether a higher value is better or a lower value is better for this metric.")
+  desirable_direction?: EvaluatorMetricDirection;
 
   @doc("Minimum value for the metric")
   min_value: float32;
@@ -151,17 +151,17 @@ model EvaluatorMetric {
 union EvaluatorMetricType {
   string,
 
-  @doc("Ordinal")
+  @doc("Ordinal metric representing bounded values")
   ordinal: "ordinal",
 
-  @doc("Continuous")
+  @doc("Continuous metric representing unbounded values")
   continuous: "continuous",
 
   @doc("Boolean metric representing true/false values")
   boolean: "boolean",
 }
 
-@doc("The type of the evaluator")
+@doc("The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral")
 @added(Versions.v2025_10_15_preview)
 union EvaluatorMetricDirection {
   string,
@@ -172,6 +172,6 @@ union EvaluatorMetricDirection {
   @doc("It indicates a lower value is better for this metric")
   decrease: "decrease",
 
-  @doc("It indicates no preference for this metric")
+  @doc("It indicates no preference for this metric direction")
   neutral: "neutral",
 }
