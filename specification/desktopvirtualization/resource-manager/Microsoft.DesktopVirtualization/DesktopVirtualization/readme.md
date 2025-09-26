@@ -43,11 +43,22 @@ suppressions:
     where:
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
       - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+  - code: PutResponseCodes
+    from: desktopvirtualization.json
+    reason: Discussed in the ARM API office hour and get approved. Our service are currently returning the 200 status code not 201, and this is already in the stable version.
+    where:
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/hostPools/{hostPoolName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
+      - $.paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DesktopVirtualization/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].*
   - code: RequiredPropertiesMissingInResourceModel
     from: desktopvirtualization.json
     reason: Discussed in the ARM API office hour and get approved. Even Common type for operation result don't have the related properties. The rule seems conflict with the contract. https://github.com/Azure/azure-rest-api-specs/blob/main/specification/common-types/resource-management/v5/types.json#L270 and also https://github.com/Azure/azure-openapi-validator/pull/767#issuecomment-2732917683. There is a fix for this and is waiting for the rollout.
     where:
       - $.definitions.ResourceProviderOperationListResult
+  - code: PatchIdentityProperty
+    from: desktopvirtualization.json
+    reason: Our service doesn't support update the identity in the patch method.  
+    where:
+      - $.definitions.HostPoolPatch
 ```
 
 ### Tag: package-preview-2025-04-01-preview
