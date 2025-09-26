@@ -343,10 +343,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Role"
-              }
+              "$ref": "#/definitions/Roles"
             }
           },
           "default": {
@@ -371,15 +368,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "roles",
+            "name": "body",
             "in": "body",
             "description": "Request body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Role"
-              }
+              "$ref": "#/definitions/Roles"
             }
           }
         ],
@@ -409,15 +403,12 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "roles",
+            "name": "body",
             "in": "body",
             "description": "Request body",
             "required": true,
             "schema": {
-              "type": "array",
-              "items": {
-                "$ref": "#/definitions/Role"
-              }
+              "$ref": "#/definitions/Roles"
             }
           }
         ],
@@ -2215,6 +2206,22 @@
       },
       "required": [
         "roleName"
+      ]
+    },
+    "Roles": {
+      "type": "object",
+      "description": "Roles",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "description": "Roles",
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
+        }
+      },
+      "required": [
+        "roles"
       ]
     },
     "TransactionReceipt": {

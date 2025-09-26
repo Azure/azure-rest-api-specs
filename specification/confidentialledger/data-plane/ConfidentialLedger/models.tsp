@@ -6,6 +6,13 @@ using TypeSpec.Http;
 
 namespace ConfidentialLedger;
 
+/** Roles */
+model Roles {
+  /** Roles */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Model renamed in client.tsp"
+  roles: Role[];
+}
+
 /**
  * State of a ledger query.
  */
