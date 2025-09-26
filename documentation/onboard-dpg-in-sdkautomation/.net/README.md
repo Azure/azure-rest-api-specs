@@ -4,7 +4,7 @@ Please copy the following configuration into `tspconfig.yaml` in your spec folde
 
 ``` yaml
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Vision.Face"
+    package-dir: "Azure.AI.Vision.Face"
     flavor: azure
     namespace: "{package-dir}"
 ```
