@@ -9,6 +9,8 @@ using Microsoft.DataProtection;
 @@clientName(Datasource.resourceID, "resourceId", "java");
 @@clientName(DeletionInfo.deleteActivityID, "deleteActivityId", "java");
 @@clientName(RetentionTag.eTag, "etag", "java");
+@@clientName(BackupVaultResource.eTag, "etag", "java");
+@@clientName(ResourceGuardResource.eTag, "etag", "java");
 @@clientName(RestoreJobRecoveryPointDetails.recoveryPointID,
   "recoveryPointId",
   "java"
@@ -24,11 +26,13 @@ using Microsoft.DataProtection;
 @@clientName(BCDRSecurityLevel, "BcdrSecurityLevel", "java");
 
 // Fix method name changes (PIN -> Pin in ResourceGuards)
-@@clientLocation(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
+@@clientName(DppBaseResourceOperationGroup.getBackupSecurityPINRequestsObjects,
   "getBackupSecurityPinRequestsObjects",
   "java"
 );
-@@clientLocation(DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
+@@clientName(DppBaseResourceOperationGroup.getDefaultBackupSecurityPINRequestsObject,
   "getDefaultBackupSecurityPinRequestsObject",
   "java"
 );
+
+@@clientName(Microsoft.DataProtection, "DataProtectionMgmtClient", "python");
