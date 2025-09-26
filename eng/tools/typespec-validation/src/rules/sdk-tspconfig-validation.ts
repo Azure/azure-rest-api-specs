@@ -297,15 +297,6 @@ export class TspConfigJavaAzEmitterOutputDirMatchPatternSubRule extends Tspconfi
   constructor() {
     super("@azure-tools/typespec-java", "emitter-output-dir", new RegExp(/^azure(-\w+)+$/));
   }
-
-  protected validate(config: any): RuleResult {
-    const option = this.tryFindOption(config);
-    if (option === undefined) {
-      // at present, we don't require service use emitter-output-dir
-      return { success: true };
-    }
-    return super.validate(config);
-  }
 }
 
 export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends TspconfigEmitterOptionsEmitterOutputDirSubRuleBase {
@@ -315,15 +306,6 @@ export class TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule extends Tspcon
       "emitter-output-dir",
       new RegExp(/^azure-resourcemanager(-\w+)+$/),
     );
-  }
-
-  protected validate(config: any): RuleResult {
-    const option = this.tryFindOption(config);
-    if (option === undefined) {
-      // at present, we don't require service use emitter-output-dir
-      return { success: true };
-    }
-    return super.validate(config);
   }
 
   protected skip(_: any, folder: string) {
@@ -719,7 +701,7 @@ export class SdkTspConfigValidationRule implements Rule {
         : "";
 
     return {
-      success: true, // Always return success to avoid blocking PRs, errors are reported in stdOutput
+      success,
       stdOutput: `[${this.name}]: validation ${success ? "passed" : "failed"}.\n${stdOutputFailedResults}`,
     };
   }
