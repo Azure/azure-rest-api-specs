@@ -12,12 +12,9 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
-  "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/sdk/selfhelp/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.SelfHelp"
+    emitter-output-dir: "{output-dir}/sdk/selfhelp/{namespace}"
   "@azure-tools/typespec-python":
     service-dir: "sdk/selfhelp"
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-selfhelp"
