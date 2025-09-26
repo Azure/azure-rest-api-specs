@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2023-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-07-01-preview'
 input-file:
-  - Microsoft.ProfessionalService/preview/2023-07-01-preview/professionalservice.json
+  - preview/2023-07-01-preview/professionalservice.json
 ```
 
 ---
