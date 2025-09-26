@@ -16,7 +16,7 @@ options:
     namespace: "Azure.ResourceManager.ConnectedCache"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-connectedcache"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-connectedcache"
     namespace: "azure.mgmt.connectedcache"
     generate-test: true
     generate-sample: true
@@ -27,15 +27,10 @@ options:
     service-name: "Connected Cache"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-connectedcache"
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    flavor: "azure"
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    packageDetails:
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-connectedcache"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
       name: "@azure/arm-connectedcache"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/connectedcache"

@@ -24,12 +24,12 @@ options:
     service-name: "Storage Discovery"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storagediscovery"
     flavor: azure
     package-details:
       name: "@azure/arm-storagediscovery"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-storagediscovery"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storagediscovery"
     namespace: "azure.mgmt.storagediscovery"
     flavor: "azure"
     generate-test: true
@@ -49,7 +49,7 @@ options:
     package-dir: "StorageDiscovery/StorageDiscovery.Autorest"
     clear-output-folder: true
     azure: true
-    module-version: 0.1.0
+    module-version: 1.0.0
     prefix: "Az"
     subject-prefix: "StorageDiscovery"
     service-name: StorageDiscovery
