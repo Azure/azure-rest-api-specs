@@ -1,3 +1,4 @@
+import "@azure-tools/typespec-client-generator-core";
 import "@azure-tools/typespec-azure-core";
 import "@typespec/versioning";
 import "@typespec/http";
