@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-preview-2023-06` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-06'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2023-06-01-preview/agfood.json
+  - preview/2023-06-01-preview/agfood.json
 ```
 
 ### Tag: package-preview-2021-09
@@ -44,7 +44,7 @@ These settings apply only when `--tag=package-preview-2021-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2021-09'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2021-09-01-preview/agfood.json
+  - preview/2021-09-01-preview/agfood.json
 ```
 
 ### Tag: package-2020-05-12-preview
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2020-05-12-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-05-12-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2020-05-12-preview/agfood.json
+  - preview/2020-05-12-preview/agfood.json
 ```
 
 ---

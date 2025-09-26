@@ -40,7 +40,7 @@ These settings apply only when `--tag=package-2021-03-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-03-31-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2021-03-31-preview/agfood.json
+  - preview/2021-03-31-preview/agfood.json
 ```
 
 ### Tag: package-2021-07-31-preview
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2021-07-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-07-31-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2021-07-31-preview/agfood.json
+  - preview/2021-07-31-preview/agfood.json
 ```
 
 ### Tag: package-2022-11-01-preview
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2022-11-01-preview/agfood.json
+  - preview/2022-11-01-preview/agfood.json
 ```
 
 ### Tag: package-2023-04-01-preview
@@ -67,7 +67,7 @@ These settings apply only when `--tag=package-2023-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-04-01-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2023-04-01-preview/agfood.json
+  - preview/2023-04-01-preview/agfood.json
 ```
 
 ### Tag: package-2023-06-01-preview
@@ -76,7 +76,7 @@ These settings apply only when `--tag=package-2023-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-06-01-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2023-06-01-preview/agfood.json
+  - preview/2023-06-01-preview/agfood.json
 ```
 
 ### Tag: package-2023-07-01-preview
@@ -85,7 +85,7 @@ These settings apply only when `--tag=package-2023-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-07-01-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2023-07-01-preview/agfood.json
+  - preview/2023-07-01-preview/agfood.json
 ```
 
 ### Tag: package-2023-11-01-preview
@@ -94,7 +94,7 @@ These settings apply only when `--tag=package-2023-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-11-01-preview'
 input-file:
-  - Microsoft.AgFoodPlatform/preview/2023-11-01-preview/agfood.json
+  - preview/2023-11-01-preview/agfood.json
 ```
 
 # Code Generation
