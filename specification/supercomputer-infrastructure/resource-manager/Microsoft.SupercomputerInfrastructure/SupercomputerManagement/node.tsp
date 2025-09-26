@@ -19,6 +19,22 @@ model Node is ProxyResource<NodeProperties> {
 
 /** The properties of a node. */
 model NodeProperties {
+  /** The asset ID of the node. */
+  @visibility(Lifecycle.Read)
+  assetId?: string;
+
+  /** The SKU of the physical node hardware. */
+  @visibility(Lifecycle.Read)
+  hardwareSku?: string;
+
+  /** The hostname of the node in the logical network. */
+  @visibility(Lifecycle.Read)
+  hostname?: string;
+
+  /** The unique identifier of the logical node. */
+  @visibility(Lifecycle.Read)
+  nodeId?: string;
+
   /** The status of the last operation on this node. */
   @visibility(Lifecycle.Read)
   provisioningState?: TopologicalProvisioningState;

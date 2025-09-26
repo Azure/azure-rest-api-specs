@@ -94,6 +94,7 @@ union ReceiverType {
   Ama: "Ama",
 
   @doc("Receives data from another pipeline group.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   PipelineGroup: "PipelineGroup",
 
   @doc("Receives data from a OTLP collector.")
@@ -164,6 +165,7 @@ union ExporterType {
   AzureMonitorWorkspaceLogs: "AzureMonitorWorkspaceLogs",
 
   @doc("Export data to another pipeline group instance.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   PipelineGroup: "PipelineGroup",
 }
 

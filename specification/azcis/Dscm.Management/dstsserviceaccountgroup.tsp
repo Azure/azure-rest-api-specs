@@ -40,17 +40,7 @@ model DstsServiceAccountGroupResourceProperties {
   authenticationRequirements?: Array<AuthenticationRequirement>;
 
   @doc("The cloud ID where the Service Account Group should be added.")
-  cloudId?:
-    | "Public"
-    | "BlackForest"
-    | "Fairfax"
-    | "Mooncake"
-    | "USNat"
-    | "USSec"
-    | "Bleu"
-    | "Delos"
-    | "GovSG"
-    | string;
+  cloudId?: CloudId;
 
   @doc("Allowed actor ids.")
   allowedActorIds?: Array<string>;
@@ -77,17 +67,6 @@ model DstsServiceAccountGroupResourceProperties {
   @doc("Request ID; a part of provisioning ResultData output.")
   @visibility(Lifecycle.Read) // A part of provisioning ResultData output, gets PATCHed back from FRP.
   requestId?: string;
-}
-
-@added(Versions.v2024_06_24_preview)
-@doc("Authentication requirement.")
-model AuthenticationRequirement {
-  @doc("The authentication requirement value. E.g. 'SAWEnforcement' or 'PTH'.")
-  value: string;
-
-  @doc("A list of required IP ranges.")
-  @Azure.ResourceManager.identifiers(#[])
-  requiredIpRanges: Array<RequiredIpRange>;
 }
 
 @added(Versions.v2024_06_24_preview)
