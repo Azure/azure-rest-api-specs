@@ -65,8 +65,8 @@ These settings apply only when `--tag=package-2023-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2023-11-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2023-11-01-preview/cluster.json
-- Microsoft.ServiceFabric/preview/2023-11-01-preview/application.json
+- preview/2023-11-01-preview/cluster.json
+- preview/2023-11-01-preview/application.json
 ```
 
 ### Tag: package-2021-06
@@ -75,8 +75,8 @@ These settings apply only when `--tag=package-2021-06` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-06'
 input-file:
-- Microsoft.ServiceFabric/stable/2021-06-01/cluster.json
-- Microsoft.ServiceFabric/stable/2021-06-01/application.json
+- stable/2021-06-01/cluster.json
+- stable/2021-06-01/application.json
 ```
 
 ### Tag: package-2020-03
@@ -85,8 +85,8 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-03'
 input-file:
-- Microsoft.ServiceFabric/stable/2020-03-01/cluster.json
-- Microsoft.ServiceFabric/stable/2020-03-01/application.json
+- stable/2020-03-01/cluster.json
+- stable/2020-03-01/application.json
 ```
 
 ### Tag: package-2020-12-preview
@@ -95,8 +95,8 @@ These settings apply only when `--tag=package-2020-12-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-12-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2020-12-01-preview/cluster.json
-- Microsoft.ServiceFabric/preview/2020-12-01-preview/application.json
+- preview/2020-12-01-preview/cluster.json
+- preview/2020-12-01-preview/application.json
 ```
 
 ### Tag: package-2020-01-preview
@@ -105,8 +105,8 @@ These settings apply only when `--tag=package-2020-01-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2020-01-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2020-01-01-preview/managedcluster.json
-- Microsoft.ServiceFabric/preview/2020-01-01-preview/nodetype.json
+- preview/2020-01-01-preview/managedcluster.json
+- preview/2020-01-01-preview/nodetype.json
 ```
 
 ### Tag: package-2019-11-preview
@@ -115,8 +115,8 @@ These settings apply only when `--tag=package-2019-11-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-11-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2019-11-01-preview/cluster.json
-- Microsoft.ServiceFabric/preview/2019-11-01-preview/application.json
+- preview/2019-11-01-preview/cluster.json
+- preview/2019-11-01-preview/application.json
 ```
 
 ### Tag: package-2019-06-preview
@@ -125,8 +125,8 @@ These settings apply only when `--tag=package-2019-06-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-06-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2019-06-01-preview/cluster.json
-- Microsoft.ServiceFabric/preview/2019-06-01-preview/application.json
+- preview/2019-06-01-preview/cluster.json
+- preview/2019-06-01-preview/application.json
 ```
 
 ### Tag: package-2019-03
@@ -135,8 +135,8 @@ These settings apply only when `--tag=package-2019-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2019-03'
 input-file:
-- Microsoft.ServiceFabric/stable/2019-03-01/cluster.json
-- Microsoft.ServiceFabric/stable/2019-03-01/application.json
+- stable/2019-03-01/cluster.json
+- stable/2019-03-01/application.json
 ```
 
 ### Tag: package-2019-03-preview
@@ -145,8 +145,8 @@ These settings apply only when `--tag=package-2019-03-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-03-preview'
 input-file:
-- Microsoft.ServiceFabric/preview/2019-03-01-preview/cluster.json
-- Microsoft.ServiceFabric/preview/2019-03-01-preview/application.json
+- preview/2019-03-01-preview/cluster.json
+- preview/2019-03-01-preview/application.json
 ```
 
 ### Tag: package-2018-02
@@ -155,8 +155,8 @@ These settings apply only when `--tag=package-2018-02` is specified on the comma
 
 ``` yaml $(tag) == 'package-2018-02'
 input-file:
-- Microsoft.ServiceFabric/stable/2018-02-01/cluster.json
-- Microsoft.ServiceFabric/preview/2017-07-01-preview/application.json
+- stable/2018-02-01/cluster.json
+- preview/2017-07-01-preview/application.json
 ```
 
 ### Tag: package-2017-07
@@ -165,7 +165,7 @@ These settings apply only when `--tag=package-2017-07` is specified on the comma
 
 ``` yaml $(tag) == 'package-2017-07'
 input-file:
-- Microsoft.ServiceFabric/preview/2017-07-01-preview/servicefabric.json
+- preview/2017-07-01-preview/servicefabric.json
 ```
 
 ### Tag: package-2016-09
@@ -174,7 +174,7 @@ These settings apply only when `--tag=package-2016-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2016-09'
 input-file:
-- Microsoft.ServiceFabric/stable/2016-09-01/servicefabric.json
+- stable/2016-09-01/servicefabric.json
 ```
 
 ### Tag: package-2018-02-only
@@ -183,7 +183,7 @@ These settings apply only when `--tag=package-2018-02-only` is specified on the 
 
 ``` yaml $(tag) == 'package-2018-02-only'
 input-file:
-- Microsoft.ServiceFabric/stable/2018-02-01/cluster.json
+- stable/2018-02-01/cluster.json
 ```
 
 ---
