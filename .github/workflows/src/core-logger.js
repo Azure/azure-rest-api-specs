@@ -45,4 +45,11 @@ export class CoreLogger {
   isDebug() {
     return this.#core.isDebug();
   }
+
+  /**
+   * @param {string} message
+   */
+  warning(message) {
+    this.#core.warning(message);
+  }
 }

@@ -42,27 +42,21 @@ namespace Language.Conversations;
 /** Analyze Conversations Service Versions */
 enum Versions {
   /** Version 2022-05-01 */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2022_05_01: "2022-05-01",
 
   /** Version 2023-04-01 */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_04_01: "2023-04-01",
 
   /** Version 2024-05-01 */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_05_01: "2024-05-01",
 
   /** Version 2024-11-01 */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_01: "2024-11-01",
 
   /** Version 2024-11-15-preview" */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15_preview: "2024-11-15-preview",
 
   /** Version 2025-05-15 */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_05_15_preview: "2025-05-15-preview",
 }
 
