@@ -9920,37 +9920,24 @@
       "type": "object",
       "description": "ConfigTemplateMetadata Properties",
       "properties": {
-        "hierarchyIds": {
+        "linkedHierarchies": {
           "type": "array",
           "description": "Hierarchy ARM Ids",
           "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
-            "x-ms-arm-id-details": {
-              "allowedResources": [
-                {
-                  "type": "Microsoft.Edge/targets"
-                },
-                {
-                  "type": "Microsoft.Edge/sites"
-                }
-              ]
-            }
+            "$ref": "#/definitions/HierarchyMetadata"
           },
-          "readOnly": true
-        },
-        "level": {
-          "type": "string",
-          "description": "Hierarchy Level",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "Provisioning state of resource",
           "readOnly": true
         }
-      }
+      },
+      "required": [
+        "linkedHierarchies"
+      ]
     },
     "ConfigTemplateProperties": {
       "type": "object",
@@ -11110,6 +11097,35 @@
           "$ref": "#/definitions/ConfigTemplateConfigurationState",
           "description": "Configuration status of the config template version",
           "readOnly": true
+        }
+      }
+    },
+    "HierarchyMetadata": {
+      "type": "object",
+      "description": "Hierarchy Ids With Level for applying config Template which will further generate ARG objects",
+      "properties": {
+        "hierarchyIds": {
+          "type": "array",
+          "description": "Hierarchy Ids",
+          "items": {
+            "type": "string",
+            "format": "arm-id",
+            "description": "A type definition that refers the id to an Azure Resource Manager resource.",
+            "x-ms-arm-id-details": {
+              "allowedResources": [
+                {
+                  "type": "Private.Edge/Targets"
+                },
+                {
+                  "type": "Microsoft.Edge/Sites"
+                }
+              ]
+            }
+          }
+        },
+        "level": {
+          "type": "string",
+          "description": "Hierarchy Level"
         }
       }
     },

@@ -16,24 +16,31 @@ using Azure.ResourceManager;
 
 namespace Microsoft.Edge;
 
+@added(Versions.v2025_08_01)
+@doc("Hierarchy Ids With Level for applying config Template which will further generate ARG objects")
+model HierarchyMetadata {
+  @doc("Hierarchy Ids")
+  hierarchyIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Private.Edge/Targets";
+    },
+    {
+      type: "Microsoft.Edge/Sites";
+    }
+  ]>[];
+
+  @doc("Hierarchy Level")
+  level?: string;
+}
+
 @added(Versions.v2025_08_15_preview)
 @added(Versions.v2025_08_01)
 @doc("ConfigTemplateMetadata Properties")
 model ConfigTemplateMetadataProperties {
   @doc("Hierarchy ARM Ids")
   @visibility(Lifecycle.Read)
-  hierarchyIds?: armResourceIdentifier<[
-    {
-      type: "Microsoft.Edge/targets";
-    },
-    {
-      type: "Microsoft.Edge/sites";
-    }
-  ]>[];
-
-  @doc("Hierarchy Level")
-  @visibility(Lifecycle.Read)
-  level?: string;
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  linkedHierarchies: HierarchyMetadata[];
 
   @doc("Provisioning state of resource")
   @visibility(Lifecycle.Read)
