@@ -399,7 +399,7 @@ const javaAzEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "{output-dir}/{service-dir}/azure-aaa",
   "{output-dir}/{service-dir}/aaa",
   [new TspConfigJavaAzEmitterOutputDirMatchPatternSubRule()],
-  true,
+  false,
 );
 
 const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
@@ -409,7 +409,7 @@ const javaMgmtEmitterOutputDirTestCases = createEmitterOptionTestCases(
   "{output-dir}/{service-dir}/azure-resourcemanager-aaa-bbb",
   "{output-dir}/{service-dir}/azure-aaa",
   [new TspConfigJavaMgmtEmitterOutputDirMatchPatternSubRule()],
-  true,
+  false,
 );
 
 const javaMgmtNamespaceTestCases = createEmitterOptionTestCases(
@@ -744,7 +744,7 @@ describe("tspconfig", function () {
 
     const rule = new SdkTspConfigValidationRule(c.subRules);
     const result = await rule.execute(c.folder);
-    strictEqual(result.success, true); // Non-management should always pass
+    strictEqual(result.success, c.success); // Non-management should always pass
     if (c.success)
       strictEqual(result.stdOutput?.includes("[SdkTspConfigValidation]: validation passed."), true);
     if (!c.success)
