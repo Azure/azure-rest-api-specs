@@ -13,8 +13,8 @@ options:
     use-read-only-status-schema: "true"
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/eventgrid
-    package-dir: armeventgrid
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    emitter-output-dir: "{output-dir}/{service-dir}/armeventgrid"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armeventgrid
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -22,20 +22,20 @@ options:
     inject-spans: true
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: azure-mgmt-eventgrid
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-eventgrid"
     namespace: azure.mgmt.eventgrid
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
     flavor: azure
-    package-dir: azure-resourcemanager-eventgrid
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-eventgrid"
     namespace: com.azure.resourcemanager.eventgrid
     service-name: Event Grid
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: arm-eventgrid
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-eventgrid"
     package-details:
       name: "@azure/arm-eventgrid"
 parameters:

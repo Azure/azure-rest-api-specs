@@ -13,24 +13,24 @@ options:
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Nginx"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Nginx"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Nginx"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-nginx"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-nginx"
     namespace: "azure.mgmt.nginx"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-nginx"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-nginx"
     namespace: "com.azure.resourcemanager.nginx"
     service-name: "Nginx" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/nginx
-    package-dir: "arm-nginx"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-nginx"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
