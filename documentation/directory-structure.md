@@ -42,14 +42,13 @@ as explained in the [glossary].
 
 The `specification` folder is the root folder for all `service` specifications.
 
-Each child of the `specification` folder corresponds to `<azureTeam>`.
-All the `service` (see [glossary]) specifications owned by that team are rooted in their `<azureTeam>` folder.
+Each child of the `specification` folder corresponds to `<organization>`.
+All the `service` (see [glossary]) specifications owned by that team are rooted in their `<organization>` folder.
 
-Given `<azureTeam>` folder has following structure:
+Given `<organization>` folder has following structure:
 
-- `<azureTeam>/<typeSpecSrc>` (multiple `<TypeSpecSrc>` folders are allowed)
-- `<azureTeam>/resource-manager/<RPNS>` (exactly one `<RPNS>` folder is allowed)
-- `<azureTeam>/data-plane/<groupingDir>` (multiple `<groupingDir>` folders are allowed)
+- `<organization>/resource-manager/<RPNS>/` (exactly one `<RPNS>` folder is allowed)
+- `<organization>/data-plane/` (multiple `<groupingDir>` folders are allowed)
 
 ### `<typeSpecSrc>` folders
 
@@ -67,61 +66,63 @@ You can learn more about TypeSpec at [aka.ms/azsdk/typespec] and [aka.ms/typespe
 
 ### `resource-manager/<RPNS>` folder
 
-The `<azureTeam>/resource-manager/<RPNS>` is a folder corresponding to ARM **Resource Provider (RP) namespace**.
+The `<organization>/resource-manager/<RPNS>` is a folder corresponding to ARM **Resource Provider (RP) namespace**.
 
 An example RPNS is `Microsoft.Automation`. A list of RPs can be found in the [Resource Provider list].
 
-This folder corresponds to a `service group` (see [glossary]) for all ARM services owned by the team.
+This folder corresponds to one or more `service` (see [glossary]) for all ARM services owned by the team.
 
-An `<RPNS>` folder has one or more child `<service>` folders corresponding to the services belonging
-to the `service group` represented by the `<RPNS>` folder.
+An `<RPNS>` folder has one or more `<service>` folders corresponding to the services.
 
 For example, [`specification/containerservice/resource-manager/Microsoft.ContainerService/aks`]
 is a folder for the `aks` service within the `Microsoft.ContainerService` ARM Resource Provider namespace.
 
 > [!NOTE]
 > Many Azure teams that have one ARM service instead of rooting it in
-> `specification/<azureTeam>/resource-manager/<RPNS>/<service>` root it in
-> `specification/<azureTeam>/resource-manager`.  
+> `specification/<organization>/resource-manager/<RPNS>/<service>` root it in
+> `specification/<organization>/resource-manager`.  
 > This is legacy, deprecated structure and is strongly discouraged going forward.
 
 In addition, the `<RPNS>` folder may contain `common-types` child folder that usually is of
 form `common-types/v<versionInt>/common.json` and contains types shared across API versions.
 E.g. [`Microsoft.Compute/common-types`].
 
-### `data-plane/<groupingDir>` folders
+### `data-plane/<service>` folders
 
-The `<azureTeam>/data-plane` folder is the equivalent
-of `<azureTeam>/resource-manager` but with following distinctions:
+The `<organization>/data-plane` folder is the equivalent
+of `<organization>/resource-manager/<RPNS>` but with following distinctions:
 
-- `<azureTeam>/data-plane` pertains to data-plane service APIs, not ARM service APIs.
-- `<azureTeam>/data-plane` has no concept of Resource Provider Namespace (`<RPNS>`).
-  Instead, it has or more `<groupingDir>` child folders (see also [glossary]).
+- `<organization>/data-plane` pertains to data-plane service APIs, not ARM service APIs.
+- `<organization>/data-plane` has no concept of Resource Provider Namespace (`<RPNS>`).
 
-Each `<groupingDir>` folder has one or more child `<service>` folders corresponding to the services grouped
-in given `<groupingDir>`.
+Each `<organization>/data-plane` or `<organization>/resource-manager/<RPNS>` folder has one or more `<service>` folders corresponding to the services grouped.
 
 > [!NOTE]
-> Many Azure teams that have one data-plane service instead of rooting it in
-> `specification/<azureTeam>/data-plane/<groupingDir>/<service>` root it in
-> `specification/<azureTeam>/data-plane`.  
-> This is legacy, deprecated structure and is strongly discouraged going forward.
+> Many organization that have a `<RPNS>` or somethings prefixed `Azure.<SomeService>` folder under `data-plane` folder 
+> instead of rooting it in `specification/<organization>/data-plane/` directly.
+> There're some other organization, who have multiple services and rooted it in
+> `specification/<organization>/data-plane/<groupDire>/<service>`.  
+> They are both legacy, deprecated structure and is strongly discouraged going forward.
 
 ## Service folder structure
 
 As described above, ARM service folder path is:
 
-`specification/<azureTeam>/resource-manager/<RPNS>/<service>`
+`specification/<organization>/resource-manager/<RPNS>/<service>`
 
 while data-plane service folder path is:
 
-`specification/<azureTeam>/data-plane/<groupingDir>/<service>`.
+`specification/<organization>/data-plane/<service>`.
 
 A service folder has the following elements:
 
 - The [AutoRest config `README.md` file]. See also section about it in [uniform versioning article].
 - Additional AutoRest config `README.md` files specific to given language SDK.
 - The `stable` and `preview` folders if applicable.
+- The `main.tsp` TypeSpec entrance if service has been converted to TypeSpec.
+- The `tspconfig.yaml` configuration file for TypeSpec compilation. Which also includes some OpenAPI/SDK emitters options.
+- Other `*.tsp` files for this service
+- `examples/<apiVersion>` folders, which includes API examples with different API versions.
 
 The `stable` and `preview` folders  contain OpenAPI specs in the `stable` and `preview` [lifecycle stages][aka.ms/azsdk/api-versions]
 respectively, organized in `<apiVersion>` subfolders for each service API version.
@@ -130,8 +131,8 @@ For example:
 
 - `<azureTeam>/resource-manager/<RPNS>/<service>/stable/<apiVersion>`
 - `<azureTeam>/resource-manager/<RPNS>/<service>/preview/<apiVersion-preview>`
-- `<azureTeam>/data-plane/<groupingDir>/<service>/stable/<apiVersion>`
-- `<azureTeam>/data-plane/<groupingDir>/<service>/preview/<apiVersion-preview>`
+- `<azureTeam>/data-plane/<service>/stable/<apiVersion>`
+- `<azureTeam>/data-plane/<service>/preview/<apiVersion-preview>`
 
 Each such API version folder directly contains a set of `.json` files containing OpenAPI specs emitted from TypeSpec,
 as well as an `examples` child folder with `.json` files having the contents of [`x-ms-examples`] referenced
