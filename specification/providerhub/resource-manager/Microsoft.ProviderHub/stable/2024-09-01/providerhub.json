@@ -3097,7 +3097,7 @@
             "description": "The resource properties to be updated.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProviderMonitorSettingTagsUpdate"
+              "type": "object"
             }
           }
         ],
@@ -5872,9 +5872,7 @@
           "$ref": "#/definitions/OperationActionType",
           "description": "The action type."
         },
-        "properties": {
-          "description": "Anything"
-        }
+        "properties": {}
       },
       "required": [
         "name",
@@ -6221,19 +6219,6 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state.",
           "readOnly": true
-        }
-      }
-    },
-    "ProviderMonitorSettingTagsUpdate": {
-      "type": "object",
-      "description": "The type used for updating tags in ProviderMonitorSetting resources.",
-      "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -6693,7 +6678,9 @@
         },
         "encryptedKey": {
           "type": "string",
-          "description": "The encrypted key."
+          "format": "password",
+          "description": "The encrypted key.",
+          "x-ms-secret": true
         },
         "accountName": {
           "type": "string",
@@ -7156,8 +7143,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The metadata.",
-          "additionalProperties": {}
+          "description": "The metadata."
         },
         "globalNotificationEndpoints": {
           "type": "array",
@@ -7173,14 +7159,12 @@
         },
         "enableTenantLinkedNotification": {
           "type": "boolean",
-          "description": "Whether tenant linked notification is enabled."
+          "description": "Whether tenant linked notification is enabled.",
+          "x-nullable": true
         },
         "notifications": {
-          "type": "array",
-          "description": "The notifications.",
-          "items": {
-            "$ref": "#/definitions/Notification"
-          }
+          "$ref": "#/definitions/Notification",
+          "description": "The notifications."
         },
         "linkedNotificationRules": {
           "type": "array",
@@ -7288,8 +7272,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The metadata.",
-          "additionalProperties": {}
+          "description": "The metadata."
         },
         "templateDeploymentOptions": {
           "$ref": "#/definitions/ResourceProviderManifestPropertiesTemplateDeploymentOptions",
@@ -7305,14 +7288,12 @@
         },
         "enableTenantLinkedNotification": {
           "type": "boolean",
-          "description": "The enable tenant linked notification."
+          "description": "The enable tenant linked notification.",
+          "x-nullable": true
         },
         "notifications": {
-          "type": "array",
-          "description": "The notifications.",
-          "items": {
-            "$ref": "#/definitions/Notification"
-          }
+          "$ref": "#/definitions/Notification",
+          "description": "The notifications."
         },
         "linkedNotificationRules": {
           "type": "array",
@@ -7682,8 +7663,7 @@
         },
         "metadata": {
           "type": "object",
-          "description": "The metadata.",
-          "additionalProperties": {}
+          "description": "The metadata."
         },
         "requiredFeatures": {
           "type": "array",
@@ -7756,11 +7736,8 @@
           "description": "The quota rule."
         },
         "notifications": {
-          "type": "array",
-          "description": "The notifications.",
-          "items": {
-            "$ref": "#/definitions/Notification"
-          }
+          "$ref": "#/definitions/Notification",
+          "description": "The notifications."
         },
         "linkedNotificationRules": {
           "type": "array",
@@ -8418,7 +8395,6 @@
           "type": "object",
           "description": "The metadata.",
           "additionalProperties": {
-            "additionalProperties": {},
             "type": "object"
           }
         },
@@ -8431,11 +8407,8 @@
           "description": "The quota rule."
         },
         "notifications": {
-          "type": "array",
-          "description": "The notifications.",
-          "items": {
-            "$ref": "#/definitions/Notification"
-          }
+          "$ref": "#/definitions/Notification",
+          "description": "The notifications."
         },
         "linkedNotificationRules": {
           "type": "array",
@@ -10131,7 +10104,6 @@
         "info": {
           "type": "object",
           "description": "The error information.",
-          "additionalProperties": {},
           "readOnly": true
         }
       },
