@@ -611,7 +611,7 @@ model TrackedResource {
    * The name of the resource
    */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @segment("{trafficmanagerprofiles}")
+  @segment("trafficmanagerprofiles")
   name?: string;
 
   /**
