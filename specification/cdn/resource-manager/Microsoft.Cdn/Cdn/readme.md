@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-preview-2025-09` is specified on t
 
 ```yaml $(tag) == 'package-preview-2025-09'
 input-file:
-  - Microsoft.Cdn/preview/2025-09-01-preview/openapi.json
+  - preview/2025-09-01-preview/openapi.json
 suppressions:
   - code: PatchBodyParametersSchema
     reason: This is the API design and therefore exempted
