@@ -19,20 +19,20 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.TrafficManager"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-trafficmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-trafficmanager"
     namespace: "azure.mgmt.trafficmanager"
+    flavor: "azure"
     generate-test: true
     generate-sample: true
-    flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-trafficmanager"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-trafficmanager"
     namespace: "com.azure.resourcemanager.trafficmanager"
-    service-name: "Traffic Manager" # human-readable service name, whitespace allowed
-    flavor: azure
-  "@azure-tools/typespec-ts":
-    package-dir: "arm-trafficmanager"
+    service-name: "Traffic Manager"
     flavor: "azure"
+  "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-trafficmanager"
+    flavor: azure
     package-details:
       name: "@azure/arm-trafficmanager"
   "@azure-tools/typespec-go":
@@ -45,9 +45,6 @@ options:
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
-  "@azure-typespec/http-client-csharp-mgmt":
-    package-name: "Azure.ResourceManager.TrafficManager"
-    namespace: "{package-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
