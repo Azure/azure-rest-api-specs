@@ -45,6 +45,30 @@ input-file:
   - Microsoft.Communication/preview/2025-05-01-preview/SmtpUsernames.json
 ```
 
+### Tag: package-2025-05-01
+
+These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-05-01'
+input-file:
+  - Microsoft.Communication/stable/2025-05-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2025-05-01/Domains.json
+  - Microsoft.Communication/stable/2025-05-01/EmailServices.json
+  - Microsoft.Communication/stable/2025-05-01/SenderUsernames.json
+```
+
+### Tag: package-2023-04
+
+These settings apply only when `--tag=package-2023-04` is specified on the command line.
+
+``` yaml $(tag) == 'package-2023-04'
+input-file:
+  - Microsoft.Communication/stable/2023-04-01/CommunicationServices.json
+  - Microsoft.Communication/stable/2023-04-01/Domains.json
+  - Microsoft.Communication/stable/2023-04-01/EmailServices.json
+  - Microsoft.Communication/stable/2023-04-01/SenderUsernames.json
+```
+
 ### Tag: package-preview-2025-01-25
 
 These settings apply only when `--tag=package-preview-2025-01-25-preview` is specified on the command line.
@@ -239,6 +263,7 @@ These settings apply only when `--tag=package-2020-08-20` is specified on the co
 ```yaml $(tag) == 'package-2020-08-20'
 input-file:
   - Microsoft.Communication/stable/2020-08-20/CommunicationService.json
+  - Microsoft.Communication/stable/2020-08-20/CommunicationService-private.json
 ```
 
 ### Tag: package-2020-08-20-private
