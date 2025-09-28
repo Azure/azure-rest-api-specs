@@ -82,4 +82,5 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 ```yaml $(tag) == 'package-2025-05-01'
 input-file:
   - Products/stable/2025-05-01/openapi.json
+  - Search/stable/2025-05-01/openapi.json
 ```

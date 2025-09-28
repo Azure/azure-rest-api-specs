@@ -710,7 +710,7 @@ model SuggestionsSearchQueryParameter {
 model SuggestionsSelectQueryParameter {
   @query
   @doc("Array of fields to return. Such as 'displayText'. If no value provided, return fields as follows. if suggestionsType=Entity, return: suggestionType, displayText, id. if suggestionType=WordSearch, return suggestionType and displayText. \n- `DisplayText`: Display text.\n- `Id`: Id.\n- `IconUrl`: Icon Url.\n- `ProductType`: Product type.\n- `LinkedAddInsTypes`: Linked AddIns types.")
-  select: SuggestionsFieldName[];
+  select?: SuggestionsFieldName[];
 }
 
 // API key def
