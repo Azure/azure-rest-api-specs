@@ -30,20 +30,21 @@ alias HeatMapModelsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<HeatMapModel>;
-  },
-  {
+
     /**
      * The name of the Traffic Manager profile.
      */
     @path
     @segment("trafficmanagerprofiles")
     profileName: string;
-
+  },
+  {
     /**
      * The type of the heatmap.
      */
     @path
     @segment("heatMaps")
+    @key("heatMapType")
     heatMapType: HeatMapType;
   },
   ErrorType = CloudError

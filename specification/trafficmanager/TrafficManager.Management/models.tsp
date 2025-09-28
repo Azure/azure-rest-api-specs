@@ -277,7 +277,29 @@ model EndpointPropertiesCustomHeadersItem {
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 @Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResource extends Resource {}
+model ProxyResource {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  id?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The name of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @segment("{endpointType}")
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
+   */
+  type?: Azure.Core.armResourceType;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+}
 
 /**
  * The core properties of ARM resources
@@ -288,9 +310,9 @@ model ProxyResource extends Resource {}
 @Azure.ResourceManager.Legacy.customAzureResource
 model Resource {
   /**
-   * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  id?: string;
+  id?: Azure.Core.armResourceIdentifier;
 
   /**
    * The name of the resource
@@ -299,9 +321,14 @@ model Resource {
   name?: string;
 
   /**
-   * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
    */
-  type?: string;
+  type?: Azure.Core.armResourceType;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
 
 /**
@@ -574,18 +601,38 @@ model MonitorConfigExpectedStatusCodeRangesItem {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 @Azure.ResourceManager.Legacy.customAzureResource
-model TrackedResource extends Resource {
+model TrackedResource {
+  /**
+   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   */
+  id?: Azure.Core.armResourceIdentifier;
+
+  /**
+   * The name of the resource
+   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @segment("{trafficmanagerprofiles}")
+  name?: string;
+
+  /**
+   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
+   */
+  type?: Azure.Core.armResourceType;
+
+  /**
+   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   */
+  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+
   /**
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
    * The Azure Region where the resource lives
    */
-  @visibility(Lifecycle.Read, Lifecycle.Create)
   location?: string;
 }
 

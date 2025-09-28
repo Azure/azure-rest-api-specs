@@ -14,14 +14,12 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager endpoint.
  */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(Profile)
-model Endpoint is Azure.ResourceManager.ProxyResource<EndpointProperties> {
-  ...ResourceNameParameter<
-    Resource = Endpoint,
-    KeyName = "endpointName",
-    SegmentName = "{endpointType}",
-    NamePattern = ""
-  >;
+model Endpoint is ProxyResource {
+  properties?: EndpointProperties;
 }
 
 alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -30,8 +28,7 @@ alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Endpoint>;
-  },
-  {
+
     /**
      * The name of the Traffic Manager profile.
      */
@@ -44,7 +41,8 @@ alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
      */
     @path
     endpointType: EndpointType;
-
+  },
+  {
     /**
      * The name of the Traffic Manager endpoint.
      */
