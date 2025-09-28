@@ -1,0 +1,608 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Communication SMS Service",
+    "description": "Azure Communication SMS Service",
+    "version": "2025-08-01-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/sms": {
+      "post": {
+        "tags": [
+          "Sms"
+        ],
+        "summary": "Sends a SMS message from a phone number that belongs to the authenticated account.",
+        "operationId": "Sms_Send",
+        "x-ms-examples": {
+          "SuccessfulSend": {
+            "$ref": "./examples/SmsSend.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "SendMessageRequest",
+            "description": "Represents the body of the send message request.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SendMessageRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "schema": {
+              "$ref": "#/definitions/SmsSendResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sms/optouts:add": {
+      "post": {
+        "tags": [
+          "OptOutsAdd"
+        ],
+        "summary": "Add phone numbers to the optouts list which shall stop receiving messages from a sender number.",
+        "operationId": "OptOuts_Add",
+        "x-ms-examples": {
+          "Opt Out": {
+            "$ref": "./examples/OptOutAdd.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OptOutRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OptOutResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sms/optouts:remove": {
+      "post": {
+        "tags": [
+          "OptOutsRemove"
+        ],
+        "summary": "Remove phone numbers from the optouts list.",
+        "operationId": "OptOuts_Remove",
+        "x-ms-examples": {
+          "Opt In": {
+            "$ref": "./examples/OptOutRemove.json"
+          }
+        },
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OptOutRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OptOutResponse"
+            }
+          }
+        }
+      }
+    },
+    "/sms/optouts:check": {
+      "post": {
+        "tags": [
+          "OptOutsCheck"
+        ],
+        "summary": "Check the opt out status for a recipient phone number with a sender phone number.",
+        "operationId": "OptOuts_Check",
+        "consumes": [
+          "application/json"
+        ],
+        "x-ms-examples": {
+          "Opt Check": {
+            "$ref": "./examples/OptOutCheck.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OptOutRequest"
+            }
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/OptOutResponse"
+            }
+          }
+        }
+      }
+    },
+    "/deliveryReports/{outgoingMessageId}": {
+      "get": {
+        "tags": [
+          "DeliveryReports"
+        ],
+        "summary": "Gets delivery report for a specific outgoing message.",
+        "operationId": "DeliveryReports_Get",
+        "x-ms-examples": {
+          "GetDeliveryReport": {
+            "$ref": "./examples/DeliveryReportGet.json"
+          }
+        },
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "name": "outgoingMessageId",
+            "in": "path",
+            "description": "The identifier of the outgoing message.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "api-version",
+            "in": "query",
+            "description": "Version of API to invoke.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/DeliveryReport"
+            }
+          },
+          "404": {
+            "description": "Not Found - Delivery report for this message is not found",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SmsRecipient": {
+      "description": "Recipient details for sending SMS messages.",
+      "required": [
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "type": "string"
+        },
+        "repeatabilityRequestId": {
+          "description": "If specified, the client directs that the request is repeatable; that is, the client can make the request multiple times with the same Repeatability-Request-ID and get back an appropriate response without the server executing the request multiple times. The value of the Repeatability-Request-ID is an opaque string representing a client-generated, 36-character hexadecimal case-insensitive encoding of a UUID (GUID), identifier for the request.",
+          "type": "string"
+        },
+        "repeatabilityFirstSent": {
+          "description": "MUST be sent by clients to specify that a request is repeatable. Repeatability-First-Sent is used to specify the date and time at which the request was first created.eg- Tue, 26 Mar 2019 16:06:51 GMT",
+          "type": "string"
+        }
+      }
+    },
+    "MessagingConnectOptions": {
+      "description": "Defines optional parameters for connecting with the Messaging Connect Partner to deliver SMS.",
+      "required": [
+        "apiKey",
+        "partner"
+      ],
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "description": "Represents the API key associated with the customer's account in the Messaging Connect Partner portal.",
+          "type": "string"
+        },
+        "partner": {
+          "description": "Specifies the partner associated with the API key.",
+          "type": "string"
+        }
+      }
+    },
+    "SmsSendOptions": {
+      "description": "Optional configuration for sending SMS messages.",
+      "required": [
+        "enableDeliveryReport"
+      ],
+      "type": "object",
+      "properties": {
+        "enableDeliveryReport": {
+          "description": "Enable this flag to receive a delivery report for this message on the Azure Resource EventGrid.",
+          "type": "boolean"
+        },
+        "tag": {
+          "description": "Use this field to provide metadata that will then be sent back in the corresponding Delivery Report.",
+          "type": "string"
+        },
+        "deliveryReportTimeoutInSeconds": {
+          "format": "int32",
+          "description": "Time to wait for a delivery report. After this time a delivery report with timeout error code is generated.",
+          "maximum": 43200,
+          "minimum": 60,
+          "type": "integer"
+        },
+        "messagingConnect": {
+          "$ref": "#/definitions/MessagingConnectOptions"
+        }
+      }
+    },
+    "SendMessageRequest": {
+      "description": "Represents the properties of a send message request.",
+      "required": [
+        "message",
+        "smsRecipients",
+        "from"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The sender's phone number in E.164 format that is owned by the authenticated account.",
+          "type": "string"
+        },
+        "smsRecipients": {
+          "description": "The recipient's phone number in E.164 format. In this version, a minimum of 1 and upto 100 recipients in the list are supported.",
+          "maxLength": 100,
+          "minLength": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmsRecipient"
+          }
+        },
+        "message": {
+          "description": "The contents of the message that will be sent to the recipient. The allowable content is defined by RFC 5724.",
+          "maxLength": 2048,
+          "minLength": 0,
+          "type": "string"
+        },
+        "smsSendOptions": {
+          "$ref": "#/definitions/SmsSendOptions"
+        }
+      }
+    },
+    "SmsSendResponse": {
+      "description": "Response for a successful or multi status send Sms request.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SmsSendResponseItem"
+          }
+        }
+      }
+    },
+    "SmsSendResponseItem": {
+      "description": "Response for a single recipient.",
+      "required": [
+        "httpStatusCode",
+        "to",
+        "successful"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The identifier of the outgoing Sms message. Only present if message processed.",
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "format": "int32",
+          "description": "HTTP Status code.",
+          "type": "integer"
+        },
+        "repeatabilityResult": {
+          "description": "The result of a repeatable request with one of the case-insensitive values accepted or rejected.",
+          "type": "string",
+          "enum": [
+            "accepted",
+            "rejected"
+          ]
+        },
+        "successful": {
+          "description": "Indicates if the message is processed successfully or not.",
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "description": "Optional error message in case of 4xx/5xx/repeatable errors.",
+          "type": "string"
+        }
+      }
+    },
+    "OptOutRecipient": {
+      "description": "A single opt out recipient number.",
+      "required": [
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient's phone number (in E.164 format).",
+          "minLength": 1,
+          "type": "string"
+        }
+      }
+    },
+    "OptOutRequest": {
+      "description": "An opt out request.",
+      "required": [
+        "from",
+        "recipients"
+      ],
+      "type": "object",
+      "properties": {
+        "from": {
+          "description": "The sender's identifier (typically phone number in E.164 format) that is owned by the authenticated account.",
+          "minLength": 1,
+          "type": "string"
+        },
+        "recipients": {
+          "maxItems": 100,
+          "minItems": 1,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptOutRecipient"
+          }
+        }
+      }
+    },
+    "OptOutResponse": {
+      "description": "Response for an opt out request. Validate the returned items in the response to see which recipients were successfully added or removed from the opt outs list.",
+      "required": [
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OptOutResponseItem"
+          }
+        }
+      }
+    },
+    "OptOutResponseItem": {
+      "required": [
+        "httpStatusCode",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "to": {
+          "description": "The recipient phone number (in E.164 format).",
+          "minLength": 1,
+          "type": "string"
+        },
+        "httpStatusCode": {
+          "format": "int32",
+          "type": "integer"
+        },
+        "isOptedOut": {
+          "description": "Optional flag specifying if number was Opted Out from receiving messages",
+          "type": "boolean"
+        },
+        "errorMessage": {
+          "description": "Optional error message in case of 4xx/5xx errors.",
+          "type": "string"
+        }
+      }
+    },
+    "DeliveryReport": {
+      "description": "Delivery report for an outgoing SMS message.",
+      "required": [
+        "deliveryStatus",
+        "messageId",
+        "from",
+        "to"
+      ],
+      "type": "object",
+      "properties": {
+        "deliveryStatus": {
+          "description": "The delivery status of the message.",
+          "type": "string",
+          "enum": [
+            "Delivered",
+            "Failed"
+          ]
+        },
+        "deliveryStatusDetails": {
+          "description": "Detailed information about the delivery status.",
+          "type": "string"
+        },
+        "deliveryAttempts": {
+          "description": "Array of delivery attempts made for this message.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DeliveryAttempt"
+          }
+        },
+        "receivedTimestamp": {
+          "description": "The timestamp when the delivery report was received.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "tag": {
+          "description": "Custom tag provided when sending the message.",
+          "type": "string"
+        },
+        "messageId": {
+          "description": "The identifier of the outgoing message.",
+          "type": "string"
+        },
+        "from": {
+          "description": "The sender's phone number in E.164 format.",
+          "type": "string"
+        },
+        "to": {
+          "description": "The recipient's phone number in E.164 format.",
+          "type": "string"
+        }
+      }
+    },
+    "DeliveryAttempt": {
+      "description": "Details of a delivery attempt.",
+      "required": [
+        "timestamp",
+        "segmentsSucceeded",
+        "segmentsFailed"
+      ],
+      "type": "object",
+      "properties": {
+        "timestamp": {
+          "description": "The timestamp of the delivery attempt.",
+          "type": "string",
+          "format": "date-time"
+        },
+        "segmentsSucceeded": {
+          "description": "Number of message segments that were successfully delivered.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "segmentsFailed": {
+          "description": "Number of message segments that failed to be delivered.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error response for failed requests.",
+      "required": [
+        "type",
+        "title",
+        "status"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "A URI reference that identifies the problem type.",
+          "type": "string"
+        },
+        "title": {
+          "description": "A short, human-readable summary of the problem type.",
+          "type": "string"
+        },
+        "status": {
+          "description": "The HTTP status code.",
+          "type": "integer",
+          "format": "int32"
+        },
+        "traceId": {
+          "description": "The trace identifier for the request.",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "parameters": {},
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "description": "The communication resource, for example https://my-resource.communication.azure.com",
+        "required": true,
+        "type": "string",
+        "in": "path",
+        "x-ms-skip-url-encoding": true,
+        "x-ms-parameter-location": "client",
+        "format": "url"
+      }
+    ]
+  }
+}

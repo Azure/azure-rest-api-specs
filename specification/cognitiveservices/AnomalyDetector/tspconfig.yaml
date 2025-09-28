@@ -1,8 +1,4 @@
 parameters:
-  "java-sdk-folder":
-    default: "{project-root}/azure-sdk-for-java/"
-  "js-sdk-folder":
-    default: "{project-root}/azure-sdk-for-js/"
   "service-dir":
     default: "sdk/anomalydetector"
 emit:
@@ -21,10 +17,9 @@ options:
     emitter-output-dir: "{project-root}/../"
   # Uncomment this line and add "@azure-tools/typespec-java" to your package.json to generate Java code
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-anomalydetector"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-anomalydetector"
     namespace: com.azure.ai.anomalydetector
     partial-update: true
-    emitter-output-dir: "{java-sdk-folder}/sdk/{service-directory-name}/azure-ai-anomalydetector"
     flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
@@ -38,10 +33,9 @@ options:
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{js-sdk-folder}/sdk/{service-directory-name}/ai-anomaly-detector-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-anomaly-detector-rest"
     generate-metadata: true
     is-modular-library: false
-    package-dir: "ai-anomaly-detector-rest"
     package-details:
       name: "@azure-rest/ai-anomaly-detector"
     flavor: azure
