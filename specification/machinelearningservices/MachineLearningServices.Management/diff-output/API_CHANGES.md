@@ -1036,6 +1036,8 @@
 | `definitions.Password.properties.value.format__added` | added | `password` |
 | `definitions.SslConfiguration.properties.cert.format__added` | added | `password` |
 | `definitions.SslConfiguration.properties.key.format__added` | added | `password` |
+| `definitions.VirtualMachineSshCredentials.properties.privateKeyData.format__added` | added | `password` |
+| `definitions.VirtualMachineSshCredentials.properties.publicKeyData.format__added` | added | `password` |
 
 ### Changes for `x-ms-secret`
 
@@ -1049,8 +1051,6 @@
 | `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.UserAccountCredentials.properties.adminUserPassword['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.UserAccountCredentials.properties.adminUserSshPublicKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.VirtualMachineSshCredentials.properties.privateKeyData['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.VirtualMachineSshCredentials.properties.publicKeyData['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.WorkspaceConnectionOAuth2.properties.clientSecret['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.WorkspaceConnectionOAuth2.properties.developerToken['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.WorkspaceConnectionOAuth2.properties.password['x-ms-secret__deleted']` | deleted | `true` |
@@ -1577,43 +1577,18 @@
 | `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-nullable__added']` | added | `true` |
 | `definitions.UsageAndQuotaDetails.properties.modelCollection['x-nullable__deleted']` | deleted | `true` |
 | `definitions.UsageAndQuotaDetails.properties.usageDetails['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VolumeDefinition.properties.bind['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VolumeDefinition.properties.consistency['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VolumeDefinition.properties.readOnly['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VolumeDefinition.properties.tmpfs['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VolumeDefinition.properties.volume['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VolumeOptions.properties.nocopy['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.cve['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.cveUrl['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.dueDate['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.id['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.packageDetails['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.providerId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.publishDate['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.solution['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.title['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.vendorId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityDetails.properties.vendorUrl['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityFindings.properties.assetId['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityFindings.properties.data['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityFindings.properties.lastScanDate['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityFindings.properties.scanner['x-nullable__deleted']` | deleted | `true` |
-| `definitions.VulnerabilityFindings.properties.source['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Webhook.properties.eventType['x-nullable__deleted']` | deleted | `true` |
 
 ### Changes for `location`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ComputeResource.properties.location__deleted` | deleted | `{"type":"string"}` |
-| `definitions.Workspace.properties.location__deleted` | deleted | `{"type":"string"}` |
 
 ### Changes for `tags`
 
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ComputeResource.properties.tags__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"type":"string"}}` |
-| `definitions.Workspace.properties.tags__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"}}` |
 
 ### Changes for `dataType`
 
@@ -2144,26 +2119,6 @@
 |------|------------|-------|
 | `definitions.TableVerticalFeaturizationSettings.properties.transformerParams.additionalProperties['x-ms-identifiers__deleted']` | deleted | `[]` |
 
-### Changes for `title`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.UserAccountCredentials.properties.adminUserName.title__deleted` | deleted | `User name.` |
-| `definitions.UserAccountCredentials.properties.adminUserPassword.title__deleted` | deleted | `Password.` |
-| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.title__deleted` | deleted | `SSH public key.` |
-| `definitions.VirtualMachineSize.properties.estimatedVMPrices.title__deleted` | deleted | `Estimated VM prices` |
-| `definitions.VirtualMachineSize.properties.family.title__deleted` | deleted | `Virtual Machine family name` |
-| `definitions.VirtualMachineSize.properties.gpus.title__deleted` | deleted | `Number of gPUs` |
-| `definitions.VirtualMachineSize.properties.lowPriorityCapable.title__deleted` | deleted | `Low priority capable` |
-| `definitions.VirtualMachineSize.properties.maxResourceVolumeMB.title__deleted` | deleted | `Resource volume size` |
-| `definitions.VirtualMachineSize.properties.memoryGB.title__deleted` | deleted | `Memory size` |
-| `definitions.VirtualMachineSize.properties.name.title__deleted` | deleted | `Virtual Machine size name` |
-| `definitions.VirtualMachineSize.properties.osVhdSizeMB.title__deleted` | deleted | `OS VHD Disk size` |
-| `definitions.VirtualMachineSize.properties.premiumIO.title__deleted` | deleted | `Premium IO supported` |
-| `definitions.VirtualMachineSize.properties.supportedComputeTypes.title__deleted` | deleted | `Supported Compute Types` |
-| `definitions.VirtualMachineSize.properties.vCPUs.title__deleted` | deleted | `Number of vPUs` |
-| `definitions.VolumeDefinition.properties.type.title__deleted` | deleted | `Type of Volume Definition` |
-
 ## Modified Values
 
 | Path | Old Value | New Value |
@@ -2249,7 +2204,6 @@
 | `definitions.SweepJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.UriFileDataVersion.allOf[0].$ref` | `#/definitions/DataVersionBase` | `#/definitions/DataVersionBaseProperties` |
 | `definitions.UriFolderDataVersion.allOf[0].$ref` | `#/definitions/DataVersionBase` | `#/definitions/DataVersionBaseProperties` |
-| `definitions.Workspace.allOf[0].$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
 | `definitions.WorkspaceConnectionOAuth2.properties.authUrl.format` | `url` | `uri` |
 | `definitions.WorkspaceProperties.properties.agentsEndpointUri.format` | `url` | `uri` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |

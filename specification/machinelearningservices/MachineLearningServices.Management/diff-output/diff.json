@@ -17048,15 +17048,10 @@
     },
     "UserAccountCredentials": {
       "properties": {
-        "adminUserName": {
-          "title__deleted": "User name."
-        },
         "adminUserSshPublicKey": {
-          "title__deleted": "SSH public key.",
           "x-ms-secret__deleted": true
         },
         "adminUserPassword": {
-          "title__deleted": "Password.",
           "x-ms-secret__deleted": true
         }
       }
@@ -17099,168 +17094,15 @@
         ]
       ]
     },
-    "VirtualMachineSize": {
-      "properties": {
-        "name": {
-          "title__deleted": "Virtual Machine size name"
-        },
-        "family": {
-          "title__deleted": "Virtual Machine family name"
-        },
-        "vCPUs": {
-          "title__deleted": "Number of vPUs"
-        },
-        "gpus": {
-          "title__deleted": "Number of gPUs"
-        },
-        "osVhdSizeMB": {
-          "title__deleted": "OS VHD Disk size"
-        },
-        "maxResourceVolumeMB": {
-          "title__deleted": "Resource volume size"
-        },
-        "memoryGB": {
-          "title__deleted": "Memory size"
-        },
-        "lowPriorityCapable": {
-          "title__deleted": "Low priority capable"
-        },
-        "premiumIO": {
-          "title__deleted": "Premium IO supported"
-        },
-        "estimatedVMPrices": {
-          "title__deleted": "Estimated VM prices"
-        },
-        "supportedComputeTypes": {
-          "title__deleted": "Supported Compute Types"
-        }
-      }
-    },
     "VirtualMachineSshCredentials": {
       "properties": {
         "publicKeyData": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         },
         "privateKeyData": {
-          "x-ms-secret__deleted": true
+          "format__added": "password"
         }
       }
-    },
-    "VolumeDefinition": {
-      "properties": {
-        "type": {
-          "title__deleted": "Type of Volume Definition"
-        },
-        "readOnly": {
-          "x-nullable__deleted": true
-        },
-        "consistency": {
-          "x-nullable__deleted": true
-        },
-        "bind": {
-          "x-nullable__deleted": true
-        },
-        "volume": {
-          "x-nullable__deleted": true
-        },
-        "tmpfs": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "VolumeOptions": {
-      "properties": {
-        "nocopy": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "VulnerabilityDetails": {
-      "properties": {
-        "cve": {
-          "x-nullable__deleted": true
-        },
-        "cveUrl": {
-          "x-nullable__deleted": true
-        },
-        "dueDate": {
-          "x-nullable__deleted": true
-        },
-        "id": {
-          "x-nullable__deleted": true
-        },
-        "packageDetails": {
-          "x-nullable__deleted": true
-        },
-        "providerId": {
-          "x-nullable__deleted": true
-        },
-        "publishDate": {
-          "x-nullable__deleted": true
-        },
-        "solution": {
-          "x-nullable__deleted": true
-        },
-        "title": {
-          "x-nullable__deleted": true
-        },
-        "vendorId": {
-          "x-nullable__deleted": true
-        },
-        "vendorUrl": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "VulnerabilityFindings": {
-      "properties": {
-        "assetId": {
-          "x-nullable__deleted": true
-        },
-        "data": {
-          "x-nullable__deleted": true
-        },
-        "lastScanDate": {
-          "x-nullable__deleted": true
-        },
-        "scanner": {
-          "x-nullable__deleted": true
-        },
-        "source": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "Webhook": {
-      "properties": {
-        "eventType": {
-          "x-nullable__deleted": true
-        }
-      }
-    },
-    "Workspace": {
-      "properties": {
-        "location__deleted": {
-          "type": "string"
-        },
-        "tags__deleted": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "allOf": [
-        [
-          "~",
-          {
-            "$ref": {
-              "__old": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource",
-              "__new": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
-            }
-          }
-        ]
-      ]
     },
     "WorkspaceConnectionOAuth2": {
       "properties": {

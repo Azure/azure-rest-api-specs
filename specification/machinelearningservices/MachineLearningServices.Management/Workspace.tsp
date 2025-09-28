@@ -14,7 +14,7 @@ namespace Microsoft.MachineLearningServices;
  * An object that represents a machine learning workspace.
  */
 model Workspace
-  is Azure.ResourceManager.TrackedResource<WorkspaceProperties, false> {
+  is Azure.ResourceManager.ProxyResource<WorkspaceProperties, false> {
   ...ResourceNameParameter<
     Resource = Workspace,
     KeyName = "workspaceName",
@@ -24,7 +24,9 @@ model Workspace
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   kind?: string;
+  location?: string;
   ...Azure.ResourceManager.ResourceSkuProperty;
+  tags?: Record<string>;
 }
 
 @armResourceOperations

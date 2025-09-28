@@ -3803,65 +3803,76 @@ model VirtualMachineSize {
   /**
    * The name of the virtual machine size.
    */
+  @summary("Virtual Machine size name")
   @visibility(Lifecycle.Read)
   name?: string;
 
   /**
    * The family name of the virtual machine size.
    */
+  @summary("Virtual Machine family name")
   @visibility(Lifecycle.Read)
   family?: string;
 
   /**
    * The number of vCPUs supported by the virtual machine size.
    */
+  @summary("Number of vPUs")
   @visibility(Lifecycle.Read)
   vCPUs?: int32;
 
   /**
    * The number of gPUs supported by the virtual machine size.
    */
+  @summary("Number of gPUs")
   @visibility(Lifecycle.Read)
   gpus?: int32;
 
   /**
    * The OS VHD disk size, in MB, allowed by the virtual machine size.
    */
+  @summary("OS VHD Disk size")
   @visibility(Lifecycle.Read)
   osVhdSizeMB?: int32;
 
   /**
    * The resource volume size, in MB, allowed by the virtual machine size.
    */
+  @summary("Resource volume size")
   @visibility(Lifecycle.Read)
   maxResourceVolumeMB?: int32;
 
   /**
    * The amount of memory, in GB, supported by the virtual machine size.
    */
+  @summary("Memory size")
   @visibility(Lifecycle.Read)
   memoryGB?: float64;
 
   /**
    * Specifies if the virtual machine size supports low priority VMs.
    */
+  @summary("Low priority capable")
   @visibility(Lifecycle.Read)
   lowPriorityCapable?: boolean;
 
   /**
    * Specifies if the virtual machine size supports premium IO.
    */
+  @summary("Premium IO supported")
   @visibility(Lifecycle.Read)
   premiumIO?: boolean;
 
   /**
    * The estimated price information for using a VM.
    */
+  @summary("Estimated VM prices")
   estimatedVMPrices?: EstimatedVMPrices;
 
   /**
    * Specifies the compute types supported by the virtual machine size.
    */
+  @summary("Supported Compute Types")
   supportedComputeTypes?: string[];
 }
 
@@ -4327,12 +4338,13 @@ model VolumeDefinition {
   /**
    * Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe
    */
+  @summary("Type of Volume Definition")
   type?: VolumeDefinitionType = VolumeDefinitionType.bind;
 
   /**
    * Indicate whether to mount volume as readOnly. Default value for this is false.
    */
-  readOnly?: boolean;
+  readOnly?: boolean | null;
 
   /**
    * Source of the mount. For bind mounts this is the host path.
@@ -4347,22 +4359,22 @@ model VolumeDefinition {
   /**
    * Consistency of the volume
    */
-  consistency?: string;
+  consistency?: string | null;
 
   /**
    * Bind Options of the mount
    */
-  bind?: BindOptions;
+  bind?: BindOptions | null;
 
   /**
    * Volume Options of the mount
    */
-  volume?: VolumeOptions;
+  volume?: VolumeOptions | null;
 
   /**
    * tmpfs option of the mount
    */
-  tmpfs?: TmpfsOptions;
+  tmpfs?: TmpfsOptions | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -4388,7 +4400,7 @@ model VolumeOptions {
   /**
    * Indicate whether volume is nocopy
    */
-  nocopy?: boolean;
+  nocopy?: boolean | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5104,7 +5116,7 @@ model VulnerabilityFindings {
   /**
    * AssetId (Image digest).
    */
-  assetId?: string;
+  assetId?: string | null;
 
   /**
    * Number of critical findings.
@@ -5115,7 +5127,7 @@ model VulnerabilityFindings {
   /**
    * List of vulnerability findings.
    */
-  data?: VulnerabilityDetails[];
+  data?: VulnerabilityDetails[] | null;
 
   /**
    * Time the report was generated.
@@ -5133,17 +5145,17 @@ model VulnerabilityFindings {
    * Scan result date.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  lastScanDate?: utcDateTime;
+  lastScanDate?: utcDateTime | null;
 
   /**
    * Vulnerability scanner name.
    */
-  scanner?: string;
+  scanner?: string | null;
 
   /**
    * Data source (internal).
    */
-  source?: string;
+  source?: string | null;
 
   /**
    * Total findings count.
@@ -5157,29 +5169,29 @@ model VulnerabilityDetails {
   /**
    * CVE id.
    */
-  cve?: string;
+  cve?: string | null;
 
   /**
    * CVE url.
    */
-  cveUrl?: string;
+  cveUrl?: string | null;
 
   /**
    * DueDate for vulnerability. Provider data or PublishDate + 30 days.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  dueDate?: utcDateTime;
+  dueDate?: utcDateTime | null;
 
   /**
    * Vulnerability ID.
    */
   @visibility(Lifecycle.Read)
-  id?: string;
+  id?: string | null;
 
   /**
    * Dependency details.
    */
-  packageDetails?: PackageDetails[];
+  packageDetails?: PackageDetails[] | null;
 
   /**
    * Indicates if there is a known patch for vulnerability.
@@ -5189,13 +5201,13 @@ model VulnerabilityDetails {
   /**
    * Vulnerability ID from provider.
    */
-  providerId?: string;
+  providerId?: string | null;
 
   /**
    * Vulnerability publish date.
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
-  publishDate?: utcDateTime;
+  publishDate?: utcDateTime | null;
 
   /**
    * Vulnerability Risk value.
@@ -5205,22 +5217,22 @@ model VulnerabilityDetails {
   /**
    * Vulnerability description.
    */
-  solution?: string;
+  solution?: string | null;
 
   /**
    * Vulnerability name.
    */
-  title?: string;
+  title?: string | null;
 
   /**
    * Vendor vulnerability ID (USN, GH Advisory, etc).
    */
-  vendorId?: string;
+  vendorId?: string | null;
 
   /**
    * Vendor vulnerability url.
    */
-  vendorUrl?: string;
+  vendorUrl?: string | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -5989,7 +6001,7 @@ model Webhook {
    * Send callback on a specified notification event
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  eventType?: string;
+  eventType?: string | null;
 
   /**
    * [Required] Specifies the type of service to send a callback
@@ -9731,16 +9743,19 @@ model UserAccountCredentials {
   /**
    * Name of the administrator user account which can be used to SSH to nodes.
    */
+  @summary("User name.")
   adminUserName: string;
 
   /**
    * SSH public key of the administrator user account.
    */
+  @summary("SSH public key.")
   adminUserSshPublicKey?: string;
 
   /**
    * Password of the administrator user account.
    */
+  @summary("Password.")
   adminUserPassword?: string;
 }
 
@@ -10562,11 +10577,13 @@ model VirtualMachineSshCredentials {
   /**
    * Public key data
    */
+  @secret
   publicKeyData?: string;
 
   /**
    * Private key data
    */
+  @secret
   privateKeyData?: string;
 }
 

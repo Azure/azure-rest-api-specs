@@ -30915,13 +30915,16 @@
       "type": "object",
       "properties": {
         "adminUserName": {
-          "type": "string"
+          "type": "string",
+          "title": "User name."
         },
         "adminUserSshPublicKey": {
-          "type": "string"
+          "type": "string",
+          "title": "SSH public key."
         },
         "adminUserPassword": {
-          "type": "string"
+          "type": "string",
+          "title": "Password."
         }
       },
       "required": [
@@ -31020,50 +31023,61 @@
       "properties": {
         "name": {
           "type": "string",
+          "title": "Virtual Machine size name",
           "readOnly": true
         },
         "family": {
           "type": "string",
+          "title": "Virtual Machine family name",
           "readOnly": true
         },
         "vCPUs": {
           "type": "integer",
           "format": "int32",
+          "title": "Number of vPUs",
           "readOnly": true
         },
         "gpus": {
           "type": "integer",
           "format": "int32",
+          "title": "Number of gPUs",
           "readOnly": true
         },
         "osVhdSizeMB": {
           "type": "integer",
           "format": "int32",
+          "title": "OS VHD Disk size",
           "readOnly": true
         },
         "maxResourceVolumeMB": {
           "type": "integer",
           "format": "int32",
+          "title": "Resource volume size",
           "readOnly": true
         },
         "memoryGB": {
           "type": "number",
           "format": "double",
+          "title": "Memory size",
           "readOnly": true
         },
         "lowPriorityCapable": {
           "type": "boolean",
+          "title": "Low priority capable",
           "readOnly": true
         },
         "premiumIO": {
           "type": "boolean",
+          "title": "Premium IO supported",
           "readOnly": true
         },
         "estimatedVMPrices": {
-          "$ref": "#/definitions/EstimatedVMPrices"
+          "$ref": "#/definitions/EstimatedVMPrices",
+          "title": "Estimated VM prices"
         },
         "supportedComputeTypes": {
           "type": "array",
+          "title": "Supported Compute Types",
           "items": {
             "type": "string"
           }
@@ -31094,10 +31108,14 @@
           "type": "string"
         },
         "publicKeyData": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "privateKeyData": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         }
       }
     },
@@ -31106,6 +31124,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "title": "Type of Volume Definition",
           "default": "bind",
           "enum": [
             "bind",
@@ -31119,7 +31138,8 @@
           }
         },
         "readOnly": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         },
         "source": {
           "type": "string"
@@ -31128,16 +31148,20 @@
           "type": "string"
         },
         "consistency": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "bind": {
-          "$ref": "#/definitions/BindOptions"
+          "$ref": "#/definitions/BindOptions",
+          "x-nullable": true
         },
         "volume": {
-          "$ref": "#/definitions/VolumeOptions"
+          "$ref": "#/definitions/VolumeOptions",
+          "x-nullable": true
         },
         "tmpfs": {
-          "$ref": "#/definitions/TmpfsOptions"
+          "$ref": "#/definitions/TmpfsOptions",
+          "x-nullable": true
         }
       }
     },
@@ -31145,7 +31169,8 @@
       "type": "object",
       "properties": {
         "nocopy": {
-          "type": "boolean"
+          "type": "boolean",
+          "x-nullable": true
         }
       }
     },
@@ -31153,21 +31178,26 @@
       "type": "object",
       "properties": {
         "cve": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "cveUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "dueDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-nullable": true
         },
         "id": {
           "type": "string",
+          "x-nullable": true,
           "readOnly": true
         },
         "packageDetails": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/PackageDetails"
           }
@@ -31176,11 +31206,13 @@
           "type": "boolean"
         },
         "providerId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "publishDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-nullable": true
         },
         "risk": {
           "type": "string",
@@ -31197,16 +31229,20 @@
           }
         },
         "solution": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "title": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "vendorId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "vendorUrl": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         }
       }
     },
@@ -31214,7 +31250,8 @@
       "type": "object",
       "properties": {
         "assetId": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "criticalFindingsCount": {
           "type": "integer",
@@ -31223,6 +31260,7 @@
         },
         "data": {
           "type": "array",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/VulnerabilityDetails"
           }
@@ -31238,13 +31276,16 @@
         },
         "lastScanDate": {
           "type": "string",
-          "format": "date-time"
+          "format": "date-time",
+          "x-nullable": true
         },
         "scanner": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "source": {
-          "type": "string"
+          "type": "string",
+          "x-nullable": true
         },
         "totalFindingsCount": {
           "type": "integer",
@@ -31258,6 +31299,7 @@
       "properties": {
         "eventType": {
           "type": "string",
+          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "read"
@@ -31296,8 +31338,17 @@
         "kind": {
           "type": "string"
         },
+        "location": {
+          "type": "string"
+        },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -31305,7 +31356,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },

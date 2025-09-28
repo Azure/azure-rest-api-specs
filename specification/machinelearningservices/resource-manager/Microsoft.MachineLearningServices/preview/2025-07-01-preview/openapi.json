@@ -43292,14 +43292,17 @@
       "properties": {
         "adminUserName": {
           "type": "string",
+          "title": "User name.",
           "description": "Name of the administrator user account which can be used to SSH to nodes."
         },
         "adminUserSshPublicKey": {
           "type": "string",
+          "title": "SSH public key.",
           "description": "SSH public key of the administrator user account."
         },
         "adminUserPassword": {
           "type": "string",
+          "title": "Password.",
           "description": "Password of the administrator user account."
         }
       },
@@ -43461,60 +43464,71 @@
       "properties": {
         "name": {
           "type": "string",
+          "title": "Virtual Machine size name",
           "description": "The name of the virtual machine size.",
           "readOnly": true
         },
         "family": {
           "type": "string",
+          "title": "Virtual Machine family name",
           "description": "The family name of the virtual machine size.",
           "readOnly": true
         },
         "vCPUs": {
           "type": "integer",
           "format": "int32",
+          "title": "Number of vPUs",
           "description": "The number of vCPUs supported by the virtual machine size.",
           "readOnly": true
         },
         "gpus": {
           "type": "integer",
           "format": "int32",
+          "title": "Number of gPUs",
           "description": "The number of gPUs supported by the virtual machine size.",
           "readOnly": true
         },
         "osVhdSizeMB": {
           "type": "integer",
           "format": "int32",
+          "title": "OS VHD Disk size",
           "description": "The OS VHD disk size, in MB, allowed by the virtual machine size.",
           "readOnly": true
         },
         "maxResourceVolumeMB": {
           "type": "integer",
           "format": "int32",
+          "title": "Resource volume size",
           "description": "The resource volume size, in MB, allowed by the virtual machine size.",
           "readOnly": true
         },
         "memoryGB": {
           "type": "number",
           "format": "double",
+          "title": "Memory size",
           "description": "The amount of memory, in GB, supported by the virtual machine size.",
           "readOnly": true
         },
         "lowPriorityCapable": {
           "type": "boolean",
+          "title": "Low priority capable",
           "description": "Specifies if the virtual machine size supports low priority VMs.",
           "readOnly": true
         },
         "premiumIO": {
           "type": "boolean",
+          "title": "Premium IO supported",
           "description": "Specifies if the virtual machine size supports premium IO.",
           "readOnly": true
         },
         "estimatedVMPrices": {
           "$ref": "#/definitions/EstimatedVMPrices",
+          "title": "Estimated VM prices",
           "description": "The estimated price information for using a VM."
         },
         "supportedComputeTypes": {
           "type": "array",
+          "title": "Supported Compute Types",
           "description": "Specifies the compute types supported by the virtual machine size.",
           "items": {
             "type": "string"
@@ -43552,11 +43566,15 @@
         },
         "publicKeyData": {
           "type": "string",
-          "description": "Public key data"
+          "format": "password",
+          "description": "Public key data",
+          "x-ms-secret": true
         },
         "privateKeyData": {
           "type": "string",
-          "description": "Private key data"
+          "format": "password",
+          "description": "Private key data",
+          "x-ms-secret": true
         }
       }
     },
@@ -43587,6 +43605,7 @@
       "properties": {
         "type": {
           "type": "string",
+          "title": "Type of Volume Definition",
           "description": "Type of Volume Definition. Possible Values: bind,volume,tmpfs,npipe",
           "default": "bind",
           "enum": [
@@ -43620,7 +43639,8 @@
         },
         "readOnly": {
           "type": "boolean",
-          "description": "Indicate whether to mount volume as readOnly. Default value for this is false."
+          "description": "Indicate whether to mount volume as readOnly. Default value for this is false.",
+          "x-nullable": true
         },
         "source": {
           "type": "string",
@@ -43632,19 +43652,23 @@
         },
         "consistency": {
           "type": "string",
-          "description": "Consistency of the volume"
+          "description": "Consistency of the volume",
+          "x-nullable": true
         },
         "bind": {
           "$ref": "#/definitions/BindOptions",
-          "description": "Bind Options of the mount"
+          "description": "Bind Options of the mount",
+          "x-nullable": true
         },
         "volume": {
           "$ref": "#/definitions/VolumeOptions",
-          "description": "Volume Options of the mount"
+          "description": "Volume Options of the mount",
+          "x-nullable": true
         },
         "tmpfs": {
           "$ref": "#/definitions/TmpfsOptions",
-          "description": "tmpfs option of the mount"
+          "description": "tmpfs option of the mount",
+          "x-nullable": true
         }
       }
     },
@@ -43653,7 +43677,8 @@
       "properties": {
         "nocopy": {
           "type": "boolean",
-          "description": "Indicate whether volume is nocopy"
+          "description": "Indicate whether volume is nocopy",
+          "x-nullable": true
         }
       }
     },
@@ -43662,25 +43687,30 @@
       "properties": {
         "cve": {
           "type": "string",
-          "description": "CVE id."
+          "description": "CVE id.",
+          "x-nullable": true
         },
         "cveUrl": {
           "type": "string",
-          "description": "CVE url."
+          "description": "CVE url.",
+          "x-nullable": true
         },
         "dueDate": {
           "type": "string",
           "format": "date-time",
-          "description": "DueDate for vulnerability. Provider data or PublishDate + 30 days."
+          "description": "DueDate for vulnerability. Provider data or PublishDate + 30 days.",
+          "x-nullable": true
         },
         "id": {
           "type": "string",
           "description": "Vulnerability ID.",
+          "x-nullable": true,
           "readOnly": true
         },
         "packageDetails": {
           "type": "array",
           "description": "Dependency details.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/PackageDetails"
           }
@@ -43691,12 +43721,14 @@
         },
         "providerId": {
           "type": "string",
-          "description": "Vulnerability ID from provider."
+          "description": "Vulnerability ID from provider.",
+          "x-nullable": true
         },
         "publishDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Vulnerability publish date."
+          "description": "Vulnerability publish date.",
+          "x-nullable": true
         },
         "risk": {
           "$ref": "#/definitions/VulnerabilityRisk",
@@ -43704,19 +43736,23 @@
         },
         "solution": {
           "type": "string",
-          "description": "Vulnerability description."
+          "description": "Vulnerability description.",
+          "x-nullable": true
         },
         "title": {
           "type": "string",
-          "description": "Vulnerability name."
+          "description": "Vulnerability name.",
+          "x-nullable": true
         },
         "vendorId": {
           "type": "string",
-          "description": "Vendor vulnerability ID (USN, GH Advisory, etc)."
+          "description": "Vendor vulnerability ID (USN, GH Advisory, etc).",
+          "x-nullable": true
         },
         "vendorUrl": {
           "type": "string",
-          "description": "Vendor vulnerability url."
+          "description": "Vendor vulnerability url.",
+          "x-nullable": true
         }
       }
     },
@@ -43725,7 +43761,8 @@
       "properties": {
         "assetId": {
           "type": "string",
-          "description": "AssetId (Image digest)."
+          "description": "AssetId (Image digest).",
+          "x-nullable": true
         },
         "criticalFindingsCount": {
           "type": "integer",
@@ -43736,6 +43773,7 @@
         "data": {
           "type": "array",
           "description": "List of vulnerability findings.",
+          "x-nullable": true,
           "items": {
             "$ref": "#/definitions/VulnerabilityDetails"
           }
@@ -43754,15 +43792,18 @@
         "lastScanDate": {
           "type": "string",
           "format": "date-time",
-          "description": "Scan result date."
+          "description": "Scan result date.",
+          "x-nullable": true
         },
         "scanner": {
           "type": "string",
-          "description": "Vulnerability scanner name."
+          "description": "Vulnerability scanner name.",
+          "x-nullable": true
         },
         "source": {
           "type": "string",
-          "description": "Data source (internal)."
+          "description": "Data source (internal).",
+          "x-nullable": true
         },
         "totalFindingsCount": {
           "type": "integer",
@@ -43815,6 +43856,7 @@
         "eventType": {
           "type": "string",
           "description": "Send callback on a specified notification event",
+          "x-nullable": true,
           "x-ms-mutability": [
             "read",
             "create"
@@ -43921,9 +43963,18 @@
         "kind": {
           "type": "string"
         },
+        "location": {
+          "type": "string"
+        },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
           "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "required": [
@@ -43931,7 +43982,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
         }
       ]
     },
