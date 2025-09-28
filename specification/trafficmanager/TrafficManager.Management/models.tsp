@@ -271,32 +271,28 @@ model EndpointPropertiesCustomHeadersItem {
 /**
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource
 model ProxyResource {
   /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   * ARM resource id of the resource.
    */
   id?: Azure.Core.armResourceIdentifier;
 
   /**
-   * The name of the resource
+   * Name of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @segment("{endpointType}")
   name?: string;
 
   /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
+   * The type of the resource.
    */
   type?: Azure.Core.armResourceType;
 
   /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   *  Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
   systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 }
@@ -596,31 +592,28 @@ model MonitorConfigExpectedStatusCodeRangesItem {
 /**
  * The resource model definition for a ARM tracked top level resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @Azure.ResourceManager.Legacy.customAzureResource
 model TrackedResource {
   /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   * ARM resource id of the resource.
    */
   id?: Azure.Core.armResourceIdentifier;
 
   /**
-   * The name of the resource
+   * Name of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @segment("trafficmanagerprofiles")
   name?: string;
 
   /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
+   * The type of the resource.
    */
   type?: Azure.Core.armResourceType;
 
   /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
+   *  Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
   systemData?: Azure.ResourceManager.CommonTypes.SystemData;
 
