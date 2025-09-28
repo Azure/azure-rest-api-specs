@@ -598,7 +598,7 @@ model OperatingSystemsParameter {
 model OrderByParameter {
   @query
   @doc("Array of sort by fields to order by and ordering type (asc\\desc), If no value provided, ordered by search score. Default ordering type: asc. For example, orderby=RatingCount desc. \n- `RatingCount`: ratingCount (asc/desc).\n- `LastModifiedDateTime`: lastModifiedDateTime (asc/desc).\n- `RatingAverage`: RatingAverage (asc/desc).")
-  orderBy?: string[];
+  orderby?: string[];
 }
 
 @doc("Parameters for Pricing Types filter")
@@ -695,7 +695,7 @@ model VmSecurityTypesParameter {
 @doc("Parameters for Operating Systems filter")
 model SuggestionTypesParameter {
   @query
-  @doc("Products that contains any of the given suggestion types. Such as 'None'. If no value provided, this filter is ignored. \n- `None`: None.\n- `Trusted`: Trusted.\n- `Confidential`: Confidential")
+  @doc("Suggestion types. \n- `WordSearch`: WordSearch.\n- `Entity`: Entity.")
   suggestionTypes: SuggestionType[];
 }
 
