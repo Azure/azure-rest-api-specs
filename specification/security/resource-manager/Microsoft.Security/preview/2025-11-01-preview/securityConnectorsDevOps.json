@@ -1321,8 +1321,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/createIssue": {
-      "post": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues/{assessmentId}": {
+      "put": {
         "tags": [
           "DevOps"
         ],
@@ -2728,9 +2728,10 @@
       "x-ms-parameter-location": "method"
     },
     "AssessmentId": {
-      "in": "query",
+      "in": "path",
       "name": "assessmentId",
       "description": "The assessment ID for which to create the GitHub issue.",
+      "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
     },
