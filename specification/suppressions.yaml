@@ -57,6 +57,12 @@
     - solarwinds/resource-manager/SolarWinds.Observability/preview/2023-07-21-preview/openapi.json
     - splitio/resource-manager/SplitIO.Experimentation/preview/2024-03-01-preview/splitio.json
 
+- tool: TypeSpecValidation
+  rules: [Compile]
+  reason: TypeSpec compilation failing with autorest emitter errors
+  paths:
+    - appcomplianceautomation/AppComplianceAutomation.Management
+
 - tool: TypeSpecValidationAll
   reason: Specs currently failing validation in RPSaaSMaster
   paths:
@@ -107,10 +113,6 @@
     - nexusidentity/NexusIdentity.IdentitySet.Management
     - orbitalplanetarycomputer/Orbital.Management
     - physicalnetwork/PhysicalNetwork.Management
-    - portalservices/AzureCoreExperiencesAssistant.Management
-    - portalservices/CopilotSettings.Management
-    - portalservices/Dashboard.Management
-    - portalservices/Extension.Management
     - riskreputation/Microsoft.RiskReputation
     - secretmanagementtestsvc/SecretManagementSampleProvider
     - securityplatform/Microsoft.SecurityPlatform
@@ -927,7 +929,7 @@
   rules: [SdkTspConfigValidation]
   sub-rules:
     - options.@azure-tools/typespec-ts.*
-  paths: [azcis/PlannedQuota.Management/tspconfig.yaml]
+  paths: [plannedquota/tspconfig.yaml]
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
@@ -2136,6 +2138,8 @@
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - options.@azure-tools/typespec-python.*
+    - options.@azure-tools/typespec-go.*
     - options.@azure-tools/typespec-ts.*
   paths: [throttling/Microsoft.Throttling.Management/tspconfig.yaml]
 - tool: TypeSpecValidation

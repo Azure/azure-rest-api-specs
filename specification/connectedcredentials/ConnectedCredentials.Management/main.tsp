@@ -21,7 +21,6 @@ using OpenAPI;
 namespace Microsoft.ConnectedCredentials;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-06-12-preview`,
 }
 

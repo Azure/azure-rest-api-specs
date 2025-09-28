@@ -25,10 +25,10 @@ model NetworkFabricSku extends Azure.ResourceManager.Foundations.ProxyResource {
   @renamedFrom(Versions.v2025_07_15, "properties")
   propertiesDeprecated: NetworkFabricSkuProperties;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("The Network Fabric SKU properties.")
   @added(Versions.v2025_07_15)
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: NetworkFabricSkuProperties;
 }
 

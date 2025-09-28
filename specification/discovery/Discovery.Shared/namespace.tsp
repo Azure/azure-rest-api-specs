@@ -16,7 +16,6 @@ namespace Microsoft.Discovery.Shared;
 
 @doc("The Microsoft.Discovery.Shared versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @doc("The 2025-07-01-preview version of the Microsoft.Discovery.Shared.")
   `2025-07-01-preview`,
 }

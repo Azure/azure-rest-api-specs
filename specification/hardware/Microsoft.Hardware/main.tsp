@@ -16,7 +16,6 @@ using Azure.ResourceManager;
   title: "Hardware Resource Provider",
   version: "2023-07-12-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Hardware;
 
 interface Operations extends Azure.ResourceManager.Operations {}

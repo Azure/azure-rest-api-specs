@@ -75,15 +75,6 @@ model DstsAuthenticationRequirement {
   value: string;
 }
 
-@doc("Realm information of the account.")
-model DstsRealm {
-  @doc("Realm's name. This is case-insensitive. E.g. \"svc://crpadmin@%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)/\".")
-  name: string;
-
-  @doc("Realm's redirection URL. This is case-insensitive. E.g. \"https://%(ArmRegionName).acs.%($CS.ComputeDnsSuffix)/\".")
-  redirectionUrl?: string;
-}
-
 @doc("Claim mapping for authorization of the account.")
 model DstsClaimMapping {
   @doc("Type of input identity. This is case-insensitive. E.g. \"http://sts.msft.net/user/Group\".")

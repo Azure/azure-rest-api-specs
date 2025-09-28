@@ -852,9 +852,9 @@ model GalleryImageVersion {
   @doc("This is the version of the gallery image.")
   name?: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Describes the properties of a gallery image version.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: GalleryImageVersionProperties;
 }
 
@@ -973,9 +973,9 @@ model LogicalNetworkPropertiesDhcpOptions {
 
 @doc("Properties of the subnet.")
 model Subnet {
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the subnet.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SubnetProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -1031,9 +1031,9 @@ model RouteTable {
   @visibility(Lifecycle.Read)
   type?: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the route table.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteTableProperties;
 }
 
@@ -1046,9 +1046,9 @@ model RouteTableProperties {
 
 @doc("Route - Route resource.")
 model Route {
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the route.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: RouteProperties;
 
   @doc("Name - name of the subnet")
@@ -1205,7 +1205,7 @@ model NetworkInterfaceProperties {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
-#suppress "deprecated" "Legacy flattening"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("InterfaceIPConfiguration IPConfiguration in a network interface.")
 model IPConfiguration {
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -1246,7 +1246,7 @@ model InterfaceDNSSettings {
   dnsServers?: string[];
 }
 
-#suppress "deprecated" "Legacy flattening"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of network interfaces")
 model NetworkInterfaceStatus {
   @doc("NetworkInterface provisioning error code")
@@ -1317,7 +1317,7 @@ model FabricIntegrationStatus {
   issues?: FabricIssue[];
 }
 
-#suppress "deprecated" "Legacy flattening"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of logical networks")
 model LogicalNetworkStatus {
   @doc("LogicalNetwork provisioning error code")
@@ -1365,9 +1365,9 @@ model LogicalNetworkUpdateProperties {
 @added(Versions.v2024_10_01_preview)
 @doc("Subnet resource")
 model SubnetUpdate {
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Properties of the subnet.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: SubnetUpdateProperties;
 
   @doc("Name - The name of the resource that is unique within a resource group. This name can be used to access the resource.")
@@ -1856,7 +1856,7 @@ model MarketplaceGalleryImageProperties {
   status?: MarketplaceGalleryImageStatus;
 }
 
-#suppress "deprecated" "Legacy flattening"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of marketplace gallery images")
 model MarketplaceGalleryImageStatus {
   @doc("MarketplaceGalleryImage provisioning error code")
@@ -1940,7 +1940,7 @@ model StorageContainerProperties {
   status?: StorageContainerStatus;
 }
 
-#suppress "deprecated" "Legacy flattening"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of storage containers")
 model StorageContainerStatus {
   @doc("StorageContainer provisioning error code")
@@ -2031,7 +2031,7 @@ model VirtualHardDiskProperties {
   maxShares?: int64;
 }
 
-#suppress "deprecated" "Legacy flattening"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of virtual hard disks")
 model VirtualHardDiskStatus {
   @doc("VirtualHardDisk provisioning error code")
@@ -2474,7 +2474,7 @@ model InstanceViewStatus {
   time?: utcDateTime;
 }
 
-#suppress "deprecated" "Legacy flattening"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
 @doc("The observed state of virtual machine instances")
 model VirtualMachineInstanceStatus {
   @doc("VirtualMachine provisioning error code")

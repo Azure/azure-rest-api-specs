@@ -17,12 +17,10 @@ namespace Microsoft.HealthDataAIServices;
 
 @doc("Supported API versions for the Microsoft.HealthDataAIServices resource provider.")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2023-06-01-preview version.")
   v2023_06_01_preview: "2023-06-01-preview",
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("The 2024-02-28-preview version.")
   v2024_02_28_preview: "2024-02-28-preview",

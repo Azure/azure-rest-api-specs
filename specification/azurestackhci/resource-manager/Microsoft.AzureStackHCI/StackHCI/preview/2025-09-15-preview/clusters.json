@@ -904,6 +904,32 @@
           "x-ms-identifiers": [
             "localAvailabilityZoneName"
           ]
+        },
+        "identityProvider": {
+          "type": "string",
+          "description": "Identity Provider for the cluster",
+          "default": "ActiveDirectory",
+          "enum": [
+            "ActiveDirectory",
+            "LocalIdentity"
+          ],
+          "x-ms-enum": {
+            "name": "IdentityProvider",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "ActiveDirectory",
+                "value": "ActiveDirectory",
+                "description": "Active Directory as the Identity Provider. This is the default option."
+              },
+              {
+                "name": "LocalIdentity",
+                "value": "LocalIdentity",
+                "description": "Use local identity with Azure Keyvault"
+              }
+            ]
+          },
+          "readOnly": true
         }
       }
     },

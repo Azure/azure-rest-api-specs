@@ -3,11 +3,15 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.StorageActions;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StorageTaskPreviewAction.properties, "!csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTaskPreviewAction.properties,
+  "!csharp"
+);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StorageTaskUpdateParameters.properties, "!csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTaskUpdateParameters.properties,
+  "!csharp"
+);
 
 @@clientName(StorageTasks.create::parameters.resource, "parameters");
 @@clientName(StorageTasks.update::parameters.properties, "parameters");
@@ -15,8 +19,10 @@ using Microsoft.StorageActions;
   "parameters"
 );
 @@clientName(StorageTasksOperationGroup.previewActions, "PreviewActions");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@@flattenProperty(StorageTask.properties, "!csharp");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(StorageTask.properties,
+  "!csharp"
+);
 
 // @@clientLocation decorators for operations with custom @operationId
 // These ensure consistent operationId generation in the output

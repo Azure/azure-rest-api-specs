@@ -18,7 +18,6 @@ using Azure.ResourceManager.Foundations;
   title: "Microsoft.FairfieldGardens",
   version: "2023-12-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.FairfieldGardens;
 
 interface Operations extends Azure.ResourceManager.Operations {}

@@ -17,11 +17,9 @@ using Azure.ResourceManager;
 namespace Microsoft.SecurityCopilot;
 
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2023-12-01-preview`,
 
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2024-11-01-preview`,
 }

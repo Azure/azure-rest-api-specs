@@ -26,6 +26,7 @@ interface Drills {
   create is ArmResourceCreateOrReplaceAsync<Drill, ServiceGroupParameters>;
 
   @route(ServiceGroupRoute)
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Drill,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

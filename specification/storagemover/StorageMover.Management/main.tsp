@@ -18,6 +18,7 @@ import "./Agent.tsp";
 import "./Endpoint.tsp";
 import "./Project.tsp";
 import "./JobDefinition.tsp";
+import "./Connection.tsp";
 import "./JobRun.tsp";
 
 using TypeSpec.Rest;
@@ -42,16 +43,19 @@ enum Versions {
   /**
    * The 2024-07-01 API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_07_01: "2024-07-01",
 
   /**
    * The 2025-07-01 API version.
    */
+  v2025_07_01: "2025-07-01",
+
+  /**
+   * The 2025-08-01 API version.
+   */
   @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @useDependency(Azure.Core.Versions.v1_0_Preview_1)
-  v2025_07_01: "2025-07-01",
+  v2025_08_01: "2025-08-01",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

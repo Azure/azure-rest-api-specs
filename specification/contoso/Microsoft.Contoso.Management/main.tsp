@@ -21,32 +21,22 @@ namespace Microsoft.Contoso;
 /** The available API versions. */
 enum Versions {
   /** 2021-10-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2021_10_01_preview: "2021-10-01-preview",
 
   /** 2022-10-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2022_10_01_preview: "2022-10-01-preview",
 
   /** 2023-10-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_10_01_preview: "2023-10-01-preview",
 
   /** 2023-11-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_11_01_preview: "2023-11-01-preview",
 
   /** 2023-12-01-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2023_12_01_preview: "2023-12-01-preview",
 }

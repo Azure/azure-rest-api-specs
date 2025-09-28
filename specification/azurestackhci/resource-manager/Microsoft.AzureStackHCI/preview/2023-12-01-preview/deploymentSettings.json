@@ -660,6 +660,30 @@
           },
           "x-ms-identifiers": []
         },
+        "dnsServerConfig": {
+          "type": "string",
+          "description": "Specifies how DNS servers are configured for the infrastructure network. Allowed values are 'UseDnsServer' to use the provided DNS servers, and 'UseForwarder' to use DNS forwarders.",
+          "enum": [
+            "UseDnsServer",
+            "UseForwarder"
+          ],
+          "x-ms-enum": {
+            "name": "DnsServerConfig",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "UseDnsServer",
+                "value": "UseDnsServer",
+                "description": "Use the provided DNS servers for the infrastructure network."
+              },
+              {
+                "name": "UseForwarder",
+                "value": "UseForwarder",
+                "description": "Use DNS forwarders for the infrastructure network."
+              }
+            ]
+          }
+        },
         "dnsZones": {
           "type": "array",
           "description": "Details of the DNS Zones to be configured.",

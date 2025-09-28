@@ -13,13 +13,13 @@ options:
     use-read-only-status-schema: "true"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: Azure.ResourceManager.DsmsManagedKeySecret
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.DsmsManagedKeySecret"
+    namespace: "Azure.ResourceManager.DsmsManagedKeySecret"
     clear-output-folder: true
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/dsmsmanagedkeysecret
-    package-dir: armdsmsmanagedkeysecret
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    emitter-output-dir: "{output-dir}/{service-dir}/armdsmsmanagedkeysecret"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armdsmsmanagedkeysecret
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -27,20 +27,20 @@ options:
     inject-spans: true
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: azure-mgmt-dsmsmanagedkeysecret
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dsmsmanagedkeysecret"
     namespace: azure.mgmt.dsmsmanagedkeysecret
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-dsmsmanagedkeysecret"
     flavor: azure
-    package-dir: azure-resourcemanager-dsmsmanagedkeysecret
     namespace: com.azure.resourcemanager.dsmsmanagedkeysecret
     service-name: dSMS Managed Key Secret
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: arm-dsmsmanagedkeysecret
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-dsmsmanagedkeysecret"
     package-details:
       name: "@azure/arm-dsmsmanagedkeysecret"
 parameters:

@@ -17,6 +17,7 @@ using Azure.ResourceManager;
 namespace Microsoft.Edge;
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("ConfigTemplateMetadata Properties")
 model ConfigTemplateMetadataProperties {
   @doc("Hierarchy ARM Ids")
@@ -40,6 +41,7 @@ model ConfigTemplateMetadataProperties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("SolutionSchema Resource")
 @parentResource(ConfigTemplate)
 model ConfigTemplateMetadata
@@ -48,13 +50,14 @@ model ConfigTemplateMetadata
   @pattern("^(?!.*\\.\\.)[a-zA-Z0-9-][a-zA-Z0-9._-]{1,68}[a-zA-Z0-9-]$")
   @path
   @key("configTemplateMetadataName")
-  @segment("configTemplateMetadata")
+  @segment("configTemplateMetadatas")
   name: string;
 
   ...EntityTagProperty;
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface ConfigTemplateMetadatas {
   @doc("Get a ConfigTemplateMetadata Resource")

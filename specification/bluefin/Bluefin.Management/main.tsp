@@ -20,7 +20,6 @@ using Azure.ResourceManager;
   version: "2023-06-26-preview",
 })
 @doc("Microsoft.Bluefin Resource Provider management API.")
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.Bluefin;
 
 interface Operations extends Azure.ResourceManager.Operations {}
