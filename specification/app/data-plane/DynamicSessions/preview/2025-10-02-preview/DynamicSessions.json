@@ -136,6 +136,12 @@
           "CodeExecution_Execute_Result_StringNaN_JupyterFormat": {
             "$ref": "./examples/CodeExecution_Execute_Result_StringNaN_JupyterFormat.json"
           },
+          "CodeExecution_Execute_ShellCommand": {
+            "$ref": "./examples/CodeExecution_Execute_ShellCommand.json"
+          },
+          "CodeExecution_Execute_ShellExecCommandAndArgs": {
+            "$ref": "./examples/CodeExecution_Execute_ShellExecCommandAndArgs.json"
+          },
           "CodeExecution_Execute_Sync": {
             "$ref": "./examples/CodeExecution_Execute_Sync.json"
           }
@@ -931,12 +937,26 @@
         "returnJupyterFormatExecutionResult": {
           "type": "boolean",
           "description": "Whether to formats primitive Python results (bool, int, float, string, None) as JSON strings or null. Default to false."
+        },
+        "shellCommand": {
+          "type": "string",
+          "description": "Shell command to execute. Only available for a `Shell` typed session pool."
+        },
+        "execCommandAndArgs": {
+          "type": "array",
+          "description": "Whether to use a new empty kernel for this execution. Default is false.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "stdin": {
+          "type": "string",
+          "description": "The standard input of the shell command execution. Only available for a `Shell` typed session pool."
         }
       },
       "required": [
         "codeInputType",
         "executionType",
-        "code",
         "timeoutInSeconds"
       ]
     },
