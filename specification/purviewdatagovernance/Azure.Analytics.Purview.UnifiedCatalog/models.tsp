@@ -345,10 +345,10 @@ model SystemData {
   createdBy?: uuid;
 }
 
-@doc("Wrapper for relationship information between entities.")
+@doc("CDC Relationship information between entities.")
 @resource("relationships")
 @parentResource(CriticalDataColumn)
-model RelationshipWrapper {
+model CdcRelationship {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
@@ -366,8 +366,8 @@ model RelationshipWrapper {
 
 @resource("relationships")
 @parentResource(CriticalDataElement)
-@doc("Wrapper for relationship information between entities.")
-model CdeRelationshipWrapper {
+@doc("Relationship information between entities.")
+model CdeRelationship {
   @doc("Type of the relationship.")
   relationshipType?: string;
 
@@ -542,18 +542,6 @@ model DataAssetsResponse {
   @nextLink
   nextLink?: string;
 }
-
-// @doc("Response containing a list of relationship wrappers.")
-// @pagedResult
-// model RelationshipWrappersResponse {
-//   @doc("The list of relationships.")
-//   @pageItems
-//   value: RelationshipWrapper[];
-
-//   @doc("The link to the next page of results.")
-//   @nextLink
-//   nextLink?: string;
-// }
 
 @doc("CatalogModelDataProductTypeEnum")
 union CatalogModelDataProductTypeEnum {
@@ -1458,10 +1446,10 @@ alias DataAssetIdParameter = {
   dataAssetId: uuid;
 };
 
-@doc("Wrapper for relationship information between entities.")
+@doc("Relationship information between entities.")
 @resource("relationships")
 @parentResource(DataAsset)
-model DataAssetRelationshipWrapper {
+model DataAssetRelationship {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 
@@ -1493,10 +1481,10 @@ alias DataProductIdParameter = {
   dataProductId: uuid;
 };
 
-@doc("Wrapper for relationship information between entities.")
+@doc("Relationship information between entities.")
 @resource("relationships")
 @parentResource(DataProduct)
-model DataProductRelationshipWrapper {
+model DataProductRelationship {
   @doc("System metadata for the relationship.")
   systemData?: SystemData;
 

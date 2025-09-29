@@ -20,10 +20,10 @@ using TypeSpec.Versioning;
  */
 @service(#{ title: "PurviewUnifiedCatalog" })
 @server(
-  "{endpoint}/purviewunifiedcatalog/api",
+  "{endpoint}/datagovernance/catalog",
   "PurviewUnifiedCatalog Service is a fully managed cloud service whose users can discover the data sources they need and understand the data sources they find. At the same time, Data Map helps organizations get more value from their existing investments.",
   {
-    endpoint: url,
+    endpoint: "https://api.purview-service.microsoft.com/",
   }
 )
 @doc("""

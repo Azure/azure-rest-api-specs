@@ -87,7 +87,7 @@ op DeleteCriticalDataElementById is UnifiedCatalogOperations.ResourceDelete<Crit
 @doc("Lists relationships for the specified CDE and entity category.")
 @get
 op ListCriticalDataElementRelationships is UnifiedCatalogOperations.ResourceList<
-  CdeRelationshipWrapper,
+  CdeRelationship,
   ListQueryParametersTrait<{
     @doc("The body associated with the critical data element output.")
     @query
@@ -111,7 +111,7 @@ op CreateCriticalDataElementRelationship is RpcOperation<
     @bodyRoot
     relationship: DataElementProperties;
   },
-  RelationshipWrapper
+  CdcRelationship
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -225,7 +225,7 @@ op CreateCriticalDataColumnRelationship is RpcOperation<
     @bodyRoot
     relationship: CriticalDataColumnProperties;
   },
-  RelationshipWrapper
+  CdcRelationship
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -235,7 +235,7 @@ op CreateCriticalDataColumnRelationship is RpcOperation<
 //@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @get
 op ListCriticalDataColumnRelationships is UnifiedCatalogOperations.ResourceList<
-  RelationshipWrapper,
+  CdcRelationship,
   ListQueryParametersTrait<{
     @doc("The body associated with the critical data element output.")
     @query
@@ -347,7 +347,7 @@ op DeleteDataAssetById is UnifiedCatalogOperations.ResourceDelete<DataAsset>;
 @doc("Lists relationships for a data asset filtered by entity category.")
 @get
 op ListDataAssetRelationships is UnifiedCatalogOperations.ResourceList<
-  DataAssetRelationshipWrapper,
+  DataAssetRelationship,
   ListQueryParametersTrait<{
     @doc("Required entity category to list relationships for.")
     @query
@@ -371,7 +371,7 @@ op CreateDataAssetRelationship is RpcOperation<
     @bodyRoot
     relationship: CriticalDataColumnRelationshipRequest;
   },
-  DataAssetRelationshipWrapper
+  DataAssetRelationship
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
@@ -501,7 +501,7 @@ op DeleteDataProductById is UnifiedCatalogOperations.ResourceDelete<DataProduct>
 @doc("Lists relationships for a data product filtered by entity category.")
 @get
 op ListDataProductRelationships is UnifiedCatalogOperations.ResourceList<
-  DataProductRelationshipWrapper,
+  DataProductRelationship,
   ListQueryParametersTrait<{
     @doc("Required entity category to list relationships for.")
     @query
@@ -525,7 +525,7 @@ op CreateDataProductRelationship is RpcOperation<
     @bodyRoot
     relationship: CriticalDataColumnRelationshipRequest;
   },
-  DataProductRelationshipWrapper
+  DataProductRelationship
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."

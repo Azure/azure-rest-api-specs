@@ -14,7 +14,7 @@
     "https"
   ],
   "x-ms-parameterized-host": {
-    "hostTemplate": "{endpoint}/purviewunifiedcatalog/api",
+    "hostTemplate": "{endpoint}/datagovernance/catalog",
     "useSchemePrefix": false,
     "parameters": [
       {
@@ -22,8 +22,12 @@
         "in": "path",
         "required": true,
         "type": "string",
-        "format": "uri",
-        "x-ms-skip-url-encoding": true
+        "enum": [
+          "https://api.purview-service.microsoft.com/"
+        ],
+        "x-ms-enum": {
+          "modelAsString": false
+        }
       }
     ]
   },
@@ -604,7 +608,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedRelationshipWrapper"
+              "$ref": "#/definitions/PagedCdcRelationship"
             }
           },
           "default": {
@@ -760,7 +764,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RelationshipWrapper"
+              "$ref": "#/definitions/CdcRelationship"
             }
           },
           "default": {
@@ -1322,7 +1326,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedCdeRelationshipWrapper"
+              "$ref": "#/definitions/PagedCdeRelationship"
             }
           },
           "default": {
@@ -1478,7 +1482,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/RelationshipWrapper"
+              "$ref": "#/definitions/CdcRelationship"
             }
           },
           "default": {
@@ -2124,7 +2128,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDataAssetRelationshipWrapper"
+              "$ref": "#/definitions/PagedDataAssetRelationship"
             }
           },
           "default": {
@@ -2280,7 +2284,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataAssetRelationshipWrapper"
+              "$ref": "#/definitions/DataAssetRelationship"
             }
           },
           "default": {
@@ -2878,7 +2882,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedDataProductRelationshipWrapper"
+              "$ref": "#/definitions/PagedDataProductRelationship"
             }
           },
           "default": {
@@ -3034,7 +3038,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/DataProductRelationshipWrapper"
+              "$ref": "#/definitions/DataProductRelationship"
             }
           },
           "default": {
@@ -5774,9 +5778,37 @@
         "properties"
       ]
     },
-    "CdeRelationshipWrapper": {
+    "CdcRelationship": {
       "type": "object",
-      "description": "Wrapper for relationship information between entities.",
+      "description": "CDC Relationship information between entities.",
+      "properties": {
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "System metadata for the relationship."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the relationship."
+        },
+        "relationshipType": {
+          "type": "string",
+          "description": "Type of the relationship."
+        },
+        "entityId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Unique identifier of the related entity.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "entityId"
+      ]
+    },
+    "CdeRelationship": {
+      "type": "object",
+      "description": "Relationship information between entities.",
       "properties": {
         "relationshipType": {
           "type": "string",
@@ -6245,9 +6277,9 @@
         }
       }
     },
-    "DataAssetRelationshipWrapper": {
+    "DataAssetRelationship": {
       "type": "object",
-      "description": "Wrapper for relationship information between entities.",
+      "description": "Relationship information between entities.",
       "properties": {
         "systemData": {
           "$ref": "#/definitions/SystemData",
@@ -6556,9 +6588,9 @@
         }
       }
     },
-    "DataProductRelationshipWrapper": {
+    "DataProductRelationship": {
       "type": "object",
-      "description": "Wrapper for relationship information between entities.",
+      "description": "Relationship information between entities.",
       "properties": {
         "systemData": {
           "$ref": "#/definitions/SystemData",
@@ -7177,15 +7209,36 @@
         ]
       }
     },
-    "PagedCdeRelationshipWrapper": {
+    "PagedCdcRelationship": {
       "type": "object",
-      "description": "Paged collection of CdeRelationshipWrapper items",
+      "description": "Paged collection of CdcRelationship items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The CdeRelationshipWrapper items on this page",
+          "description": "The CdcRelationship items on this page",
           "items": {
-            "$ref": "#/definitions/CdeRelationshipWrapper"
+            "$ref": "#/definitions/CdcRelationship"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedCdeRelationship": {
+      "type": "object",
+      "description": "Paged collection of CdeRelationship items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The CdeRelationship items on this page",
+          "items": {
+            "$ref": "#/definitions/CdeRelationship"
           }
         },
         "nextLink": {
@@ -7261,15 +7314,15 @@
         "value"
       ]
     },
-    "PagedDataAssetRelationshipWrapper": {
+    "PagedDataAssetRelationship": {
       "type": "object",
-      "description": "Paged collection of DataAssetRelationshipWrapper items",
+      "description": "Paged collection of DataAssetRelationship items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataAssetRelationshipWrapper items on this page",
+          "description": "The DataAssetRelationship items on this page",
           "items": {
-            "$ref": "#/definitions/DataAssetRelationshipWrapper"
+            "$ref": "#/definitions/DataAssetRelationship"
           }
         },
         "nextLink": {
@@ -7303,15 +7356,15 @@
         "value"
       ]
     },
-    "PagedDataProductRelationshipWrapper": {
+    "PagedDataProductRelationship": {
       "type": "object",
-      "description": "Paged collection of DataProductRelationshipWrapper items",
+      "description": "Paged collection of DataProductRelationship items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The DataProductRelationshipWrapper items on this page",
+          "description": "The DataProductRelationship items on this page",
           "items": {
-            "$ref": "#/definitions/DataProductRelationshipWrapper"
+            "$ref": "#/definitions/DataProductRelationship"
           }
         },
         "nextLink": {
@@ -7387,27 +7440,6 @@
         "value"
       ]
     },
-    "PagedRelationshipWrapper": {
-      "type": "object",
-      "description": "Paged collection of RelationshipWrapper items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The RelationshipWrapper items on this page",
-          "items": {
-            "$ref": "#/definitions/RelationshipWrapper"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
     "PagedTerm": {
       "type": "object",
       "description": "Paged collection of Term items",
@@ -7467,34 +7499,6 @@
           }
         ]
       }
-    },
-    "RelationshipWrapper": {
-      "type": "object",
-      "description": "Wrapper for relationship information between entities.",
-      "properties": {
-        "systemData": {
-          "$ref": "#/definitions/SystemData",
-          "description": "System metadata for the relationship."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the relationship."
-        },
-        "relationshipType": {
-          "type": "string",
-          "description": "Type of the relationship."
-        },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the related entity.",
-          "x-ms-mutability": [
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "entityId"
-      ]
     },
     "SharedEntityStatus": {
       "type": "string",
