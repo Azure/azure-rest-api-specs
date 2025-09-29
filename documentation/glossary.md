@@ -2,22 +2,9 @@
 
 This article defines some of the terms used in the articles under `documentation` directory.
 
-## Grouping directory
-
-A `grouping directory`, denoted as `<groupingDir>` in the [directory structure article], is a root folder for
-a set of data-plane `service` folders. It is a subfolder of `data-plane` folder.
-
-Each `service` in given `grouping directory` must [**version uniformly**][uniform versioning article] but each `service`
-within a `grouping directory` can version independently of each other.
-
-A `grouping directory` can be seen as a more free-form equivalent of the ARM `service group`, but for data-plane services.
-
-Specifically, all services grouped in given `groping directory` do not share any ARM **Resource Provider (RP) namespace**
-and are not related to ARM in any way.
-
 ## Resource type
 
-In case of ARM, a `service` is a collection of `resource types` or `resource type groups`.
+In case of ARM, a `service` is a collection of `resource types` or `resource type groups` that version uniformly in perpetuity.
 
 ## Service
 
@@ -29,13 +16,13 @@ documentation portal and language SDKs. For example, [Azure Kubernetes Service].
 
 In this repository, an ARM service has a path of form:
 
-`specification/<azureTeamName>/resource-manager/<RPNS>/<service>`
+`specification/<organization>/resource-manager/<RPNS>/<service>`
 
 where `<RPNS>` stands for ARM **Resource Provider (RP) namespace**.
 
 A data-plane service has a path of form:
 
-`specification/<azureTeamName>/data-plane/<namespace>/<service>`
+`specification/<organization>/data-plane/<service>`
 
 > [!NOTE]
 > Some existing services follow different directory structure layouts.
@@ -46,7 +33,7 @@ is a folder for the `aks` service within the `Microsoft.ContainerService` ARM Re
 
 You can learn more about how a `service` maps to its directory in the [directory structure article].
 
-## Service group
+## Service Group
 
 A `service group` is a set of services that share a common ARM **Resource Provider (RP) namespace**, `RPNS`.
 
@@ -55,7 +42,7 @@ within a `service group` can version independently of each other.
 
 A `service group` has a path of form:
 
-`specification/<azureTeamName>/resource-manager/<RPNS>`
+`specification/<organization>/resource-manager/<RPNS>`
 
 as such, it corresponds to ARM Resource Provider Namespace.
 
