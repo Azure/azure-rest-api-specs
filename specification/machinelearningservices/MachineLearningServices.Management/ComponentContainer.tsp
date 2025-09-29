@@ -58,6 +58,7 @@ interface ComponentContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentContainers_Get")
+  @summary("Get container.")
   get is ComponentContainerOps.Read<ComponentContainer>;
 
   /**
@@ -65,6 +66,7 @@ interface ComponentContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is ComponentContainerOps.CreateOrUpdateAsync<
     ComponentContainer,
     Response = ArmResourceUpdatedResponse<ComponentContainer> | (ArmResourceCreatedResponse<ComponentContainer> & {
@@ -82,6 +84,7 @@ interface ComponentContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryComponentContainers_Delete")
+  @summary("Delete container.")
   delete is ComponentContainerOps.DeleteWithoutOkAsync<
     ComponentContainer,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -98,6 +101,7 @@ interface ComponentContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentContainers_List")
+  @summary("List containers.")
   list is ComponentContainerOps.List<
     ComponentContainer,
     Parameters = {
@@ -142,6 +146,7 @@ interface ComponentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentContainers_Get")
+  @summary("Get container.")
   get is ComponentContainerOperationGroupOps.Read<ComponentContainer>;
 
   /**
@@ -149,6 +154,7 @@ interface ComponentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is ComponentContainerOperationGroupOps.CreateOrUpdateSync<ComponentContainer>;
 
   /**
@@ -156,6 +162,7 @@ interface ComponentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentContainers_Delete")
+  @summary("Delete container.")
   delete is ComponentContainerOperationGroupOps.DeleteSync<ComponentContainer>;
 
   /**
@@ -163,6 +170,7 @@ interface ComponentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentContainers_List")
+  @summary("List component containers.")
   list is ComponentContainerOperationGroupOps.List<
     ComponentContainer,
     Parameters = {

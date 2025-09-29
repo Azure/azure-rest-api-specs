@@ -37,11 +37,13 @@ interface BatchDeployments {
   /**
    * Gets a batch inference deployment by id.
    */
+  @summary("Get batch inference deployment by id.")
   get is ArmResourceRead<BatchDeployment>;
 
   /**
    * Creates/updates a batch inference deployment (asynchronous).
    */
+  @summary("Creates/updates a batch inference deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BatchDeployment,
     Response = ArmResourceUpdatedResponse<BatchDeployment> | (ArmResourceCreatedResponse<BatchDeployment> & {
@@ -57,6 +59,7 @@ interface BatchDeployments {
    * Update a batch inference deployment (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update a batch inference deployment (asynchronous).")
   update is ArmCustomPatchAsync<
     BatchDeployment,
     PatchModel = PartialBatchDeploymentPartialMinimalTrackedResourceWithProperties,
@@ -73,6 +76,7 @@ interface BatchDeployments {
    * Delete Batch Inference deployment (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete Batch Inference deployment (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchDeployment,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -87,6 +91,7 @@ interface BatchDeployments {
   /**
    * Lists Batch inference deployments in the workspace.
    */
+  @summary("Lists Batch inference deployments in the workspace.")
   list is ArmResourceListByParent<
     BatchDeployment,
     Parameters = {

@@ -64,6 +64,7 @@ interface ModelVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_Get")
+  @summary("Get version.")
   get is ModelVersionOps.Read<ModelVersion>;
 
   /**
@@ -71,6 +72,7 @@ interface ModelVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is ModelVersionOps.CreateOrUpdateAsync<
     ModelVersion,
     Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<CodeContainer> & {
@@ -88,6 +90,7 @@ interface ModelVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryModelVersions_Delete")
+  @summary("Delete version.")
   delete is ModelVersionOps.DeleteWithoutOkAsync<
     ModelVersion,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -104,6 +107,7 @@ interface ModelVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_List")
+  @summary("List versions.")
   list is ModelVersionOps.List<
     ModelVersion,
     Parameters = {
@@ -158,6 +162,7 @@ interface ModelVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
+  @summary("Generate a storage location and credential for the client to upload a model asset to.")
   createOrGetStartPendingUpload is ModelVersionOps.ActionSync<
     ModelVersion,
     PendingUploadRequestDto,

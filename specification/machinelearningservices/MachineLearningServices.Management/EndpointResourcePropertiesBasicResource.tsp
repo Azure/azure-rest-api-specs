@@ -30,6 +30,7 @@ interface EndpointResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Endpoint_Get")
+  @summary("Get endpoint resource")
   get is ArmResourceRead<EndpointResourcePropertiesBasicResource>;
 
   /**
@@ -38,6 +39,7 @@ interface EndpointResourcePropertiesBasicResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("Endpoint_CreateOrUpdate")
+  @summary("Create or update endpoint resource with the specified parameters")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     EndpointResourcePropertiesBasicResource,
     Response = ArmResourceUpdatedResponse<EndpointResourcePropertiesBasicResource> | ArmAcceptedLroResponse,
@@ -50,6 +52,7 @@ interface EndpointResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Endpoint_List")
+  @summary("List All the endpoints under this workspace")
   list is ArmResourceListByParent<
     EndpointResourcePropertiesBasicResource,
     Parameters = {
@@ -91,6 +94,7 @@ interface EndpointResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Endpoint_ListKeys")
+  @summary("List keys for the endpoint resource.")
   listKeys is ArmResourceActionSync<
     EndpointResourcePropertiesBasicResource,
     void,
@@ -102,6 +106,7 @@ interface EndpointResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Endpoint_GetModels")
+  @summary("Get available models under the endpoint resource.")
   @list
   @get
   @action("models")
@@ -116,6 +121,7 @@ interface EndpointResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Endpoint_RegenerateKeys")
+  @summary("Regenerate account keys")
   @action("regenerateKey")
   regenerateKeys is ArmResourceActionSync<
     EndpointResourcePropertiesBasicResource,

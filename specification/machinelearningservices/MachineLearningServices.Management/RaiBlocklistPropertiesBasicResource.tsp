@@ -30,6 +30,7 @@ interface RaiBlocklistPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiBlocklist_Get")
+  @summary("Gets the specified custom blocklist associated with the Azure OpenAI connection.")
   get is ArmResourceRead<RaiBlocklistPropertiesBasicResource>;
 
   /**
@@ -37,6 +38,7 @@ interface RaiBlocklistPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiBlocklist_Create")
+  @summary("Update the state of specified blocklist associated with the Azure OpenAI connection.")
   create is ArmResourceCreateOrReplaceAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
@@ -55,6 +57,7 @@ interface RaiBlocklistPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiBlocklist_Delete")
+  @summary("Deletes the specified custom blocklist associated with the Azure OpenAI connection.")
   delete is ArmResourceDeleteWithoutOkAsync<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
@@ -71,6 +74,7 @@ interface RaiBlocklistPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiBlocklists_List")
+  @summary("Gets the custom blocklists associated with the Azure OpenAI connection.")
   list is ArmResourceListByParent<
     RaiBlocklistPropertiesBasicResource,
     Parameters = {
@@ -88,6 +92,7 @@ interface RaiBlocklistPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiBlocklistItem_AddBulk")
+  @summary("Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.")
   @action("addRaiBlocklistItems")
   addBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
@@ -100,6 +105,7 @@ interface RaiBlocklistPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiBlocklistItem_DeleteBulk")
+  @summary("Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.")
   @action("deleteRaiBlocklistItems")
   deleteBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,

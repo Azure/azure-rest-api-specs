@@ -84,6 +84,7 @@ interface DataContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_Get")
+  @summary("Get container.")
   get is DataContainerOps.Read<DataContainer>;
 
   /**
@@ -92,6 +93,7 @@ interface DataContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @useFinalStateVia("original-uri")
   @operationId("RegistryDataContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is DataContainerwithNamePatternOps.CreateOrUpdateAsync<
     DataContainer,
     Response = ArmResourceUpdatedResponse<DataContainer> | (ArmResourceCreatedResponse<
@@ -113,6 +115,7 @@ interface DataContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryDataContainers_Delete")
+  @summary("Delete container.")
   delete is DataContainerOps.DeleteWithoutOkAsync<
     DataContainer,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -129,6 +132,7 @@ interface DataContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataContainers_List")
+  @summary("List Data containers.")
   list is DataContainerOps.List<
     DataContainer,
     Parameters = {
@@ -179,6 +183,7 @@ interface DataContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DataContainers_Get")
+  @summary("Get container.")
   get is DataContainerOperationGroupOps.Read<DataContainer>;
 
   /**
@@ -186,6 +191,7 @@ interface DataContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DataContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is DataContainerOperationGroupOps.CreateOrUpdateSync<DataContainer>;
 
   /**
@@ -193,6 +199,7 @@ interface DataContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DataContainers_Delete")
+  @summary("Delete container.")
   delete is DataContainerOperationGroupOps.DeleteSync<DataContainer>;
 
   /**
@@ -200,6 +207,7 @@ interface DataContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("DataContainers_List")
+  @summary("List data containers.")
   list is DataContainerOperationGroupOps.List<
     DataContainer,
     Parameters = {

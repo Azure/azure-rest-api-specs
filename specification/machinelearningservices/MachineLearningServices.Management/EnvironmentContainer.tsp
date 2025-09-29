@@ -62,6 +62,7 @@ interface EnvironmentContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentContainers_Get")
+  @summary("Get container.")
   get is EnvironmentContainerOps.Read<EnvironmentContainer>;
 
   /**
@@ -70,6 +71,7 @@ interface EnvironmentContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @useFinalStateVia("original-uri")
   @operationId("RegistryEnvironmentContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOps.CreateOrUpdateAsync<
     EnvironmentContainer,
     Response = ArmResourceUpdatedResponse<EnvironmentContainer> | (ArmResourceCreatedResponse<
@@ -91,6 +93,7 @@ interface EnvironmentContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryEnvironmentContainers_Delete")
+  @summary("Delete container.")
   delete is EnvironmentContainerOps.DeleteWithoutOkAsync<
     EnvironmentContainer,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -107,6 +110,7 @@ interface EnvironmentContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentContainers_List")
+  @summary("List environment containers.")
   list is EnvironmentContainerOps.List<
     EnvironmentContainer,
     Parameters = {
@@ -157,6 +161,7 @@ interface EnvironmentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentContainers_Get")
+  @summary("Get container.")
   get is EnvironmentContainerOperationGroupOps.Read<EnvironmentContainer>;
 
   /**
@@ -164,6 +169,7 @@ interface EnvironmentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is EnvironmentContainerOperationGroupOps.CreateOrUpdateSync<EnvironmentContainer>;
 
   /**
@@ -171,6 +177,7 @@ interface EnvironmentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentContainers_Delete")
+  @summary("Delete container.")
   delete is EnvironmentContainerOperationGroupOps.DeleteSync<EnvironmentContainer>;
 
   /**
@@ -178,6 +185,7 @@ interface EnvironmentContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentContainers_List")
+  @summary("List environment containers.")
   list is EnvironmentContainerOperationGroupOps.List<
     EnvironmentContainer,
     Parameters = {

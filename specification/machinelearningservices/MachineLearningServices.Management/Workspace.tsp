@@ -34,12 +34,14 @@ interface Workspaces {
   /**
    * Gets the properties of the specified machine learning workspace.
    */
+  @summary("Get workspace.")
   get is ArmResourceRead<Workspace>;
 
   /**
    * Creates or updates a workspace with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create or update workspace.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
@@ -51,6 +53,7 @@ interface Workspaces {
    * Updates a machine learning workspace with the specified parameters.
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update workspace.")
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspaceUpdateParameters
@@ -60,6 +63,7 @@ interface Workspaces {
    * Deletes a machine learning workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete workspace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
@@ -75,6 +79,7 @@ interface Workspaces {
   /**
    * Lists all the available machine learning workspaces under the specified resource group.
    */
+  @summary("Lists all the available machine learning workspaces under the specified resource group.")
   listByResourceGroup is ArmResourceListByParent<
     Workspace,
     Parameters = {
@@ -99,6 +104,7 @@ interface Workspaces {
   /**
    * Lists all the available machine learning workspaces under the specified subscription.
    */
+  @summary("Lists all the available machine learning workspaces under the specified subscription.")
   listBySubscription is ArmListBySubscription<
     Workspace,
     Parameters = {
@@ -137,6 +143,7 @@ interface Workspaces {
   /**
    * Diagnose workspace setup issue.
    */
+  @summary("Diagnose workspace setup issue.")
   diagnose is ArmResourceActionAsync<
     Workspace,
     DiagnoseWorkspaceParameters,
@@ -222,6 +229,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EndpointDeployment_GetInWorkspace")
+  @summary("Get all the deployments under the workspace scope")
   @list
   @get
   @action("deployments")

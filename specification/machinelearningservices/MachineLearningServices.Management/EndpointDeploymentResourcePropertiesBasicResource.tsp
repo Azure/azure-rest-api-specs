@@ -66,6 +66,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_GetDeployment")
+  @summary("Get deployments under the Azure OpenAI connection by name.")
   getDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.Read<EndpointDeploymentResourcePropertiesBasicResource>;
 
   /**
@@ -73,6 +74,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_CreateOrUpdateDeployment")
+  @summary("Create or update Azure OpenAI connection deployment resource with the specified parameters")
   createOrUpdateDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
@@ -91,6 +93,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_DeleteDeployment")
+  @summary("Delete Azure OpenAI connection deployment resource by name")
   deleteDeployment is EndpointDeploymentResourcePropertiesBasicResourceOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
@@ -107,6 +110,7 @@ interface EndpointDeploymentResourcePropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_ListDeployments")
+  @summary("Get all the deployments under the Azure OpenAI connection.")
   listDeployments is EndpointDeploymentResourcePropertiesBasicResourceOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
@@ -157,12 +161,14 @@ interface EndpointDeployment {
   /**
    * Get deployments under endpoint resource by name
    */
+  @summary("Get deployments under endpoint resource by name")
   get is EndpointDeploymentOps.Read<EndpointDeploymentResourcePropertiesBasicResource>;
 
   /**
    * Create or update endpoint deployment resource with the specified parameters
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Create or update endpoint deployment resource with the specified parameters")
   createOrUpdate is EndpointDeploymentOps.CreateOrUpdateAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Response = ArmResourceUpdatedResponse<EndpointDeploymentResourcePropertiesBasicResource> | ArmAcceptedLroResponse,
@@ -173,6 +179,7 @@ interface EndpointDeployment {
   /**
    * Delete  endpoint deployment resource by name
    */
+  @summary("Delete  endpoint deployment resource by name")
   delete is EndpointDeploymentOps.DeleteWithoutOkAsync<
     EndpointDeploymentResourcePropertiesBasicResource,
     Parameters = {
@@ -187,6 +194,7 @@ interface EndpointDeployment {
   /**
    * Get all the deployments under the endpoint resource scope
    */
+  @summary("Get all the deployments under the endpoint resource scope")
   list is EndpointDeploymentOps.List<
     EndpointDeploymentResourcePropertiesBasicResource,
     Response = ArmResponse<EndpointDeploymentResourcePropertiesBasicResourceArmPaginatedResult>

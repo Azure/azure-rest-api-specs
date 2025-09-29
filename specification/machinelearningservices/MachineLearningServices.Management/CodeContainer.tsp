@@ -58,6 +58,7 @@ interface CodeContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeContainers_Get")
+  @summary("Get Code container.")
   get is CodeContainerOps.Read<CodeContainer>;
 
   /**
@@ -65,6 +66,7 @@ interface CodeContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeContainers_CreateOrUpdate")
+  @summary("Create or update Code container.")
   createOrUpdate is CodeContainerOps.CreateOrUpdateAsync<
     CodeContainer,
     Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<CodeContainer> & {
@@ -82,6 +84,7 @@ interface CodeContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryCodeContainers_Delete")
+  @summary("Delete Code container.")
   delete is CodeContainerOps.DeleteWithoutOkAsync<
     CodeContainer,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -98,6 +101,7 @@ interface CodeContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryCodeContainers_List")
+  @summary("List containers.")
   list is CodeContainerOps.List<
     CodeContainer,
     Parameters = {
@@ -142,6 +146,7 @@ interface CodeContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CodeContainers_Get")
+  @summary("Get containers.")
   get is CodeContainerOperationGroupOps.Read<CodeContainer>;
 
   /**
@@ -149,6 +154,7 @@ interface CodeContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CodeContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is CodeContainerOperationGroupOps.CreateOrUpdateSync<CodeContainer>;
 
   /**
@@ -156,6 +162,7 @@ interface CodeContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CodeContainers_Delete")
+  @summary("Delete container.")
   delete is CodeContainerOperationGroupOps.DeleteSync<CodeContainer>;
 
   /**
@@ -163,6 +170,7 @@ interface CodeContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CodeContainers_List")
+  @summary("List containers.")
   list is CodeContainerOperationGroupOps.List<
     CodeContainer,
     Parameters = {

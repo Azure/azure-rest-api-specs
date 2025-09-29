@@ -35,17 +35,20 @@ interface Registries {
   /**
    * Get registry
    */
+  @summary("Get registry")
   get is ArmResourceRead<Registry>;
 
   /**
    * Create or update registry
    */
+  @summary("Create or update registry")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Registry>;
 
   /**
    * Update tags
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update tags")
   update is ArmCustomPatchSync<
     Registry,
     PatchModel = PartialRegistryPartialTrackedResource
@@ -55,6 +58,7 @@ interface Registries {
    * Delete registry
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete registry")
   delete is ArmResourceDeleteWithoutOkAsync<
     Registry,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -69,6 +73,7 @@ interface Registries {
   /**
    * List registries
    */
+  @summary("List registries")
   list is ArmResourceListByParent<
     Registry,
     Response = ArmResponse<RegistryTrackedResourceArmPaginatedResult>
@@ -77,6 +82,7 @@ interface Registries {
   /**
    * List registries by subscription
    */
+  @summary("List registries by subscription")
   listBySubscription is ArmListBySubscription<
     Registry,
     Response = ArmResponse<RegistryTrackedResourceArmPaginatedResult>
@@ -87,6 +93,7 @@ interface Registries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataReferences_GetBlobReferenceSAS")
+  @summary("Get blob reference SAS Uri.")
   @post
   getBlobReferenceSAS(
     ...ReferenceSASParameters,
@@ -95,6 +102,7 @@ interface Registries {
   /**
    * Remove regions from registry
    */
+  @summary("Remove regions from registry")
   removeRegions is ArmResourceActionAsyncBase<
     Registry,
     Registry,

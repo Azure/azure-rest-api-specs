@@ -30,11 +30,13 @@ interface CapabilityHosts {
   /**
    * Get capabilityHost.
    */
+  @summary("Get capabilityHost.") 
   get is ArmResourceRead<CapabilityHost>;
 
   /**
    * Create or update capabilityHost.
    */
+  @summary("Create or update capabilityHost.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CapabilityHost,
     Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<CodeContainer> & {
@@ -49,6 +51,7 @@ interface CapabilityHosts {
   /**
    * Delete capabilityHost.
    */
+  @summary("Delete capabilityHost.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CapabilityHost,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {

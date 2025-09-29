@@ -96,6 +96,7 @@ interface DataVersionBases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataVersions_Get")
+  @summary("Get version.")
   get is DataVersionBaseOps.Read<DataVersionBase>;
 
   /**
@@ -104,6 +105,7 @@ interface DataVersionBases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @useFinalStateVia("original-uri")
   @operationId("RegistryDataVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is DataVersionWithNamePatternBaseOps.CreateOrUpdateAsync<
     DataVersionBase,
     Response = ArmResourceUpdatedResponse<DataVersionBase> | (ArmResourceCreatedResponse<
@@ -125,6 +127,7 @@ interface DataVersionBases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryDataVersions_Delete")
+  @summary("Delete version.")
   delete is DataVersionBaseOps.DeleteWithoutOkAsync<
     DataVersionBase,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -184,6 +187,7 @@ interface DataVersionBases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataVersions_CreateOrGetStartPendingUpload")
   @action("startPendingUpload")
+  @summary("Generate a storage location and credential for the client to upload a data asset to.")
   createOrGetStartPendingUpload is DataVersionBaseOps.ActionSync<
     DataVersionBase,
     PendingUploadRequestDto,
@@ -226,21 +230,25 @@ interface DataVersions {
   /**
    * Get version.
    */
+  @summary("Get version.")
   get is DataVersionOps.Read<DataVersionBase>;
 
   /**
    * Create or update version.
    */
+  @summary("Create or update version.")
   createOrUpdate is DataVersionOps.CreateOrUpdateSync<DataVersionBase>;
 
   /**
    * Delete version.
    */
+  @summary("Delete version.")
   delete is DataVersionOps.DeleteSync<DataVersionBase>;
 
   /**
    * List data versions in the data container
    */
+  @summary("List data versions in the data container")
   list is DataVersionOps.List<
     DataVersionBase,
     Parameters = {
@@ -281,6 +289,7 @@ interface DataVersions {
   /**
    * Publish version asset into registry.
    */
+  @summary("Publish version asset into registry.")
   publish is DataVersionOps.ActionAsync<
     DataVersionBase,
     DestinationAsset,

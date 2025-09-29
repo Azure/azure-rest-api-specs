@@ -58,6 +58,7 @@ interface ModelContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_Get")
+  @summary("Get container.")
   get is ModelContainerOps.Read<ModelContainer>;
 
   /**
@@ -65,6 +66,7 @@ interface ModelContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<
     ModelContainer,
     Response = ArmResourceUpdatedResponse<ModelContainer> | (ArmResourceCreatedResponse<ModelContainer> & {
@@ -82,6 +84,7 @@ interface ModelContainers {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryModelContainers_Delete")
+  @summary("Delete container.")
   delete is ModelContainerOps.DeleteWithoutOkAsync<
     ModelContainer,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -98,6 +101,7 @@ interface ModelContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_List")
+  @summary("List model containers.")
   list is ModelContainerOps.List<
     ModelContainer,
     Parameters = {

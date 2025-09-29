@@ -65,6 +65,7 @@ interface RaiPolicyPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiPolicy_Get")
+  @summary("Gets the specified Content Filters associated with the Azure OpenAI connection.")
   get is RaiPolicyPropertiesBasicResourceOps.Read<RaiPolicyPropertiesBasicResource>;
 
   /**
@@ -72,6 +73,7 @@ interface RaiPolicyPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiPolicy_Create")
+  @summary("Update the state of specified Content Filters associated with the Azure OpenAI connection.")
   create is RaiPolicyPropertiesBasicResourceOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
@@ -90,6 +92,7 @@ interface RaiPolicyPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiPolicy_Delete")
+  @summary("Deletes the specified Content Filters associated with the Azure OpenAI connection.")
   delete is RaiPolicyPropertiesBasicResourceOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
@@ -106,6 +109,7 @@ interface RaiPolicyPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ConnectionRaiPolicies_List")
+  @summary("List the specified Content Filters associated with the Azure OpenAI connection.")
   list is RaiPolicyPropertiesBasicResourceOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
@@ -156,11 +160,13 @@ interface RaiPolicy {
   /**
    * Gets the specified Content Filters associated with the Azure OpenAI account.
    */
+  @summary("Gets the specified Content Filters associated with the Azure OpenAI account.")
   get is RaiPolicyOps.Read<RaiPolicyPropertiesBasicResource>;
 
   /**
    * Update the state of specified Content Filters associated with the Azure OpenAI account.
    */
+  @summary("Update the state of specified Content Filters associated with the Azure OpenAI account.")
   create is RaiPolicyOps.CreateOrUpdateAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
@@ -177,6 +183,7 @@ interface RaiPolicy {
   /**
    * Deletes the specified Content Filters associated with the Azure OpenAI account.
    */
+  @summary("Deletes the specified Content Filters associated with the Azure OpenAI account.")
   delete is RaiPolicyOps.DeleteWithoutOkAsync<
     RaiPolicyPropertiesBasicResource,
     Parameters = {
@@ -193,6 +200,7 @@ interface RaiPolicy {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RaiPolicies_List")
+  @summary("List the specified Content Filters associated with the Azure OpenAI account.")
   list is RaiPolicyOps.List<
     RaiPolicyPropertiesBasicResource,
     Parameters = {

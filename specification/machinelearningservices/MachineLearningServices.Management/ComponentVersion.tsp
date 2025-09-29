@@ -64,6 +64,7 @@ interface ComponentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentVersions_Get")
+  @summary("Get version.")
   get is ComponentVersionOps.Read<ComponentVersion>;
 
   /**
@@ -71,6 +72,7 @@ interface ComponentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<ComponentVersion, Response = ArmResourceUpdatedResponse<ComponentVersion> | (ArmResourceCreatedResponse<ComponentVersion> & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
@@ -85,6 +87,7 @@ interface ComponentVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryComponentVersions_Delete")
+  @summary("Delete version.")
   delete is ComponentVersionOps.DeleteWithoutOkAsync<
     ComponentVersion,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -101,6 +104,7 @@ interface ComponentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentVersions_List")
+  @summary("List versions.")
   list is ComponentVersionOps.List<
     ComponentVersion,
     Parameters = {
@@ -163,6 +167,7 @@ interface ComponentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentVersions_Get")
+  @summary("Get version.")
   get is ComponentVersionOperationGroupOps.Read<ComponentVersion>;
 
   /**
@@ -170,6 +175,7 @@ interface ComponentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is ComponentVersionOperationGroupOps.CreateOrUpdateSync<ComponentVersion>;
 
   /**
@@ -177,6 +183,7 @@ interface ComponentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentVersions_Delete")
+  @summary("Delete version.")
   delete is ComponentVersionOperationGroupOps.DeleteSync<ComponentVersion>;
 
   /**
@@ -184,6 +191,7 @@ interface ComponentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentVersions_List")
+  @summary("List component versions.")
   list is ComponentVersionOperationGroupOps.List<
     ComponentVersion,
     Parameters = {
@@ -219,6 +227,7 @@ interface ComponentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ComponentVersions_Publish")
+  @summary("Publish version asset into registry.")
   publish is ComponentVersionOperationGroupOps.ActionAsync<
     ComponentVersion,
     DestinationAsset,

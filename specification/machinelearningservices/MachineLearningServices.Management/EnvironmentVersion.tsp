@@ -64,6 +64,7 @@ interface EnvironmentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_Get")
+  @summary("Get version.")
   get is EnvironmentVersionOps.Read<EnvironmentVersion>;
 
   /**
@@ -71,6 +72,7 @@ interface EnvironmentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is EnvironmentVersionOps.CreateOrUpdateAsync<
     EnvironmentVersion,
     Response = ArmResourceUpdatedResponse<EnvironmentVersion> | (ArmResourceCreatedResponse<EnvironmentVersion> & {
@@ -88,6 +90,7 @@ interface EnvironmentVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   @operationId("RegistryEnvironmentVersions_Delete")
+  @summary("Delete version.")
   delete is EnvironmentVersionOps.DeleteWithoutOkAsync<
     EnvironmentVersion,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -104,6 +107,7 @@ interface EnvironmentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_List")
+  @summary("List environment versions.")
   list is EnvironmentVersionOps.List<
     EnvironmentVersion,
     Parameters = {
@@ -172,6 +176,7 @@ interface EnvironmentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentVersions_Get")
+  @summary("Get version.")
   get is EnvironmentVersionOperationGroupOps.Read<EnvironmentVersion>;
 
   /**
@@ -179,6 +184,7 @@ interface EnvironmentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is EnvironmentVersionOperationGroupOps.CreateOrUpdateSync<EnvironmentVersion>;
 
   /**
@@ -186,6 +192,7 @@ interface EnvironmentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentVersions_Delete")
+  @summary("Delete version.")
   delete is EnvironmentVersionOperationGroupOps.DeleteSync<EnvironmentVersion>;
 
   /**
@@ -193,6 +200,7 @@ interface EnvironmentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentVersions_List")
+  @summary("List versions.")
   list is EnvironmentVersionOperationGroupOps.List<
     EnvironmentVersion,
     Parameters = {

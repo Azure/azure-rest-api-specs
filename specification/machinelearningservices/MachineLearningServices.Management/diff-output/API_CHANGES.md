@@ -1,5 +1,619 @@
 ## Swagger Changes
 
+### Changes for `summary`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `paths['/providers/microsoft.MachineLearningServices/operations'].get.summary__deleted` | deleted | `Lists all of the available Azure Machine Learning Workspaces REST API operations` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/registries'].get.summary__deleted` | deleted | `List registries by subscription` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/workspaces'].get.summary__deleted` | deleted | `Lists all the available machine learning workspaces under the specified subscription.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries'].get.summary__deleted` | deleted | `List registries` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].delete.summary__deleted` | deleted | `Delete registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].get.summary__deleted` | deleted | `Get registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].patch.summary__deleted` | deleted | `Update tags` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].put.summary__deleted` | deleted | `Create or update registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes'].get.summary__deleted` | deleted | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}'].delete.summary__deleted` | deleted | `Delete Code container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}'].get.summary__deleted` | deleted | `Get Code container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}'].put.summary__deleted` | deleted | `Create or update Code container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}/startPendingUpload'].post.summary__deleted` | deleted | `Generate a storage location and credential for the client to upload a code asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components'].get.summary__deleted` | deleted | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data'].get.summary__deleted` | deleted | `List Data containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions'].get.summary__deleted` | deleted | `List data versions in the data container` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}/startPendingUpload'].post.summary__deleted` | deleted | `Generate a storage location and credential for the client to upload a data asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}'].post.summary__deleted` | deleted | `Get blob reference SAS Uri.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments'].get.summary__deleted` | deleted | `List environment containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models'].get.summary__deleted` | deleted | `List model containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}'].put.summary__deleted` | deleted | `Create or update model container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}/startPendingUpload'].post.summary__deleted` | deleted | `Generate a storage location and credential for the client to upload a model asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/removeRegions'].post.summary__deleted` | deleted | `Remove regions from registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces'].get.summary__deleted` | deleted | `Lists all the available machine learning workspaces under the specified resource group.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].delete.summary__deleted` | deleted | `Deletes a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].get.summary__deleted` | deleted | `Gets the properties of the specified machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].patch.summary__deleted` | deleted | `Updates a machine learning workspace with the specified parameters.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].put.summary__deleted` | deleted | `Creates or updates a workspace with the specified parameters.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints'].get.summary__deleted` | deleted | `Lists Batch inference endpoint in the workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].delete.summary__deleted` | deleted | `Delete Batch Inference Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].get.summary__deleted` | deleted | `Gets a batch inference endpoint by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].patch.summary__deleted` | deleted | `Update a batch inference endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].put.summary__deleted` | deleted | `Creates a batch inference endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments'].get.summary__deleted` | deleted | `Lists Batch inference deployments in the workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].delete.summary__deleted` | deleted | `Delete Batch Inference deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].get.summary__deleted` | deleted | `Gets a batch inference deployment by id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].patch.summary__deleted` | deleted | `Update a batch inference deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].put.summary__deleted` | deleted | `Creates/updates a batch inference deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys'].post.summary__deleted` | deleted | `Lists batch Inference Endpoint keys.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].delete.summary__deleted` | deleted | `Delete capabilityHost.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].get.summary__deleted` | deleted | `Get capabilityHost.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].put.summary__deleted` | deleted | `Create or update capabilityHost.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.summary__deleted` | deleted | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/publish'].post.summary__deleted` | deleted | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload'].post.summary__deleted` | deleted | `Generate a storage location and credential for the client to upload a code asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components'].get.summary__deleted` | deleted | `List component containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions'].get.summary__deleted` | deleted | `List component versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}/publish'].post.summary__deleted` | deleted | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateDataMounts'].post.summary__deleted` | deleted | `Update Data Mounts of a Machine Learning compute.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections'].get.summary__deleted` | deleted | `Lists all the available machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].delete.summary__deleted` | deleted | `Delete machine learning workspaces connections by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].get.summary__deleted` | deleted | `Lists machine learning workspaces connections by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].patch.summary__deleted` | deleted | `Update machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].put.summary__deleted` | deleted | `Create or update machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments'].get.summary__deleted` | deleted | `Get all the deployments under the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}'].delete.summary__deleted` | deleted | `Delete Azure OpenAI connection deployment resource by name` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}'].get.summary__deleted` | deleted | `Get deployments under the Azure OpenAI connection by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}'].put.summary__deleted` | deleted | `Create or update Azure OpenAI connection deployment resource with the specified parameters` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/listsecrets'].post.summary__deleted` | deleted | `List all the secrets of a machine learning workspaces connections.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models'].get.summary__deleted` | deleted | `Get available models under the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists'].get.summary__deleted` | deleted | `Gets the custom blocklists associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}'].delete.summary__deleted` | deleted | `Deletes the specified custom blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}'].get.summary__deleted` | deleted | `Gets the specified custom blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}'].put.summary__deleted` | deleted | `Update the state of specified blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.summary__deleted` | deleted | `Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.summary__deleted` | deleted | `Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems'].get.summary__deleted` | deleted | `Gets the custom blocklist items associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}'].delete.summary__deleted` | deleted | `Deletes the specified custom blocklist item associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}'].get.summary__deleted` | deleted | `Gets the specified custom blocklist item associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}'].put.summary__deleted` | deleted | `Update the state of specified blocklist item associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies'].get.summary__deleted` | deleted | `List the specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}'].delete.summary__deleted` | deleted | `Deletes the specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}'].get.summary__deleted` | deleted | `Gets the specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}'].put.summary__deleted` | deleted | `Update the state of specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/testconnection'].post.summary__deleted` | deleted | `Test machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.summary__deleted` | deleted | `List data containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions'].get.summary__deleted` | deleted | `List data versions in the data container` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}/publish'].post.summary__deleted` | deleted | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores'].get.summary__deleted` | deleted | `List datastores.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}'].delete.summary__deleted` | deleted | `Delete datastore.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}'].get.summary__deleted` | deleted | `Get datastore.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}'].put.summary__deleted` | deleted | `Create or update datastore.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets'].post.summary__deleted` | deleted | `Get datastore secrets.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/deployments'].get.summary__deleted` | deleted | `Get all the deployments under the workspace scope` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose'].post.summary__deleted` | deleted | `Diagnose workspace setup issue.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints'].get.summary__deleted` | deleted | `List All the endpoints under this workspace` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}'].get.summary__deleted` | deleted | `Gets endpoint resource` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}'].put.summary__deleted` | deleted | `Create or update endpoint resource with the specified parameters` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments'].get.summary__deleted` | deleted | `Get all the deployments under the endpoint resource scope` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}'].delete.summary__deleted` | deleted | `Delete  endpoint deployment resource by name` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}'].get.summary__deleted` | deleted | `Get deployments under endpoint resource by name` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}'].put.summary__deleted` | deleted | `Create or update endpoint deployment resource with the specified parameters` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/listKeys'].post.summary__deleted` | deleted | `List keys for the endpoint resource.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models'].get.summary__deleted` | deleted | `Get available models under the endpoint resource.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies'].get.summary__deleted` | deleted | `List the specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}'].delete.summary__deleted` | deleted | `Deletes the specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}'].get.summary__deleted` | deleted | `Gets the specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}'].put.summary__deleted` | deleted | `Update the state of specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/regenerateKey'].post.summary__deleted` | deleted | `Regenerate account keys` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.summary__deleted` | deleted | `List environment containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}'].put.summary__deleted` | deleted | `Creates or updates an EnvironmentVersion.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}/publish'].post.summary__deleted` | deleted | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets'].get.summary__deleted` | deleted | `List featurestore entity containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features'].get.summary__deleted` | deleted | `List Features.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features/{featureName}'].get.summary__deleted` | deleted | `Get feature.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/backfill'].post.summary__deleted` | deleted | `Backfill.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities'].get.summary__deleted` | deleted | `List featurestore entity containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions'].get.summary__deleted` | deleted | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools'].get.summary__deleted` | deleted | `List InferencePools.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].delete.summary__deleted` | deleted | `Delete InferencePool (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].get.summary__deleted` | deleted | `Get InferencePool.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].patch.summary__deleted` | deleted | `Update InferencePool (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].put.summary__deleted` | deleted | `Create or update InferencePool (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints'].get.summary__deleted` | deleted | `List Inference Endpoints.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].delete.summary__deleted` | deleted | `Delete InferenceEndpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].get.summary__deleted` | deleted | `Get InferenceEndpoint.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].patch.summary__deleted` | deleted | `Update InferenceEndpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].put.summary__deleted` | deleted | `Create or update InferenceEndpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups'].get.summary__deleted` | deleted | `List Inference Groups.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].delete.summary__deleted` | deleted | `Delete InferenceGroup (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].get.summary__deleted` | deleted | `Get InferenceGroup.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].patch.summary__deleted` | deleted | `Update InferenceGroup (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].put.summary__deleted` | deleted | `Create or update InferenceGroup (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus'].post.summary__deleted` | deleted | `Retrieve status of delta models associated with the InferenceGroup and the target base model.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list'].post.summary__deleted` | deleted | `List delta models associated with the InferenceGroup and the target base model.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify'].post.summary__deleted` | deleted | `Modify delta models associated with the InferenceGroup and the target base model.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/getStatus'].post.summary__deleted` | deleted | `Retrieve inference group status.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus'].get.summary__deleted` | deleted | `List Inference Group Skus.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs'].get.summary__deleted` | deleted | `Lists Jobs in the workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}'].delete.summary__deleted` | deleted | `Deletes a Job (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}'].get.summary__deleted` | deleted | `Gets a Job by name/id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}'].put.summary__deleted` | deleted | `Creates and executes a Job.
+For update case, the Tags in the definition passed in will replace Tags in the existing job.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}/cancel'].post.summary__deleted` | deleted | `Cancels a Job (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listConnectionModels'].post.summary__deleted` | deleted | `Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys'].post.summary__deleted` | deleted | `Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken'].post.summary__deleted` | deleted | `Get Azure Machine Learning Workspace notebook access token` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys'].post.summary__deleted` | deleted | `Lists keys of Azure Machine Learning Workspaces notebook.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys'].post.summary__deleted` | deleted | `Lists keys of Azure Machine Learning Workspace's storage account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks'].get.summary__deleted` | deleted | `List API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}'].get.summary__deleted` | deleted | `Get API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}'].patch.summary__deleted` | deleted | `Patch API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}'].put.summary__deleted` | deleted | `PUT API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules'].post.summary__deleted` | deleted | `The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules'].get.summary__deleted` | deleted | `The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}'].delete.summary__deleted` | deleted | `The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}'].get.summary__deleted` | deleted | `The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions'].get.summary__deleted` | deleted | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].delete.summary__deleted` | deleted | `Delete Marketplace Subscription (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.summary__deleted` | deleted | `Create or update Marketplace Subscription (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models'].get.summary__deleted` | deleted | `List model containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].delete.summary__deleted` | deleted | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].get.summary__deleted` | deleted | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].put.summary__deleted` | deleted | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions'].get.summary__deleted` | deleted | `List model versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}'].delete.summary__deleted` | deleted | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}'].get.summary__deleted` | deleted | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}'].put.summary__deleted` | deleted | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/publish'].post.summary__deleted` | deleted | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints'].get.summary__deleted` | deleted | `List Online Endpoints.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].delete.summary__deleted` | deleted | `Delete Online Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].get.summary__deleted` | deleted | `Get Online Endpoint.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].patch.summary__deleted` | deleted | `Update Online Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.summary__deleted` | deleted | `Create or update Online Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments'].get.summary__deleted` | deleted | `List Inference Endpoint Deployments.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].delete.summary__deleted` | deleted | `Delete Inference Endpoint Deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].get.summary__deleted` | deleted | `Get Inference Deployment Deployment.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].patch.summary__deleted` | deleted | `Update Online Deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.summary__deleted` | deleted | `Create or update Inference Endpoint Deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs'].post.summary__deleted` | deleted | `Polls an Endpoint operation.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus'].get.summary__deleted` | deleted | `List Inference Endpoint Deployment Skus.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/listKeys'].post.summary__deleted` | deleted | `List EndpointAuthKeys for an Endpoint using Key-based authentication.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/regenerateKeys'].post.summary__deleted` | deleted | `Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/token'].post.summary__deleted` | deleted | `Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints'].get.summary__deleted` | deleted | `Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules'].get.summary__deleted` | deleted | `Lists the managed network outbound rules for a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}'].delete.summary__deleted` | deleted | `Deletes an outbound rule from the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}'].get.summary__deleted` | deleted | `Gets an outbound rule from the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}'].put.summary__deleted` | deleted | `Creates or updates an outbound rule in the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook'].post.summary__deleted` | deleted | `Prepare Azure Machine Learning Workspace's notebook resource` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections'].get.summary__deleted` | deleted | `Called by end-users to get all PE connections.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.summary__deleted` | deleted | `Called by end-users to delete a PE connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.summary__deleted` | deleted | `Called by end-users to get a PE connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.summary__deleted` | deleted | `Called by end-users to approve or reject a PE connection.
+This method must validate and forward the call to NRP.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources'].get.summary__deleted` | deleted | `Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
+Each "private link resource" is a connection endpoint (IP address) to the resource.
+Pre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.
+Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
+Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork'].post.summary__deleted` | deleted | `Provisions the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys'].post.summary__deleted` | deleted | `Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules'].get.summary__deleted` | deleted | `List schedules in specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].delete.summary__deleted` | deleted | `Delete schedule.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].get.summary__deleted` | deleted | `Get schedule.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.summary__deleted` | deleted | `Create or update schedule.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints'].get.summary__deleted` | deleted | `List Serverless Endpoints.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].delete.summary__deleted` | deleted | `Delete Serverless Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].get.summary__deleted` | deleted | `Get Serverless Endpoint.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].patch.summary__deleted` | deleted | `Update Serverless Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.summary__deleted` | deleted | `Create or update Serverless Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys'].post.summary__deleted` | deleted | `List EndpointAuthKeys for an Endpoint using Key-based authentication.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/regenerateKeys'].post.summary__deleted` | deleted | `Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).` |
+
+### Changes for `description`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.AccountKeyAuthTypeWorkspaceConnectionProperties.properties.credentials.description__added` | added | `Account key object for workspace connection credential.` |
+| `definitions.ApiKeyAuthWorkspaceConnectionProperties.properties.credentials.description__added` | added | `Api key object for workspace connection credential.` |
+| `definitions.AutoMLJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.CapabilityHost.description__added` | added | `Azure Resource Manager resource envelope.` |
+| `definitions.CommandJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
+| `definitions.CommandJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.CustomKeys.properties.keys.description__added` | added | `Dictionary of <string>` |
+| `definitions.CustomMonitoringSignal.properties.inputAssets.additionalProperties.description__deleted` | deleted | `Monitoring input data base definition.` |
+| `definitions.CustomMonitoringSignal.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
+| `definitions.DistillationJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.EndpointDeploymentResourcePropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.EndpointModelProperties.properties.systemData.description__added` | added | `Metadata pertaining to creation and last modification of the resource.` |
+| `definitions.EndpointModelSkuProperties.properties.connectionIds.items.description__added` | added | `A type definition that refers the id to an Azure Resource Manager resource.` |
+| `definitions.EndpointResourcePropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.FeatureAttributionDriftMonitoringSignal.properties.productionData.items.description__deleted` | deleted | `Monitoring input data base definition.` |
+| `definitions.FineTuningJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.JupyterKernelConfig.properties.argv.items.description__deleted` | deleted | `argument values` |
+| `definitions.ManagedNetworkSettings.properties.outboundRules.additionalProperties.description__deleted` | deleted | `Outbound Rule for the managed network of a machine learning workspace.` |
+| `definitions.ManagedNetworkSettings.properties.outboundRules.description__added` | added | `Dictionary of <OutboundRule>` |
+| `definitions.ManagedNetworkSettingsPropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic.description__added` | added | `Dictionary of <integer>` |
+| `definitions.ManagedOnlineEndpointResourceProperties.properties.traffic.description__added` | added | `Dictionary of <integer>` |
+| `definitions.MarketplaceSubscription.description__added` | added | `Azure Resource Manager resource envelope.` |
+| `definitions.ModelContainer.description__added` | added | `Azure Resource Manager resource envelope.` |
+| `definitions.NotificationSetting.properties.webhooks.additionalProperties.description__deleted` | deleted | `Webhook base` |
+| `definitions.OAuth2AuthTypeWorkspaceConnectionProperties.properties.credentials.description__added` | added | `ClientId and ClientSecret are required. Other properties are optional
+depending on each OAuth2 provider's implementation.` |
+| `definitions.OnlineDeployment.description__added` | added | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.OutboundRuleBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.PipelineJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
+| `definitions.PipelineJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.PrivateEndpointConnection.properties.identity.description__added` | added | `The managed service identities assigned to this resource.` |
+| `definitions.PrivateEndpointConnectionProperties.properties.privateEndpoint.description__added` | added | `The Private Endpoint resource.` |
+| `definitions.PrivateEndpointDestination.properties.serviceResourceId.description__added` | added | `A type definition that refers the id to an Azure Resource Manager resource.` |
+| `definitions.PrivateLinkResource.properties.identity.description__added` | added | `Managed service identity (system assigned and/or user assigned identities)` |
+| `definitions.PrivateLinkResource.properties.tags.description__added` | added | `Dictionary of <string>` |
+| `definitions.PrivateLinkResourceListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
+| `definitions.RaiBlocklistItemPropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.RaiBlocklistPropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.RaiPolicyPropertiesBasicResource.properties.properties.description__added` | added | `Azure OpenAI Content Filters properties.` |
+| `definitions.ScaleSettingsInformation.properties.scaleSettings.description__added` | added | `scale settings for AML Compute` |
+| `definitions.ServerlessEndpoint.description__added` | added | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.ServerlessEndpointInferenceEndpoint.properties.headers.description__added` | added | `Dictionary of <string>` |
+| `definitions.ServerlessEndpointResourceProperties.properties.metadata.description__added` | added | `Anything` |
+| `definitions.SparkJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
+| `definitions.SparkJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.SweepJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
+| `definitions.SweepJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
+| `definitions.Workspace.properties.identity.description__added` | added | `The managed service identities assigned to this resource.` |
+| `definitions.WorkspaceConnectionPropertiesV2.properties.createdByWorkspaceArmId.description__added` | added | `A type definition that refers the id to an Azure Resource Manager resource.` |
+| `definitions.WorkspaceConnectionPropertiesV2BasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.WorkspaceProperties.properties.managedNetwork.description__added` | added | `Managed Network settings for a machine learning workspace.` |
+| `definitions.WorkspacePropertiesUpdateParameters.properties.managedNetwork.description__added` | added | `Managed Network settings for a machine learning workspace.` |
+| `definitions.WorkspaceUpdateParameters.properties.identity.description__added` | added | `Managed service identity (system assigned and/or user assigned identities)` |
+| `paths['/providers/microsoft.MachineLearningServices/operations'].get.description__added` | added | `List the operations for the provider` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota'].get.description__added` | added | `List available MaaS PTU quota.` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota/default'].get.description__added` | added | `Get available MaaS PTU quota.` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/quotaAndUsage'].get.description__added` | added | `List MaaS PTU usage and quota.` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/registries'].get.description__added` | added | `List registries by subscription` |
+| `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/workspaces'].get.description__added` | added | `Lists all the available machine learning workspaces under the specified subscription.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries'].get.description__added` | added | `List registries` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].delete.description__added` | added | `Delete registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].get.description__added` | added | `Get registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].patch.description__added` | added | `Update tags` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].put.description__added` | added | `Create or update registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes'].get.description__added` | added | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}'].delete.description__added` | added | `Delete Code container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}'].get.description__added` | added | `Get Code container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}'].put.description__added` | added | `Create or update Code container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}/startPendingUpload'].post.description__added` | added | `Generate a storage location and credential for the client to upload a code asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components'].get.description__added` | added | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data'].get.description__added` | added | `List Data containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions'].get.description__added` | added | `List data versions in the data container` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}/startPendingUpload'].post.description__added` | added | `Generate a storage location and credential for the client to upload a data asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}'].post.description__added` | added | `Get blob reference SAS Uri.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments'].get.description__added` | added | `List environment containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models'].get.description__added` | added | `List model containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}'].put.description__added` | added | `Create or update model container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}/startPendingUpload'].post.description__added` | added | `Generate a storage location and credential for the client to upload a model asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/removeRegions'].post.description__added` | added | `Remove regions from registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces'].get.description__added` | added | `Lists all the available machine learning workspaces under the specified resource group.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].delete.description__added` | added | `Deletes a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].get.description__added` | added | `Gets the properties of the specified machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].patch.description__added` | added | `Updates a machine learning workspace with the specified parameters.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}'].put.description__added` | added | `Creates or updates a workspace with the specified parameters.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints'].get.description__added` | added | `Lists Batch inference endpoint in the workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].delete.description__added` | added | `Delete Batch Inference Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].get.description__added` | added | `Gets a batch inference endpoint by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].patch.description__added` | added | `Update a batch inference endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}'].put.description__added` | added | `Creates a batch inference endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments'].get.description__added` | added | `Lists Batch inference deployments in the workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].delete.description__added` | added | `Delete Batch Inference deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].get.description__added` | added | `Gets a batch inference deployment by id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].patch.description__added` | added | `Update a batch inference deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}'].put.description__added` | added | `Creates/updates a batch inference deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys'].post.description__added` | added | `Lists batch Inference Endpoint keys.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].delete.description__added` | added | `Delete capabilityHost.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].get.description__added` | added | `Get capabilityHost.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}'].put.description__added` | added | `Create or update capabilityHost.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes'].get.description__added` | added | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/publish'].post.description__added` | added | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload'].post.description__added` | added | `Generate a storage location and credential for the client to upload a code asset to.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components'].get.description__added` | added | `List component containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions'].get.description__added` | added | `List component versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}/publish'].post.description__added` | added | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateDataMounts'].post.description__added` | added | `Update Data Mounts of a Machine Learning compute.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections'].get.description__added` | added | `Lists all the available machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].delete.description__added` | added | `Delete machine learning workspaces connections by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].get.description__added` | added | `Lists machine learning workspaces connections by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].patch.description__added` | added | `Update machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}'].put.description__added` | added | `Create or update machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments'].get.description__added` | added | `Get all the deployments under the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}'].delete.description__added` | added | `Delete Azure OpenAI connection deployment resource by name` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}'].get.description__added` | added | `Get deployments under the Azure OpenAI connection by name.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}'].put.description__added` | added | `Create or update Azure OpenAI connection deployment resource with the specified parameters` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/listsecrets'].post.description__added` | added | `List all the secrets of a machine learning workspaces connections.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models'].get.description__added` | added | `Get available models under the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists'].get.description__added` | added | `Gets the custom blocklists associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}'].delete.description__added` | added | `Deletes the specified custom blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}'].get.description__added` | added | `Gets the specified custom blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}'].put.description__added` | added | `Update the state of specified blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems'].post.description__added` | added | `Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems'].post.description__added` | added | `Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems'].get.description__added` | added | `Gets the custom blocklist items associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}'].delete.description__added` | added | `Deletes the specified custom blocklist item associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}'].get.description__added` | added | `Gets the specified custom blocklist item associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}'].put.description__added` | added | `Update the state of specified blocklist item associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies'].get.description__added` | added | `List the specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}'].delete.description__added` | added | `Deletes the specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}'].get.description__added` | added | `Gets the specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}'].put.description__added` | added | `Update the state of specified Content Filters associated with the Azure OpenAI connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/testconnection'].post.description__added` | added | `Test machine learning workspaces connections under the specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data'].get.description__added` | added | `List data containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions'].get.description__added` | added | `List data versions in the data container` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}/publish'].post.description__added` | added | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores'].get.description__added` | added | `List datastores.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}'].delete.description__added` | added | `Delete datastore.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}'].get.description__added` | added | `Get datastore.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}'].put.description__added` | added | `Create or update datastore.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets'].post.description__added` | added | `Get datastore secrets.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets'].post.responses.200.schema.description__deleted` | deleted | `Base definition for datastore secrets.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/deployments'].get.description__added` | added | `Get all the deployments under the workspace scope` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose'].post.description__added` | added | `Diagnose workspace setup issue.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints'].get.description__added` | added | `List All the endpoints under this workspace` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}'].get.description__added` | added | `Gets endpoint resource` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}'].put.description__added` | added | `Create or update endpoint resource with the specified parameters` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments'].get.description__added` | added | `Get all the deployments under the endpoint resource scope` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}'].delete.description__added` | added | `Delete  endpoint deployment resource by name` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}'].get.description__added` | added | `Get deployments under endpoint resource by name` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}'].put.description__added` | added | `Create or update endpoint deployment resource with the specified parameters` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/listKeys'].post.description__added` | added | `List keys for the endpoint resource.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models'].get.description__added` | added | `Get available models under the endpoint resource.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies'].get.description__added` | added | `List the specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}'].delete.description__added` | added | `Deletes the specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}'].get.description__added` | added | `Gets the specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}'].put.description__added` | added | `Update the state of specified Content Filters associated with the Azure OpenAI account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/regenerateKey'].post.description__added` | added | `Regenerate account keys` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments'].get.description__added` | added | `List environment containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}'].put.description__added` | added | `Creates or updates an EnvironmentVersion.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}/publish'].post.description__added` | added | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets'].get.description__added` | added | `List featurestore entity containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features'].get.description__added` | added | `List Features.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{featuresetName}/versions/{featuresetVersion}/features/{featureName}'].get.description__added` | added | `Get feature.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featuresets/{name}/versions/{version}/backfill'].post.description__added` | added | `Backfill.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities'].get.description__added` | added | `List featurestore entity containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions'].get.description__added` | added | `List versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/featurestoreEntities/{name}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools'].get.description__added` | added | `List InferencePools.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].delete.description__added` | added | `Delete InferencePool (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].get.description__added` | added | `Get InferencePool.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].patch.description__added` | added | `Update InferencePool (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{inferencePoolName}'].put.description__added` | added | `Create or update InferencePool (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints'].get.description__added` | added | `List Inference Endpoints.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].delete.description__added` | added | `Delete InferenceEndpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].get.description__added` | added | `Get InferenceEndpoint.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].patch.description__added` | added | `Update InferenceEndpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/endpoints/{endpointName}'].put.description__added` | added | `Create or update InferenceEndpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups'].get.description__added` | added | `List Inference Groups.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].delete.description__added` | added | `Delete InferenceGroup (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].get.description__added` | added | `Get InferenceGroup.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].patch.description__added` | added | `Update InferenceGroup (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}'].put.description__added` | added | `Create or update InferenceGroup (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/getStatus'].post.description__added` | added | `Retrieve status of delta models associated with the InferenceGroup and the target base model.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/list'].post.description__added` | added | `List delta models associated with the InferenceGroup and the target base model.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/deltaModels/modify'].post.description__added` | added | `Modify delta models associated with the InferenceGroup and the target base model.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/getStatus'].post.description__added` | added | `Retrieve inference group status.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/inferencePools/{poolName}/groups/{groupName}/skus'].get.description__added` | added | `List Inference Group Skus.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs'].get.description__added` | added | `Lists Jobs in the workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}'].delete.description__added` | added | `Deletes a Job (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}'].get.description__added` | added | `Gets a Job by name/id.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}'].put.description__added` | added | `Creates and executes a Job.
+For update case, the Tags in the definition passed in will replace Tags in the existing job.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/jobs/{id}/cancel'].post.description__added` | added | `Cancels a Job (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listConnectionModels'].post.description__added` | added | `Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listKeys'].post.description__added` | added | `Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookAccessToken'].post.description__added` | added | `Get Azure Machine Learning Workspace notebook access token` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listNotebookKeys'].post.description__added` | added | `Lists keys of Azure Machine Learning Workspaces notebook.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/listStorageAccountKeys'].post.description__added` | added | `Lists keys of Azure Machine Learning Workspace's storage account.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks'].get.description__added` | added | `List API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}'].get.description__added` | added | `Get API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}'].patch.description__added` | added | `Patch API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}'].put.description__added` | added | `PUT API for managed network settings of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules'].post.description__added` | added | `The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules'].get.description__added` | added | `The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}'].delete.description__added` | added | `The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}'].get.description__added` | added | `The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}'].put.description__added` | added | `Create a OutboundRuleBasicResource` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions'].get.description__added` | added | `List containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].delete.description__added` | added | `Delete Marketplace Subscription (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}'].put.description__added` | added | `Create or update Marketplace Subscription (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models'].get.description__added` | added | `List model containers.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].delete.description__added` | added | `Delete container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].get.description__added` | added | `Get container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}'].put.description__added` | added | `Create or update container.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions'].get.description__added` | added | `List model versions.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}'].delete.description__added` | added | `Delete version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}'].get.description__added` | added | `Get version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}'].put.description__added` | added | `Create or update version.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/publish'].post.description__added` | added | `Publish version asset into registry.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints'].get.description__added` | added | `List Online Endpoints.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].delete.description__added` | added | `Delete Online Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].get.description__added` | added | `Get Online Endpoint.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].patch.description__added` | added | `Update Online Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}'].put.description__added` | added | `Create or update Online Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments'].get.description__added` | added | `List Inference Endpoint Deployments.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].delete.description__added` | added | `Delete Inference Endpoint Deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].get.description__added` | added | `Get Inference Deployment Deployment.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].patch.description__added` | added | `Update Online Deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}'].put.description__added` | added | `Create or update Inference Endpoint Deployment (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs'].post.description__added` | added | `Polls an Endpoint operation.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus'].get.description__added` | added | `List Inference Endpoint Deployment Skus.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/listKeys'].post.description__added` | added | `List EndpointAuthKeys for an Endpoint using Key-based authentication.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/regenerateKeys'].post.description__added` | added | `Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/token'].post.description__added` | added | `Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints'].get.description__added` | added | `Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules'].get.description__added` | added | `Lists the managed network outbound rules for a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}'].delete.description__added` | added | `Deletes an outbound rule from the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}'].get.description__added` | added | `Gets an outbound rule from the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}'].put.description__added` | added | `Creates or updates an outbound rule in the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook'].post.description__added` | added | `Prepare Azure Machine Learning Workspace's notebook resource` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections'].get.description__added` | added | `Called by end-users to get all PE connections.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].delete.description__added` | added | `Called by end-users to delete a PE connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].get.description__added` | added | `Called by end-users to get a PE connection.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}'].put.description__added` | added | `Called by end-users to approve or reject a PE connection.
+This method must validate and forward the call to NRP.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources'].get.description__added` | added | `Called by Client (Portal, CLI, etc) to get available "private link resources" for the workspace.
+Each "private link resource" is a connection endpoint (IP address) to the resource.
+Pre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.
+Other RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.
+Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds".` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork'].post.description__added` | added | `Provisions the managed network of a machine learning workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys'].post.description__added` | added | `Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules'].get.description__added` | added | `List schedules in specified workspace.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].delete.description__added` | added | `Delete schedule.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].get.description__added` | added | `Get schedule.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}'].put.description__added` | added | `Create or update schedule.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints'].get.description__added` | added | `List Serverless Endpoints.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].delete.description__added` | added | `Delete Serverless Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].get.description__added` | added | `Get Serverless Endpoint.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].patch.description__added` | added | `Update Serverless Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}'].put.description__added` | added | `Create or update Serverless Endpoint (asynchronous).` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys'].post.description__added` | added | `List EndpointAuthKeys for an Endpoint using Key-based authentication.` |
+| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/regenerateKeys'].post.description__added` | added | `Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).` |
+
 ### Changes for `$ref`
 
 | Path | Change Type | Value |
@@ -355,32 +969,6 @@
 |------|------------|-------|
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}'].patch['x-ms-long-running-operation-options__added']` | added | `{"final-state-via":"azure-async-operation","final-state-schema":"#/definitions/ComputeResource"}` |
 
-### Changes for `description`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.AutoMLJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `definitions.CommandJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
-| `definitions.CommandJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `definitions.CustomMonitoringSignal.properties.inputAssets.additionalProperties.description__deleted` | deleted | `Monitoring input data base definition.` |
-| `definitions.CustomMonitoringSignal.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
-| `definitions.DistillationJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `definitions.FineTuningJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `definitions.ManagedNetworkSettings.properties.outboundRules.additionalProperties.description__deleted` | deleted | `Outbound Rule for the managed network of a machine learning workspace.` |
-| `definitions.NotificationSetting.properties.webhooks.additionalProperties.description__deleted` | deleted | `Webhook base` |
-| `definitions.PipelineJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
-| `definitions.PipelineJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `definitions.PrivateEndpointConnectionListResult.description__added` | added | `[Placeholder] Discription for page model` |
-| `definitions.PrivateEndpointConnectionListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
-| `definitions.PrivateLinkResourceListResult.description__added` | added | `[Placeholder] Discription for page model` |
-| `definitions.PrivateLinkResourceListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
-| `definitions.SparkJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
-| `definitions.SparkJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `definitions.SweepJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
-| `definitions.SweepJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/resize'].post.responses.202.headers.Location.description__added` | added | `The Location header contains the URL where the status of the long running operation can be checked.` |
-| `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets'].post.responses.200.schema.description__deleted` | deleted | `Base definition for datastore secrets.` |
-
 ### Changes for `items`
 
 | Path | Change Type | Value |
@@ -397,37 +985,37 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AKSSchema__deleted` | deleted | `{"type":"object","properties":{"properties":{"type":"object","properties":{"clusterFqdn":{"type":"st...` |
+| `definitions.AKSSchema__deleted` | deleted | `{"type":"object","properties":{"properties":{"type":"object","description":"AKS properties","propert...` |
 
 ### Changes for `AksComputeSecretsProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AksComputeSecretsProperties__deleted` | deleted | `{"type":"object","properties":{"userKubeConfig":{"type":"string"},"adminKubeConfig":{"type":"string"...` |
+| `definitions.AksComputeSecretsProperties__deleted` | deleted | `{"type":"object","description":"Properties of AksComputeSecrets","properties":{"userKubeConfig":{"ty...` |
 
 ### Changes for `AmlComputeSchema`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AmlComputeSchema__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/AmlComputeProperties"}}}` |
+| `definitions.AmlComputeSchema__deleted` | deleted | `{"type":"object","description":"Properties(top level) of AmlCompute","properties":{"properties":{"$r...` |
 
 ### Changes for `AssetJobInput`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AssetJobInput__deleted` | deleted | `{"type":"object","properties":{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMo...` |
+| `definitions.AssetJobInput__deleted` | deleted | `{"type":"object","description":"Asset input type.","properties":{"mode":{"type":"string","descriptio...` |
 
 ### Changes for `AssetJobOutput`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AssetJobOutput__deleted` | deleted | `{"type":"object","properties":{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"strin...` |
+| `definitions.AssetJobOutput__deleted` | deleted | `{"type":"object","description":"Asset output type.","properties":{"assetName":{"type":"string","desc...` |
 
 ### Changes for `AzureDatastore`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AzureDatastore__deleted` | deleted | `{"type":"object","properties":{"resourceGroup":{"type":"string","x-nullable":true},"subscriptionId":...` |
+| `definitions.AzureDatastore__deleted` | deleted | `{"type":"object","description":"Base definition for Azure datastore contents configuration.","proper...` |
 
 ### Changes for `BatchDeploymentTrackedResource`
 
@@ -445,55 +1033,55 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHostResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/CapabilityHost"}},"required":["pr...` |
+| `definitions.CapabilityHostResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `CapacityConfig`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapacityConfig__deleted` | deleted | `{"type":"object","properties":{"minimum":{"type":"integer","format":"int32"},"maximum":{"type":"inte...` |
+| `definitions.CapacityConfig__deleted` | deleted | `{"type":"object","description":"The capacity configuration.","properties":{"minimum":{"type":"intege...` |
 
 ### Changes for `CodeContainerResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CodeContainerResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/CodeContainer"}},"required":["pro...` |
+| `definitions.CodeContainerResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `CodeVersionResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CodeVersionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/CodeVersion"}},"required":["prope...` |
+| `definitions.CodeVersionResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `CognitiveServiceEndpointDeploymentResourceProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CognitiveServiceEndpointDeploymentResourceProperties__deleted` | deleted | `{"type":"object","properties":{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyNa...` |
+| `definitions.CognitiveServiceEndpointDeploymentResourceProperties__deleted` | deleted | `{"type":"object","properties":{"model":{"$ref":"#/definitions/EndpointDeploymentModel","description"...` |
 
 ### Changes for `ComponentContainerResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComponentContainerResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ComponentContainer"}},"required":...` |
+| `definitions.ComponentContainerResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `ComponentVersionResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComponentVersionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ComponentVersion"}},"required":["...` |
+| `definitions.ComponentVersionResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `ComputeInstanceSchema`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComputeInstanceSchema__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ComputeInstanceProperties"}}}` |
+| `definitions.ComputeInstanceSchema__deleted` | deleted | `{"type":"object","description":"Properties(top level) of ComputeInstance","properties":{"properties"...` |
 
 ### Changes for `DataContainerResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DataContainerResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/DataContainer"}},"required":["pro...` |
+| `definitions.DataContainerResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `DataLakeAnalyticsSchema`
 
@@ -505,13 +1093,13 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DataVersionBaseResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/DataVersionBase"}},"required":["p...` |
+| `definitions.DataVersionBaseResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `DatabricksComputeSecretsProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DatabricksComputeSecretsProperties__deleted` | deleted | `{"type":"object","properties":{"databricksAccessToken":{"type":"string"}}}` |
+| `definitions.DatabricksComputeSecretsProperties__deleted` | deleted | `{"type":"object","description":"Properties of Databricks Compute Secrets","properties":{"databricksA...` |
 
 ### Changes for `DatabricksSchema`
 
@@ -523,49 +1111,49 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DatastoreResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/Datastore"}},"required":["propert...` |
+| `definitions.DatastoreResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `EnvironmentContainerResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentContainerResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/EnvironmentContainer"}},"required...` |
+| `definitions.EnvironmentContainerResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `EnvironmentVersionResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/EnvironmentVersion"}},"required":...` |
+| `definitions.EnvironmentVersionResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `FeatureResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeatureResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/Feature"}},"required":["propertie...` |
+| `definitions.FeatureResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `FeaturesetContainerResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetContainerResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FeaturesetContainer"}},"required"...` |
+| `definitions.FeaturesetContainerResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `FeaturesetVersionResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetVersionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FeaturesetVersion"}},"required":[...` |
+| `definitions.FeaturesetVersionResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `FeaturestoreEntityContainerResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturestoreEntityContainerResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FeaturestoreEntityContainer"}},"r...` |
+| `definitions.FeaturestoreEntityContainerResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `FeaturestoreEntityVersionResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturestoreEntityVersionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/FeaturestoreEntityVersion"}},"req...` |
+| `definitions.FeaturestoreEntityVersionResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `HDInsightSchema`
 
@@ -589,7 +1177,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImageVertical__deleted` | deleted | `{"type":"object","properties":{"limitSettings":{"$ref":"#/definitions/ImageLimitSettings"},"sweepSet...` |
+| `definitions.ImageVertical__deleted` | deleted | `{"type":"object","description":"Abstract class for AutoML tasks that train image (computer vision) m...` |
 
 ### Changes for `InferenceEndpointTrackedResource`
 
@@ -613,43 +1201,43 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InstanceResourceSchema__deleted` | deleted | `{"type":"object","additionalProperties":{"type":"string"}}` |
+| `definitions.InstanceResourceSchema__deleted` | deleted | `{"type":"object","description":"Resource requests/limits for this instance type","additionalProperti...` |
 
 ### Changes for `JobBaseResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBaseResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/JobBase"}},"required":["propertie...` |
+| `definitions.JobBaseResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `KubernetesSchema`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.KubernetesSchema__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/KubernetesProperties"}}}` |
+| `definitions.KubernetesSchema__deleted` | deleted | `{"type":"object","description":"Kubernetes Compute Schema","properties":{"properties":{"$ref":"#/def...` |
 
 ### Changes for `MarketplaceSubscriptionResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MarketplaceSubscriptionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/MarketplaceSubscription"}},"requi...` |
+| `definitions.MarketplaceSubscriptionResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `ModelContainerResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelContainerResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ModelContainer"}},"required":["pr...` |
+| `definitions.ModelContainerResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `ModelVersionResource`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersionResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/ModelVersion"}},"required":["prop...` |
+| `definitions.ModelVersionResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `NlpVertical`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.NlpVertical__deleted` | deleted | `{"type":"object","properties":{"featurizationSettings":{"$ref":"#/definitions/NlpVerticalFeaturizati...` |
+| `definitions.NlpVertical__deleted` | deleted | `{"type":"object","description":"Abstract class for NLP related AutoML tasks.\\r\\nNLP - Natural Langua...` |
 
 ### Changes for `OnlineDeploymentTrackedResource`
 
@@ -667,7 +1255,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.PartialRegistry__deleted` | deleted | `{"type":"object"}` |
+| `definitions.PartialRegistry__deleted` | deleted | `{"type":"object","description":"Partial Registry class for PATCH"}` |
 
 ### Changes for `PartialUserAssignedIdentity`
 
@@ -679,7 +1267,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.RaiBlocklistItemsBulkDeleteRequest__deleted` | deleted | `{"type":"object","items":{"type":"string"}}` |
+| `definitions.RaiBlocklistItemsBulkDeleteRequest__deleted` | deleted | `{"type":"object","description":"The list of Cognitive Services RaiBlocklist Items Names.","items":{"...` |
 
 ### Changes for `RegistryTrackedResource`
 
@@ -691,7 +1279,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ScheduleResource__deleted` | deleted | `{"type":"object","properties":{"properties":{"$ref":"#/definitions/Schedule"}},"required":["properti...` |
+| `definitions.ScheduleResource__deleted` | deleted | `{"type":"object","description":"Azure Resource Manager resource envelope.","properties":{"properties...` |
 
 ### Changes for `ServerlessEndpointTrackedResource`
 
@@ -703,7 +1291,7 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.TableVertical__deleted` | deleted | `{"type":"object","properties":{"cvSplitColumnNames":{"type":"array","x-nullable":true,"items":{"type...` |
+| `definitions.TableVertical__deleted` | deleted | `{"type":"object","description":"Abstract class for AutoML tasks that use table dataset as input - su...` |
 
 ### Changes for `VirtualMachineSchema`
 
@@ -721,79 +1309,79 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AKSSchemaProperties__added` | added | `{"type":"object","properties":{"clusterFqdn":{"type":"string","x-nullable":true},"systemServices":{"...` |
+| `definitions.AKSSchemaProperties__added` | added | `{"type":"object","description":"AKS properties","properties":{"clusterFqdn":{"type":"string","descri...` |
 
 ### Changes for `Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>__added']` | added | `{"type":"object","properties":{"body":{"type":"array","items":{"$ref":"#/definitions/RaiBlocklistIte...` |
+| `definitions['Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
 
 ### Changes for `BatchDeploymentProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeploymentProperties__added` | added | `{"type":"object","properties":{"compute":{"type":"string","x-nullable":true},"deploymentConfiguratio...` |
+| `definitions.BatchDeploymentProperties__added` | added | `{"type":"object","description":"Batch inference settings per deployment.","properties":{"compute":{"...` |
 
 ### Changes for `BatchEndpointProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchEndpointProperties__added` | added | `{"type":"object","properties":{"defaults":{"$ref":"#/definitions/BatchEndpointDefaults"},"provisioni...` |
+| `definitions.BatchEndpointProperties__added` | added | `{"type":"object","description":"Batch endpoint configuration.","properties":{"defaults":{"$ref":"#/d...` |
 
 ### Changes for `CapabilityHostProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHostProperties__added` | added | `{"type":"object","properties":{"aiServicesConnections":{"type":"array","x-nullable":true,"items":{"t...` |
+| `definitions.CapabilityHostProperties__added` | added | `{"type":"object","properties":{"aiServicesConnections":{"type":"array","description":"List of AI ser...` |
 
 ### Changes for `CodeContainerProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CodeContainerProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Failed","Ca...` |
+| `definitions.CodeContainerProperties__added` | added | `{"type":"object","description":"Container for code asset versions.","properties":{"provisioningState...` |
 
 ### Changes for `CodeVersionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CodeVersionProperties__added` | added | `{"type":"object","properties":{"codeUri":{"type":"string","x-nullable":true},"provisioningState":{"t...` |
+| `definitions.CodeVersionProperties__added` | added | `{"type":"object","description":"Code asset version details.","properties":{"codeUri":{"type":"string...` |
 
 ### Changes for `ComponentContainerProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComponentContainerProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Failed","Ca...` |
+| `definitions.ComponentContainerProperties__added` | added | `{"type":"object","description":"Component container definition.\\n<see href=\\"https://docs.microsoft....` |
 
 ### Changes for `ComponentVersionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComponentVersionProperties__added` | added | `{"type":"object","properties":{"componentSpec":{"type":"object","x-nullable":true,"additionalPropert...` |
+| `definitions.ComponentVersionProperties__added` | added | `{"type":"object","description":"Definition of a component version: defines resources that span compo...` |
 
 ### Changes for `DataContainerProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DataContainerProperties__added` | added | `{"type":"object","properties":{"dataType":{"type":"string","enum":["uri_file","uri_folder","mltable"...` |
+| `definitions.DataContainerProperties__added` | added | `{"type":"object","description":"Container for data asset versions.","properties":{"dataType":{"type"...` |
 
 ### Changes for `DataLakeAnalyticsSchemaProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DataLakeAnalyticsSchemaProperties__added` | added | `{"type":"object","properties":{"dataLakeStoreAccountName":{"type":"string"}}}` |
+| `definitions.DataLakeAnalyticsSchemaProperties__added` | added | `{"type":"object","properties":{"dataLakeStoreAccountName":{"type":"string","description":"DataLake S...` |
 
 ### Changes for `DataVersionBaseProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DataVersionBaseProperties__added` | added | `{"type":"object","properties":{"dataType":{"type":"string","enum":["uri_file","uri_folder","mltable"...` |
+| `definitions.DataVersionBaseProperties__added` | added | `{"type":"object","description":"Data version base definition","properties":{"dataType":{"type":"stri...` |
 
 ### Changes for `DatastoreProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DatastoreProperties__added` | added | `{"type":"object","properties":{"credentials":{"$ref":"#/definitions/DatastoreCredentials"},"datastor...` |
+| `definitions.DatastoreProperties__added` | added | `{"type":"object","description":"Base definition for datastore contents configuration.","properties":...` |
 
 ### Changes for `DiagnoseResponseResultValue`
 
@@ -805,121 +1393,121 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentContainerProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Failed","Ca...` |
+| `definitions.EnvironmentContainerProperties__added` | added | `{"type":"object","description":"Container for environment specification versions.","properties":{"pr...` |
 
 ### Changes for `EnvironmentVersionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersionProperties__added` | added | `{"type":"object","properties":{"autoRebuild":{"type":"string","default":"Disabled","enum":["Disabled...` |
+| `definitions.EnvironmentVersionProperties__added` | added | `{"type":"object","description":"Environment version details.","properties":{"autoRebuild":{"type":"s...` |
 
 ### Changes for `FeatureProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeatureProperties__added` | added | `{"type":"object","properties":{"dataType":{"type":"string","default":"String","enum":["String","Inte...` |
+| `definitions.FeatureProperties__added` | added | `{"type":"object","description":"DTO object representing feature","properties":{"dataType":{"type":"s...` |
 
 ### Changes for `FeaturesetContainerProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetContainerProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Failed","Ca...` |
+| `definitions.FeaturesetContainerProperties__added` | added | `{"type":"object","description":"DTO object representing feature set","properties":{"provisioningStat...` |
 
 ### Changes for `FeaturesetVersionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetVersionProperties__added` | added | `{"type":"object","properties":{"entities":{"type":"array","x-nullable":true,"items":{"type":"string"...` |
+| `definitions.FeaturesetVersionProperties__added` | added | `{"type":"object","description":"DTO object representing feature set version","properties":{"entities...` |
 
 ### Changes for `FeaturestoreEntityContainerProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturestoreEntityContainerProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Failed","Ca...` |
+| `definitions.FeaturestoreEntityContainerProperties__added` | added | `{"type":"object","description":"DTO object representing feature entity","properties":{"provisioningS...` |
 
 ### Changes for `FeaturestoreEntityVersionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturestoreEntityVersionProperties__added` | added | `{"type":"object","properties":{"indexColumns":{"type":"array","x-nullable":true,"items":{"$ref":"#/d...` |
+| `definitions.FeaturestoreEntityVersionProperties__added` | added | `{"type":"object","description":"DTO object representing feature entity version","properties":{"index...` |
 
 ### Changes for `InferenceEndpointProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceEndpointProperties__added` | added | `{"type":"object","properties":{"authMode":{"type":"string","enum":["AAD"],"x-ms-enum":{"name":"AuthM...` |
+| `definitions.InferenceEndpointProperties__added` | added | `{"type":"object","description":"InferenceEndpoint configuration","properties":{"authMode":{"type":"s...` |
 
 ### Changes for `InferenceGroupProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceGroupProperties__added` | added | `{"type":"object","properties":{"environmentConfiguration":{"$ref":"#/definitions/GroupEnvironmentCon...` |
+| `definitions.InferenceGroupProperties__added` | added | `{"type":"object","description":"Inference group configuration","properties":{"environmentConfigurati...` |
 
 ### Changes for `InferencePoolProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferencePoolProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Creating","Deleting","S...` |
+| `definitions.InferencePoolProperties__added` | added | `{"type":"object","description":"Inference pool configuration","properties":{"provisioningState":{"ty...` |
 
 ### Changes for `InstanceTypeSchemaResources`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InstanceTypeSchemaResources__added` | added | `{"type":"object","properties":{"requests":{"type":"object","additionalProperties":{"type":"string"}}...` |
+| `definitions.InstanceTypeSchemaResources__added` | added | `{"type":"object","description":"Resource requests/limits for this instance type","properties":{"requ...` |
 
 ### Changes for `JobBaseProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBaseProperties__added` | added | `{"type":"object","properties":{"componentId":{"type":"string","x-nullable":true,"x-ms-mutability":["...` |
+| `definitions.JobBaseProperties__added` | added | `{"type":"object","description":"Base definition for a job.","properties":{"componentId":{"type":"str...` |
 
 ### Changes for `MarketplaceSubscriptionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MarketplaceSubscriptionProperties__added` | added | `{"type":"object","properties":{"marketplacePlan":{"$ref":"#/definitions/MarketplacePlan","x-nullable...` |
+| `definitions.MarketplaceSubscriptionProperties__added` | added | `{"type":"object","properties":{"marketplacePlan":{"$ref":"#/definitions/MarketplacePlan","descriptio...` |
 
 ### Changes for `ModelContainerProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelContainerProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","enum":["Succeeded","Failed","Ca...` |
+| `definitions.ModelContainerProperties__added` | added | `{"type":"object","properties":{"provisioningState":{"type":"string","description":"Provisioning stat...` |
 
 ### Changes for `ModelVersionProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersionProperties__added` | added | `{"type":"object","properties":{"flavors":{"type":"object","x-nullable":true,"additionalProperties":{...` |
+| `definitions.ModelVersionProperties__added` | added | `{"type":"object","description":"Model asset version details.","properties":{"flavors":{"type":"objec...` |
 
 ### Changes for `OnlineDeploymentProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeploymentProperties__added` | added | `{"type":"object","properties":{"appInsightsEnabled":{"type":"boolean","default":false},"dataCollecto...` |
+| `definitions.OnlineDeploymentProperties__added` | added | `{"type":"object","properties":{"appInsightsEnabled":{"type":"boolean","description":"If true, enable...` |
 
 ### Changes for `OnlineEndpointProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineEndpointProperties__added` | added | `{"type":"object","properties":{"compute":{"type":"string","x-nullable":true},"mirrorTraffic":{"type"...` |
+| `definitions.OnlineEndpointProperties__added` | added | `{"type":"object","description":"Online endpoint configuration","properties":{"compute":{"type":"stri...` |
 
 ### Changes for `RegistryProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.RegistryProperties__added` | added | `{"type":"object","properties":{"discoveryUrl":{"type":"string","x-nullable":true},"intellectualPrope...` |
+| `definitions.RegistryProperties__added` | added | `{"type":"object","description":"Details of the Registry","properties":{"discoveryUrl":{"type":"strin...` |
 
 ### Changes for `ScheduleProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ScheduleProperties__added` | added | `{"type":"object","properties":{"action":{"$ref":"#/definitions/ScheduleActionBase","x-ms-mutability"...` |
+| `definitions.ScheduleProperties__added` | added | `{"type":"object","description":"Base definition of a schedule","properties":{"action":{"$ref":"#/def...` |
 
 ### Changes for `ServerlessEndpointProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServerlessEndpointProperties__added` | added | `{"type":"object","properties":{"authMode":{"type":"string","enum":["Key","AAD","KeyAndAAD"],"x-ms-en...` |
+| `definitions.ServerlessEndpointProperties__added` | added | `{"type":"object","properties":{"authMode":{"type":"string","description":"[Required] Specifies the a...` |
 
 ### Changes for `Stringforlist`
 
@@ -931,89 +1519,89 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.SynapseSparkProperties__added` | added | `{"type":"object","properties":{"autoScaleProperties":{"$ref":"#/definitions/AutoScaleProperties"},"a...` |
+| `definitions.SynapseSparkProperties__added` | added | `{"type":"object","properties":{"autoScaleProperties":{"$ref":"#/definitions/AutoScaleProperties","de...` |
 
 ### Changes for `TypeSpec.Http.NoContentResponse`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['TypeSpec.Http.NoContentResponse__added']` | added | `{"type":"object"}` |
+| `definitions['TypeSpec.Http.NoContentResponse__added']` | added | `{"type":"object","description":"There is no content to send for this request, but the headers may be...` |
 
 ### Changes for `TypeSpec.Http.OkResponse`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object"}` |
+| `definitions['TypeSpec.Http.OkResponse__added']` | added | `{"type":"object","description":"The request has succeeded."}` |
 
 ### Changes for `VirtualMachineSchemaProperties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.VirtualMachineSchemaProperties__added` | added | `{"type":"object","properties":{"virtualMachineSize":{"type":"string"},"sshPort":{"type":"integer","f...` |
+| `definitions.VirtualMachineSchemaProperties__added` | added | `{"type":"object","properties":{"virtualMachineSize":{"type":"string","description":"Virtual Machine ...` |
 
 ### Changes for `properties`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AKS.properties__added` | added | `{"properties":{"$ref":"#/definitions/AKSSchemaProperties"}}` |
-| `definitions.AksComputeSecrets.properties__added` | added | `{"userKubeConfig":{"type":"string"},"adminKubeConfig":{"type":"string"},"imagePullSecretName":{"type...` |
-| `definitions.AmlCompute.properties__added` | added | `{"properties":{"$ref":"#/definitions/AmlComputeProperties"}}` |
-| `definitions.BatchDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/BatchDeploymentProperties"}` |
-| `definitions.BatchEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/BatchEndpointProperties"}` |
-| `definitions.CapabilityHost.properties.properties__added` | added | `{"$ref":"#/definitions/CapabilityHostProperties"}` |
-| `definitions.CodeContainer.properties.properties__added` | added | `{"$ref":"#/definitions/CodeContainerProperties"}` |
-| `definitions.CodeVersion.properties.properties__added` | added | `{"$ref":"#/definitions/CodeVersionProperties"}` |
-| `definitions.ComponentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentContainerProperties"}` |
-| `definitions.ComponentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentVersionProperties"}` |
-| `definitions.ComputeInstance.properties__added` | added | `{"properties":{"$ref":"#/definitions/ComputeInstanceProperties"}}` |
-| `definitions.ComputeResource.properties.properties__added` | added | `{"$ref":"#/definitions/ComputeResourceSchema"}` |
-| `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
-| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
-| `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
-| `definitions.Databricks.properties__added` | added | `{"properties":{"$ref":"#/definitions/DatabricksProperties"}}` |
-| `definitions.DatabricksComputeSecrets.properties__added` | added | `{"databricksAccessToken":{"type":"string"}}` |
-| `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties"}` |
+| `definitions.AKS.properties__added` | added | `{"properties":{"$ref":"#/definitions/AKSSchemaProperties","description":"AKS properties"}}` |
+| `definitions.AksComputeSecrets.properties__added` | added | `{"userKubeConfig":{"type":"string","description":"Content of kubeconfig file that can be used to con...` |
+| `definitions.AmlCompute.properties__added` | added | `{"properties":{"$ref":"#/definitions/AmlComputeProperties","description":"Properties of AmlCompute"}...` |
+| `definitions.BatchDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/BatchDeploymentProperties","description":"[Required] Additional attributes of...` |
+| `definitions.BatchEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/BatchEndpointProperties","description":"[Required] Additional attributes of t...` |
+| `definitions.CapabilityHost.properties.properties__added` | added | `{"$ref":"#/definitions/CapabilityHostProperties","description":"[Required] Additional attributes of ...` |
+| `definitions.CodeContainer.properties.properties__added` | added | `{"$ref":"#/definitions/CodeContainerProperties","description":"[Required] Additional attributes of t...` |
+| `definitions.CodeVersion.properties.properties__added` | added | `{"$ref":"#/definitions/CodeVersionProperties","description":"[Required] Additional attributes of the...` |
+| `definitions.ComponentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentContainerProperties","description":"[Required] Additional attributes...` |
+| `definitions.ComponentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ComponentVersionProperties","description":"[Required] Additional attributes o...` |
+| `definitions.ComputeInstance.properties__added` | added | `{"properties":{"$ref":"#/definitions/ComputeInstanceProperties","description":"Properties of Compute...` |
+| `definitions.ComputeResource.properties.properties__added` | added | `{"$ref":"#/definitions/ComputeResourceSchema","description":"The resource-specific properties for th...` |
+| `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel","description":"Model used for the endpoint ...` |
+| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
+| `definitions.Databricks.properties__added` | added | `{"properties":{"$ref":"#/definitions/DatabricksProperties","description":"Properties of Databricks"}...` |
+| `definitions.DatabricksComputeSecrets.properties__added` | added | `{"databricksAccessToken":{"type":"string","description":"access token for databricks account."}}` |
+| `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties","description":"[Required] Additional attributes of t...` |
 | `definitions.DataLakeAnalytics.properties__added` | added | `{"properties":{"$ref":"#/definitions/DataLakeAnalyticsSchemaProperties"}}` |
-| `definitions.Datastore.properties.properties__added` | added | `{"$ref":"#/definitions/DatastoreProperties"}` |
-| `definitions.DataVersionBase.properties.properties__added` | added | `{"$ref":"#/definitions/DataVersionBaseProperties"}` |
+| `definitions.Datastore.properties.properties__added` | added | `{"$ref":"#/definitions/DatastoreProperties","description":"[Required] Additional attributes of the e...` |
+| `definitions.DataVersionBase.properties.properties__added` | added | `{"$ref":"#/definitions/DataVersionBaseProperties","description":"[Required] Additional attributes of...` |
 | `definitions.DiagnoseResponseResult.properties.value.properties__deleted` | deleted | `{"userDefinedRouteResults":{"type":"array","items":{"$ref":"#/definitions/DiagnoseResult"},"x-ms-ide...` |
-| `definitions.EnvironmentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentContainerProperties"}` |
-| `definitions.EnvironmentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentVersionProperties"}` |
-| `definitions.Feature.properties.properties__added` | added | `{"$ref":"#/definitions/FeatureProperties"}` |
-| `definitions.FeaturesetContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetContainerProperties"}` |
-| `definitions.FeaturesetVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetVersionProperties"}` |
-| `definitions.FeaturestoreEntityContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityContainerProperties"}` |
-| `definitions.FeaturestoreEntityVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityVersionProperties"}` |
-| `definitions.HDInsight.properties__added` | added | `{"properties":{"$ref":"#/definitions/HDInsightProperties"}}` |
-| `definitions.InferenceEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceEndpointProperties"}` |
-| `definitions.InferenceGroup.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceGroupProperties"}` |
-| `definitions.InferencePool.properties.properties__added` | added | `{"$ref":"#/definitions/InferencePoolProperties"}` |
+| `definitions.EnvironmentContainer.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentContainerProperties","description":"[Required] Additional attribut...` |
+| `definitions.EnvironmentVersion.properties.properties__added` | added | `{"$ref":"#/definitions/EnvironmentVersionProperties","description":"[Required] Additional attributes...` |
+| `definitions.Feature.properties.properties__added` | added | `{"$ref":"#/definitions/FeatureProperties","description":"[Required] Additional attributes of the ent...` |
+| `definitions.FeaturesetContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetContainerProperties","description":"[Required] Additional attribute...` |
+| `definitions.FeaturesetVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetVersionProperties","description":"[Required] Additional attributes ...` |
+| `definitions.FeaturestoreEntityContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityContainerProperties","description":"[Required] Additional a...` |
+| `definitions.FeaturestoreEntityVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityVersionProperties","description":"[Required] Additional att...` |
+| `definitions.HDInsight.properties__added` | added | `{"properties":{"$ref":"#/definitions/HDInsightProperties","description":"HDInsight compute propertie...` |
+| `definitions.InferenceEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceEndpointProperties","description":"[Required] Additional attributes ...` |
+| `definitions.InferenceGroup.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceGroupProperties","description":"[Required] Additional attributes of ...` |
+| `definitions.InferencePool.properties.properties__added` | added | `{"$ref":"#/definitions/InferencePoolProperties","description":"[Required] Additional attributes of t...` |
 | `definitions.InstanceTypeSchema.properties.resources.properties__deleted` | deleted | `{"requests":{"$ref":"#/definitions/InstanceResourceSchema","description":"Resource requests for this...` |
-| `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties"}` |
-| `definitions.Kubernetes.properties__added` | added | `{"properties":{"$ref":"#/definitions/KubernetesProperties"}}` |
-| `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties"}` |
-| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
-| `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
-| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
-| `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
-| `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties"}` |
-| `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties"}` |
-| `definitions.OnlineDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineDeploymentProperties"}` |
-| `definitions.OnlineEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineEndpointProperties"}` |
-| `definitions.OpenAIEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
-| `definitions.Registry.properties.properties__added` | added | `{"$ref":"#/definitions/RegistryProperties","x-ms-client-flatten":true}` |
-| `definitions.Schedule.properties.properties__added` | added | `{"$ref":"#/definitions/ScheduleProperties"}` |
-| `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties"}` |
-| `definitions.SpeechEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel"},"raiPolicyName":{"type":"string"},"sku":{"...` |
+| `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties","description":"[Required] Additional attributes of the ent...` |
+| `definitions.Kubernetes.properties__added` | added | `{"properties":{"$ref":"#/definitions/KubernetesProperties","description":"Properties of Kubernetes"}...` |
+| `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties","description":"[Required] Additional attri...` |
+| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
+| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
+| `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties","description":"[Required] Additional attributes of ...` |
+| `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties","description":"[Required] Additional attributes of th...` |
+| `definitions.OnlineDeployment.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineDeploymentProperties","description":"[Required] Additional attributes o...` |
+| `definitions.OnlineEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/OnlineEndpointProperties","description":"[Required] Additional attributes of ...` |
+| `definitions.OpenAIEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel","description":"Model used for the endpoint ...` |
+| `definitions.Registry.properties.properties__added` | added | `{"$ref":"#/definitions/RegistryProperties","description":"[Required] Additional attributes of the en...` |
+| `definitions.Schedule.properties.properties__added` | added | `{"$ref":"#/definitions/ScheduleProperties","description":"[Required] Additional attributes of the en...` |
+| `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties","description":"[Required] Additional attributes...` |
+| `definitions.SpeechEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel","description":"Model used for the endpoint ...` |
 | `definitions.SynapseSpark.properties.properties.properties__deleted` | deleted | `{"autoScaleProperties":{"$ref":"#/definitions/AutoScaleProperties","description":"Auto scale propert...` |
-| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
-| `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
-| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
-| `definitions.UriFileJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
-| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","default":"ReadOnlyMount","enum":["ReadOnlyMount","ReadWriteMount","Downloa...` |
-| `definitions.UriFolderJobOutput.properties__added` | added | `{"assetName":{"type":"string","x-nullable":true},"mode":{"type":"string","default":"ReadWriteMount",...` |
+| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
+| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.UriFileJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
+| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.UriFolderJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
 | `definitions.VirtualMachine.properties__added` | added | `{"properties":{"$ref":"#/definitions/VirtualMachineSchemaProperties"}}` |
-| `definitions.VirtualMachineSecrets.properties__added` | added | `{"administratorAccount":{"$ref":"#/definitions/VirtualMachineSshCredentials"}}` |
+| `definitions.VirtualMachineSecrets.properties__added` | added | `{"administratorAccount":{"$ref":"#/definitions/VirtualMachineSshCredentials","description":"Admin cr...` |
 
 ### Changes for `format`
 
@@ -1134,19 +1722,19 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AzureBlobDatastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.AzureDataLakeGen1Datastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.AzureDataLakeGen2Datastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.AzureFileDatastore.properties.resourceGroup__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureBlobDatastore.properties.resourceGroup__added` | added | `{"type":"string","description":"Azure Resource Group name","x-nullable":true}` |
+| `definitions.AzureDataLakeGen1Datastore.properties.resourceGroup__added` | added | `{"type":"string","description":"Azure Resource Group name","x-nullable":true}` |
+| `definitions.AzureDataLakeGen2Datastore.properties.resourceGroup__added` | added | `{"type":"string","description":"Azure Resource Group name","x-nullable":true}` |
+| `definitions.AzureFileDatastore.properties.resourceGroup__added` | added | `{"type":"string","description":"Azure Resource Group name","x-nullable":true}` |
 
 ### Changes for `subscriptionId`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.AzureBlobDatastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.AzureDataLakeGen1Datastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.AzureDataLakeGen2Datastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.AzureFileDatastore.properties.subscriptionId__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.AzureBlobDatastore.properties.subscriptionId__added` | added | `{"type":"string","description":"Azure Subscription Id","x-nullable":true}` |
+| `definitions.AzureDataLakeGen1Datastore.properties.subscriptionId__added` | added | `{"type":"string","description":"Azure Subscription Id","x-nullable":true}` |
+| `definitions.AzureDataLakeGen2Datastore.properties.subscriptionId__added` | added | `{"type":"string","description":"Azure Subscription Id","x-nullable":true}` |
+| `definitions.AzureFileDatastore.properties.subscriptionId__added` | added | `{"type":"string","description":"Azure Subscription Id","x-nullable":true}` |
 
 ### Changes for `example`
 
@@ -1257,97 +1845,97 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.compute__deleted` | deleted | `{"type":"string","x-nullable":true}` |
-| `definitions.OnlineEndpoint.properties.compute__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.BatchDeployment.properties.compute__deleted` | deleted | `{"type":"string","description":"Compute target for batch inference operation.","x-nullable":true}` |
+| `definitions.OnlineEndpoint.properties.compute__deleted` | deleted | `{"type":"string","description":"ARM resource ID of the compute if it exists.\\r\\noptional","x-nullabl...` |
 
 ### Changes for `deploymentConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.deploymentConfiguration__deleted` | deleted | `{"$ref":"#/definitions/BatchDeploymentConfiguration","x-nullable":true}` |
+| `definitions.BatchDeployment.properties.deploymentConfiguration__deleted` | deleted | `{"$ref":"#/definitions/BatchDeploymentConfiguration","description":"Properties relevant to different...` |
 
 ### Changes for `errorThreshold`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.errorThreshold__deleted` | deleted | `{"type":"integer","format":"int32","default":-1}` |
+| `definitions.BatchDeployment.properties.errorThreshold__deleted` | deleted | `{"type":"integer","format":"int32","description":"Error threshold, if the error count for the entire...` |
 
 ### Changes for `loggingLevel`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.loggingLevel__deleted` | deleted | `{"type":"string","default":"Info","enum":["Info","Warning","Debug"],"x-ms-enum":{"name":"BatchLoggin...` |
+| `definitions.BatchDeployment.properties.loggingLevel__deleted` | deleted | `{"type":"string","description":"Log verbosity for batch inferencing.\\r\\nIncreasing verbosity order f...` |
 
 ### Changes for `maxConcurrencyPerInstance`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.maxConcurrencyPerInstance__deleted` | deleted | `{"type":"integer","format":"int32","default":1}` |
+| `definitions.BatchDeployment.properties.maxConcurrencyPerInstance__deleted` | deleted | `{"type":"integer","format":"int32","description":"Indicates maximum number of parallelism per instan...` |
 
 ### Changes for `miniBatchSize`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.miniBatchSize__deleted` | deleted | `{"type":"integer","format":"int64","default":10}` |
+| `definitions.BatchDeployment.properties.miniBatchSize__deleted` | deleted | `{"type":"integer","format":"int64","description":"Size of the mini-batch passed to each batch invoca...` |
 
 ### Changes for `model`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.model__deleted` | deleted | `{"$ref":"#/definitions/AssetReferenceBase","x-nullable":true}` |
-| `definitions.OnlineDeployment.properties.model__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.BatchDeployment.properties.model__deleted` | deleted | `{"$ref":"#/definitions/AssetReferenceBase","description":"Reference to the model asset for the endpo...` |
+| `definitions.OnlineDeployment.properties.model__deleted` | deleted | `{"type":"string","description":"The URI path to the model.","x-nullable":true}` |
 
 ### Changes for `outputAction`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.outputAction__deleted` | deleted | `{"type":"string","default":"AppendRow","enum":["SummaryOnly","AppendRow"],"x-ms-enum":{"name":"Batch...` |
+| `definitions.BatchDeployment.properties.outputAction__deleted` | deleted | `{"type":"string","description":"Enum to determine how batch inferencing will handle output","default...` |
 
 ### Changes for `outputFileName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.outputFileName__deleted` | deleted | `{"type":"string","default":"predictions.csv"}` |
+| `definitions.BatchDeployment.properties.outputFileName__deleted` | deleted | `{"type":"string","description":"Customized output file name for append_row output action.","default"...` |
 
 ### Changes for `provisioningState`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Scaling","Updating","Succeeded","Failed","Canceled"]...` |
-| `definitions.BatchEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Succeeded","Failed","Updating","Canceled"],"x-ms-enu...` |
-| `definitions.CapabilityHost.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.CodeContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.CodeVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.ComponentContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.ComponentVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.EnvironmentContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.EnvironmentVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.FeaturesetContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.FeaturesetVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.FeaturestoreEntityContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.FeaturestoreEntityVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.InferenceEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Succeeded","Failed","Updating","Canceled"],"x-ms-enu...` |
-| `definitions.InferenceGroup.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Succeeded","Failed","Updating","Canceled"],"x-ms-enu...` |
-| `definitions.InferencePool.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Succeeded","Failed","Updating","Canceled"],"x-ms-enu...` |
-| `definitions.MarketplaceSubscription.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Succeeded","Failed","Updating","Canceled"],"x-ms-enu...` |
-| `definitions.ModelContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.ModelVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Succeeded","Failed","Canceled","Creating","Updating","Deleting"],"x-ms-enu...` |
-| `definitions.OnlineDeployment.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Scaling","Updating","Succeeded","Failed","Canceled"]...` |
-| `definitions.OnlineEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Succeeded","Failed","Updating","Canceled"],"x-ms-enu...` |
-| `definitions.Schedule.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Updating","Deleting","Succeeded","Failed","Canceled"],"x-ms-enu...` |
-| `definitions.ServerlessEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","enum":["Creating","Deleting","Succeeded","Failed","Updating","Canceled"],"x-ms-enu...` |
+| `definitions.BatchDeployment.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Possible values for DeploymentProvisioningState.","enum":["Creating"...` |
+| `definitions.BatchEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"State of endpoint provisioning.","enum":["Creating","Deleting","Succ...` |
+| `definitions.CapabilityHost.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of capability host.","enum":["Succeeded","Failed"...` |
+| `definitions.CodeContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.CodeVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.ComponentContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.ComponentVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.EnvironmentContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.EnvironmentVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.FeaturesetContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.FeaturesetVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.FeaturestoreEntityContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.FeaturestoreEntityVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.InferenceEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"State of pool related resources provisioning.","enum":["Creating","D...` |
+| `definitions.InferenceGroup.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"State of pool related resources provisioning.","enum":["Creating","D...` |
+| `definitions.InferencePool.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"State of pool related resources provisioning.","enum":["Creating","D...` |
+| `definitions.MarketplaceSubscription.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning State of the Marketplace Subscription.","enum":["Creati...` |
+| `definitions.ModelContainer.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.ModelVersion.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state of registry asset.","enum":["Succeeded","Failed",...` |
+| `definitions.OnlineDeployment.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Possible values for DeploymentProvisioningState.","enum":["Creating"...` |
+| `definitions.OnlineEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"State of endpoint provisioning.","enum":["Creating","Deleting","Succ...` |
+| `definitions.Schedule.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"Provisioning state for the schedule.","enum":["Creating","Updating",...` |
+| `definitions.ServerlessEndpoint.properties.provisioningState__deleted` | deleted | `{"type":"string","description":"State of endpoint provisioning.","enum":["Creating","Deleting","Succ...` |
 
 ### Changes for `resources`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.resources__deleted` | deleted | `{"$ref":"#/definitions/DeploymentResourceConfiguration","x-nullable":true}` |
+| `definitions.BatchDeployment.properties.resources__deleted` | deleted | `{"$ref":"#/definitions/DeploymentResourceConfiguration","description":"Indicates compute configurati...` |
 
 ### Changes for `retrySettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.retrySettings__deleted` | deleted | `{"$ref":"#/definitions/BatchRetrySettings","x-nullable":true}` |
+| `definitions.BatchDeployment.properties.retrySettings__deleted` | deleted | `{"$ref":"#/definitions/BatchRetrySettings","description":"Retry Settings for the batch inference ope...` |
 
 ### Changes for `identity`
 
@@ -1358,7 +1946,7 @@
 | `definitions.InferenceEndpoint.properties.identity__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/Manage...` |
 | `definitions.InferenceGroup.properties.identity__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/Manage...` |
 | `definitions.InferencePool.properties.identity__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/Manage...` |
-| `definitions.JobBase.properties.identity__deleted` | deleted | `{"$ref":"#/definitions/IdentityConfiguration","x-nullable":true,"x-ms-mutability":["create","read"]}` |
+| `definitions.JobBase.properties.identity__deleted` | deleted | `{"$ref":"#/definitions/IdentityConfiguration","description":"Identity configuration. If set, this sh...` |
 | `definitions.OnlineDeployment.properties.identity__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/Manage...` |
 | `definitions.OnlineEndpoint.properties.identity__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/Manage...` |
 | `definitions.Registry.properties.identity__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/Manage...` |
@@ -1368,176 +1956,176 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.BatchEndpoint.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.InferenceEndpoint.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.InferenceGroup.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.InferencePool.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.OnlineDeployment.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.OnlineEndpoint.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.Registry.properties.kind__added` | added | `{"type":"string"}` |
-| `definitions.ServerlessEndpoint.properties.kind__added` | added | `{"type":"string"}` |
+| `definitions.BatchDeployment.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.BatchEndpoint.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.InferenceEndpoint.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.InferenceGroup.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.InferencePool.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.OnlineDeployment.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.OnlineEndpoint.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.Registry.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
+| `definitions.ServerlessEndpoint.properties.kind__added` | added | `{"type":"string","description":"Metadata used by portal/tooling/etc to render different UX experienc...` |
 
 ### Changes for `sku`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchDeployment.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.BatchEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.InferenceEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.InferenceGroup.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.InferencePool.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.OnlineDeployment.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.OnlineEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.Registry.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
-| `definitions.ServerlessEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku"}` |
+| `definitions.BatchDeployment.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.BatchEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.InferenceEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.InferenceGroup.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.InferencePool.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.OnlineDeployment.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.OnlineEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.Registry.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
+| `definitions.ServerlessEndpoint.properties.sku__added` | added | `{"$ref":"../../../../../common-types/resource-management/v3/types.json#/definitions/Sku","descriptio...` |
 
 ### Changes for `defaults`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.BatchEndpoint.properties.defaults__deleted` | deleted | `{"$ref":"#/definitions/BatchEndpointDefaults","x-nullable":true}` |
+| `definitions.BatchEndpoint.properties.defaults__deleted` | deleted | `{"$ref":"#/definitions/BatchEndpointDefaults","description":"Default values for Batch Endpoint","x-n...` |
 
 ### Changes for `aiServicesConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHost.properties.aiServicesConnections__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.CapabilityHost.properties.aiServicesConnections__deleted` | deleted | `{"type":"array","description":"List of AI services connections.","x-nullable":true,"items":{"type":"...` |
 
 ### Changes for `capabilityHostKind`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHost.properties.capabilityHostKind__deleted` | deleted | `{"type":"string","default":"Agents","enum":["Agents"],"x-ms-enum":{"name":"CapabilityHostKind","mode...` |
+| `definitions.CapabilityHost.properties.capabilityHostKind__deleted` | deleted | `{"type":"string","description":"Kind of this capability host.","default":"Agents","enum":["Agents"],...` |
 
 ### Changes for `customerSubnet`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHost.properties.customerSubnet__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.CapabilityHost.properties.customerSubnet__deleted` | deleted | `{"type":"string","description":"Customer subnet info to help set up this capability host.","x-nullab...` |
 
 ### Changes for `storageConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHost.properties.storageConnections__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.CapabilityHost.properties.storageConnections__deleted` | deleted | `{"type":"array","description":"List of Storage connections.","x-nullable":true,"items":{"type":"stri...` |
 
 ### Changes for `threadStorageConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHost.properties.threadStorageConnections__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.CapabilityHost.properties.threadStorageConnections__deleted` | deleted | `{"type":"array","description":"List of Thread storage connections.","x-nullable":true,"items":{"type...` |
 
 ### Changes for `vectorStoreConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CapabilityHost.properties.vectorStoreConnections__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.CapabilityHost.properties.vectorStoreConnections__deleted` | deleted | `{"type":"array","description":"List of VectorStore connections.","x-nullable":true,"items":{"type":"...` |
 
 ### Changes for `cvSplitColumnNames`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.cvSplitColumnNames__added` | added | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
-| `definitions.Forecasting.properties.cvSplitColumnNames__added` | added | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
-| `definitions.Regression.properties.cvSplitColumnNames__added` | added | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.Classification.properties.cvSplitColumnNames__added` | added | `{"type":"array","description":"Columns to use for CVSplit data.","x-nullable":true,"items":{"type":"...` |
+| `definitions.Forecasting.properties.cvSplitColumnNames__added` | added | `{"type":"array","description":"Columns to use for CVSplit data.","x-nullable":true,"items":{"type":"...` |
+| `definitions.Regression.properties.cvSplitColumnNames__added` | added | `{"type":"array","description":"Columns to use for CVSplit data.","x-nullable":true,"items":{"type":"...` |
 
 ### Changes for `featurizationSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
-| `definitions.Forecasting.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
-| `definitions.Regression.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","x-nullable":true}` |
-| `definitions.TextClassification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","x-nullable":true}` |
-| `definitions.TextClassificationMultilabel.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","x-nullable":true}` |
-| `definitions.TextNer.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","x-nullable":true}` |
+| `definitions.Classification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","description":"Featurization inputs neede...` |
+| `definitions.Forecasting.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","description":"Featurization inputs neede...` |
+| `definitions.Regression.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/TableVerticalFeaturizationSettings","description":"Featurization inputs neede...` |
+| `definitions.TextClassification.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","description":"Featurization inputs needed ...` |
+| `definitions.TextClassificationMultilabel.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","description":"Featurization inputs needed ...` |
+| `definitions.TextNer.properties.featurizationSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalFeaturizationSettings","description":"Featurization inputs needed ...` |
 
 ### Changes for `limitSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","x-nullable":true}` |
-| `definitions.Forecasting.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","x-nullable":true}` |
-| `definitions.ImageClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
-| `definitions.ImageClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
-| `definitions.ImageInstanceSegmentation.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
-| `definitions.ImageObjectDetection.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings"}` |
-| `definitions.Regression.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","x-nullable":true}` |
-| `definitions.TextClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","x-nullable":true}` |
-| `definitions.TextClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","x-nullable":true}` |
-| `definitions.TextNer.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","x-nullable":true}` |
+| `definitions.Classification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","description":"Execution constraints for AutoMLJo...` |
+| `definitions.Forecasting.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","description":"Execution constraints for AutoMLJo...` |
+| `definitions.ImageClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings","description":"[Required] Limit settings for the AutoML j...` |
+| `definitions.ImageClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings","description":"[Required] Limit settings for the AutoML j...` |
+| `definitions.ImageInstanceSegmentation.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings","description":"[Required] Limit settings for the AutoML j...` |
+| `definitions.ImageObjectDetection.properties.limitSettings__added` | added | `{"$ref":"#/definitions/ImageLimitSettings","description":"[Required] Limit settings for the AutoML j...` |
+| `definitions.Regression.properties.limitSettings__added` | added | `{"$ref":"#/definitions/TableVerticalLimitSettings","description":"Execution constraints for AutoMLJo...` |
+| `definitions.TextClassification.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","description":"Execution constraints for AutoMLJob....` |
+| `definitions.TextClassificationMultilabel.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","description":"Execution constraints for AutoMLJob....` |
+| `definitions.TextNer.properties.limitSettings__added` | added | `{"$ref":"#/definitions/NlpVerticalLimitSettings","description":"Execution constraints for AutoMLJob....` |
 
 ### Changes for `nCrossValidations`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","x-nullable":true}` |
-| `definitions.Forecasting.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","x-nullable":true}` |
-| `definitions.Regression.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","x-nullable":true}` |
+| `definitions.Classification.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","description":"Number of cross validation folds to be appl...` |
+| `definitions.Forecasting.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","description":"Number of cross validation folds to be appl...` |
+| `definitions.Regression.properties.nCrossValidations__added` | added | `{"$ref":"#/definitions/NCrossValidations","description":"Number of cross validation folds to be appl...` |
 
 ### Changes for `testData`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.Forecasting.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.Regression.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.Classification.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Test data input.","x-nullable":true}` |
+| `definitions.Forecasting.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Test data input.","x-nullable":true}` |
+| `definitions.Regression.properties.testData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Test data input.","x-nullable":true}` |
 
 ### Changes for `testDataSize`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.testDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.Forecasting.properties.testDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.Regression.properties.testDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.Classification.properties.testDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of test dataset that needs to be set ...` |
+| `definitions.Forecasting.properties.testDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of test dataset that needs to be set ...` |
+| `definitions.Regression.properties.testDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of test dataset that needs to be set ...` |
 
 ### Changes for `validationData`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.Forecasting.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.ImageClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.ImageClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.ImageInstanceSegmentation.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.ImageObjectDetection.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.Regression.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.TextClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.TextClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
-| `definitions.TextNer.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","x-nullable":true}` |
+| `definitions.Classification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.Forecasting.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.ImageClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.ImageClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.ImageInstanceSegmentation.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.ImageObjectDetection.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.Regression.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.TextClassification.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.TextClassificationMultilabel.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
+| `definitions.TextNer.properties.validationData__added` | added | `{"$ref":"#/definitions/MLTableJobInput","description":"Validation data inputs.","x-nullable":true}` |
 
 ### Changes for `validationDataSize`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.Forecasting.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.ImageClassification.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.ImageClassificationMultilabel.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.ImageInstanceSegmentation.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.ImageObjectDetection.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
-| `definitions.Regression.properties.validationDataSize__added` | added | `{"type":"number","format":"double","x-nullable":true}` |
+| `definitions.Classification.properties.validationDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of training dataset that needs to be ...` |
+| `definitions.Forecasting.properties.validationDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of training dataset that needs to be ...` |
+| `definitions.ImageClassification.properties.validationDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of training dataset that needs to be ...` |
+| `definitions.ImageClassificationMultilabel.properties.validationDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of training dataset that needs to be ...` |
+| `definitions.ImageInstanceSegmentation.properties.validationDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of training dataset that needs to be ...` |
+| `definitions.ImageObjectDetection.properties.validationDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of training dataset that needs to be ...` |
+| `definitions.Regression.properties.validationDataSize__added` | added | `{"type":"number","format":"double","description":"The fraction of training dataset that needs to be ...` |
 
 ### Changes for `weightColumnName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Classification.properties.weightColumnName__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.Forecasting.properties.weightColumnName__added` | added | `{"type":"string","x-nullable":true}` |
-| `definitions.Regression.properties.weightColumnName__added` | added | `{"type":"string","x-nullable":true}` |
+| `definitions.Classification.properties.weightColumnName__added` | added | `{"type":"string","description":"The name of the sample weight column. Automated ML supports a weight...` |
+| `definitions.Forecasting.properties.weightColumnName__added` | added | `{"type":"string","description":"The name of the sample weight column. Automated ML supports a weight...` |
+| `definitions.Regression.properties.weightColumnName__added` | added | `{"type":"string","description":"The name of the sample weight column. Automated ML supports a weight...` |
 
 ### Changes for `codeUri`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.CodeVersion.properties.codeUri__deleted` | deleted | `{"type":"string","x-nullable":true,"example":"https://blobStorage/folderName"}` |
+| `definitions.CodeVersion.properties.codeUri__deleted` | deleted | `{"type":"string","description":"Uri where code is located","x-nullable":true,"example":"https://blob...` |
 
 ### Changes for `componentSpec`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComponentVersion.properties.componentSpec__deleted` | deleted | `{"type":"object","x-nullable":true,"example":{"code":"azureml:/subscriptions/00000000-1111-2222-3333...` |
+| `definitions.ComponentVersion.properties.componentSpec__deleted` | deleted | `{"type":"object","description":"Defines Component definition details.\\r\\n<see href=\\"https://docs.mi...` |
 
 ### Changes for `readOnly`
 
@@ -1582,21 +2170,21 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComputeResource.properties.location__deleted` | deleted | `{"type":"string"}` |
+| `definitions.ComputeResource.properties.location__deleted` | deleted | `{"type":"string","description":"Specifies the location of the resource."}` |
 
 ### Changes for `tags`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ComputeResource.properties.tags__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"type":"string"}}` |
+| `definitions.ComputeResource.properties.tags__deleted` | deleted | `{"type":"object","description":"Contains resource tags defined as key/value pairs.","x-nullable":tru...` |
 
 ### Changes for `dataType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DataContainer.properties.dataType__deleted` | deleted | `{"type":"string","enum":["uri_file","uri_folder","mltable"],"x-ms-enum":{"name":"DataType","modelAsS...` |
-| `definitions.DataVersionBase.properties.dataType__deleted` | deleted | `{"type":"string","enum":["uri_file","uri_folder","mltable"],"x-ms-enum":{"name":"DataType","modelAsS...` |
-| `definitions.Feature.properties.dataType__deleted` | deleted | `{"type":"string","default":"String","enum":["String","Integer","Long","Float","Double","Binary","Dat...` |
+| `definitions.DataContainer.properties.dataType__deleted` | deleted | `{"type":"string","description":"Enum to determine the type of data.","enum":["uri_file","uri_folder"...` |
+| `definitions.DataVersionBase.properties.dataType__deleted` | deleted | `{"type":"string","description":"Enum to determine the type of data.","enum":["uri_file","uri_folder"...` |
+| `definitions.Feature.properties.dataType__deleted` | deleted | `{"type":"string","description":"Specifies type","default":"String","enum":["String","Integer","Long"...` |
 
 ### Changes for `discriminator`
 
@@ -1611,25 +2199,25 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.DataVersionBase.properties.dataUri__deleted` | deleted | `{"type":"string","minLength":1,"pattern":"[a-zA-Z0-9_]","x-ms-mutability":["create","read"]}` |
+| `definitions.DataVersionBase.properties.dataUri__deleted` | deleted | `{"type":"string","description":"[Required] Uri of the data. Example: https://go.microsoft.com/fwlink...` |
 
 ### Changes for `credentials`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Datastore.properties.credentials__deleted` | deleted | `{"$ref":"#/definitions/DatastoreCredentials"}` |
+| `definitions.Datastore.properties.credentials__deleted` | deleted | `{"$ref":"#/definitions/DatastoreCredentials","description":"[Required] Account credentials."}` |
 
 ### Changes for `datastoreType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Datastore.properties.datastoreType__deleted` | deleted | `{"type":"string","enum":["AzureBlob","AzureDataLakeGen1","AzureDataLakeGen2","AzureFile","OneLake"],...` |
+| `definitions.Datastore.properties.datastoreType__deleted` | deleted | `{"type":"string","description":"Enum to determine the datastore contents type.","enum":["AzureBlob",...` |
 
 ### Changes for `isDefault`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Datastore.properties.isDefault__deleted` | deleted | `{"type":"boolean","readOnly":true,"x-ms-mutability":["read"]}` |
+| `definitions.Datastore.properties.isDefault__deleted` | deleted | `{"type":"boolean","description":"Readonly property to indicate if datastore is the workspace default...` |
 
 ### Changes for `uniqueItems`
 
@@ -1642,232 +2230,232 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.autoRebuild__deleted` | deleted | `{"type":"string","default":"Disabled","enum":["Disabled","OnBaseImageUpdate"],"x-ms-enum":{"name":"A...` |
+| `definitions.EnvironmentVersion.properties.autoRebuild__deleted` | deleted | `{"type":"string","description":"AutoRebuild setting for the derived image","default":"Disabled","enu...` |
 
 ### Changes for `build`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.build__deleted` | deleted | `{"$ref":"#/definitions/BuildContext","x-ms-mutability":["create","read"]}` |
+| `definitions.EnvironmentVersion.properties.build__deleted` | deleted | `{"$ref":"#/definitions/BuildContext","description":"Configuration settings for Docker build context....` |
 
 ### Changes for `condaFile`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.condaFile__deleted` | deleted | `{"type":"string","x-ms-mutability":["create","read"]}` |
+| `definitions.EnvironmentVersion.properties.condaFile__deleted` | deleted | `{"type":"string","description":"Standard configuration file used by Conda that lets you install any ...` |
 
 ### Changes for `environmentType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.environmentType__deleted` | deleted | `{"type":"string","enum":["Curated","UserCreated"],"x-ms-enum":{"name":"EnvironmentType","modelAsStri...` |
+| `definitions.EnvironmentVersion.properties.environmentType__deleted` | deleted | `{"type":"string","description":"Environment type is either user created or curated by Azure ML servi...` |
 
 ### Changes for `image`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.image__deleted` | deleted | `{"type":"string","example":"docker.io/tensorflow/serving:latest","x-ms-mutability":["create","read"]...` |
+| `definitions.EnvironmentVersion.properties.image__deleted` | deleted | `{"type":"string","description":"Name of the image that will be used for the environment.\\r\\n<seealso...` |
 
 ### Changes for `imageDetails`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.imageDetails__deleted` | deleted | `{"$ref":"#/definitions/ImageDetails"}` |
+| `definitions.EnvironmentVersion.properties.imageDetails__deleted` | deleted | `{"$ref":"#/definitions/ImageDetails","description":"Environment image details"}` |
 
 ### Changes for `inferenceConfig`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.inferenceConfig__deleted` | deleted | `{"$ref":"#/definitions/InferenceContainerProperties","x-ms-mutability":["create","read"]}` |
+| `definitions.EnvironmentVersion.properties.inferenceConfig__deleted` | deleted | `{"$ref":"#/definitions/InferenceContainerProperties","description":"Defines configuration specific t...` |
 
 ### Changes for `osType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.osType__deleted` | deleted | `{"type":"string","default":"Linux","enum":["Linux","Windows"],"x-ms-enum":{"name":"OperatingSystemTy...` |
+| `definitions.EnvironmentVersion.properties.osType__deleted` | deleted | `{"type":"string","description":"The type of operating system.","default":"Linux","enum":["Linux","Wi...` |
 
 ### Changes for `stage`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.EnvironmentVersion.properties.stage__deleted` | deleted | `{"type":"string","x-nullable":true}` |
-| `definitions.FeaturesetVersion.properties.stage__deleted` | deleted | `{"type":"string","x-nullable":true}` |
-| `definitions.FeaturestoreEntityVersion.properties.stage__deleted` | deleted | `{"type":"string","x-nullable":true}` |
-| `definitions.ModelVersion.properties.stage__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.EnvironmentVersion.properties.stage__deleted` | deleted | `{"type":"string","description":"Stage in the environment lifecycle assigned to this environment","x-...` |
+| `definitions.FeaturesetVersion.properties.stage__deleted` | deleted | `{"type":"string","description":"Specifies the asset stage","x-nullable":true}` |
+| `definitions.FeaturestoreEntityVersion.properties.stage__deleted` | deleted | `{"type":"string","description":"Specifies the asset stage","x-nullable":true}` |
+| `definitions.ModelVersion.properties.stage__deleted` | deleted | `{"type":"string","description":"Stage in the model lifecycle assigned to this model","x-nullable":tr...` |
 
 ### Changes for `featureName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Feature.properties.featureName__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.Feature.properties.featureName__deleted` | deleted | `{"type":"string","description":"Specifies name","x-nullable":true}` |
 
 ### Changes for `entities`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetVersion.properties.entities__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"type":"string"}}` |
+| `definitions.FeaturesetVersion.properties.entities__deleted` | deleted | `{"type":"array","description":"Specifies list of entities","x-nullable":true,"items":{"type":"string...` |
 
 ### Changes for `materializationSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetVersion.properties.materializationSettings__deleted` | deleted | `{"$ref":"#/definitions/MaterializationSettings","x-nullable":true}` |
+| `definitions.FeaturesetVersion.properties.materializationSettings__deleted` | deleted | `{"$ref":"#/definitions/MaterializationSettings","description":"Specifies the materialization setting...` |
 
 ### Changes for `specification`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturesetVersion.properties.specification__deleted` | deleted | `{"$ref":"#/definitions/FeaturesetSpecification","x-nullable":true}` |
+| `definitions.FeaturesetVersion.properties.specification__deleted` | deleted | `{"$ref":"#/definitions/FeaturesetSpecification","description":"Specifies the feature spec details","...` |
 
 ### Changes for `indexColumns`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.FeaturestoreEntityVersion.properties.indexColumns__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/IndexColumn"}}` |
+| `definitions.FeaturestoreEntityVersion.properties.indexColumns__deleted` | deleted | `{"type":"array","description":"Specifies index columns","x-nullable":true,"items":{"$ref":"#/definit...` |
 
 ### Changes for `modelSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImageClassification.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification","x-nullable":true}` |
-| `definitions.ImageClassificationMultilabel.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification","x-nullable":true}` |
-| `definitions.ImageInstanceSegmentation.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection","x-nullable":true}` |
-| `definitions.ImageObjectDetection.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection","x-nullable":true}` |
-| `definitions.ServerlessEndpoint.properties.modelSettings__deleted` | deleted | `{"$ref":"#/definitions/ModelSettings","x-nullable":true}` |
+| `definitions.ImageClassification.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification","description":"Settings used for training t...` |
+| `definitions.ImageClassificationMultilabel.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsClassification","description":"Settings used for training t...` |
+| `definitions.ImageInstanceSegmentation.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection","description":"Settings used for training ...` |
+| `definitions.ImageObjectDetection.properties.modelSettings__added` | added | `{"$ref":"#/definitions/ImageModelSettingsObjectDetection","description":"Settings used for training ...` |
+| `definitions.ServerlessEndpoint.properties.modelSettings__deleted` | deleted | `{"$ref":"#/definitions/ModelSettings","description":"The model settings (model id) for the model bei...` |
 
 ### Changes for `searchSpace`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImageClassification.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsClass...` |
-| `definitions.ImageClassificationMultilabel.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsClass...` |
-| `definitions.ImageInstanceSegmentation.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsObjec...` |
-| `definitions.ImageObjectDetection.properties.searchSpace__added` | added | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/ImageModelDistributionSettingsObjec...` |
+| `definitions.ImageClassification.properties.searchSpace__added` | added | `{"type":"array","description":"Search space for sampling different combinations of models and their ...` |
+| `definitions.ImageClassificationMultilabel.properties.searchSpace__added` | added | `{"type":"array","description":"Search space for sampling different combinations of models and their ...` |
+| `definitions.ImageInstanceSegmentation.properties.searchSpace__added` | added | `{"type":"array","description":"Search space for sampling different combinations of models and their ...` |
+| `definitions.ImageObjectDetection.properties.searchSpace__added` | added | `{"type":"array","description":"Search space for sampling different combinations of models and their ...` |
 
 ### Changes for `sweepSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ImageClassification.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
-| `definitions.ImageClassificationMultilabel.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
-| `definitions.ImageInstanceSegmentation.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
-| `definitions.ImageObjectDetection.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","x-nullable":true}` |
+| `definitions.ImageClassification.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","description":"Model sweeping and hyperparameter sweeping...` |
+| `definitions.ImageClassificationMultilabel.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","description":"Model sweeping and hyperparameter sweeping...` |
+| `definitions.ImageInstanceSegmentation.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","description":"Model sweeping and hyperparameter sweeping...` |
+| `definitions.ImageObjectDetection.properties.sweepSettings__added` | added | `{"$ref":"#/definitions/ImageSweepSettings","description":"Model sweeping and hyperparameter sweeping...` |
 
 ### Changes for `authMode`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceEndpoint.properties.authMode__deleted` | deleted | `{"type":"string","enum":["AAD"],"x-ms-enum":{"name":"AuthMode","modelAsString":true}}` |
-| `definitions.ServerlessEndpoint.properties.authMode__deleted` | deleted | `{"type":"string","enum":["Key","AAD","KeyAndAAD"],"x-ms-enum":{"name":"ServerlessInferenceEndpointAu...` |
+| `definitions.InferenceEndpoint.properties.authMode__deleted` | deleted | `{"type":"string","description":"Enum to determine endpoint authentication mode.","enum":["AAD"],"x-m...` |
+| `definitions.ServerlessEndpoint.properties.authMode__deleted` | deleted | `{"type":"string","description":"[Required] Specifies the authentication mode for the Serverless endp...` |
 
 ### Changes for `endpointUri`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceEndpoint.properties.endpointUri__deleted` | deleted | `{"type":"string","format":"uri","x-nullable":true,"readOnly":true,"x-ms-mutability":["read"]}` |
+| `definitions.InferenceEndpoint.properties.endpointUri__deleted` | deleted | `{"type":"string","format":"uri","description":"Endpoint URI for the inference endpoint.","x-nullable...` |
 
 ### Changes for `groupName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceEndpoint.properties.groupName__deleted` | deleted | `{"type":"string","minLength":1,"pattern":"[a-zA-Z0-9_]"}` |
+| `definitions.InferenceEndpoint.properties.groupName__deleted` | deleted | `{"type":"string","description":"[Required] Group within the same pool with which this endpoint needs...` |
 
 ### Changes for `requestConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceEndpoint.properties.requestConfiguration__deleted` | deleted | `{"$ref":"#/definitions/RequestConfiguration","x-nullable":true}` |
+| `definitions.InferenceEndpoint.properties.requestConfiguration__deleted` | deleted | `{"$ref":"#/definitions/RequestConfiguration","description":"RequestConfiguration for endpoint.","x-n...` |
 
 ### Changes for `environmentConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceGroup.properties.environmentConfiguration__deleted` | deleted | `{"$ref":"#/definitions/GroupEnvironmentConfiguration","x-nullable":true}` |
+| `definitions.InferenceGroup.properties.environmentConfiguration__deleted` | deleted | `{"$ref":"#/definitions/GroupEnvironmentConfiguration","description":"Gets or sets environment config...` |
 
 ### Changes for `modelConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceGroup.properties.modelConfiguration__deleted` | deleted | `{"$ref":"#/definitions/GroupModelConfiguration","x-nullable":true}` |
+| `definitions.InferenceGroup.properties.modelConfiguration__deleted` | deleted | `{"$ref":"#/definitions/GroupModelConfiguration","description":"Gets or sets model configuration for ...` |
 
 ### Changes for `nodeSkuType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceGroup.properties.nodeSkuType__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.InferenceGroup.properties.nodeSkuType__deleted` | deleted | `{"type":"string","description":"Gets or sets compute instance type.","x-nullable":true}` |
 
 ### Changes for `scaleUnitSize`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferenceGroup.properties.scaleUnitSize__deleted` | deleted | `{"type":"integer","format":"int32"}` |
+| `definitions.InferenceGroup.properties.scaleUnitSize__deleted` | deleted | `{"type":"integer","format":"int32","description":"Gets or sets Scale Unit size."}` |
 
 ### Changes for `scaleUnitConfiguration`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.InferencePool.properties.scaleUnitConfiguration__deleted` | deleted | `{"$ref":"#/definitions/ScaleUnitConfiguration","x-nullable":true}` |
+| `definitions.InferencePool.properties.scaleUnitConfiguration__deleted` | deleted | `{"$ref":"#/definitions/ScaleUnitConfiguration","description":"Gets or sets ScaleUnitConfiguration fo...` |
 
 ### Changes for `componentId`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.componentId__deleted` | deleted | `{"type":"string","x-nullable":true,"x-ms-mutability":["create","read"]}` |
+| `definitions.JobBase.properties.componentId__deleted` | deleted | `{"type":"string","description":"ARM resource ID of the component resource.","x-nullable":true,"x-ms-...` |
 
 ### Changes for `computeId`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.computeId__deleted` | deleted | `{"type":"string","x-nullable":true,"x-ms-mutability":["create","read"]}` |
+| `definitions.JobBase.properties.computeId__deleted` | deleted | `{"type":"string","description":"ARM resource ID of the compute resource.","x-nullable":true,"x-ms-mu...` |
 
 ### Changes for `displayName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.displayName__deleted` | deleted | `{"type":"string","x-nullable":true,"x-ms-mutability":["create","read"]}` |
-| `definitions.Schedule.properties.displayName__deleted` | deleted | `{"type":"string","x-nullable":true,"x-ms-mutability":["create","read"]}` |
+| `definitions.JobBase.properties.displayName__deleted` | deleted | `{"type":"string","description":"Display name of job.","x-nullable":true,"x-ms-mutability":["create",...` |
+| `definitions.Schedule.properties.displayName__deleted` | deleted | `{"type":"string","description":"Display name of schedule.","x-nullable":true,"x-ms-mutability":["cre...` |
 
 ### Changes for `experimentName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.experimentName__deleted` | deleted | `{"type":"string","default":"Default","x-ms-mutability":["create","read"]}` |
+| `definitions.JobBase.properties.experimentName__deleted` | deleted | `{"type":"string","description":"The name of the experiment the job belongs to. If not set, the job i...` |
 
 ### Changes for `isArchived`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.isArchived__deleted` | deleted | `{"type":"boolean","default":false,"x-ms-mutability":["create","read","update"]}` |
+| `definitions.JobBase.properties.isArchived__deleted` | deleted | `{"type":"boolean","description":"Is the asset archived?","default":false,"x-ms-mutability":["create"...` |
 
 ### Changes for `jobType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.jobType__deleted` | deleted | `{"type":"string","enum":["AutoML","Command","Sweep","Pipeline","Spark","FineTuning","Distillation"],...` |
+| `definitions.JobBase.properties.jobType__deleted` | deleted | `{"type":"string","description":"Enum to determine the type of job.","enum":["AutoML","Command","Swee...` |
 
 ### Changes for `notificationSetting`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.notificationSetting__deleted` | deleted | `{"$ref":"#/definitions/NotificationSetting","x-nullable":true,"x-ms-mutability":["create","read","up...` |
+| `definitions.JobBase.properties.notificationSetting__deleted` | deleted | `{"$ref":"#/definitions/NotificationSetting","description":"Notification setting for the job","x-null...` |
 
 ### Changes for `parentJobName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.parentJobName__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.JobBase.properties.parentJobName__deleted` | deleted | `{"type":"string","description":"Parent job name.","x-nullable":true}` |
 
 ### Changes for `services`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.services__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"$ref":"#/definitions/JobService","x-null...` |
+| `definitions.JobBase.properties.services__deleted` | deleted | `{"type":"object","description":"List of JobEndpoints.\\r\\nFor local jobs, a job endpoint will have an...` |
 
 ### Changes for `status`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.JobBase.properties.status__deleted` | deleted | `{"type":"string","enum":["NotStarted","Starting","Provisioning","Preparing","Queued","Running","Fina...` |
+| `definitions.JobBase.properties.status__deleted` | deleted | `{"type":"string","description":"The status of a job.","enum":["NotStarted","Starting","Provisioning"...` |
 
 ### Changes for `allOf`
 
@@ -1881,134 +2469,134 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MarketplaceSubscription.properties.marketplacePlan__deleted` | deleted | `{"$ref":"#/definitions/MarketplacePlan","x-nullable":true,"readOnly":true,"x-ms-mutability":["read"]...` |
+| `definitions.MarketplaceSubscription.properties.marketplacePlan__deleted` | deleted | `{"$ref":"#/definitions/MarketplacePlan","description":"Marketplace Plan associated with the Marketpl...` |
 
 ### Changes for `marketplaceSubscriptionStatus`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MarketplaceSubscription.properties.marketplaceSubscriptionStatus__deleted` | deleted | `{"type":"string","enum":["Subscribed","Suspended","Unsubscribed"],"x-ms-enum":{"name":"MarketplaceSu...` |
+| `definitions.MarketplaceSubscription.properties.marketplaceSubscriptionStatus__deleted` | deleted | `{"type":"string","description":"Current status of the Marketplace Subscription.","enum":["Subscribed...` |
 
 ### Changes for `modelId`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.MarketplaceSubscription.properties.modelId__deleted` | deleted | `{"type":"string","minLength":1,"pattern":"[a-zA-Z0-9_]"}` |
+| `definitions.MarketplaceSubscription.properties.modelId__deleted` | deleted | `{"type":"string","description":"[Required] Target Marketplace Model ID to create a Marketplace Subsc...` |
 
 ### Changes for `flavors`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersion.properties.flavors__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"$ref":"#/definitions/FlavorData","x-null...` |
+| `definitions.ModelVersion.properties.flavors__deleted` | deleted | `{"type":"object","description":"Mapping of model flavors to their properties.","x-nullable":true,"ad...` |
 
 ### Changes for `jobName`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersion.properties.jobName__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.ModelVersion.properties.jobName__deleted` | deleted | `{"type":"string","description":"Name of the training job which produced this model","x-nullable":tru...` |
 
 ### Changes for `modelType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersion.properties.modelType__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.ModelVersion.properties.modelType__deleted` | deleted | `{"type":"string","description":"The storage format for this entity. Used for NCD.","x-nullable":true...` |
 
 ### Changes for `modelUri`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersion.properties.modelUri__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.ModelVersion.properties.modelUri__deleted` | deleted | `{"type":"string","description":"The URI path to the model contents.","x-nullable":true}` |
 
 ### Changes for `datasets`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ModelVersion.properties.datasets__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/DatasetReference"}}` |
+| `definitions.ModelVersion.properties.datasets__deleted` | deleted | `{"type":"array","description":"Array of dataset references","x-nullable":true,"items":{"$ref":"#/def...` |
 
 ### Changes for `appInsightsEnabled`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.appInsightsEnabled__deleted` | deleted | `{"type":"boolean","default":false}` |
+| `definitions.OnlineDeployment.properties.appInsightsEnabled__deleted` | deleted | `{"type":"boolean","description":"If true, enables Application Insights logging.","default":false}` |
 
 ### Changes for `dataCollector`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.dataCollector__deleted` | deleted | `{"$ref":"#/definitions/DataCollector","x-nullable":true}` |
+| `definitions.OnlineDeployment.properties.dataCollector__deleted` | deleted | `{"$ref":"#/definitions/DataCollector","description":"The mdc configuration, we disable mdc when it's...` |
 
 ### Changes for `egressPublicNetworkAccess`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.egressPublicNetworkAccess__deleted` | deleted | `{"type":"string","default":"Enabled","enum":["Enabled","Disabled"],"x-ms-enum":{"name":"EgressPublic...` |
+| `definitions.OnlineDeployment.properties.egressPublicNetworkAccess__deleted` | deleted | `{"type":"string","description":"Enum to determine whether PublicNetworkAccess is Enabled or Disabled...` |
 
 ### Changes for `endpointComputeType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.endpointComputeType__deleted` | deleted | `{"type":"string","enum":["Managed","Kubernetes","AzureMLCompute"],"x-ms-enum":{"name":"EndpointCompu...` |
+| `definitions.OnlineDeployment.properties.endpointComputeType__deleted` | deleted | `{"type":"string","description":"Enum to determine endpoint compute type.","enum":["Managed","Kuberne...` |
 
 ### Changes for `instanceType`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.instanceType__deleted` | deleted | `{"type":"string","default":"Standard_F4s_v2","x-nullable":true,"x-ms-mutability":["create","read"]}` |
+| `definitions.OnlineDeployment.properties.instanceType__deleted` | deleted | `{"type":"string","description":"Compute instance type. Default: Standard_F4s_v2.","default":"Standar...` |
 
 ### Changes for `livenessProbe`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.livenessProbe__deleted` | deleted | `{"$ref":"#/definitions/ProbeSettings","x-nullable":true}` |
+| `definitions.OnlineDeployment.properties.livenessProbe__deleted` | deleted | `{"$ref":"#/definitions/ProbeSettings","description":"Liveness probe monitors the health of the conta...` |
 
 ### Changes for `modelMountPath`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.modelMountPath__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.OnlineDeployment.properties.modelMountPath__deleted` | deleted | `{"type":"string","description":"The path to mount the model in custom container.","x-nullable":true}` |
 
 ### Changes for `readinessProbe`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.readinessProbe__deleted` | deleted | `{"$ref":"#/definitions/ProbeSettings","x-nullable":true}` |
+| `definitions.OnlineDeployment.properties.readinessProbe__deleted` | deleted | `{"$ref":"#/definitions/ProbeSettings","description":"Readiness probe validates if the container is r...` |
 
 ### Changes for `requestSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.requestSettings__deleted` | deleted | `{"$ref":"#/definitions/OnlineRequestSettings","x-nullable":true}` |
+| `definitions.OnlineDeployment.properties.requestSettings__deleted` | deleted | `{"$ref":"#/definitions/OnlineRequestSettings","description":"Request settings for the deployment.","...` |
 
 ### Changes for `scaleSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.scaleSettings__deleted` | deleted | `{"$ref":"#/definitions/OnlineScaleSettings","x-nullable":true}` |
+| `definitions.OnlineDeployment.properties.scaleSettings__deleted` | deleted | `{"$ref":"#/definitions/OnlineScaleSettings","description":"Scale settings for the deployment.\\r\\nIf ...` |
 
 ### Changes for `startupProbe`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineDeployment.properties.startupProbe__deleted` | deleted | `{"$ref":"#/definitions/ProbeSettings","x-nullable":true}` |
+| `definitions.OnlineDeployment.properties.startupProbe__deleted` | deleted | `{"$ref":"#/definitions/ProbeSettings","description":"Startup probe verify whether an application wit...` |
 
 ### Changes for `mirrorTraffic`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineEndpoint.properties.mirrorTraffic__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"format":"int32","type":"integer"}}` |
+| `definitions.OnlineEndpoint.properties.mirrorTraffic__deleted` | deleted | `{"type":"object","description":"Percentage of traffic to be mirrored to each deployment without usin...` |
 
 ### Changes for `publicNetworkAccess`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineEndpoint.properties.publicNetworkAccess__deleted` | deleted | `{"type":"string","default":"Enabled","enum":["Enabled","Disabled"],"x-ms-enum":{"name":"PublicNetwor...` |
-| `definitions.Registry.properties.publicNetworkAccess__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.OnlineEndpoint.properties.publicNetworkAccess__deleted` | deleted | `{"type":"string","description":"Enum to determine whether PublicNetworkAccess is Enabled or Disabled...` |
+| `definitions.Registry.properties.publicNetworkAccess__deleted` | deleted | `{"type":"string","description":"Is the Registry accessible from the internet?\\r\\nPossible values: \\"...` |
 
 ### Changes for `traffic`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.OnlineEndpoint.properties.traffic__deleted` | deleted | `{"type":"object","x-nullable":true,"additionalProperties":{"format":"int32","type":"integer"}}` |
+| `definitions.OnlineEndpoint.properties.traffic__deleted` | deleted | `{"type":"object","description":"Percentage of traffic from endpoint to divert to each deployment. Tr...` |
 
 ### Changes for `nextLink`
 
@@ -2021,85 +2609,85 @@
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Registry.properties.discoveryUrl__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.Registry.properties.discoveryUrl__deleted` | deleted | `{"type":"string","description":"Discovery URL for the Registry","x-nullable":true}` |
 
 ### Changes for `intellectualPropertyPublisher`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Registry.properties.intellectualPropertyPublisher__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.Registry.properties.intellectualPropertyPublisher__deleted` | deleted | `{"type":"string","description":"IntellectualPropertyPublisher for the registry","x-nullable":true}` |
 
 ### Changes for `managedResourceGroup`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Registry.properties.managedResourceGroup__deleted` | deleted | `{"$ref":"#/definitions/ArmResourceId","x-nullable":true}` |
+| `definitions.Registry.properties.managedResourceGroup__deleted` | deleted | `{"$ref":"#/definitions/ArmResourceId","description":"ResourceId of the managed RG if the registry ha...` |
 
 ### Changes for `managedResourceGroupSettings`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Registry.properties.managedResourceGroupSettings__deleted` | deleted | `{"$ref":"#/definitions/ManagedResourceGroupSettings","x-nullable":true}` |
+| `definitions.Registry.properties.managedResourceGroupSettings__deleted` | deleted | `{"$ref":"#/definitions/ManagedResourceGroupSettings","description":"Managed resource group specific ...` |
 
 ### Changes for `mlFlowRegistryUri`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Registry.properties.mlFlowRegistryUri__deleted` | deleted | `{"type":"string","x-nullable":true}` |
+| `definitions.Registry.properties.mlFlowRegistryUri__deleted` | deleted | `{"type":"string","description":"MLFlow Registry URI for the Registry","x-nullable":true}` |
 
 ### Changes for `registryPrivateEndpointConnections`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Registry.properties.registryPrivateEndpointConnections__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/RegistryPrivateEndpointConnection"}...` |
+| `definitions.Registry.properties.registryPrivateEndpointConnections__deleted` | deleted | `{"type":"array","description":"Private endpoint connections info used for pending connections in pri...` |
 
 ### Changes for `regionDetails`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Registry.properties.regionDetails__deleted` | deleted | `{"type":"array","x-nullable":true,"items":{"$ref":"#/definitions/RegistryRegionArmDetails"}}` |
+| `definitions.Registry.properties.regionDetails__deleted` | deleted | `{"type":"array","description":"Details of each region the registry is in","x-nullable":true,"items":...` |
 
 ### Changes for `action`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Schedule.properties.action__deleted` | deleted | `{"$ref":"#/definitions/ScheduleActionBase","x-ms-mutability":["create","read","update"]}` |
+| `definitions.Schedule.properties.action__deleted` | deleted | `{"$ref":"#/definitions/ScheduleActionBase","description":"[Required] Specifies the action of the sch...` |
 
 ### Changes for `isEnabled`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Schedule.properties.isEnabled__deleted` | deleted | `{"type":"boolean","default":true,"x-ms-mutability":["create","read","update"]}` |
+| `definitions.Schedule.properties.isEnabled__deleted` | deleted | `{"type":"boolean","description":"Is the schedule enabled?","default":true,"x-ms-mutability":["create...` |
 
 ### Changes for `trigger`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.Schedule.properties.trigger__deleted` | deleted | `{"$ref":"#/definitions/TriggerBase","x-ms-mutability":["create","read","update"]}` |
+| `definitions.Schedule.properties.trigger__deleted` | deleted | `{"$ref":"#/definitions/TriggerBase","description":"[Required] Specifies the trigger details","x-ms-m...` |
 
 ### Changes for `contentSafety`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServerlessEndpoint.properties.contentSafety__deleted` | deleted | `{"$ref":"#/definitions/ContentSafety","x-nullable":true}` |
+| `definitions.ServerlessEndpoint.properties.contentSafety__deleted` | deleted | `{"$ref":"#/definitions/ContentSafety","description":"Specifies the content safety options. If omitte...` |
 
 ### Changes for `endpointState`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServerlessEndpoint.properties.endpointState__deleted` | deleted | `{"type":"string","enum":["Unknown","Creating","Deleting","Suspending","Reinstating","Online","Suspen...` |
+| `definitions.ServerlessEndpoint.properties.endpointState__deleted` | deleted | `{"type":"string","description":"State of the Serverless Endpoint.","enum":["Unknown","Creating","Del...` |
 
 ### Changes for `inferenceEndpoint`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServerlessEndpoint.properties.inferenceEndpoint__deleted` | deleted | `{"$ref":"#/definitions/ServerlessInferenceEndpoint","x-nullable":true,"readOnly":true,"x-ms-mutabili...` |
+| `definitions.ServerlessEndpoint.properties.inferenceEndpoint__deleted` | deleted | `{"$ref":"#/definitions/ServerlessInferenceEndpoint","description":"The inference uri to target when ...` |
 
 ### Changes for `marketplaceSubscriptionId`
 
 | Path | Change Type | Value |
 |------|------------|-------|
-| `definitions.ServerlessEndpoint.properties.marketplaceSubscriptionId__deleted` | deleted | `{"type":"string","x-nullable":true,"readOnly":true,"x-ms-mutability":["read"]}` |
+| `definitions.ServerlessEndpoint.properties.marketplaceSubscriptionId__deleted` | deleted | `{"type":"string","description":"The MarketplaceSubscription Azure ID associated to this ServerlessEn...` |
 
 ### Changes for `enum`
 
@@ -2124,63 +2712,495 @@
 | Path | Old Value | New Value |
 |------|-----------|----------|
 | `definitions.AmlComputeNodeInformation.properties.port.type` | `number` | `integer` |
+| `definitions.AmlUserFeature.properties.displayName.description` | `Specifies the feature name ` | `Specifies the feature name` |
+| `definitions.ApiKeyAuthWorkspaceConnectionProperties.description` | `This connection type covers the generic ApiKey auth connection categories, for examples:
+AzureOpenAI:
+    Category:= AzureOpenAI
+    AuthType:= ApiKey (as type discriminator)
+    Credentials:= {ApiKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey
+    Target:= {ApiBase}
+            
+CognitiveService:
+    Category:= CognitiveService
+    AuthType:= ApiKey (as type discriminator)
+    Credentials:= {SubscriptionKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey
+    Target:= ServiceRegion={serviceRegion}
+            
+CognitiveSearch:
+    Category:= CognitiveSearch
+    AuthType:= ApiKey (as type discriminator)
+    Credentials:= {Key} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey
+    Target:= {Endpoint}
+            
+Use Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields` | `This connection type covers the generic ApiKey auth connection categories, for examples:
+AzureOpenAI:
+Category:= AzureOpenAI
+AuthType:= ApiKey (as type discriminator)
+Credentials:= {ApiKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey
+Target:= {ApiBase}
+
+CognitiveService:
+Category:= CognitiveService
+AuthType:= ApiKey (as type discriminator)
+Credentials:= {SubscriptionKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey
+Target:= ServiceRegion={serviceRegion}
+
+CognitiveSearch:
+Category:= CognitiveSearch
+AuthType:= ApiKey (as type discriminator)
+Credentials:= {Key} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey
+Target:= {Endpoint}
+
+Use Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields` |
+| `definitions.ArmResourceId.properties.resourceId.description` | `Arm ResourceId is in the format "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}"
+or "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}"` | `Arm ResourceId is in the format "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.Storage/storageAccounts/{StorageAccountName}"
+or "/subscriptions/{SubscriptionId}/resourceGroups/{ResourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{AcrName}"` |
 | `definitions.AutoMLJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
+| `definitions.AutoMLJob.description` | `AutoMLJob class.
+Use this class for executing AutoML tasks like Classification/Regression etc.
+See TaskType enum for all the tasks supported.` | `AutoMLJob class.
+Use this class for executing AutoML tasks like Classification/Regression etc.
+See TaskType enum for all the tasks supported.` |
+| `definitions.AutoMLJob.properties.environmentId.description` | `The ARM resource ID of the Environment specification for the job.
+This is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.` | `The ARM resource ID of the Environment specification for the job.
+This is optional value to provide, if not provided, AutoML will default this to Production AutoML curated environment version when running the job.` |
+| `definitions.AutoMLVertical.description` | `AutoML vertical class.
+Base class for AutoML verticals - TableVertical/ImageVertical/NLPVertical` | `AutoML vertical class.
+Base class for AutoML verticals - TableVertical/ImageVertical/NLPVertical` |
+| `definitions.AutoMLVertical.properties.logVerbosity.description` | `Enum for setting log verbosity.` | `Log verbosity for the job.` |
+| `definitions.AutoMLVertical.properties.targetColumnName.description` | `Target column name: This is prediction values column.
+Also known as label column name in context of classification tasks.` | `Target column name: This is prediction values column.
+Also known as label column name in context of classification tasks.` |
 | `definitions.AzureBlobDatastore.allOf[0].$ref` | `#/definitions/AzureDatastore` | `#/definitions/DatastoreProperties` |
 | `definitions.AzureDataLakeGen1Datastore.allOf[0].$ref` | `#/definitions/AzureDatastore` | `#/definitions/DatastoreProperties` |
 | `definitions.AzureDataLakeGen2Datastore.allOf[0].$ref` | `#/definitions/AzureDatastore` | `#/definitions/DatastoreProperties` |
 | `definitions.AzureFileDatastore.allOf[0].$ref` | `#/definitions/AzureDatastore` | `#/definitions/DatastoreProperties` |
 | `definitions.BatchDeployment.allOf[0].$ref` | `#/definitions/EndpointDeploymentPropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.BatchDeployment.description` | `Batch inference settings per deployment.` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.BatchDeploymentTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/BatchDeploymentTrackedResource` | `#/definitions/BatchDeployment` |
 | `definitions.BatchEndpoint.allOf[0].$ref` | `#/definitions/EndpointPropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.BatchEndpoint.description` | `Batch endpoint configuration.` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.BatchEndpointDefaults.properties.deploymentName.description` | `Name of the deployment that will be default for the endpoint.
+This deployment will end up getting 100% traffic when the endpoint scoring URL is invoked.` | `Name of the deployment that will be default for the endpoint.
+This deployment will end up getting 100% traffic when the endpoint scoring URL is invoked.` |
 | `definitions.BatchEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/BatchEndpointTrackedResource` | `#/definitions/BatchEndpoint` |
+| `definitions.BlobReferenceForConsumptionDto.properties.blobUri.description` | `Blob URI path for client to upload data.
+Example: https://blob.windows.core.net/Container/Path` | `Blob URI path for client to upload data.
+Example: https://blob.windows.core.net/Container/Path` |
+| `definitions.BuildContext.properties.contextUri.description` | `[Required] URI of the Docker build context used to build the image. Supports blob URIs on environment creation and may return blob or Git URIs.
+<seealso href="https://docs.docker.com/engine/reference/commandline/build/#extended-description" />` | `[Required] URI of the Docker build context used to build the image. Supports blob URIs on environment creation and may return blob or Git URIs.
+<seealso href="https://docs.docker.com/engine/reference/commandline/build/#extended-description" />` |
+| `definitions.BuildContext.properties.dockerfilePath.description` | `Path to the Dockerfile in the build context.
+<seealso href="https://docs.docker.com/engine/reference/builder/" />` | `Path to the Dockerfile in the build context.
+<seealso href="https://docs.docker.com/engine/reference/builder/" />` |
 | `definitions.CapabilityHost.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.Classification.properties.primaryMetric.description` | `Primary metrics for classification tasks.` | `Primary metric for the task.` |
 | `definitions.CodeContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.CodeContainer.description` | `Container for code asset versions.` | `Azure Resource Manager resource envelope.` |
 | `definitions.CodeContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/CodeContainerResource` | `#/definitions/CodeContainer` |
 | `definitions.CodeVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.CodeVersion.description` | `Code asset version details.` | `Azure Resource Manager resource envelope.` |
 | `definitions.CodeVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/CodeVersionResource` | `#/definitions/CodeVersion` |
+| `definitions.ColumnTransformer.properties.parameters.description` | `Different properties to be passed to transformer.
+Input expected is dictionary of key,value pairs in JSON format.` | `Different properties to be passed to transformer.
+Input expected is dictionary of key,value pairs in JSON format.` |
 | `definitions.CommandJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.ComponentContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.ComponentContainer.description` | `Component container definition.
+<see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />` | `Azure Resource Manager resource envelope.` |
 | `definitions.ComponentContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ComponentContainerResource` | `#/definitions/ComponentContainer` |
 | `definitions.ComponentVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.ComponentVersion.description` | `Definition of a component version: defines resources that span component types.` | `Azure Resource Manager resource envelope.` |
 | `definitions.ComponentVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ComponentVersionResource` | `#/definitions/ComponentVersion` |
 | `definitions.ComputeResource.allOf[0].$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.ComputeResource.properties.identity.description` | `The identity of the resource.` | `The managed service identities assigned to this resource.` |
+| `definitions.ComputeResource.properties.sku.description` | `The sku of the workspace.` | `The SKU (Stock Keeping Unit) assigned to this resource.` |
+| `definitions.ContainerResourceSettings.properties.cpu.description` | `Number of vCPUs request/limit for container. More info:
+https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` | `Number of vCPUs request/limit for container. More info:
+https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` |
+| `definitions.ContainerResourceSettings.properties.gpu.description` | `Number of Nvidia GPU cards request/limit for container. More info:
+https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` | `Number of Nvidia GPU cards request/limit for container. More info:
+https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` |
+| `definitions.ContainerResourceSettings.properties.memory.description` | `Memory size request/limit for container. More info:
+https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` | `Memory size request/limit for container. More info:
+https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` |
+| `definitions.Cron.properties.expression.description` | `[Required] Specifies cron expression of schedule.
+The expression should follow NCronTab format.` | `[Required] Specifies cron expression of schedule.
+The expression should follow NCronTab format.` |
+| `definitions.Cron.properties.timeZone.description` | `Specifies time zone in which the schedule runs.
+TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` | `Specifies time zone in which the schedule runs.
+TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` |
+| `definitions.CronTrigger.properties.expression.description` | `[Required] Specifies cron expression of schedule.
+The expression should follow NCronTab format.` | `[Required] Specifies cron expression of schedule.
+The expression should follow NCronTab format.` |
+| `definitions.CustomKeysWorkspaceConnectionProperties.description` | `Category:= CustomKeys
+AuthType:= CustomKeys (as type discriminator)
+Credentials:= {CustomKeys} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.CustomKeys
+Target:= {any value}
+Use Metadata property bag for ApiVersion and other metadata fields` | `Category:= CustomKeys
+AuthType:= CustomKeys (as type discriminator)
+Credentials:= {CustomKeys} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.CustomKeys
+Target:= {any value}
+Use Metadata property bag for ApiVersion and other metadata fields` |
 | `definitions.CustomService.additionalProperties` | `true` | `{}` |
+| `definitions.DataCollector.properties.collections.description` | `[Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.
+Model data collector can be used for either payload logging or custom logging or both of them. Collection request and response are reserved for payload logging, others are for custom logging.` | `[Required] The collection configuration. Each collection has it own configuration to collect model data and the name of collection can be arbitrary string.
+Model data collector can be used for either payload logging or custom logging or both of them. Collection request and response are reserved for payload logging, others are for custom logging.` |
+| `definitions.DataCollector.properties.rollingRate.description` | `When model data is collected to blob storage, we need to roll the data to different path to avoid logging all of them in a single blob file.
+If the rolling rate is hour, all data will be collected in the blob path /yyyy/MM/dd/HH/.
+If it's day, all data will be collected in blob path /yyyy/MM/dd/.
+The other benefit of rolling path is that model monitoring ui is able to select a time range of data very quickly.` | `When model data is collected to blob storage, we need to roll the data to different path to avoid logging all of them in a single blob file.
+If the rolling rate is hour, all data will be collected in the blob path /yyyy/MM/dd/HH/.
+If it's day, all data will be collected in blob path /yyyy/MM/dd/.
+The other benefit of rolling path is that model monitoring ui is able to select a time range of data very quickly.` |
 | `definitions.DataContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.DataContainer.description` | `Container for data asset versions.` | `Azure Resource Manager resource envelope.` |
 | `definitions.DataContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/DataContainerResource` | `#/definitions/DataContainer` |
 | `definitions.Datastore.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.Datastore.description` | `Base definition for datastore contents configuration.` | `Azure Resource Manager resource envelope.` |
 | `definitions.DatastoreResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/DatastoreResource` | `#/definitions/Datastore` |
 | `definitions.DataVersionBase.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.DataVersionBase.description` | `Data version base definition` | `Azure Resource Manager resource envelope.` |
 | `definitions.DataVersionBaseResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/DataVersionBaseResource` | `#/definitions/DataVersionBase` |
 | `definitions.DistillationJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
+| `definitions.DistillationJob.properties.dataGenerationDetails.description` | `[Required] ` | `[Required]` |
+| `definitions.DistillationJob.properties.finetuningDetails.description` | `[Required] ` | `[Required]` |
+| `definitions.DistillationJob.properties.outputs.description` | `[Required] ` | `[Required]` |
 | `definitions.Docker.additionalProperties` | `true` | `{}` |
+| `definitions.EncryptionProperty.properties.cosmosDbResourceId.description` | `The byok cosmosdb account that customer brings to store customer's data
+with encryption` | `The byok cosmosdb account that customer brings to store customer's data
+with encryption` |
+| `definitions.EncryptionProperty.properties.searchAccountResourceId.description` | `The byok search account that customer brings to store customer's data
+with encryption` | `The byok search account that customer brings to store customer's data
+with encryption` |
+| `definitions.EncryptionProperty.properties.storageAccountResourceId.description` | `The byok storage account that customer brings to store customer's data
+with encryption` | `The byok storage account that customer brings to store customer's data
+with encryption` |
+| `definitions.EndpointPropertiesBase.properties.keys.description` | `EndpointAuthKeys to set initially on an Endpoint.
+This property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.` | `EndpointAuthKeys to set initially on an Endpoint.
+This property will always be returned as null. AuthKey values must be retrieved using the ListKeys API.` |
 | `definitions.EndpointResourceProperties.properties.endpointUri.format` | `url` | `uri` |
+| `definitions.EndpointResourceProperties.properties.location.description` | `Location of the endpoint.
+Since input dto and when parse endpoint resource share the same contract
+this Location field is just for parse the endpoint resource info
+we won't let customer specify the endpoint resource location since we will create it the same location as workspace` | `Location of the endpoint.
+Since input dto and when parse endpoint resource share the same contract
+this Location field is just for parse the endpoint resource info
+we won't let customer specify the endpoint resource location since we will create it the same location as workspace` |
+| `definitions.EndpointScheduleAction.properties.endpointInvocationDefinition.description` | `[Required] Defines Schedule action definition details.
+<see href="TBD" />` | `[Required] Defines Schedule action definition details.
+<see href="TBD" />` |
 | `definitions.EnvironmentContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.EnvironmentContainer.description` | `Container for environment specification versions.` | `Azure Resource Manager resource envelope.` |
 | `definitions.EnvironmentContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/EnvironmentContainerResource` | `#/definitions/EnvironmentContainer` |
 | `definitions.EnvironmentVariable.additionalProperties` | `true` | `{}` |
 | `definitions.EnvironmentVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.EnvironmentVersion.description` | `Environment version details.` | `Azure Resource Manager resource envelope.` |
 | `definitions.EnvironmentVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/EnvironmentVersionResource` | `#/definitions/EnvironmentVersion` |
 | `definitions.Feature.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.Feature.description` | `DTO object representing feature` | `Azure Resource Manager resource envelope.` |
 | `definitions.FeatureResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/FeatureResource` | `#/definitions/Feature` |
 | `definitions.FeaturesetContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.FeaturesetContainer.description` | `DTO object representing feature set` | `Azure Resource Manager resource envelope.` |
 | `definitions.FeaturesetContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/FeaturesetContainerResource` | `#/definitions/FeaturesetContainer` |
 | `definitions.FeaturesetVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.FeaturesetVersion.description` | `DTO object representing feature set version` | `Azure Resource Manager resource envelope.` |
 | `definitions.FeaturesetVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/FeaturesetVersionResource` | `#/definitions/FeaturesetVersion` |
 | `definitions.FeaturestoreEntityContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.FeaturestoreEntityContainer.description` | `DTO object representing feature entity` | `Azure Resource Manager resource envelope.` |
 | `definitions.FeaturestoreEntityContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/FeaturestoreEntityContainerResource` | `#/definitions/FeaturestoreEntityContainer` |
 | `definitions.FeaturestoreEntityVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.FeaturestoreEntityVersion.description` | `DTO object representing feature entity version` | `Azure Resource Manager resource envelope.` |
 | `definitions.FeaturestoreEntityVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/FeaturestoreEntityVersionResource` | `#/definitions/FeaturestoreEntityVersion` |
 | `definitions.FineTuningJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
+| `definitions.FineTuningJob.properties.fineTuningDetails.description` | `[Required] ` | `[Required]` |
+| `definitions.FineTuningJob.properties.outputs.description` | `[Required] ` | `[Required]` |
+| `definitions.Forecasting.properties.primaryMetric.description` | `Primary metrics for Forecasting task.` | `Primary metric for forecasting task.` |
+| `definitions.ForecastingSettings.properties.countryOrRegionForHolidays.description` | `Country or region for holidays for forecasting tasks.
+These should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.` | `Country or region for holidays for forecasting tasks.
+These should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.` |
+| `definitions.ForecastingSettings.properties.cvStepSize.description` | `Number of periods between the origin time of one CV fold and the next fold. For
+example, if \`CVStepSize\` = 3 for daily data, the origin time for each fold will be
+three days apart.` | `Number of periods between the origin time of one CV fold and the next fold. For
+example, if \`CVStepSize\` = 3 for daily data, the origin time for each fold will be
+three days apart.` |
+| `definitions.ForecastingSettings.properties.featureLags.description` | `Flag for generating lags for the numeric features.` | `Flag for generating lags for the numeric features with 'auto' or null.` |
+| `definitions.ForecastingSettings.properties.seasonality.description` | `Set time series seasonality as an integer multiple of the series frequency.
+If seasonality is set to 'auto', it will be inferred.` | `Set time series seasonality as an integer multiple of the series frequency.
+If seasonality is set to 'auto', it will be inferred.` |
+| `definitions.ForecastingSettings.properties.targetAggregateFunction.description` | `Target aggregate function.` | `The function to be used to aggregate the time series target column to conform to a user specified frequency.
+If the TargetAggregateFunction is set i.e. not 'None', but the freq parameter is not set, the error is raised. The possible target aggregation functions are: "sum", "max", "min" and "mean".` |
+| `definitions.ForecastingSettings.properties.timeSeriesIdColumnNames.description` | `The names of columns used to group a timeseries. It can be used to create multiple series.
+If grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.` | `The names of columns used to group a timeseries. It can be used to create multiple series.
+If grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.` |
 | `definitions.Image.additionalProperties` | `true` | `{}` |
 | `definitions.Image.properties.type.title` | `Type of the image` | `Type of the Image` |
+| `definitions.ImageClassification.description` | `Image Classification. Multi-class image classification is used when an image is classified with only a single label
+from a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'.` | `Image Classification. Multi-class image classification is used when an image is classified with only a single label
+from a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'.` |
+| `definitions.ImageClassification.properties.primaryMetric.description` | `Primary metrics for classification tasks.` | `Primary metric to optimize for this task.` |
+| `definitions.ImageClassificationMultilabel.description` | `Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels
+from a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'.` | `Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels
+from a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'.` |
+| `definitions.ImageClassificationMultilabel.properties.primaryMetric.description` | `Primary metrics for classification multilabel tasks.` | `Primary metric to optimize for this task.` |
+| `definitions.ImageInstanceSegmentation.description` | `Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,
+drawing a polygon around each object in the image.` | `Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,
+drawing a polygon around each object in the image.` |
+| `definitions.ImageInstanceSegmentation.properties.primaryMetric.description` | `Primary metrics for InstanceSegmentation tasks.` | `Primary metric to optimize for this task.` |
+| `definitions.ImageModelDistributionSettings.description` | `Distribution expressions to sweep over values of model settings.
+<example>
+Some examples are:
+\`\`\`
+ModelName = "choice('seresnext', 'resnest50')";
+LearningRate = "uniform(0.001, 0.01)";
+LayersToFreeze = "choice(0, 2)";
+\`\`\`</example>
+All distributions can be specified as distribution_name(min, max) or choice(val1, val2, ..., valn)
+where distribution name can be: uniform, quniform, loguniform, etc
+For more details on how to compose distribution expressions please check the documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Distribution expressions to sweep over values of model settings.
+<example>
+Some examples are:
+\`\`\`
+ModelName = "choice('seresnext', 'resnest50')";
+LearningRate = "uniform(0.001, 0.01)";
+LayersToFreeze = "choice(0, 2)";
+\`\`\`</example>
+All distributions can be specified as distribution_name(min, max) or choice(val1, val2, ..., valn)
+where distribution name can be: uniform, quniform, loguniform, etc
+For more details on how to compose distribution expressions please check the documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelDistributionSettings.properties.earlyStoppingDelay.description` | `Minimum number of epochs or validation evaluations to wait before primary metric improvement
+is tracked for early stopping. Must be a positive integer.` | `Minimum number of epochs or validation evaluations to wait before primary metric improvement
+is tracked for early stopping. Must be a positive integer.` |
+| `definitions.ImageModelDistributionSettings.properties.earlyStoppingPatience.description` | `Minimum number of epochs or validation evaluations with no primary metric improvement before
+the run is stopped. Must be a positive integer.` | `Minimum number of epochs or validation evaluations with no primary metric improvement before
+the run is stopped. Must be a positive integer.` |
+| `definitions.ImageModelDistributionSettings.properties.gradientAccumulationStep.description` | `Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
+updating the model weights while accumulating the gradients of those steps, and then using
+the accumulated gradients to compute the weight updates. Must be a positive integer.` | `Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
+updating the model weights while accumulating the gradients of those steps, and then using
+the accumulated gradients to compute the weight updates. Must be a positive integer.` |
+| `definitions.ImageModelDistributionSettings.properties.layersToFreeze.description` | `Number of layers to freeze for the model. Must be a positive integer.
+For instance, passing 2 as value for 'seresnext' means
+freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
+see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Number of layers to freeze for the model. Must be a positive integer.
+For instance, passing 2 as value for 'seresnext' means
+freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
+see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelDistributionSettings.properties.modelName.description` | `Name of the model to use for training.
+For more information on the available models please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Name of the model to use for training.
+For more information on the available models please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelDistributionSettingsClassification.description` | `Distribution expressions to sweep over values of model settings.
+<example>
+Some examples are:
+\`\`\`
+ModelName = "choice('seresnext', 'resnest50')";
+LearningRate = "uniform(0.001, 0.01)";
+LayersToFreeze = "choice(0, 2)";
+\`\`\`</example>
+For more details on how to compose distribution expressions please check the documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Distribution expressions to sweep over values of model settings.
+<example>
+Some examples are:
+\`\`\`
+ModelName = "choice('seresnext', 'resnest50')";
+LearningRate = "uniform(0.001, 0.01)";
+LayersToFreeze = "choice(0, 2)";
+\`\`\`</example>
+For more details on how to compose distribution expressions please check the documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelDistributionSettingsClassification.properties.weightedLoss.description` | `Weighted loss. The accepted values are 0 for no weighted loss.
+1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.` | `Weighted loss. The accepted values are 0 for no weighted loss.
+1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.description` | `Distribution expressions to sweep over values of model settings.
+<example>
+Some examples are:
+\`\`\`
+ModelName = "choice('seresnext', 'resnest50')";
+LearningRate = "uniform(0.001, 0.01)";
+LayersToFreeze = "choice(0, 2)";
+\`\`\`</example>
+For more details on how to compose distribution expressions please check the documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Distribution expressions to sweep over values of model settings.
+<example>
+Some examples are:
+\`\`\`
+ModelName = "choice('seresnext', 'resnest50')";
+LearningRate = "uniform(0.001, 0.01)";
+LayersToFreeze = "choice(0, 2)";
+\`\`\`</example>
+For more details on how to compose distribution expressions please check the documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-tune-hyperparameters
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxDetectionsPerImage.description` | `Maximum number of detections per image, for all classes. Must be a positive integer.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Maximum number of detections per image, for all classes. Must be a positive integer.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.boxScoreThreshold.description` | `During inference, only return proposals with a classification score greater than
+BoxScoreThreshold. Must be a float in the range[0, 1].` | `During inference, only return proposals with a classification score greater than
+BoxScoreThreshold. Must be a float in the range[0, 1].` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.imageSize.description` | `Image size for train and validation. Must be a positive integer.
+Note: The training run may get into CUDA OOM if the size is too big.
+Note: This settings is only supported for the 'yolov5' algorithm.` | `Image size for train and validation. Must be a positive integer.
+Note: The training run may get into CUDA OOM if the size is too big.
+Note: This settings is only supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.maxSize.description` | `Maximum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Maximum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.minSize.description` | `Minimum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Minimum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.modelSize.description` | `Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
+Note: training run may get into CUDA OOM if the model size is too big.
+Note: This settings is only supported for the 'yolov5' algorithm.` | `Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
+Note: training run may get into CUDA OOM if the model size is too big.
+Note: This settings is only supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.multiScale.description` | `Enable multi-scale image by varying image size by +/- 50%.
+Note: training run may get into CUDA OOM if no sufficient GPU memory.
+Note: This settings is only supported for the 'yolov5' algorithm.` | `Enable multi-scale image by varying image size by +/- 50%.
+Note: training run may get into CUDA OOM if no sufficient GPU memory.
+Note: This settings is only supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileGridSize.description` | `The grid size to use for tiling each image. Note: TileGridSize must not be
+None to enable small object detection logic. A string containing two integers in mxn format.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `The grid size to use for tiling each image. Note: TileGridSize must not be
+None to enable small object detection logic. A string containing two integers in mxn format.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tileOverlapRatio.description` | `Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelDistributionSettingsObjectDetection.properties.tilePredictionsNmsThreshold.description` | `The IOU threshold to use to perform NMS while merging predictions from tiles and image.
+Used in validation/ inference. Must be float in the range [0, 1].
+Note: This settings is not supported for the 'yolov5' algorithm.
+NMS: Non-maximum suppression` | `The IOU threshold to use to perform NMS while merging predictions from tiles and image.
+Used in validation/ inference. Must be float in the range [0, 1].
+Note: This settings is not supported for the 'yolov5' algorithm.
+NMS: Non-maximum suppression` |
+| `definitions.ImageModelSettings.description` | `Settings used for training the model.
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Settings used for training the model.
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelSettings.properties.earlyStoppingDelay.description` | `Minimum number of epochs or validation evaluations to wait before primary metric improvement
+is tracked for early stopping. Must be a positive integer.` | `Minimum number of epochs or validation evaluations to wait before primary metric improvement
+is tracked for early stopping. Must be a positive integer.` |
+| `definitions.ImageModelSettings.properties.earlyStoppingPatience.description` | `Minimum number of epochs or validation evaluations with no primary metric improvement before
+the run is stopped. Must be a positive integer.` | `Minimum number of epochs or validation evaluations with no primary metric improvement before
+the run is stopped. Must be a positive integer.` |
+| `definitions.ImageModelSettings.properties.gradientAccumulationStep.description` | `Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
+updating the model weights while accumulating the gradients of those steps, and then using
+the accumulated gradients to compute the weight updates. Must be a positive integer.` | `Gradient accumulation means running a configured number of "GradAccumulationStep" steps without
+updating the model weights while accumulating the gradients of those steps, and then using
+the accumulated gradients to compute the weight updates. Must be a positive integer.` |
+| `definitions.ImageModelSettings.properties.layersToFreeze.description` | `Number of layers to freeze for the model. Must be a positive integer.
+For instance, passing 2 as value for 'seresnext' means
+freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
+see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Number of layers to freeze for the model. Must be a positive integer.
+For instance, passing 2 as value for 'seresnext' means
+freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
+see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelSettings.properties.learningRateScheduler.description` | `Learning rate scheduler enum.` | `Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.` |
+| `definitions.ImageModelSettings.properties.modelName.description` | `Name of the model to use for training.
+For more information on the available models please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Name of the model to use for training.
+For more information on the available models please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelSettings.properties.optimizer.description` | `Stochastic optimizer for image models.` | `Type of optimizer.` |
+| `definitions.ImageModelSettingsClassification.description` | `Settings used for training the model.
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Settings used for training the model.
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelSettingsClassification.properties.weightedLoss.description` | `Weighted loss. The accepted values are 0 for no weighted loss.
+1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.` | `Weighted loss. The accepted values are 0 for no weighted loss.
+1 for weighted loss with sqrt.(class_weights). 2 for weighted loss with class_weights. Must be 0 or 1 or 2.` |
+| `definitions.ImageModelSettingsObjectDetection.description` | `Settings used for training the model.
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Settings used for training the model.
+For more information on the available settings please visit the official documentation:
+https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.boxDetectionsPerImage.description` | `Maximum number of detections per image, for all classes. Must be a positive integer.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Maximum number of detections per image, for all classes. Must be a positive integer.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.boxScoreThreshold.description` | `During inference, only return proposals with a classification score greater than
+BoxScoreThreshold. Must be a float in the range[0, 1].` | `During inference, only return proposals with a classification score greater than
+BoxScoreThreshold. Must be a float in the range[0, 1].` |
+| `definitions.ImageModelSettingsObjectDetection.properties.imageSize.description` | `Image size for train and validation. Must be a positive integer.
+Note: The training run may get into CUDA OOM if the size is too big.
+Note: This settings is only supported for the 'yolov5' algorithm.` | `Image size for train and validation. Must be a positive integer.
+Note: The training run may get into CUDA OOM if the size is too big.
+Note: This settings is only supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.maxSize.description` | `Maximum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Maximum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.minSize.description` | `Minimum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Minimum size of the image to be rescaled before feeding it to the backbone.
+Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.modelSize.description` | `Image model size.` | `Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
+Note: training run may get into CUDA OOM if the model size is too big.
+Note: This settings is only supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.multiScale.description` | `Enable multi-scale image by varying image size by +/- 50%.
+Note: training run may get into CUDA OOM if no sufficient GPU memory.
+Note: This settings is only supported for the 'yolov5' algorithm.` | `Enable multi-scale image by varying image size by +/- 50%.
+Note: training run may get into CUDA OOM if no sufficient GPU memory.
+Note: This settings is only supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.tileGridSize.description` | `The grid size to use for tiling each image. Note: TileGridSize must not be
+None to enable small object detection logic. A string containing two integers in mxn format.
+Note: This settings is not supported for the 'yolov5' algorithm.` | `The grid size to use for tiling each image. Note: TileGridSize must not be
+None to enable small object detection logic. A string containing two integers in mxn format.
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.tileOverlapRatio.description` | `Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
+Note: This settings is not supported for the 'yolov5' algorithm.` | `Overlap ratio between adjacent tiles in each dimension. Must be float in the range [0, 1).
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.tilePredictionsNmsThreshold.description` | `The IOU threshold to use to perform NMS while merging predictions from tiles and image.
+Used in validation/ inference. Must be float in the range [0, 1].
+Note: This settings is not supported for the 'yolov5' algorithm.` | `The IOU threshold to use to perform NMS while merging predictions from tiles and image.
+Used in validation/ inference. Must be float in the range [0, 1].
+Note: This settings is not supported for the 'yolov5' algorithm.` |
+| `definitions.ImageModelSettingsObjectDetection.properties.validationMetricType.description` | `Metric computation method to use for validation metrics in image tasks.` | `Metric computation method to use for validation metrics.` |
+| `definitions.ImageObjectDetection.description` | `Image Object Detection. Object detection is used to identify objects in an image and locate each object with a
+bounding box e.g. locate all dogs and cats in an image and draw a bounding box around each.` | `Image Object Detection. Object detection is used to identify objects in an image and locate each object with a
+bounding box e.g. locate all dogs and cats in an image and draw a bounding box around each.` |
+| `definitions.ImageObjectDetection.properties.primaryMetric.description` | `Primary metrics for Image ObjectDetection task.` | `Primary metric to optimize for this task.` |
 | `definitions.InferenceEndpoint.allOf[0].$ref` | `#/definitions/PropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.InferenceEndpoint.description` | `InferenceEndpoint configuration` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.InferenceEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/InferenceEndpointTrackedResource` | `#/definitions/InferenceEndpoint` |
 | `definitions.InferenceGroup.allOf[0].$ref` | `#/definitions/PropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.InferenceGroup.description` | `Inference group configuration` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.InferenceGroupTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/InferenceGroupTrackedResource` | `#/definitions/InferenceGroup` |
 | `definitions.InferencePool.allOf[0].$ref` | `#/definitions/PropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.InferencePool.description` | `Inference pool configuration` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.InferencePoolTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/InferencePoolTrackedResource` | `#/definitions/InferencePool` |
 | `definitions.JobBase.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.JobBase.description` | `Base definition for a job.` | `Azure Resource Manager resource envelope.` |
 | `definitions.JobBaseResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/JobBaseResource` | `#/definitions/JobBase` |
 | `definitions.JobScheduleAction.properties.jobDefinition.$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
+| `definitions.JobService.properties.nodes.description` | `Nodes that user would like to start the service on.
+If Nodes is not set or set to null, the service will only be started on leader node.` | `Nodes that user would like to start the service on.
+If Nodes is not set or set to null, the service will only be started on leader node.` |
+| `definitions.KeyVaultProperties.properties.identityClientId.description` | `Currently, we support only SystemAssigned MSI.
+We need this when we support UserAssignedIdentities` | `Currently, we support only SystemAssigned MSI.
+We need this when we support UserAssignedIdentities` |
 | `definitions.KubernetesOnlineDeployment.allOf[0].$ref` | `#/definitions/OnlineDeployment` | `#/definitions/OnlineDeploymentProperties` |
 | `definitions.ManagedOnlineDeployment.allOf[0].$ref` | `#/definitions/OnlineDeployment` | `#/definitions/OnlineDeploymentProperties` |
 | `definitions.MarketplaceSubscriptionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/MarketplaceSubscriptionResource` | `#/definitions/MarketplaceSubscription` |
@@ -2188,24 +3208,134 @@
 | `definitions.ModelContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.ModelContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ModelContainerResource` | `#/definitions/ModelContainer` |
 | `definitions.ModelVersion.allOf[0].$ref` | `#/definitions/AssetBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.ModelVersion.description` | `Model asset version details.` | `Azure Resource Manager resource envelope.` |
 | `definitions.ModelVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ModelVersionResource` | `#/definitions/ModelVersion` |
 | `definitions.OneLakeDatastore.allOf[0].$ref` | `#/definitions/Datastore` | `#/definitions/DatastoreProperties` |
 | `definitions.OnlineDeployment.allOf[0].$ref` | `#/definitions/EndpointDeploymentPropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
 | `definitions.OnlineDeploymentTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/OnlineDeploymentTrackedResource` | `#/definitions/OnlineDeployment` |
 | `definitions.OnlineEndpoint.allOf[0].$ref` | `#/definitions/EndpointPropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
+| `definitions.OnlineEndpoint.description` | `Online endpoint configuration` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.OnlineEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/OnlineEndpointTrackedResource` | `#/definitions/OnlineEndpoint` |
+| `definitions.OnlineRequestSettings.properties.maxQueueWait.description` | `(Deprecated for Managed Online Endpoints) The maximum amount of time a request will stay in the queue in ISO 8601 format.
+Defaults to 500ms.
+(Now increase \`request_timeout_ms\` to account for any networking/queue delays)` | `(Deprecated for Managed Online Endpoints) The maximum amount of time a request will stay in the queue in ISO 8601 format.
+Defaults to 500ms.
+(Now increase \`request_timeout_ms\` to account for any networking/queue delays)` |
+| `definitions.OnlineRequestSettings.properties.requestTimeout.description` | `The scoring timeout in ISO 8601 format.
+Defaults to 5000ms.` | `The scoring timeout in ISO 8601 format.
+Defaults to 5000ms.` |
+| `definitions.PendingUploadRequestDto.properties.pendingUploadType.description` | `Type of storage to use for the pending upload location` | `TemporaryBlobReference is the only supported type` |
+| `definitions.PendingUploadResponseDto.properties.pendingUploadType.description` | `Type of storage to use for the pending upload location` | `TemporaryBlobReference is the only supported type` |
 | `definitions.PipelineJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
+| `definitions.PrivateEndpointConnection.properties.location.description` | `Same as workspace location.` | `*Same as workspace location.` |
+| `definitions.PrivateEndpointConnection.properties.sku.description` | `Optional. This field is required to be implemented by the RP because AML is supporting more than one tier` | `The SKU (Stock Keeping Unit) assigned to this resource.` |
+| `definitions.PrivateEndpointConnectionListResult.description` | `List of private endpoint connection associated with the specified workspace` | `[Placeholder] Discription for page model` |
+| `definitions.PrivateEndpointConnectionListResult.properties.value.description` | `Array of private endpoint connections` | `[Placeholder] Discription for value property` |
+| `definitions.PrivateLinkResourceListResult.description` | `A list of private link resources` | `[Placeholder] Discription for page model` |
+| `definitions.PrivateLinkServiceConnectionState.properties.status.description` | `Connection status of the service consumer with the service provider
+Possible state transitions
+Pending -> Approved (Service provider approves the connection request)
+Pending -> Rejected (Service provider rejects the connection request)
+Pending -> Disconnected (Service provider deletes the connection)
+Approved -> Rejected (Service provider rejects the approved connection)
+Approved -> Disconnected (Service provider deletes the connection)
+Rejected -> Pending (Service consumer re-initiates the connection request that was rejected)
+Rejected -> Disconnected (Service provider deletes the connection)` | `Connection status of the service consumer with the service provider` |
+| `definitions.QueueSettings.properties.jobTier.description` | `Enum to determine the job tier.` | `Controls the compute job tier` |
+| `definitions.Recurrence.properties.timeZone.description` | `Specifies time zone in which the schedule runs.
+TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` | `Specifies time zone in which the schedule runs.
+TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` |
+| `definitions.Registry.description` | `Details of the Registry` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
+| `definitions.RegistryPrivateEndpointConnection.properties.id.description` | `This is the private endpoint connection name created on SRP
+Full resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}` | `This is the private endpoint connection name created on SRP
+Full resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}` |
 | `definitions.RegistryTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |
+| `definitions.Regression.properties.primaryMetric.description` | `Primary metrics for Regression task.` | `Primary metric for regression task.` |
+| `definitions.RequestConfiguration.properties.requestTimeout.description` | `The scoring timeout in ISO 8601 format.
+Defaults to 5000ms.` | `The scoring timeout in ISO 8601 format.
+Defaults to 5000ms.` |
+| `definitions.SamplingAlgorithm.description` | `The Sampling Algorithm used to generate hyperparameter values, along with properties to
+configure the algorithm` | `The Sampling Algorithm used to generate hyperparameter values, along with properties to
+configure the algorithm` |
 | `definitions.SASCredentialDto.properties.sasUri.format` | `uri` | `password` |
 | `definitions.Schedule.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
+| `definitions.Schedule.description` | `Base definition of a schedule` | `Azure Resource Manager resource envelope.` |
 | `definitions.ScheduleResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ScheduleResource` | `#/definitions/Schedule` |
 | `definitions.ServerlessEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ServerlessEndpointTrackedResource` | `#/definitions/ServerlessEndpoint` |
+| `definitions.SharedPrivateLinkResourceProperty.properties.status.description` | `Connection status of the service consumer with the service provider
+Possible state transitions
+Pending -> Approved (Service provider approves the connection request)
+Pending -> Rejected (Service provider rejects the connection request)
+Pending -> Disconnected (Service provider deletes the connection)
+Approved -> Rejected (Service provider rejects the approved connection)
+Approved -> Disconnected (Service provider deletes the connection)
+Rejected -> Pending (Service consumer re-initiates the connection request that was rejected)
+Rejected -> Disconnected (Service provider deletes the connection)` | `Connection status of the service consumer with the service provider` |
+| `definitions.SkuCapacity.properties.scaleType.description` | `Node scaling setting for the compute sku.` | `Gets or sets the type of the scale.` |
 | `definitions.SparkJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
+| `definitions.StackEnsembleSettings.properties.stackMetaLearnerType.description` | `The meta-learner is a model trained on the output of the individual heterogeneous models.
+Default meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).
+This parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression` | `The meta-learner is a model trained on the output of the individual heterogeneous models.` |
 | `definitions.SweepJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
+| `definitions.SystemCreatedStorageAccount.properties.storageAccountType.description` | `Allowed values:
+"Standard_LRS",
+"Standard_GRS",
+"Standard_RAGRS",
+"Standard_ZRS",
+"Standard_GZRS",
+"Standard_RAGZRS",
+"Premium_LRS",
+"Premium_ZRS"` | `Allowed values:
+"Standard_LRS",
+"Standard_GRS",
+"Standard_RAGRS",
+"Standard_ZRS",
+"Standard_GZRS",
+"Standard_RAGZRS",
+"Premium_LRS",
+"Premium_ZRS"` |
+| `definitions.TableVerticalFeaturizationSettings.properties.mode.description` | `Featurization mode - determines data featurization mode.` | `Featurization mode - User can keep the default 'Auto' mode and AutoML will take care of necessary transformation of the data in featurization phase.
+If 'Off' is selected then no featurization is done.
+If 'Custom' is selected then user can specify additional inputs to customize how featurization is done.` |
+| `definitions.TextClassification.description` | `Text Classification task in AutoML NLP vertical.
+NLP - Natural Language Processing.` | `Text Classification task in AutoML NLP vertical.
+NLP - Natural Language Processing.` |
+| `definitions.TextClassification.properties.primaryMetric.description` | `Primary metrics for classification tasks.` | `Primary metric for Text-Classification task.` |
+| `definitions.TextClassificationMultilabel.description` | `Text Classification Multilabel task in AutoML NLP vertical.
+NLP - Natural Language Processing.` | `Text Classification Multilabel task in AutoML NLP vertical.
+NLP - Natural Language Processing.` |
+| `definitions.TextNer.description` | `Text-NER task in AutoML NLP vertical.
+NER - Named Entity Recognition.
+NLP - Natural Language Processing.` | `Text-NER task in AutoML NLP vertical.
+NER - Named Entity Recognition.
+NLP - Natural Language Processing.` |
+| `definitions.TrainingSettings.properties.ensembleModelDownloadTimeout.description` | `During VotingEnsemble and StackEnsemble model generation, multiple fitted models from the previous child runs are downloaded.
+Configure this parameter with a higher value than 300 secs, if more time is needed.` | `During VotingEnsemble and StackEnsemble model generation, multiple fitted models from the previous child runs are downloaded.
+Configure this parameter with a higher value than 300 secs, if more time is needed.` |
+| `definitions.TriggerBase.properties.endTime.description` | `Specifies end time of schedule in ISO 8601, but without a UTC offset. Refer https://en.wikipedia.org/wiki/ISO_8601.
+Recommented format would be "2022-06-01T00:00:01"
+If not present, the schedule will run indefinitely` | `Specifies end time of schedule in ISO 8601, but without a UTC offset. Refer https://en.wikipedia.org/wiki/ISO_8601.
+Recommented format would be "2022-06-01T00:00:01"
+If not present, the schedule will run indefinitely` |
+| `definitions.TriggerBase.properties.timeZone.description` | `Specifies time zone in which the schedule runs.
+TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` | `Specifies time zone in which the schedule runs.
+TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` |
+| `definitions.TriggerBase.properties.triggerType.description` | `[Required] ` | `[Required]` |
 | `definitions.UriFileDataVersion.allOf[0].$ref` | `#/definitions/DataVersionBase` | `#/definitions/DataVersionBaseProperties` |
 | `definitions.UriFolderDataVersion.allOf[0].$ref` | `#/definitions/DataVersionBase` | `#/definitions/DataVersionBaseProperties` |
+| `definitions.Workspace.properties.sku.description` | `Optional. This field is required to be implemented by the RP because AML is supporting more than one tier` | `The SKU (Stock Keeping Unit) assigned to this resource.` |
+| `definitions.WorkspaceConnectionOAuth2.description` | `ClientId and ClientSecret are required. Other properties are optional
+depending on each OAuth2 provider's implementation.` | `ClientId and ClientSecret are required. Other properties are optional
+depending on each OAuth2 provider's implementation.` |
 | `definitions.WorkspaceConnectionOAuth2.properties.authUrl.format` | `url` | `uri` |
+| `definitions.WorkspaceConnectionOAuth2.properties.refreshToken.description` | `Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho
+where user needs to get RefreshToken offline` | `Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho
+where user needs to get RefreshToken offline` |
+| `definitions.WorkspaceConnectionOAuth2.properties.username.description` | `Concur, ServiceNow auth server AccessToken grant type is 'Password'
+which requires UsernamePassword` | `Concur, ServiceNow auth server AccessToken grant type is 'Password'
+which requires UsernamePassword` |
 | `definitions.WorkspaceProperties.properties.agentsEndpointUri.format` | `url` | `uri` |
+| `definitions.WorkspaceProperties.properties.provisioningState.description` | `The current deployment state of workspace resource. The provisioningState is to indicate states for resource provisioning.` | `The provision state of the cluster. Valid values are Unknown, Updating, Provisioning, Succeeded, and Failed.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].delete.responses.202.headers.Location.description` | `URI to poll for asynchronous operation result.` | `The Location header contains the URL where the status of the long running operation can be checked.` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].get.responses.200.schema.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}'].patch.responses.200.schema.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |

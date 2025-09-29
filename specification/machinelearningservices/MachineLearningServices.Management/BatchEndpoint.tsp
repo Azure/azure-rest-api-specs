@@ -37,11 +37,13 @@ interface BatchEndpoints {
   /**
    * Gets a batch inference endpoint by name.
    */
+  @summary("Get batch inference endpoint by name.")
   get is ArmResourceRead<BatchEndpoint>;
 
   /**
    * Creates a batch inference endpoint (asynchronous).
    */
+  @summary("Create a batch inference endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BatchEndpoint,
     Response = ArmResourceUpdatedResponse<BatchEndpoint> | (ArmResourceCreatedResponse<BatchEndpoint> & {
@@ -56,6 +58,7 @@ interface BatchEndpoints {
   /**
    * Update a batch inference endpoint (asynchronous).
    */
+  @summary("Update a batch inference endpoint (asynchronous).")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     BatchEndpoint,
@@ -73,6 +76,7 @@ interface BatchEndpoints {
    * Delete Batch Inference Endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete Batch Inference Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchEndpoint,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -87,6 +91,7 @@ interface BatchEndpoints {
   /**
    * Lists Batch inference endpoint in the workspace.
    */
+  @summary("Lists Batch inference endpoint in the workspace.")
   list is ArmResourceListByParent<
     BatchEndpoint,
     Parameters = {
@@ -109,6 +114,7 @@ interface BatchEndpoints {
    * Lists batch Inference Endpoint keys.
    */
   @action("listkeys")
+  @summary("Lists batch Inference Endpoint keys.")
   listKeys is ArmResourceActionSync<
     BatchEndpoint,
     void,

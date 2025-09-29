@@ -137,6 +137,7 @@ interface ComputeResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Compute_UpdateDataMounts")
+  @summary("Update Data Mounts of a Machine Learning compute.")
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
     ComputeInstanceDataMount[],

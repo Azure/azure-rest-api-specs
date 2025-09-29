@@ -30,11 +30,13 @@ interface Datastores {
   /**
    * Get datastore.
    */
+  @summary("Get datastore.")
   get is ArmResourceRead<Datastore>;
 
   /**
    * Create or update datastore.
    */
+  @summary("Create or update datastore.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     Datastore,
     Parameters = {
@@ -49,11 +51,13 @@ interface Datastores {
   /**
    * Delete datastore.
    */
+  @summary("Delete datastore.")
   delete is ArmResourceDeleteSync<Datastore>;
 
   /**
    * List datastores.
    */
+  @summary("List datastores.")
   list is ArmResourceListByParent<
     Datastore,
     Parameters = {
@@ -105,6 +109,7 @@ interface Datastores {
   /**
    * Get datastore secrets.
    */
+  @summary("Get datastore secrets.")
   listSecrets is ArmResourceActionSync<
     Datastore,
     SecretExpiry,
