@@ -311,7 +311,7 @@ model Resource {
  */
 model GrafanaIntegrations {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureMonitorWorkspaceIntegrations?: AzureMonitorWorkspaceIntegration[];
 }
 
@@ -707,7 +707,7 @@ model MarketplaceTrialQuota {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GrafanaAvailablePluginListResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["pluginId"])
+  @identifiers(#["pluginId"])
   value?: GrafanaAvailablePlugin[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

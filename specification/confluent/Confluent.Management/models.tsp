@@ -6,6 +6,7 @@ import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Confluent;
@@ -336,7 +337,7 @@ model ErrorResponseBody {
    * Error detail
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: ErrorResponseBody[];
 }
 
@@ -1539,7 +1540,7 @@ model ListRegionsSuccessResponse {
   /**
    * List of regions supported by confluent
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   data?: RegionRecord[];
 }
 

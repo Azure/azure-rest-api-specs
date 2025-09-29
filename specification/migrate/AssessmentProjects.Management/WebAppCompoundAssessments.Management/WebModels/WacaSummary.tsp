@@ -38,11 +38,11 @@ model DiscoveredLightSummary {
   numberOfWebApps: int32;
 
   @doc("Number of web apps per type.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   numberOfWebAppsPerType?: WebAppsPerType[];
 
   @doc("Number of web servers per type.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   numberOfWebServersPerType?: WebServersPerType[];
 
   @doc("Number of web servers.")
