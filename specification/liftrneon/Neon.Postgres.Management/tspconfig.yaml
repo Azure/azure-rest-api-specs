@@ -22,7 +22,7 @@ options:
     model-namespace: false
     generate-sample-project: false
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-neonpostgres"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-neonpostgres"
     namespace: "azure.mgmt.neonpostgres"
     flavor: "azure"
     generate-test: true
@@ -44,7 +44,7 @@ options:
     inject-spans: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-neonpostgres"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-neonpostgres"
     flavor: azure
     package-details:
       name: "@azure/arm-neonpostgres"

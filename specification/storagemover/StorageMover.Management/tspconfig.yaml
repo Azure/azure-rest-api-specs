@@ -17,7 +17,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.StorageMover"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-storagemover"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storagemover"
     namespace: "azure.mgmt.storagemover"
     generate-test: true
     generate-sample: true
@@ -30,7 +30,7 @@ options:
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
     service-dir: sdk/storagemover
-    package-dir: "arm-storagemover"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storagemover"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
