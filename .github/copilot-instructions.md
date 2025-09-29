@@ -204,7 +204,7 @@ Always read the template before editing so you follow the canonical configuratio
 
 ## 3. Copy and customize the emitter block
 
-- Select the entire block for the language (`@azure-tools/typespec-python`, `-csharp`, `-ts`, `-java`, or `-go`).
+- Select the entire block for the language.
 - Only replace service-specific tokens (`Widget`, `widget`, namespaces, package names) with your service name.
 - Leave the rest of the properties (`flavor`, boolean flags, `{service-dir}` placeholders, etc.) unchanged.
 
