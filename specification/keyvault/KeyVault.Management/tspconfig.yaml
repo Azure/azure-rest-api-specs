@@ -14,10 +14,10 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.KeyVault"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.KeyVault"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.KeyVault"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-keyvault"
     namespace: "azure.mgmt.keyvault"
@@ -25,14 +25,14 @@ options:
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-keyvault-generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault-generated"
     namespace: "com.azure.resourcemanager.keyvault.generated"
     service-name: "KeyVault" # human-readable service name, whitespace allowed
     flavor: azure
     premium: false
     enable-sync-stack: false
   "@azure-tools/typespec-ts":
-    package-dir: "arm-keyvault"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-keyvault"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
