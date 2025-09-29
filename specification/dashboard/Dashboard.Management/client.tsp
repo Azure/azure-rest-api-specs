@@ -75,3 +75,8 @@ using Microsoft.Dashboard;
 @@clientName(Smtp.startTLSPolicy, "startTlsPolicy", "java");
 @@clientName(Microsoft.Dashboard, "DashboardManagementClient", "javascript");
 @@clientName(Microsoft.Dashboard, "DashboardManagementClient", "python");
+
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
