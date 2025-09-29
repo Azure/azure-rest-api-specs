@@ -17,8 +17,8 @@ options:
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/Microsoft.Insights/{version-status}/{version}/metricBatch.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-monitor-querymetrics"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-monitor-querymetrics"
+    package-name: "azure-monitor-querymetrics"
     package-mode: dataplane
     package-version: 1.0.0
     flavor: azure
@@ -30,7 +30,7 @@ options:
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "monitor-query-metrics"
+    emitter-output-dir: "{output-dir}/{service-dir}/monitor-query-metrics"
     is-modular-library: true
     package-details:
       name: "@azure/monitor-query-metrics"
