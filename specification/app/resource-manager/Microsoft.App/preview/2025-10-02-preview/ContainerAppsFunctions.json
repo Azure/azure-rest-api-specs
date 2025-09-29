@@ -21,8 +21,8 @@
         "tags": [
           "AzureFunctionsOnContainerApps"
         ],
-        "summary": "Get the functions for a given Container App Revision.",
-        "operationId": "ContainerAppRevisionFunctions_ListFunctions",
+        "summary": "List the functions for a given Container App Revision.",
+        "operationId": "ContainerAppsRevisionFunctions_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -52,7 +52,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ContainerAppFunctionCollection"
+              "$ref": "#/definitions/ContainerAppsFunctionCollection"
             }
           },
           "default": {
@@ -64,7 +64,7 @@
         },
         "x-ms-examples": {
           "List Container App Revision's functions": {
-            "$ref": "./examples/ContainerAppRevisionFunctions_List.json"
+            "$ref": "./examples/ContainerAppsRevisionFunctions_List.json"
           }
         },
         "x-ms-pageable": {
@@ -78,7 +78,7 @@
           "AzureFunctionsOnContainerApps"
         ],
         "summary": "Get a specific function of a Container App Revision.",
-        "operationId": "ContainerAppRevisionFunctions_GetFunction",
+        "operationId": "ContainerAppsRevisionFunctions_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -115,7 +115,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ContainerAppFunction"
+              "$ref": "#/definitions/ContainerAppsFunction"
             }
           },
           "default": {
@@ -127,7 +127,7 @@
         },
         "x-ms-examples": {
           "Get Container App Revision's function": {
-            "$ref": "./examples/ContainerAppRevisionFunctions_Get.json"
+            "$ref": "./examples/ContainerAppsRevisionFunctions_Get.json"
           }
         }
       }
@@ -137,8 +137,8 @@
         "tags": [
           "AzureFunctionsOnContainerApps"
         ],
-        "summary": "Get the functions for a given Container App from the latest Revision.",
-        "operationId": "ContainerAppFunctions_ListFunctions",
+        "summary": "List the functions for a given Container App from the latest Revision.",
+        "operationId": "ContainerAppsFunctions_List",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -161,7 +161,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ContainerAppFunctionCollection"
+              "$ref": "#/definitions/ContainerAppsFunctionCollection"
             }
           },
           "default": {
@@ -173,7 +173,7 @@
         },
         "x-ms-examples": {
           "List Container App's functions": {
-            "$ref": "./examples/ContainerAppFunctions_List.json"
+            "$ref": "./examples/ContainerAppsFunctions_List.json"
           }
         },
         "x-ms-pageable": {
@@ -187,7 +187,7 @@
           "AzureFunctionsOnContainerApps"
         ],
         "summary": "Get a specific function of a Container App from the latest Revision.",
-        "operationId": "ContainerAppFunctions_GetFunction",
+        "operationId": "ContainerAppsFunctions_Get",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
@@ -217,7 +217,7 @@
           "200": {
             "description": "OK",
             "schema": {
-              "$ref": "#/definitions/ContainerAppFunction"
+              "$ref": "#/definitions/ContainerAppsFunction"
             }
           },
           "default": {
@@ -229,27 +229,22 @@
         },
         "x-ms-examples": {
           "Get Container App's function": {
-            "$ref": "./examples/ContainerAppFunctions_Get.json"
+            "$ref": "./examples/ContainerAppsFunctions_Get.json"
           }
         }
       }
     }
   },
   "definitions": {
-    "ContainerAppFunction": {
+    "ContainerAppsFunction": {
       "description": "Container App Function.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ],
       "properties": {
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "readOnly": true
-        },
         "properties": {
           "description": "Function resource specific properties",
           "type": "object",
@@ -284,7 +279,7 @@
         }
       }
     },
-    "ContainerAppFunctionCollection": {
+    "ContainerAppsFunctionCollection": {
       "description": "Container App Functions collection ARM resource.",
       "required": [
         "value"
@@ -295,7 +290,7 @@
           "description": "Collection of resources.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/ContainerAppFunction"
+            "$ref": "#/definitions/ContainerAppsFunction"
           }
         },
         "nextLink": {

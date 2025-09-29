@@ -62,6 +62,7 @@ input-file:
   - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironmentsStorages.json
   - Microsoft.App/preview/2025-10-02-preview/ContainerApps.json
   - Microsoft.App/preview/2025-10-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsFunctions.json
   - Microsoft.App/preview/2025-10-02-preview/ContainerAppsLabelHistory.json
   - Microsoft.App/preview/2025-10-02-preview/ContainerAppsPatches.json
   - Microsoft.App/preview/2025-10-02-preview/ContainerAppsRevisions.json
