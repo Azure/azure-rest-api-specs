@@ -1,13 +1,10 @@
 version: 2
 updates:
-  # For monorepos, only the root folder should be listed (not the sub-folders).
-  # We may also need to set "versioning-strategy" to "increase" rather than "increase-if-necessary",
-  # to update both package.json and package-lock.json files.  In our case, we don't really care
-  # if the package.json files are updated or not, just that package-lock.json is update.
-  # https://github.com/dependabot/dependabot-core/issues/4993#issuecomment-1289133027
   - package-ecosystem: "npm"
     directories:
       - "/"
+      - "/eng/tools"
+      - "/eng/tools/**"
     schedule:
       interval: "daily"
     ignore:
@@ -20,9 +17,6 @@ updates:
       - dependency-name: "typescript"
       # Updated manually by the Liftr team
       - dependency-name: "@azure-tools/typespec-liftr-base"
-      - dependency-name: "@types/js-yaml"
-      - dependency-name: "autorest"
-      - dependency-name: "js-yaml"
       # Only allow patch updates for spec-gen-sdk
       - dependency-name: "@azure-tools/spec-gen-sdk"
         update-types: ["version-update:semver-minor", "version-update:semver-major"]
@@ -41,7 +35,6 @@ updates:
       eslint:
         patterns:
           - "*eslint*"
-    # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
     versioning-strategy: increase-if-necessary
   - package-ecosystem: "npm"
     directories:
@@ -63,5 +56,4 @@ updates:
       eslint:
         patterns:
           - "*eslint*"
-    # Leave the constraint if the original constraint allows the new version, otherwise, bump the constraint.
     versioning-strategy: increase-if-necessary
