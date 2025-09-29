@@ -1019,10 +1019,7 @@ model VaultProperties {
   /**
    * An array of 0 to 1024 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID. When `createMode` is set to `recover`, access policies are not required. Otherwise, access policies are required.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["tenantId", "objectId", "permissions"]
-  )
+  @identifiers(#["tenantId", "objectId", "permissions"])
   accessPolicies?: AccessPolicyEntry[];
 
   /**
@@ -1352,10 +1349,7 @@ model VaultPatchProperties {
   /**
    * An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["tenantId", "objectId", "permissions"]
-  )
+  @identifiers(#["tenantId", "objectId", "permissions"])
   accessPolicies?: AccessPolicyEntry[];
 
   /**
@@ -1450,10 +1444,7 @@ model VaultAccessPolicyProperties {
   /**
    * An array of 0 to 16 identities that have access to the key vault. All identities in the array must use the same tenant ID as the key vault's tenant ID.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["tenantId", "objectId", "permissions"]
-  )
+  @identifiers(#["tenantId", "objectId", "permissions"])
   accessPolicies: AccessPolicyEntry[];
 }
 

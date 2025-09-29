@@ -43,7 +43,7 @@ model EnclaveEndpointDestinationRule {
 
 @doc("Enclave Endpoint Resource properties")
 model EnclaveEndpointProperties {
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Enclave Endpoint Rule Collection.")
   ruleCollection: EnclaveEndpointDestinationRule[];
 

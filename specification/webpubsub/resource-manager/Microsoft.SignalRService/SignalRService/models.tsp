@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.SignalRService;
 
 /**
@@ -685,7 +687,6 @@ model PrivateEndpointConnectionProperties {
    * Group IDs
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   groupIds?: string[];
 
   /**
@@ -752,7 +753,6 @@ model SharedPrivateLinkResourceProperties {
   /**
    * A list of FQDNs for third party private link service
    */
-  @identifiers(#[])
   fqdns?: string[];
 
   /**
@@ -1151,7 +1151,6 @@ model EventHandler {
   /**
    * Gets or sets the list of system events.
    */
-  @identifiers(#[])
   systemEvents?: string[];
 
   /**
@@ -1283,13 +1282,11 @@ model PrivateLinkResourceProperties {
   /**
    * Required members of the private link resource
    */
-  @identifiers(#[])
   requiredMembers?: string[];
 
   /**
    * Required private DNS zone names
    */
-  @identifiers(#[])
   requiredZoneNames?: string[];
 
   /**
@@ -1383,10 +1380,11 @@ model SkuList {
    * The list of skus available for the resource.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["resourceType", "/sku/name", "/sku/tier"]
-  )
+  @Azure.ResourceManager.identifiers(#[
+    "resourceType",
+    "/sku/name",
+    "/sku/tier"
+  ])
   value?: Sku[];
 
   /**
@@ -1447,7 +1445,6 @@ model SkuCapacity {
    * Allows capacity value list.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   allowedValues?: int32[];
 
   /**
@@ -1482,7 +1479,6 @@ model EventNameFilter extends EventListenerFilter {
   /**
    * Gets or sets a list of system events. Supported events: "connected" and "disconnected". Blocking event "connect" is not supported because it requires a response.
    */
-  @identifiers(#[])
   systemEvents?: string[];
 
   /**
@@ -1608,4 +1604,4 @@ model TrafficThrottleByUserIdRule extends ClientTrafficControlRule {
 
   type: "TrafficThrottleByUserIdRule";
 }
-@@OpenAPI.extension(OperationList.value, "x-ms-identifiers", #["name"]);
+@@identifiers(OperationList.value, #["name"]);

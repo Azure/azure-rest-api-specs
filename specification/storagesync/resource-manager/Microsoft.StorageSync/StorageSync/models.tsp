@@ -404,7 +404,6 @@ model OperationResourceMetricSpecification {
   /**
    * Supported aggregation types for the metric.
    */
-  @identifiers(#[])
   supportedAggregationTypes?: string[];
 
   /**
@@ -1231,7 +1230,6 @@ model TriggerChangeDetectionParameters {
   /**
    * Array of relative paths on the Azure File share to be included in the change detection. Can be files and directories.
    */
-  @identifiers(#[])
   paths?: string[];
 }
 
@@ -2645,7 +2643,6 @@ model ResourcesMoveInfo {
   /**
    * Collection of Resources.
    */
-  @identifiers(#[])
   resources?: string[];
 }
 
@@ -2675,10 +2672,7 @@ model OperationDisplayResource {
 }
 
 model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
-@@OpenAPI.extension(OperationEntityListResult.value,
-  "x-ms-identifiers",
-  #["name"]
-);
+@@identifiers(OperationEntityListResult.value, #["name"]);
 
 /**
  * Standard OK response with Azure request tracking headers.

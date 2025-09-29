@@ -76,6 +76,6 @@ model WebAppServicePlanV3Properties {
 
   @doc("Cost components of the web app service plan.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costComponents: CostComponent[];
 }

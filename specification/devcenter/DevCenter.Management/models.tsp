@@ -2126,10 +2126,7 @@ model CatalogListResult is Azure.Core.Page<Catalog>;
 @@visibility(DevBoxDefinitionListResult.value, Lifecycle.Read);
 @@visibility(DevCenterListResult.value, Lifecycle.Read);
 @@visibility(EncryptionSetListResult.value, Lifecycle.Read);
-@@OpenAPI.extension(OutboundEnvironmentEndpointCollection.value,
-  "x-ms-identifiers",
-  #["category"]
-);
+@@identifiers(OutboundEnvironmentEndpointCollection.value, #["category"]);
 @@visibility(EnvironmentDefinitionListResult.value, Lifecycle.Read);
 @@visibility(EnvironmentTypeListResult.value, Lifecycle.Read);
 @@visibility(GalleryListResult.value, Lifecycle.Read);

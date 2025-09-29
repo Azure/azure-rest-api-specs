@@ -1459,10 +1459,7 @@ model SkuList {
    * The list of skus available for the resource.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["resourceType", "/sku/name", "/sku/tier"]
-  )
+  @identifiers(#["resourceType", "/sku/name", "/sku/tier"])
   value?: Sku[];
 
   /**

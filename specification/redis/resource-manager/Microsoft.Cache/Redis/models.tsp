@@ -1113,7 +1113,4 @@ model OperationListResult {
   @nextLink
   nextLink?: string;
 }
-@@OpenAPI.extension(NotificationListResponse.value,
-  "x-ms-identifiers",
-  #["name", "timestamp"]
-);
+@@identifiers(NotificationListResponse.value, #["name", "timestamp"]);

@@ -72,7 +72,7 @@ model CommunityEndpointDestinationRule {
 
 @doc("Community Endpoint Resource properties")
 model CommunityEndpointProperties {
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Community Endpoint Rule Collection.")
   ruleCollection: CommunityEndpointDestinationRule[];
 

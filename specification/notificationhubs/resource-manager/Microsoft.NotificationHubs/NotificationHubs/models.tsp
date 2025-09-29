@@ -1369,7 +1369,6 @@ model MetricSpecification {
    * List of supported time grain types.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   supportedTimeGrainTypes?: string[];
 
   /**
@@ -1585,4 +1584,4 @@ model SharedAccessAuthorizationRuleListResult
 
 model NotificationHubListResult is Azure.Core.Page<NotificationHubResource>;
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
-@@OpenAPI.extension(OperationListResult.value, "x-ms-identifiers", #["name"]);
+@@identifiers(OperationListResult.value, #["name"]);
