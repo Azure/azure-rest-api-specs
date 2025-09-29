@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "workspaceName": "my-aml-workspace",
+    "name": "agent-app-1",
+    "api-version": "2025-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/my-aml-workspace/applications/agent-app-1/agents/agent-001",
+            "name": "agent-001",
+            "type": "Microsoft.MachineLearningServices/workspaces/applications/agents",
+            "properties": {
+              "description": "Primary customer support agent with multi-language capabilities",
+              "tags": {
+                "role": "primary",
+                "language": "multi"
+              },
+              "properties": {
+                "isArchived": false
+              },
+              "agentId": "agent-001",
+              "name": "CustomerSupportAgent",
+              "version": "1.2.0",
+              "capabilities": [
+                "natural-language-processing",
+                "sentiment-analysis",
+                "multi-language-support",
+                "knowledge-base-query"
+              ],
+              "modelReference": "gpt-4-turbo-preview"
+            },
+            "systemData": {
+              "createdAt": "2024-09-29T12:34:56.999Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-09-29T12:34:56.999Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.MachineLearningServices/workspaces/my-aml-workspace/applications/agent-app-1/agents/agent-002",
+            "name": "agent-002",
+            "type": "Microsoft.MachineLearningServices/workspaces/applications/agents",
+            "properties": {
+              "description": "Specialized technical support agent for complex queries",
+              "tags": {
+                "role": "technical",
+                "specialization": "complex-queries"
+              },
+              "properties": {
+                "isArchived": false
+              },
+              "agentId": "agent-002",
+              "name": "TechnicalSupportAgent",
+              "version": "1.1.0",
+              "capabilities": [
+                "technical-documentation",
+                "code-analysis",
+                "troubleshooting",
+                "escalation-handling"
+              ],
+              "modelReference": "gpt-4-turbo-preview"
+            },
+            "systemData": {
+              "createdAt": "2024-09-29T12:34:56.999Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-09-29T12:34:56.999Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
