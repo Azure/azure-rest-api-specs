@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-10-01-preview'
 input-file:
-  - Microsoft.CognitiveServices/stable/2025-10-01-preview/cognitiveservices.json
+  - Microsoft.CognitiveServices/preview/2025-10-01-preview/cognitiveservices.json
 suppressions:
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
