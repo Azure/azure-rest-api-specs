@@ -2,6 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.SecurityInsights;
+using Azure.ClientGenerator.Core.Legacy;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
 @@flattenProperty(ActionRequest.properties);
