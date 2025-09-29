@@ -24,3 +24,8 @@ using Microsoft.StorageDiscovery;
   "StorageDiscoveryProvisioningState",
   "csharp"
 );
+
+@@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
+  Azure.Core.armResourceIdentifier,
+  "csharp"
+);
