@@ -715,7 +715,7 @@ model RotationPolicy {
   /**
    * The lifetimeActions for key rotation action.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lifetimeActions?: LifetimeAction[];
 }
 
@@ -909,7 +909,7 @@ model ManagedHsmRotationPolicy {
   /**
    * The lifetimeActions for key rotation action.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lifetimeActions?: ManagedHsmLifetimeAction[];
 }
 
@@ -1182,13 +1182,13 @@ model NetworkRuleSet {
   /**
    * The list of IP address rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: IPRule[];
 
   /**
    * The list of virtual network rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   virtualNetworkRules?: VirtualNetworkRule[];
 }
 
@@ -1658,7 +1658,7 @@ model ManagedHsmProperties {
   /**
    * List of all regions associated with the managed hsm pool.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   regions?: MhsmGeoReplicatedRegion[];
 
   /**
@@ -1703,13 +1703,13 @@ model MhsmNetworkRuleSet {
   /**
    * The list of IP address rules.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  @identifiers(#["value"])
   ipRules?: MhsmipRule[];
 
   /**
    * The list of service tags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["tag"])
+  @identifiers(#["tag"])
   serviceTags?: MhsmServiceTagRule[];
 
   /**
@@ -2104,13 +2104,13 @@ model ServiceSpecification {
   /**
    * Log specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 
   /**
    * Metric specifications of operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   metricSpecifications?: MetricSpecification[];
 }
 
@@ -2181,7 +2181,7 @@ model MetricSpecification {
   /**
    * The dimensions of metric
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: DimensionProperties[];
 
   /**
@@ -2439,7 +2439,7 @@ model OperationListResult {
    * List of Storage operations supported by the Storage resource provider.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value: Operation[];
 
   /**

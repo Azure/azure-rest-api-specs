@@ -385,7 +385,7 @@ model DiagnosticResourceProperties {
   /**
    * SolutionIds that are needed to be invoked.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["solutionId"])
+  @identifiers(#["solutionId"])
   insights?: DiagnosticInvocation[];
 
   /**
@@ -404,7 +404,7 @@ model DiagnosticResourceProperties {
    * Array of Diagnostics.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["solutionId"])
+  @identifiers(#["solutionId"])
   diagnostics?: Diagnostic[];
 }
 
@@ -441,7 +441,7 @@ model Diagnostic {
   /**
    * The problems (if any) detected by this insight.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   insights?: Insight[];
 
   /**
@@ -500,7 +500,7 @@ model Error {
   /**
    * An array of additional nested error response info objects, as described by this contract.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["type", "message"])
+  @identifiers(#["type", "message"])
   details?: Error[];
 }
 
@@ -559,7 +559,7 @@ model Solutions {
    * List of metadata.
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   solutions?: SolutionMetadataProperties[];
 }
 
@@ -588,7 +588,7 @@ model SolutionMetadataProperties {
    * Required parameters for invoking this particular solution.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   requiredInputs?: string[];
 }
 
@@ -599,7 +599,7 @@ model SolutionResourceProperties {
   /**
    * Solution request trigger criteria
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   triggerCriteria?: TriggerCriterion[];
 
   /**
@@ -642,7 +642,7 @@ model SolutionResourceProperties {
    * List of section object.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["title"])
+  @identifiers(#["title"])
   sections?: Section[];
 }
 
@@ -668,37 +668,37 @@ model ReplacementMaps {
   /**
    * Solution AzureKB results
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   webResults?: WebResult[];
 
   /**
    * Solution diagnostics results.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["solutionId"])
+  @identifiers(#["solutionId"])
   diagnostics?: SolutionsDiagnostic[];
 
   /**
    * Solutions Troubleshooters
    */
-  @OpenAPI.extension("x-ms-identifiers", #["solutionId"])
+  @identifiers(#["solutionId"])
   troubleshooters?: SolutionsTroubleshooters[];
 
   /**
    * Solution metrics based charts
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricsBasedCharts?: MetricsBasedChart[];
 
   /**
    * Video solutions, which have the power to engage the customer by stimulating their senses
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   videos?: Video[];
 
   /**
    * Group of Videos
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   videoGroups?: VideoGroup[];
 }
 
@@ -714,7 +714,7 @@ model WebResult {
   /**
    * AzureKB search results
    */
-  @OpenAPI.extension("x-ms-identifiers", #["solutionId"])
+  @identifiers(#["solutionId"])
   searchResults?: SearchResult[];
 }
 
@@ -795,13 +795,13 @@ model SolutionsDiagnostic {
   /**
    * Required parameters of this item
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   requiredParameters?: string[];
 
   /**
    * Diagnostic insights
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   insights?: Insight[];
 }
 
@@ -867,7 +867,7 @@ model FilterGroup {
   /**
    * List of filters
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   filter?: Filter[];
 }
 
@@ -924,7 +924,7 @@ model VideoGroup {
   /**
    * List of videos will be shown to customers
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   videos?: VideoGroupVideo[];
 
   /**
@@ -1041,7 +1041,7 @@ model TroubleshooterInstanceProperties {
    * List of step object.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   steps?: Step[];
 }
 
@@ -1090,7 +1090,7 @@ model Step {
   isLastStep?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["questionId"])
+  @identifiers(#["questionId"])
   inputs?: StepInput[];
 
   /**
@@ -1099,7 +1099,7 @@ model Step {
   automatedCheckResults?: AutomatedCheckResult;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   insights?: Insight[];
 
   /**
@@ -1158,7 +1158,7 @@ model StepInput {
   responseValidationProperties?: ResponseValidationProperties;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   responseOptions?: ResponseOption[];
 }
 
@@ -1242,7 +1242,7 @@ model ContinueRequestBody {
   stepId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   responses?: TroubleshooterResponse[];
 }
 
@@ -1310,7 +1310,7 @@ model SolutionsResourcePropertiesSelfHelp {
    * List of section object.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["title"])
+  @identifiers(#["title"])
   sections?: SectionSelfHelp[];
 }
 
@@ -1321,19 +1321,19 @@ model ReplacementMapsSelfHelp {
   /**
    * Solution AzureKB results
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   webResults?: WebResult[];
 
   /**
    * Video solutions, which have the power to engage the customer by stimulating their senses
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   videos?: Video[];
 
   /**
    * Group of Videos
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   videoGroups?: VideoGroup[];
 }
 
@@ -1433,13 +1433,13 @@ model NlpSolutions {
   /**
    * The list of solution metadata.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   solutions?: SolutionMetadataProperties[];
 
   /**
    * The set of services that are most likely related to the request. If relatedServices is included in the response then solutions may not be discovered until the client calls a second time specifying one of the service Ids in the relatedServices object.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   relatedServices?: ClassificationService[];
 }
 

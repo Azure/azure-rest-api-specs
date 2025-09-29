@@ -88,7 +88,7 @@ model ApprovalBaseModel {
   grandparentResourceId?: armResourceIdentifier;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
+  @identifiers(#["approverEntraId"])
   @doc("List of approvers for the approval request")
   approvers?: Approver[];
 

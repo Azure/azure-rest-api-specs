@@ -1541,7 +1541,7 @@ model BackupManagementUsageList extends ResourceList {
    * The list of backup management usages for the given vault.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: BackupManagementUsage[];
 }
 
@@ -1662,7 +1662,7 @@ model ClientDiscoveryForServiceSpecification {
   /**
    * List of log specifications of this operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   logSpecifications?: ClientDiscoveryForLogSpecification[];
 }
 
@@ -1865,14 +1865,14 @@ model CloudErrorBody {
    * A list of additional details about the error.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: CloudErrorBody[];
 
   /**
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalInfo?: ErrorAdditionalInfo[];
 }
 
@@ -2393,7 +2393,7 @@ model ValidateOperationResponse {
   /**
    * Gets the validation result
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   validationResults?: ErrorDetail[];
 }
 
@@ -2912,7 +2912,7 @@ model ResourceGuardProxyBase {
   resourceGuardResourceId: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceGuardOperationDetails?: ResourceGuardOperationDetail[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3043,7 +3043,7 @@ model KPIResourceHealthDetails {
   /**
    * Resource Health Status
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   resourceHealthDetails?: ResourceHealthDetails[];
 }
 
@@ -3141,7 +3141,7 @@ model AzureFileShareRecoveryPoint extends RecoveryPoint {
   /**
    * Recovery point tier information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   recoveryPointTierDetails?: RecoveryPointTierInformation[];
 
   /**
@@ -3218,7 +3218,7 @@ model AzureFileShareRestoreRequest extends RestoreRequest {
   /**
    * List of Source Files/Folders(which need to recover) and TargetFolderPath details
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restoreFileSpecs?: RestoreFileSpecs[];
 
   /**
@@ -3285,7 +3285,7 @@ model AzureVmWorkloadProtectionPolicy extends ProtectionPolicy {
   /**
    * List of sub-protection policies which includes schedule and retention
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subProtectionPolicy?: SubProtectionPolicy[];
 
   /**
@@ -3547,7 +3547,7 @@ alias AzureIaaSVMProtectedItemProperties = {
   /**
    * Health details on this backup item.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   healthDetails?: AzureIaaSVMHealthDetails[];
 
   /**
@@ -3735,7 +3735,7 @@ model AzureIaaSVMJob extends Job {
   /**
    * Error details on execution of this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   errorDetails?: AzureIaaSVMErrorInfo[];
 
   /**
@@ -3772,7 +3772,7 @@ model AzureIaaSVMJobExtendedInfo {
   /**
    * List of tasks associated with this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["taskId"])
+  @identifiers(#["taskId"])
   tasksList?: AzureIaaSVMJobTaskDetails[];
 
   /**
@@ -3873,7 +3873,7 @@ model AzureIaaSVMJobV2 extends Job {
   /**
    * Error details on execution of this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   errorDetails?: AzureIaaSVMErrorInfo[];
 
   /**
@@ -4045,7 +4045,7 @@ model AzureStorageJob extends Job {
   /**
    * Error details on execution of this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   errorDetails?: AzureStorageErrorInfo[];
 
   /**
@@ -4081,7 +4081,7 @@ model AzureStorageJobExtendedInfo {
   /**
    * List of tasks for this job
    */
-  @OpenAPI.extension("x-ms-identifiers", #["taskId"])
+  @identifiers(#["taskId"])
   tasksList?: AzureStorageJobTaskDetails[];
 
   /**
@@ -4183,7 +4183,7 @@ alias AzureVmWorkloadProtectedItemProperties = {
   /**
    * List of the nodes in case of distributed container.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodesList?: DistributedNodesInfo[];
 };
 /**
@@ -4368,7 +4368,7 @@ model AzureWorkloadJob extends Job {
   /**
    * Error details on execution of this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   errorDetails?: AzureWorkloadErrorInfo[];
 
   /**
@@ -4389,7 +4389,7 @@ model AzureWorkloadJobExtendedInfo {
   /**
    * List of tasks for this job
    */
-  @OpenAPI.extension("x-ms-identifiers", #["taskId"])
+  @identifiers(#["taskId"])
   tasksList?: AzureWorkloadJobTaskDetails[];
 
   /**
@@ -4424,7 +4424,7 @@ alias AzureWorkloadPointInTimeRecoveryPointProperties = {
   /**
    * List of log ranges
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   timeRanges?: PointInTimeRange[];
 };
 
@@ -4471,7 +4471,7 @@ alias AzureWorkloadRecoveryPointProperties = {
   /**
    * Recovery point tier information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   recoveryPointTierDetails?: RecoveryPointTierInformationV2[];
 
   /**
@@ -4770,7 +4770,7 @@ model AzureWorkloadSQLPointInTimeRecoveryPoint extends RecoveryPoint {
   /**
    * List of log ranges
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   timeRanges?: PointInTimeRange[];
 
   ...AzureWorkloadSQLRecoveryPointProperties;
@@ -4813,7 +4813,7 @@ model AzureWorkloadSQLRecoveryPointExtendedInfo {
   /**
    * List of data directory paths during restore operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDirectoryPaths?: SQLDataDirectory[];
 }
 
@@ -4874,7 +4874,7 @@ alias AzureWorkloadSQLRestoreRequestProperties = {
   /**
    * Data directory details
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   alternateDirectoryPaths?: SQLDataDirectoryMapping[];
 };
 
@@ -4993,7 +4993,7 @@ model DailyRetentionFormat {
   /**
    * List of days of the month.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   daysOfTheMonth?: Day[];
 }
 
@@ -5095,7 +5095,7 @@ model DpmJob extends Job {
   /**
    * The errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorDetails?: DpmErrorInfo[];
 
   /**
@@ -5116,7 +5116,7 @@ model DpmJobExtendedInfo {
   /**
    * List of tasks associated with this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["taskId"])
+  @identifiers(#["taskId"])
   tasksList?: DpmJobTaskDetails[];
 
   /**
@@ -5336,7 +5336,7 @@ model GenericProtectionPolicy extends ProtectionPolicy {
   /**
    * List of sub-protection policies which includes schedule and retention
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subProtectionPolicy?: SubProtectionPolicy[];
 
   /**
@@ -5553,7 +5553,7 @@ model IaasVMRecoveryPoint extends RecoveryPoint {
   /**
    * Recovery point tier information.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   recoveryPointTierDetails?: RecoveryPointTierInformationV2[];
 
   /**
@@ -5683,13 +5683,13 @@ model RecoveryPointDiskConfiguration {
   /**
    * Information of disks included in backup
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   includedDiskList?: DiskInformation[];
 
   /**
    * Information of disks excluded from backup
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   excludedDiskList?: DiskInformation[];
 }
 
@@ -6178,7 +6178,7 @@ model MabJob extends Job {
   /**
    * The errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorDetails?: MabErrorInfo[];
 
   /**
@@ -6199,7 +6199,7 @@ model MabJobExtendedInfo {
   /**
    * List of tasks for this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["taskId"])
+  @identifiers(#["taskId"])
   tasksList?: MabJobTaskDetails[];
 
   /**
@@ -6500,7 +6500,7 @@ model VaultJob extends Job {
   /**
    * Error details on execution of this job.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["errorCode"])
+  @identifiers(#["errorCode"])
   errorDetails?: VaultJobErrorInfo[];
 
   /**
@@ -6894,7 +6894,7 @@ model AzureWorkloadContainerExtendedInfo {
   /**
    * List of the nodes in case of distributed container.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodesList?: DistributedNodesInfo[];
 }
 
@@ -6917,7 +6917,7 @@ model InquiryInfo {
    * Inquiry Details which will have workload specific details.
    * For e.g. - For SQL and oracle this will contain different details.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   inquiryDetails?: WorkloadInquiryDetails[];
 }
 
@@ -7334,7 +7334,7 @@ model AzureVmWorkloadSQLAvailabilityGroupProtectableItem
   /**
    * List of the nodes in case of distributed container.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodesList?: DistributedNodesInfo[];
 
   ...AzureVmWorkloadProtectableItemProperties;
@@ -7394,7 +7394,7 @@ model AzureVmWorkloadSQLInstanceWorkloadItem extends WorkloadItem {
   /**
    * Data Directory Paths for default directories
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDirectoryPaths?: SQLDataDirectory[];
 
   ...AzureVmWorkloadItemProperties;
@@ -7870,7 +7870,7 @@ model InstantItemRecoveryTarget {
   /**
    * List of client scripts.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   clientScripts?: ClientScriptForConnect[];
 }
 
@@ -7906,7 +7906,7 @@ model MabContainer extends ProtectionContainer {
   /**
    * Health details on this mab container.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   mabContainerHealthDetails?: MABContainerHealthDetails[];
 
   /**
@@ -8300,7 +8300,7 @@ model ClientDiscoveryResponse {
    * List of available operations.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: ClientDiscoveryValueForSingleApi[];
 
   /**

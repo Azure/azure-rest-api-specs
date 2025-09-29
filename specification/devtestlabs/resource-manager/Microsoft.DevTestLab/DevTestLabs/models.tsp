@@ -463,7 +463,7 @@ model CloudErrorBody {
   /**
    * Inner errors.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: CloudErrorBody[];
 }
 
@@ -980,7 +980,7 @@ model ArmTemplateProperties {
    * File name and parameter values information from all azuredeploy.*.parameters.json for the ARM template.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   parametersValueFilesInfo?: ParametersValueFileInfo[];
 
   /**
@@ -1161,14 +1161,14 @@ model LabCostProperties {
    * The lab cost details component of the cost data.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labCostDetails?: LabCostDetailsProperties[];
 
   /**
    * The resource cost component of the cost data.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceCosts?: LabResourceCostProperties[];
 
   /**
@@ -1225,7 +1225,7 @@ model TargetCostProperties {
   /**
    * Cost thresholds.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   costThresholds?: CostThresholdProperties[];
 
   /**
@@ -1415,7 +1415,7 @@ model CustomImageProperties {
   /**
    * Storage information about the data disks present in the custom image
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDiskStorageInfo?: DataDiskStorageTypeInfo[];
 
   /**
@@ -1706,7 +1706,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * The artifacts to be installed on the virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: ArtifactInstallProperties[];
 
   /**
@@ -1748,7 +1748,7 @@ model LabVirtualMachineCreationParameterProperties {
   /**
    * New or existing data disks to attach to the virtual machine after creation
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDiskParameters?: DataDiskProperties[];
 
   /**
@@ -1910,7 +1910,7 @@ model SharedPublicIpAddressConfiguration {
   /**
    * The incoming NAT rules
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   inboundNatRules?: InboundNatRule[];
 }
 
@@ -2149,7 +2149,7 @@ model NotificationChannelProperties {
   /**
    * The list of event for which this notification is enabled.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   events?: Event[];
 
   /**
@@ -2212,7 +2212,7 @@ model EvaluatePoliciesRequest {
   /**
    * Policies to evaluate.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policies?: EvaluatePoliciesProperties[];
 }
 
@@ -2248,7 +2248,7 @@ model EvaluatePoliciesResponse {
   /**
    * Results of evaluating a policy set.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   results?: PolicySetResult[];
 }
 
@@ -2264,7 +2264,7 @@ model PolicySetResult {
   /**
    * The list of policy violations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policyViolations?: PolicyViolation[];
 }
 
@@ -2870,7 +2870,7 @@ model LabVirtualMachineProperties {
   /**
    * The artifacts to be installed on the virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: ArtifactInstallProperties[];
 
   /**
@@ -2936,7 +2936,7 @@ model LabVirtualMachineProperties {
   /**
    * New or existing data disks to attach to the virtual machine after creation
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataDiskParameters?: DataDiskProperties[];
 
   /**
@@ -2991,7 +2991,7 @@ model ComputeVmProperties {
   /**
    * Gets the statuses of the virtual machine.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   statuses?: ComputeVmInstanceViewStatus[];
 
   /**
@@ -3084,7 +3084,7 @@ model ApplyArtifactsRequest {
   /**
    * The list of artifacts to apply.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: ArtifactInstallProperties[];
 }
 
@@ -3130,7 +3130,7 @@ model VirtualNetworkProperties {
   /**
    * The allowed subnets of the virtual network.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedSubnets?: Subnet[];
 
   /**
@@ -3152,7 +3152,7 @@ model VirtualNetworkProperties {
   /**
    * The subnet overrides of the virtual network.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subnetOverrides?: SubnetOverride[];
 
   /**
@@ -3253,7 +3253,7 @@ model SubnetSharedPublicIpAddressConfiguration {
   /**
    * Backend ports that virtual machines on this subnet are allowed to expose
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedPorts?: Port[];
 }
 

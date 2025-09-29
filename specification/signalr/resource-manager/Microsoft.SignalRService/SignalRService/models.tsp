@@ -299,13 +299,13 @@ model ServiceSpecification {
   /**
    * Specifications of the Metrics for Azure Monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "unit"])
+  @identifiers(#["name", "unit"])
   metricSpecifications?: MetricSpecification[];
 
   /**
    * Specifications of the Logs for Azure Monitoring.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   logSpecifications?: LogSpecification[];
 }
 
@@ -353,7 +353,7 @@ model MetricSpecification {
   /**
    * The dimensions of the metrics.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   dimensions?: Dimension[];
 }
 
@@ -580,14 +580,14 @@ model SignalRProperties {
    * Private endpoint connections to the resource.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   privateEndpointConnections?: PrivateEndpointConnection[];
 
   /**
    * The list of shared private link resources.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sharedPrivateLinkResources?: SharedPrivateLinkResource[];
 
   /**
@@ -609,7 +609,7 @@ model SignalRProperties {
    * When a featureFlag is not explicitly set, its globally default value will be used
    * But keep in mind, the default value doesn't mean "false". It varies in terms of different FeatureFlags.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   features?: SignalRFeature[];
 
   /**
@@ -708,7 +708,7 @@ model PrivateEndpointConnectionProperties {
    * Group IDs
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   groupIds?: string[];
 
   /**
@@ -775,7 +775,7 @@ model SharedPrivateLinkResourceProperties {
   /**
    * A list of FQDNs for third party private link service
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   fqdns?: string[];
 
   /**
@@ -840,7 +840,7 @@ model LiveTraceConfiguration {
   /**
    * Gets or sets the list of category configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   categories?: LiveTraceCategory[];
 }
 
@@ -870,7 +870,7 @@ model ResourceLogConfiguration {
   /**
    * Gets or sets the list of category configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   categories?: ResourceLogCategory[];
 }
 
@@ -901,7 +901,7 @@ model SignalRCorsSettings {
   /**
    * Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use "*" to allow all. If omitted, allow all by default.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedOrigins?: string[];
 }
 
@@ -945,7 +945,7 @@ model ServerlessUpstreamSettings {
   /**
    * Gets or sets the list of Upstream URL templates. Order matters, and the first matching template takes effects.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   templates?: UpstreamTemplate[];
 }
 
@@ -1037,13 +1037,13 @@ model SignalRNetworkACLs {
   /**
    * ACLs for requests from private endpoints
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   privateEndpoints?: PrivateEndpointACL[];
 
   /**
    * IP rules for filtering public traffic
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(30)
   ipRules?: IPRule[];
 }
@@ -1056,13 +1056,13 @@ model NetworkACL {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allow?: SignalRRequestType[];
 
   /**
    * Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   deny?: SignalRRequestType[];
 }
 
@@ -1100,14 +1100,14 @@ model ApplicationFirewallSettings {
   /**
    * Rules to control the client connection count
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(10)
   clientConnectionCountRules?: ClientConnectionCountRule[];
 
   /**
    * Rules to control the client traffic
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @maxItems(10)
   clientTrafficControlRules?: ClientTrafficControlRule[];
 
@@ -1359,19 +1359,19 @@ model PrivateLinkResourceProperties {
   /**
    * Required members of the private link resource
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   requiredMembers?: string[];
 
   /**
    * Required private DNS zone names
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   requiredZoneNames?: string[];
 
   /**
    * The list of resources that are onboarded to private link service
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   shareablePrivateLinkResourceTypes?: ShareablePrivateLinkResourceType[];
 }
 
@@ -1523,7 +1523,7 @@ model SkuCapacity {
    * Allows capacity value list.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   allowedValues?: int32[];
 
   /**

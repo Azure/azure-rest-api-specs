@@ -630,7 +630,7 @@ model GeoDataReplicationProperties {
   /**
    * A list of regions where replicas of the namespace are maintained.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locations?: NamespaceReplicaLocation[];
 }
 
@@ -925,7 +925,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * List of Provisioning Issues if any
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningIssues?: ProvisioningIssue[];
 
   /**

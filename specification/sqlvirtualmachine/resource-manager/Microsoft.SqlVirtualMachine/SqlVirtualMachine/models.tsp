@@ -380,13 +380,13 @@ model AvailabilityGroupListenerProperties {
   /**
    * List of load balancer configurations for an availability group listener.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   loadBalancerConfigurations?: LoadBalancerConfiguration[];
 
   /**
    * List of multi subnet IP configurations for an AG listener.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   multiSubnetIpConfigurations?: MultiSubnetIpConfiguration[];
 
   /**
@@ -472,7 +472,7 @@ model AgConfiguration {
   /**
    * Replica configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   replicas?: AgReplica[];
 }
 
