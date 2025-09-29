@@ -1107,34 +1107,6 @@
             "default": 20
           },
           {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
-          },
-          {
             "name": "after",
             "in": "query",
             "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
@@ -1221,34 +1193,6 @@
             "type": "integer",
             "format": "int32",
             "default": 20
-          },
-          {
-            "name": "order",
-            "in": "query",
-            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
-            "required": false,
-            "type": "string",
-            "default": "desc",
-            "enum": [
-              "asc",
-              "desc"
-            ],
-            "x-ms-enum": {
-              "name": "ListSortOrder",
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "ascending",
-                  "value": "asc",
-                  "description": "Specifies an ascending sort order."
-                },
-                {
-                  "name": "descending",
-                  "value": "desc",
-                  "description": "Specifies a descending sort order."
-                }
-              ]
-            }
           },
           {
             "name": "after",
@@ -4152,30 +4096,6 @@
       "required": [
         "createdAt"
       ]
-    },
-    "ListSortOrder": {
-      "type": "string",
-      "description": "The available sorting options when requesting a list of response objects.",
-      "enum": [
-        "asc",
-        "desc"
-      ],
-      "x-ms-enum": {
-        "name": "ListSortOrder",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ascending",
-            "value": "asc",
-            "description": "Specifies an ascending sort order."
-          },
-          {
-            "name": "descending",
-            "value": "desc",
-            "description": "Specifies a descending sort order."
-          }
-        ]
-      }
     },
     "ManagedAzureAISearchIndex": {
       "type": "object",
