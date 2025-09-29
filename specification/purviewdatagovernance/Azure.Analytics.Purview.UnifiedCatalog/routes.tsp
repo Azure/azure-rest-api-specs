@@ -19,7 +19,7 @@ alias UnifiedCatalogOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 @tag("CriticalDataElements")
 @doc("Searches and retrieves critical data elements based on domain, keyword, and other filters.")
 @get
-op ListCriticalDataElementAsync is UnifiedCatalogOperations.ResourceList<
+op ListCriticalDataElement is UnifiedCatalogOperations.ResourceList<
   CriticalDataElement,
   ListQueryParametersTrait<{
     @doc("Whether to return minimal information for referred Domains.")
@@ -43,7 +43,7 @@ op ListCriticalDataElementAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Creates a new critical data element in the catalog.")
 @route("/criticalDataElements")
 @post
-op CreateCriticalDataElementAsync is RpcOperation<
+op CreateCriticalDataElement is RpcOperation<
   {
     @doc("the critical data element to update.")
     @body
@@ -57,7 +57,7 @@ op CreateCriticalDataElementAsync is RpcOperation<
 @tag("CriticalDataElements")
 @doc("Searches and retrieves critical data elements based on Id.")
 @get
-op GetCriticalDataElementByIdAsync is UnifiedCatalogOperations.ResourceRead<CriticalDataElement>;
+op GetCriticalDataElementById is UnifiedCatalogOperations.ResourceRead<CriticalDataElement>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -65,7 +65,7 @@ op GetCriticalDataElementByIdAsync is UnifiedCatalogOperations.ResourceRead<Crit
 @doc("Updates an existing critical data element in the catalog.")
 @route("/criticalDataElements/{criticalDataElementId}")
 @put
-op UpdateCriticalDataElementAsync is RpcOperation<
+op UpdateCriticalDataElement is RpcOperation<
   {
     @doc("the critical data element to update.")
     @body
@@ -79,14 +79,14 @@ op UpdateCriticalDataElementAsync is RpcOperation<
 @tag("CriticalDataElements")
 @doc("Deletes an existing critical data element in the catalog.")
 @delete
-op DeleteCriticalDataElementByIdAsync is UnifiedCatalogOperations.ResourceDelete<CriticalDataElement>;
+op DeleteCriticalDataElementById is UnifiedCatalogOperations.ResourceDelete<CriticalDataElement>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("CriticalDataElements")
 @doc("Lists relationships for the specified CDE and entity category.")
 @get
-op ListCriticalDataElementRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
+op ListCriticalDataElementRelationships is UnifiedCatalogOperations.ResourceList<
   CdeRelationshipWrapper,
   ListQueryParametersTrait<{
     @doc("The body associated with the critical data element output.")
@@ -101,7 +101,7 @@ op ListCriticalDataElementRelationshipsAsync is UnifiedCatalogOperations.Resourc
 @doc("Creates a relationship between the specified CDE and another entity.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @post
-op CreateCriticalDataElementRelationshipAsync is RpcOperation<
+op CreateCriticalDataElementRelationship is RpcOperation<
   CriticalDataElementIdParameters & {
     @doc("The type of entity for the relationship.")
     @query
@@ -120,7 +120,7 @@ op CreateCriticalDataElementRelationshipAsync is RpcOperation<
 @doc("Deletes a relationship between the CDE and the specified entity.")
 @route("/criticalDataElements/{criticalDataElementId}/relationships")
 @delete
-op DeleteCriticalDataElementRelationshipAsync is RpcOperation<
+op DeleteCriticalDataElementRelationship is RpcOperation<
   CriticalDataElementIdParameters & {
     @doc("The type of entity for the relationship.")
     @query
@@ -140,7 +140,7 @@ op DeleteCriticalDataElementRelationshipAsync is RpcOperation<
 @route("/criticalDataElements/query")
 @list
 @post
-op QueryCriticalDataElementsAsync is RpcOperation<
+op QueryCriticalDataElements is RpcOperation<
   {
     @doc("The request body containing query criteria.")
     @bodyRoot
@@ -159,7 +159,7 @@ op QueryCriticalDataElementsAsync is RpcOperation<
 @doc("Retrieves facets for critical data elements.")
 @route("/criticalDataElements/facets")
 @post
-op GetCriticalDataElementFacetsAsync is RpcOperation<
+op GetCriticalDataElementFacets is RpcOperation<
   {
     @doc("The request body containing query criteria.")
     @bodyRoot
@@ -174,7 +174,7 @@ op GetCriticalDataElementFacetsAsync is RpcOperation<
 @doc("Creates a new critical data column in the catalog.")
 @route("/criticalDataColumns")
 @post
-op CreateCriticalDataColumnAsync is RpcOperation<
+op CreateCriticalDataColumn is RpcOperation<
   CreateCriticalDataColumnRequest,
   CreateCriticalDataColumnResponse
 >;
@@ -184,7 +184,7 @@ op CreateCriticalDataColumnAsync is RpcOperation<
 @tag("CriticalDataColumns")
 @doc("Searches and retrieves critical data columns based on domain, assetId, and other filters.")
 @get
-op ListCriticalDataColumnAsync is UnifiedCatalogOperations.ResourceList<
+op ListCriticalDataColumn is UnifiedCatalogOperations.ResourceList<
   CriticalDataColumn,
   ListQueryParametersTrait<{
     @doc("The unique identifier of the critical data column.")
@@ -207,7 +207,7 @@ op ListCriticalDataColumnAsync is UnifiedCatalogOperations.ResourceList<
 @tag("CriticalDataColumns")
 @doc("Searches and retrieves critical data columns based on Id.")
 @get
-op GetCriticalDataColumnByIdAsync is UnifiedCatalogOperations.ResourceRead<CriticalDataColumn>;
+op GetCriticalDataColumnById is UnifiedCatalogOperations.ResourceRead<CriticalDataColumn>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -215,7 +215,7 @@ op GetCriticalDataColumnByIdAsync is UnifiedCatalogOperations.ResourceRead<Criti
 @doc("Updates an existing critical data column in the catalog.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @post
-op CreateCriticalDataColumnRelationshipAsync is RpcOperation<
+op CreateCriticalDataColumnRelationship is RpcOperation<
   CriticalDataColumnIdParameters & {
     @doc("The body associated with the critical data column")
     @query
@@ -234,7 +234,7 @@ op CreateCriticalDataColumnRelationshipAsync is RpcOperation<
 @doc("Retrieves relationships for a critical data column.")
 //@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @get
-op ListCriticalDataColumnRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
+op ListCriticalDataColumnRelationships is UnifiedCatalogOperations.ResourceList<
   RelationshipWrapper,
   ListQueryParametersTrait<{
     @doc("The body associated with the critical data element output.")
@@ -249,7 +249,7 @@ op ListCriticalDataColumnRelationshipsAsync is UnifiedCatalogOperations.Resource
 @doc("Deletes relationships for a critical data column.")
 @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
 @delete
-op DeleteCriticalDataColumnRelationshipAsync is RpcOperation<
+op DeleteCriticalDataColumnRelationship is RpcOperation<
   CriticalDataColumnIdParameters & {
     @doc("The body associated with the critical data column")
     @query
@@ -271,7 +271,7 @@ op DeleteCriticalDataColumnRelationshipAsync is RpcOperation<
 @tag("DataAsset")
 @doc("Lists data assets with optional ordering and pagination.")
 @get
-op ListDataAssetsAsync is UnifiedCatalogOperations.ResourceList<
+op ListDataAssets is UnifiedCatalogOperations.ResourceList<
   DataAsset,
   ListQueryParametersTrait<{
     @doc("Expressions that specify the order of returned results.")
@@ -287,7 +287,7 @@ op ListDataAssetsAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Creates a new data asset.")
 @route("/dataAssets")
 @post
-op CreateDataAssetAsync is RpcOperation<
+op CreateDataAsset is RpcOperation<
   {
     @doc("The data asset payload")
     @bodyRoot
@@ -303,7 +303,7 @@ op CreateDataAssetAsync is RpcOperation<
 @route("/dataAssets/query")
 @list
 @post
-op QueryDataAssetsAsync is RpcOperation<
+op QueryDataAssets is RpcOperation<
   {
     @doc("The data asset payload")
     @bodyRoot
@@ -317,7 +317,7 @@ op QueryDataAssetsAsync is RpcOperation<
 @tag("DataAsset")
 @doc("Retrieves a data asset by its unique identifier.")
 @get
-op GetDataAssetByIdAsync is UnifiedCatalogOperations.ResourceRead<DataAsset>;
+op GetDataAssetById is UnifiedCatalogOperations.ResourceRead<DataAsset>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -325,7 +325,7 @@ op GetDataAssetByIdAsync is UnifiedCatalogOperations.ResourceRead<DataAsset>;
 @doc("Updates a data asset by its unique identifier.")
 @route("/dataAssets/{dataAssetId}")
 @put
-op UpdateDataAssetAsync is RpcOperation<
+op UpdateDataAsset is RpcOperation<
   DataAssetIdParameter & {
     @doc("Updated data asset payload.")
     @bodyRoot
@@ -339,14 +339,14 @@ op UpdateDataAssetAsync is RpcOperation<
 @tag("DataAsset")
 @doc("Deletes a data asset by its unique identifier.")
 @delete
-op DeleteDataAssetByIdAsync is UnifiedCatalogOperations.ResourceDelete<DataAsset>;
+op DeleteDataAssetById is UnifiedCatalogOperations.ResourceDelete<DataAsset>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataAsset")
 @doc("Lists relationships for a data asset filtered by entity category.")
 @get
-op ListDataAssetRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
+op ListDataAssetRelationships is UnifiedCatalogOperations.ResourceList<
   DataAssetRelationshipWrapper,
   ListQueryParametersTrait<{
     @doc("Required entity category to list relationships for.")
@@ -361,7 +361,7 @@ op ListDataAssetRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Creates a relationship between the specified data asset and another entity.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @post
-op CreateDataAssetRelationshipAsync is RpcOperation<
+op CreateDataAssetRelationship is RpcOperation<
   DataAssetIdParameter & {
     @doc("Category of the entity to relate to (required).")
     @query
@@ -380,7 +380,7 @@ op CreateDataAssetRelationshipAsync is RpcOperation<
 @doc("Deletes relationships for a data asset.")
 @route("/dataAssets/{dataAssetId}/relationships")
 @delete
-op DeleteDataAssetRelationshipAsync is RpcOperation<
+op DeleteDataAssetRelationship is RpcOperation<
   DataAssetIdParameter & {
     @doc("Category of the related entity (required).")
     @query
@@ -398,7 +398,7 @@ op DeleteDataAssetRelationshipAsync is RpcOperation<
 @tag("DataProduct")
 @doc("Lists data products with optional domain filter, sorting and pagination.")
 @get
-op ListDataProductsAsync is UnifiedCatalogOperations.ResourceList<
+op ListDataProducts is UnifiedCatalogOperations.ResourceList<
   DataProduct,
   ListQueryParametersTrait<SkipQueryParameter &
     TopQueryParameter & {
@@ -418,7 +418,7 @@ op ListDataProductsAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Creates a new data product.")
 @route("/dataProducts")
 @post
-op CreateDataProductAsync is RpcOperation<
+op CreateDataProduct is RpcOperation<
   {
     @doc("The data product payload.")
     @bodyRoot
@@ -434,7 +434,7 @@ op CreateDataProductAsync is RpcOperation<
 @route("/dataProducts/query")
 @list
 @post
-op QueryDataProductsAsync is RpcOperation<
+op QueryDataProducts is RpcOperation<
   {
     @doc("Optional duplicate-check flag (1 to enable exact search).")
     @query
@@ -457,7 +457,7 @@ op QueryDataProductsAsync is RpcOperation<
 @doc("Retrieves facets for data products based on the supplied facets request.")
 @route("/dataProducts/facets")
 @post
-op GetDataProductFacetsAsync is RpcOperation<
+op GetDataProductFacets is RpcOperation<
   {
     @doc("Facet request specifying which facets to compute.")
     @bodyRoot
@@ -471,7 +471,7 @@ op GetDataProductFacetsAsync is RpcOperation<
 @tag("DataProduct")
 @doc("Retrieves a data product by its dataProductId.")
 @get
-op GetDataProductByIdAsync is UnifiedCatalogOperations.ResourceRead<DataProduct>;
+op GetDataProductById is UnifiedCatalogOperations.ResourceRead<DataProduct>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -479,7 +479,7 @@ op GetDataProductByIdAsync is UnifiedCatalogOperations.ResourceRead<DataProduct>
 @doc("Updates a data product by its DataProductId.")
 @route("/dataProducts/{dataProductId}")
 @put
-op UpdateDataProductAsync is RpcOperation<
+op UpdateDataProduct is RpcOperation<
   DataProductIdParameter & {
     @doc("Updated data product payload.")
     @bodyRoot
@@ -493,14 +493,14 @@ op UpdateDataProductAsync is RpcOperation<
 @tag("DataProduct")
 @doc("Deletes a data product by its dataProductId.")
 @delete
-op DeleteDataProductByIdAsync is UnifiedCatalogOperations.ResourceDelete<DataProduct>;
+op DeleteDataProductById is UnifiedCatalogOperations.ResourceDelete<DataProduct>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("DataProduct")
 @doc("Lists relationships for a data product filtered by entity category.")
 @get
-op ListDataProductRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
+op ListDataProductRelationships is UnifiedCatalogOperations.ResourceList<
   DataProductRelationshipWrapper,
   ListQueryParametersTrait<{
     @doc("Required entity category to list relationships for.")
@@ -515,7 +515,7 @@ op ListDataProductRelationshipsAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Creates a relationship for a data product.")
 @route("/dataProducts/{dataProductId}/relationships")
 @post
-op CreateDataProductRelationshipAsync is RpcOperation<
+op CreateDataProductRelationship is RpcOperation<
   DataProductIdParameter & {
     @doc("Category of the entity to relate to (required).")
     @query
@@ -534,7 +534,7 @@ op CreateDataProductRelationshipAsync is RpcOperation<
 @doc("Deletes a relationship between the data product and a specified entity.")
 @route("/dataProducts/{dataProductId}/relationships")
 @delete
-op DeleteDataProductRelationshipAsync is RpcOperation<
+op DeleteDataProductRelationship is RpcOperation<
   DataProductIdParameter & {
     @doc("Category of the related entity (required).")
     @query
@@ -552,7 +552,7 @@ op DeleteDataProductRelationshipAsync is RpcOperation<
 @tag("BusinessDomain")
 @doc("Enumerates business domains with optional continuation token and write-obligation filtering.")
 @get
-op EnumerateDomainsAsync is UnifiedCatalogOperations.ResourceList<
+op EnumerateDomains is UnifiedCatalogOperations.ResourceList<
   Domain,
   ListQueryParametersTrait<{
     @doc("skiptoken")
@@ -571,7 +571,7 @@ op EnumerateDomainsAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Creates a new business domain.")
 @route("/businessdomains")
 @post
-op CreateDomainAsync is RpcOperation<
+op CreateDomain is RpcOperation<
   {
     @doc("Domain payload to create.")
     @bodyRoot
@@ -586,7 +586,7 @@ op CreateDomainAsync is RpcOperation<
 @doc("Updates an existing business domain.")
 @route("/businessdomains/{domainId}")
 @put
-op UpdateDomainAsync is RpcOperation<
+op UpdateDomain is RpcOperation<
   DomainIdParameter & {
     @doc("Updated domain payload.")
     @bodyRoot
@@ -600,14 +600,14 @@ op UpdateDomainAsync is RpcOperation<
 @tag("BusinessDomain")
 @doc("Retrieves a business domain by identifier.")
 @get
-op GetDomainByIdAsync is UnifiedCatalogOperations.ResourceRead<Domain>;
+op GetDomainById is UnifiedCatalogOperations.ResourceRead<Domain>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("BusinessDomain")
 @doc("Deletes an existing business domain.")
 @delete
-op DeleteDomainByIdAsync is UnifiedCatalogOperations.ResourceDelete<Domain>;
+op DeleteDomainById is UnifiedCatalogOperations.ResourceDelete<Domain>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -615,7 +615,7 @@ op DeleteDomainByIdAsync is UnifiedCatalogOperations.ResourceDelete<Domain>;
 @doc("Creates a new term in the catalog.")
 @route("/terms")
 @post
-op CreateTermAsync is RpcOperation<
+op CreateTerm is RpcOperation<
   {
     @doc("Term payload.")
     @bodyRoot
@@ -629,7 +629,7 @@ op CreateTermAsync is RpcOperation<
 @tag("Term")
 @doc("Lists terms with optional domain/parent/keyword filters and pagination.")
 @get
-op ListTermAsync is UnifiedCatalogOperations.ResourceList<
+op ListTerm is UnifiedCatalogOperations.ResourceList<
   Term,
   ListQueryParametersTrait<SkipQueryParameter &
     TopQueryParameter & {
@@ -661,7 +661,7 @@ op ListTermAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Updates an existing term")
 @route("/terms/{termId}")
 @put
-op UpdateTermAsync is RpcOperation<
+op UpdateTerm is RpcOperation<
   TermIdParameter & {
     @doc("Updated term payload.")
     @bodyRoot
@@ -675,14 +675,14 @@ op UpdateTermAsync is RpcOperation<
 @tag("Term")
 @doc("Retrieves a single term by identifier.")
 @get
-op GetTermAsync is UnifiedCatalogOperations.ResourceRead<Term>;
+op GetTerm is UnifiedCatalogOperations.ResourceRead<Term>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("Term")
 @doc("Deletes a term by its unique identifier.")
 @delete
-op DeleteTermAsync is UnifiedCatalogOperations.ResourceDelete<Term>;
+op DeleteTerm is UnifiedCatalogOperations.ResourceDelete<Term>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -691,7 +691,7 @@ op DeleteTermAsync is UnifiedCatalogOperations.ResourceDelete<Term>;
 @route("/terms/query")
 @list
 @post
-op QueryTermsAsync is RpcOperation<
+op QueryTerms is RpcOperation<
   {
     @doc("The bypassObligations to skip obligations.")
     @query
@@ -710,7 +710,7 @@ op QueryTermsAsync is RpcOperation<
 @doc("Retrieves facets for terms.")
 @route("/terms/facets")
 @post
-op GetTermFacetsAsync is RpcOperation<
+op GetTermFacets is RpcOperation<
   {
     @doc("Facet request specifying which facets to compute.")
     @bodyRoot
@@ -726,7 +726,7 @@ op GetTermFacetsAsync is RpcOperation<
 @route("/terms/{termId}/hierarchies")
 @list
 @get
-op ListHierarchyTermsAsync is RpcOperation<TermIdParameter, TermResponse>;
+op ListHierarchyTerms is RpcOperation<TermIdParameter, TermResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -734,7 +734,7 @@ op ListHierarchyTermsAsync is RpcOperation<TermIdParameter, TermResponse>;
 @doc("Adds a related entity to a term.")
 @route("/terms/{termId}/relationships")
 @post
-op AddRelatedEntityAsync is RpcOperation<
+op AddRelatedEntity is RpcOperation<
   TermIdParameter & {
     @doc("The type of entity to retrieve relationships for.")
     @query
@@ -753,7 +753,7 @@ op AddRelatedEntityAsync is RpcOperation<
 @doc("Deletes a related entity from a term.")
 @route("/terms/{termId}/relationships")
 @delete
-op DeleteRelatedTermAsync is RpcOperation<
+op DeleteRelatedTerm is RpcOperation<
   TermIdParameter & {
     @doc("The type of entity to retrieve relationships for.")
     @query
@@ -775,7 +775,7 @@ op DeleteRelatedTermAsync is RpcOperation<
 @tag("Term")
 @doc("Lists related entities for a term by category and optional relationship type.")
 @get
-op ListRelatedEntitiesAsync is UnifiedCatalogOperations.ResourceList<
+op ListRelatedEntities is UnifiedCatalogOperations.ResourceList<
   TermRelationship,
   ListQueryParametersTrait<{
     @doc("The type of entity to retrieve relationships for.")
@@ -793,7 +793,7 @@ op ListRelatedEntitiesAsync is UnifiedCatalogOperations.ResourceList<
 @tag("OKR")
 @doc("Lists objectives with optional filters, sorting and pagination.")
 @get
-op ListObjectivesAsync is UnifiedCatalogOperations.ResourceList<
+op ListObjectives is UnifiedCatalogOperations.ResourceList<
   ObjectiveWithAdditionalProperties,
   ListQueryParametersTrait<SkipQueryParameter &
     TopQueryParameter & {
@@ -817,7 +817,7 @@ op ListObjectivesAsync is UnifiedCatalogOperations.ResourceList<
 @doc("Creates a new objective (OKR).")
 @route("/objectives")
 @post
-op CreateObjectiveAsync is RpcOperation<
+op CreateObjective is RpcOperation<
   {
     @doc("The objective payload, including additional properties.")
     @bodyRoot
@@ -833,7 +833,7 @@ op CreateObjectiveAsync is RpcOperation<
 @route("/objectives/query")
 @list
 @post
-op QueryObjectivesAsync is RpcOperation<
+op QueryObjectives is RpcOperation<
   {
     @doc("Optional duplicate-check flag (1 to enable exact search).")
     @query
@@ -852,7 +852,7 @@ op QueryObjectivesAsync is RpcOperation<
 @doc("Retrieves the facets for objectives (OKRs).")
 @route("/objectives/facets")
 @post
-op GetObjectiveFacetsAsync is RpcOperation<
+op GetObjectiveFacets is RpcOperation<
   {
     @doc("Facet request specifying which facets to compute.")
     @bodyRoot
@@ -867,7 +867,7 @@ op GetObjectiveFacetsAsync is RpcOperation<
 @doc("Updates an existing objective (OKR) by ID.")
 @route("/objectives/{objectiveId}")
 @put
-op UpdateObjectiveAsync is RpcOperation<
+op UpdateObjective is RpcOperation<
   ObjectiveIdParameter & {
     @doc("Updated objective payload.")
     @bodyRoot
@@ -881,21 +881,21 @@ op UpdateObjectiveAsync is RpcOperation<
 @tag("OKR")
 @doc("Deletes an objective by identifier.")
 @delete
-op DeleteObjectiveByIdAsync is UnifiedCatalogOperations.ResourceDelete<ObjectiveWithAdditionalProperties>;
+op DeleteObjectiveById is UnifiedCatalogOperations.ResourceDelete<ObjectiveWithAdditionalProperties>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Retrieves an objective by identifier.")
 @get
-op GetObjectiveByIdAsync is UnifiedCatalogOperations.ResourceRead<ObjectiveWithAdditionalProperties>;
+op GetObjectiveById is UnifiedCatalogOperations.ResourceRead<ObjectiveWithAdditionalProperties>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 @tag("OKR")
 @doc("Lists key results for a given objective.")
 @get
-op ListKeyResultsAsync is UnifiedCatalogOperations.ResourceList<KeyResult>;
+op ListKeyResults is UnifiedCatalogOperations.ResourceList<KeyResult>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -903,7 +903,7 @@ op ListKeyResultsAsync is UnifiedCatalogOperations.ResourceList<KeyResult>;
 @doc("Creates a key result under the specified objective.")
 @route("/objectives/{objectiveId}/keyResults")
 @post
-op CreateKeyResultAsync is RpcOperation<
+op CreateKeyResult is RpcOperation<
   ObjectiveIdParameter & {
     @doc("Key result payload.")
     @bodyRoot
@@ -918,7 +918,7 @@ op CreateKeyResultAsync is RpcOperation<
 @doc("Retrieves a key result by its identifier under the specified objective")
 @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
 @get
-op GetKeyResultByIdAsync is RpcOperation<GetKeyResultParameter, KeyResult>;
+op GetKeyResultById is RpcOperation<GetKeyResultParameter, KeyResult>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -927,7 +927,7 @@ op GetKeyResultByIdAsync is RpcOperation<GetKeyResultParameter, KeyResult>;
 @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
 @list
 @put
-op UpdateKeyResultAsync is RpcOperation<
+op UpdateKeyResult is RpcOperation<
   GetKeyResultParameter & {
     @doc("Updated key result payload.")
     @bodyRoot
@@ -942,10 +942,7 @@ op UpdateKeyResultAsync is RpcOperation<
 @doc("Deletes a key result by its identifier under the specified objective.")
 @route("/objectives/{objectiveId}/keyResults/{keyResultId}")
 @delete
-op DeleteKeyResultByIdAsync is RpcOperation<
-  GetKeyResultParameter,
-  DeleteResponse
->;
+op DeleteKeyResultById is RpcOperation<GetKeyResultParameter, DeleteResponse>;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
@@ -968,7 +965,7 @@ op ListPolicies is RpcOperation<
 @doc("Updates a policy by its identifier.")
 @route("/policies/{policyId}")
 @put
-op UpdatePolicyAsync is RpcOperation<
+op UpdatePolicy is RpcOperation<
   PolicyIdParameters & {
     @doc("Updated policy payload.")
     @bodyRoot
