@@ -172,7 +172,7 @@ union PriorityProfileType {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
-@doc("The type of operating stystem supported by Azure")
+@doc("Operating system for virtual machine.")
 union OperatingSystemType {
   @doc("Windows operating system")
   Windows: "Windows",
@@ -331,18 +331,18 @@ model PriorityProfile {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
-@doc("The properties that support fungible create operaions")
+@doc("The properties that support fungible create operations")
 model FungibileProperties {
   @doc("A list of preferred vm sizes to create and the rank of their preferences")
   vmSizesProfile?: Array<VmSizesProfileProperties>;
 
-  @doc("The OS type for the vms")
+  @doc("The operating system for the virtual machines.")
   osType: OperatingSystemType;
 
-  @doc("The priority profile")
+  @doc("Sets the type regular or spot VMs and allocation strategy for regular virtual machines")
   priorityProfile?: PriorityProfile;
 
-  @doc("The allocation policy used to determine zonal spread for virtual machine creation")
+  @doc("The allocation policy used to determine zonal spread for creation of virtual machines")
   zoneAllocationPolicy?: ZoneAllocationPolicy;
 }
 
