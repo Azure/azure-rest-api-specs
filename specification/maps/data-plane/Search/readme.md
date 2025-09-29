@@ -130,7 +130,8 @@ These settings apply only when `--tag=package-stable-1.0` is specified on the co
 input-file:
   - stable/1.0/search.json
 
-  - suppress: XmsEnumValidation
+suppressions:
+  - code: XmsEnumValidation
     reason: The Search 1.0 API is already released and nearing the end of its lifecycle, new customers are encouraged to use the newer version of the API and any updates the this version risks introducing breaking changes to existing customers.
 ```
 
