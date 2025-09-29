@@ -96,9 +96,7 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-11'
 input-file:
-  - Microsoft.CertificateRegistration/stable/2024-11-01/AppServiceCertificateOrders.json
-  - Microsoft.CertificateRegistration/stable/2024-11-01/CertificateOrdersDiagnostics.json
-  - Microsoft.CertificateRegistration/stable/2024-11-01/CertificateRegistrationProvider.json
+  - Microsoft.CertificateRegistration/stable/2024-11-01/openapi.json
   - Microsoft.DomainRegistration/stable/2024-11-01/DomainRegistrationProvider.json
   - Microsoft.DomainRegistration/stable/2024-11-01/Domains.json
   - Microsoft.DomainRegistration/stable/2024-11-01/TopLevelDomains.json
@@ -117,6 +115,7 @@ input-file:
   - Microsoft.Web/stable/2024-11-01/SiteCertificates.json
   - Microsoft.Web/stable/2024-11-01/StaticSites.json
   - Microsoft.Web/stable/2024-11-01/WebApps.json
+
 ```
 
 ### Tag: package-2024-04
