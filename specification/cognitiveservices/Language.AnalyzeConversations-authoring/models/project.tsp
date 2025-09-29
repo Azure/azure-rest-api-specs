@@ -433,12 +433,14 @@ model AnalyzeConversationAuthoringProjectDeployment {
    * Represents the metadata of the assigned Azure resources.
    */
   @added(Versions.v2025_11_01)
+  @typeChangedFrom(Versions.v2025_05_15_preview, AnalyzeConversationAuthoringAssignedDeploymentResource)
   assignedResources: AnalyzeConversationAuthoringDeploymentResource[];
 }
 
 /**
  * Represents an Azure resource assigned to a deployment.
  */
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringDeploymentResource {
   /**
    * Represents the Azure resource Id.

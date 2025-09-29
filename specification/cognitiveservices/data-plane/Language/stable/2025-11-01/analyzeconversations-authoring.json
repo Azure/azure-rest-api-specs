@@ -2382,24 +2382,6 @@
         "status"
       ]
     },
-    "AnalyzeConversationAuthoringDeploymentResource": {
-      "type": "object",
-      "description": "Represents an Azure resource assigned to a deployment.",
-      "properties": {
-        "resourceId": {
-          "type": "string",
-          "description": "Represents the Azure resource Id."
-        },
-        "region": {
-          "type": "string",
-          "description": "Represents the resource region."
-        }
-      },
-      "required": [
-        "resourceId",
-        "region"
-      ]
-    },
     "AnalyzeConversationAuthoringDeploymentResourceAssignmentInfo": {
       "type": "object",
       "description": "Represents metadata for the Azure resource..",
@@ -3379,11 +3361,8 @@
           "description": "Represents model training config version."
         },
         "assignedResources": {
-          "type": "array",
-          "description": "Represents the metadata of the assigned Azure resources.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResource"
-          }
+          "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResourceInfo",
+          "description": "Represents the metadata of the assigned Azure resources."
         }
       },
       "required": [
