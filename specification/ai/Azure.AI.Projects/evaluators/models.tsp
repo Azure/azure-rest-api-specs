@@ -109,7 +109,7 @@ model EvaluatorVersion {
   @doc("The type of the evaluator")
   evaluator_type: EvaluatorType;
 
-  @doc("The category of the evaluator")
+  @doc("The categories of the evaluator")
   categories: EvaluatorCategory[];
 
   @doc("Definition of the evaluator")
