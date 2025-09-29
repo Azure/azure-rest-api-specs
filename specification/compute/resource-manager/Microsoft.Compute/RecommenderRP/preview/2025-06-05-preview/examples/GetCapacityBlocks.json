@@ -1,0 +1,51 @@
+{
+  "parameters": {
+    "$filter": "sku eq Standard_D16s_v4 and capacity eq 4 and start-date-range eq 2025-07-15T00:00:00-07:00 and end-date-range eq 2025-07-21T00:00:00-07:00 and durationhours eq 24 and zone eq 1 and location eq eastus",
+    "api-version": "2025-06-05-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "37522560-0aee-4258-8146-de5db0ab97bc",
+            "type": "capacityBlocks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/capacityBlocks/37522560-0aee-4258-8146-de5db0ab97bc",
+            "properties": {
+              "location": "eastus",
+              "scheduleProfile": {
+                "end": "2025-07-17T12:00:00+00:00",
+                "start": "2025-07-16T12:00:00+00:00"
+              },
+              "sku": {
+                "name": "Standard_ND_A100_v4",
+                "capacity": 4
+              },
+              "zone": 1
+            }
+          },
+          {
+            "name": "2f8f8aea-1122-4a3b-bbdc-6535daf15dd9",
+            "type": "capacityBlocks",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Compute/capacityBlocks/2f8f8aea-1122-4a3b-bbdc-6535daf15dd9",
+            "properties": {
+              "location": "eastus",
+              "scheduleProfile": {
+                "end": "2025-07-20T12:00:00+00:00",
+                "start": "2025-07-19T12:00:00+00:00"
+              },
+              "sku": {
+                "name": "Standard_ND_A100_v4",
+                "capacity": 4
+              },
+              "zone": 1
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "CapacityBlocks_Get",
+  "title": "Returns list of capacity block objects."
+}
