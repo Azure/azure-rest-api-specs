@@ -241,106 +241,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/:authorize-copy": {
-      "post": {
-        "operationId": "ConversationAuthoringProject_CopyProjectAuthorization",
-        "description": "Generates a copy project operation authorization to the current target Azure resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringCopyAuthorizationOptions"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringCopiedProjectOptions"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/:copy": {
-      "post": {
-        "operationId": "ConversationAuthoringProject_CopyProject",
-        "description": "Copies an existing project to another Azure resource.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The copy project info.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringCopiedProjectOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/authoring/analyze-conversations/projects/{projectName}/:export": {
       "post": {
         "operationId": "ConversationAuthoringProject_Export",
@@ -590,52 +490,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/copy/jobs/{jobId}": {
-      "get": {
-        "operationId": "ConversationAuthoringProject_GetCopyProjectStatus",
-        "description": "Gets the status of an existing copy project job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringCopiedProjectJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/deployments": {
@@ -1153,261 +1007,6 @@
         }
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/exported-models": {
-      "get": {
-        "operationId": "ConversationAuthoringListExportedModels",
-        "description": "Lists the exported models belonging to a project.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedAnalyzeConversationAuthoringExportedTrainedModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}": {
-      "get": {
-        "operationId": "ConversationAuthoringExportedModel_GetExportedModel",
-        "description": "Gets the details of an exported model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "exportedModelName",
-            "in": "path",
-            "description": "The exported model name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringExportedTrainedModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      },
-      "put": {
-        "operationId": "ConversationAuthoringExportedModel_CreateOrUpdateExportedModel",
-        "description": "Creates a new exported model or replaces an existing one.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "exportedModelName",
-            "in": "path",
-            "description": "The exported model name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The exported model info.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ExportedModelOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      },
-      "delete": {
-        "operationId": "ConversationAuthoringExportedModel_DeleteExportedModel",
-        "description": "Deletes an existing exported model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "exportedModelName",
-            "in": "path",
-            "description": "The exported model name.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/exported-models/{exportedModelName}/jobs/{jobId}": {
-      "get": {
-        "operationId": "ConversationAuthoringExportedModel_GetExportedModelJobStatus",
-        "description": "Gets the status for an existing job to create or update an exported model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "exportedModelName",
-            "in": "path",
-            "description": "The exported model name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringExportedModelJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
     "/authoring/analyze-conversations/projects/{projectName}/import/jobs/{jobId}": {
       "get": {
         "operationId": "ConversationAuthoringProject_GetImportStatus",
@@ -1592,66 +1191,6 @@
         }
       }
     },
-    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate": {
-      "post": {
-        "operationId": "ConversationAuthoringTrainedModel_EvaluateModel",
-        "description": "Triggers evaluation operation on a trained model.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The name of the project to use.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The training input parameters.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions"
-            }
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "The request has been accepted for processing, but processing has not yet completed.",
-            "headers": {
-              "Operation-Location": {
-                "type": "string",
-                "format": "uri",
-                "description": "The location for monitoring the operation state."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-long-running-operation": true
-      }
-    },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:load-snapshot": {
       "post": {
         "operationId": "ConversationAuthoringTrainedModel_LoadSnapshot",
@@ -1701,59 +1240,6 @@
           }
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluate/jobs/{jobId}": {
-      "get": {
-        "operationId": "ConversationAuthoringTrainedModel_GetEvaluationStatus",
-        "description": "Gets the status for an evaluation job.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "The new project name.",
-            "required": true,
-            "type": "string",
-            "maxLength": 100
-          },
-          {
-            "name": "trainedModelLabel",
-            "in": "path",
-            "description": "The trained model label.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "jobId",
-            "in": "path",
-            "description": "The job ID.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationJobState"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
       }
     },
     "/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/evaluation/result": {
@@ -2042,7 +1528,7 @@
             "description": "The info for the deployment resources to be deleted.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions"
+              "$ref": "#/definitions/AnalyzeConversationAuthoringDeleteDeploymentOptions"
             }
           }
         ],
@@ -2653,10 +2139,6 @@
           "type": "string",
           "description": "The category of the entity."
         },
-        "description": {
-          "type": "string",
-          "description": "The entity description."
-        },
         "compositionSetting": {
           "$ref": "#/definitions/CompositionSetting",
           "description": "The behavior to follow when the entity's components overlap with each other."
@@ -2695,17 +2177,6 @@
         "category": {
           "type": "string",
           "description": "The intent category."
-        },
-        "description": {
-          "type": "string",
-          "description": "The intent description."
-        },
-        "associatedEntities": {
-          "type": "array",
-          "description": "The list of associated entities.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationExportedAssociatedEntityLabel"
-          }
         }
       },
       "required": [
@@ -2778,116 +2249,6 @@
         "intent"
       ]
     },
-    "AnalyzeConversationAuthoringCopiedProjectJobState": {
-      "type": "object",
-      "description": "Represents the state of a copy job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
-    "AnalyzeConversationAuthoringCopiedProjectOptions": {
-      "type": "object",
-      "description": "Represents the options for copying an existing project to another Azure resource.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "targetProjectName": {
-          "type": "string",
-          "description": "The project name to be copied-into."
-        },
-        "accessToken": {
-          "type": "string",
-          "description": "The access token."
-        },
-        "expiresAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration of the access token."
-        },
-        "targetResourceId": {
-          "type": "string",
-          "description": "Represents the target Azure resource ID."
-        },
-        "targetResourceRegion": {
-          "type": "string",
-          "description": "Represents the target Azure resource region."
-        }
-      },
-      "required": [
-        "projectKind",
-        "targetProjectName",
-        "accessToken",
-        "expiresAt",
-        "targetResourceId",
-        "targetResourceRegion"
-      ]
-    },
-    "AnalyzeConversationAuthoringCopyAuthorizationOptions": {
-      "type": "object",
-      "description": "Represents the options for authorizing a project copy to the current Azure resource.",
-      "properties": {
-        "projectKind": {
-          "$ref": "#/definitions/ProjectKind",
-          "description": "Represents the project kind."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The name of the storage container."
-        },
-        "allowOverwrite": {
-          "type": "boolean",
-          "description": "Whether to allow an existing project to be overwritten using the resulting copy authorization."
-        }
-      },
-      "required": [
-        "projectKind"
-      ]
-    },
     "AnalyzeConversationAuthoringCreateDeploymentOptions": {
       "type": "object",
       "description": "Represents the options for creating or updating a project deployment.",
@@ -2896,11 +2257,11 @@
           "type": "string",
           "description": "Represents the trained model label."
         },
-        "assignedResources": {
+        "assignedResourceIds": {
           "type": "array",
-          "description": "Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
+          "description": "Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.",
           "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResource"
+            "type": "string"
           }
         }
       },
@@ -2919,10 +2280,6 @@
         "settings": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringProjectSettings",
           "description": "The project settings."
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name in case of conversation summarization."
         },
         "projectName": {
           "type": "string",
@@ -2945,63 +2302,6 @@
         "projectKind",
         "projectName",
         "language"
-      ]
-    },
-    "AnalyzeConversationAuthoringDataGenerationConnectionInfo": {
-      "type": "object",
-      "description": "Represents the connection info for the Azure resource to use during data generation.",
-      "properties": {
-        "kind": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionKind",
-          "description": "Connection type for data generation settings. Currently only supports Azure OpenAI."
-        },
-        "deploymentName": {
-          "type": "string",
-          "description": "Deployment name of model to be used for synthetic data generation."
-        },
-        "resourceId": {
-          "type": "string",
-          "description": "Resource ID for the data generation resource. Looks something like\n\"/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{resourceName}\"."
-        }
-      },
-      "required": [
-        "kind",
-        "deploymentName"
-      ]
-    },
-    "AnalyzeConversationAuthoringDataGenerationConnectionKind": {
-      "type": "string",
-      "description": "Represents the connection kind for Azure OpenAI deployment.",
-      "enum": [
-        "AzureOpenAI"
-      ],
-      "x-ms-enum": {
-        "name": "AnalyzeConversationAuthoringDataGenerationConnectionKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "AzureOpenAI",
-            "value": "AzureOpenAI"
-          }
-        ]
-      }
-    },
-    "AnalyzeConversationAuthoringDataGenerationSettings": {
-      "type": "object",
-      "description": "Settings to enable data generation for training augmentation.",
-      "properties": {
-        "enableDataGeneration": {
-          "type": "boolean",
-          "description": "Must be explicitly set to True to enable data generation to augment training data."
-        },
-        "dataGenerationConnectionInfo": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionInfo",
-          "description": "Must be filled out to enable data generation to augment training data."
-        }
-      },
-      "required": [
-        "enableDataGeneration",
-        "dataGenerationConnectionInfo"
       ]
     },
     "AnalyzeConversationAuthoringDeleteDeploymentOptions": {
@@ -3128,10 +2428,6 @@
         "region": {
           "type": "string",
           "description": "Represents the resource region."
-        },
-        "assignedAoaiResource": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationConnectionInfo",
-          "description": "Represents the AOAI resource assigned for data generation."
         }
       },
       "required": [
@@ -3297,89 +2593,6 @@
         "trueNegativeCount",
         "falsePositiveCount",
         "falseNegativeCount"
-      ]
-    },
-    "AnalyzeConversationAuthoringEvaluationJobResult": {
-      "type": "object",
-      "properties": {
-        "evaluationOptions": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions",
-          "description": "Represents the options used running the evaluation."
-        },
-        "modelLabel": {
-          "type": "string",
-          "description": "Represents trained model label."
-        },
-        "trainingConfigVersion": {
-          "type": "string",
-          "description": "Represents training config version."
-        },
-        "percentComplete": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Represents progress percentage."
-        }
-      },
-      "required": [
-        "evaluationOptions",
-        "modelLabel",
-        "trainingConfigVersion",
-        "percentComplete"
-      ]
-    },
-    "AnalyzeConversationAuthoringEvaluationJobState": {
-      "type": "object",
-      "description": "Represents the state of a evaluation job.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        },
-        "result": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationJobResult",
-          "description": "Represents evaluation task detailed result."
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status",
-        "result"
       ]
     },
     "AnalyzeConversationAuthoringEvaluationOptions": {
@@ -3633,56 +2846,6 @@
       ],
       "x-ms-discriminator-value": "Luis"
     },
-    "AnalyzeConversationAuthoringExportedModelJobState": {
-      "type": "object",
-      "description": "Represents the state of a job to create or updated an exported model.",
-      "properties": {
-        "jobId": {
-          "type": "string",
-          "description": "The job ID.",
-          "readOnly": true
-        },
-        "createdDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The creation date time of the job."
-        },
-        "lastUpdatedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last date time the job was updated."
-        },
-        "expirationDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The expiration date time of the job."
-        },
-        "status": {
-          "$ref": "#/definitions/JobStatus",
-          "description": "The job status."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "The warnings that were encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        },
-        "errors": {
-          "type": "array",
-          "description": "The errors encountered while executing the job.",
-          "items": {
-            "$ref": "#/definitions/Azure.Core.Foundations.Error"
-          }
-        }
-      },
-      "required": [
-        "jobId",
-        "createdDateTime",
-        "lastUpdatedDateTime",
-        "status"
-      ]
-    },
     "AnalyzeConversationAuthoringExportedOrchestrationOptions": {
       "type": "object",
       "description": "Represents the options used to define the orchestration behavior of an intent.",
@@ -3781,48 +2944,6 @@
         }
       ],
       "x-ms-discriminator-value": "QuestionAnswering"
-    },
-    "AnalyzeConversationAuthoringExportedTrainedModel": {
-      "type": "object",
-      "description": "Represents an exported trained model.",
-      "properties": {
-        "exportedModelName": {
-          "type": "string",
-          "description": "The exported model name.",
-          "readOnly": true
-        },
-        "modelId": {
-          "type": "string",
-          "description": "The model ID."
-        },
-        "lastTrainedDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last trained date time of the model."
-        },
-        "lastExportedModelDateTime": {
-          "type": "string",
-          "format": "date-time",
-          "description": "The last exported date time of the model."
-        },
-        "modelExpirationDate": {
-          "type": "string",
-          "format": "date",
-          "description": "The model expiration date."
-        },
-        "modelTrainingConfigVersion": {
-          "type": "string",
-          "description": "The model training config version."
-        }
-      },
-      "required": [
-        "exportedModelName",
-        "modelId",
-        "lastTrainedDateTime",
-        "lastExportedModelDateTime",
-        "modelExpirationDate",
-        "modelTrainingConfigVersion"
-      ]
     },
     "AnalyzeConversationAuthoringExportedUtteranceEntityLabel": {
       "type": "object",
@@ -4070,10 +3191,6 @@
         "category": {
           "type": "string",
           "description": "The intent category."
-        },
-        "description": {
-          "type": "string",
-          "description": "The intent description."
         }
       },
       "required": [
@@ -4291,14 +3408,6 @@
         "settings": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringProjectSettings",
           "description": "The project settings.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "storageInputContainerName": {
-          "type": "string",
-          "description": "The storage container name in case of conversation summarization.",
           "x-ms-mutability": [
             "read",
             "create"
@@ -4585,10 +3694,6 @@
         "evaluationOptions": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringEvaluationOptions",
           "description": "Represents the evaluation options. By default, the evaluation kind is percentage, with training split percentage as 80, and testing split percentage as 20."
-        },
-        "dataGenerationSettings": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringDataGenerationSettings",
-          "description": "For customers to populate if they wish to use data generation for their model training job."
         }
       },
       "required": [
@@ -4616,10 +3721,6 @@
           "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
           "description": "Represents the model training status."
         },
-        "dataGenerationStatus": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
-          "description": "Represents the model data generation status."
-        },
         "evaluationStatus": {
           "$ref": "#/definitions/AnalyzeConversationAuthoringSubTrainingJobState",
           "description": "Represents model evaluation status."
@@ -4633,8 +3734,7 @@
       "required": [
         "modelLabel",
         "trainingConfigVersion",
-        "trainingStatus",
-        "dataGenerationStatus"
+        "trainingStatus"
       ]
     },
     "AnalyzeConversationAuthoringTrainingJobState": {
@@ -4690,22 +3790,6 @@
         "lastUpdatedDateTime",
         "status",
         "result"
-      ]
-    },
-    "AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions": {
-      "type": "object",
-      "description": "Represents the options to unassign Azure resources from a project.",
-      "properties": {
-        "assignedResourceIds": {
-          "type": "array",
-          "description": "Represents the assigned resource IDs to be unassigned.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "assignedResourceIds"
       ]
     },
     "AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult": {
@@ -4802,19 +3886,6 @@
       "required": [
         "expectedIntent",
         "predictedIntent"
-      ]
-    },
-    "AnalyzeConversationExportedAssociatedEntityLabel": {
-      "type": "object",
-      "description": "Represents an associated entity label for an intent.",
-      "properties": {
-        "category": {
-          "type": "string",
-          "description": "The category of the entity label."
-        }
-      },
-      "required": [
-        "category"
       ]
     },
     "Azure.Core.Foundations.Error": {
@@ -4964,19 +4035,6 @@
         ]
       }
     },
-    "ExportedModelOptions": {
-      "type": "object",
-      "description": "Represents the options for creating or replacing an exported model.",
-      "properties": {
-        "trainedModelLabel": {
-          "type": "string",
-          "description": "The trained model label."
-        }
-      },
-      "required": [
-        "trainedModelLabel"
-      ]
-    },
     "JobStatus": {
       "type": "string",
       "enum": [
@@ -5079,27 +4137,6 @@
           "description": "The AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata items on this page",
           "items": {
             "$ref": "#/definitions/AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedAnalyzeConversationAuthoringExportedTrainedModel": {
-      "type": "object",
-      "description": "Paged collection of AnalyzeConversationAuthoringExportedTrainedModel items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The AnalyzeConversationAuthoringExportedTrainedModel items on this page",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringExportedTrainedModel"
           }
         },
         "nextLink": {
@@ -5284,8 +4321,7 @@
       "type": "string",
       "enum": [
         "Conversation",
-        "Orchestration",
-        "CustomConversationSummarization"
+        "Orchestration"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -5300,11 +4336,6 @@
             "name": "Orchestration",
             "value": "Orchestration",
             "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
-          },
-          {
-            "name": "CustomConversationSummarization",
-            "value": "CustomConversationSummarization",
-            "description": "A project to build conversation summarization models which are able to summarize long conversations."
           }
         ]
       }
@@ -5407,8 +4438,7 @@
       "type": "string",
       "enum": [
         "Conversation",
-        "Orchestration",
-        "CustomConversationSummarization"
+        "Orchestration"
       ],
       "x-ms-enum": {
         "name": "ProjectKind",
@@ -5423,11 +4453,6 @@
             "name": "Orchestration",
             "value": "Orchestration",
             "description": "A project to connect and orchestrate Conversation, Custom question answering and LUIS projects together in one single project."
-          },
-          {
-            "name": "CustomConversationSummarization",
-            "value": "CustomConversationSummarization",
-            "description": "A project to build conversation summarization models which are able to summarize long conversations."
           }
         ]
       },
