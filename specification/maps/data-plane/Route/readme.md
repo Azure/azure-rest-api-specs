@@ -45,6 +45,9 @@ modelerfour:
 directive:
   - suppress: IntegerTypeMustHaveFormat
     reason: Data-plane specs can suppress violations of this rule, since it only exists for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec (https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#integertypemusthaveformat).
+
+  - suppress: OperationIdNounVerb
+    reason: Fixing this risks introducing breaking changes.
 ```
 
 ### Tag: package-stable-2025-01-01

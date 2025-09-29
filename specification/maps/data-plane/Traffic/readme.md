@@ -35,6 +35,14 @@ credential-default-policy-type: BearerTokenCredentialPolicy
 credential-scopes: https://atlas.microsoft.com/.default
 ```
 
+### Suppression
+
+``` yaml
+directive:
+  - suppress: OperationIdNounVerb
+    reason: Fixing this risks introducing breaking changes.
+```
+
 ### Tag: package-deprecated-1.0
 
 These settings apply only when `--tag=package-deprecated-1.0` is specified on the command line.
@@ -51,10 +59,6 @@ These settings apply only when `--tag=package-stable-2025-01-01` is specified on
 ``` yaml $(tag) == 'package-stable-2025-01-01'
 input-file:
   - stable/2025-01-01/traffic.json
-
-suppressions:
-  - code: OperationIdNounVerb
-    reason: False alarm. Per the Noun_Verb convention for Operation Ids, the noun 'Traffic' should not appear after the underscore.
 ```
 
 # Code Generation
