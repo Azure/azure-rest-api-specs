@@ -47,6 +47,9 @@ modelerfour:
 directive:
   - suppress: INVALID_TYPE
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
+
+  - suppress: IntegerTypeMustHaveFormat
+    reason: Data-plane specs can suppress violations of this rule, since it only exists for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec (https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#integertypemusthaveformat).
 ```
 
 ### Tag: package-stable-2024-04-01

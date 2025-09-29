@@ -42,6 +42,8 @@ directive:
     from: timezone.json
     reason: It will break existing clients if we change the name
 
+  - suppress: IntegerTypeMustHaveFormat
+    reason: Data-plane specs can suppress violations of this rule, since it only exists for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec (https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#integertypemusthaveformat).
 ```
 
 ### Tag: package-stable-1.0
