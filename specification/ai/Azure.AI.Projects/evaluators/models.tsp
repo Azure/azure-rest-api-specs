@@ -154,7 +154,7 @@ union EvaluatorMetricType {
   @doc("Ordinal metric representing categories that can be ordered or ranked.")
   ordinal: "ordinal",
 
-  @doc("Continuous metric representing unbounded values")
+  @doc("Continuous metric representing values in a continuous range.")
   continuous: "continuous",
 
   @doc("Boolean metric representing true/false values")
