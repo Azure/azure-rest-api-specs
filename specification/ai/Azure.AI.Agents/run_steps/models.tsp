@@ -424,6 +424,35 @@ model RunStepDeltaAzureAISearchToolCall extends RunStepDeltaToolCall {
   azureAISearch: Record<string>;
 }
 
+/** Represents the Computer Use tool call in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaComputerUseToolCall extends RunStepDeltaToolCall {
+  /** The object type, which is always "computer_use_preview". */
+  type: "computer_use_preview";
+
+  /** The computer use data for the tool call. */
+  @encodedName("application/json", "computer_use_preview")
+  computerUsePreview?: RunStepDeltaComputerUseDetails;
+}
+
+/** Represents the Computer Use tool call details in a streaming run step. */
+@added(Versions.v2025_05_15_preview)
+model RunStepDeltaComputerUseDetails {
+  /** The action to be performed by the computer use tool. */
+  action?: ComputerUseAction;
+
+  /** Safety checks that are pending acknowledgment by the developer. */
+  @encodedName("application/json", "pending_safety_checks")
+  pendingSafetyChecks?: SafetyCheck[];
+
+  /** The output from the computer use tool, null if outputs have not yet been submitted. */
+  output?: ComputerScreenshot;
+
+  /** Safety checks that have been acknowledged by the developer, null if outputs have not yet been submitted. */
+  @encodedName("application/json", "acknowledged_safety_checks")
+  acknowledgedSafetyChecks?: SafetyCheck[];
+}
+
 @doc("Represents the Microsoft Fabric tool call in a streaming run step.")
 @added(Versions.v2025_05_15_preview)
 model RunStepDeltaMicrosoftFabricToolCall extends RunStepDeltaToolCall {
