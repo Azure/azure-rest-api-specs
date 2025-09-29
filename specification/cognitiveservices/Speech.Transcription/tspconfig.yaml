@@ -23,26 +23,24 @@ options:
     generate-protocol-methods: true
     generate-convenience-methods: true
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-speech-transcription"
     namespace: com.azure.ai.speech.transcription
     partial-update: true
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-speech-transcription"
     package-version: "1.0.0"
-    package-name: "{package-dir}"
+    package-name: "azure-ai-speech-transcription"
     package-pprint-name: '"Azure AI Speech Transcription"'
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
     flavor: azure
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription-rest"
-    package-dir: "azure-ai-speech-transcription-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-transcription"
+    is-modular-library: true
     package-details:
-      name: "@azure-rest/azure-ai-speech-transcription"
-    flavor: azure
+      name: "@azure/azure-ai-speech-transcription"
+    flavor: modular
   "@azure-tools/typespec-go":
     emitter-output-dir: "{output-dir}/{service-dir}/azspeechtranscription"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azspeechtranscription"

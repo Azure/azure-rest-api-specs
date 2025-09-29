@@ -15,27 +15,26 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/@azure-tools/typespec-autorest/{version-status}/{version}/Transcription.json"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.AI.Speech.BatchTranscription"
     namespace: "Azure.AI.Speech.BatchTranscription"
     clear-output-folder: true
     emitter-output-dir: "{output-dir}/{service-dir}/Azure.AI.Speech.BatchTranscription"
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-ai-speech-batchtranscription"
     namespace: com.azure.ai.speech.batchtranscription
     partial-update: true
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription"
+    is-modular-library: true
     package-details:
-      name: "@azure-rest/azure-ai-speech-batchtranscription"
-    flavor: azure
+      name: "@azure/azure-ai-speech-batchtranscription"
+      version: 1.0.0
+    flavor: modular
   "@azure-tools/typespec-python":
-    package-dir: "azure-ai-speech-batchtranscription"
     package-version: "1.0.0"
-    package-name: "{package-dir}"
+    package-name: "azure-ai-speech-batchtranscription"
     package-pprint-name: '"Azure AI Speech BatchTranscription"'
     emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-speech-batchtranscription"
     flavor: azure
