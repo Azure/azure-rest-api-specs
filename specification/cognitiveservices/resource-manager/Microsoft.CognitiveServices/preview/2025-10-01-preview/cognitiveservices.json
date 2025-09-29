@@ -5869,6 +5869,80 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/provisionManagedNetwork": {
+      "post": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Provisions the managed network of a cognitive services account.",
+        "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/AccountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Managed Network Provisioning Options for a cognitive services account.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Provision ManagedNetwork": {
+            "$ref": "./examples/ManagedNetwork/provisionManagedNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -10268,11 +10342,6 @@
       "description": "Managed Network settings for a cognitive services account.",
       "type": "object",
       "properties": {
-        "enableNetworkMonitor": {
-          "description": "A flag to indicate if monitoring needs to be enabled for the managed network.",
-          "type": "boolean",
-          "default": false
-        },
         "isolationMode": {
           "description": "Isolation mode for the managed network of a cognitive services account.",
           "$ref": "#/definitions/IsolationMode"
@@ -10301,12 +10370,18 @@
           "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
           "$ref": "#/definitions/ManagedNetworkKind"
         },
-        "firewallPublicIpAddress": {
+        "egressIpAddress": {
           "type": "string",
           "description": "Public IP address assigned to the Azure Firewall.",
           "readOnly": true,
           "x-nullable": true
         }
+      }
+    },
+    "ManagedNetworkProvisionOptions": {
+      "description": "Managed Network Provisioning options for managed network of a cognitive services account.",
+      "type": "object",
+      "properties": {
       }
     },
     "ManagedNetworkKind": {
@@ -10351,9 +10426,6 @@
       "description": "Status of the Provisioning for the managed network of a cognitive services account.",
       "type": "object",
       "properties": {
-        "sparkReady": {
-          "type": "boolean"
-        },
         "status": {
           "description": "Status for the managed network of a cognitive services account.",
           "$ref": "#/definitions/ManagedNetworkStatus"
