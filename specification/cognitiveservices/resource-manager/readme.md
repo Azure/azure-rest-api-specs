@@ -41,6 +41,24 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 input-file:
   - Microsoft.CognitiveServices/preview/2025-10-01-preview/cognitiveservices.json
 suppressions:
+  - code: ArmResourcePropertiesBag
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.definitions.OutboundRuleBasicResource
+  - code: AvoidAdditionalProperties
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.definitions.ManagedNetworkSettings.properties.outboundRules
+  - code: ProvisioningStateSpecifiedForLROPut
+    reason: This API is copied from Machine Learning Services RP where this behavior is already established.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
+  - code: PutResponseCodes
+    reason: This API is copied from Machine Learning Services RP where it is already established and in use.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}"].put
   - code: PutResponseCodes
     reason: This is existing behavior in all other APIs and already in stable version, will keep the same.
     where:
