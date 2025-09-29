@@ -106,7 +106,7 @@ model CriticalDataElement {
 
   @doc("The unique identifier of the critical data element.")
   @key("criticalDataElementId")
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   id: uuid;
 
   @doc("The name of the critical data element.")
@@ -288,7 +288,7 @@ model CriticalDataColumn {
 
   @doc("The identifier of the critical data column.")
   @key("criticalDataColumnId")
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   domain: uuid;
 
   @doc("The Id of the asset.")
@@ -360,7 +360,7 @@ model RelationshipWrapper {
 
   @doc("Unique identifier of the related entity.")
   @key
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   entityId: uuid;
 }
 
@@ -373,7 +373,7 @@ model CdeRelationshipWrapper {
 
   @doc("Unique identifier of the related entity.")
   @key
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   entityId: uuid;
 }
 
@@ -424,7 +424,7 @@ model CatalogModelDataAssetSchema {
 model DataAsset {
   @doc("The data asset identifier.")
   @key("dataAssetId")
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   id: uuid;
 
   @doc("Name of the asset.")
@@ -642,7 +642,7 @@ model DataProduct {
 
   @doc("The unique identifier of the data product.")
   @key("dataProductId")
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   id: uuid;
 
   @doc("The name of the data product.")
@@ -947,7 +947,7 @@ model Term {
 
   @doc("The unique identifier of the term.")
   @key("termId")
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   id: uuid;
 
   @doc("The name of the term.")
@@ -1076,7 +1076,7 @@ model TermRelationship {
 
   @doc("The unique identifier of the entity.")
   @key
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   entityId: uuid;
 
   @doc("The type of the term relationship.")
@@ -1120,7 +1120,7 @@ model ObjectiveWithAdditionalProperties {
 
   @doc("The unique identifier of the objective.")
   @key("objectiveId")
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   id: uuid;
 
   @doc("The definition of the objective.")
@@ -1325,7 +1325,7 @@ model KeyResult {
 
   @doc("The unique identifier of the domain.")
   @key
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   domainId: uuid;
 
   @doc("The progress of the key result.")
@@ -1473,7 +1473,7 @@ model DataAssetRelationshipWrapper {
 
   @doc("Unique identifier of the related entity.")
   @key
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   entityId: uuid;
 }
 
@@ -1508,7 +1508,7 @@ model DataProductRelationshipWrapper {
 
   @doc("Unique identifier of the related entity.")
   @key
-  @visibility(Lifecycle.Query)
+  @visibility(Lifecycle.Create)
   entityId: uuid;
 }
 
