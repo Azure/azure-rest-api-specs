@@ -57,15 +57,15 @@ interface SkuResources {
   /**
    * Gets the sku details for the given resource type and sku name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_Get")
   get is SkuResourceOps.Read<SkuResource>;
 
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_CreateOrUpdate")
   createOrUpdate is SkuResourceOps.CreateOrUpdateSync<
     SkuResource,
@@ -75,14 +75,14 @@ interface SkuResources {
   /**
    * Deletes a resource type sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_Delete")
   delete is SkuResourceOps.DeleteSync<SkuResource>;
 
   /**
    * Gets the list of skus for the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_ListByResourceTypeRegistrations")
   listByResourceTypeRegistrations is SkuResourceOps.List<
     SkuResource,
@@ -134,7 +134,7 @@ interface Skus {
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdateNestedResourceTypeFirst is SkusOps.CreateOrUpdateSync<
     SkuResource,
     Response = ArmResourceUpdatedResponse<SkuResource>
@@ -199,15 +199,15 @@ interface SkuResourceOperationGroup {
   /**
    * Gets the sku details for the given resource type and sku name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_GetNestedResourceTypeSecond")
   getNestedResourceTypeSecond is SkuResourceOperationGroupOps.Read<SkuResource>;
 
   /**
    * Creates or updates the resource type skus in the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_CreateOrUpdateNestedResourceTypeSecond")
   createOrUpdateNestedResourceTypeSecond is SkuResourceOperationGroupOps.CreateOrUpdateSync<
     SkuResource,
@@ -217,14 +217,14 @@ interface SkuResourceOperationGroup {
   /**
    * Deletes a resource type sku.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_DeleteNestedResourceTypeSecond")
   deleteNestedResourceTypeSecond is SkuResourceOperationGroupOps.DeleteSync<SkuResource>;
 
   /**
    * Gets the list of skus for the given resource type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Skus_ListByResourceTypeRegistrationsNestedResourceTypeSecond")
   listByResourceTypeRegistrationsNestedResourceTypeSecond is SkuResourceOperationGroupOps.List<
     SkuResource,
