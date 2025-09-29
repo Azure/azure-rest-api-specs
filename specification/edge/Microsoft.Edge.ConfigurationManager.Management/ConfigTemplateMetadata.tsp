@@ -23,7 +23,7 @@ model HierarchyMetadata {
   @visibility(Lifecycle.Read)
   hierarchyIds?: Azure.Core.armResourceIdentifier<[
     {
-      type: "Private.Edge/Targets";
+      type: "Microsoft.Edge/Targets";
     },
     {
       type: "Microsoft.Edge/Sites";
