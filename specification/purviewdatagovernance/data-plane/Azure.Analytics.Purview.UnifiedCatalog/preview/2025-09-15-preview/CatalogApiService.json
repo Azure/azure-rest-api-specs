@@ -194,7 +194,7 @@
           {
             "name": "domainId",
             "in": "path",
-            "description": "Identifier of the domain to retrieve.",
+            "description": "The unique identifier of the domain.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -293,7 +293,7 @@
           {
             "name": "domainId",
             "in": "path",
-            "description": "Identifier of the domain to retrieve.",
+            "description": "The unique identifier of the domain.",
             "required": true,
             "type": "string",
             "format": "uuid"
@@ -6581,7 +6581,10 @@
         },
         "id": {
           "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the domain."
+          "description": "The unique identifier of the domain.",
+          "x-ms-mutability": [
+            "create"
+          ]
         },
         "name": {
           "type": "string",
@@ -6598,6 +6601,10 @@
         "description": {
           "type": "string",
           "description": "The description of the domain."
+        },
+        "parentId": {
+          "$ref": "#/definitions/Azure.Core.uuid",
+          "description": "Identifier of the domain to retrieve."
         },
         "thumbnail": {
           "$ref": "#/definitions/CatalogModelDomainAllOfThumbnail",
@@ -6619,7 +6626,9 @@
         }
       },
       "required": [
+        "id",
         "systemData",
+        "parentId",
         "thumbnail",
         "domains",
         "managedAttributes"

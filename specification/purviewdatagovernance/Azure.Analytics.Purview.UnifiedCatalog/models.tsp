@@ -825,7 +825,9 @@ model Domain {
   type?: CatalogModelDomainTypeEnum;
 
   @doc("The unique identifier of the domain.")
-  id?: uuid;
+  @key("domainId")
+  @visibility(Lifecycle.Create)
+  id: uuid;
 
   @doc("The name of the domain.")
   name?: string;
@@ -840,8 +842,6 @@ model Domain {
   description?: string;
 
   @doc("Identifier of the domain to retrieve.")
-  @key("domainId")
-  @visibility(Lifecycle.Query)
   parentId: uuid;
 
   @doc("The thumbnail properties of the domain.")
