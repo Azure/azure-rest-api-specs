@@ -483,7 +483,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
 /**
  * Represents the options for deleting a project deployment.
  */
-@renamedFrom(Versions.v2025_11_01, "ConversationalAnalysisAuthoringDeploymentAzureResourceIds")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentAzureResourceIds")
 model AnalyzeConversationAuthoringDeleteDeploymentOptions {
   /**
    * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
@@ -1002,7 +1002,7 @@ model AnalyzeConversationAuthoringLoadSnapshotJobState {
  * Represents the assigned deployment resources.
  */
 @added(Versions.v2025_11_01)
-@renamedFrom(Versions.v2025_11_01, "ConversationalAnalysisAuthoringDeploymentResourcesInfoList")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourcesInfoList")
 model AnalyzeConversationAuthoringAssignedDeploymentResources {
   /**
    * The list of assigned deployment resources.
@@ -1021,7 +1021,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
 @added(Versions.v2025_11_01)
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-@renamedFrom(Versions.v2025_11_01, "ConversationalAnalysisAuthoringDeploymentResourceInfo")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourceInfo")
 model AnalyzeConversationAuthoringAssignedDeploymentResource {
   /**
    * The resource ID.
@@ -1040,7 +1040,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
  * Represents the options for assigning Azure resources to a project.
  */
 @added(Versions.v2025_11_01)
-@renamedFrom(Versions.v2025_11_01, "ConversationalAnalysisAuthoringDeploymentResourceAssignments")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourceAssignments")
 model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
    * Represents the metadata for the resources to be assigned.
@@ -1052,7 +1052,7 @@ model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
 /**
  * Represents metadata for the Azure resource..
  */
-@renamedFrom(Versions.v2025_11_01, "ConversationalAnalysisAuthoringDeploymentResourceAssignmentInfo")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourceAssignmentInfo")
 model AnalyzeConversationAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.

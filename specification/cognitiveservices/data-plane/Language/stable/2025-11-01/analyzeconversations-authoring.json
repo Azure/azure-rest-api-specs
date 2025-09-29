@@ -725,7 +725,7 @@
             "description": "The options for deleting the deployment.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringDeleteDeploymentOptions"
+              "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentAzureResourceIds"
             }
           }
         ],
@@ -1432,7 +1432,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedAnalyzeConversationAuthoringAssignedDeploymentResource"
+              "$ref": "#/definitions/PagedAnalyzeConversationAuthoringDeploymentResourceInfo"
             }
           },
           "default": {
@@ -1475,7 +1475,7 @@
             "description": "The new project resources info.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringAssignDeploymentResourcesOptions"
+              "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResourceAssignments"
             }
           }
         ],
@@ -1528,7 +1528,7 @@
             "description": "The info for the deployment resources to be deleted.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/AnalyzeConversationAuthoringDeleteDeploymentOptions"
+              "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentAzureResourceIds"
             }
           }
         ],
@@ -2023,41 +2023,6 @@
     }
   },
   "definitions": {
-    "AnalyzeConversationAuthoringAssignDeploymentResourcesOptions": {
-      "type": "object",
-      "description": "Represents the options for assigning Azure resources to a project.",
-      "properties": {
-        "resourcesMetadata": {
-          "type": "array",
-          "description": "Represents the metadata for the resources to be assigned.",
-          "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringResourceMetadata"
-          }
-        }
-      },
-      "required": [
-        "resourcesMetadata"
-      ]
-    },
-    "AnalyzeConversationAuthoringAssignedDeploymentResource": {
-      "type": "object",
-      "description": "Represents the assigned deployment resource.",
-      "properties": {
-        "azureResourceId": {
-          "type": "string",
-          "description": "The resource ID.",
-          "readOnly": true
-        },
-        "region": {
-          "type": "string",
-          "description": "The resource region."
-        }
-      },
-      "required": [
-        "azureResourceId",
-        "region"
-      ]
-    },
     "AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata": {
       "type": "object",
       "description": "Represents the metadata for an assigned deployment",
@@ -2304,7 +2269,7 @@
         "language"
       ]
     },
-    "AnalyzeConversationAuthoringDeleteDeploymentOptions": {
+    "AnalyzeConversationAuthoringDeploymentAzureResourceIds": {
       "type": "object",
       "description": "Represents the options for deleting a project deployment.",
       "properties": {
@@ -2432,6 +2397,64 @@
       },
       "required": [
         "resourceId",
+        "region"
+      ]
+    },
+    "AnalyzeConversationAuthoringDeploymentResourceAssignmentInfo": {
+      "type": "object",
+      "description": "Represents metadata for the Azure resource..",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "Represents the Azure resource ID."
+        },
+        "customDomain": {
+          "type": "string",
+          "description": "Represents the Azure resource custom domain."
+        },
+        "region": {
+          "type": "string",
+          "description": "Represents the Azure resource region."
+        }
+      },
+      "required": [
+        "azureResourceId",
+        "customDomain",
+        "region"
+      ]
+    },
+    "AnalyzeConversationAuthoringDeploymentResourceAssignments": {
+      "type": "object",
+      "description": "Represents the options for assigning Azure resources to a project.",
+      "properties": {
+        "resourcesMetadata": {
+          "type": "array",
+          "description": "Represents the metadata for the resources to be assigned.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResourceAssignmentInfo"
+          }
+        }
+      },
+      "required": [
+        "resourcesMetadata"
+      ]
+    },
+    "AnalyzeConversationAuthoringDeploymentResourceInfo": {
+      "type": "object",
+      "description": "Represents the assigned deployment resource.",
+      "properties": {
+        "azureResourceId": {
+          "type": "string",
+          "description": "The resource ID.",
+          "readOnly": true
+        },
+        "region": {
+          "type": "string",
+          "description": "The resource region."
+        }
+      },
+      "required": [
+        "azureResourceId",
         "region"
       ]
     },
@@ -3516,29 +3539,6 @@
         "hasSnapshot"
       ]
     },
-    "AnalyzeConversationAuthoringResourceMetadata": {
-      "type": "object",
-      "description": "Represents metadata for the Azure resource..",
-      "properties": {
-        "azureResourceId": {
-          "type": "string",
-          "description": "Represents the Azure resource ID."
-        },
-        "customDomain": {
-          "type": "string",
-          "description": "Represents the Azure resource custom domain."
-        },
-        "region": {
-          "type": "string",
-          "description": "Represents the Azure resource region."
-        }
-      },
-      "required": [
-        "azureResourceId",
-        "customDomain",
-        "region"
-      ]
-    },
     "AnalyzeConversationAuthoringSubTrainingJobState": {
       "type": "object",
       "description": "Represents the detailed state of a training sub-operation.",
@@ -4107,15 +4107,15 @@
         ]
       }
     },
-    "PagedAnalyzeConversationAuthoringAssignedDeploymentResource": {
+    "PagedAnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata": {
       "type": "object",
-      "description": "Paged collection of AnalyzeConversationAuthoringAssignedDeploymentResource items",
+      "description": "Paged collection of AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AnalyzeConversationAuthoringAssignedDeploymentResource items on this page",
+          "description": "The AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata items on this page",
           "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringAssignedDeploymentResource"
+            "$ref": "#/definitions/AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata"
           }
         },
         "nextLink": {
@@ -4128,15 +4128,15 @@
         "value"
       ]
     },
-    "PagedAnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata": {
+    "PagedAnalyzeConversationAuthoringDeploymentResourceInfo": {
       "type": "object",
-      "description": "Paged collection of AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata items",
+      "description": "Paged collection of AnalyzeConversationAuthoringDeploymentResourceInfo items",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata items on this page",
+          "description": "The AnalyzeConversationAuthoringDeploymentResourceInfo items on this page",
           "items": {
-            "$ref": "#/definitions/AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata"
+            "$ref": "#/definitions/AnalyzeConversationAuthoringDeploymentResourceInfo"
           }
         },
         "nextLink": {
