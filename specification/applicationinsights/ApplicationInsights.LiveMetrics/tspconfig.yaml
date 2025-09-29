@@ -14,7 +14,7 @@ options:
     omit-unreachable-types: true
     output-file: "{azure-resource-provider-folder}/LiveMetrics/{version-status}/{version}/livemetrics.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-applicationinsights-livemetrics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-applicationinsights-livemetrics"
     namespace: "azure.applicationinsights.livemetrics"
     flavor: azure
     generate-test: true
@@ -26,7 +26,7 @@ options:
     model-namespace: false
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "livemetrics-rest"
+    emitter-output-dir: "{output-dir}/{service-dir}/livemetrics-rest"
     generate-metadata: true
     is-modular-library: false
     package-details:
