@@ -52,7 +52,7 @@ These are the global settings for the Subscription API.
 
 ``` yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-2024-08-preview
 ```
 
 ### Tag: package-2024-08-preview
@@ -72,7 +72,6 @@ These settings apply only when `--tag=package-2021-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2021-10'
 input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 - Microsoft.Subscription/stable/2021-10-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
@@ -84,7 +83,6 @@ These settings apply only when `--tag=package-2020-09` is specified on the comma
 
 ``` yaml $(tag) == 'package-2020-09'
 input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 - Microsoft.Subscription/stable/2020-09-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
@@ -107,7 +105,6 @@ These settings apply only when `--tag=package-2019-10-preview` is specified on t
 
 ``` yaml $(tag) == 'package-2019-10-preview'
 input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 - Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
@@ -122,7 +119,6 @@ input-file:
 - Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
 - Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
 - Microsoft.Subscription/preview/2018-03-01-preview/operations.json
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -134,7 +130,6 @@ These settings apply only when `--tag=package-2018-03-preview` is specified on t
 ``` yaml $(tag) == 'package-2018-11-preview'
 input-file:
 - Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -146,7 +141,6 @@ These settings apply only when `--tag=package-2018-03-preview` is specified on t
 ``` yaml $(tag) == 'package-2018-03-preview'
 input-file:
 - Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -236,18 +230,3 @@ java:
 regenerate-manager: true
 generate-interface: true
 ```
-
-### Tag: package-2016-06-01
-
-These settings apply only when `--tag=package-2016-06-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-06-01'
-input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
-title: SubscriptionClient
-description: The subscription client
-```
-
-
-
-
