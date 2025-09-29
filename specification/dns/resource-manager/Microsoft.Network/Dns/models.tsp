@@ -2,10 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Network;
 
@@ -383,7 +380,6 @@ model TxtRecord {
   /**
    * The text value of this TXT record.
    */
-  @identifiers(#[])
   value?: string[];
 }
 
@@ -580,7 +576,6 @@ model ZoneProperties {
    * The name servers for this DNS zone. This is a read-only property and any attempt to set this value will be ignored.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   nameServers?: string[];
 
   /**

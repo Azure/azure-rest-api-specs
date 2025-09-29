@@ -878,13 +878,11 @@ model NetworkACL {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @identifiers(#[])
   allow?: WebPubSubRequestType[];
 
   /**
    * Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @identifiers(#[])
   deny?: WebPubSubRequestType[];
 }
 

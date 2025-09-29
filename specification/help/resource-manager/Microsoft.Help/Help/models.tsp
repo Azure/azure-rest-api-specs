@@ -3,8 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -588,7 +586,6 @@ model SolutionMetadataProperties {
    * Required parameters for invoking this particular solution.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   requiredInputs?: string[];
 }
 
@@ -795,7 +792,6 @@ model SolutionsDiagnostic {
   /**
    * Required parameters of this item
    */
-  @identifiers(#[])
   requiredParameters?: string[];
 
   /**

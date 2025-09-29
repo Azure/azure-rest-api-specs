@@ -6,6 +6,7 @@ import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Confluent;

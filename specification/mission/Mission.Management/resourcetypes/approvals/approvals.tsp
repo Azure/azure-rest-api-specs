@@ -4,6 +4,7 @@ import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 using Azure.Core;
+using Azure.ResourceManager;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;

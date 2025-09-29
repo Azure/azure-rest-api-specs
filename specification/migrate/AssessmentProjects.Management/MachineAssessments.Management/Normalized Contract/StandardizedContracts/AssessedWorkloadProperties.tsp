@@ -2,12 +2,7 @@ import "./CommonModels.tsp";
 import "./CommonAssessmentPropertiesEnums.tsp";
 import "../Enums/Enums.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -123,7 +118,6 @@ model Configuration {
 model RecommendedFor {
   @doc("The list of strategy type.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   strategies?: StrategyType[];
 }
 
@@ -147,7 +141,6 @@ model MigrationIssues {
 
   @doc("The recommended action.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   recommendedActions?: string[];
 
   @doc("The more information list.")

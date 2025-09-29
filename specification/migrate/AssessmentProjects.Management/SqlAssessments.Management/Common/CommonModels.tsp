@@ -4,12 +4,7 @@ import "../Normalized Contract/StandardizedContracts/AssessedWorkloadProperties.
 import "../Normalized Contract/StandardizedContracts/CostComponent.tsp";
 import "../Normalized Contract/StandardizedContracts/ProductSupportStatus.tsp";
 
-using TypeSpec.Http;
-using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -294,7 +289,6 @@ model SqlPaaSTargetOptions {
   serviceTier?: AzureSqlServiceTier;
 
   @doc("Gets or sets the target location.")
-  @identifiers(#[])
   targetLocations?: AzureLocation[];
 }
 
@@ -352,7 +346,6 @@ model SqlVmSettings {
     Gets or sets the Azure VM families (calling instance series to keep it
     consistent with other targets).
     """)
-  @identifiers(#[])
   instanceSeries?: AzureVmFamily[];
 }
 

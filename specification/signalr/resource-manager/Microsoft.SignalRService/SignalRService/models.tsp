@@ -3,10 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.SignalRService;
 
@@ -708,7 +705,6 @@ model PrivateEndpointConnectionProperties {
    * Group IDs
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   groupIds?: string[];
 
   /**
@@ -775,7 +771,6 @@ model SharedPrivateLinkResourceProperties {
   /**
    * A list of FQDNs for third party private link service
    */
-  @identifiers(#[])
   fqdns?: string[];
 
   /**
@@ -901,7 +896,6 @@ model SignalRCorsSettings {
   /**
    * Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use "*" to allow all. If omitted, allow all by default.
    */
-  @identifiers(#[])
   allowedOrigins?: string[];
 }
 
@@ -1056,13 +1050,11 @@ model NetworkACL {
   /**
    * Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @identifiers(#[])
   allow?: SignalRRequestType[];
 
   /**
    * Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.
    */
-  @identifiers(#[])
   deny?: SignalRRequestType[];
 }
 
@@ -1359,13 +1351,11 @@ model PrivateLinkResourceProperties {
   /**
    * Required members of the private link resource
    */
-  @identifiers(#[])
   requiredMembers?: string[];
 
   /**
    * Required private DNS zone names
    */
-  @identifiers(#[])
   requiredZoneNames?: string[];
 
   /**
@@ -1520,7 +1510,6 @@ model SkuCapacity {
    * Allows capacity value list.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   allowedValues?: int32[];
 
   /**

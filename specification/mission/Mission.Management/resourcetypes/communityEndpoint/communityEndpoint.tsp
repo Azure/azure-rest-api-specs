@@ -3,7 +3,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/rest";
 import "@typespec/versioning";
 
-using OpenAPI;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using Azure.Core;
 

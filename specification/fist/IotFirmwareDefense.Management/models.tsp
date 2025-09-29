@@ -3,8 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using OpenAPI;
 using Versioning;
+using Azure.ResourceManager;
 
 @versioned(Versions)
 namespace Microsoft.IoTFirmwareDefense;

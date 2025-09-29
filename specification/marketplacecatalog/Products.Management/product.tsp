@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."

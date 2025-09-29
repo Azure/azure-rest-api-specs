@@ -1,7 +1,7 @@
 import "@typespec/openapi";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Azure.ResourceManager;
 
 namespace Microsoft.ContainerService;
 

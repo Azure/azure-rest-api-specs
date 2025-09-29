@@ -6,6 +6,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 namespace Microsoft.DevTestLab;
 
 using OpenAPI;
+using Azure.ResourceManager;
 
 /**
  * The storage type for the disk (i.e. Standard, Premium).

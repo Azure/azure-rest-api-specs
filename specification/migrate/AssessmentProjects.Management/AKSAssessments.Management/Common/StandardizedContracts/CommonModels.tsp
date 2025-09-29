@@ -212,7 +212,6 @@ model AssessedNetworkAdaptersV3 {
 
   @doc("Gets the ip addresses.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
   ipAddresses?: string[];
 
   @doc("Gets the megabytes per second received.")
