@@ -33,11 +33,11 @@ model SessionCodeExecutionRequest {
   returnJupyterFormatExecutionResult?: boolean;
 
   @added(Versions.v2025_10_02_preview)
-  @doc("Shell command to execute. Only available for a `Shell` typed session pool.")
+  @doc("Shell command to execute in Bash. Only available for a `Shell` typed session pool. Cannot coexist with `execCommandAndArgs`.")
   shellCommand?: string;
 
   @added(Versions.v2025_10_02_preview)
-  @doc("Whether to use a new empty kernel for this execution. Default is false.")
+  @doc("The executable and its arguments. Only available for a `Shell` typed session pool. Cannot coexist with `shellCommand`.")
   execCommandAndArgs?: string[];
 
   @added(Versions.v2025_10_02_preview)

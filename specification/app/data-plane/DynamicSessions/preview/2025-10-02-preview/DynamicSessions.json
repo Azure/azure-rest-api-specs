@@ -940,11 +940,11 @@
         },
         "shellCommand": {
           "type": "string",
-          "description": "Shell command to execute. Only available for a `Shell` typed session pool."
+          "description": "Shell command to execute in Bash. Only available for a `Shell` typed session pool. Cannot coexist with `execCommandAndArgs`."
         },
         "execCommandAndArgs": {
           "type": "array",
-          "description": "Whether to use a new empty kernel for this execution. Default is false.",
+          "description": "The executable and its arguments. Only available for a `Shell` typed session pool. Cannot coexist with `shellCommand`.",
           "items": {
             "type": "string"
           }
