@@ -13,12 +13,6 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "./models.tsp";
 import "./back-compatible.tsp";
-import "./ProvisionedCluster.tsp";
-import "./ProvisionedClusterUpgradeProfile.tsp";
-import "./HybridIdentityMetadata.tsp";
-import "./AgentPool.tsp";
-import "./KubernetesVersionProfile.tsp";
-import "./VmSkuProfile.tsp";
 import "./VirtualNetwork.tsp";
 
 using TypeSpec.Rest;
@@ -30,6 +24,7 @@ using TypeSpec.Versioning;
 /**
  * The Microsoft.HybridContainerService Rest API spec.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "For backward compatibility"
 @armProviderNamespace
 @service(#{ title: "HybridContainerService" })
 @versioned(Versions)
@@ -45,5 +40,3 @@ enum Versions {
    */
   v2025_02_01_preview: "2025-02-01-preview",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}

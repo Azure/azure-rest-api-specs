@@ -1,0 +1,703 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "HybridContainerService",
+    "version": "2025-02-01-preview",
+    "description": "The Microsoft.HybridContainerService Rest API spec.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "VirtualNetworks"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.HybridContainerService/virtualNetworks": {
+      "get": {
+        "operationId": "virtualNetworks_ListBySubscription",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Lists the virtual networks in the specified subscription",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_ListBySubscription_MaximumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_ListBySubscription_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_ListBySubscription_MinimumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_ListBySubscription_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks": {
+      "get": {
+        "operationId": "virtualNetworks_ListByResourceGroup",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Lists the virtual networks in the specified resource group",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetworksListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_ListByResourceGroup_MaximumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_ListByResourceGroup_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_ListByResourceGroup_MinimumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_ListByResourceGroup_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.HybridContainerService/virtualNetworks/{virtualNetworkName}": {
+      "get": {
+        "operationId": "virtualNetworks_Retrieve",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Gets the specified virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Parameter for the name of the virtual network",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Retrieve_MaximumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_Retrieve_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_Retrieve_MinimumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_Retrieve_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "virtualNetworks_CreateOrUpdate",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Creates or updates the virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Parameter for the name of the virtual network",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "virtualNetworks",
+            "in": "body",
+            "description": "Virtual Network resource definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'virtualNetwork' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          },
+          "201": {
+            "description": "Resource 'virtualNetwork' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/virtualNetwork"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "virtualNetworks_Update",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Patches the virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Parameter for the name of the virtual network",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          },
+          {
+            "name": "virtualNetworks",
+            "in": "body",
+            "description": "Virtual Network resource patch definition",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/VirtualNetworksPatch"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/virtualNetwork"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Update_MaximumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_Update_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_Update_MinimumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_Update_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/virtualNetwork"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "virtualNetworks_Delete",
+        "tags": [
+          "VirtualNetworks"
+        ],
+        "description": "Deletes the specified virtual network resource",
+        "parameters": [
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "virtualNetworkName",
+            "in": "path",
+            "description": "Parameter for the name of the virtual network",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 64,
+            "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-_a-zA-Z0-9]{0,61}[a-zA-Z0-9]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "VirtualNetworks_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_Delete_MaximumSet_Gen.json"
+          },
+          "VirtualNetworks_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/VirtualNetworks_Delete_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "ExtendedLocationTypes": {
+      "type": "string",
+      "description": "The extended location type. Allowed value: 'CustomLocation'",
+      "enum": [
+        "CustomLocation"
+      ],
+      "x-ms-enum": {
+        "name": "ExtendedLocationTypes",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CustomLocation",
+            "value": "CustomLocation"
+          }
+        ]
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Pending",
+        "Creating",
+        "Deleting",
+        "Updating",
+        "Accepted"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "VirtualNetworkExtendedLocation": {
+      "type": "object",
+      "description": "Extended location pointing to the underlying infrastructure",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ExtendedLocationTypes",
+          "description": "The extended location type. Allowed value: 'CustomLocation'"
+        },
+        "name": {
+          "type": "string",
+          "description": "ARM Id of the extended location."
+        }
+      }
+    },
+    "VirtualNetworkProperties": {
+      "type": "object",
+      "description": "Properties of the virtual network resource",
+      "properties": {
+        "infraVnetProfile": {
+          "$ref": "#/definitions/VirtualNetworkPropertiesInfraVnetProfile"
+        },
+        "vipPool": {
+          "type": "array",
+          "description": "Range of IP Addresses for Kubernetes API Server and services if using HA Proxy load balancer",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkPropertiesVipPoolItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "vmipPool": {
+          "type": "array",
+          "description": "Range of IP Addresses for Kubernetes node VMs",
+          "items": {
+            "$ref": "#/definitions/VirtualNetworkPropertiesVmipPoolItem"
+          },
+          "x-ms-identifiers": []
+        },
+        "dnsServers": {
+          "type": "array",
+          "description": "List of DNS server IP Addresses associated with the network",
+          "items": {
+            "type": "string"
+          }
+        },
+        "gateway": {
+          "type": "string",
+          "description": "IP Address of the Gateway associated with the network"
+        },
+        "ipAddressPrefix": {
+          "type": "string",
+          "description": "IP Address Prefix of the network"
+        },
+        "vlanID": {
+          "type": "integer",
+          "format": "int32",
+          "description": "VLAN Id used by the network"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "readOnly": true
+        },
+        "status": {
+          "$ref": "#/definitions/VirtualNetworkPropertiesStatus",
+          "description": "Status of the virtual network resource",
+          "readOnly": true
+        }
+      }
+    },
+    "VirtualNetworkPropertiesInfraVnetProfile": {
+      "type": "object",
+      "properties": {
+        "hci": {
+          "$ref": "#/definitions/VirtualNetworkPropertiesInfraVnetProfileHci",
+          "description": "Infrastructure network profile for HCI platform"
+        }
+      }
+    },
+    "VirtualNetworkPropertiesInfraVnetProfileHci": {
+      "type": "object",
+      "description": "Infrastructure network profile for HCI platform",
+      "properties": {
+        "mocGroup": {
+          "type": "string",
+          "description": "Group in MOC(Microsoft On-premises Cloud)"
+        },
+        "mocLocation": {
+          "type": "string",
+          "description": "Location in MOC(Microsoft On-premises Cloud)"
+        },
+        "mocVnetName": {
+          "type": "string",
+          "description": "Virtual Network name in MOC(Microsoft On-premises Cloud)"
+        }
+      }
+    },
+    "VirtualNetworkPropertiesStatus": {
+      "type": "object",
+      "description": "Status of the virtual network resource",
+      "properties": {
+        "operationStatus": {
+          "$ref": "#/definitions/VirtualNetworkPropertiesStatusOperationStatus",
+          "description": "The detailed status of the long running operation."
+        }
+      }
+    },
+    "VirtualNetworkPropertiesStatusOperationStatus": {
+      "type": "object",
+      "description": "The detailed status of the long running operation.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/VirtualNetworkPropertiesStatusOperationStatusError",
+          "description": "The error if any from the operation."
+        },
+        "operationId": {
+          "type": "string",
+          "description": "The identifier of the operation."
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the operation."
+        }
+      }
+    },
+    "VirtualNetworkPropertiesStatusOperationStatusError": {
+      "type": "object",
+      "description": "The error if any from the operation.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "The error code from the operation."
+        },
+        "message": {
+          "type": "string",
+          "description": "The error message from the operation."
+        }
+      }
+    },
+    "VirtualNetworkPropertiesVipPoolItem": {
+      "type": "object",
+      "properties": {
+        "endIP": {
+          "type": "string",
+          "description": "Ending IP address for the IP Pool"
+        },
+        "startIP": {
+          "type": "string",
+          "description": "Starting IP address for the IP Pool"
+        }
+      }
+    },
+    "VirtualNetworkPropertiesVmipPoolItem": {
+      "type": "object",
+      "properties": {
+        "endIP": {
+          "type": "string",
+          "description": "Ending IP address for the IP Pool"
+        },
+        "startIP": {
+          "type": "string",
+          "description": "Starting IP address for the IP Pool"
+        }
+      }
+    },
+    "VirtualNetworksPatch": {
+      "type": "object",
+      "description": "The Virtual Network resource patch definition.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "virtualNetwork": {
+      "type": "object",
+      "description": "The Virtual Network resource definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/VirtualNetworkProperties",
+          "description": "Properties of the virtual network resource"
+        },
+        "extendedLocation": {
+          "$ref": "#/definitions/VirtualNetworkExtendedLocation",
+          "description": "Extended location pointing to the underlying infrastructure"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "virtualNetworksListResult": {
+      "type": "object",
+      "description": "A list of virtual network resources.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The collection of virtual networks.",
+          "items": {
+            "$ref": "#/definitions/virtualNetwork"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URL to get the next set of results."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}

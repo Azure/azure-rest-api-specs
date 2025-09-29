@@ -1038,20 +1038,6 @@ model provisionedClusterListResult {
   nextLink?: string;
 }
 
-/**
- * A list of virtual network resources.
- */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change"
-model virtualNetworksListResult {
-  @pageItems
-  @doc("The collection of virtual networks.")
-  value?: virtualNetwork[];
-
-  @nextLink
-  @doc("The URL to get the next set of results.")
-  nextLink?: string;
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model VmSkuProfileProperties {
   /**
@@ -1329,17 +1315,6 @@ model VirtualNetworkExtendedLocation {
    * ARM Id of the extended location.
    */
   name?: string;
-}
-
-/**
- * The Virtual Network resource patch definition.
- */
-model VirtualNetworksPatch {
-  /**
-   * Resource tags
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
-  tags?: Record<string>;
 }
 
 /**

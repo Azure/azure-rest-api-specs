@@ -113,14 +113,3 @@ using Microsoft.HybridContainerService;
 @@clientName(VmSkuProfiles.putVMSkus::parameters.resource, "skus");
 @@clientLocation(VmSkuProfiles.deleteVMSkus, "");
 @@clientLocation(VmSkuProfiles.list, "VMSkus");
-
-@@clientLocation(VirtualNetworks.retrieve, "virtualNetworks");
-@@clientLocation(VirtualNetworks.createOrUpdate, "virtualNetworks");
-@@clientName(VirtualNetworks.createOrUpdate::parameters.resource,
-  "virtualNetworks"
-);
-@@clientLocation(VirtualNetworks.update, "virtualNetworks");
-@@clientName(VirtualNetworks.update::parameters.properties, "virtualNetworks");
-@@clientLocation(VirtualNetworks.delete, "virtualNetworks");
-@@clientLocation(VirtualNetworks.listByResourceGroup, "virtualNetworks");
-@@clientLocation(VirtualNetworks.listBySubscription, "virtualNetworks");

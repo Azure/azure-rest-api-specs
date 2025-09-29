@@ -41,14 +41,8 @@ These settings apply only when `--tag=package-preview-2025-02-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-02-01-preview'
 input-file:
-  - Microsoft.HybridContainerService/preview/2025-02-01-preview/openapi.json
-suppressions:
-  - code: AvoidAdditionalProperties
-    reason: Consistent with azure aks, they are pass thru (user defined) and not subject to any validations. 
-    where: 
-      - $.definitions.AgentPoolProperties.properties.nodeLabels
-      - $.definitions.KubernetesVersionProperties.properties.patchVersions
-      - $.definitions.NamedAgentPoolProfile.properties.nodeLabels
+  - Microsoft.HybridContainerService/preview/2025-02-01-preview/provisionedClusterInstances.json
+  - Microsoft.HybridContainerService/preview/2025-02-01-preview/virtualNetworks.json
 ```
 
 ### Tag: package-2024-01
