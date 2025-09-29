@@ -4617,7 +4617,7 @@ model UsageAndQuotaDetails {
   /**
    * Model collection name
    */
-  modelCollection?: string;
+  modelCollection?: string | null;
 
   /**
    * The total number of quota
@@ -4627,7 +4627,7 @@ model UsageAndQuotaDetails {
   /**
    * Usage details for each deployment
    */
-  usageDetails?: PTUDeploymentUsage[];
+  usageDetails?: PTUDeploymentUsage[] | null;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
