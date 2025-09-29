@@ -266,132 +266,132 @@ op DeleteCriticalDataColumnRelationship is RpcOperation<
   DeleteResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Lists data assets with optional ordering and pagination.")
-@get
-op ListDataAssets is UnifiedCatalogOperations.ResourceList<
-  DataAsset,
-  ListQueryParametersTrait<{
-    @doc("Expressions that specify the order of returned results.")
-    @query
-    orderBy?: string;
-  } & SkipQueryParameter &
-    TopQueryParameter>
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Lists data assets with optional ordering and pagination.")
+// @get
+// op ListDataAssets is UnifiedCatalogOperations.ResourceList<
+//   DataAsset,
+//   ListQueryParametersTrait<{
+//     @doc("Expressions that specify the order of returned results.")
+//     @query
+//     orderBy?: string;
+//   } & SkipQueryParameter &
+//     TopQueryParameter>
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Creates a new data asset.")
-@route("/dataAssets")
-@post
-op CreateDataAsset is RpcOperation<
-  {
-    @doc("The data asset payload")
-    @bodyRoot
-    dataAsset: DataAsset;
-  },
-  CreateDataAssetResponse
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Creates a new data asset.")
+// @route("/dataAssets")
+// @post
+// op CreateDataAsset is RpcOperation<
+//   {
+//     @doc("The data asset payload")
+//     @bodyRoot
+//     dataAsset: DataAsset;
+//   },
+//   CreateDataAssetResponse
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Creates a new data asset with fileted query inputs.")
-@route("/dataAssets/query")
-@list
-@post
-op QueryDataAssets is RpcOperation<
-  {
-    @doc("The data asset payload")
-    @bodyRoot
-    request: DataAssetQueryRequest;
-  },
-  DataAssetsResponse
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Creates a new data asset with fileted query inputs.")
+// @route("/dataAssets/query")
+// @list
+// @post
+// op QueryDataAssets is RpcOperation<
+//   {
+//     @doc("The data asset payload")
+//     @bodyRoot
+//     request: DataAssetQueryRequest;
+//   },
+//   DataAssetsResponse
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Retrieves a data asset by its unique identifier.")
-@get
-op GetDataAssetById is UnifiedCatalogOperations.ResourceRead<DataAsset>;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Retrieves a data asset by its unique identifier.")
+// @get
+// op GetDataAssetById is UnifiedCatalogOperations.ResourceRead<DataAsset>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Updates a data asset by its unique identifier.")
-@route("/dataAssets/{dataAssetId}")
-@put
-op UpdateDataAsset is RpcOperation<
-  DataAssetIdParameter & {
-    @doc("Updated data asset payload.")
-    @bodyRoot
-    dataAsset: DataAsset;
-  },
-  DataAsset
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Updates a data asset by its unique identifier.")
+// @route("/dataAssets/{dataAssetId}")
+// @put
+// op UpdateDataAsset is RpcOperation<
+//   DataAssetIdParameter & {
+//     @doc("Updated data asset payload.")
+//     @bodyRoot
+//     dataAsset: DataAsset;
+//   },
+//   DataAsset
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Deletes a data asset by its unique identifier.")
-@delete
-op DeleteDataAssetById is UnifiedCatalogOperations.ResourceDelete<DataAsset>;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Deletes a data asset by its unique identifier.")
+// @delete
+// op DeleteDataAssetById is UnifiedCatalogOperations.ResourceDelete<DataAsset>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Lists relationships for a data asset filtered by entity category.")
-@get
-op ListDataAssetRelationships is UnifiedCatalogOperations.ResourceList<
-  DataAssetRelationship,
-  ListQueryParametersTrait<{
-    @doc("Required entity category to list relationships for.")
-    @query
-    entityType: EntityCategory;
-  }>
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Lists relationships for a data asset filtered by entity category.")
+// @get
+// op ListDataAssetRelationships is UnifiedCatalogOperations.ResourceList<
+//   DataAssetRelationship,
+//   ListQueryParametersTrait<{
+//     @doc("Required entity category to list relationships for.")
+//     @query
+//     entityType: EntityCategory;
+//   }>
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Creates a relationship between the specified data asset and another entity.")
-@route("/dataAssets/{dataAssetId}/relationships")
-@post
-op CreateDataAssetRelationship is RpcOperation<
-  DataAssetIdParameter & {
-    @doc("Category of the entity to relate to (required).")
-    @query
-    entityType: EntityCategory;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Creates a relationship between the specified data asset and another entity.")
+// @route("/dataAssets/{dataAssetId}/relationships")
+// @post
+// op CreateDataAssetRelationship is RpcOperation<
+//   DataAssetIdParameter & {
+//     @doc("Category of the entity to relate to (required).")
+//     @query
+//     entityType: EntityCategory;
 
-    @doc("Relationship payload as JSON (required).")
-    @bodyRoot
-    relationship: CriticalDataColumnRelationshipRequest;
-  },
-  DataAssetRelationship
->;
+//     @doc("Relationship payload as JSON (required).")
+//     @bodyRoot
+//     relationship: CriticalDataColumnRelationshipRequest;
+//   },
+//   DataAssetRelationship
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("DataAsset")
-@doc("Deletes relationships for a data asset.")
-@route("/dataAssets/{dataAssetId}/relationships")
-@delete
-op DeleteDataAssetRelationship is RpcOperation<
-  DataAssetIdParameter & {
-    @doc("Category of the related entity (required).")
-    @query
-    entityType: EntityCategory;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("DataAsset")
+// @doc("Deletes relationships for a data asset.")
+// @route("/dataAssets/{dataAssetId}/relationships")
+// @delete
+// op DeleteDataAssetRelationship is RpcOperation<
+//   DataAssetIdParameter & {
+//     @doc("Category of the related entity (required).")
+//     @query
+//     entityType: EntityCategory;
 
-    @doc("Identifier of the related entity (required).")
-    @query
-    entityId: uuid;
-  },
-  DeleteResponse
->;
+//     @doc("Identifier of the related entity (required).")
+//     @query
+//     entityId: uuid;
+//   },
+//   DeleteResponse
+// >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
