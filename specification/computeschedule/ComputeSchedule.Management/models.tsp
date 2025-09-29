@@ -235,7 +235,7 @@ union PreferenceRank {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-10-01`)
-@doc("The names of availability zones")
+@doc("Azure availability zone names")
 union ZoneName {
   @doc("Azure Zone 0")
   Zone0: 0,
