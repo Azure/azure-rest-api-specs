@@ -102,6 +102,24 @@ input-file:
     );
   });
 
+  it("throws if input-file is not string", async () => {
+    let content = `
+\`\`\`yaml $(tag) == 'package-2025-01-01'
+input-file:
+  - foo.json
+  - bar:
+    - qux.json
+\`\`\`
+`;
+
+    let readme = new Readme("foo", { ...options, content });
+
+    expect(readme.getTags()).rejects.toThrowErrorMatchingInlineSnapshot(
+      // TODO: Improve error message
+      `[TypeError: swaggerPath.includes is not a function]`,
+    );
+  });
+
   it("can be created with empty content", async () => {
     const folder = "/fake";
     const readme = new Readme(resolve(folder, "readme.md"), {
