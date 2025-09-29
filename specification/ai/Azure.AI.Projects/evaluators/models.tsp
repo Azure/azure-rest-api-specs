@@ -120,7 +120,7 @@ model EvaluatorVersion {
   created_by: string;
 
   @visibility(Lifecycle.Read)
-  @doc("Creation date of the evaluator")
+  @doc("Creation date/time of the evaluator")
   created_at: string;
 
   @visibility(Lifecycle.Read)
