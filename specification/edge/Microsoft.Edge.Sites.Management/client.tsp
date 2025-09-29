@@ -17,3 +17,4 @@ using Microsoft.Edge;
 );
 @@clientName(SiteUpdate, "EdgeSitePatch", "csharp");
 @@clientName(SiteUpdateProperties, "EdgeSitePatchProperties", "csharp");
+@@clientName(SiteAddressProperties, "EdgeSiteAddressProperties", "csharp");
