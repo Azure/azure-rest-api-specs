@@ -5781,16 +5781,8 @@
         "relationshipType": {
           "type": "string",
           "description": "Type of the relationship."
-        },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the related entity.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "entityId"
-      ]
+      }
     },
     "Condition": {
       "type": "object",
@@ -5836,11 +5828,6 @@
           "$ref": "#/definitions/CatalogModelSystemDataWithExpired",
           "description": "Gets or Sets SystemData."
         },
-        "domain": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The identifier of the critical data column.",
-          "readOnly": true
-        },
         "assetId": {
           "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Id of the asset."
@@ -5867,7 +5854,6 @@
       },
       "required": [
         "name",
-        "domain",
         "assetId",
         "assetName"
       ]
@@ -5920,11 +5906,6 @@
           "$ref": "#/definitions/CatalogModelCriticalDataElementDataTypeEnum",
           "description": "The data type of the critical data element."
         },
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the critical data element.",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "The name of the critical data element."
@@ -5958,10 +5939,7 @@
             "$ref": "#/definitions/CatalogModelManagedAttribute"
           }
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "CriticalDataElementFacetRequest": {
       "type": "object",
@@ -6102,11 +6080,6 @@
       "type": "object",
       "description": "DataAsset.",
       "properties": {
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The data asset identifier.",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "Name of the asset."
@@ -6178,7 +6151,6 @@
         }
       },
       "required": [
-        "id",
         "name"
       ]
     },
@@ -6252,16 +6224,8 @@
         "relationshipType": {
           "type": "string",
           "description": "Type of the relationship."
-        },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the related entity.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "entityId"
-      ]
+      }
     },
     "DataAssetsResponse": {
       "type": "object",
@@ -6323,11 +6287,6 @@
           "items": {
             "$ref": "#/definitions/CatalogModelManagedAttribute"
           }
-        },
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the data product.",
-          "readOnly": true
         },
         "name": {
           "type": "string",
@@ -6402,10 +6361,7 @@
           "$ref": "#/definitions/CatalogModelDataProductAllOfAdditionalProperties",
           "description": "Additional properties of the data product."
         }
-      },
-      "required": [
-        "id"
-      ]
+      }
     },
     "DataProductFacetRequest": {
       "type": "object",
@@ -6559,16 +6515,8 @@
         "relationshipType": {
           "type": "string",
           "description": "Type of the relationship."
-        },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the related entity.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "entityId"
-      ]
+      }
     },
     "DataProductResponse": {
       "type": "object",
@@ -6651,11 +6599,6 @@
           "type": "string",
           "description": "The description of the domain."
         },
-        "parentId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Identifier of the domain to retrieve.",
-          "readOnly": true
-        },
         "thumbnail": {
           "$ref": "#/definitions/CatalogModelDomainAllOfThumbnail",
           "description": "The thumbnail properties of the domain."
@@ -6677,7 +6620,6 @@
       },
       "required": [
         "systemData",
-        "parentId",
         "thumbnail",
         "domains",
         "managedAttributes"
@@ -6768,11 +6710,6 @@
           "type": "string",
           "description": "The definition of the key result."
         },
-        "domainId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the domain.",
-          "readOnly": true
-        },
         "progress": {
           "type": "number",
           "format": "double",
@@ -6790,8 +6727,7 @@
         }
       },
       "required": [
-        "status",
-        "domainId"
+        "status"
       ]
     },
     "ModelsFacetRequestObject": {
@@ -6999,11 +6935,6 @@
           "$ref": "#/definitions/OkrSystemDataWithExpired",
           "description": "The system data associated with the objective."
         },
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the objective.",
-          "readOnly": true
-        },
         "definition": {
           "type": "string",
           "description": "The definition of the objective."
@@ -7033,7 +6964,6 @@
         }
       },
       "required": [
-        "id",
         "definition"
       ]
     },
@@ -7462,16 +7392,8 @@
         "relationshipType": {
           "type": "string",
           "description": "Type of the relationship."
-        },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "Unique identifier of the related entity.",
-          "readOnly": true
         }
-      },
-      "required": [
-        "entityId"
-      ]
+      }
     },
     "SharedEntityStatus": {
       "type": "string",
@@ -7556,11 +7478,6 @@
           "$ref": "#/definitions/CatalogModelStatus",
           "description": "The status of the term."
         },
-        "id": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the term.",
-          "readOnly": true
-        },
         "name": {
           "type": "string",
           "description": "The name of the term."
@@ -7619,7 +7536,6 @@
       },
       "required": [
         "status",
-        "id",
         "name",
         "domain"
       ]
@@ -7765,19 +7681,11 @@
           "type": "string",
           "description": "description for the term relationship"
         },
-        "entityId": {
-          "$ref": "#/definitions/Azure.Core.uuid",
-          "description": "The unique identifier of the entity.",
-          "readOnly": true
-        },
         "relationshipType": {
           "$ref": "#/definitions/TermRelationshipType",
           "description": "The type of the term relationship."
         }
-      },
-      "required": [
-        "entityId"
-      ]
+      }
     },
     "TermRelationshipType": {
       "type": "string",
