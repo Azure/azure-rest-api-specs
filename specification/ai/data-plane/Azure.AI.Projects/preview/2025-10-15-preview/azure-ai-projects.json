@@ -1095,81 +1095,57 @@
     "/evaluators": {
       "get": {
         "operationId": "Evaluators_ListVersions",
-        "description": "List the latest version of each EvaluatorVersion",
+        "description": "List the latest version of each Evaluator",
         "parameters": [
           {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
           },
           {
-            "name": "type",
+            "name": "order",
             "in": "query",
-            "description": "Filter evaluator versions by type. Possible values: 'all', 'custom', 'builtin'.",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
             "required": false,
             "type": "string",
+            "default": "desc",
             "enum": [
-              "builtin",
-              "custom",
-              "all"
+              "asc",
+              "desc"
             ],
             "x-ms-enum": {
+              "name": "ListSortOrder",
               "modelAsString": true,
               "values": [
                 {
-                  "name": "built_in",
-                  "value": "builtin",
-                  "description": "Built-in evaluator (Microsoft provided)"
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
                 },
                 {
-                  "name": "custom",
-                  "value": "custom",
-                  "description": "Custom evaluator"
-                },
-                {
-                  "name": "all",
-                  "value": "all"
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
                 }
               ]
             }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedEvaluatorVersion"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/evaluators/{name}/versions": {
-      "get": {
-        "operationId": "Evaluators_ListEvaluatorVersions",
-        "description": "List all versions of the given EvaluatorVersion",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
             "type": "string"
           }
         ],
@@ -1177,29 +1153,172 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/PagedEvaluatorVersion"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/EvaluatorVersion"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluators/{name}/versions": {
+      "get": {
+        "operationId": "Evaluators_ListEvaluatorVersions",
+        "description": "List all versions of the given Evaluator name",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the evaluator",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "order",
+            "in": "query",
+            "description": "Sort order by the created_at timestamp of the objects. asc for ascending order and desc for descending order.",
+            "required": false,
+            "type": "string",
+            "default": "desc",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "ListSortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "ascending",
+                  "value": "asc",
+                  "description": "Specifies an ascending sort order."
+                },
+                {
+                  "name": "descending",
+                  "value": "desc",
+                  "description": "Specifies a descending sort order."
+                }
+              ]
+            }
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/EvaluatorVersion"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          }
         }
       },
       "post": {
         "operationId": "Evaluators_CreateEvaluatorVersion",
-        "description": "Create an existing EvaluatorVersion with the given version id",
+        "description": "Create a new EvaluatorVersion with auto incremented version id",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3361,7 +3480,7 @@
           "description": "The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required."
         },
         "data_schema": {
-          "description": "The JSON schema (Draft 2020-12) for the data mapping of the evaluator to the dataset. This includes parameters like type, properties, required."
+          "description": "The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required."
         },
         "metrics": {
           "type": "object",
@@ -3440,10 +3559,7 @@
           "format": "float",
           "description": "Maximum value for the metric. If not specified, it is assumed to be unbounded."
         }
-      },
-      "required": [
-        "min_value"
-      ]
+      }
     },
     "EvaluatorMetricDirection": {
       "type": "string",
@@ -3490,12 +3606,12 @@
           {
             "name": "ordinal",
             "value": "ordinal",
-            "description": "Ordinal metric representing bounded values"
+            "description": "Ordinal metric representing categories that can be ordered or ranked."
           },
           {
             "name": "continuous",
             "value": "continuous",
-            "description": "Continuous metric representing unbounded values"
+            "description": "Continuous metric representing values in a continuous range."
           },
           {
             "name": "boolean",
@@ -3550,7 +3666,7 @@
         },
         "categories": {
           "type": "array",
-          "description": "The category of the evaluator",
+          "description": "The categories of the evaluator",
           "items": {
             "$ref": "#/definitions/EvaluatorCategory"
           }
@@ -3566,12 +3682,12 @@
         },
         "created_at": {
           "type": "string",
-          "description": "Creation date of the evaluator",
+          "description": "Creation date/time of the evaluator",
           "readOnly": true
         },
         "modified_at": {
           "type": "string",
-          "description": "Last modified date of the evaluator",
+          "description": "Last modified date/time of the evaluator",
           "readOnly": true
         },
         "id": {
@@ -4037,6 +4153,30 @@
         "createdAt"
       ]
     },
+    "ListSortOrder": {
+      "type": "string",
+      "description": "The available sorting options when requesting a list of response objects.",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "ListSortOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ascending",
+            "value": "asc",
+            "description": "Specifies an ascending sort order."
+          },
+          {
+            "name": "descending",
+            "value": "desc",
+            "description": "Specifies a descending sort order."
+          }
+        ]
+      }
+    },
     "ManagedAzureAISearchIndex": {
       "type": "object",
       "description": "Managed Azure AI Search Index Definition",
@@ -4216,27 +4356,6 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEvaluatorVersion": {
-      "type": "object",
-      "description": "Paged collection of EvaluatorVersion items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The EvaluatorVersion items on this page",
-          "items": {
-            "$ref": "#/definitions/EvaluatorVersion"
           }
         },
         "nextLink": {

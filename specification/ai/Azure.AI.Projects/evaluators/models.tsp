@@ -140,7 +140,7 @@ model EvaluatorMetric {
   desirable_direction?: EvaluatorMetricDirection;
 
   @doc("Minimum value for the metric")
-  min_value: float32;
+  min_value?: float32;
 
   @doc("Maximum value for the metric. If not specified, it is assumed to be unbounded.")
   max_value?: float32;

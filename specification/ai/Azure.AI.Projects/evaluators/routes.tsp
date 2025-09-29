@@ -9,7 +9,6 @@ import "../servicepatterns.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
 
 namespace Azure.AI.Projects;
 
@@ -21,34 +20,30 @@ alias EvaluatorInputParameters = InputParameters<
 
 @added(Versions.v2025_10_15_preview)
 interface Evaluators {
-  // GET /evaluators/{evaluatorName}/versions
-  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
-  @doc("List all versions of the given {name}", EvaluatorVersion)
-  @Rest.action("versions")
-  @Rest.actionSeparator("/")
-  @Http.get
-  @list
-  listEvaluatorVersions is Azure.Core.StandardResourceOperations.ResourceAction<
-    EvaluatorVersion,
-    ListEvaluatorVersionsParameters,
-    Azure.Core.Page<EvaluatorVersion>
-  >;
-
-  // GET /evaluators
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List the latest version of each {name}", EvaluatorVersion)
-  @Rest.listsResource(EvaluatorVersion)
-  listVersions is Azure.Core.Foundations.ResourceList<
-    EvaluatorVersion,
-    {
-      @doc("Filter evaluator versions by type. Possible values: 'all', 'custom', 'builtin'.")
-      @Http.query
-      type?: EvaluatorType | "all";
-    },
-    Azure.Core.Page<EvaluatorVersion>
-  >;
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  @get
+  @doc("List all versions of the given Evaluator name", EvaluatorVersion)
+  @route("/evaluators/{name}/versions")
+  op listEvaluatorVersions(
+    @doc("Name of the evaluator")
+    @path name: string,
+    ...OpenAIListRequestOptions,
+  ): OpenAIPageableListOf<EvaluatorVersion>;
 
-  // GET /evaluators/{evaluatorName}/versions/{version}
+
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
+  @get
+  @doc("List the latest version of each Evaluator", EvaluatorVersion)
+  @route("/evaluators")
+  op listVersions(
+    ...OpenAIListRequestOptions,
+  ): OpenAIPageableListOf<EvaluatorVersion>;
+
+
+  // GET /evaluators/{name}/versions/{version}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc(
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
@@ -68,7 +63,7 @@ interface Evaluators {
     Azure.Core.Foundations.ResourceOkResponse<EvaluatorVersion>
   >;
 
-  // DELETE /evaluators/{evaluatorName}/versions/{version}
+  // DELETE /evaluators/{name}/versions/{version}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc(
     "Delete the specific version of the {name}. The service returns 204 No Content if the {name} was deleted successfully or if the {name} does not exist.",
@@ -88,7 +83,7 @@ interface Evaluators {
 
   // POST /evaluators/{evaluatorName}/versions
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("Create an existing {name} with the given version id", EvaluatorVersion)
+  @doc("Create a new {name} with auto incremented version id", EvaluatorVersion)
   @Rest.segment("versions")
   @Http.post
   createEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
