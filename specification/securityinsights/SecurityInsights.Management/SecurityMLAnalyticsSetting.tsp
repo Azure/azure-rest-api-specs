@@ -15,19 +15,14 @@ namespace Microsoft.SecurityInsights;
  * Security ML Analytics Setting
  */
 @discriminator("kind")
-model SecurityMLAnalyticsSetting is Azure.ResourceManager.ProxyResource<{}> {
+model SecurityMLAnalyticsSetting
+  is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<SecurityMLAnalyticsSettingsKind> {
   ...ResourceNameParameter<
     Resource = SecurityMLAnalyticsSetting,
     KeyName = "settingsResourceName",
     SegmentName = "securityMLAnalyticsSettings",
     NamePattern = ""
   >;
-
-  /**
-   * The kind of security ML Analytics Settings
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind: SecurityMLAnalyticsSettingsKind;
 }
 
 @armResourceOperations

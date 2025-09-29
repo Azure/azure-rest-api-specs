@@ -30,7 +30,12 @@ interface EntitiesOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Entities_RunPlaybook")
   @autoRoute
-  runPlaybook is Extension.ActionSync<OperationalInsights, EntityResource, Request = EntityManualTriggerRequestBody, Response = void>;
+  runPlaybook is Extension.ActionSync<
+    OperationalInsights,
+    EntityResource,
+    Request = EntityManualTriggerRequestBody,
+    Response = void
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -77,7 +82,7 @@ interface SourceControlOperationGroup {
     @doc("The content of the action request")
     @body
     repositoryAccess: RepositoryAccessProperties,
-    ): RepoList | CloudError;
+  ): RepoList | CloudError;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
@@ -128,6 +133,6 @@ interface ThreatIntelligenceIndicatorMetricsOperationGroup {
     OperationalInsights,
     ThreatIntelligenceMain,
     Request = void,
-    Response = ThreatIntelligenceMetricsList,
+    Response = ThreatIntelligenceMetricsList
   >;
 }

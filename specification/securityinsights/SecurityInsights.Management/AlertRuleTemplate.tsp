@@ -14,20 +14,14 @@ namespace Microsoft.SecurityInsights;
 /**
  * Alert rule template.
  */
-@discriminator("kind")
-model AlertRuleTemplate is Azure.ResourceManager.ProxyResource<{}> {
+model AlertRuleTemplate
+  is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<AlertRuleKind> {
   ...ResourceNameParameter<
     Resource = AlertRuleTemplate,
     KeyName = "alertRuleTemplateId",
     SegmentName = "alertRuleTemplates",
     NamePattern = ""
   >;
-
-  /**
-   * The alert rule kind
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind: AlertRuleKind;
 }
 
 @armResourceOperations

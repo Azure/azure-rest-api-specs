@@ -6396,6 +6396,7 @@ model AADDataConnector extends DataConnector {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
   @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AADDataConnectorProperties;
+
   /**
    * The data connector kind
    */
@@ -7376,6 +7377,7 @@ model MCASDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
    * Alerts log data type connection.
    */
   alerts?: DataConnectorDataTypeCommon;
+
   /**
    * Discovery log data type connection.
    */

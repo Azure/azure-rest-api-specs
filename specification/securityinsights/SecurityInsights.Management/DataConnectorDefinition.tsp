@@ -16,19 +16,14 @@ namespace Microsoft.SecurityInsights;
  * and the info required to define data connections.
  */
 @discriminator("kind")
-model DataConnectorDefinition is Azure.ResourceManager.ProxyResource<{}> {
+model DataConnectorDefinition
+  is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<DataConnectorDefinitionKind> {
   ...ResourceNameParameter<
     Resource = DataConnectorDefinition,
     KeyName = "dataConnectorDefinitionName",
     SegmentName = "dataConnectorDefinitions",
     NamePattern = "^[a-z0-9A-Z-_]*$"
   >;
-
-  /**
-   * The data connector kind
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind: DataConnectorDefinitionKind;
 }
 
 @armResourceOperations

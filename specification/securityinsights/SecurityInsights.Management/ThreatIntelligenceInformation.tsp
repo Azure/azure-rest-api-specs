@@ -16,19 +16,14 @@ namespace Microsoft.SecurityInsights;
  */
 @discriminator("kind")
 @parentResource(ThreatIntelligenceMain)
-model ThreatIntelligenceInformation is Azure.ResourceManager.ProxyResource<{}> {
+model ThreatIntelligenceInformation
+  is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<ThreatIntelligenceResourceInnerKind> {
   ...ResourceNameParameter<
     Resource = ThreatIntelligenceInformation,
     KeyName = "name",
     SegmentName = "indicators",
     NamePattern = ""
   >;
-
-  /**
-   * The kind of the entity.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind: ThreatIntelligenceResourceInnerKind;
 }
 
 @armResourceOperations
