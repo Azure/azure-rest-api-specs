@@ -151,7 +151,7 @@ model EvaluatorMetric {
 union EvaluatorMetricType {
   string,
 
-  @doc("Ordinal metric representing bounded values")
+  @doc("Ordinal metric representing categories that can be ordered or ranked.")
   ordinal: "ordinal",
 
   @doc("Continuous metric representing unbounded values")
