@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2024-12-30",
+    "parameters": {
+      "resetAllToDefault": "False",
+      "value": [
+        {
+          "name": "event_scheduler",
+          "properties": {
+            "value": "OFF"
+          }
+        },
+        {
+          "name": "div_precision_increment",
+          "properties": {
+            "value": "8"
+          }
+        }
+      ]
+    },
+    "resourceGroupName": "testrg",
+    "serverName": "mysqltestserver",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "event_scheduler",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/event_scheduler",
+            "properties": {
+              "description": "Indicates the status of the Event Scheduler. It is always OFF for a replica server to keep the replication consistency.",
+              "allowedValues": "ON,OFF",
+              "dataType": "Enumeration",
+              "defaultValue": "OFF",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False",
+              "source": "user-override",
+              "value": "ON"
+            }
+          },
+          {
+            "name": "div_precision_increment",
+            "type": "Microsoft.DBforMySQL/flexibleServers/configurations",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver/configurations/div_precision_increment",
+            "properties": {
+              "description": "Number of digits by which to increase the scale of the result of division operations.",
+              "allowedValues": "0-30",
+              "dataType": "Integer",
+              "defaultValue": "4",
+              "isConfigPendingRestart": "False",
+              "isDynamicConfig": "True",
+              "isReadOnly": "False",
+              "source": "user-override",
+              "value": "8"
+            }
+          }
+        ]
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/azureAsyncOperation/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-12-30",
+        "Location": "https://management.azure.com/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/providers/Microsoft.DBforMySQL/locations/southeastasia/operationResults/e276a03a-1770-4549-86f5-0edffae8997c?api-version=2024-12-30"
+      }
+    }
+  },
+  "operationId": "Configurations_BatchUpdate",
+  "title": "ConfigurationList"
+}

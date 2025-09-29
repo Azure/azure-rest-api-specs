@@ -275,9 +275,6 @@
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob.json"
-          },
-          "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
           }
         },
         "description": "Creates a new knowledge source or updates an knowledge source if it already exists.",
@@ -346,9 +343,6 @@
           },
           "SearchServiceDeleteKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceAzureBlob.json"
-          },
-          "SearchServiceDeleteKnowledgeSourceWeb": {
-            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
           }
         },
         "description": "Deletes an existing knowledge source.",
@@ -400,9 +394,6 @@
           },
           "SearchServiceGetKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceAzureBlob.json"
-          },
-          "SearchServiceGetKnowledgeSourceWeb": {
-            "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
           }
         },
         "description": "Retrieves a knowledge source definition.",
@@ -450,9 +441,6 @@
           },
           "SearchServiceListKnowledgeSourcesAzureBlob": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesAzureBlob.json"
-          },
-          "SearchServiceListKnowledgeSourcesWeb": {
-            "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
           }
         },
         "description": "Lists all knowledge sources available for a search service.",
@@ -493,9 +481,6 @@
           },
           "SearchServiceCreateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceAzureBlob.json"
-          },
-          "SearchServiceCreateKnowledgeSourceWeb": {
-            "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
           }
         },
         "description": "Creates a new knowledge source.",
@@ -2926,133 +2911,6 @@
       ],
       "description": "Parameters for search index knowledge source."
     },
-    "WebKnowledgeSource": {
-      "type": "object",
-      "x-ms-discriminator-value": "web",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeSource"
-        }
-      ],
-      "properties": {
-        "webParameters": {
-          "$ref": "#/definitions/WebKnowledgeSourceParameters",
-          "description": "The parameters for the knowledge source."
-        }
-      },
-      "required": [
-        "webParameters"
-      ],
-      "description": "Knowledge Source targeting web results."
-    },
-    "WebKnowledgeSourceParameters": {
-      "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "x-nullable": true,
-          "description": "An explicit identity to use for this knowledge source. "
-        },
-        "bingResourceId": {
-          "type": "string",
-          "description": "The ResourceId of the Bing Search resource to use for web results."
-        },
-        "language": {
-          "type": "string",
-          "description": "The language of the web results."
-        },
-        "market": {
-          "type": "string",
-          "description": "The market of the web results."
-        },
-        "freshness": {
-          "type": "string",
-          "description": "The freshness of web results."
-        },
-        "allowedDomains": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WebKnowledgeSourceAllowedDomain"
-          },
-          "description": "Domains that are allowed for web results"
-        },
-        "blockedDomains": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/WebKnowledgeSourceBlockedDomain"
-          },
-          "description": "Domains that are blocked from web results"
-        }
-      },
-      "description": "Parameters for web knowledge source."
-    },
-    "WebKnowledgeSourceAllowedDomain": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string",
-          "description": "The address of the domain."
-        },
-        "includeSubpages": {
-          "type": "boolean",
-          "description": "whether or not to include subpages from this domain."
-        },
-        "rankingAdjustment": {
-          "$ref": "#/definitions/WebKnowledgeSourceDomainRankingAdjustmentKind"
-        }
-      },
-      "required": [
-        "address"
-      ],
-      "description": "Configuration for web knowledge source domain."
-    },
-    "WebKnowledgeSourceBlockedDomain": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string",
-          "description": "The address of the domain."
-        },
-        "includeSubpages": {
-          "type": "boolean",
-          "description": "whether or not to include subpages from this domain."
-        }
-      },
-      "required": [
-        "address"
-      ],
-      "description": "Configuration for web knowledge source domain."
-    },
-    "WebKnowledgeSourceDomainRankingAdjustmentKind": {
-      "type": "string",
-      "enum": [
-        "boost",
-        "superBoost",
-        "demote"
-      ],
-      "x-ms-enum": {
-        "name": "WebKnowledgeSourceRankingAdjustment",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "boost",
-            "name": "boost",
-            "description": "Raises the ranking of the chosen domain or subpage so it appears higher in the search results."
-          },
-          {
-            "value": "superBoost",
-            "name": "superBoost",
-            "description": "Applies a stronger positive weight than Boost, pushing the selected domain or subpage towards the very top of the results."
-          },
-          {
-            "value": "demote",
-            "name": "demote",
-            "description": "Lowers the ranking of the specified domain or subpage so it shows up further down the results list."
-          }
-        ]
-      },
-      "description": "The ranking adjustment to perform on the web results."
-    },
     "AzureBlobKnowledgeSource": {
       "type": "object",
       "x-ms-discriminator-value": "azureBlob",
@@ -3127,8 +2985,7 @@
       "type": "string",
       "enum": [
         "searchIndex",
-        "azureBlob",
-        "web"
+        "azureBlob"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -3143,11 +3000,6 @@
             "value": "azureBlob",
             "name": "AzureBlob",
             "description": "A knowledge source that read and ingest data from Azure Blob Storage to a Search Index."
-          },
-          {
-            "value": "web",
-            "name": "Web",
-            "description": "A knowledge source that reads data from the web."
           }
         ]
       },
