@@ -1,9 +1,9 @@
-import { describe, expect, it, vi, beforeEach, afterEach } from "vitest";
 import { existsSync, mkdirSync } from "node:fs";
 import path from "node:path";
 import { simpleGit } from "simple-git";
-import { createPullRequestProperties } from "../../src/utils/pull-request.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
 import { Context } from "../../src/types/breaking-change.js";
+import { createPullRequestProperties } from "../../src/utils/pull-request.js";
 
 // Test constants
 const TEST_CONSTANTS = {

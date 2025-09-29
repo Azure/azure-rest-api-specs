@@ -1,0 +1,155 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PostgreSQLManagementClient",
+    "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
+    "version": "2025-06-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Microsoft Entra OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "NameAvailability"
+        ],
+        "operationId": "NameAvailability_CheckGlobally",
+        "x-ms-examples": {
+          "Check the validity and availability of the given name, to assign it to a new server or to use it as the base name of a new pair of virtual endpoints.": {
+            "$ref": "./examples/NameAvailabilityCheckGlobally.json"
+          }
+        },
+        "description": "Checks the validity and availability of the given name, to assign it to a new server or to use it as the base name of a new pair of virtual endpoints.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "Parameters required to check if a given name is valid and available to assign it to a new server or to use it as the base name of a new pair of virtual endpoints."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DBforPostgreSQL/locations/{locationName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "NameAvailability"
+        ],
+        "operationId": "NameAvailability_CheckWithLocation",
+        "x-ms-examples": {
+          "Check the validity and availability of the given name, in the given location, to assign it to a new server or to use it as the base name of a new pair of virtual endpoints": {
+            "$ref": "./examples/NameAvailabilityCheckWithLocation.json"
+          }
+        },
+        "description": "Check the availability of name for resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/LocationNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityRequest"
+            },
+            "description": "Parameters required to check if a given name is valid and available to assign it to a new server or to use it as the base name of a new pair of virtual endpoints."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityModel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "NameAvailabilityModel": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name for which validity and availability was checked.",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Type of resource. It can be 'Microsoft.DBforPostgreSQL/flexibleServers' or 'Microsoft.DBforPostgreSQL/flexibleServers/virtualendpoints'.",
+          "readOnly": true
+        }
+      },
+      "description": "Availability of a name.",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/CheckNameAvailabilityResponse"
+        }
+      ]
+    }
+  },
+  "parameters": {}
+}

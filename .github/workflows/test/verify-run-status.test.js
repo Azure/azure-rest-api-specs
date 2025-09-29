@@ -1,4 +1,4 @@
-import { describe, expect, it, vi, beforeEach } from "vitest";
+import { beforeEach, describe, expect, it, vi } from "vitest";
 import { verifyRunStatusImpl } from "../src/verify-run-status.js";
 import { createMockCore, createMockGithub } from "./mocks.js";
 

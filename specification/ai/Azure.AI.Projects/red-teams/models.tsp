@@ -113,10 +113,9 @@ union RiskCategory {
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
 model AzureOpenAIModelConfiguration extends TargetConfig {
-  @visibility(Lifecycle.Read)
   type: "AzureOpenAIModel";
 
-  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`.")
+  @doc("Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`).")
   modelDeploymentName: string;
 }
 
