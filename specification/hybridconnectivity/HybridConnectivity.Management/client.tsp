@@ -5,19 +5,24 @@ using Azure.ClientGenerator.Core;
 using Azure.Core;
 namespace Microsoft.HybridConnectivity;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ServiceConfigurationResourcePatch.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResourcePatch.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EndpointAccessResource.relay);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EndpointAccessResource.relay
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IngressGatewayResource.relay);
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IngressGatewayResource.ingress);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.relay
+);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressGatewayResource.ingress
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IngressProfileProperties.aadProfile);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IngressProfileProperties.aadProfile
+);
 
 @@clientName(EndpointResources.createOrUpdate::parameters.resource,
   "EndpointResource"
@@ -34,8 +39,9 @@ namespace Microsoft.HybridConnectivity;
 @@clientName(ServiceConfigurationResources.createOrupdate::parameters.resource,
   "ServiceConfigurationResource"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ServiceConfigurationResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ServiceConfigurationResource.properties
+);
 
 @@clientName(EndpointResource, "HybridConnectivityEndpoint", "csharp");
 @@clientName(ServiceConfigurationResource,
