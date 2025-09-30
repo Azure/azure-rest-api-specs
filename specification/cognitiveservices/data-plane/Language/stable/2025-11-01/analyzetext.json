@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "version": "2024-11-15-preview",
+    "version": "2025-11-01",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\\\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
@@ -106,47 +106,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulEntityLinkingRequest": {
-            "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
-          },
-          "SuccessfulEntityRecognitionExclusionRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionExclusionRequest.json"
-          },
-          "SuccessfulEntityRecognitionInclusionRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionInclusionRequest.json"
-          },
-          "SuccessfulEntityRecognitionInferenceOptionsRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionInferenceOptionsRequest.json"
-          },
-          "SuccessfulEntityRecognitionOverlapPolicy": {
-            "$ref": "./examples/SuccessfulEntityRecognitionOverlapPolicy.json"
-          },
-          "SuccessfulEntityRecognitionRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
-          },
-          "SuccessfulKeyPhraseExtractionRequest": {
-            "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
-          },
-          "SuccessfulLanguageDetectionRequest": {
-            "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
-          },
-          "SuccessfulPiiEntityRecognitionExclusionRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionExclusionRequest.json"
-          },
-          "SuccessfulPiiEntityRecognitionMaskedEntitiesRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionMaskedEntities.json"
-          },
-          "SuccessfulPiiEntityRecognitionRedactionPolicyRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionRedactionPolicyRequest.json"
-          },
-          "SuccessfulPiiEntityRecognitionRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
-          },
-          "SuccessfulSentimentAnalysisRequest": {
-            "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
-          }
         }
       }
     },
@@ -189,23 +148,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskSubmit": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskSubmit.json"
-          },
-          "SuccessfulAbstractiveSummarizationTaskSubmit": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskSubmit.json"
-          },
-          "SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
-          },
-          "SuccessfulHealthcareDocumentTypePostRequest": {
-            "$ref": "./examples/SuccessfulHealthcareDocumentTypePostRequest.json"
-          },
-          "SuccessfulHealthcarePostRequest": {
-            "$ref": "./examples/SuccessfulHealthcarePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -271,23 +213,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskResult": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskResult.json"
-          },
-          "SuccessfulAbstractiveSummarizationTaskResult": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskResult.json"
-          },
-          "SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
-          },
-          "SuccessfulHealthcareDocumentTypeTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
-          },
-          "SuccessfulHealthcareTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulHealthcareTaskStatusRequest.json"
-          }
         }
       }
     },
@@ -331,11 +256,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAnalyzeTextJobsCancelRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -727,6 +647,11 @@
         "defaultLanguage": {
           "type": "string",
           "description": "Default language to use for records requesting automatic language detection."
+        },
+        "cancelAfter": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional duration in seconds after which the job will be canceled if not completed."
         }
       },
       "required": [
@@ -2972,6 +2897,44 @@
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
     },
+    "EntitySynonym": {
+      "type": "object",
+      "description": "The entity synonyms used to enhance pii entity detection",
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The synonym to be used for context"
+        },
+        "language": {
+          "type": "string",
+          "description": "The 2 letter ISO 639-1 language the synonym"
+        }
+      },
+      "required": [
+        "synonym"
+      ]
+    },
+    "EntitySynonyms": {
+      "type": "object",
+      "description": "Object that allows the user to provide synonyms for context words that to enhance pii entity detection.",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/EntityCategory",
+          "description": "The entity name"
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "The entity synonyms",
+          "items": {
+            "$ref": "#/definitions/EntitySynonym"
+          }
+        }
+      },
+      "required": [
+        "entityType",
+        "synonyms"
+      ]
+    },
     "EntityTag": {
       "type": "object",
       "description": "Entity tag object which contains the name of the tags abd any associated confidence score. Entity Tags are used to express some similarities/affinity between entities.",
@@ -4956,7 +4919,16 @@
         "IPAddress",
         "Date",
         "Person",
-        "Address"
+        "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate"
       ],
       "x-ms-enum": {
         "name": "PiiCategoriesExclude",
@@ -5816,6 +5788,51 @@
             "name": "Address",
             "value": "Address",
             "description": "Address"
+          },
+          {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
           }
         ]
       }
@@ -5995,6 +6012,15 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate",
         "All",
         "Default"
       ],
@@ -6858,6 +6884,51 @@
             "description": "Address"
           },
           {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
+          },
+          {
             "name": "All",
             "value": "All",
             "description": "All PII categories."
@@ -7132,6 +7203,17 @@
         "redactionPolicy": {
           "$ref": "#/definitions/BaseRedactionPolicy",
           "description": "RedactionPolicy to be used on the input."
+        },
+        "valueExclusionPolicy": {
+          "$ref": "#/definitions/ValueExclusionPolicy",
+          "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
+        },
+        "entitySynonyms": {
+          "type": "array",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection.",
+          "items": {
+            "$ref": "#/definitions/EntitySynonyms"
+          }
         }
       }
     },
@@ -8785,6 +8867,28 @@
           }
         ]
       }
+    },
+    "ValueExclusionPolicy": {
+      "type": "object",
+      "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service",
+      "properties": {
+        "caseSensitive": {
+          "type": "boolean",
+          "description": "Option to make the values excluded values case sensitive",
+          "default": false
+        },
+        "excludedValues": {
+          "type": "array",
+          "description": "List of words and terms that should be excluded from detection by the PII detection service",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "caseSensitive",
+        "excludedValues"
+      ]
     },
     "VolumeMetadata": {
       "type": "object",

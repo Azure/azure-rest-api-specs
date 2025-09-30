@@ -1350,7 +1350,8 @@
           "enum": [
             "noMask",
             "characterMask",
-            "entityMask"
+            "entityMask",
+            "syntheticReplacement"
           ],
           "x-ms-enum": {
             "name": "RedactionPolicyKind",
@@ -1370,6 +1371,11 @@
                 "name": "entityMask",
                 "value": "entityMask",
                 "description": "Redact detected entities with entity type."
+              },
+              {
+                "name": "syntheticReplacement",
+                "value": "syntheticReplacement",
+                "description": "Replace detected entities with synthetic values."
               }
             ]
           }
@@ -1522,6 +1528,16 @@
               }
             ]
           }
+        },
+        "unmaskLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional parameter to indicate the length of unmasked characters at the end of the redacted PII entity. Default is 0."
+        },
+        "unmaskFromEnd": {
+          "type": "boolean",
+          "description": "Optional parameter to indicate whether to unmask characters from the end of the redacted PII entity. Default is true.",
+          "default": true
         }
       },
       "allOf": [

@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "version": "2024-11-15-preview",
+    "version": "2025-11-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\\\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
@@ -528,6 +528,49 @@
         "summaries"
       ]
     },
+    "AddressMetadata": {
+      "type": "object",
+      "description": "Represents the Address entity Metadata model.",
+      "properties": {
+        "formatedAddress": {
+          "type": "string",
+          "description": "The fully formatted address string following postal conventions for the address's country/region."
+        },
+        "addressLines": {
+          "type": "array",
+          "description": "The full address string as recognized from the input text.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "city": {
+          "type": "string",
+          "description": "The city name of the address."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state or province name of the address."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal or ZIP code of the address."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "The country or region name of the address."
+        }
+      },
+      "required": [
+        "formatedAddress",
+        "addressLines"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressMetadata"
+    },
     "AgeMetadata": {
       "type": "object",
       "description": "Represents the Age entity Metadata model.",
@@ -727,6 +770,11 @@
         "defaultLanguage": {
           "type": "string",
           "description": "Default language to use for records requesting automatic language detection."
+        },
+        "cancelAfter": {
+          "type": "number",
+          "format": "float",
+          "description": "Optional duration in seconds after which the job will be canceled if not completed."
         }
       },
       "required": [
@@ -1374,6 +1422,22 @@
               }
             ]
           }
+        },
+        "entityTypes": {
+          "type": "array",
+          "description": "(Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories.",
+          "items": {
+            "$ref": "#/definitions/PiiCategoriesExclude"
+          }
+        },
+        "policyName": {
+          "type": "string",
+          "description": "(Optional) name of the redaction policy for identification purposes."
+        },
+        "isDefaultPolicy": {
+          "type": "boolean",
+          "description": "(Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default.",
+          "default": false
         }
       },
       "discriminator": "policyKind",
@@ -1621,6 +1685,47 @@
           }
         ]
       }
+    },
+    "ConfidenceScoreThreshold": {
+      "type": "object",
+      "description": "The confidence score threshold configuration for PII entity recognition",
+      "properties": {
+        "default": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0",
+          "default": 0.3
+        },
+        "overrides": {
+          "type": "array",
+          "description": "Confidence score threshold overrides for specific PII categories",
+          "items": {
+            "$ref": "#/definitions/ConfidenceScoreThresholdOverride"
+          }
+        }
+      },
+      "required": [
+        "default"
+      ]
+    },
+    "ConfidenceScoreThresholdOverride": {
+      "type": "object",
+      "description": "The confidence score threshold override for a specific PII category",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/PiiCategoriesExclude",
+          "description": "The PII category for which to override the confidence score threshold"
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The confidence score threshold for the specified PII category"
+        }
+      },
+      "required": [
+        "entityType",
+        "value"
+      ]
     },
     "CurrencyMetadata": {
       "type": "object",
@@ -2971,6 +3076,44 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
+    },
+    "EntitySynonym": {
+      "type": "object",
+      "description": "The entity synonyms used to enhance pii entity detection",
+      "properties": {
+        "synonym": {
+          "type": "string",
+          "description": "The synonym to be used for context"
+        },
+        "language": {
+          "type": "string",
+          "description": "The 2 letter ISO 639-1 language the synonym"
+        }
+      },
+      "required": [
+        "synonym"
+      ]
+    },
+    "EntitySynonyms": {
+      "type": "object",
+      "description": "Object that allows the user to provide synonyms for context words that to enhance pii entity detection.",
+      "properties": {
+        "entityType": {
+          "$ref": "#/definitions/EntityCategory",
+          "description": "The entity name"
+        },
+        "synonyms": {
+          "type": "array",
+          "description": "The entity synonyms",
+          "items": {
+            "$ref": "#/definitions/EntitySynonym"
+          }
+        }
+      },
+      "required": [
+        "entityType",
+        "synonyms"
+      ]
     },
     "EntityTag": {
       "type": "object",
@@ -4506,7 +4649,8 @@
         "TemperatureMetadata",
         "CurrencyMetadata",
         "NumericRangeMetadata",
-        "TemporalSpanMetadata"
+        "TemporalSpanMetadata",
+        "AddressMetadata"
       ],
       "x-ms-enum": {
         "name": "MetadataKind",
@@ -4596,6 +4740,11 @@
             "name": "TemporalSpanMetadata",
             "value": "TemporalSpanMetadata",
             "description": "Metadata for temporal span values."
+          },
+          {
+            "name": "AddressMetadata",
+            "value": "AddressMetadata",
+            "description": "Metadata for address-related values."
           }
         ]
       }
@@ -4956,7 +5105,16 @@
         "IPAddress",
         "Date",
         "Person",
-        "Address"
+        "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate"
       ],
       "x-ms-enum": {
         "name": "PiiCategoriesExclude",
@@ -5816,6 +5974,51 @@
             "name": "Address",
             "value": "Address",
             "description": "Address"
+          },
+          {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
           }
         ]
       }
@@ -5995,6 +6198,15 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate",
         "All",
         "Default"
       ],
@@ -6858,6 +7070,51 @@
             "description": "Address"
           },
           {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
+          },
+          {
             "name": "All",
             "value": "All",
             "description": "All PII categories."
@@ -7129,9 +7386,32 @@
             "$ref": "#/definitions/PiiCategoriesExclude"
           }
         },
-        "redactionPolicy": {
-          "$ref": "#/definitions/BaseRedactionPolicy",
-          "description": "RedactionPolicy to be used on the input."
+        "redactionPolicies": {
+          "type": "array",
+          "description": "List of RedactionPolicies to be used on the input.",
+          "items": {
+            "$ref": "#/definitions/BaseRedactionPolicy"
+          }
+        },
+        "confidenceScoreThreshold": {
+          "$ref": "#/definitions/ConfidenceScoreThreshold",
+          "description": "Confidence score threshold configuration for PII entity recognition"
+        },
+        "disableEntityValidation": {
+          "type": "boolean",
+          "description": "Disable entity validation for PII entity recognition",
+          "default": false
+        },
+        "valueExclusionPolicy": {
+          "$ref": "#/definitions/ValueExclusionPolicy",
+          "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
+        },
+        "entitySynonyms": {
+          "type": "array",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection.",
+          "items": {
+            "$ref": "#/definitions/EntitySynonyms"
+          }
         }
       }
     },
@@ -8355,6 +8635,22 @@
         ]
       }
     },
+    "SyntheticReplacementPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of replacing PII with synthetic values.",
+      "properties": {
+        "preserveDataFormat": {
+          "type": "boolean",
+          "description": "Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "syntheticReplacement"
+    },
     "TargetConfidenceScoreLabel": {
       "type": "object",
       "description": "Represents the confidence scores across all sentiment classes: positive and negative.",
@@ -8785,6 +9081,28 @@
           }
         ]
       }
+    },
+    "ValueExclusionPolicy": {
+      "type": "object",
+      "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service",
+      "properties": {
+        "caseSensitive": {
+          "type": "boolean",
+          "description": "Option to make the values excluded values case sensitive",
+          "default": false
+        },
+        "excludedValues": {
+          "type": "array",
+          "description": "List of words and terms that should be excluded from detection by the PII detection service",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "caseSensitive",
+        "excludedValues"
+      ]
     },
     "VolumeMetadata": {
       "type": "object",

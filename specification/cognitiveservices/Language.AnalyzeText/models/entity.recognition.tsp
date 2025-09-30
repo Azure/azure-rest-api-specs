@@ -950,6 +950,10 @@ union MetadataKind {
 
   /** Metadata for temporal span values. */
   TemporalSpanMetadata: "TemporalSpanMetadata",
+
+  /** Metadata for address-related values. */
+  @added(Versions.v2025_11_15_preview)
+  AddressMetadata: "AddressMetadata",
 }
 
 /** Represents Metadata for quantities. */
@@ -1080,7 +1084,7 @@ model DateValue {
   value: string;
 
   /** Modifier for datetime to indicate point of reference like before, after etc. */
-  modifier?: TemporalModifier;
+  modifier?: TemporalModifier;  
 }
 
 /** Base temporal metadata object. */
@@ -1089,6 +1093,33 @@ model BaseTemporalMetadata {
   /** List of date values. */
   dateValues?: DateValue[];
 }
+
+/** Represents the Address entity Metadata model. */
+@added(Versions.v2025_11_15_preview)
+model AddressMetadata extends BaseMetadata {
+
+  /** Kind of the metadata. */
+  metadataKind: MetadataKind.AddressMetadata;
+
+  /** The fully formatted address string following postal conventions for the address's country/region. */
+  formatedAddress: string;
+
+  /** The full address string as recognized from the input text. */
+  addressLines: string[];
+
+  /** The city name of the address. */
+  city?: string;
+
+  /** The state or province name of the address. */
+  state?: string;
+
+  /** The postal or ZIP code of the address. */
+  postalCode?: string;
+
+  /** The country or region name of the address. */
+  countryOrRegion?: string;
+}
+
 
 /** A Metadata for date entity instances. */
 @added(Versions.v2024_11_01)
