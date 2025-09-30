@@ -5329,19 +5329,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
+          "200": {
+            "description": "OK"
           },
           "204": {
             "description": "No Content"
@@ -5353,10 +5342,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Delete OutboundRule": {
             "$ref": "./examples/ManagedNetwork/deleteRuleV2.json"
@@ -5367,7 +5352,7 @@
         "tags": [
           "ManagedNetwork"
         ],
-        "summary": "The GET API for retrieveing a single outbound rule of the managed network associated with the cognitive services account.",
+        "summary": "The GET API for retrieving a single outbound rule of the managed network associated with the cognitive services account.",
         "operationId": "OutboundRule_Get",
         "produces": [
           "application/json"
@@ -5501,7 +5486,7 @@
         "tags": [
           "ManagedNetwork"
         ],
-        "summary": "The GET API for retrieveing the list of outbound rules of the managed network associated with the cognitive services account.",
+        "summary": "The GET API for retrieving the list of outbound rules of the managed network associated with the cognitive services account.",
         "operationId": "OutboundRule_List",
         "produces": [
           "application/json"
@@ -6054,7 +6039,7 @@
         "tags": [
           "AgentApplication"
         ],
-        "summary": "Delete Agent Application (asynchronous).",
+        "summary": "Delete Agent Application.",
         "operationId": "AgentApplications_Delete",
         "produces": [
           "application/json"
@@ -6081,26 +6066,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "x-ms-async-operation-timeout": {
-                "description": "Timeout for the client to use when polling the asynchronous operation.",
-                "type": "string",
-                "format": "duration"
-              },
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32",
-                "maximum": 600,
-                "minimum": 10
-              }
-            }
+          "200": {
+            "description": "OK"
           },
           "204": {
             "description": "No Content"
@@ -6116,10 +6083,6 @@
           "Delete Account Agent Application.": {
             "$ref": "./examples/AgentApplication/delete.json"
           }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
         }
       },
       "get": {
