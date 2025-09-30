@@ -132,7 +132,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
   @added(Versions.v2025_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Get")
   get is VirtualMachineScaleSetVMDiagnosticRunCommandOps.Read<
-    VirtualMachineDiagnosticRunCommand,
+    VirtualMachineRunCommand,
     Parameters = {
       /**
        * The expand expression to apply on the operation.
