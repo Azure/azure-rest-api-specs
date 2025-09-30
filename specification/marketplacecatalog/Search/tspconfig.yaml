@@ -11,6 +11,39 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Search"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Search"
+    flavor: azure
+  "@azure-typespec/http-client-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "Search"
+    model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-details:
+      name: "@azure-rest/contoso-widgetmanager"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: com.azure.contoso.widgetmanager
+    flavor: azure
+  "@azure-tools/typespec-go":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{namespace}"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
