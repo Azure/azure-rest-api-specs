@@ -41,6 +41,8 @@ input-file:
   - Microsoft.Communication/stable/2025-09-01/Domains.json
   - Microsoft.Communication/stable/2025-09-01/EmailServices.json
   - Microsoft.Communication/stable/2025-09-01/SenderUsernames.json
+  - Microsoft.Communication/stable/2025-09-01/SmtpUsernames.json
+  - Microsoft.Communication/stable/2025-09-01/SuppressionLists.json
 ```
 
 ### Tag: package-preview-2025-05-01-preview
