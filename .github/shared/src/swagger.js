@@ -5,6 +5,7 @@ import { readFile } from "fs/promises";
 import { dirname, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
 import { example } from "./changed-files.js";
+import { includesFolder } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
 
 /**
@@ -191,7 +192,7 @@ export class Swagger {
    * @returns {string} version kind (stable or preview)
    */
   get versionKind() {
-    return dirname(this.#path).includes("/preview/")
+    return includesFolder(this.#path, "preview")
       ? API_VERSION_LIFECYCLE_STAGES.PREVIEW
       : API_VERSION_LIFECYCLE_STAGES.STABLE;
   }

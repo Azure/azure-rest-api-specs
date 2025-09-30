@@ -1,0 +1,96 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "PrivateAccesses types",
+    "version": "2023-10-27-preview"
+  },
+  "paths": {},
+  "definitions": {
+    "PrivateAccess": {
+      "type": "object",
+      "description": "PrivateAccesses tracked resource.",
+      "allOf": [
+        {
+          "$ref": "../../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateAccessProperties",
+          "x-ms-client-flatten": true,
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "PrivateAccessProperties": {
+      "type": "object",
+      "description": "The properties of a private access resource",
+      "properties": {
+        "privateEndpointConnections": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "../../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          },
+          "description": "A readonly collection of private endpoint connection. Currently only one endpoint connection is supported."
+        }
+      }
+    },
+    "PrivateAccessListResult": {
+      "type": "object",
+      "description": "Model that represents a list of private access resources and a link for pagination.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateAccess"
+          },
+          "description": "List of private access resources.",
+          "readOnly": true
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "URL to retrieve the next page of private access resources.",
+          "readOnly": true
+        }
+      }
+    },
+    "PrivateLinkResourceListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private link resources",
+          "items": {
+            "$ref": "../../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots.",
+          "readOnly": true
+        }
+      },
+      "description": "A list of private link resources"
+    },
+    "PrivateEndpointConnectionListResult": {
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "Array of private endpoint connections",
+          "items": {
+            "$ref": "../../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "$ref": "./common.json#/definitions/urlNullable",
+          "description": "The uri to fetch the next page of snapshots. Call ListNext() with this to fetch the next page of snapshots.",
+          "readOnly": true
+        }
+      },
+      "description": "A list of private link resources"
+    }
+  }
+}

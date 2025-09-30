@@ -73,8 +73,14 @@ describe("breaking-change-add-label-artifacts", () => {
     createMockWorkflowRun(CROSS_VERSION_BREAKING_CHANGE_WORKFLOW_NAME, "completed", "success", 2),
   ];
 
-  const expectStandardOutputs = (breakingChangeValue, versioningValue) => {
+  const expectRequiredOutputs = () => {
+    expect(mockCore.setOutput).toHaveBeenCalledWith("head_sha", mockInputs.head_sha);
     expect(mockCore.setOutput).toHaveBeenCalledWith("issue_number", mockInputs.issue_number);
+  };
+
+  const expectStandardOutputs = (breakingChangeValue, versioningValue) => {
+    expectRequiredOutputs();
+
     expect(mockCore.setOutput).toHaveBeenCalledWith(
       "breakingChangeReviewLabelName",
       REVIEW_REQUIRED_LABELS.BREAKING_CHANGE,
@@ -91,9 +97,13 @@ describe("breaking-change-add-label-artifacts", () => {
   };
 
   const expectEarlyReturn = (infoMessage) => {
+    expectRequiredOutputs();
+
+    // Ensure setOutput was *only* called with the two required outputs
+    expect(mockCore.setOutput).toHaveBeenCalledTimes(2);
+
     expect(mockCore.info).toHaveBeenCalledWith(infoMessage);
     expect(mockGithub.rest.actions.listWorkflowRunArtifacts).not.toHaveBeenCalled();
-    expect(mockCore.setOutput).not.toHaveBeenCalled();
   };
 
   describe("successful execution with both workflows completed", () => {

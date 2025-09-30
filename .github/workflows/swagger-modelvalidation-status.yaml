@@ -1,4 +1,4 @@
-name: "[TEST-IGNORE] Swagger ModelValidation - Set Status"
+name: "Swagger ModelValidation - Set Status"
 
 on:
   # Must run on pull_request_target instead of pull_request, since the latter cannot trigger on
@@ -15,7 +15,12 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["\\[TEST-IGNORE\\] Swagger ModelValidation - Analyze Code"]
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      [
+        "Swagger ModelValidation - Analyze Code",
+        "\\[TEST-IGNORE\\] Swagger ModelValidation - Analyze Code",
+      ]
     types: [completed]
 
 permissions:
@@ -30,6 +35,6 @@ jobs:
     name: Set ModelValidation Status
     uses: ./.github/workflows/_reusable-set-check-status.yaml
     with:
-      monitored_workflow_name: "[TEST-IGNORE] Swagger ModelValidation - Analyze Code"
-      required_check_name: "[TEST-IGNORE] Swagger ModelValidation"
+      monitored_workflow_name: "Swagger ModelValidation - Analyze Code"
+      required_check_name: "Swagger ModelValidation"
       overriding_label: "Approved-ModelValidation"

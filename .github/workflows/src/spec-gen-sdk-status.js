@@ -57,6 +57,7 @@ export async function setSpecGenSdkStatusImpl({
   issue_number,
 }) {
   const statusName = "SDK Validation Status";
+  core.setOutput("head_sha", head_sha);
   core.setOutput("issue_number", issue_number);
   const checks = await github.paginate(github.rest.checks.listForRef, {
     owner,

@@ -1,0 +1,62 @@
+{
+  "operationId": "Connections_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-05-30-preview",
+    "connection": {
+      "location": "East US",
+      "properties": {
+        "justification": "justification",
+        "pipeline": "testdc",
+        "requirementId": "id",
+        "flowProfileList": [
+          {
+            "pipeline": "pipelinea",
+            "name": "flowProfileNamea",
+            "flowProfileId": "25f2c41a-6e29-4c40-a033-b4de81d4a681",
+            "replicationScenario": "Files",
+            "status": "Enabled",
+            "description": "Testing 123"
+          },
+          {
+            "pipeline": "pipelinea",
+            "name": "flowProfileNameb",
+            "flowProfileId": "66b00598-cabb-4a85-b3d8-88905ac899b8",
+            "replicationScenario": "Files",
+            "status": "Enabled",
+            "description": "Testing 123"
+          }
+        ]
+      }
+    },
+    "connectionName": "testConnection",
+    "resourceGroupName": "testRG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "Creates or updates the connection resource",
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
+        "location": "East US",
+        "properties": {
+          "justification": "justification",
+          "pipeline": "testdc",
+          "requirementId": "id"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.AzureDataTransfer/connections",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testRG/providers/Microsoft.AzureDataTransfer/connections/testConnection",
+        "location": "East US",
+        "properties": {
+          "justification": "justification",
+          "pipeline": "testdc",
+          "requirementId": "id"
+        }
+      }
+    }
+  }
+}
