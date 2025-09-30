@@ -1,6 +1,6 @@
-import "./custom/events.tsp";
-import "./custom/items.tsp";
-import "./custom/tools.tsp";
+import "./events.tsp";
+import "./items.tsp";
+import "./tools.tsp";
 import "@typespec/http";
 import "@typespec/openapi";
 import "@azure-tools/typespec-client-generator-core";

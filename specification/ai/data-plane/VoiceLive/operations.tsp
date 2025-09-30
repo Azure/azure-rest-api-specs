@@ -1,4 +1,3 @@
-import "./common";
 import "./models.tsp";
 import "@azure-tools/typespec-azure-core";
 

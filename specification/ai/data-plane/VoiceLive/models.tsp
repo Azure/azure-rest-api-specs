@@ -1,5 +1,4 @@
 import "./client.tsp";
-import "./common";
 import "./custom.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
