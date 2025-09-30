@@ -717,6 +717,7 @@ input-file:
 - Microsoft.Security/preview/2023-02-15-preview/sensitivitySettings.json
 - Microsoft.Security/preview/2023-05-01-preview/healthReports.json
 - Microsoft.Security/preview/2023-10-01-preview/securityConnectors.json
+- Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2017-08-01/complianceResults.json
 - Microsoft.Security/stable/2019-01-01/advancedThreatProtectionSettings.json
 - Microsoft.Security/stable/2019-08-01/deviceSecurityGroups.json
@@ -741,7 +742,6 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
-- Microsoft.Security/stable/2025-03-01/securityConnectorsDevOps.json
 
 # Needed when there is more than one input file
 override-info:
