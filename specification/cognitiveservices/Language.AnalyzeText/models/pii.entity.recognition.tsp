@@ -92,12 +92,16 @@ model ConfidenceScoreThreshold {
 }
 
 /** Confidence score threshold override for a specific PII category */
+@added(Versions.v2025_11_15_preview)
 model ConfidenceScoreThresholdOverride {
   /** The PII category for which to override the confidence score threshold */
   entity: PiiCategoriesExclude;
 
   /** The confidence score threshold for the specified PII category */
   value: float32;
+
+  /** The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages. */
+  language: string
 }
 
 /** Policy for specific words and terms that should be excluded from detection by the PII detection service */

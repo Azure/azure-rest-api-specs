@@ -1712,7 +1712,7 @@
       "type": "object",
       "description": "Confidence score threshold override for a specific PII category",
       "properties": {
-        "entityType": {
+        "entity": {
           "$ref": "#/definitions/PiiCategoriesExclude",
           "description": "The PII category for which to override the confidence score threshold"
         },
@@ -1720,11 +1720,16 @@
           "type": "number",
           "format": "float",
           "description": "The confidence score threshold for the specified PII category"
+        },
+        "language": {
+          "type": "string",
+          "description": "The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages."
         }
       },
       "required": [
-        "entityType",
-        "value"
+        "entity",
+        "value",
+        "language"
       ]
     },
     "CurrencyMetadata": {
@@ -5113,7 +5118,6 @@
         "Neighborhood",
         "SortCode",
         "PIN",
-        "VIN",
         "VehicleIdentificationNumber",
         "LicensePlate",
         "KRPassportNumber",
@@ -6023,11 +6027,6 @@
             "description": "PIN"
           },
           {
-            "name": "VIN",
-            "value": "VIN",
-            "description": "VIN"
-          },
-          {
             "name": "VehicleIdentificationNumber",
             "value": "VehicleIdentificationNumber",
             "description": "VIN"
@@ -6277,7 +6276,6 @@
         "Neighborhood",
         "SortCode",
         "PIN",
-        "VIN",
         "VehicleIdentificationNumber",
         "LicensePlate",
         "KRPassportNumber",
@@ -7187,11 +7185,6 @@
             "name": "PIN",
             "value": "PIN",
             "description": "PIN"
-          },
-          {
-            "name": "VIN",
-            "value": "VIN",
-            "description": "VIN"
           },
           {
             "name": "VehicleIdentificationNumber",
