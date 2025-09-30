@@ -33,7 +33,9 @@ if (args.length > 1) {
 const specPath = args[0];
 
 // Default to 'undefined' instead of 'defaultLogger', so output is always a valid JSON object (no logging)
-const specModel = new SpecModel(specPath, { logger: debug ? debugLogger : undefined });
+const logger = debug ? debugLogger : undefined;
+
+const specModel = new SpecModel(specPath, { logger });
 
 console.log(
   JSON.stringify(
