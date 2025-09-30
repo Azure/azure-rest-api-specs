@@ -29,12 +29,6 @@ model SystemData {
   lastModifiedAt?: utcDateTime;
 }
 
-@doc("LongRunningOperation response")
-model LongRunningNullResponse {
-  @doc("The location uri to poll for status")
-  location: string;
-}
-
 @doc("Settings for online request configuration.")
 model OnlineRequestSettings {
   @doc("The timeout duration for requests.")
@@ -42,6 +36,19 @@ model OnlineRequestSettings {
 
   @doc("The maximum number of concurrent requests per instance.")
   maxConcurrentRequestsPerInstance: int32;
+}
+
+@doc("LongRunningNullResponse")
+model LongRunningNullResponse {
+  @doc("Polling Uri.")
+  @pollingLocation
+  location: ResourceLocation<ResourceOperationStatus<PutAssetLROResponse>>;
+}
+
+@doc("PutAssetLROResponse")
+model PutAssetLROResponse {
+  @doc("Response of completed put asset lro.")
+  assetId: string;
 }
 
 @doc("Settings for probe configuration.")
