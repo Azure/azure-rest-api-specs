@@ -168,103 +168,103 @@ op GetCriticalDataElementFacets is RpcOperation<
   FacetsResponse
 >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("CriticalDataColumns")
-@doc("Creates a new critical data column in the catalog.")
-@route("/criticalDataColumns")
-@post
-op CreateCriticalDataColumn is RpcOperation<
-  CreateCriticalDataColumnRequest,
-  CreateCriticalDataColumnResponse
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("CriticalDataColumns")
+// @doc("Creates a new critical data column in the catalog.")
+// @route("/criticalDataColumns")
+// @post
+// op CreateCriticalDataColumn is RpcOperation<
+//   CreateCriticalDataColumnRequest,
+//   CreateCriticalDataColumnResponse
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("CriticalDataColumns")
-@doc("Searches and retrieves critical data columns based on domain, assetId, and other filters.")
-@get
-op ListCriticalDataColumn is UnifiedCatalogOperations.ResourceList<
-  CriticalDataColumn,
-  ListQueryParametersTrait<{
-    @doc("The unique identifier of the critical data column.")
-    @query
-    domainId?: uuid;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("CriticalDataColumns")
+// @doc("Searches and retrieves critical data columns based on domain, assetId, and other filters.")
+// @get
+// op ListCriticalDataColumn is UnifiedCatalogOperations.ResourceList<
+//   CriticalDataColumn,
+//   ListQueryParametersTrait<{
+//     @doc("The unique identifier of the critical data column.")
+//     @query
+//     domainId?: uuid;
 
-    @doc("The unique identifier of the critical data column.")
-    @query
-    assetId?: uuid;
+//     @doc("The unique identifier of the critical data column.")
+//     @query
+//     assetId?: uuid;
 
-    @doc("Expressions that specify the order of returned results.")
-    @query
-    orderBy?: string;
-  } & SkipQueryParameter &
-    TopQueryParameter>
->;
+//     @doc("Expressions that specify the order of returned results.")
+//     @query
+//     orderBy?: string;
+//   } & SkipQueryParameter &
+//     TopQueryParameter>
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("CriticalDataColumns")
-@doc("Searches and retrieves critical data columns based on Id.")
-@get
-op GetCriticalDataColumnById is UnifiedCatalogOperations.ResourceRead<CriticalDataColumn>;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("CriticalDataColumns")
+// @doc("Searches and retrieves critical data columns based on Id.")
+// @get
+// op GetCriticalDataColumnById is UnifiedCatalogOperations.ResourceRead<CriticalDataColumn>;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("CriticalDataColumns")
-@doc("Updates an existing critical data column in the catalog.")
-@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
-@post
-op CreateCriticalDataColumnRelationship is RpcOperation<
-  CriticalDataColumnIdParameters & {
-    @doc("The body associated with the critical data column")
-    @query
-    entityType: EntityCategory;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("CriticalDataColumns")
+// @doc("Updates an existing critical data column in the catalog.")
+// @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
+// @post
+// op CreateCriticalDataColumnRelationship is RpcOperation<
+//   CriticalDataColumnIdParameters & {
+//     @doc("The body associated with the critical data column")
+//     @query
+//     entityType: EntityCategory;
 
-    @doc("CriticalDataColumnProperties")
-    @bodyRoot
-    relationship: CriticalDataColumnProperties;
-  },
-  CdcRelationship
->;
+//     @doc("CriticalDataColumnProperties")
+//     @bodyRoot
+//     relationship: CriticalDataColumnProperties;
+//   },
+//   CdcRelationship
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("CriticalDataColumns")
-@doc("Retrieves relationships for a critical data column.")
-//@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
-@get
-op ListCriticalDataColumnRelationships is UnifiedCatalogOperations.ResourceList<
-  CdcRelationship,
-  ListQueryParametersTrait<{
-    @doc("The body associated with the critical data element output.")
-    @query
-    entityType: EntityCategory;
-  }>
->;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("CriticalDataColumns")
+// @doc("Retrieves relationships for a critical data column.")
+// //@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
+// @get
+// op ListCriticalDataColumnRelationships is UnifiedCatalogOperations.ResourceList<
+//   CdcRelationship,
+//   ListQueryParametersTrait<{
+//     @doc("The body associated with the critical data element output.")
+//     @query
+//     entityType: EntityCategory;
+//   }>
+// >;
 
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-@tag("CriticalDataColumns")
-@doc("Deletes relationships for a critical data column.")
-@route("/criticalDataColumns/{criticalDataColumnId}/relationships")
-@delete
-op DeleteCriticalDataColumnRelationship is RpcOperation<
-  CriticalDataColumnIdParameters & {
-    @doc("The body associated with the critical data column")
-    @query
-    entityType: EntityCategory;
+// #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+// #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+// @tag("CriticalDataColumns")
+// @doc("Deletes relationships for a critical data column.")
+// @route("/criticalDataColumns/{criticalDataColumnId}/relationships")
+// @delete
+// op DeleteCriticalDataColumnRelationship is RpcOperation<
+//   CriticalDataColumnIdParameters & {
+//     @doc("The body associated with the critical data column")
+//     @query
+//     entityType: EntityCategory;
 
-    @doc("The unique identifier of the critical data column.")
-    @query
-    entityId?: uuid;
+//     @doc("The unique identifier of the critical data column.")
+//     @query
+//     entityId?: uuid;
 
-    @doc("The identifier of the critical data element.")
-    @query
-    criticalDataElementId?: uuid;
-  },
-  DeleteResponse
->;
+//     @doc("The identifier of the critical data element.")
+//     @query
+//     criticalDataElementId?: uuid;
+//   },
+//   DeleteResponse
+// >;
 
 // #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
 // #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
