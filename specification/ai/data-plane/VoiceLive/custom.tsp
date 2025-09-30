@@ -60,8 +60,7 @@ model RequestSession {
 
 @usage(ResponseUsage)
 @doc("Base for session configuration in the response.")
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" // Being able to use the returned options as input is useful
-model ResponseSession extends RequestSession {
+model ResponseSession is RequestSession {
   ...SessionBase;
   @doc("The agent configuration for the session, if applicable.")
   agent?: AgentConfig;
