@@ -17,12 +17,12 @@ options:
     arm-resource-flattening: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.NetApp"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.NetApp"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.NetApp"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-netapp"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-netapp"
     namespace: "azure.mgmt.netapp"
     generate-test: true
     generate-sample: true
@@ -33,7 +33,7 @@ options:
     service-name: "NetAppFiles"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-netapp"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-netapp"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
