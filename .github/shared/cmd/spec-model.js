@@ -13,6 +13,9 @@ let args = process.argv.slice(2);
 const debug = args.includes("--debug");
 args = args.filter((a) => a != "--debug");
 
+const embedErrors = args.includes("--embed-errors");
+args = args.filter((a) => a != "--embed-errors");
+
 const includeRefs = args.includes("--include-refs");
 args = args.filter((a) => a != "--include-refs");
 
@@ -36,4 +39,6 @@ const specModel = new SpecModel(specPath, {
   logger: new ConsoleLogger(debug),
 });
 
-console.log(JSON.stringify(await specModel.toJSONAsync({ includeRefs, relativePaths }), null, 2));
+console.log(
+  JSON.stringify(await specModel.toJSONAsync({ embedErrors, includeRefs, relativePaths }), null, 2),
+);
