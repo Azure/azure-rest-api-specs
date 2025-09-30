@@ -13,34 +13,34 @@ union ContentPartType {
 }
 
 @discriminator("type")
-@doc("Base for any content part; discriminated by `type`.")
+/** Base for any content part; discriminated by `type`. */
 model ContentPart {
   type: ContentPartType;
 }
 
 @usage(RequestUsage)
-@doc("A text content part for a request.")
+/** A text content part for a request. */
 model RequestTextContentPart extends ContentPart {
   type: ContentPartType.input_text;
   text?: string;
 }
 
 @usage(RequestUsage)
-@doc("An audio content part for a request.")
+/** An audio content part for a request. */
 model RequestAudioContentPart extends ContentPart {
   type: ContentPartType.input_audio;
   transcript?: string;
 }
 
 @usage(ResponseUsage)
-@doc("A text content part for a response.")
+/** A text content part for a response. */
 model ResponseTextContentPart extends ContentPart {
   type: ContentPartType.text;
   text?: string;
 }
 
 @usage(ResponseUsage)
-@doc("An audio content part for a response.")
+/** An audio content part for a response. */
 model ResponseAudioContentPart extends ContentPart {
   type: ContentPartType.audio;
   transcript?: string;

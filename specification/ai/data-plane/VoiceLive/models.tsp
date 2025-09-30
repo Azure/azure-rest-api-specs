@@ -10,44 +10,44 @@ alias RequestUsage = Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenera
 alias ResponseUsage = Azure.ClientGenerator.Core.Usage.output | Azure.ClientGenerator.Core.Usage.json;
 alias DualUsage = RequestUsage | ResponseUsage;
 
-@doc("Error object returned in case of API failure.")
+/** Error object returned in case of API failure. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VoiceLiveErrorDetails {
-  @doc("Error code, or null if unspecified.")
+  /** Error code, or null if unspecified. */
   code?: string;
 
-  @doc("Human-readable error message.")
+  /** Human-readable error message. */
   message: string;
 
-  @doc("Parameter name related to the error, if applicable.")
+  /** Parameter name related to the error, if applicable. */
   param?: string;
 
-  @doc("Type or category of the error.")
+  /** Type or category of the error. */
   type?: string;
 
-  @doc("Event id of the error.")
+  /** Event id of the error. */
   event_id?: string;
 }
 
 @error
-@doc("Standard error response envelope.")
+/** Standard error response envelope. */
 @usage(ResponseUsage)
 model ErrorResponse {
-  @doc("Error object returned in case of API failure.")
+  /** Error object returned in case of API failure. */
   error: VoiceLiveErrorDetails;
 }
 
-@doc("A single log probability entry for a token.")
+/** A single log probability entry for a token. */
 @usage(ResponseUsage)
 model LogProbProperties {
-  @doc("The token that was used to generate the log probability.")
+  /** The token that was used to generate the log probability. */
   token: string;
 
-  @doc("The log probability of the token.")
+  /** The log probability of the token. */
   logprob: float32;
 
-  @doc("The bytes that were used to generate the log probability.")
+  /** The bytes that were used to generate the log probability. */
   bytes: int32[];
 }
 
@@ -64,104 +64,94 @@ model ClientEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Send this event to update the session’s default configuration.
-  The client may send this event at any time to update any field,
-  except for `voice`. However, note that once a session has been
-  initialized with a particular `model`, it can’t be changed to
-  another model using `session.update`.
-  
-  When the server receives a `session.update`, it will respond
-  with a `session.updated` event showing the full, effective configuration.
-  Only the fields that are present are updated. To clear a field like
-  `instructions`, pass an empty string.
-  """)
+/**
+ * Send this event to update the session’s default configuration.
+ * The client may send this event at any time to update any field,
+ * except for `voice`. However, note that once a session has been
+ * initialized with a particular `model`, it can’t be changed to
+ * another model using `session.update`.
+ * When the server receives a `session.update`, it will respond
+ * with a `session.updated` event showing the full, effective configuration.
+ * Only the fields that are present are updated. To clear a field like
+ * `instructions`, pass an empty string.
+ */
 @usage(RequestUsage)
 model ClientEventSessionUpdate extends ClientEvent {
-  @doc("""
-    The event type, must be `session.update`.
-    """)
+  /** The event type, must be `session.update`. */
   type: ClientEventType.session_update;
 
   // Tool customization: apply enriched request-specific model
   session: RequestSession;
 }
 
-@doc("""
-      Sent when the client connects and provides its SDP (Session Description Protocol)
-      for avatar-related media negotiation.
-    """)
+/**
+
+ * Sent when the client connects and provides its SDP (Session Description Protocol)
+
+ * for avatar-related media negotiation.
+
+ */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventSessionAvatarConnect extends ClientEvent {
-  @doc("The event type, must be 'session.avatar.connect'.")
+  /** The event type, must be 'session.avatar.connect'. */
   type: ClientEventType.session_avatar_connect;
 
-  @doc("The client's SDP offer.")
+  /** The client's SDP offer. */
   client_sdp: string;
 }
 
-@doc("""
-      Indicates the start of a new audio input turn.
-    """)
+/** Indicates the start of a new audio input turn. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnStart extends ClientEvent {
-  @doc("The event type, must be 'input_audio.turn.start'.")
+  /** The event type, must be 'input_audio.turn.start'. */
   type: ClientEventType.input_audio_turn_start;
 
-  @doc("Unique identifier for the input audio turn.")
+  /** Unique identifier for the input audio turn. */
   turn_id: string;
 }
 
-@doc("""
-      Appends audio data to an ongoing input turn.
-    """)
+/** Appends audio data to an ongoing input turn. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnAppend extends ClientEvent {
-  @doc("The event type, must be 'input_audio.turn.append'.")
+  /** The event type, must be 'input_audio.turn.append'. */
   type: ClientEventType.input_audio_turn_append;
 
-  @doc("The ID of the turn this audio is part of.")
+  /** The ID of the turn this audio is part of. */
   turn_id: string;
 
-  @doc("Base64-encoded audio chunk.")
+  /** Base64-encoded audio chunk. */
   audio: string;
 }
 
-@doc("""
-      Marks the end of an audio input turn.
-    """)
+/** Marks the end of an audio input turn. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnEnd extends ClientEvent {
-  @doc("The event type, must be 'input_audio.turn.end'.")
+  /** The event type, must be 'input_audio.turn.end'. */
   type: ClientEventType.input_audio_turn_end;
 
-  @doc("The ID of the audio turn being ended.")
+  /** The ID of the audio turn being ended. */
   turn_id: string;
 }
 
-@doc("""
-      Cancels an in-progress input audio turn.
-    """)
+/** Cancels an in-progress input audio turn. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnCancel extends ClientEvent {
-  @doc("The event type, must be 'input_audio.turn.cancel'.")
+  /** The event type, must be 'input_audio.turn.cancel'. */
   type: ClientEventType.input_audio_turn_cancel;
 
-  @doc("The ID of the turn to cancel.")
+  /** The ID of the turn to cancel. */
   turn_id: string;
 }
 
-@doc("""
-      Clears all input audio currently being streamed.
-    """)
+/** Clears all input audio currently being streamed. */
 @usage(RequestUsage)
 model ClientEventInputAudioClear extends ClientEvent {
-  @doc("The event type, must be 'input_audio.clear'.")
+  /** The event type, must be 'input_audio.clear'. */
   type: ClientEventType.input_audio_clear;
 }
 
@@ -179,15 +169,16 @@ model Response {
   /** The unique ID of the response. */
   id?: string;
 
-  @doc("""
-    The object type, must be `realtime.response`.
-    """)
+  /** The object type, must be `realtime.response`. */
   object?: "realtime.response";
 
-  @doc("""
-    The final status of the response.
-    One of: `completed`, `cancelled`, `failed`, `incomplete`, or `in_progress`.
-    """)
+  /**
+
+   * The final status of the response.
+
+   * One of: `completed`, `cancelled`, `failed`, `incomplete`, or `in_progress`.
+
+   */
   status?: ResponseStatus;
 
   /** Additional details about the status. */
@@ -205,32 +196,40 @@ model Response {
    */
   usage?: TokenUsage;
 
-  @doc("""
-    Which conversation the response is added to, determined by the `conversation`
-    field in the `response.create` event. If `auto`, the response will be added to
-    the default conversation and the value of `conversation_id` will be an id like
-    `conv_1234`. If `none`, the response will not be added to any conversation and
-    the value of `conversation_id` will be `null`. If responses are being triggered
-    by server VAD, the response will be added to the default conversation, thus
-    the `conversation_id` will be an id like `conv_1234`.
-    """)
+  /**
+
+   * Which conversation the response is added to, determined by the `conversation`
+
+   * field in the `response.create` event. If `auto`, the response will be added to
+
+   * the default conversation and the value of `conversation_id` will be an id like
+
+   * `conv_1234`. If `none`, the response will not be added to any conversation and
+
+   * the value of `conversation_id` will be `null`. If responses are being triggered
+
+   * by server VAD, the response will be added to the default conversation, thus
+
+   * the `conversation_id` will be an id like `conv_1234`.
+
+   */
   conversation_id?: string;
 
-  @doc("""
-    supported voice identifiers and configurations.
-    """)
+  /** supported voice identifiers and configurations. */
   voice?: Voice;
 
-  @doc("""
-    The set of modalities the model used to respond. If there are multiple modalities,
-    the model will pick one, for example if `modalities` is `["text", "audio"]`, the model
-    could be responding in either text or audio.
-    """)
+  /**
+
+   * The set of modalities the model used to respond. If there are multiple modalities,
+
+   * the model will pick one, for example if `modalities` is `["text", "audio"]`, the model
+
+   * could be responding in either text or audio.
+
+   */
   modalities?: Modality[];
 
-  @doc("""
-    The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
-    """)
+  /** The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. */
   output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
 
   /** Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. */
@@ -258,80 +257,74 @@ model Response {
  */
 @usage(RequestUsage)
 model ClientEventInputAudioBufferAppend extends ClientEvent {
-  @doc("""
-    The event type, must be `input_audio_buffer.append`.
-    """)
+  /** The event type, must be `input_audio_buffer.append`. */
   type: ClientEventType.input_audio_buffer_append;
 
   // Tool customization: use encoded type for audio data
-  @doc("""
-    Base64-encoded audio. This must be in the format specified by the
-    `input_audio_format` field in the session configuration.
-    """)
+  /**
+   * Base64-encoded audio. This must be in the format specified by the
+   * `input_audio_format` field in the session configuration.
+   */
   audio: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Send this event to commit the user input audio buffer, which will create a
-  new user message item in the conversation. This event will produce an error
-  if the input audio buffer is empty. When in Server VAD mode, the client does
-  not need to send this event, the server will commit the audio buffer
-  automatically.
-  
-  Committing the input audio buffer will trigger input audio transcription
-  (if enabled in session configuration), but it will not create a response
-  from the model. The server will respond with an `input_audio_buffer.committed`
-  event.
-  """)
+/**
+ * Send this event to commit the user input audio buffer, which will create a
+ * new user message item in the conversation. This event will produce an error
+ * if the input audio buffer is empty. When in Server VAD mode, the client does
+ * not need to send this event, the server will commit the audio buffer
+ * automatically.
+ * Committing the input audio buffer will trigger input audio transcription
+ * (if enabled in session configuration), but it will not create a response
+ * from the model. The server will respond with an `input_audio_buffer.committed`
+ * event.
+ */
 model ClientEventInputAudioBufferCommit extends ClientEvent {
-  @doc("""
-    The event type, must be `input_audio_buffer.commit`.
-    """)
+  /** The event type, must be `input_audio_buffer.commit`. */
   type: ClientEventType.input_audio_buffer_commit;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Send this event to clear the audio bytes in the buffer. The server will
-  respond with an `input_audio_buffer.cleared` event.
-  """)
+/**
+ * Send this event to clear the audio bytes in the buffer. The server will
+ * respond with an `input_audio_buffer.cleared` event.
+ */
 model ClientEventInputAudioBufferClear extends ClientEvent {
-  @doc("""
-    The event type, must be `input_audio_buffer.clear`.
-    """)
+  /** The event type, must be `input_audio_buffer.clear`. */
   type: ClientEventType.input_audio_buffer_clear;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Add a new Item to the Conversation's context, including messages, function
-  calls, and function call responses. This event can be used both to populate a
-  "history" of the conversation and to add new items mid-stream, but has the
-  current limitation that it cannot populate assistant audio messages.
-  
-  If successful, the server will respond with a `conversation.item.created`
-  event, otherwise an `error` event will be sent.
-  """)
+/**
+ * Add a new Item to the Conversation's context, including messages, function
+ * calls, and function call responses. This event can be used both to populate a
+ * "history" of the conversation and to add new items mid-stream, but has the
+ * current limitation that it cannot populate assistant audio messages.
+ * If successful, the server will respond with a `conversation.item.created`
+ * event, otherwise an `error` event will be sent.
+ */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventConversationItemCreate extends ClientEvent {
-  @doc("""
-    The event type, must be `conversation.item.create`.
-    """)
+  /** The event type, must be `conversation.item.create`. */
   type: ClientEventType.conversation_item_create;
 
-  @doc("""
-    Optional client-generated ID used to identify this event.
-    """)
+  /** Optional client-generated ID used to identify this event. */
   event_id?: string;
 
-  @doc("""
-    The ID of the preceding item after which the new item will be inserted.
-    If not set, the new item will be appended to the end of the conversation.
-    If set to `root`, the new item will be added to the beginning of the conversation.
-    If set to an existing ID, it allows an item to be inserted mid-conversation. If the
-    ID cannot be found, an error will be returned and the item will not be added.
-    """)
+  /**
+
+   * The ID of the preceding item after which the new item will be inserted.
+
+   * If not set, the new item will be appended to the end of the conversation.
+
+   * If set to `root`, the new item will be added to the beginning of the conversation.
+
+   * If set to an existing ID, it allows an item to be inserted mid-conversation. If the
+
+   * ID cannot be found, an error will be returned and the item will not be added.
+
+   */
   previous_item_id?: string;
 
   // Tool customization: apply enriched item definition hierarchy
@@ -339,25 +332,21 @@ model ClientEventConversationItemCreate extends ClientEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Send this event to truncate a previous assistant message’s audio. The server
-  will produce audio faster than voicelive, so this event is useful when the user
-  interrupts to truncate audio that has already been sent to the client but not
-  yet played. This will synchronize the server's understanding of the audio with
-  the client's playback.
-  
-  Truncating audio will delete the server-side text transcript to ensure there
-  is not text in the context that hasn't been heard by the user.
-  
-  If successful, the server will respond with a `conversation.item.truncated`
-  event.
-  """)
+/**
+ * Send this event to truncate a previous assistant message’s audio. The server
+ * will produce audio faster than voicelive, so this event is useful when the user
+ * interrupts to truncate audio that has already been sent to the client but not
+ * yet played. This will synchronize the server's understanding of the audio with
+ * the client's playback.
+ * Truncating audio will delete the server-side text transcript to ensure there
+ * is not text in the context that hasn't been heard by the user.
+ * If successful, the server will respond with a `conversation.item.truncated`
+ * event.
+ */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventConversationItemTruncate extends ClientEvent {
-  @doc("""
-    The event type, must be `conversation.item.truncate`.
-    """)
+  /** The event type, must be `conversation.item.truncate`. */
   type: ClientEventType.conversation_item_truncate;
 
   /**
@@ -378,18 +367,16 @@ model ClientEventConversationItemTruncate extends ClientEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Send this event when you want to remove any item from the conversation
-  history. The server will respond with a `conversation.item.deleted` event,
-  unless the item does not exist in the conversation history, in which case the
-  server will respond with an error.
-  """)
+/**
+ * Send this event when you want to remove any item from the conversation
+ * history. The server will respond with a `conversation.item.deleted` event,
+ * unless the item does not exist in the conversation history, in which case the
+ * server will respond with an error.
+ */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventConversationItemDelete extends ClientEvent {
-  @doc("""
-    The event type, must be `conversation.item.delete`.
-    """)
+  /** The event type, must be `conversation.item.delete`. */
   type: ClientEventType.conversation_item_delete;
 
   /** The ID of the item to delete. */
@@ -397,51 +384,42 @@ model ClientEventConversationItemDelete extends ClientEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  This event instructs the server to create a Response, which means triggering
-  model inference. When in Server VAD mode, the server will create Responses
-  automatically.
-  
-  A Response will include at least one Item, and may have two, in which case
-  the second will be a function call. These Items will be appended to the
-  conversation history.
-  
-  The server will respond with a `response.created` event, events for Items
-  and content created, and finally a `response.done` event to indicate the
-  Response is complete.
-  
-  The `response.create` event includes inference configuration like
-  `instructions`, and `temperature`. These fields will override the Session's
-  configuration for this Response only.
-  """)
+/**
+ * This event instructs the server to create a Response, which means triggering
+ * model inference. When in Server VAD mode, the server will create Responses
+ * automatically.
+ * A Response will include at least one Item, and may have two, in which case
+ * the second will be a function call. These Items will be appended to the
+ * conversation history.
+ * The server will respond with a `response.created` event, events for Items
+ * and content created, and finally a `response.done` event to indicate the
+ * Response is complete.
+ * The `response.create` event includes inference configuration like
+ * `instructions`, and `temperature`. These fields will override the Session's
+ * configuration for this Response only.
+ */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventResponseCreate extends ClientEvent {
-  @doc("""
-    The event type, must be `response.create`.
-    """)
+  /** The event type, must be `response.create`. */
   type: ClientEventType.response_create;
 
   response?: ResponseCreateParams;
 
-  @doc("""
-    additional instructions (system prompt) appended to the default instructions of the session. Only affects this response only.
-    """)
+  /** additional instructions (system prompt) appended to the default instructions of the session. Only affects this response only. */
   additional_instructions?: string;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Send this event to cancel an in-progress response. The server will respond
-  with a `response.cancelled` event or an error if there is no response to
-  cancel.
-  """)
+/**
+ * Send this event to cancel an in-progress response. The server will respond
+ * with a `response.cancelled` event or an error if there is no response to
+ * cancel.
+ */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventResponseCancel extends ClientEvent {
-  @doc("""
-    The event type, must be `response.cancel`.
-    """)
+  /** The event type, must be `response.cancel`. */
   type: ClientEventType.response_cancel;
 
   /**
@@ -459,9 +437,7 @@ model ClientEventResponseCancel extends ClientEvent {
  */
 @usage(ResponseUsage)
 model ServerEventError extends ServerEvent {
-  @doc("""
-    The event type, must be `error`.
-    """)
+  /** The event type, must be `error`. */
   type: ServerEventType.error;
 
   /** Details of the error. */
@@ -476,19 +452,19 @@ model ServerEventErrorDetails {
   type: string;
 
   /** Error code, if any. */
-  @doc("Error code, if any.")
+  /** Error code, if any. */
   code?: string;
 
   /** A human-readable error message. */
-  @doc("A human-readable error message.")
+  /** A human-readable error message. */
   message: string;
 
   /** Parameter related to the error, if any. */
-  @doc("Parameter related to the error, if any.")
+  /** Parameter related to the error, if any. */
   param?: string;
 
   /** The event_id of the client event that caused the error, if applicable. */
-  @doc("The event_id of the client event that caused the error, if applicable.")
+  /** The event_id of the client event that caused the error, if applicable. */
   event_id?: string;
 }
 
@@ -500,9 +476,7 @@ model ServerEventErrorDetails {
  */
 @usage(ResponseUsage)
 model ServerEventSessionCreated extends ServerEvent {
-  @doc("""
-    The event type, must be `session.created`.
-    """)
+  /** The event type, must be `session.created`. */
   type: ServerEventType.session_created;
 
   // Tool customization: apply enriched response-specific model
@@ -510,29 +484,27 @@ model ServerEventSessionCreated extends ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when a session is updated with a `session.update` event, unless
-  there is an error.
-  """)
+/**
+ * Returned when a session is updated with a `session.update` event, unless
+ * there is an error.
+ */
 @usage(ResponseUsage)
 model ServerEventSessionUpdated extends ServerEvent {
-  @doc("""
-    The event type, must be `session.updated`.
-    """)
+  /** The event type, must be `session.updated`. */
   type: ServerEventType.session_updated;
 
   // Tool customization: apply enriched response-specific model
   session: ResponseSession;
 }
 
-@doc("Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer.")
+/** Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventSessionAvatarConnecting extends ServerEvent {
-  @doc("The event type, must be 'session.avatar.connecting'.")
+  /** The event type, must be 'session.avatar.connecting'. */
   type: ServerEventType.session_avatar_connecting;
 
-  @doc("The server's SDP answer for the avatar connection.")
+  /** The server's SDP answer for the avatar connection. */
   server_sdp: string;
 }
 
@@ -554,18 +526,16 @@ model ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when an input audio buffer is committed, either by the client or
-  automatically in server VAD mode. The `item_id` property is the ID of the user
-  message item that will be created, thus a `conversation.item.created` event
-  will also be sent to the client.
-  """)
+/**
+ * Returned when an input audio buffer is committed, either by the client or
+ * automatically in server VAD mode. The `item_id` property is the ID of the user
+ * message item that will be created, thus a `conversation.item.created` event
+ * will also be sent to the client.
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventInputAudioBufferCommitted extends ServerEvent {
-  @doc("""
-    The event type, must be `input_audio_buffer.committed`.
-    """)
+  /** The event type, must be `input_audio_buffer.committed`. */
   type: ServerEventType.input_audio_buffer_committed;
 
   /** The ID of the preceding item after which the new item will be inserted. */
@@ -576,45 +546,45 @@ model ServerEventInputAudioBufferCommitted extends ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when the input audio buffer is cleared by the client with a
-  `input_audio_buffer.clear` event.
-  """)
+/**
+ * Returned when the input audio buffer is cleared by the client with a
+ * `input_audio_buffer.clear` event.
+ */
 @usage(ResponseUsage)
 model ServerEventInputAudioBufferCleared extends ServerEvent {
-  @doc("""
-    The event type, must be `input_audio_buffer.cleared`.
-    """)
+  /** The event type, must be `input_audio_buffer.cleared`. */
   type: ServerEventType.input_audio_buffer_cleared;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Sent by the server when in `server_vad` mode to indicate that speech has been
-  detected in the audio buffer. This can happen any time audio is added to the
-  buffer (unless speech is already detected). The client may want to use this
-  event to interrupt audio playback or provide visual feedback to the user.
-  
-  The client should expect to receive a `input_audio_buffer.speech_stopped` event
-  when speech stops. The `item_id` property is the ID of the user message item
-  that will be created when speech stops and will also be included in the
-  `input_audio_buffer.speech_stopped` event (unless the client manually commits
-  the audio buffer during VAD activation).
-  """)
+/**
+ * Sent by the server when in `server_vad` mode to indicate that speech has been
+ * detected in the audio buffer. This can happen any time audio is added to the
+ * buffer (unless speech is already detected). The client may want to use this
+ * event to interrupt audio playback or provide visual feedback to the user.
+ * The client should expect to receive a `input_audio_buffer.speech_stopped` event
+ * when speech stops. The `item_id` property is the ID of the user message item
+ * that will be created when speech stops and will also be included in the
+ * `input_audio_buffer.speech_stopped` event (unless the client manually commits
+ * the audio buffer during VAD activation).
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
-  @doc("""
-    The event type, must be `input_audio_buffer.speech_started`.
-    """)
+  /** The event type, must be `input_audio_buffer.speech_started`. */
   type: ServerEventType.input_audio_buffer_speech_started;
 
-  @doc("""
-    Milliseconds from the start of all audio written to the buffer during the
-    session when speech was first detected. This will correspond to the
-    beginning of audio sent to the model, and thus includes the
-    `prefix_padding_ms` configured in the Session.
-    """)
+  /**
+
+   * Milliseconds from the start of all audio written to the buffer during the
+
+   * session when speech was first detected. This will correspond to the
+
+   * beginning of audio sent to the model, and thus includes the
+
+   * `prefix_padding_ms` configured in the Session.
+
+   */
   audio_start_ms: int32;
 
   /** The ID of the user message item that will be created when speech stops. */
@@ -622,24 +592,26 @@ model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned in `server_vad` mode when the server detects the end of speech in
-  the audio buffer. The server will also send an `conversation.item.created`
-  event with the user message item that is created from the audio buffer.
-  """)
+/**
+ * Returned in `server_vad` mode when the server detects the end of speech in
+ * the audio buffer. The server will also send an `conversation.item.created`
+ * event with the user message item that is created from the audio buffer.
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
-  @doc("""
-    The event type, must be `input_audio_buffer.speech_stopped`.
-    """)
+  /** The event type, must be `input_audio_buffer.speech_stopped`. */
   type: ServerEventType.input_audio_buffer_speech_stopped;
 
-  @doc("""
-    Milliseconds since the session started when speech stopped. This will
-    correspond to the end of audio sent to the model, and thus includes the
-    `min_silence_duration_ms` configured in the Session.
-    """)
+  /**
+
+   * Milliseconds since the session started when speech stopped. This will
+
+   * correspond to the end of audio sent to the model, and thus includes the
+
+   * `min_silence_duration_ms` configured in the Session.
+
+   */
   audio_end_ms: int32;
 
   /** The ID of the user message item that will be created. */
@@ -647,23 +619,21 @@ model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when a conversation item is created. There are several scenarios that produce this event:
-    - The server is generating a Response, which if successful will produce
-      either one or two Items, which will be of type `message`
-      (role `assistant`) or type `function_call`.
-    - The input audio buffer has been committed, either by the client or the
-      server (in `server_vad` mode). The server will take the content of the
-      input audio buffer and add it to a new user message Item.
-    - The client has sent a `conversation.item.create` event to add a new Item
-      to the Conversation.
-  """)
+/**
+ * Returned when a conversation item is created. There are several scenarios that produce this event:
+ * - The server is generating a Response, which if successful will produce
+ * either one or two Items, which will be of type `message`
+ * (role `assistant`) or type `function_call`.
+ * - The input audio buffer has been committed, either by the client or the
+ * server (in `server_vad` mode). The server will take the content of the
+ * input audio buffer and add it to a new user message Item.
+ * - The client has sent a `conversation.item.create` event to add a new Item
+ * to the Conversation.
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemCreated extends ServerEvent {
-  @doc("""
-    The event type, must be `conversation.item.created`.
-    """)
+  /** The event type, must be `conversation.item.created`. */
   type: ServerEventType.conversation_item_created;
 
   /**
@@ -677,26 +647,25 @@ model ServerEventConversationItemCreated extends ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  This event is the output of audio transcription for user audio written to the
-  user audio buffer. Transcription begins when the input audio buffer is
-  committed by the client or server (in `server_vad` mode). Transcription runs
-  asynchronously with Response creation, so this event may come before or after
-  the Response events.
-  
-  VoiceLive API models accept audio natively, and thus input transcription is a
-  separate process run on a separate ASR (Automatic Speech Recognition) model.
-  The transcript may diverge somewhat from the model's interpretation, and
-  should be treated as a rough guide.
-  """)
+/**
+ * This event is the output of audio transcription for user audio written to the
+ * user audio buffer. Transcription begins when the input audio buffer is
+ * committed by the client or server (in `server_vad` mode). Transcription runs
+ * asynchronously with Response creation, so this event may come before or after
+ * the Response events.
+ * VoiceLive API models accept audio natively, and thus input transcription is a
+ * separate process run on a separate ASR (Automatic Speech Recognition) model.
+ * The transcript may diverge somewhat from the model's interpretation, and
+ * should be treated as a rough guide.
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemInputAudioTranscriptionCompleted
   extends ServerEvent {
-  @doc("""
-    The event type, must be
-    `conversation.item.input_audio_transcription.completed`.
-    """)
+  /**
+   * The event type, must be
+   * `conversation.item.input_audio_transcription.completed`.
+   */
   type: ServerEventType.conversation_item_input_audio_transcription_completed;
 
   /** The ID of the user message item containing the audio. */
@@ -710,19 +679,19 @@ model ServerEventConversationItemInputAudioTranscriptionCompleted
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when input audio transcription is configured, and a transcription
-  request for a user message failed. These events are separate from other
-  `error` events so that the client can identify the related Item.
-  """)
+/**
+ * Returned when input audio transcription is configured, and a transcription
+ * request for a user message failed. These events are separate from other
+ * `error` events so that the client can identify the related Item.
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemInputAudioTranscriptionFailed
   extends ServerEvent {
-  @doc("""
-    The event type, must be
-    `conversation.item.input_audio_transcription.failed`.
-    """)
+  /**
+   * The event type, must be
+   * `conversation.item.input_audio_transcription.failed`.
+   */
   type: ServerEventType.conversation_item_input_audio_transcription_failed;
 
   /** The ID of the user message item. */
@@ -736,20 +705,17 @@ model ServerEventConversationItemInputAudioTranscriptionFailed
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when an earlier assistant audio message item is truncated by the
-  client with a `conversation.item.truncate` event. This event is used to
-  synchronize the server's understanding of the audio with the client's playback.
-  
-  This action will truncate the audio and remove the server-side text transcript
-  to ensure there is no text in the context that hasn't been heard by the user.
-  """)
+/**
+ * Returned when an earlier assistant audio message item is truncated by the
+ * client with a `conversation.item.truncate` event. This event is used to
+ * synchronize the server's understanding of the audio with the client's playback.
+ * This action will truncate the audio and remove the server-side text transcript
+ * to ensure there is no text in the context that hasn't been heard by the user.
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemTruncated extends ServerEvent {
-  @doc("""
-    The event type, must be `conversation.item.truncated`.
-    """)
+  /** The event type, must be `conversation.item.truncated`. */
   type: ServerEventType.conversation_item_truncated;
 
   /** The ID of the assistant message item that was truncated. */
@@ -765,17 +731,15 @@ model ServerEventConversationItemTruncated extends ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when an item in the conversation is deleted by the client with a
-  `conversation.item.delete` event. This event is used to synchronize the
-  server's understanding of the conversation history with the client's view.
-  """)
+/**
+ * Returned when an item in the conversation is deleted by the client with a
+ * `conversation.item.delete` event. This event is used to synchronize the
+ * server's understanding of the conversation history with the client's view.
+ */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemDeleted extends ServerEvent {
-  @doc("""
-    The event type, must be `conversation.item.deleted`.
-    """)
+  /** The event type, must be `conversation.item.deleted`. */
   type: ServerEventType.conversation_item_deleted;
 
   /** The ID of the item that was deleted. */
@@ -785,31 +749,27 @@ model ServerEventConversationItemDeleted extends ServerEvent {
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when a new Response is created. The first event of response creation,
-  where the response is in an initial state of `in_progress`.
-  """)
+/**
+ * Returned when a new Response is created. The first event of response creation,
+ * where the response is in an initial state of `in_progress`.
+ */
 @usage(ResponseUsage)
 model ServerEventResponseCreated extends ServerEvent {
-  @doc("""
-    The event type, must be `response.created`.
-    """)
+  /** The event type, must be `response.created`. */
   type: ServerEventType.response_created;
 
   response: Response;
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when a Response is done streaming. Always emitted, no matter the
-  final state. The Response object included in the `response.done` event will
-  include all output Items in the Response but will omit the raw audio data.
-  """)
+/**
+ * Returned when a Response is done streaming. Always emitted, no matter the
+ * final state. The Response object included in the `response.done` event will
+ * include all output Items in the Response but will omit the raw audio data.
+ */
 @usage(ResponseUsage)
 model ServerEventResponseDone extends ServerEvent {
-  @doc("""
-    The event type, must be `response.done`.
-    """)
+  /** The event type, must be `response.done`. */
   type: ServerEventType.response_done;
 
   response: Response;
@@ -820,9 +780,7 @@ model ServerEventResponseDone extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseOutputItemAdded extends ServerEvent {
-  @doc("""
-    The event type, must be `response.output_item.added`.
-    """)
+  /** The event type, must be `response.output_item.added`. */
   type: ServerEventType.response_output_item_added;
 
   /** The ID of the Response to which the item belongs. */
@@ -843,9 +801,7 @@ model ServerEventResponseOutputItemAdded extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseOutputItemDone extends ServerEvent {
-  @doc("""
-    The event type, must be `response.output_item.done`.
-    """)
+  /** The event type, must be `response.output_item.done`. */
   type: ServerEventType.response_output_item_done;
 
   /** The ID of the Response to which the item belongs. */
@@ -866,9 +822,7 @@ model ServerEventResponseOutputItemDone extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseContentPartAdded extends ServerEvent {
-  @doc("""
-    The event type, must be `response.content_part.added`.
-    """)
+  /** The event type, must be `response.content_part.added`. */
   type: ServerEventType.response_content_part_added;
 
   /** The ID of the response. */
@@ -896,9 +850,7 @@ model ServerEventResponseContentPartAdded extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseContentPartDone extends ServerEvent {
-  @doc("""
-    The event type, must be `response.content_part.done`.
-    """)
+  /** The event type, must be `response.content_part.done`. */
   type: ServerEventType.response_content_part_done;
 
   /** The ID of the response. */
@@ -923,9 +875,7 @@ model ServerEventResponseContentPartDone extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseTextDelta extends ServerEvent {
-  @doc("""
-    The event type, must be `response.text.delta`.
-    """)
+  /** The event type, must be `response.text.delta`. */
   type: ServerEventType.response_text_delta;
 
   /** The ID of the response. */
@@ -952,9 +902,7 @@ model ServerEventResponseTextDelta extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseTextDone extends ServerEvent {
-  @doc("""
-    The event type, must be `response.text.done`.
-    """)
+  /** The event type, must be `response.text.done`. */
   type: ServerEventType.response_text_done;
 
   /** The ID of the response. */
@@ -978,9 +926,7 @@ model ServerEventResponseTextDone extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTranscriptDelta extends ServerEvent {
-  @doc("""
-    The event type, must be `response.audio_transcript.delta`.
-    """)
+  /** The event type, must be `response.audio_transcript.delta`. */
   type: ServerEventType.response_audio_transcript_delta;
 
   /** The ID of the response. */
@@ -1008,9 +954,7 @@ model ServerEventResponseAudioTranscriptDelta extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTranscriptDone extends ServerEvent {
-  @doc("""
-    The event type, must be `response.audio_transcript.done`.
-    """)
+  /** The event type, must be `response.audio_transcript.done`. */
   type: ServerEventType.response_audio_transcript_done;
 
   /** The ID of the response. */
@@ -1034,9 +978,7 @@ model ServerEventResponseAudioTranscriptDone extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioDelta extends ServerEvent {
-  @doc("""
-    The event type, must be `response.audio.delta`.
-    """)
+  /** The event type, must be `response.audio.delta`. */
   type: ServerEventType.response_audio_delta;
 
   /** The ID of the response. */
@@ -1065,9 +1007,7 @@ model ServerEventResponseAudioDelta extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioDone extends ServerEvent {
-  @doc("""
-    The event type, must be `response.audio.done`.
-    """)
+  /** The event type, must be `response.audio.done`. */
   type: ServerEventType.response_audio_done;
 
   /** The ID of the response. */
@@ -1083,9 +1023,7 @@ model ServerEventResponseAudioDone extends ServerEvent {
   content_index: int32;
 }
 
-@doc("""
-    Represents a delta update of blendshape animation frames for a specific output of a response.
-    """)
+/** Represents a delta update of blendshape animation frames for a specific output of a response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
@@ -1098,9 +1036,7 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   frame_index: int32;
 }
 
-@doc("""
-    Indicates the completion of blendshape animation processing for a specific output of a response.
-    """)
+/** Indicates the completion of blendshape animation processing for a specific output of a response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
@@ -1110,9 +1046,7 @@ model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
   output_index: int32;
 }
 
-@doc("""
-    Represents a word-level audio timestamp delta for a response.
-    """)
+/** Represents a word-level audio timestamp delta for a response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTimestampDelta extends ServerEvent {
@@ -1127,9 +1061,7 @@ model ServerEventResponseAudioTimestampDelta extends ServerEvent {
   timestamp_type: "word";
 }
 
-@doc("""
-    Indicates completion of audio timestamp delivery for a response.
-    """)
+/** Indicates completion of audio timestamp delivery for a response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTimestampDone extends ServerEvent {
@@ -1140,9 +1072,7 @@ model ServerEventResponseAudioTimestampDone extends ServerEvent {
   content_index: int32;
 }
 
-@doc("""
-    Represents a viseme ID delta update for animation based on audio.
-    """)
+/** Represents a viseme ID delta update for animation based on audio. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
@@ -1155,9 +1085,7 @@ model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
   viseme_id: int32;
 }
 
-@doc("""
-    Indicates completion of viseme animation delivery for a response.
-    """)
+/** Indicates completion of viseme animation delivery for a response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAnimationVisemeDone extends ServerEvent {
@@ -1172,25 +1100,22 @@ model ServerEventResponseAnimationVisemeDone extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ResponseCreateParams {
-  @doc("""
-    Whether to commit the response to the conversation. Defaults to true.
-    """)
+  /** Whether to commit the response to the conversation. Defaults to true. */
   commit?: boolean = true;
 
-  @doc("""
-    Whether to cancel any ongoing generation before starting this one. Defaults to true.
-    """)
+  /** Whether to cancel any ongoing generation before starting this one. Defaults to true. */
   cancel_previous?: boolean = true;
 
-  @doc("""
-    Input items to append to the conversation context before generating a response.
-    """)
+  /** Input items to append to the conversation context before generating a response. */
   append_input_items?: ConversationRequestItem[];
 
-  @doc("""
-    Input items to be used as the context for this response.
-    An empty array clears previous context.
-    """)
+  /**
+
+   * Input items to be used as the context for this response.
+
+   * An empty array clears previous context.
+
+   */
   input_items?: ConversationRequestItem[];
 
   // Tool customization: Apply reusable modality representation
@@ -1200,69 +1125,77 @@ model ResponseCreateParams {
    */
   modalities?: Modality[];
 
-  @doc("""
-    The default system instructions (i.e. system message) prepended to model
-    calls. This field allows the client to guide the model on desired
-    responses. The model can be instructed on response content and format,
-    (e.g. "be extremely succinct", "act friendly", "here are examples of good
-    responses") and on audio behavior (e.g. "talk quickly", "inject emotion
-    into your voice", "laugh frequently"). The instructions are not guaranteed
-    to be followed by the model, but they provide guidance to the model on the
-    desired behavior.
-    
-    Note that the server sets default instructions which will be used if this
-    field is not set and are visible in the `session.created` event at the
-    start of the session.
-    """)
+  /**
+
+   * The default system instructions (i.e. system message) prepended to model
+
+   * calls. This field allows the client to guide the model on desired
+
+   * responses. The model can be instructed on response content and format,
+
+   * (e.g. "be extremely succinct", "act friendly", "here are examples of good
+
+   * responses") and on audio behavior (e.g. "talk quickly", "inject emotion
+
+   * into your voice", "laugh frequently"). The instructions are not guaranteed
+
+   * to be followed by the model, but they provide guidance to the model on the
+
+   * desired behavior.
+
+   * Note that the server sets default instructions which will be used if this
+
+   * field is not set and are visible in the `session.created` event at the
+
+   * start of the session.
+
+   */
   instructions?: string;
 
-  @doc("""
-    supported voice identifiers and configurations.
-    """)
+  /** supported voice identifiers and configurations. */
   voice?: Voice;
 
   // Tool customization: use extracted and reusable audio format definition
-  @doc("""
-    The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`.
-    """)
+  /** The format of output audio. Options are `pcm16`, `g711_ulaw`, or `g711_alaw`. */
   output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
 
   // Tool customization: use enriched tool definition
   /** Tools (functions) available to the model. */
   tools?: Tool[];
 
-  @doc("""
-    How the model chooses tools. Options are `auto`, `none`, `required`, or
-    specify a function, like `{"type": "function", "function": {"name": "my_function"}}`.
-    """)
+  /**
+
+   * How the model chooses tools. Options are `auto`, `none`, `required`, or
+
+   * specify a function, like `{"type": "function", "function": {"name": "my_function"}}`.
+
+   */
   tool_choice?: string;
 
   /** Sampling temperature for the model, limited to [0.6, 1.2]. Defaults to 0.8. */
   temperature?: float32;
 
   // Tool customization: Address (observed as of 2025-01-31) spec issue with 'max_response_output_tokens'
-  @doc("""
-    Maximum number of output tokens for a single assistant response,
-    inclusive of tool calls. Provide an integer between 1 and 4096 to
-    limit output tokens, or `inf` for the maximum available tokens for a
-    given model. Defaults to `inf`.
-    """)
+  /**
+   * Maximum number of output tokens for a single assistant response,
+   * inclusive of tool calls. Provide an integer between 1 and 4096 to
+   * limit output tokens, or `inf` for the maximum available tokens for a
+   * given model. Defaults to `inf`.
+   */
   max_output_tokens?: int32 | "inf";
 }
 
 // Tool customization (apply_discriminator): apply discriminated type base
-@doc("""
-  Send this event when you want to retrieve the server's representation of a specific item in the conversation history. This is useful, for example, to inspect user audio after noise cancellation and VAD.
-  The server will respond with a `conversation.item.retrieved` event,
-  unless the item does not exist in the conversation history, in which case the
-  server will respond with an error.
-  """)
+/**
+ * Send this event when you want to retrieve the server's representation of a specific item in the conversation history. This is useful, for example, to inspect user audio after noise cancellation and VAD.
+ * The server will respond with a `conversation.item.retrieved` event,
+ * unless the item does not exist in the conversation history, in which case the
+ * server will respond with an error.
+ */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventConversationItemRetrieve extends ClientEvent {
-  @doc("""
-    The event type, must be `conversation.item.retrieve`.
-    """)
+  /** The event type, must be `conversation.item.retrieve`. */
   type: ClientEventType.conversation_item_retrieve;
 
   /** The ID of the item to retrieve. */
@@ -1275,9 +1208,7 @@ model ClientEventConversationItemRetrieve extends ClientEvent {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemInputAudioTranscriptionDelta
   extends ServerEvent {
-  @doc("""
-    The event type, must be `conversation.item.input_audio_transcription.delta`.
-    """)
+  /** The event type, must be `conversation.item.input_audio_transcription.delta`. */
   type: ServerEventType.conversation_item_input_audio_transcription_delta;
 
   /** The ID of the item. */
@@ -1294,15 +1225,11 @@ model ServerEventConversationItemInputAudioTranscriptionDelta
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
-@doc("""
-  Returned when a conversation item is retrieved with `conversation.item.retrieve`.
-  """)
+/** Returned when a conversation item is retrieved with `conversation.item.retrieve`. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemRetrieved extends ServerEvent {
-  @doc("""
-    The event type, must be `conversation.item.retrieved`.
-    """)
+  /** The event type, must be `conversation.item.retrieved`. */
   type: ServerEventType.conversation_item_retrieved;
 
   // Tool customization: apply enriched item definition hierarchy
@@ -1316,9 +1243,7 @@ model ServerEventConversationItemRetrieved extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseFunctionCallArgumentsDelta extends ServerEvent {
-  @doc("""
-    The event type, must be `response.function_call_arguments.delta`.
-    """)
+  /** The event type, must be `response.function_call_arguments.delta`. */
   type: ServerEventType.response_function_call_arguments_delta;
 
   /** The ID of the response. */
@@ -1345,9 +1270,7 @@ model ServerEventResponseFunctionCallArgumentsDelta extends ServerEvent {
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
-  @doc("""
-    The event type, must be `response.function_call_arguments.done`.
-    """)
+  /** The event type, must be `response.function_call_arguments.done`. */
   type: ServerEventType.response_function_call_arguments_done;
 
   /** The ID of the response. */

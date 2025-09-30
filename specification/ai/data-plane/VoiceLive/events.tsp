@@ -2,7 +2,7 @@ using TypeSpec.OpenAPI;
 
 namespace VoiceLive;
 
-@doc("Client event types used in VoiceLive protocol.")
+/** Client event types used in VoiceLive protocol. */
 union ClientEventType {
   string,
   session_update: "session.update",
@@ -23,7 +23,7 @@ union ClientEventType {
   session_avatar_connect: "session.avatar.connect",
 }
 
-@doc("Server event types used in VoiceLive protocol.")
+/** Server event types used in VoiceLive protocol. */
 union ServerEventType {
   string,
   error: "error",

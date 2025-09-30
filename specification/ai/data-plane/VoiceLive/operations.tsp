@@ -7,8 +7,8 @@ namespace VoiceLive;
 
 // Service versioning is enum based
 #suppress "@azure-tools/typespec-azure-core/no-enum" 
-@doc("API versioning.")
+/** API versioning. */
 enum Versions {
-  @doc("Version 2025-10-01.")
+  /** Version 2025-10-01. */
   v2025_10_01: "2025-10-01",
 }

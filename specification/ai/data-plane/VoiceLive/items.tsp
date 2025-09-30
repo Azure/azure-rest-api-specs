@@ -15,48 +15,48 @@ union ItemType {
 // Base for user content parts
 @discriminator("type")
 @usage(RequestUsage)
-@doc("Base for any message content part; discriminated by `type`.")
+/** Base for any message content part; discriminated by `type`. */
 model MessageContentPart {
-  @doc("The type of the content part.")
+  /** The type of the content part. */
   type: ContentPartType;
 }
 
 // Variants
 @usage(RequestUsage)
-@doc("Input text content part.")
+/** Input text content part. */
 model InputTextContentPart extends MessageContentPart {
   type: ContentPartType.input_text;
   text: string;
 }
 
 @usage(RequestUsage)
-@doc("Input audio content part.")
+/** Input audio content part. */
 model InputAudioContentPart extends MessageContentPart {
   type: ContentPartType.input_audio;
   audio: string;
   transcript?: string;
 }
 
-@doc("Output text content part.")
+/** Output text content part. */
 @usage(ResponseUsage)
 model OutputTextContentPart extends MessageContentPart {
-  @doc("The type of the content part.")
+  /** The type of the content part. */
   type: ContentPartType.text;
-  @doc("The text content.")
+  /** The text content. */
   text: string;
 }
 
 // Status enum
-@doc("Indicates the processing status of an item or parameter.")
+/** Indicates the processing status of an item or parameter. */
 union ItemParamStatus {
   string,
-  @doc("Item or parameter is still being processed.")
+  /** Item or parameter is still being processed. */
   completed: "completed",
-  @doc("Item or parameter is not yet complete.")
+  /** Item or parameter is not yet complete. */
   incomplete: "incomplete",
 }
 
-@doc("Base for any response item; discriminated by `type`.")
+/** Base for any response item; discriminated by `type`. */
 @discriminator("type")
 @usage(RequestUsage)
 model ConversationRequestItem {
@@ -67,43 +67,43 @@ model ConversationRequestItem {
 // ----- Message Items -----
 @discriminator("role")
 @usage(RequestUsage)
-@doc("A message item within a conversation.")
+/** A message item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
 model MessageItem extends ConversationRequestItem {
-  @doc("The type of the item; must be 'message' for message items.")
+  /** The type of the item; must be 'message' for message items. */
   type: ItemType.message;
-  @doc("The role of the message origionator.")
+  /** The role of the message origionator. */
   role: MessageRole;
-  @doc("The content parts of the message.")
+  /** The content parts of the message. */
   content: MessageContentPart[];
-  @doc("Processing status of the message item.")
+  /** Processing status of the message item. */
   status?: ItemParamStatus;
 }
 
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
-@doc("A system message item within a conversation.")
+/** A system message item within a conversation. */
 model SystemMessageItem extends MessageItem {
   role: MessageRole.system;
 }
 
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
-@doc("A user message item within a conversation.")
+/** A user message item within a conversation. */
 model UserMessageItem extends MessageItem {
   role: MessageRole.user;
 }
 
 @usage(DualUsage)
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
-@doc("An assistant message item within a conversation.")
+/** An assistant message item within a conversation. */
 model AssistantMessageItem extends MessageItem {
   role: MessageRole.assistant;
 }
 
 // ----- Function Call Items -----
 @usage(RequestUsage)
-@doc("A function call item within a conversation.")
+/** A function call item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model FunctionCallItem extends ConversationRequestItem {
   type: ItemType.function_call;
@@ -114,7 +114,7 @@ model FunctionCallItem extends ConversationRequestItem {
 }
 
 @usage(RequestUsage)
-@doc("A function call output item within a conversation.")
+/** A function call output item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model FunctionCallOutputItem extends ConversationRequestItem {
   type: ItemType.function_call_output;
@@ -124,7 +124,7 @@ model FunctionCallOutputItem extends ConversationRequestItem {
 }
 
 @discriminator("type")
-@doc("Base for any response item; discriminated by `type`.")
+/** Base for any response item; discriminated by `type`. */
 @usage(ResponseUsage)
 model ResponseItem {
   // must stay here, required, broad type
@@ -134,7 +134,7 @@ model ResponseItem {
 }
 
 @usage(ResponseUsage)
-@doc("Base type for message item within a conversation.")
+/** Base type for message item within a conversation. */
 model ResponseMessageItem extends ResponseItem {
   type: ItemType.message;
   role: MessageRole;
@@ -143,7 +143,7 @@ model ResponseMessageItem extends ResponseItem {
 }
 
 @usage(ResponseUsage)
-@doc("A function call item within a conversation.")
+/** A function call item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ResponseFunctionCallItem
   extends ResponseItem {
@@ -155,7 +155,7 @@ model ResponseFunctionCallItem
 }
 
 @usage(ResponseUsage)
-@doc("A function call output item within a conversation.")
+/** A function call output item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ResponseFunctionCallOutputItem
   extends ResponseItem {
@@ -166,14 +166,14 @@ model ResponseFunctionCallOutputItem
 
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@doc("Indicates the processing status of a response item.")
+/** Indicates the processing status of a response item. */
 union ResponseItemStatus {
   string,
-  @doc("Item that is in progress.")
+  /** Item that is in progress. */
   in_progress: "in_progress",
-  @doc("Item has been fully processed and is complete.")
+  /** Item has been fully processed and is complete. */
   completed: "completed",
-  @doc("Item has been processed but is incomplete.")
+  /** Item has been processed but is incomplete. */
   incomplete: "incomplete",
 }
 
@@ -184,7 +184,7 @@ union MessageRole {
   assistant: "assistant",
 }
 
-@doc("Terminal status of a response.")
+/** Terminal status of a response. */
 union ResponseStatus {
   string,
   completed: "completed",
@@ -194,7 +194,7 @@ union ResponseStatus {
   in_progress: "in_progress",
 }
 
-@doc("Base for all non-success response details.")
+/** Base for all non-success response details. */
 @discriminator("type")  // or just @discriminator("type") if imported unqualified
 @usage(ResponseUsage)
 model ResponseStatusDetails {
@@ -202,7 +202,7 @@ model ResponseStatusDetails {
   type: ResponseStatus;
 }
 
-@doc("Details for a cancelled response.")
+/** Details for a cancelled response. */
 @usage(ResponseUsage)
 model ResponseCancelledDetails extends ResponseStatusDetails {
   // Narrow the discriminator to a literal in each child:
@@ -210,14 +210,14 @@ model ResponseCancelledDetails extends ResponseStatusDetails {
   reason: "turn_detected" | "client_cancelled" | string;
 }
 
-@doc("Details for an incomplete response.")
+/** Details for an incomplete response. */
 @usage(ResponseUsage)
 model ResponseIncompleteDetails extends ResponseStatusDetails {
   type: "incomplete";
   reason: "max_output_tokens" | "content_filter" | string;
 }
 
-@doc("Details for a failed response.")
+/** Details for a failed response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/no-unknown" // The error can be of any type, depending on the failure.
 model ResponseFailedDetails extends ResponseStatusDetails {
@@ -225,61 +225,61 @@ model ResponseFailedDetails extends ResponseStatusDetails {
   error: unknown;
 }
 
-@doc("Details of input token usage.")
+/** Details of input token usage. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model InputTokenDetails {
-  @doc("Number of cached tokens used in the input.")
+  /** Number of cached tokens used in the input. */
   cached_tokens: int32;
 
-  @doc("Number of text tokens used in the input.")
+  /** Number of text tokens used in the input. */
   text_tokens: int32;
 
-  @doc("Number of audio tokens used in the input.")
+  /** Number of audio tokens used in the input. */
   audio_tokens: int32;
 
-  @doc("Details of cached token usage.")
+  /** Details of cached token usage. */
   cached_tokens_details: CachedTokenDetails;
 }
 
-@doc("Details of output token usage.")
+/** Details of output token usage. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model OutputTokenDetails {
-  @doc("Number of text tokens generated in the output.")
+  /** Number of text tokens generated in the output. */
   text_tokens: int32;
 
-  @doc("Number of audio tokens generated in the output.")
+  /** Number of audio tokens generated in the output. */
   audio_tokens: int32;
 }
 
-@doc("Details of output token usage.")
+/** Details of output token usage. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model CachedTokenDetails {
-  @doc("Number of cached text tokens.")
+  /** Number of cached text tokens. */
   text_tokens: int32;
 
-  @doc("Number of cached audio tokens.")
+  /** Number of cached audio tokens. */
   audio_tokens: int32;
 }
 
-@doc("Overall usage statistics for a response.")
+/** Overall usage statistics for a response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model TokenUsage {
-  @doc("Total number of tokens (input + output).")
+  /** Total number of tokens (input + output). */
   total_tokens: int32;
 
-  @doc("Number of input tokens.")
+  /** Number of input tokens. */
   input_tokens: int32;
 
-  @doc("Number of output tokens.")
+  /** Number of output tokens. */
   output_tokens: int32;
 
-  @doc("Detailed breakdown of input tokens.")
+  /** Detailed breakdown of input tokens. */
   input_token_details: InputTokenDetails;
 
-  @doc("Detailed breakdown of output tokens.")
+  /** Detailed breakdown of output tokens. */
   output_token_details: OutputTokenDetails;
 }

@@ -11,135 +11,142 @@ namespace VoiceLive;
 
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style. // Service message format is snake_case to remain close to OpenAI style.
-@doc("Base for session configuration shared between request and response.")
+/** Base for session configuration shared between request and response. */
 model RequestSession {
   ...SessionBase;
-  @doc("The model for the session.")
+  /** The model for the session. */
   `model`?: string;
-  @doc("The modalities to be used in the session.")
+  /** The modalities to be used in the session. */
   modalities?: Modality[];
-  @doc("The animation configuration for the session.")
+  /** The animation configuration for the session. */
   animation?: Animation;
-  @doc("The voice configuration for the session.")
+  /** The voice configuration for the session. */
   voice?: Voice;
-  @doc("Optional instructions to guide the model's behavior throughout the session.")
+  /** Optional instructions to guide the model's behavior throughout the session. */
   instructions?: string;
 
-  @doc("""
-    Input audio sampling rate in Hz. Available values:
-    - For pcm16: 8000, 16000, 24000
-    - For g711_alaw/g711_ulaw: 8000
-    """)
+  /**
+
+   * Input audio sampling rate in Hz. Available values:
+
+   * - For pcm16: 8000, 16000, 24000
+
+   * - For g711_alaw/g711_ulaw: 8000
+
+   */
   input_audio_sampling_rate?: int32 = 24000;
 
-  @doc("Input audio format. Default is 'pcm16'.")
+  /** Input audio format. Default is 'pcm16'. */
   input_audio_format?: InputAudioFormat = InputAudioFormat.pcm16;
-  @doc("Output audio format. Default is 'pcm16'.")
+  /** Output audio format. Default is 'pcm16'. */
   output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
-  @doc("Type of turn detection to use.")  
+  /** Type of turn detection to use. */  
   turn_detection?: TurnDetection;
-  @doc("Configuration for input audio noise reduction.")
+  /** Configuration for input audio noise reduction. */
   input_audio_noise_reduction?: AudioNoiseReduction;
-  @doc("Configuration for echo cancellation during server-side audio processing.")
+  /** Configuration for echo cancellation during server-side audio processing. */
   input_audio_echo_cancellation?: AudioEchoCancellation;
-  @doc("Configuration for avatar streaming and behavior during the session.")
+  /** Configuration for avatar streaming and behavior during the session. */
   avatar?: AvatarConfig;
-  @doc("Configuration for input audio transcription.")
+  /** Configuration for input audio transcription. */
   input_audio_transcription?: AudioInputTranscriptionOptions;
-  @doc("Types of timestamps to include in audio response content.")
+  /** Types of timestamps to include in audio response content. */
   output_audio_timestamp_types?: AudioTimestampType[];
-  @doc("Configuration for tools to be used during the session, if applicable.")
+  /** Configuration for tools to be used during the session, if applicable. */
   tools?: Tool[];
-  @doc("Specifies which tools the model is allowed to call during the session.")
+  /** Specifies which tools the model is allowed to call during the session. */
   tool_choice?: ToolChoice;
-  @doc("Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7.")
+  /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
-  @doc("Maximum number of tokens to generate in the response. Default is unlimited.")
+  /** Maximum number of tokens to generate in the response. Default is unlimited. */
   max_response_output_tokens?: int32 | "inf";
 }
 
 @usage(ResponseUsage)
-@doc("Base for session configuration in the response.")
+/** Base for session configuration in the response. */
 model ResponseSession is RequestSession {
   ...SessionBase;
-  @doc("The agent configuration for the session, if applicable.")
+  /** The agent configuration for the session, if applicable. */
   agent?: AgentConfig;
-  @doc("The unique identifier for the session.")
+  /** The unique identifier for the session. */
   id?: string;
 }
 
-@doc("Supported OpenAI voice names (string enum).")
+/** Supported OpenAI voice names (string enum). */
 union OAIVoice {
   string,
-  @doc("Alloy voice.")
+  /** Alloy voice. */
   alloy: "alloy",
-  @doc("Ash voice.")
+  /** Ash voice. */
   ash: "ash",
-  @doc("Ballard voice.")
+  /** Ballard voice. */
   ballad: "ballad",
-  @doc("Coral voice.")
+  /** Coral voice. */
   coral: "coral",
-  @doc("Echo voice.")
+  /** Echo voice. */
   echo: "echo",
-  @doc("Sage voice.")
+  /** Sage voice. */
   sage: "sage",
-  @doc("Shimmer voice.")
+  /** Shimmer voice. */
   shimmer: "shimmer",
-  @doc("Verse voice.")
+  /** Verse voice. */
   verse: "verse",
 }
 
-@doc("""
-  OpenAI voice configuration with explicit type field.
-  
-  This provides a unified interface for OpenAI voices, complementing the
-  existing string-based OAIVoice for backward compatibility.
-  """)
+/**
+
+ * OpenAI voice configuration with explicit type field.
+
+ * This provides a unified interface for OpenAI voices, complementing the
+
+ * existing string-based OAIVoice for backward compatibility.
+
+ */
 @usage(RequestUsage)
 model OpenAIVoice {
-  @doc("The type of the voice.")
+  /** The type of the voice. */
   type: "openai";
-  @doc("The name of the OpenAI voice.")
+  /** The name of the OpenAI voice. */
   name: OAIVoice;
 }
 
 // --- Azure voices ----------------------------------------------------------
 
-@doc("Base for Azure voice configurations.")
+/** Base for Azure voice configurations. */
 @discriminator("type")
 @usage(DualUsage)
 model AzureVoice {
-  @doc("The type of the Azure voice.")
+  /** The type of the Azure voice. */
   type: AzureVoiceType;
 }
 
-@doc("Union of all supported Azure voice types.")
+/** Union of all supported Azure voice types. */
 union AzureVoiceType {
   string,
-  @doc("Azure custom voice.")
+  /** Azure custom voice. */
   azure_custom: "azure-custom",
-  @doc("Azure standard voice.")
+  /** Azure standard voice. */
   azure_standard: "azure-standard",
-  @doc("Azure personal voice.")
+  /** Azure personal voice. */
   azure_personal: "azure-personal",
 }
 @usage(DualUsage)
-@doc("Azure custom voice configuration.")
+/** Azure custom voice configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureCustomVoice extends AzureVoice {
   type: AzureVoiceType.azure_custom;
 
   @minLength(1)
-  @doc("Voice name cannot be empty.")
+  /** Voice name cannot be empty. */
   name: string;
 
   @minLength(1)
-  @doc("Endpoint ID cannot be empty.")
+  /** Endpoint ID cannot be empty. */
   endpoint_id: string;
 
   @minValue(0)
   @maxValue(1)
-  @doc("Temperature must be between 0.0 and 1.0.")
+  /** Temperature must be between 0.0 and 1.0. */
   temperature?: float32;
 
   custom_lexicon_url?: string;
@@ -151,19 +158,19 @@ model AzureCustomVoice extends AzureVoice {
   volume?: string;
 }
 
-@doc("Azure standard voice configuration.")
+/** Azure standard voice configuration. */
 @usage(DualUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureStandardVoice extends AzureVoice {
   type: AzureVoiceType.azure_standard;
 
   @minLength(1)
-  @doc("Voice name cannot be empty.")
+  /** Voice name cannot be empty. */
   name: string;
 
   @minValue(0)
   @maxValue(1)
-  @doc("Temperature must be between 0.0 and 1.0.")
+  /** Temperature must be between 0.0 and 1.0. */
   temperature?: float32;
 
   custom_lexicon_url?: string;
@@ -175,35 +182,35 @@ model AzureStandardVoice extends AzureVoice {
   volume?: string;
 }
 
-@doc("Azure personal voice configuration.")
+/** Azure personal voice configuration. */
 @usage(DualUsage)
 model AzurePersonalVoice extends AzureVoice {
   type: AzureVoiceType.azure_personal;
-  @minLength(1) @doc("Voice name cannot be empty.") name: string;
+  @minLength(1) /** Voice name cannot be empty. */  name: string;
 
   @minValue(0)
   @maxValue(1)
-  @doc("Temperature must be between 0.0 and 1.0.")
+  /** Temperature must be between 0.0 and 1.0. */
   temperature?: float32;
 
-  @doc("Underlying neural model to use for personal voice.")
+  /** Underlying neural model to use for personal voice. */
   `model`: PersonalVoiceModels;
 }
 
-@doc("PersonalVoice models")
+/** PersonalVoice models */
 union PersonalVoiceModels {
   string,
-  @doc("Use the latest Dragon model.")
+  /** Use the latest Dragon model. */
   "DragonLatestNeural",
-  @doc("Use the latest Phoenix model.")
+  /** Use the latest Phoenix model. */
   "PhoenixLatestNeural",
-  @doc("Use the Phoenix V2 model.")
+  /** Use the Phoenix V2 model. */
   "PhoenixV2Neural",
 }
 
 // --- Top-level Voice union -------------------------------------------------
 
-@doc("Union of all supported voice configurations.")
+/** Union of all supported voice configurations. */
 union Voice {
   OAIVoice,
   OpenAIVoice,
@@ -211,54 +218,54 @@ union Voice {
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@doc("Input audio format types supported.")
+/** Input audio format types supported. */
 union InputAudioFormat {
   string,
-  @doc("16-bit PCM audio format at default sampling rate (24kHz)")
+  /** 16-bit PCM audio format at default sampling rate (24kHz) */
   pcm16: "pcm16",
-  @doc("G.711 μ-law (mu-law) audio format at 8kHz sampling rate")
+  /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
   g711_ulaw: "g711_ulaw",
-  @doc("G.711 A-law audio format at 8kHz sampling rate")
+  /** G.711 A-law audio format at 8kHz sampling rate */
   g711_alaw: "g711_alaw",
 }
 
-@doc("Output audio format types supported.")
+/** Output audio format types supported. */
 union OutputAudioFormat {
   string,
 
-  @doc("16-bit PCM audio format at default sampling rate (24kHz)")
+  /** 16-bit PCM audio format at default sampling rate (24kHz) */
   pcm16: "pcm16",
 
-  @doc("16-bit PCM audio format at 8kHz sampling rate")
+  /** 16-bit PCM audio format at 8kHz sampling rate */
   pcm16_8000hz: "pcm16-8000hz",
 
-  @doc("16-bit PCM audio format at 16kHz sampling rate")
+  /** 16-bit PCM audio format at 16kHz sampling rate */
   pcm16_16000hz: "pcm16-16000hz",
 
-  @doc("G.711 μ-law (mu-law) audio format at 8kHz sampling rate")
+  /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
   g711_ulaw: "g711_ulaw",
 
-  @doc("G.711 A-law audio format at 8kHz sampling rate")
+  /** G.711 A-law audio format at 8kHz sampling rate */
   g711_alaw: "g711_alaw",
 }
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@doc("Supported audio input transcription models.")
+/** Supported audio input transcription models. */
 union AudioInputTranscriptionModel {
   string,
-  @doc("OpenAI Whisper model.")
+  /** OpenAI Whisper model. */
   whisper_1: "whisper-1",
 }
 
-@doc("Configuration for input audio transcription.")
+/** Configuration for input audio transcription. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AudioInputTranscriptionOptions {
-  @doc("""
-    The transcription model to use. Supported values:
-    'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
-    'azure-speech'.
-    """)
+  /**
+   * The transcription model to use. Supported values:
+   * 'whisper-1', 'gpt-4o-transcribe', 'gpt-4o-mini-transcribe',
+   * 'azure-speech'.
+   */
   `model`:
     | string
     | "whisper-1"
@@ -266,93 +273,93 @@ model AudioInputTranscriptionOptions {
     | "gpt-4o-mini-transcribe"
     | "azure-speech";
 
-  @doc("Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh').")
+  /** Optional language code in BCP-47 (e.g., 'en-US'), or ISO-639-1 (e.g., 'en'), or multi languages with auto detection, (e.g., 'en,zh'). */
   language?: string;
 
-  @doc("Optional configuration for custom speech models.")
+  /** Optional configuration for custom speech models. */
   custom_speech?: Record<string>;
 
-  @doc("Optional list of phrase hints to bias recognition.")
+  /** Optional list of phrase hints to bias recognition. */
   phrase_list?: string[];
 }
 
-@doc("Supported modalities for the session.")
+/** Supported modalities for the session. */
 union Modality {
   string,
-  @doc("Text modality.")
+  /** Text modality. */
   text: "text",
-  @doc("Audio modality.")
+  /** Audio modality. */
   audio: "audio",
-  @doc("Animation modality.")
+  /** Animation modality. */
   animation: "animation",
-  @doc("Avatar modality.")
+  /** Avatar modality. */
   avatar: "avatar",
 }
 
 @discriminator("model")
-@doc("Top-level union for end-of-utterance (EOU) semantic detection configuration.")
+/** Top-level union for end-of-utterance (EOU) semantic detection configuration. */
 @usage(RequestUsage)
 model EouDetection {
   `model`: "semantic_detection_v1" | "semantic_detection_v1_en" | "semantic_detection_v1_multilingual" | string;
 }
 
-@doc("Threshold level settings for Azure semantic end-of-utterance detection.")
+/** Threshold level settings for Azure semantic end-of-utterance detection. */
 union EouThresholdLevel
 {
   string,
-  @doc("Low sensitivity threshold level.")
+  /** Low sensitivity threshold level. */
   "low",
-  @doc("Medium sensitivity threshold level.")
+  /** Medium sensitivity threshold level. */
   "medium",
-  @doc("High sensitivity threshold level.")
+  /** High sensitivity threshold level. */
   "high",
-  @doc("Default sensitivity threshold level.")
+  /** Default sensitivity threshold level. */
   "default"
 }
-@doc("Azure semantic end-of-utterance detection (default).")
+/** Azure semantic end-of-utterance detection (default). */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetection extends EouDetection {
   `model`: "semantic_detection_v1";
 
-  @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
+  /** Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`. */
   threshold_level?: EouThresholdLevel; 
 
-  @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
+  /** Timeout in milliseconds. Recommended instead of `timeout`. */
   @minValue(0)
   timeout_ms?: int32;
 }
 
-@doc("Azure semantic end-of-utterance detection (English-optimized).")
+/** Azure semantic end-of-utterance detection (English-optimized). */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetectionEn extends EouDetection {
   `model`: "semantic_detection_v1_en";
 
-  @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
+  /** Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`. */
   threshold_level?: EouThresholdLevel;
 
-  @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
+  /** Timeout in milliseconds. Recommended instead of `timeout`. */
   @minValue(0)
   timeout_ms?: int32;
 }
 
-@doc("Azure semantic end-of-utterance detection (multilingual).")
+/** Azure semantic end-of-utterance detection (multilingual). */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetectionMultilingual extends EouDetection {
   `model`: "semantic_detection_v1_multilingual";
 
-  @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
+  /** Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`. */
   threshold_level?: EouThresholdLevel;
 
-  @doc("Timeout in milliseconds. Recommended instead of `timeout`.")
+  /** Timeout in milliseconds. Recommended instead of `timeout`. */
   @minValue(0)
   timeout_ms?: int32;
 }
 
 @discriminator("type")
-@doc("Top-level union for turn detection configuration.")
+/** Top-level union for turn detection configuration. */
 @usage(RequestUsage)
 model TurnDetection {
   type: TurnDetectionType;
@@ -366,7 +373,7 @@ union TurnDetectionType {
   azure_semantic_vad_multilingual: "azure_semantic_vad_multilingual",
 }
 
-@doc("Base model for VAD-based turn detection.")
+/** Base model for VAD-based turn detection. */
 @usage(DualUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerVad extends TurnDetection {
@@ -384,7 +391,7 @@ model ServerVad extends TurnDetection {
   interrupt_response?: boolean = false;
 }
 
-@doc("Server Speech Detection (Azure semantic VAD, default variant).")
+/** Server Speech Detection (Azure semantic VAD, default variant). */
 @usage(DualUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVad extends TurnDetection {
@@ -405,7 +412,7 @@ model AzureSemanticVad extends TurnDetection {
   interrupt_response?: boolean = false;
 }
 
-@doc("Server Speech Detection (Azure semantic VAD, English-only).")
+/** Server Speech Detection (Azure semantic VAD, English-only). */
 @usage(DualUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVadEn extends TurnDetection {
@@ -425,7 +432,7 @@ model AzureSemanticVadEn extends TurnDetection {
   interrupt_response?: boolean = false;
 }
 
-@doc("Server Speech Detection (Azure semantic VAD).")
+/** Server Speech Detection (Azure semantic VAD). */
 @usage(DualUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVadMultilingual extends TurnDetection {
@@ -446,155 +453,155 @@ model AzureSemanticVadMultilingual extends TurnDetection {
   interrupt_response?: boolean = false;
 }
 
-@doc("Configuration for input audio noise reduction.")
+/** Configuration for input audio noise reduction. */
 @usage(RequestUsage)
 model AudioNoiseReduction {
-  @doc("The type of noise reduction model.")
+  /** The type of noise reduction model. */
   type: "azure_deep_noise_suppression" | "near_field" | "far_field" | string;
 }
 
-@doc("Echo cancellation configuration for server-side audio processing.")
+/** Echo cancellation configuration for server-side audio processing. */
 @usage(RequestUsage)
 model AudioEchoCancellation {
-  @doc("The type of echo cancellation model to use.")
+  /** The type of echo cancellation model to use. */
   type: "server_echo_cancellation";
 }
 
-@doc("Output timestamp types supported in audio response content.")
+/** Output timestamp types supported in audio response content. */
 union AudioTimestampType {
   string,
 
-  @doc("Timestamps per word in the output audio.")
+  /** Timestamps per word in the output audio. */
   word: "word",
 }
 
-@doc("Specifies the types of animation data to output.")
+/** Specifies the types of animation data to output. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 union AnimationOutputType {
   string,
-  @doc("Blendshapes output type.")
+  /** Blendshapes output type. */
   blendshapes: "blendshapes",
-  @doc("Viseme ID output type.")
+  /** Viseme ID output type. */
   viseme_id: "viseme_id",
 }
 
-@doc("Configuration for animation outputs including blendshapes and visemes metadata.")
+/** Configuration for animation outputs including blendshapes and visemes metadata. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model Animation {
-  @doc("The name of the animation model to use.")
+  /** The name of the animation model to use. */
   model_name?: string = "default";
 
-  @doc("Set of output data types requested from the animation system.")
+  /** Set of output data types requested from the animation system. */
   outputs?: AnimationOutputType[] = #[AnimationOutputType.blendshapes];
 }
 
-@doc("Configuration for avatar streaming and behavior during the session.")
+/** Configuration for avatar streaming and behavior during the session. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AvatarConfig {
-  @doc("Optional list of ICE servers to use for WebRTC connection establishment.")
+  /** Optional list of ICE servers to use for WebRTC connection establishment. */
   ice_servers?: IceServer[];
 
-  @doc("The character name or ID used for the avatar.")
+  /** The character name or ID used for the avatar. */
   character: string;
 
-  @doc("Optional avatar style, such as emotional tone or speaking style.")
+  /** Optional avatar style, such as emotional tone or speaking style. */
   style?: string;
 
-  @doc("Indicates whether the avatar is customized or not.")
+  /** Indicates whether the avatar is customized or not. */
   customized: boolean;
 
-  @doc("Optional video configuration including resolution, bitrate, and codec.")
+  /** Optional video configuration including resolution, bitrate, and codec. */
   video?: VideoParams;
 }
 
-@doc("ICE server configuration for WebRTC connection negotiation.")
+/** ICE server configuration for WebRTC connection negotiation. */
 @usage(RequestUsage)
 model IceServer {
-  @doc("List of ICE server URLs (e.g., TURN or STUN endpoints).")
+  /** List of ICE server URLs (e.g., TURN or STUN endpoints). */
   urls: url[];
 
-  @doc("Optional username used for authentication with the ICE server.")
+  /** Optional username used for authentication with the ICE server. */
   username?: string;
 
-  @doc("Optional credential (e.g., password or token) used for authentication.")
+  /** Optional credential (e.g., password or token) used for authentication. */
   credential?: string;
 }
 
 @usage(RequestUsage)
-@doc("Configuration for the agent.")
+/** Configuration for the agent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AgentConfig {
-  @doc("The type of agent to use.")
+  /** The type of agent to use. */
   type: "agent";
-  @doc("The name of the agent.")
+  /** The name of the agent. */
   name: string;
-  @doc("Optional description of the agent.")
+  /** Optional description of the agent. */
   description?: string;
-  @doc("The ID of the agent.")
+  /** The ID of the agent. */
   agent_id: string;
-  @doc("The ID of the conversation thread.")
+  /** The ID of the conversation thread. */
   thread_id: string;
 }
 
-@doc("Video streaming parameters for avatar.")
+/** Video streaming parameters for avatar. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VideoParams {
-  @doc("Bitrate in bits per second (e.g., 2000000 for 2 Mbps).")
+  /** Bitrate in bits per second (e.g., 2000000 for 2 Mbps). */
   bitrate?: int32 = 2000000;
 
-  @doc("Codec to use for encoding. Currently only 'h264' is supported.")
+  /** Codec to use for encoding. Currently only 'h264' is supported. */
   codec?: "h264" = "h264";
 
-  @doc("Optional cropping settings for the video stream.")
+  /** Optional cropping settings for the video stream. */
   crop?: VideoCrop;
 
-  @doc("Optional resolution settings for the video stream.")
+  /** Optional resolution settings for the video stream. */
   resolution?: VideoResolution;
 
-  @doc("Optional background settings for the video. Allows specifying either a solid color or an image URL.")
+  /** Optional background settings for the video. Allows specifying either a solid color or an image URL. */
   background?: Background;
 
-  @doc("Group of Pictures (GOP) size for video encoding. Controls the interval between keyframes, affecting compression efficiency and seeking performance.")
+  /** Group of Pictures (GOP) size for video encoding. Controls the interval between keyframes, affecting compression efficiency and seeking performance. */
   @minValue(1)
   @maxValue(2000)
   gop_size?: int32 = 10;
 }
 
-@doc("Defines a video crop rectangle using top-left and bottom-right coordinates.")
+/** Defines a video crop rectangle using top-left and bottom-right coordinates. */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VideoCrop {
-  @doc("Top-left corner of the crop region. Array of [x, y], must be non-negative integers.")
+  /** Top-left corner of the crop region. Array of [x, y], must be non-negative integers. */
   @minItems(2)
   @maxItems(2)
   top_left: int32[];
 
-  @doc("Bottom-right corner of the crop region. Array of [x, y], must be non-negative integers.")
+  /** Bottom-right corner of the crop region. Array of [x, y], must be non-negative integers. */
   @minItems(2)
   @maxItems(2)
   bottom_right: int32[];
 }
 
-@doc("Resolution of the video feed in pixels.")
+/** Resolution of the video feed in pixels. */
 @usage(RequestUsage)
 model VideoResolution {
-  @doc("Width of the video in pixels. Must be greater than 0.")
+  /** Width of the video in pixels. Must be greater than 0. */
   width: int32;
 
-  @doc("Height of the video in pixels. Must be greater than 0.")
+  /** Height of the video in pixels. Must be greater than 0. */
   height: int32;
 }
 
-@doc("Defines a video background, either a solid color or an image URL (mutually exclusive).")
+/** Defines a video background, either a solid color or an image URL (mutually exclusive). */
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model Background {
-  @doc("Background color in hex format (e.g., `#00FF00FF`). Cannot be set if `image_url` is provided.")
+  /** Background color in hex format (e.g., `#00FF00FF`). Cannot be set if `image_url` is provided. */
   color?: string;
 
-  @doc("Background image URL. Cannot be set if `color` is provided.")
+  /** Background image URL. Cannot be set if `color` is provided. */
   image_url?: string;
 }

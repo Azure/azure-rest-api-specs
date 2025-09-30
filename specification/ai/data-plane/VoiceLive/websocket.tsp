@@ -20,9 +20,7 @@ using Azure.Core;
   "{endpoint}/voice-agent/realtime",
   "VoiceLive Endpoint",
   {
-    @doc("""
-      Azure AI VoiceLive endpoint.
-      """)
+    /** Azure AI VoiceLive endpoint. */
     endpoint: url,
   }
 )
