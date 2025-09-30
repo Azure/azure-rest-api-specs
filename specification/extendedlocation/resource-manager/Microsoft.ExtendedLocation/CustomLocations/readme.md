@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-09-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-09-15-preview'
 input-file:
-  - Microsoft.ExtendedLocation/preview/2024-09-15-preview/customlocations.json
+  - preview/2024-09-15-preview/customlocations.json
 ```
 
 ### Tag: package-2021-03-15-preview
