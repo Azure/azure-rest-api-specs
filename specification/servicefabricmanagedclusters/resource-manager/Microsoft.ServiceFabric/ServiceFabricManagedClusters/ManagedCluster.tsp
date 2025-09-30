@@ -6,7 +6,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 
-using Azure.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
