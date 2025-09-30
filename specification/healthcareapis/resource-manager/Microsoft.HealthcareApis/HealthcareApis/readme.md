@@ -39,7 +39,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
-  - Microsoft.HealthcareApis/preview/2025-10-01-preview/healthcare-apis.json
+  - preview/2025-10-01-preview/healthcare-apis.json
 ```
 
 ### Tag: package-preview-2025-10-01
