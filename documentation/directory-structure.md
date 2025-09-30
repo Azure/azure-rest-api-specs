@@ -7,135 +7,135 @@ https://marketplace.visualstudio.com/items?itemName=yzhang.markdown-all-in-one
 -->
 
 - [`specification` directory structure](#specification-directory-structure)
-  - [Key concepts](#key-concepts)
-  - [`specification` folder](#specification-folder)
-    - [`<typeSpecSrc>` folders](#typespecsrc-folders)
-    - [`resource-manager/<RPNS>` folder](#resource-managerrpns-folder)
-    - [`data-plane/<groupingDir>` folders](#data-planegroupingdir-folders)
+  - [Key concepts and terminology](#key-concepts-and-terminology)
+  - [Overview of the folder structure](#overview-of-the-folder-structure)
+    - [ARM services: `resource-manager/<RPNS>` folder](#arm-services-resource-managerrpns-folder)
+    - [Data-plane services: `data-plane` folders](#data-plane-services-data-planeservice-folders)
   - [Service folder structure](#service-folder-structure)
+    - [Contents of a service folder](#contents-of-a-service-folder)
+    - [API version folders](#api-version-folders)
   - [`specification/common-types`](#specificationcommon-types)
   - [Naming guidelines for `specification` folder contents](#naming-guidelines-for-specification-folder-contents)
-  - [About legacy, deprecated directory structure for services and service groups](#about-legacy-deprecated-directory-structure-for-services-and-service-groups)
-  - [Migrating from a singular service to service group in a legacy directory structure](#migrating-from-a-singular-service-to-service-group-in-a-legacy-directory-structure)
-  - [Deprecated directory structure and hand-written OpenAPI specs](#deprecated-directory-structure-and-hand-written-openapi-specs)
+  - [Legacy and deprecated patterns](#legacy-and-deprecated-patterns)
+  - [Current migration efforts](#current-migration-efforts)
+  - [Existing violations and historical context](#existing-violations-and-historical-context)
 
 # `specification` directory structure
 
-This article describes the directory structure / folder layout of the `specification` folder.
-You may be also interested in following:
-
-- [Specification index]
-- [Resource Provider list]
+This article describes the recommended directory structure and folder layout for Azure REST API specifications in the `specification` folder. This structure supports both ARM (Azure Resource Manager) and data-plane services, and is designed to work seamlessly with TypeSpec-based API development.
 
 > [!IMPORTANT]
-> The structure described in this article is recommended. There exist some exceptions for historical reasons.
-> These exceptions are strongly discouraged going forward.
+> The structure described in this article is the **recommended standard** for all new services. While some existing services may follow legacy patterns for historical reasons, all new services should adopt this structure. We are actively working on migrating legacy patterns to align with these guidelines.
 
-## Key concepts
+## Key concepts and terminology
 
-The directory structure is a reflection of a few key concepts.
+Before diving into the folder structure, familiarize yourself with these key concepts as defined in the [glossary]:
 
-Familiarize yourself with the concepts of `service`, `service group`, `grouping directory` and `uniform versioning`
-as explained in the [glossary].
+- **Service**: A customer-facing Azure service (e.g., Azure Key Vault, Azure Container Registry)
+- **Organization**: The Azure team or group responsible for one or more services
+- **Resource Provider Namespace (RPNS)**: The ARM namespace for resource management operations (e.g., `Microsoft.KeyVault`)
+- **API versioning**: Following [uniform versioning] principles for consistent service evolution
 
-## `specification` folder
+Additional resources:
+- [Specification index] - Complete list of all specifications
+- [Resource Provider list] - Official list of ARM Resource Providers
 
-The `specification` folder is the root folder for all `service` specifications.
+## Overview of the folder structure
 
-Each child of the `specification` folder corresponds to `<azureTeam>`.
-All the `service` (see [glossary]) specifications owned by that team are rooted in their `<azureTeam>` folder.
+The `specification` folder is organized hierarchically to support both ARM and data-plane services. Here's the high-level structure:
 
-Given `<azureTeam>` folder has following structure:
+```
+specification/
+└── <organization>/
+    ├── cspell.yaml                     # Spell-check configuration
+    ├── resource-manager/               # ARM services
+    │   └── <RPNS>/                    # Resource Provider Namespace
+    │       └── <service>/             # Individual service
+    └── data-plane/                    # Data-plane services
+        └── <service>/                 # Individual service
+```
 
-- `<azureTeam>/<typeSpecSrc>` (multiple `<TypeSpecSrc>` folders are allowed)
-- `<azureTeam>/resource-manager/<RPNS>` (exactly one `<RPNS>` folder is allowed)
-- `<azureTeam>/data-plane/<groupingDir>` (multiple `<groupingDir>` folders are allowed)
+Each organization folder contains:
+- **One** `resource-manager/<RPNS>/` folder for ARM services (where `<RPNS>` is the Resource Provider Namespace)
+- **One** `data-plane/` folder that can contain multiple service folders for data-plane services
 
-### `<typeSpecSrc>` folders
+### ARM services: `resource-manager/<RPNS>` folder
 
-The `<azureTeam>/<typeSpecSrc>` folders contain the TypeSpec specifications for the services owned by the team.
-
-The content of these folders is used as input to emit OpenAPI specifications
-placed within `<azureTeam>/resource-manager/<RPNS>` folder and `<azureTeam>/data-plane/<groupingDir>` folders.
-
-> [!NOTE]
-> Some services may not have `<typeSpecSrc>` folders. In such case, these services OpenAPI specs are hand-written.  
-> This is legacy, deprecated practice and is not allowed going forward.
-
-You can find details on the name and contents of `<typeSpecSrc>` folders in [TypeSpec directory structure].
-You can learn more about TypeSpec at [aka.ms/azsdk/typespec] and [aka.ms/typespec].
-
-### `resource-manager/<RPNS>` folder
-
-The `<azureTeam>/resource-manager/<RPNS>` is a folder corresponding to ARM **Resource Provider (RP) namespace**.
+The `<organization>/resource-manager/<RPNS>` folder corresponds to an ARM **Resource Provider (RP) namespace**.
 
 An example RPNS is `Microsoft.Automation`. A list of RPs can be found in the [Resource Provider list].
 
-This folder corresponds to a `service group` (see [glossary]) for all ARM services owned by the team.
+This folder contains one or more `<service>` folders corresponding to the ARM services owned by the team.
 
-An `<RPNS>` folder has one or more child `<service>` folders corresponding to the services belonging
-to the `service group` represented by the `<RPNS>` folder.
-
-For example, [`specification/containerservice/resource-manager/Microsoft.ContainerService/aks`]
-is a folder for the `aks` service within the `Microsoft.ContainerService` ARM Resource Provider namespace.
+For example, [`specification/containerservice/resource-manager/Microsoft.ContainerService/aks`] is a folder for the `aks` service within the `Microsoft.ContainerService` ARM Resource Provider namespace.
 
 > [!NOTE]
-> Many Azure teams that have one ARM service instead of rooting it in
-> `specification/<azureTeam>/resource-manager/<RPNS>/<service>` root it in
-> `specification/<azureTeam>/resource-manager`.  
-> This is legacy, deprecated structure and is strongly discouraged going forward.
+> Many Azure teams that have one ARM service place it directly in `specification/<organization>/resource-manager/` instead of `specification/<organization>/resource-manager/<RPNS>/<service>`. This is a legacy, deprecated structure and is strongly discouraged going forward.
 
-In addition, the `<RPNS>` folder may contain `common-types` child folder that usually is of
-form `common-types/v<versionInt>/common.json` and contains types shared across API versions.
-E.g. [`Microsoft.Compute/common-types`].
+**Shared definitions**: If there are models or operations definitions (other than those in [`specification/common-types`]) that need to be shared across different services, they must be duplicated in each service's own folder. This is because each service must control its own versioning lifecycle of those shared definitions.
 
-### `data-plane/<groupingDir>` folders
+### Data-plane services: `data-plane` folders
 
-The `<azureTeam>/data-plane` folder is the equivalent
-of `<azureTeam>/resource-manager` but with following distinctions:
+The `<organization>/data-plane` folder contains data-plane service APIs, with the following distinctions from ARM services:
 
-- `<azureTeam>/data-plane` pertains to data-plane service APIs, not ARM service APIs.
-- `<azureTeam>/data-plane` has no concept of Resource Provider Namespace (`<RPNS>`).
-  Instead, it has or more `<groupingDir>` child folders (see also [glossary]).
+- Pertains to data-plane service APIs, not ARM service APIs
+- Has no concept of Resource Provider Namespace (`<RPNS>`)
+- Each service gets its own folder directly under `data-plane/`
 
-Each `<groupingDir>` folder has one or more child `<service>` folders corresponding to the services grouped
-in given `<groupingDir>`.
+Each `<organization>/data-plane` folder contains one or more `<service>` folders corresponding to the data-plane services owned by the team.
 
 > [!NOTE]
-> Many Azure teams that have one data-plane service instead of rooting it in
-> `specification/<azureTeam>/data-plane/<groupingDir>/<service>` root it in
-> `specification/<azureTeam>/data-plane`.  
-> This is legacy, deprecated structure and is strongly discouraged going forward.
+> Some organizations use additional grouping folders like `<organization>/data-plane/<groupingDir>/<service>` or prefix service names with `Azure.<SomeService>`. These are legacy, deprecated structures and are strongly discouraged going forward.
 
 ## Service folder structure
 
-As described above, ARM service folder path is:
+Each service folder follows a consistent structure regardless of whether it's ARM or data-plane:
 
-`specification/<azureTeam>/resource-manager/<RPNS>/<service>`
+- **ARM services**: `specification/<organization>/resource-manager/<RPNS>/<service>`
+- **Data-plane services**: `specification/<organization>/data-plane/<service>`
 
-while data-plane service folder path is:
+### Contents of a service folder
 
-`specification/<azureTeam>/data-plane/<groupingDir>/<service>`.
+A service folder contains the following elements:
 
-A service folder has the following elements:
+**TypeSpec files** (for TypeSpec-based services):
+- `main.tsp` - TypeSpec entry point
+- `tspconfig.yaml` - TypeSpec compilation configuration (includes OpenAPI/SDK emitter options)
+- Additional `*.tsp` files for the service
+- `examples/<apiVersion>/` - TypeSpec examples organized by API version
 
-- The [AutoRest config `README.md` file]. See also section about it in [uniform versioning article].
-- Additional AutoRest config `README.md` files specific to given language SDK.
-- The `stable` and `preview` folders if applicable.
+**Configuration files**:
+- `readme.md` - [AutoRest configuration file][AutoRest config `readme.md` file] (see [uniform versioning article])
+- Additional language-specific `readme.md` files for SDK generation
+
+**Generated OpenAPI specs**:
+- `stable/` and `preview/` folders containing API version subfolders
 
 The `stable` and `preview` folders  contain OpenAPI specs in the `stable` and `preview` [lifecycle stages][aka.ms/azsdk/api-versions]
 respectively, organized in `<apiVersion>` subfolders for each service API version.
 
-For example:
+### API version folders
 
-- `<azureTeam>/resource-manager/<RPNS>/<service>/stable/<apiVersion>`
-- `<azureTeam>/resource-manager/<RPNS>/<service>/preview/<apiVersion-preview>`
-- `<azureTeam>/data-plane/<groupingDir>/<service>/stable/<apiVersion>`
-- `<azureTeam>/data-plane/<groupingDir>/<service>/preview/<apiVersion-preview>`
+The `stable` and `preview` folders contain OpenAPI specs in the respective [lifecycle stages][aka.ms/azsdk/api-versions], organized in `<apiVersion>` subfolders:
+
+**ARM services**:
+- `<organization>/resource-manager/<RPNS>/<service>/stable/<apiVersion>`
+- `<organization>/resource-manager/<RPNS>/<service>/preview/<apiVersion-preview>`
+
+**Data-plane services**:
+- `<organization>/data-plane/<service>/stable/<apiVersion>`
+- `<organization>/data-plane/<service>/preview/<apiVersion-preview>`
 
 Each such API version folder directly contains a set of `.json` files containing OpenAPI specs emitted from TypeSpec,
 as well as an `examples` child folder with `.json` files having the contents of [`x-ms-examples`] referenced
 from the OpenAPI specs.
+
+**Notes**: The examples folder under `<service>` folder is the TypeSpec examples, it's a super set of all apiVersion examples. TypeSpec has a plan to reduce the redundance and are trying to figure out some new design for TypeSpec based examples. 
+
+Read [API versioning guidelines] to learn more.
+from the OpenAPI specs.
+
+**Notes: the examples folder under `<service>` folder is the TypeSpec examples, it's a super set of all apiVersion examples. TypeSpec has a plan to reduce the redundance and are trying to figure out some new design for TypeSpec based examples. 
 
 Read [API versioning guidelines] to learn more.
 
@@ -152,45 +152,55 @@ Azure team services in their `specification` child folders.
 - For file names, any casing is allowed.
 - When in doubt, mimic naming of the examples provided in this article.
 
-## About legacy, deprecated directory structure for services and service groups
+## Legacy and deprecated patterns
 
-Many teams follow a legacy, deprecated directory structure which usually has following differences:
+For historical reasons, many existing services in the repository follow deprecated directory structures that do not conform to the recommended guidelines above. **All new services must follow the recommended structure**, and existing services are being migrated over time.
 
-- If a team owns only one service, instead of rooting it in `specification/<azureTeam>/resource-manager/<RPNS>/<service>`,
-  it is rooted in`specification/<azureTeam>/resource-manager`.
-- If a team first owned one service and then expanded to a service group, 
-  it contains mixture of both the deprecated structure (for the first service) as well as the correct structure
-  (for the 2nd and following services).
+### Summary of deprecated patterns
 
-This legacy structure is strongly discouraged going forward.
+The following patterns exist in the repository but are **strongly discouraged** for new services:
 
-## Migrating from a singular service to service group in a legacy directory structure
+#### ARM services - deprecated patterns:
+- **Single service without RPNS folder**: Placing a single ARM service directly in `specification/<organization>/resource-manager/` instead of `specification/<organization>/resource-manager/<RPNS>/<service>`
+- **Mixed directory structures**: When teams expand from one to multiple services, mixing the old flat structure (for the original service) with the correct nested structure (for new services)
+- **Multiple RPNS subfolders**: Having multiple `<RPNS>` subfolders under `resource-manager/` folder
 
-In case an Azure SDK team owns a singular service following the legacy, deprecated layout, and wants to expand to a full
-service group, it can do the following:
+#### Data-plane services - deprecated patterns:
+- **Additional grouping folders**: Using extra nesting like `<organization>/data-plane/<groupingDir>/<service>` instead of `<organization>/data-plane/<service>`
+- **Service name prefixes**: Prefixing service names with `Azure.<SomeService>` or RPNS `Microsoft.<SomeService>` or similar patterns
+- **RPNS-style folders**: Using Resource Provider-style folder names under `data-plane/`
 
-- Keep the existing service as-is, without any changes.
-- Introduce the new services using the new, correct structure.
+#### General deprecated patterns:
+- **Incorrect folder nesting**: More deeply nested subfolders than the recommended structure allows
+- **Misplaced README files**: Placing `readme.md` files in wrong folders, incorrectly denoting them as service folders
+- **Missing service directories**: Lack of proper `<service>` directory structure
+- **API version naming issues**: Missing `-preview` suffix in preview API versions
+- **Mixed API versions**: Mixing `stable` and `preview` API versions in the same folder subtree
+- **Mixed lifecycle stages**: Combining multiple API version lifecycle stages in the same `readme.md` configuration
 
-## Deprecated directory structure and hand-written OpenAPI specs
+## Current Folder Migration efforts
 
-As mentioned multiple times in this article, for historical reasons, some `specification/<azureTeam>` folders may
-violate some of the constraints presented in this article. This includes violations like:
+We are actively working on migrating the repository to eliminate differences between legacy patterns and the recommended structure. This migration effort includes:
 
-- More deeply nested subfolders than allowed.
-- `README.md` placed in a wrong folder (thus incorrectly denoting it as a `service` folder).
-- Lack of `<service>` directory for given service path.
-- Incorrect lack of `-preview` suffix in `preview` API versions.
-- Multiple `<RPNS>` subfolders of `resource-manager` folder.
-- Mixing of `stable` and `preview` API versions in the same folder subtree.
-- Mixing of multiple API versions in given `README.md` package, including mixing of multiple API version lifecycle stages.
+### What we're fixing:
+- **Standardizing single vs. multiple service patterns**: Ensuring consistent folder structure regardless of whether a team has one or multiple services
+- **Eliminating mixed structures**: Converting teams that have a mix of old and new patterns to use the recommended structure consistently
+- **Simplifying tooling**: Reducing complexity in engineering systems by having a single, consistent structure
+- **Improving discoverability**: Making it easier to find and navigate service specifications
 
-In addition, some `<azureTeam>` folders have OpenAPI specs that have been written manually instead of emitted from
-TypeSpec. In some cases the folders have mixture of manually-written and TypeSpec-emitted OpenAPI specs.
+### Timeline and approach:
+- Migration is being done incrementally to minimize disruption to existing workflows
+- Teams will be contacted individually to coordinate migration of their services
+- New services must follow the recommended structure immediately
+- Documentation and tooling are being updated to reflect the recommended patterns
 
-All of the aforementioned cases are considered legacy & deprecated, and are strongly discouraged going forward.
+### For service teams:
+- **New services**: Always use the recommended structure described in this document
+- **Existing services**: Contact the Azure SDK team if you need to add new services or want to migrate existing ones
+- **When in doubt**: Follow the examples and patterns shown in the recommended structure sections above
 
-[`Microsoft.Compute/common-types`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/compute/resource-manager/Microsoft.Compute/common-types/
+**All violations described above are considered legacy and deprecated. They are strongly discouraged for any new development.**
+
 [`specification/common-types`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/common-types
 [`specification/containerservice/resource-manager/Microsoft.ContainerService/aks`]: https://github.com/Azure/azure-rest-api-specs/tree/main/specification/containerservice/resource-manager/Microsoft.ContainerService/aks
 [`x-ms-examples`]: https://azure.github.io/autorest/extensions/#x-ms-examples
@@ -202,7 +212,6 @@ All of the aforementioned cases are considered legacy & deprecated, and are stro
 [glossary]: ./glossary.md
 [Resource Provider list]: https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-services-resource-providers#match-resource-provider-to-service
 [Specification index]: https://azure.github.io/azure-sdk/releases/latest/all/specs.html
-[TypeSpec directory structure]: https://github.com/Azure/azure-rest-api-specs/blob/main/documentation/typespec-structure-guidelines.md
 [uniform versioning article]: ./uniform-versioning.md
 
 <!-- Unused references -->
