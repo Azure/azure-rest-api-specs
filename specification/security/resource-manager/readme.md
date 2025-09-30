@@ -106,6 +106,15 @@ tag: package-composite-v3
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-11-01-preview
+
+These settings apply only when `--tag=package-preview-2025-11-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-01-preview'
+input-file:
+  - Microsoft.Security/preview/2025-11-01-preview/securityConnectorsDevOps.json
+```
+
 ### Tag: package-preview-2025-09-01-preview
 
 These settings apply only when `--tag=package-preview-2025-09-01-preview` is specified on the command line.
