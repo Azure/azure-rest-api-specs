@@ -5,7 +5,6 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "./models.tsp";
 import "./VirtualMachine.tsp";
-import "./VirtualMachineRunCommand.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
@@ -22,12 +21,12 @@ namespace Microsoft.Compute;
 model VirtualMachineDiagnosticRunCommand
   is Azure.ResourceManager.TrackedResource<VirtualMachineRunCommandProperties> {
   ...ResourceNameParameter<
-    Resource = VirtualMachineRunCommand,
+    Resource = VirtualMachineDiagnosticRunCommand,
     KeyName = "runCommandName",
     SegmentName = "diagnosticRunCommands",
     NamePattern = ""
   >;
-};
+}
 
 @armResourceOperations
 interface VirtualMachineDiagnosticRunCommandOps
@@ -35,7 +34,7 @@ interface VirtualMachineDiagnosticRunCommandOps
       VirtualMachinePath,
       KeysOf<{
         ...ResourceNameParameter<
-          VirtualMachineRunCommand,
+          VirtualMachineDiagnosticRunCommand,
           SegmentName = "diagnosticRunCommands",
           KeyName = "runCommandName",
           NamePattern = ""
@@ -88,7 +87,7 @@ interface VirtualMachineDiagnosticRunCommands {
   #suppress "deprecated" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-core/no-response-body" "For backward compatibility"
-    @added(Versions.v2025_04_01)
+  @added(Versions.v2025_04_01)
   delete is VirtualMachineDiagnosticRunCommandOps.DeleteAsync<VirtualMachineDiagnosticRunCommand>;
 
   /**
@@ -115,7 +114,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommandOps
       VirtualMachineScaleSetVMPath,
       KeysOf<{
         ...ResourceNameParameter<
-          VirtualMachineRunCommand,
+          VirtualMachineDiagnosticRunCommand,
           SegmentName = "diagnosticRunCommands",
           KeyName = "runCommandName",
           NamePattern = ""
@@ -132,7 +131,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
   @added(Versions.v2025_04_01)
   @operationId("VirtualMachineScaleSetVMDiagnosticRunCommands_Get")
   get is VirtualMachineScaleSetVMDiagnosticRunCommandOps.Read<
-    VirtualMachineRunCommand,
+    VirtualMachineDiagnosticRunCommand,
     Parameters = {
       /**
        * The expand expression to apply on the operation.
