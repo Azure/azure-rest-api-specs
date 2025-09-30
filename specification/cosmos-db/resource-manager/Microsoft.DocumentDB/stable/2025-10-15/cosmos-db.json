@@ -8290,6 +8290,13 @@
           "items": {
             "$ref": "#/definitions/VectorIndex"
           }
+        },
+        "fullTextIndexes": {
+          "description": "List of paths to include in the full text indexing",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FullTextIndexPath"
+          }
         }
       }
     },
@@ -8461,6 +8468,19 @@
         "dataType",
         "distanceFunction",
         "dimensions"
+      ]
+    },
+    "FullTextIndexPath": {
+      "type": "object",
+      "description": "Represents the full text index path.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the full text field in the document."
+        }
+      },
+      "required": [
+        "path"
       ]
     },
     "FullTextPath": {
