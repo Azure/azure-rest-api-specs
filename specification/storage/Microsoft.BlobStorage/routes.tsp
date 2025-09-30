@@ -301,7 +301,7 @@ interface Container {
     {
       ...TimeoutParameter;
       ...LeaseIdOptionalParameter;
-      ...MetadataHeaders;
+      ...MetadataHeadersParameter;
       ...IfModifiedSinceParameter;
     },
     {
