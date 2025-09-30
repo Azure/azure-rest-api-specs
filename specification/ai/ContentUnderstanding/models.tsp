@@ -59,7 +59,6 @@ model ContentAnalyzer {
 
   @doc("The schema of fields to extracted.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @clientName("ContentFieldSchema")
   fieldSchema?: FieldSchema;
 
   @doc("The data source containing training data for the analyzer.")
