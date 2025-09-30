@@ -41,6 +41,12 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 input-file:
   - Microsoft.CognitiveServices/preview/2025-10-01-preview/cognitiveservices.json
 suppressions:
+  - code:  ProvisioningStateMustBeReadOnly
+    reason: Provisioning state for agentic application definition IS read-only.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}"].put.responses.201.schema
   - code: ArmResourcePropertiesBag
     reason: This API is copied from Machine Learning Services RP where this behavior is already established.
     where:
