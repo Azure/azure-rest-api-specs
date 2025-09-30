@@ -42,7 +42,7 @@ input-file:
   - Microsoft.CognitiveServices/preview/2025-10-01-preview/cognitiveservices.json
 suppressions:
   - code:  ProvisioningStateMustBeReadOnly
-    reason: Provisioning state for agentic application definition IS read-only.
+    reason: Provisioning state for agent application definition IS read-only.
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}"].get.responses.200.schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}"].put.responses.200.schema
