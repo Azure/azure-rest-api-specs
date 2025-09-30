@@ -6797,7 +6797,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/RuleSet"
+              "$ref": "#/definitions/BatchRuleSet"
             }
           },
           "default": {
@@ -6811,6 +6811,9 @@
           "RuleSets_Get": {
             "$ref": "./examples/RuleSets_Get.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "put": {
@@ -6845,6 +6848,15 @@
             "description": "Name of the rule set under the profile which is unique globally.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "batchRuleSet",
+            "in": "body",
+            "description": "The batch rule set creation properties.",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/BatchRuleSetInput"
+            }
           }
         ],
         "responses": {
@@ -16269,6 +16281,102 @@
         "value"
       ]
     },
+    "BatchRuleSetInput": {
+      "type": "object",
+      "description": "Friendly RuleSet name mapping to the any RuleSet or secret related information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BatchRuleSetInputProperties",
+          "description": "The JSON object that contains the properties of the Batch Rule Set.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BatchRuleSetInputProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the Batch Rule Set to create.",
+      "properties": {
+        "profileName": {
+          "type": "string",
+          "description": "The name of the profile which holds the rule set.",
+          "readOnly": true
+        },
+        "batchMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether the rule set is in batch mode."
+        },
+        "rules": {
+          "$ref": "#/definitions/BatchRulesInputProperties",
+          "description": "A collection of rules that are associated with the batch rule set."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/AFDStateProperties"
+        }
+      ]
+    },
+    "BatchRulesInputProperties": {
+      "type": "object",
+      "description": "A collection of rules that are associated with the batch rule set.",
+      "additionalProperties": {
+        "$ref": "#/definitions/Rule",
+        "x-nullable": false
+      },
+      "x-nullable": true
+    },
+    "BatchRuleSet": {
+      "type": "object",
+      "description": "Friendly RuleSet name mapping to the any RuleSet or secret related information.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/BatchRuleSetProperties",
+          "description": "The JSON object that contains the properties of the Batch Rule Set.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "BatchRuleSetProperties": {
+      "type": "object",
+      "description": "The JSON object that contains the properties of the Batch Rule Set to create.",
+      "properties": {
+        "profileName": {
+          "type": "string",
+          "description": "The name of the profile which holds the rule set.",
+          "readOnly": true
+        },
+        "batchMode": {
+          "type": "boolean",
+          "description": "Indicates whether the rule set is in batch mode.",
+          "readOnly": true,
+          "default": false
+        },
+        "rules": {
+          "type": "array",
+          "description": "A list of rules that are associated with the rule set.",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/Rule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      }
+    },
     "RuleSetProperties": {
       "type": "object",
       "description": "The JSON object that contains the properties of the Rule Set to create.",
@@ -16277,6 +16385,11 @@
           "type": "string",
           "description": "The name of the profile which holds the rule set.",
           "readOnly": true
+        },
+        "batchMode": {
+          "type": "boolean",
+          "default": false,
+          "description": "Indicates whether the rule set is in batch mode."
         }
       },
       "allOf": [
