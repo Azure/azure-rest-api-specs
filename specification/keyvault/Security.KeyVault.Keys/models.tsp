@@ -151,14 +151,19 @@ union JsonWebKeyWrapAlgorithm {
 
   /** 128-bit AES key wrap. */
   A128_KW: "A128KW",
+
   /** 192-bit AES key wrap. */
   A192_KW: "A192KW",
+
   /** 256-bit AES key wrap. */
   A256_KW: "A256KW",
+
   /** 128-bit AES key wrap with padding. */
   A256_KWPAD: "A256KWPAD",
+
   /** 192-bit AES key wrap with padding. */
   A128_KWPAD: "A128KWPAD",
+
   /** 256-bit AES key wrap with padding. */
   A192_KWPAD: "A192KWPAD",
 
@@ -490,6 +495,7 @@ model SecureKeyWrapOperationParameters {
 @added(KeyVault.Versions.v2026_01_01_preview)
 model SecureKeyUnWrapOperationParameters {
   ...SecureKeyOperationCommonParameters;
+
   /**
    * The value to operate on.
    */
