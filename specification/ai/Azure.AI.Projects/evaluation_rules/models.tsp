@@ -17,10 +17,10 @@ union EvaluationRuleActionType {
   string,
 
   @doc("Continuous evaluation.")
-  ContinuousEvaluation: "ContinuousEvaluation",
+  continuous_evaluation: "continuous_evaluation",
 
   @doc("Human evaluation.")
-  HumanEvaluation: "HumanEvaluation",
+  human_evaluation: "human_evaluation",
 }
 
 @doc("Evaluation action model.")
@@ -34,10 +34,10 @@ model EvaluationRuleAction {
 @doc("Evaluation rule action for continuous evaluation.")
 @added(Versions.v2025_10_15_preview)
 model ContinuousEvaluationRuleAction {
-  @doc("Eval Id to add continuous evaluation run to.")
+  @doc("Eval Id to add continuous evaluation runs to.")
   eval_id: string;
 
-  @doc("Maximum number of evaluation run in an hour.")
+  @doc("Maximum number of evaluation runs allowed per hour.")
   max_hourly_runs?: int32;
 }
 
@@ -55,7 +55,7 @@ scalar AssetId extends string;
 @doc("Evaluation filter model.")
 @added(Versions.v2025_10_15_preview)
 model EvaluationRuleFilter {
-  @doc("Value of the evaluation filter.")
+  @doc("Filter by agent name.")
   agent_name: string;
 }
 
@@ -65,10 +65,10 @@ union EvaluationRuleEventType {
   string,
 
   @doc("Response completed.")
-  ResponseCompleted: "response.completed",
+  response_completed: "response.completed",
 
   @doc("Manual trigger.")
-  Manual: "manual",
+  manual: "manual",
 }
 
 @doc("Evaluation rule model.")
@@ -76,12 +76,11 @@ union EvaluationRuleEventType {
 @added(Versions.v2025_10_15_preview)
 model EvaluationRule {
   @doc("Unique identifier for the evaluation rule.")
-  @key("name")
-  @encodedName("application/json", "id")
+  @key
   @visibility(Lifecycle.Read)
   name: string;
 
-  @doc("Description for evaluation rule.")
+  @doc("Description for the evaluation rule.")
   description?: string;
 
   @doc("Metadata about the evaluation rule.")
@@ -90,10 +89,10 @@ model EvaluationRule {
   @doc("Definition of the evaluation rule action.")
   action: EvaluationRuleAction;
 
-  @doc("Description of the evaluation rule.")
+  @doc("Filter condition of the evaluation rule.")
   filter?: EvaluationRuleFilter;
 
-  @doc("List of event types that the evaluation rule applies to.")
+  @doc("Event types that the evaluation rule applies to.")
   event_types: EvaluationRuleEventType[];
 
   @doc("Indicates whether the evaluation rule is disabled. Default is false.")

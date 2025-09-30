@@ -58,6 +58,7 @@ interface EvaluationRules {
     @query("agent_name")
     agentName?: string,
 
+    ...OpenAIListRequestOptions,
     ...ApiVersionParameter,
   ): OpenAIPageableListOf<EvaluationRule>;
 }
