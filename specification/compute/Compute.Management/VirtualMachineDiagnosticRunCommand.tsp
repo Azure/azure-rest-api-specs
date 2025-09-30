@@ -104,7 +104,7 @@ interface VirtualMachineDiagnosticRunCommands {
       @query("$expand")
       $expand?: string;
     },
-    Response = VirtualMachineRunCommandsListResult
+    Response = VirtualMachineDiagnosticRunCommandsListResult
   >;
 }
 
@@ -192,7 +192,7 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
       @query("$expand")
       $expand?: string;
     },
-    Response = VirtualMachineRunCommandsListResult
+    Response = VirtualMachineDiagnosticRunCommandsListResult
   >;
 }
 

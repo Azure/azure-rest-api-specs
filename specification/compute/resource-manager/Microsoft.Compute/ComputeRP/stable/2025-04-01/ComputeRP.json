@@ -8285,7 +8285,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineRunCommandsListResult"
+              "$ref": "#/definitions/VirtualMachineDiagnosticRunCommandsListResult"
             }
           },
           "default": {
@@ -11047,7 +11047,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/VirtualMachineRunCommandsListResult"
+              "$ref": "#/definitions/VirtualMachineDiagnosticRunCommandsListResult"
             }
           },
           "default": {
@@ -19400,6 +19400,27 @@
         {
           "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
+      ]
+    },
+    "VirtualMachineDiagnosticRunCommandsListResult": {
+      "type": "object",
+      "description": "The List diagnostic run command operation response",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The list of diagnostic run commands.",
+          "items": {
+            "$ref": "#/definitions/VirtualMachineDiagnosticRunCommand"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The uri to fetch the next page of diagnostic run commands."
+        }
+      },
+      "required": [
+        "value"
       ]
     },
     "VirtualMachineEvictionPolicyTypes": {
