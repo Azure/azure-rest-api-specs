@@ -548,8 +548,8 @@ model MarketParameter {
 @doc("Parameter for selecting which fields to return in the response")
 model SelectParameter {
   @query
-  @doc("Array of fields to return. Such as select=pricingTypes. \n- `All`: All fields.\n- `SupportedProducts`: Supported Products.\n- `PublisherId`: Publisher Id.\n- `DisplayName`: Display Name.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `SmallIconUri`: Small Icon Uri.\n- `PublisherType`: Publisher Type.\n- `PublishingState`: Publishing State.\n- `UniqueProductId`: Unique Product Id.\n- `ProductType`: Product Type.\n- `Plans`: Plans.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `PublisherDisplayName`: Publisher Display Name.\n- `Summary`: Summary.\n- `Description`: Description.\n- `RatingBuckets`: Rating Buckets.\n- `RatingAverage`: Rating Average.\n- `LastModifiedDateTime`: Last Modified time.\n- `RatingCount`: Rating Count.\n- `LongSummary`: Long Summary.")
-  select: SearchFieldName[];
+  @doc("Array of fields to return. Such as select=pricingTypes. If no value provided, return fields as follows: uniqueProductId, displayName. \n- `All`: All fields.\n- `SupportedProducts`: Supported Products.\n- `PublisherId`: Publisher Id.\n- `DisplayName`: Display Name.\n- `AzureBenefit`: Azure Benefit.\n- `Badges`: Badges.\n- `SmallIconUri`: Small Icon Uri.\n- `PublisherType`: Publisher Type.\n- `PublishingState`: Publishing State.\n- `UniqueProductId`: Unique Product Id.\n- `ProductType`: Product Type.\n- `Plans`: Plans.\n- `OperatingSystems`: Operating Systems.\n- `PricingTypes`: Pricing Types.\n- `PublisherDisplayName`: Publisher Display Name.\n- `Summary`: Summary.\n- `Description`: Description.\n- `RatingBuckets`: Rating Buckets.\n- `RatingAverage`: Rating Average.\n- `LastModifiedDateTime`: Last Modified time.\n- `RatingCount`: Rating Count.\n- `LongSummary`: Long Summary.")
+  select?: SearchFieldName[];
 }
 
 @doc("Parameter for azure benefit eligibility filter")
