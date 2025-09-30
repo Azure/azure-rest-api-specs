@@ -17,14 +17,12 @@ enum Versions {
   v2023_11_01: "2023-11-01",
 
   /** 2024-05-01 preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2024_05_01_preview: "2024-05-01-preview",
 
   /** 2025-01-01 stable version */
   v2025_05_01: "2025-01-01",
 
   /** 2025-03-01 preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   v2025_03_01_preview: "2025-03-01-preview",
 }
 
@@ -319,6 +317,7 @@ interface AssociationsInterface {
     Association,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<Association, AssociationUpdate>;
   delete is ArmResourceDeleteWithoutOkAsync<Association>;
   listByTrafficController is ArmResourceListByParent<Association>;
@@ -333,6 +332,7 @@ interface FrontendsInterface {
     Frontend,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     Frontend,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -354,6 +354,7 @@ interface SecurityPoliciesInterface {
     SecurityPolicy,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     SecurityPolicy,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -374,6 +375,7 @@ interface TrafficControllerInterface {
     TrafficController,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     TrafficController,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -12,7 +12,7 @@ options:
     examples-dir: "{project-root}/examples"
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-notificationhubs"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-notificationhubs"
     namespace: "azure.mgmt.notificationhubs"
     generate-test: true
     generate-sample: true
@@ -23,7 +23,7 @@ options:
     service-name: "NotificationHubs" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-notificationhubs"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-notificationhubs"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -31,8 +31,8 @@ options:
       name: "@azure/arm-notificationhubs"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/notificationhubs"
-    package-dir: "armnotificationhubs"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armnotificationhubs"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnotificationhubs"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
