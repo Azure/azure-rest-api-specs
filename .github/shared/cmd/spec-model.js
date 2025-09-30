@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { ConsoleLogger } from "../src/logger.js";
+import { debugLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
@@ -32,10 +32,8 @@ if (args.length > 1) {
 
 const specPath = args[0];
 
-// Default to no logger, so output is a valid JSON object
-const logger = debug ? new ConsoleLogger(debug) : undefined;
-
-const specModel = new SpecModel(specPath, { logger });
+// Default to 'undefined' instead of 'defaultLogger', so output is always a valid JSON object (no logging)
+const specModel = new SpecModel(specPath, { logger: debug ? debugLogger : undefined });
 
 console.log(
   JSON.stringify(
