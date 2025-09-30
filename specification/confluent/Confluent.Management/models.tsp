@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
-
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
