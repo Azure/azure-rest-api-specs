@@ -1019,7 +1019,7 @@ interface Blob {
   setMetadata is StorageOperation<
     {
       ...TimeoutParameter;
-      ...MetadataHeaders;
+      ...MetadataHeadersParameter;
       ...LeaseIdOptionalParameter;
       ...EncryptionKeyParameter;
       ...EncryptionKeySha256Parameter;
@@ -1420,7 +1420,6 @@ interface Blob {
     },
     {
       @statusCode statusCode: 204;
-      ...DateResponseHeader;
     }
   >;
 }
