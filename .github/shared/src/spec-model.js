@@ -241,14 +241,14 @@ export class SpecModel {
  * @template T
  * @param {() => Promise<T>} fn
  * @param {{embedErrors?: boolean}} [options]
- * @returns T
+ * @returns {Promise<T | {error: string}>}
  */
 export async function embedError(fn, options) {
   try {
     return await fn();
   } catch (error) {
-    if (options?.embedErrors) {
-      return { error };
+    if (options?.embedErrors && error instanceof Error) {
+      return { error: error.message };
     } else {
       throw error;
     }
