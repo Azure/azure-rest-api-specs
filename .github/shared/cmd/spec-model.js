@@ -33,6 +33,7 @@ if (args.length > 1) {
 const specPath = args[0];
 
 const specModel = new SpecModel(specPath, {
+  // Default to no logger, so output is a valid JSON object
   logger: debug ? new ConsoleLogger(debug) : undefined,
 });
 
