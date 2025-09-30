@@ -203,7 +203,7 @@ export class Swagger {
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
-    return embedError(
+    return await embedError(
       async () => ({
         path:
           options?.relativePaths && this.#tag?.readme?.specModel

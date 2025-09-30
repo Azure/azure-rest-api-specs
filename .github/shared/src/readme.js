@@ -208,7 +208,7 @@ export class Readme {
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
-    return embedError(async () => {
+    return await embedError(async () => {
       const tags = await mapAsync(
         [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
         async (t) => await t.toJSONAsync(options),
