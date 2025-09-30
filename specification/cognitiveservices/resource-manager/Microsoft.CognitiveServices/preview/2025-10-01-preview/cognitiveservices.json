@@ -3,7 +3,7 @@
   "info": {
     "title": "CognitiveServicesManagementClient",
     "description": "Cognitive Services Management Client",
-    "version": "2025-09-01"
+    "version": "2025-10-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -5297,6 +5297,653 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}": {
+      "delete": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The DELETE API for deleting a single outbound rule of the managed network associated with the cognitive services account.",
+        "operationId": "OutboundRule_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Delete OutboundRule": {
+            "$ref": "./examples/ManagedNetwork/deleteRuleV2.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The GET API for retrieveing a single outbound rule of the managed network associated with the cognitive services account.",
+        "operationId": "OutboundRule_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get OutboundRule": {
+            "$ref": "./examples/ManagedNetwork/getRuleV2.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The PUT API for creating or updating a single outbound rule of the managed network associated with the cognitive services account.",
+        "operationId": "OutboundRule_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "#/parameters/RuleName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "CreateOrUpdate OutboundRule": {
+            "$ref": "./examples/ManagedNetwork/createOrUpdateRuleV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/outboundRules": {
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The GET API for retrieveing the list of outbound rules of the managed network associated with the cognitive services account.",
+        "operationId": "OutboundRule_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List OutboundRules": {
+            "$ref": "./examples/ManagedNetwork/listRuleV2.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}/batchOutboundRules": {
+      "post": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "The POST API for updating the outbound rules of the managed network associated with the cognitive services account.",
+        "operationId": "OutboundRules_Post",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Managed Network Settings object of the account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Post OutboundRules": {
+            "$ref": "./examples/ManagedNetwork/postOutboundRulesV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks/{managedNetworkName}": {
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Get API for managed network settings of a cognitive services account.",
+        "operationId": "ManagedNetworkSettings_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/getManagedNetworkV2.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Patch API for managed network settings of a cognitive services account.",
+        "operationId": "ManagedNetworkSettings_Patch",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Managed Network Settings object of the account.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32",
+                "maximum": 600,
+                "minimum": 10
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Patch ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/patchManagedNetworkV2.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "PUT API for managed network settings of a cognitive services account.",
+        "operationId": "ManagedNetworkSettings_Put",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNetworkNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The Managed Network Settings object of the account.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "Put ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/createOrUpdateManagedNetworkV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/managedNetworks": {
+      "get": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "List API for managed network settings of a cognitive services account.",
+        "operationId": "ManagedNetworkSettings_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkListResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List ManagedNetworkSettings": {
+            "$ref": "./examples/ManagedNetwork/listManagedNetworkV2.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/provisionManagedNetwork": {
+      "post": {
+        "tags": [
+          "ManagedNetwork"
+        ],
+        "summary": "Provisions the managed network of a cognitive services account.",
+        "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Managed Network Provisioning Options for a cognitive services account.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionOptions"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request was successful; the request was well-formed and received properly.",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+            }
+          },
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Provision ManagedNetwork": {
+            "$ref": "./examples/ManagedNetwork/provisionManagedNetwork.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
     }
   },
   "definitions": {
@@ -9652,6 +10299,340 @@
         }
       },
       "description": "The list of Quota Tiers response."
+    },
+    "FirewallSku": {
+      "description": "Firewall Sku used for FQDN Rules",
+      "enum": [
+        "Standard",
+        "Basic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FirewallSku",
+        "modelAsString": true
+      }
+    },
+    "FqdnOutboundRule": {
+      "description": "FQDN Outbound Rule for the managed network of a cognitive services account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/OutboundRule"
+        }
+      ],
+      "properties": {
+        "destination": {
+          "type": "string"
+        }
+      },
+      "x-ms-discriminator-value": "FQDN"
+    },
+    "IsolationMode": {
+      "description": "Isolation mode for the managed network of a cognitive services account.",
+      "enum": [
+        "Disabled",
+        "AllowInternetOutbound",
+        "AllowOnlyApprovedOutbound"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "IsolationMode",
+        "modelAsString": true
+      }
+    },
+    "ManagedNetworkSettings": {
+      "description": "Managed Network settings for a cognitive services account.",
+      "type": "object",
+      "properties": {
+        "isolationMode": {
+          "description": "Isolation mode for the managed network of a cognitive services account.",
+          "$ref": "#/definitions/IsolationMode"
+        },
+        "networkId": {
+          "type": "string",
+          "readOnly": true
+        },
+        "outboundRules": {
+          "type": "object",
+          "additionalProperties": {
+            "description": "Outbound Rule for the managed network of a cognitive services account.",
+            "$ref": "#/definitions/OutboundRule"
+          },
+          "x-nullable": true
+        },
+        "status": {
+          "description": "Status of the Provisioning for the managed network of a cognitive services account.",
+          "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+        },
+        "firewallSku": {
+          "description": "Firewall Sku used for FQDN Rules",
+          "$ref": "#/definitions/FirewallSku"
+        },
+        "managedNetworkKind": {
+          "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+          "$ref": "#/definitions/ManagedNetworkKind"
+        },
+        "egressIpAddress": {
+          "type": "string",
+          "description": "Public IP address assigned to the Azure Firewall.",
+          "readOnly": true,
+          "x-nullable": true
+        }
+      }
+    },
+    "ManagedNetworkProvisionOptions": {
+      "description": "Managed Network Provisioning options for managed network of a cognitive services account.",
+      "type": "object",
+      "properties": {}
+    },
+    "ManagedNetworkKind": {
+      "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+      "enum": [
+        "V1",
+        "V2"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkKind",
+        "modelAsString": true
+      }
+    },
+    "ManagedNetworkSettingsBasicResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Managed Network settings for a cognitive services account.",
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        }
+      }
+    },
+    "ManagedNetworkStatus": {
+      "description": "Status for the managed network of a cognitive services account.",
+      "enum": [
+        "Inactive",
+        "Active"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkStatus",
+        "modelAsString": true
+      }
+    },
+    "ManagedNetworkProvisionStatus": {
+      "description": "Status of the Provisioning for the managed network of a cognitive services account.",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "Status for the managed network of a cognitive services account.",
+          "$ref": "#/definitions/ManagedNetworkStatus"
+        }
+      }
+    },
+    "ManagedNetworkListResult": {
+      "description": "List of managed networks of a cognitive services account.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of managed network settings of an account. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+          }
+        }
+      }
+    },
+    "ManagedNetworkSettingsEx": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ManagedNetworkSettings"
+        }
+      ],
+      "properties": {
+        "changeableIsolationModes": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IsolationMode"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedNetworkSettingsProperties": {
+      "description": "The properties of the managed network settings of a cognitive services account.",
+      "type": "object",
+      "properties": {
+        "managedNetwork": {
+          "description": "Managed Network settings for a cognitive services account.",
+          "$ref": "#/definitions/ManagedNetworkSettingsEx"
+        },
+        "provisioningState": {
+          "description": "The current deployment state of the managed network resource. The provisioningState is to indicate states for resource provisioning.",
+          "$ref": "#/definitions/ManagedNetworkProvisioningState",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      }
+    },
+    "ManagedNetworkProvisioningState": {
+      "enum": [
+        "Deferred",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Deleting",
+        "Deleted"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedNetworkProvisioningState",
+        "modelAsString": true
+      },
+      "readOnly": true,
+      "x-ms-mutability": [
+        "read"
+      ]
+    },
+    "ManagedNetworkSettingsPropertiesBasicResource": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "The properties of the managed network settings of a cognitive services account.",
+          "$ref": "#/definitions/ManagedNetworkSettingsProperties"
+        }
+      }
+    },
+    "OutboundRule": {
+      "description": "Outbound Rule for the managed network of a cognitive services account.",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "category": {
+          "description": "Category of a managed network Outbound Rule of a cognitive services account.",
+          "$ref": "#/definitions/RuleCategory"
+        },
+        "status": {
+          "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+          "$ref": "#/definitions/RuleStatus"
+        },
+        "type": {
+          "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+          "$ref": "#/definitions/RuleType"
+        },
+        "errorInformation": {
+          "description": "Error information about an outbound rule of a cognitive services account if RuleStatus is failed.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        },
+        "parentRuleNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ]
+        }
+      },
+      "discriminator": "type"
+    },
+    "OutboundRuleBasicResource": {
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "Outbound Rule for the managed network of a cognitive services account.",
+          "$ref": "#/definitions/OutboundRule"
+        }
+      }
+    },
+    "OutboundRuleListResult": {
+      "description": "List of outbound rules for the managed network of a cognitive services account.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+          "type": "string"
+        },
+        "value": {
+          "description": "The list of cognitive services accounts. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/OutboundRuleBasicResource"
+          }
+        }
+      }
+    },
+    "RuleCategory": {
+      "description": "Category of a managed network Outbound Rule of a cognitive services account.",
+      "enum": [
+        "Required",
+        "Recommended",
+        "UserDefined",
+        "Dependency"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RuleCategory",
+        "modelAsString": true
+      }
+    },
+    "RuleStatus": {
+      "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+      "enum": [
+        "Inactive",
+        "Active",
+        "Provisioning",
+        "Deleting",
+        "Failed"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RuleStatus",
+        "modelAsString": true
+      }
+    },
+    "RuleType": {
+      "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+      "enum": [
+        "FQDN",
+        "PrivateEndpoint",
+        "ServiceTag"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "RuleType",
+        "modelAsString": true
+      }
     }
   },
   "parameters": {
@@ -9873,6 +10854,24 @@
       "type": "string",
       "description": "Default parameter. Leave the value as \"default\".",
       "x-ms-parameter-location": "method"
+    },
+    "ManagedNetworkNameParameter": {
+      "in": "path",
+      "name": "managedNetworkName",
+      "description": "Name of the managedNetwork associated with the cognitive services account. Only 'default' is supported.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "RuleName": {
+      "in": "path",
+      "name": "ruleName",
+      "description": "Name of the cognitive services account managed network outbound rule",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     }
   }
 }
