@@ -16,6 +16,11 @@ model ImageRequest {
   cql: Record<unknown>;
 
   /**
+   * Zoom
+   */
+  zoom?: float32;
+
+  /**
    * Geometry
    */
   geometry?: Geometry;
@@ -24,12 +29,13 @@ model ImageRequest {
    * JSON-encoded visualization parameters
    */
   @encodedName("application/json", "render_params")
-  renderParams: string;
+  renderParameters: string;
 
   /**
    * Width of the output image in pixels
    */
-  cols: int32;
+  @encodedName("application/json", "cols")
+  columns: int32;
 
   /**
    * Height of the output image in pixels
@@ -37,19 +43,15 @@ model ImageRequest {
   rows: int32;
 
   /**
-   * Output format for the generated image
-   */
-  format?: TilerImageExportFormat = TilerImageExportFormat.png;
-
-  /**
    * Whether to include branding on the output image
    */
   showBranding?: boolean = true;
 
   /**
-   * Whether to apply masking to invalid or no-data areas
+   * Image size
    */
-  mask?: boolean;
+  @pattern("^[1-9][0-9]*x[1-9][0-9]*$")
+  imageSize?: string;
 }
 
 /**

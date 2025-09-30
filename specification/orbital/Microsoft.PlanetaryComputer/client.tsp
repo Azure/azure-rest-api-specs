@@ -185,6 +185,8 @@ interface Stac {
   createOrReplaceItem is StacItems.createOrReplace;
   deleteItem is StacItems.delete;
   getItem is StacItems.get;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
   listItems is StacItems.getFeatures;
   updateItem is StacItems.update;
 
