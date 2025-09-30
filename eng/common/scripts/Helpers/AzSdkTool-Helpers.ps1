@@ -115,7 +115,6 @@ function Get-GitHubApiHeaders {
         }
         return $headers
     }
-    Write-Host "Using unauthenticated requests."
     return @{}
 }
 
