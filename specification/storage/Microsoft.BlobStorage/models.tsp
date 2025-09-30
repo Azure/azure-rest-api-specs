@@ -2241,16 +2241,6 @@ union PremiumPageBlobAccessTier {
   string,
 }
 
-/** The blob name parameter. */
-alias BlobPathParameter = {
-  /** The name of the blob. */
-  @minLength(1)
-  @maxLength(1024)
-  @pattern("^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$")
-  @path
-  blobName: string;
-};
-
 /** The type of blob deletions. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum BlobDeleteType {
@@ -2473,13 +2463,6 @@ alias LeaseDurationHeaderParameter = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
   @header("x-ms-lease-duration")
   duration: int32;
-};
-
-/** The container name path parameter */
-alias ContainerNamePathParameter = {
-  /** The name of the container. */
-  @path
-  containerName: string;
 };
 
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
