@@ -47,6 +47,7 @@ suppressions:
     where:
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/applications/{name}"].get.responses.200.schema
       - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/applications/{name}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/applications/{name}"].put.responses.201.schema
   - code: AvoidAdditionalProperties
     reason: This is necessary to allow users to specify custom inference parameters and 
       fine-tuning hyperparameters for any model. Enforcing typecasting would require modifying 
