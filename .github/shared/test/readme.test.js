@@ -107,15 +107,15 @@ input-file:
 \`\`\`yaml $(tag) == 'package-2025-01-01'
 input-file:
   - foo.json
-  - bar:
-    - qux.json
+  - invalid-object:
+    - bar.json
 \`\`\`
 `;
 
     let readme = new Readme("foo", { ...options, content });
 
     expect(readme.getTags()).rejects.toThrowErrorMatchingInlineSnapshot(
-      // TODO: Improve error message
+      // TODO: Improve error message, using a schema validator like 'zod'
       `[TypeError: swaggerPath.includes is not a function]`,
     );
   });
