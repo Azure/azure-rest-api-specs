@@ -43,18 +43,6 @@ union EvaluationTaxonomyInputType {
 model EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
   type: EvaluationTaxonomyInputType;
-
-  @doc("ID of the evaluation taxonomy input.")
-  id?: string;
-
-  @doc("Name of the evaluation taxonomy input.")
-  name?: string;
-
-  @doc("Version of the evaluation taxonomy input.")
-  version?: string;
-
-  @doc("Description of the evaluation taxonomy input.")
-  description?: string;
 }
 
 @added(Versions.v2025_10_15_preview)
@@ -62,6 +50,34 @@ model EvaluationTaxonomyInput {
 model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
   type: EvaluationTaxonomyInputType.agent;
+
+  @doc("Target configuration for the agent.")
+  target: AzureAIAgentTarget;
+
+  @doc("List of risk categories to evaluate against.")
+  risks: RiskCategory[];
+}
+
+@added(Versions.v2025_10_15_preview)
+@doc("Target type.")
+union TargetType {
+  string,
+
+  @doc("Azure AI Agent Target")
+  azureAIAgent: "AzureAIAgent",
+}
+
+@added(Versions.v2025_10_15_preview)
+@doc("Azure AI Agent target configuration.")
+model AzureAIAgentTarget {
+  @doc("Type of the target.")
+  type: TargetType.azureAIAgent;
+
+  @doc("Name of the Azure AI Agent.")
+  name: string;
+
+  @doc("Version of the Azure AI Agent.")
+  version: string;
 
   @doc("Tool description.")
   tools: ToolDescription[];
@@ -88,6 +104,9 @@ model TaxonomyCategory {
 
   @doc("List of taxonomy sub categories.")
   subCategories: TaxonomySubCategory[];
+
+  @doc("Additional properties for the taxonomy category.")
+  properties?: Record<string>;
 }
 
 @added(Versions.v2025_10_15_preview)
@@ -101,4 +120,7 @@ model TaxonomySubCategory {
 
   @doc("List of taxonomy items under this sub-category.")
   enabled: boolean;
+
+  @doc("Additional properties for the taxonomy sub-category.")
+  properties?: Record<string>;
 }
