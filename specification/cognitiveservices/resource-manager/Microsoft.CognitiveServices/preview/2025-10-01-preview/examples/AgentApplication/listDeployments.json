@@ -1,0 +1,69 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "test-rg",
+    "accountName": "my-cognitive-services-account",
+    "name": "agent-app-1",
+    "api-version": "2025-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "value": [
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/applications/agent-app-1/deployments/deploy-001",
+            "name": "deploy-001",
+            "type": "Microsoft.CognitiveServices/accounts/applications/deployments",
+            "properties": {
+              "description": "Production deployment for customer support agents",
+              "tags": {
+                "environment": "production",
+                "region": "eastus"
+              },
+              "deploymentId": "deploy-001",
+              "agentId": "agent-001",
+              "environment": "production",
+              "status": "Running",
+              "endpoint": "https://eastus.api.azureml.ms/agents/agent-001"
+            },
+            "systemData": {
+              "createdAt": "2024-09-29T12:34:56.999Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-09-29T12:34:56.999Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          },
+          {
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/test-rg/providers/Microsoft.CognitiveServices/accounts/my-cognitive-services-account/applications/agent-app-1/deployments/deploy-002",
+            "name": "deploy-002",
+            "type": "Microsoft.CognitiveServices/accounts/applications/deployments",
+            "properties": {
+              "description": "Staging deployment for testing new features",
+              "tags": {
+                "environment": "staging",
+                "region": "westus"
+              },
+              "deploymentId": "deploy-002",
+              "agentId": "agent-002",
+              "environment": "staging",
+              "status": "Running",
+              "endpoint": "https://westus.api.azureml.ms/agents/agent-002"
+            },
+            "systemData": {
+              "createdAt": "2024-09-29T12:34:56.999Z",
+              "createdBy": "user@contoso.com",
+              "createdByType": "User",
+              "lastModifiedAt": "2024-09-29T12:34:56.999Z",
+              "lastModifiedBy": "user@contoso.com",
+              "lastModifiedByType": "User"
+            }
+          }
+        ],
+        "nextLink": null
+      }
+    }
+  }
+}
