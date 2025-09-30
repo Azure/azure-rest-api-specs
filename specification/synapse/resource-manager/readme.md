@@ -51,6 +51,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
   - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/stable/2021-06-01/workspacesPerSubscriptionUsage.json
   - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
   - Microsoft.Synapse/preview/2021-06-01-preview/library.json
   - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
@@ -75,6 +76,7 @@ input-file:
   - Microsoft.Synapse/stable/2021-06-01/sqlPool.json
   - Microsoft.Synapse/stable/2021-06-01/sqlServer.json
   - Microsoft.Synapse/stable/2021-06-01/workspace.json
+  - Microsoft.Synapse/stable/2021-06-01/workspacesPerSubscriptionUsage.json
   - Microsoft.Synapse/preview/2021-06-01-preview/bigDataPool.json
   - Microsoft.Synapse/preview/2021-06-01-preview/library.json
   - Microsoft.Synapse/preview/2021-06-01-preview/integrationRuntime.json
