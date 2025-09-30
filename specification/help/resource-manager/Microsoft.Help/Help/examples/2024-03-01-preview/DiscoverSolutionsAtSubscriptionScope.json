@@ -1,0 +1,60 @@
+{
+  "parameters": {
+    "api-version": "2024-03-01-preview",
+    "discoverSolutionRequest": {
+      "issueSummary": "how to retrieve certs from deleted keyvault.",
+      "resourceId": "subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/resourceGroups/myresourceGroup/providers/Microsoft.KeyVault/vaults/test-keyvault-non-read",
+      "serviceId": "0d0fcd2e-c4fd-4349-8497-200edb39s3ca"
+    },
+    "subscriptionId": "0d0fcd2e-c4fd-4349-8497-200edb3923c6"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "SampleProblemClassificationId1",
+            "type": "Microsoft.Help/discoverySolutions",
+            "id": "/subscriptions/0d0fcd2e-c4fd-4349-8497-200edb3923c6/providers/Microsoft.Help/discoverSolutions/SampleProblemClassificationId1",
+            "properties": {
+              "problemClassificationId": "SampleProblemClassificationId1",
+              "problemDescription": "SampleDescription1",
+              "problemTitle": "SampleTitle1",
+              "relatedServices": [
+                {
+                  "displayName": "SQL Server in VM - Linux",
+                  "resourceTypes": [
+                    "MICROSOFT.CLASSICCOMPUTE/VIRTUALMACHINES",
+                    "MICROSOFT.COMPUTE/VIRTUALMACHINES"
+                  ],
+                  "serviceId": "/providers/Microsoft.Support/services/40ef020e-8ae7-8d57-b538-9153c47cee69"
+                }
+              ],
+              "serviceId": "SampleServiceId1",
+              "solutions": [
+                {
+                  "description": "This is an azure solution to troubleshoot subscription issues.",
+                  "requiredInputs": [
+                    "SubscriptionId"
+                  ],
+                  "solutionId": "SampleSolutionId1",
+                  "solutionType": "Diagnostics"
+                },
+                {
+                  "description": "This is an azure solution to troubleshoot keyvault resource.",
+                  "requiredInputs": [
+                    "SubscriptionId"
+                  ],
+                  "solutionId": "SampleSolutionId2",
+                  "solutionType": "Solutions"
+                }
+              ]
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "DiscoverySolutionNLP_DiscoverSolutionsBySubscription",
+  "title": "Discovery Solutions using issue summary and service id."
+}
