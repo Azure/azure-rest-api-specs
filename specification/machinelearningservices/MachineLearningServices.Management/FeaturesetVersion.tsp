@@ -30,11 +30,13 @@ interface FeaturesetVersions {
   /**
    * Get version.
    */
+  @summary("Get version.")
   get is ArmResourceRead<FeaturesetVersion>;
 
   /**
    * Create or update version.
    */
+  @summary("Create or update version.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturesetVersion,
     Response = ArmResourceUpdatedResponse<FeaturesetVersion> | (ArmResourceCreatedResponse<FeaturesetVersion> & {
@@ -49,6 +51,7 @@ interface FeaturesetVersions {
   /**
    * Delete version.
    */
+  @summary("Delete version.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetVersion,
@@ -64,6 +67,7 @@ interface FeaturesetVersions {
   /**
    * List versions.
    */
+  @summary("List versions.")
   list is ArmResourceListByParent<
     FeaturesetVersion,
     Parameters = {
@@ -127,6 +131,7 @@ interface FeaturesetVersions {
   /**
    * Backfill.
    */
+  @summary("Backfill.")
   backfill is ArmResourceActionAsync<
     FeaturesetVersion,
     FeaturesetVersionBackfillRequest,

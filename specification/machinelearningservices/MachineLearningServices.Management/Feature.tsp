@@ -68,11 +68,13 @@ interface Features {
   /**
    * Get feature.
    */
+  @summary("Get feature.")
   get is FeatureOps.Read<Feature>;
 
   /**
    * List Features.
    */
+  @summary("List Features.")
   list is FeatureOps.List<
     Feature,
     Parameters = {

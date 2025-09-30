@@ -38,11 +38,13 @@ interface InferencePools {
   /**
    * Get InferencePool.
    */
+  @summary("Get InferencePool.")
   get is ArmResourceRead<InferencePool>;
 
   /**
    * Create or update InferencePool (asynchronous).
    */
+  @summary("Create or update InferencePool (asynchronous).")
   @useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     InferencePool,
@@ -61,6 +63,7 @@ interface InferencePools {
   /**
    * Update InferencePool (asynchronous).
    */
+  @summary("Update InferencePool (asynchronous).")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     InferencePool,
@@ -77,6 +80,7 @@ interface InferencePools {
   /**
    * Delete InferencePool (asynchronous).
    */
+  @summary("Delete InferencePool (asynchronous).")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     InferencePool,
@@ -92,6 +96,7 @@ interface InferencePools {
   /**
    * List InferencePools.
    */
+  @summary("List InferencePools.")
   list is ArmResourceListByParent<
     InferencePool,
     Parameters = {

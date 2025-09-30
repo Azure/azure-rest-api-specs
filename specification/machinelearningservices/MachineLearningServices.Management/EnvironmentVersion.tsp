@@ -184,7 +184,7 @@ interface EnvironmentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentVersions_CreateOrUpdate")
-  @summary("Create or update version.")
+  @summary("Creates or updates an EnvironmentVersion.")
   createOrUpdate is EnvironmentVersionOperationGroupOps.CreateOrUpdateSync<EnvironmentVersion>;
 
   /**
@@ -236,6 +236,7 @@ interface EnvironmentVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("EnvironmentVersions_Publish")
+  @summary("Publish version asset into registry.")
   publish is EnvironmentVersionOperationGroupOps.ActionAsync<
     EnvironmentVersion,
     DestinationAsset,

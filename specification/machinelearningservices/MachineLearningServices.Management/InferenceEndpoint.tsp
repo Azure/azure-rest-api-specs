@@ -70,6 +70,7 @@ interface InferenceEndpoints {
   /**
    * Get InferenceEndpoint.
    */
+  @summary("Get InferenceEndpoint.")
   get is InferenceEndpointOps.Read<InferenceEndpoint>;
 
   /**

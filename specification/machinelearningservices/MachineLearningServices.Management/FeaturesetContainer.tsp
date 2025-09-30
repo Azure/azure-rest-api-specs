@@ -30,11 +30,13 @@ interface FeaturesetContainers {
   /**
    * Get container.
    */
+  @summary("Get container.")
   getEntity is ArmResourceRead<FeaturesetContainer>;
 
   /**
    * Create or update container.
    */
+  @summary("Create or update container.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturesetContainer,
     Response = ArmResourceUpdatedResponse<FeaturesetContainer> | (ArmResourceCreatedResponse<FeaturesetContainer> & {
@@ -49,6 +51,7 @@ interface FeaturesetContainers {
   /**
    * Delete container.
    */
+  @summary("Delete container.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetContainer,
@@ -64,6 +67,7 @@ interface FeaturesetContainers {
   /**
    * List featurestore entity containers.
    */
+  @summary("List featurestore entity containers.")
   list is ArmResourceListByParent<
     FeaturesetContainer,
     Parameters = {

@@ -66,7 +66,7 @@ interface ModelContainers {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryModelContainers_CreateOrUpdate")
-  @summary("Create or update container.")
+  @summary("Create or update model container.")
   createOrUpdate is ModelContainerOps.CreateOrUpdateAsync<
     ModelContainer,
     Response = ArmResourceUpdatedResponse<ModelContainer> | (ArmResourceCreatedResponse<ModelContainer> & {

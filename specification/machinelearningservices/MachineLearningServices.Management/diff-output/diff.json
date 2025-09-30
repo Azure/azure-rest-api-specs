@@ -2,8 +2,11 @@
   "paths": {
     "/providers/microsoft.MachineLearningServices/operations": {
       "get": {
-        "summary__deleted": "Lists all of the available Azure Machine Learning Workspaces REST API operations",
-        "description__added": "List the operations for the provider"
+        "description__added": "List the operations for the provider",
+        "summary": {
+          "__old": "Lists all of the available Azure Machine Learning Workspaces REST API operations",
+          "__new": "Lists all of the available Azure Machine Learning Services REST API operations."
+        }
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota": {
@@ -51,25 +54,21 @@
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/registries": {
       "get": {
-        "summary__deleted": "List registries by subscription",
         "description__added": "List registries by subscription"
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/workspaces": {
       "get": {
-        "summary__deleted": "Lists all the available machine learning workspaces under the specified subscription.",
         "description__added": "Lists all the available machine learning workspaces under the specified subscription."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries": {
       "get": {
-        "summary__deleted": "List registries",
         "description__added": "List registries"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}": {
       "get": {
-        "summary__deleted": "Get registry",
         "description__added": "Get registry",
         "responses": {
           "200": {
@@ -83,7 +82,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update registry",
         "description__added": "Create or update registry",
         "parameters": [
           [
@@ -130,7 +128,6 @@
         }
       },
       "patch": {
-        "summary__deleted": "Update tags",
         "description__added": "Update tags",
         "responses": {
           "200": {
@@ -144,7 +141,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete registry",
         "description__added": "Delete registry",
         "responses": {
           "202": {
@@ -162,7 +158,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes": {
       "get": {
-        "summary__deleted": "List containers.",
         "description__added": "List containers.",
         "parameters": [
           [
@@ -190,7 +185,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}": {
       "get": {
-        "summary__deleted": "Get Code container.",
         "description__added": "Get Code container.",
         "parameters": [
           [
@@ -225,7 +219,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update Code container.",
         "description__added": "Create or update Code container.",
         "parameters": [
           [
@@ -288,7 +281,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete Code container.",
         "description__added": "Delete Code container.",
         "parameters": [
           [
@@ -327,7 +319,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions": {
       "get": {
-        "summary__deleted": "List versions.",
         "description__added": "List versions.",
         "parameters": [
           [
@@ -374,7 +365,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -412,7 +402,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -478,7 +467,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -520,7 +508,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes/{codeName}/versions/{version}/startPendingUpload": {
       "post": {
-        "summary__deleted": "Generate a storage location and credential for the client to upload a code asset to.",
         "description__added": "Generate a storage location and credential for the client to upload a code asset to.",
         "parameters": [
           [
@@ -553,7 +540,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components": {
       "get": {
-        "summary__deleted": "List containers.",
         "description__added": "List containers.",
         "parameters": [
           [
@@ -581,7 +567,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
         "parameters": [
           [
@@ -616,7 +601,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update container.",
         "description__added": "Create or update container.",
         "parameters": [
           [
@@ -679,7 +663,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -718,7 +701,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions": {
       "get": {
-        "summary__deleted": "List versions.",
         "description__added": "List versions.",
         "parameters": [
           [
@@ -765,7 +747,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/components/{componentName}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -803,7 +784,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -869,7 +849,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -911,7 +890,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data": {
       "get": {
-        "summary__deleted": "List Data containers.",
         "description__added": "List Data containers.",
         "parameters": [
           [
@@ -947,7 +925,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
         "parameters": [
           [
@@ -982,7 +959,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update container.",
         "description__added": "Create or update container.",
         "parameters": [
           [
@@ -1047,7 +1023,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -1139,7 +1114,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -1177,7 +1151,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -1245,7 +1218,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -1287,7 +1259,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions/{version}/startPendingUpload": {
       "post": {
-        "summary__deleted": "Generate a storage location and credential for the client to upload a data asset to.",
         "description__added": "Generate a storage location and credential for the client to upload a data asset to.",
         "parameters": [
           [
@@ -1320,7 +1291,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/datareferences/{name}/versions/{version}": {
       "post": {
-        "summary__deleted": "Get blob reference SAS Uri.",
         "description__added": "Get blob reference SAS Uri.",
         "parameters": [
           [
@@ -1353,7 +1323,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments": {
       "get": {
-        "summary__deleted": "List environment containers.",
         "description__added": "List environment containers.",
         "parameters": [
           [
@@ -1389,7 +1358,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
         "parameters": [
           [
@@ -1424,7 +1392,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update container.",
         "description__added": "Create or update container.",
         "parameters": [
           [
@@ -1489,7 +1456,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -1528,8 +1494,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions": {
       "get": {
-        "summary__deleted": "List versions.",
         "description__added": "List versions.",
+        "summary": {
+          "__old": "List versions.",
+          "__new": "List environment versions."
+        },
         "parameters": [
           [
             "-",
@@ -1578,7 +1547,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -1616,7 +1584,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -1682,7 +1649,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -1724,7 +1690,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models": {
       "get": {
-        "summary__deleted": "List model containers.",
         "description__added": "List model containers.",
         "parameters": [
           [
@@ -1760,7 +1725,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
         "parameters": [
           [
@@ -1795,8 +1759,11 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update model container.",
         "description__added": "Create or update model container.",
+        "summary": {
+          "__old": "Create or update model container.",
+          "__new": "Create or update container."
+        },
         "parameters": [
           [
             "-",
@@ -1858,7 +1825,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -1897,7 +1863,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions": {
       "get": {
-        "summary__deleted": "List versions.",
         "description__added": "List versions.",
         "parameters": [
           [
@@ -1964,7 +1929,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -2002,7 +1966,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -2068,7 +2031,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -2110,7 +2072,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/models/{modelName}/versions/{version}/startPendingUpload": {
       "post": {
-        "summary__deleted": "Generate a storage location and credential for the client to upload a model asset to.",
         "description__added": "Generate a storage location and credential for the client to upload a model asset to.",
         "parameters": [
           [
@@ -2143,7 +2104,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/removeRegions": {
       "post": {
-        "summary__deleted": "Remove regions from registry",
         "description__added": "Remove regions from registry",
         "parameters": [
           [
@@ -2185,18 +2145,23 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces": {
       "get": {
-        "summary__deleted": "Lists all the available machine learning workspaces under the specified resource group.",
         "description__added": "Lists all the available machine learning workspaces under the specified resource group."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}": {
       "get": {
-        "summary__deleted": "Gets the properties of the specified machine learning workspace.",
-        "description__added": "Gets the properties of the specified machine learning workspace."
+        "description__added": "Gets the properties of the specified machine learning workspace.",
+        "summary": {
+          "__old": "Gets the properties of the specified machine learning workspace.",
+          "__new": "Get workspace."
+        }
       },
       "put": {
-        "summary__deleted": "Creates or updates a workspace with the specified parameters.",
         "description__added": "Creates or updates a workspace with the specified parameters.",
+        "summary": {
+          "__old": "Creates or updates a workspace with the specified parameters.",
+          "__new": "Create or update workspace."
+        },
         "responses": {
           "202": {
             "headers": {
@@ -2211,8 +2176,11 @@
         }
       },
       "patch": {
-        "summary__deleted": "Updates a machine learning workspace with the specified parameters.",
         "description__added": "Updates a machine learning workspace with the specified parameters.",
+        "summary": {
+          "__old": "Updates a machine learning workspace with the specified parameters.",
+          "__new": "Update workspace."
+        },
         "responses": {
           "202": {
             "headers__added": {
@@ -2225,8 +2193,11 @@
         }
       },
       "delete": {
-        "summary__deleted": "Deletes a machine learning workspace.",
         "description__added": "Deletes a machine learning workspace.",
+        "summary": {
+          "__old": "Deletes a machine learning workspace.",
+          "__new": "Delete workspace."
+        },
         "responses": {
           "202": {
             "headers": {
@@ -2243,7 +2214,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints": {
       "get": {
-        "summary__deleted": "Lists Batch inference endpoint in the workspace.",
         "description__added": "Lists Batch inference endpoint in the workspace.",
         "parameters": [
           [
@@ -2279,8 +2249,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}": {
       "get": {
-        "summary__deleted": "Gets a batch inference endpoint by name.",
         "description__added": "Gets a batch inference endpoint by name.",
+        "summary": {
+          "__old": "Gets a batch inference endpoint by name.",
+          "__new": "Get batch inference endpoint by name."
+        },
         "parameters": [
           [
             "-",
@@ -2314,8 +2287,11 @@
         }
       },
       "put": {
-        "summary__deleted": "Creates a batch inference endpoint (asynchronous).",
         "description__added": "Creates a batch inference endpoint (asynchronous).",
+        "summary": {
+          "__old": "Creates a batch inference endpoint (asynchronous).",
+          "__new": "Create a batch inference endpoint (asynchronous)."
+        },
         "parameters": [
           [
             "-",
@@ -2386,7 +2362,6 @@
         }
       },
       "patch": {
-        "summary__deleted": "Update a batch inference endpoint (asynchronous).",
         "description__added": "Update a batch inference endpoint (asynchronous).",
         "parameters": [
           [
@@ -2443,7 +2418,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete Batch Inference Endpoint (asynchronous).",
         "description__added": "Delete Batch Inference Endpoint (asynchronous).",
         "parameters": [
           [
@@ -2482,7 +2456,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments": {
       "get": {
-        "summary__deleted": "Lists Batch inference deployments in the workspace.",
         "description__added": "Lists Batch inference deployments in the workspace.",
         "parameters": [
           [
@@ -2529,8 +2502,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/deployments/{deploymentName}": {
       "get": {
-        "summary__deleted": "Gets a batch inference deployment by id.",
         "description__added": "Gets a batch inference deployment by id.",
+        "summary": {
+          "__old": "Gets a batch inference deployment by id.",
+          "__new": "Get batch inference deployment by id."
+        },
         "parameters": [
           [
             "-",
@@ -2567,7 +2543,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Creates/updates a batch inference deployment (asynchronous).",
         "description__added": "Creates/updates a batch inference deployment (asynchronous).",
         "parameters": [
           [
@@ -2645,7 +2620,6 @@
         }
       },
       "patch": {
-        "summary__deleted": "Update a batch inference deployment (asynchronous).",
         "description__added": "Update a batch inference deployment (asynchronous).",
         "parameters": [
           [
@@ -2708,7 +2682,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete Batch Inference deployment (asynchronous).",
         "description__added": "Delete Batch Inference deployment (asynchronous).",
         "parameters": [
           [
@@ -2750,7 +2723,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/batchEndpoints/{endpointName}/listkeys": {
       "post": {
-        "summary__deleted": "Lists batch Inference Endpoint keys.",
         "description__added": "Lists batch Inference Endpoint keys.",
         "parameters": [
           [
@@ -2777,7 +2749,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/capabilityHosts/{name}": {
       "get": {
-        "summary__deleted": "Get capabilityHost.",
         "description__added": "Get capabilityHost.",
         "parameters": [
           [
@@ -2812,7 +2783,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update capabilityHost.",
         "description__added": "Create or update capabilityHost.",
         "parameters": [
           [
@@ -2884,7 +2854,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete capabilityHost.",
         "description__added": "Delete capabilityHost.",
         "parameters": [
           [
@@ -2926,7 +2895,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes": {
       "get": {
-        "summary__deleted": "List containers.",
         "description__added": "List containers.",
         "parameters": [
           [
@@ -2954,8 +2922,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
+        "summary": {
+          "__old": "Get container.",
+          "__new": "Get containers."
+        },
         "parameters": [
           [
             "-",
@@ -2989,7 +2960,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update container.",
         "description__added": "Create or update container.",
         "parameters": [
           [
@@ -3052,7 +3022,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -3079,7 +3048,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions": {
       "get": {
-        "summary__deleted": "List versions.",
         "description__added": "List versions.",
         "parameters": [
           [
@@ -3132,7 +3100,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -3170,7 +3137,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -3236,7 +3202,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -3266,7 +3231,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/publish": {
       "post": {
-        "summary__deleted": "Publish version asset into registry.",
         "description__added": "Publish version asset into registry.",
         "parameters": [
           [
@@ -3311,7 +3275,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/codes/{name}/versions/{version}/startPendingUpload": {
       "post": {
-        "summary__deleted": "Generate a storage location and credential for the client to upload a code asset to.",
         "description__added": "Generate a storage location and credential for the client to upload a code asset to.",
         "parameters": [
           [
@@ -3344,7 +3307,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components": {
       "get": {
-        "summary__deleted": "List component containers.",
         "description__added": "List component containers.",
         "parameters": [
           [
@@ -3380,7 +3342,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
         "parameters": [
           [
@@ -3415,7 +3376,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update container.",
         "description__added": "Create or update container.",
         "parameters": [
           [
@@ -3478,7 +3438,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -3505,7 +3464,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions": {
       "get": {
-        "summary__deleted": "List component versions.",
         "description__added": "List component versions.",
         "parameters": [
           [
@@ -3555,7 +3513,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -3593,7 +3550,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -3659,7 +3615,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -3689,7 +3644,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/components/{name}/versions/{version}/publish": {
       "post": {
-        "summary__deleted": "Publish version asset into registry.",
         "description__added": "Publish version asset into registry.",
         "parameters": [
           [
@@ -3841,47 +3795,42 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/updateDataMounts": {
       "post": {
-        "summary__deleted": "Update Data Mounts of a Machine Learning compute.",
         "description__added": "Update Data Mounts of a Machine Learning compute."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections": {
       "get": {
-        "summary__deleted": "Lists all the available machine learning workspaces connections under the specified workspace.",
-        "description__added": "Lists all the available machine learning workspaces connections under the specified workspace."
+        "description__added": "Lists all the available machine learning workspaces connections under the specified workspace.",
+        "summary": {
+          "__old": "Lists all the available machine learning workspaces connections under the specified workspace.",
+          "__new": "List all the available machine learning workspaces connections under the specified workspace."
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}": {
       "get": {
-        "summary__deleted": "Lists machine learning workspaces connections by name.",
         "description__added": "Lists machine learning workspaces connections by name."
       },
       "put": {
-        "summary__deleted": "Create or update machine learning workspaces connections under the specified workspace.",
         "description__added": "Create or update machine learning workspaces connections under the specified workspace."
       },
       "patch": {
-        "summary__deleted": "Update machine learning workspaces connections under the specified workspace.",
         "description__added": "Update machine learning workspaces connections under the specified workspace."
       },
       "delete": {
-        "summary__deleted": "Delete machine learning workspaces connections by name.",
         "description__added": "Delete machine learning workspaces connections by name."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments": {
       "get": {
-        "summary__deleted": "Get all the deployments under the Azure OpenAI connection.",
         "description__added": "Get all the deployments under the Azure OpenAI connection."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/deployments/{deploymentName}": {
       "get": {
-        "summary__deleted": "Get deployments under the Azure OpenAI connection by name.",
         "description__added": "Get deployments under the Azure OpenAI connection by name."
       },
       "put": {
-        "summary__deleted": "Create or update Azure OpenAI connection deployment resource with the specified parameters",
         "description__added": "Create or update Azure OpenAI connection deployment resource with the specified parameters",
         "responses": {
           "201": {
@@ -3895,7 +3844,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete Azure OpenAI connection deployment resource by name",
         "description__added": "Delete Azure OpenAI connection deployment resource by name",
         "responses": {
           "202": {
@@ -3913,29 +3861,24 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/listsecrets": {
       "post": {
-        "summary__deleted": "List all the secrets of a machine learning workspaces connections.",
         "description__added": "List all the secrets of a machine learning workspaces connections."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/models": {
       "get": {
-        "summary__deleted": "Get available models under the Azure OpenAI connection.",
         "description__added": "Get available models under the Azure OpenAI connection."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists": {
       "get": {
-        "summary__deleted": "Gets the custom blocklists associated with the Azure OpenAI connection.",
         "description__added": "Gets the custom blocklists associated with the Azure OpenAI connection."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}": {
       "get": {
-        "summary__deleted": "Gets the specified custom blocklist associated with the Azure OpenAI connection.",
         "description__added": "Gets the specified custom blocklist associated with the Azure OpenAI connection."
       },
       "put": {
-        "summary__deleted": "Update the state of specified blocklist associated with the Azure OpenAI connection.",
         "description__added": "Update the state of specified blocklist associated with the Azure OpenAI connection.",
         "responses": {
           "201": {
@@ -3949,7 +3892,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Deletes the specified custom blocklist associated with the Azure OpenAI connection.",
         "description__added": "Deletes the specified custom blocklist associated with the Azure OpenAI connection.",
         "responses": {
           "202": {
@@ -3967,7 +3909,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/addRaiBlocklistItems": {
       "post": {
-        "summary__deleted": "Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.",
         "description__added": "Add multiple blocklist items to the specified blocklist associated with the Azure OpenAI connection.",
         "responses": {
           "202": {
@@ -3985,7 +3926,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/deleteRaiBlocklistItems": {
       "post": {
-        "summary__deleted": "Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.",
         "description__added": "Delete multiple blocklist items from the specified blocklist associated with the Azure OpenAI connection.",
         "parameters": [
           [
@@ -4026,17 +3966,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems": {
       "get": {
-        "summary__deleted": "Gets the custom blocklist items associated with the Azure OpenAI connection.",
         "description__added": "Gets the custom blocklist items associated with the Azure OpenAI connection."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiBlocklists/{raiBlocklistName}/raiBlocklistItems/{raiBlocklistItemName}": {
       "get": {
-        "summary__deleted": "Gets the specified custom blocklist item associated with the Azure OpenAI connection.",
         "description__added": "Gets the specified custom blocklist item associated with the Azure OpenAI connection."
       },
       "put": {
-        "summary__deleted": "Update the state of specified blocklist item associated with the Azure OpenAI connection.",
         "description__added": "Update the state of specified blocklist item associated with the Azure OpenAI connection.",
         "responses": {
           "201": {
@@ -4050,7 +3987,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Deletes the specified custom blocklist item associated with the Azure OpenAI connection.",
         "description__added": "Deletes the specified custom blocklist item associated with the Azure OpenAI connection.",
         "responses": {
           "202": {
@@ -4068,17 +4004,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies": {
       "get": {
-        "summary__deleted": "List the specified Content Filters associated with the Azure OpenAI connection.",
         "description__added": "List the specified Content Filters associated with the Azure OpenAI connection."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/raiPolicies/{raiPolicyName}": {
       "get": {
-        "summary__deleted": "Gets the specified Content Filters associated with the Azure OpenAI connection.",
         "description__added": "Gets the specified Content Filters associated with the Azure OpenAI connection."
       },
       "put": {
-        "summary__deleted": "Update the state of specified Content Filters associated with the Azure OpenAI connection.",
         "description__added": "Update the state of specified Content Filters associated with the Azure OpenAI connection.",
         "responses": {
           "201": {
@@ -4092,7 +4025,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Deletes the specified Content Filters associated with the Azure OpenAI connection.",
         "description__added": "Deletes the specified Content Filters associated with the Azure OpenAI connection.",
         "responses": {
           "202": {
@@ -4110,7 +4042,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}/testconnection": {
       "post": {
-        "summary__deleted": "Test machine learning workspaces connections under the specified workspace.",
         "description__added": "Test machine learning workspaces connections under the specified workspace.",
         "responses": {
           "202": {
@@ -4128,7 +4059,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data": {
       "get": {
-        "summary__deleted": "List data containers.",
         "description__added": "List data containers.",
         "parameters": [
           [
@@ -4164,7 +4094,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
         "parameters": [
           [
@@ -4199,7 +4128,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update container.",
         "description__added": "Create or update container.",
         "parameters": [
           [
@@ -4262,7 +4190,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -4289,7 +4216,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions": {
       "get": {
-        "summary__deleted": "List data versions in the data container",
         "description__added": "List data versions in the data container",
         "parameters": [
           [
@@ -4342,7 +4268,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -4380,7 +4305,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update version.",
         "description__added": "Create or update version.",
         "parameters": [
           [
@@ -4446,7 +4370,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -4476,7 +4399,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/data/{name}/versions/{version}/publish": {
       "post": {
-        "summary__deleted": "Publish version asset into registry.",
         "description__added": "Publish version asset into registry.",
         "parameters": [
           [
@@ -4521,7 +4443,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores": {
       "get": {
-        "summary__deleted": "List datastores.",
         "description__added": "List datastores.",
         "parameters": [
           [
@@ -4580,7 +4501,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}": {
       "get": {
-        "summary__deleted": "Get datastore.",
         "description__added": "Get datastore.",
         "parameters": [
           [
@@ -4615,7 +4535,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update datastore.",
         "description__added": "Create or update datastore.",
         "parameters": [
           [
@@ -4681,7 +4600,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete datastore.",
         "description__added": "Delete datastore.",
         "parameters": [
           [
@@ -4708,7 +4626,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/datastores/{name}/listSecrets": {
       "post": {
-        "summary__deleted": "Get datastore secrets.",
         "description__added": "Get datastore secrets.",
         "parameters": [
           [
@@ -4745,7 +4662,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/deployments": {
       "get": {
-        "summary__deleted": "Get all the deployments under the workspace scope",
         "description__added": "Get all the deployments under the workspace scope",
         "parameters": [
           [
@@ -4785,7 +4701,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/diagnose": {
       "post": {
-        "summary__deleted": "Diagnose workspace setup issue.",
         "description__added": "Diagnose workspace setup issue.",
         "responses": {
           "202": {
@@ -4803,7 +4718,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints": {
       "get": {
-        "summary__deleted": "List All the endpoints under this workspace",
         "description__added": "List All the endpoints under this workspace",
         "parameters": [
           [
@@ -4855,11 +4769,13 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}": {
       "get": {
-        "summary__deleted": "Gets endpoint resource",
-        "description__added": "Gets endpoint resource"
+        "description__added": "Gets endpoint resource",
+        "summary": {
+          "__old": "Gets endpoint resource",
+          "__new": "Get endpoint resource"
+        }
       },
       "put": {
-        "summary__deleted": "Create or update endpoint resource with the specified parameters",
         "description__added": "Create or update endpoint resource with the specified parameters",
         "responses": {
           "202": {
@@ -4877,17 +4793,14 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments": {
       "get": {
-        "summary__deleted": "Get all the deployments under the endpoint resource scope",
         "description__added": "Get all the deployments under the endpoint resource scope"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/deployments/{deploymentName}": {
       "get": {
-        "summary__deleted": "Get deployments under endpoint resource by name",
         "description__added": "Get deployments under endpoint resource by name"
       },
       "put": {
-        "summary__deleted": "Create or update endpoint deployment resource with the specified parameters",
         "description__added": "Create or update endpoint deployment resource with the specified parameters",
         "responses": {
           "202": {
@@ -4903,7 +4816,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete  endpoint deployment resource by name",
         "description__added": "Delete  endpoint deployment resource by name",
         "responses": {
           "202": {
@@ -4921,29 +4833,24 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/listKeys": {
       "post": {
-        "summary__deleted": "List keys for the endpoint resource.",
         "description__added": "List keys for the endpoint resource."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/models": {
       "get": {
-        "summary__deleted": "Get available models under the endpoint resource.",
         "description__added": "Get available models under the endpoint resource."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies": {
       "get": {
-        "summary__deleted": "List the specified Content Filters associated with the Azure OpenAI account.",
         "description__added": "List the specified Content Filters associated with the Azure OpenAI account."
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/raiPolicies/{raiPolicyName}": {
       "get": {
-        "summary__deleted": "Gets the specified Content Filters associated with the Azure OpenAI account.",
         "description__added": "Gets the specified Content Filters associated with the Azure OpenAI account."
       },
       "put": {
-        "summary__deleted": "Update the state of specified Content Filters associated with the Azure OpenAI account.",
         "description__added": "Update the state of specified Content Filters associated with the Azure OpenAI account.",
         "responses": {
           "201": {
@@ -4957,7 +4864,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Deletes the specified Content Filters associated with the Azure OpenAI account.",
         "description__added": "Deletes the specified Content Filters associated with the Azure OpenAI account.",
         "responses": {
           "202": {
@@ -4975,13 +4881,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/endpoints/{endpointName}/regenerateKey": {
       "post": {
-        "summary__deleted": "Regenerate account keys",
         "description__added": "Regenerate account keys"
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments": {
       "get": {
-        "summary__deleted": "List environment containers.",
         "description__added": "List environment containers.",
         "parameters": [
           [
@@ -5017,7 +4921,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}": {
       "get": {
-        "summary__deleted": "Get container.",
         "description__added": "Get container.",
         "parameters": [
           [
@@ -5052,7 +4955,6 @@
         }
       },
       "put": {
-        "summary__deleted": "Create or update container.",
         "description__added": "Create or update container.",
         "parameters": [
           [
@@ -5115,7 +5017,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete container.",
         "description__added": "Delete container.",
         "parameters": [
           [
@@ -5142,7 +5043,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions": {
       "get": {
-        "summary__deleted": "List versions.",
         "description__added": "List versions.",
         "parameters": [
           [
@@ -5192,7 +5092,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/environments/{name}/versions/{version}": {
       "get": {
-        "summary__deleted": "Get version.",
         "description__added": "Get version.",
         "parameters": [
           [
@@ -5230,8 +5129,11 @@
         }
       },
       "put": {
-        "summary__deleted": "Creates or updates an EnvironmentVersion.",
         "description__added": "Creates or updates an EnvironmentVersion.",
+        "summary": {
+          "__old": "Creates or updates an EnvironmentVersion.",
+          "__new": "Create or update version."
+        },
         "parameters": [
           [
             "-",
@@ -5296,7 +5198,6 @@
         }
       },
       "delete": {
-        "summary__deleted": "Delete version.",
         "description__added": "Delete version.",
         "parameters": [
           [
@@ -19329,16 +19230,6 @@
           " "
         ]
       ]
-    },
-    "UsageAndQuotaDetails": {
-      "properties": {
-        "modelCollection": {
-          "x-nullable__deleted": true
-        },
-        "usageDetails": {
-          "x-nullable__deleted": true
-        }
-      }
     },
     "UsageAndQuotaDetailsArmPaginatedResult": {
       "required__added": [

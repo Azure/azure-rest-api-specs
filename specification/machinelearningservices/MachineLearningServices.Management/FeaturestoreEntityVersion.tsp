@@ -33,11 +33,13 @@ interface FeaturestoreEntityVersions {
   /**
    * Get version.
    */
+  @summary("Get version.")
   get is ArmResourceRead<FeaturestoreEntityVersion>;
 
   /**
    * Create or update version.
    */
+  @summary("Create or update version.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturestoreEntityVersion,
     Response = ArmResourceUpdatedResponse<FeaturesetVersion> | (ArmResourceCreatedResponse<FeaturesetVersion> & {
@@ -52,6 +54,7 @@ interface FeaturestoreEntityVersions {
   /**
    * Delete version.
    */
+  @summary("Delete version.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityVersion,
@@ -67,6 +70,7 @@ interface FeaturestoreEntityVersions {
   /**
    * List versions.
    */
+  @summary("List versions.")
   list is ArmResourceListByParent<
     FeaturestoreEntityVersion,
     Parameters = {
