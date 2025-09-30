@@ -4,9 +4,8 @@ import { ConsoleLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
-  "Usage: npx spec-model path/to/spec [--debug] [--embed-errors] [--include-refs] [--relative-paths]\n" +
-  "Example: npx spec-model specification/contosowidgetmanager\n" +
-  "Example: npx spec-model specification --embed-errors";
+  "Usage: npx spec-model path/to/spec [--debug] [--include-refs] [--relative-paths]\n" +
+  "Example: npx spec-model specfication/contosowidgetmanager";
 
 // Exclude first two args (node, script file)
 let args = process.argv.slice(2);
