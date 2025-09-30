@@ -1,0 +1,67 @@
+import "@azure-tools/typespec-client-generator-core";
+import "./main.tsp";
+
+using Azure.ClientGenerator.Core;
+using Microsoft.Storage;
+
+@@clientName(ProvisioningState, "StorageProvisioningState", "csharp");
+@@clientName(Microsoft.Storage, "StorageManagementClient", "javascript");
+@@clientName(Microsoft.Storage, "StorageManagementClient", "python");
+
+@@clientName(AccountType, "ActiveDirectoryPropertiesAccountType", "go, java");
+@@clientName(AllowedMethods, "CorsRuleAllowedMethodsItem", "go, java");
+
+// Java customization for mitigating breaking changes
+@@clientName(SKUCapability, "SkuCapability", "java");
+@@clientName(IPRule, "IpRule", "java");
+@@clientName(IPRule.value, "ipAddressOrRange", "java");
+@@clientName(StorageAccounts.listAccountSAS, "listAccountSas", "java");
+@@clientName(StorageAccounts.listServiceSAS, "listServiceSas", "java");
+@@clientName(ImmutableStorageWithVersioning.timeStamp, "timestamp", "java");
+@@clientName(FileShareRecommendations.baseIOPS, "baseIops", "java");
+@@clientName(AccountSasParameters.signedIp, "ipAddressOrRange", "java");
+@@clientName(AccountLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
+@@clientName(FileShareLimits.maxProvisionedIOPS, "maxProvisionedIops", "java");
+@@clientName(FileShareLimits.minProvisionedIOPS, "minProvisionedIops", "java");
+@@clientName(BurstingConstants.burstFloorIOPS, "burstFloorIops", "java");
+@@clientName(AccountUsageElements.provisionedIOPS, "provisionedIops", "java");
+@@clientName(ServiceSasParameters.signedIp, "ipAddressOrRange", "java");
+
+// should only be used in Java
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum Action {
+  ALLOW: "Allow",
+}
+@@alternateType(IPRule.action, Action, "java");
+@@alternateType(VirtualNetworkRule.action, Action, "java");
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+enum IntervalUnit {
+  DAYS: "Days",
+}
+@@alternateType(TriggerParameters.intervalUnit, IntervalUnit, "java");
+@@alternateType(TriggerParametersUpdate.intervalUnit, IntervalUnit, "java");
+
+@@usage(StorageAccount,
+  Azure.ClientGenerator.Core.Usage.input | Azure.ClientGenerator.Core.Usage.output,
+  "java"
+);
+
+@@clientName(ETagHeader.eTag, "etag", "java");
+
+// Fix client parameter order.
+/**
+ * Get properties of specified deleted account resource.
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op getDeletedAccountCustomized(
+  apiVersion: string,
+  deletedAccountName: string,
+  location: Azure.Core.azureLocation,
+  provider: "Microsoft.ThisWillBeReplaced",
+  subscriptionId: Azure.Core.uuid,
+): Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount> | Microsoft.Storage.ErrorResponse;
+@@override(DeletedAccounts.get, getDeletedAccountCustomized, "java");
