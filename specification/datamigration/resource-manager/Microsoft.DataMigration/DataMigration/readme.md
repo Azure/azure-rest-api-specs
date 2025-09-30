@@ -30,7 +30,7 @@ These are the global settings for the Database Migration Service API.
 title: DataMigrationManagementClient
 description: Data Migration Client
 openapi-type: arm
-tag: package-preview-2025-09
+tag: package-2025-06
 ```
 ### Tag: package-preview-2025-09
 
