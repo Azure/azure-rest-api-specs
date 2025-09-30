@@ -870,13 +870,13 @@ model BingGroundingSearchConfiguration {
   market?: string;
 
   @doc("""
-      The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
-      For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
-      Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
-      If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
-      To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
-      To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
-      Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
+    The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
+    For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
+    Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
+    If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
+    To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
+    To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
+    Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
     """)
   @encodedName("application/json", "set_lang")
   setLang?: string;
@@ -1209,13 +1209,13 @@ model BingCustomSearchConfiguration {
   market?: string;
 
   @doc("""
-      The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
-      For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
-      Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
-      If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
-      To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
-      To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
-      Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
+    The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
+    For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
+    Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
+    If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
+    To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
+    To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
+    Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
     """)
   @encodedName("application/json", "set_lang")
   setLang?: string;
