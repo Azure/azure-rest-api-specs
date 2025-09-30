@@ -188,7 +188,7 @@ interface Service {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("?comp=blobs")
-  filterBlobs is StorageOperation<
+  findBlobsByTags is StorageOperation<
     {
       ...TimeoutParameter;
       ...FilterBlobsWhereParameter;
@@ -197,7 +197,7 @@ interface Service {
       ...FilterBlobsIncludeParameter;
     },
     {
-      ...DateResponseHeader;
+      ...DateResponseHeaderPrivate;
 
       /** The filter blobs enumeration results */
       @body
