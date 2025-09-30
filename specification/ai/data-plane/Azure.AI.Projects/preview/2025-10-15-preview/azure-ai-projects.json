@@ -1092,6 +1092,339 @@
         }
       }
     },
+    "/evaluators": {
+      "get": {
+        "operationId": "Evaluators_ListVersions",
+        "description": "List the latest version of each Evaluator",
+        "parameters": [
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/EvaluatorVersion"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          }
+        }
+      }
+    },
+    "/evaluators/{name}/versions": {
+      "get": {
+        "operationId": "Evaluators_ListEvaluatorVersions",
+        "description": "List all versions of the given Evaluator name",
+        "parameters": [
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the evaluator",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          },
+          {
+            "name": "after",
+            "in": "query",
+            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "before",
+            "in": "query",
+            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "object",
+              "description": "The response data for a requested list of items.",
+              "properties": {
+                "object": {
+                  "type": "string",
+                  "description": "The object type, which is always list.",
+                  "enum": [
+                    "list"
+                  ],
+                  "x-ms-enum": {
+                    "modelAsString": false
+                  }
+                },
+                "data": {
+                  "type": "array",
+                  "description": "The requested list of items.",
+                  "items": {
+                    "$ref": "#/definitions/EvaluatorVersion"
+                  }
+                },
+                "first_id": {
+                  "type": "string",
+                  "description": "The first ID represented in this list.",
+                  "x-ms-client-name": "firstId"
+                },
+                "last_id": {
+                  "type": "string",
+                  "description": "The last ID represented in this list.",
+                  "x-ms-client-name": "lastId"
+                },
+                "has_more": {
+                  "type": "boolean",
+                  "description": "A value indicating whether there are additional values available not captured in this list.",
+                  "x-ms-client-name": "hasMore"
+                }
+              },
+              "required": [
+                "object",
+                "data",
+                "first_id",
+                "last_id",
+                "has_more"
+              ]
+            }
+          }
+        }
+      },
+      "post": {
+        "operationId": "Evaluators_CreateEvaluatorVersion",
+        "description": "Create a new EvaluatorVersion with auto incremented version id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/evaluators/{name}/versions/{version}": {
+      "get": {
+        "operationId": "Evaluators_GetEvaluatorVersion",
+        "description": "Get the specific version of the EvaluatorVersion. The service returns 404 Not Found error if the EvaluatorVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the EvaluatorVersion to retrieve.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "Evaluators_UpdateEvaluatorVersion",
+        "description": "Update an existing EvaluatorVersion with the given version id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the EvaluatorVersion to update.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "Evaluators_DeleteEvaluatorVersion",
+        "description": "Delete the specific version of the EvaluatorVersion. The service returns 204 No Content if the EvaluatorVersion was deleted successfully or if the EvaluatorVersion does not exist.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The version of the EvaluatorVersion to delete.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/indexes": {
       "get": {
         "operationId": "Indexes_ListLatest",
@@ -2693,6 +3026,25 @@
         "clusters"
       ]
     },
+    "CodeBasedEvaluatorDefinition": {
+      "type": "object",
+      "description": "Code-based evaluator definition using python code",
+      "properties": {
+        "code_text": {
+          "type": "string",
+          "description": "Inline code text for the evaluator"
+        }
+      },
+      "required": [
+        "code_text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluatorDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "code"
+    },
     "Connection": {
       "type": "object",
       "description": "Response from the list and get connections operations",
@@ -3416,6 +3768,36 @@
         ]
       }
     },
+    "EvaluatorCategory": {
+      "type": "string",
+      "description": "The category of the evaluator",
+      "enum": [
+        "quality",
+        "safety",
+        "agents"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluatorCategory",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "quality",
+            "value": "quality",
+            "description": "Quality"
+          },
+          {
+            "name": "safety",
+            "value": "safety",
+            "description": "Risk & Safety"
+          },
+          {
+            "name": "agents",
+            "value": "agents",
+            "description": "Agents"
+          }
+        ]
+      }
+    },
     "EvaluatorConfiguration": {
       "type": "object",
       "description": "Evaluator Configuration",
@@ -3439,6 +3821,274 @@
       },
       "required": [
         "id"
+      ]
+    },
+    "EvaluatorDefinition": {
+      "type": "object",
+      "description": "Base evaluator configuration with discriminator",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluatorDefinitionType",
+          "description": "The type of evaluator definition"
+        },
+        "init_parameters": {
+          "description": "The JSON schema (Draft 2020-12) for the evaluator's input parameters. This includes parameters like type, properties, required."
+        },
+        "data_schema": {
+          "description": "The JSON schema (Draft 2020-12) for the evaluator's input data. This includes parameters like type, properties, required."
+        },
+        "metrics": {
+          "type": "object",
+          "description": "List of output metrics produced by this evaluator",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorMetric"
+          }
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluatorDefinitionType": {
+      "type": "string",
+      "description": "The type of evaluator definition",
+      "enum": [
+        "prompt",
+        "code",
+        "prompt_and_code",
+        "service",
+        "openai_graders"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluatorDefinitionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "prompt",
+            "value": "prompt",
+            "description": "Prompt-based definition"
+          },
+          {
+            "name": "code",
+            "value": "code",
+            "description": "Code-based definition"
+          },
+          {
+            "name": "prompt_and_code",
+            "value": "prompt_and_code",
+            "description": "Prompt & Code Based definition"
+          },
+          {
+            "name": "service",
+            "value": "service",
+            "description": "Service-based evaluator"
+          },
+          {
+            "name": "openai_graders",
+            "value": "openai_graders",
+            "description": "OpenAI graders"
+          }
+        ]
+      }
+    },
+    "EvaluatorMetric": {
+      "type": "object",
+      "description": "Evaluator Metric",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluatorMetricType",
+          "description": "Type of the metric."
+        },
+        "desirable_direction": {
+          "$ref": "#/definitions/EvaluatorMetricDirection",
+          "description": "It indicates whether a higher value is better or a lower value is better for this metric."
+        },
+        "min_value": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum value for the metric"
+        },
+        "max_value": {
+          "type": "number",
+          "format": "float",
+          "description": "Maximum value for the metric. If not specified, it is assumed to be unbounded."
+        }
+      }
+    },
+    "EvaluatorMetricDirection": {
+      "type": "string",
+      "description": "The direction of the metric indicating whether a higher value is better, a lower value is better, or neutral",
+      "enum": [
+        "increase",
+        "decrease",
+        "neutral"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluatorMetricDirection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "increase",
+            "value": "increase",
+            "description": "It indicates a higher value is better for this metric"
+          },
+          {
+            "name": "decrease",
+            "value": "decrease",
+            "description": "It indicates a lower value is better for this metric"
+          },
+          {
+            "name": "neutral",
+            "value": "neutral",
+            "description": "It indicates no preference for this metric direction"
+          }
+        ]
+      }
+    },
+    "EvaluatorMetricType": {
+      "type": "string",
+      "description": "The type of the evaluator",
+      "enum": [
+        "ordinal",
+        "continuous",
+        "boolean"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluatorMetricType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ordinal",
+            "value": "ordinal",
+            "description": "Ordinal metric representing categories that can be ordered or ranked."
+          },
+          {
+            "name": "continuous",
+            "value": "continuous",
+            "description": "Continuous metric representing values in a continuous range."
+          },
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "Boolean metric representing true/false values"
+          }
+        ]
+      }
+    },
+    "EvaluatorType": {
+      "type": "string",
+      "description": "The type of the evaluator",
+      "enum": [
+        "builtin",
+        "custom"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluatorType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "built_in",
+            "value": "builtin",
+            "description": "Built-in evaluator (Microsoft provided)"
+          },
+          {
+            "name": "custom",
+            "value": "custom",
+            "description": "Custom evaluator"
+          }
+        ]
+      }
+    },
+    "EvaluatorVersion": {
+      "type": "object",
+      "description": "Evaluator Definition",
+      "properties": {
+        "display_name": {
+          "type": "string",
+          "description": "Display Name for evaluator. It helps to find the evaluator easily in AI Foundry. It does not need to be unique."
+        },
+        "metadata": {
+          "type": "object",
+          "description": "Metadata about the evaluator",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "evaluator_type": {
+          "$ref": "#/definitions/EvaluatorType",
+          "description": "The type of the evaluator"
+        },
+        "categories": {
+          "type": "array",
+          "description": "The categories of the evaluator",
+          "items": {
+            "$ref": "#/definitions/EvaluatorCategory"
+          }
+        },
+        "definition": {
+          "$ref": "#/definitions/EvaluatorDefinition",
+          "description": "Definition of the evaluator"
+        },
+        "created_by": {
+          "type": "string",
+          "description": "Creator of the evaluator",
+          "readOnly": true
+        },
+        "created_at": {
+          "type": "string",
+          "description": "Creation date/time of the evaluator",
+          "readOnly": true
+        },
+        "modified_at": {
+          "type": "string",
+          "description": "Last modified date/time of the evaluator",
+          "readOnly": true
+        },
+        "id": {
+          "type": "string",
+          "description": "Asset ID, a unique identifier for the asset",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the resource",
+          "readOnly": true
+        },
+        "version": {
+          "type": "string",
+          "description": "The version of the resource",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "The asset description text.",
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "object",
+          "description": "Tag dictionary. Tags can be added, removed, and updated.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "update",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "evaluator_type",
+        "categories",
+        "definition",
+        "created_by",
+        "created_at",
+        "modified_at",
+        "name",
+        "version"
       ]
     },
     "FieldMapping": {
@@ -4400,6 +5050,25 @@
           }
         ]
       }
+    },
+    "PromptBasedEvaluatorDefinition": {
+      "type": "object",
+      "description": "Prompt-based evaluator",
+      "properties": {
+        "prompt_text": {
+          "type": "string",
+          "description": "The prompt text used for evaluation"
+        }
+      },
+      "required": [
+        "prompt_text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluatorDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "prompt"
     },
     "RedTeam": {
       "type": "object",
