@@ -5936,12 +5936,12 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications": {
       "get": {
         "tags": [
           "AgentApplication"
         ],
-        "summary": "Lists Agent Applications in the account.",
+        "summary": "Lists Agent Applications in the project.",
         "operationId": "AgentApplications_List",
         "produces": [
           "application/json"
@@ -5955,6 +5955,9 @@
           },
           {
             "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
@@ -6034,7 +6037,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}": {
       "delete": {
         "tags": [
           "AgentApplication"
@@ -6053,6 +6056,9 @@
           },
           {
             "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
           },
           {
             "in": "path",
@@ -6103,6 +6109,9 @@
           },
           {
             "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
           },
           {
             "in": "path",
@@ -6156,6 +6165,9 @@
           },
           {
             "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
           },
           {
             "in": "path",
@@ -6217,7 +6229,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}/listAgents": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/listAgents": {
       "post": {
         "tags": [
           "AgentApplication"
@@ -6236,6 +6248,9 @@
           },
           {
             "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
           },
           {
             "in": "path",
@@ -6272,7 +6287,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/applications/{name}/listDeployments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/listDeployments": {
       "post": {
         "tags": [
           "AgentApplication"
@@ -6291,6 +6306,9 @@
           },
           {
             "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
           },
           {
             "in": "path",
