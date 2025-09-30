@@ -435,7 +435,7 @@ interface Container {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing API"
   @get
   @route("?restype=container&comp=blobs")
-  filterBlobs is StorageOperation<
+  findBlobsByTags is StorageOperation<
     {
       ...TimeoutParameter;
       ...FilterBlobsWhereParameter;
@@ -444,7 +444,7 @@ interface Container {
       ...FilterBlobsIncludeParameter;
     },
     {
-      ...DateResponseHeader;
+      ...DateResponseHeaderPrivate;
 
       /** The container filter blob enumeration results */
       @body
