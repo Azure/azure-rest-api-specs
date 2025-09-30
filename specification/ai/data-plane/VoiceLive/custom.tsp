@@ -10,7 +10,7 @@ using Azure.ClientGenerator.Core;
 namespace VoiceLive;
 
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style. // Service message format is snake_case to remain close to OpenAI style.
 @doc("Base for session configuration shared between request and response.")
 model RequestSession {
   ...SessionBase;
@@ -125,7 +125,7 @@ union AzureVoiceType {
 }
 @usage(DualUsage)
 @doc("Azure custom voice configuration.")
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureCustomVoice extends AzureVoice {
   type: AzureVoiceType.azure_custom;
 
@@ -153,7 +153,7 @@ model AzureCustomVoice extends AzureVoice {
 
 @doc("Azure standard voice configuration.")
 @usage(DualUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureStandardVoice extends AzureVoice {
   type: AzureVoiceType.azure_standard;
 
@@ -210,7 +210,7 @@ union Voice {
   AzureVoice, // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @doc("Input audio format types supported.")
 union InputAudioFormat {
   string,
@@ -242,7 +242,7 @@ union OutputAudioFormat {
   g711_alaw: "g711_alaw",
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @doc("Supported audio input transcription models.")
 union AudioInputTranscriptionModel {
   string,
@@ -252,7 +252,7 @@ union AudioInputTranscriptionModel {
 
 @doc("Configuration for input audio transcription.")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AudioInputTranscriptionOptions {
   @doc("""
     The transcription model to use. Supported values:
@@ -311,7 +311,7 @@ union EouThresholdLevel
 }
 @doc("Azure semantic end-of-utterance detection (default).")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetection extends EouDetection {
   `model`: "semantic_detection_v1";
 
@@ -325,7 +325,7 @@ model AzureSemanticDetection extends EouDetection {
 
 @doc("Azure semantic end-of-utterance detection (English-optimized).")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetectionEn extends EouDetection {
   `model`: "semantic_detection_v1_en";
 
@@ -339,7 +339,7 @@ model AzureSemanticDetectionEn extends EouDetection {
 
 @doc("Azure semantic end-of-utterance detection (multilingual).")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetectionMultilingual extends EouDetection {
   `model`: "semantic_detection_v1_multilingual";
 
@@ -368,7 +368,7 @@ union TurnDetectionType {
 
 @doc("Base model for VAD-based turn detection.")
 @usage(DualUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerVad extends TurnDetection {
   type: TurnDetectionType.server_vad;
 
@@ -386,7 +386,7 @@ model ServerVad extends TurnDetection {
 
 @doc("Server Speech Detection (Azure semantic VAD, default variant).")
 @usage(DualUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVad extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad;
 
@@ -407,7 +407,7 @@ model AzureSemanticVad extends TurnDetection {
 
 @doc("Server Speech Detection (Azure semantic VAD, English-only).")
 @usage(DualUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVadEn extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_en;
 
@@ -427,7 +427,7 @@ model AzureSemanticVadEn extends TurnDetection {
 
 @doc("Server Speech Detection (Azure semantic VAD).")
 @usage(DualUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVadMultilingual extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_multilingual;
 
@@ -469,7 +469,7 @@ union AudioTimestampType {
 }
 
 @doc("Specifies the types of animation data to output.")
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 union AnimationOutputType {
   string,
   @doc("Blendshapes output type.")
@@ -480,7 +480,7 @@ union AnimationOutputType {
 
 @doc("Configuration for animation outputs including blendshapes and visemes metadata.")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model Animation {
   @doc("The name of the animation model to use.")
   model_name?: string = "default";
@@ -491,7 +491,7 @@ model Animation {
 
 @doc("Configuration for avatar streaming and behavior during the session.")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AvatarConfig {
   @doc("Optional list of ICE servers to use for WebRTC connection establishment.")
   ice_servers?: IceServer[];
@@ -524,7 +524,7 @@ model IceServer {
 
 @usage(RequestUsage)
 @doc("Configuration for the agent.")
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AgentConfig {
   @doc("The type of agent to use.")
   type: "agent";
@@ -540,7 +540,7 @@ model AgentConfig {
 
 @doc("Video streaming parameters for avatar.")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VideoParams {
   @doc("Bitrate in bits per second (e.g., 2000000 for 2 Mbps).")
   bitrate?: int32 = 2000000;
@@ -565,7 +565,7 @@ model VideoParams {
 
 @doc("Defines a video crop rectangle using top-left and bottom-right coordinates.")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VideoCrop {
   @doc("Top-left corner of the crop region. Array of [x, y], must be non-negative integers.")
   @minItems(2)
@@ -590,7 +590,7 @@ model VideoResolution {
 
 @doc("Defines a video background, either a solid color or an image URL (mutually exclusive).")
 @usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style"
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model Background {
   @doc("Background color in hex format (e.g., `#00FF00FF`). Cannot be set if `image_url` is provided.")
   color?: string;
