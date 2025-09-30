@@ -321,7 +321,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
           }
         }
       },
@@ -384,10 +384,6 @@
         "summaryLength": {
           "$ref": "#/definitions/SummaryLengthBucket",
           "description": "(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries."
-        },
-        "instruction": {
-          "type": "string",
-          "description": "(Optional) If provided, the query will be used to generate the summary."
         }
       }
     },
@@ -411,9 +407,9 @@
         "text"
       ]
     },
-    "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
+    "AbstractiveSummaryDocumentResult": {
       "type": "object",
-      "description": "An object representing the Abstractive Summarization result of a single document with detected language.",
+      "description": "An object representing the pre-built Abstractive Summarization results of each document.",
       "properties": {
         "id": {
           "type": "string",
@@ -436,10 +432,6 @@
           "items": {
             "$ref": "#/definitions/AbstractiveSummary"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -643,15 +635,6 @@
           "items": {
             "$ref": "#/definitions/AnalyzeTextLROTask"
           }
-        },
-        "defaultLanguage": {
-          "type": "string",
-          "description": "Default language to use for records requesting automatic language detection."
-        },
-        "cancelAfter": {
-          "type": "number",
-          "format": "float",
-          "description": "Optional duration in seconds after which the job will be canceled if not completed."
         }
       },
       "required": [
@@ -1301,9 +1284,9 @@
         ]
       }
     },
-    "ClassificationDocumentResultWithDetectedLanguage": {
+    "ClassificationDocumentResult": {
       "type": "object",
-      "description": "Contains the classification doc result for the task with detected language.",
+      "description": "Contains the classification doc result for the task.",
       "properties": {
         "id": {
           "type": "string",
@@ -1326,10 +1309,6 @@
           "items": {
             "$ref": "#/definitions/ClassificationResult"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -1453,7 +1432,7 @@
           "type": "array",
           "description": "Enumeration of the document results.",
           "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/EntitiesDocumentResult"
           }
         }
       },
@@ -1564,7 +1543,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/ClassificationDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/ClassificationDocumentResult"
           }
         }
       },
@@ -1879,9 +1858,9 @@
         "message"
       ]
     },
-    "EntitiesDocumentResultWithDetectedLanguage": {
+    "EntitiesDocumentResult": {
       "type": "object",
-      "description": "Contains the entity recognition task result for the document with detected language.",
+      "description": "Contains the entity recognition task result for the document.",
       "properties": {
         "id": {
           "type": "string",
@@ -1904,10 +1883,6 @@
           "items": {
             "$ref": "#/definitions/Entity"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -1941,43 +1916,6 @@
           "items": {
             "$ref": "#/definitions/EntityWithMetadata"
           }
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities"
-      ]
-    },
-    "EntitiesDocumentResultWithMetadataDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the entity recognition task result for the document with metadata and detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/EntityWithMetadata"
-          }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -2109,7 +2047,7 @@
       "description": "Contains the entity task",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesWithMetadataAutoResult",
+          "$ref": "#/definitions/EntitiesResult",
           "description": "Results for entity recognition."
         }
       },
@@ -2122,39 +2060,6 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionResults"
-    },
-    "EntitiesWithMetadataAutoResult": {
-      "type": "object",
-      "description": "Contains the entity recognition task result.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        },
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithMetadataDetectedLanguage"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion",
-        "documents"
-      ]
     },
     "Entity": {
       "type": "object",
@@ -2589,7 +2494,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntityLinkingResultWithDetectedLanguage"
+            "$ref": "#/definitions/LinkedEntitiesDocumentResult"
           }
         }
       },
@@ -2597,43 +2502,6 @@
         "errors",
         "modelVersion",
         "documents"
-      ]
-    },
-    "EntityLinkingResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "Entity linking document result with auto language detection.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized well known entities in the document.",
-          "items": {
-            "$ref": "#/definitions/LinkedEntity"
-          }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities"
       ]
     },
     "EntityLinkingTaskParameters": {
@@ -2720,44 +2588,6 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionLROResults"
-    },
-    "EntitySynonym": {
-      "type": "object",
-      "description": "The entity synonyms used to enhance pii entity detection",
-      "properties": {
-        "synonym": {
-          "type": "string",
-          "description": "The synonym to be used for context"
-        },
-        "language": {
-          "type": "string",
-          "description": "The 2 letter ISO 639-1 language the synonym"
-        }
-      },
-      "required": [
-        "synonym"
-      ]
-    },
-    "EntitySynonyms": {
-      "type": "object",
-      "description": "Object that allows the user to provide synonyms for context words that to enhance pii entity detection.",
-      "properties": {
-        "entityType": {
-          "$ref": "#/definitions/EntityCategory",
-          "description": "The entity name"
-        },
-        "synonyms": {
-          "type": "array",
-          "description": "The entity synonyms",
-          "items": {
-            "$ref": "#/definitions/EntitySynonym"
-          }
-        }
-      },
-      "required": [
-        "entityType",
-        "synonyms"
-      ]
     },
     "EntityTag": {
       "type": "object",
@@ -2998,7 +2828,7 @@
         "error"
       ]
     },
-    "ExtractedSummaryDocumentResultWithDetectedLanguage": {
+    "ExtractedSummaryDocumentResult": {
       "type": "object",
       "description": "A ranked list of sentences representing the extracted summary.",
       "properties": {
@@ -3023,10 +2853,6 @@
           "items": {
             "$ref": "#/definitions/ExtractedSummarySentence"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -3124,7 +2950,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/ExtractedSummaryDocumentResult"
           }
         }
       },
@@ -3209,10 +3035,6 @@
               }
             ]
           }
-        },
-        "query": {
-          "type": "string",
-          "description": "(Optional) If provided, the query will be used to extract most relevant sentences from the document."
         }
       }
     },
@@ -3243,9 +3065,9 @@
         }
       }
     },
-    "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
+    "HealthcareEntitiesDocumentResult": {
       "type": "object",
-      "description": "Result object for the processed Healthcare document with detected language.",
+      "description": "Result object for the processed Healthcare document.",
       "properties": {
         "id": {
           "type": "string",
@@ -3279,10 +3101,6 @@
         "fhirBundle": {
           "$ref": "#/definitions/FhirBundle",
           "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html."
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -3467,7 +3285,7 @@
           "type": "array",
           "description": "List of result objects for the processed Healthcare documents.",
           "items": {
-            "$ref": "#/definitions/HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
+            "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
           }
         }
       },
@@ -3834,7 +3652,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/KeyPhrasesDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/KeyPhrasesDocumentResult"
           }
         }
       },
@@ -3879,9 +3697,9 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
-    "KeyPhrasesDocumentResultWithDetectedLanguage": {
+    "KeyPhrasesDocumentResult": {
       "type": "object",
-      "description": "A ranked list of sentences representing the extracted summary.",
+      "description": "Contains the Key phrase extraction results for a document.",
       "properties": {
         "id": {
           "type": "string",
@@ -3904,10 +3722,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -4187,6 +4001,39 @@
           }
         ]
       }
+    },
+    "LinkedEntitiesDocumentResult": {
+      "type": "object",
+      "description": "Entity linking document result.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized well known entities in the document.",
+          "items": {
+            "$ref": "#/definitions/LinkedEntity"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities"
+      ]
     },
     "LinkedEntity": {
       "type": "object",
@@ -4734,15 +4581,7 @@
         "Date",
         "Person",
         "Address",
-        "DateOfBirth",
-        "BankAccountNumber",
-        "PassportNumber",
-        "DriversLicenseNumber",
-        "Neighborhood",
-        "SortCode",
-        "PIN",
         "VehicleIdentificationNumber",
-        "LicensePlate",
         "All",
         "Default"
       ],
@@ -5606,49 +5445,9 @@
             "description": "Address"
           },
           {
-            "name": "DateOfBirth",
-            "value": "DateOfBirth",
-            "description": "Date Of Birth"
-          },
-          {
-            "name": "BankAccountNumber",
-            "value": "BankAccountNumber",
-            "description": "Bank Account Number"
-          },
-          {
-            "name": "PassportNumber",
-            "value": "PassportNumber",
-            "description": "Passport Number"
-          },
-          {
-            "name": "DriversLicenseNumber",
-            "value": "DriversLicenseNumber",
-            "description": "Drivers License Number"
-          },
-          {
-            "name": "Neighborhood",
-            "value": "Neighborhood",
-            "description": "Neighborhood"
-          },
-          {
-            "name": "SortCode",
-            "value": "SortCode",
-            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
-          },
-          {
-            "name": "PIN",
-            "value": "PIN",
-            "description": "PIN"
-          },
-          {
             "name": "VehicleIdentificationNumber",
             "value": "VehicleIdentificationNumber",
             "description": "VIN"
-          },
-          {
-            "name": "LicensePlate",
-            "value": "LicensePlate",
-            "description": "License Plate"
           },
           {
             "name": "All",
@@ -5662,6 +5461,44 @@
           }
         ]
       }
+    },
+    "PiiEntitiesDocumentResult": {
+      "type": "object",
+      "description": "Contains the PII results.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "redactedText",
+        "entities"
+      ]
     },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
@@ -5721,7 +5558,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/PiiResultWithDetectedLanguage"
+            "$ref": "#/definitions/PiiEntitiesDocumentResult"
           }
         }
       },
@@ -5729,48 +5566,6 @@
         "errors",
         "modelVersion",
         "documents"
-      ]
-    },
-    "PiiResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the PII results with detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "redactedText",
-        "entities"
       ]
     },
     "PiiTaskParameters": {
@@ -5848,17 +5643,6 @@
                 "description": "Returned offset and length values will correspond to UTF-16 code units. Use this option if your application is written in a language that support Unicode, for example Java, JavaScript."
               }
             ]
-          }
-        },
-        "valueExclusionPolicy": {
-          "$ref": "#/definitions/ValueExclusionPolicy",
-          "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
-        },
-        "entitySynonyms": {
-          "type": "array",
-          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection.",
-          "items": {
-            "$ref": "#/definitions/EntitySynonyms"
           }
         }
       }
@@ -6740,9 +6524,9 @@
         "negative"
       ]
     },
-    "SentimentDocumentResultWithDetectedLanguage": {
+    "SentimentDocumentResult": {
       "type": "object",
-      "description": "Sentiment analysis per document.",
+      "description": "An object representing the pre-built Sentiment Analysis results of each document.",
       "properties": {
         "id": {
           "type": "string",
@@ -6773,10 +6557,6 @@
           "items": {
             "$ref": "#/definitions/SentenceSentiment"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -6829,7 +6609,7 @@
           "type": "array",
           "description": "The sentiment analysis results for each document in the input.",
           "items": {
-            "$ref": "#/definitions/SentimentDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/SentimentDocumentResult"
           }
         }
       },
@@ -7513,28 +7293,6 @@
           }
         ]
       }
-    },
-    "ValueExclusionPolicy": {
-      "type": "object",
-      "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service",
-      "properties": {
-        "caseSensitive": {
-          "type": "boolean",
-          "description": "Option to make the values excluded values case sensitive",
-          "default": false
-        },
-        "excludedValues": {
-          "type": "array",
-          "description": "List of words and terms that should be excluded from detection by the PII detection service",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "caseSensitive",
-        "excludedValues"
-      ]
     },
     "VolumeMetadata": {
       "type": "object",

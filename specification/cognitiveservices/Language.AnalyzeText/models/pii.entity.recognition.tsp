@@ -33,8 +33,12 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
 
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
-  @removed(Versions.v2025_11_01)
+  @added(Versions.v2025_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
+
+  /** (Optional) describes the PII categories to be excluded from detection */
+  @added(Versions.v2024_11_15_preview)
+  excludeCategories?: PiiCategoriesExclude[];
 
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
   @added(Versions.v2025_05_15_preview)
@@ -90,7 +94,7 @@ model ConfidenceScoreThreshold {
 /** Confidence score threshold override for a specific PII category */
 model ConfidenceScoreThresholdOverride {
   /** The PII category for which to override the confidence score threshold */
-  entityType: PiiCategoriesExclude;
+  entity: PiiCategoriesExclude;
 
   /** The confidence score threshold for the specified PII category */
   value: float32;
@@ -227,7 +231,7 @@ union PiiDomain {
 }
 
 /** Entity object with tags. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_11_01)
 model PiiEntityWithTags is Entity {
   /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
   type?: string;
@@ -236,12 +240,15 @@ model PiiEntityWithTags is Entity {
   tags?: EntityTag[];
 
   /** Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text */
+  @added(Versions.v2024_11_15_preview)
   mask?: string;
 
   /** Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”. */
+  @added(Versions.v2024_11_15_preview)
   maskOffset?: int32;
 
   /** The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”. */
+  @added(Versions.v2024_11_15_preview)
   maskLength?: int32;
 }
 
@@ -803,36 +810,36 @@ union PiiCategoriesExclude {
   Address: "Address",
 
   /** Date Of Birth */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   DateOfBirth: "DateOfBirth",
 
   /** Bank Account Number */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   BankAccountNumber: "BankAccountNumber",
 
   /** Passport Number */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   PassportNumber: "PassportNumber",
 
   /** Drivers License Number */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   Neighborhood: "Neighborhood",
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   SortCode: "SortCode",
 
   /** PIN */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   PIN: "PIN",
 
   /** VIN */
   @added(Versions.v2025_05_15_preview)
-  @removed(Versions.v2025_11_01)
+  @removed(Versions.v2025_11_15_preview)
   VIN: "VIN",
 
   /** VIN */
