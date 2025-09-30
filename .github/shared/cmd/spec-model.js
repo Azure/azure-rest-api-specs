@@ -33,7 +33,7 @@ if (args.length > 1) {
 const specPath = args[0];
 
 const specModel = new SpecModel(specPath, {
-  logger: new ConsoleLogger(debug),
+  logger: debug ? new ConsoleLogger(debug) : undefined,
 });
 
 console.log(
