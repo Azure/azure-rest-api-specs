@@ -918,7 +918,7 @@ interface StacCollectionOperations {
     @header("operation-location")
     operationLocation: url;
 
-    @statusCode statusCode: 202;
+    @statusCode statusCode: 200;
 
     @doc("Operation")
     @body
