@@ -1688,7 +1688,7 @@
     },
     "ConfidenceScoreThreshold": {
       "type": "object",
-      "description": "The confidence score threshold configuration for PII entity recognition",
+      "description": "Configuration for confidence score threshold for PII entity recognition",
       "properties": {
         "default": {
           "type": "number",
@@ -1698,7 +1698,7 @@
         },
         "overrides": {
           "type": "array",
-          "description": "Confidence score threshold overrides for specific PII categories",
+          "description": "List of confidence score threshold overrides for specific PII categories",
           "items": {
             "$ref": "#/definitions/ConfidenceScoreThresholdOverride"
           }
@@ -1710,7 +1710,7 @@
     },
     "ConfidenceScoreThresholdOverride": {
       "type": "object",
-      "description": "The confidence score threshold override for a specific PII category",
+      "description": "Confidence score threshold override for a specific PII category",
       "properties": {
         "entityType": {
           "$ref": "#/definitions/PiiCategoriesExclude",
@@ -5113,7 +5113,7 @@
         "Neighborhood",
         "SortCode",
         "PIN",
-        "VIN",
+        "VedhicleIdentificationNumber",
         "LicensePlate"
       ],
       "x-ms-enum": {
@@ -6012,7 +6012,7 @@
           },
           {
             "name": "VIN",
-            "value": "VIN",
+            "value": "VedhicleIdentificationNumber",
             "description": "VIN"
           },
           {
@@ -6205,7 +6205,7 @@
         "Neighborhood",
         "SortCode",
         "PIN",
-        "VIN",
+        "VedhicleIdentificationNumber",
         "LicensePlate",
         "All",
         "Default"
@@ -7106,7 +7106,7 @@
           },
           {
             "name": "VIN",
-            "value": "VIN",
+            "value": "VedhicleIdentificationNumber",
             "description": "VIN"
           },
           {
@@ -7379,11 +7379,15 @@
             ]
           }
         },
-        "excludePiiCategories": {
+        "valueExclusionPolicy": {
+          "$ref": "#/definitions/ValueExclusionPolicy",
+          "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
+        },
+        "entitySynonyms": {
           "type": "array",
-          "description": "Enumeration of PII categories to be excluded in the response.",
+          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection.",
           "items": {
-            "$ref": "#/definitions/PiiCategoriesExclude"
+            "$ref": "#/definitions/EntitySynonyms"
           }
         },
         "redactionPolicies": {
@@ -7401,17 +7405,6 @@
           "type": "boolean",
           "description": "Disable entity validation for PII entity recognition",
           "default": false
-        },
-        "valueExclusionPolicy": {
-          "$ref": "#/definitions/ValueExclusionPolicy",
-          "description": "Policy for specific words and terms that should be excluded from detection by the PII detection service"
-        },
-        "entitySynonyms": {
-          "type": "array",
-          "description": "(Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection.",
-          "items": {
-            "$ref": "#/definitions/EntitySynonyms"
-          }
         }
       }
     },
@@ -8637,7 +8630,7 @@
     },
     "SyntheticReplacementPolicyType": {
       "type": "object",
-      "description": "Represents the policy of replacing PII with synthetic values.",
+      "description": "Represents the policy of replacing detected PII with synthetic values.",
       "properties": {
         "preserveDataFormat": {
           "type": "boolean",

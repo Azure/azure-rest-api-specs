@@ -36,6 +36,14 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   @removed(Versions.v2025_11_15_preview)
   redactionPolicy?: BaseRedactionPolicy;
 
+  /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
+  @added(Versions.v2025_05_15_preview)
+  valueExclusionPolicy?: ValueExclusionPolicy;
+
+  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
+  @added(Versions.v2025_05_15_preview)
+  entitySynonyms?: EntitySynonyms[];
+
   /** List of RedactionPolicies to be used on the input. */
   @added(Versions.v2025_11_15_preview)
   redactionPolicies?: BaseRedactionPolicy[];
@@ -47,18 +55,10 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   /** Disable entity validation for PII entity recognition */
   @added(Versions.v2025_11_15_preview)
   disableEntityValidation?: boolean = false;
-
-  /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
-  @added(Versions.v2025_11_15_preview)
-  valueExclusionPolicy?: ValueExclusionPolicy;
-
-  /** (Optional) request parameter that allows the user to provide synonyms for context words that to enhance pii entity detection. */
-  @added(Versions.v2025_11_15_preview)
-  entitySynonyms?: EntitySynonyms[];
 }
 
 /** Object that allows the user to provide synonyms for context words that to enhance pii entity detection. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntitySynonyms {
   /** The entity name */
   entityType: EntityCategory;
@@ -68,7 +68,7 @@ model EntitySynonyms {
 }
 
 /** The entity synonyms used to enhance pii entity detection */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntitySynonym {
   /** The synonym to be used for context */
   synonym: string;
@@ -77,15 +77,18 @@ model EntitySynonym {
   language?: string;
 }
 
+/** Configuration for confidence score threshold for PII entity recognition */
 @added(Versions.v2025_11_15_preview)
 model ConfidenceScoreThreshold {
   /** Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0 */
   default: float32 = 0.3;
 
+  /** List of confidence score threshold overrides for specific PII categories */
   overrides?: ConfidenceScoreThresholdOverride[];
 }
 
-model ConfidenceScoreThresholdOverride{
+/** Confidence score threshold override for a specific PII category */
+model ConfidenceScoreThresholdOverride {
   /** The PII category for which to override the confidence score threshold */
   entityType: PiiCategoriesExclude;
 
@@ -94,7 +97,7 @@ model ConfidenceScoreThresholdOverride{
 }
 
 /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model ValueExclusionPolicy {
   /** Option to make the values excluded values case sensitive */
   caseSensitive: boolean = false;
@@ -104,14 +107,14 @@ model ValueExclusionPolicy {
 }
 
 /** The abstract base class for RedactionPolicy. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 @discriminator("policyKind")
 model BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind = RedactionPolicyKind.characterMask;
 
-  @added(Versions.v2025_11_15_preview)
   /** (Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories. */
+  @added(Versions.v2025_11_15_preview)
   entityTypes?: PiiCategoriesExclude[];
 
   /** (Optional) name of the redaction policy for identification purposes. */
@@ -124,7 +127,7 @@ model BaseRedactionPolicy {
 }
 
 /** Represents the policy of redacting with a redaction character */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model CharacterMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.characterMask;
@@ -133,12 +136,15 @@ model CharacterMaskPolicyType extends BaseRedactionPolicy {
   redactionCharacter?: redactionCharacter = redactionCharacter.asterisk;
 
   /** Optional parameter to indicate the length of unmasked characters at the end of the redacted PII entity. Default is 0. */
+  @added(Versions.v2025_11_15_preview)
   unmaskLength?: int32;
 
   /** Optional parameter to indicate whether to unmask characters from the end of the redacted PII entity. Default is true. */
+  @added(Versions.v2025_11_15_preview)
   unmaskFromEnd?: boolean = true;
 }
 
+/** Represents the policy of replacing detected PII with synthetic values. */
 @added(Versions.v2025_11_15_preview)
 model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
@@ -146,24 +152,24 @@ model SyntheticReplacementPolicyType extends BaseRedactionPolicy {
 
   /** Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false. */
   preserveDataFormat?: boolean;
-} 
+}
 
 /** Represents the policy of not redacting found PII. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model NoMaskPolicyType extends BaseRedactionPolicy {
   /** The entity RedactionPolicy object kind. */
   policyKind: RedactionPolicyKind.noMask;
 }
 
 /** Represents the policy of redacting PII with the entity type. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model EntityMaskPolicyType extends BaseRedactionPolicy {
   /** The entity OverlapPolicy object kind. */
   policyKind: RedactionPolicyKind.entityMask;
 }
 
 /** Kinds of redaction policies supported. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 union RedactionPolicyKind {
   string,
 
@@ -177,7 +183,8 @@ union RedactionPolicyKind {
   entityMask: "entityMask",
 
   /** Replace detected entities with synthetic values. */
-  syntheticReplacement: "syntheticReplacement"
+  @added(Versions.v2025_11_15_preview)
+  syntheticReplacement: "syntheticReplacement",
 }
 
 /** Contains the analyze text PIIEntityRecognition LRO task. */
@@ -825,7 +832,7 @@ union PiiCategoriesExclude {
 
   /** VIN */
   @added(Versions.v2025_11_15_preview)
-  VIN: "VIN",
+  VIN: "VedhicleIdentificationNumber",
 
   /** License Plate */
   @added(Versions.v2025_11_15_preview)

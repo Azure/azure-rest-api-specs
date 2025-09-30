@@ -1084,7 +1084,7 @@ model DateValue {
   value: string;
 
   /** Modifier for datetime to indicate point of reference like before, after etc. */
-  modifier?: TemporalModifier;  
+  modifier?: TemporalModifier;
 }
 
 /** Base temporal metadata object. */
@@ -1097,7 +1097,6 @@ model BaseTemporalMetadata {
 /** Represents the Address entity Metadata model. */
 @added(Versions.v2025_11_15_preview)
 model AddressMetadata extends BaseMetadata {
-
   /** Kind of the metadata. */
   metadataKind: MetadataKind.AddressMetadata;
 
@@ -1119,7 +1118,6 @@ model AddressMetadata extends BaseMetadata {
   /** The country or region name of the address. */
   countryOrRegion?: string;
 }
-
 
 /** A Metadata for date entity instances. */
 @added(Versions.v2024_11_01)
