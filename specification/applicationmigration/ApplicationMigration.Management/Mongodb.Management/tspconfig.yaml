@@ -35,11 +35,9 @@ options:
     package-details:
       name: "@azure/arm-applicationmigration" # Must match /^\@azure\/arm(?:-[a-z]+)+$/
     experimental-extensible-enums: true
-  "@azure-tools/typespec-csharp":
-    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    namespace: "Azure.ResourceManager.ApplicationMigration" # Must match /^Azure\.ResourceManager\./
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    clear-output-folder: true
+  "@azure-typespec/http-client-csharp-mgmt":
+    namespace: "Azure.ResourceManager.ApplicationMigration"
+    emitter-output-dir: "{output-dir}/sdk/applicationmigration/{namespace}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
