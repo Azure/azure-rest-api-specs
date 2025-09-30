@@ -139,6 +139,16 @@ describe("SpecModel", () => {
     await expect(
       mapAsync([...readmes.values()], async (r) => await r.getTags()),
     ).rejects.toThrowError(/multiple.*tag/i);
+
+    await expect(specModel.toJSONAsync()).rejects.toThrowError(/multiple.*tag/i);
+
+    await expect(specModel.toJSONAsync({ embedErrors: true })).resolves.toMatchObject({
+      readmes: [
+        {
+          error: expect.stringMatching(/multiple.*tag/i),
+        },
+      ],
+    });
   });
 
   describe("getAffectedReadmeTags", () => {
