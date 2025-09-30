@@ -41,6 +41,18 @@ These settings apply only when `--tag=package-2025-10-01-preview` is specified o
 input-file:
   - Microsoft.CognitiveServices/preview/2025-10-01-preview/cognitiveservices.json
 suppressions:
+  - code:  ProvisioningStateMustBeReadOnly
+    reason: Schema ref is AgentApplicationResource -> AgenticApplication. AgenticApplication has a readonly provisioning state.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}"].put.responses.201.schema
+  - code:  ProvisioningStateMustBeReadOnly
+    reason: Schema ref is AgentDeploymentResource -> AgentDeployment. AgentDeployment has a readonly provisioning state.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].get.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].put.responses.200.schema
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}"].put.responses.201.schema
   - code: ArmResourcePropertiesBag
     reason: This API is copied from Machine Learning Services RP where this behavior is already established.
     where:
@@ -103,6 +115,24 @@ suppressions:
     reason: Same as existing account resource, trying to have the same behavior
     where:
       - $.definitions.ProjectProperties.properties.endpoints
+  - code: AvoidAdditionalProperties
+    reason: Provide customers ability to assign customize labels to rules.
+    where:
+      - $.definitions.RaiToolLabelProperties.properties.accountScope.properties.labelValues
+      - $.definitions.RaiToolLabelProperties.properties.projectScopes.items.properties.labelValues
+      - $.definitions.RaiIfcRuleProperties.properties.conditions
+  - code: AvoidAdditionalProperties
+    reason: Provide customers ability to define custom conditions for when a rule is activated.
+    where:
+      - $.definitions.RaiIfcRuleProperties.properties.conditions
+  - code: TopLevelResourcesListByResourceGroup
+    reason: These are subscription level resources and are modeled after the RaiPolicy List operation
+    where: 
+      - $.definitions.RaiExternalSafetyProvider
+      - $.definitions.RaiExternalSafetyProviderSchema
+  - code: ResourceNameRestriction
+    reason: Parameter exists in previous API versions without pattern, cannot add now without breaking change.
+    from: cognitiveservices.json
 ```
 
 ### Tag: package-2025-09-01

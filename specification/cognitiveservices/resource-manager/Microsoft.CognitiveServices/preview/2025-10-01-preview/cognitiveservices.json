@@ -5329,19 +5329,8 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
-            "headers": {
-              "Location": {
-                "description": "URI to poll for asynchronous operation result.",
-                "type": "string"
-              },
-              "Retry-After": {
-                "description": "Duration the client should wait between requests, in seconds.",
-                "type": "integer",
-                "format": "int32"
-              }
-            }
+          "200": {
+            "description": "OK"
           },
           "204": {
             "description": "No Content"
@@ -5353,10 +5342,6 @@
             }
           }
         },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "location"
-        },
         "x-ms-examples": {
           "Delete OutboundRule": {
             "$ref": "./examples/ManagedNetwork/deleteRuleV2.json"
@@ -5367,7 +5352,7 @@
         "tags": [
           "ManagedNetwork"
         ],
-        "summary": "The GET API for retrieveing a single outbound rule of the managed network associated with the cognitive services account.",
+        "summary": "The GET API for retrieving a single outbound rule of the managed network associated with the cognitive services account.",
         "operationId": "OutboundRule_Get",
         "produces": [
           "application/json"
@@ -5453,8 +5438,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/OutboundRuleBasicResource"
+            },
             "headers": {
               "Location": {
                 "description": "URI to poll for asynchronous operation result.",
@@ -5498,7 +5486,7 @@
         "tags": [
           "ManagedNetwork"
         ],
-        "summary": "The GET API for retrieveing the list of outbound rules of the managed network associated with the cognitive services account.",
+        "summary": "The GET API for retrieving the list of outbound rules of the managed network associated with the cognitive services account.",
         "operationId": "OutboundRule_List",
         "produces": [
           "application/json"
@@ -5785,8 +5773,11 @@
           }
         ],
         "responses": {
-          "202": {
-            "description": "Accepted",
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+            },
             "headers": {
               "Location": {
                 "description": "URI to poll for asynchronous operation result.",
@@ -5942,6 +5933,842 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications": {
+      "get": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Lists Agent Applications in the project.",
+        "operationId": "AgentApplications_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Number of agent applications to be retrieved in a page of results.",
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "in": "query",
+            "name": "$skip",
+            "description": "Number of agent applications to skip.",
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token for pagination.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of agent applications to retrieve.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "searchText",
+            "description": "Search text for filtering agent applications.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "Field to order by.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderByAsc",
+            "description": "Whether to order in ascending order.",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgentApplicationResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Account Agent Applications.": {
+            "$ref": "./examples/AgentApplication/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}": {
+      "delete": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Delete Agent Application.",
+        "operationId": "AgentApplications_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Agent Application name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Account Agent Application.": {
+            "$ref": "./examples/AgentApplication/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Gets an Agent Application by name.",
+        "operationId": "AgentApplications_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Name for the Agent Application.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgentApplicationResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Account Agent Application.": {
+            "$ref": "./examples/AgentApplication/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Creates or updates an Agent Application (asynchronous).",
+        "operationId": "AgentApplications_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Name for the Agent Application.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Agent Application definition object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentApplicationResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/AgentApplicationResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AgentApplicationResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Account Agent Application.": {
+            "$ref": "./examples/AgentApplication/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/listAgents": {
+      "post": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Lists agents for an Agent Application.",
+        "operationId": "AgentApplications_ListAgents",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Agent Application name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgentReferenceResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Agents for Agent Application.": {
+            "$ref": "./examples/AgentApplication/listAgents.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/enable": {
+      "post": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Enables an Agent Application.",
+        "operationId": "AgentApplications_Enable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Agent Application name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Enable Agent Application.": {
+            "$ref": "./examples/AgentApplication/enable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/disable": {
+      "post": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Disables an Agent Application.",
+        "operationId": "AgentApplications_Disable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Agent Application name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Disable Agent Application.": {
+            "$ref": "./examples/AgentApplication/disable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments": {
+      "get": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Lists Agent Deployments in the application.",
+        "operationId": "AgentDeployments_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "query",
+            "name": "count",
+            "description": "Number of agent deployments to be retrieved in a page of results.",
+            "type": "integer",
+            "format": "int32",
+            "default": 30
+          },
+          {
+            "in": "query",
+            "name": "$skipToken",
+            "description": "Continuation token for pagination.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "names",
+            "description": "Names of agent deployments to retrieve.",
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "in": "query",
+            "name": "orderBy",
+            "description": "Field to order by.",
+            "type": "string"
+          },
+          {
+            "in": "query",
+            "name": "orderByAsc",
+            "description": "Whether to order in ascending order.",
+            "type": "boolean",
+            "default": false
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgentDeploymentResourceArmPaginatedResult"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List Agent Deployments.": {
+            "$ref": "./examples/AgentDeployment/list.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}": {
+      "delete": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Delete Agent Deployment.",
+        "operationId": "AgentDeployments_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "No Content"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete Agent Deployment.": {
+            "$ref": "./examples/AgentDeployment/delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Gets an Agent Deployment by name.",
+        "operationId": "AgentDeployments_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/AgentDeploymentResource"
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Agent Deployment.": {
+            "$ref": "./examples/AgentDeployment/get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Creates or updates an Agent Deployment (asynchronous).",
+        "operationId": "AgentDeployments_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "Agent Deployment definition object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/AgentDeploymentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create or update request is successful.",
+            "schema": {
+              "$ref": "#/definitions/AgentDeploymentResource"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/AgentDeploymentResource"
+            },
+            "headers": {
+              "x-ms-async-operation-timeout": {
+                "description": "Timeout for the client to use when polling the asynchronous operation.",
+                "type": "string",
+                "format": "duration"
+              },
+              "Azure-AsyncOperation": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update Agent Deployment.": {
+            "$ref": "./examples/AgentDeployment/createOrUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}/start": {
+      "post": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Starts an Agent Deployment.",
+        "operationId": "AgentDeployments_Start",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start Agent Deployment.": {
+            "$ref": "./examples/AgentDeployment/start.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}/stop": {
+      "post": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Stops an Agent Deployment.",
+        "operationId": "AgentDeployments_Stop",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop Agent Deployment.": {
+            "$ref": "./examples/AgentDeployment/stop.json"
+          }
         }
       }
     }
@@ -10633,6 +11460,949 @@
         "name": "RuleType",
         "modelAsString": true
       }
+    },
+    "AgentApplicationResource": {
+      "description": "Agent Application resource",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/AgenticApplication"
+        }
+      },
+      "x-ms-client-name": "AgentApplication",
+      "additionalProperties": false
+    },
+    "AgentApplicationResourceArmPaginatedResult": {
+      "description": "A paginated list of Agent Application entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Agent Application objects. If null, there are no additional pages.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "An array of objects of type Agent Application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentApplicationResource"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentReferenceResource": {
+      "description": "Agent Reference resource",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/AgentReference"
+        }
+      },
+      "x-ms-client-name": "AgentReference",
+      "additionalProperties": false
+    },
+    "AgentReferenceResourceArmPaginatedResult": {
+      "description": "A paginated list of Agent Reference entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Agent Reference objects. If null, there are no additional pages.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "An array of objects of type Agent Reference.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentReferenceResource"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentDeploymentResource": {
+      "description": "Agent Deployment resource",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "description": "[Required] Additional attributes of the entity.",
+          "$ref": "#/definitions/AgentDeployment"
+        }
+      },
+      "x-ms-client-name": "AgentDeployment",
+      "additionalProperties": false
+    },
+    "AgentDeploymentResourceArmPaginatedResult": {
+      "description": "A paginated list of Agent Deployment entities.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link to the next page of Agent Deployment objects. If null, there are no additional pages.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "value": {
+          "description": "An array of objects of type Agent Deployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentDeploymentResource"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgenticApplication": {
+      "description": "Resource type representing an agentic application as a management construct.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
+        "displayName": {
+          "description": "The display name of the application.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "baseUrl": {
+          "description": "The application's dedicated invocation endpoint.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "agents": {
+          "description": "The list of agent definitions comprising this application, returned as references to the objects under the parent project; use this to obtain a flat list of all agent-version pairs represented by this application.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentReference"
+          },
+          "x-nullable": true
+        },
+        "agentIdentityBlueprint": {
+          "description": "The EntraId Agentic Blueprint of the application.",
+          "$ref": "#/definitions/AssignedIdentity",
+          "x-nullable": true
+        },
+        "defaultInstanceIdentity": {
+          "description": "The (default) agent instance identity of the application.",
+          "$ref": "#/definitions/AssignedIdentity",
+          "x-nullable": true
+        },
+        "authorizationPolicy": {
+          "description": "Gets or sets the authorization policy associated with this agentic application instance.",
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy",
+          "x-nullable": true
+        },
+        "trafficRoutingPolicy": {
+          "description": "Gets or sets the traffic routing policy for the application's deployments.",
+          "$ref": "#/definitions/ApplicationTrafficRoutingPolicy",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Provisioning state of the application.",
+          "$ref": "#/definitions/AgenticApplicationProvisioningState",
+          "readOnly": true
+        },
+        "isEnabled": {
+          "description": "Enabledstate of the application.",
+          "type": "boolean",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentDeployment": {
+      "description": "Type representing an agent deployment as a management construct.",
+      "type": "object",
+      "discriminator": "deploymentType",
+      "required": [
+        "deploymentType"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceBase"
+        }
+      ],
+      "properties": {
+        "displayName": {
+          "description": "Gets or sets the display name of the deployment.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "deploymentId": {
+          "description": "Gets or sets the unique identifier of the deployment.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "state": {
+          "description": "Gets or sets the current operational state of the deployment (and, intrinsically, of the comprising agents).",
+          "$ref": "#/definitions/AgentDeploymentState",
+          "x-nullable": true
+        },
+        "protocols": {
+          "description": "Gets or sets the supported protocol types and versions exposed by this deployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AgentProtocolVersion"
+          },
+          "x-ms-identifiers": [
+            "protocol",
+            "version"
+          ],
+          "x-nullable": true
+        },
+        "agents": {
+          "description": "Returns a flat list of agent:version deployed in this deployment.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/VersionedAgentReference"
+          },
+          "x-ms-identifiers": [
+            "agentId"
+          ],
+          "x-nullable": true
+        },
+        "deploymentType": {
+          "description": "Gets or sets the type of deployment for the agent.",
+          "$ref": "#/definitions/AgentDeploymentType"
+        },
+        "provisioningState": {
+          "description": "Gets or sets the provisioning state of the agent deployment.",
+          "$ref": "#/definitions/AgentDeploymentProvisioningState",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedAgentDeployment": {
+      "description": "Represents a managed agent deployment where the underlying infrastructure is managed by the platform in the deployer's subscription.",
+      "type": "object",
+      "x-ms-discriminator-value": "Managed",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentDeployment"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "HostedAgentDeployment": {
+      "description": "Represents a hosted agent deployment where the underlying infrastructure is owned by the platform.",
+      "type": "object",
+      "x-ms-discriminator-value": "Hosted",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentDeployment"
+        }
+      ],
+      "properties": {
+        "minReplicas": {
+          "description": "Gets or sets the minimum number of replicas for this hosted deployment.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "maxReplicas": {
+          "description": "Gets or sets the maximum number of replicas for this hosted deployment.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentReference": {
+      "description": "Type modeling a reference to a version of an agent definition.",
+      "type": "object",
+      "properties": {
+        "agentId": {
+          "description": "Gets the agent's unique identifier within the organization (subscription).",
+          "type": "string",
+          "x-nullable": true
+        },
+        "agentName": {
+          "description": "Gets the agent's name (unique within the project/app).",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "VersionedAgentReference": {
+      "description": "Type modeling a reference to a version of an agent definition.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentReference"
+        }
+      ],
+      "properties": {
+        "agentVersion": {
+          "description": "Gets the agent's version (unique for each agent lineage).",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentProtocol": {
+      "description": "Protocol used by the agent/exposed by a deployment.",
+      "type": "string",
+      "enum": [
+        "Agent",
+        "A2A",
+        "Responses"
+      ],
+      "x-ms-enum": {
+        "name": "AgentProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Agent",
+            "description": "Agent protocol (aka Active)"
+          },
+          {
+            "value": "A2A",
+            "description": "Agent2Agent standard"
+          },
+          {
+            "value": "Responses",
+            "description": "OpenAI-compatible"
+          }
+        ]
+      }
+    },
+    "AgentProtocolVersion": {
+      "description": "Type modeling the protocol and version used by an agent/exposed by a deployment.",
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "description": "The protocol used by the agent/exposed by a deployment.",
+          "$ref": "#/definitions/AgentProtocol"
+        },
+        "version": {
+          "description": "The version of the protocol.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgentDeploymentState": {
+      "description": "Current operational state of the agentic functionality represented by this deployment.",
+      "type": "string",
+      "enum": [
+        "Starting",
+        "Running",
+        "Stopping",
+        "Stopped",
+        "Failed",
+        "Deleting",
+        "Deleted",
+        "Updating"
+      ],
+      "x-ms-enum": {
+        "name": "AgentDeploymentState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Starting",
+            "description": "The deployment is starting."
+          },
+          {
+            "value": "Running",
+            "description": "The deployment started/is operational."
+          },
+          {
+            "value": "Stopping",
+            "description": "The deployment is being stopped."
+          },
+          {
+            "value": "Stopped",
+            "description": "The deployment was stopped."
+          },
+          {
+            "value": "Failed",
+            "description": "The deployment failed."
+          },
+          {
+            "value": "Deleting",
+            "description": "The deployment is being deleted."
+          },
+          {
+            "value": "Deleted",
+            "description": "The deployment was deleted."
+          },
+          {
+            "value": "Updating",
+            "description": "The deployment is being updated."
+          }
+        ]
+      }
+    },
+    "AgentDeploymentType": {
+      "description": "Specifies the type of deployment for an agent, indicating how the underlying compute and network infrastructure is managed.",
+      "type": "string",
+      "enum": [
+        "Managed",
+        "Hosted",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "AgentDeploymentType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Managed",
+            "description": "The underlying infra is managed by the platform in the deployer's subscription"
+          },
+          {
+            "value": "Hosted",
+            "description": "The underlying infra is owned by the platform"
+          },
+          {
+            "value": "Custom",
+            "description": "The underlying infra is provisioned by the deployer (BYO)"
+          }
+        ]
+      }
+    },
+    "AgentDeploymentProvisioningState": {
+      "description": "Provisioning state of an agentic deployment, as an Azure resource.",
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AgentDeploymentProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "The deployment was successfully completed."
+          },
+          {
+            "value": "Failed",
+            "description": "The deployment failed."
+          },
+          {
+            "value": "Canceled",
+            "description": "The deployment was canceled."
+          },
+          {
+            "value": "Creating",
+            "description": "The deployment is being created."
+          },
+          {
+            "value": "Updating",
+            "description": "The deployment is being updated."
+          },
+          {
+            "value": "Deleting",
+            "description": "The deployment is being deleted."
+          }
+        ]
+      }
+    },
+    "TrafficRoutingProtocol": {
+      "description": "Traffic routing protocol, used to distribute an application's inbound traffic to its deployments.",
+      "type": "string",
+      "enum": [
+        "FixedRatio"
+      ],
+      "x-ms-enum": {
+        "name": "TrafficRoutingProtocol",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "FixedRatio",
+            "description": "Percentage based routing"
+          }
+        ]
+      }
+    },
+    "TrafficRoutingRule": {
+      "description": "Represents a rule for routing traffic to a specific deployment.",
+      "type": "object",
+      "properties": {
+        "ruleId": {
+          "description": "The identifier of this traffic routing rule.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "A user-provided description for this traffic routing rule.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "deploymentId": {
+          "description": "The unique identifier of the deployment to which traffic is routed by this rule.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "trafficPercentage": {
+          "description": "Gets or sets the percentage of traffic allocated to this instance.",
+          "type": "integer",
+          "format": "int32"
+        }
+      },
+      "additionalProperties": false
+    },
+    "BuiltInAuthorizationScheme": {
+      "description": "Authorization scheme type.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "OrganizationScope",
+        "Microsoft365",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "BuiltInAuthorizationScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Default",
+            "description": "Standard AzureML RBAC"
+          },
+          {
+            "value": "OrganizationScope",
+            "description": "Claim-based, requires membership in the tenant"
+          },
+          {
+            "value": "Microsoft365",
+            "description": "Microsoft365-specific (AzureBotService) authorization"
+          },
+          {
+            "value": "Custom",
+            "description": "Custom scheme defined by the application author"
+          }
+        ]
+      }
+    },
+    "ApplicationAuthorizationPolicy": {
+      "description": "Represents a policy for authorizing applications based on specified authentication and authorization schemes.",
+      "type": "object",
+      "discriminator": "type",
+      "required": [
+        "type"
+      ],
+      "properties": {
+        "type": {
+          "description": "Authorization scheme type.",
+          "$ref": "#/definitions/BuiltInAuthorizationScheme"
+        }
+      },
+      "additionalProperties": false
+    },
+    "RoleBasedBuiltInAuthorizationPolicy": {
+      "description": "Built-in role-based authorization policy.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Default",
+      "additionalProperties": false
+    },
+    "OrganizationSharedBuiltInAuthorizationPolicy": {
+      "description": "Built-in authorization policy scoped to organization/tenant.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "OrganizationScope",
+      "additionalProperties": false
+    },
+    "M365BuiltInAuthorizationPolicy": {
+      "description": "Represents a built-in authorization policy specific to Azure Bot Service/M365 authentication.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft365",
+      "additionalProperties": false
+    },
+    "ApplicationTrafficRoutingPolicy": {
+      "description": "Type representing an application traffic policy as a property of an agentic application.",
+      "type": "object",
+      "properties": {
+        "protocol": {
+          "description": "Methodology used to route traffic to the application's deployments.",
+          "$ref": "#/definitions/TrafficRoutingProtocol"
+        },
+        "rules": {
+          "description": "Gets or sets the collection of traffic routing rules.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/TrafficRoutingRule"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AgenticApplicationProvisioningState": {
+      "description": "Provisioning state of an agentic application.",
+      "type": "string",
+      "enum": [
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Creating",
+        "Updating",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "AgenticApplicationProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Succeeded",
+            "description": "The application was successfully provisioned."
+          },
+          {
+            "value": "Failed",
+            "description": "The application provisioning failed."
+          },
+          {
+            "value": "Canceled",
+            "description": "The application provisioning was canceled."
+          },
+          {
+            "value": "Creating",
+            "description": "The application is being created."
+          },
+          {
+            "value": "Updating",
+            "description": "The application is being updated."
+          },
+          {
+            "value": "Deleting",
+            "description": "The application is being deleted."
+          }
+        ]
+      }
+    },
+    "AssignedIdentity": {
+      "description": "Type representing an identity assignment",
+      "type": "object",
+      "required": [
+        "kind",
+        "type",
+        "clientId",
+        "principalId",
+        "tenantId"
+      ],
+      "properties": {
+        "kind": {
+          "description": "Specifies the kind of Entra identity described by this object.",
+          "$ref": "#/definitions/IdentityKind"
+        },
+        "type": {
+          "description": "Enumeration of identity types, from the perspective of management.",
+          "$ref": "#/definitions/IdentityManagementType"
+        },
+        "clientId": {
+          "description": "The client ID of the identity.",
+          "type": "string"
+        },
+        "principalId": {
+          "description": "The principal ID of the identity.",
+          "type": "string"
+        },
+        "tenantId": {
+          "description": "The tenant ID of the identity.",
+          "type": "string"
+        },
+        "subject": {
+          "description": "The subject of this identity assignment.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "provisioningState": {
+          "description": "Represents the provisioning state of an identity resource.",
+          "$ref": "#/definitions/IdentityProvisioningState",
+          "readOnly": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "IdentityKind": {
+      "description": "Specifies the kind of Entra identity described by this object.",
+      "type": "string",
+      "enum": [
+        "AgentBlueprint",
+        "AgentInstance",
+        "AgenticUser",
+        "Managed",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "AgentBlueprint",
+            "description": "Represents a class identity, used for agentic applications."
+          },
+          {
+            "value": "AgentInstance",
+            "description": "Represents an instance identity."
+          },
+          {
+            "value": "AgenticUser",
+            "description": "Represents an agentic instance identity with user-like traits."
+          },
+          {
+            "value": "Managed",
+            "description": "Represents a classic managed identity."
+          },
+          {
+            "value": "None",
+            "description": "No identity."
+          }
+        ]
+      }
+    },
+    "IdentityManagementType": {
+      "description": "Enumeration of identity types, from the perspective of management.",
+      "type": "string",
+      "enum": [
+        "System",
+        "User",
+        "None"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityManagementType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "System",
+            "description": "Platform-managed identity."
+          },
+          {
+            "value": "User",
+            "description": "User-managed identity."
+          },
+          {
+            "value": "None",
+            "description": "No identity."
+          }
+        ]
+      }
+    },
+    "IdentityProvisioningState": {
+      "description": "Represents the provisioning state of an identity resource.",
+      "type": "string",
+      "enum": [
+        "Creating",
+        "Updating",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleting"
+      ],
+      "x-ms-enum": {
+        "name": "IdentityProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Creating",
+            "description": "Identity is being created."
+          },
+          {
+            "value": "Updating",
+            "description": "Identity is being updated."
+          },
+          {
+            "value": "Succeeded",
+            "description": "Identity has been successfully provisioned."
+          },
+          {
+            "value": "Failed",
+            "description": "Identity provisioning has failed."
+          },
+          {
+            "value": "Canceled",
+            "description": "Identity provisioning has been canceled."
+          },
+          {
+            "value": "Deleting",
+            "description": "Identity is being deleted."
+          }
+        ]
+      }
+    },
+    "AgentCard": {
+      "description": "Represents a detailed description of an agent, including its name, functionality, hosting information, supported interaction modes, and available skills.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Human-readable name for the Agent (e.g., 'Recipe Agent').",
+          "type": "string",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "Human-readable description of the Agent's function.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "url": {
+          "description": "URL address where the Agent is hosted.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "provider": {
+          "description": "Service provider information for the Agent.",
+          "$ref": "#/definitions/ProviderInfo",
+          "x-nullable": true
+        },
+        "version": {
+          "description": "Version of the Agent (format defined by provider, e.g., '1.0.0').",
+          "type": "string",
+          "x-nullable": true
+        },
+        "documentationUrl": {
+          "description": "URL for the Agent's documentation.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "defaultInputModes": {
+          "description": "Default interaction modes supported by the Agent across all skills.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "defaultOutputModes": {
+          "description": "Default output modes supported by the Agent across all skills.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "skills": {
+          "description": "Collection of capability units the Agent can perform.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Skill"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "ProviderInfo": {
+      "description": "Service provider information for the Agent",
+      "type": "object",
+      "properties": {
+        "organization": {
+          "description": "Organization name of the provider.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "url": {
+          "description": "URL of the provider.",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "Skill": {
+      "description": "Collection of capability units the Agent can perform",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Unique identifier for the skill.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Human-readable name for the skill.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "description": {
+          "description": "Skill description.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "tags": {
+          "description": "Tags describing the skill's capability category (e.g., 'cooking', 'customer support').",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "examples": {
+          "description": "Example scenarios or prompts the skill can execute (e.g., 'I need a recipe for bread').",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "inputModes": {
+          "description": "Input MIME types supported by the skill (if different from default).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "outputModes": {
+          "description": "Output MIME types supported by the skill (if different from default).",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
     }
   },
   "parameters": {
@@ -10677,6 +12447,24 @@
       "required": true,
       "type": "string",
       "description": "The name of the deployment associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "deploymentNameForActionParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the deployment for pause/resume actions",
+      "x-ms-parameter-location": "method"
+    },
+    "appNameParameter": {
+      "name": "appName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the application associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
     "raiPolicyNameParameter": {
