@@ -5,6 +5,7 @@ import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import { mapAsync } from "./array.js";
+import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
 
 /**
@@ -207,19 +208,21 @@ export class Readme {
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
-    const tags = await mapAsync(
-      [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
-      async (t) => await t.toJSONAsync(options),
-    );
+    return await embedError(async () => {
+      const tags = await mapAsync(
+        [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
+        async (t) => await t.toJSONAsync(options),
+      );
 
-    return {
-      path:
-        options?.relativePaths && this.#specModel
-          ? relative(this.#specModel.folder, this.#path)
-          : this.#path,
-      globalConfig: await this.getGlobalConfig(),
-      tags,
-    };
+      return {
+        path:
+          options?.relativePaths && this.#specModel
+            ? relative(this.#specModel.folder, this.#path)
+            : this.#path,
+        globalConfig: await this.getGlobalConfig(),
+        tags,
+      };
+    }, options);
   }
 
   /**
