@@ -950,6 +950,10 @@ union MetadataKind {
 
   /** Metadata for temporal span values. */
   TemporalSpanMetadata: "TemporalSpanMetadata",
+
+  /** Metadata for address-related values. */
+  @added(Versions.v2025_11_15_preview)
+  AddressMetadata: "AddressMetadata",
 }
 
 /** Represents Metadata for quantities. */
@@ -1053,6 +1057,32 @@ model WeightMetadata extends BaseMetadata {
 
   /** Unit of measure for weight. */
   unit: WeightUnit;
+}
+
+/** Represents the Address entity Metadata model. */
+@added(Version.v2025_11_15_preview)
+model AddressMetadata extends BaseMetadata {
+
+  /** Kind of the metadata. */
+  metadataKind: MetadataKind.AddressMetadata;
+
+  /** The fully formatted address string following postal conventions for the address's country/region. */
+  formatedAddress: string;
+
+  /** The full address string as recognized from the input text. */
+  addressLines: string[];
+
+  /** The city name of the address. */
+  city?: string;
+
+  /** The state or province name of the address. */
+  state?: string;
+
+  /** The postal or ZIP code of the address. */
+  postalCode?: string;
+
+  /** The country or region name of the address. */
+  countryOrRegion?: string;
 }
 
 /** Represents the Currency ) entity Metadata model. */
