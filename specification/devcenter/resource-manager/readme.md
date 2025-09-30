@@ -96,6 +96,21 @@ directive:
       - AvoidAdditionalProperties
 
   - where:
+    - $.definitions.CustomizationTaskProperties.properties.inputs
+    suppress:
+      - AvoidAdditionalProperties
+
+  - where:
+    - $.definitions.ProjectEnvironmentTypeUpdateProperties.properties.userRoleAssignments
+    suppress:
+      - AvoidAdditionalProperties
+
+  - where:
+    - $.definitions.UserRoleAssignment.properties.roles
+    suppress:
+      - AvoidAdditionalProperties
+
+  - where:
     - $.definitions.OutboundEnvironmentEndpointCollection
     suppress:
       - RequiredPropertiesMissingInResourceModel
@@ -106,9 +121,34 @@ directive:
       - ArmResourcePropertiesBag
 
   - where:
+    - $.definitions.DevBoxDefinition
+    suppress:
+      - ArmResourcePropertiesBag
+
+  - where:
+    - $.definitions.ImageVersion
+    suppress:
+      - ArmResourcePropertiesBag
+
+  - where:
     - $.definitions.SkuListResult
     suppress:
       - RequiredPropertiesMissingInResourceModel
+
+  - where:
+    - $.definitions.ListUsagesResult
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+
+  - where:
+    - $.definitions.OperationStatus
+    suppress:
+      - RequiredPropertiesMissingInResourceModel
+
+  - where:
+    - $.definitions.OperationStatus
+    suppress:
+      - BodyTopLevelProperties
 ```
 
 
@@ -118,7 +158,7 @@ These settings apply only when `--tag=package-preview-2025-07-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-07-01-preview'
 input-file:
-  - Microsoft.DevCenter/preview/2025-07-01-preview/devcenter.json
+  - Microsoft.DevCenter/preview/2025-07-01-preview/DevCenterRP.json
 ```
 
 ### Tag: package-preview-2025-04-01-preview
