@@ -1321,13 +1321,16 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues/{assessmentId}": {
-      "put": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Security/securityConnectors/{securityConnectorName}/devops/default/gitHubOwners/{ownerName}/repos/{repoName}/issues": {
+      "post": {
         "tags": [
           "DevOps"
         ],
         "summary": "Creates a GitHub issue for the specified repository and assessment.",
         "operationId": "GitHubIssues_Create",
+        "consumes": [
+          "application/json"
+        ],
         "produces": [
           "application/json"
         ],
@@ -1348,10 +1351,15 @@
             "$ref": "#/parameters/RepoName"
           },
           {
-            "$ref": "#/parameters/AssessmentId"
+            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v2/types.json#/parameters/ApiVersionParameter"
+            "in": "body",
+            "name": "assessmentId",
+            "description": "The assessment ID for which to create the GitHub issue.",
+            "schema": {
+              "type": "string"
+            }
           }
         ],
         "responses": {
@@ -2723,14 +2731,6 @@
       "in": "path",
       "name": "ownerName",
       "description": "The GitHub owner name.",
-      "required": true,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "AssessmentId": {
-      "in": "path",
-      "name": "assessmentId",
-      "description": "The assessment ID for which to create the GitHub issue.",
       "required": true,
       "type": "string",
       "x-ms-parameter-location": "method"
