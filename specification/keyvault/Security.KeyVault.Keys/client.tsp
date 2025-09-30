@@ -333,7 +333,7 @@ op secureWrapKey is KeyVaultOperation<
 >;
 
 /**
- * The SECURE UNWRAP operation supports the unwrap of previously wrapped key. 
+ * The SECURE UNWRAP operation supports the unwrap of previously wrapped key.
  * It ensures the target token satisfies the release policy associated with the key encryption key.
  * This operation requires the keys/unwrapKey permission.
  */
