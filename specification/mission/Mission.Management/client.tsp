@@ -132,3 +132,5 @@ using Microsoft.Mission;
   "EnclaveDefaultSettingsPatch",
   "csharp"
 );
+
+@@clientName(Microsoft.Mission, "VirtualEnclavesMgmtClient", "python");

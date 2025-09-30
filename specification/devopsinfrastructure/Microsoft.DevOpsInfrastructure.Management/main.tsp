@@ -19,14 +19,10 @@ namespace Microsoft.DevOpsInfrastructure;
 /** Api versions */
 enum Versions {
   /** 2025-01-21 version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(CommonTypes.Versions.v5)
   v2025_01_21: "2025-01-21",
 
   /** 2025-09-20 version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2025_09_20: "2025-09-20",
 }
