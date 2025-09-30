@@ -4984,6 +4984,15 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VIN",
+        "LicensePlate",
         "All",
         "Default"
       ],
@@ -5847,6 +5856,51 @@
             "description": "Address"
           },
           {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VIN",
+            "value": "VIN",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
+          },
+          {
             "name": "All",
             "value": "All",
             "description": "All PII categories."
@@ -5858,44 +5912,6 @@
           }
         ]
       }
-    },
-    "PiiEntitiesDocumentResult": {
-      "type": "object",
-      "description": "Contains the PII results.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "redactedText",
-        "entities"
-      ]
     },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
@@ -5955,7 +5971,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/PiiEntitiesDocumentResult"
+            "$ref": "#/definitions/PiiResultWithDetectedLanguage"
           }
         }
       },
@@ -5963,6 +5979,48 @@
         "errors",
         "modelVersion",
         "documents"
+      ]
+    },
+    "PiiResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Contains the PII results with detected language.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "redactedText",
+        "entities"
       ]
     },
     "PiiTaskParameters": {

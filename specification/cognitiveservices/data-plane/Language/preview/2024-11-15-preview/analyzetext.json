@@ -5816,44 +5816,6 @@
         ]
       }
     },
-    "PiiEntitiesDocumentResult": {
-      "type": "object",
-      "description": "Contains the PII results.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "redactedText",
-        "entities"
-      ]
-    },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
       "description": "Contains the PII LRO results.",
@@ -5912,7 +5874,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/PiiEntitiesDocumentResult"
+            "$ref": "#/definitions/PiiResultWithDetectedLanguage"
           }
         }
       },
@@ -5920,6 +5882,48 @@
         "errors",
         "modelVersion",
         "documents"
+      ]
+    },
+    "PiiResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Contains the PII results with detected language.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "redactedText",
+        "entities"
       ]
     },
     "PiiTaskParameters": {

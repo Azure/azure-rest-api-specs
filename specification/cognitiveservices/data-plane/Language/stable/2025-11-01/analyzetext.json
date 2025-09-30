@@ -1259,47 +1259,6 @@
         "metadataKind"
       ]
     },
-    "BaseRedactionPolicy": {
-      "type": "object",
-      "description": "The abstract base class for RedactionPolicy.",
-      "properties": {
-        "policyKind": {
-          "type": "string",
-          "description": "The entity RedactionPolicy object kind.",
-          "default": "characterMask",
-          "enum": [
-            "noMask",
-            "characterMask",
-            "entityMask"
-          ],
-          "x-ms-enum": {
-            "name": "RedactionPolicyKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "noMask",
-                "value": "noMask",
-                "description": "Do not redact detected entities."
-              },
-              {
-                "name": "characterMask",
-                "value": "characterMask",
-                "description": "React detected entities with redaction character."
-              },
-              {
-                "name": "entityMask",
-                "value": "entityMask",
-                "description": "Redact detected entities with entity type."
-              }
-            ]
-          }
-        }
-      },
-      "discriminator": "policyKind",
-      "required": [
-        "policyKind"
-      ]
-    },
     "Certainty": {
       "type": "string",
       "description": "Describes the entities certainty and polarity.",
@@ -1341,115 +1300,6 @@
           }
         ]
       }
-    },
-    "CharacterMaskPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of redacting with a redaction character",
-      "properties": {
-        "redactionCharacter": {
-          "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction.",
-          "default": "*",
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ],
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "exclamationPoint",
-                "value": "!",
-                "description": "Exclamation point character"
-              },
-              {
-                "name": "numberSign",
-                "value": "#",
-                "description": "Number sign character"
-              },
-              {
-                "name": "dollar",
-                "value": "$",
-                "description": "Dollar sign character"
-              },
-              {
-                "name": "perCent",
-                "value": "%",
-                "description": "Percent sign character"
-              },
-              {
-                "name": "ampersand",
-                "value": "&",
-                "description": "Ampersand character"
-              },
-              {
-                "name": "asterisk",
-                "value": "*",
-                "description": "Asterisk character"
-              },
-              {
-                "name": "plus",
-                "value": "+",
-                "description": "Plus sign character"
-              },
-              {
-                "name": "minus",
-                "value": "-",
-                "description": "Minus sign character"
-              },
-              {
-                "name": "equals",
-                "value": "=",
-                "description": "Equals sign character"
-              },
-              {
-                "name": "questionMark",
-                "value": "?",
-                "description": "Question mark character"
-              },
-              {
-                "name": "atSign",
-                "value": "@",
-                "description": "At sign character"
-              },
-              {
-                "name": "caret",
-                "value": "^",
-                "description": "Caret character"
-              },
-              {
-                "name": "underscore",
-                "value": "_",
-                "description": "Underscore character"
-              },
-              {
-                "name": "tilde",
-                "value": "~",
-                "description": "Tilde character"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "characterMask"
     },
     "ClassificationDocumentResultWithDetectedLanguage": {
       "type": "object",
@@ -2851,16 +2701,6 @@
         }
       ],
       "x-ms-discriminator-value": "EntityLinkingResults"
-    },
-    "EntityMaskPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of redacting PII with the entity type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "entityMask"
     },
     "EntityRecognitionLROResult": {
       "type": "object",
@@ -4582,16 +4422,6 @@
         "text"
       ]
     },
-    "NoMaskPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of not redacting found PII.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "noMask"
-    },
     "NumberKind": {
       "type": "string",
       "description": "The type of the extracted number entity.",
@@ -4904,6 +4734,15 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VehicleIdentificationNumber",
+        "LicensePlate",
         "All",
         "Default"
       ],
@@ -5767,6 +5606,51 @@
             "description": "Address"
           },
           {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VehicleIdentificationNumber",
+            "value": "VehicleIdentificationNumber",
+            "description": "VIN"
+          },
+          {
+            "name": "LicensePlate",
+            "value": "LicensePlate",
+            "description": "License Plate"
+          },
+          {
             "name": "All",
             "value": "All",
             "description": "All PII categories."
@@ -5778,44 +5662,6 @@
           }
         ]
       }
-    },
-    "PiiEntitiesDocumentResult": {
-      "type": "object",
-      "description": "Contains the PII results.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/Entity"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "redactedText",
-        "entities"
-      ]
     },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
@@ -5875,7 +5721,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/PiiEntitiesDocumentResult"
+            "$ref": "#/definitions/PiiResultWithDetectedLanguage"
           }
         }
       },
@@ -5883,6 +5729,48 @@
         "errors",
         "modelVersion",
         "documents"
+      ]
+    },
+    "PiiResultWithDetectedLanguage": {
+      "type": "object",
+      "description": "Contains the PII results with detected language.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        },
+        "detectedLanguage": {
+          "$ref": "#/definitions/DetectedLanguage",
+          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "redactedText",
+        "entities"
       ]
     },
     "PiiTaskParameters": {
@@ -5961,10 +5849,6 @@
               }
             ]
           }
-        },
-        "redactionPolicy": {
-          "$ref": "#/definitions/BaseRedactionPolicy",
-          "description": "RedactionPolicy to be used on the input."
         },
         "valueExclusionPolicy": {
           "$ref": "#/definitions/ValueExclusionPolicy",
