@@ -56,6 +56,7 @@ enum Versions {
   /**
    * The 2025-07-01-preview API version.
    */
+  @previewVersion
   v2025_07_01_preview: "2025-07-01-preview",
 }
 

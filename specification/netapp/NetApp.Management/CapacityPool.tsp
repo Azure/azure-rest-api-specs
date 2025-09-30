@@ -77,7 +77,7 @@ model PoolProperties {
    * Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  customThroughputMibps?: float32 | null;
+  customThroughputMibps?: int32 | null;
 
   /**
    * The qos type of the pool
@@ -159,7 +159,7 @@ model PoolPatchProperties {
    * Maximum throughput in MiB/s that can be achieved by this pool and this will be accepted as input only for manual qosType pool with Flexible service level
    */
   #suppress "@azure-tools/typespec-azure-core/no-nullable" "For backward compatibility"
-  customThroughputMibps?: float32 | null;
+  customThroughputMibps?: int32 | null;
 }
 
 /**
