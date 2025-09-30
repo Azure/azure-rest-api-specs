@@ -2038,12 +2038,11 @@ interface BlockBlob {
   @put
   @sharedRoute
   @route("?BlockBlob&fromUrl")
-  putBlobFromUrl is StorageOperationNoBody<
+  uploadBlobFromUrl is StorageOperationNoBody<
     {
       ...MetadataHeaders;
       ...TimeoutParameter;
       ...ContentMd5Parameter;
-      ...ContentLengthParameter;
       ...BlobContentTypeParameter;
       ...BlobContentEncodingParameter;
       ...BlobContentLanguageParameter;
@@ -2069,6 +2068,11 @@ interface BlockBlob {
       ...SourceContentMd5Parameter;
       ...BlobTagsHeaderParameter;
       ...CopySourceParameter;
+
+      /** Required to be 0 for Put Blob from URL operation. */
+      @header("Content-Length")
+      contentLength: 0;
+
       ...CopySourceBlobPropertiesParameter;
       ...CopySourceAuthorizationParameter;
       ...CopySourceTagsParameter;
