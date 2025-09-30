@@ -195,6 +195,12 @@
           },
           "Create Developer Bastion Host": {
             "$ref": "./examples/BastionHostDeveloperPut.json"
+          },
+          "Create Bastion Host With Session Recording Configuration and System Assigned Identity": {
+            "$ref": "./examples/BastionHostPutWithSystemAssignedIdentityForSRConfig.json"
+          },
+          "Create Bastion Host With Session Recording Configuration and User Assigned Identity": {
+            "$ref": "./examples/BastionHostPutWithUserAssignedIdentityForSRConfig.json"
           }
         },
         "x-ms-long-running-operation": true,
@@ -813,9 +819,60 @@
           "type": "boolean",
           "default": false,
           "description": "Enable/Disable Private Only feature of the Bastion Host resource."
+        },
+        "sessionRecordingConfiguration": {
+          "$ref": "#/definitions/SessionRecordingConfiguration",
+          "description": "Configuration for session recording feature of the Bastion Host resource."
         }
       },
       "description": "Properties of the Bastion Host."
+    },
+    "SessionRecordingConfiguration": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "type": "object",
+          "description": "The managed identity to use to authenticate to the storage account.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of managed service identity to authenticate to the storage account.",
+              "enum": [
+                "SystemAssigned",
+                "UserAssigned"
+              ],
+              "x-ms-enum": {
+                "name": "SessionRecordingConfigurationIdentityType",
+                "modelAsString": true
+              }
+            },
+            "userAssignedIdentityId": {
+              "type": "string",
+              "format": "arm-id",
+              "description": "The resource ID of the user assigned identity to use in ARM resource id form: (e.g. '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}').",
+              "x-ms-arm-id-details": {
+                "allowedResources": [
+                  {
+                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
+                  }
+                ]
+              }
+            }
+          },
+          "required": [
+            "type"
+          ]
+        },
+        "blobContainerUri": {
+          "type": "string",
+          "description": "The url to the blob container where session recordings will be stored. (e.g. https://MyAccount.blob.core.windows.net/MyContainer)"
+        }
+      },
+      "required": [
+        "identity",
+        "blobContainerUri"
+      ],
+      "description": "Configuration for the session recording feature of the bastion host resource."
     },
     "BastionHost": {
       "properties": {
@@ -839,6 +896,10 @@
         "sku": {
           "description": "The sku of this Bastion Host.",
           "$ref": "#/definitions/Sku"
+        },
+        "identity": {
+          "$ref": "./network.json#/definitions/ManagedServiceIdentity",
+          "description": "The identity of the bastion host, if configured."
         }
       },
       "allOf": [
