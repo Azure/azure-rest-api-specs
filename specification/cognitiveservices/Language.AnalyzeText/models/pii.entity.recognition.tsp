@@ -33,7 +33,7 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
 
   /** RedactionPolicy to be used on the input. */
   @added(Versions.v2024_11_15_preview)
-  @removed(Versions.v2025_11_15_preview)
+  @removed(Versions.v2025_11_01)
   redactionPolicy?: BaseRedactionPolicy;
 
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
@@ -211,7 +211,7 @@ model PiiTaskResult extends AnalyzeTextTaskResult {
 #suppress "@azure-tools/typespec-azure-core/casing-style"
 model PiiResult is PreBuiltResult {
   /** Response by document */
-  @typeChangedFrom(Versions.v2025_11_15_preview, PiiEntitiesDocumentResult[])
+  @typeChangedFrom(Versions.v2024_11_15_preview, PiiEntitiesDocumentResult[])
   documents: PiiResultWithDetectedLanguage[];
 }
 
@@ -227,7 +227,7 @@ union PiiDomain {
 }
 
 /** Entity object with tags. */
-@added(Versions.v2025_11_15_preview)
+@added(Versions.v2024_11_15_preview)
 model PiiEntityWithTags is Entity {
   /** An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected. */
   type?: string;
@@ -803,38 +803,86 @@ union PiiCategoriesExclude {
   Address: "Address",
 
   /** Date Of Birth */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   DateOfBirth: "DateOfBirth",
 
   /** Bank Account Number */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   BankAccountNumber: "BankAccountNumber",
 
   /** Passport Number */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   PassportNumber: "PassportNumber",
 
   /** Drivers License Number */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   Neighborhood: "Neighborhood",
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   SortCode: "SortCode",
 
   /** PIN */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   PIN: "PIN",
 
   /** VIN */
-  @added(Versions.v2025_11_15_preview)
-  VIN: "VedhicleIdentificationNumber",
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
+  VIN: "VIN",
+
+  /** VIN */
+  @added(Versions.v2025_11_01)
+  VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
   /** License Plate */
-  @added(Versions.v2025_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   LicensePlate: "LicensePlate",
+
+  /** KR Passport Number */
+  @added(Versions.v2025_11_15_preview)
+  KRPassportNumber: "KRPassportNumber",
+
+  /** KR Driver's License Number */
+  @added(Versions.v2025_11_15_preview)
+  KRDriversLicenseNumber: "KRDriversLicenseNumber",
+
+  /** KR Social Security Number */
+  @added(Versions.v2025_11_15_preview)
+  KRSocialSecurityNumber: "KRSocialSecurityNumber",
+
+  /** Government Issued ID */
+  @added(Versions.v2025_11_15_preview)
+  GovernmentIssuedId: "GovernmentIssuedId",
+
+  /** Password */
+  @added(Versions.v2025_11_15_preview)
+  Password: "Password",
+
+  /** National Identification */
+  @added(Versions.v2025_11_15_preview)
+  NationalId: "NationalId",
+
+  /** Zip Code */
+  @added(Versions.v2025_11_15_preview)
+  ZipCode: "ZipCode",
+
+  /** Card Verification Value */
+  @added(Versions.v2025_11_15_preview)
+  CVV: "CVV",
+  /** Expiration Date */
+  @added(Versions.v2025_11_15_preview)
+  ExpirationDate: "ExpirationDate",
+
+  /** CA Social Identification Number */
+  @added(Versions.v2025_11_15_preview)
+  CASocialIdentificationNumber: "CASocialIdentificationNumber",
+
+  /** Medicare Beneficiary ID */
+  @added(Versions.v2025_11_15_preview)
+  MedicareBeneficiaryId: "MedicareBeneficiaryId",
 }
