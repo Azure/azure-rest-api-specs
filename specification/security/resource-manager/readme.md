@@ -661,7 +661,6 @@ input-file:
 - Microsoft.Security/stable/2024-08-01/securityStandards.json
 - Microsoft.Security/stable/2024-08-01/standardAssignments.json
 - Microsoft.Security/stable/2024-08-01/customRecommedations.json
-- Microsoft.Security/stable/2025-03-01/securityConnectorsDevOps.json
 - Microsoft.Security/stable/2025-06-01/defenderForStorageSettings.json
 - Microsoft.Security/stable/2025-06-01/operations.json
 
