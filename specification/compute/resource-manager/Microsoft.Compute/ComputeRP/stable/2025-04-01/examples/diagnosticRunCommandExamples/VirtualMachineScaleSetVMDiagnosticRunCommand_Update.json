@@ -1,0 +1,52 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscription-id}",
+    "resourceGroupName": "myResourceGroup",
+    "vmScaleSetName": "myvmScaleSet",
+    "instanceId": "0",
+    "runCommandName": "myRunCommand",
+    "api-version": "2025-04-01",
+    "runCommand": {
+      "properties": {
+        "source": {
+          "commandId": "FleetDiagnosticsWindows"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myRunCommand",
+        "type": "Microsoft.Compute/virtualMachineScaleSets/virtualMachines/runCommands",
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachineScaleSets/myvmScaleSet/virtualMachines/0/runCommands/myRunCommand",
+        "location": "westus",
+        "tags": {
+          "tag1": "value1",
+          "tag2": "value2"
+        },
+        "properties": {
+          "source": {
+            "commandId": "FleetDiagnosticsWindows"
+          },
+          "parameters": [
+            {
+              "name": "param1",
+              "value": "value1"
+            },
+            {
+              "name": "param2",
+              "value": "value2"
+            }
+          ],
+          "asyncExecution": false,
+          "treatFailureAsDeploymentFailure": false,
+          "timeoutInSeconds": 3600,
+          "provisioningState": "Updating"
+        }
+      }
+    }
+  },
+  "operationId": "VirtualMachineScaleSetVMDiagnosticRunCommands_Update",
+  "title": "Update VirtualMachineScaleSet VM diagnostic run command."
+}
