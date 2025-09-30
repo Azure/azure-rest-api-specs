@@ -18,21 +18,21 @@ union ItemType {
 @doc("Base for any message content part; discriminated by `type`.")
 model MessageContentPart {
   @doc("The type of the content part.")
-  type: string;
+  type: ContentPartType;
 }
 
 // Variants
 @usage(RequestUsage)
 @doc("Input text content part.")
 model InputTextContentPart extends MessageContentPart {
-  type: "input_text";
+  type: ContentPartType.input_text;
   text: string;
 }
 
 @usage(RequestUsage)
 @doc("Input audio content part.")
 model InputAudioContentPart extends MessageContentPart {
-  type: "input_audio";
+  type: ContentPartType.input_audio;
   audio: string;
   transcript?: string;
 }
@@ -41,7 +41,7 @@ model InputAudioContentPart extends MessageContentPart {
 @usage(ResponseUsage)
 model OutputTextContentPart extends MessageContentPart {
   @doc("The type of the content part.")
-  type: "text";
+  type: ContentPartType.text;
   @doc("The text content.")
   text: string;
 }
@@ -68,6 +68,7 @@ model ConversationRequestItem {
 @discriminator("role")
 @usage(RequestUsage)
 @doc("A message item within a conversation.")
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
 model MessageItem extends ConversationRequestItem {
   @doc("The type of the item; must be 'message' for message items.")
   type: ItemType.message;
@@ -80,18 +81,21 @@ model MessageItem extends ConversationRequestItem {
 }
 
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
 @doc("A system message item within a conversation.")
 model SystemMessageItem extends MessageItem {
   role: MessageRole.system;
 }
 
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
 @doc("A user message item within a conversation.")
 model UserMessageItem extends MessageItem {
   role: MessageRole.user;
 }
 
 @usage(DualUsage)
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator"
 @doc("An assistant message item within a conversation.")
 model AssistantMessageItem extends MessageItem {
   role: MessageRole.assistant;
@@ -215,6 +219,7 @@ model ResponseIncompleteDetails extends ResponseStatusDetails {
 
 @doc("Details for a failed response.")
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/no-unknown"
 model ResponseFailedDetails extends ResponseStatusDetails {
   type: "failed";
   error: unknown;

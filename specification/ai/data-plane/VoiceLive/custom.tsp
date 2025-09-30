@@ -60,6 +60,7 @@ model RequestSession {
 
 @usage(ResponseUsage)
 @doc("Base for session configuration in the response.")
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" // Being able to use the returned options as input is useful
 model ResponseSession extends RequestSession {
   ...SessionBase;
   @doc("The agent configuration for the session, if applicable.")
@@ -292,7 +293,7 @@ union Modality {
 @discriminator("model")
 @doc("Top-level union for end-of-utterance (EOU) semantic detection configuration.")
 @usage(RequestUsage)
-model EOUDetection {
+model EouDetection {
   `model`: "semantic_detection_v1" | "semantic_detection_v1_en" | "semantic_detection_v1_multilingual" | string;
 }
 
@@ -312,7 +313,7 @@ union EouThresholdLevel
 @doc("Azure semantic end-of-utterance detection (default).")
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model AzureSemanticDetection extends EOUDetection {
+model AzureSemanticDetection extends EouDetection {
   `model`: "semantic_detection_v1";
 
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
@@ -326,7 +327,7 @@ model AzureSemanticDetection extends EOUDetection {
 @doc("Azure semantic end-of-utterance detection (English-optimized).")
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model AzureSemanticDetectionEn extends EOUDetection {
+model AzureSemanticDetectionEn extends EouDetection {
   `model`: "semantic_detection_v1_en";
 
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
@@ -340,7 +341,7 @@ model AzureSemanticDetectionEn extends EOUDetection {
 @doc("Azure semantic end-of-utterance detection (multilingual).")
 @usage(RequestUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style"
-model AzureSemanticDetectionMultilingual extends EOUDetection {
+model AzureSemanticDetectionMultilingual extends EouDetection {
   `model`: "semantic_detection_v1_multilingual";
 
   @doc("Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`.")
@@ -378,7 +379,7 @@ model ServerVad extends TurnDetection {
 
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
-  end_of_utterance_detection?: EOUDetection;
+  end_of_utterance_detection?: EouDetection;
   auto_truncate?: boolean = false;
   create_response?: boolean = false;
   interrupt_response?: boolean = false;
@@ -396,7 +397,7 @@ model AzureSemanticVad extends TurnDetection {
 
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
-  end_of_utterance_detection?: EOUDetection;
+  end_of_utterance_detection?: EouDetection;
   speech_duration_ms?: int32;
   remove_filler_words?: boolean = false;
   languages?: string[];
@@ -417,7 +418,7 @@ model AzureSemanticVadEn extends TurnDetection {
 
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
-  end_of_utterance_detection?: EOUDetection;
+  end_of_utterance_detection?: EouDetection;
   speech_duration_ms?: int32;
   remove_filler_words?: boolean = false;
   auto_truncate?: boolean = false;
@@ -437,7 +438,7 @@ model AzureSemanticVadMultilingual extends TurnDetection {
 
   prefix_padding_ms?: int32;
   silence_duration_ms?: int32;
-  end_of_utterance_detection?: EOUDetection;
+  end_of_utterance_detection?: EouDetection;
   speech_duration_ms?: int32;
   remove_filler_words?: boolean = false;
   languages?: string[];

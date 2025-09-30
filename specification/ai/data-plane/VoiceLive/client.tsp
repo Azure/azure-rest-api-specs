@@ -135,7 +135,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.ServerEventError, "SessionUpdateError", "csharp");
 @@clientName(VoiceLive.ServerEventErrorDetails, "SessionUpdateErrorDetails", "csharp");
 @@clientName(VoiceLive.TokenUsage, "ResponseTokenStatistics", "csharp");
-@@clientName(VoiceLive.EOUDetection, "EouDetection", "csharp");
 @@clientName(VoiceLive.RequestSession, "VoiceLiveSessionOptions", "csharp");
 @@clientName(VoiceLive.ResponseSession, "VoiceLiveSessionResponse", "csharp");
 @@clientName(VoiceLive.AvatarConfig, "AvatarConfiguration", "csharp");

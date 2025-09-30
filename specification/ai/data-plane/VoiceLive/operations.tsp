@@ -6,6 +6,8 @@ using TypeSpec.Versioning;
 
 namespace VoiceLive;
 
+// Service versioning is enum based
+#suppress "@azure-tools/typespec-azure-core/no-enum"
 @doc("API versioning.")
 enum Versions {
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)

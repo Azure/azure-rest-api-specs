@@ -1246,7 +1246,7 @@ model ServerEventConversationItemInputAudioTranscriptionDelta
   delta?: string;
 
   /** The log probabilities of the transcription. */
-  logprobs?: LogProbProperties[] | null;
+  logprobs?: LogProbProperties[];
 }
 
 // Tool customization (apply_discriminator): apply discriminated type
