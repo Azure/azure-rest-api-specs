@@ -1,4 +1,4 @@
-import { readme, swagger } from "@azure-tools/specs-shared/changed-files";
+import { getChangedFiles, readme, swagger } from "@azure-tools/specs-shared/changed-files";
 import { SpecModel } from "@azure-tools/specs-shared/spec-model";
 import deepEqual from "deep-eql";
 import { readFile } from "fs/promises";
@@ -12,7 +12,8 @@ import { deduplicateTags } from "./markdown-utils.js";
 export async function getRunList(
   beforePath: string,
   afterPath: string,
-  changedFilesPath: string,
+  baseBranch: string,
+  compareSha: string,
 ): Promise<[Map<string, ReadmeAffectedTags>, Map<string, ReadmeAffectedTags>, Set<string>]> {
   // Forward slashes are OK list coming from changedFilesPath is from git which
   // always uses forward slashes as path separators
@@ -20,8 +21,14 @@ export async function getRunList(
   // Read changed files, exclude any files that should be ignored
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
 
+  const changedFiles = await getChangedFiles({ 
+    baseCommitish: baseBranch,
+    headCommitish: compareSha, 
+    cwd: afterPath
+  });
+
   // Changed files should already be filtered to the top-level "specification" folder (see lintdiff-code.yaml)
-  const changedSpecFiles = (await readFileList(changedFilesPath)).filter((file) => {
+  const changedSpecFiles = changedFiles.filter((file) => {
     // File is not ignored
     for (const ignore of ignoreFilesWith) {
       if (file.includes(ignore)) {
