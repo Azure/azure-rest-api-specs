@@ -1830,9 +1830,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/fetchApplicationHealth": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/fetchHealth": {
       "post": {
-        "operationId": "Applications_FetchApplicationHealth",
+        "operationId": "Applications_FetchHealth",
         "tags": [
           "Applications"
         ],
@@ -1867,7 +1867,7 @@
             "description": "The parameters for fetching the health of a deployed application.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/FetchApplicationHealthRequest"
+              "$ref": "#/definitions/ApplicationFetchHealthRequest"
             }
           }
         ],
@@ -1895,7 +1895,7 @@
         },
         "x-ms-examples": {
           "Fetch application health": {
-            "$ref": "./examples/ApplicationActionFetchApplicationHealth_example.json"
+            "$ref": "./examples/ApplicationActionFetchHealth_example.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4281,6 +4281,35 @@
         "ipConfigurations"
       ]
     },
+    "ApplicationFetchHealthRequest": {
+      "type": "object",
+      "description": "Parameters for fetching the health of an application.",
+      "properties": {
+        "eventsHealthStateFilter": {
+          "$ref": "#/definitions/HealthFilter",
+          "description": "Allows filtering of the health events returned in the response based on health state."
+        },
+        "deployedApplicationsHealthStateFilter": {
+          "$ref": "#/definitions/HealthFilter",
+          "description": "Allows filtering of the deployed applications health state objects returned in the result of application health query based on their health state."
+        },
+        "servicesHealthStateFilter": {
+          "$ref": "#/definitions/HealthFilter",
+          "description": "Allows filtering of the services health state objects returned in the result of services health query based on their health state."
+        },
+        "excludeHealthStatistics": {
+          "type": "boolean",
+          "description": "Indicates whether the health statistics should be returned as part of the query result. False by default. The statistics show the number of children entities in health state Ok, Warning, and Error.",
+          "default": false
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Request timeout for the health query in seconds. The default value is 60 seconds.",
+          "default": 60
+        }
+      }
+    },
     "ApplicationHealthPolicy": {
       "type": "object",
       "description": "Defines a health policy used to evaluate the health of an application or one of its children entities.",
@@ -4586,6 +4615,16 @@
             "type": "string"
           }
         },
+        "properties": {
+          "$ref": "#/definitions/ApplicationUpdateParametersProperties",
+          "description": "Application update parameters properties."
+        }
+      }
+    },
+    "ApplicationUpdateParametersProperties": {
+      "type": "object",
+      "description": "Properties for application update request.",
+      "properties": {
         "parameters": {
           "type": "object",
           "description": "List of application parameters with overridden values from their default values specified in the application manifest.",
@@ -5336,35 +5375,6 @@
             "description": "Indicates the fault simulation has failed on stop. The simulation will have this status after the stop operation fails."
           }
         ]
-      }
-    },
-    "FetchApplicationHealthRequest": {
-      "type": "object",
-      "description": "Parameters for fetching the health of an application.",
-      "properties": {
-        "eventsHealthStateFilter": {
-          "$ref": "#/definitions/HealthFilter",
-          "description": "Allows filtering of the health events returned in the response based on health state."
-        },
-        "deployedApplicationsHealthStateFilter": {
-          "$ref": "#/definitions/HealthFilter",
-          "description": "Allows filtering of the deployed applications health state objects returned in the result of application health query based on their health state."
-        },
-        "servicesHealthStateFilter": {
-          "$ref": "#/definitions/HealthFilter",
-          "description": "Allows filtering of the services health state objects returned in the result of services health query based on their health state."
-        },
-        "excludeHealthStatistics": {
-          "type": "boolean",
-          "description": "Indicates whether the health statistics should be returned as part of the query result. False by default. The statistics show the number of children entities in health state Ok, Warning, and Error.",
-          "default": false
-        },
-        "timeout": {
-          "type": "integer",
-          "format": "int64",
-          "description": "Request timeout for the health query in seconds. The default value is 60 seconds.",
-          "default": 60
-        }
       }
     },
     "FrontendConfiguration": {

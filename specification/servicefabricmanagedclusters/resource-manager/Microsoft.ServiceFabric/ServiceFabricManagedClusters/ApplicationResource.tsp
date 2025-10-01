@@ -129,9 +129,9 @@ interface Applications {
    * Get the status of the deployed application health. It will query the cluster to find the health of the deployed application.
    */
   @added(Versions.v2025_10_01_preview)
-  fetchApplicationHealth is ArmResourceActionAsync<
+  fetchHealth is ArmResourceActionAsync<
     ApplicationResource,
-    FetchApplicationHealthRequest,
+    ApplicationFetchHealthRequest,
     never,
     LroHeaders = ArmCombinedLroHeaders
   >;
@@ -162,7 +162,7 @@ interface Applications {
 @@doc(Applications.updateUpgrade::parameters.body,
   "The parameters for updating an application upgrade."
 );
-@@doc(Applications.fetchApplicationHealth::parameters.body,
+@@doc(Applications.fetchHealth::parameters.body,
   "The parameters for fetching the health of a deployed application."
 );
 @@doc(Applications.restartDeployedCodePackage::parameters.body,
@@ -343,6 +343,18 @@ model ApplicationUserAssignedIdentity {
 }
 
 /**
+ * Properties for application update request.
+ */
+@added(Versions.v2025_10_01_preview)
+model ApplicationUpdateParametersProperties {
+  /**
+   * List of application parameters with overridden values from their default values specified in the application manifest.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property of app resource, used to pass string to string dictionary"
+  parameters?: Record<string>;
+}
+
+/**
  * Application update request.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "Not adding identity property as this API is for updating tags only"
@@ -354,11 +366,10 @@ model ApplicationUpdateParameters {
   tags?: Record<string>;
 
   /**
-   * List of application parameters with overridden values from their default values specified in the application manifest.
+   * Application update parameters properties.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property of app resource, used to pass string to string dictionary"
   @added(Versions.v2025_10_01_preview)
-  parameters?: Record<string>;
+  properties?: ApplicationUpdateParametersProperties;
 }
 
 /**
@@ -698,7 +709,7 @@ union HealthFilter {
  * Parameters for fetching the health of an application.
  */
 @added(Versions.v2025_10_01_preview)
-model FetchApplicationHealthRequest {
+model ApplicationFetchHealthRequest {
   /**
    * Allows filtering of the health events returned in the response based on health state.
    */

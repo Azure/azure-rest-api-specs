@@ -45,8 +45,12 @@ using Microsoft.ServiceFabric;
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientName(Applications.resumeUpgrade::parameters.body, "parameters");
 @@clientName(Applications.updateUpgrade::parameters.body, "parameters");
-@@clientName(Applications.fetchApplicationHealth::parameters.body, "parameters");
-@@clientName(Applications.restartDeployedCodePackage::parameters.body, "parameters");
+@@clientName(Applications.fetchHealth::parameters.body,
+  "parameters"
+);
+@@clientName(Applications.restartDeployedCodePackage::parameters.body,
+  "parameters"
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@Azure.ClientGenerator.Core.Legacy.flattenProperty decorator for backwards compatibility with existing spec"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApplicationResource.properties
 );
