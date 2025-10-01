@@ -166,7 +166,7 @@ model EvalRunResultComparison {
   compareItems: EvalRunResultCompareItem[];
 }
 
-@doc("Summary statistics of an evaluation run.")
+@doc("Summary statistics of a metric in an evaluation run.")
 @added(Versions.v2025_10_15_preview)
 model EvalRunResultSummary {
   @doc("The evaluation run ID.")
@@ -182,7 +182,7 @@ model EvalRunResultSummary {
   standardDeviation: float32;
 }
 
-@doc("Comparison result for a treatment run against the baseline.")
+@doc("Metric comparison for a treatment against the baseline.")
 @added(Versions.v2025_10_15_preview)
 model EvalRunResultCompareItem {
   @doc("The treatment run ID.")
