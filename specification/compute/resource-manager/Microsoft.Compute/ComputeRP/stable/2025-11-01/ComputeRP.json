@@ -5567,6 +5567,9 @@
           "Create a scale set with ephemeral os disk provisioning in Nvme disk using placement property.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_CreateA_WithDiffOsDiskUsingDiffDiskPlacementAsNvmeDisk.json"
           },
+          "Create a scale set with ephemeral os disks using placement property and enableFullCaching set to true.": {
+            "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_CreateA_WithDiffOsDiskUsingDiffDiskPlacementAndFullCachingEnabled.json"
+          },
           "Create a scale set with ephemeral os disks using placement property.": {
             "$ref": "./examples/virtualMachineScaleSetExamples/VirtualMachineScaleSet_CreateA_WithDiffOsDiskUsingDiffDiskPlacement.json"
           },
@@ -10088,6 +10091,9 @@
           "Create a vm with empty data disks.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithEmptyDataDisks.json"
           },
+          "Create a vm with ephemeral os disk and enableFullCaching set to true.": {
+            "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithADiffOsDiskAndFullCachingEnabled.json"
+          },
           "Create a vm with ephemeral os disk provisioning in Cache disk using placement property.": {
             "$ref": "./examples/virtualMachineExamples/VirtualMachine_Create_WithADiffOsDiskUsingDiffDiskPlacementAsCacheDisk.json"
           },
@@ -13789,6 +13795,10 @@
         "placement": {
           "$ref": "#/definitions/DiffDiskPlacement",
           "description": "Specifies the ephemeral disk placement for operating system disk. Possible values are: **CacheDisk,** **ResourceDisk,** **NvmeDisk.** The defaulting behavior is: **CacheDisk** if one is configured for the VM size otherwise **ResourceDisk** or **NvmeDisk** is used. Refer to the VM size documentation for Windows VM at https://docs.microsoft.com/azure/virtual-machines/windows/sizes and Linux VM at https://docs.microsoft.com/azure/virtual-machines/linux/sizes to check which VM sizes exposes a cache disk. Minimum api-version for NvmeDisk: 2024-03-01."
+        },
+        "enableFullCaching": {
+          "type": "boolean",
+          "description": "Specifies whether or not to enable full caching for this VM which will cache the OS disk locally on the host and make this VM more resilient to storage outages"
         }
       }
     },
