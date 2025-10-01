@@ -838,7 +838,7 @@ op updateDataSource is Azure.Core.Foundations.Operation<
      * Data Source Entity
      */
     @bodyRoot
-    dataSourceEntity: DataSourceEntity;
+    body: DataSourceEntity;
   },
   DataSourceEntity
 >;
@@ -863,7 +863,7 @@ op createDataSource is Azure.Core.Foundations.Operation<
      * Data Source Entity
      */
     @bodyRoot
-    dataSourceEntity: DataSourceEntity;
+    body: DataSourceEntity;
   },
   DataSourceEntityResponse
 >;
@@ -962,7 +962,7 @@ op updateScopedAssetMetaData is Azure.Core.Foundations.Operation<
      * Scoped asset meta data body
      */
     @bodyRoot
-    dataSource: DataSourceEntity;
+    body: DataSourceEntity;
   },
   DataSourceEntity
 >;
@@ -996,7 +996,7 @@ op createScopedAssetMetaData is Azure.Core.Foundations.Operation<
      * Scoped asset meta data body
      */
     @bodyRoot
-    dataSource: DataSourceEntity;
+    body: DataSourceEntity;
   },
   DataSourceEntityResponse
 >;
