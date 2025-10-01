@@ -506,7 +506,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
 
   const rpaasExceptionLabel = new Label("RPaaSException", labelContext.present);
-  rpaasExceptionLabel.shouldBePresent = impactAssessment.rpaasExceptionRequired || false;
+  rpaasExceptionLabel.shouldBePresent = ("RPaaSException" in labelContext.present)
 
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
     "CI-RpaaSRPNotInPrivateRepo",
@@ -541,7 +541,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
       labelContext,
       armReviewLabel.shouldBePresent,
       impactAssessment.rpaasRPMissing,
-      impactAssessment.rpaasExceptionRequired,
+      rpaasExceptionLabel.shouldBePresent,
       impactAssessment.rpaasRpNotInPrivateRepo,
     );
   }
@@ -555,7 +555,6 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   rpassReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   newRPNamespaceLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
-  rpaasExceptionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
 
   // this is the only labelling that was part of original pipelinebot logic, it handles the rotation of
