@@ -1,0 +1,43 @@
+parameters:
+  "service-dir":
+    default: "sdk/migrate"
+emit:
+  - "@azure-tools/typespec-autorest"
+output-dir: "{project-root}/../"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{output-dir}"
+    output-file: "{azure-resource-provider-folder}/{service-name}/Waves/{version-status}/{version}/waves.json"
+    azure-resource-provider-folder: ./resource-manager
+    use-read-only-status-schema: true
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.Migrate"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-migrate"
+    package-name: "{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-migrate"
+    namespace: "com.azure.resourcemanager.migrate"
+    service-name: "migrate"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    package-dir: "arm-migrate"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-migrate"
+  "@azure-tools/typespec-client-generator-cli":
+    "additionalDirectories":
+      - "specification/migrate/Waves.Management/Common"
