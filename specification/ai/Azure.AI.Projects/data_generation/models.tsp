@@ -75,10 +75,10 @@ model DataGenerationSeedDataSource {
   file_id: string;
 }
 
-@doc("Job options controlling how synthetic data is produced.")
+@doc("Common job options shared by all data generation job types.")
 @added(Versions.v2025_05_15_preview)
 @removed(Versions.v1)
-model DataGenerationJobOptions {
+model DataGenerationJobBaseOptions {
   @doc("Number of synthetic samples to generate.")
   num_samples: int32;
 
@@ -87,9 +87,39 @@ model DataGenerationJobOptions {
 
   @doc("Prefix applied to any output file(s) produced.")
   output_file_prefix?: string;
+}
 
-  @doc("Number of conversational turns to simulate (if applicable to the chosen type).")
+@doc("Options specific to a QuestionAnswers data generation job.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model QuestionAnswersDataGenerationJobOptions extends DataGenerationJobBaseOptions {
+  @doc("Number of conversational turns to simulate for each generated sample.")
   num_turns?: int32;
+}
+
+@doc("Options specific to a MultipleChoiceQuestions data generation job.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model MultipleChoiceQuestionsDataGenerationJobOptions extends DataGenerationJobBaseOptions {
+  @doc("Number of answer choices to generate per question.")
+  num_choices?: int32;
+}
+
+@doc("Options specific to a QuestionAnswersWithTools data generation job.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+model QuestionAnswersWithToolsDataGenerationJobOptions extends DataGenerationJobBaseOptions {
+  @doc("Number of conversational turns to simulate for each generated sample (tool-augmented scenario).")
+  num_turns?: int32;
+}
+
+@doc("Discriminated union of all data generation job option shapes.")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v1)
+union DataGenerationJobOptions {
+  QuestionAnswersDataGenerationJobOptions,
+  MultipleChoiceQuestionsDataGenerationJobOptions,
+  QuestionAnswersWithToolsDataGenerationJobOptions,
 }
 
 @doc("Model generation sampling / configuration options.")
