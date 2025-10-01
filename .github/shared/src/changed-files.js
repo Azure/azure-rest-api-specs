@@ -36,6 +36,7 @@ export async function getChangedFiles(options = {}) {
   const files = result
     .trim()
     .split("\n")
+    // ignore empty lines (e.g. when no files are changed)
     .filter((s) => s.length > 0);
   logger?.info("Changed Files:");
   for (const file of files) {
