@@ -96,6 +96,9 @@ interface Services {
 @@doc(Services.update::parameters.properties,
   "The service resource updated tags."
 );
+@@doc(Services.restartReplica::parameters.body,
+  "The parameters for restarting replicas."
+);
 
 /**
  * The service resource properties.

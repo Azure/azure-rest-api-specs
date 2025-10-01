@@ -162,6 +162,12 @@ interface Applications {
 @@doc(Applications.updateUpgrade::parameters.body,
   "The parameters for updating an application upgrade."
 );
+@@doc(Applications.fetchApplicationHealth::parameters.body,
+  "The parameters for fetching the health of a deployed application."
+);
+@@doc(Applications.restartDeployedCodePackage::parameters.body,
+  "The parameters for restarting a deployed code package."
+);
 
 /**
  * The application resource properties.
