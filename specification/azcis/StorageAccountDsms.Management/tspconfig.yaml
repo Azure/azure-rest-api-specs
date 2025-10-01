@@ -13,13 +13,13 @@ options:
     use-read-only-status-schema: "true"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: Azure.ResourceManager.StorageAccountDsms
-    namespace: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.StorageAccountDsms"
+    namespace: "Azure.ResourceManager.StorageAccountDsms"
     clear-output-folder: true
   "@azure-tools/typespec-go":
     service-dir: sdk/resourcemanager/storageaccountdsms
-    package-dir: armstorageaccountdsms
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    emitter-output-dir: "{output-dir}/{service-dir}/armstorageaccountdsms"
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/armstorageaccountdsms
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
@@ -27,20 +27,20 @@ options:
     inject-spans: true
     flavor: azure
   "@azure-tools/typespec-python":
-    package-dir: azure-mgmt-storageaccountdsms
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storageaccountdsms"
     namespace: azure.mgmt.storageaccountdsms
     generate-test: true
     generate-sample: true
     flavor: azure
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storageaccountdsms"
     flavor: azure
-    package-dir: azure-resourcemanager-storageaccountdsms
     namespace: com.azure.resourcemanager.storageaccountdsms
     service-name: Storage Account dSMS
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: arm-storageaccountdsms
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-storageaccountdsms"
     package-details:
       name: "@azure/arm-storageaccountdsms"
 parameters:

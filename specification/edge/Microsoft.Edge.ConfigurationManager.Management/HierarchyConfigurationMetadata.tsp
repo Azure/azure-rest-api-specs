@@ -18,6 +18,7 @@ namespace Microsoft.Edge;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "ResourceProvisioningState is not needed since this resource is created via ARB and directly pushed to ARG"
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Hierarchy Configuration Metadata Properties")
 model HierarchyConfigurationMetadataProperties {
   @doc("Display name of the hierarchy configuration metadata resource")
@@ -37,6 +38,7 @@ model HierarchyConfigurationMetadataProperties {
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @doc("Hierarchy Configuration Metadata Resource attached to a Target or Site")
 model HierarchyConfigurationMetadata
   is Azure.ResourceManager.ExtensionResource<HierarchyConfigurationMetadataProperties> {
@@ -51,6 +53,7 @@ model HierarchyConfigurationMetadata
 }
 
 @added(Versions.v2025_08_15_preview)
+@added(Versions.v2025_08_01)
 @armResourceOperations
 interface HierarchyConfigurationMetadatas {
   @doc("Get a Hierarchy Configuration Metadata resource")

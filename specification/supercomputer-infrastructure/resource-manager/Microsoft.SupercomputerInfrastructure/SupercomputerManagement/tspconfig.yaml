@@ -12,23 +12,23 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.SupercomputerInfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SupercomputerInfrastructure"
     clear-output-folder: true
     model-namespace: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.SupercomputerInfrastructure"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-supercomputerinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-supercomputerinfrastructure"
     namespace: "azure.mgmt.supercomputerinfrastructure"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-supercomputerinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-supercomputerinfrastructure"
     namespace: "com.azure.resourcemanager.supercomputerinfrastructure"
     service-name: "supercomputerinfrastructure"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-supercomputerinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-supercomputerinfrastructure"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -36,8 +36,8 @@ options:
       name: "@azure/arm-supercomputerinfrastructure"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/supercomputerinfrastructure"
-    package-dir: "armsupercomputerinfrastructure"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsupercomputerinfrastructure"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsupercomputerinfrastructure"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

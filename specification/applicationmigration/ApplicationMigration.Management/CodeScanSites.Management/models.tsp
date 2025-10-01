@@ -15,15 +15,15 @@ union ReportFramework {
 }
 
 @doc("The target platform for migration.")
-union MigrationTarget {
+union AzureTarget {
   @doc("Azure Kubernetes Service.")
   AKS: "AKS",
 
   @doc("App Service Container.")
-  ASC: "ASC",
+  AzureAppServiceContainer: "AzureAppServiceContainer",
 
   @doc("App Service Native.")
-  ASN: "ASN",
+  AzureAppService: "AzureAppService",
 
   string,
 }
@@ -52,6 +52,9 @@ union ReportStatus {
   @doc("Scan has been requested.")
   ScanRequested: "ScanRequested",
 
+  @doc("Scan request is in progress.")
+  InProgress: "InProgress",
+
   string,
 }
 
@@ -71,8 +74,11 @@ union IssueCategory {
   @doc("Warning category.")
   Warning: "Warning",
 
-  @doc("Info category.")
-  Info: "Info",
+  @doc("Internal category.")
+  Internal: "Internal",
+
+  @doc("Information category.")
+  Information: "Information",
 
   string,
 }

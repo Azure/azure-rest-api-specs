@@ -35,8 +35,8 @@ model CodeScanIssueProperties {
   @doc("The number of occurrences of the issue.")
   occurrences: int32;
 
-  @doc("The migration targets affected by this issue.")
-  azureTargets: MigrationTarget[];
+  @doc("The migration targets applicable for this issue.")
+  azureTargets: AzureTarget[];
 }
 
 @parentResource(CodeScanReport)

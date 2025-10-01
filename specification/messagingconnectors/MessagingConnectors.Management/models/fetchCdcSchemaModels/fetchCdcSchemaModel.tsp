@@ -6,38 +6,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 namespace Microsoft.MessagingConnectors.Models.FetchSchema;
 
-@doc("Connector Schema Config")
-@discriminator("connectorType")
-model ConnectorSchemaConfig {
-  @doc("connector Type.")
-  connectorType: Models.Connector.ConnectorType;
-}
-
-@doc("SqlServerSource Schema Config")
-model SqlServerSourceConnectorSchemaConfig extends ConnectorSchemaConfig {
-  @doc("SqlServerSource Connector")
-  connectorType: Models.Connector.ConnectorType.SqlServerSource;
-
-  @doc("Servername string")
-  serverName: string;
-
-  @doc("Port of Server")
-  port: int32;
-
-  @doc("databaseName of Server")
-  databaseName: string;
-
-  @doc("username of Server")
-  userName: string;
-
-  @doc("password of Server")
-  @secret
-  password: string;
-
-  @doc("tables of Server")
-  tables: string;
-}
-
 @doc("Schema format Types")
 union SchemaFormatType {
   @doc("Avro format")
@@ -64,8 +32,8 @@ model SchemaFormat {
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state"
 @doc("properties of fetch Schema")
 model SchemaRequestProperties {
-  @doc("schema config for connector")
-  connectorSchemaConfig: ConnectorSchemaConfig;
+  @doc("Config for DataSource")
+  dataSourceProperties: Models.DataSource.DataSourceProperties;
 
   @doc("Schema Format")
   format: SchemaFormat;

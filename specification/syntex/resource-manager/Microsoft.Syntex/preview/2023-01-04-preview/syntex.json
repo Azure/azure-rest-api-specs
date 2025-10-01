@@ -792,6 +792,38 @@
             "update"
           ]
         },
+        "subFeatureMappings": {
+          "type": "array",
+          "description": "An array of feature objects, each containing a feature name and a list of sub-features.",
+          "items": {
+            "$ref": "#/definitions/SubFeaturesObject"
+          },
+          "readOnly": true,
+          "x-ms-mutability": [
+            "read"
+          ],
+          "default": []
+        },
+        "subFeaturesToAdd": {
+          "type": "array",
+          "description": "An array of feature objects, each containing a feature name and a list of sub-features to be added.",
+          "items": {
+            "$ref": "#/definitions/SubFeaturesObject"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
+        "subFeaturesToRemove": {
+          "type": "array",
+          "description": "An array of feature objects, each containing a feature name and a list of sub-features to be removed.",
+          "items": {
+            "$ref": "#/definitions/SubFeaturesObject"
+          },
+          "x-ms-mutability": [
+            "update"
+          ]
+        },
         "scope": {
           "type": "string",
           "description": "This signifies if the scope is tenant only or global."
@@ -859,6 +891,20 @@
                 "description": "The migrated features associated with the accounts resource."
               }
             },
+            "subFeaturesToAdd": {
+              "type": "array",
+              "description": "An array of feature objects, each containing a feature name and a list of sub-features to be added.",
+              "items": {
+                "$ref": "#/definitions/SubFeaturesObject"
+              }
+            },
+            "subFeaturesToRemove": {
+              "type": "array",
+              "description": "An array of feature objects, each containing a feature name and a list of sub-features to be removed.",
+              "items": {
+                "$ref": "#/definitions/SubFeaturesObject"
+              }
+            },
             "scopeMetaData": {
               "type": "array",
               "description": "The list of security or M365 groups associated with the accounts resource.",
@@ -875,6 +921,23 @@
         }
       },
       "description": "The type used for update operations of the Account."
+    },
+    "SubFeaturesObject": {
+      "type": "object",
+      "properties": {
+        "feature": {
+          "type": "string",
+          "description": "A string representing a feature."
+        },
+        "subfeatures": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "description": "A string representing a sub-feature."
+          },
+          "description": "A list of subfeatures."
+        }
+      }
     }
   },
   "parameters": {
