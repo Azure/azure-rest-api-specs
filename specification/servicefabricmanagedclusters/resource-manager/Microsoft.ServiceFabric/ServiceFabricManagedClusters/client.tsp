@@ -45,9 +45,7 @@ using Microsoft.ServiceFabric;
 @@clientName(Applications.update::parameters.properties, "parameters");
 @@clientName(Applications.resumeUpgrade::parameters.body, "parameters");
 @@clientName(Applications.updateUpgrade::parameters.body, "parameters");
-@@clientName(Applications.fetchHealth::parameters.body,
-  "parameters"
-);
+@@clientName(Applications.fetchHealth::parameters.body, "parameters");
 @@clientName(Applications.restartDeployedCodePackage::parameters.body,
   "parameters"
 );

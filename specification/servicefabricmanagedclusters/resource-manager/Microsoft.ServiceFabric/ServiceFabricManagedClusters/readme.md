@@ -415,7 +415,8 @@ suppressions:
       - $.definitions.UserAssignedIdentityMap
       - $.definitions.VMSSExtensionProperties.properties.settings
       - $.definitions.VMSSExtensionProperties.properties.protectedSettings
-    
+      - $.definitions.ApplicationUpdateParametersProperties.properties.parameters
+
   - code: AvoidAdditionalProperties
     reason: Documenting already shipped APIs
     where:
