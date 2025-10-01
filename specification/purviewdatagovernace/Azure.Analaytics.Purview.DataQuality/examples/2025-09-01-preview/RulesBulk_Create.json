@@ -4,34 +4,34 @@
     "api-version": "2025-09-01-preview",
     "body": [
       {
-        "name": "CreateBulkRules",
-        "type": "CustomSQL",
-        "description": "Rule to check completeness of data",
+        "name": "Duplicate_Rows",
+        "type": "Duplicate",
+        "description": "Rule to check duplicate rows",
         "businessDomain": {
-          "type": "BusinessDomain",
+          "type": "BusinessDomainReference",
           "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
         },
         "dataAsset": {
-          "type": "DataAsset",
+          "type": "DataAssetReference",
           "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
         },
         "dataProduct": {
-          "type": "DataProduct",
+          "type": "DataProductReference",
           "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
         },
         "id": "123e4567-e89b-12d3-a456-426614174000",
-        "score": 95.5,
+        "score": 0.95,
         "status": "Active",
         "typeProperties": {
           "column": {
-            "type": "string",
-            "value": "CustomerName"
+            "type": "Column",
+            "value": "AccountNumber"
           }
         }
       },
       {
-        "name": "CheckNulls",
-        "type": "Validation",
+        "name": "Empty/blank_fields_AccountId",
+        "type": "NotNull",
         "description": "Rule to check null values",
         "businessDomain": {
           "type": "BusinessDomain",
@@ -46,12 +46,12 @@
           "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
         },
         "id": "223e4567-e89b-12d3-a456-426614174111",
-        "score": 88,
-        "status": "Draft",
+        "score": 0.95,
+        "status": "Active",
         "typeProperties": {
           "column": {
-            "type": "string",
-            "value": "Email"
+            "type": "Column",
+            "value": "AccountId"
           }
         }
       }
@@ -66,54 +66,54 @@
       "body": {
         "value": [
           {
-            "name": "CreateRules",
-            "type": "CustomSQL",
-            "description": "Rule to check completeness of data",
+            "name": "Duplicate_Rows",
+            "type": "Duplicate",
+            "description": "Rule to check duplicate rows",
             "businessDomain": {
-              "type": "BusinessDomain",
+              "type": "BusinessDomainReference",
               "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
             },
             "dataAsset": {
-              "type": "DataAsset",
+              "type": "DataAssetReference",
               "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
             },
             "dataProduct": {
-              "type": "DataProduct",
+              "type": "DataProductReference",
               "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
             },
             "id": "123e4567-e89b-12d3-a456-426614174000",
-            "score": 95.5,
+            "score": 0.95,
             "status": "Active",
             "typeProperties": {
               "column": {
-                "type": "string",
-                "value": "CustomerName"
+                "type": "Column",
+                "value": "AccountNumber"
               }
             }
           },
           {
-            "name": "CheckNulls",
-            "type": "Validation",
+            "name": "Empty/blank_fields_AccountId",
+            "type": "NotNull",
             "description": "Rule to check null values",
             "businessDomain": {
-              "type": "BusinessDomain",
+              "type": "BusinessDomainReference",
               "referenceId": "abcdef12-3456-7890-abcd-ef1234567890"
             },
             "dataAsset": {
-              "type": "DataAsset",
+              "type": "DataAssetReference",
               "referenceId": "abcd1234-5678-abcd-1234-abcd5678ef00"
             },
             "dataProduct": {
-              "type": "DataProduct",
+              "type": "DataProductReference",
               "referenceId": "12345678-abcd-1234-ef00-123456abcdef"
             },
             "id": "223e4567-e89b-12d3-a456-426614174111",
-            "score": 88,
-            "status": "Draft",
+            "score": 0.95,
+            "status": "Active",
             "typeProperties": {
               "column": {
-                "type": "string",
-                "value": "Email"
+                "type": "Column",
+                "value": "AccountId"
               }
             }
           }
