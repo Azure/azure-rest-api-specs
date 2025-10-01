@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Azure CDN WebApplicationFirewallManagement",
-    "version": "2025-06-01",
+    "version": "2025-12-01",
     "description": "APIs to manage web application firewall rules for Azure CDN",
     "x-typespec-generated": [
       {
@@ -9281,6 +9281,84 @@
       ],
       "x-ms-discriminator-value": "AzureFirstPartyManagedCertificate"
     },
+    "BatchRuleProperties": {
+      "type": "object",
+      "description": "The JSON object that contains a rule with its name for batch mode operations.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the rule.",
+          "minLength": 1,
+          "maxLength": 60,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,59}$"
+        },
+        "ruleSetName": {
+          "type": "string",
+          "description": "The name of the rule set containing the rule.",
+          "readOnly": true
+        },
+        "order": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The order in which the rules are applied for the endpoint. Possible values {0,1,2,3,………}. A rule with a lesser order will be applied before a rule with a greater order. Rule with order 0 is a special rule. It does not require any condition and actions listed in it will always be applied."
+        },
+        "conditions": {
+          "type": "array",
+          "description": "A list of conditions that must be matched for the actions to be executed",
+          "items": {
+            "$ref": "#/definitions/DeliveryRuleCondition"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "actions": {
+          "type": "array",
+          "description": "A list of actions that are executed when all the conditions of a rule are satisfied.",
+          "items": {
+            "$ref": "#/definitions/DeliveryRuleAction"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "matchProcessingBehavior": {
+          "type": "string",
+          "description": "If this rule is a match should the rules engine continue running the remaining rules or stop. If not present, defaults to Continue.",
+          "default": "Continue",
+          "enum": [
+            "Continue",
+            "Stop"
+          ],
+          "x-ms-enum": {
+            "name": "MatchProcessingBehavior",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Continue",
+                "value": "Continue"
+              },
+              {
+                "name": "Stop",
+                "value": "Stop"
+              }
+            ]
+          }
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/AfdProvisioningState",
+          "description": "Provisioning status",
+          "readOnly": true
+        },
+        "deploymentStatus": {
+          "$ref": "#/definitions/DeploymentStatus",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
     "CacheBehavior": {
       "type": "string",
       "description": "Caching behavior for the requests",
@@ -16295,6 +16373,21 @@
           "type": "string",
           "description": "The name of the profile which holds the rule set.",
           "readOnly": true
+        },
+        "batchMode": {
+          "type": "boolean",
+          "description": "Indicates whether rule set is in batch mode. Default value is false. When batch mode is enabled, rules will be processed in a batch along with the rule set.\nWhen batch mode is disabled, rules would need to be processed independently.\nThis property can only be set during rule set creation and cannot be updated later.\nFor switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.",
+          "default": false
+        },
+        "rules": {
+          "type": "array",
+          "description": "A list of rules that are part of this rule set provided the rule set is in batch mode.\nThis property will be ignored if the rule set is not in batch mode.",
+          "items": {
+            "$ref": "#/definitions/BatchRuleProperties"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       },
       "allOf": [

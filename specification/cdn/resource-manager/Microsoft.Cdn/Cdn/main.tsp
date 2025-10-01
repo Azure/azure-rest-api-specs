@@ -53,6 +53,11 @@ enum Versions {
    * The 2025-06-01 API version.
    */
   v2025_06_01: "2025-06-01",
+
+  /**
+   * The 2025-12-01 API version.
+   */
+  v2025_12_01: "2025-12-01",
 }
 
 interface Operations
