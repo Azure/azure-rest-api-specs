@@ -1,0 +1,53 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+options:
+  "@azure-tools/typespec-autorest":
+    arm-types-dir: "{project-root}/../../common-types/resource-management"
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}/.."
+    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/genevaLogs.json"
+    use-read-only-status-schema: "true"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: Azure.ResourceManager.GenevaLogs
+    namespace: "Azure.ResourceManager.GenevaLogs"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
+    clear-output-folder: true
+  "@azure-tools/typespec-go":
+    service-dir: sdk/resourcemanager/genevalogs
+    package-dir: armgenevalogs
+    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}
+    emitter-output-dir: "{output-dir}/{service-dir}/armgenevalogs"
+    fix-const-stuttering: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+    flavor: azure
+  "@azure-tools/typespec-python":
+    package-dir: azure-mgmt-genevalogs
+    namespace: azure.mgmt.genevalogs
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
+  "@azure-tools/typespec-java":
+    flavor: azure
+    package-dir: azure-resourcemanager-genevalogs
+    namespace: com.azure.resourcemanager.genevalogs
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
+    service-name: Geneva Logs
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
+    package-dir: arm-genevalogs
+    package-details:
+      name: "@azure/arm-genevalogs"
+parameters:
+  service-dir:
+    default: sdk/genevalogs

@@ -1,0 +1,501 @@
+{
+  "title": "Create GenevaLogsAccounts",
+  "operationId": "GenevaLogsAccounts_CreateOrUpdate",
+  "parameters": {
+    "subscriptionId": "3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa",
+    "resourceGroupName": "myResourceGroup",
+    "resourceName": "genevaLogsAccountTest",
+    "api-version": "2023-08-22-preview",
+    "resource": {
+      "properties": {
+        "accountName": "GenevaLogsAccountTest",
+        "mdsEnvironment": "Test",
+        "metricsAccountName": "MDS",
+        "contactEmail": "azcis@microsoft.com",
+        "administratorAliases": [
+          "redmond\\tintoa",
+          "redmond\\peterza"
+        ],
+        "administratorSecurityGroup": "redmond\\genevainfra",
+        "subscriptionIds": [
+          "e27dbacc-6f5a-436e-b57b-4235d0bd9ac1"
+        ],
+        "defaultStorageReplicationType": "Standard_ZRS",
+        "namespaceNames": [
+          "UlisesBTest"
+        ],
+        "keyVaultCertificate": {
+          "rootCertificateThumbprint": "7560250ace111c2fbf8778a58c11e92db31e2b24",
+          "san": "sdtest46.warmpathfecanary.cloudapp.net",
+          "description": "Description"
+        },
+        "namespaceConfig": "some URI",
+        "storageGroups": [
+          {
+            "configNamespace": "tintoatestmdsnsc",
+            "storageGroupName": "tintoatestmdsnsceus",
+            "defaultRegion": "eastus",
+            "storageReplicationTypes": [
+              "Standard_ZRS"
+            ],
+            "consumerGroups": [
+              "LogAnalyticsConsumer",
+              "GenevaAnalyticsConsumer"
+            ],
+            "regionBasedKustoSettingsMode": "Append",
+            "regionBasedKustoSettings": [
+              {
+                "region": "eastus",
+                "logAnalyticsId": "loganid5",
+                "logAnalyticsDatabase": "logandb5"
+              }
+            ]
+          }
+        ],
+        "userRoles": [
+          {
+            "name": "MyNewUserRole",
+            "securityGroups": [
+              "redmond\\genevainfra"
+            ],
+            "users": [
+              "ulisesb",
+              "tintoa"
+            ],
+            "keyVaultCertificates": [
+              {
+                "rootCertificateThumbprint": "7560250ace111c2fbf8778a58c11e92db31e2b24",
+                "san": "sdtest46.warmpathfecanary.cloudapp.net",
+                "description": "Description"
+              }
+            ],
+            "msiConfigs": [
+              {
+                "objectId": "123412324-1234-1234-1234-123412341234",
+                "tenantId": "123412324-1234-1234-1234-123412341234",
+                "description": "test1 description"
+              },
+              {
+                "resourceId": "providers/Microsoft.Geneva/testResource",
+                "description": "test2 description"
+              }
+            ],
+            "appkiAcl": [
+              "APMF\\*.Autopilot"
+            ],
+            "agentClaims": [
+              {
+                "namespaceRegex": "^UlisesBTest.*",
+                "right": "Execute"
+              }
+            ],
+            "configClaims": [
+              {
+                "resource": "^UlisesBTest.resource1.*",
+                "right": "Write"
+              },
+              {
+                "resource": "^UlisesBTest.resource2.*",
+                "right": "Read"
+              },
+              {
+                "resource": "^Acis.*",
+                "right": "Read"
+              },
+              {
+                "resource": "^MdsRunner$.*",
+                "right": "Read"
+              },
+              {
+                "resource": "^MdsRunnerSvc$.*",
+                "right": "Read"
+              },
+              {
+                "resource": "^MdsRunnerSvcMetrics.*",
+                "right": "Read"
+              },
+              {
+                "resource": "^MdsVer.*",
+                "right": "Read"
+              },
+              {
+                "resource": "^RunnerServiceV.*",
+                "right": "Read"
+              }
+            ]
+          },
+          {
+            "name": "MaCommunication",
+            "securityGroups": [
+              "redmond\\ceg_org_fte_redmond"
+            ],
+            "users": [
+              "ulisesb",
+              "tintoa"
+            ],
+            "keyVaultCertificates": [
+              {
+                "rootCertificateThumbprint": "12",
+                "san": "foo.bar.warmpathfecanary.cloudapp.net",
+                "description": "Description"
+              }
+            ],
+            "appkiAcl": [
+              "APMF\\*.Autopilot"
+            ],
+            "agentClaims": [
+              {
+                "namespaceRegex": "^UlisesBTest.*",
+                "right": "Execute"
+              }
+            ],
+            "configClaims": [
+              {
+                "resource": "^UlisesBTest.resource1.*",
+                "right": "Write"
+              },
+              {
+                "resource": "^UlisesBTest.resource2.*",
+                "right": "Read"
+              }
+            ]
+          }
+        ],
+        "azureLocation": "useast"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/genevaLogsAccounts/genevaLogsAccountTest",
+        "name": "genevaLogsAccountTest",
+        "type": "Microsoft.AzureCis/genevaLogsAccounts",
+        "properties": {
+          "accountName": "GenevaLogsAccountTest",
+          "mdsEnvironment": "Test",
+          "metricsAccountName": "MDS",
+          "contactEmail": "azcis@microsoft.com",
+          "administratorAliases": [
+            "redmond\\tintoa",
+            "redmond\\peterza"
+          ],
+          "administratorSecurityGroup": "redmond\\genevainfra",
+          "subscriptionIds": [
+            "e27dbacc-6f5a-436e-b57b-4235d0bd9ac1"
+          ],
+          "defaultStorageReplicationType": "Standard_ZRS",
+          "namespaceNames": [
+            "UlisesBTest"
+          ],
+          "keyVaultCertificate": {
+            "rootCertificateThumbprint": "7560250ace111c2fbf8778a58c11e92db31e2b24",
+            "san": "sdtest46.warmpathfecanary.cloudapp.net",
+            "description": "Description"
+          },
+          "namespaceConfig": "some URI",
+          "storageGroups": [
+            {
+              "configNamespace": "tintoatestmdsnsc",
+              "storageGroupName": "tintoatestmdsnsceus",
+              "defaultRegion": "eastus",
+              "storageReplicationTypes": [
+                "Standard_ZRS"
+              ],
+              "consumerGroups": [
+                "LogAnalyticsConsumer",
+                "GenevaAnalyticsConsumer"
+              ],
+              "regionBasedKustoSettingsMode": "Append",
+              "regionBasedKustoSettings": [
+                {
+                  "region": "eastus",
+                  "logAnalyticsId": "loganid5",
+                  "logAnalyticsDatabase": "logandb5"
+                }
+              ]
+            }
+          ],
+          "userRoles": [
+            {
+              "name": "MyNewUserRole",
+              "securityGroups": [
+                "redmond\\genevainfra"
+              ],
+              "users": [
+                "ulisesb",
+                "tintoa"
+              ],
+              "keyVaultCertificates": [
+                {
+                  "rootCertificateThumbprint": "7560250ace111c2fbf8778a58c11e92db31e2b24",
+                  "san": "sdtest46.warmpathfecanary.cloudapp.net",
+                  "description": "Description"
+                }
+              ],
+              "msiConfigs": [
+                {
+                  "objectId": "123412324-1234-1234-1234-123412341234",
+                  "tenantId": "123412324-1234-1234-1234-123412341234",
+                  "description": "test1 description"
+                },
+                {
+                  "resourceId": "providers/Microsoft.Geneva/testResource",
+                  "description": "test2 description"
+                }
+              ],
+              "appkiAcl": [
+                "APMF\\*.Autopilot"
+              ],
+              "agentClaims": [
+                {
+                  "namespaceRegex": "^UlisesBTest.*",
+                  "right": "Execute"
+                }
+              ],
+              "configClaims": [
+                {
+                  "resource": "^UlisesBTest.resource1.*",
+                  "right": "Write"
+                },
+                {
+                  "resource": "^UlisesBTest.resource2.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^Acis.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsRunner$.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsRunnerSvc$.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsRunnerSvcMetrics.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsVer.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^RunnerServiceV.*",
+                  "right": "Read"
+                }
+              ]
+            },
+            {
+              "name": "MaCommunication",
+              "securityGroups": [
+                "redmond\\ceg_org_fte_redmond"
+              ],
+              "users": [
+                "ulisesb",
+                "tintoa"
+              ],
+              "keyVaultCertificates": [
+                {
+                  "rootCertificateThumbprint": "12",
+                  "san": "foo.bar.warmpathfecanary.cloudapp.net",
+                  "description": "Description"
+                }
+              ],
+              "appkiAcl": [
+                "APMF\\*.Autopilot"
+              ],
+              "agentClaims": [
+                {
+                  "namespaceRegex": "^UlisesBTest.*",
+                  "right": "Execute"
+                }
+              ],
+              "configClaims": [
+                {
+                  "resource": "^UlisesBTest.resource1.*",
+                  "right": "Write"
+                },
+                {
+                  "resource": "^UlisesBTest.resource2.*",
+                  "right": "Read"
+                }
+              ]
+            }
+          ],
+          "azureLocation": "useast",
+          "provisioningState": "Succeeded",
+          "configDetails": {
+            "configVersion": "0.1"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/3a3595d0-5fcd-5bee-ba2f-5f389d7d91fa/resourceGroups/myResourceGroup/providers/Microsoft.AzureCis/genevaLogsAccounts/genevaLogsAccountTest",
+        "name": "genevaLogsAccountTest",
+        "type": "Microsoft.AzureCis/genevaLogsAccounts",
+        "properties": {
+          "accountName": "GenevaLogsAccountTest",
+          "mdsEnvironment": "Test",
+          "metricsAccountName": "MDS",
+          "contactEmail": "azcis@microsoft.com",
+          "administratorAliases": [
+            "redmond\\tintoa",
+            "redmond\\peterza"
+          ],
+          "administratorSecurityGroup": "redmond\\genevainfra",
+          "subscriptionIds": [
+            "e27dbacc-6f5a-436e-b57b-4235d0bd9ac1"
+          ],
+          "defaultStorageReplicationType": "Standard_ZRS",
+          "namespaceNames": [
+            "UlisesBTest"
+          ],
+          "keyVaultCertificate": {
+            "rootCertificateThumbprint": "7560250ace111c2fbf8778a58c11e92db31e2b24",
+            "san": "sdtest46.warmpathfecanary.cloudapp.net",
+            "description": "Description"
+          },
+          "namespaceConfig": "some URI",
+          "storageGroups": [
+            {
+              "configNamespace": "tintoatestmdsnsc",
+              "storageGroupName": "tintoatestmdsnsceus",
+              "defaultRegion": "eastus",
+              "storageReplicationTypes": [
+                "Standard_ZRS"
+              ],
+              "consumerGroups": [
+                "LogAnalyticsConsumer",
+                "GenevaAnalyticsConsumer"
+              ],
+              "regionBasedKustoSettingsMode": "Append",
+              "regionBasedKustoSettings": [
+                {
+                  "region": "eastus",
+                  "logAnalyticsId": "loganid5",
+                  "logAnalyticsDatabase": "logandb5"
+                }
+              ]
+            }
+          ],
+          "userRoles": [
+            {
+              "name": "MyNewUserRole",
+              "securityGroups": [
+                "redmond\\genevainfra"
+              ],
+              "users": [
+                "ulisesb",
+                "tintoa"
+              ],
+              "keyVaultCertificates": [
+                {
+                  "rootCertificateThumbprint": "7560250ace111c2fbf8778a58c11e92db31e2b24",
+                  "san": "sdtest46.warmpathfecanary.cloudapp.net",
+                  "description": "Description"
+                }
+              ],
+              "msiConfigs": [
+                {
+                  "objectId": "123412324-1234-1234-1234-123412341234",
+                  "tenantId": "123412324-1234-1234-1234-123412341234",
+                  "description": "test1 description"
+                },
+                {
+                  "resourceId": "providers/Microsoft.Geneva/testResource",
+                  "description": "test2 description"
+                }
+              ],
+              "appkiAcl": [
+                "APMF\\*.Autopilot"
+              ],
+              "agentClaims": [
+                {
+                  "namespaceRegex": "^UlisesBTest.*",
+                  "right": "Execute"
+                }
+              ],
+              "configClaims": [
+                {
+                  "resource": "^UlisesBTest.resource1.*",
+                  "right": "Write"
+                },
+                {
+                  "resource": "^UlisesBTest.resource2.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^Acis.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsRunner$.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsRunnerSvc$.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsRunnerSvcMetrics.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^MdsVer.*",
+                  "right": "Read"
+                },
+                {
+                  "resource": "^RunnerServiceV.*",
+                  "right": "Read"
+                }
+              ]
+            },
+            {
+              "name": "MaCommunication",
+              "securityGroups": [
+                "redmond\\ceg_org_fte_redmond"
+              ],
+              "users": [
+                "ulisesb",
+                "tintoa"
+              ],
+              "keyVaultCertificates": [
+                {
+                  "rootCertificateThumbprint": "12",
+                  "san": "foo.bar.warmpathfecanary.cloudapp.net",
+                  "description": "Description"
+                }
+              ],
+              "appkiAcl": [
+                "APMF\\*.Autopilot"
+              ],
+              "agentClaims": [
+                {
+                  "namespaceRegex": "^UlisesBTest.*",
+                  "right": "Execute"
+                }
+              ],
+              "configClaims": [
+                {
+                  "resource": "^UlisesBTest.resource1.*",
+                  "right": "Write"
+                },
+                {
+                  "resource": "^UlisesBTest.resource2.*",
+                  "right": "Read"
+                }
+              ]
+            }
+          ],
+          "azureLocation": "useast",
+          "provisioningState": "Accepted"
+        }
+      }
+    }
+  }
+}

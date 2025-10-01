@@ -51,6 +51,7 @@ input-file:
   - Microsoft.AzureCis/preview/2024-06-24-preview/eventgrid.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/ficp.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/genevaActions.json
+  - Microsoft.AzureCis/preview/2024-06-24-preview/genevaLogs.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/plannedQuota.json
   - Microsoft.AzureCis/preview/2024-06-24-preview/storageAccountDsms.json
 ```
