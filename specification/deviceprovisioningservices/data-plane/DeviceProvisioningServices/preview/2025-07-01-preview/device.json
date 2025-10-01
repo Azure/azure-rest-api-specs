@@ -76,7 +76,8 @@
               },
               "retry-after": {
                 "description": "The retry interval in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               }
             }
           },
@@ -100,7 +101,8 @@
           "RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen": {
             "$ref": "./examples/RuntimeRegistration_RegisterDeviceAndIssueCertificate_MinimumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{idScope}/registrations/{registrationId}/operations/{operationId}": {
@@ -154,7 +156,8 @@
             "headers": {
               "retry-after": {
                 "description": "The retry interval in seconds.",
-                "type": "integer"
+                "type": "integer",
+                "format": "int32"
               },
               "Location": {
                 "description": "The location of the resource.",
