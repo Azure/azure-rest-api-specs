@@ -819,6 +819,505 @@
         }
       }
     },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/scoped-asset-metadata": {
+      "get": {
+        "operationId": "GetScopedAssetMetaData",
+        "description": "Get scoped asset meta data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Get": {
+            "$ref": "./examples/ScopedAssetMetaData_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateScopedAssetMetaData",
+        "description": "Update scoped asset meta data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSource",
+            "in": "body",
+            "description": "Scoped asset meta data body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Update": {
+            "$ref": "./examples/ScopeMetaData_Update.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateScopedAssetMetaData",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSource",
+            "in": "body",
+            "description": "Scoped asset meta data body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Create": {
+            "$ref": "./examples/ScopedMetaData_Create.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteScopedAssetMetaData",
+        "description": "Delete scoped asset meta data",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScopedAssetMetaData_Delete": {
+            "$ref": "./examples/ScopedAssetMetaData_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-sources": {
+      "get": {
+        "operationId": "GetDataSources",
+        "description": "Get all Data Sources for a given Business Domain",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$skipToken",
+            "in": "query",
+            "description": "token",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "name",
+            "in": "query",
+            "description": "name",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DataSourceEntity"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSources_Get": {
+            "$ref": "./examples/DataSources_Get.json"
+          }
+        }
+      },
+      "post": {
+        "operationId": "CreateDataSource",
+        "description": "Update data source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceEntity",
+            "in": "body",
+            "description": "Data Source Entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Create": {
+            "$ref": "./examples/DataSource_Create.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-sources/{dataSourceId}": {
+      "get": {
+        "operationId": "GetDataSource",
+        "description": "Get Data Source for a given data source id",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "Get Data Source Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Get": {
+            "$ref": "./examples/DataSource_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "UpdateDataSource",
+        "description": "Update data source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "Get Data Source Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceEntity",
+            "in": "body",
+            "description": "Data Source Entity",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/DataSourceEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Update": {
+            "$ref": "./examples/DataSource_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "DeleteDataSource",
+        "description": "Delete data source",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataSourceId",
+            "in": "path",
+            "description": "Get Data Source Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "DataSource_Delete": {
+            "$ref": "./examples/DataSource_Delete.json"
+          }
+        }
+      }
+    },
     "/business-domains/{businessDomainId}/runs/{runId}": {
       "get": {
         "operationId": "GetRunStatus",
@@ -1570,6 +2069,220 @@
         }
       }
     },
+    "DataSourceEntity": {
+      "type": "object",
+      "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The display name of the data source connection."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the data source."
+        },
+        "isVnetEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the data source is enabled with Virtual Network (VNet)."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource (if applicable)."
+        },
+        "businessDomain": {
+          "type": "object",
+          "description": "The business domain this data source belongs to.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of business domain reference."
+            },
+            "referenceId": {
+              "type": "string",
+              "description": "Unique identifier for the business domain."
+            }
+          },
+          "required": [
+            "type",
+            "referenceId"
+          ]
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "ISO 8601 timestamp when the data source was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identifier (GUID or user ID) of the last modifier."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics)."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "A dictionary of key-value pairs with additional properties\nspecific to the data source type.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Optional list of scopes that define access levels or boundaries for this data source.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scope": {
+                "type": "object",
+                "description": "The scope definition containing type and included objects.",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "The scope type (e.g., Sql)."
+                  },
+                  "includes": {
+                    "type": "array",
+                    "description": "List of included items in the scope.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "includes"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the scope."
+              }
+            },
+            "required": [
+              "scope",
+              "id"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "isVnetEnabled",
+        "businessDomain",
+        "lastModifiedAt",
+        "lastModifiedBy",
+        "type",
+        "typeProperties"
+      ]
+    },
+    "DataSourceEntityResponse": {
+      "type": "object",
+      "description": "Represents a data source entity with metadata, configuration, and optional scopes.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The display name of the data source connection."
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the data source."
+        },
+        "isVnetEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether the data source is enabled with Virtual Network (VNet)."
+        },
+        "targetResourceId": {
+          "type": "string",
+          "description": "The Azure resource ID of the target resource (if applicable)."
+        },
+        "businessDomain": {
+          "type": "object",
+          "description": "The business domain this data source belongs to.",
+          "properties": {
+            "type": {
+              "type": "string",
+              "description": "Type of business domain reference."
+            },
+            "referenceId": {
+              "type": "string",
+              "description": "Unique identifier for the business domain."
+            }
+          },
+          "required": [
+            "type",
+            "referenceId"
+          ]
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "description": "ISO 8601 timestamp when the data source was last modified."
+        },
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "Identifier (GUID or user ID) of the last modifier."
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics)."
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "A dictionary of key-value pairs with additional properties\nspecific to the data source type.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "scopes": {
+          "type": "array",
+          "description": "Optional list of scopes that define access levels or boundaries for this data source.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "scope": {
+                "type": "object",
+                "description": "The scope definition containing type and included objects.",
+                "properties": {
+                  "type": {
+                    "type": "string",
+                    "description": "The scope type (e.g., Sql)."
+                  },
+                  "includes": {
+                    "type": "array",
+                    "description": "List of included items in the scope.",
+                    "items": {
+                      "type": "string"
+                    }
+                  }
+                },
+                "required": [
+                  "type",
+                  "includes"
+                ]
+              },
+              "id": {
+                "type": "string",
+                "description": "Unique identifier for the scope."
+              }
+            },
+            "required": [
+              "scope",
+              "id"
+            ]
+          }
+        }
+      },
+      "required": [
+        "name",
+        "id",
+        "isVnetEnabled",
+        "businessDomain",
+        "lastModifiedAt",
+        "lastModifiedBy",
+        "type",
+        "typeProperties"
+      ]
+    },
     "DatasetToDatasourceMapping": {
       "type": "object",
       "description": "Maps a dataset to a datasource.",
@@ -2034,9 +2747,9 @@
       "type": "object",
       "description": "Job Config DTO Response",
       "properties": {
-        "scanType": {
+        "scanId": {
           "type": "string",
-          "description": "Scan Type"
+          "description": "Scan Id"
         },
         "statuslro": {
           "$ref": "#/definitions/LroStatus",
@@ -2065,61 +2778,134 @@
       "type": "object",
       "description": "Represents a scheduled scan entity.",
       "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the schedule."
-        },
         "id": {
           "type": "string",
           "description": "Unique identifier of the schedule."
+        },
+        "name": {
+          "type": "string",
+          "description": "Name of the schedule."
         },
         "description": {
           "type": "string",
           "description": "Description of the schedule."
         },
-        "annotations": {
+        "trigger": {
           "type": "object",
-          "description": "Dictionary of annotations for the schedule.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "businessDomain": {
-          "$ref": "#/definitions/Reference",
-          "description": "Reference to the related BusinessDomain entity."
+          "description": "Trigger configuration for the schedule.",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "typeProperties": {
+              "type": "object",
+              "properties": {
+                "timezone": {
+                  "type": "string"
+                },
+                "isScheduled": {
+                  "type": "boolean"
+                },
+                "triggerTime": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "typeProperties"
+          ]
         },
         "scope": {
-          "$ref": "#/definitions/ScanScope",
-          "description": "Scope of the scan."
+          "type": "object",
+          "description": "Scope of the scan, including data products and data assets.",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataProduct": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  },
+                  "dataAsset": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "dataProduct",
+                  "dataAsset"
+                ]
+              }
+            }
+          },
+          "required": [
+            "items"
+          ]
         },
-        "trigger": {
-          "$ref": "#/definitions/Trigger",
-          "description": "Trigger configuration for the schedule."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Timestamp when the schedule was last modified."
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "User who last modified the schedule."
+        "businessDomain": {
+          "type": "object",
+          "description": "Reference to the related BusinessDomain entity.",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "referenceId": {
+              "type": "string"
+            }
+          },
+          "required": [
+            "type",
+            "referenceId"
+          ]
         },
         "createdAt": {
           "type": "string",
           "format": "date-time",
           "description": "Timestamp when the schedule was created."
         },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Timestamp when the schedule was last modified."
+        },
         "createdBy": {
           "type": "string",
           "description": "User who created the schedule."
         },
-        "executionData": {
-          "type": "object",
-          "description": "Dictionary of execution data for the schedule.",
-          "additionalProperties": {
-            "type": "string"
-          }
+        "lastModifiedBy": {
+          "type": "string",
+          "description": "User who last modified the schedule."
+        },
+        "eTag": {
+          "type": "string",
+          "description": "Entity tag for concurrency control."
         }
       }
     },
