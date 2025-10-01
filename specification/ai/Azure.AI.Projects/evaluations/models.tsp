@@ -12,6 +12,27 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+model AzureAIEvaluator {
+  /** The object type, which is always `label_model`. */
+  @extension("x-stainless-const", true)
+  type: "azure_ai_evaluator";
+
+  /** The name of the grader. */
+  name: string;
+
+  /** The name of the evaluator. */
+  evaluator_name: string;
+
+  /** The version of the evaluator. */
+  evaluator_version?: string;
+
+  /** The initialization parameters for the evaluation. Must support structured outputs. */
+  initialization_parameters?: {};
+
+  /** The model to use for the evaluation. Must support structured outputs. */
+  data_mapping?: Record<string>;
+}
+
 @doc("OpenAI definition: Eval output results.")
 @added(Versions.v2025_10_15_preview)
 model EvalRunOutputItem {
@@ -71,9 +92,11 @@ model CreateEvalJsonlRunDataSource {
 
 @doc("OpenAI Input data source definition for eval.")
 @added(Versions.v2025_10_15_preview)
-model EvalJsonlInputData {
+model SyncEvalInput {
   @doc("Identifier of the evaluator.")
   data_source: CreateEvalJsonlRunDataSource;
+
+  testing_criteria: AzureAIEvaluator[];
 }
 
 @doc("Evaluator Configuration")
