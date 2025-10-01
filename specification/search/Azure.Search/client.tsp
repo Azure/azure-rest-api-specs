@@ -13,6 +13,7 @@ namespace Customizations;
   name: "SearchIndexClient",
   service: Search,
 })
+@clientInitialization(Search.SearchIndexClientOptions)
 @clientNamespace("Azure.Search.Documents")
 namespace SearchIndexClient {
   @operationGroup()
@@ -533,6 +534,22 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.IndexStatisticsSummary, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ListIndexStatsSummary, "Azure.Search.Documents.Indexes");
 
+@@clientNamespace(Search.ChatCompletionExtraParametersBehavior, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionResponseFormatType, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingUnit, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillExtractionOptions, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputFormat, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexerPermissionOption, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.PermissionFilter, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.RankingOrder, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionCommonModelParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionResponseFormat, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionSchema, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionSchemaProperties, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionSkill, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingProperties, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.QueryResultDocumentInnerHit, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.WebApiHttpHeaders, "Azure.Search.Documents.Indexes");
 
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);

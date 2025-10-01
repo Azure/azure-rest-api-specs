@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 
 namespace Search;
 
@@ -71,6 +73,13 @@ alias agentNamePath = {
   @path
   agentName: string;
 };
+
+@doc("Client initialization options for SearchIndexClient.")
+model SearchIndexClientOptions {
+  @doc("The name of the index.")
+  @paramAlias("indexName")
+  indexName: string;
+}
 
 alias SearchOperation<
   TParams extends Reflection.Model,

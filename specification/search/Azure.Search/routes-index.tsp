@@ -9,19 +9,18 @@ using TypeSpec.Versioning;
 
 namespace Search;
 
-@route("/indexes('{indexName}')")
 interface Documents {
   @doc("Queries the number of documents in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @route("/docs/$count")
+  @route("/indexes('{indexName}')/docs/$count")
   @get
   count is SearchIndexOperation<{}, int32>;
 
   @doc("Searches for documents in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @route("/docs")
+  @route("/indexes('{indexName}')/docs")
   @get
   searchGet is SearchIndexOperation<
     {
@@ -159,7 +158,7 @@ interface Documents {
   @doc("Searches for documents in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @route("/docs/search.post.search")
+  @route("/indexes('{indexName}')/docs/search.post.search")
   @post
   searchPost is SearchIndexOperation<
     {
@@ -172,7 +171,7 @@ interface Documents {
 
   @doc("Retrieves a document from the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @route("/docs('{key}')")
+  @route("/indexes('{indexName}')/docs('{key}')")
   @get
   get is SearchIndexOperation<
     {
@@ -190,7 +189,7 @@ interface Documents {
   @doc("Suggests documents in the index that match the given partial query text.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @route("/docs/search.suggest")
+  @route("/indexes('{indexName}')/docs/search.suggest")
   @get
   suggestGet is SearchIndexOperation<
     {
@@ -243,7 +242,7 @@ interface Documents {
 
   @doc("Suggests documents in the index that match the given partial query text.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @route("/docs/search.post.suggest")
+  @route("/indexes('{indexName}')/docs/search.post.suggest")
   @post
   suggestPost is SearchIndexOperation<
     {
@@ -256,7 +255,7 @@ interface Documents {
 
   @doc("Sends a batch of document write actions to the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @route("/docs/search.index")
+  @route("/indexes('{indexName}')/docs/search.index")
   @post
   index is SearchIndexOperation<
     {
@@ -270,7 +269,7 @@ interface Documents {
   @doc("Autocompletes incomplete query terms based on input text and matching terms in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
-  @route("/docs/search.autocomplete")
+  @route("/indexes('{indexName}')/docs/search.autocomplete")
   @get
   autocompleteGet is SearchIndexOperation<
     {
@@ -319,7 +318,7 @@ interface Documents {
 
   @doc("Autocompletes incomplete query terms based on input text and matching terms in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
-  @route("/docs/search.post.autocomplete")
+  @route("/indexes('{indexName}')/docs/search.post.autocomplete")
   @post
   autocompletePost is SearchIndexOperation<
     {
