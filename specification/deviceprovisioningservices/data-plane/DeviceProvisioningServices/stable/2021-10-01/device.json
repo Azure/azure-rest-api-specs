@@ -47,6 +47,12 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/RegistrationOperationStatus"
+            }
+          },
           "202": {
             "description": "Accepted",
             "schema": {
@@ -63,12 +69,6 @@
               }
             }
           },
-          "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/RegistrationOperationStatus"
-            }
-          },
           "default": {
             "description": "Error response",
             "schema": {
@@ -80,6 +80,14 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeRegistration_OperationStatusLookup_MaximumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_OperationStatusLookup_MaximumSet_Gen.json"
+          },
+          "RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_OperationStatusLookup_MinimumSet_Gen.json"
           }
         }
       }
@@ -143,6 +151,14 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeRegistration_DeviceRegistrationStatusLookup_MaximumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_DeviceRegistrationStatusLookup_MaximumSet_Gen.json"
+          },
+          "RuntimeRegistration_DeviceRegistrationStatusLookup_MinimumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_DeviceRegistrationStatusLookup_MinimumSet_Gen.json"
           }
         }
       }
@@ -222,6 +238,14 @@
                 "type": "string"
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "RuntimeRegistration_RegisterDevice_MaximumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_RegisterDevice_MaximumSet_Gen.json"
+          },
+          "RuntimeRegistration_RegisterDevice_MinimumSet_Gen": {
+            "$ref": "./examples/RuntimeRegistration_RegisterDevice_MinimumSet_Gen.json"
           }
         }
       }
