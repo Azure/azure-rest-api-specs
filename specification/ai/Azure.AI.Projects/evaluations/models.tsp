@@ -13,6 +13,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @doc("Azure AI Evaluator class definition.")
+@added(Versions.v2025_10_15_preview)
 model AzureAIEvaluator {
   @doc("The object type, which is always `azure_ai_evaluator`.")
   type: "azure_ai_evaluator";

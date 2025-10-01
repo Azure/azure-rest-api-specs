@@ -2930,7 +2930,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "description": "The object type, which is always `label_model`.",
+          "description": "The object type, which is always `azure_ai_evaluator`.",
           "enum": [
             "azure_ai_evaluator"
           ],
@@ -2940,23 +2940,23 @@
         },
         "name": {
           "type": "string",
-          "description": "The name of the grader."
+          "description": "User provided name of the Azure AI Evaluator object instance."
         },
         "evaluator_name": {
           "type": "string",
-          "description": "The name of the evaluator."
+          "description": "The reference name of the evaluator."
         },
         "evaluator_version": {
           "type": "string",
-          "description": "The version of the evaluator."
+          "description": "The optional reference version of the evaluator."
         },
         "initialization_parameters": {
           "type": "object",
-          "description": "The initialization parameters for the evaluation. Must support structured outputs."
+          "description": "The initialization parameters for the evaluation."
         },
         "data_mapping": {
           "type": "object",
-          "description": "The model to use for the evaluation. Must support structured outputs.",
+          "description": "The model to use for the evaluation.",
           "additionalProperties": {
             "type": "string"
           }
@@ -3737,22 +3737,19 @@
           }
         },
         "content": {
-          "type": "array",
+          "type": "object",
           "description": "The content of the jsonl file.",
-          "items": {
-            "type": "object",
-            "properties": {
-              "item": {
-                "type": "object"
-              },
-              "sample": {
-                "type": "object"
-              }
+          "properties": {
+            "item": {
+              "type": "object"
             },
-            "required": [
-              "item"
-            ]
-          }
+            "sample": {
+              "type": "object"
+            }
+          },
+          "required": [
+            "item"
+          ]
         }
       },
       "required": [
@@ -3795,7 +3792,7 @@
       "properties": {
         "object": {
           "type": "string",
-          "description": "The type of the object. Always \"eval.run.output_item\".",
+          "description": "The type of the object. Always eval.run.output_item",
           "default": "eval.run.output_item",
           "enum": [
             "eval.run.output_item"
@@ -3848,15 +3845,10 @@
       },
       "required": [
         "object",
-        "id",
-        "run_id",
-        "eval_id",
         "created_at",
         "status",
-        "datasource_item_id",
         "datasource_item",
-        "results",
-        "sample"
+        "results"
       ]
     },
     "Evaluation": {
@@ -5785,8 +5777,16 @@
         },
         "testing_criteria": {
           "type": "array",
+          "description": "Evaluators to be used for the evaluation.",
           "items": {
             "$ref": "#/definitions/AzureAIEvaluator"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
           }
         }
       },
