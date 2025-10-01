@@ -874,6 +874,10 @@
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
   sub-rules:
+    - parameters.service-dir.default
+    - options.@azure-tools/typespec-go.*
+    - options.@azure-tools/typespec-java.*
+    - options.@azure-tools/typespec-python.*
     - options.@azure-tools/typespec-ts.*
   paths:
   - azcis/AadApplication.Management/tspconfig.yaml
@@ -1617,12 +1621,6 @@
   sub-rules:
     - options.@azure-tools/typespec-ts.*
   paths: [liftrweightsandbiases/Liftr.WeightsAndBiases.Management/tspconfig.yaml]
-- tool: TypeSpecValidation
-  reason: Remove specs contain incorrect or missing emitter options or parameters
-  rules: [SdkTspConfigValidation]
-  sub-rules:
-    - options.@azure-tools/typespec-ts.*
-  paths: [lionrock/Lionrock.Management/tspconfig.yaml]
 - tool: TypeSpecValidation
   reason: Remove specs contain incorrect or missing emitter options or parameters
   rules: [SdkTspConfigValidation]
