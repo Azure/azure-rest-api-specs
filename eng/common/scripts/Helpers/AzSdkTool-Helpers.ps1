@@ -128,7 +128,10 @@ function Get-GitHubApiHeaders {
     }
 
     Write-Host "Using unauthenticated GitHub API requests."
-    return @{}
+    $headers = @{
+            Authorization = "Bearer testfail"
+        }
+        return $headers
 }
 
 <#
