@@ -1,6 +1,6 @@
 #!/usr/bin/env node
 
-import { ConsoleLogger } from "../src/logger.js";
+import { debugLogger } from "../src/logger.js";
 import { SpecModel } from "../src/spec-model.js";
 
 const USAGE =
@@ -32,8 +32,16 @@ if (args.length > 1) {
 
 const specPath = args[0];
 
-const specModel = new SpecModel(specPath, {
-  logger: new ConsoleLogger(debug),
-});
+// Default to 'undefined' instead of 'defaultLogger', so output is always a valid JSON object (no logging)
+const logger = debug ? debugLogger : undefined;
 
-console.log(JSON.stringify(await specModel.toJSONAsync({ includeRefs, relativePaths }), null, 2));
+const specModel = new SpecModel(specPath, { logger });
+
+console.log(
+  JSON.stringify(
+    // Always embed errors, since we always want to return a valid JSON object instead of throwing
+    await specModel.toJSONAsync({ embedErrors: true, includeRefs, relativePaths }),
+    null,
+    2,
+  ),
+);
