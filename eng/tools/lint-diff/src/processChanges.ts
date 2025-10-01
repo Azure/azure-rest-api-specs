@@ -21,10 +21,10 @@ export async function getRunList(
   // Read changed files, exclude any files that should be ignored
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
 
-  const changedFiles = await getChangedFiles({ 
+  const changedFiles = await getChangedFiles({
     baseCommitish: baseBranch,
-    headCommitish: compareSha, 
-    cwd: afterPath
+    headCommitish: compareSha,
+    cwd: afterPath,
   });
 
   // Changed files should already be filtered to the top-level "specification" folder (see lintdiff-code.yaml)
