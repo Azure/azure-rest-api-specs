@@ -55,10 +55,10 @@ model QuantumComputingData {
 }
 
 /** Input parameters for the job. */
-model InputParams is unknown;
+model InputParams is Record<{}>;
 
 /** Metadata for the job. */
-model Metadata is unknown;
+model Metadata is Record<{}>;
 
 /** A job to be run in the workspace. */
 @resource("jobs")
