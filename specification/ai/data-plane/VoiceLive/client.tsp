@@ -1,5 +1,4 @@
 import "@azure-tools/typespec-client-generator-core";
-import "./websocket.tsp";
 
 using Azure.ClientGenerator.Core;
 
