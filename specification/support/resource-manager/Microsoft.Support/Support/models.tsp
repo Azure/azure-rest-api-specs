@@ -235,7 +235,7 @@ model ProblemClassificationProperties {
   /**
    * This property indicates whether secondary consent is present for problem classification
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secondaryConsentEnabled?: SecondaryConsentEnabled[];
 }
 
@@ -441,7 +441,7 @@ model SupportTicketDetailsProperties {
   /**
    * This property indicates secondary consents for the support ticket
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secondaryConsent?: SecondaryConsent[];
 }
 
@@ -558,7 +558,7 @@ model QuotaTicketDetails {
   /**
    * This property is required for providing the region and new quota limits.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["region"])
+  @identifiers(#["region"])
   quotaChangeRequests?: QuotaChangeRequest[];
 }
 
@@ -619,7 +619,7 @@ model UpdateSupportTicket {
   /**
    * This property indicates secondary consents for the support ticket
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secondaryConsent?: SecondaryConsent[];
 }
 
@@ -721,7 +721,7 @@ model ChatTranscriptDetailsProperties {
   /**
    * List of chat transcript communication resources.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   messages?: MessageProperties[];
 
   /**

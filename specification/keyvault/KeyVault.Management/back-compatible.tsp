@@ -139,7 +139,7 @@ using Azure.Core;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 @@clientName(Operation.properties, "OperationProperties");
 
-@@OpenAPI.extension(MhsmRegionsListResult.value, "x-ms-identifiers", #["name"]);
+@@Azure.ResourceManager.identifiers(MhsmRegionsListResult.value, #["name"]);
 
 @@clientName(Azure.ResourceManager.CommonTypes.Resource,
   "ArmResource",

@@ -501,7 +501,7 @@ model NetworkRuleSetProperties {
   /**
    * List of IpRules
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules?: NWRuleSetIpRules[];
 }
 

@@ -207,7 +207,7 @@ model InboundEndpointProperties {
   /**
    * IP configurations for the inbound endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipConfigurations: IpConfiguration[];
 
   /**
@@ -340,7 +340,7 @@ model ForwardingRuleProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers: TargetDnsServer[];
 
   /**
@@ -395,7 +395,7 @@ model ForwardingRulePatchProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers?: TargetDnsServer[];
 
   /**
@@ -540,7 +540,7 @@ model DnsSecurityRuleProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsResolverDomainLists: SubResource[];
 
   /**
@@ -596,7 +596,7 @@ model DnsSecurityRulePatchProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsResolverDomainLists?: SubResource[];
 
   /**
