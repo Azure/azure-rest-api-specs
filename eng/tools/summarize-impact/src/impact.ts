@@ -658,7 +658,6 @@ async function processNewRpNamespaceWithoutRpaasLabel(
     ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = true;
   }
 
-
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processNewRpNamespaceWithoutRpaasLabel");
 
