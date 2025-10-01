@@ -325,7 +325,11 @@
             "disabled"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "EnrollmentStatus",
+            "modelAsString": true
+          }
         },
         "substatus": {
           "description": "Substatus for 'Assigned' devices. Possible values include - 'initialAssignment': Device has been assigned to an IoT hub for the first time, 'deviceDataMigrated': Device has been assigned to a different IoT hub and its device data was migrated from the previously assigned IoT hub. Device data was removed from the previously assigned IoT hub, 'deviceDataReset':  Device has been assigned to a different IoT hub and its device data was populated from the initial state stored in the enrollment. Device data was removed from the previously assigned IoT hub, 'reprovisionedToInitialAssignment': Device has been re-provisioned to a previously assigned IoT hub.",
@@ -336,7 +340,11 @@
             "reprovisionedToInitialAssignment"
           ],
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AssignedDeviceSubstatus",
+            "modelAsString": true
+          }
         },
         "errorCode": {
           "format": "int32",
@@ -422,7 +430,11 @@
             "failed",
             "disabled"
           ],
-          "type": "string"
+          "type": "string",
+          "x-ms-enum": {
+            "name": "EnrollmentStatus",
+            "modelAsString": true
+          }
         },
         "registrationState": {
           "$ref": "#/definitions/DeviceRegistrationResult"
