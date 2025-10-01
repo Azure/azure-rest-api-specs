@@ -33,7 +33,10 @@ export async function getChangedFiles(options = {}) {
   // filter based on status with a single call to `git diff`.
   const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish, ...paths]);
 
-  const files = result.trim().split("\n");
+  const files = result
+    .trim()
+    .split("\n")
+    .filter((s) => s.length > 0);
   logger?.info("Changed Files:");
   for (const file of files) {
     logger?.info(`  ${file}`);
