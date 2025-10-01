@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "ServiceFabricManagedClustersManagementClient",
-    "version": "2025-06-01-preview",
+    "version": "2025-10-01-preview",
     "description": "Service Fabric Managed Clusters Management Client",
     "x-typespec-generated": [
       {
@@ -1830,6 +1830,80 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/fetchApplicationHealth": {
+      "post": {
+        "operationId": "Applications_FetchApplicationHealth",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Get the status of the deployed application health. It will query the cluster to find the health of the deployed application.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/FetchApplicationHealthRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fetch application health": {
+            "$ref": "./examples/ApplicationActionFetchApplicationHealth_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/fetchUpgradeStatus": {
       "post": {
         "operationId": "Applications_ReadUpgrade",
@@ -1887,6 +1961,80 @@
         "x-ms-examples": {
           "Get an application upgrade": {
             "$ref": "./examples/ApplicationActionGetUpgrade_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/restartDeployedCodePackage": {
+      "post": {
+        "operationId": "Applications_RestartDeployedCodePackage",
+        "tags": [
+          "Applications"
+        ],
+        "description": "Restart a code package instance of a service replica or instance. This is a potentially destabilizing operation that should be used with immense care.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestartDeployedCodePackageRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart deployed code package": {
+            "$ref": "./examples/ApplicationActionRestartDeployedCodePackage_example.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2309,6 +2457,87 @@
         "x-ms-examples": {
           "Delete a service": {
             "$ref": "./examples/ServiceDeleteOperation_example.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}/services/{serviceName}/restartReplica": {
+      "post": {
+        "operationId": "Services_RestartReplica",
+        "tags": [
+          "Services"
+        ],
+        "description": "A long-running resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "clusterName",
+            "in": "path",
+            "description": "The name of the cluster resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "applicationName",
+            "in": "path",
+            "description": "The name of the application resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "serviceName",
+            "in": "path",
+            "description": "The name of the service resource in the format of {applicationName}~{serviceName}.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The content of the action request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RestartReplicaRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Restart replicas": {
+            "$ref": "./examples/ApplicationActionRestartReplica_example.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -4356,6 +4585,13 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "parameters": {
+          "type": "object",
+          "description": "List of application parameters with overridden values from their default values specified in the application manifest.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       }
     },
@@ -5102,6 +5338,35 @@
         ]
       }
     },
+    "FetchApplicationHealthRequest": {
+      "type": "object",
+      "description": "Parameters for fetching the health of an application.",
+      "properties": {
+        "eventsHealthStateFilter": {
+          "$ref": "#/definitions/HealthFilter",
+          "description": "Allows filtering of the health events returned in the response based on health state."
+        },
+        "deployedApplicationsHealthStateFilter": {
+          "$ref": "#/definitions/HealthFilter",
+          "description": "Allows filtering of the deployed applications health state objects returned in the result of application health query based on their health state."
+        },
+        "servicesHealthStateFilter": {
+          "$ref": "#/definitions/HealthFilter",
+          "description": "Allows filtering of the services health state objects returned in the result of services health query based on their health state."
+        },
+        "excludeHealthStatistics": {
+          "type": "boolean",
+          "description": "Indicates whether the health statistics should be returned as part of the query result. False by default. The statistics show the number of children entities in health state Ok, Warning, and Error.",
+          "default": false
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Request timeout for the health query in seconds. The default value is 60 seconds.",
+          "default": 60
+        }
+      }
+    },
     "FrontendConfiguration": {
       "type": "object",
       "description": "Describes the frontend configurations for the node type.",
@@ -5153,6 +5418,54 @@
             ]
           }
         }
+      }
+    },
+    "HealthFilter": {
+      "type": "string",
+      "description": "Enum for filtering health events.",
+      "enum": [
+        "Default",
+        "None",
+        "Ok",
+        "Warning",
+        "Error",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "HealthFilter",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default value. Matches any health state."
+          },
+          {
+            "name": "None",
+            "value": "None",
+            "description": "Filter that doesn't match any health state. Used to return no results on a given collection of health entities."
+          },
+          {
+            "name": "Ok",
+            "value": "Ok",
+            "description": "Filter for health state Ok."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Filter for health state Warning."
+          },
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Filter for health state Error."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "Filter that matches input with any health state."
+          }
+        ]
       }
     },
     "IpConfiguration": {
@@ -7149,6 +7462,96 @@
           "readOnly": true
         }
       }
+    },
+    "RestartDeployedCodePackageRequest": {
+      "type": "object",
+      "description": "Parameters for restarting a deployed code package.",
+      "properties": {
+        "nodeName": {
+          "type": "string",
+          "description": "The name of the node where the code package needs to be restarted. Use '*' to restart on all nodes where the code package is running."
+        },
+        "serviceManifestName": {
+          "type": "string",
+          "description": "The name of the service manifest as specified in the code package."
+        },
+        "codePackageName": {
+          "type": "string",
+          "description": "The name of the code package as specified in the service manifest."
+        },
+        "codePackageInstanceId": {
+          "type": "string",
+          "description": "The instance ID for currently running entry point. For a code package setup entry point (if specified) runs first and after it finishes main entry point is started. Each time entry point executable is run, its instance ID will change. If 0 is passed in as the code package instance ID, the API will restart the code package with whatever instance ID it is currently running. If an instance ID other than 0 is passed in, the API will restart the code package only if the current Instance ID matches the passed in instance ID. Note, passing in the exact instance ID (not 0) in the API is safer, because if ensures at most one restart of the code package."
+        },
+        "servicePackageActivationId": {
+          "type": "string",
+          "description": "The activation id of a deployed service package. If ServicePackageActivationMode specified at the time of creating the service is 'SharedProcess' (or if it is not specified, in which case it defaults to 'SharedProcess'), then value of ServicePackageActivationId is always an empty string."
+        },
+        "force": {
+          "type": "boolean",
+          "description": "The confirmation from user to restart the deployed code package."
+        }
+      },
+      "required": [
+        "nodeName",
+        "serviceManifestName",
+        "codePackageName",
+        "codePackageInstanceId"
+      ]
+    },
+    "RestartKind": {
+      "type": "string",
+      "description": "The kind of restart to perform.",
+      "enum": [
+        "Simultaneous"
+      ],
+      "x-ms-enum": {
+        "name": "RestartKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Simultaneous",
+            "value": "Simultaneous",
+            "description": "Restart all listed replicas at the same time."
+          }
+        ]
+      }
+    },
+    "RestartReplicaRequest": {
+      "type": "object",
+      "description": "Request to restart a replica.",
+      "properties": {
+        "partitionId": {
+          "type": "string",
+          "description": "The ID of the partition."
+        },
+        "replicaIds": {
+          "type": "array",
+          "description": "The IDs of the replicas to be restarted.",
+          "items": {
+            "type": "integer",
+            "format": "int64"
+          }
+        },
+        "restartKind": {
+          "$ref": "#/definitions/RestartKind",
+          "description": "The kind of restart to perform."
+        },
+        "forceRestart": {
+          "type": "boolean",
+          "description": "If true, the restart operation will be forced. Use this option with care, as it may cause data loss."
+        },
+        "timeout": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The server timeout for performing the operation in seconds. This timeout specifies the time duration that the client is willing to wait for the requested operation to complete. The default value for this parameter is 60 seconds."
+        }
+      },
+      "required": [
+        "partitionId",
+        "replicaIds",
+        "restartKind"
+      ]
     },
     "RollingUpgradeMode": {
       "type": "string",

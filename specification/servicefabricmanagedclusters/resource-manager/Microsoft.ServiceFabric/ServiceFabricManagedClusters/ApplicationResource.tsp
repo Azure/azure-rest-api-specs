@@ -2,11 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Microsoft.ServiceFabric;
 /**
@@ -119,6 +121,28 @@ interface Applications {
   updateUpgrade is ArmResourceActionAsync<
     ApplicationResource,
     RuntimeUpdateApplicationUpgradeParameters,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
+
+  /**
+   * Get the status of the deployed application health. It will query the cluster to find the health of the deployed application.
+   */
+  @added(Versions.v2025_10_01_preview)
+  fetchApplicationHealth is ArmResourceActionAsync<
+    ApplicationResource,
+    FetchApplicationHealthRequest,
+    never,
+    LroHeaders = ArmCombinedLroHeaders
+  >;
+
+  /**
+   * Restart a code package instance of a service replica or instance. This is a potentially destabilizing operation that should be used with immense care.
+   */
+  @added(Versions.v2025_10_01_preview)
+  restartDeployedCodePackage is ArmResourceActionAsync<
+    ApplicationResource,
+    RestartDeployedCodePackageRequest,
     never,
     LroHeaders = ArmCombinedLroHeaders
   >;
@@ -322,6 +346,13 @@ model ApplicationUpdateParameters {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property, used to pass string to string dictionary"
   tags?: Record<string>;
+
+  /**
+   * List of application parameters with overridden values from their default values specified in the application manifest.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property of app resource, used to pass string to string dictionary"
+  @added(Versions.v2025_10_01_preview)
+  parameters?: Record<string>;
 }
 
 /**
@@ -617,4 +648,109 @@ model RuntimeUpdateApplicationUpgradeParameters {
    * Describes the parameters for updating a rolling upgrade of application or cluster and a monitoring policy.
    */
   updateDescription?: RuntimeRollingUpgradeUpdateMonitoringPolicy;
+}
+
+/**
+ * Enum for filtering health events.
+ */
+@added(Versions.v2025_10_01_preview)
+union HealthFilter {
+  string,
+
+  /**
+   * Default value. Matches any health state.
+   */
+  Default: "Default",
+
+  /**
+   * Filter that doesn't match any health state. Used to return no results on a given collection of health entities.
+   */
+  None: "None",
+
+  /**
+   * Filter for health state Ok.
+   */
+  Ok: "Ok",
+
+  /**
+   * Filter for health state Warning.
+   */
+  Warning: "Warning",
+
+  /**
+   * Filter for health state Error.
+   */
+  Error: "Error",
+
+  /**
+   * Filter that matches input with any health state.
+   */
+  All: "All",
+}
+
+/**
+ * Parameters for fetching the health of an application.
+ */
+@added(Versions.v2025_10_01_preview)
+model FetchApplicationHealthRequest {
+  /**
+   * Allows filtering of the health events returned in the response based on health state.
+   */
+  eventsHealthStateFilter?: HealthFilter;
+
+  /**
+   * Allows filtering of the deployed applications health state objects returned in the result of application health query based on their health state.
+   */
+  deployedApplicationsHealthStateFilter?: HealthFilter;
+
+  /**
+   * Allows filtering of the services health state objects returned in the result of services health query based on their health state.
+   */
+  servicesHealthStateFilter?: HealthFilter;
+
+  /**
+   * Indicates whether the health statistics should be returned as part of the query result. False by default. The statistics show the number of children entities in health state Ok, Warning, and Error.
+   */
+  excludeHealthStatistics?: boolean = false;
+
+  /**
+   * Request timeout for the health query in seconds. The default value is 60 seconds.
+   */
+  timeout?: int64 = 60;
+}
+
+/**
+ * Parameters for restarting a deployed code package.
+ */
+@added(Versions.v2025_10_01_preview)
+model RestartDeployedCodePackageRequest {
+  /**
+   * The name of the node where the code package needs to be restarted. Use '*' to restart on all nodes where the code package is running.
+   */
+  nodeName: string;
+
+  /**
+   * The name of the service manifest as specified in the code package.
+   */
+  serviceManifestName: string;
+
+  /**
+   * The name of the code package as specified in the service manifest.
+   */
+  codePackageName: string;
+
+  /**
+   * The instance ID for currently running entry point. For a code package setup entry point (if specified) runs first and after it finishes main entry point is started. Each time entry point executable is run, its instance ID will change. If 0 is passed in as the code package instance ID, the API will restart the code package with whatever instance ID it is currently running. If an instance ID other than 0 is passed in, the API will restart the code package only if the current Instance ID matches the passed in instance ID. Note, passing in the exact instance ID (not 0) in the API is safer, because if ensures at most one restart of the code package.
+   */
+  codePackageInstanceId: string;
+
+  /**
+   * The activation id of a deployed service package. If ServicePackageActivationMode specified at the time of creating the service is 'SharedProcess' (or if it is not specified, in which case it defaults to 'SharedProcess'), then value of ServicePackageActivationId is always an empty string.
+   */
+  servicePackageActivationId?: string;
+
+  /**
+   * The confirmation from user to restart the deployed code package.
+   */
+  force?: boolean;
 }
