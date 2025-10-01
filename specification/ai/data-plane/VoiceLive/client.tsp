@@ -87,7 +87,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.VideoCrop.bottom_right, "BottomRightInternal", "csharp");
 @@clientName(VoiceLive.VideoCrop.top_left, "TopLeftInternal", "csharp");
 @@clientName(VoiceLive.Response, "SessionResponse", "csharp");
-@@clientName(VoiceLive.Response.modalities, "ModalitiesInternal", "csharp");
 @@clientName(VoiceLive.AgentConfig, "RespondingAgentOptions", "csharp");
 @@clientName(VoiceLive.FunctionTool, "VoiceLiveFunctionDefinition", "csharp");
 @@clientName(VoiceLive.Tool, "VoiceLiveToolDefinition", "csharp");

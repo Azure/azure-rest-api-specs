@@ -197,21 +197,13 @@ model Response {
   usage?: TokenUsage;
 
   /**
-
    * Which conversation the response is added to, determined by the `conversation`
-
    * field in the `response.create` event. If `auto`, the response will be added to
-
    * the default conversation and the value of `conversation_id` will be an id like
-
    * `conv_1234`. If `none`, the response will not be added to any conversation and
-
    * the value of `conversation_id` will be `null`. If responses are being triggered
-
    * by server VAD, the response will be added to the default conversation, thus
-
    * the `conversation_id` will be an id like `conv_1234`.
-
    */
   conversation_id?: string;
 
@@ -219,13 +211,9 @@ model Response {
   voice?: Voice;
 
   /**
-
    * The set of modalities the model used to respond. If there are multiple modalities,
-
    * the model will pick one, for example if `modalities` is `["text", "audio"]`, the model
-
    * could be responding in either text or audio.
-
    */
   modalities?: Modality[];
 
@@ -313,17 +301,11 @@ model ClientEventConversationItemCreate extends ClientEvent {
   event_id?: string;
 
   /**
-
    * The ID of the preceding item after which the new item will be inserted.
-
    * If not set, the new item will be appended to the end of the conversation.
-
    * If set to `root`, the new item will be added to the beginning of the conversation.
-
    * If set to an existing ID, it allows an item to be inserted mid-conversation. If the
-
    * ID cannot be found, an error will be returned and the item will not be added.
-
    */
   previous_item_id?: string;
 
@@ -452,18 +434,14 @@ model ServerEventErrorDetails {
   type: string;
 
   /** Error code, if any. */
-  /** Error code, if any. */
   code?: string;
 
-  /** A human-readable error message. */
   /** A human-readable error message. */
   message: string;
 
   /** Parameter related to the error, if any. */
-  /** Parameter related to the error, if any. */
   param?: string;
 
-  /** The event_id of the client event that caused the error, if applicable. */
   /** The event_id of the client event that caused the error, if applicable. */
   event_id?: string;
 }
@@ -575,15 +553,10 @@ model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
   type: ServerEventType.input_audio_buffer_speech_started;
 
   /**
-
    * Milliseconds from the start of all audio written to the buffer during the
-
    * session when speech was first detected. This will correspond to the
-
    * beginning of audio sent to the model, and thus includes the
-
    * `prefix_padding_ms` configured in the Session.
-
    */
   audio_start_ms: int32;
 
@@ -604,13 +577,9 @@ model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
   type: ServerEventType.input_audio_buffer_speech_stopped;
 
   /**
-
    * Milliseconds since the session started when speech stopped. This will
-
    * correspond to the end of audio sent to the model, and thus includes the
-
    * `min_silence_duration_ms` configured in the Session.
-
    */
   audio_end_ms: int32;
 
@@ -1110,11 +1079,8 @@ model ResponseCreateParams {
   append_input_items?: ConversationRequestItem[];
 
   /**
-
    * Input items to be used as the context for this response.
-
    * An empty array clears previous context.
-
    */
   input_items?: ConversationRequestItem[];
 
@@ -1126,29 +1092,18 @@ model ResponseCreateParams {
   modalities?: Modality[];
 
   /**
-
    * The default system instructions (i.e. system message) prepended to model
-
    * calls. This field allows the client to guide the model on desired
-
    * responses. The model can be instructed on response content and format,
-
    * (e.g. "be extremely succinct", "act friendly", "here are examples of good
-
    * responses") and on audio behavior (e.g. "talk quickly", "inject emotion
-
    * into your voice", "laugh frequently"). The instructions are not guaranteed
-
    * to be followed by the model, but they provide guidance to the model on the
-
    * desired behavior.
-
+   * 
    * Note that the server sets default instructions which will be used if this
-
    * field is not set and are visible in the `session.created` event at the
-
    * start of the session.
-
    */
   instructions?: string;
 
@@ -1164,11 +1119,8 @@ model ResponseCreateParams {
   tools?: Tool[];
 
   /**
-
    * How the model chooses tools. Options are `auto`, `none`, `required`, or
-
    * specify a function, like `{"type": "function", "function": {"name": "my_function"}}`.
-
    */
   tool_choice?: string;
 

@@ -10,7 +10,6 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @service(#{ title: "VoiceLive"})
-@versioned(VoiceLive.Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | AadOauth2Auth<[
     "https://cognitiveservices.azure.com/.default"
@@ -25,4 +24,5 @@ using Azure.Core;
   }
 )
 
-namespace VoiceLive.WebSocket;
+@versioned(VoiceLive.Versions)
+namespace VoiceLive{}
