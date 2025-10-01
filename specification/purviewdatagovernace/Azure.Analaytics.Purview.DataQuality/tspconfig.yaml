@@ -15,30 +15,3 @@ options:
     examples-dir: "{project-root}/examples"
     output-file: "{azure-resource-provider-folder}/Azure.Analaytics.Purview.DataQuality/{version-status}/{version}/purviewDataQuality.json"
     omit-unreachable-types: true
-  "@azure-tools/typespec-python":
-    package-dir: "azure-purview-dataquality"
-    namespace: "azure.purview.dataquality"
-    generate-test: true
-    generate-sample: true
-    flavor: azure
-  "@azure-typespec/http-client-csharp":
-    namespace: Azure.Analaytics.Purview.DataQuality
-    model-namespace: false
-  "@azure-tools/typespec-ts":
-    package-dir: "purview-dataquality-rest"
-    package-details:
-      name: "@azure-rest/purview-dataquality"
-    flavor: azure
-  "@azure-tools/typespec-java":
-    package-dir: "azure-analaytics-purview-dataquality"
-    namespace: com.azure.analaytics.purview.dataquality
-    flavor: azure
-  "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azpurviewdataquality"
-    service-dir: "sdk/purview"
-    emitter-output-dir: "{output-dir}/{service-dir}/azpurviewdataquality"
-    generate-fakes: true
-    inject-spans: true
-    single-client: true
-    slice-elements-byval: true
-    flavor: azure
