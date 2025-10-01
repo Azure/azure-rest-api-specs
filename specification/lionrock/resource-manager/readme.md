@@ -1,4 +1,4 @@
-# plannedquota
+# Microsoft.Lionrock
 
 > see https://aka.ms/autorest
 

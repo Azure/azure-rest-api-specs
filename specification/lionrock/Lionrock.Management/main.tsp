@@ -1,27 +1,23 @@
-import "@azure-tools/typespec-autorest";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/versioning";
+
 import "./versions.tsp";
 import "./plannedquota.tsp";
 
-using TypeSpec.Versioning;
 using Azure.ResourceManager;
+using TypeSpec.Versioning;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "The names of Namespace types must use PascalCaseTypeSpec"
 @armProviderNamespace
-@service(#{ title: "Azure Planned Quota" })
-@doc("Planned Quota Provider")
+@service(#{ title: "Microsoft.Lionrock" })
+@doc("Microsoft.Lionrock resource providers API.")
 @versioned(Microsoft.Lionrock.Versions)
 namespace Microsoft.Lionrock;
-
-#suppress "@azure-tools/typespec-azure-core/no-openapi" "Using Autorest.example intentionally to attach provider operations example"
-@@Autorest.example(Operations.list,
-  "./examples/PlannedQuota_Operations.json",
-  "List Operations"
-);
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
 @doc("Provisioning status of the resource.")
-union PlannedQuotaProvisioningState {
+union LionrockProvisioningState {
   string,
   ResourceProvisioningState,
 
