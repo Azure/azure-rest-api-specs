@@ -40,13 +40,13 @@ model EvalRunOutputItem {
   object: "eval.run.output_item" = "eval.run.output_item";
 
   @doc("Unique identifier for the evaluation run output item.")
-  id: string;
+  id?: string;
 
   @doc("The identifier of the evaluation run associated with this output item.")
-  run_id: string;
+  run_id?: string;
 
   @doc("The identifier of the evaluation group.")
-  eval_id: string;
+  eval_id?: string;
 
   @doc("Unix timestamp (in seconds) when the evaluation run was created.")
   created_at: integer;
@@ -55,7 +55,7 @@ model EvalRunOutputItem {
   status: string;
 
   @doc("The identifier for the data source item.")
-  datasource_item_id: integer;
+  datasource_item_id?: integer;
 
   @doc("Details of the input data source item.")
   datasource_item: {};
@@ -64,7 +64,7 @@ model EvalRunOutputItem {
   results: {}[];
 
   @doc("A sample containing the input and output of the evaluation run.")
-  sample: {};
+  sample?: {};
 }
 
 @doc("OpenAI definintion: Eval inline file content or jsonl input data.")
@@ -77,7 +77,7 @@ model EvalJsonlFileContentSource {
   content: {
     item: {};
     sample?: {};
-  }[];
+  };
 }
 
 @doc("Eval jsonl input data.")
