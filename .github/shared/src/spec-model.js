@@ -12,6 +12,7 @@ const specModelCache = new Map();
 
 /**
  * @typedef {Object} ToJSONOptions
+ * @prop {boolean} [embedErrors]
  * @prop {boolean} [includeRefs]
  * @prop {boolean} [relativePaths]
  *
@@ -216,15 +217,16 @@ export class SpecModel {
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
-    const readmes = await mapAsync(
-      [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
-      async (r) => await r.toJSONAsync(options),
-    );
-
-    return {
-      folder: this.#folder,
-      readmes,
-    };
+    return await embedError(async () => {
+      const readmes = await mapAsync(
+        [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
+        async (r) => await r.toJSONAsync(options),
+      );
+      return {
+        folder: this.#folder,
+        readmes,
+      };
+    }, options);
   }
 
   /**
@@ -232,5 +234,23 @@ export class SpecModel {
    */
   toString() {
     return `SpecModel(${this.#folder}, {logger: ${this.#logger}}})`;
+  }
+}
+
+/**
+ * @template T
+ * @param {() => Promise<T>} fn
+ * @param {{embedErrors?: boolean}} [options]
+ * @returns {Promise<T | {error: string}>}
+ */
+export async function embedError(fn, options) {
+  try {
+    return await fn();
+  } catch (error) {
+    if (options?.embedErrors && error instanceof Error) {
+      return { error: error.message };
+    } else {
+      throw error;
+    }
   }
 }
