@@ -29,7 +29,7 @@ export async function main() {
         default: "lint-diff.md",
       },
       // TODO: Consider using git commands to determine this information
-      "base-branch": {
+      "base-sha": {
         type: "string",
         short: "b",
         default: "main",
@@ -53,7 +53,7 @@ export async function main() {
       before: beforeArg,
       after: afterArg,
       "out-file": outFile,
-      "base-branch": baseBranch,
+      "base-sha": baseSha,
       "compare-sha": compareSha,
       "github-repo-path": githubRepoPath,
     },
@@ -85,7 +85,7 @@ export async function main() {
     beforeArg as string,
     afterArg as string,
     outFile as string,
-    baseBranch as string,
+    baseSha as string,
     compareSha as string,
     githubRepoPath as string,
   );
@@ -95,7 +95,7 @@ async function runLintDiff(
   beforePath: string,
   afterPath: string,
   outFile: string,
-  baseBranch: string,
+  baseSha: string,
   compareSha: string,
   githubRepoPath: string,
 ) {
@@ -104,7 +104,7 @@ async function runLintDiff(
     [beforeList, afterList, affectedSwaggers] = await getRunList(
       beforePath,
       afterPath,
-      baseBranch,
+      baseSha,
       compareSha,
     );
   } catch (error) {
@@ -160,7 +160,7 @@ async function runLintDiff(
     runCorrelations,
     affectedSwaggers,
     outFile,
-    baseBranch,
+    baseSha,
     compareSha,
     githubRepoPath,
   );

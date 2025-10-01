@@ -12,7 +12,7 @@ import { deduplicateTags } from "./markdown-utils.js";
 export async function getRunList(
   beforePath: string,
   afterPath: string,
-  baseBranch: string,
+  baseSha: string,
   compareSha: string,
 ): Promise<[Map<string, ReadmeAffectedTags>, Map<string, ReadmeAffectedTags>, Set<string>]> {
   // Forward slashes are OK list coming from changedFilesPath is from git which
@@ -22,7 +22,7 @@ export async function getRunList(
   const ignoreFilesWith = ["/examples/", "/quickstart-templates/", "/scenarios/"];
 
   const changedFiles = await getChangedFiles({
-    baseCommitish: baseBranch,
+    baseCommitish: baseSha,
     headCommitish: compareSha,
     cwd: afterPath,
   });

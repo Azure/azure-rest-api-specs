@@ -23,7 +23,7 @@ export async function generateLintDiffReport(
   runCorrelations: Map<string, BeforeAfter>,
   affectedSwaggers: Set<string>,
   outFile: string,
-  baseBranch: string,
+  baseSha: string,
   compareSha: string,
   githubRepoPath: string,
 ): Promise<boolean> {
@@ -49,7 +49,7 @@ export async function generateLintDiffReport(
     const afterPath = getPath(after);
     const beforePath = before ? getPath(before) : "";
 
-    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(githubRepoPath, compareSha, afterPath)}) | [${beforeName}](${getFileLink(githubRepoPath, baseBranch, beforePath)}) ${getAutoRestFailedMessage(before)}|\n`;
+    outputMarkdown += `| ${afterName} | [${afterName}](${getFileLink(githubRepoPath, compareSha, afterPath)}) | [${beforeName}](${getFileLink(githubRepoPath, baseSha, beforePath)}) ${getAutoRestFailedMessage(before)}|\n`;
   }
 
   outputMarkdown += `\n\n`;
