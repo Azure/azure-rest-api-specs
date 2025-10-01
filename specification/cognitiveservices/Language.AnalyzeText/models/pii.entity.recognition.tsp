@@ -895,5 +895,25 @@ union PiiCategoriesExclude {
 
   /** Medicare Beneficiary ID */
   @added(Versions.v2025_11_15_preview)
-  MedicareBeneficiaryId: "MedicareBeneficiaryId",
+  MedicareBeneficiaryId: "USMedicareBeneficiaryId",
+
+  /** Location */
+  @added(Versions.v2025_11_15_preview)
+  Location: "Location",
+
+  /** City */
+  @added(Versions.v2025_11_15_preview)
+  City: "City",
+
+  /** State */
+  @added(Versions.v2025_11_15_preview)
+  State: "State",
+
+  /** Airport */
+  @added(Versions.v2025_11_15_preview)
+  Airport: "Airport",
+
+  /** Geopolitical Entity */
+  @added(Versions.v2025_11_15_preview)
+  GPE: "GPE",
 }
