@@ -1,13 +1,14 @@
-markdown
-
 # Azure Purview Data Quality
 
 > This service has been migrated to TypeSpec. For the latest specification, see the TypeSpec project at `../Azure.Analaytics.Purview.DataQuality/`.
+
 > see https://aka.ms/autorest
+
 This is the legacy AutoRest configuration file for Purview Data Quality.
 
 **Note: This service has been migrated to TypeSpec. For active development and the latest API  
-specification, please refer to the TypeSpec project located at `../Azure.Analaytics.Purview.DataQuality/`.**
+specification, please refer to the TypeSpec project located at 
+`../Azure.Analaytics.Purview.DataQuality/`.**
 
 ## TypeSpec Project
 
