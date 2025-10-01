@@ -433,7 +433,7 @@ describe("Summarize Checks Unit Tests", () => {
       expect(output).toEqual(expectedOutput);
     });
 
-    it("should generate error summary when CI-NewRPNamespaceWithoutRPaaS is present, and RPaaSException is as well.", async () => {
+    it("should generate success summary when CI-NewRPNamespaceWithoutRPaaS is present, and RPaaSException is as well.", async () => {
       const repo = "azure-rest-api-specs";
       const targetBranch = "main";
       const labelNames = ["CI-NewRPNamespaceWithoutRPaaS", "RPaaSException"];
