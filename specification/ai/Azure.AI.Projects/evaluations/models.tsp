@@ -12,24 +12,24 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+/** Azure AI Evaluator class definition. */
 model AzureAIEvaluator {
-  /** The object type, which is always `label_model`. */
-  @extension("x-stainless-const", true)
+  /** The object type, which is always `azure_ai_evaluator`. */
   type: "azure_ai_evaluator";
 
-  /** The name of the grader. */
+  /** User provided name of the Azure AI Evaluator object instance. */
   name: string;
 
-  /** The name of the evaluator. */
+  /** The reference name of the evaluator. */
   evaluator_name: string;
 
-  /** The version of the evaluator. */
+  /** The optional reference version of the evaluator. */
   evaluator_version?: string;
 
-  /** The initialization parameters for the evaluation. Must support structured outputs. */
+  /** The initialization parameters for the evaluation. */
   initialization_parameters?: {};
 
-  /** The model to use for the evaluation. Must support structured outputs. */
+  /** The model to use for the evaluation. */
   data_mapping?: Record<string>;
 }
 

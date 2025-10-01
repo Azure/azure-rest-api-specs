@@ -2388,7 +2388,7 @@
             "description": "Creates a sync eval run.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/EvalJsonlInputData"
+              "$ref": "#/definitions/SyncEvalInput"
             }
           }
         ],
@@ -2923,6 +2923,50 @@
           }
         ]
       }
+    },
+    "AzureAIEvaluator": {
+      "type": "object",
+      "description": "Azure AI Evaluator class definition.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The object type, which is always `label_model`.",
+          "enum": [
+            "azure_ai_evaluator"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the grader."
+        },
+        "evaluator_name": {
+          "type": "string",
+          "description": "The name of the evaluator."
+        },
+        "evaluator_version": {
+          "type": "string",
+          "description": "The version of the evaluator."
+        },
+        "initialization_parameters": {
+          "type": "object",
+          "description": "The initialization parameters for the evaluation. Must support structured outputs."
+        },
+        "data_mapping": {
+          "type": "object",
+          "description": "The model to use for the evaluation. Must support structured outputs.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "name",
+        "evaluator_name"
+      ]
     },
     "AzureAISearchIndex": {
       "type": "object",
@@ -3714,19 +3758,6 @@
       "required": [
         "type",
         "content"
-      ]
-    },
-    "EvalJsonlInputData": {
-      "type": "object",
-      "description": "OpenAI Input data source definition for eval.",
-      "properties": {
-        "data_source": {
-          "$ref": "#/definitions/CreateEvalJsonlRunDataSource",
-          "description": "Identifier of the evaluator."
-        }
-      },
-      "required": [
-        "data_source"
       ]
     },
     "EvalResult": {
@@ -5742,6 +5773,26 @@
         "name",
         "size",
         "tier"
+      ]
+    },
+    "SyncEvalInput": {
+      "type": "object",
+      "description": "OpenAI Input data source definition for eval.",
+      "properties": {
+        "data_source": {
+          "$ref": "#/definitions/CreateEvalJsonlRunDataSource",
+          "description": "Identifier of the evaluator."
+        },
+        "testing_criteria": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureAIEvaluator"
+          }
+        }
+      },
+      "required": [
+        "data_source",
+        "testing_criteria"
       ]
     },
     "SystemMessage": {
