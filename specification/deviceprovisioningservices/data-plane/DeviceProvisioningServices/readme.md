@@ -22,13 +22,22 @@ To see additional help and options, run:
 
 ### Basic Information
 
-These are the global settings for the IotHub API.
+These are the global settings for the API.
 
 ``` yaml
-openapi-type: arm
+openapi-type: data-plane
 tag: package-2021-10-01
 ```
 
+### Tag: package-preview-2025-07
+
+These settings apply only when `--tag=package-preview-2025-07` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-07'
+input-file:
+  - preview/2025-07-01-preview/service.json
+  - preview/2025-07-01-preview/device.json
+```
 
 ### Tag: package-2021-10-01
 
@@ -37,6 +46,7 @@ These settings apply only when `--tag=package-2021-10-01` is specified on the co
 ```yaml $(tag) == 'package-2021-10-01'
 input-file:
   - stable/2021-10-01/service.json
+  - stable/2021-10-01/device.json
 ```
 ---
 
