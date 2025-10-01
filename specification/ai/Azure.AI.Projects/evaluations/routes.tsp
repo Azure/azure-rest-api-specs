@@ -25,7 +25,7 @@ interface SyncEvals {
     {
       @doc("Creates a sync eval run.")
       @body
-      eval: EvalJsonlInputData;
+      eval: SyncEvalInput;
     },
     EvalRunOutputItem
   >;
