@@ -1,27 +1,20 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "./models.tsp";
-import "@typespec/http";
+import "@typespec/openapi";
 
+using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
-using Azure.Core.Traits;
+using TypeSpec.OpenAPI;
 
 namespace PurviewDataQuality;
 
-alias ServiceTraits = NoRepeatableRequests &
-  NoConditionalRequests &
-  NoClientRequestId;
-alias DataQualityOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 /**
  * Create Rules for Assets
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules")
 @post
-op CreateRules is Azure.Core.Foundations.Operation<
+op createRules is Azure.Core.Foundations.Operation<
   {
     /**
      * Unique Identifier for Business Domain
@@ -41,11 +34,8 @@ op CreateRules is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
 
-    /**
-     * Rule entity
-     */
     @bodyRoot
-    body: RuleEntity;
+    body?: RuleEntity;
   },
   RuleEntityResponse
 >;
@@ -53,9 +43,6 @@ op CreateRules is Azure.Core.Foundations.Operation<
 /**
  * Get Rules for Assets
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules")
 @get
 op getRules is Azure.Core.Foundations.Operation<
@@ -84,9 +71,6 @@ op getRules is Azure.Core.Foundations.Operation<
 /**
  * Update a rule
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules/{ruleId}")
 @put
 op updateRule is Azure.Core.Foundations.Operation<
@@ -115,9 +99,6 @@ op updateRule is Azure.Core.Foundations.Operation<
     @path
     ruleId: string;
 
-    /**
-     * Body Rule Entity
-     */
     @bodyRoot
     body?: RuleEntity;
   },
@@ -127,9 +108,6 @@ op updateRule is Azure.Core.Foundations.Operation<
 /**
  * Delete a rule
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules/{ruleId}")
 @delete
 op deleteRule is Azure.Core.Foundations.Operation<
@@ -164,9 +142,6 @@ op deleteRule is Azure.Core.Foundations.Operation<
 /**
  * Get a Rule
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/global-rules/{ruleId}")
 @get
 op getRule is Azure.Core.Foundations.Operation<
@@ -201,9 +176,6 @@ op getRule is Azure.Core.Foundations.Operation<
 /**
  * Create Bulk Rules for Assets
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/bulk/global-rules")
 @post
 op createBulkRules is Azure.Core.Foundations.Operation<
@@ -226,22 +198,15 @@ op createBulkRules is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
 
-    /**
-     * Body Rule Entity
-     */
-    #suppress "@azure-tools/typespec-azure-core/request-body-problem"
     @bodyRoot
     body?: RuleEntity[];
   },
-  RuleEntityListResponse
+  RuleEntityResponse[]
 >;
 
 /**
  * Create Asset Metadata Observer
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
 @post
 op createAssetMetaData is Azure.Core.Foundations.Operation<
@@ -264,9 +229,6 @@ op createAssetMetaData is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
 
-    /**
-     * Asset Meta data observer
-     */
     @bodyRoot
     body?: AssetMetadataObserver;
   },
@@ -276,9 +238,6 @@ op createAssetMetaData is Azure.Core.Foundations.Operation<
 /**
  * Get Observer
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
 @get
 op getObserver is Azure.Core.Foundations.Operation<
@@ -307,9 +266,6 @@ op getObserver is Azure.Core.Foundations.Operation<
 /**
  * Update Observer
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/asset-metadata")
 @put
 op updateObserver is Azure.Core.Foundations.Operation<
@@ -332,9 +288,6 @@ op updateObserver is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
 
-    /**
-     * AssetMetaDataObserver
-     */
     @bodyRoot
     body?: AssetMetadataObserver;
   },
@@ -344,9 +297,6 @@ op updateObserver is Azure.Core.Foundations.Operation<
 /**
  * Get Schedules
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules")
 @get
 op getSchedules is Azure.Core.Foundations.Operation<
@@ -369,9 +319,6 @@ op getSchedules is Azure.Core.Foundations.Operation<
 /**
  * Create Schedule
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules")
 @post
 op createSchedule is Azure.Core.Foundations.Operation<
@@ -382,21 +329,15 @@ op createSchedule is Azure.Core.Foundations.Operation<
     @path
     businessDomainId: string;
 
-    /**
-     * Schedule Entity
-     */
     @bodyRoot
     body?: ScheduleEntity;
   },
-  ScheduleEntityResponse
+  ScheduleEntity
 >;
 
 /**
  * Get Schedule
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
 @get
 op getSchedule is Azure.Core.Foundations.Operation<
@@ -419,9 +360,6 @@ op getSchedule is Azure.Core.Foundations.Operation<
 /**
  * Update Schedule
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
 @put
 op updateSchedule is Azure.Core.Foundations.Operation<
@@ -438,9 +376,6 @@ op updateSchedule is Azure.Core.Foundations.Operation<
     @path
     scheduleId: string;
 
-    /**
-     * Body for Schedule Entity
-     */
     @bodyRoot
     body?: ScheduleEntity;
   },
@@ -450,9 +385,6 @@ op updateSchedule is Azure.Core.Foundations.Operation<
 /**
  * Delete Schedule
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}")
 @delete
 op deleteSchedule is Azure.Core.Foundations.Operation<
@@ -475,11 +407,7 @@ op deleteSchedule is Azure.Core.Foundations.Operation<
 /**
  * Create Scan
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans")
-@pollingOperation(createScan)
 @post
 op createScan is Azure.Core.Foundations.Operation<
   {
@@ -507,11 +435,7 @@ op createScan is Azure.Core.Foundations.Operation<
 /**
  * Cancel Scan
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/cancel")
-@pollingOperation(cancelScan)
 @post
 op cancelScan is Azure.Core.Foundations.Operation<
   {
@@ -533,15 +457,12 @@ op cancelScan is Azure.Core.Foundations.Operation<
     @path
     scanId: string;
   },
-  ScanDTOResponse
+  ScanDTO
 >;
 
 /**
  * Get Scan by ScanId
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}")
 @get
 op scanByScanId is Azure.Core.Foundations.Operation<
@@ -564,15 +485,15 @@ op scanByScanId is Azure.Core.Foundations.Operation<
     @path
     scanId: string;
   },
-  ScheduleScanMonitoringEntity
+  ScheduleScanMonitoringEntity & {
+    @header
+    contentType: "application/json" | "text/json";
+  }
 >;
 
 /**
  * Get the run status by run id
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/runs/{runId}")
 @get
 op getRunStatus is Azure.Core.Foundations.Operation<
@@ -589,17 +510,16 @@ op getRunStatus is Azure.Core.Foundations.Operation<
     @path
     runId: string;
   },
-  JobMetadataEntity
+  JobMetadataEntity & {
+    @header
+    contentType: "application/json" | "text/json";
+  }
 >;
 
 /**
  * Cancel Scan
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/runs/{runId}/cancel")
-@pollingOperation(cancelScanByRunId)
 @post
 op cancelScanByRunId is Azure.Core.Foundations.Operation<
   {
@@ -615,15 +535,12 @@ op cancelScanByRunId is Azure.Core.Foundations.Operation<
     @path
     runId: string;
   },
-  ScanDTOResponse
+  string
 >;
 
 /**
  * Get runs for asset
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs")
 @get
 op getRunsForAsset is Azure.Core.Foundations.Operation<
@@ -652,17 +569,14 @@ op getRunsForAsset is Azure.Core.Foundations.Operation<
     @query("runType")
     runType: string;
   },
-  JobHistoryEntity[]
+  string
 >;
 
 /**
  * Do an observation
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@operationId("observe")
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations")
-@pollingOperation(observe)
 @post
 op observe is Azure.Core.Foundations.Operation<
   {
@@ -684,9 +598,6 @@ op observe is Azure.Core.Foundations.Operation<
     @path
     dataAssetId: string;
 
-    /**
-     * Body Job Config DTO
-     */
     @bodyRoot
     body: JobConfigDTO;
   },
@@ -696,12 +607,9 @@ op observe is Azure.Core.Foundations.Operation<
 /**
  * Deletes a specific observation.
  */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/observations/{observationId}")
 @delete
-op `Delete Observation` is Azure.Core.Foundations.Operation<
+op `delete Observation` is Azure.Core.Foundations.Operation<
   {
     /**
      * Get Business Domain Id
