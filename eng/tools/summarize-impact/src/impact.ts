@@ -120,7 +120,7 @@ export async function evaluateImpact(
   // doesn't necessarily need to be in the PR context.
   // Uses the previous outputs that DID need to be a PR context, but otherwise only examines targetBranch and those
   // output labels.
-  const { ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent, rpaasExceptionLabelShouldBePresent } =
+  const ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent =
     await processNewRpNamespaceWithoutRpaasLabel(
       context,
       labelContext,
@@ -149,7 +149,6 @@ export async function evaluateImpact(
     rpaasRpNotInPrivateRepo: ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
     resourceManagerRequired: resourceManagerLabelShouldBePresent,
     dataPlaneRequired: dataPlaneShouldBePresent,
-    rpaasExceptionRequired: rpaasExceptionLabelShouldBePresent,
     typeSpecChanged: typeSpecLabelShouldBePresent,
     isNewApiVersion: newApiVersion,
     isDraft: context.isDraft,
@@ -626,10 +625,7 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   resourceManagerLabelShouldBePresent: boolean,
   newRPNamespaceLabelShouldBePresent: boolean,
   rpaasLabelShouldBePresent: boolean,
-): Promise<{
-  ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent: boolean;
-  rpaasExceptionLabelShouldBePresent: boolean;
-}> {
+): Promise<boolean> {
   console.log("ENTER definition processNewRpNamespaceWithoutRpaasLabel");
   const ciNewRPNamespaceWithoutRpaaSLabel = new Label(
     "CI-NewRPNamespaceWithoutRPaaS",
@@ -637,8 +633,6 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   );
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = false;
-
-  const rpaasExceptionLabel = new Label("RPaaSException", labelContext.present);
 
   let skip = false;
 
@@ -664,18 +658,11 @@ async function processNewRpNamespaceWithoutRpaasLabel(
     ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = true;
   }
 
-  rpaasExceptionLabel.shouldBePresent =
-    rpaasExceptionLabel.present && ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent;
 
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
-  rpaasExceptionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   console.log("RETURN definition processNewRpNamespaceWithoutRpaasLabel");
 
-  return {
-    ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent:
-      ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent,
-    rpaasExceptionLabelShouldBePresent: rpaasExceptionLabel.shouldBePresent as boolean,
-  };
+  return ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent;
 }
 
 export const getRPaaSFolderList = async (
