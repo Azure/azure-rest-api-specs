@@ -238,7 +238,7 @@ export const getResourceProviderFromFilePath = (filePath: string): string | unde
 
 async function processTypeSpec(ctx: PRContext, labelContext: LabelContext): Promise<boolean> {
   console.log("ENTER definition processTypeSpec");
-  const typeSpecLabel = new Label("TypeSpec", labelContext.present);
+  const typeSpecLabel = new Label("TypeSpec");
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   typeSpecLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
@@ -421,7 +421,7 @@ function processPRTypeLabel(
   types: PRType[],
   labelContext: LabelContext,
 ): boolean {
-  const label = new Label(labelName, labelContext.present);
+  const label = new Label(labelName);
   label.shouldBePresent = types.includes(labelName);
 
   label.applyStateChange(labelContext.toAdd, labelContext.toRemove);
@@ -431,10 +431,7 @@ function processPRTypeLabel(
 async function processSuppression(context: PRContext, labelContext: LabelContext) {
   console.log("ENTER definition processSuppression");
 
-  const suppressionReviewRequiredLabel = new Label(
-    "SuppressionReviewRequired",
-    labelContext.present,
-  );
+  const suppressionReviewRequiredLabel = new Label("SuppressionReviewRequired");
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   suppressionReviewRequiredLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
@@ -536,7 +533,7 @@ async function processRPaaS(
   labelContext: LabelContext,
 ): Promise<{ rpaasLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRPaaS");
-  const rpaasLabel = new Label("RPaaS", labelContext.present);
+  const rpaasLabel = new Label("RPaaS");
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   rpaasLabel.shouldBePresent = false;
 
@@ -572,7 +569,7 @@ async function processNewRPNamespace(
   resourceManagerLabelShouldBePresent: boolean,
 ): Promise<{ newRPNamespaceLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processNewRPNamespace");
-  const newRPNamespaceLabel = new Label("new-rp-namespace", labelContext.present);
+  const newRPNamespaceLabel = new Label("new-rp-namespace");
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   newRPNamespaceLabel.shouldBePresent = false;
   const handlers: ChangeHandler[] = [];
@@ -627,10 +624,7 @@ async function processNewRpNamespaceWithoutRpaasLabel(
   rpaasLabelShouldBePresent: boolean,
 ): Promise<boolean> {
   console.log("ENTER definition processNewRpNamespaceWithoutRpaasLabel");
-  const ciNewRPNamespaceWithoutRpaaSLabel = new Label(
-    "CI-NewRPNamespaceWithoutRPaaS",
-    labelContext.present,
-  );
+  const ciNewRPNamespaceWithoutRpaaSLabel = new Label("CI-NewRPNamespaceWithoutRPaaS");
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = false;
 
@@ -724,10 +718,7 @@ async function processRpaasRpNotInPrivateRepoLabel(
   rpFolderNames: string[],
 ): Promise<{ ciRpaasRPNotInPrivateRepoLabelShouldBePresent: boolean }> {
   console.log("ENTER definition processRpaasRpNotInPrivateRepoLabel");
-  const ciRpaasRPNotInPrivateRepoLabel = new Label(
-    "CI-RpaaSRPNotInPrivateRepo",
-    labelContext.present,
-  );
+  const ciRpaasRPNotInPrivateRepoLabel = new Label("CI-RpaaSRPNotInPrivateRepo");
   // By default this label should not be present. We may determine later in this function that it should be present after all.
   ciRpaasRPNotInPrivateRepoLabel.shouldBePresent = false;
 
