@@ -51,7 +51,7 @@ jobs:
           npm exec --no -- lint-diff \
             --before before \
             --after after \
-            --base-branch ${{ github.event.pull_request.base.ref }} \
+            --base-branch ${{ github.event.pull_request.base.sha }} \
             --compare-sha ${{ github.event.pull_request.head.sha }} \
             --out-file "$GITHUB_STEP_SUMMARY"
         env:
