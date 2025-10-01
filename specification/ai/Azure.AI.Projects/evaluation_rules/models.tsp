@@ -92,8 +92,8 @@ model EvaluationRule {
   @doc("Filter condition of the evaluation rule.")
   filter?: EvaluationRuleFilter;
 
-  @doc("Event types that the evaluation rule applies to.")
-  event_types: EvaluationRuleEventType[];
+  @doc("Event type that the evaluation rule applies to.")
+  event_type: EvaluationRuleEventType;
 
   @doc("Indicates whether the evaluation rule is disabled. Default is false.")
   disabled: boolean = false;
