@@ -2886,27 +2886,6 @@ model RuleSetProperties extends AFDStateProperties {
 }
 
 /**
- * The JSON object that contains the properties for creating or updating a Rule Set.
- */
-// @doc("Properties for creating or updating a rule set.")
-// model RuleSetCreateOrUpdateProperties {
-//   /**
-//    * Indicates whether rule set is in batch mode. Default value is false. When batch mode is enabled, rules will be processed in a batch along with the rule set.
-//    * When batch mode is disabled, rules would need to be processed independently.
-//    * This property can only be set during rule set creation and cannot be updated later.
-//    * For switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.
-//    */
-//   batchMode?: boolean = false;
-
-//   /**
-//    * A dictionary of rules to be created as part of this rule set when in batch mode.
-//    * The key is the rule name, and the value contains the rule properties.
-//    * This property will be ignored if the rule set is not in batch mode.
-//    */
-//   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Rules dictionary maps rule name to rule properties for batch mode operations"
-//   rules?: Record<RuleProperties>;
-// }
-/**
  * The JSON object that contains the properties of the Rules to create.
  */
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2922,7 +2901,9 @@ model BatchRuleProperties {
   /**
    * Name of the rule.
    */
-  @visibility(Lifecycle.Read)
+  @maxLength(60)
+  @minLength(1)
+  @pattern("^[a-zA-Z][a-zA-Z0-9]{0,59}$")
   name: string;
 
   ...RuleProperties;

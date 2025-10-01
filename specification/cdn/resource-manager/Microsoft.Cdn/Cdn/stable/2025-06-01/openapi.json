@@ -6845,21 +6845,34 @@
             "description": "Name of the rule set under the profile which is unique globally.",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "resource",
+            "in": "body",
+            "description": "Resource create parameters.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RuleSet"
+            }
           }
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'RuleSet' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/RuleSet"
             }
           },
           "201": {
-            "description": "Azure create operation completed successfully.",
+            "description": "Resource 'RuleSet' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/RuleSet"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -6878,7 +6891,12 @@
           "RuleSets_Create": {
             "$ref": "./examples/RuleSets_Create.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/RuleSet"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "RuleSets_Delete",

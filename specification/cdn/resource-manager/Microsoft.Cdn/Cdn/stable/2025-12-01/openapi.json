@@ -9288,7 +9288,9 @@
         "name": {
           "type": "string",
           "description": "Name of the rule.",
-          "readOnly": true
+          "minLength": 1,
+          "maxLength": 60,
+          "pattern": "^[a-zA-Z][a-zA-Z0-9]{0,59}$"
         },
         "ruleSetName": {
           "type": "string",
@@ -16228,7 +16230,7 @@
     },
     "RuleProperties": {
       "type": "object",
-      "description": "The JSON object that contains the properties for creating or updating a Rule Set.The JSON object that contains the properties of the Rules to create.",
+      "description": "The JSON object that contains the properties of the Rules to create.",
       "properties": {
         "ruleSetName": {
           "type": "string",
