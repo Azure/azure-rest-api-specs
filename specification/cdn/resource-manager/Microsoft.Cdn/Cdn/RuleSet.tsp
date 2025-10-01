@@ -2,13 +2,13 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Profile.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Cdn;
 /**
@@ -31,17 +31,11 @@ interface RuleSets {
    */
   get is ArmResourceRead<RuleSet>;
 
-  // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Creates a new rule set within the specified profile.
    */
-  // create is ArmResourceCreateOrReplaceSync<RuleSet>;
-  @put
-  create is Azure.ResourceManager.Legacy.CustomPatchAsync<
-    RuleSet,
-    PatchModel = void,
-    Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
-  >;
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  create is ArmResourceCreateOrReplaceAsync<RuleSet>;
 
   /**
    * Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.
@@ -79,3 +73,7 @@ interface RuleSets {
 @@doc(RuleSet.properties,
   "The JSON object that contains the properties of the Rule Set to create."
 );
+
+// Mark batch mode properties as added in version 2025-12-01
+@@added(RuleSetProperties.batchMode, Versions.v2025_12_01);
+@@added(RuleSetProperties.rules, Versions.v2025_12_01);
