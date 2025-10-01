@@ -1,0 +1,55 @@
+{
+  "title": "Create DataGeneration job",
+  "operationId": "DataGenerationJobs_Create",
+  "parameters": {
+    "api-version": "2025-05-15-preview",
+    "x-ms-client-request-id": "d9e5f9d0-1b23-4c2d-9c5a-111111111111",
+    "dataGenerationJob": {
+      "type": "QuestionAnswers",
+      "options": {
+        "num_samples": 100,
+        "output_format": "FineTuneSupervised",
+        "output_file_prefix": "qna-train-dataset",
+        "num_turns": 6
+      },
+      "seed_data_sources": [
+        {
+          "type": "file",
+          "file_id": "file-1234"
+        }
+      ],
+      "model_options": {
+        "model": "gpt-4.1",
+        "temperature": 0.7,
+        "max_tokens": 1024
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "object": "data_generation.job",
+        "id": "datagen-1234",
+        "status": "running",
+        "type": "QuestionAnswers",
+        "options": {
+          "num_samples": 100,
+          "output_format": "FineTuneSupervised",
+          "output_file_prefix": "qna-train-dataset",
+          "num_turns": 6
+        },
+        "seed_data_sources": [
+          {
+            "type": "file",
+            "file_id": "file-1234"
+          }
+        ],
+        "model_options": {
+          "model": "gpt-4.1",
+          "temperature": 0.7,
+          "max_tokens": 1024
+        }
+      }
+    }
+  }
+}
