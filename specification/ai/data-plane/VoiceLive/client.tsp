@@ -53,6 +53,15 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ServerEventResponseTextDone, Access.public, "python");
 @@access(VoiceLive.ServerEventSessionUpdated, Access.public, "python");
 
+@@access(VoiceLive.ToolChoice, Access.public, "python");
+@@access(VoiceLive.Voice, Access.public, "python");
+
+
+@@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "python");
+@@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "python");
+@@clientName(VoiceLive.ToolChoiceFunctionObject, "ToolChoiceFunctionSelection", "python");
+
+
 @@access(VoiceLive.ServerEvent, Access.public, "csharp");
 @@access(VoiceLive.ServerEventSessionCreated, Access.public, "csharp");
 @@access(VoiceLive.ClientEvent, Access.internal, "csharp");
