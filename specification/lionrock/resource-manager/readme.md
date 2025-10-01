@@ -21,5 +21,5 @@ These settings apply only when `--tag=2025-10-01` is specified on the command li
 
 ```yaml $(tag) == '2025-10-01'
 input-file:
-  - Microsoft.Lionrock/preview/2025-10-01/plannedQuota.json
+  - Microsoft.Lionrock/stable/2025-10-01/lionrock.json
 ```
