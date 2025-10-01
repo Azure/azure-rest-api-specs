@@ -93,10 +93,14 @@ model CreateEvalJsonlRunDataSource {
 @doc("OpenAI Input data source definition for eval.")
 @added(Versions.v2025_10_15_preview)
 model SyncEvalInput {
-  @doc("Identifier of the evaluator.")
+  /** Identifier of the evaluator. */
   data_source: CreateEvalJsonlRunDataSource;
 
+  /** Evaluators to be used for the evaluation. */
   testing_criteria: AzureAIEvaluator[];
+
+  /** Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed. */
+  properties?: Record<string>;
 }
 
 @doc("Evaluator Configuration")
