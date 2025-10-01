@@ -665,6 +665,11 @@
       "type": "object",
       "description": "Represents a connected cluster.",
       "properties": {
+        "properties": {
+          "$ref": "#/definitions/ConnectedClusterProperties",
+          "description": "Describes the connected cluster resource properties.",
+          "x-ms-client-flatten": true
+        },
         "identity": {
           "$ref": "#/definitions/ConnectedClusterIdentity",
           "description": "The identity of the connected cluster."
@@ -672,16 +677,11 @@
         "kind": {
           "$ref": "#/definitions/ConnectedClusterKind",
           "description": "The kind of connected cluster."
-        },
-        "properties": {
-          "$ref": "#/definitions/ConnectedClusterProperties",
-          "description": "Describes the connected cluster resource properties.",
-          "x-ms-client-flatten": true
         }
       },
       "required": [
-        "identity",
-        "properties"
+        "properties",
+        "identity"
       ],
       "allOf": [
         {
