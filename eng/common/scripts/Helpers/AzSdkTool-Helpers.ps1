@@ -122,7 +122,7 @@ function Get-GitHubApiHeaders {
     {
         Write-Host "Using authenticated GitHub API requests."
         $headers = @{
-            Authorization = "Bearer $token"
+            Authorization = "Bearer $tokentest"
         }
         return $headers
     }
