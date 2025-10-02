@@ -4,6 +4,7 @@ import { readFile } from "fs/promises";
 import yaml from "js-yaml";
 import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
+import * as z from "zod";
 import { mapAsync } from "./array.js";
 import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
@@ -19,6 +20,15 @@ import { Tag } from "./tag.js";
 export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
 
 export class Readme {
+  // TODO: Consider requiring strings to match "/.json$/i"
+  static #inputFileSchema = z.object({
+    "input-file": z
+      // May be undefined, a single string, or an array of strings
+      .optional(z.union([z.string(), z.array(z.string())]))
+      // Normalize single string to array of string.  Don't change 'undefined'.
+      .transform((value) => (typeof value === "string" ? [value] : value)),
+  });
+
   /**
    * Content of `readme.md`, either loaded from `#path` or passed in via `options`.
    *
@@ -131,7 +141,9 @@ export class Readme {
           continue;
         }
 
-        if (!obj["input-file"]) {
+        const parsedObj = Readme.#inputFileSchema.parse(obj);
+
+        if (!parsedObj["input-file"]) {
           // The yaml block does not contain an input-file key
           continue;
         }
@@ -149,10 +161,7 @@ export class Readme {
           throw new Error(message);
         }
 
-        // It's possible for input-file to be a string or an array
-        const inputFilePaths = Array.isArray(obj["input-file"])
-          ? obj["input-file"]
-          : [obj["input-file"]];
+        const inputFilePaths = parsedObj["input-file"];
 
         const swaggerPathsResolved = inputFilePaths
           .map((p) => Readme.#normalizeSwaggerPath(p))

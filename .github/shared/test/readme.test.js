@@ -115,8 +115,37 @@ input-file:
     let readme = new Readme("foo", { ...options, content });
 
     expect(readme.getTags()).rejects.toThrowErrorMatchingInlineSnapshot(
-      // TODO: Improve error message, using a schema validator like 'zod'
-      `[TypeError: swaggerPath.includes is not a function]`,
+      `
+      [ZodError: [
+        {
+          "code": "invalid_union",
+          "errors": [
+            [
+              {
+                "expected": "string",
+                "code": "invalid_type",
+                "path": [],
+                "message": "Invalid input: expected string, received array"
+              }
+            ],
+            [
+              {
+                "expected": "string",
+                "code": "invalid_type",
+                "path": [
+                  1
+                ],
+                "message": "Invalid input: expected string, received object"
+              }
+            ]
+          ],
+          "path": [
+            "input-file"
+          ],
+          "message": "Invalid input"
+        }
+      ]]
+    `,
     );
   });
 
