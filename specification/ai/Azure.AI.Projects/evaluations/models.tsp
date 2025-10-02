@@ -12,95 +12,95 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
-@doc("Azure AI Evaluator class definition.")
+/** Azure AI Evaluator class definition. */
 @added(Versions.v2025_10_15_preview)
 model AzureAIEvaluator {
-  @doc("The object type, which is always `azure_ai_evaluator`.")
+  /** The object type, which is always `azure_ai_evaluator`. */
   type: "azure_ai_evaluator";
 
-  @doc("User provided name of the Azure AI Evaluator object instance.")
+  /** User provided name of the Azure AI Evaluator object instance. */
   name: string;
 
-  @doc("The reference name of the evaluator.")
+  /** The reference name of the evaluator. */
   evaluator_name: string;
 
-  @doc("The optional reference version of the evaluator.")
+  /** The optional reference version of the evaluator. */
   evaluator_version?: string;
 
-  @doc("The initialization parameters for the evaluation.")
+  /** The initialization parameters for the evaluation. */
   initialization_parameters?: {};
 
-  @doc("The model to use for the evaluation.")
+  /** The model to use for the evaluation. */
   data_mapping?: Record<string>;
 }
 
-@doc("OpenAI definition: Eval output results.")
+/** OpenAI definition: Eval output results. */
 @added(Versions.v2025_10_15_preview)
 model EvalRunOutputItem {
-  @doc("The type of the object. Always eval.run.output_item")
+  /** The type of the object. Always eval.run.output_item */
   object: "eval.run.output_item" = "eval.run.output_item";
 
-  @doc("Unique identifier for the evaluation run output item.")
+  /** Unique identifier for the evaluation run output item. */
   id?: string;
 
-  @doc("The identifier of the evaluation run associated with this output item.")
+  /** The identifier of the evaluation run associated with this output item. */
   run_id?: string;
 
-  @doc("The identifier of the evaluation group.")
+  /** The identifier of the evaluation group. */
   eval_id?: string;
 
-  @doc("Unix timestamp (in seconds) when the evaluation run was created.")
+  /** Unix timestamp (in seconds) when the evaluation run was created. */
   created_at: integer;
 
-  @doc("The status of the evaluation run.")
+  /** The status of the evaluation run. */
   status: string;
 
-  @doc("The identifier for the data source item.")
+  /** The identifier for the data source item. */
   datasource_item_id?: integer;
 
-  @doc("Details of the input data source item.")
+  /** Details of the input data source item. */
   datasource_item: {};
 
-  @doc("A list of results from the evaluation run.")
+  /** A list of results from the evaluation run. */
   results: {}[];
 
-  @doc("A sample containing the input and output of the evaluation run.")
+  /** A sample containing the input and output of the evaluation run. */
   sample?: {};
 }
 
-@doc("OpenAI definintion: Eval inline file content or jsonl input data.")
+/** OpenAI definintion: Eval inline file content or jsonl input data. */
 @added(Versions.v2025_10_15_preview)
 model EvalJsonlFileContentSource {
-  @doc("The type of jsonl source. Always `file_content`.")
+  /** The type of jsonl source. Always `file_content`. */
   type: "file_content" = "file_content";
 
-  @doc("The content of the jsonl file.")
+  /** The content of the jsonl file. */
   content: {
     item: {};
     sample?: {};
   };
 }
 
-@doc("Eval jsonl input data.")
+/** Eval jsonl input data. */
 @added(Versions.v2025_10_15_preview)
 model CreateEvalJsonlRunDataSource {
-  @doc("The type of data source. Always `jsonl`.")
+  /** The type of data source. Always jsonl. */
   type: "jsonl" = "jsonl";
 
-  @doc("Determines what populates the `item` namespace in the data source.")
+  /** Determines what populates the `item` namespace in the data source. */
   source: EvalJsonlFileContentSource;
 }
 
-@doc("OpenAI Input data source definition for eval.")
+/** OpenAI Input data source definition for eval. */
 @added(Versions.v2025_10_15_preview)
 model SyncEvalInput {
-  @doc("Identifier of the evaluator.")
+  /** Identifier of the evaluator. */
   data_source: CreateEvalJsonlRunDataSource;
 
-  @doc("Evaluators to be used for the evaluation.")
+  /** Evaluators to be used for the evaluation. */
   testing_criteria: AzureAIEvaluator[];
 
-  @doc("Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.")
+  /** Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed. */
   properties?: Record<string>;
 }
 
