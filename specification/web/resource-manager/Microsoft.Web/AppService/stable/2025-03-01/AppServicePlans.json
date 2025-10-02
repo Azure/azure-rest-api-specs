@@ -720,8 +720,8 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/instances": {
-      "get": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/listinstances": {
+      "post": {
         "tags": [
           "AppServicePlans"
         ],
@@ -1564,7 +1564,8 @@
             "in": "path",
             "description": "Name of worker machine.",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
           },
           {
             "$ref": "#/parameters/subscriptionIdParameter"
