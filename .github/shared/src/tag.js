@@ -1,6 +1,7 @@
 // @ts-check
 
 import { mapAsync } from "./array.js";
+import { embedError } from "./spec-model.js";
 import { Swagger } from "./swagger.js";
 
 /**
@@ -70,13 +71,16 @@ export class Tag {
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
-    return {
-      name: this.#name,
-      inputFiles: await mapAsync(
-        [...this.#inputFiles.values()].sort((a, b) => a.path.localeCompare(b.path)),
-        async (s) => await s.toJSONAsync(options),
-      ),
-    };
+    return await embedError(
+      async () => ({
+        name: this.#name,
+        inputFiles: await mapAsync(
+          [...this.#inputFiles.values()].sort((a, b) => a.path.localeCompare(b.path)),
+          async (s) => await s.toJSONAsync(options),
+        ),
+      }),
+      options,
+    );
   }
 
   toString() {

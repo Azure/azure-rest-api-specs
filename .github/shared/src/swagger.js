@@ -7,6 +7,7 @@ import { mapAsync } from "./array.js";
 import { example } from "./changed-files.js";
 import { includesFolder } from "./path.js";
 import { SpecModelError } from "./spec-model-error.js";
+import { embedError } from "./spec-model.js";
 
 /**
  * @typedef {import('./spec-model.js').Tag} Tag
@@ -202,20 +203,23 @@ export class Swagger {
    * @returns {Promise<Object>}
    */
   async toJSONAsync(options) {
-    return {
-      path:
-        options?.relativePaths && this.#tag?.readme?.specModel
-          ? relative(this.#tag?.readme?.specModel.folder, this.#path)
-          : this.#path,
-      refs: options?.includeRefs
-        ? await mapAsync(
-            [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),
-            async (s) =>
-              // Do not include swagger refs transitively, otherwise we could get in infinite loop
-              await s.toJSONAsync({ ...options, includeRefs: false }),
-          )
-        : undefined,
-    };
+    return await embedError(
+      async () => ({
+        path:
+          options?.relativePaths && this.#tag?.readme?.specModel
+            ? relative(this.#tag?.readme?.specModel.folder, this.#path)
+            : this.#path,
+        refs: options?.includeRefs
+          ? await mapAsync(
+              [...(await this.getRefs()).values()].sort((a, b) => a.path.localeCompare(b.path)),
+              async (s) =>
+                // Do not include swagger refs transitively, otherwise we could get in infinite loop
+                await s.toJSONAsync({ ...options, includeRefs: false }),
+            )
+          : undefined,
+      }),
+      options,
+    );
   }
 
   toString() {

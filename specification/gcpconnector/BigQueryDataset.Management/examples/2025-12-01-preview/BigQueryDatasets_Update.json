@@ -1,0 +1,113 @@
+{
+  "title": "BigQueryDatasets_Update",
+  "operationId": "BigQueryDatasets_Update",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "1DC4EECF-55F0-4C76-A0C5-348D96DFFBF5",
+    "resourceGroupName": "rgstorageBucket",
+    "name": "valid-resource-name-001",
+    "properties": {
+      "tags": {}
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "gcpProperties": {
+            "kind": "bigquery#dataset",
+            "etag": "abc123def456",
+            "id": "test-project:test-dataset",
+            "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/test-project/datasets/test-dataset",
+            "datasetReference": {
+              "datasetId": "test-dataset",
+              "projectId": "test-project"
+            },
+            "friendlyName": "Test Dataset",
+            "description": "This is a test BigQuery dataset",
+            "labels": {
+              "environment": "test",
+              "department": "engineering"
+            },
+            "location": "US",
+            "defaultTableExpirationMs": "604800000",
+            "defaultPartitionExpirationMs": "259200000",
+            "defaultEncryptionConfiguration": {
+              "kmsKeyName": "projects/test-project/locations/us/keyRings/test-keyring/cryptoKeys/test-key"
+            },
+            "defaultCollation": "und:ci",
+            "defaultRoundingMode": "ROUND_HALF_EVEN",
+            "access": [
+              {
+                "role": "OWNER",
+                "userByEmail": "user@example.com"
+              },
+              {
+                "role": "READER",
+                "groupByEmail": "team@example.com"
+              },
+              {
+                "role": "WRITER",
+                "specialGroup": "projectWriters"
+              }
+            ],
+            "creationTime": "1632150000000",
+            "lastModifiedTime": "1642150000000",
+            "type": "DEFAULT",
+            "linkedDatasetSource": {
+              "sourceDataset": {
+                "datasetId": "source-dataset",
+                "projectId": "source-project"
+              }
+            },
+            "linkedDatasetMetadata": {
+              "status": "SYNCED"
+            },
+            "satisfiesPzs": true,
+            "satisfiesPzi": false,
+            "isCaseInsensitive": true,
+            "maxTimeTravelHours": "168",
+            "tags": [
+              {
+                "key": "tag-key/name",
+                "value": "tag-value"
+              }
+            ],
+            "storageBillingModel": "LOGICAL",
+            "resourceTags": {
+              "project": "testproject",
+              "environment": "development"
+            }
+          },
+          "publicCloudConnectorsResourceId": "dhkwede",
+          "gcpProjectNumber": "dwwjpxudgxrmxnhshqgowpgf",
+          "resourceName": "cctuwniqhjgjyiwatf",
+          "publicCloudResourceName": "loypjtufnnsu",
+          "gcpSourceSchema": "ewziyhomey",
+          "gcpRegion": "hrrgxzyebg",
+          "gcpTags": {},
+          "provisioningState": "Succeeded",
+          "gcpProjectId": "lvknddutseiexgbnso"
+        },
+        "tags": {},
+        "location": "ljgjmtocpdgzmm",
+        "id": "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.GcpConnector/{resource}/{resourceName}",
+        "name": "diehnzghusafdlukebm",
+        "type": "fbial",
+        "systemData": {
+          "createdBy": "k",
+          "createdByType": "User",
+          "createdAt": "2025-06-19T19:45:45.745Z",
+          "lastModifiedBy": "ffrfs",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-06-19T19:45:45.745Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
