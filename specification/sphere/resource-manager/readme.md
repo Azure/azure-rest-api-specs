@@ -116,7 +116,6 @@ require: $(this-folder)/../../../profiles/readme.md
 
 # all the input files across all versions
 input-file:
-  - $(this-folder)/Microsoft.AzureSphere/preview/2022-09-01-preview/azuresphere.json
   - $(this-folder)/Microsoft.AzureSphere/stable/2024-04-01/azuresphere.json
 ```
 
