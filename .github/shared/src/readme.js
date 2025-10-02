@@ -20,7 +20,7 @@ import { Tag } from "./tag.js";
  */
 export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
 
-// Example: foo.json
+// Example: "foo.json"
 const jsonFileSchema = z.string().regex(/\.json$/i);
 
 // Examples:
