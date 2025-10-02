@@ -98,6 +98,9 @@ model DrillResourceAttentionReason {
   @doc("Experiment MSI does not have the desired RBAC on the resource.")
   faultRbacOnTarget?: RBACState;
 
+  @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
+  runbookFaultRbacOnTargets?: RBACState;
+
   @doc("Target extension resource is missing on the resource.")
   target?: ExtensionObjectState;
 

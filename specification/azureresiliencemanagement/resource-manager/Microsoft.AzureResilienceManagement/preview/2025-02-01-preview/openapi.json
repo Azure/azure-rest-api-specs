@@ -5033,11 +5033,14 @@
         "resourceLists": {
           "$ref": "#/definitions/ResourceLists",
           "description": "Add, Update, Delete resource lists"
+        },
+        "forceInclusionAndUpdate": {
+          "$ref": "#/definitions/ForceInclusionAndUpdate",
+          "description": "Whether to allow inclusion and update despite attention reasons."
         }
       },
       "required": [
-        "faultDurationInMin",
-        "resourceLists"
+        "faultDurationInMin"
       ]
     },
     "AddOrUpdateResourcesResponse": {
@@ -5187,6 +5190,17 @@
             "type": "string"
           }
         },
+        "drillRbacOnAzureHealthModel": {
+          "$ref": "#/definitions/RBACState",
+          "description": "Drill object does not have the necessary RBAC to read the Azure Health Model."
+        },
+        "rbacNeededForDrillOnAzureHealthModel": {
+          "type": "array",
+          "description": "Permissions needed by the Drill MSI to read Azure Health Model.",
+          "items": {
+            "type": "string"
+          }
+        },
         "roReadiness": {
           "$ref": "#/definitions/RecoveryPlanState",
           "description": "Associated RO ready or not."
@@ -5194,6 +5208,10 @@
         "faultRbacOnTargets": {
           "$ref": "#/definitions/RBACState",
           "description": "RBAC required by Experiment MSI not setup on the target resources."
+        },
+        "runbookFaultRbacOnTargets": {
+          "$ref": "#/definitions/RBACState",
+          "description": "RBAC required by AutomationAccount for runbook MSI not setup on the target resources."
         },
         "targets": {
           "$ref": "#/definitions/ExtensionObjectState",
@@ -5980,6 +5998,10 @@
         "faultRbacOnTarget": {
           "$ref": "#/definitions/RBACState",
           "description": "Experiment MSI does not have the desired RBAC on the resource."
+        },
+        "runbookFaultRbacOnTargets": {
+          "$ref": "#/definitions/RBACState",
+          "description": "RBAC required by AutomationAccount for runbook MSI not setup on the target resources."
         },
         "target": {
           "$ref": "#/definitions/ExtensionObjectState",
@@ -7066,6 +7088,30 @@
           "$ref": "#/definitions/CustomFaultDetails",
           "description": "Custom Fault Details selected by user"
         }
+      }
+    },
+    "ForceInclusionAndUpdate": {
+      "type": "string",
+      "description": "Enum for ForceInclusionAndUpdate",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "ForceInclusionAndUpdate",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable ForceInclusionAndUpdate."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable ForceInclusionAndUpdate."
+          }
+        ]
       }
     },
     "GoalAssignment": {

@@ -353,3 +353,17 @@ union HealthStatus {
   @doc("Unhealthy Status.")
   Unhealthy: "Unhealthy",
 }
+
+/**
+ * Enum for ForceInclusionAndUpdate
+ */
+@doc("Enum for ForceInclusionAndUpdate")
+union ForceInclusionAndUpdate {
+  string,
+
+  @doc("Enable ForceInclusionAndUpdate.")
+  Enable: "Enable",
+
+  @doc("Disable ForceInclusionAndUpdate.")
+  Disable: "Disable",
+}
