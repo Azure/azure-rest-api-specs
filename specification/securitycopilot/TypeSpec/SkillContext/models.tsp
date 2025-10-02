@@ -1525,10 +1525,15 @@ namespace SkillContext
 		InternalMetadata: 2
 	}
 
+	model CachedEntity<T> {
+		@doc("The cached entity.")
+		cachedEntity: T;
+	}
+
 	@doc("Request model for setting cached entity")
 	model SetCachedEntityRequest {
 		@doc("Entity to cache")
-		entity: T;
+		entity: CachedEntity<unknown>;
 
 		@doc("Optional suffix to make cache key unique; if not specified, entity type is used as the suffix")
 		cacheKeySuffix?: string;
@@ -1541,11 +1546,6 @@ namespace SkillContext
 
 		@doc("Type of data to be stored in the cache")
 		dataType: SkillUtilityCacheDataType;
-	}
-
-	model CachedEntity<T> {
-		@doc("The cached entity.")
-		cachedEntity: T;
 	}
 
 	@doc("Defines the state of debugging through local PluginHost")
