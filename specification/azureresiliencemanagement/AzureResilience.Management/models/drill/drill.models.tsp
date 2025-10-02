@@ -268,7 +268,7 @@ model ChaosExperimentPropertiesOfDrill {
   @doc("Duration of faults.")
   @visibility(Lifecycle.Read)
   @minValue(0)
-  faultDurationInMin: int32;
+  faultDurationInMin?: int32;
 }
 
 @doc("Reason why the Drill is in NeedsAttention state, and not ready to run.")
