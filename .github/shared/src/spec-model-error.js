@@ -43,7 +43,8 @@ export class SpecModelError extends Error {
       `SpecModelError: ${this.message}` +
       `${this.source ? `\n\tProblem File: ${this.source}` : ""}` +
       `${this.readme ? `\n\tReadme: ${this.readme}` : ""}` +
-      `${this.tag ? `\n\tTag: ${this.tag}` : ""}`
+      `${this.tag ? `\n\tTag: ${this.tag}` : ""}` +
+      `${this.cause ? `\n\tCause: ${this.cause}` : ""}`
     );
   }
 }
