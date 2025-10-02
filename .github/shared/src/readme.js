@@ -6,6 +6,7 @@ import { marked } from "marked";
 import { dirname, normalize, relative, resolve } from "path";
 import * as z from "zod";
 import { mapAsync } from "./array.js";
+import { SpecModelError } from "./spec-model-error.js";
 import { embedError } from "./spec-model.js";
 import { Tag } from "./tag.js";
 
@@ -141,7 +142,21 @@ export class Readme {
           continue;
         }
 
-        const parsedObj = Readme.#inputFileSchema.parse(obj);
+        let parsedObj;
+        try {
+          parsedObj = Readme.#inputFileSchema.parse(obj);
+        } catch (error) {
+          if (error instanceof z.ZodError) {
+            throw new SpecModelError(`Unable to parse input-file from YAML`, {
+              source: this.#path,
+              readme: this.#path,
+              tag: tagName,
+              cause: error,
+            });
+          } else {
+            throw error;
+          }
+        }
 
         if (!parsedObj["input-file"]) {
           // The yaml block does not contain an input-file key

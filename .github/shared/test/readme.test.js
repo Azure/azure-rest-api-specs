@@ -4,6 +4,7 @@ import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
 import { Readme, TagMatchRegex } from "../src/readme.js";
+import { SpecModelError } from "../src/spec-model-error.js";
 import { SpecModel } from "../src/spec-model.js";
 import { contosoReadme } from "./examples.js";
 
@@ -114,39 +115,50 @@ input-file:
 
     let readme = new Readme("foo", { ...options, content });
 
-    expect(readme.getTags()).rejects.toThrowErrorMatchingInlineSnapshot(
-      `
-      [ZodError: [
-        {
-          "code": "invalid_union",
-          "errors": [
-            [
-              {
-                "expected": "string",
-                "code": "invalid_type",
-                "path": [],
-                "message": "Invalid input: expected string, received array"
-              }
+    try {
+      await readme.getTags();
+      expect.unreachable();
+    } catch (error) {
+      if (!(error instanceof SpecModelError)) {
+        throw error;
+      }
+
+      expect(error.message).toMatchInlineSnapshot(`"Unable to parse input-file from YAML"`);
+      expect(error.source).toEqual(readme.path);
+      expect(error.readme).toEqual(readme.path);
+      expect(error.tag).toEqual("package-2025-01-01");
+      expect(error.cause).toMatchInlineSnapshot(`
+        [ZodError: [
+          {
+            "code": "invalid_union",
+            "errors": [
+              [
+                {
+                  "expected": "string",
+                  "code": "invalid_type",
+                  "path": [],
+                  "message": "Invalid input: expected string, received array"
+                }
+              ],
+              [
+                {
+                  "expected": "string",
+                  "code": "invalid_type",
+                  "path": [
+                    1
+                  ],
+                  "message": "Invalid input: expected string, received object"
+                }
+              ]
             ],
-            [
-              {
-                "expected": "string",
-                "code": "invalid_type",
-                "path": [
-                  1
-                ],
-                "message": "Invalid input: expected string, received object"
-              }
-            ]
-          ],
-          "path": [
-            "input-file"
-          ],
-          "message": "Invalid input"
-        }
-      ]]
-    `,
-    );
+            "path": [
+              "input-file"
+            ],
+            "message": "Invalid input"
+          }
+        ]]
+      `);
+    }
   });
 
   it("can be created with empty content", async () => {
