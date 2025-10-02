@@ -5387,13 +5387,21 @@
               }
             ]
           }
+        },
+        "faultDurationInMin": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Duration of faults.",
+          "minimum": 0,
+          "readOnly": true
         }
       },
       "required": [
         "subscription",
         "region",
         "identity",
-        "chaosExperimentIdentityForFaults"
+        "chaosExperimentIdentityForFaults",
+        "faultDurationInMin"
       ]
     },
     "ChaosExperimentPropertiesOfDrillUpdate": {
@@ -6400,7 +6408,8 @@
       "enum": [
         "Start",
         "Retry",
-        "MarkAsComplete"
+        "MarkAsComplete",
+        "Cancel"
       ],
       "x-ms-enum": {
         "name": "DrillRunOperationVerbs",
@@ -6420,6 +6429,11 @@
             "name": "MarkAsComplete",
             "value": "MarkAsComplete",
             "description": "MarkAsComplete Action."
+          },
+          {
+            "name": "Cancel",
+            "value": "Cancel",
+            "description": "Cancel Action."
           }
         ]
       }

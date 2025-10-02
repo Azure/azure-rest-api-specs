@@ -295,6 +295,9 @@ union DrillRunOperationVerbs {
 
   @doc("MarkAsComplete Action.")
   MarkAsComplete: "MarkAsComplete",
+
+  @doc("Cancel Action.")
+  Cancel: "Cancel",
 }
 
 /**
