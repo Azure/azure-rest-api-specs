@@ -33,10 +33,10 @@ export class SpecModelError extends Error {
 
     const fullMessage =
       message +
-      (source ? `\n\tProblem File: ${source}` : "") +
-      (readme ? `\n\tReadme: ${readme}` : "") +
-      (tag ? `\n\tTag: ${tag}` : "") +
-      (cause ? `\n\tCause: ${cause}` : "");
+      (source ? `\n  Problem File: ${source}` : "") +
+      (readme ? `\n  Readme: ${readme}` : "") +
+      (tag ? `\n  Tag: ${tag}` : "") +
+      (cause ? `\n  Cause: ${cause}` : "");
 
     super(fullMessage, { cause });
 

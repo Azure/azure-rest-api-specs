@@ -116,10 +116,10 @@ input-file:
 
     await expect(readme.getTags()).rejects.toThrowErrorMatchingInlineSnapshot(`
       [SpecModelError: Unable to parse input-file YAML for tag package-2025-01-01 in ${readme.path}
-      	Problem File: ${readme.path}
-      	Readme: ${readme.path}
-      	Tag: package-2025-01-01
-      	Cause: [
+        Problem File: ${readme.path}
+        Readme: ${readme.path}
+        Tag: package-2025-01-01
+        Cause: [
         {
           "code": "invalid_union",
           "errors": [
