@@ -183,7 +183,7 @@ op getCachedEntity(
 @query cacheKeySuffix? : string,
 @query({format: "multi"}) scopes? : Array<SkillUtilityCacheScope>,
 @query dataType? : SkillUtilityCacheDataType,
-): CachedEntity<string>;
+): CachedEntity<unknown>;
 
 @post
 @route("/skillContext/setCachedEntityAsync")
