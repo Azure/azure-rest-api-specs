@@ -1,0 +1,93 @@
+{
+  "title": "Session Initialization",
+  "description": "Example of initializing a VoiceLive session with basic configuration",
+  "scenario": "Client connects and receives initial session configuration, then updates with custom settings",
+  "messages": [
+    {
+      "direction": "server-to-client",
+      "event": {
+        "type": "session.created",
+        "event_id": "event_001",
+        "session": {
+          "id": "sess_001",
+          "object": "realtime.session",
+          "model": "gpt-4o-realtime-preview",
+          "expires_at": 1735862400,
+          "modalities": [
+            "text",
+            "audio"
+          ],
+          "instructions": "",
+          "voice": "alloy",
+          "input_audio_format": "pcm16",
+          "output_audio_format": "pcm16",
+          "input_audio_transcription": null,
+          "turn_detection": {
+            "type": "server_vad",
+            "threshold": 0.5,
+            "prefix_padding_ms": 300,
+            "silence_duration_ms": 500
+          },
+          "tools": [],
+          "tool_choice": "auto",
+          "temperature": 0.8,
+          "max_response_output_tokens": "inf"
+        }
+      }
+    },
+    {
+      "direction": "client-to-server",
+      "event": {
+        "type": "session.update",
+        "session": {
+          "modalities": [
+            "text",
+            "audio"
+          ],
+          "instructions": "You are a helpful assistant. Be concise in your responses.",
+          "voice": "shimmer",
+          "temperature": 0.7,
+          "max_response_output_tokens": 2048,
+          "turn_detection": {
+            "type": "server_vad",
+            "threshold": 0.6,
+            "prefix_padding_ms": 300,
+            "silence_duration_ms": 700
+          }
+        }
+      }
+    },
+    {
+      "direction": "server-to-client",
+      "event": {
+        "type": "session.updated",
+        "event_id": "event_002",
+        "session": {
+          "id": "sess_001",
+          "object": "realtime.session",
+          "model": "gpt-4o-realtime-preview",
+          "expires_at": 1735862400,
+          "modalities": [
+            "text",
+            "audio"
+          ],
+          "instructions": "You are a helpful assistant. Be concise in your responses.",
+          "voice": "shimmer",
+          "input_audio_format": "pcm16",
+          "output_audio_format": "pcm16",
+          "input_audio_transcription": null,
+          "turn_detection": {
+            "type": "server_vad",
+            "threshold": 0.6,
+            "prefix_padding_ms": 300,
+            "silence_duration_ms": 700
+          },
+          "tools": [],
+          "tool_choice": "auto",
+          "temperature": 0.7,
+          "max_response_output_tokens": 2048
+        }
+      }
+    }
+  ]
+}
