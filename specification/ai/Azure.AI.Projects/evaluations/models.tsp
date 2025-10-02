@@ -68,7 +68,7 @@ model EvalRunOutputItem {
   sample?: {};
 }
 
-/** OpenAI definintion: Eval inline file content or jsonl input data. */
+/** OpenAI definition: Eval inline file content or jsonl input data. */
 @added(Versions.v2025_10_15_preview)
 model EvalJsonlFileContentSource {
   /** The type of jsonl source. Always `file_content`. */
