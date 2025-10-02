@@ -8,38 +8,46 @@ describe("SpecModelError", () => {
     let message = "test message";
     let options = {};
 
-    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(
-      `[SpecModelError: test message]`,
-    );
+    let error = new SpecModelError(message, options);
+    expect(error).toMatchInlineSnapshot(`[SpecModelError: test message]`);
+    expect(error.message).toEqual(message);
 
     options.source = "/test/source.json";
-    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+    error = new SpecModelError(message, options);
+    expect(error).toMatchInlineSnapshot(`
       [SpecModelError: test message
         Problem File: /test/source.json]
     `);
+    expect(error.source).toEqual("/test/source.json");
 
     options.readme = "/test/readme.md";
-    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+    error = new SpecModelError(message, options);
+    expect(error).toMatchInlineSnapshot(`
       [SpecModelError: test message
         Problem File: /test/source.json
         Readme: /test/readme.md]
     `);
+    expect(error.readme).toEqual("/test/readme.md");
 
     options.tag = "2025-01-01";
-    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+    error = new SpecModelError(message, options);
+    expect(error).toMatchInlineSnapshot(`
       [SpecModelError: test message
         Problem File: /test/source.json
         Readme: /test/readme.md
         Tag: 2025-01-01]
     `);
+    expect(error.tag).toEqual("2025-01-01");
 
     options.cause = new TypeError("inner error");
-    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+    error = new SpecModelError(message, options);
+    expect(error).toMatchInlineSnapshot(`
       [SpecModelError: test message
         Problem File: /test/source.json
         Readme: /test/readme.md
         Tag: 2025-01-01
         Cause: TypeError: inner error]
     `);
+    expect(error.cause).toEqual(options.cause);
   });
 });
