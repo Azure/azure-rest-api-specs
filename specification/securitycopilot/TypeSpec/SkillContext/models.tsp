@@ -1543,6 +1543,11 @@ namespace SkillContext
 		dataType: SkillUtilityCacheDataType;
 	}
 
+	model CachedEntity<T> {
+		@doc("The cached entity.")
+		cachedEntity: T;
+	}
+
 	@doc("Defines the state of debugging through local PluginHost")
 	enum LocalPluginHostDebugState {
 		None,
