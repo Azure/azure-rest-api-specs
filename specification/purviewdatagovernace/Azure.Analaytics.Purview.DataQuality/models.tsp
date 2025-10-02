@@ -1034,7 +1034,7 @@ model DataSourceEntity {
   /**
    * Unique identifier for the data source.
    */
-  id: string;
+  id?: string;
 
   /**
    * Indicates whether the data source is enabled with Virtual Network (VNet).
@@ -1064,12 +1064,12 @@ model DataSourceEntity {
   /**
    * ISO 8601 timestamp when the data source was last modified.
    */
-  lastModifiedAt: string;
+  lastModifiedAt?: string;
 
   /**
    * Identifier (GUID or user ID) of the last modifier.
    */
-  lastModifiedBy: string;
+  lastModifiedBy?: string;
 
   /**
    * The type of the data source (e.g., AzureSqlDatabase, Snowflake, AzureSynapseAnalytics).
