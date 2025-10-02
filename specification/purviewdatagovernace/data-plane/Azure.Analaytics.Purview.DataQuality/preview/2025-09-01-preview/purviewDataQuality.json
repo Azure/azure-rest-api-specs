@@ -2757,20 +2757,6 @@
         "statuslro"
       ]
     },
-    "ScanScope": {
-      "type": "object",
-      "description": "Defines the scan scope.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the scope."
-        },
-        "referenceId": {
-          "type": "string",
-          "description": "Identifier of the referenced entity for the scope."
-        }
-      }
-    },
     "ScheduleEntity": {
       "type": "object",
       "description": "Represents a scheduled scan entity.",
@@ -2934,12 +2920,83 @@
           "description": "Reference to the related BusinessDomain entity."
         },
         "scope": {
-          "$ref": "#/definitions/ScanScope",
-          "description": "Scope of the scan."
+          "type": "object",
+          "description": "Scope of the scan, including data products and data assets.",
+          "properties": {
+            "items": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "dataProduct": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  },
+                  "dataAsset": {
+                    "type": "object",
+                    "properties": {
+                      "referenceId": {
+                        "type": "string"
+                      },
+                      "type": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "referenceId",
+                      "type"
+                    ]
+                  }
+                },
+                "required": [
+                  "dataProduct",
+                  "dataAsset"
+                ]
+              }
+            }
+          },
+          "required": [
+            "items"
+          ]
         },
         "trigger": {
-          "$ref": "#/definitions/Trigger",
-          "description": "Trigger configuration for the schedule."
+          "type": "object",
+          "description": "Trigger configuration for the schedule.",
+          "properties": {
+            "type": {
+              "type": "string"
+            },
+            "typeProperties": {
+              "type": "object",
+              "properties": {
+                "timezone": {
+                  "type": "string"
+                },
+                "isScheduled": {
+                  "type": "boolean"
+                },
+                "triggerTime": {
+                  "type": "string",
+                  "format": "date-time"
+                }
+              }
+            }
+          },
+          "required": [
+            "type",
+            "typeProperties"
+          ]
         },
         "lastModifiedAt": {
           "type": "string",
@@ -3067,20 +3124,6 @@
         "eTag": {
           "type": "string",
           "description": "ETag for concurrency control."
-        }
-      }
-    },
-    "Trigger": {
-      "type": "object",
-      "description": "Defines a trigger for scans.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of trigger (e.g., manual, scheduled)."
-        },
-        "cron": {
-          "type": "string",
-          "description": "Cron expression for scheduled triggers."
         }
       }
     },
