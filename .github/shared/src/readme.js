@@ -20,16 +20,22 @@ import { Tag } from "./tag.js";
  */
 export const TagMatchRegex = /yaml.*\$\(tag\) ?== ?(["'])(.*?)\1/;
 
-export class Readme {
-  // TODO: Consider requiring strings to match "/.json$/i"
-  static #inputFileSchema = z.object({
-    "input-file": z
-      // May be undefined, a single string, or an array of strings
-      .optional(z.union([z.string(), z.array(z.string())]))
-      // Normalize single string to array of string.  Don't change 'undefined'.
-      .transform((value) => (typeof value === "string" ? [value] : value)),
-  });
+// Example: foo.json
+const jsonFileSchema = z.string().regex(/\.json$/i);
 
+// Examples:
+// {}
+// {"input-file": "foo.json"}
+// {"input-file": ["foo.json", "bar.json"]}
+const inputFileSchema = z.object({
+  "input-file": z
+    // May be undefined, a single json filename, or an array of json filenames
+    .optional(z.union([jsonFileSchema, z.array(jsonFileSchema)]))
+    // Normalize single string to array of string.  Don't change 'undefined'.
+    .transform((value) => (typeof value === "string" ? [value] : value)),
+});
+
+export class Readme {
   /**
    * Content of `readme.md`, either loaded from `#path` or passed in via `options`.
    *
@@ -144,7 +150,7 @@ export class Readme {
 
         let parsedObj;
         try {
-          parsedObj = Readme.#inputFileSchema.parse(obj);
+          parsedObj = inputFileSchema.parse(obj);
         } catch (error) {
           if (error instanceof z.ZodError) {
             throw new SpecModelError(`Unable to parse input-file from YAML`, {
