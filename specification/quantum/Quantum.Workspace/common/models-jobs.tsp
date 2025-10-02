@@ -54,12 +54,6 @@ model QuantumComputingData {
   count: int64;
 }
 
-/** Input parameters for the job. */
-model InputParams is Record<{}>;
-
-/** Metadata for the job. */
-model Metadata is Record<{}>;
-
 /** A job to be run in the workspace. */
 @resource("jobs")
 @parentResource(Quantum.Workspace.QuantumWorkspace)
@@ -100,7 +94,7 @@ model JobDetails extends ItemDetails {
 
   /** The job metadata. Metadata provides client the ability to store client-specific information */
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  metadata?: Metadata;
+  metadata?: {};
 
   /** The time when a job was successfully cancelled. */
   @visibility(Lifecycle.Read)
@@ -112,7 +106,7 @@ model JobDetails extends ItemDetails {
 
   /** The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  inputParams?: InputParams;
+  inputParams?: {};
 
   /** The output blob uri. When a job finishes successfully, results will be uploaded to this blob. */
   @visibility(Lifecycle.Read, Lifecycle.Create)
