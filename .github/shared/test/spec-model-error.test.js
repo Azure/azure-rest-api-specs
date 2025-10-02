@@ -28,5 +28,14 @@ describe("SpecModelError", () => {
       	Readme: /test/readme.md
       	Tag: 2025-01-01"
     `);
+
+    error.cause = new TypeError("inner error");
+    expect(error.toString()).toMatchInlineSnapshot(`
+      "SpecModelError: test message
+      	Problem File: /test/source.json
+      	Readme: /test/readme.md
+      	Tag: 2025-01-01
+      	Cause: TypeError: inner error"
+    `);
   });
 });
