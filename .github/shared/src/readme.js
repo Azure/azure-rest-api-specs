@@ -164,9 +164,10 @@ export class Readme {
                 cause: error,
               },
             );
-          } else {
+          } /* v8 ignore start: defensive rethrow */ else {
             throw error;
           }
+          /* v8 ignore end */
         }
 
         if (!parsedObj["input-file"]) {
