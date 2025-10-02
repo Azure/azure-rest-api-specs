@@ -70,12 +70,14 @@ export class Readme {
    * @param {import('./logger.js').ILogger} [options.logger]
    * @param {SpecModel} [options.specModel]
    */
-  constructor(path, options) {
-    this.#path = resolve(options?.specModel?.folder ?? "", path);
+  constructor(path, options = {}) {
+    const { content, logger, specModel } = options;
 
-    this.#content = options?.content;
-    this.#logger = options?.logger;
-    this.#specModel = options?.specModel;
+    this.#path = resolve(specModel?.folder ?? "", path);
+
+    this.#content = content;
+    this.#logger = logger;
+    this.#specModel = specModel;
   }
 
   /**
@@ -240,7 +242,9 @@ export class Readme {
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
+  async toJSONAsync(options = {}) {
+    const { relativePaths } = options;
+
     return await embedError(async () => {
       const tags = await mapAsync(
         [...(await this.getTags()).values()].sort((a, b) => a.name.localeCompare(b.name)),
@@ -249,7 +253,7 @@ export class Readme {
 
       return {
         path:
-          options?.relativePaths && this.#specModel
+          relativePaths && this.#specModel
             ? relative(this.#specModel.folder, this.#path)
             : this.#path,
         globalConfig: await this.getGlobalConfig(),
