@@ -387,12 +387,52 @@
             "asyncScalingEnabled": {
               "description": "If <code>true</code>, this App Service Plan will attempt to scale asynchronously if there are insufficient workers to scale synchronously.\nIf <code>false</code>, this App Service Plan will only attempt sync scaling.",
               "type": "boolean"
+            },
+            "planDefaultIdentity": {
+              "$ref": "#/definitions/DefaultIdentity",
+              "description": "Identity to use by platform for various features and integrations using managed identity."
+            },
+            "isCustomMode": {
+              "description": "Whether this server farm is in custom mode.",
+              "type": "boolean"
+            },
+            "registryAdapters": {
+              "description": "Registry adapters associated with this App Service plan.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/RegistryAdapter"
+              }
+            },
+            "installScripts": {
+              "description": "Install scripts associated with this App Service plan.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/InstallScript"
+              }
+            },
+            "network": {
+              "description": "All network settings for the server farm.",
+              "$ref": "#/definitions/ServerFarmNetworkSettings"
+            },
+            "storageMounts": {
+              "description": "Storage mounts associated with this App Service plan.",
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/StorageMount"
+              }
+            },
+            "rdpEnabled": {
+              "description": "If <code>true</code>, RDP access is enabled for this App Service plan. Only applicable for IsCustomMode ASPs.\nIf <code>false</code>, RDP access is disabled.",
+              "type": "boolean"
             }
           },
           "x-ms-client-flatten": true
         },
         "sku": {
           "$ref": "#/definitions/SkuDescription"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity"
         },
         "extendedLocation": {
           "$ref": "#/definitions/ExtendedLocation"
@@ -1578,6 +1618,26 @@
         }
       }
     },
+    "DefaultIdentity": {
+      "type": "object",
+      "properties": {
+        "identityType": {
+          "enum": [
+            "None",
+            "SystemAssigned",
+            "UserAssigned"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ManagedServiceIdentityType",
+            "modelAsString": false
+          }
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string"
+        }
+      }
+    },
     "DeletedSite": {
       "description": "A deleted app.",
       "type": "object",
@@ -2255,6 +2315,42 @@
         }
       }
     },
+    "InstallScript": {
+      "description": "Server farm install script configuration.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the install script.",
+          "type": "string"
+        },
+        "source": {
+          "$ref": "#/definitions/InstallScriptSource",
+          "description": "Source of the install script."
+        }
+      }
+    },
+    "InstallScriptSource": {
+      "description": "Object to hold install script reference.",
+      "type": "object",
+      "properties": {
+        "sourceUri": {
+          "description": "Install script source URI where the install script file will be fetched from.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the install script.",
+          "enum": [
+            "RemoteAzureBlob",
+            "PlatformStorage"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "InstallScriptType",
+            "modelAsString": true
+          }
+        }
+      }
+    },
     "IpSecurityRestriction": {
       "description": "IP security restriction on an app.",
       "type": "object",
@@ -2333,6 +2429,20 @@
         "value": {
           "type": "object",
           "readOnly": true
+        }
+      }
+    },
+    "KeyVaultReferenceWithStatus": {
+      "description": "Object to hold key vault reference and the resolution status",
+      "type": "object",
+      "properties": {
+        "secretUri": {
+          "description": "Key vault secret URI.",
+          "type": "string"
+        },
+        "referenceStatus": {
+          "description": "Reference status of the key vault secret.",
+          "type": "string"
         }
       }
     },
@@ -2885,6 +2995,36 @@
         "name": {
           "description": "Name of the routing rule. The recommended name would be to point to the slot which will receive the traffic in the experiment.",
           "type": "string"
+        }
+      }
+    },
+    "RegistryAdapter": {
+      "description": "Server farm registry adapter configuration.",
+      "type": "object",
+      "properties": {
+        "registryKey": {
+          "description": "Registry key for the adapter.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the registry adapter.",
+          "enum": [
+            "Binary",
+            "String",
+            "Expand_String",
+            "Multi_String",
+            "DWord",
+            "QWord"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "RegistryAdapterType",
+            "modelAsString": true
+          }
+        },
+        "keyVaultSecretReference": {
+          "$ref": "#/definitions/KeyVaultReferenceWithStatus",
+          "description": "Key vault reference to the value that will be placed in the registry location"
         }
       }
     },
@@ -4280,6 +4420,16 @@
         }
       }
     },
+    "ServerFarmNetworkSettings": {
+      "description": "Network settings for an app service plan.",
+      "type": "object",
+      "properties": {
+        "virtualNetworkSubnetId": {
+          "description": "Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration. This must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}",
+          "type": "string"
+        }
+      }
+    },
     "SiteLimits": {
       "description": "Metric limits set on an app.",
       "type": "object",
@@ -4547,6 +4697,41 @@
         "timeInterval": {
           "description": "Time interval.",
           "type": "string"
+        }
+      }
+    },
+    "StorageMount": {
+      "description": "Server farm storage mount configuration.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the storage mount.",
+          "type": "string"
+        },
+        "type": {
+          "description": "Type of the storage mount.",
+          "enum": [
+            "AzureFiles",
+            "LocalStorage",
+            "FileShare"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "StorageMountType",
+            "modelAsString": true
+          }
+        },
+        "source": {
+          "description": "Source of the fileshare/storage.",
+          "type": "string"
+        },
+        "destinationPath": {
+          "description": "Path on worker where storage will be mounted.",
+          "type": "string"
+        },
+        "credentialsKeyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReferenceWithStatus",
+          "description": "KV reference to the credentials to connect to the share."
         }
       }
     },
