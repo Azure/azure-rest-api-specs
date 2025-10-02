@@ -38,6 +38,9 @@ export class SpecModelError extends Error {
     this.tag = options?.tag;
   }
 
+  // TODO: Move all this code into the ctor, when setting the super message, since
+  // downstream tools prefer error.message to error.toString().  Even if long, best to
+  // put all info (except callstacks) in message (with newlines as needed).
   toString() {
     return (
       `SpecModelError: ${this.message}` +
