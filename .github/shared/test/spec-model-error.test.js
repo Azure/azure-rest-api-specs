@@ -4,38 +4,42 @@ import { describe, expect, it } from "vitest";
 import { SpecModelError } from "../src/spec-model-error.js";
 
 describe("SpecModelError", () => {
-  it("toString`", () => {
-    let error = new SpecModelError("test message");
-    expect(error.toString()).toMatchInlineSnapshot(`"SpecModelError: test message"`);
+  it("builds full message from message and options", () => {
+    let message = "test message";
+    let options = {};
 
-    error.source = "/test/source.json";
-    expect(error.toString()).toMatchInlineSnapshot(`
-      "SpecModelError: test message
-      	Problem File: /test/source.json"
+    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(
+      `[SpecModelError: test message]`,
+    );
+
+    options.source = "/test/source.json";
+    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+      [SpecModelError: test message
+      	Problem File: /test/source.json]
     `);
 
-    error.readme = "/test/readme.md";
-    expect(error.toString()).toMatchInlineSnapshot(`
-      "SpecModelError: test message
+    options.readme = "/test/readme.md";
+    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+      [SpecModelError: test message
       	Problem File: /test/source.json
-      	Readme: /test/readme.md"
+      	Readme: /test/readme.md]
     `);
 
-    error.tag = "2025-01-01";
-    expect(error.toString()).toMatchInlineSnapshot(`
-      "SpecModelError: test message
+    options.tag = "2025-01-01";
+    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+      [SpecModelError: test message
       	Problem File: /test/source.json
       	Readme: /test/readme.md
-      	Tag: 2025-01-01"
+      	Tag: 2025-01-01]
     `);
 
-    error.cause = new TypeError("inner error");
-    expect(error.toString()).toMatchInlineSnapshot(`
-      "SpecModelError: test message
+    options.cause = new TypeError("inner error");
+    expect(new SpecModelError(message, options)).toMatchInlineSnapshot(`
+      [SpecModelError: test message
       	Problem File: /test/source.json
       	Readme: /test/readme.md
       	Tag: 2025-01-01
-      	Cause: TypeError: inner error"
+      	Cause: TypeError: inner error]
     `);
   });
 });
