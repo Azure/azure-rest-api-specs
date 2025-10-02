@@ -469,7 +469,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   trainedModelLabel: string;
 
   /**
-   * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
+   * Represents the Language or AIService resource IDs that if provided,\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2025_11_01)
   @removed(Versions.v2025_05_15_preview)
@@ -483,12 +483,12 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
 }
 
 /**
- * Represents the options for deleting a project deployment.
+ * Represents the payload for deleting a project deployment.
  */
-@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentAzureResourceIds")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectAzureResourceIds")
 model AnalyzeConversationAuthoringDeleteDeploymentOptions {
   /**
-   * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
+   * Represents the Language or AIService resource IDs to unassign from the project or delete the deployment from.
    */
   assignedResourceIds?: string[];
 }
@@ -1018,43 +1018,43 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
 }
 
 /**
- * Represents the assigned deployment resource.
+ * Represents the assigned project resource.
  */
 @added(Versions.v2025_11_01)
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourceInfo")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectResourceInfo")
 model AnalyzeConversationAuthoringAssignedDeploymentResource {
   /**
-   * The resource ID.
+   * The Azure resource ID of the language or AI resource.
    */
   @key
   @visibility(Lifecycle.Read)
   azureResourceId: string;
 
   /**
-   * The resource region.
+   * The Azure resource region.
    */
   region: string;
 }
 
 /**
- * Represents the options for assigning Azure resources to a project.
+ * Represents the payload for assigning Azure resources to a project.
  */
 @added(Versions.v2025_11_01)
-@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourceAssignments")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectResourceAssignments")
 model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
-   * Represents the metadata for the resources to be assigned.
+   * Represents the metadata for the project resources to be assigned.
    */
-  @renamedFrom(Versions.v2025_11_01, "deploymentResources")
+  @renamedFrom(Versions.v2025_05_15_preview, "projectResources")
   resourcesMetadata: AnalyzeConversationAuthoringResourceMetadata[];
 }
 
 /**
  * Represents metadata for the Azure resource..
  */
-@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourceAssignmentInfo")
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectResourceAssignmentInfo")
 model AnalyzeConversationAuthoringResourceMetadata {
   /**
    * Represents the Azure resource ID.
@@ -1084,11 +1084,12 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
 }
 
 /**
- * Represents the state of a deployment resources job.
+ * Represents the state of a project resources job.
  */
 @added(Versions.v2025_11_01)
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
+@renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectResourcesJobState")
 model AnalyzeConversationAuthoringDeploymentResourcesJobState {
   ...AnalyzeConversationAuthoringJobState;
 }

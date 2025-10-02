@@ -63,10 +63,11 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
 >;
 
 /**
- * Lists the deployments resources assigned to the project.
+ * Lists the Language or AIService resources assigned to the project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2025_11_01)
+@renamedFrom(Versions.v2025_05_15_preview, "conversationAuthoringListProjectResources")
 op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedDeploymentResource,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -191,7 +192,7 @@ interface ConversationAuthoringDeployment {
   >;
 
   /**
-   * Deletes a project deployment from the specified assigned resources.
+   * Deletes a deployment from the specified project-assigned resources.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
@@ -217,7 +218,7 @@ interface ConversationAuthoringDeployment {
       deploymentName: string;
 
       /**
-       * The options for deleting the deployment.
+       * The Language or AIService resource list for deleting the deployment.\r\n            The deployment will only be deleted from the specified resources, and will remain for the rest.
        */
       @body
       @clientName("details", "csharp")
@@ -242,7 +243,7 @@ interface ConversationAuthoringDeployment {
 
 interface ConversationAuthoringProject {
   /**
-   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
+   * Assign new Language or AIService Azure resources to a project to allowing deployment to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
@@ -252,6 +253,7 @@ interface ConversationAuthoringProject {
   )
   @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
+  @renamedFrom(Versions.v2025_05_15_preview, "assignProjectResources")
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -262,7 +264,7 @@ interface ConversationAuthoringProject {
       projectName: string;
 
       /**
-       * The new project resources info.
+       * The new project resources to be assigned.
        */
       @body
       @clientName("details", "csharp")
@@ -274,7 +276,7 @@ interface ConversationAuthoringProject {
   >;
 
   /**
-   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
+   * Unassign resources from a project. This disallows deployment to these resources.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
@@ -284,6 +286,7 @@ interface ConversationAuthoringProject {
   )
   @access(Access.internal, "python")
   @added(Versions.v2025_11_01)
+  @renamedFrom(Versions.v2025_05_15_preview, "unassignProjectResources")
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
       /**
@@ -294,7 +297,7 @@ interface ConversationAuthoringProject {
       projectName: string;
 
       /**
-       * The info for the deployment resources to be deleted.
+       * The list of Language or AIService Azure resource IDs to be unassigned.
        */
       @body
       @clientName("details", "csharp")
@@ -307,18 +310,20 @@ interface ConversationAuthoringProject {
   >;
 
   /**
-   * Gets the status of an existing assign deployment resources job.
+   * Gets the status of an existing assign project resources job.
    */
   @added(Versions.v2025_11_01)
+  @renamedFrom(Versions.v2025_05_15_preview, "getAssignProjectResourcesStatus")
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
 
   /**
-   * Gets the status of an existing unassign deployment resources job.
+   * Gets the status of an existing unassign project resources job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
   @added(Versions.v2025_11_01)
+  @renamedFrom(Versions.v2025_05_15_preview, "getUnassignProjectResourcesStatus")
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
