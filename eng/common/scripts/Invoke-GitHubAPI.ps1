@@ -35,6 +35,38 @@ function Set-GitHubAPIParameters ($members,  $parameterName, $parameters, $allow
   return $parameters
 }
 
+<#
+.SYNOPSIS
+Gets the authenticated user's details from GitHub.
+
+.DESCRIPTION
+Retrieves information about the currently authenticated GitHub user using the GitHub API.
+
+.PARAMETER AuthToken
+GitHub authentication token. This parameter is required.
+
+.EXAMPLE
+Get-GitHubUser -AuthToken $token
+
+.NOTES
+This function calls the GitHub API endpoint: https://api.github.com/user
+#>
+function Get-GitHubUser {
+  param (
+    [ValidateNotNullOrEmpty()]
+    [Parameter(Mandatory = $true)]
+    $AuthToken
+  )
+
+  $uri = "https://api.github.com/user"
+
+  return Invoke-RestMethod `
+          -Method GET `
+          -Uri $uri `
+          -Headers (Get-GitHubApiHeaders -token $AuthToken) `
+          -MaximumRetryCount 3
+}
+
 function Get-GitHubPullRequests {
   param (
     $RepoOwner,
