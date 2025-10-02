@@ -1,0 +1,47 @@
+parameters:
+  "service-dir":
+    default: "sdk/bulkactions"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/bulkactions.json"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-bulkactions"
+    namespace: "azure.mgmt.bulkactions"
+    flavor: "azure"
+    generate-test: true
+    generate-sample: true
+  "@azure-tools/typespec-ts":
+    generate-sample: false
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-bulkactions"
+    flavor: azure
+    package-details:
+      name: "@azure/arm-bulkactions"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.BulkActions"
+    flavor: azure
+    clear-output-folder: true
+    namespace: "Azure.ResourceManager.BulkActions"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-bulkactions"
+    namespace: "com.azure.resourcemanager.bulkactions"
+    flavor: "azure"
+    service-name: "Compute Schedule"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/bulkactions"
+    emitter-output-dir: "{output-dir}/{service-dir}/armbulkactions"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armbulkactions"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
