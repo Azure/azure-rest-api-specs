@@ -18,12 +18,12 @@ alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
 @added(Versions.v2025_10_15_preview)
 interface SyncEvals {
-  @doc("Synchronize evaluation runs from connected resources.")
+  /** Synchronize evaluation runs from connected resources. */
   @route("sync_evals:run")
   @post
   create is Azure.Core.Foundations.Operation<
     {
-      @doc("Creates a sync eval run.")
+      /** Creates a sync eval run. */
       @body
       eval: SyncEvalInput;
     },
