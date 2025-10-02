@@ -1,6 +1,7 @@
 import "./common.tsp";
 using Azure.Core;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 
 namespace Microsoft.App.DynamicSessions;
 
@@ -13,10 +14,35 @@ model SessionCodeExecutionRequest {
   executionType: ExecutionType;
 
   @doc("The string of the code to execute, based on CodeInputType.")
-  code: string;
+  @madeOptional(Versions.v2025_10_02_preview)
+  code?: string;
 
   @doc("Code execution timeout in seconds.")
   timeoutInSeconds: int32;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The maximum length of the output streams. Default value is 4096.")
+  outputStreamsMaxLength?: int32;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("Whether to use empty kernel for this execution. Default is false.")
+  useEmptyKernel?: boolean;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("Whether to formats primitive Python results (bool, int, float, string, None) as JSON strings or null. Default to false.")
+  returnJupyterFormatExecutionResult?: boolean;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("Shell command to execute in Bash. Only available for a `Shell` typed session pool. Cannot coexist with `execCommandAndArgs`.")
+  shellCommand?: string;
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The executable and its arguments. Only available for a `Shell` typed session pool. Cannot coexist with `shellCommand`.")
+  execCommandAndArgs?: string[];
+
+  @added(Versions.v2025_10_02_preview)
+  @doc("The standard input of the shell command execution. Only available for a `Shell` typed session pool.")
+  stdin?: string;
 }
 
 @doc("The result of the code execution.")
