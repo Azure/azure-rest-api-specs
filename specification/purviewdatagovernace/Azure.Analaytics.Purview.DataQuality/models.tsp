@@ -352,14 +352,32 @@ model ScheduleEntityResponse {
   businessDomain?: Reference;
 
   /**
-   * Scope of the scan.
+   * Scope of the scan, including data products and data assets.
    */
-  scope?: ScanScope;
+  scope?: {
+    items: Array<{
+      dataProduct: {
+        referenceId: string;
+        type: string;
+      };
+      dataAsset: {
+        referenceId: string;
+        type: string;
+      };
+    }>;
+  };
 
   /**
    * Trigger configuration for the schedule.
    */
-  trigger?: Trigger;
+  trigger?: {
+    type: string;
+    typeProperties: {
+      timezone?: string;
+      isScheduled?: boolean;
+      triggerTime?: utcDateTime;
+    };
+  };
 
   /**
    * Timestamp when the schedule was last modified.
