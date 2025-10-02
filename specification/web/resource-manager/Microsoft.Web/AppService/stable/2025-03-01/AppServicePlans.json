@@ -399,10 +399,6 @@
               "$ref": "#/definitions/ServerFarmRdpDetails"
             }
           },
-          "404": {
-            "description": "Server farm not found.",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -756,10 +752,6 @@
             "schema": {
               "$ref": "#/definitions/ServerFarmInstanceDetails"
             }
-          },
-          "404": {
-            "description": "Server farm not found.",
-            "x-ms-error-response": true
           },
           "default": {
             "description": "App Service error response.",
@@ -1588,10 +1580,6 @@
               "$ref": "./CommonDefinitions.json#/definitions/Operation"
             }
           },
-          "404": {
-            "description": "Server farm not found.",
-            "x-ms-error-response": true
-          },
           "default": {
             "description": "App Service error response.",
             "schema": {
@@ -1767,6 +1755,9 @@
             }
           },
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "./CommonDefinitions.json#/definitions/ManagedServiceIdentity"
         }
       }
     },
