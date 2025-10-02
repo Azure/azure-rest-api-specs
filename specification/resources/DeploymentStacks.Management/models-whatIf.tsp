@@ -33,7 +33,7 @@ model DeploymentStackWhatIfResult
 alias DeploymentStackWhatIfNameParameter = ResourceNameParameter<
   Resource = DeploymentStackWhatIfResult,
   KeyName = "deploymentStackWhatIfName",
-  SegmentName = "deploymentStackWhatIf",
+  SegmentName = "deploymentStackWhatIfResults",
   NamePattern = "^[-\\w\\._\\(\\)]+$"
 >;
 
@@ -48,6 +48,11 @@ model DeploymentStackWhatIfResultProperties is DeploymentStacksError {
    * The deployment stack id to use as the basis for comparison.
    */
   deploymentStackId: string;
+
+  /**
+   * The timestamp for when the deployment stack was last modified. This can be used to determine if the what-if data is still current. 
+   */
+  deploymentStackLastModified: utcDateTime;
 
   /**
    * The interval to persist the deployment stack what-if result in ISO 8601 format.

@@ -59,7 +59,7 @@
     }
   ],
   "paths": {
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIf": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults": {
       "get": {
         "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_ListWhatIf",
         "tags": [
@@ -93,7 +93,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIf/{deploymentStackWhatIfName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}": {
       "get": {
         "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_GetWhatIf",
         "tags": [
@@ -251,7 +251,7 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIf/{deploymentStackWhatIfName}/whatIf": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}/whatIf": {
       "post": {
         "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_WhatIf",
         "tags": [
@@ -278,7 +278,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DeploymentStackTemplateDefinition"
+              "$ref": "#/definitions/DeploymentStackWhatIfResult"
             }
           },
           "default": {
@@ -651,7 +651,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIf": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults": {
       "get": {
         "operationId": "DeploymentStacksWhatIfResultsAtSubscription_ListWhatIf",
         "tags": [
@@ -685,7 +685,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIf/{deploymentStackWhatIfName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}": {
       "get": {
         "operationId": "DeploymentStacksWhatIfResultsAtSubscription_GetWhatIf",
         "tags": [
@@ -843,7 +843,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIf/{deploymentStackWhatIfName}/whatIf": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}/whatIf": {
       "post": {
         "operationId": "DeploymentStacksWhatIfResultsAtSubscription_WhatIf",
         "tags": [
@@ -870,7 +870,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DeploymentStackTemplateDefinition"
+              "$ref": "#/definitions/DeploymentStackWhatIfResult"
             }
           },
           "default": {
@@ -1243,7 +1243,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIf": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults": {
       "get": {
         "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_ListWhatIf",
         "tags": [
@@ -1280,7 +1280,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIf/{deploymentStackWhatIfName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}": {
       "get": {
         "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_GetWhatIf",
         "tags": [
@@ -1447,7 +1447,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIf/{deploymentStackWhatIfName}/whatIf": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}/whatIf": {
       "post": {
         "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_WhatIf",
         "tags": [
@@ -1477,7 +1477,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/DeploymentStackTemplateDefinition"
+              "$ref": "#/definitions/DeploymentStackWhatIfResult"
             }
           },
           "default": {
@@ -3000,6 +3000,11 @@
           "type": "string",
           "description": "The deployment stack id to use as the basis for comparison."
         },
+        "deploymentStackLastModified": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp for when the deployment stack was last modified. This can be used to determine if the what-if data is still current."
+        },
         "retentionInterval": {
           "type": "string",
           "format": "duration",
@@ -3024,6 +3029,7 @@
         "actionOnUnmanage",
         "denySettings",
         "deploymentStackId",
+        "deploymentStackLastModified",
         "retentionInterval"
       ]
     },
