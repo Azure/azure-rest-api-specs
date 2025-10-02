@@ -36,7 +36,6 @@ namespace Quantum.Workspace.Services {
   alias CreateOperation<Resource extends TypeSpec.Reflection.Model> = AzureCoreOperations.ResourceCreateOrReplace<Resource>;
 
   /** Operation to patch a resource. */
-  @added(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
   @patch(#{ implicitOptionality: true })
   @updatesResource(Resource)
   op PatchOperation<Resource extends Reflection.Model> is AzureCoreOperations.ResourceUpdate<
