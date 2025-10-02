@@ -31,7 +31,7 @@ namespace Quantum.Workspace.Services {
       """
     @removed(QuantumWorkspaceAPIVersion.v2025_09_01_preview)
     @renamedFrom(QuantumWorkspaceAPIVersion.v2025_09_01_preview, "update")
-    updateOld is PatchOperation<JobDetails>;
+    updateOld is PatchOperationOld<JobDetails>;
 
     /** Request the cancellation of an existing job. */
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Existing name"
