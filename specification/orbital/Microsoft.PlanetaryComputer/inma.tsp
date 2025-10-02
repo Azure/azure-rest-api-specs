@@ -347,7 +347,7 @@ interface StacItems {
      */
     @query
     datetime?: string,
-  ): ItemCollection | ErrorResponse;
+  ): StacItemCollection | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Fetch a single STAC Item")
@@ -372,22 +372,22 @@ interface StacItems {
     ...CollectionParameters,
 
     /**
-     * STAC Item or ItemCollection
+     * STAC Item or StacItemCollection
      *
-     * Represents a STAC Item or ItemCollection as defined by the STAC 1.0.0 standard.
+     * Represents a STAC Item or StacItemCollection as defined by the STAC 1.0.0 standard.
      *
      * **Item**: A GeoJSON Feature that represents a single spatiotemporal asset.
      * It includes metadata such as geometry, datetime, and links to related assets.
      * Example: A satellite image with its metadata.
      *
-     * **ItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.
+     * **StacItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.
      * It is used to group multiple related Items together, such as a collection of satellite images.
      *
      * This union allows the request body to accept either a single Item or a collection of Items.
      */
     #suppress "@azure-tools/typespec-client-generator-core/no-unnamed-types" "Backcompatibility with existing clients"
     @body
-    body: StacItemOrItemCollection,
+    body: StacItemOrStacItemCollection,
   ): {
     @pollingLocation
     @doc("Url used to monitor the background operation")
@@ -866,7 +866,7 @@ model OdataQuery {
   skip?: int64;
 }
 
-interface StacCollectionOperations {
+interface StacCollections {
   /**
    * Endpoint.
    */

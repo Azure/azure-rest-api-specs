@@ -20,9 +20,9 @@ namespace Customizations;
 @@clientName(IngestionOperations, "IngestionOperationsManagement", "csharp");
 @@clientName(IngestionSources, "IngestionSourcesManagement", "csharp");
 @@clientName(TilerInfoOperations, "TilerInfoManagement", "csharp");
-@@clientName(StacCollectionOperations, "StacCollectionManagement", "csharp");
-// @@clientName(StacItemOrItemCollection,
-//   "StacItemOrItemCollectionContent",
+@@clientName(StacCollections, "StacCollectionManagement", "csharp");
+// @@clientName(StacItemOrStacItemCollection,
+//   "StacItemOrStacItemCollectionContent",
 //   "csharp"
 // );
 @@clientName(ItemProperties.datetime, "date_time", "python");
@@ -43,8 +43,8 @@ namespace Customizations;
 // Models ending with "Response" - rename to "Result"
 @@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
 @@clientName(BoundsResponse, "BoundsResult", "csharp");
-@@clientName(GeoJsonStatisticsItemCollectionResponse,
-  "GeoJsonStatisticsItemCollectionResult",
+@@clientName(GeoJsonStatisticsStacItemCollectionResponse,
+  "GeoJsonStatisticsStacItemCollectionResult",
   "csharp"
 );
 
@@ -70,7 +70,7 @@ namespace Customizations;
 
 // Models ending with "Definition" - rename appropriately
 @@clientName(StacQueryable, "QueryableProperty", "csharp");
-@@clientName(IngestionDefinition, "IngestionConfiguration", "csharp");
+@@clientName(Ingestion, "IngestionConfiguration", "csharp");
 
 // Models ending with "Operation" - rename to "Info"
 @@clientName(Operation, "LongRunningOperation", "csharp");
@@ -92,7 +92,7 @@ namespace Customizations;
 @@clientName(RenderOption, "RenderOptionModel", "csharp");
 @@clientName(StacCollection, "StacCollectionModel", "csharp");
 @@clientName(StacItem, "StacItemModel", "csharp");
-@@clientName(ItemCollection, "ItemCollectionModel", "csharp");
+@@clientName(StacItemCollection, "StacItemCollectionModel", "csharp");
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -100,10 +100,10 @@ namespace Customizations;
 @operationGroup
 interface Ingestion {
   // Ingestion operations management
-  cancelLongRunningOperation is IngestionOperations.delete;
-  cancelAllLongRunningOperations is IngestionOperations.deleteAll;
-  getLongRunningOperation is IngestionOperations.get;
-  listLongRunningOperations is IngestionOperations.list;
+  cancelIngestionOperation is IngestionOperations.delete;
+  cancelAllIngestionOperations is IngestionOperations.deleteAll;
+  getIngestionOperation is IngestionOperations.get;
+  listIngestionOperations is IngestionOperations.list;
 
   // Ingestion runs operations
   createIngestionRun is IngestionRuns.create;
@@ -150,13 +150,13 @@ interface Stac {
   listMosaics is StacCollectionMosaics.getAll;
 
   // STAC Collections
-  createCollection is StacCollectionOperations.create;
-  createOrReplaceCollection is StacCollectionOperations.createOrReplace;
-  deleteCollection is StacCollectionOperations.delete;
-  getCollection is StacCollectionOperations.get;
+  createCollection is StacCollections.create;
+  createOrReplaceCollection is StacCollections.createOrReplace;
+  deleteCollection is StacCollections.delete;
+  getCollection is StacCollections.get;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listCollections is StacCollectionOperations.getAll;
+  listCollections is StacCollections.getAll;
 
   // Collection Partition Types
   getPartitionType is StacCollectionPartitionTypes.get;
@@ -205,8 +205,7 @@ interface Stac {
   listQueryablesByCollection is StacQueryables.getAllByCollection;
 
   // STAC Search
-  createSearchOperations is StacSearchOperations.create;
-  getSearchOperations is StacSearchOperations.get;
+  search is StacSearch.create;
 }
 
 // === Tiles for STAC Items ===
@@ -261,16 +260,16 @@ interface Tiler {
   listStatistics is TilerStatistics.getAll;
 
   // Tile JSON
-  getTileJson is TilerTileJsonOperations.get;
-  getTileJsonWithMatrixSet is TilerTileJsonTileMatrixSets.get;
+  // getTileJson is TilerTileJsonOperations.get;
+  getTileJson is TilerTileJsonTileMatrixSets.get;
 
   // Tiles
-  getTileWithMatrixSet is TilerTileMatrixSets.getZxyScaleByFormat;
-  getTile is TilerTiles.getZxyScaleByFormat;
+  getTile is TilerTileMatrixSets.getZxyScaleByFormat;
+  // getTile is TilerTiles.getZxyScaleByFormat;
 
   // WMTS Capabilities
-  getWmtsCapabilities is TilerWmts.getCapabilitiesXml;
-  getWmtsCapabilitiesWithMatrixSet is TilerWmtsTileMatrixSets.getCapabilitiesXml;
+  // getWmtsCapabilities is TilerWmts.getCapabilitiesXml;
+  getWmtsCapabilities is TilerWmtsTileMatrixSets.getCapabilitiesXml;
 
   // Map Legends
   getClassMapLegend is MapsClassMapLegends.get;
@@ -279,24 +278,24 @@ interface Tiler {
 
   // Mosaic Assets
   getAssetsForPoint is MosaicsAssetsForPoints.getPointAssets;
-  getMosaicsAssetsForTileWithMatrixSet is MosaicsAssetsForTileMatrixSets.getZxyAssets;
-  getMosaicsAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
+  getMosaicsAssetsForTile is MosaicsAssetsForTileMatrixSets.getZxyAssets;
+  // getMosaicsAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
 
   // Mosaic Search and Registration
   getMosaicsSearchInfo is MosaicsInfoSearch.get;
   registerMosaicsSearch is MosaicsRegisterSearch.register;
 
   // Mosaic Tile JSON
-  getMosaicsTileJson is MosaicsTileJsonOperations.get;
-  getMosaicsTileWithMatrixSet is MosaicsTileMatrixSets.getZxyScaleByFormat;
+  // getMosaicsTileJson is MosaicsTileJsonOperations.get;
+  getMosaicsTileJson is MosaicsTileMatrixSets.getZxyScaleByFormat;
   getMosaicsTileJsonWithMatrixSet is MosaicsTileMatrixSetsTileJson.get;
 
   // Mosaic Tiles
   getMosaicsTile is MosaicsTiles.getZxyScaleByFormat;
 
   // Mosaic WMTS Capabilities
-  getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
-  getMosaicsWmtsCapabilitiesWithMatrixSet is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
+  // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;
+  getMosaicsWmtsCapabilities is MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml;
 }
 
 // === Shared Access Signature (SAS) ===

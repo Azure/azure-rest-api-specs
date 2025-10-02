@@ -31,7 +31,7 @@ interface StacConformanceClass {
   get is Azure.Core.Foundations.Operation<{}, ConformanceClasses>;
 }
 
-interface StacSearchOperations {
+interface StacSearch {
   /**
    * Endpoint.
    */
@@ -123,7 +123,7 @@ interface StacSearchOperations {
       @query("token")
       token?: string;
     },
-    ItemCollection
+    StacItemCollection
   >;
   /**
    * Endpoint.
@@ -141,6 +141,6 @@ interface StacSearchOperations {
       @body
       body: SearchOptions;
     },
-    ItemCollection
+    StacItemCollection
   >;
 }

@@ -2975,7 +2975,7 @@
             "description": "Request GeoJson body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ItemCollection"
+              "$ref": "#/definitions/StacItemCollection"
             }
           }
         ],
@@ -2983,7 +2983,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/GeoJsonStatisticsItemCollectionResponse"
+              "$ref": "#/definitions/GeoJsonStatisticsStacItemCollectionResponse"
             }
           },
           "default": {
@@ -8466,7 +8466,7 @@
     },
     "/stac/collections": {
       "get": {
-        "operationId": "StacCollectionOperations_GetAll",
+        "operationId": "StacCollections_GetAll",
         "tags": [
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
@@ -8534,13 +8534,13 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionOperations_GetAll": {
-            "$ref": "./examples/StacCollectionOperations_GetAll.json"
+          "StacCollections_GetAll": {
+            "$ref": "./examples/StacCollections_GetAll.json"
           }
         }
       },
       "post": {
-        "operationId": "StacCollectionOperations_Create",
+        "operationId": "StacCollections_Create",
         "tags": [
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
@@ -8593,8 +8593,8 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionOperations_Create": {
-            "$ref": "./examples/StacCollectionOperations_Create.json"
+          "StacCollections_Create": {
+            "$ref": "./examples/StacCollections_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8605,7 +8605,7 @@
     },
     "/stac/collections/{collectionId}": {
       "get": {
-        "operationId": "StacCollectionOperations_Get",
+        "operationId": "StacCollections_Get",
         "tags": [
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
@@ -8682,13 +8682,13 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionOperations_Get": {
-            "$ref": "./examples/StacCollectionOperations_Get.json"
+          "StacCollections_Get": {
+            "$ref": "./examples/StacCollections_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "StacCollectionOperations_CreateOrReplace",
+        "operationId": "StacCollections_CreateOrReplace",
         "tags": [
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
@@ -8744,8 +8744,8 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionOperations_CreateOrReplace": {
-            "$ref": "./examples/StacCollectionOperations_CreateOrReplace.json"
+          "StacCollections_CreateOrReplace": {
+            "$ref": "./examples/StacCollections_CreateOrReplace.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8754,7 +8754,7 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "StacCollectionOperations_Delete",
+        "operationId": "StacCollections_Delete",
         "tags": [
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
@@ -8801,8 +8801,8 @@
           }
         },
         "x-ms-examples": {
-          "StacCollectionOperations_Delete": {
-            "$ref": "./examples/StacCollectionOperations_Delete.json"
+          "StacCollections_Delete": {
+            "$ref": "./examples/StacCollections_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9911,7 +9911,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ItemCollection"
+              "$ref": "#/definitions/StacItemCollection"
             }
           },
           "default": {
@@ -9949,10 +9949,10 @@
           {
             "name": "body",
             "in": "body",
-            "description": "STAC Item or ItemCollection\n\nRepresents a STAC Item or ItemCollection as defined by the STAC 1.0.0 standard.\n\n**Item**: A GeoJSON Feature that represents a single spatiotemporal asset.\nIt includes metadata such as geometry, datetime, and links to related assets.\nExample: A satellite image with its metadata.\n\n**ItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.\nIt is used to group multiple related Items together, such as a collection of satellite images.\n\nThis union allows the request body to accept either a single Item or a collection of Items.",
+            "description": "STAC Item or StacItemCollection\n\nRepresents a STAC Item or StacItemCollection as defined by the STAC 1.0.0 standard.\n\n**Item**: A GeoJSON Feature that represents a single spatiotemporal asset.\nIt includes metadata such as geometry, datetime, and links to related assets.\nExample: A satellite image with its metadata.\n\n**StacItemCollection**: A GeoJSON FeatureCollection that contains multiple Items.\nIt is used to group multiple related Items together, such as a collection of satellite images.\n\nThis union allows the request body to accept either a single Item or a collection of Items.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItemOrItemCollection"
+              "$ref": "#/definitions/StacItemOrStacItemCollection"
             }
           }
         ],
@@ -10646,7 +10646,7 @@
     },
     "/stac/search": {
       "get": {
-        "operationId": "StacSearchOperations_Get",
+        "operationId": "StacSearch_Get",
         "tags": [
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
@@ -10791,7 +10791,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ItemCollection"
+              "$ref": "#/definitions/StacItemCollection"
             }
           },
           "default": {
@@ -10808,13 +10808,13 @@
           }
         },
         "x-ms-examples": {
-          "StacSearchOperations_Get": {
-            "$ref": "./examples/StacSearchOperations_Get.json"
+          "StacSearch_Get": {
+            "$ref": "./examples/StacSearch_Get.json"
           }
         }
       },
       "post": {
-        "operationId": "StacSearchOperations_Create",
+        "operationId": "StacSearch_Create",
         "tags": [
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
@@ -10838,7 +10838,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ItemCollection"
+              "$ref": "#/definitions/StacItemCollection"
             }
           },
           "default": {
@@ -10855,8 +10855,8 @@
           }
         },
         "x-ms-examples": {
-          "StacSearchOperations_Create": {
-            "$ref": "./examples/StacSearchOperations_Create.json"
+          "StacSearch_Create": {
+            "$ref": "./examples/StacSearch_Create.json"
           }
         }
       }
@@ -12816,79 +12816,6 @@
         ]
       }
     },
-    "GeoJsonStatisticsItemCollectionResponse": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.mdCollection of STAC items with statistical information",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/ItemCollectionType",
-          "description": "GeoJSON type identifier for ItemCollection"
-        },
-        "features": {
-          "type": "array",
-          "description": "Array of STAC items with statistics",
-          "items": {
-            "$ref": "#/definitions/GeoJsonStatisticsItemResponse"
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box coordinates [west, south, east, north]",
-          "items": {
-            "type": "number",
-            "format": "double"
-          },
-          "x-ms-client-name": "boundingBox"
-        },
-        "stac_version": {
-          "type": "string",
-          "description": "Stac Version",
-          "default": "1.0.0",
-          "minLength": 1,
-          "x-ms-client-name": "stacVersion"
-        },
-        "msft:_created": {
-          "type": "string",
-          "description": "MSFT Created",
-          "x-ms-client-name": "createdOn"
-        },
-        "msft:_updated": {
-          "type": "string",
-          "description": "MSFT Updated",
-          "x-ms-client-name": "updatedOn"
-        },
-        "short_description": {
-          "type": "string",
-          "description": "MSFT Short Description",
-          "maxLength": 300,
-          "x-ms-client-name": "shortDescription"
-        },
-        "stac_extensions": {
-          "type": "array",
-          "description": "List of STAC extension URLs used by this item collection",
-          "items": {
-            "type": "string",
-            "format": "uri"
-          },
-          "x-ms-client-name": "stacExtensions"
-        },
-        "links": {
-          "type": "array",
-          "description": "Related links for the item collection",
-          "items": {
-            "$ref": "#/definitions/Link"
-          }
-        },
-        "context": {
-          "$ref": "#/definitions/ContextExtension",
-          "description": "Pagination context for the response\n\nSee the [STAC Context Extension](https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification)"
-        }
-      },
-      "required": [
-        "type",
-        "features"
-      ]
-    },
     "GeoJsonStatisticsItemResponse": {
       "type": "object",
       "description": "STAC Item representing a spatiotemporal asset with statistical information",
@@ -12971,6 +12898,79 @@
         "id",
         "type",
         "properties"
+      ]
+    },
+    "GeoJsonStatisticsStacItemCollectionResponse": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.mdCollection of STAC items with statistical information",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/StacItemCollectionType",
+          "description": "GeoJSON type identifier for StacItemCollection"
+        },
+        "features": {
+          "type": "array",
+          "description": "Array of STAC items with statistics",
+          "items": {
+            "$ref": "#/definitions/GeoJsonStatisticsItemResponse"
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box coordinates [west, south, east, north]",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "x-ms-client-name": "boundingBox"
+        },
+        "stac_version": {
+          "type": "string",
+          "description": "Stac Version",
+          "default": "1.0.0",
+          "minLength": 1,
+          "x-ms-client-name": "stacVersion"
+        },
+        "msft:_created": {
+          "type": "string",
+          "description": "MSFT Created",
+          "x-ms-client-name": "createdOn"
+        },
+        "msft:_updated": {
+          "type": "string",
+          "description": "MSFT Updated",
+          "x-ms-client-name": "updatedOn"
+        },
+        "short_description": {
+          "type": "string",
+          "description": "MSFT Short Description",
+          "maxLength": 300,
+          "x-ms-client-name": "shortDescription"
+        },
+        "stac_extensions": {
+          "type": "array",
+          "description": "List of STAC extension URLs used by this item collection",
+          "items": {
+            "type": "string",
+            "format": "uri"
+          },
+          "x-ms-client-name": "stacExtensions"
+        },
+        "links": {
+          "type": "array",
+          "description": "Related links for the item collection",
+          "items": {
+            "$ref": "#/definitions/Link"
+          }
+        },
+        "context": {
+          "$ref": "#/definitions/ContextExtension",
+          "description": "Pagination context for the response\n\nSee the [STAC Context Extension](https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification)"
+        }
+      },
+      "required": [
+        "type",
+        "features"
       ]
     },
     "Geometry": {
@@ -13486,59 +13486,6 @@
       }
     },
     "IntervalLegendsElement": {},
-    "ItemCollection": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md\n\nRepresents a collection of STAC Items as a GeoJSON FeatureCollection.",
-      "properties": {
-        "features": {
-          "type": "array",
-          "description": "Array of STAC Items in the collection.",
-          "items": {
-            "$ref": "#/definitions/StacItem"
-          }
-        },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box of all items in format [west, south, east, north].",
-          "items": {
-            "type": "number",
-            "format": "double"
-          },
-          "x-ms-client-name": "boundingBox"
-        },
-        "context": {
-          "$ref": "#/definitions/ContextExtension",
-          "description": "Context information for the search response."
-        }
-      },
-      "required": [
-        "features"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/StacItemOrItemCollection"
-        }
-      ],
-      "x-ms-discriminator-value": "FeatureCollection"
-    },
-    "ItemCollectionType": {
-      "type": "string",
-      "description": "Represents the GeoJSON feature collection type for STAC item collections.",
-      "enum": [
-        "FeatureCollection"
-      ],
-      "x-ms-enum": {
-        "name": "ItemCollectionType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "FeatureCollection",
-            "value": "FeatureCollection",
-            "description": "Standard GeoJSON FeatureCollection type."
-          }
-        ]
-      }
-    },
     "ItemProperties": {
       "type": "object",
       "description": "Properties of a STAC Item containing metadata about the asset.\n\nhttps://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/item-spec.md#properties-object",
@@ -15612,18 +15559,71 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/StacItemOrItemCollection"
+          "$ref": "#/definitions/StacItemOrStacItemCollection"
         }
       ],
       "x-ms-discriminator-value": "Feature"
     },
-    "StacItemOrItemCollection": {
+    "StacItemCollection": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md\n\nRepresents a collection of STAC Items as a GeoJSON FeatureCollection.",
+      "properties": {
+        "features": {
+          "type": "array",
+          "description": "Array of STAC Items in the collection.",
+          "items": {
+            "$ref": "#/definitions/StacItem"
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box of all items in format [west, south, east, north].",
+          "items": {
+            "type": "number",
+            "format": "double"
+          },
+          "x-ms-client-name": "boundingBox"
+        },
+        "context": {
+          "$ref": "#/definitions/ContextExtension",
+          "description": "Context information for the search response."
+        }
+      },
+      "required": [
+        "features"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/StacItemOrStacItemCollection"
+        }
+      ],
+      "x-ms-discriminator-value": "FeatureCollection"
+    },
+    "StacItemCollectionType": {
+      "type": "string",
+      "description": "Represents the GeoJSON feature collection type for STAC item collections.",
+      "enum": [
+        "FeatureCollection"
+      ],
+      "x-ms-enum": {
+        "name": "StacItemCollectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FeatureCollection",
+            "value": "FeatureCollection",
+            "description": "Standard GeoJSON FeatureCollection type."
+          }
+        ]
+      }
+    },
+    "StacItemOrStacItemCollection": {
       "type": "object",
       "description": "Base type for STAC items and collections with discriminator.",
       "properties": {
         "type": {
           "type": "string",
-          "description": "Discriminator property for StacItemOrItemCollection."
+          "description": "Discriminator property for StacItemOrStacItemCollection."
         },
         "stac_version": {
           "type": "string",
@@ -15723,7 +15723,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/StacItemOrItemCollection"
+          "$ref": "#/definitions/StacItemOrStacItemCollection"
         }
       ],
       "x-ms-discriminator-value": "Feature"

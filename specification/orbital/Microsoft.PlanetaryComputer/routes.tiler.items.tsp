@@ -258,9 +258,9 @@ interface TilerGeoJsonStatistics {
        * Request GeoJson body
        */
       @body
-      body: ItemCollection;
+      body: StacItemCollection;
     },
-    GeoJsonStatisticsItemCollectionResponse
+    GeoJsonStatisticsStacItemCollectionResponse
   >;
 }
 

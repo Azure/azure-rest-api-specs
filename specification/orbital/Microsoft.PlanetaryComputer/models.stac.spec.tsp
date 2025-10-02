@@ -97,7 +97,7 @@ union StacQueryableDefinitionDataType {
 /**
  * Represents the GeoJSON feature collection type for STAC item collections.
  */
-union ItemCollectionType {
+union StacItemCollectionType {
   string,
 
   /**
@@ -611,7 +611,7 @@ union StacModelType {
  */
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Work around Python SDK bug."
 @discriminator("type")
-model StacItemOrItemCollection {
+model StacItemOrStacItemCollection {
   /**
    * Stac Version
    */
@@ -633,7 +633,7 @@ model StacItemOrItemCollection {
  */
 @resource("items")
 @parentResource(StacCollection)
-model StacItem extends StacItemOrItemCollection {
+model StacItem extends StacItemOrStacItemCollection {
   ...FeatureBase;
 
   /**
@@ -721,7 +721,7 @@ model ItemProperties {
  *
  * Represents a collection of STAC Items as a GeoJSON FeatureCollection.
  */
-model ItemCollection extends StacItemOrItemCollection {
+model StacItemCollection extends StacItemOrStacItemCollection {
   /**
    * GeoJSON FeatureCollection type.
    */

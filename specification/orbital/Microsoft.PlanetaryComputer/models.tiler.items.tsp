@@ -516,11 +516,11 @@ model WmtsCapabilitiesResponse {
 /**
  * Collection of STAC items with statistical information
  */
-model GeoJsonStatisticsItemCollectionResponse {
+model GeoJsonStatisticsStacItemCollectionResponse {
   /**
-   * GeoJSON type identifier for ItemCollection
+   * GeoJSON type identifier for StacItemCollection
    */
-  type: ItemCollectionType;
+  type: StacItemCollectionType;
 
   /**
    * Array of STAC items with statistics
