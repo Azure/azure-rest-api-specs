@@ -36,8 +36,16 @@ interface RuleSets {
   /**
    * Creates a new rule set within the specified profile.
    */
+  @armResourceCreateOrUpdate(RuleSet)
   @Azure.Core.useFinalStateVia("azure-async-operation")
-  create is ArmResourceCreateOrReplaceAsync<RuleSet>;
+  create(
+    ...ResourceInstanceParameters<RuleSet>,
+
+    /** The rule set to create. Making it optional to be backwards compatible */
+    @body resource?: RuleSet,
+  ): ArmResponse<RuleSet> | (ArmCreatedResponse<RuleSet> &
+    ArmAsyncOperationHeader<FinalResult = RuleSet> &
+    ArmLroLocationHeader<FinalResult = RuleSet>) | ErrorResponse;
 
   /**
    * Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.
