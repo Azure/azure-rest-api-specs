@@ -27,16 +27,13 @@ interface Ingestions {
   @doc("Get ingestions of a catalog")
   @route("/inma/collections/{collectionId}/ingestions")
   @get
-  list(
-    ...CollectionParameters,
-    ...OdataQuery,
-  ): Page<IngestionDefinition> | ErrorResponse;
+  list(...CollectionParameters, ...OdataQuery): Page<Ingestion> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get the definition of an ingestion")
   @route("/inma/collections/{collectionId}/ingestions/{ingestionId}")
   @get
-  get(...IngestionParameters): IngestionDefinition | ErrorResponse;
+  get(...IngestionParameters): Ingestion | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create a new ingestion")
@@ -47,7 +44,7 @@ interface Ingestions {
 
     @doc("Definition of the ingestion")
     @body
-    definition: IngestionDefinition,
+    definition: Ingestion,
   ): {
     @doc("Url of the created ingestion")
     @header
@@ -57,7 +54,7 @@ interface Ingestions {
 
     @doc("Ingestion definition")
     @body
-    _: IngestionDefinition;
+    _: Ingestion;
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -73,12 +70,12 @@ interface Ingestions {
 
     @doc("Ingestion properties to update")
     @body
-    definition: IngestionDefinition,
+    definition: Ingestion,
   ): {
     @statusCode statusCode: 200;
 
     @body
-    _: IngestionDefinition;
+    _: Ingestion;
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -108,7 +105,7 @@ interface Ingestions {
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
 @parentResource(StacCollection)
 @resource("ingestions")
-model IngestionDefinition {
+model Ingestion {
   @doc("Ingestion id")
   @visibility(Lifecycle.Read)
   @key("ingestionId")
@@ -204,7 +201,7 @@ interface IngestionRuns {
 
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
 @resource("runs")
-@parentResource(IngestionDefinition)
+@parentResource(Ingestion)
 model IngestionRun {
   @doc("Run id")
   @key("runId")
@@ -918,7 +915,7 @@ interface StacCollectionOperations {
     @header("operation-location")
     operationLocation: url;
 
-    @statusCode statusCode: 200;
+    @statusCode statusCode: 202;
 
     @doc("Operation")
     @body
@@ -980,7 +977,7 @@ interface StacCollectionOperations {
     @header("operation-location")
     operationLocation: url;
 
-    @statusCode statusCode: 202;
+    @statusCode statusCode: 200;
 
     @doc("Operation")
     @body

@@ -1127,7 +1127,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: Geometry;
+      body: StacItem;
     },
     TileResponse
   >;

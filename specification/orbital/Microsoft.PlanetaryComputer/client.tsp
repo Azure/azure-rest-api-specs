@@ -100,10 +100,10 @@ namespace Customizations;
 @operationGroup
 interface Ingestion {
   // Ingestion operations management
-  deleteIngestionOperation is IngestionOperations.delete;
-  deleteAllIngestionOperations is IngestionOperations.deleteAll;
-  getIngestionOperation is IngestionOperations.get;
-  listIngestionOperations is IngestionOperations.list;
+  cancelLongRunningOperation is IngestionOperations.delete;
+  cancelAllLongRunningOperations is IngestionOperations.deleteAll;
+  getLongRunningOperation is IngestionOperations.get;
+  listLongRunningOperations is IngestionOperations.list;
 
   // Ingestion runs operations
   createIngestionRun is IngestionRuns.create;
@@ -138,7 +138,7 @@ interface Stac {
   deleteCollectionAsset is StacCollectionAssets.delete;
 
   // Collection Configuration
-  getCollectionConfig is StacCollectionConfig.get;
+  getCollectionConfiguration is StacCollectionConfig.get;
 
   // Collection Mosaics
   addMosaic is StacCollectionMosaics.add;
@@ -239,7 +239,7 @@ interface Tiler {
 
   // Basic Info and Assets
   getInfoGeoJson is TilerInfoGeoJsonOperations.get;
-  getInfo is TilerInfoOperations.get;
+  getAssetsInfo is TilerInfoOperations.get;
 
   // Parts/Crops
   getPart is TilerParts.getCroppedToBoundingBox;
