@@ -144,7 +144,7 @@ export class Readme {
         const obj = /** @type {any} */ (yaml.load(block.text, { schema: yaml.FAILSAFE_SCHEMA }));
 
         if (!obj) {
-          this.#logger?.debug(`No yaml object found for tag ${tagName} in ${this.#path}`);
+          this.#logger?.debug(`No YAML object found for tag ${tagName} in ${this.#path}`);
           continue;
         }
 
@@ -153,12 +153,15 @@ export class Readme {
           parsedObj = inputFileSchema.parse(obj);
         } catch (error) {
           if (error instanceof z.ZodError) {
-            throw new SpecModelError(`Unable to parse input-file from YAML`, {
-              source: this.#path,
-              readme: this.#path,
-              tag: tagName,
-              cause: error,
-            });
+            throw new SpecModelError(
+              `Unable to parse input-file YAML for tag ${tagName} in ${this.#path}`,
+              {
+                source: this.#path,
+                readme: this.#path,
+                tag: tagName,
+                cause: error,
+              },
+            );
           } else {
             throw error;
           }

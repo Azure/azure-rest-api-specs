@@ -123,7 +123,9 @@ input-file:
         throw error;
       }
 
-      expect(error.message).toMatchInlineSnapshot(`"Unable to parse input-file from YAML"`);
+      expect(error.message).toEqual(
+        `Unable to parse input-file yaml for tag package-2025-01-01 in ${readme.path}`,
+      );
       expect(error.source).toEqual(readme.path);
       expect(error.readme).toEqual(readme.path);
       expect(error.tag).toEqual("package-2025-01-01");
