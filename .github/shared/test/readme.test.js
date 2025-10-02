@@ -4,7 +4,6 @@ import { resolve } from "path";
 import { describe, expect, it } from "vitest";
 import { ConsoleLogger } from "../src/logger.js";
 import { Readme, TagMatchRegex } from "../src/readme.js";
-import { SpecModelError } from "../src/spec-model-error.js";
 import { SpecModel } from "../src/spec-model.js";
 import { contosoReadme } from "./examples.js";
 
@@ -66,7 +65,7 @@ input-file:
 
     let readme = new Readme("foo", { ...options, content });
 
-    expect(readme.getTags()).rejects.toThrowError(
+    await expect(readme.getTags()).rejects.toThrowError(
       "Multiple input-file definitions for tag package-2025-01-01",
     );
   });
@@ -98,7 +97,7 @@ input-file:
 
     let readme = new Readme("foo", { ...options, content });
 
-    expect(readme.getTags()).rejects.toThrowError(
+    await expect(readme.getTags()).rejects.toThrowError(
       "Multiple input-file definitions for tag package-2025-01-01",
     );
   });
@@ -113,54 +112,43 @@ input-file:
 \`\`\`
 `;
 
-    let readme = new Readme("foo", { ...options, content });
+    let readme = new Readme("readme.md", { ...options, content });
 
-    try {
-      await readme.getTags();
-      expect.unreachable();
-    } catch (error) {
-      if (!(error instanceof SpecModelError)) {
-        throw error;
-      }
-
-      expect(error.message).toEqual(
-        `Unable to parse input-file YAML for tag package-2025-01-01 in ${readme.path}`,
-      );
-      expect(error.source).toEqual(readme.path);
-      expect(error.readme).toEqual(readme.path);
-      expect(error.tag).toEqual("package-2025-01-01");
-      expect(error.cause).toMatchInlineSnapshot(`
-        [ZodError: [
-          {
-            "code": "invalid_union",
-            "errors": [
-              [
-                {
-                  "expected": "string",
-                  "code": "invalid_type",
-                  "path": [],
-                  "message": "Invalid input: expected string, received array"
-                }
-              ],
-              [
-                {
-                  "expected": "string",
-                  "code": "invalid_type",
-                  "path": [
-                    1
-                  ],
-                  "message": "Invalid input: expected string, received object"
-                }
-              ]
+    await expect(readme.getTags()).rejects.toThrowErrorMatchingInlineSnapshot(`
+      [SpecModelError: Unable to parse input-file YAML for tag package-2025-01-01 in ${readme.path}
+      	Problem File: ${readme.path}
+      	Readme: ${readme.path}
+      	Tag: package-2025-01-01
+      	Cause: [
+        {
+          "code": "invalid_union",
+          "errors": [
+            [
+              {
+                "expected": "string",
+                "code": "invalid_type",
+                "path": [],
+                "message": "Invalid input: expected string, received array"
+              }
             ],
-            "path": [
-              "input-file"
-            ],
-            "message": "Invalid input"
-          }
-        ]]
-      `);
-    }
+            [
+              {
+                "expected": "string",
+                "code": "invalid_type",
+                "path": [
+                  1
+                ],
+                "message": "Invalid input: expected string, received object"
+              }
+            ]
+          ],
+          "path": [
+            "input-file"
+          ],
+          "message": "Invalid input"
+        }
+      ]]
+    `);
   });
 
   it("can be created with empty content", async () => {
