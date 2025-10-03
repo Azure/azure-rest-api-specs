@@ -316,7 +316,7 @@
         "operationId": "Jobs_Update",
         "description": "OLD METHOD: Update job properties.",
         "consumes": [
-          "application/merge-patch+json"
+          "application/json-patch+json"
         ],
         "parameters": [
           {
@@ -370,7 +370,7 @@
             "description": "The resource instance.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/JobDetailsUpdate"
+              "$ref": "#/definitions/JsonPatchDocument"
             }
           }
         ],
@@ -380,6 +380,9 @@
             "schema": {
               "$ref": "#/definitions/JobDetails"
             }
+          },
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1314,13 +1317,6 @@
         "message"
       ]
     },
-    "InputParams": {
-      "type": "object",
-      "description": "Input parameters for the job.",
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
     "ItemDetails": {
       "type": "object",
       "description": "A workspace item.",
@@ -1401,22 +1397,6 @@
         "itemType"
       ]
     },
-    "ItemDetailsUpdate": {
-      "type": "object",
-      "description": "A workspace item.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the item. It is not required for the name to be unique and it's only used for display purposes.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "discriminator": "itemType"
-    },
     "ItemType": {
       "type": "string",
       "description": "The type of the workspace item.",
@@ -1496,7 +1476,7 @@
           "readOnly": true
         },
         "metadata": {
-          "$ref": "#/definitions/Metadata",
+          "type": "object",
           "description": "The job metadata. Metadata provides client the ability to store client-specific information",
           "x-ms-mutability": [
             "read",
@@ -1516,7 +1496,7 @@
           "readOnly": true
         },
         "inputParams": {
-          "$ref": "#/definitions/InputParams",
+          "type": "object",
           "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
           "x-ms-mutability": [
             "read",
@@ -1559,39 +1539,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ItemDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "Job"
-    },
-    "JobDetailsUpdate": {
-      "type": "object",
-      "description": "A job to be run in the workspace.",
-      "properties": {
-        "metadata": {
-          "$ref": "#/definitions/Metadata",
-          "description": "The job metadata. Metadata provides client the ability to store client-specific information",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/ItemDetailsUpdate"
         }
       ],
       "x-ms-discriminator-value": "Job"
@@ -1668,11 +1615,98 @@
         ]
       }
     },
-    "Metadata": {
+    "JsonPatchDocument": {
+      "type": "array",
+      "description": "A JSONPatch document as defined by RFC 6902.",
+      "items": {
+        "$ref": "#/definitions/JsonPatchObject"
+      }
+    },
+    "JsonPatchObject": {
       "type": "object",
-      "description": "Metadata for the job.",
-      "additionalProperties": {
-        "type": "object"
+      "description": "A JSONPatch object as defined by RFC 6902.",
+      "properties": {
+        "op": {
+          "$ref": "#/definitions/JsonPatchOperation",
+          "description": "The operation to be performed.",
+          "x-ms-client-name": "operation",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "path": {
+          "type": "string",
+          "description": "A JSON-Pointer.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "value": {
+          "type": "object",
+          "description": "A value to be used in the operation on the path.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        },
+        "from": {
+          "type": "string",
+          "description": "Optional field used in copy and move operations.",
+          "x-ms-mutability": [
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "op",
+        "path"
+      ]
+    },
+    "JsonPatchOperation": {
+      "type": "string",
+      "description": "The operation to be performed.",
+      "enum": [
+        "add",
+        "remove",
+        "replace",
+        "move",
+        "copy",
+        "test"
+      ],
+      "x-ms-enum": {
+        "name": "JsonPatchOperation",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "add",
+            "value": "add",
+            "description": "Add value operation."
+          },
+          {
+            "name": "remove",
+            "value": "remove",
+            "description": "Remove value operation."
+          },
+          {
+            "name": "replace",
+            "value": "replace",
+            "description": "Replace value operation."
+          },
+          {
+            "name": "move",
+            "value": "move",
+            "description": "Move value operation."
+          },
+          {
+            "name": "copy",
+            "value": "copy",
+            "description": "Copy value operation."
+          },
+          {
+            "name": "test",
+            "value": "test",
+            "description": "Test value operation."
+          }
+        ]
       }
     },
     "MeterPeriod": {
@@ -1975,16 +2009,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/ItemDetails"
-        }
-      ],
-      "x-ms-discriminator-value": "Session"
-    },
-    "SessionDetailsUpdate": {
-      "type": "object",
-      "description": "Session, a logical grouping of jobs.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ItemDetailsUpdate"
         }
       ],
       "x-ms-discriminator-value": "Session"

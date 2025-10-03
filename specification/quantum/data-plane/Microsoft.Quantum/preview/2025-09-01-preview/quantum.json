@@ -1364,13 +1364,6 @@
         "message"
       ]
     },
-    "InputParams": {
-      "type": "object",
-      "description": "Input parameters for the job.",
-      "additionalProperties": {
-        "type": "object"
-      }
-    },
     "ItemDetails": {
       "type": "object",
       "description": "A workspace item.",
@@ -1556,7 +1549,7 @@
           "readOnly": true
         },
         "metadata": {
-          "$ref": "#/definitions/Metadata",
+          "type": "object",
           "description": "The job metadata. Metadata provides client the ability to store client-specific information",
           "x-ms-mutability": [
             "read",
@@ -1576,7 +1569,7 @@
           "readOnly": true
         },
         "inputParams": {
-          "$ref": "#/definitions/InputParams",
+          "type": "object",
           "description": "The input parameters for the job. JSON object used by the target solver. It is expected that the size of this object is small and only used to specify parameters for the execution target, not the input data.",
           "x-ms-mutability": [
             "read",
@@ -1755,13 +1748,6 @@
             "create"
           ]
         }
-      }
-    },
-    "Metadata": {
-      "type": "object",
-      "description": "Metadata for the job.",
-      "additionalProperties": {
-        "type": "object"
       }
     },
     "MeterPeriod": {
