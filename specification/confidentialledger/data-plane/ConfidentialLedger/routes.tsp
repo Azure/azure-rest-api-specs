@@ -562,7 +562,7 @@ op getUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
     @query("roleName")
     roleName: string;
   },
-  Roles
+  UserDefinedRole
 >;
 
 /**
@@ -578,7 +578,7 @@ op createUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
     /** Request body */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
     @bodyRoot
-    body: Roles;
+    body: UserDefinedRoles;
   },
   {}
 >;
@@ -599,7 +599,7 @@ op updateUserDefinedRole is ConfidentialLedgerCommon.LedgerOperation<
     /** Request body */
     #suppress "@azure-tools/typespec-azure-core/request-body-problem" "Existing API contract"
     @bodyRoot
-    body: Roles;
+    body: UserDefinedRoles;
   },
   {}
 >;

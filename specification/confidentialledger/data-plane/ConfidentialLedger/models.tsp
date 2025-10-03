@@ -7,10 +7,15 @@ using TypeSpec.Http;
 namespace ConfidentialLedger;
 
 /** Roles */
-model Roles {
+model UserDefinedRoles {
   /** Roles */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "Model renamed in client.tsp"
   roles: Role[];
+}
+
+/** User defined role */
+model UserDefinedRole {
+  /** User defined role */
+  role: Role[];
 }
 
 /**

@@ -343,7 +343,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Roles"
+              "$ref": "#/definitions/UserDefinedRole"
             }
           },
           "default": {
@@ -373,7 +373,7 @@
             "description": "Request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Roles"
+              "$ref": "#/definitions/UserDefinedRoles"
             }
           }
         ],
@@ -408,7 +408,7 @@
             "description": "Request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Roles"
+              "$ref": "#/definitions/UserDefinedRoles"
             }
           }
         ],
@@ -2208,22 +2208,6 @@
         "roleName"
       ]
     },
-    "Roles": {
-      "type": "object",
-      "description": "Roles",
-      "properties": {
-        "roles": {
-          "type": "array",
-          "description": "Roles",
-          "items": {
-            "$ref": "#/definitions/Role"
-          }
-        }
-      },
-      "required": [
-        "roles"
-      ]
-    },
     "TransactionReceipt": {
       "type": "object",
       "description": "A receipt certifying the transaction at the specified id.",
@@ -2414,6 +2398,38 @@
       },
       "required": [
         "functionId"
+      ]
+    },
+    "UserDefinedRole": {
+      "type": "object",
+      "description": "User defined role",
+      "properties": {
+        "role": {
+          "type": "array",
+          "description": "User defined role",
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
+        }
+      },
+      "required": [
+        "role"
+      ]
+    },
+    "UserDefinedRoles": {
+      "type": "object",
+      "description": "Roles",
+      "properties": {
+        "roles": {
+          "type": "array",
+          "description": "Roles",
+          "items": {
+            "$ref": "#/definitions/Role"
+          }
+        }
+      },
+      "required": [
+        "roles"
       ]
     }
   },
