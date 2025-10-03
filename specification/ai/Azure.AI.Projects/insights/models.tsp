@@ -85,6 +85,22 @@ model AgentClusterInsightsRequest extends InsightRequest {
   modelConfiguration?: InsightModelConfiguration;
 }
 
+@doc("Evaluation Comparison Request")
+@added(Versions.v2025_10_15_preview)
+model EvaluationComparisonRequest extends InsightRequest {
+  @doc("The type of request.")
+  type: InsightType.EvaluationComparison;
+
+  @doc("Identifier for the evaluation.")
+  evalId: string;
+
+  @doc("The baseline run ID for comparison.")
+  baselineRunId: string;
+
+  @doc("List of treatment run IDs for comparison.")
+  treatmentRunIds: string[];
+}
+
 @doc("The request of the insights.")
 @added(Versions.v2025_10_15_preview)
 union InsightType {
@@ -93,6 +109,9 @@ union InsightType {
 
   @doc("Cluster Insight on an Agent.")
   AgentClusterInsight: "AgentClusterInsight",
+
+  @doc("Evaluation Comparison.")
+  EvaluationComparison: "EvaluationComparison",
 
   string,
 }
@@ -113,6 +132,94 @@ model InsightsMetadata {
 model InsightResult {
   @doc("The type of insights result.")
   type: InsightType;
+}
+
+@doc("Insights from the evaluation comparison.")
+@added(Versions.v2025_10_15_preview)
+model EvalCompareReport extends InsightResult {
+  @doc("The type of insights result.")
+  type: InsightType.EvaluationComparison;
+
+  @doc("Comparison results for each treatment run against the baseline.")
+  comparisons: EvalRunResultComparison[];
+
+  @doc("The statistical method used for comparison.")
+  method: string;
+}
+
+@doc("Comparison results for treatment runs against the baseline.")
+@added(Versions.v2025_10_15_preview)
+model EvalRunResultComparison {
+  @doc("Name of the testing criteria.")
+  testingCriteria: string;
+
+  @doc("Metric being evaluated.")
+  metric: string;
+
+  @doc("Name of the evaluator for this testing criteria.")
+  evaluator: string;
+
+  @doc("Summary statistics of the baseline run.")
+  baselineRunSummary: EvalRunResultSummary;
+
+  @doc("List of comparison results for each treatment run.")
+  compareItems: EvalRunResultCompareItem[];
+}
+
+@doc("Summary statistics of a metric in an evaluation run.")
+@added(Versions.v2025_10_15_preview)
+model EvalRunResultSummary {
+  @doc("The evaluation run ID.")
+  runId: string;
+
+  @doc("Number of samples in the evaluation run.")
+  sampleCount: int32;
+
+  @doc("Average value of the metric in the evaluation run.")
+  average: float32;
+
+  @doc("Standard deviation of the metric in the evaluation run.")
+  standardDeviation: float32;
+}
+
+@doc("Metric comparison for a treatment against the baseline.")
+@added(Versions.v2025_10_15_preview)
+model EvalRunResultCompareItem {
+  @doc("The treatment run ID.")
+  treatmentRunId: string;
+
+  @doc("Summary statistics of the treatment run.")
+  treatmentRunSummary: EvalRunResultSummary;
+
+  @doc("Estimated difference between treatment and baseline.")
+  deltaEstimate: float32;
+
+  @doc("P-value for the treatment effect.")
+  pValue: float32;
+
+  @doc("Type of treatment effect.")
+  treatmentEffect: TreatmentEffectType;
+}
+
+@doc("Treatment Effect Type.")
+@added(Versions.v2025_10_15_preview)
+union TreatmentEffectType {
+  @doc("Not enough samples to determine treatment effect.")
+  TooFewSamples: "TooFewSamples",
+
+  @doc("No significant difference between treatment and baseline.")
+  Inconclusive: "Inconclusive",
+
+  @doc("Indicates the metric changed with statistical significance, but the direction is neutral.")
+  Changed: "Changed",
+
+  @doc("Indicates the treatment significantly improved the metric compared to baseline.")
+  Improved: "Improved",
+
+  @doc("Indicates the treatment significantly degraded the metric compared to baseline.")
+  Degraded: "Degraded",
+
+  string,
 }
 
 @doc("Insights from the cluster analysis.")
