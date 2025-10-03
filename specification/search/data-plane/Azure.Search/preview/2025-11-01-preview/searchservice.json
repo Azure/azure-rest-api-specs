@@ -2734,6 +2734,12 @@
           },
           "description": "Contains configuration options on how to connect to AI models."
         },
+        "retrievalReasoningEffort": {
+          "$ref": "knowledgebase.json#/definitions/KnowledgeRetrievalReasoningEffort"
+        },
+        "outputMode": {
+          "$ref": "knowledgebase.json#/definitions/KnowledgeRetrievalOutputMode"
+        },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
@@ -2908,9 +2914,39 @@
           "type": "string",
           "description": "The name of the Search index."
         },
-        "sourceDataSelect": {
-          "type": "string",
+        "sourceDataFields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
           "description": "Used to request additional fields for referenced source data."
+        },
+        "searchFields": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string"
+              }
+            },
+            "required": [
+              "name"
+            ]
+          },
+          "description": "Used to restrict which fields to search on the search index."
+        },
+        "semanticConfigurationName": {
+          "type": "string",
+          "description": "Used to specify a different semantic configuration on the target search index other than the default one."
         }
       },
       "required": [
@@ -9901,6 +9937,11 @@
             ]
           }
         },
+        "sensitivityLabel": {
+          "type": "boolean",
+          "description": "A value indicating whether the field should be used for sensitivity label filtering. This enables document-level filtering based on Microsoft Purview sensitivity labels.",
+          "x-nullable": true
+        },
         "analyzer": {
           "externalDocs": {
             "url": "https://learn.microsoft.com/rest/api/searchservice/Language-support"
@@ -10515,6 +10556,11 @@
             "name": "SearchIndexPermissionFilterOption",
             "modelAsString": true
           }
+        },
+        "purviewEnabled": {
+          "type": "boolean",
+          "description": "A value indicating whether the index is leveraging Purview-specific features. This property defaults to false and cannot be changed after index creation.",
+          "x-nullable": true
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",

@@ -16,7 +16,9 @@
       ],
       "maxRuntimeInSeconds": 60,
       "maxOutputSize": 100000,
-      "retrievalReasoningEffort": "minimal",
+      "retrievalReasoningEffort": {
+        "kind": "minimal"
+      },
       "includeActivity": true,
       "outputMode": "extractiveData",
       "knowledgeSourceParams": [
@@ -59,9 +61,12 @@
             }
           },
           {
-            "type": "semanticReranker",
+            "type": "agenticReasoning",
             "id": 1,
-            "inputTokens": 37
+            "retrievalReasoningEffort": {
+              "kind": "minimal"
+            },
+            "reasoningTokens": 37
           }
         ],
         "references": [
@@ -93,7 +98,7 @@
       }
     },
     "206": {
-      "body": {
+		"body": {
         "response": [
           {
             "content": [
@@ -117,7 +122,7 @@
               "filter": "foo eq bar"
             }
           },
-          {
+		  {
             "type": "web",
             "id": 1,
             "knowledgeSourceName": "ks-preview-web",
@@ -143,9 +148,12 @@
             }
           },
           {
-            "type": "semanticReranker",
-            "id": 1,
-            "inputTokens": 37
+            "type": "agenticReasoning",
+            "id": 2,
+            "retrievalReasoningEffort": {
+              "kind": "minimal"
+            },
+            "reasoningTokens": 37
           }
         ],
         "references": [
@@ -175,6 +183,6 @@
           }
         ]
       }
-    }
+	}
   }
 }

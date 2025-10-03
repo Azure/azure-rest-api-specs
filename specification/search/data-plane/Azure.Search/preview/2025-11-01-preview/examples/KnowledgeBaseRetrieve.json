@@ -21,7 +21,9 @@
       ],
       "maxRuntimeInSeconds": 60,
       "maxOutputSize": 100000,
-      "retrievalReasoningEffort": "medium",
+      "retrievalReasoningEffort": {
+        "kind": "low"
+      },
       "includeActivity": true,
       "outputMode": "answerSynthesis",
       "knowledgeSourceParams": [
@@ -83,9 +85,12 @@
             }
           },
           {
-            "type": "semanticReranker",
+            "type": "agenticReasoning",
             "id": 3,
-            "inputTokens": 74
+            "retrievalReasoningEffort": {
+              "kind": "low"
+            },
+            "reasoningTokens": 74
           },
           {
             "type": "modelAnswerSynthesis",
@@ -124,7 +129,7 @@
       }
     },
     "206": {
-      "body": {
+	   "body": {
         "response": [
           {
             "content": [
@@ -151,7 +156,7 @@
             "count": 2,
             "elapsedMs": 1234,
             "searchIndexArguments": {
-              "search": "foo",
+              "search": "hello world",
               "filter": "foo eq bar"
             }
           },
@@ -181,9 +186,12 @@
             }
           },
           {
-            "type": "semanticReranker",
-            "id": 1,
-            "inputTokens": 37
+            "type": "agenticReasoning",
+            "id": 3,
+            "retrievalReasoningEffort": {
+              "kind": "low"
+            },
+            "reasoningTokens": 74
           },
           {
             "type": "modelAnswerSynthesis",
@@ -220,6 +228,6 @@
           }
         ]
       }
-    }
+	}
   }
 }

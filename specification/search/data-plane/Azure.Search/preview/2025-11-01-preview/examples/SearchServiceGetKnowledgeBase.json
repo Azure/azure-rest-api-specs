@@ -15,6 +15,7 @@
         "description": "Description of the knowledge base.",
         "retrievalInstructions": "Instructions for retrieval for the knowledge base.",
         "answerInstructions": "Instructions for answer synthesis.",
+        "outputMode": "extractiveData",
         "knowledgeSources": [
           {
             "name": "ks-preview-test"
@@ -35,10 +36,14 @@
           "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
           "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",
           "keyVaultUri": "https://myKeyVault.vault.azure.net",
+          "isServiceLevelKey": false,
           "accessCredentials": {
             "applicationId": "00000000-0000-0000-0000-000000000000",
             "applicationSecret": "<applicationSecret>"
           }
+        },
+        "retrievalReasoningEffort": {
+          "kind": "low"
         }
       }
     }

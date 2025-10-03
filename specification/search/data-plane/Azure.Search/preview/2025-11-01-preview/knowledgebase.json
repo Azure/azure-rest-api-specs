@@ -763,25 +763,25 @@
       },
       "description": "Represents an LLM answer synthesis activity record."
     },
-    "KnowledgeBaseSemanticRerankerActivityRecord": {
+    "KnowledgeBaseAgenticReasoningActivityRecord": {
       "type": "object",
-      "x-ms-discriminator-value": "semanticReranker",
+      "x-ms-discriminator-value": "agenticReasoning",
       "allOf": [
         {
           "$ref": "#/definitions/KnowledgeBaseActivityRecord"
         }
       ],
       "properties": {
-        "inputTokens": {
+        "reasoningTokens": {
           "type": "integer",
           "format": "int32",
-          "description": "The number of input tokens for the semantic ranker activity."
+          "description": "The number of input tokens for agentic reasoning."
         },
         "retrievalReasoningEffort": {
           "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort"
         }
       },
-      "description": "Represents a semantic ranker activity record."
+      "description": "Represents an agentic reasoning activity record."
     },
     "KnowledgeBaseReference": {
       "type": "object",
