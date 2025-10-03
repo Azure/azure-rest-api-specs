@@ -15,7 +15,7 @@ options:
   "@azure-tools/typespec-python":
     "package-version": "1.2.0b2"
     "package-name": "azure-confidentialledger"
-    "package-dir": "azure-confidentialledger"
+    "emitter-output-dir": "{output-dir}/{service-dir}/azure-confidentialledger"
     "namespace": "azure.confidentialledger"
     "flavor": "azure"
     "generate-test": false
@@ -23,15 +23,15 @@ options:
     "package-pprint-name": "Confidential Ledger"
   "@azure-tools/typespec-csharp":
     "namespace": "Azure.ConfidentialLedger"
-    "package-dir": "Azure.ConfidentialLedger"
+    "emitter-output-dir": "{output-dir}/{service-dir}/Azure.ConfidentialLedger"
     "flavor": "azure"
     clear-output-folder: true
   "@azure-tools/typespec-java":
-    "package-dir": "azure-confidentialledger"
+    "emitter-output-dir": "{output-dir}/{service-dir}/azure-confidentialledger"
     "namespace": "com.azure.confidentialledger"
     "flavor": "azure"
   "@azure-tools/typespec-ts":
-    "package-dir": "confidentialledger-rest"
+    "emitter-output-dir": "{output-dir}/{service-dir}/confidentialledger-rest"
     "package-details":
       "name": "@azure-rest/azure-confidentialledger"
       description: "Microsoft Confidential Ledger"
@@ -41,7 +41,7 @@ options:
   "@azure-tools/typespec-go":
     "module": "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     "service-dir": "sdk/confidentialledger"
-    "package-dir": "azconfidentialledger"
+    "emitter-output-dir": "{output-dir}/{service-dir}/azconfidentialledger"
     module-version: "0.0.1"
     generate-fakes: true
     inject-spans: true
