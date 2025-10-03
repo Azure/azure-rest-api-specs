@@ -13887,7 +13887,7 @@
           "type": "array",
           "description": "Criteria for ordering items in the mosaic",
           "items": {
-            "$ref": "#/definitions/SortExtension"
+            "$ref": "#/definitions/StacSortExtension"
           },
           "x-ms-client-name": "sortBy"
         },
@@ -14293,25 +14293,6 @@
       },
       "required": [
         "href"
-      ]
-    },
-    "SortExtension": {
-      "type": "object",
-      "description": "https://github.com/radiantearth/stac-api-spec/tree/master/extensions/sort#sort-api-extension\n\nRepresents a sort specification for STAC API queries.",
-      "properties": {
-        "field": {
-          "type": "string",
-          "description": "The field name to sort by.",
-          "minLength": 1
-        },
-        "direction": {
-          "$ref": "#/definitions/StacSearchSortingDirection",
-          "description": "The sort direction (ascending or descending)."
-        }
-      },
-      "required": [
-        "field",
-        "direction"
       ]
     },
     "StacAsset": {
@@ -15829,7 +15810,7 @@
           "type": "array",
           "description": "Sort criteria for the search results.\n\nSee the [STAC Sort Extension](https://github.com/stac-api-extensions/sort).",
           "items": {
-            "$ref": "#/definitions/SortExtension"
+            "$ref": "#/definitions/StacSortExtension"
           },
           "x-ms-client-name": "sortBy"
         },
@@ -15911,6 +15892,25 @@
           }
         ]
       }
+    },
+    "StacSortExtension": {
+      "type": "object",
+      "description": "https://github.com/radiantearth/stac-api-spec/tree/master/extensions/sort#sort-api-extension\n\nRepresents a sort specification for STAC API queries.",
+      "properties": {
+        "field": {
+          "type": "string",
+          "description": "The field name to sort by.",
+          "minLength": 1
+        },
+        "direction": {
+          "$ref": "#/definitions/StacSearchSortingDirection",
+          "description": "The sort direction (ascending or descending)."
+        }
+      },
+      "required": [
+        "field",
+        "direction"
+      ]
     },
     "StatisticsResponse": {
       "type": "object",

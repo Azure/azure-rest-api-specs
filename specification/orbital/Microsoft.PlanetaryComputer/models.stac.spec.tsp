@@ -242,7 +242,7 @@ model StacSearchParameters {
    * See the [STAC Sort Extension](https://github.com/stac-api-extensions/sort).
    */
   @encodedName("application/json", "sortby")
-  sortBy?: SortExtension[];
+  sortBy?: StacSortExtension[];
 
   /**
    * Specifies which fields to include or exclude in the STAC search results.
@@ -283,7 +283,7 @@ model StacSearchParameters {
  *
  * Represents a sort specification for STAC API queries.
  */
-model SortExtension {
+model StacSortExtension {
   /**
    * The field name to sort by.
    */

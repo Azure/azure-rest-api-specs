@@ -271,12 +271,10 @@ interface Tiler {
   registerMosaicsSearch is MosaicsRegisterSearch.register;
 
   // Mosaic Tile JSON
-  // getMosaicsTileJson is MosaicsTileJsonOperations.get;
-  getMosaicsTileJson is MosaicsTileMatrixSets.getZxyScaleByFormat;
-  getMosaicsTileJsonWithMatrixSet is MosaicsTileMatrixSetsTileJson.get;
+  getMosaicsTileJson is MosaicsTileMatrixSetsTileJson.get;
 
   // Mosaic Tiles
-  getMosaicsTile is MosaicsTiles.getZxyScaleByFormat;
+  getMosaicsTile is MosaicsTileMatrixSets.getZxyScaleByFormat;
 
   // Mosaic WMTS Capabilities
   // getMosaicsWmtsCapabilities is MosaicsWmtsMosaics.getCapabilitiesXml;

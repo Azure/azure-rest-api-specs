@@ -125,7 +125,7 @@ model RegisterMosaic {
    * Criteria for ordering items in the mosaic
    */
   @encodedName("application/json", "sortby")
-  sortBy?: SortExtension[];
+  sortBy?: StacSortExtension[];
 
   /**
    * Query language format used in the filter parameter
