@@ -4940,7 +4940,15 @@
         "IPAddress",
         "Date",
         "Person",
-        "Address"
+        "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VehicleIdentificationNumber"
       ],
       "x-ms-enum": {
         "name": "PiiCategoriesExclude",
@@ -5800,6 +5808,46 @@
             "name": "Address",
             "value": "Address",
             "description": "Address"
+          },
+          {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VehicleIdentificationNumber",
+            "value": "VehicleIdentificationNumber",
+            "description": "VIN"
           }
         ]
       }
@@ -5979,6 +6027,14 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VehicleIdentificationNumber",
         "All",
         "Default"
       ],
@@ -6842,6 +6898,46 @@
             "description": "Address"
           },
           {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VehicleIdentificationNumber",
+            "value": "VehicleIdentificationNumber",
+            "description": "VIN"
+          },
+          {
             "name": "All",
             "value": "All",
             "description": "All PII categories."
@@ -6872,71 +6968,6 @@
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
-    },
-    "PiiEntityWithTags": {
-      "type": "object",
-      "description": "Entity object with tags.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
-        },
-        "category": {
-          "type": "string",
-          "description": "Entity type."
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        },
-        "type": {
-          "type": "string",
-          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
-          "items": {
-            "$ref": "#/definitions/EntityTag"
-          }
-        },
-        "mask": {
-          "type": "string",
-          "description": "Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text"
-        },
-        "maskOffset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”."
-        },
-        "maskLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”."
-        }
-      },
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ]
     },
     "PiiLROTask": {
       "type": "object",
@@ -7014,7 +7045,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/PiiEntityWithTags"
+            "$ref": "#/definitions/Entity"
           }
         },
         "detectedLanguage": {
@@ -7106,16 +7137,16 @@
             ]
           }
         },
-        "excludePiiCategories": {
-          "type": "array",
-          "description": "Enumeration of PII categories to be excluded in the response.",
-          "items": {
-            "$ref": "#/definitions/PiiCategoriesExclude"
-          }
-        },
         "redactionPolicy": {
           "$ref": "#/definitions/BaseRedactionPolicy",
           "description": "RedactionPolicy to be used on the input."
+        },
+        "excludeCategories": {
+          "type": "array",
+          "description": "(Optional) describes the PII categories to be excluded from detection",
+          "items": {
+            "$ref": "#/definitions/PiiCategoriesExclude"
+          }
         }
       }
     },

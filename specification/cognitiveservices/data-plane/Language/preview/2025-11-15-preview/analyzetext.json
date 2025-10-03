@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "version": "2025-05-15-preview",
+    "version": "2025-11-15-preview",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\\\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
@@ -527,6 +527,49 @@
         "warnings",
         "summaries"
       ]
+    },
+    "AddressMetadata": {
+      "type": "object",
+      "description": "Represents the Address entity Metadata model.",
+      "properties": {
+        "formatedAddress": {
+          "type": "string",
+          "description": "The fully formatted address string following postal conventions for the address's country/region."
+        },
+        "addressLines": {
+          "type": "array",
+          "description": "The full address string as recognized from the input text.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "city": {
+          "type": "string",
+          "description": "The city name of the address."
+        },
+        "state": {
+          "type": "string",
+          "description": "The state or province name of the address."
+        },
+        "postalCode": {
+          "type": "string",
+          "description": "The postal or ZIP code of the address."
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "The country or region name of the address."
+        }
+      },
+      "required": [
+        "formatedAddress",
+        "addressLines"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseMetadata"
+        }
+      ],
+      "x-ms-discriminator-value": "AddressMetadata"
     },
     "AgeMetadata": {
       "type": "object",
@@ -1350,7 +1393,8 @@
           "enum": [
             "noMask",
             "characterMask",
-            "entityMask"
+            "entityMask",
+            "syntheticReplacement"
           ],
           "x-ms-enum": {
             "name": "RedactionPolicyKind",
@@ -1370,9 +1414,30 @@
                 "name": "entityMask",
                 "value": "entityMask",
                 "description": "Redact detected entities with entity type."
+              },
+              {
+                "name": "syntheticReplacement",
+                "value": "syntheticReplacement",
+                "description": "Replace detected entities with synthetic values."
               }
             ]
           }
+        },
+        "entityTypes": {
+          "type": "array",
+          "description": "(Optional) describes the PII categories to which the redaction policy will be applied. If not specified, the redaction policy will be applied to all PII categories.",
+          "items": {
+            "$ref": "#/definitions/PiiCategoriesExclude"
+          }
+        },
+        "policyName": {
+          "type": "string",
+          "description": "(Optional) name of the redaction policy for identification purposes."
+        },
+        "isDefaultPolicy": {
+          "type": "boolean",
+          "description": "(Optional) flag to indicate whether this redaction policy is the default policy to be applied when no specific policy is defined for a PII category. Only one policy can be marked as default.",
+          "default": false
         }
       },
       "discriminator": "policyKind",
@@ -1522,6 +1587,16 @@
               }
             ]
           }
+        },
+        "unmaskLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Optional parameter to indicate the length of unmasked characters at the end of the redacted PII entity. Default is 0."
+        },
+        "unmaskFromEnd": {
+          "type": "boolean",
+          "description": "Optional parameter to indicate whether to unmask characters from the end of the redacted PII entity. Default is true.",
+          "default": true
         }
       },
       "allOf": [
@@ -1610,6 +1685,52 @@
           }
         ]
       }
+    },
+    "ConfidenceScoreThreshold": {
+      "type": "object",
+      "description": "Configuration for confidence score threshold for PII entity recognition",
+      "properties": {
+        "default": {
+          "type": "number",
+          "format": "float",
+          "description": "Minimum confidence score threshold for the PII entities to be returned in the response. Entities with a confidence score below this threshold will be filtered out. Value should be between 0.0 and 1.0",
+          "default": 0.3
+        },
+        "overrides": {
+          "type": "array",
+          "description": "List of confidence score threshold overrides for specific PII categories",
+          "items": {
+            "$ref": "#/definitions/ConfidenceScoreThresholdOverride"
+          }
+        }
+      },
+      "required": [
+        "default"
+      ]
+    },
+    "ConfidenceScoreThresholdOverride": {
+      "type": "object",
+      "description": "Confidence score threshold override for a specific PII category",
+      "properties": {
+        "entity": {
+          "$ref": "#/definitions/PiiCategoriesExclude",
+          "description": "The PII category for which to override the confidence score threshold"
+        },
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The confidence score threshold for the specified PII category"
+        },
+        "language": {
+          "type": "string",
+          "description": "The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages."
+        }
+      },
+      "required": [
+        "entity",
+        "value",
+        "language"
+      ]
     },
     "CurrencyMetadata": {
       "type": "object",
@@ -4533,7 +4654,8 @@
         "TemperatureMetadata",
         "CurrencyMetadata",
         "NumericRangeMetadata",
-        "TemporalSpanMetadata"
+        "TemporalSpanMetadata",
+        "AddressMetadata"
       ],
       "x-ms-enum": {
         "name": "MetadataKind",
@@ -4623,6 +4745,11 @@
             "name": "TemporalSpanMetadata",
             "value": "TemporalSpanMetadata",
             "description": "Metadata for temporal span values."
+          },
+          {
+            "name": "AddressMetadata",
+            "value": "AddressMetadata",
+            "description": "Metadata for address-related values."
           }
         ]
       }
@@ -4991,9 +5118,24 @@
         "Neighborhood",
         "SortCode",
         "PIN",
-        "VIN",
         "VehicleIdentificationNumber",
-        "LicensePlate"
+        "LicensePlate",
+        "KRPassportNumber",
+        "KRDriversLicenseNumber",
+        "KRSocialSecurityNumber",
+        "GovernmentIssuedId",
+        "Password",
+        "NationalId",
+        "ZipCode",
+        "CVV",
+        "ExpirationDate",
+        "CASocialIdentificationNumber",
+        "USMedicareBeneficiaryId",
+        "Location",
+        "City",
+        "State",
+        "Airport",
+        "GPE"
       ],
       "x-ms-enum": {
         "name": "PiiCategoriesExclude",
@@ -5890,11 +6032,6 @@
             "description": "PIN"
           },
           {
-            "name": "VIN",
-            "value": "VIN",
-            "description": "VIN"
-          },
-          {
             "name": "VehicleIdentificationNumber",
             "value": "VehicleIdentificationNumber",
             "description": "VIN"
@@ -5903,6 +6040,86 @@
             "name": "LicensePlate",
             "value": "LicensePlate",
             "description": "License Plate"
+          },
+          {
+            "name": "KRPassportNumber",
+            "value": "KRPassportNumber",
+            "description": "KR Passport Number"
+          },
+          {
+            "name": "KRDriversLicenseNumber",
+            "value": "KRDriversLicenseNumber",
+            "description": "KR Driver's License Number"
+          },
+          {
+            "name": "KRSocialSecurityNumber",
+            "value": "KRSocialSecurityNumber",
+            "description": "KR Social Security Number"
+          },
+          {
+            "name": "GovernmentIssuedId",
+            "value": "GovernmentIssuedId",
+            "description": "Government Issued ID"
+          },
+          {
+            "name": "Password",
+            "value": "Password",
+            "description": "Password"
+          },
+          {
+            "name": "NationalId",
+            "value": "NationalId",
+            "description": "National Identification"
+          },
+          {
+            "name": "ZipCode",
+            "value": "ZipCode",
+            "description": "Zip Code"
+          },
+          {
+            "name": "CVV",
+            "value": "CVV",
+            "description": "Card Verification Value"
+          },
+          {
+            "name": "ExpirationDate",
+            "value": "ExpirationDate",
+            "description": "Expiration Date"
+          },
+          {
+            "name": "CASocialIdentificationNumber",
+            "value": "CASocialIdentificationNumber",
+            "description": "CA Social Identification Number"
+          },
+          {
+            "name": "MedicareBeneficiaryId",
+            "value": "USMedicareBeneficiaryId",
+            "description": "Medicare Beneficiary ID"
+          },
+          {
+            "name": "Location",
+            "value": "Location",
+            "description": "Location"
+          },
+          {
+            "name": "City",
+            "value": "City",
+            "description": "City"
+          },
+          {
+            "name": "State",
+            "value": "State",
+            "description": "State"
+          },
+          {
+            "name": "Airport",
+            "value": "Airport",
+            "description": "Airport"
+          },
+          {
+            "name": "GPE",
+            "value": "GPE",
+            "description": "Geopolitical Entity"
           }
         ]
       }
@@ -6089,9 +6306,24 @@
         "Neighborhood",
         "SortCode",
         "PIN",
-        "VIN",
         "VehicleIdentificationNumber",
         "LicensePlate",
+        "KRPassportNumber",
+        "KRDriversLicenseNumber",
+        "KRSocialSecurityNumber",
+        "GovernmentIssuedId",
+        "Password",
+        "NationalId",
+        "ZipCode",
+        "CVV",
+        "ExpirationDate",
+        "CASocialIdentificationNumber",
+        "USMedicareBeneficiaryId",
+        "Location",
+        "City",
+        "State",
+        "Airport",
+        "GPE",
         "All",
         "Default"
       ],
@@ -6990,11 +7222,6 @@
             "description": "PIN"
           },
           {
-            "name": "VIN",
-            "value": "VIN",
-            "description": "VIN"
-          },
-          {
             "name": "VehicleIdentificationNumber",
             "value": "VehicleIdentificationNumber",
             "description": "VIN"
@@ -7003,6 +7230,86 @@
             "name": "LicensePlate",
             "value": "LicensePlate",
             "description": "License Plate"
+          },
+          {
+            "name": "KRPassportNumber",
+            "value": "KRPassportNumber",
+            "description": "KR Passport Number"
+          },
+          {
+            "name": "KRDriversLicenseNumber",
+            "value": "KRDriversLicenseNumber",
+            "description": "KR Driver's License Number"
+          },
+          {
+            "name": "KRSocialSecurityNumber",
+            "value": "KRSocialSecurityNumber",
+            "description": "KR Social Security Number"
+          },
+          {
+            "name": "GovernmentIssuedId",
+            "value": "GovernmentIssuedId",
+            "description": "Government Issued ID"
+          },
+          {
+            "name": "Password",
+            "value": "Password",
+            "description": "Password"
+          },
+          {
+            "name": "NationalId",
+            "value": "NationalId",
+            "description": "National Identification"
+          },
+          {
+            "name": "ZipCode",
+            "value": "ZipCode",
+            "description": "Zip Code"
+          },
+          {
+            "name": "CVV",
+            "value": "CVV",
+            "description": "Card Verification Value"
+          },
+          {
+            "name": "ExpirationDate",
+            "value": "ExpirationDate",
+            "description": "Expiration Date"
+          },
+          {
+            "name": "CASocialIdentificationNumber",
+            "value": "CASocialIdentificationNumber",
+            "description": "CA Social Identification Number"
+          },
+          {
+            "name": "MedicareBeneficiaryId",
+            "value": "USMedicareBeneficiaryId",
+            "description": "Medicare Beneficiary ID"
+          },
+          {
+            "name": "Location",
+            "value": "Location",
+            "description": "Location"
+          },
+          {
+            "name": "City",
+            "value": "City",
+            "description": "City"
+          },
+          {
+            "name": "State",
+            "value": "State",
+            "description": "State"
+          },
+          {
+            "name": "Airport",
+            "value": "Airport",
+            "description": "Airport"
+          },
+          {
+            "name": "GPE",
+            "value": "GPE",
+            "description": "Geopolitical Entity"
           },
           {
             "name": "All",
@@ -7035,6 +7342,71 @@
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
+    },
+    "PiiEntityWithTags": {
+      "type": "object",
+      "description": "Entity object with tags.",
+      "properties": {
+        "text": {
+          "type": "string",
+          "description": "Entity text as appears in the request."
+        },
+        "category": {
+          "type": "string",
+          "description": "Entity type."
+        },
+        "subcategory": {
+          "type": "string",
+          "description": "(Optional) Entity sub type."
+        },
+        "offset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
+        },
+        "length": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
+        },
+        "confidenceScore": {
+          "type": "number",
+          "format": "double",
+          "description": "Confidence score between 0 and 1 of the extracted entity."
+        },
+        "type": {
+          "type": "string",
+          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
+          "items": {
+            "$ref": "#/definitions/EntityTag"
+          }
+        },
+        "mask": {
+          "type": "string",
+          "description": "Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text"
+        },
+        "maskOffset": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”."
+        },
+        "maskLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”."
+        }
+      },
+      "required": [
+        "text",
+        "category",
+        "offset",
+        "length",
+        "confidenceScore"
+      ]
     },
     "PiiLROTask": {
       "type": "object",
@@ -7112,7 +7484,7 @@
           "type": "array",
           "description": "Recognized entities in the document.",
           "items": {
-            "$ref": "#/definitions/Entity"
+            "$ref": "#/definitions/PiiEntityWithTags"
           }
         },
         "detectedLanguage": {
@@ -7225,6 +7597,22 @@
           "items": {
             "$ref": "#/definitions/EntitySynonyms"
           }
+        },
+        "redactionPolicies": {
+          "type": "array",
+          "description": "List of RedactionPolicies to be used on the input.",
+          "items": {
+            "$ref": "#/definitions/BaseRedactionPolicy"
+          }
+        },
+        "confidenceScoreThreshold": {
+          "$ref": "#/definitions/ConfidenceScoreThreshold",
+          "description": "Confidence score threshold configuration for PII entity recognition"
+        },
+        "disableEntityValidation": {
+          "type": "boolean",
+          "description": "Disable entity validation for PII entity recognition",
+          "default": false
         }
       }
     },
@@ -8447,6 +8835,22 @@
           }
         ]
       }
+    },
+    "SyntheticReplacementPolicyType": {
+      "type": "object",
+      "description": "Represents the policy of replacing detected PII with synthetic values.",
+      "properties": {
+        "preserveDataFormat": {
+          "type": "boolean",
+          "description": "Optional flag to indicate whether to preserve the original data format in the synthetic replacement. Default is false."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/BaseRedactionPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "syntheticReplacement"
     },
     "TargetConfidenceScoreLabel": {
       "type": "object",
