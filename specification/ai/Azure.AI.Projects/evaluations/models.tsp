@@ -34,6 +34,56 @@ model AzureAIEvaluator {
   data_mapping?: Record<string>;
 }
 
+/** Expect format of the results list of the evaluation run output items. */
+@added(Versions.v2025_10_15_preview)
+model EvaluationRunOutputItemResult {
+  /** The result type (e.g., "string_check", "azure_ai_evaluator"). */
+  type: string;
+
+  /** The name of the test criteria (e.g., "my_string_check_grader", "my_fluency"). */
+  name: string;
+
+  /** Whether the test criteria passed or failed. */
+  passed: boolean;
+
+  /** The numeric score for this test criteria metric. */
+  score: float64;
+
+  /** The name of the metric (e.g., "fluency", "f1_score"). Most evaluators only have a single metric with the same name as the evaluator. */
+  metric: string;
+
+  /** The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad", etc.). */
+  label?: string;
+
+  /** The threshold used to determine pass/fail for this test criteria, if it is numerical. */
+  threshold?: float64;
+
+  /** The reason for the test criteria metric. */
+  reason?: string;
+
+  /** A sample from the evaluation run output item, if available. */
+  sample?: {};
+
+  /** Additional details about the test criteria metric. */
+  properties: Record<unknown>;
+}
+
+/** Query and response excepted input messsage defintion. */
+@added(Versions.v2025_10_15_preview)
+model QueryResponseInlineMessage {
+  /** The input query string provided by the user or system. Can be image url. */
+  query: string;
+
+  /** The generated response corresponding to the input query. Can be image url. */
+  response: string;
+
+  /** Optional contextual information that may provide additional details or background relevant to the query-response pair. */
+  context?: string;
+
+  /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
+  tools?: string[];
+}
+
 /** OpenAI definition: Eval output results. */
 @added(Versions.v2025_10_15_preview)
 model EvalRunOutputItem {
@@ -61,7 +111,7 @@ model EvalRunOutputItem {
   /** Details of the input data source item. */
   datasource_item: {};
 
-  /** A list of results from the evaluation run. */
+  /** A list of results from the evaluation run. Expected Object: EvaluationRunOutputItemResult. */
   results: {}[];
 
   /** A sample containing the input and output of the evaluation run. */
@@ -76,7 +126,10 @@ model EvalJsonlFileContentSource {
 
   /** The content of the jsonl file. */
   content: {
+    /** Expected schema: QueryResponseInlineMessage */
     item: {};
+
+    /** optional sample. */
     sample?: {};
   };
 }
