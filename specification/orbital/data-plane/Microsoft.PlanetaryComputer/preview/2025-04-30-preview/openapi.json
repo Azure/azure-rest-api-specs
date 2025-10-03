@@ -9017,111 +9017,6 @@
         }
       }
     },
-    "/stac/collections/{collectionId}/config/partition-type": {
-      "get": {
-        "operationId": "StacCollectionPartitionTypes_Get",
-        "tags": [
-          "STAC Collection Configuration"
-        ],
-        "summary": "Get Partitiontype",
-        "description": "Get the partitiontype for a GeoCatalog Collection.\n\nArgs:\ncollection_id: the collection id to get the partitiontype for.\n\nReturns:\nThe partitiontype for the collection.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "collectionId",
-            "in": "path",
-            "description": "Unique identifier for the STAC collection.",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PartitionType"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "StacCollectionPartitionTypes_Get": {
-            "$ref": "./examples/StacCollectionPartitionTypes_Get.json"
-          }
-        }
-      },
-      "put": {
-        "operationId": "StacCollectionPartitionTypes_Replace",
-        "tags": [
-          "STAC Collection Configuration"
-        ],
-        "summary": "Create Partitiontype",
-        "description": "Updates partition type for a GeoCatalog Collection. This will\ndetermine the partitioning scheme for items within the database,\nand can only be set before any items are loaded.\n\nIdeal partitioning schemes result in partitions of roughly 100k items each.\n\nThe default partitioning scheme is \"none\" which does not partition items.\n\nArgs:\ncollection_id: the collection id to add the partitiontype to.\npartitiontype: the partitiontype to add.\n\nReturns:\nNone",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "collectionId",
-            "in": "path",
-            "description": "Unique identifier for the STAC collection.",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "Partition type configuration determining how items are partitioned in storage.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/PartitionType"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded."
-          },
-          "404": {
-            "description": "The server cannot find the requested resource."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "StacCollectionPartitionTypes_Replace": {
-            "$ref": "./examples/StacCollectionPartitionTypes_Replace.json"
-          }
-        }
-      }
-    },
     "/stac/collections/{collectionId}/configurations": {
       "get": {
         "operationId": "StacCollectionConfig_Get",
@@ -9463,6 +9358,111 @@
         "x-ms-examples": {
           "StacCollectionMosaics_Delete": {
             "$ref": "./examples/StacCollectionMosaics_Delete.json"
+          }
+        }
+      }
+    },
+    "/stac/collections/{collectionId}/configurations/partition-type": {
+      "get": {
+        "operationId": "StacCollectionPartitionTypes_Get",
+        "tags": [
+          "STAC Collection Configuration"
+        ],
+        "summary": "Get Partitiontype",
+        "description": "Get the partitiontype for a GeoCatalog Collection.\n\nArgs:\ncollection_id: the collection id to get the partitiontype for.\n\nReturns:\nThe partitiontype for the collection.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "Unique identifier for the STAC collection.",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PartitionType"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StacCollectionPartitionTypes_Get": {
+            "$ref": "./examples/StacCollectionPartitionTypes_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "StacCollectionPartitionTypes_Replace",
+        "tags": [
+          "STAC Collection Configuration"
+        ],
+        "summary": "Create Partitiontype",
+        "description": "Updates partition type for a GeoCatalog Collection. This will\ndetermine the partitioning scheme for items within the database,\nand can only be set before any items are loaded.\n\nIdeal partitioning schemes result in partitions of roughly 100k items each.\n\nThe default partitioning scheme is \"none\" which does not partition items.\n\nArgs:\ncollection_id: the collection id to add the partitiontype to.\npartitiontype: the partitiontype to add.\n\nReturns:\nNone",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "Unique identifier for the STAC collection.",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Partition type configuration determining how items are partitioned in storage.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PartitionType"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "StacCollectionPartitionTypes_Replace": {
+            "$ref": "./examples/StacCollectionPartitionTypes_Replace.json"
           }
         }
       }

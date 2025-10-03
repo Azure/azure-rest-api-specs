@@ -574,7 +574,7 @@ interface StacCollectionPartitionTypes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Partitiontype")
   @tag("STAC Collection Configuration")
-  @route("/stac/collections/{collectionId}/config/partition-type")
+  @route("/stac/collections/{collectionId}/configurations/partition-type")
   @get
   get is Azure.Core.Foundations.Operation<
     {
@@ -608,7 +608,7 @@ interface StacCollectionPartitionTypes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
   @summary("Create Partitiontype")
   @tag("STAC Collection Configuration")
-  @route("/stac/collections/{collectionId}/config/partition-type")
+  @route("/stac/collections/{collectionId}/configurations/partition-type")
   @put
   replace is Azure.Core.Foundations.Operation<
     {
