@@ -57,7 +57,7 @@ model FleetManagedNamespaceProperties {
   status?: FleetManagedNamespaceStatus;
 
   @visibility(Lifecycle.Read)
-  @doc("The Azure Portal FQDN of the Fleet managed namespace.")
+  @doc("The Azure Portal FQDN of the Fleet hub.")
   portalFqdn?: string;
 }
 
