@@ -36,7 +36,9 @@ export class SpecModel {
    * @param {Object} [options]
    * @param {import('./logger.js').ILogger} [options.logger]
    */
-  constructor(folder, options) {
+  constructor(folder, options = {}) {
+    const { logger } = options;
+
     const resolvedFolder = resolve(folder);
 
     const cachedSpecModel = specModelCache.get(resolvedFolder);
@@ -45,7 +47,7 @@ export class SpecModel {
     }
 
     this.#folder = resolvedFolder;
-    this.#logger = options?.logger;
+    this.#logger = logger;
 
     specModelCache.set(resolvedFolder, this);
   }
@@ -216,7 +218,7 @@ export class SpecModel {
    * @param {ToJSONOptions} [options]
    * @returns {Promise<Object>}
    */
-  async toJSONAsync(options) {
+  async toJSONAsync(options = {}) {
     return await embedError(async () => {
       const readmes = await mapAsync(
         [...(await this.getReadmes()).values()].sort((a, b) => a.path.localeCompare(b.path)),
@@ -240,14 +242,17 @@ export class SpecModel {
 /**
  * @template T
  * @param {() => Promise<T>} fn
- * @param {{embedErrors?: boolean}} [options]
+ * @param {Object} [options]
+ * @param {boolean} [options.embedErrors]
  * @returns {Promise<T | {error: string}>}
  */
-export async function embedError(fn, options) {
+export async function embedError(fn, options = {}) {
+  const { embedErrors } = options;
+
   try {
     return await fn();
   } catch (error) {
-    if (options?.embedErrors && error instanceof Error) {
+    if (embedErrors && error instanceof Error) {
       return { error: error.message };
     } else {
       throw error;
