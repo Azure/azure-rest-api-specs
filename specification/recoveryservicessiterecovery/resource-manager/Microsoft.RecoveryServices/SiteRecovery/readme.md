@@ -75,12 +75,21 @@ These are the global settings for the RecoveryServicesSiteRecovery API.
 
 ```yaml
 openapi-type: arm
-tag: package-2025-02-01
+tag: package-2025-08-01
 directive:
   - where:
       - $.paths
     suppress:
       - UniqueResourcePaths
+```
+
+### Tag: package-2025-08-01
+
+These settings apply only when `--tag=package-2025-08-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-01'
+input-file:
+  - stable/2025-08-01/service.json
 ```
 
 ### Tag: package-2025-02-01
