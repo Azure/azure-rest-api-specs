@@ -1,4 +1,3 @@
-/* eslint-disable no-unused-vars */
 // @ts-check
 import fs from "fs";
 import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
@@ -22,6 +21,7 @@ describe("spec-gen-sdk-status", () => {
     // Setup specific mocks
     getAzurePipelineArtifactMock = vi
       .spyOn(artifacts, "getAzurePipelineArtifact")
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .mockImplementation(async ({ ado_build_id, ado_project_url, artifactName }) => {
         return {
           artifactData: JSON.stringify({
@@ -34,6 +34,7 @@ describe("spec-gen-sdk-status", () => {
 
     writeToActionsSummaryMock = vi
       .spyOn(github, "writeToActionsSummary")
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
       .mockImplementation(async (content, core) => {
         // Implementation that just returns
         return;
@@ -78,6 +79,7 @@ describe("spec-gen-sdk-status", () => {
       target_url: "https://example.com",
       github: mockGithub,
       core: mockCore,
+      issue_number: 123,
     });
 
     // Verify the right status was set
@@ -89,6 +91,9 @@ describe("spec-gen-sdk-status", () => {
         state: "pending",
       }),
     );
+
+    expect(mockCore.setOutput).toBeCalledWith("head_sha", "testSha");
+    expect(mockCore.setOutput).toBeCalledWith("issue_number", 123);
   });
 
   it("should set success status when all checks are completed successfully", async () => {

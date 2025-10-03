@@ -8,6 +8,8 @@ import { includesFolder } from "./path.js";
 debug.enable("simple-git");
 
 /**
+ * Get a list of changed files in a git repository
+ *
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
@@ -31,8 +33,11 @@ export async function getChangedFiles(options = {}) {
   // filter based on status with a single call to `git diff`.
   const result = await simpleGit(cwd).diff(["--name-only", baseCommitish, headCommitish, ...paths]);
 
-  const files = result.trim().split("\n");
-
+  const files = result
+    .trim()
+    .split("\n")
+    // ignore empty lines (e.g. when no files are changed)
+    .filter((s) => s.length > 0);
   logger?.info("Changed Files:");
   for (const file of files) {
     logger?.info(`  ${file}`);
@@ -43,6 +48,10 @@ export async function getChangedFiles(options = {}) {
 }
 
 /**
+ * Get a list of changed files in a git repository with statuses for additions,
+ * modifications, deletions, and renames. Warning: rename behavior can vary
+ * based on the git client's configuration of diff.renames.
+ *
  * @param {Object} [options]
  * @param {string} [options.baseCommitish] Default: "HEAD^".
  * @param {string} [options.cwd] Current working directory.  Default: process.cwd().
@@ -214,12 +223,21 @@ export function typespec(file) {
  * @param {string} [file]
  * @returns {boolean}
  */
+export function quickstartTemplate(file) {
+  return typeof file === "string" && json(file) && file.includes("/quickstart-templates/");
+}
+
+/**
+ * @param {string} [file]
+ * @returns {boolean}
+ */
 export function swagger(file) {
   return (
     typeof file === "string" &&
     json(file) &&
     (dataPlane(file) || resourceManager(file)) &&
     !example(file) &&
+    !quickstartTemplate(file) &&
     !scenario(file)
   );
 }

@@ -120,10 +120,8 @@ async function runLintDiff(
     );
   } catch (error) {
     if (error instanceof SpecModelError) {
-      console.log("\n\n");
-      console.log("❌ Error building Spec Model from changed file list:");
+      console.log("\n❌ Error building Spec Model from changed file list:");
       console.log(`${error}`);
-      console.log("Ensure input files and references are valid.");
 
       process.exitCode = 1;
       return;

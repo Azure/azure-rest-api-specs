@@ -1,0 +1,262 @@
+{
+  "operationId": "Skillsets_Get",
+  "title": "SearchServiceGetSkillset",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "skillsetName": "myskillset",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "myskillset",
+        "description": "Skillset for extracting entities and more",
+        "skills": [
+          {
+            "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
+            "name": "skill2",
+            "context": "/document",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "countryHint",
+                "source": "/document/countryHint",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "languageCode",
+                "targetName": "languageCode"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+            "name": "skill3",
+            "context": "/document",
+            "defaultLanguageCode": "en",
+            "textSplitMode": "pages",
+            "maximumPageLength": 4000,
+            "pageOverlapLength": 0,
+            "maximumPagesToTake": 0,
+            "unit": "azureOpenAITokens",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "textItems",
+                "targetName": "pages"
+              }
+            ],
+            "azureOpenAITokenizerParameters": {
+              "encoderModelName": "cl100k_base",
+              "allowedSpecialTokens": [
+                "[START]",
+                "[END]"
+              ]
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+            "name": "skill4",
+            "context": "/document/pages/*",
+            "defaultLanguageCode": "en",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "keyPhrases",
+                "targetName": "keyPhrases"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+            "name": "skill5",
+            "context": "/document",
+            "uri": "https://contoso.example.org/",
+            "httpMethod": "POST",
+            "timeout": "PT5S",
+            "batchSize": 1000,
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "customresult",
+                "targetName": "result"
+              }
+            ],
+            "httpHeaders": {}
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "markdownHeaderDepth": "h3",
+            "outputFormat": "markdown",
+            "extractionOptions": [],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "markdown_document",
+                "targetName": "markdown_document"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill#2",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "outputFormat": "text",
+            "extractionOptions": [
+              "images",
+              "locationMetadata"
+            ],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_sections",
+                "targetName": "text_sections"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images"
+              }
+            ],
+            "chunkingProperties": {
+              "unit": "characters",
+              "maximumLength": 500,
+              "overlapLength": 50
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.ChatCompletionSkill",
+            "name": "chatCompletionSkill",
+            "context": "/document/normalized_images/*",
+            "uri": "https://azs-grok-aoai.openai.azure.com/openai/deployments/azs-grok-gpt-4o/chat/completions",
+            "httpMethod": "POST",
+            "timeout": "PT30S",
+            "batchSize": 1,
+            "degreeOfParallelism": 5,
+            "apiKey": "<redacted>",
+            "extraParametersBehavior": "error",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "systemMessage",
+                "source": "/document/system_message",
+                "inputs": []
+              },
+              {
+                "name": "userMessage",
+                "source": "/document/user_message",
+                "inputs": []
+              },
+              {
+                "name": "image",
+                "source": "/document/normalized_images/*",
+                "inputs": []
+              },
+              {
+                "name": "imageDetail",
+                "source": "/document/detail",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "response",
+                "targetName": "response"
+              }
+            ],
+            "httpHeaders": {},
+            "commonModelParameters": {
+              "model": "gpt-4o",
+              "frequencyPenalty": 0,
+              "presencePenalty": 0,
+              "maxTokens": 0,
+              "temperature": 0,
+              "seed": 0,
+              "stop": []
+            },
+            "extraParameters": {
+              "safe_mode": true
+            },
+            "responseFormat": {
+              "type": "jsonSchema",
+              "jsonSchemaProperties": {
+                "name": "Some Name",
+                "description": "Some Description",
+                "strict": true,
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "steps",
+                    "answer"
+                  ],
+                  "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}"
+                }
+              }
+            }
+          }
+        ]
+      }
+    }
+  }
+}
