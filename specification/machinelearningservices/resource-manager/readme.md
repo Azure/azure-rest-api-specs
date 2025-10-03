@@ -27,7 +27,67 @@ These are the global settings for the Machine Learning Services API.
 
 ``` yaml
 openapi-type: arm
-tag: package-preview-2025-07
+tag: package-2025-09-01
+```
+
+### Tag: package-2025-09-01
+
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-09-01'
+input-file:
+  - Microsoft.MachineLearningServices/stable/2025-09-01/machineLearningServices.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/mfe.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/registries.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/workspaceFeatures.json
+  - Microsoft.MachineLearningServices/stable/2025-09-01/workspaceRP.json
+suppressions:
+  - code: PatchBodyParametersSchema
+    reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/connections/{connectionName}"].patch.parameters[5].schema.properties.properties
+  - code: ResourceNameRestriction
+    reason: Experience is the same as previous GA version, adding restriction will be a breaking change.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listNodes"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/listKeys"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/start"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/stop"]
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}/restart"]
+  - code: AvoidAdditionalProperties
+    reason: Existing property in previous GA version.
+    where:
+      - $.definitions.SparkJob.properties.conf
+      - $.definitions.SparkJob.properties.environmentVariables
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+      - $.definitions.CustomKeys.properties.keys
+  - code: LroLocationHeader
+    reason: Existing API behavior
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].delete.responses.202
+  - code: PatchBodyParametersSchema
+    reason: Existing API behavior, the whole property is not required.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}"].patch.parameters[4].schema.properties.properties
+  - code: XmsPageableForListCalls
+    reason: Existing API behavior.
+    where:
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources"].get
+  - code: GuidUsage
+    reason: Existing property in previous GA version.
+    where:
+      - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: CMK is a short term and not violate the camel case rule.
+    where:
+      - $.definitions.WorkspaceProperties.properties.enableServiceSideCMKEncryption
+  - code: NestedResourcesMustHaveListOperation
+    reason: This resource will have many kind and we currently only start with the first kind that will have a 1 to 1 
+        mapping with the parent resource, so right now we didn't implement List API, 
+        we will add whence needed in the future.
+    where:
+      - $.definitions["CapabilityHostResource"]
 ```
 
 ### Tag: package-preview-2025-07
@@ -75,13 +135,36 @@ suppressions:
     where:
       - $.definitions["CapabilityHostResource"]
   - code: AvoidAdditionalProperties
-    reason: Existing API behavior in 2025-04-01-preview.
+    reason: These are hyperparameters which can vary by model and the finetuning task type,
+      so cannot have strictly typed properties.
     where:
       - $.definitions.CustomModelFineTuning.properties.hyperParameters
+  - code: AvoidAdditionalProperties
+    reason: ModelID is a string representing the asset id for the model. The list of modelIds is dynamic since it based
+      on which models the user previously attempted to add to the InferenceGroup
+    where:
       - $.definitions.DeltaModelStatusResponse.properties.deltaModels
+  - code: AvoidAdditionalProperties
+    reason: JobOutputs is a common-type predefined reference, which is an allowed scenario
+    where:
       - $.definitions.FineTuningJob.properties.outputs
+  - code: AvoidAdditionalProperties
+    reason: As discussed In office hour this conf property is string dictionary 
+      and passed by user as per there requirements depending on runtime version. 
+      This passed to downstream and we have multiple validation on all required 
+      configuration before passing it downstream, All optional property passed as 
+      user wants and any failure due to that considered as user error.
+    where:
       - $.definitions.SparkJob.properties.conf
+  - code: AvoidAdditionalProperties
+    reason: This is for feature parity with other job type like commandjob, sweepjob etc.
+      We have one interface for all type of job and other job take environment variable like this to match with them 
+      we also pass environment variable in this format. please check existing "CommandJob" in same file.
+    where:
       - $.definitions.SparkJob.properties.environmentVariables
+  - code: AvoidAdditionalProperties
+    reason: Caused by swagger file refactor, this is already in prod.
+    where:
       - $.definitions.DiagnoseRequestProperties.properties.requiredResourceProviders
   - code: PatchBodyParametersSchema
     reason: Suppress as instructed, this patch is for a abstract class and the type-discriminator needs to be required.
@@ -120,15 +203,21 @@ suppressions:
       - $.definitions.WorkspaceConnectionOAuth2.properties.clientId.format
       - $.definitions.ManagedResourceGroupAssignedIdentities.properties.principalId.format
   - code: AvoidAdditionalProperties
-    reason: Existing API behavior in 2025-04-01-preview.
+    reason: These schemas are already in production use.
     where:
       - $.definitions.CustomKeys.properties.keys
+      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
+  - code: AvoidAdditionalProperties
+    reason: Caused by previously renamed definitions, already in production use.
+    where:
       - $.definitions.EndpointModelProperties.properties.capabilities
       - $.definitions.EndpointModelProperties.properties.finetuneCapabilities
+  - code: AvoidAdditionalProperties
+    reason: trying to align with schema here for caller to consume https://github.com/Azure/azure-rest-api-specs/blob/2e5be0e72597c6fc8d438f20e38087d900c16427/specification/machinelearningservices/resource-manager/Microsoft.MachineLearningServices/preview/2024-04-01-preview/mfe.json#L26070
+    where:
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic
       - $.definitions.ManagedOnlineEndpointResourceProperties.properties.traffic
       - $.definitions.ServerlessEndpointInferenceEndpoint.properties.headers
-      - $.definitions.WorkspaceConnectionPropertiesV2.properties.metadata
   - code: ParametersSchemaAsTypeObject
     reason: Existing API parameter with type array.
     where:
@@ -155,8 +244,8 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     reason: Service already using response pattern without provisioning state for all previous existing outbound rules APIs.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}].put
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
 ```
 
 ### Tag: package-2025-06-01
@@ -394,8 +483,8 @@ suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     reason: Service already using response pattern without provisioning state for all previous existing outbound rules APIs.
     where:
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}].put
-      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}"].put
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}"].put
 ```
 
 ### Tag: package-preview-2025-01
