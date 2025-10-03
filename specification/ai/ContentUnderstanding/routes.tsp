@@ -1,10 +1,12 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "./models.tsp";
 
 using Azure.Core;
 using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -68,6 +70,7 @@ interface ContentAnalyzers {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the result of an analysis operation.")
+  @access(Access.internal)
   @route("/analyzerResults/{operationId}")
   getResult is Foundations.GetOperationStatus<
     GetResultParameters,

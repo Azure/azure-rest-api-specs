@@ -3054,7 +3054,7 @@
         "height"
       ]
     },
-    "ClassifierCategory": {
+    "ClassifierCategoryDefinition": {
       "type": "object",
       "description": "A classifier category.",
       "properties": {
@@ -3257,7 +3257,7 @@
           ]
         },
         "fieldSchema": {
-          "$ref": "#/definitions/FieldSchema",
+          "$ref": "#/definitions/ContentFieldSchema",
           "description": "The schema of fields to extracted.",
           "x-ms-mutability": [
             "read",
@@ -3528,7 +3528,7 @@
           "type": "object",
           "description": "The categories to classify against.",
           "additionalProperties": {
-            "$ref": "#/definitions/ClassifierCategory"
+            "$ref": "#/definitions/ClassifierCategoryDefinition"
           },
           "x-ms-mutability": [
             "read",
@@ -3636,7 +3636,7 @@
       "description": "Field extracted from the content.",
       "properties": {
         "type": {
-          "$ref": "#/definitions/FieldType",
+          "$ref": "#/definitions/ContentFieldType",
           "description": "Semantic data type of the field value."
         },
         "spans": {
@@ -3662,6 +3662,194 @@
       "required": [
         "type"
       ]
+    },
+    "ContentFieldDefinition": {
+      "type": "object",
+      "description": "Definition of the field using a JSON Schema like syntax.",
+      "properties": {
+        "method": {
+          "type": "string",
+          "description": "Generation method.",
+          "default": "generate",
+          "enum": [
+            "generate",
+            "extract",
+            "classify"
+          ],
+          "x-ms-enum": {
+            "name": "GenerationMethod",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "generate",
+                "value": "generate",
+                "description": "Values are generated freely based on the content."
+              },
+              {
+                "name": "extract",
+                "value": "extract",
+                "description": "Values are extracted as they appear in the content."
+              },
+              {
+                "name": "classify",
+                "value": "classify",
+                "description": "Values are classified against a predefined set of categories."
+              }
+            ]
+          }
+        },
+        "type": {
+          "$ref": "#/definitions/ContentFieldType",
+          "description": "Semantic data type of the field value."
+        },
+        "description": {
+          "type": "string",
+          "description": "Field description."
+        },
+        "items": {
+          "$ref": "#/definitions/ContentFieldDefinition",
+          "description": "Field type schema of each array element, if type is array."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Named sub-fields, if type is object.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentFieldDefinition"
+          }
+        },
+        "examples": {
+          "type": "array",
+          "description": "Examples of field values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enum": {
+          "type": "array",
+          "description": "Enumeration of possible field values.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "enumDescriptions": {
+          "type": "object",
+          "description": "Descriptions for each enumeration value.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "$ref": {
+          "type": "string",
+          "description": "Reference to another field definition."
+        }
+      }
+    },
+    "ContentFieldSchema": {
+      "type": "object",
+      "description": "Schema of fields to be extracted from documents.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the field schema.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "description": {
+          "type": "string",
+          "description": "A description of the field schema.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "fields": {
+          "type": "object",
+          "description": "The fields defined in the schema.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentFieldDefinition"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "definitions": {
+          "type": "object",
+          "description": "Additional definitions referenced by the fields in the schema.",
+          "additionalProperties": {
+            "$ref": "#/definitions/ContentFieldDefinition"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      },
+      "required": [
+        "fields"
+      ]
+    },
+    "ContentFieldType": {
+      "type": "string",
+      "description": "Semantic data type of the field value.",
+      "enum": [
+        "string",
+        "date",
+        "time",
+        "number",
+        "integer",
+        "boolean",
+        "array",
+        "object"
+      ],
+      "x-ms-enum": {
+        "name": "ContentFieldType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "string",
+            "value": "string",
+            "description": "Plain text."
+          },
+          {
+            "name": "date",
+            "value": "date",
+            "description": "Date, normalized to ISO 8601 (YYYY-MM-DD) format."
+          },
+          {
+            "name": "time",
+            "value": "time",
+            "description": "Time, normalized to ISO 8601 (hh:mm:ss) format."
+          },
+          {
+            "name": "number",
+            "value": "number",
+            "description": "Number as double precision floating point."
+          },
+          {
+            "name": "integer",
+            "value": "integer",
+            "description": "Integer as 64-bit signed integer."
+          },
+          {
+            "name": "boolean",
+            "value": "boolean",
+            "description": "Boolean value."
+          },
+          {
+            "name": "array",
+            "value": "array",
+            "description": "List of subfields of the same type."
+          },
+          {
+            "name": "object",
+            "value": "object",
+            "description": "Named list of subfields."
+          }
+        ]
+      }
     },
     "ContentSpan": {
       "type": "object",
@@ -4498,194 +4686,6 @@
           "$ref": "#/definitions/BoundingBox",
           "description": "Bounding box specifying the region of interest."
         }
-      }
-    },
-    "FieldDefinition": {
-      "type": "object",
-      "description": "Definition of the field using a JSON Schema like syntax.",
-      "properties": {
-        "method": {
-          "type": "string",
-          "description": "Generation method.",
-          "default": "generate",
-          "enum": [
-            "generate",
-            "extract",
-            "classify"
-          ],
-          "x-ms-enum": {
-            "name": "GenerationMethod",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "generate",
-                "value": "generate",
-                "description": "Values are generated freely based on the content."
-              },
-              {
-                "name": "extract",
-                "value": "extract",
-                "description": "Values are extracted as they appear in the content."
-              },
-              {
-                "name": "classify",
-                "value": "classify",
-                "description": "Values are classified against a predefined set of categories."
-              }
-            ]
-          }
-        },
-        "type": {
-          "$ref": "#/definitions/FieldType",
-          "description": "Semantic data type of the field value."
-        },
-        "description": {
-          "type": "string",
-          "description": "Field description."
-        },
-        "items": {
-          "$ref": "#/definitions/FieldDefinition",
-          "description": "Field type schema of each array element, if type is array."
-        },
-        "properties": {
-          "type": "object",
-          "description": "Named sub-fields, if type is object.",
-          "additionalProperties": {
-            "$ref": "#/definitions/FieldDefinition"
-          }
-        },
-        "examples": {
-          "type": "array",
-          "description": "Examples of field values.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "enum": {
-          "type": "array",
-          "description": "Enumeration of possible field values.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "enumDescriptions": {
-          "type": "object",
-          "description": "Descriptions for each enumeration value.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "$ref": {
-          "type": "string",
-          "description": "Reference to another field definition."
-        }
-      }
-    },
-    "FieldSchema": {
-      "type": "object",
-      "description": "Schema of fields to be extracted from documents.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the field schema.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "description": {
-          "type": "string",
-          "description": "A description of the field schema.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "fields": {
-          "type": "object",
-          "description": "The fields defined in the schema.",
-          "additionalProperties": {
-            "$ref": "#/definitions/FieldDefinition"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "definitions": {
-          "type": "object",
-          "description": "Additional definitions referenced by the fields in the schema.",
-          "additionalProperties": {
-            "$ref": "#/definitions/FieldDefinition"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        }
-      },
-      "required": [
-        "fields"
-      ]
-    },
-    "FieldType": {
-      "type": "string",
-      "description": "Semantic data type of the field value.",
-      "enum": [
-        "string",
-        "date",
-        "time",
-        "number",
-        "integer",
-        "boolean",
-        "array",
-        "object"
-      ],
-      "x-ms-enum": {
-        "name": "FieldType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "string",
-            "value": "string",
-            "description": "Plain text."
-          },
-          {
-            "name": "date",
-            "value": "date",
-            "description": "Date, normalized to ISO 8601 (YYYY-MM-DD) format."
-          },
-          {
-            "name": "time",
-            "value": "time",
-            "description": "Time, normalized to ISO 8601 (hh:mm:ss) format."
-          },
-          {
-            "name": "number",
-            "value": "number",
-            "description": "Number as double precision floating point."
-          },
-          {
-            "name": "integer",
-            "value": "integer",
-            "description": "Integer as 64-bit signed integer."
-          },
-          {
-            "name": "boolean",
-            "value": "boolean",
-            "description": "Boolean value."
-          },
-          {
-            "name": "array",
-            "value": "array",
-            "description": "List of subfields of the same type."
-          },
-          {
-            "name": "object",
-            "value": "object",
-            "description": "Named list of subfields."
-          }
-        ]
       }
     },
     "FindSimilarFacesParameters": {
