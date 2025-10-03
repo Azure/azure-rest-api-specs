@@ -3723,7 +3723,7 @@
     },
     "EvalJsonlFileContentSource": {
       "type": "object",
-      "description": "OpenAI definintion: Eval inline file content or jsonl input data.",
+      "description": "OpenAI definition: Eval inline file content or jsonl input data.",
       "properties": {
         "type": {
           "type": "string",
@@ -3741,10 +3741,12 @@
           "description": "The content of the jsonl file.",
           "properties": {
             "item": {
-              "type": "object"
+              "type": "object",
+              "description": "Expected schema: QueryResponseInlineMessage"
             },
             "sample": {
-              "type": "object"
+              "type": "object",
+              "description": "optional sample."
             }
           },
           "required": [
@@ -3833,7 +3835,7 @@
         },
         "results": {
           "type": "array",
-          "description": "A list of results from the evaluation run.",
+          "description": "A list of results from the evaluation run. Expected Object: EvaluationRunOutputItemResult.",
           "items": {
             "type": "object"
           }
@@ -4009,6 +4011,63 @@
         }
       ],
       "x-ms-discriminator-value": "EvaluationRunClusterInsight"
+    },
+    "EvaluationRunOutputItemResult": {
+      "type": "object",
+      "description": "Expect format of the results list of the evaluation run output items.",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The result type (e.g., \"string_check\", \"azure_ai_evaluator\")."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the test criteria (e.g., \"my_string_check_grader\", \"my_fluency\")."
+        },
+        "passed": {
+          "type": "boolean",
+          "description": "Whether the test criteria passed or failed."
+        },
+        "score": {
+          "type": "number",
+          "format": "double",
+          "description": "The numeric score for this test criteria metric."
+        },
+        "metric": {
+          "type": "string",
+          "description": "The name of the metric (e.g., \"fluency\", \"f1_score\"). Most evaluators only have a single metric with the same name as the evaluator."
+        },
+        "label": {
+          "type": "string",
+          "description": "The label associated with the test criteria metric (e.g., \"pass\", \"fail\", \"good\", \"bad\", etc.)."
+        },
+        "threshold": {
+          "type": "number",
+          "format": "double",
+          "description": "The threshold used to determine pass/fail for this test criteria, if it is numerical."
+        },
+        "reason": {
+          "type": "string",
+          "description": "The reason for the test criteria metric."
+        },
+        "sample": {
+          "type": "object",
+          "description": "A sample from the evaluation run output item, if available."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Additional details about the test criteria metric.",
+          "additionalProperties": {}
+        }
+      },
+      "required": [
+        "type",
+        "name",
+        "passed",
+        "score",
+        "metric",
+        "properties"
+      ]
     },
     "EvaluationTarget": {
       "type": "object",
@@ -5258,24 +5317,45 @@
         ]
       }
     },
-    "PromptBasedEvaluatorDefinition": {
+    "QueryResponseInlineMessage": {
       "type": "object",
-      "description": "Prompt-based evaluator",
+      "description": "Query and response excepted input messsage defintion.",
       "properties": {
-        "prompt_text": {
+        "type": {
           "type": "string",
-          "description": "The prompt text used for evaluation"
+          "description": "The object type, which is always query_response_inline_message.",
+          "enum": [
+            "azure_query_response_inline_message"
+          ],
+          "x-ms-enum": {
+            "modelAsString": false
+          }
+        },
+        "query": {
+          "type": "string",
+          "description": "The input query string provided by the user or system. Can be image url."
+        },
+        "response": {
+          "type": "string",
+          "description": "The generated response corresponding to the input query. Can be image url."
+        },
+        "context": {
+          "type": "string",
+          "description": "Optional contextual information that may provide additional details or background relevant to the query-response pair."
+        },
+        "tools": {
+          "type": "array",
+          "description": "Optional list of tools or resources utilized during the evaluation or generation of the response.",
+          "items": {
+            "type": "string"
+          }
         }
       },
       "required": [
-        "prompt_text"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluatorDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "prompt"
+        "type",
+        "query",
+        "response"
+      ]
     },
     "RecurrenceSchedule": {
       "type": "object",
