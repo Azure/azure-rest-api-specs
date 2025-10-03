@@ -11,7 +11,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     output-file: "{version-status}/{version}/mongoCluster.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-mongocluster"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-mongocluster"
     namespace: "azure.mgmt.mongocluster"
     flavor: "azure"
     generate-test: true
@@ -23,8 +23,8 @@ options:
     service-name: "Mongo Cluster"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/mongocluster"
-    package-dir: "armmongocluster"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armmongocluster"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armmongocluster"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
@@ -38,7 +38,7 @@ options:
     namespace: "Azure.ResourceManager.MongoCluster"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-mongocluster"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-mongocluster"
     flavor: azure
     package-details:
       name: "@azure/arm-mongocluster"
