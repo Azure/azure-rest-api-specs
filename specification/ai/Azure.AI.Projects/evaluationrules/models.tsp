@@ -17,10 +17,10 @@ union EvaluationRuleActionType {
   string,
 
   @doc("Continuous evaluation.")
-  continuous_evaluation: "continuous_evaluation",
+  continuousEvaluation: "continuousEvaluation",
 
   @doc("Human evaluation.")
-  human_evaluation: "human_evaluation",
+  humanEvaluation: "humanEvaluation",
 }
 
 @doc("Evaluation action model.")
@@ -35,17 +35,17 @@ model EvaluationRuleAction {
 @added(Versions.v2025_10_15_preview)
 model ContinuousEvaluationRuleAction {
   @doc("Eval Id to add continuous evaluation runs to.")
-  eval_id: string;
+  evalId: string;
 
   @doc("Maximum number of evaluation runs allowed per hour.")
-  max_hourly_runs?: int32;
+  maxHourlyRuns?: int32;
 }
 
-@doc("Evaluation rule action for continuous evaluation.")
+@doc("Evaluation rule action for human evaluation.")
 @added(Versions.v2025_10_15_preview)
 model HumanEvaluationRuleAction {
   @doc("Human evaluation template Id.")
-  template_id: AssetId;
+  templateId: AssetId;
 }
 
 @added(Versions.v2025_10_15_preview)
@@ -56,7 +56,7 @@ scalar AssetId extends string;
 @added(Versions.v2025_10_15_preview)
 model EvaluationRuleFilter {
   @doc("Filter by agent name.")
-  agent_name: string;
+  agentName: string;
 }
 
 @doc("Type of the evaluation rule event.")
@@ -65,26 +65,26 @@ union EvaluationRuleEventType {
   string,
 
   @doc("Response completed.")
-  response_completed: "response.completed",
+  responseCompleted: "response.completed",
 
   @doc("Manual trigger.")
   manual: "manual",
 }
 
 @doc("Evaluation rule model.")
-@resource("evaluation_rules")
+@resource("evaluationrules")
 @added(Versions.v2025_10_15_preview)
 model EvaluationRule {
   @doc("Unique identifier for the evaluation rule.")
   @key
   @visibility(Lifecycle.Read)
-  name: string;
+  id: string;
+
+  @doc("Display Name for the evaluation rule.")
+  displayName?: string;
 
   @doc("Description for the evaluation rule.")
   description?: string;
-
-  @doc("Metadata about the evaluation rule.")
-  metadata?: Record<string>;
 
   @doc("Definition of the evaluation rule action.")
   action: EvaluationRuleAction;
@@ -93,12 +93,12 @@ model EvaluationRule {
   filter?: EvaluationRuleFilter;
 
   @doc("Event type that the evaluation rule applies to.")
-  event_type: EvaluationRuleEventType;
+  eventType: EvaluationRuleEventType;
 
-  @doc("Indicates whether the evaluation rule is disabled. Default is false.")
-  disabled: boolean = false;
+  @doc("Indicates whether the evaluation rule is enabled. Default is true.")
+  enabled: boolean;
 
   @visibility(Lifecycle.Read)
-  @doc("Creation date/time of the evaluation rule.")
-  created_at: string;
+  @doc("System metadata for the evaluation rule.")
+  systemData: Record<string>;
 }

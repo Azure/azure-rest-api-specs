@@ -12,7 +12,7 @@ import "./insights/routes.tsp";
 import "./deployments/routes.tsp";
 import "./red-teams/routes.tsp";
 import "./schedules/routes.tsp";
-import "./evaluation_rules/routes.tsp";
+import "./evaluationrules/routes.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;

@@ -10,7 +10,6 @@ import "../servicepatterns.tsp";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.Core.Traits;
-using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
@@ -22,18 +21,18 @@ alias EvaluationRuleOperations = Azure.Core.ResourceOperations<EvaluationRuleTra
 
 @added(Versions.v2025_10_15_preview)
 interface EvaluationRules {
-  // GET /evaluation_rules/{name}
+  // GET /evaluationrules/{id}
   @doc("Get an evaluation rule.")
   getEvaluationRule is EvaluationRuleOperations.ResourceRead<EvaluationRule>;
 
-  // DELETE /evaluation_rules/{name}
+  // DELETE /evaluationrules/{id}
   @doc("Delete an evaluation rule.")
   delete is EvaluationRuleOperations.ResourceDelete<EvaluationRule>;
 
-  // POST /evaluation_rules/{name}
+  // PUT /evaluationrules/{id}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Create or update an evaluation rule.")
-  @Http.post
+  @Http.put
   createOrUpdate is Azure.Core.Foundations.ResourceOperation<
     EvaluationRule,
     {
@@ -45,20 +44,21 @@ interface EvaluationRules {
   >;
 
   // GET /evaluation_rules
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @get
   @doc("List all evaluation rules.")
-  @route("/evaluation_rules")
-  listEvaluationRules(
-    @doc("List evaluation rules of this action type.")
-    @query("action_type")
-    actionType?: EvaluationRuleActionType,
+  list is EvaluationRuleOperations.ResourceList<
+    EvaluationRule,
+    ListQueryParametersTrait<{
+      @query("actionType")
+      @doc("Filter by the type of evaluation rule.")
+      actionType?: EvaluationRuleActionType;
 
-    @doc("List evaluation rules with filter for this agent name.")
-    @query("agent_name")
-    agentName?: string,
+      @query("agentName")
+      @doc("Filter by the agent name.")
+      agentName?: string;
 
-    ...OpenAIListRequestOptions,
-    ...ApiVersionParameter,
-  ): OpenAIPageableListOf<EvaluationRule>;
+      @query("enabled")
+      @doc("Filter by the enabled status.")
+      enabled?: boolean;
+    }>
+  >;
 }
