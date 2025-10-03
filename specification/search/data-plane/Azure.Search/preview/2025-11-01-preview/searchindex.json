@@ -631,6 +631,9 @@
           },
           {
             "$ref": "#/parameters/QuerySourceAuthorizationParameter"
+          },
+          {
+            "$ref": "#/parameters/EnableElevatedReadParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -693,6 +696,9 @@
           },
           {
             "$ref": "#/parameters/QuerySourceAuthorizationParameter"
+          },
+          {
+            "$ref": "#/parameters/EnableElevatedReadParameter"
           }
         ],
         "x-ms-request-id": "request-id",
@@ -759,6 +765,9 @@
           },
           {
             "$ref": "#/parameters/QuerySourceAuthorizationParameter"
+          },
+          {
+            "$ref": "#/parameters/EnableElevatedReadParameter"
           }
         ],
         "responses": {
@@ -1302,11 +1311,35 @@
           "readOnly": true,
           "description": "The approximate count of documents falling within the bucket described by this facet."
         },
+        "avg": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The resulting total avg for the facet when a avg metric is requested."
+        },
+        "min": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The resulting total min for the facet when a min metric is requested."
+        },
+        "max": {
+          "type": "number",
+          "format": "double",
+          "readOnly": true,
+          "description": "The resulting total max for the facet when a max metric is requested."
+        },
         "sum": {
           "type": "number",
           "format": "double",
           "readOnly": true,
           "description": "The resulting total sum for the facet when a sum metric is requested."
+        },
+        "cardinality": {
+          "type": "number",
+          "format": "int64",
+          "readOnly": true,
+          "description": "The resulting total cardinality for the facet when a cardinality metric is requested."
         },
         "@search.facets": {
           "$ref": "#/definitions/SearchFacetsResult",
@@ -3379,6 +3412,14 @@
       "type": "string",
       "description": "Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.",
       "x-ms-query-source-authorization": true,
+      "x-ms-parameter-location": "method"
+    },
+    "EnableElevatedReadParameter": {
+      "name": "x-ms-enable-elevated-read",
+      "in": "header",
+      "required": false,
+      "type": "boolean",
+      "description": "A value that enables elevated read that bypass document level permission checks for the query operation.",
       "x-ms-parameter-location": "method"
     },
     "EndpointParameter": {
