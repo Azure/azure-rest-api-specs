@@ -4,8 +4,8 @@ import "@azure-tools/typespec-autorest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "../common/models.tsp";
-import "./models.tsp";
 import "../servicepatterns.tsp";
+import "./models.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -43,7 +43,7 @@ interface EvaluationRules {
     Azure.Core.Foundations.ResourceCreatedOrOkResponse<EvaluationRule>
   >;
 
-  // GET /evaluation_rules
+  // GET /evaluationrules
   @doc("List all evaluation rules.")
   list is EvaluationRuleOperations.ResourceList<
     EvaluationRule,
