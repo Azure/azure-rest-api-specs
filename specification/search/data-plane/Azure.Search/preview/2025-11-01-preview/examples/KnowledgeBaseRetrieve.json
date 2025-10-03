@@ -1,6 +1,6 @@
 {
   "operationId": "KnowledgeRetrieval_Retrieve",
-  "title": "KnowledgeAgentRetrieve",
+  "title": "KnowledgeBaseRetrieve",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "knowledgeBaseName": "base-preview-test",
@@ -21,9 +21,7 @@
       ],
       "maxRuntimeInSeconds": 60,
       "maxOutputSize": 100000,
-      "retrievalReasoningEffort": {
-        "kind": "low"
-      },
+      "retrievalReasoningEffort": "medium",
       "includeActivity": true,
       "outputMode": "answerSynthesis",
       "knowledgeSourceParams": [
@@ -87,10 +85,7 @@
           {
             "type": "semanticReranker",
             "id": 3,
-            "inputTokens": 74,
-            "retrievalReasoningEffort": {
-              "kind": "low"
-            }
+            "inputTokens": 74
           },
           {
             "type": "modelAnswerSynthesis",
@@ -156,13 +151,13 @@
             "count": 2,
             "elapsedMs": 1234,
             "searchIndexArguments": {
-              "search": "hello world",
+              "search": "foo",
               "filter": "foo eq bar"
             }
           },
           {
             "type": "web",
-            "id": 1,
+            "id": 2,
             "knowledgeSourceName": "ks-preview-web",
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 10,
@@ -187,11 +182,8 @@
           },
           {
             "type": "semanticReranker",
-            "id": 3,
-            "inputTokens": 74,
-            "retrievalReasoningEffort": {
-              "kind": "low"
-            }
+            "id": 1,
+            "inputTokens": 37
           },
           {
             "type": "modelAnswerSynthesis",

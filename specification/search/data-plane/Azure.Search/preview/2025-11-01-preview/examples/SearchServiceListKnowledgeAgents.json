@@ -1,5 +1,5 @@
 {
-  "operationId": "KnowledgeAgents_List",
+  "operationId": "KnowledgeBases_List",
   "title": "SearchServiceListKnowledgeAgents",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
@@ -12,18 +12,13 @@
         "value": [
           {
             "@odata.etag": "0x1234568AE7E58A1",
-            "name": "agent-preview-test",
-            "kind": "full",
-            "description": "Description of the agent.",
-            "retrievalInstructions": "Instructions for retrieval for the agent.",
+            "name": "base-preview-test",
+            "description": "Description of the knowledge base.",
+            "retrievalInstructions": "Instructions for retrieval for the knowledge base.",
+            "answerInstructions": "Instructions for answer synthesis.",
             "knowledgeSources": [
               {
-                "name": "ks-preview-test",
-                "alwaysQuerySource": true,
-                "includeReferences": true,
-                "includeReferenceSourceData": true,
-                "maxSubQueries": 5,
-                "rerankerThreshold": 2.1
+                "name": "ks-preview-test"
               }
             ],
             "models": [
@@ -37,15 +32,6 @@
                 }
               }
             ],
-            "outputConfiguration": {
-              "modality": "extractiveData",
-              "answerInstructions": "Provide a concise answer to the question.",
-              "includeActivity": true
-            },
-            "requestLimits": {
-              "maxRuntimeInSeconds": 60,
-              "maxOutputSize": 100000
-            },
             "encryptionKey": {
               "keyVaultKeyName": "myUserManagedEncryptionKey-createdinAzureKeyVault",
               "keyVaultKeyVersion": "myKeyVersion-32charAlphaNumericString",

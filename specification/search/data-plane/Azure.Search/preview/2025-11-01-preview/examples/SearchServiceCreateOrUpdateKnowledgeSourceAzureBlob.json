@@ -11,37 +11,48 @@
     "Prefer": "return=representation",
     "KnowledgeSource": {
       "azureBlobParameters": {
-        "identity": {
-          "userAssignedIdentity": "/my/userassigned/id",
-          "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity"
-        },
         "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
         "containerName": "test-container",
         "folderPath": "test-path",
-        "embeddingModel": {
-          "azureOpenAIParameters": {
-            "resourceUri": "https://test-sample.openai.azure.com/",
-            "deploymentId": "model",
-            "apiKey": "api-key",
-            "modelName": "text-embedding-3-large"
+        "ingestionParameters": {
+          "identity": {
+            "userAssignedIdentity": "/my/userassigned/id",
+            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity"
           },
-          "name": "openai",
-          "kind": "azureOpenAI"
-        },
-        "chatCompletionModel": {
-          "azureOpenAIParameters": {
-            "resourceUri": "https://test-sample.openai.azure.com/",
-            "deploymentId": "myDeployment",
-            "apiKey": "api-key",
-            "modelName": "gpt-4o-mini"
+          "embeddingModel": {
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "model",
+              "apiKey": "api-key",
+              "modelName": "text-embedding-3-large"
+            },
+            "kind": "azureOpenAI"
           },
-          "kind": "azureOpenAI"
-        },
-        "ingestionSchedule": {
-          "interval": "P1D",
-          "startTime": "2025-01-07T19:30:00Z"
-        },
-        "disableImageVerbalization": false
+          "chatCompletionModel": {
+            "azureOpenAIParameters": {
+              "resourceUri": "https://test-sample.openai.azure.com/",
+              "deploymentId": "myDeployment",
+              "apiKey": "api-key",
+              "modelName": "gpt-4o-mini"
+            },
+            "kind": "azureOpenAI"
+          },
+          "disableImageVerbalization": false,
+          "ingestionSchedule": {
+            "interval": "P1D",
+            "startTime": "2025-01-07T19:30:00Z"
+          },
+          "ingestionPermissionOptions": [
+            "userIds",
+            "groupIds",
+            "rbacScope"
+          ],
+          "contentExtractionMode": "standard",
+          "aiServices": {
+            "uri": "https://my-ai-service.azure.com/",
+            "apiKey": "api-key"
+          }
+        }
       },
       "name": "ks-preview-test",
       "description": "Description of the knowledge source.",
@@ -78,33 +89,44 @@
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
           "containerName": "test-container",
           "folderPath": "test-path",
-          "disableImageVerbalization": false,
-          "identity": {
-            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
-            "userAssignedIdentity": "/my/userassigned/id"
-          },
-          "embeddingModel": {
-            "name": "openai",
-            "kind": "azureOpenAI",
-            "azureOpenAIParameters": {
-              "resourceUri": "https://test-sample.openai.azure.com/",
-              "deploymentId": "model",
-              "apiKey": "api-key",
-              "modelName": "text-embedding-3-large"
+          "ingestionParameters": {
+            "disableImageVerbalization": false,
+            "ingestionPermissionOptions": [
+              "userIds",
+              "groupIds",
+              "rbacScope"
+            ],
+            "contentExtractionMode": "standard",
+            "identity": {
+              "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+              "userAssignedIdentity": "/my/userassigned/id"
+            },
+            "embeddingModel": {
+              "kind": "azureOpenAI",
+              "azureOpenAIParameters": {
+                "resourceUri": "https://test-sample.openai.azure.com/",
+                "deploymentId": "model",
+                "apiKey": "api-key",
+                "modelName": "text-embedding-3-large"
+              }
+            },
+            "chatCompletionModel": {
+              "kind": "azureOpenAI",
+              "azureOpenAIParameters": {
+                "resourceUri": "https://test-sample.openai.azure.com/",
+                "deploymentId": "myDeployment",
+                "apiKey": "api-key",
+                "modelName": "gpt-4o-mini"
+              }
+            },
+            "ingestionSchedule": {
+              "interval": "P1D",
+              "startTime": "2024-06-06T00:01:50.265Z"
+            },
+            "aiServices": {
+              "uri": "https://my-ai-service.azure.com/",
+              "apiKey": "api-key"
             }
-          },
-          "chatCompletionModel": {
-            "kind": "azureOpenAI",
-            "azureOpenAIParameters": {
-              "resourceUri": "https://test-sample.openai.azure.com/",
-              "deploymentId": "myDeployment",
-              "apiKey": "api-key",
-              "modelName": "gpt-4o-mini"
-            }
-          },
-          "ingestionSchedule": {
-            "interval": "P1D",
-            "startTime": "2024-06-06T00:01:50.265Z"
           },
           "createdResources": {
             "datasource": "ks-preview-test-datasource",
@@ -134,33 +156,44 @@
           "connectionString": "DefaultEndpointsProtocol=https;AccountName=myAccountName;AccountKey=myAccountKey;EndpointSuffix=core.windows.net ",
           "containerName": "test-container",
           "folderPath": "test-path",
-          "disableImageVerbalization": false,
-          "identity": {
-            "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
-            "userAssignedIdentity": "/my/userassigned/id"
-          },
-          "embeddingModel": {
-            "name": "openai",
-            "kind": "azureOpenAI",
-            "azureOpenAIParameters": {
-              "resourceUri": "https://test-sample.openai.azure.com/",
-              "deploymentId": "model",
-              "apiKey": "api-key",
-              "modelName": "text-embedding-3-large"
+          "ingestionParameters": {
+            "disableImageVerbalization": false,
+            "ingestionPermissionOptions": [
+              "userIds",
+              "groupIds",
+              "rbacScope"
+            ],
+            "contentExtractionMode": "standard",
+            "identity": {
+              "@odata.type": "#Microsoft.Azure.Search.DataUserAssignedIdentity",
+              "userAssignedIdentity": "/my/userassigned/id"
+            },
+            "embeddingModel": {
+              "kind": "azureOpenAI",
+              "azureOpenAIParameters": {
+                "resourceUri": "https://test-sample.openai.azure.com/",
+                "deploymentId": "model",
+                "apiKey": "api-key",
+                "modelName": "text-embedding-3-large"
+              }
+            },
+            "chatCompletionModel": {
+              "kind": "azureOpenAI",
+              "azureOpenAIParameters": {
+                "resourceUri": "https://test-sample.openai.azure.com/",
+                "deploymentId": "myDeployment",
+                "apiKey": "api-key",
+                "modelName": "gpt-4o-mini"
+              }
+            },
+            "ingestionSchedule": {
+              "interval": "P1D",
+              "startTime": "2024-06-06T00:01:50.265Z"
+            },
+            "aiServices": {
+              "uri": "https://my-ai-service.azure.com/",
+              "apiKey": "api-key"
             }
-          },
-          "chatCompletionModel": {
-            "kind": "azureOpenAI",
-            "azureOpenAIParameters": {
-              "resourceUri": "https://test-sample.openai.azure.com/",
-              "deploymentId": "myDeployment",
-              "apiKey": "api-key",
-              "modelName": "gpt-4o-mini"
-            }
-          },
-          "ingestionSchedule": {
-            "interval": "P1D",
-            "startTime": "2024-06-06T00:01:50.265Z"
           },
           "createdResources": {
             "datasource": "ks-preview-test-datasource",

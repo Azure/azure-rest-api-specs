@@ -24,34 +24,34 @@
     "application/json"
   ],
   "paths": {
-    "/agents('{agentName}')": {
+    "/knowledgebases('{knowledgeBaseName}')": {
       "put": {
         "tags": [
-          "KnowledgeAgents"
+          "KnowledgeBases"
         ],
-        "operationId": "KnowledgeAgents_CreateOrUpdate",
+        "operationId": "KnowledgeBases_CreateOrUpdate",
         "x-ms-examples": {
-          "SearchServiceCreateOrUpdateKnowledgeAgent": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeAgent.json"
+          "SearchServiceCreateOrUpdateKnowledgeBase": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeBase.json"
           }
         },
-        "description": "Creates a new agent or updates an agent if it already exists.",
+        "description": "Creates a new knowledge base or updates an knowledge base if it already exists.",
         "parameters": [
           {
-            "name": "agentName",
+            "name": "knowledgeBaseName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the agent to create or update."
+            "description": "The name of the knowledge base to create or update."
           },
           {
-            "name": "KnowledgeAgent",
+            "name": "KnowledgeBase",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
+              "$ref": "#/definitions/KnowledgeBase"
             },
-            "description": "The definition of the agent to create or update."
+            "description": "The definition of the knowledge base to create or update."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -73,13 +73,13 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
+              "$ref": "#/definitions/KnowledgeBase"
             }
           },
           "201": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
+              "$ref": "#/definitions/KnowledgeBase"
             }
           },
           "default": {
@@ -92,22 +92,22 @@
       },
       "delete": {
         "tags": [
-          "KnowledgeAgents"
+          "KnowledgeBases"
         ],
-        "operationId": "KnowledgeAgents_Delete",
+        "operationId": "KnowledgeBases_Delete",
         "x-ms-examples": {
-          "SearchServiceDeleteKnowledgeAgent": {
-            "$ref": "./examples/SearchServiceDeleteKnowledgeAgent.json"
+          "SearchServiceDeleteKnowledgeBase": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeBase.json"
           }
         },
-        "description": "Deletes an existing agent.",
+        "description": "Deletes an existing knowledge base.",
         "parameters": [
           {
-            "name": "agentName",
+            "name": "knowledgeBaseName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the agent to delete."
+            "description": "The name of the knowledge base to delete."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -140,22 +140,22 @@
       },
       "get": {
         "tags": [
-          "KnowledgeAgents"
+          "KnowledgeBases"
         ],
-        "operationId": "KnowledgeAgents_Get",
+        "operationId": "KnowledgeBases_Get",
         "x-ms-examples": {
-          "SearchServiceGetKnowledgeAgent": {
-            "$ref": "./examples/SearchServiceGetKnowledgeAgent.json"
+          "SearchServiceGetKnowledgeBase": {
+            "$ref": "./examples/SearchServiceGetKnowledgeBase.json"
           }
         },
-        "description": "Retrieves an agent definition.",
+        "description": "Retrieves an knowledge base definition.",
         "parameters": [
           {
-            "name": "agentName",
+            "name": "knowledgeBaseName",
             "in": "path",
             "required": true,
             "type": "string",
-            "description": "The name of the agent to retrieve."
+            "description": "The name of the knowledge base to retrieve."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -169,7 +169,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
+              "$ref": "#/definitions/KnowledgeBase"
             }
           },
           "default": {
@@ -181,18 +181,18 @@
         }
       }
     },
-    "/agents": {
+    "/knowledgebases": {
       "get": {
         "tags": [
-          "KnowledgeAgents"
+          "KnowledgeBases"
         ],
-        "operationId": "KnowledgeAgents_List",
+        "operationId": "KnowledgeBases_List",
         "x-ms-examples": {
-          "SearchServiceListKnowledgeAgents": {
-            "$ref": "./examples/SearchServiceListKnowledgeAgents.json"
+          "SearchServiceListKnowledgeBases": {
+            "$ref": "./examples/SearchServiceListKnowledgeBases.json"
           }
         },
-        "description": "Lists all agents available for a search service.",
+        "description": "Lists all knowledge bases available for a search service.",
         "parameters": [
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -205,7 +205,7 @@
           "200": {
             "description": "",
             "schema": {
-              "$ref": "#/definitions/ListKnowledgeAgentsResult"
+              "$ref": "#/definitions/ListKnowledgeBasesResult"
             }
           },
           "default": {
@@ -221,24 +221,24 @@
       },
       "post": {
         "tags": [
-          "KnowledgeAgents"
+          "KnowledgeBases"
         ],
-        "operationId": "KnowledgeAgents_Create",
+        "operationId": "KnowledgeBases_Create",
         "x-ms-examples": {
-          "SearchServiceCreateKnowledgeAgent": {
-            "$ref": "./examples/SearchServiceCreateKnowledgeAgent.json"
+          "SearchServiceCreateKnowledgeBase": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeBase.json"
           }
         },
-        "description": "Creates a new agent.",
+        "description": "Creates a new knowledge base.",
         "parameters": [
           {
-            "name": "KnowledgeAgent",
+            "name": "KnowledgeBase",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
+              "$ref": "#/definitions/KnowledgeBase"
             },
-            "description": "The definition of the agent to create."
+            "description": "The definition of the knowledge base to create."
           },
           {
             "$ref": "#/parameters/ClientRequestIdParameter"
@@ -249,9 +249,9 @@
         ],
         "responses": {
           "201": {
-            "description": "Successfully created an agent",
+            "description": "Successfully created an knowledge base",
             "schema": {
-              "$ref": "#/definitions/KnowledgeAgent"
+              "$ref": "#/definitions/KnowledgeBase"
             }
           },
           "default": {
@@ -275,6 +275,15 @@
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceSharePoint": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceSharePoint.json"
+          },
+          "SearchServiceCreateOrUpdateKnowledgeSourceOneLake": {
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceOneLake.json"
           }
         },
         "description": "Creates a new knowledge source or updates an knowledge source if it already exists.",
@@ -343,6 +352,15 @@
           },
           "SearchServiceDeleteKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceSharePoint": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceSharePoint.json"
+          },
+          "SearchServiceDeleteKnowledgeSourceOneLake": {
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceOneLake.json"
           }
         },
         "description": "Deletes an existing knowledge source.",
@@ -394,6 +412,15 @@
           },
           "SearchServiceGetKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceGetKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceGetKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
+          },
+          "SearchServiceGetKnowledgeSourceSharePoint": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceSharePoint.json"
+          },
+          "SearchServiceGetKnowledgeSourceOneLake": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceOneLake.json"
           }
         },
         "description": "Retrieves a knowledge source definition.",
@@ -441,6 +468,15 @@
           },
           "SearchServiceListKnowledgeSourcesAzureBlob": {
             "$ref": "./examples/SearchServiceListKnowledgeSourcesAzureBlob.json"
+          },
+          "SearchServiceListKnowledgeSourcesWeb": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
+          },
+          "SearchServiceListKnowledgeSourcesSharePoint": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesSharePoint.json"
+          },
+          "SearchServiceListKnowledgeSourcesOneLake": {
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesOneLake.json"
           }
         },
         "description": "Lists all knowledge sources available for a search service.",
@@ -481,6 +517,15 @@
           },
           "SearchServiceCreateKnowledgeSourceAzureBlob": {
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceAzureBlob.json"
+          },
+          "SearchServiceCreateKnowledgeSourceWeb": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
+          },
+          "SearchServiceCreateKnowledgeSourceSharePoint": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceSharePoint.json"
+          },
+          "SearchServiceCreateKnowledgeSourceOneLake": {
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceOneLake.json"
           }
         },
         "description": "Creates a new knowledge source.",
@@ -506,6 +551,50 @@
             "description": "Successfully created an knowledge source",
             "schema": {
               "$ref": "#/definitions/KnowledgeSource"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/data-plane/v1/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/knowledgesources('{sourceName}')/status": {
+      "get": {
+        "tags": [
+          "KnowledgeSources"
+        ],
+        "operationId": "KnowledgeSources_GetStatus",
+        "x-ms-examples": {
+          "SearchServiceGetKnowledgeSourceStatus": {
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceStatus.json"
+          }
+        },
+        "description": "Returns the current status and synchronization history of a knowledge source.",
+        "parameters": [
+          {
+            "name": "sourceName",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The name of the knowledge source for which to retrieve status."
+          },
+          {
+            "$ref": "#/parameters/ClientRequestIdParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiVersionParameter"
+          }
+        ],
+        "x-ms-request-id": "request-id",
+        "responses": {
+          "200": {
+            "description": "Knowledge source status retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/KnowledgeSourceStatus"
             }
           },
           "default": {
@@ -2625,18 +2714,12 @@
     }
   },
   "definitions": {
-    "KnowledgeAgent": {
+    "KnowledgeBase": {
       "type": "object",
-      "discriminator": "kind",
       "properties": {
-        "kind": {
-          "$ref": "#/definitions/KnowledgeAgentKind",
-          "description": "The type of agent.",
-          "x-nullable": false
-        },
         "name": {
           "type": "string",
-          "description": "The name of the knowledge agent."
+          "description": "The name of the knowledge knowledge base."
         },
         "knowledgeSources": {
           "type": "array",
@@ -2644,17 +2727,21 @@
             "$ref": "#/definitions/KnowledgeSourceReference"
           }
         },
-        "requestLimits": {
-          "$ref": "#/definitions/KnowledgeAgentRequestLimits"
+        "models": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/KnowledgeBaseModel"
+          },
+          "description": "Contains configuration options on how to connect to AI models."
         },
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
-          "description": "The ETag of the agent."
+          "description": "The ETag of the knowledge base."
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your agent definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your agent definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your agent definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge base definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge base definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge base definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -2662,62 +2749,19 @@
         },
         "description": {
           "type": "string",
-          "description": "The description of the agent."
-        }
-      },
-      "required": [
-        "kind",
-        "name",
-        "knowledgeSources"
-      ]
-    },
-    "FastKnowledgeAgent": {
-      "type": "object",
-      "x-ms-discriminator-value": "fast",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgent"
-        }
-      ],
-      "properties": {
-        "outputConfiguration": {
-          "$ref": "#/definitions/FastKnowledgeAgentOutputConfiguration"
-        }
-      },
-      "required": [
-        "kind",
-        "name",
-        "knowledgeSources"
-      ]
-    },
-    "FullKnowledgeAgent": {
-      "type": "object",
-      "x-ms-discriminator-value": "full",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeAgent"
-        }
-      ],
-      "properties": {
-        "models": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/KnowledgeAgentModel"
-          },
-          "description": "Contains configuration options on how to connect to AI models."
-        },
-        "outputConfiguration": {
-          "$ref": "#/definitions/FullKnowledgeAgentOutputConfiguration"
+          "description": "The description of the knowledge base."
         },
         "retrievalInstructions": {
           "type": "string",
-          "description": "Instructions considered by the knowledge agent when developing query plan."
+          "description": "Instructions considered by the knowledge knowledge base when developing query plan."
+        },
+        "answerInstructions": {
+          "type": "string",
+          "description": "Instructions considered by the knowledge knowledge base when generating answers."
         }
       },
       "required": [
-        "kind",
         "name",
-        "models",
         "knowledgeSources"
       ]
     },
@@ -2727,104 +2771,20 @@
         "name": {
           "type": "string",
           "description": "The name of the knowledge source."
-        },
-        "includeReferences": {
-          "type": "boolean",
-          "description": "Indicates whether references should be included for data retrieved from this source."
-        },
-        "includeReferenceSourceData": {
-          "type": "boolean",
-          "description": "Indicates whether references should include the structured data obtained during retrieval in their payload."
-        },
-        "alwaysQuerySource": {
-          "type": "boolean",
-          "description": "Indicates that this knowledge source should bypass source selection and always be queried at retrieval time."
-        },
-        "maxSubQueries": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum number of queries that can be issued at a time when retrieving data from this source."
-        },
-        "rerankerThreshold": {
-          "type": "number",
-          "format": "float",
-          "description": "The reranker threshold all retrieved documents must meet to be included in the response."
         }
       },
       "required": [
         "name"
       ]
     },
-    "FullKnowledgeAgentOutputConfiguration": {
-      "type": "object",
-      "properties": {
-        "modality": {
-          "type": "string",
-          "enum": [
-            "answerSynthesis",
-            "extractiveData"
-          ],
-          "x-ms-enum": {
-            "name": "FullKnowledgeAgentOutputConfigurationModality",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "answerSynthesis",
-                "name": "AnswerSynthesis",
-                "description": "Synthesize an answer for the response payload."
-              },
-              {
-                "value": "extractiveData",
-                "name": "ExtractiveData",
-                "description": "Return data from the knowledge sources directly without generative alteration."
-              }
-            ]
-          },
-          "description": "The output configuration for the agent"
-        },
-        "answerInstructions": {
-          "type": "string",
-          "description": "Instructions considered by the knowledge agent when generating answers"
-        },
-        "includeActivity": {
-          "type": "boolean",
-          "description": "Indicates retrieval results should include activity information."
-        }
-      }
-    },
-    "FastKnowledgeAgentOutputConfiguration": {
-      "type": "object",
-      "properties": {
-        "includeActivity": {
-          "type": "boolean",
-          "description": "Indicates retrieval results should include activity information."
-        }
-      }
-    },
-    "KnowledgeAgentRequestLimits": {
-      "type": "object",
-      "properties": {
-        "maxRuntimeInSeconds": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The maximum runtime in seconds."
-        },
-        "maxOutputSize": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Limits the maximum size of the content in the output."
-        }
-      },
-      "description": "Guardrails to limit how much resources are utilized for a single agent retrieval request."
-    },
-    "ListKnowledgeAgentsResult": {
+    "ListKnowledgeBasesResult": {
       "type": "object",
       "properties": {
         "value": {
-          "x-ms-client-name": "KnowledgeAgents",
+          "x-ms-client-name": "KnowledgeBases",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/KnowledgeAgent"
+            "$ref": "#/definitions/KnowledgeBase"
           }
         }
       },
@@ -2832,12 +2792,12 @@
         "value"
       ]
     },
-    "KnowledgeAgentModel": {
+    "KnowledgeBaseModel": {
       "type": "object",
       "discriminator": "kind",
       "properties": {
         "kind": {
-          "$ref": "#/definitions/KnowledgeAgentModelKind",
+          "$ref": "#/definitions/KnowledgeBaseModelKind",
           "description": "The type of AI model.",
           "x-nullable": false
         }
@@ -2847,13 +2807,13 @@
       ],
       "description": "Specifies the connection parameters for the model to use for query planning."
     },
-    "KnowledgeAgentModelKind": {
+    "KnowledgeBaseModelKind": {
       "type": "string",
       "enum": [
         "azureOpenAI"
       ],
       "x-ms-enum": {
-        "name": "KnowledgeAgentModelKind",
+        "name": "KnowledgeBaseModelKind",
         "modelAsString": true,
         "values": [
           {
@@ -2865,36 +2825,12 @@
       },
       "description": "The AI model to be used for query planning."
     },
-    "KnowledgeAgentKind": {
-      "type": "string",
-      "enum": [
-        "fast",
-        "full"
-      ],
-      "x-ms-enum": {
-        "name": "KnowledgeAgentKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "fast",
-            "name": "Fast",
-            "description": "A fast agent that doesn't call any external models."
-          },
-          {
-            "value": "full",
-            "name": "Full",
-            "description": "A full agent that calls external models."
-          }
-        ]
-      },
-      "description": "The kind of agent configuration to use."
-    },
-    "KnowledgeAgentAzureOpenAIModel": {
+    "KnowledgeBaseAzureOpenAIModel": {
       "type": "object",
       "x-ms-discriminator-value": "azureOpenAI",
       "allOf": [
         {
-          "$ref": "#/definitions/KnowledgeAgentModel"
+          "$ref": "#/definitions/KnowledgeBaseModel"
         }
       ],
       "properties": {
@@ -2929,11 +2865,11 @@
         "@odata.etag": {
           "x-ms-client-name": "ETag",
           "type": "string",
-          "description": "The ETag of the agent."
+          "description": "The ETag of the knowledge base."
         },
         "encryptionKey": {
           "$ref": "#/definitions/SearchResourceEncryptionKey",
-          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your agent definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your agent definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your agent definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
+          "description": "A description of an encryption key that you create in Azure Key Vault. This key is used to provide an additional level of encryption-at-rest for your knowledge base definition when you want full assurance that no one, not even Microsoft, can decrypt them. Once you have encrypted your knowledge base definition, it will always remain encrypted. The search service will ignore attempts to set this property to null. You can change this property as needed if you want to rotate your encryption key; Your knowledge base definition will be unaffected. Encryption with customer-managed keys is not available for free search services, and is only available for paid services created on or after January 1, 2019.",
           "externalDocs": {
             "url": "https://aka.ms/azure-search-encryption-with-cmk"
           },
@@ -3004,11 +2940,6 @@
     "AzureBlobKnowledgeSourceParameters": {
       "type": "object",
       "properties": {
-        "identity": {
-          "$ref": "#/definitions/SearchIndexerDataIdentity",
-          "x-nullable": true,
-          "description": "An explicit identity to use for this knowledge source. "
-        },
         "connectionString": {
           "type": "string",
           "description": "Key-based connection string or the ResourceId format if using a managed identity."
@@ -3019,31 +2950,18 @@
         },
         "folderPath": {
           "type": "string",
-          "description": "Optional folder path within the container."
-        },
-        "embeddingModel": {
-          "$ref": "#/definitions/VectorSearchVectorizer",
-          "description": "Optional vectorizer configuration for vectorizing content.",
+          "description": "Optional folder path within the container.",
           "x-nullable": true
         },
-        "chatCompletionModel": {
-          "$ref": "#/definitions/KnowledgeAgentModel",
-          "description": "Optional chat completion model for image verbalization or context extraction.",
-          "x-nullable": true
-        },
-        "ingestionSchedule": {
-          "$ref": "#/definitions/IndexingSchedule",
-          "description": "Optional schedule for data ingestion.",
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings.",
           "x-nullable": true
         },
         "createdResources": {
           "$ref": "#/definitions/CreatedResources",
           "description": "Resources created by the knowledge source.",
           "readOnly": true
-        },
-        "disableImageVerbalization": {
-          "type": "boolean",
-          "description": "Indicates whether image verbalization should be disabled."
         }
       },
       "required": [
@@ -3052,11 +2970,354 @@
       ],
       "description": "Parameters for Azure Blob Storage knowledge source."
     },
+    "IndexedSharePointKnowledgeSource": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedSharePoint",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "properties": {
+        "indexedSharePointParameters": {
+          "$ref": "#/definitions/IndexedSharePointKnowledgeSourceParameters",
+          "description": "The parameters for the SharePoint knowledge source."
+        }
+      },
+      "required": [
+        "indexedSharePointParameters"
+      ],
+      "description": "Configuration for SharePoint knowledge source."
+    },
+    "IndexedSharePointKnowledgeSourceParameters": {
+      "type": "object",
+      "properties": {
+        "connectionString": {
+          "type": "string",
+          "description": "SharePoint connection string with format: SharePointOnlineEndpoint=[SharePoint site url];ApplicationId=[Azure AD App ID];ApplicationSecret=[Azure AD App client secret];TenantId=[SharePoint site tenant id]"
+        },
+        "containerName": {
+          "type": "string",
+          "enum": [
+            "defaultSiteLibrary",
+            "allSiteLibraries",
+            "useQuery"
+          ],
+          "description": "Specifies which SharePoint libraries to access."
+        },
+        "query": {
+          "type": "string",
+          "description": "Optional query to filter SharePoint content.",
+          "x-nullable": true
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings.",
+          "x-nullable": true
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "connectionString",
+        "containerName"
+      ],
+      "description": "Parameters for SharePoint knowledge source."
+    },
+    "IndexedOneLakeKnowledgeSource": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedOneLake",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "properties": {
+        "indexedOneLakeParameters": {
+          "$ref": "#/definitions/IndexedOneLakeKnowledgeSourceParameters",
+          "description": "The parameters for the OneLake knowledge source."
+        }
+      },
+      "required": [
+        "indexedOneLakeParameters"
+      ],
+      "description": "Configuration for OneLake knowledge source."
+    },
+    "IndexedOneLakeKnowledgeSourceParameters": {
+      "type": "object",
+      "properties": {
+        "fabricWorkspaceId": {
+          "type": "string",
+          "description": "OneLake workspace ID."
+        },
+        "lakehouseId": {
+          "type": "string",
+          "description": "Specifies which OneLake lakehouse to access."
+        },
+        "targetPath": {
+          "type": "string",
+          "description": "Optional OneLakehouse folder or shortcut to filter OneLake content.",
+          "x-nullable": true
+        },
+        "ingestionParameters": {
+          "$ref": "#/definitions/KnowledgeSourceIngestionParameters",
+          "description": "Consolidates all general ingestion settings.",
+          "x-nullable": true
+        },
+        "createdResources": {
+          "$ref": "#/definitions/CreatedResources",
+          "description": "Resources created by the knowledge source.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "fabricWorkspaceId",
+        "lakehouseId"
+      ],
+      "description": "Parameters for OneLake knowledge source."
+    },
+    "KnowledgeSourceIngestionParameters": {
+      "type": "object",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/SearchIndexerDataIdentity",
+          "x-nullable": true,
+          "description": "An explicit identity to use for this knowledge source."
+        },
+        "embeddingModel": {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer",
+          "description": "Optional vectorizer configuration for vectorizing content.",
+          "x-nullable": true
+        },
+        "chatCompletionModel": {
+          "$ref": "#/definitions/KnowledgeBaseModel",
+          "description": "Optional chat completion model for image verbalization or context extraction.",
+          "x-nullable": true
+        },
+        "disableImageVerbalization": {
+          "type": "boolean",
+          "description": "Indicates whether image verbalization should be disabled. Default is false.",
+          "default": false
+        },
+        "ingestionSchedule": {
+          "$ref": "#/definitions/IndexingSchedule",
+          "description": "Optional schedule for data ingestion.",
+          "x-nullable": true
+        },
+        "ingestionPermissionOptions": {
+          "type": "array",
+          "items": {
+            "type": "string",
+            "enum": [
+              "userIds",
+              "groupIds",
+              "rbacScope"
+            ]
+          },
+          "description": "Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.",
+          "x-nullable": true
+        },
+        "contentExtractionMode": {
+          "type": "string",
+          "enum": [
+            "minimal",
+            "standard"
+          ],
+          "description": "Optional content extraction mode. Default is 'minimal'.",
+          "default": "minimal",
+          "x-nullable": true
+        },
+        "aiServices": {
+          "$ref": "#/definitions/AIServices",
+          "description": "Optional AI Services configuration for content processing.",
+          "x-nullable": true
+        }
+      },
+      "description": "Consolidates all general ingestion settings for knowledge sources."
+    },
+    "AIServices": {
+      "type": "object",
+      "properties": {
+        "uri": {
+          "type": "string",
+          "format": "uri",
+          "description": "The URI of the AI Services endpoint."
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The API key for accessing AI Services."
+        }
+      },
+      "required": [
+        "uri"
+      ],
+      "description": "Parameters for Azure Blob Storage knowledge source."
+    },
+    "WebKnowledgeSource": {
+      "type": "object",
+      "x-ms-discriminator-value": "web",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "properties": {
+        "webParameters": {
+          "$ref": "#/definitions/WebKnowledgeSourceParameters",
+          "description": "The parameters for the web knowledge source."
+        }
+      },
+      "description": "Knowledge Source targeting web results."
+    },
+    "WebKnowledgeSourceParameters": {
+      "type": "object",
+      "properties": {
+        "domains": {
+          "$ref": "#/definitions/WebKnowledgeSourceDomains",
+          "description": "Domain allow/block configuration for web results."
+        }
+      },
+      "description": "Parameters for web knowledge source."
+    },
+    "WebKnowledgeSourceDomains": {
+      "type": "object",
+      "properties": {
+        "allowedDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceAllowedDomain"
+          },
+          "description": "Domains that are allowed for web results"
+        },
+        "blockedDomains": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/WebKnowledgeSourceBlockedDomain"
+          },
+          "description": "Domains that are blocked from web results"
+        }
+      },
+      "description": "Domain allow/block configuration for web knowledge source."
+    },
+    "WebKnowledgeSourceAllowedDomain": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address of the domain."
+        },
+        "includeSubpages": {
+          "type": "boolean",
+          "description": "Whether or not to include subpages from this domain."
+        },
+        "rankingAdjustment": {
+          "$ref": "#/definitions/WebKnowledgeSourceDomainRankingAdjustmentKind"
+        }
+      },
+      "required": [
+        "address"
+      ],
+      "description": "Configuration for web knowledge source allowed domain."
+    },
+    "WebKnowledgeSourceBlockedDomain": {
+      "type": "object",
+      "properties": {
+        "address": {
+          "type": "string",
+          "description": "The address of the domain."
+        },
+        "includeSubpages": {
+          "type": "boolean",
+          "description": "Whether or not to include subpages from this domain."
+        }
+      },
+      "required": [
+        "address"
+      ],
+      "description": "Configuration for web knowledge source blocked domain."
+    },
+    "WebKnowledgeSourceDomainRankingAdjustmentKind": {
+      "type": "string",
+      "enum": [
+        "boost",
+        "superBoost",
+        "demote"
+      ],
+      "x-ms-enum": {
+        "name": "WebKnowledgeSourceRankingAdjustment",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "boost",
+            "name": "boost",
+            "description": "Raises the ranking of the chosen domain or subpage so it appears higher in the search results."
+          },
+          {
+            "value": "superBoost",
+            "name": "superBoost",
+            "description": "Applies a stronger positive weight than Boost, pushing the selected domain or subpage towards the very top of the results."
+          },
+          {
+            "value": "demote",
+            "name": "demote",
+            "description": "Lowers the ranking of the specified domain or subpage so it shows up further down the results list."
+          }
+        ]
+      },
+      "description": "The ranking adjustment to perform on the web results."
+    },
+    "RemoteSharePointKnowledgeSource": {
+      "type": "object",
+      "x-ms-discriminator-value": "remoteSharePoint",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSource"
+        }
+      ],
+      "properties": {
+        "remoteSharePointParameters": {
+          "$ref": "#/definitions/RemoteSharePointKnowledgeSourceParameters",
+          "description": "The parameters for the knowledge source."
+        }
+      },
+      "required": [
+        "remoteSharePointParameters"
+      ],
+      "description": "Configuration for remote SharePoint knowledge source."
+    },
+    "RemoteSharePointKnowledgeSourceParameters": {
+      "type": "object",
+      "properties": {
+        "filterExpression": {
+          "type": "string",
+          "description": "Keyword Query Language (KQL) expression with queryable SharePoint properties and attributes to scope the retrieval before the query runs. See documentation: https://learn.microsoft.com/en-us/sharepoint/dev/general-development/keyword-query-language-kql-syntax-reference"
+        },
+        "resourceMetadata": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A list of metadata fields to be returned for each item in the response. Only retrievable metadata properties can be included in this list. By default, no metadata is returned. Optional."
+        },
+        "containerTypeId": {
+          "type": "string",
+          "description": "Container ID for SharePoint Embedded connection. When this is null, it will use SharePoint Online."
+        }
+      },
+      "description": "Parameters for remote SharePoint knowledge source."
+    },
     "KnowledgeSourceKind": {
       "type": "string",
       "enum": [
         "searchIndex",
-        "azureBlob"
+        "azureBlob",
+        "web",
+        "remoteSharePoint",
+        "indexedSharePoint",
+        "indexedOneLake"
       ],
       "x-ms-enum": {
         "name": "KnowledgeSourceKind",
@@ -3065,12 +3326,32 @@
           {
             "value": "searchIndex",
             "name": "SearchIndex",
-            "description": "A knowledge source that reads data from a Search Index."
+            "description": "A knowledge source that retrieves data from a Search Index."
           },
           {
             "value": "azureBlob",
             "name": "AzureBlob",
-            "description": "A knowledge source that read and ingest data from Azure Blob Storage to a Search Index."
+            "description": "A knowledge source that retrieves and ingests data from Azure Blob Storage to a Search Index."
+          },
+          {
+            "value": "web",
+            "name": "Web",
+            "description": "A knowledge source that retrieves data from the web."
+          },
+          {
+            "value": "remoteSharePoint",
+            "name": "RemoteSharePoint",
+            "description": "A knowledge source that retrieves data from a remote SharePoint endpoint."
+          },
+          {
+            "value": "indexedSharePoint",
+            "name": "IndexedSharePoint",
+            "description": "A knowledge source that retrieves and ingests data from SharePoint to a Search Index."
+          },
+          {
+            "value": "indexedOneLake",
+            "name": "IndexedOneLake",
+            "description": "A knowledge source that retrieves and ingests data from OneLake to a Search Index."
           }
         ]
       },
@@ -3098,6 +3379,131 @@
         "description": "The name of the created resource."
       },
       "description": "Resources created by the knowledge source. Keys represent resource types (e.g., 'datasource', 'indexer', 'skillset', 'index') and values represent resource names."
+    },
+    "KnowledgeSourceStatus": {
+      "type": "object",
+      "properties": {
+        "synchronizationStatus": {
+          "type": "string",
+          "enum": [
+            "creating",
+            "active",
+            "deleting"
+          ],
+          "description": "The current synchronization status of the knowledge source."
+        },
+        "synchronizationInterval": {
+          "type": "string",
+          "description": "The synchronization interval (e.g., '1d' for daily). Null if no schedule is configured.",
+          "x-nullable": true
+        },
+        "currentSynchronizationState": {
+          "$ref": "#/definitions/SynchronizationState",
+          "description": "Current synchronization state that spans multiple indexer runs.",
+          "x-nullable": true
+        },
+        "lastSynchronizationState": {
+          "$ref": "#/definitions/CompletedSynchronizationState",
+          "description": "Details of the last completed synchronization. Null on first sync.",
+          "x-nullable": true
+        },
+        "statistics": {
+          "$ref": "#/definitions/KnowledgeSourceStatistics",
+          "description": "Statistical information about the knowledge source synchronization history. Null on first sync.",
+          "x-nullable": true
+        }
+      },
+      "required": [
+        "synchronizationStatus"
+      ],
+      "description": "Represents the status and synchronization history of a knowledge source."
+    },
+    "KnowledgeSourceStatistics": {
+      "type": "object",
+      "properties": {
+        "totalSynchronization": {
+          "type": "integer",
+          "description": "The total number of synchronizations completed."
+        },
+        "averageSynchronizationDuration": {
+          "type": "string",
+          "description": "The average duration of synchronizations in HH:MM:SS format."
+        },
+        "averageItemsProcessedPerSynchronization": {
+          "type": "integer",
+          "description": "The average number of items processed per synchronization."
+        }
+      },
+      "required": [
+        "totalSynchronization",
+        "averageSynchronizationDuration",
+        "averageItemsProcessedPerSynchronization"
+      ],
+      "description": "Statistical information about knowledge source synchronization history."
+    },
+    "SynchronizationState": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the current synchronization."
+        },
+        "itemUpdatesProcessed": {
+          "type": "integer",
+          "description": "The number of item updates successfully processed in the current synchronization."
+        },
+        "itemsUpdatesFailed": {
+          "type": "integer",
+          "description": "The number of item updates that failed in the current synchronization."
+        },
+        "itemsSkipped": {
+          "type": "integer",
+          "description": "The number of items skipped in the current synchronization."
+        }
+      },
+      "required": [
+        "startTime",
+        "itemUpdatesProcessed",
+        "itemsUpdatesFailed",
+        "itemsSkipped"
+      ],
+      "description": "Represents the current state of an ongoing synchronization that spans multiple indexer runs."
+    },
+    "CompletedSynchronizationState": {
+      "type": "object",
+      "properties": {
+        "startTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time of the last completed synchronization."
+        },
+        "endTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time of the last completed synchronization."
+        },
+        "itemUpdatesProcessed": {
+          "type": "integer",
+          "description": "The number of item updates successfully processed in the last synchronization."
+        },
+        "itemsUpdatesFailed": {
+          "type": "integer",
+          "description": "The number of item updates that failed in the last synchronization."
+        },
+        "itemsSkipped": {
+          "type": "integer",
+          "description": "The number of items skipped in the last synchronization."
+        }
+      },
+      "required": [
+        "startTime",
+        "endTime",
+        "itemUpdatesProcessed",
+        "itemsUpdatesFailed",
+        "itemsSkipped"
+      ],
+      "description": "Represents the completed state of the last synchronization."
     },
     "AnalyzeRequest": {
       "type": "object",
@@ -7656,6 +8062,38 @@
       },
       "description": "The storage method for the original full-precision vectors used for rescoring and internal index operations."
     },
+    "KnowledgeSourceVectorizer": {
+      "type": "object",
+      "discriminator": "kind",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/VectorSearchVectorizerKind",
+          "description": "The name of the kind of vectorization method being configured for use with vector search.",
+          "x-nullable": false
+        }
+      },
+      "required": [
+        "kind"
+      ],
+      "description": "Specifies the vectorization method to be used for knowledge source embedding model, with optional name."
+    },
+    "KnowledgeSourceAzureOpenAIVectorizer": {
+      "type": "object",
+      "x-ms-discriminator-value": "azureOpenAI",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceVectorizer"
+        }
+      ],
+      "properties": {
+        "azureOpenAIParameters": {
+          "x-ms-client-name": "AzureOpenAIParameters",
+          "$ref": "#/definitions/AzureOpenAIParameters",
+          "description": "Contains the parameters specific to Azure OpenAI embedding vectorization."
+        }
+      },
+      "description": "Specifies the Azure OpenAI resource used to vectorize a query string."
+    },    
     "VectorSearchVectorizer": {
       "type": "object",
       "discriminator": "kind",
@@ -8233,7 +8671,8 @@
         "azuretable",
         "mysql",
         "adlsgen2",
-        "onelake"
+        "onelake",
+        "sharepoint"
       ],
       "x-ms-enum": {
         "name": "SearchIndexerDataSourceType",
@@ -8273,6 +8712,11 @@
             "value": "onelake",
             "name": "OneLake",
             "description": "Indicates a Microsoft Fabric OneLake datasource."
+          },
+          {
+            "value": "sharepoint",
+            "name": "SharePoint",
+            "description": "Indicates a SharePoint datasource."
           }
         ]
       },
@@ -9142,6 +9586,11 @@
           "readOnly": true,
           "description": "Overall indexer status."
         },
+        "runtime": {
+          "$ref": "#/definitions/IndexerRuntime",
+          "readOnly": true,
+          "description": "Snapshot of the indexer’s cumulative runtime consumption for the service over the current UTC period."
+        },
         "lastResult": {
           "$ref": "#/definitions/IndexerExecutionResult",
           "readOnly": true,
@@ -9169,6 +9618,7 @@
       "required": [
         "name",
         "status",
+        "runtime",
         "executionHistory",
         "limits"
       ],
@@ -9204,6 +9654,41 @@
       },
       "x-nullable": false,
       "description": "Represents the overall indexer status."
+    },
+    "IndexerRuntime": {
+      "type": "object",
+      "properties": {
+        "usedSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false,
+          "description": "Cumulative runtime of the indexer from the beginningTime to endingTime, in seconds."
+        },
+        "remainingSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true,
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "beginningTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        },
+        "endingTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        }
+      },
+      "required": [
+        "usedSeconds",
+        "beginningTime",
+        "endingTime"
+      ],
+      "description": "Represents the indexer's cumulative runtime consumption in the service."
     },
     "IndexerExecutionStatusDetail": {
       "type": "string",
@@ -9788,7 +10273,8 @@
         "average",
         "minimum",
         "maximum",
-        "firstMatching"
+        "firstMatching",
+        "product"
       ],
       "x-ms-enum": {
         "name": "ScoringFunctionAggregation",
@@ -9818,6 +10304,11 @@
             "value": "firstMatching",
             "name": "FirstMatching",
             "description": "Boost scores using the first applicable scoring function in the scoring profile."
+          },
+          {
+            "value": "product",
+            "name": "Product",
+            "description": "Boost scores by the product of all scoring function results."
           }
         ]
       },
@@ -11710,6 +12201,97 @@
       ],
       "x-ms-enum": {
         "name": "DocumentIntelligenceLayoutSkillChunkingUnit",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "characters",
+            "name": "Characters",
+            "description": "Specifies chunk by characters."
+          }
+        ]
+      },
+      "default": "characters",
+      "description": "Controls the cardinality of the chunk unit. Default is 'characters'"
+    },
+    "ContentUnderstandingSkill": {
+      "type": "object",
+      "x-ms-discriminator-value": "#Microsoft.Skills.Util.ContentUnderstandingSkill",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SearchIndexerSkill"
+        }
+      ],
+      "properties": {
+        "extractionOptions": {
+          "x-nullable": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ContentUnderstandingSkillExtractionOptions"
+          },
+          "description": "Controls the cardinality of the content extracted from the document by the skill"
+        },
+        "chunkingProperties": {
+          "$ref": "#/definitions/ContentUnderstandingSkillChunkingProperties",
+          "x-nullable": true,
+          "description": "Controls the cardinality for chunking the content."
+        }
+      },
+      "description": "A skill that leverages Azure AI Content Understanding to process and extract structured insights from documents, enabling enriched, searchable content for enhanced document indexing and retrieval"
+    },
+    "ContentUnderstandingSkillExtractionOptions": {
+      "type": "string",
+      "enum": [
+        "images",
+        "locationMetadata"
+      ],
+      "x-ms-enum": {
+        "name": "ContentUnderstandingSkillExtractionOptions",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "images",
+            "name": "Images",
+            "description": "Specify that image content should be extracted from the document."
+          },
+          {
+            "value": "locationMetadata",
+            "name": "LocationMetadata",
+            "description": "Specify that location metadata should be extracted from the document."
+          }
+        ]
+      },
+      "description": "Controls the cardinality of the content extracted from the document by the skill."
+    },
+    "ContentUnderstandingSkillChunkingProperties": {
+      "type": "object",
+      "description": "Controls the cardinality for chunking the content.",
+      "properties": {
+        "unit": {
+          "$ref": "#/definitions/ContentUnderstandingSkillChunkingUnit",
+          "x-nullable": true,
+          "description": "The unit of the chunk."
+        },
+        "maximumLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The maximum chunk length in characters. Default is 500."
+        },
+        "overlapLength": {
+          "type": "integer",
+          "format": "int32",
+          "x-nullable": true,
+          "description": "The length of overlap provided between two text chunks. Default is 0."
+        }
+      }
+    },
+    "ContentUnderstandingSkillChunkingUnit": {
+      "type": "string",
+      "enum": [
+        "characters"
+      ],
+      "x-ms-enum": {
+        "name": "ContentUnderstandingSkillChunkingUnit",
         "modelAsString": true,
         "values": [
           {
@@ -14398,6 +14980,10 @@
           "$ref": "#/definitions/ServiceCounters",
           "description": "Service level resource counters."
         },
+        "indexersRuntime": {
+          "$ref": "#/definitions/ServiceIndexersRuntime",
+          "description": "Service level indexers runtime information."
+        },
         "limits": {
           "$ref": "#/definitions/ServiceLimits",
           "description": "Service level general limits."
@@ -14405,9 +14991,10 @@
       },
       "required": [
         "counters",
+        "indexersRuntime",
         "limits"
       ],
-      "description": "Response from a get service statistics request. If successful, it includes service level counters and limits."
+      "description": "Response from a get service statistics request. If successful, it includes service level counters, indexer runtime information, and limits."
     },
     "ServiceCounters": {
       "type": "object",
@@ -14471,6 +15058,41 @@
       ],
       "description": "Represents service-level resource counters and quotas."
     },
+    "ServiceIndexersRuntime": {
+      "type": "object",
+      "properties": {
+        "usedSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": false,
+          "description": "Cumulative runtime of all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "remainingSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true,
+          "description": "Cumulative runtime remaining for all indexers in the service from the beginningTime to endingTime, in seconds."
+        },
+        "beginningTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "Beginning UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        },
+        "endingTime": {
+          "type": "string",
+          "format": "date-time",
+          "x-nullable": false,
+          "description": "End UTC time of the 24-hour period considered for indexer runtime usage (inclusive)."
+        }
+      },
+      "required": [
+        "usedSeconds",
+        "beginningTime",
+        "endingTime"
+      ],
+      "description": "Represents service level indexers runtime information."
+    },
     "ServiceLimits": {
       "type": "object",
       "properties": {
@@ -14504,6 +15126,12 @@
           "format": "int64",
           "x-nullable": true,
           "description": "The maximum amount of storage in bytes allowed per index."
+        },
+        "maxCumulativeIndexerRuntimeSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "x-nullable": true,
+          "description": "The maximum cumulative runtime in seconds allowed for all indexers in the service over the current UTC period."
         }
       },
       "description": "Represents various service level limits."
