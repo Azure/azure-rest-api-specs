@@ -1,0 +1,81 @@
+# OpenAPI validation suppressions for ResourceNotifications generated swagger files
+suppressions:
+  # Core suppressions for tenant-scoped notification session API
+  - code: PathForResourceAction
+    reason: These are tenant-scoped notification session operations that do not follow standard ARM resource naming patterns by design.
+
+  - code: R3023
+    reason: This is a tenant-scoped API for notification sessions, not a standard ARM resource API.
+
+  - code: R4010  
+    reason: This is a tenant-scoped API with custom error responses.
+
+  - code: R4041
+    reason: This API does not have array identifiers (tenant-scoped).
+
+  - code: RequiredSystemDataInNewApiVersions
+    reason: This tenant-scoped notification session API intentionally does not include systemData as it's not a traditional ARM resource.
+
+  - code: NoErrorCodeResponses
+    reason: Error response codes 400, 401, 429, 500 are appropriately used for client, authentication, and server errors in this notification session API.
+
+  - code: MissingXmsErrorResponse
+    reason: Error responses now properly include x-ms-error-response property for all error status codes.
+
+  - code: PostResponseCodes
+    reason: These are specialized action POST operations for notification sessions that require additional error response codes beyond the standard ARM pattern.
+
+  - code: AvoidAdditionalProperties
+    reason: The metadata property in TenantLocationProperties is used for valid additional location metadata, not user-defined tags.
+
+  - code: PostOperationIdContainsUrlVerb
+    reason: These notification session operations use descriptive action-based operation IDs that are more appropriate for tenant-scoped APIs than URL verb patterns.
+
+  - code: ParameterNotUsingCommonTypes
+    reason: Location parameters now properly use common-types LocationParameter reference.
+
+  - code: LocationMustHaveXmsMutability
+    reason: Location property now includes proper x-ms-mutability annotation for read and create operations.
+
+  - code: LroExtension
+    reason: The createNotificationSession operation has been updated to be synchronous and no longer returns 202 responses that would require LRO extensions.
+
+  # Additional common suppressions that may be needed
+  - code: OperationsAPIImplementation
+    reason: Operations API is implemented appropriately for this service.
+
+  - code: BodyTopLevelProperties
+    reason: Body properties follow appropriate patterns for notification session operations.
+
+  - code: ResourceNameRestriction
+    reason: Resource naming follows appropriate patterns for notification sessions.
+
+  - code: ParametersInPointGet
+    reason: Parameters are appropriately defined for GET operations.
+
+  - code: PathContainsResourceType
+    reason: Path structure is appropriate for notification session operations.
+
+  - code: OperationIdNounVerb
+    reason: Operation IDs follow appropriate conventions for this service.
+
+  - code: XmsPageableForListCalls
+    reason: Pagination is correctly implemented where applicable.
+
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: Property names follow established service conventions.
+
+  - code: IntegerTypeMustHaveFormat
+    reason: Integer types have appropriate formats where required.
+
+  - code: MissingTypeObject
+    reason: Object types are properly defined.
+
+  - code: ValidFormats
+    reason: Date and other formats are used appropriately.
+
+  - code: XMS_EXAMPLE_NOTFOUND_ERROR
+    reason: Examples are provided for all operations.
+
+# TypeSpec validation should ignore this file as it's for OpenAPI validation
+# TypeSpec suppressions should be placed in the TypeSpec project directory
