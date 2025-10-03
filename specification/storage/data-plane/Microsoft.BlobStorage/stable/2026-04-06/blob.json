@@ -3710,6 +3710,12 @@
           },
           {
             "$ref": "#/parameters/BlobDeleteType"
+          },
+          {
+            "$ref": "#/parameters/AccessTierIfModifiedSince"
+          },
+          {
+            "$ref": "#/parameters/AccessTierIfUnmodifiedSince"
           }
         ],
         "responses": {
@@ -11310,6 +11316,32 @@
       "type": "string",
       "in": "path",
       "x-ms-skip-url-encoding": true
+    },
+    "AccessTierIfModifiedSince": {
+      "name": "x-ms-access-tier-if-modified-since",
+      "x-ms-client-name": "accessTierIfModifiedSince",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "date-time-rfc1123",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "blob-access-tier-request-conditions"
+      },
+      "description": "Specify this header value to operate only on a blob if the access-tier has been modified since the specified date/time."
+    },
+    "AccessTierIfUnmodifiedSince": {
+      "name": "x-ms-access-tier-if-unmodified-since",
+      "x-ms-client-name": "accessTierIfUnmodifiedSince",
+      "in": "header",
+      "required": false,
+      "type": "string",
+      "format": "date-time-rfc1123",
+      "x-ms-parameter-location": "method",
+      "x-ms-parameter-grouping": {
+        "name": "blob-access-tier-request-conditions"
+      },
+      "description": "Specify this header value to operate only on a blob if the access-tier has not been modified since the specified date/time."
     },
     "ApiVersionParameter": {
       "name": "x-ms-version",
