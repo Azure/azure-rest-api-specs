@@ -36,7 +36,7 @@ interface TilerBound {
       @pattern(".*")
       itemId: string;
     },
-    BoundsResponse
+    StacItemBounds
   >;
 }
 
@@ -143,7 +143,7 @@ interface TilerAvailableAssets {
       @pattern(".*")
       itemId: string;
     },
-    AvailableAssetsResponse
+    AvailableAssets
   >;
 }
 
@@ -178,7 +178,7 @@ interface TilerAssetStatistics {
 
       ...StatisticsQueryParameters;
     },
-    AssetStatisticsResponse
+    StacAssetStatistics
   >;
 }
 
@@ -250,7 +250,7 @@ interface TilerGeoJsonStatistics {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       ...StatisticsQueryParameters;
 
@@ -260,7 +260,7 @@ interface TilerGeoJsonStatistics {
       @body
       body: StacItemCollection;
     },
-    GeoJsonStatisticsStacItemCollectionResponse
+    GeoJsonStatisticsForStacItemCollection
   >;
 }
 
@@ -442,7 +442,7 @@ interface TilerTileJsonOperations {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonResponse
+    TileJsonMetaData
   >;
 }
 
@@ -502,7 +502,7 @@ interface TilerTileJsonTileMatrixSets {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonResponse
+    TileJsonMetaData
   >;
 }
 
@@ -560,7 +560,7 @@ interface TilerWmts {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    WmtsCapabilitiesResponse
+    WmtsCapabilities
   >;
 }
 
@@ -630,7 +630,7 @@ interface TilerPoints {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Point")
   @tag("Tiles for STAC Items")
-  @route("/data/collections/{collectionId}/items/{itemId}/point/{lon},{lat}")
+  @route("/data/collections/{collectionId}/items/{itemId}/point/{longitude},{latitude}")
   @get
   getPoint is Azure.Core.Foundations.Operation<
     {
@@ -654,13 +654,13 @@ interface TilerPoints {
        * Longitude
        */
       @path
-      lon: float64;
+      longitude: float64;
 
       /**
        * Latitude
        */
       @path
-      lat: float32;
+      latitude: float32;
 
       ...AssetQueryParameters;
 
@@ -668,7 +668,7 @@ interface TilerPoints {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -881,7 +881,7 @@ interface TilerParts {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -954,7 +954,7 @@ interface TilerParts {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -1035,7 +1035,7 @@ interface TilerGeoJsons {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.
@@ -1106,7 +1106,7 @@ interface TilerGeoJsons {
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
 
       /**
        * Resampling method.

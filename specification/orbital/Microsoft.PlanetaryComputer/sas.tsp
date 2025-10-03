@@ -11,7 +11,7 @@ namespace Microsoft.PlanetaryComputer;
  * Represents a Shared Access Signature (SAS) token response for accessing Azure Blob Storage.
  */
 @summary("Managed Storage Shared Access Signature (SAS) Token")
-model ManagedStorageSharedAccessSignatureToken {
+model SharedAccessSignatureToken {
   /**
    * The expiration date and time of the SAS token in UTC.
    */
@@ -30,7 +30,7 @@ model ManagedStorageSharedAccessSignatureToken {
  * The expiry field will be null for unsigned links.
  */
 @summary("UnsignedLink")
-model UnsignedLink {
+model SignedLink {
   /**
    * The expiry date of the signed link. This indicates when the link will no longer be valid.
    */
@@ -57,7 +57,7 @@ model TokenResponse {
    * Response body
    */
   @body
-  body: ManagedStorageSharedAccessSignatureToken;
+  body: SharedAccessSignatureToken;
 }
 
 /**
@@ -75,7 +75,7 @@ model SignedHrefResponse {
    */
   @summary("Response Signed Href Api Sign Get")
   @body
-  body?: UnsignedLink;
+  body?: SignedLink;
 }
 
 interface Sas {

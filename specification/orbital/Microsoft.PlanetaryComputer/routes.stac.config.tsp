@@ -232,7 +232,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       collectionId: string;
     },
-    Mosaic[]
+    StacMosaic[]
   >;
   /**
    * Add a mosaic definition to a given collection
@@ -256,14 +256,14 @@ interface StacCollectionMosaics {
        * Mosaic definition to be created or updated.
        */
       @body
-      body: Mosaic;
+      body: StacMosaic;
     },
     {
       ...CreatedResponse;
 
       @body
-      body: Mosaic;
-    } | Mosaic
+      body: StacMosaic;
+    } | StacMosaic
   >;
   /**
    * Get a mosaic definition from a given collection
@@ -291,7 +291,7 @@ interface StacCollectionMosaics {
       @pattern(".*")
       mosaicId: string;
     },
-    Mosaic
+    StacMosaic
   >;
   /**
    * Update a mosaic definition from a given collection
@@ -323,14 +323,14 @@ interface StacCollectionMosaics {
        * Mosaic definition to be created or updated.
        */
       @body
-      body: Mosaic;
+      body: StacMosaic;
     },
     {
       ...CreatedResponse;
 
       @body
-      body: Mosaic;
-    } | Mosaic
+      body: StacMosaic;
+    } | StacMosaic
   >;
   /**
    * Delete a mosaic definition from a given collection
@@ -626,7 +626,7 @@ interface StacCollectionPartitionTypes {
       @body
       body: PartitionType;
     },
-    OkResponse
+    OkResponse | NotFoundResponse
   >;
 }
 

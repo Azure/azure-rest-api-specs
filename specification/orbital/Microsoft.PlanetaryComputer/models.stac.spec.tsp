@@ -9,7 +9,7 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Defines the sorting directions for query results in STAC API.
  */
-union StacQueryResultsSortingDirection {
+union StacSearchSortingDirection {
   string,
 
   /**
@@ -112,8 +112,8 @@ union StacItemCollectionType {
  *
  * Represents the STAC API landing page with links to available resources.
  */
-model LandingPage {
-  ...MicrosoftStacProperties;
+model StacLandingPage {
+  ...StacMicrosoftProperties;
   ...StacExtensionsList;
 
   /**
@@ -147,7 +147,7 @@ model LandingPage {
   /**
    * Links to related resources and endpoints.
    */
-  links: Link[];
+  links: StacLink[];
 
   /**
    * Type
@@ -162,7 +162,7 @@ model LandingPage {
  *
  * Represents the OGC API conformance declaration.
  */
-model ConformanceClasses {
+model StacConformanceClasses {
   /**
    * List of OGC API conformance classes implemented by this API.
    */
@@ -174,7 +174,7 @@ model ConformanceClasses {
  * *
  * Defines parameters for a STAC search POST request.
  */
-model SearchOptions {
+model StacSearchParameters {
   /**
    * List of collection IDs to search within.
    */
@@ -293,7 +293,7 @@ model SortExtension {
   /**
    * The sort direction (ascending or descending).
    */
-  direction: StacQueryResultsSortingDirection;
+  direction: StacSearchSortingDirection;
 }
 
 /**
@@ -323,11 +323,11 @@ model SearchOptionsFields {
  *
  * Represents a collection of STAC collections with links.
  */
-model FeatureCollections {
+model StacCatalogCollections {
   /**
    * Links to related resources and endpoints.
    */
-  links: Link[];
+  links: StacLink[];
 
   /**
    * Array of STAC collections available in the catalog.
@@ -344,7 +344,7 @@ model FeatureCollections {
  */
 @resource("collections")
 model StacCollection {
-  ...MicrosoftStacProperties;
+  ...StacMicrosoftProperties;
   ...StacExtensionsList;
 
   /**
@@ -373,7 +373,7 @@ model StacCollection {
   /**
    * Links to related resources and endpoints.
    */
-  links: Link[];
+  links: StacLink[];
 
   /**
    * Human-readable title for the collection.
@@ -389,7 +389,7 @@ model StacCollection {
   /**
    * Assets
    */
-  assets?: Record<Asset>;
+  assets?: Record<StacAsset>;
 
   /**
    * License identifier for the collection data.
@@ -410,7 +410,7 @@ model StacCollection {
   /**
    * Organizations or individuals who provide the collection data.
    */
-  providers?: Provider[];
+  providers?: StacProvider[];
 
   /**
    * Summaries
@@ -428,9 +428,9 @@ model StacCollection {
  * Represents a STAC asset, which is a file or resource associated with a STAC item.
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model Asset {
+model StacAsset {
   ...Record<unknown>;
-  ...CommonMetadata;
+  ...StacCommonMetadata;
 
   /**
    * Human-readable title for the asset.
@@ -465,7 +465,7 @@ model Asset {
  *
  * Represents information about a data provider for STAC collections and items.
  */
-model Provider {
+model StacProvider {
   /**
    * Name of the provider organization or individual.
    */
@@ -572,7 +572,7 @@ model StacQueryable {
  *
  * Context information for a search response including pagination details.
  */
-model ContextExtension {
+model StacContextExtension {
   /**
    * Number of items returned in the response.
    */
@@ -622,9 +622,9 @@ model StacItemOrStacItemCollection {
   /**
    * Links to related resources and endpoints.
    */
-  links?: Link[];
+  links?: StacLink[];
 
-  ...MicrosoftStacProperties;
+  ...StacMicrosoftProperties;
   ...StacExtensionsList;
 }
 
@@ -657,12 +657,12 @@ model StacItem extends StacItemOrStacItemCollection {
    * Attributes associated with the feature
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  properties: ItemProperties;
+  properties: StacItemProperties;
 
   /**
    * Assets
    */
-  assets: Record<Asset>;
+  assets: Record<StacAsset>;
 
   /**
    * MSFT Timestamp
@@ -683,9 +683,9 @@ model StacItem extends StacItemOrStacItemCollection {
  * https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/item-spec.md#properties-object
  */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-model ItemProperties {
+model StacItemProperties {
   ...Record<unknown>;
-  ...CommonMetadata;
+  ...StacCommonMetadata;
 
   /**
    * Human-readable title for the item.
@@ -741,13 +741,13 @@ model StacItemCollection extends StacItemOrStacItemCollection {
   /**
    * Context information for the search response.
    */
-  context?: ContextExtension;
+  context?: StacContextExtension;
 }
 
 /**
  * Microsoft STAC Properties
  */
-model MicrosoftStacProperties {
+model StacMicrosoftProperties {
   /**
    * MSFT Created
    */
@@ -771,7 +771,7 @@ model MicrosoftStacProperties {
 /**
  * Common Metadata
  */
-model CommonMetadata {
+model StacCommonMetadata {
   /**
    * Platform that acquired the data.
    */
@@ -795,7 +795,7 @@ model CommonMetadata {
   /**
    * Organizations or individuals who provide the data.
    */
-  providers?: Provider[];
+  providers?: StacProvider[];
 
   /**
    * Ground sample distance in meters.
@@ -832,7 +832,7 @@ model StacExtensionsList {
  *
  * Represents a link.
  */
-model Link {
+model StacLink {
   /**
    * The relationship type of the link.
    */
@@ -846,7 +846,7 @@ model Link {
   /**
    * The MIME type of the linked resource.
    */
-  type?: LinkType = LinkType.`application/json`;
+  type?: StacLinkType = StacLinkType.`application/json`;
 
   /**
    * The URL of the link.
@@ -893,7 +893,7 @@ model Link {
 /**
  * MIME types for links.
  */
-union LinkType {
+union StacLinkType {
   string,
 
   /**

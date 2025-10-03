@@ -889,7 +889,7 @@ interface StacCollections {
       @query("duration")
       durationInMinutes?: int32;
     },
-    FeatureCollections
+    StacCatalogCollections
   >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."

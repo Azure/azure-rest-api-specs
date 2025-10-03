@@ -204,7 +204,7 @@ union TileAddressingScheme {
 /**
  * Type of metadata resource in the system
  */
-union MetadataType {
+union MosaicMetadataType {
   string,
 
   /**
@@ -293,7 +293,7 @@ union TilerImageExportFormat {
 /**
  * Geographic extent of a dataset expressed as a bounding box
  */
-model BoundsResponse {
+model StacItemBounds {
   /**
    * Array of coordinates defining the bounding box [west, south, east, north]
    */
@@ -340,12 +340,13 @@ model TilerInfoGeoJsonFeature {
 /**
  * TileJSON metadata describing a tile set according to the TileJSON specification
  */
-model TileJsonResponse {
+model TileJsonMetaData {
   /**
    * TileJson
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  tilejson?: string = "2.2.0";
+  @encodedName("application/json", "tilejson")
+  tileJson?: string = "2.2.0";
 
   /**
    * Human-readable name of the tile set

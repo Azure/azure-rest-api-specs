@@ -15,18 +15,14 @@ using Microsoft.PlanetaryComputer;
 namespace Customizations;
 
 // Client name conflicts
-@@clientName(Ingestions, "IngestionsManagement", "csharp");
-@@clientName(StacItems, "StacItemsManagement", "csharp");
 @@clientName(IngestionOperations, "IngestionOperationsManagement", "csharp");
-@@clientName(IngestionSources, "IngestionSourcesManagement", "csharp");
 @@clientName(TilerInfoOperations, "TilerInfoManagement", "csharp");
-@@clientName(StacCollections, "StacCollectionManagement", "csharp");
 // @@clientName(StacItemOrStacItemCollection,
 //   "StacItemOrStacItemCollectionContent",
 //   "csharp"
 // );
-@@clientName(ItemProperties.datetime, "date_time", "python");
-@@clientName(SearchOptions.datetime, "date_time", "python");
+@@clientName(StacItemProperties.datetime, "date_time", "python");
+@@clientName(StacSearchParameters.datetime, "date_time", "python");
 
 // Disable convenient API for JSON-Merge patch operations
 @@convenientAPI(Ingestions.update, false, "csharp,java");
@@ -36,17 +32,12 @@ namespace Customizations;
 @@alternateType(IntervalLegendsResponse.body, Record<unknown>[]);
 
 // Use CQL2-TEXT for strongly typed languages
-@@alternateType(SearchOptions.filter, string, "csharp,java");
+@@alternateType(StacSearchParameters.filter, string, "csharp,java");
 @@alternateType(RegisterMosaic.filter, string, "csharp,java");
 
 // Address naming convention violations for C# SDK
 // Models ending with "Response" - rename to "Result"
-@@clientName(AssetStatisticsResponse, "AssetStatisticsResult", "csharp");
-@@clientName(BoundsResponse, "BoundsResult", "csharp");
-@@clientName(GeoJsonStatisticsStacItemCollectionResponse,
-  "GeoJsonStatisticsStacItemCollectionResult",
-  "csharp"
-);
+@@clientName(StacAssetStatistics, "AssetStatisticsResult", "csharp");
 
 @@clientName(GeoJsonStatisticsItemResponse,
   "GeoJsonStatisticsItemResult",
@@ -58,7 +49,6 @@ namespace Customizations;
   "csharp"
 );
 @@clientName(StatisticsResponse, "StatisticsResult", "csharp");
-@@clientName(TileJsonResponse, "TileJsonResult", "csharp");
 @@clientName(IngestionSourcesPagedResponse,
   "IngestionSourcesPagedResult",
   "csharp"
@@ -66,7 +56,7 @@ namespace Customizations;
 
 // Models ending with "Request" - rename to "Content"
 @@clientName(ImageRequest, "ImageContent", "csharp");
-@@clientName(SearchOptions, "SearchPostContent", "csharp");
+@@clientName(StacSearchParameters, "SearchPostContent", "csharp");
 
 // Models ending with "Definition" - rename appropriately
 @@clientName(StacQueryable, "QueryableProperty", "csharp");
@@ -77,14 +67,9 @@ namespace Customizations;
 @@clientName(IngestionRunOperation, "IngestionRunInfo", "csharp");
 
 // Generic single-word class names - add descriptive prefixes
-@@clientName(Asset, "StacAsset", "csharp");
-@@clientName(Link, "StacLink", "csharp");
-@@clientName(Metadata, "MosaicMetadata", "csharp");
 @@clientName(Geometry, "GeoJsonGeometry", "csharp");
 @@clientName(Point, "GeoJsonPoint", "csharp");
-@@clientName(Mosaic, "StacMosaic", "csharp");
 @@clientName(Polygon, "GeoJsonPolygon", "csharp");
-@@clientName(Provider, "StacProvider", "csharp");
 @@clientName(Resampling, "ResamplingMethod", "csharp");
 @@clientName(TileMatrixSetId, "TileMatrixSetId", "csharp");
 
@@ -277,7 +262,7 @@ interface Tiler {
   getLegend is MapsLegends.get;
 
   // Mosaic Assets
-  getAssetsForPoint is MosaicsAssetsForPoints.getPointAssets;
+  getMosaicsAssetsForPoint is MosaicsAssetsForPoints.getPointAssets;
   getMosaicsAssetsForTile is MosaicsAssetsForTileMatrixSets.getZxyAssets;
   // getMosaicsAssetsForTile is MosaicsAssetsForTiles.getZxyAssets;
 

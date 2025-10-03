@@ -136,17 +136,17 @@ model RegisterMosaic {
   /**
    * Additional metadata to associate with the mosaic
    */
-  metadata?: Metadata;
+  metadata?: MosaicMetadata;
 }
 
 /**
  * Metadata information for mosaic or search results
  */
-model Metadata {
+model MosaicMetadata {
   /**
    * Type of metadata resource
    */
-  type?: MetadataType = MetadataType.mosaic;
+  type?: MosaicMetadataType = MosaicMetadataType.mosaic;
 
   /**
    * Geographic bounding box in [west, south, east, north] format
@@ -194,7 +194,7 @@ model TilerMosaicSearchRegistrationResponse {
   /**
    * Related links for the registered mosaic
    */
-  links?: Link[];
+  links?: StacLink[];
 }
 
 /**
@@ -211,7 +211,7 @@ model TilerStacSearchRegistration {
   /**
    * Related links for the search query
    */
-  links?: Link[];
+  links?: StacLink[];
 }
 
 /**
@@ -263,7 +263,7 @@ model TilerStacSearchDefinition {
   /**
    * Additional metadata associated with the search
    */
-  metadata: Metadata;
+  metadata: MosaicMetadata;
 }
 
 /**

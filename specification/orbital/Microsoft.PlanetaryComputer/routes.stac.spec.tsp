@@ -16,7 +16,7 @@ interface StacLandingPages {
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac")
   @get
-  get is Azure.Core.Foundations.Operation<{}, LandingPage>;
+  get is Azure.Core.Foundations.Operation<{}, StacLandingPage>;
 }
 
 interface StacConformanceClass {
@@ -28,7 +28,7 @@ interface StacConformanceClass {
   @tag("SpatioTemporal Asset Catalog (STAC) API")
   @route("/stac/conformance")
   @get
-  get is Azure.Core.Foundations.Operation<{}, ConformanceClasses>;
+  get is Azure.Core.Foundations.Operation<{}, StacConformanceClasses>;
 }
 
 interface StacSearch {
@@ -139,7 +139,7 @@ interface StacSearch {
        * Request body
        */
       @body
-      body: SearchOptions;
+      body: StacSearchParameters;
     },
     StacItemCollection
   >;

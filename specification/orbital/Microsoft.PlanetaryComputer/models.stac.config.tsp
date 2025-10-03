@@ -243,11 +243,11 @@ union PartitionTypeScheme {
 /**
  * Configuration for data mosaic visualization.
  */
-model MosaicInfo {
+model StacMosaicConfiguration {
   /**
    * Predefined data mosaics available for this collection.
    */
-  mosaics: Mosaic[];
+  mosaics: StacMosaic[];
 
   /**
    * Available render options for visualizing the data.
@@ -269,7 +269,7 @@ model MosaicInfo {
 /**
  * Defines a named mosaic with filtering criteria.
  */
-model Mosaic {
+model StacMosaic {
   /**
    * Unique identifier for the mosaic.
    */
@@ -308,7 +308,8 @@ model UserCollectionSettings {
   /**
    * Settings for data mosaic visualization.
    */
-  mosaicInfo: MosaicInfo;
+  @encodedName("application/json", "mosaicInfo")
+  mosaicConfiguration: StacMosaicConfiguration;
 }
 
 /**

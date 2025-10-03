@@ -229,7 +229,7 @@ interface MosaicsTileJsonOperations {
       @query("return_mask")
       returnMask?: boolean = true;
     },
-    TileJsonResponse
+    TileJsonMetaData
   >;
 }
 
@@ -283,7 +283,7 @@ interface MosaicsTileMatrixSetsTileJson {
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonResponse
+    TileJsonMetaData
   >;
 }
 
@@ -501,7 +501,7 @@ interface MosaicsAssetsForPoints {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Assets For Point")
   @tag("Tiles for STAC Collections Mosaics")
-  @route("/data/mosaic/{searchId}/{lon},{lat}/assets")
+  @route("/data/mosaic/{searchId}/{longitude},{latitude}/assets")
   @get
   getPointAssets is Azure.Core.Foundations.Operation<
     {
@@ -519,20 +519,20 @@ interface MosaicsAssetsForPoints {
        * Longitude
        */
       @path
-      lon: float32;
+      longitude: float32;
 
       /**
        * Latitude
        */
       @path
-      lat: float32;
+      latitude: float32;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
        */
       @query("coord-crs")
-      coordCrs?: string;
+      coordinateReferenceSystem?: string;
     },
-    Asset[]
+    StacAsset[]
   >;
 }

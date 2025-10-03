@@ -361,7 +361,7 @@ union NoDataType {
 /**
  * Return a list of supported assets.
  */
-model AvailableAssetsResponse {
+model AvailableAssets {
   /**
    * status code for available assets response
    */
@@ -378,7 +378,7 @@ model AvailableAssetsResponse {
 /**
  * Return dataset's statistics.
  */
-model AssetStatisticsResponse {
+model StacAssetStatistics {
   /**
    * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
    */
@@ -492,7 +492,7 @@ model StatisticsResponse is Record<BandStatistics>;
 /**
  * Successful Response
  */
-model WmtsCapabilitiesResponse {
+model WmtsCapabilities {
   /**
    * status code for wmts capabilities
    */
@@ -516,7 +516,7 @@ model WmtsCapabilitiesResponse {
 /**
  * Collection of STAC items with statistical information
  */
-model GeoJsonStatisticsStacItemCollectionResponse {
+model GeoJsonStatisticsForStacItemCollection {
   /**
    * GeoJSON type identifier for StacItemCollection
    */
@@ -568,14 +568,14 @@ model GeoJsonStatisticsStacItemCollectionResponse {
   /**
    * Related links for the item collection
    */
-  links?: Link[];
+  links?: StacLink[];
 
   /**
    * Pagination context for the response
    *
    * See the [STAC Context Extension](https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification)
    */
-  context?: ContextExtension;
+  context?: StacContextExtension;
 }
 
 /**
@@ -583,7 +583,7 @@ model GeoJsonStatisticsStacItemCollectionResponse {
  */
 model GeoJsonStatisticsItemResponse {
   ...Feature;
-  ...MicrosoftStacProperties;
+  ...StacMicrosoftProperties;
 
   /**
    * Stac Version
@@ -601,7 +601,7 @@ model GeoJsonStatisticsItemResponse {
    * Properties
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  properties: ItemProperties;
+  properties: StacItemProperties;
 
   /**
    * MSFT Timestamp
