@@ -38,7 +38,7 @@ model DrillResourceProperties {
   resourceType: string;
 
   @doc("Inclusion State of the Drill resource in Drill")
-  inclusionState: DrillResourceInclusionState;
+  inclusionState?: DrillResourceInclusionState;
 
   @doc("Inclusion State of the Drill resource in Recovery Plan")
   @visibility(Lifecycle.Read)
