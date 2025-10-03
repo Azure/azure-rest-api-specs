@@ -2,7 +2,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 
 /**
@@ -62,17 +61,3 @@ model IntervalLegendsResponse {
  * Interval type alias.
  */
 alias Interval = int64[];
-
-/**
- * Classmap legend color.
- *
- * The color is represented as a 4-tuple of integers, each in the range [0, 255].
- * The first three integers represent the red, green, and blue components of the
- * color, respectively. The fourth integer represents the alpha (opacity) value.
- */
-alias RgbaColor = int64[];
-
-/**
- * Classmap legend response model.
- */
-model ClassmapLegendResponse is Record<RgbaColor>;

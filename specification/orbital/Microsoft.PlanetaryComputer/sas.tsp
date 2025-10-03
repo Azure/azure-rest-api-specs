@@ -10,14 +10,14 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Represents a Shared Access Signature (SAS) token response for accessing Azure Blob Storage.
  */
-@summary("SasToken")
-model SasToken {
+@summary("Managed Storage Shared Access Signature (SAS) Token")
+model SharedAccessSignatureToken {
   /**
    * The expiration date and time of the SAS token in UTC.
    */
   @summary("Msft:Expiry")
   @encodedName("application/json", "msft:expiry")
-  msftExpiry: utcDateTime;
+  expiresOn: utcDateTime;
 
   /**
    * The SAS token string used for authentication.
@@ -30,13 +30,13 @@ model SasToken {
  * The expiry field will be null for unsigned links.
  */
 @summary("UnsignedLink")
-model UnsignedLink {
+model SignedLink {
   /**
    * The expiry date of the signed link. This indicates when the link will no longer be valid.
    */
   @summary("Msft:Expiry")
   @encodedName("application/json", "msft:expiry")
-  msftExpiry?: utcDateTime;
+  expiresOn?: utcDateTime;
 
   /**
    * The URL of the unsigned link.
@@ -57,7 +57,7 @@ model TokenResponse {
    * Response body
    */
   @body
-  body: SasToken;
+  body: SharedAccessSignatureToken;
 }
 
 /**
@@ -75,7 +75,7 @@ model SignedHrefResponse {
    */
   @summary("Response Signed Href Api Sign Get")
   @body
-  body?: UnsignedLink;
+  body?: SignedLink;
 }
 
 interface Sas {
@@ -106,8 +106,8 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query
-    duration?: int64,
+    @query("duration")
+    durationInMinutes?: int64,
   ): TokenResponse | ErrorResponse;
 
   /**
@@ -129,8 +129,8 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query
-    duration?: int64,
+    @query("duration")
+    durationInMinutes?: int64,
   ): OkResponse | ErrorResponse;
 
   /**
@@ -159,7 +159,7 @@ interface Sas {
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
      */
     @summary("Duration")
-    @query
-    duration?: int64,
+    @query("duration")
+    durationInMinutes?: int64,
   ): SignedHrefResponse | ErrorResponse;
 }

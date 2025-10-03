@@ -32,18 +32,20 @@ model StatisticsQueryParameters {
   categorical?: boolean;
 
   /**
-   * List of values for which to report counts.
+   * List of pixel categorical values for which to report counts.
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query("c")
   @query(#{ explode: true })
-  c?: string[];
+  categoriesPixels?: string[];
 
   /**
    * List of percentile values (default to [2, 98]).
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
+  @query("p")
   @query(#{ explode: true })
-  p?: int32[];
+  percentiles?: int32[];
 
   /**
    *
@@ -173,7 +175,7 @@ model BoundingBoxPathParameters {
 /**
  * Response model for point query operations providing values at a specific location
  */
-model TitilerCoreModelsResponsesPoint {
+model TilerCoreModelsResponsesPoint {
   /**
    * Geographic coordinates [longitude, latitude] of the queried point
    */
@@ -245,7 +247,7 @@ model TilerInfo {
    */
   @summary("Nodata Type")
   @encodedName("application/json", "nodata_type")
-  nodataType?: NoDataType;
+  noDataType?: NoDataType;
 
   /**
    * Color interpretation
@@ -305,13 +307,15 @@ model TilerInfo {
    * Minzoom
    */
   @summary("Minzoom")
-  minzoom?: int64;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int64;
 
   /**
    * Maxzoom
    */
   @summary("Maxzoom")
-  maxzoom?: int64;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int64;
 }
 /**
  * Union type for band metadata elements
@@ -357,7 +361,7 @@ union NoDataType {
 /**
  * Return a list of supported assets.
  */
-model AvailableAssetsResponse {
+model AvailableAssets {
   /**
    * status code for available assets response
    */
@@ -374,7 +378,7 @@ model AvailableAssetsResponse {
 /**
  * Return dataset's statistics.
  */
-model AssetStatisticsResponse {
+model StacAssetStatistics {
   /**
    * Response Asset Statistics Api Collections  Collection Id  Items  Item Id  Asset Statistics Get
    */
@@ -488,7 +492,7 @@ model StatisticsResponse is Record<BandStatistics>;
 /**
  * Successful Response
  */
-model WmtsCapabilitiesResponse {
+model WmtsCapabilities {
   /**
    * status code for wmts capabilities
    */
@@ -512,11 +516,11 @@ model WmtsCapabilitiesResponse {
 /**
  * Collection of STAC items with statistical information
  */
-model GeoJsonStatisticsItemCollectionResponse {
+model GeoJsonStatisticsForStacItemCollection {
   /**
-   * GeoJSON type identifier for ItemCollection
+   * GeoJSON type identifier for StacItemCollection
    */
-  type: ItemCollectionType;
+  type: StacItemCollectionType;
 
   /**
    * Array of STAC items with statistics
@@ -526,7 +530,8 @@ model GeoJsonStatisticsItemCollectionResponse {
   /**
    * Bounding box coordinates [west, south, east, north]
    */
-  bbox?: float64[];
+  @encodedName("application/json", "bbox")
+  boundingBox?: float64[];
 
   /**
    * Stac Version
@@ -539,20 +544,20 @@ model GeoJsonStatisticsItemCollectionResponse {
    * MSFT Created
    */
   @encodedName("application/json", "msft:_created")
-  msftCreated?: string;
+  createdOn?: string;
 
   /**
    * MSFT Updated
    */
   @encodedName("application/json", "msft:_updated")
-  msftUpdated?: string;
+  updatedOn?: string;
 
   /**
    * MSFT Short Description
    */
   @maxLength(300)
-  @encodedName("application/json", "msft:short_description")
-  msftShortDescription?: string;
+  @encodedName("application/json", "short_description")
+  shortDescription?: string;
 
   /**
    * List of STAC extension URLs used by this item collection
@@ -563,15 +568,14 @@ model GeoJsonStatisticsItemCollectionResponse {
   /**
    * Related links for the item collection
    */
-  links?: Link[];
+  links?: StacLink[];
 
   /**
-   *
-   * https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification
-   *
    * Pagination context for the response
+   *
+   * See the [STAC Context Extension](https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification)
    */
-  context?: ContextExtension;
+  context?: StacContextExtension;
 }
 
 /**
@@ -579,7 +583,7 @@ model GeoJsonStatisticsItemCollectionResponse {
  */
 model GeoJsonStatisticsItemResponse {
   ...Feature;
-  ...MicrosoftStacProperties;
+  ...StacMicrosoftProperties;
 
   /**
    * Stac Version
@@ -597,19 +601,19 @@ model GeoJsonStatisticsItemResponse {
    * Properties
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  properties: ItemProperties;
+  properties: StacItemProperties;
 
   /**
    * MSFT Timestamp
    */
   @encodedName("application/json", "_msft:ts")
-  msftTimestamp?: string;
+  timestamp?: string;
 
   /**
    * MSFT ETag
    */
   @encodedName("application/json", "_msft:etag")
-  msftEtag?: string;
+  eTag?: string;
 
   /**
    * List of STAC extension URLs used by this item
