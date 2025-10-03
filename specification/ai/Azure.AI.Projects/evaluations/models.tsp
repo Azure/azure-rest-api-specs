@@ -71,6 +71,9 @@ model EvaluationRunOutputItemResult {
 /** Query and response excepted input messsage defintion. */
 @added(Versions.v2025_10_15_preview)
 model QueryResponseInlineMessage {
+  /** The object type, which is always query_response_inline_message. */
+  type: "azure_query_response_inline_message";
+
   /** The input query string provided by the user or system. Can be image url. */
   query: string;
 
