@@ -84,7 +84,7 @@ model QueryResponseInlineMessage {
   context?: string;
 
   /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
-  tools?: string[];
+  tools?: {}[];
 }
 
 /** OpenAI definition: Eval output results. */
