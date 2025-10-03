@@ -64,6 +64,10 @@ model DrillResourceProperties {
   @visibility(Lifecycle.Read)
   faultProperties?: FaultProperties;
 
+  @doc("ForceInclusion status for this resource. Has the customer forceIncluded it?")
+  @visibility(Lifecycle.Read)
+  forceInclusionState?: ForceInclusionAndUpdate;
+
   @doc("HA status of the Drill resource")
   @visibility(Lifecycle.Read)
   haStatus?: HAStatus;
