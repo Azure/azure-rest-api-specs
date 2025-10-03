@@ -144,6 +144,9 @@ model EvaluatorMetric {
 
   @doc("Maximum value for the metric. If not specified, it is assumed to be unbounded.")
   max_value?: float32;
+
+  @doc("Indicates if this metric is primary when there are multiple metrics.")
+  is_primary?: boolean;
 }
 
 @doc("The type of the evaluator")
