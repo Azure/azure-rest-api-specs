@@ -173,18 +173,18 @@ These settings apply only when `--tag=package-2025-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-11-01-preview'
 input-file:
-- preview/2025-11-01-preview/knowledgeagent.json
+- preview/2025-11-01-preview/knowledgebase.json
 - preview/2025-11-01-preview/searchservice.json
 - preview/2025-11-01-preview/searchindex.json
 ```
 
-### Tag: package-2025-11-knowledgeagent-preview
+### Tag: package-2025-11-knowledgebase-preview
 
-These settings apply only when `--tag=package-2025-11-knowledgeagent-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-11-knowledgebase-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-11-knowledgeagent-preview'
+``` yaml $(tag) == 'package-2025-11-knowledgebase-preview'
 input-file:
-- preview/2025-11-01-preview/knowledgeagent.json
+- preview/2025-11-01-preview/knowledgebase.json
 ```
 
 ### Tag: package-2025-11-searchservice-preview
