@@ -14,7 +14,7 @@ model ProductSummary {
   publisherId?: string;
 
   @doc("Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs")
-  azureBenefit?: string;
+  azureBenefit?: AzureBenefit;
 
   @doc("Displays certification and qualification badges earned by the product for marketplace visibility")
   badges?: string[];
