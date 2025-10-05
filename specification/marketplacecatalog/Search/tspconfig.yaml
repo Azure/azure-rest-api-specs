@@ -11,6 +11,48 @@ options:
     azure-resource-provider-folder: "data-plane"
     emitter-output-dir: "{project-root}/.."
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.Marketplace.Search"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-marketplace"
+    namespace: "com.azure.marketplace.search"
+    service-name: "search"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/search"
+    is-modular-library: true
+    flavor: "azure"
+    experimentalExtensibleEnums: true
+    experimental-extensible-enums: true
+    generateMetadata: true
+    hierarchyClient: false
+    enableOperationGroup: true
+    packageDetails:
+      name: "@azure/search"
+    package-details:
+      name: "@azure/search"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/search"
+    emitter-output-dir: "{output-dir}/{service-dir}/search"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/search"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-fakes: true
+    generate-samples: true
+    generate-examples: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-search"
+    package-name: "azure-marketplace-search"
+    namespace: "azure.marketplace.search"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
