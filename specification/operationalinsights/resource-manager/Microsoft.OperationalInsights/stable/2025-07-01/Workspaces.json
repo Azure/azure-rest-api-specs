@@ -913,7 +913,8 @@
       "default": "Enabled",
       "enum": [
         "Enabled",
-        "Disabled"
+        "Disabled",
+        "SecuredByPerimeter"
       ],
       "x-ms-enum": {
         "name": "PublicNetworkAccessType",
@@ -926,6 +927,10 @@
           {
             "value": "Disabled",
             "description": "Disables public connectivity to Log Analytics through public DNS."
+          },
+          {
+            "value": "SecuredByPerimeter",
+            "description": "Resource is only accessible from private networks and access approved by network security perimeter associated to this resource."
           }
         ]
       }
