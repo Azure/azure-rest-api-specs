@@ -318,6 +318,28 @@
         }
       }
     },
+    "AzureBenefit": {
+      "type": "string",
+      "description": "Azure benefit eligibility filter",
+      "enum": [
+        "Eligible",
+        "NotEligible"
+      ],
+      "x-ms-enum": {
+        "name": "AzureBenefit",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Eligible",
+            "value": "Eligible"
+          },
+          {
+            "name": "NotEligible",
+            "value": "NotEligible"
+          }
+        ]
+      }
+    },
     "DiscoveryErrorDetails": {
       "type": "object",
       "description": "Error details returned in DiscoveryErrorPayload",
@@ -567,7 +589,7 @@
           "description": "Publisher id"
         },
         "azureBenefit": {
-          "type": "string",
+          "$ref": "#/definitions/AzureBenefit",
           "description": "Indicates whether product purchases count toward Azure consumption commitment benefits for enterprise customers.\n- `Eligible` - Product costs apply to Azure consumption commitment benefit calculations and credits\n- `NotEligible` - Product costs do not qualify for Azure consumption commitment benefit programs"
         },
         "badges": {
