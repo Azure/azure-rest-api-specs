@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Defender for Cloud",
-    "description": "API spec for Microsoft.Security (Microsoft Defender for Cloud) resource provider",
+    "description": "API spec for Microsoft Defender for Cloud operation statuses.",
     "version": "2025-10-01-preview"
   },
   "host": "management.azure.com",
@@ -34,28 +34,37 @@
     }
   },
   "paths": {
-    "/providers/Microsoft.Security/operations": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Security/locations/{location}/operationStatuses/{operationId}": {
       "get": {
         "x-ms-examples": {
-          "List the operations for the Microsoft.Security (Microsoft Defender for Cloud) resource provider": {
-            "$ref": "./examples/Operations/ListOperations_example.json"
+          "Get operation status": {
+            "$ref": "./examples/OperationStatuses/GetOperationStatus.json"
           }
         },
         "tags": [
-          "Operations"
+          "OperationStatuses"
         ],
-        "description": "Exposes all available operations for discovery purposes.",
-        "operationId": "Operations_List",
+        "description": "Get the status of a long running azure asynchronous operation.",
+        "operationId": "OperationStatuses_Get",
         "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/OperationIdParameter"
+          },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
-            "description": "OK",
+            "description": "OK. Operation status.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationStatusResult"
             }
           },
           "default": {
@@ -64,9 +73,6 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     }
