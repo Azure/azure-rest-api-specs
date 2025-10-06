@@ -791,24 +791,6 @@ model JobMetadataEntity {
 }
 
 /**
- * Metadata for jobs.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
-#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-model JobMetadataDTOEntity {
-  /**
-   * Runs
-   */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  Runs: ScheduleScanMonitoringEntity[];
-
-  /**
-   * count
-   */
-  count: int64;
-}
-
-/**
  * Job history information.
  */
 model JobHistoryEntity {
@@ -1327,7 +1309,7 @@ model OpinionEntity {
   /**
    * Get value
    */
-  value?: Record<string>;
+  value?: string;
 
   /**
    * Get result At
