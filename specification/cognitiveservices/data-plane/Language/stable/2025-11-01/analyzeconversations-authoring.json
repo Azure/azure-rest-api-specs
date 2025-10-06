@@ -3438,8 +3438,11 @@
           "description": "Represents model training config version."
         },
         "assignedResources": {
-          "$ref": "#/definitions/AnalyzeConversationAuthoringProjectResourceInfo",
-          "description": "Represents the metadata of the assigned Azure resources."
+          "type": "array",
+          "description": "Represents the metadata of the assigned Azure resources.",
+          "items": {
+            "$ref": "#/definitions/AnalyzeConversationAuthoringProjectResourceInfo"
+          }
         }
       },
       "required": [

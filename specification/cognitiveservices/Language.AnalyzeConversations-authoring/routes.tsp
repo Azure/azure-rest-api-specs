@@ -69,7 +69,7 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
 @added(Versions.v2025_05_15_preview)
 @renamedFrom(Versions.v2025_11_01, "conversationAuthoringListDeploymentResources")
 op conversationAuthoringListProjectResources is languageOperations.ResourceList<
-  AnalyzeConversationAuthoringAssignedDeploymentResource,
+  AnalyzeConversationAuthoringProjectResourceInfo,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
 
@@ -223,7 +223,7 @@ interface ConversationAuthoringDeployment {
        */
       @body
       @clientName("details", "csharp")
-      body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
+      body: AnalyzeConversationAuthoringProjectAzureResourceIds;
     },
     AcceptedResponse,
     {},
@@ -269,7 +269,7 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
-      body: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
+      body: AnalyzeConversationAuthoringProjectResourceAssignments;
     },
     AcceptedResponse,
     {},
@@ -303,7 +303,7 @@ interface ConversationAuthoringProject {
       @body
       @clientName("details", "csharp")
       @typeChangedFrom(Versions.v2025_11_01, AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions)
-      body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
+      body: AnalyzeConversationAuthoringProjectAzureResourceIds;
     },
     AcceptedResponse,
     {},
@@ -315,7 +315,7 @@ interface ConversationAuthoringProject {
    */
   @added(Versions.v2025_05_15_preview)
   @renamedFrom(Versions.v2025_11_01, "getAssignDeploymentResourcesStatus")
-  getAssignProjectResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
+  getAssignProjectResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign project resources job.
@@ -340,7 +340,7 @@ interface ConversationAuthoringProject {
       @path
       jobId: string;
     },
-    AnalyzeConversationAuthoringDeploymentResourcesJobState,
+    AnalyzeConversationAuthoringProjectResourcesJobState,
     {},
     Foundations.ErrorResponse
   >;

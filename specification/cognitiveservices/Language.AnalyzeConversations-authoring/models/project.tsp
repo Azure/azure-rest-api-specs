@@ -439,7 +439,7 @@ model AnalyzeConversationAuthoringProjectDeployment {
    * Represents the metadata of the assigned Azure resources.
    */
   @added(Versions.v2025_05_15_preview)
-  @typeChangedFrom(Versions.v2025_11_01, AnalyzeConversationAuthoringDeploymentResource)
+  @typeChangedFrom(Versions.v2025_11_01, AnalyzeConversationAuthoringDeploymentResource[])
   assignedResources: AnalyzeConversationAuthoringProjectResourceInfo[];
 }
 
@@ -479,7 +479,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   /**
    * Represents the Language or AIService resource IDs that if provided,\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   assignedResourceIds?: string[];
 
   /**
