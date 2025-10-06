@@ -38,7 +38,7 @@ interface Evaluators {
 
   // GET /evaluators
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  @doc("List the latest version of each {name}", EvaluatorVersion)
+  @doc("List the latest version of each evaluator")
   @Rest.listsResource(EvaluatorVersion)
   listEvaluators is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
