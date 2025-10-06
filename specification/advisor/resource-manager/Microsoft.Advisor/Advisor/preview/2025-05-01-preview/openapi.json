@@ -2397,8 +2397,54 @@
         "displayName": {
           "type": "string",
           "description": "The display name."
+        },
+        "recommendationCategory": {
+          "$ref": "#/definitions/Category",
+          "description": "The category of the recommendation."
+        },
+        "recommendationImpact": {
+          "$ref": "#/definitions/Impact",
+          "description": "The business impact of the recommendation."
+        },
+        "recommendationSubCategory": {
+          "$ref": "#/definitions/Control",
+          "description": "The sub-category of the recommendation."
+        },
+        "supportedResourceType": {
+          "type": "string",
+          "description": "The resource type the recommendation applies to."
+        },
+        "descriptionOfChanges": {
+          "type": "array",
+          "description": "Description of changes.",
+          "items": {}
+        },
+        "properties": {
+          "type": "array",
+          "description": "Additional name/value properties.",
+          "items": {
+            "$ref": "#/definitions/NameValuePair"
+          }
         }
       }
+    },
+    "NameValuePair": {
+      "type": "object",
+      "description": "A simple name/value pair used in metadata properties.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The property name."
+        },
+        "value": {
+          "type": "string",
+          "description": "The property value."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
     },
     "OperationDisplayInfo": {
       "type": "object",
