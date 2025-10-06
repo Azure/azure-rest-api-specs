@@ -112,6 +112,7 @@ These settings apply only when `--tag=package-preview-2025-10-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-10-01-preview'
 input-file:
+  - Microsoft.Security/preview/2025-10-01-preview/operations.json
   - Microsoft.Security/preview/2025-10-01-preview/operationResults.json
   - Microsoft.Security/preview/2025-10-01-preview/operationStatuses.json
 ```
