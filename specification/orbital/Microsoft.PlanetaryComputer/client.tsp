@@ -83,7 +83,7 @@ namespace Customizations;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 @operationGroup
-interface Ingestion {
+interface IngestionClient {
   // Ingestion operations management
   cancelIngestionOperation is IngestionOperations.delete;
   cancelAllIngestionOperations is IngestionOperations.deleteAll;
@@ -114,7 +114,7 @@ interface Ingestion {
 // === SpatioTemporal Asset Catalog (STAC) API ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
-interface Stac {
+interface StacClient {
   // Collection Assets
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
   createCollectionAsset is StacCollectionAssets.create;
@@ -196,7 +196,7 @@ interface Stac {
 // === Tiles for STAC Items ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
-interface Tiler {
+interface TilerClient {
   // Tile Matrix Sets
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
   getTileMatrixList is TileMatrixList.get;
@@ -284,7 +284,7 @@ interface Tiler {
 // === Shared Access Signature (SAS) ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
-interface SharedAccessSignature {
+interface SharedAccessSignatureClient {
   // Sign HREF for read access
   getSign is Sas.getSign;
 
