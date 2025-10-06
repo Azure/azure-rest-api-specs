@@ -1325,7 +1325,7 @@ model OpinionEntity {
    */
   value?: Record<string>;
   /**
-   * Get resuled At
+   * Get result At
    */
   resultedAt: utcDateTime;
   /**
