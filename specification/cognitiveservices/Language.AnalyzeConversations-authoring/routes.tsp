@@ -116,6 +116,7 @@ op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 op conversationAuthoringListExportedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringExportedTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -542,6 +543,7 @@ interface ConversationAuthoringProject {
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
@@ -559,6 +561,7 @@ interface ConversationAuthoringProject {
   @pollingOperation(ConversationAuthoringProject.getCopyProjectStatus)
   @access(Access.internal, "python")
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   copyProject is Foundations.LongRunningOperation<
     {
       /**
@@ -584,6 +587,7 @@ interface ConversationAuthoringProject {
    * Gets the status of an existing copy project job.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
 
   /**
@@ -652,6 +656,7 @@ interface ConversationAuthoringExportedModel {
    * Gets the details of an exported model.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
 
   /**
@@ -664,6 +669,7 @@ interface ConversationAuthoringExportedModel {
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   @access(Access.internal, "python")
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -693,6 +699,7 @@ interface ConversationAuthoringExportedModel {
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   @access(Access.internal, "python")
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -723,6 +730,7 @@ interface ConversationAuthoringExportedModel {
    * Gets the status for an existing job to create or update an exported model.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
 }
 interface ConversationAuthoringTrainedModel {
@@ -744,6 +752,7 @@ interface ConversationAuthoringTrainedModel {
   @post
   @pollingOperation(ConversationAuthoringTrainedModel.getEvaluationStatus)
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   evaluateModel is Foundations.LongRunningOperation<
     {
       /**
@@ -802,6 +811,7 @@ interface ConversationAuthoringTrainedModel {
    * Gets the status for an evaluation job.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
 
   /**
