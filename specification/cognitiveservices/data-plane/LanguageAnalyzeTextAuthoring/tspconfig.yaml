@@ -21,13 +21,32 @@ options:
     flavor: azure
     generate-sample-project: false
   "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-textanalytics-authoring"
     package-name: "azure-ai-textanalytics-authoring"
     package-dir: "azure-ai-textanalytics-authoring"
     namespace: "azure.ai.textanalytics.authoring"
     generate-test: true
     generate-sample: true
-    flavor: "azure"
+    flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Language.Text.Authoring
     model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-language-textanalytics-authoring-rest"
+    package-details:
+      name: "@azure-rest/azure-ai-language-textanalytics-authoring"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-language-textanalytics-authoring"
+    namespace: com.azure.ai.language.textanalytics.authoring
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmanager"
+    service-dir: "sdk/ai-language-textanalytics-authoring"
+    emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure

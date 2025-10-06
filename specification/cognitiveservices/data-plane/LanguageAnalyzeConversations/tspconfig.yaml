@@ -20,12 +20,31 @@ options:
     namespace: "Azure.AI.Language.Conversations"
     flavor: azure
   "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-language-conversations"
     package-dir: "azure-ai-language-conversations"
     namespace: "azure.ai.language.conversations"
     generate-test: true
     generate-sample: true
-    flavor: "azure"
+    flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Language.Conversations
     model-namespace: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-language-conversations-rest"
+    package-details:
+      name: "@azure-rest/azure-ai-language-conversations"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-language-conversations"
+    namespace: com.azure.ai.language.conversations
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmanager"
+    service-dir: "sdk/ai-language-conversations"
+    emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure

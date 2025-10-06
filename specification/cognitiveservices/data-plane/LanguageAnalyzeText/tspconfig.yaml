@@ -20,13 +20,32 @@ options:
     namespace: "Azure.AI.Language.Text"
     flavor: azure
   "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-textanalytics"
     package-name: "azure-ai-textanalytics"
     package-dir: "azure-ai-textanalytics"
     namespace: "azure.ai.textanalytics"
     generate-test: true
     generate-sample: true
-    flavor: "azure"
+    flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Language.Text
     model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-language-textanalytics-rest"
+    package-details:
+      name: "@azure-rest/azure-ai-language-textanalytics"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-language-textanalytics"
+    namespace: com.azure.ai.language.textanalytics
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmanager"
+    service-dir: "sdk/ai-language-textanalytics"
+    emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure

@@ -19,7 +19,32 @@ options:
     model-namespace: false
     namespace: "Azure.AI.Language.Documents"
     flavor: azure
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-language-documents"
+    package-dir: "azure-ai-language-documents"
+    namespace: "azure.ai.language.documents"
+    generate-test: true
+    generate-sample: true
+    flavor: azure
   "@azure-typespec/http-client-csharp":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.AI.Language.Documents
     model-namespace: false
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-language-documents-rest"
+    package-details:
+      name: "@azure-rest/azure-ai-language-documents"
+    flavor: azure
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-language-documents"
+    namespace: com.azure.ai.language.documents
+    flavor: azure
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azmanager"
+    service-dir: "sdk/ai-language-documents"
+    emitter-output-dir: "{output-dir}/{service-dir}/azmanager"
+    generate-fakes: true
+    inject-spans: true
+    single-client: true
+    slice-elements-byval: true
+    flavor: azure
