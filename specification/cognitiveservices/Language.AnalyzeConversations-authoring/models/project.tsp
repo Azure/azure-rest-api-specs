@@ -433,7 +433,6 @@ model AnalyzeConversationAuthoringProjectDeployment {
    * Represents the metadata of the assigned Azure resources.
    */
   @added(Versions.v2025_11_01)
-  @typeChangedFrom(Versions.v2025_11_15_preview, AnalyzeConversationAuthoringDeploymentResourceInfo)
   assignedResources: AnalyzeConversationAuthoringDeploymentResource[];
 }
 
@@ -469,7 +468,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   trainedModelLabel: string;
 
   /**
-   * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
+   * Represents the Language or AIService resource IDs that if provided,\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2025_11_01)
   @removed(Versions.v2025_11_15_preview)
@@ -483,11 +482,11 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
 }
 
 /**
- * Represents the options for deleting a project deployment.
+ * Represents the payload for deleting a project deployment.
  */
-model AnalyzeConversationAuthoringDeploymentAzureResourceIds {
+model AnalyzeConversationAuthoringProjectAzureResourceIds {
   /**
-   * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
+   * Represents the Language or AIService resource IDs to unassign from the project or delete the deployment from.
    */
   assignedResourceIds?: string[];
 }
@@ -1007,7 +1006,7 @@ model AnalyzeConversationAuthoringDeploymentResourcesInfoList {
   /**
    * The list of assigned deployment resources.
    */
-  value: AnalyzeConversationAuthoringDeploymentResourceInfo[];
+  value: AnalyzeConversationAuthoringProjectResourceInfo[];
 
   /**
    * The next page link.
@@ -1016,41 +1015,40 @@ model AnalyzeConversationAuthoringDeploymentResourcesInfoList {
 }
 
 /**
- * Represents the assigned deployment resource.
+ * Represents the assigned project resource.
  */
 @added(Versions.v2025_11_01)
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-model AnalyzeConversationAuthoringDeploymentResourceInfo {
+model AnalyzeConversationAuthoringProjectResourceInfo {
   /**
-   * The resource ID.
+   * The Azure resource ID of the language or AI resource.
    */
   @key
   @visibility(Lifecycle.Read)
   azureResourceId: string;
 
   /**
-   * The resource region.
+   * The Azure resource region.
    */
   region: string;
 }
 
 /**
- * Represents the options for assigning Azure resources to a project.
+ * Represents the payload for assigning Azure resources to a project.
  */
 @added(Versions.v2025_11_01)
-model AnalyzeConversationAuthoringDeploymentResourceAssignments {
+model AnalyzeConversationAuthoringProjectResourceAssignments {
   /**
-   * Represents the metadata for the resources to be assigned.
+   * Represents the metadata for the project resources to be assigned.
    */
-  @renamedFrom(Versions.v2025_11_01, "deploymentResources")
-  resourcesMetadata: AnalyzeConversationAuthoringDeploymentResourceAssignmentInfo[];
+  projectResources: AnalyzeConversationAuthoringProjectResourceAssignmentInfo[];
 }
 
 /**
  * Represents metadata for the Azure resource..
  */
-model AnalyzeConversationAuthoringDeploymentResourceAssignmentInfo {
+model AnalyzeConversationAuthoringProjectResourceAssignmentInfo {
   /**
    * Represents the Azure resource ID.
    */
@@ -1079,12 +1077,12 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
 }
 
 /**
- * Represents the state of a deployment resources job.
+ * Represents the state of a project resources job.
  */
 @added(Versions.v2025_11_01)
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-model AnalyzeConversationAuthoringDeploymentResourcesJobState {
+model AnalyzeConversationAuthoringProjectResourcesJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
 
