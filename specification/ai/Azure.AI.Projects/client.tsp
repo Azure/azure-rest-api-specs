@@ -29,17 +29,49 @@ using Azure.ClientGenerator.Core;
 // More accurate naming
 @@clientName(Azure.AI.Projects.AssetCredentialResponse, "DatasetCredential");
 
-// In Python, the emitter changes "keys" to "keys_property", since there is already
-// a "keys" method in the generated code due to usage of MutableMapping. Call it credential_keys instead.
-@@clientName(Azure.AI.Projects.CustomCredential.keys,
-  "credential_keys",
-  "python"
-);
-
 // Less generic names for C# SDK (avoid one-word class names)
-@@clientName(Azure.AI.Projects.Connection, "ConnectionProperties", "csharp");
-@@clientName(Azure.AI.Projects.Deployment, "AssetDeployment", "csharp");
-@@clientName(Azure.AI.Projects.Index, "SearchIndex", "csharp");
+@@clientName(Azure.AI.Projects.BlobReference,
+  "AIProjectBlobReference",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Connection, "AIProjectConnection", "csharp");
+@@clientName(Azure.AI.Projects.Deployment, "AIProjectDeployment", "csharp");
+@@clientName(Azure.AI.Projects.DeploymentType,
+  "AIProjectDeploymentType",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.FieldMapping,
+  "AIProjectIndexFieldMapping",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Index, "AIProjectIndex", "csharp");
+@@clientName(Azure.AI.Projects.CosmosDBIndex,
+  "AIProjectCosmosDBIndex",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.BaseCredentials,
+  "AIProjectConnectionBaseCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.ApiKeyCredentials,
+  "AIProjectConnectionApiKeyCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.CustomCredential,
+  "AIProjectConnectionCustomCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.EntraIDCredentials,
+  "AIProjectConnectionEntraIdCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.SASCredentials,
+  "AIProjectConnectionSasCredential",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.DatasetVersion, "AIProjectDataset", "csharp");
+@@clientName(Azure.AI.Projects.FileDatasetVersion, "FileDataset", "csharp");
+@@clientName(Azure.AI.Projects.FolderDatasetVersion, "FolderDataset", "csharp");
 
 // Do not use terms "request" or "response" in C# class names as these are REST API terms
 @@clientName(Azure.AI.Projects.PendingUploadRequest,
@@ -52,10 +84,19 @@ using Azure.ClientGenerator.Core;
 );
 
 // Less generic names for C# subclients
-@@clientName(Azure.AI.Projects.Connections, "ConnectionsOperations", "csharp");
-@@clientName(Azure.AI.Projects.Datasets, "DatasetsOperations", "csharp");
-@@clientName(Azure.AI.Projects.Deployments, "DeploymentsOperations", "csharp");
-@@clientName(Azure.AI.Projects.Indexes, "IndexesOperations", "csharp");
+@@clientName(Azure.AI.Projects.Connections,
+  "AIProjectConnectionsOperations",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Datasets,
+  "AIProjectDatasetsOperations",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Deployments,
+  "AIProjectDeploymentsOperations",
+  "csharp"
+);
+@@clientName(Azure.AI.Projects.Indexes, "AIProjectIndexesOperations", "csharp");
 
 // Need to explicitly make all get and list methods include the object name for C#
 @@clientName(Azure.AI.Projects.Connections.get, "getConnection", "csharp");
