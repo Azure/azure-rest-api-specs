@@ -1702,7 +1702,8 @@
             "type": "string",
             "enum": [
               "EvaluationRunClusterInsight",
-              "AgentClusterInsight"
+              "AgentClusterInsight",
+              "EvaluationComparison"
             ],
             "x-ms-enum": {
               "name": "InsightType",
@@ -1717,6 +1718,11 @@
                   "name": "AgentClusterInsight",
                   "value": "AgentClusterInsight",
                   "description": "Cluster Insight on an Agent."
+                },
+                {
+                  "name": "EvaluationComparison",
+                  "value": "EvaluationComparison",
+                  "description": "Evaluation Comparison."
                 }
               ]
             }
@@ -3026,6 +3032,32 @@
         "clusters"
       ]
     },
+    "ClusterTokenUsage": {
+      "type": "object",
+      "description": "Token usage for cluster analysis",
+      "properties": {
+        "inputTokenUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "input token usage"
+        },
+        "outputTokenUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "output token usage"
+        },
+        "totalTokenUsage": {
+          "type": "integer",
+          "format": "int32",
+          "description": "total token usage"
+        }
+      },
+      "required": [
+        "inputTokenUsage",
+        "outputTokenUsage",
+        "totalTokenUsage"
+      ]
+    },
     "CodeBasedEvaluatorDefinition": {
       "type": "object",
       "description": "Code-based evaluator definition using python code",
@@ -3580,6 +3612,33 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "EvalCompareReport": {
+      "type": "object",
+      "description": "Insights from the evaluation comparison.",
+      "properties": {
+        "comparisons": {
+          "type": "array",
+          "description": "Comparison results for each treatment run against the baseline.",
+          "items": {
+            "$ref": "#/definitions/EvalRunResultComparison"
+          }
+        },
+        "method": {
+          "type": "string",
+          "description": "The statistical method used for comparison."
+        }
+      },
+      "required": [
+        "comparisons",
+        "method"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationComparison"
+    },
     "EvalResult": {
       "type": "object",
       "description": "Result of the evaluation.",
@@ -3607,6 +3666,108 @@
         "type",
         "score",
         "passed"
+      ]
+    },
+    "EvalRunResultCompareItem": {
+      "type": "object",
+      "description": "Metric comparison for a treatment against the baseline.",
+      "properties": {
+        "treatmentRunId": {
+          "type": "string",
+          "description": "The treatment run ID."
+        },
+        "treatmentRunSummary": {
+          "$ref": "#/definitions/EvalRunResultSummary",
+          "description": "Summary statistics of the treatment run."
+        },
+        "deltaEstimate": {
+          "type": "number",
+          "format": "float",
+          "description": "Estimated difference between treatment and baseline."
+        },
+        "pValue": {
+          "type": "number",
+          "format": "float",
+          "description": "P-value for the treatment effect."
+        },
+        "treatmentEffect": {
+          "$ref": "#/definitions/TreatmentEffectType",
+          "description": "Type of treatment effect."
+        }
+      },
+      "required": [
+        "treatmentRunId",
+        "treatmentRunSummary",
+        "deltaEstimate",
+        "pValue",
+        "treatmentEffect"
+      ]
+    },
+    "EvalRunResultComparison": {
+      "type": "object",
+      "description": "Comparison results for treatment runs against the baseline.",
+      "properties": {
+        "testingCriteria": {
+          "type": "string",
+          "description": "Name of the testing criteria."
+        },
+        "metric": {
+          "type": "string",
+          "description": "Metric being evaluated."
+        },
+        "evaluator": {
+          "type": "string",
+          "description": "Name of the evaluator for this testing criteria."
+        },
+        "baselineRunSummary": {
+          "$ref": "#/definitions/EvalRunResultSummary",
+          "description": "Summary statistics of the baseline run."
+        },
+        "compareItems": {
+          "type": "array",
+          "description": "List of comparison results for each treatment run.",
+          "items": {
+            "$ref": "#/definitions/EvalRunResultCompareItem"
+          }
+        }
+      },
+      "required": [
+        "testingCriteria",
+        "metric",
+        "evaluator",
+        "baselineRunSummary",
+        "compareItems"
+      ]
+    },
+    "EvalRunResultSummary": {
+      "type": "object",
+      "description": "Summary statistics of a metric in an evaluation run.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The evaluation run ID."
+        },
+        "sampleCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of samples in the evaluation run."
+        },
+        "average": {
+          "type": "number",
+          "format": "float",
+          "description": "Average value of the metric in the evaluation run."
+        },
+        "standardDeviation": {
+          "type": "number",
+          "format": "float",
+          "description": "Standard deviation of the metric in the evaluation run."
+        }
+      },
+      "required": [
+        "runId",
+        "sampleCount",
+        "average",
+        "standardDeviation"
       ]
     },
     "Evaluation": {
@@ -3667,6 +3828,38 @@
         "data",
         "evaluators"
       ]
+    },
+    "EvaluationComparisonRequest": {
+      "type": "object",
+      "description": "Evaluation Comparison Request",
+      "properties": {
+        "evalId": {
+          "type": "string",
+          "description": "Identifier for the evaluation."
+        },
+        "baselineRunId": {
+          "type": "string",
+          "description": "The baseline run ID for comparison."
+        },
+        "treatmentRunIds": {
+          "type": "array",
+          "description": "List of treatment run IDs for comparison.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "evalId",
+        "baselineRunId",
+        "treatmentRunIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationComparison"
     },
     "EvaluationResultSample": {
       "type": "object",
@@ -4342,6 +4535,14 @@
           "type": "string",
           "description": "The id of the analysis cluster."
         },
+        "label": {
+          "type": "string",
+          "description": "Label for the cluster"
+        },
+        "suggestion": {
+          "type": "string",
+          "description": "Suggestion for the cluster"
+        },
         "description": {
           "type": "string",
           "description": "Description of the analysis cluster."
@@ -4368,6 +4569,8 @@
       },
       "required": [
         "id",
+        "label",
+        "suggestion",
         "description",
         "weight"
       ]
@@ -4466,13 +4669,18 @@
         "method": {
           "type": "string",
           "description": "Method used for clustering."
+        },
+        "usage": {
+          "$ref": "#/definitions/ClusterTokenUsage",
+          "description": "Token usage while performing clustering analysis"
         }
       },
       "required": [
         "sampleCount",
         "uniqueSubclusterCount",
         "uniqueClusterCount",
-        "method"
+        "method",
+        "usage"
       ]
     },
     "InsightType": {
@@ -4480,7 +4688,8 @@
       "description": "The request of the insights.",
       "enum": [
         "EvaluationRunClusterInsight",
-        "AgentClusterInsight"
+        "AgentClusterInsight",
+        "EvaluationComparison"
       ],
       "x-ms-enum": {
         "name": "InsightType",
@@ -4495,6 +4704,11 @@
             "name": "AgentClusterInsight",
             "value": "AgentClusterInsight",
             "description": "Cluster Insight on an Agent."
+          },
+          {
+            "name": "EvaluationComparison",
+            "value": "EvaluationComparison",
+            "description": "Evaluation Comparison."
           }
         ]
       }
@@ -4963,6 +5177,25 @@
         ]
       }
     },
+    "PromptBasedEvaluatorDefinition": {
+      "type": "object",
+      "description": "Prompt-based evaluator",
+      "properties": {
+        "prompt_text": {
+          "type": "string",
+          "description": "The prompt text used for evaluation"
+        }
+      },
+      "required": [
+        "prompt_text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluatorDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "prompt"
+    },
     "RecurrenceSchedule": {
       "type": "object",
       "description": "Recurrence schedule model.",
@@ -5050,25 +5283,6 @@
           }
         ]
       }
-    },
-    "PromptBasedEvaluatorDefinition": {
-      "type": "object",
-      "description": "Prompt-based evaluator",
-      "properties": {
-        "prompt_text": {
-          "type": "string",
-          "description": "The prompt text used for evaluation"
-        }
-      },
-      "required": [
-        "prompt_text"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluatorDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "prompt"
     },
     "RedTeam": {
       "type": "object",
@@ -5504,6 +5718,48 @@
       "required": [
         "type"
       ]
+    },
+    "TreatmentEffectType": {
+      "type": "string",
+      "description": "Treatment Effect Type.",
+      "enum": [
+        "TooFewSamples",
+        "Inconclusive",
+        "Changed",
+        "Improved",
+        "Degraded"
+      ],
+      "x-ms-enum": {
+        "name": "TreatmentEffectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TooFewSamples",
+            "value": "TooFewSamples",
+            "description": "Not enough samples to determine treatment effect."
+          },
+          {
+            "name": "Inconclusive",
+            "value": "Inconclusive",
+            "description": "No significant difference between treatment and baseline."
+          },
+          {
+            "name": "Changed",
+            "value": "Changed",
+            "description": "Indicates the metric changed with statistical significance, but the direction is neutral."
+          },
+          {
+            "name": "Improved",
+            "value": "Improved",
+            "description": "Indicates the treatment significantly improved the metric compared to baseline."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Indicates the treatment significantly degraded the metric compared to baseline."
+          }
+        ]
+      }
     },
     "Trigger": {
       "type": "object",
