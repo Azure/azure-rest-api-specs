@@ -6,10 +6,11 @@
 // Read inline comments for details on other sources.
 
 import eslint from "@eslint/js";
+import { defineConfig } from "eslint/config";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
 import tseslint from "typescript-eslint";
 
-const config = tseslint.config(
+const config = defineConfig(
   // ========================================
   // ESLint + TS-ESLint configs
   // ========================================
