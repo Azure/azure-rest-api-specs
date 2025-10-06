@@ -67,8 +67,8 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2025_05_15_preview)
-@renamedFrom(Versions.v2025_05_15_preview, "conversationAuthoringListProjectResources")
-op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
+@renamedFrom(Versions.v2025_11_01, "conversationAuthoringListDeploymentResources")
+op conversationAuthoringListProjectResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedDeploymentResource,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
@@ -250,12 +250,12 @@ interface ConversationAuthoringProject {
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(
-    ConversationAuthoringProject.getAssignDeploymentResourcesStatus
+    ConversationAuthoringProject.getAssignProjectResourcesStatus
   )
   @access(Access.internal, "python")
   @added(Versions.v2025_05_15_preview)
-  @renamedFrom(Versions.v2025_05_15_preview, "assignProjectResources")
-  assignDeploymentResources is Foundations.LongRunningOperation<
+  @renamedFrom(Versions.v2025_11_01, "assignDeploymentResources")
+  assignProjectResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -283,7 +283,7 @@ interface ConversationAuthoringProject {
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(
-    ConversationAuthoringProject.getUnassignDeploymentResourcesStatus
+    ConversationAuthoringProject.getUnassignProjectResourcesStatus
   )
   @access(Access.internal, "python") 
   @renamedFrom(Versions.v2025_11_01, "unassignDeploymentResources")
@@ -314,8 +314,8 @@ interface ConversationAuthoringProject {
    * Gets the status of an existing assign project resources job.
    */
   @added(Versions.v2025_05_15_preview)
-  @renamedFrom(Versions.v2025_05_15_preview, "getAssignProjectResourcesStatus")
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
+  @renamedFrom(Versions.v2025_11_01, "getAssignDeploymentResourcesStatus")
+  getAssignProjectResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
 
   /**
    * Gets the status of an existing unassign project resources job.
@@ -324,8 +324,8 @@ interface ConversationAuthoringProject {
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
   @added(Versions.v2025_05_15_preview)
-  @renamedFrom(Versions.v2025_05_15_preview, "getUnassignProjectResourcesStatus")
-  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+  @renamedFrom(Versions.v2025_11_01, "getUnassignDeploymentResourcesStatus")
+  getUnassignProjectResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
        * The name of the project to use.
