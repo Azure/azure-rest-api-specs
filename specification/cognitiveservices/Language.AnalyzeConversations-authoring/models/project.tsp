@@ -438,7 +438,7 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   @typeChangedFrom(Versions.v2025_05_15_preview, AnalyzeConversationAuthoringAssignedDeploymentResource)
   assignedResources: AnalyzeConversationAuthoringDeploymentResource[];
 }
@@ -479,7 +479,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   /**
    * Represents the Language or AIService resource IDs that if provided,\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   assignedResourceIds?: string[];
 
   /**
@@ -1011,7 +1011,7 @@ model AnalyzeConversationAuthoringLoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 @renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringDeploymentResourcesInfoList")
 model AnalyzeConversationAuthoringAssignedDeploymentResources {
   /**
@@ -1028,7 +1028,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
 /**
  * Represents the assigned project resource.
  */
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectResourceInfo")
@@ -1049,7 +1049,7 @@ model AnalyzeConversationAuthoringAssignedDeploymentResource {
 /**
  * Represents the payload for assigning Azure resources to a project.
  */
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 @renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectResourceAssignments")
 model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
   /**
@@ -1095,7 +1095,7 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
 /**
  * Represents the state of a project resources job.
  */
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @renamedFrom(Versions.v2025_05_15_preview, "AnalyzeConversationAuthoringProjectResourcesJobState")
@@ -1209,7 +1209,7 @@ model AnalyzeConversationAuthoringProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of retrieved assigned project deployments.
@@ -1225,7 +1225,7 @@ model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
 /**
  * Represents the metadata for assigned deployments for a project.
  */
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 @resource("authoring/analyze-conversations/projects/global/deployments/resources")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
   /**
@@ -1244,7 +1244,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
 /**
  * Represents the metadata for an assigned deployment
  */
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.

@@ -56,7 +56,7 @@ op conversationAuthoringListSupportedLanguages is languageOperations.ResourceLis
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 op conversationAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -66,7 +66,7 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
  * Lists the Language or AIService resources assigned to the project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@added(Versions.v2025_11_01)
+@added(Versions.v2025_05_15_preview)
 @renamedFrom(Versions.v2025_05_15_preview, "conversationAuthoringListProjectResources")
 op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedDeploymentResource,
@@ -202,7 +202,7 @@ interface ConversationAuthoringDeployment {
     ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus
   )
   @access(Access.internal, "python")
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
@@ -233,7 +233,7 @@ interface ConversationAuthoringDeployment {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
@@ -253,7 +253,7 @@ interface ConversationAuthoringProject {
     ConversationAuthoringProject.getAssignDeploymentResourcesStatus
   )
   @access(Access.internal, "python")
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   @renamedFrom(Versions.v2025_05_15_preview, "assignProjectResources")
   assignDeploymentResources is Foundations.LongRunningOperation<
     {
@@ -286,7 +286,7 @@ interface ConversationAuthoringProject {
     ConversationAuthoringProject.getUnassignDeploymentResourcesStatus
   )
   @access(Access.internal, "python")
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   @renamedFrom(Versions.v2025_05_15_preview, "unassignProjectResources")
   unassignDeploymentResources is Foundations.LongRunningOperation<
     {
@@ -313,7 +313,7 @@ interface ConversationAuthoringProject {
   /**
    * Gets the status of an existing assign project resources job.
    */
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   @renamedFrom(Versions.v2025_05_15_preview, "getAssignProjectResourcesStatus")
   getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
 
@@ -323,7 +323,7 @@ interface ConversationAuthoringProject {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   @renamedFrom(Versions.v2025_05_15_preview, "getUnassignProjectResourcesStatus")
   getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
     {
