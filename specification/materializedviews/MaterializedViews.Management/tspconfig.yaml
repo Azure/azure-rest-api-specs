@@ -1,0 +1,50 @@
+parameters:
+  "service-dir":
+    default: "sdk/materializedviews"
+emit:
+  - "@azure-tools/typespec-autorest"
+options:
+  "@azure-tools/typespec-autorest":
+    omit-unreachable-types: true
+    emitter-output-dir: "{project-root}/.."
+    azure-resource-provider-folder: "resource-manager"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/materializedviews.json"
+    examples-dir: "{project-root}/examples"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    package-dir: "Azure.ResourceManager.MaterializedViews"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+  "@azure-tools/typespec-python":
+    package-dir: "azure-mgmt-materializedviews"
+    namespace: "azure.mgmt.materializedviews"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    package-dir: "azure-resourcemanager-materializedviews"
+    namespace: "com.azure.resourcemanager.materializedviews"
+    service-name: "MaterializedViews"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    service-dir: sdk/materializedviews
+    package-dir: "arm-materializedviews"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-materializedviews"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/materializedviews"
+    package-dir: "armmaterializedviews"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
