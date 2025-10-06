@@ -77,6 +77,19 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
+### Release 2024-05-15-preview
+
+These settings apply only when `--tag=release_2024_05_15_preview` is specified on the command line.
+
+``` yaml $(tag) == 'release_2024-11-15-preview'
+input-file:
+  - preview/2024-05-15-preview/analyzeconversations.json
+title:
+  Microsoft Cognitive Language Service - Conversations
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ### Release 2024-05-01
 
 These settings apply only when `--tag=release_2024_05_01` is specified on the command line.
@@ -138,4 +151,5 @@ This is not used by Autorest itself.
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
+  - repo: azure-sdk-for-python
 ```
