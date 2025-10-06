@@ -1868,7 +1868,10 @@
       "properties": {
         "instanceName": {
           "description": "The instance name.",
-          "type": "string"
+          "type": "string",
+          "pattern": "^[a-zA-Z0-9]+$",
+          "minLength": 1,
+          "maxLength": 64
         },
         "ipAddress": {
           "description": "The instance IP address.",
@@ -1920,7 +1923,8 @@
       "properties": {
         "rdpPassword": {
           "description": "The RDP password for the server farm.",
-          "type": "string"
+          "type": "string",
+          "x-ms-secret": true
         },
         "rdpPasswordExpiry": {
           "format": "date-time",
