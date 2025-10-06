@@ -800,7 +800,7 @@ model JobMetadataDTOEntity {
    * Runs
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
-  Runs: JobMetadataEntity[];
+  Runs: ScheduleScanMonitoringEntity[];
 
   /**
    * count
@@ -1308,30 +1308,37 @@ model OpinionEntity {
    * Get data product id
    */
   dataProductId: string;
+
   /**
    * Get data asset id
    */
   dataAssetId: string;
+
   /**
    * Get control id
    */
   controlId: string;
+
   /**
    * Get opinion id
    */
   opinionId: string;
+
   /**
    * Get value
    */
   value?: Record<string>;
+
   /**
    * Get result At
    */
   resultedAt: utcDateTime;
+
   /**
    * Get outcomeId
    */
   outcomeId: string;
+
   /**
    * Get queryExecutionId
    */
@@ -1341,7 +1348,4 @@ model OpinionEntity {
 /**
  * Empty response
  */
-model EmptyResponse
-{
-
-}
+model EmptyResponse {}

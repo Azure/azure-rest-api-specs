@@ -1101,7 +1101,7 @@ op GetRuns is Azure.Core.Foundations.Operation<
     @query("offset")
     offset: int64;
   },
-  JobMetadataDTOEntity
+  ScheduleScanMonitoringEntity
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
