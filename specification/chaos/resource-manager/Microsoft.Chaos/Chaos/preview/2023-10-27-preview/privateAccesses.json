@@ -1,0 +1,481 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Chaos Management",
+    "version": "2023-10-27-preview",
+    "description": "Chaos Studio Private Accesses resource type."
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "PrivateAccesses"
+    }
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Chaos/privateAccesses": {
+      "get": {
+        "description": "Get a list of private access resources in a subscription.",
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_ListAll",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of Private Access resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccessListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all private accesses in a subscription.": {
+            "$ref": "./examples/ListPrivateAccessInASubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses": {
+      "get": {
+        "description": "Get a list of private access resources in a resource group.",
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_List",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/continuationToken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "List of private access resources returned if request was successful.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccessListResult"
+            }
+          },
+          "default": {
+            "description": "Error response returned if request was unsuccessful.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all private access in a resource group.": {
+            "$ref": "./examples/ListPrivateAccessInAResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}": {
+      "get": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_Get",
+        "description": "Get a private access resource",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "ARM operation completed successfully.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get a private access resource": {
+            "$ref": "./examples/GetAPrivateAccess.json"
+          },
+          "Get a private access resource with private endpoint": {
+            "$ref": "./examples/GetAPrivateAccess_WithPrivateEndpoint.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_CreateOrUpdate",
+        "description": "Create or update a private access",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          },
+          {
+            "name": "privateAccess",
+            "description": "private access resource to be created or updated.",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Private access resource created successfully.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
+          "200": {
+            "description": "Private Access resource updated successfully.",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateAccess"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create or Update a private access resource": {
+            "$ref": "./examples/CreateOrUpdateAPrivateAccess.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_Delete",
+        "description": "Delete a private access",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "204": {
+            "description": "Resource deleted successfully."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private access resource": {
+            "$ref": "./examples/DeleteAPrivateAccess.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_GetPrivateLinkResources",
+        "description": "Gets the private link resources possible under private access resource",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List all possible private link resources under private access resource.": {
+            "$ref": "./examples/PrivateAccessPrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_GetAPrivateEndpointConnection",
+        "description": "Gets information about a private endpoint connection under a private access resource.",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/privatelinks.json#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get information about a private endpoint connection under a private access resource.": {
+            "$ref": "./examples/PrivateAccessPrivateEndpointConnection_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_DeleteAPrivateEndpointConnection",
+        "description": "Deletes a private endpoint connection under a private access resource.",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          },
+          {
+            "$ref": "#/parameters/PrivateEndpointConnectionName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Asynchronous delete operation.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Resource is deleted already."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete a private endpoint connection under a private access resource.": {
+            "$ref": "./examples/PrivateAccessPrivateEndpointConnection_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Chaos/privateAccesses/{privateAccessName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "PrivateAccesses"
+        ],
+        "operationId": "PrivateAccesses_ListPrivateEndpointConnections",
+        "description": "List information about private endpoint connections under a private access resource",
+        "parameters": [
+          {
+            "$ref": "./types/common.json#/parameters/apiVersion"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/subscriptionId"
+          },
+          {
+            "$ref": "./types/common.json#/parameters/resourceGroupName"
+          },
+          {
+            "$ref": "#/parameters/PrivateAccessName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "./types/privateAccesses.json#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List all private endpoint connections under a private access resource.": {
+            "$ref": "./examples/PrivateAccessPrivateEndpointConnection_ListByPrivateAccess.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    }
+  },
+  "parameters": {
+    "PrivateAccessName": {
+      "name": "privateAccessName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
+      "minLength": 1,
+      "description": "The name of the private access resource that is being created. Supported characters for the name are a-z, A-Z, 0-9, _ and -. The maximum name length is 80 characters.",
+      "x-ms-parameter-location": "method"
+    },
+    "PrivateEndpointConnectionName": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[^<>%&:?#/\\\\]+$",
+      "description": "The name of the private endpoint connection.",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

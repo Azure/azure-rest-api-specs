@@ -31,9 +31,6 @@ model AadToken
 
 @doc("Azure Health Data Services de-identification service versions.")
 enum Versions {
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_11_15: "2024-11-15",
-
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_07_15_preview: "2025-07-15-preview",
 }
