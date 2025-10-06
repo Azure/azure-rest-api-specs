@@ -791,6 +791,24 @@ model JobMetadataEntity {
 }
 
 /**
+ * Metadata for jobs.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+model JobMetadataDTOEntity {
+  /**
+   * Runs
+   */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+  Runs: JobMetadataEntity[];
+
+  /**
+   * count
+   */
+  count: int64;
+}
+
+/**
  * Job history information.
  */
 model JobHistoryEntity {
@@ -1216,4 +1234,114 @@ model DataSourceEntityResponse {
      */
     id: string;
   }>;
+}
+
+/**
+ * Profile Entity
+ */
+model ProfileEntity {
+  /**
+   * type
+   */
+  type: string;
+
+  /**
+   * Type properties
+   */
+  typeProperties: {
+    location: {
+      type: string;
+      typeProperties: {
+        fileSystem: string;
+        folderPath: string;
+      };
+    }[];
+  };
+
+  /**
+   * data source id
+   */
+  dataSourceId: string;
+
+  /**
+   * configuration
+   */
+  configuration: {
+    keyColumns: {
+      name: string;
+    }[];
+  };
+}
+
+/**
+ * Profile Entity
+ */
+model ProfileEntityResponse {
+  /**
+   * status code
+   */
+  @statusCode
+  statusCode: 202;
+
+  /**
+   * profile run id
+   */
+  profileRunId: string;
+
+  /**
+   * lro status
+   */
+  @lroStatus
+  statuslro: LroStatus;
+}
+
+/**
+ * Opinion Entity
+ */
+model OpinionEntity {
+  /**
+   * Get Business domain Id
+   */
+  businessDomainId: string;
+
+  /**
+   * Get data product id
+   */
+  dataProductId: string;
+  /**
+   * Get data asset id
+   */
+  dataAssetId: string;
+  /**
+   * Get control id
+   */
+  controlId: string;
+  /**
+   * Get opinion id
+   */
+  opinionId: string;
+  /**
+   * Get value
+   */
+  value?: Record<string>;
+  /**
+   * Get resuled At
+   */
+  resultedAt: utcDateTime;
+  /**
+   * Get outcomeId
+   */
+  outcomeId: string;
+  /**
+   * Get queryExecutionId
+   */
+  queryExecuted?: string;
+}
+
+/**
+ * Empty response
+ */
+model EmptyResponse
+{
+
 }

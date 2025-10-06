@@ -1000,3 +1000,155 @@ op createScopedAssetMetaData is Azure.Core.Foundations.Operation<
   },
   DataSourceEntityResponse
 >;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles")
+@post
+op profile is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business Domain Id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get data product Id
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Get data asset Id
+     */
+    @path
+    dataAssetId: string;
+
+    /**
+     * Scoped asset meta data body
+     */
+    @bodyRoot
+    profiles: ProfileEntity;
+  },
+  ProfileEntityResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileRunId}")
+@delete
+op `Delete Profile` is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business Domain Id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get data product Id
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Get data asset Id
+     */
+    @path
+    dataAssetId: string;
+
+    /**
+     * Get Profile Run Id
+     */
+    @path
+    profileRunId: string;
+  },
+  void
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs")
+@get
+op GetRuns is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business Domain Id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get schedule Id
+     */
+    @path
+    scheduleId: string;
+
+    /**
+     * Get scan id
+     */
+    @path
+    scanId: string;
+
+    /**
+     * Get offset
+     */
+    @query("offset")
+    offset: int64;
+  },
+  JobMetadataDTOEntity
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/business-domains/{businessDomainId}/report/snapshots/dataquality/latest")
+@get
+op GetLatestSnapshot is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business Domain Id
+     */
+    @path
+    businessDomainId: string;
+  },
+  EmptyResponse
+>;
+
+#suppress "@azure-tools/typespec-azure-core/use-standard-names" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+@route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}")
+@get
+op OpinionTrend is Azure.Core.Foundations.Operation<
+  {
+    /**
+     * Get Business Domain Id
+     */
+    @path
+    businessDomainId: string;
+
+    /**
+     * Get data product Id
+     */
+    @path
+    dataProductId: string;
+
+    /**
+     * Get data asset Id
+     */
+    @path
+    dataAssetId: string;
+
+    /**
+     * Get Rule Id
+     */
+    @path
+    ruleId: string;
+  },
+  OpinionEntity
+>;
