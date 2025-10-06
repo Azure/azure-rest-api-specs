@@ -45,7 +45,7 @@ model UpdateStage {
     Accepts either:
         • A fixed count, e.g., "3"
         • A percentage, e.g., "25%" (range 1–100). Percentage is of the total number of clusters across all groups in the stage.
-          Fractional results are rounded up. A minimum of 1 upgrade is enforced.
+          Fractional results are rounded down. A minimum of 1 upgrade is enforced.
     Examples:
         • "3"     --> up to 3 clusters from this stage upgrade at once (across all groups).
         • "100%"  --> “all at once”; up to all clusters in this stage upgrade at the same time.
@@ -86,7 +86,7 @@ model UpdateGroup {
     Accepts either:
         • A fixed count, e.g. "3"
         • A percentage, e.g. "25%" (range 1–100). Percentage is of the number of clusters in the group. 
-          Fractional results are rounded up. A minimum of 1 upgrade is enforced.
+          Fractional results are rounded down. A minimum of 1 upgrade is enforced.
     Examples:
         • "3" --> up to 3 members from this group upgrade at once.
         • "100%" --> “all at once”, up to all members for this group upgrade at the same time.
