@@ -2123,7 +2123,10 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ScheduleScanMonitoringEntity"
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/ScheduleScanMonitoringEntity"
+              }
             }
           },
           "default": {
@@ -2863,11 +2866,8 @@
           "description": "Get opinion id"
         },
         "value": {
-          "type": "object",
-          "description": "Get value",
-          "additionalProperties": {
-            "type": "string"
-          }
+          "type": "string",
+          "description": "Get value"
         },
         "resultedAt": {
           "type": "string",
