@@ -752,6 +752,192 @@
         }
       }
     },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles": {
+      "post": {
+        "operationId": "Profile",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profiles",
+            "in": "body",
+            "description": "Scoped asset meta data body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ProfileEntity"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Profile Entity",
+            "schema": {
+              "$ref": "#/definitions/ProfileEntityResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles/{profileRunId}": {
+      "delete": {
+        "operationId": "Delete Profile",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "profileRunId",
+            "in": "path",
+            "description": "Get Profile Run Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Profile_Delete": {
+            "$ref": "./examples/Profile_Delete.json"
+          }
+        }
+      }
+    },
+    "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/rule-opinions/{ruleId}": {
+      "get": {
+        "operationId": "OpinionTrend",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataProductId",
+            "in": "path",
+            "description": "Get data product Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "dataAssetId",
+            "in": "path",
+            "description": "Get data asset Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "ruleId",
+            "in": "path",
+            "description": "Get Rule Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/OpinionEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "RuleOpinions_Get": {
+            "$ref": "./examples/RuleOpinions_Get.json"
+          }
+        }
+      }
+    },
     "/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/runs": {
       "get": {
         "operationId": "GetRunsForAsset",
@@ -1318,6 +1504,46 @@
         }
       }
     },
+    "/business-domains/{businessDomainId}/report/snapshots/dataquality/latest": {
+      "get": {
+        "operationId": "GetLatestSnapshot",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LatestSnapshot_Get": {
+            "$ref": "./examples/LatestSnapshot_Get.json"
+          }
+        }
+      }
+    },
     "/business-domains/{businessDomainId}/runs/{runId}": {
       "get": {
         "operationId": "GetRunStatus",
@@ -1847,6 +2073,71 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/business-domains/{businessDomainId}/schedules/{scheduleId}/scans/{scanId}/runs": {
+      "get": {
+        "operationId": "GetRuns",
+        "description": "The most basic operation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "businessDomainId",
+            "in": "path",
+            "description": "Get Business Domain Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scheduleId",
+            "in": "path",
+            "description": "Get schedule Id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "scanId",
+            "in": "path",
+            "description": "Get scan id",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "offset",
+            "in": "query",
+            "description": "Get offset",
+            "required": true,
+            "type": "integer",
+            "format": "int64"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/JobMetadataDTOEntity"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ScanRuns_Get": {
+            "$ref": "./examples/ScanRuns_Get.json"
+          }
+        }
       }
     }
   },
@@ -2388,6 +2679,28 @@
         "businessDomainId"
       ]
     },
+    "JobMetadataDTOEntity": {
+      "type": "object",
+      "description": "Metadata for jobs.",
+      "properties": {
+        "Runs": {
+          "type": "array",
+          "description": "Runs",
+          "items": {
+            "$ref": "#/definitions/JobMetadataEntity"
+          }
+        },
+        "count": {
+          "type": "integer",
+          "format": "int64",
+          "description": "count"
+        }
+      },
+      "required": [
+        "Runs",
+        "count"
+      ]
+    },
     "JobMetadataEntity": {
       "type": "object",
       "description": "Metadata for jobs.",
@@ -2540,6 +2853,161 @@
           }
         ]
       }
+    },
+    "OpinionEntity": {
+      "type": "object",
+      "description": "Opinion Entity",
+      "properties": {
+        "businessDomainId": {
+          "type": "string",
+          "description": "Get Business domain Id"
+        },
+        "dataProductId": {
+          "type": "string",
+          "description": "Get data product id"
+        },
+        "dataAssetId": {
+          "type": "string",
+          "description": "Get data asset id"
+        },
+        "controlId": {
+          "type": "string",
+          "description": "Get control id"
+        },
+        "opinionId": {
+          "type": "string",
+          "description": "Get opinion id"
+        },
+        "value": {
+          "type": "object",
+          "description": "Get value",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "resultedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Get resuled At"
+        },
+        "outcomeId": {
+          "type": "string",
+          "description": "Get outcomeId"
+        },
+        "queryExecuted": {
+          "type": "string",
+          "description": "Get queryExecutionId"
+        }
+      },
+      "required": [
+        "businessDomainId",
+        "dataProductId",
+        "dataAssetId",
+        "controlId",
+        "opinionId",
+        "resultedAt",
+        "outcomeId"
+      ]
+    },
+    "ProfileEntity": {
+      "type": "object",
+      "description": "Profile Entity",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "type"
+        },
+        "typeProperties": {
+          "type": "object",
+          "description": "Type properties",
+          "properties": {
+            "location": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "type": {
+                    "type": "string"
+                  },
+                  "typeProperties": {
+                    "type": "object",
+                    "properties": {
+                      "fileSystem": {
+                        "type": "string"
+                      },
+                      "folderPath": {
+                        "type": "string"
+                      }
+                    },
+                    "required": [
+                      "fileSystem",
+                      "folderPath"
+                    ]
+                  }
+                },
+                "required": [
+                  "type",
+                  "typeProperties"
+                ]
+              }
+            }
+          },
+          "required": [
+            "location"
+          ]
+        },
+        "dataSourceId": {
+          "type": "string",
+          "description": "data source id"
+        },
+        "configuration": {
+          "type": "object",
+          "description": "configuration",
+          "properties": {
+            "keyColumns": {
+              "type": "array",
+              "items": {
+                "type": "object",
+                "properties": {
+                  "name": {
+                    "type": "string"
+                  }
+                },
+                "required": [
+                  "name"
+                ]
+              }
+            }
+          },
+          "required": [
+            "keyColumns"
+          ]
+        }
+      },
+      "required": [
+        "type",
+        "typeProperties",
+        "dataSourceId",
+        "configuration"
+      ]
+    },
+    "ProfileEntityResponse": {
+      "type": "object",
+      "description": "Profile Entity",
+      "properties": {
+        "profileRunId": {
+          "type": "string",
+          "description": "profile run id"
+        },
+        "statuslro": {
+          "$ref": "#/definitions/LroStatus",
+          "description": "lro status"
+        }
+      },
+      "required": [
+        "profileRunId",
+        "statuslro"
+      ]
     },
     "Reference": {
       "type": "object",
