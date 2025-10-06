@@ -20,6 +20,7 @@ options:
     generate-sample: true
     flavor: azure
   "@azure-typespec/http-client-csharp":
+    package-dir: "azure-planetary-computer"
     namespace: "Azure.Analytics.PlanetaryComputer"
     model-namespace: false
   "@azure-tools/typespec-ts":
@@ -28,7 +29,7 @@ options:
       name: "@azure-rest/planetarycomputer"
     flavor: azure
   "@azure-tools/typespec-java":
-    package-dir: "azure-analytics-planetary-computer"
+    package-dir: "azure-planetary-computer"
     namespace: com.azure.planetarycomputer
     # partial-update: true
     # use-eclipse-language-server: false
@@ -36,12 +37,12 @@ options:
     # generate-samples: false
     # generate-tests: false
     flavor: azure
-  # "@azure-tools/typespec-csharp":
-  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.PlanetaryComputer"
-  #   clear-output-folder: true
-  #   model-namespace: false
-  #   namespace: "{package-dir}"
-  #   flavor: azure
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.PlanetaryComputer"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "{package-dir}"
+    flavor: azure
   # "@azure-tools/typespec-ts":
   #   package-dir: "planetarycomputer-rest"
   #   is-modular-library: false
