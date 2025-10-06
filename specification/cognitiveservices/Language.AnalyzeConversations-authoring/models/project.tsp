@@ -439,8 +439,8 @@ model AnalyzeConversationAuthoringProjectDeployment {
    * Represents the metadata of the assigned Azure resources.
    */
   @added(Versions.v2025_05_15_preview)
-  @typeChangedFrom(Versions.v2025_05_15_preview, AnalyzeConversationAuthoringAssignedDeploymentResource)
-  assignedResources: AnalyzeConversationAuthoringDeploymentResource[];
+  @typeChangedFrom(Versions.v2025_11_01, AnalyzeConversationAuthoringDeploymentResource)
+  assignedResources: AnalyzeConversationAuthoringAssignedDeploymentResource[];
 }
 
 /**
@@ -1084,7 +1084,6 @@ model AnalyzeConversationAuthoringResourceMetadata {
  * Represents the options to unassign Azure resources from a project.
  */
 @removed(Versions.v2025_11_01)
-@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.

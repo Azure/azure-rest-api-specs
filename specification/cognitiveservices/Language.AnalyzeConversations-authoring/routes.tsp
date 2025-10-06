@@ -285,10 +285,10 @@ interface ConversationAuthoringProject {
   @pollingOperation(
     ConversationAuthoringProject.getUnassignDeploymentResourcesStatus
   )
-  @access(Access.internal, "python")
+  @access(Access.internal, "python") 
+  @renamedFrom(Versions.v2025_11_01, "unassignDeploymentResources")
   @added(Versions.v2025_05_15_preview)
-  @renamedFrom(Versions.v2025_05_15_preview, "unassignProjectResources")
-  unassignDeploymentResources is Foundations.LongRunningOperation<
+  unassignProjectResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -302,8 +302,8 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
-      @typeChangedFrom(Versions.v2025_05_15_preview, AnalyzeConversationAuthoringDeleteDeploymentOptions)
-      body: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
+      @typeChangedFrom(Versions.v2025_11_01, AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions)
+      body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
     },
     AcceptedResponse,
     {},
