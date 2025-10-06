@@ -38,11 +38,11 @@ model VirtualMachineExtensionProperties {
   @doc("Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available.")
   enableAutomaticUpgrade?: boolean;
 
-  @doc("Json formatted public settings for the extension.")
-  settings?: unknown;
+  @doc("JSON formatted public settings for the extension.")
+  settings?: Record<unknown>;
 
   @doc("The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.")
-  protectedSettings?: unknown;
+  protectedSettings?: Record<unknown>;
 
   @doc("Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false.")
   suppressFailures?: boolean;
