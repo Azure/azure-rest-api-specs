@@ -284,6 +284,23 @@ model InsightSummary {
 
   @doc("Method used for clustering.")
   method: string;
+
+  @doc("Token usage while performing clustering analysis")
+  usage: ClusterTokenUsage;
+}
+
+@doc("Token usage for cluster analysis")
+@added(Versions.v2025_10_15_preview)
+model ClusterTokenUsage {
+
+  @doc("input token usage")
+  inputTokenUsage: int32;
+
+  @doc("output token usage")
+  outputTokenUsage: int32;
+
+  @doc("total token usage")
+  totalTokenUsage: int32;
 }
 
 @doc("Coordinates for the analysis chart.")
@@ -356,6 +373,12 @@ model EvalResult {
 model InsightCluster {
   @doc("The id of the analysis cluster.")
   id: string;
+
+  @doc("Label for the cluster")
+  label: string;
+
+  @doc("Suggestion for the cluster")
+  suggestion: string;
 
   @doc("Description of the analysis cluster.")
   description: string;
