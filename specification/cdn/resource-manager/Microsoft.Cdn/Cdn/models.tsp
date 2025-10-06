@@ -2868,12 +2868,12 @@ model RuleSetProperties extends AFDStateProperties {
   profileName?: string;
 
   /**
-   * Indicates whether rule set is in batch mode. Default value is false. When batch mode is enabled, rules will be processed in a batch along with the rule set.
+   * Indicates whether rule set is in batch mode. When batch mode is enabled, rules will be processed in a batch along with the rule set.
    * When batch mode is disabled, rules would need to be processed independently.
    * This property can only be set during rule set creation and cannot be updated later.
    * For switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.
    */
-  batchMode?: boolean = false;
+  batchMode?: boolean;
 
   /**
    * A list of rules that are part of this rule set provided the rule set is in batch mode.
