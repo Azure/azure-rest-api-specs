@@ -1094,9 +1094,43 @@
     },
     "/evaluators": {
       "get": {
-        "operationId": "Evaluators_ListVersions",
-        "description": "List the latest version of each Evaluator",
+        "operationId": "Evaluators_ListEvaluators",
+        "description": "List the latest version of each EvaluatorVersion",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom",
+              "all"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "built_in",
+                  "value": "builtin",
+                  "description": "Built-in evaluator (Microsoft provided)"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "Custom evaluator"
+                },
+                {
+                  "name": "all",
+                  "value": "all"
+                }
+              ]
+            }
+          },
           {
             "name": "limit",
             "in": "query",
@@ -1105,85 +1139,78 @@
             "type": "integer",
             "format": "int32",
             "default": 20
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/EvaluatorVersion"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
+              "$ref": "#/definitions/PagedEvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/evaluators/{name}/versions": {
       "get": {
         "operationId": "Evaluators_ListEvaluatorVersions",
-        "description": "List all versions of the given Evaluator name",
+        "description": "List all versions of the given EvaluatorVersion",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the evaluator",
+            "description": "The name of the resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom",
+              "all"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "built_in",
+                  "value": "builtin",
+                  "description": "Built-in evaluator (Microsoft provided)"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "Custom evaluator"
+                },
+                {
+                  "name": "all",
+                  "value": "all"
+                }
+              ]
+            }
           },
           {
             "name": "limit",
@@ -1193,71 +1220,30 @@
             "type": "integer",
             "format": "int32",
             "default": 20
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/EvaluatorVersion"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
+              "$ref": "#/definitions/PagedEvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -1273,6 +1259,46 @@
             "description": "The name of the resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom",
+              "all"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "built_in",
+                  "value": "builtin",
+                  "description": "Built-in evaluator (Microsoft provided)"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "Custom evaluator"
+                },
+                {
+                  "name": "all",
+                  "value": "all"
+                }
+              ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
           }
         ],
         "responses": {
@@ -1702,7 +1728,8 @@
             "type": "string",
             "enum": [
               "EvaluationRunClusterInsight",
-              "AgentClusterInsight"
+              "AgentClusterInsight",
+              "EvaluationComparison"
             ],
             "x-ms-enum": {
               "name": "InsightType",
@@ -1717,6 +1744,11 @@
                   "name": "AgentClusterInsight",
                   "value": "AgentClusterInsight",
                   "description": "Cluster Insight on an Agent."
+                },
+                {
+                  "name": "EvaluationComparison",
+                  "value": "EvaluationComparison",
+                  "description": "Evaluation Comparison."
                 }
               ]
             }
@@ -3580,6 +3612,33 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "EvalCompareReport": {
+      "type": "object",
+      "description": "Insights from the evaluation comparison.",
+      "properties": {
+        "comparisons": {
+          "type": "array",
+          "description": "Comparison results for each treatment run against the baseline.",
+          "items": {
+            "$ref": "#/definitions/EvalRunResultComparison"
+          }
+        },
+        "method": {
+          "type": "string",
+          "description": "The statistical method used for comparison."
+        }
+      },
+      "required": [
+        "comparisons",
+        "method"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationComparison"
+    },
     "EvalResult": {
       "type": "object",
       "description": "Result of the evaluation.",
@@ -3607,6 +3666,108 @@
         "type",
         "score",
         "passed"
+      ]
+    },
+    "EvalRunResultCompareItem": {
+      "type": "object",
+      "description": "Metric comparison for a treatment against the baseline.",
+      "properties": {
+        "treatmentRunId": {
+          "type": "string",
+          "description": "The treatment run ID."
+        },
+        "treatmentRunSummary": {
+          "$ref": "#/definitions/EvalRunResultSummary",
+          "description": "Summary statistics of the treatment run."
+        },
+        "deltaEstimate": {
+          "type": "number",
+          "format": "float",
+          "description": "Estimated difference between treatment and baseline."
+        },
+        "pValue": {
+          "type": "number",
+          "format": "float",
+          "description": "P-value for the treatment effect."
+        },
+        "treatmentEffect": {
+          "$ref": "#/definitions/TreatmentEffectType",
+          "description": "Type of treatment effect."
+        }
+      },
+      "required": [
+        "treatmentRunId",
+        "treatmentRunSummary",
+        "deltaEstimate",
+        "pValue",
+        "treatmentEffect"
+      ]
+    },
+    "EvalRunResultComparison": {
+      "type": "object",
+      "description": "Comparison results for treatment runs against the baseline.",
+      "properties": {
+        "testingCriteria": {
+          "type": "string",
+          "description": "Name of the testing criteria."
+        },
+        "metric": {
+          "type": "string",
+          "description": "Metric being evaluated."
+        },
+        "evaluator": {
+          "type": "string",
+          "description": "Name of the evaluator for this testing criteria."
+        },
+        "baselineRunSummary": {
+          "$ref": "#/definitions/EvalRunResultSummary",
+          "description": "Summary statistics of the baseline run."
+        },
+        "compareItems": {
+          "type": "array",
+          "description": "List of comparison results for each treatment run.",
+          "items": {
+            "$ref": "#/definitions/EvalRunResultCompareItem"
+          }
+        }
+      },
+      "required": [
+        "testingCriteria",
+        "metric",
+        "evaluator",
+        "baselineRunSummary",
+        "compareItems"
+      ]
+    },
+    "EvalRunResultSummary": {
+      "type": "object",
+      "description": "Summary statistics of a metric in an evaluation run.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The evaluation run ID."
+        },
+        "sampleCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of samples in the evaluation run."
+        },
+        "average": {
+          "type": "number",
+          "format": "float",
+          "description": "Average value of the metric in the evaluation run."
+        },
+        "standardDeviation": {
+          "type": "number",
+          "format": "float",
+          "description": "Standard deviation of the metric in the evaluation run."
+        }
+      },
+      "required": [
+        "runId",
+        "sampleCount",
+        "average",
+        "standardDeviation"
       ]
     },
     "Evaluation": {
@@ -3667,6 +3828,38 @@
         "data",
         "evaluators"
       ]
+    },
+    "EvaluationComparisonRequest": {
+      "type": "object",
+      "description": "Evaluation Comparison Request",
+      "properties": {
+        "evalId": {
+          "type": "string",
+          "description": "Identifier for the evaluation."
+        },
+        "baselineRunId": {
+          "type": "string",
+          "description": "The baseline run ID for comparison."
+        },
+        "treatmentRunIds": {
+          "type": "array",
+          "description": "List of treatment run IDs for comparison.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "evalId",
+        "baselineRunId",
+        "treatmentRunIds"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightRequest"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationComparison"
     },
     "EvaluationResultSample": {
       "type": "object",
@@ -3913,6 +4106,10 @@
           "type": "number",
           "format": "float",
           "description": "Maximum value for the metric. If not specified, it is assumed to be unbounded."
+        },
+        "is_primary": {
+          "type": "boolean",
+          "description": "Indicates if this metric is primary when there are multiple metrics."
         }
       }
     },
@@ -4480,7 +4677,8 @@
       "description": "The request of the insights.",
       "enum": [
         "EvaluationRunClusterInsight",
-        "AgentClusterInsight"
+        "AgentClusterInsight",
+        "EvaluationComparison"
       ],
       "x-ms-enum": {
         "name": "InsightType",
@@ -4495,6 +4693,11 @@
             "name": "AgentClusterInsight",
             "value": "AgentClusterInsight",
             "description": "Cluster Insight on an Agent."
+          },
+          {
+            "name": "EvaluationComparison",
+            "value": "EvaluationComparison",
+            "description": "Evaluation Comparison."
           }
         ]
       }
@@ -4756,6 +4959,27 @@
         "value"
       ]
     },
+    "PagedEvaluatorVersion": {
+      "type": "object",
+      "description": "Paged collection of EvaluatorVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluatorVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluatorVersion"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedIndex": {
       "type": "object",
       "description": "Paged collection of Index items",
@@ -4963,6 +5187,25 @@
         ]
       }
     },
+    "PromptBasedEvaluatorDefinition": {
+      "type": "object",
+      "description": "Prompt-based evaluator",
+      "properties": {
+        "prompt_text": {
+          "type": "string",
+          "description": "The prompt text used for evaluation"
+        }
+      },
+      "required": [
+        "prompt_text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluatorDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "prompt"
+    },
     "RecurrenceSchedule": {
       "type": "object",
       "description": "Recurrence schedule model.",
@@ -5050,25 +5293,6 @@
           }
         ]
       }
-    },
-    "PromptBasedEvaluatorDefinition": {
-      "type": "object",
-      "description": "Prompt-based evaluator",
-      "properties": {
-        "prompt_text": {
-          "type": "string",
-          "description": "The prompt text used for evaluation"
-        }
-      },
-      "required": [
-        "prompt_text"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluatorDefinition"
-        }
-      ],
-      "x-ms-discriminator-value": "prompt"
     },
     "RedTeam": {
       "type": "object",
@@ -5504,6 +5728,48 @@
       "required": [
         "type"
       ]
+    },
+    "TreatmentEffectType": {
+      "type": "string",
+      "description": "Treatment Effect Type.",
+      "enum": [
+        "TooFewSamples",
+        "Inconclusive",
+        "Changed",
+        "Improved",
+        "Degraded"
+      ],
+      "x-ms-enum": {
+        "name": "TreatmentEffectType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TooFewSamples",
+            "value": "TooFewSamples",
+            "description": "Not enough samples to determine treatment effect."
+          },
+          {
+            "name": "Inconclusive",
+            "value": "Inconclusive",
+            "description": "No significant difference between treatment and baseline."
+          },
+          {
+            "name": "Changed",
+            "value": "Changed",
+            "description": "Indicates the metric changed with statistical significance, but the direction is neutral."
+          },
+          {
+            "name": "Improved",
+            "value": "Improved",
+            "description": "Indicates the treatment significantly improved the metric compared to baseline."
+          },
+          {
+            "name": "Degraded",
+            "value": "Degraded",
+            "description": "Indicates the treatment significantly degraded the metric compared to baseline."
+          }
+        ]
+      }
     },
     "Trigger": {
       "type": "object",
