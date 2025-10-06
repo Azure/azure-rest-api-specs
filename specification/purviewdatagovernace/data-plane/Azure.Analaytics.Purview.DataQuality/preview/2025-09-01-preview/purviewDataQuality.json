@@ -2123,7 +2123,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/JobMetadataDTOEntity"
+              "$ref": "#/definitions/ScheduleScanMonitoringEntity"
             }
           },
           "default": {
@@ -2683,28 +2683,6 @@
         "runId",
         "dataProductId",
         "businessDomainId"
-      ]
-    },
-    "JobMetadataDTOEntity": {
-      "type": "object",
-      "description": "Metadata for jobs.",
-      "properties": {
-        "Runs": {
-          "type": "array",
-          "description": "Runs",
-          "items": {
-            "$ref": "#/definitions/JobMetadataEntity"
-          }
-        },
-        "count": {
-          "type": "integer",
-          "format": "int64",
-          "description": "count"
-        }
-      },
-      "required": [
-        "Runs",
-        "count"
       ]
     },
     "JobMetadataEntity": {
