@@ -1005,8 +1005,9 @@ op createScopedAssetMetaData is Azure.Core.Foundations.Operation<
 #suppress "@azure-tools/typespec-azure-core/casing-style" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
 @route("/business-domains/{businessDomainId}/data-products/{dataProductId}/data-assets/{dataAssetId}/profiles")
+@pollingOperation(Profile)
 @post
-op profile is Azure.Core.Foundations.Operation<
+op Profile is Azure.Core.Foundations.Operation<
   {
     /**
      * Get Business Domain Id
