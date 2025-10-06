@@ -20,29 +20,33 @@ alias EvaluatorInputParameters = InputParameters<
 
 @added(Versions.v2025_10_15_preview)
 interface Evaluators {
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @get
+  // GET /evaluators/{name}/versions
+  #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
   @doc("List all versions of the given Evaluator name", EvaluatorVersion)
-  @route("/evaluators/{name}/versions")
-  op listEvaluatorVersions(
-    @doc("Name of the evaluator")
-    @path name: string,
-    ...OpenAIListRequestOptions,
-  ): OpenAIPageableListOf<EvaluatorVersion>;
+  @Rest.action("versions")
+  @Rest.actionSeparator("/")
+  @Http.get
+  @list
+  listEvaluatorVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+    EvaluatorVersion,
+    ListEvaluatorVersionsParameters,
+    Azure.Core.Page<EvaluatorVersion>
+  >;
 
-
-
+  // GET /evaluators
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-  #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
-  @get
-  @doc("List the latest version of each Evaluator", EvaluatorVersion)
-  @route("/evaluators")
-  op listVersions(
-    ...OpenAIListRequestOptions,
-  ): OpenAIPageableListOf<EvaluatorVersion>;
-
-
+  @doc("List the latest version of each {name}", EvaluatorVersion)
+  @Rest.listsResource(EvaluatorVersion)
+  listVersions is Azure.Core.Foundations.ResourceList<
+    EvaluatorVersion,
+    {
+      @doc("Filter evaluator versions by type. Possible values: 'all', 'custom', 'builtin'.")
+      @Http.query
+      type?: EvaluatorType | "all";
+    },
+    Azure.Core.Page<EvaluatorVersion>
+  >;
+  
   // GET /evaluators/{name}/versions/{version}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc(
