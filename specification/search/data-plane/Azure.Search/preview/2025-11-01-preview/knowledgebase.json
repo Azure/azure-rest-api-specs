@@ -336,6 +336,26 @@
       ],
       "description": "Specifies runtime parameters for a azure blob knowledge source"
     },
+    "IndexedSharePointKnowledgeSourceParams": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedSharePoint",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "description": "Specifies runtime parameters for a indexed SharePoint knowledge source"
+    },
+    "IndexedOneLakeKnowledgeSourceParams": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedOneLake",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeSourceParams"
+        }
+      ],
+      "description": "Specifies runtime parameters for a indexed OneLake knowledge source"
+    },
     "WebKnowledgeSourceParams": {
       "type": "object",
       "x-ms-discriminator-value": "web",
@@ -646,6 +666,58 @@
       },
       "description": "Represents the arguments the azure blob retrieval activity was run with."
     },
+    "KnowledgeBaseIndexedSharePointActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedSharePoint",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
+        "indexedSharePointArguments": {
+          "$ref": "#/definitions/KnowledgeBaseIndexedSharePointActivityArguments",
+          "description": "The indexed SharePoint arguments for the retrieval activity."
+        }
+      },
+      "description": "Represents a indexed SharePoint retrieval activity record."
+    },
+    "KnowledgeBaseIndexedSharePointActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query indexed SharePoint contents."
+        }
+      },
+      "description": "Represents the arguments the indexed SharePoint retrieval activity was run with."
+    },
+    "KnowledgeBaseIndexedOneLakeActivityRecord": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedOneLake",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseRetrievalActivityRecord"
+        }
+      ],
+      "properties": {
+        "indexedOneLakeArguments": {
+          "$ref": "#/definitions/KnowledgeBaseIndexedOneLakeActivityArguments",
+          "description": "The indexed OneLake arguments for the retrieval activity."
+        }
+      },
+      "description": "Represents a indexed OneLake retrieval activity record."
+    },
+    "KnowledgeBaseIndexedOneLakeActivityArguments": {
+      "type": "object",
+      "properties": {
+        "search": {
+          "type": "string",
+          "description": "The search string used to query indexed OneLake contents."
+        }
+      },
+      "description": "Represents the arguments the indexed OneLake retrieval activity was run with."
+    },
     "KnowledgeBaseWebActivityRecord": {
       "type": "object",
       "x-ms-discriminator-value": "web",
@@ -849,6 +921,38 @@
       },
       "description": "Represents an Azure Blob Storage document reference."
     },
+    "KnowledgeBaseIndexedSharePointReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedSharePoint",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "properties": {
+        "docUrl": {
+          "type": "string",
+          "description": "The document URL for the reference."
+        }
+      },
+      "description": "Represents an Azure Blob Storage document reference."
+    },   
+    "KnowledgeBaseIndexedOneLakeReference": {
+      "type": "object",
+      "x-ms-discriminator-value": "indexedOneLake",
+      "allOf": [
+        {
+          "$ref": "#/definitions/KnowledgeBaseReference"
+        }
+      ],
+      "properties": {
+        "docUrl": {
+          "type": "string",
+          "description": "The document URL for the reference."
+        }
+      },
+      "description": "Represents an Azure Blob Storage document reference."
+    },    
     "KnowledgeBaseWebReference": {
       "type": "object",
       "x-ms-discriminator-value": "web",
