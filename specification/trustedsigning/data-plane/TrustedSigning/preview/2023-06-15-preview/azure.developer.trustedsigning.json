@@ -235,53 +235,6 @@
         }
       }
     },
-    "/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign/certchain": {
-      "get": {
-        "operationId": "CertificateProfileOperations_GetSignCertificateChain",
-        "summary": "Gets the signing certificate chain for that account and profile.",
-        "description": "The certificate chain is generated as part of each profile renewal.",
-        "produces": [
-          "application/pkcs7-mime",
-          "application/json"
-        ],
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/SigningOptions.accountName"
-          },
-          {
-            "$ref": "#/parameters/SigningOptions.certificateProfile"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "file"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Gets the codesigning root certificate on the certificate chain for that account and profile name.": {
-            "$ref": "./examples/CertificateProfileOperations_GetSignCertificateChain.json"
-          }
-        }
-      }
-    },
     "/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign/eku": {
       "get": {
         "operationId": "CertificateProfileOperations_ListExtendedKeyUsages",

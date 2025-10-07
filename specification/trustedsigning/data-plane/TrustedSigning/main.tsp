@@ -63,6 +63,7 @@ interface CertificateProfileOperations {
   @summary("Gets the signing certificate chain for that account and profile.")
   @doc("The certificate chain is generated as part of each profile renewal.")
   @route("/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign/certchain")
+  @added(Versions.v2024_06_15)
   getSignCertificateChain is RpcOperation<
     SigningOptions,
     BytesBody<"application/pkcs7-mime">
