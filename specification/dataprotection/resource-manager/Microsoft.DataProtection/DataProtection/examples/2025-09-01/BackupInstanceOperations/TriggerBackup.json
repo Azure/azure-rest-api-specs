@@ -1,0 +1,34 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "backupInstanceName": "testInstance1",
+    "parameters": {
+      "backupRuleOptions": {
+        "ruleName": "BackupWeekly",
+        "triggerOption": {
+          "retentionTagOverride": "yearly"
+        }
+      }
+    },
+    "resourceGroupName": "000pikumar",
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b",
+    "vaultName": "PratikPrivatePreviewVault1"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "jobId": "c60cb49-63e8-4b21-b9bd-26277b3fdfae",
+        "objectType": "OperationJobExtendedInfo"
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupVaults/PratikPrivatePreviewVault1/operationStatus/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2025-09-01",
+        "Location": "https://management.azure.com/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/000pikumar/providers/Microsoft.DataProtection/backupInstances/harshitbi1/operationResults/ZTA4YjQ0ZGYtYmNkNS00YTk1LWFjZTMtOTc1MjNmZWIxYWZlO2Y1ODg1MzA3LWJkNjItNDQ2OC05ZjZlLTJkMGM2NjNiNmJmNg==?api-version=2025-09-01",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "BackupInstances_AdhocBackup",
+  "title": "Trigger Adhoc Backup"
+}
