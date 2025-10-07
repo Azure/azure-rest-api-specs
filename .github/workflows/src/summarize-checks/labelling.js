@@ -51,7 +51,6 @@ import {
  * @property {boolean} dataPlaneRequired - Whether a data plane review is required.
  * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
  * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
- * @property {boolean} rpaasExceptionRequired - Whether an RPaaS exception is required.
  * @property {boolean} rpaasRpNotInPrivateRepo - Whether the RPaaS RP is not present in the private repo.
  * @property {boolean} rpaasChange - Whether this PR includes RPaaS changes.
  * @property {boolean} newRP - Whether this PR introduces a new resource provider.
@@ -411,8 +410,8 @@ export const breakingChangesCheckType = {
  * @returns {void}
  */
 export function processArmReviewLabels(context, existingLabels) {
-  // only kick this off if the ARMReview label is present
-  if (existingLabels.includes("ARMReview")) {
+  // only kick this off if the ARMReview label is present and NotReadyForARMReview is not present
+  if (existingLabels.includes("ARMReview") && !existingLabels.includes("NotReadyForARMReview")) {
     // the important part about how this will work depends how the users use it
     // EG: if they add the "ARMSignedOff" label, we will remove the "ARMChangesRequested" and "WaitForARMFeedback" labels.
     // if they add the "ARMChangesRequested" label, we will remove the "WaitForARMFeedback" label.
@@ -505,8 +504,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   );
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
 
-  const rpaasExceptionLabel = new Label("RPaaSException", labelContext.present);
-  rpaasExceptionLabel.shouldBePresent = impactAssessment.rpaasExceptionRequired || false;
+  const rpaasExceptionLabelPresent = "RPaaSException" in labelContext.present;
 
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
     "CI-RpaaSRPNotInPrivateRepo",
@@ -541,7 +539,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
       labelContext,
       armReviewLabel.shouldBePresent,
       impactAssessment.rpaasRPMissing,
-      impactAssessment.rpaasExceptionRequired,
+      rpaasExceptionLabelPresent,
       impactAssessment.rpaasRpNotInPrivateRepo,
     );
   }
@@ -555,7 +553,6 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   rpassReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   newRPNamespaceLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
-  rpaasExceptionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
 
   // this is the only labelling that was part of original pipelinebot logic, it handles the rotation of
@@ -642,13 +639,15 @@ async function processARMReviewWorkflowLabels(
 
   const armSignedOffLabel = new Label("ARMSignedOff", labelContext.present);
 
+  const blockedOnVersioningPolicy = getBlockedOnVersioningPolicy(labelContext);
+
   const blockedOnRpaas = getBlockedOnRpaas(
     ciNewRPNamespaceWithoutRpaaSLabelShouldBePresent,
     rpaasExceptionLabelShouldBePresent,
     ciRpaasRPNotInPrivateRepoLabelShouldBePresent,
   );
 
-  const blocked = blockedOnRpaas;
+  const blocked = blockedOnRpaas || blockedOnVersioningPolicy;
 
   // If given PR is in scope of ARM review and it is blocked for any reason,
   // the "NotReadyForARMReview" label should be present, to the exclusion
@@ -708,6 +707,23 @@ async function processARMReviewWorkflowLabels(
       `exactlyOneArmReviewWorkflowLabelShouldBePresent: ${exactlyOneArmReviewWorkflowLabelShouldBePresent}. `,
   );
   return;
+}
+
+/**
+ * @param {LabelContext} labelContext
+ * @returns {boolean}
+ */
+function getBlockedOnVersioningPolicy(labelContext) {
+  const pendingVersioningReview =
+    labelContext.present.has("VersioningReviewRequired") &&
+    !anyApprovalLabelPresent("SameVersion", [...labelContext.present]);
+
+  const pendingBreakingChangeReview =
+    labelContext.present.has("BreakingChangeReviewRequired") &&
+    !anyApprovalLabelPresent("CrossVersion", [...labelContext.present]);
+
+  const blockedOnVersioningPolicy = pendingVersioningReview || pendingBreakingChangeReview;
+  return blockedOnVersioningPolicy;
 }
 
 /**
