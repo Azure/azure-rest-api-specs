@@ -2510,8 +2510,8 @@ model DiffDiskSettings {
   /**
    * Specifies whether or not to enable full caching for this VM which will cache the OS disk locally on the host and make this VM more resilient to storage outages
    */
-   @added(Versions.v2025_11_01)
-   enableFullCaching?: boolean;
+  @added(Versions.v2025_11_01)
+  enableFullCaching?: boolean;
 }
 
 /**
