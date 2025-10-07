@@ -65,7 +65,6 @@ input-file:
   - preview/2024-11-15-preview/analyzeconversations.json
   - preview/2024-11-15-preview/analyzetext.json
   - preview/2024-11-15-preview/analyzetext-authoring.json
-  - preview/2024-11-15-preview/analyzeconversations-authoring.json
   - preview/2024-11-15-preview/analyzedocuments.json
 title:
   Microsoft Cognitive Language Service
