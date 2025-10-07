@@ -67,7 +67,10 @@ op conversationAuthoringListAssignedResourceDeployments is languageOperations.Re
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
 @added(Versions.v2025_05_15_preview)
-@renamedFrom(Versions.v2025_11_01, "conversationAuthoringListDeploymentResources")
+@renamedFrom(
+  Versions.v2025_11_01,
+  "conversationAuthoringListDeploymentResources"
+)
 op conversationAuthoringListProjectResources is languageOperations.ResourceList<
   AnalyzeConversationAuthoringProjectResourceInfo,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -285,7 +288,7 @@ interface ConversationAuthoringProject {
   @pollingOperation(
     ConversationAuthoringProject.getUnassignProjectResourcesStatus
   )
-  @access(Access.internal, "python") 
+  @access(Access.internal, "python")
   @renamedFrom(Versions.v2025_11_01, "unassignDeploymentResources")
   @added(Versions.v2025_05_15_preview)
   unassignProjectResources is Foundations.LongRunningOperation<
@@ -302,7 +305,10 @@ interface ConversationAuthoringProject {
        */
       @body
       @clientName("details", "csharp")
-      @typeChangedFrom(Versions.v2025_11_01, AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions)
+      @typeChangedFrom(
+        Versions.v2025_11_01,
+        AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions
+      )
       body: AnalyzeConversationAuthoringProjectAzureResourceIds;
     },
     AcceptedResponse,
