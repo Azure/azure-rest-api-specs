@@ -10,18 +10,11 @@ using Azure.Core;
 
 @versioned(VoiceLive.Versions)
 @service(#{ title: "VoiceLive" })
+@versioned(Versions)
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | AadOauth2Auth<[
     "https://ai.azure.com/.default"
   ]>
-)
-@server(
-  "{endpoint}/voice-agent/realtime",
-  "VoiceLive Endpoint",
-  {
-    /** Azure AI VoiceLive endpoint. */
-    endpoint: url,
-  }
 )
 namespace VoiceLive;
 
@@ -30,9 +23,3 @@ enum Versions {
   /** Version 2025-10-01. */
   v2025_10_01: "2025-10-01",
 }
-
-#suppress "@azure-tools/typespec-azure-core/operation-missing-api-version"
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-core/use-standard-names"
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations"
-op upgrade(): void;
