@@ -12,35 +12,35 @@ union ContentPartType {
   audio: "audio",
 }
 
-@discriminator("type")
 /** Base for any content part; discriminated by `type`. */
+@discriminator("type")
 model ContentPart {
   type: ContentPartType;
 }
 
-@usage(RequestUsage)
 /** A text content part for a request. */
+@usage(RequestUsage)
 model RequestTextContentPart extends ContentPart {
   type: ContentPartType.input_text;
   text?: string;
 }
 
-@usage(RequestUsage)
 /** An audio content part for a request. */
+@usage(RequestUsage)
 model RequestAudioContentPart extends ContentPart {
   type: ContentPartType.input_audio;
   transcript?: string;
 }
 
-@usage(ResponseUsage)
 /** A text content part for a response. */
+@usage(ResponseUsage)
 model ResponseTextContentPart extends ContentPart {
   type: ContentPartType.text;
   text?: string;
 }
 
-@usage(ResponseUsage)
 /** An audio content part for a response. */
+@usage(ResponseUsage)
 model ResponseAudioContentPart extends ContentPart {
   type: ContentPartType.audio;
   transcript?: string;

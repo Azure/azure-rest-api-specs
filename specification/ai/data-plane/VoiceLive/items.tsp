@@ -13,24 +13,24 @@ union ItemType {
 }
 
 // Base for user content parts
+/** Base for any message content part; discriminated by `type`. */
 @discriminator("type")
 @usage(RequestUsage)
-/** Base for any message content part; discriminated by `type`. */
 model MessageContentPart {
   /** The type of the content part. */
   type: ContentPartType;
 }
 
 // Variants
-@usage(RequestUsage)
 /** Input text content part. */
+@usage(RequestUsage)
 model InputTextContentPart extends MessageContentPart {
   type: ContentPartType.input_text;
   text: string;
 }
 
-@usage(RequestUsage)
 /** Input audio content part. */
+@usage(RequestUsage)
 model InputAudioContentPart extends MessageContentPart {
   type: ContentPartType.input_audio;
   audio: string;
@@ -42,6 +42,7 @@ model InputAudioContentPart extends MessageContentPart {
 model OutputTextContentPart extends MessageContentPart {
   /** The type of the content part. */
   type: ContentPartType.text;
+
   /** The text content. */
   text: string;
 }
@@ -50,8 +51,10 @@ model OutputTextContentPart extends MessageContentPart {
 /** Indicates the processing status of an item or parameter. */
 union ItemParamStatus {
   string,
+
   /** Item or parameter is still being processed. */
   completed: "completed",
+
   /** Item or parameter is not yet complete. */
   incomplete: "incomplete",
 }
@@ -65,46 +68,49 @@ model ConversationRequestItem {
 }
 
 // ----- Message Items -----
-@discriminator("role")
-@usage(RequestUsage)
 /** A message item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
+@discriminator("role")
+@usage(RequestUsage)
 model MessageItem extends ConversationRequestItem {
   /** The type of the item; must be 'message' for message items. */
   type: ItemType.message;
+
   /** The role of the message origionator. */
   role: MessageRole;
+
   /** The content parts of the message. */
   content: MessageContentPart[];
+
   /** Processing status of the message item. */
   status?: ItemParamStatus;
 }
 
-@usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
 /** A system message item within a conversation. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
+@usage(RequestUsage)
 model SystemMessageItem extends MessageItem {
   role: MessageRole.system;
 }
 
-@usage(RequestUsage)
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
 /** A user message item within a conversation. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
+@usage(RequestUsage)
 model UserMessageItem extends MessageItem {
   role: MessageRole.user;
 }
 
-@usage(DualUsage)
-#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
 /** An assistant message item within a conversation. */
+#suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" // The messages have multiple discriminators, but this is intentional. This follows the OpenAI style.
+@usage(DualUsage)
 model AssistantMessageItem extends MessageItem {
   role: MessageRole.assistant;
 }
 
 // ----- Function Call Items -----
-@usage(RequestUsage)
 /** A function call item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
 model FunctionCallItem extends ConversationRequestItem {
   type: ItemType.function_call;
   name: string;
@@ -113,9 +119,9 @@ model FunctionCallItem extends ConversationRequestItem {
   status?: ItemParamStatus;
 }
 
-@usage(RequestUsage)
 /** A function call output item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(RequestUsage)
 model FunctionCallOutputItem extends ConversationRequestItem {
   type: ItemType.function_call_output;
   call_id: string;
@@ -123,18 +129,19 @@ model FunctionCallOutputItem extends ConversationRequestItem {
   status?: ItemParamStatus;
 }
 
-@discriminator("type")
 /** Base for any response item; discriminated by `type`. */
+@discriminator("type")
 @usage(ResponseUsage)
 model ResponseItem {
   // must stay here, required, broad type
   type: ItemType;
+
   id?: string;
   object?: "realtime.item";
 }
 
-@usage(ResponseUsage)
 /** Base type for message item within a conversation. */
+@usage(ResponseUsage)
 model ResponseMessageItem extends ResponseItem {
   type: ItemType.message;
   role: MessageRole;
@@ -142,11 +149,10 @@ model ResponseMessageItem extends ResponseItem {
   status: ResponseItemStatus;
 }
 
-@usage(ResponseUsage)
 /** A function call item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-model ResponseFunctionCallItem
-  extends ResponseItem {
+@usage(ResponseUsage)
+model ResponseFunctionCallItem extends ResponseItem {
   type: ItemType.function_call;
   name: string;
   call_id: string;
@@ -154,25 +160,27 @@ model ResponseFunctionCallItem
   status: ResponseItemStatus;
 }
 
-@usage(ResponseUsage)
 /** A function call output item within a conversation. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-model ResponseFunctionCallOutputItem
-  extends ResponseItem {
+@usage(ResponseUsage)
+model ResponseFunctionCallOutputItem extends ResponseItem {
   type: ItemType.function_call_output;
   call_id: string;
   output: string;
 }
 
-@usage(ResponseUsage)
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 /** Indicates the processing status of a response item. */
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
 union ResponseItemStatus {
   string,
+
   /** Item that is in progress. */
   in_progress: "in_progress",
+
   /** Item has been fully processed and is complete. */
   completed: "completed",
+
   /** Item has been processed but is incomplete. */
   incomplete: "incomplete",
 }
@@ -195,7 +203,7 @@ union ResponseStatus {
 }
 
 /** Base for all non-success response details. */
-@discriminator("type")  // or just @discriminator("type") if imported unqualified
+@discriminator("type") // or just @discriminator("type") if imported unqualified
 @usage(ResponseUsage)
 model ResponseStatusDetails {
   // Required discriminator key on the base; keep it as a broad string.
@@ -207,6 +215,7 @@ model ResponseStatusDetails {
 model ResponseCancelledDetails extends ResponseStatusDetails {
   // Narrow the discriminator to a literal in each child:
   type: "cancelled";
+
   reason: "turn_detected" | "client_cancelled" | string;
 }
 
@@ -218,16 +227,16 @@ model ResponseIncompleteDetails extends ResponseStatusDetails {
 }
 
 /** Details for a failed response. */
-@usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/no-unknown" // The error can be of any type, depending on the failure.
+@usage(ResponseUsage)
 model ResponseFailedDetails extends ResponseStatusDetails {
   type: "failed";
   error: unknown;
 }
 
 /** Details of input token usage. */
-@usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
 model InputTokenDetails {
   /** Number of cached tokens used in the input. */
   cached_tokens: int32;
@@ -243,8 +252,8 @@ model InputTokenDetails {
 }
 
 /** Details of output token usage. */
-@usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
 model OutputTokenDetails {
   /** Number of text tokens generated in the output. */
   text_tokens: int32;
@@ -254,8 +263,8 @@ model OutputTokenDetails {
 }
 
 /** Details of output token usage. */
-@usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
 model CachedTokenDetails {
   /** Number of cached text tokens. */
   text_tokens: int32;
@@ -265,8 +274,8 @@ model CachedTokenDetails {
 }
 
 /** Overall usage statistics for a response. */
-@usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+@usage(ResponseUsage)
 model TokenUsage {
   /** Total number of tokens (input + output). */
   total_tokens: int32;

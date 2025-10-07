@@ -9,7 +9,7 @@ using TypeSpec.Versioning;
 using Azure.Core;
 
 @versioned(VoiceLive.Versions)
-@service(#{ title: "VoiceLive"})
+@service(#{ title: "VoiceLive" })
 @useAuth(
   ApiKeyAuth<ApiKeyLocation.header, "api-key"> | AadOauth2Auth<[
     "https://ai.azure.com/.default"
@@ -23,7 +23,6 @@ using Azure.Core;
     endpoint: url,
   }
 )
-
 namespace VoiceLive;
 
 /** API versioning. */
