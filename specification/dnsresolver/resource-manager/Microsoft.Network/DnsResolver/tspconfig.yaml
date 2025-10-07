@@ -13,9 +13,16 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     arm-resource-flattening: true
     emit-lro-options: "all"
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.DnsResolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dnsresolver"
+    package-dir: "azure-mgmt-dnsresolver"
     namespace: "azure.mgmt.dnsresolver"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-dnsresolver"
     generate-test: true
     generate-sample: true
     flavor: "azure"
@@ -25,9 +32,10 @@ options:
     service-name: "Dns Resolver" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-dnsresolver"
+    package-dir: "arm-dnsresolver"
     flavor: azure
     experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-dnsresolver"
     package-details:
       name: "@azure/arm-dnsresolver"
   "@azure-tools/typespec-go":
