@@ -3007,14 +3007,14 @@
             "description": "OK -- Get the IFC Rule successfully.",
             "schema": {
               "$ref": "#/definitions/RaiIfcRule"
-              }
-            },
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
             }
+          }
         }
       },
       "put": {
@@ -3059,14 +3059,14 @@
             "description": "Created IFC Rule successfully.",
             "schema": {
               "$ref": "#/definitions/RaiIfcRule"
-              }
-            },
+            }
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
             }
+          }
         }
       },
       "delete": {
@@ -3101,22 +3101,20 @@
           "202": {
             "description": "Accepted -- delete operation started.",
             "headers": {
-              "location":
-              {
+              "location": {
                 "type": "string"
               }
-              }
-            },
+            }
+          },
           "204": {
             "description": "No Content -- IFC Rule does not exist."
           },
           "default": {
             "description": "Error response describing why the operation failed.",
-            "schema":
-            {
+            "schema": {
               "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-              }
             }
+          }
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -3125,7 +3123,9 @@
       },
       "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiIfcRules": {
         "get": {
-          "tags": ["RaiIfcRules"],
+          "tags": [
+            "RaiIfcRules"
+          ],
           "operationId": "RaiIfcRules_List",
           "description": "Gets the IFC Rules associated with the Azure OpenAI account.",
           "x-ms-examples": {
@@ -3152,14 +3152,14 @@
               "description": "Successfully retrieved IFC Rules.",
               "schema": {
                 "$ref": "#/definitions/RaiIfcRuleResult"
-                }
-              },
+              }
+            },
             "default": {
               "description": "Error response describing why the operation failed.",
               "schema": {
                 "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ErrorResponse"
-                }
               }
+            }
           },
           "x-ms-pageable": {
             "nextLinkName": "nextLink"
@@ -3169,7 +3169,9 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiToolLabels/{toolConnectionName}": {
       "get": {
-        "tags": ["RaiToolLabels"],
+        "tags": [
+          "RaiToolLabels"
+        ],
         "operationId": "RaiToolLabels_Get",
         "description": "Gets the specified RAI Tool Label associated with the Azure OpenAI account.",
         "x-ms-examples": {
@@ -3197,7 +3199,9 @@
         "responses": {
           "200": {
             "description": "OK -- Retrieved RAI Tool Label successfully.",
-            "schema": { "$ref": "#/definitions/RaiToolLabel" }
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3208,7 +3212,9 @@
         }
       },
       "put": {
-        "tags": ["RaiToolLabels"],
+        "tags": [
+          "RaiToolLabels"
+        ],
         "operationId": "RaiToolLabels_Create",
         "description": "Creates the RAI Tool Label associated with the Azure OpenAI account.",
         "x-ms-examples": {
@@ -3236,14 +3242,18 @@
             "name": "raiToolLabel",
             "in": "body",
             "required": true,
-            "schema": { "$ref": "#/definitions/RaiToolLabel" },
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            },
             "description": "Properties describing the RAI Tool Label."
           }
         ],
         "responses": {
           "201": {
             "description": "Created RAI Tool Label successfully.",
-            "schema": { "$ref": "#/definitions/RaiToolLabel" }
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3254,7 +3264,9 @@
         }
       },
       "delete": {
-        "tags": ["RaiToolLabels"],
+        "tags": [
+          "RaiToolLabels"
+        ],
         "operationId": "RaiToolLabels_Delete",
         "description": "Deletes the specified RAI Tool Label associated with the Azure OpenAI account.",
         "x-ms-examples": {
@@ -3285,10 +3297,12 @@
             "headers": {
               "location": {
                 "type": "string"
-                }
               }
+            }
           },
-          "204": { "description": "No Content -- RAI Tool Label does not exist." },
+          "204": {
+            "description": "No Content -- RAI Tool Label does not exist."
+          },
           "default": {
             "description": "Error response describing why the operation failed.",
             "schema": {
@@ -3297,12 +3311,16 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": { "final-state-via": "location" }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiToolLabels": {
       "get": {
-        "tags": ["RaiToolLabels"],
+        "tags": [
+          "RaiToolLabels"
+        ],
         "operationId": "RaiToolLabels_List",
         "description": "Lists all RAI Tool Labels associated with the Azure OpenAI account.",
         "x-ms-examples": {
@@ -3327,7 +3345,9 @@
         "responses": {
           "200": {
             "description": "Successfully retrieved RAI Tool Labels.",
-            "schema": { "$ref": "#/definitions/RaiToolLabelResult" }
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabelResult"
+            }
           },
           "default": {
             "description": "Error response describing why the operation failed.",
@@ -3336,7 +3356,9 @@
             }
           }
         },
-        "x-ms-pageable": { "nextLinkName": "nextLink" }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
       }
     },
     "subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/raiContentFilters": {
@@ -9760,7 +9782,9 @@
           "items": {
             "$ref": "#/definitions/RaiIfcRule"
           },
-          "x-ms-identifiers": ["name"],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of RaiIfcRules."
         }
       },
@@ -9781,8 +9805,13 @@
         },
         "tags": {
           "type": "object",
-          "additionalProperties": { "type": "string" },
-          "x-ms-mutability": ["read", "create"],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "Resource tags."
         },
         "properties": {
@@ -9797,23 +9826,41 @@
       ]
     },
     "RaiIfcRuleProperties": {
-    "description": "RAI IFC Rule properties.",
-    "type": "object",
-    "properties": {
-      "name": { "type": "string", "description": "Unique identifier for the IFC rule." },
-      "action": {
-        "type": "string",
-        "enum": ["NONE", "RETRY", "HITL", "ANNOTATING", "BLOCKING"],
-        "description": "Action type of the IFC rule."
+      "description": "RAI IFC Rule properties.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Unique identifier for the IFC rule."
+        },
+        "action": {
+          "type": "string",
+          "enum": [
+            "NONE",
+            "RETRY",
+            "HITL",
+            "ANNOTATING",
+            "BLOCKING"
+          ],
+          "description": "Action type of the IFC rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the IFC rule."
+        },
+        "conditions": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "Dictionary of arbitrary key/value pairs for conditions."
+        }
       },
-      "description": { "type": "string", "description": "Description of the IFC rule." },
-      "conditions": {
-        "type": "object",
-        "additionalProperties": { "type": "string" },
-        "description": "Dictionary of arbitrary key/value pairs for conditions."
-      }
-      },
-      "required": ["name", "action", "conditions"]
+      "required": [
+        "name",
+        "action",
+        "conditions"
+      ]
     },
     "RaiToolLabelResult": {
       "type": "object",
@@ -9827,7 +9874,9 @@
           "items": {
             "$ref": "#/definitions/RaiToolLabel"
           },
-          "x-ms-identifiers": ["name"],
+          "x-ms-identifiers": [
+            "name"
+          ],
           "description": "The list of RAI Tool Labels."
         }
       },
@@ -9848,8 +9897,13 @@
         },
         "tags": {
           "type": "object",
-          "additionalProperties": { "type": "string" },
-          "x-ms-mutability": ["read", "create"],
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
           "description": "Resource tags."
         },
         "properties": {
@@ -9862,2297 +9916,2305 @@
           "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/ProxyResource"
         }
       ]
-      },
-      "RaiToolLabelProperties": {
-        "description": "RAI Tool Label properties.",
-        "type": "object",
-        "properties": {
-          "toolConnectionName": {
-            "type": "string",
-            "description": "The unique tool connection name, e.g., 'Web_Search'."
-          },
-          "accountScope": {
+    },
+    "RaiToolLabelProperties": {
+      "description": "RAI Tool Label properties.",
+      "type": "object",
+      "properties": {
+        "toolConnectionName": {
+          "type": "string",
+          "description": "The unique tool connection name, e.g., 'Web_Search'."
+        },
+        "accountScope": {
+          "type": "object",
+          "description": "Account-level tool label definition.",
+          "properties": {
+            "labelValues": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Dictionary of label key-value pairs for the account scope."
+            }
+          }
+        },
+        "projectScopes": {
+          "type": "array",
+          "description": "List of project-level tool label definitions.",
+          "items": {
             "type": "object",
-            "description": "Account-level tool label definition.",
             "properties": {
+              "project": {
+                "type": "string",
+                "description": "Project name to which this scope applies."
+              },
               "labelValues": {
                 "type": "object",
-                "additionalProperties": { "type": "string" },
-                "description": "Dictionary of label key-value pairs for the account scope."
-              }
-            }
-          },
-          "projectScopes": {
-            "type": "array",
-            "description": "List of project-level tool label definitions.",
-            "items": {
-              "type": "object",
-              "properties": {
-                "project": {
-                  "type": "string",
-                  "description": "Project name to which this scope applies."
+                "additionalProperties": {
+                  "type": "string"
                 },
-                "labelValues": {
-                  "type": "object",
-                  "additionalProperties": { "type": "string" },
-                  "description": "Dictionary of label key-value pairs for the project scope."
-                }
-              },
-              "required": ["project", "labelValues"]
-            }
-          }
-        },
-        "required": ["toolConnectionName"]
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationList": {
-      "description": "A list of NSP configurations for an Cognitive Services account.",
-      "type": "object",
-      "properties": {
-        "value": {
-          "description": "Array of NSP configurations List Result for an Cognitive Services account.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ]
-        },
-        "nextLink": {
-          "description": "Link to retrieve next page of results.",
-          "type": "string"
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfiguration": {
-      "description": "NSP Configuration for an Cognitive Services account.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
-          "description": "NSP Configuration properties."
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationProperties": {
-      "description": "The properties of an NSP Configuration.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "description": "Provisioning state of NetworkSecurityPerimeter configuration",
-          "type": "string"
-        },
-        "provisioningIssues": {
-          "description": "List of Provisioning Issues",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ProvisioningIssue"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
-        },
-        "networkSecurityPerimeter": {
-          "$ref": "#/definitions/NetworkSecurityPerimeter"
-        },
-        "resourceAssociation": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationAssociationInfo"
-        },
-        "profile": {
-          "$ref": "#/definitions/NetworkSecurityPerimeterProfileInfo"
-        }
-      }
-    },
-    "ProvisioningIssue": {
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the NSP provisioning issue",
-          "type": "string"
-        },
-        "properties": {
-          "$ref": "#/definitions/ProvisioningIssueProperties"
-        }
-      }
-    },
-    "ProvisioningIssueProperties": {
-      "description": "Properties of Provisioning Issue",
-      "type": "object",
-      "properties": {
-        "issueType": {
-          "description": "Type of Issue",
-          "type": "string"
-        },
-        "severity": {
-          "description": "Severity of the issue",
-          "type": "string"
-        },
-        "description": {
-          "description": "Description of the issue",
-          "type": "string"
-        },
-        "suggestedResourceIds": {
-          "description": "IDs of resources that can be associated to the same perimeter to remediate the issue.",
-          "type": "array",
-          "items": {
-            "type": "string",
-            "format": "arm-id",
-            "description": "Fully qualified resource ID for the resource."
-          }
-        },
-        "suggestedAccessRules": {
-          "description": "Optional array, suggested access rules",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterAccessRule"
-          }
-        }
-      }
-    },
-    "NetworkSecurityPerimeter": {
-      "description": "Information about a linked Network Security Perimeter",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Fully qualified identifier of the resource",
-          "type": "string",
-          "format": "arm-id"
-        },
-        "perimeterGuid": {
-          "description": "Guid of the resource",
-          "type": "string"
-        },
-        "location": {
-          "description": "Location of the resource",
-          "type": "string"
-        }
-      }
-    },
-    "NetworkSecurityPerimeterConfigurationAssociationInfo": {
-      "description": "Network Security Perimeter Configuration Association Information",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the resource association",
-          "type": "string"
-        },
-        "accessMode": {
-          "description": "Access Mode of the resource association",
-          "type": "string"
-        }
-      }
-    },
-    "NetworkSecurityPerimeterProfileInfo": {
-      "description": "Network Security Perimeter Profile Information",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Name of the resource profile",
-          "type": "string"
-        },
-        "accessRulesVersion": {
-          "description": "Access rules version of the resource profile",
-          "type": "integer",
-          "format": "int64"
-        },
-        "accessRules": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeterAccessRule"
-          },
-          "x-ms-identifiers": []
-        },
-        "diagnosticSettingsVersion": {
-          "description": "Current diagnostic settings version",
-          "type": "integer",
-          "format": "int64"
-        },
-        "enabledLogCategories": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "description": "List of enabled log categories"
-        }
-      }
-    },
-    "NetworkSecurityPerimeterAccessRule": {
-      "description": "Network Security Perimeter Access Rule",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Network Security Perimeter Access Rule Name",
-          "type": "string"
-        },
-        "properties": {
-          "description": "Properties of Network Security Perimeter Access Rule",
-          "$ref": "#/definitions/NetworkSecurityPerimeterAccessRuleProperties"
-        }
-      }
-    },
-    "NetworkSecurityPerimeterAccessRuleProperties": {
-      "description": "The Properties of Network Security Perimeter Rule",
-      "type": "object",
-      "properties": {
-        "direction": {
-          "enum": [
-            "Inbound",
-            "Outbound"
-          ],
-          "type": "string",
-          "description": "Direction of Access Rule",
-          "x-ms-enum": {
-            "name": "NspAccessRuleDirection",
-            "modelAsString": true
-          }
-        },
-        "addressPrefixes": {
-          "description": "Address prefixes for inbound rules",
-          "type": "array",
-          "items": {
-            "description": "IP Address",
-            "type": "string"
-          }
-        },
-        "subscriptions": {
-          "description": "Subscriptions for inbound rules",
-          "type": "array",
-          "items": {
-            "description": "Subscription for inbound rule",
-            "type": "object",
-            "properties": {
-              "id": {
-                "description": "Fully qualified identifier of subscription",
-                "type": "string"
+                "description": "Dictionary of label key-value pairs for the project scope."
               }
-            }
-          }
-        },
-        "networkSecurityPerimeters": {
-          "description": "NetworkSecurityPerimeters for inbound rules",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkSecurityPerimeter"
-          }
-        },
-        "fullyQualifiedDomainNames": {
-          "description": "Fully qualified domain name for outbound rules",
-          "type": "array",
-          "items": {
-            "description": "Fully qualified domain name",
-            "type": "string"
-          }
-        }
-      }
-    },
-    "DefenderForAISettingResult": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of Defender for AI Settings.",
-          "type": "string"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/DefenderForAISetting"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The list of Defender for AI Settings."
-        }
-      },
-      "description": "The list of cognitive services Defender for AI Settings."
-    },
-    "DefenderForAISetting": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Etag."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "properties": {
-          "x-ms-client-flatten": true,
-          "$ref": "#/definitions/DefenderForAISettingProperties"
-        }
-      },
-      "description": "The Defender for AI resource."
-    },
-    "DefenderForAISettingProperties": {
-      "type": "object",
-      "properties": {
-        "state": {
-          "type": "string",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "x-ms-enum": {
-            "name": "DefenderForAISettingState",
-            "modelAsString": true
-          },
-          "description": "Defender for AI state on the AI resource."
-        }
-      },
-      "description": "The Defender for AI resource properties."
-    },
-    "ConnectionPropertiesV2BasicResource": {
-      "required": [
-        "properties"
-      ],
-      "description": "Connection base resource schema.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      }
-    },
-    "ConnectionPropertiesV2": {
-      "required": [
-        "authType"
-      ],
-      "type": "object",
-      "description": "Connection property base schema.",
-      "properties": {
-        "authType": {
-          "description": "Authentication type of the connection target",
-          "$ref": "#/definitions/ConnectionAuthType"
-        },
-        "category": {
-          "description": "Category of the connection",
-          "$ref": "#/definitions/ConnectionCategory"
-        },
-        "createdByWorkspaceArmId": {
-          "type": "string",
-          "format": "arm-id",
-          "readOnly": true
-        },
-        "error": {
-          "description": "Provides the error message if the connection fails",
-          "type": "string"
-        },
-        "expiryTime": {
-          "format": "date-time",
-          "type": "string"
-        },
-        "group": {
-          "description": "Group based on connection category",
-          "$ref": "#/definitions/ConnectionGroup",
-          "readOnly": true
-        },
-        "isSharedToAll": {
-          "type": "boolean"
-        },
-        "metadata": {
-          "description": "Store user metadata for this connection",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "peRequirement": {
-          "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'.",
-          "$ref": "#/definitions/ManagedPERequirement"
-        },
-        "peStatus": {
-          "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'.",
-          "$ref": "#/definitions/ManagedPEStatus"
-        },
-        "sharedUserList": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          }
-        },
-        "target": {
-          "description": "The connection URL to be used.",
-          "type": "string"
-        },
-        "useWorkspaceManagedIdentity": {
-          "type": "boolean"
-        }
-      },
-      "discriminator": "authType"
-    },
-    "ConnectionAuthType": {
-      "description": "Authentication type of the connection target",
-      "enum": [
-        "PAT",
-        "ManagedIdentity",
-        "UsernamePassword",
-        "None",
-        "SAS",
-        "AccountKey",
-        "ServicePrincipal",
-        "AccessKey",
-        "ApiKey",
-        "CustomKeys",
-        "OAuth2",
-        "AAD"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ConnectionAuthType",
-        "modelAsString": true
-      }
-    },
-    "ConnectionCategory": {
-      "description": "Category of the connection",
-      "enum": [
-        "PythonFeed",
-        "ContainerRegistry",
-        "Git",
-        "S3",
-        "Snowflake",
-        "AzureSqlDb",
-        "AzureSynapseAnalytics",
-        "AzureMySqlDb",
-        "AzurePostgresDb",
-        "ADLSGen2",
-        "Redis",
-        "ApiKey",
-        "AzureOpenAI",
-        "AIServices",
-        "CognitiveSearch",
-        "CognitiveService",
-        "CustomKeys",
-        "AzureBlob",
-        "AzureOneLake",
-        "CosmosDb",
-        "CosmosDbMongoDbApi",
-        "AzureDataExplorer",
-        "AzureMariaDb",
-        "AzureDatabricksDeltaLake",
-        "AzureSqlMi",
-        "AzureTableStorage",
-        "AmazonRdsForOracle",
-        "AmazonRdsForSqlServer",
-        "AmazonRedshift",
-        "Db2",
-        "Drill",
-        "GoogleBigQuery",
-        "Greenplum",
-        "Hbase",
-        "Hive",
-        "Impala",
-        "Informix",
-        "MariaDb",
-        "MicrosoftAccess",
-        "MySql",
-        "Netezza",
-        "Oracle",
-        "Phoenix",
-        "PostgreSql",
-        "Presto",
-        "SapOpenHub",
-        "SapBw",
-        "SapHana",
-        "SapTable",
-        "Spark",
-        "SqlServer",
-        "Sybase",
-        "Teradata",
-        "Vertica",
-        "Pinecone",
-        "Cassandra",
-        "Couchbase",
-        "MongoDbV2",
-        "MongoDbAtlas",
-        "AmazonS3Compatible",
-        "FileServer",
-        "FtpServer",
-        "GoogleCloudStorage",
-        "Hdfs",
-        "OracleCloudStorage",
-        "Sftp",
-        "GenericHttp",
-        "ODataRest",
-        "Odbc",
-        "GenericRest",
-        "AmazonMws",
-        "Concur",
-        "Dynamics",
-        "DynamicsAx",
-        "DynamicsCrm",
-        "GoogleAdWords",
-        "Hubspot",
-        "Jira",
-        "Magento",
-        "Marketo",
-        "Office365",
-        "Eloqua",
-        "Responsys",
-        "OracleServiceCloud",
-        "PayPal",
-        "QuickBooks",
-        "Salesforce",
-        "SalesforceServiceCloud",
-        "SalesforceMarketingCloud",
-        "SapCloudForCustomer",
-        "SapEcc",
-        "ServiceNow",
-        "SharePointOnlineList",
-        "Shopify",
-        "Square",
-        "WebTable",
-        "Xero",
-        "Zoho",
-        "GenericContainerRegistry",
-        "Elasticsearch",
-        "OpenAI",
-        "Serp",
-        "BingLLMSearch",
-        "Serverless",
-        "ManagedOnlineEndpoint",
-        "AzureStorageAccount"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ConnectionCategory",
-        "modelAsString": true
-      }
-    },
-    "ConnectionGroup": {
-      "description": "Group based on connection category",
-      "enum": [
-        "Azure",
-        "AzureAI",
-        "Database",
-        "NoSQL",
-        "File",
-        "GenericProtocol",
-        "ServicesAndApps"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ConnectionGroup",
-        "modelAsString": true
-      }
-    },
-    "ManagedPERequirement": {
-      "enum": [
-        "Required",
-        "NotRequired",
-        "NotApplicable"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ManagedPERequirement",
-        "modelAsString": true
-      }
-    },
-    "ManagedPEStatus": {
-      "enum": [
-        "Inactive",
-        "Active",
-        "NotApplicable"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ManagedPEStatus",
-        "modelAsString": true
-      }
-    },
-    "PATAuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionPersonalAccessToken"
-        }
-      },
-      "x-ms-discriminator-value": "PAT"
-    },
-    "ConnectionPersonalAccessToken": {
-      "type": "object",
-      "properties": {
-        "pat": {
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "ManagedIdentityAuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionManagedIdentity"
-        }
-      },
-      "x-ms-discriminator-value": "ManagedIdentity"
-    },
-    "ConnectionManagedIdentity": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string"
-        },
-        "resourceId": {
-          "type": "string"
-        }
-      }
-    },
-    "UsernamePasswordAuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionUsernamePassword"
-        }
-      },
-      "x-ms-discriminator-value": "UsernamePassword"
-    },
-    "ConnectionUsernamePassword": {
-      "type": "object",
-      "properties": {
-        "password": {
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "securityToken": {
-          "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "username": {
-          "type": "string"
-        }
-      }
-    },
-    "NoneAuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "x-ms-discriminator-value": "None"
-    },
-    "SASAuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionSharedAccessSignature"
-        }
-      },
-      "x-ms-discriminator-value": "SAS"
-    },
-    "ConnectionSharedAccessSignature": {
-      "type": "object",
-      "properties": {
-        "sas": {
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "AccountKeyAuthTypeConnectionProperties": {
-      "description": "This connection type covers the account key connection for Azure storage",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionAccountKey"
-        }
-      },
-      "x-ms-discriminator-value": "AccountKey"
-    },
-    "ConnectionAccountKey": {
-      "description": "Account key object for connection credential.",
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "ServicePrincipalAuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionServicePrincipal"
-        }
-      },
-      "x-ms-discriminator-value": "ServicePrincipal"
-    },
-    "ConnectionServicePrincipal": {
-      "type": "object",
-      "properties": {
-        "clientId": {
-          "type": "string"
-        },
-        "clientSecret": {
-          "x-ms-secret": true,
-          "type": "string"
-        },
-        "tenantId": {
-          "type": "string"
-        }
-      }
-    },
-    "AccessKeyAuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionAccessKey"
-        }
-      },
-      "x-ms-discriminator-value": "AccessKey"
-    },
-    "ConnectionAccessKey": {
-      "type": "object",
-      "properties": {
-        "accessKeyId": {
-          "type": "string"
-        },
-        "secretAccessKey": {
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "ApiKeyAuthConnectionProperties": {
-      "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\r\nAzureOpenAI:\r\n    Category:= AzureOpenAI\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {ApiKey} as .ApiKey\r\n    Target:= {ApiBase}\r\n            \r\nCognitiveService:\r\n    Category:= CognitiveService\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {SubscriptionKey} as ApiKey\r\n    Target:= ServiceRegion={serviceRegion}\r\n            \r\nCognitiveSearch:\r\n    Category:= CognitiveSearch\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {Key} as ApiKey\r\n    Target:= {Endpoint}\r\n            \r\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionApiKey"
-        }
-      },
-      "x-ms-discriminator-value": "ApiKey"
-    },
-    "ConnectionApiKey": {
-      "description": "Api key object for connection credential.",
-      "type": "object",
-      "properties": {
-        "key": {
-          "type": "string",
-          "x-ms-secret": true
-        }
-      }
-    },
-    "CustomKeysConnectionProperties": {
-      "description": "Category:= CustomKeys\r\nAuthType:= CustomKeys (as type discriminator)\r\nCredentials:= {CustomKeys} as CustomKeys\r\nTarget:= {any value}\r\nUse Metadata property bag for ApiVersion and other metadata fields",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "description": "Custom Keys credential object",
-          "$ref": "#/definitions/CustomKeys"
-        }
-      },
-      "x-ms-discriminator-value": "CustomKeys"
-    },
-    "CustomKeys": {
-      "description": "Custom Keys credential object",
-      "type": "object",
-      "properties": {
-        "keys": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      }
-    },
-    "OAuth2AuthTypeConnectionProperties": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "properties": {
-        "credentials": {
-          "$ref": "#/definitions/ConnectionOAuth2"
-        }
-      },
-      "x-ms-discriminator-value": "OAuth2"
-    },
-    "ConnectionOAuth2": {
-      "description": "ClientId and ClientSecret are required. Other properties are optional\r\ndepending on each OAuth2 provider's implementation.",
-      "type": "object",
-      "properties": {
-        "authUrl": {
-          "description": "Required by Concur connection category",
-          "type": "string",
-          "format": "uri"
-        },
-        "clientId": {
-          "type": "string",
-          "description": "Client id in the format of UUID",
-          "format": "uuid"
-        },
-        "clientSecret": {
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "developerToken": {
-          "description": "Required by GoogleAdWords connection category",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "password": {
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "refreshToken": {
-          "description": "Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho\r\nwhere user needs to get RefreshToken offline",
-          "type": "string",
-          "x-ms-secret": true
-        },
-        "tenantId": {
-          "description": "Required by QuickBooks and Xero connection categories",
-          "type": "string"
-        },
-        "username": {
-          "description": "Concur, ServiceNow auth server AccessToken grant type is 'Password'\r\nwhich requires UsernamePassword",
-          "type": "string"
-        }
-      }
-    },
-    "AADAuthTypeConnectionProperties": {
-      "description": "This connection type covers the AAD auth for any applicable Azure service",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      ],
-      "x-ms-discriminator-value": "AAD"
-    },
-    "ConnectionUpdateContent": {
-      "description": "The properties that the Cognitive services connection will be updated with.",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "description": "The properties that the Cognitive services connection will be updated with.",
-          "$ref": "#/definitions/ConnectionPropertiesV2"
-        }
-      }
-    },
-    "ConnectionPropertiesV2BasicResourceArmPaginatedResult": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "type": "string"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
-          }
-        }
-      }
-    },
-    "CapabilityHostResource": {
-      "description": "Azure Resource Manager resource envelope.",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/CapabilityHost"
-        }
-      },
-      "x-ms-client-name": "CapabilityHost",
-      "additionalProperties": false
-    },
-    "CapabilityHost": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        }
-      ],
-      "properties": {
-        "aiServicesConnections": {
-          "description": "List of AI services connections.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "capabilityHostKind": {
-          "description": "Kind of this capability host.",
-          "$ref": "#/definitions/CapabilityHostKind"
-        },
-        "customerSubnet": {
-          "description": "Customer subnet info to help set up this capability host.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state for the CapabilityHost.",
-          "$ref": "#/definitions/CapabilityHostProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        },
-        "storageConnections": {
-          "description": "List of connection names from those available in the account or project to be used as a storage resource.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "threadStorageConnections": {
-          "description": "List of connection names from those available in the account or project to be used for Thread storage.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "vectorStoreConnections": {
-          "description": "List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        }
-      },
-      "x-ms-client-name": "CapabilityHostProperties",
-      "additionalProperties": false
-    },
-    "CapabilityHostProvisioningState": {
-      "description": "Provisioning state of capability host.",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "type": "string",
-      "readOnly": true,
-      "x-ms-enum": {
-        "name": "CapabilityHostProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Succeeded"
-          },
-          {
-            "value": "Failed"
-          },
-          {
-            "value": "Canceled"
-          },
-          {
-            "value": "Creating"
-          },
-          {
-            "value": "Updating"
-          },
-          {
-            "value": "Deleting"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "CapabilityHostKind": {
-      "enum": [
-        "Agents"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "CapabilityHostKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Agents"
-          }
-        ]
-      },
-      "additionalProperties": false
-    },
-    "ResourceBase": {
-      "type": "object",
-      "properties": {
-        "description": {
-          "description": "The asset description text.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tag dictionary. Tags can be added, removed, and updated.",
-          "type": "object",
-          "additionalProperties": {
-            "type": "string",
-            "x-nullable": true
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "NetworkInjection": {
-      "description": "Specifies in AI Foundry where virtual network injection occurs to secure scenarios like Agents entirely within the user's private network, eliminating public internet exposure while maintaining control over network configurations and resources.",
-      "type": "object",
-      "properties": {
-        "scenario": {
-          "type": "string",
-          "enum": [
-            "none",
-            "agent"
-          ],
-          "x-ms-enum": {
-            "name": "scenarioType",
-            "modelAsString": true
-          },
-          "description": "Specifies what features in AI Foundry network injection applies to. Currently only supports 'agent' for agent scenarios. 'none' means no network injection."
-        },
-        "subnetArmId": {
-          "description": "Specify the subnet for which your Agent Client is injected into.",
-          "type": "string",
-          "format": "arm-id",
-          "x-ms-arm-id-details": {
-            "allowedResources": [
-              {
-                "type": "Microsoft.Network/virtualNetworks/subnets"
-              }
+            },
+            "required": [
+              "project",
+              "labelValues"
             ]
           }
-        },
-        "useMicrosoftManagedNetwork": {
-          "description": "Boolean to enable Microsoft Managed Network for subnet delegation",
-          "type": "boolean"
-        }
-      }
-    },
-    "Project": {
-      "description": "Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.",
-      "type": "object",
-      "properties": {
-        "identity": {
-          "$ref": "#/definitions/Identity"
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "create",
-            "update"
-          ],
-          "description": "Resource tags."
-        },
-        "location": {
-          "type": "string",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ],
-          "description": "The geo-location where the resource lives"
-        },
-        "properties": {
-          "$ref": "#/definitions/ProjectProperties",
-          "description": "Properties of Cognitive Services project."
         }
       },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
-        }
-      ]
-    },
-    "ProjectProperties": {
-      "description": "Properties of Cognitive Services Project'.",
-      "type": "object",
-      "properties": {
-        "provisioningState": {
-          "readOnly": true,
-          "type": "string",
-          "description": "Gets the status of the cognitive services project at the time the operation was called.",
-          "enum": [
-            "Accepted",
-            "Creating",
-            "Deleting",
-            "Moving",
-            "Failed",
-            "Succeeded",
-            "Canceled",
-            "ResolvingDNS"
-          ],
-          "x-ms-enum": {
-            "name": "ProvisioningState",
-            "modelAsString": true
-          }
-        },
-        "displayName": {
-          "type": "string",
-          "description": "The display name of the Cognitive Services Project."
-        },
-        "description": {
-          "type": "string",
-          "description": "The description of the Cognitive Services Project."
-        },
-        "endpoints": {
-          "readOnly": true,
-          "type": "object",
-          "description": "The list of endpoint for this Cognitive Services Project.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "isDefault": {
-          "readOnly": true,
-          "type": "boolean",
-          "description": "Indicates whether the project is the default project for the account."
-        }
-      }
-    },
-    "ProjectListResult": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of projects.",
-          "type": "string"
-        },
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Project"
-          },
-          "description": "Gets the list of Cognitive Services projects and their properties."
-        }
-      },
-      "description": "The list of cognitive services projects operation response."
-    },
-    "QuotaTier": {
-      "description": "The quota tier information for the subscription",
-      "type": "object",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/QuotaTierProperties",
-          "description": "Properties of quota tier resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "QuotaTierProperties": {
-      "description": "Properties of Quota Tier resource'.",
-      "type": "object",
-      "properties": {
-        "currentTierName": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Name of the current quota tier for the subscription."
-        },
-        "tierUpgradePolicy": {
-          "type": "string",
-          "description": "Gets the tier upgrade policy for the subscription.",
-          "enum": [
-            "OnceUpgradeIsAvailable",
-            "NoAutoUpgrade"
-          ],
-          "x-ms-enum": {
-            "name": "TierUpgradePolicy",
-            "modelAsString": true
-          }
-        },
-        "assignmentDate": {
-          "type": "string",
-          "format": "date-time",
-          "readOnly": true,
-          "description": "The date on which the current tier was assigned to the subscription (UTC)."
-        },
-        "tierUpgradeEligibilityInfo": {
-          "$ref": "#/definitions/QuotaTierUpgradeEligibilityInfo",
-          "description": "Information about the quota tier upgrade eligibility for the subscription.",
-          "readOnly": true,
-          "x-nullable": true
-        }
-      }
-    },
-    "QuotaTierUpgradeEligibilityInfo": {
-      "description": "Information about the quota tier upgrade eligibility for the subscription.",
-      "type": "object",
-      "properties": {
-        "nextTierName": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "Name of the next quota tier for the subscription."
-        },
-        "upgradeAvailabilityStatus": {
-          "type": "string",
-          "description": "Specifies whether an upgrade to the next quota tier is available.",
-          "enum": [
-            "Available",
-            "NotAvailable"
-          ],
-          "x-ms-enum": {
-            "name": "UpgradeAvailabilityStatus",
-            "modelAsString": true
-          }
-        },
-        "upgradeApplicableDate": {
-          "type": "string",
-          "format": "date-time",
-          "x-nullable": true,
-          "description": "The date after which the current tier will be upgraded to the next tier if the TierUpgradePolicy is \"OnceUpgradeIsAvailable\" (UTC)."
-        },
-        "upgradeUnavailabilityReason": {
-          "type": "string",
-          "x-nullable": true,
-          "description": "Reason in case the subscription is not eligible for upgrade to the next tier."
-        }
-      }
-    },
-    "QuotaTierListResult": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of quota tiers.",
-          "type": "string"
-        },
-        "value": {
-          "readOnly": true,
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/QuotaTier"
-          },
-          "x-ms-identifiers": [
-            "id"
-          ],
-          "description": "Gets the list of Quota Tiers and their properties."
-        }
-      },
-      "description": "The list of Quota Tiers response."
-    },
-    "FirewallSku": {
-      "description": "Firewall Sku used for FQDN Rules",
-      "enum": [
-        "Standard",
-        "Basic"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "FirewallSku",
-        "modelAsString": true
-      }
-    },
-    "FqdnOutboundRule": {
-      "description": "FQDN Outbound Rule for the managed network of a cognitive services account.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/OutboundRule"
-        }
-      ],
-      "properties": {
-        "destination": {
-          "type": "string"
-        }
-      },
-      "x-ms-discriminator-value": "FQDN"
-    },
-    "IsolationMode": {
-      "description": "Isolation mode for the managed network of a cognitive services account.",
-      "enum": [
-        "Disabled",
-        "AllowInternetOutbound",
-        "AllowOnlyApprovedOutbound"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "IsolationMode",
-        "modelAsString": true
-      }
-    },
-    "ManagedNetworkSettings": {
-      "description": "Managed Network settings for a cognitive services account.",
-      "type": "object",
-      "properties": {
-        "isolationMode": {
-          "description": "Isolation mode for the managed network of a cognitive services account.",
-          "$ref": "#/definitions/IsolationMode"
-        },
-        "networkId": {
-          "type": "string",
-          "readOnly": true
-        },
-        "outboundRules": {
-          "type": "object",
-          "additionalProperties": {
-            "description": "Outbound Rule for the managed network of a cognitive services account.",
-            "$ref": "#/definitions/OutboundRule"
-          },
-          "x-nullable": true
-        },
-        "status": {
-          "description": "Status of the Provisioning for the managed network of a cognitive services account.",
-          "$ref": "#/definitions/ManagedNetworkProvisionStatus"
-        },
-        "firewallSku": {
-          "description": "Firewall Sku used for FQDN Rules",
-          "$ref": "#/definitions/FirewallSku"
-        },
-        "managedNetworkKind": {
-          "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
-          "$ref": "#/definitions/ManagedNetworkKind"
-        },
-        "egressIpAddress": {
-          "type": "string",
-          "description": "Public IP address assigned to the Azure Firewall.",
-          "readOnly": true,
-          "x-nullable": true
-        }
-      }
-    },
-    "ManagedNetworkProvisionOptions": {
-      "description": "Managed Network Provisioning options for managed network of a cognitive services account.",
-      "type": "object",
-      "properties": {}
-    },
-    "ManagedNetworkKind": {
-      "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
-      "enum": [
-        "V1",
-        "V2"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ManagedNetworkKind",
-        "modelAsString": true
-      }
-    },
-    "ManagedNetworkSettingsBasicResource": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "Managed Network settings for a cognitive services account.",
-          "$ref": "#/definitions/ManagedNetworkSettings"
-        }
-      }
-    },
-    "ManagedNetworkStatus": {
-      "description": "Status for the managed network of a cognitive services account.",
-      "enum": [
-        "Inactive",
-        "Active"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ManagedNetworkStatus",
-        "modelAsString": true
-      }
-    },
-    "ManagedNetworkProvisionStatus": {
-      "description": "Status of the Provisioning for the managed network of a cognitive services account.",
-      "type": "object",
-      "properties": {
-        "status": {
-          "description": "Status for the managed network of a cognitive services account.",
-          "$ref": "#/definitions/ManagedNetworkStatus"
-        }
-      }
-    },
-    "ManagedNetworkListResult": {
-      "description": "List of managed networks of a cognitive services account.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of managed network settings of an account. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
-          }
-        }
-      }
-    },
-    "ManagedNetworkSettingsEx": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ManagedNetworkSettings"
-        }
-      ],
-      "properties": {
-        "changeableIsolationModes": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/IsolationMode"
-          },
-          "readOnly": true
-        }
-      }
-    },
-    "ManagedNetworkSettingsProperties": {
-      "description": "The properties of the managed network settings of a cognitive services account.",
-      "type": "object",
-      "properties": {
-        "managedNetwork": {
-          "description": "Managed Network settings for a cognitive services account.",
-          "$ref": "#/definitions/ManagedNetworkSettingsEx"
-        },
-        "provisioningState": {
-          "description": "The current deployment state of the managed network resource. The provisioningState is to indicate states for resource provisioning.",
-          "$ref": "#/definitions/ManagedNetworkProvisioningState",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
-        }
-      }
-    },
-    "ManagedNetworkProvisioningState": {
-      "enum": [
-        "Deferred",
-        "Updating",
-        "Succeeded",
-        "Failed",
-        "Deleting",
-        "Deleted"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "ManagedNetworkProvisioningState",
-        "modelAsString": true
-      },
-      "readOnly": true,
-      "x-ms-mutability": [
-        "read"
-      ]
-    },
-    "ManagedNetworkSettingsPropertiesBasicResource": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "The properties of the managed network settings of a cognitive services account.",
-          "$ref": "#/definitions/ManagedNetworkSettingsProperties"
-        }
-      }
-    },
-    "OutboundRule": {
-      "description": "Outbound Rule for the managed network of a cognitive services account.",
       "required": [
-        "type"
-      ],
-      "type": "object",
+        "toolConnectionName"
+      ]
+    }
+  },
+  "NetworkSecurityPerimeterConfigurationList": {
+    "description": "A list of NSP configurations for an Cognitive Services account.",
+    "type": "object",
+    "properties": {
+      "value": {
+        "description": "Array of NSP configurations List Result for an Cognitive Services account.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterConfiguration"
+        },
+        "x-ms-identifiers": [
+          "id"
+        ]
+      },
+      "nextLink": {
+        "description": "Link to retrieve next page of results.",
+        "type": "string"
+      }
+    }
+  },
+  "NetworkSecurityPerimeterConfiguration": {
+    "description": "NSP Configuration for an Cognitive Services account.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
       "properties": {
-        "category": {
-          "description": "Category of a managed network Outbound Rule of a cognitive services account.",
-          "$ref": "#/definitions/RuleCategory"
+        "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationProperties",
+        "description": "NSP Configuration properties."
+      }
+    }
+  },
+  "NetworkSecurityPerimeterConfigurationProperties": {
+    "description": "The properties of an NSP Configuration.",
+    "type": "object",
+    "properties": {
+      "provisioningState": {
+        "readOnly": true,
+        "description": "Provisioning state of NetworkSecurityPerimeter configuration",
+        "type": "string"
+      },
+      "provisioningIssues": {
+        "description": "List of Provisioning Issues",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/ProvisioningIssue"
         },
-        "status": {
-          "description": "Type of a managed network Outbound Rule of a cognitive services account.",
-          "$ref": "#/definitions/RuleStatus"
-        },
-        "type": {
-          "description": "Type of a managed network Outbound Rule of a cognitive services account.",
-          "$ref": "#/definitions/RuleType"
-        },
-        "errorInformation": {
-          "description": "Error information about an outbound rule of a cognitive services account if RuleStatus is failed.",
+        "x-ms-identifiers": [
+          "name"
+        ]
+      },
+      "networkSecurityPerimeter": {
+        "$ref": "#/definitions/NetworkSecurityPerimeter"
+      },
+      "resourceAssociation": {
+        "$ref": "#/definitions/NetworkSecurityPerimeterConfigurationAssociationInfo"
+      },
+      "profile": {
+        "$ref": "#/definitions/NetworkSecurityPerimeterProfileInfo"
+      }
+    }
+  },
+  "ProvisioningIssue": {
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Name of the NSP provisioning issue",
+        "type": "string"
+      },
+      "properties": {
+        "$ref": "#/definitions/ProvisioningIssueProperties"
+      }
+    }
+  },
+  "ProvisioningIssueProperties": {
+    "description": "Properties of Provisioning Issue",
+    "type": "object",
+    "properties": {
+      "issueType": {
+        "description": "Type of Issue",
+        "type": "string"
+      },
+      "severity": {
+        "description": "Severity of the issue",
+        "type": "string"
+      },
+      "description": {
+        "description": "Description of the issue",
+        "type": "string"
+      },
+      "suggestedResourceIds": {
+        "description": "IDs of resources that can be associated to the same perimeter to remediate the issue.",
+        "type": "array",
+        "items": {
           "type": "string",
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
-          ]
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource."
+        }
+      },
+      "suggestedAccessRules": {
+        "description": "Optional array, suggested access rules",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterAccessRule"
+        }
+      }
+    }
+  },
+  "NetworkSecurityPerimeter": {
+    "description": "Information about a linked Network Security Perimeter",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "Fully qualified identifier of the resource",
+        "type": "string",
+        "format": "arm-id"
+      },
+      "perimeterGuid": {
+        "description": "Guid of the resource",
+        "type": "string"
+      },
+      "location": {
+        "description": "Location of the resource",
+        "type": "string"
+      }
+    }
+  },
+  "NetworkSecurityPerimeterConfigurationAssociationInfo": {
+    "description": "Network Security Perimeter Configuration Association Information",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Name of the resource association",
+        "type": "string"
+      },
+      "accessMode": {
+        "description": "Access Mode of the resource association",
+        "type": "string"
+      }
+    }
+  },
+  "NetworkSecurityPerimeterProfileInfo": {
+    "description": "Network Security Perimeter Profile Information",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Name of the resource profile",
+        "type": "string"
+      },
+      "accessRulesVersion": {
+        "description": "Access rules version of the resource profile",
+        "type": "integer",
+        "format": "int64"
+      },
+      "accessRules": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/NetworkSecurityPerimeterAccessRule"
         },
-        "parentRuleNames": {
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true,
-          "x-ms-mutability": [
-            "read"
+        "x-ms-identifiers": []
+      },
+      "diagnosticSettingsVersion": {
+        "description": "Current diagnostic settings version",
+        "type": "integer",
+        "format": "int64"
+      },
+      "enabledLogCategories": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "description": "List of enabled log categories"
+      }
+    }
+  },
+  "NetworkSecurityPerimeterAccessRule": {
+    "description": "Network Security Perimeter Access Rule",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Network Security Perimeter Access Rule Name",
+        "type": "string"
+      },
+      "properties": {
+        "description": "Properties of Network Security Perimeter Access Rule",
+        "$ref": "#/definitions/NetworkSecurityPerimeterAccessRuleProperties"
+      }
+    }
+  },
+  "NetworkSecurityPerimeterAccessRuleProperties": {
+    "description": "The Properties of Network Security Perimeter Rule",
+    "type": "object",
+    "properties": {
+      "direction": {
+        "enum": [
+          "Inbound",
+          "Outbound"
+        ],
+        "type": "string",
+        "description": "Direction of Access Rule",
+        "x-ms-enum": {
+          "name": "NspAccessRuleDirection",
+          "modelAsString": true
+        }
+      },
+      "addressPrefixes": {
+        "description": "Address prefixes for inbound rules",
+        "type": "array",
+        "items": {
+          "description": "IP Address",
+          "type": "string"
+        }
+      },
+      "subscriptions": {
+        "description": "Subscriptions for inbound rules",
+        "type": "array",
+        "items": {
+          "description": "Subscription for inbound rule",
+          "type": "object",
+          "properties": {
+            "id": {
+              "description": "Fully qualified identifier of subscription",
+              "type": "string"
+            }
+          }
+        }
+      },
+      "networkSecurityPerimeters": {
+        "description": "NetworkSecurityPerimeters for inbound rules",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/NetworkSecurityPerimeter"
+        }
+      },
+      "fullyQualifiedDomainNames": {
+        "description": "Fully qualified domain name for outbound rules",
+        "type": "array",
+        "items": {
+          "description": "Fully qualified domain name",
+          "type": "string"
+        }
+      }
+    }
+  },
+  "DefenderForAISettingResult": {
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link used to get the next page of Defender for AI Settings.",
+        "type": "string"
+      },
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/DefenderForAISetting"
+        },
+        "x-ms-identifiers": [
+          "name"
+        ],
+        "description": "The list of Defender for AI Settings."
+      }
+    },
+    "description": "The list of cognitive services Defender for AI Settings."
+  },
+  "DefenderForAISetting": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
+      "systemData": {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+        "readOnly": true
+      },
+      "etag": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Resource Etag."
+      },
+      "tags": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "x-ms-mutability": [
+          "read",
+          "create",
+          "update"
+        ],
+        "description": "Resource tags."
+      },
+      "properties": {
+        "x-ms-client-flatten": true,
+        "$ref": "#/definitions/DefenderForAISettingProperties"
+      }
+    },
+    "description": "The Defender for AI resource."
+  },
+  "DefenderForAISettingProperties": {
+    "type": "object",
+    "properties": {
+      "state": {
+        "type": "string",
+        "enum": [
+          "Disabled",
+          "Enabled"
+        ],
+        "x-ms-enum": {
+          "name": "DefenderForAISettingState",
+          "modelAsString": true
+        },
+        "description": "Defender for AI state on the AI resource."
+      }
+    },
+    "description": "The Defender for AI resource properties."
+  },
+  "ConnectionPropertiesV2BasicResource": {
+    "required": [
+      "properties"
+    ],
+    "description": "Connection base resource schema.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    }
+  },
+  "ConnectionPropertiesV2": {
+    "required": [
+      "authType"
+    ],
+    "type": "object",
+    "description": "Connection property base schema.",
+    "properties": {
+      "authType": {
+        "description": "Authentication type of the connection target",
+        "$ref": "#/definitions/ConnectionAuthType"
+      },
+      "category": {
+        "description": "Category of the connection",
+        "$ref": "#/definitions/ConnectionCategory"
+      },
+      "createdByWorkspaceArmId": {
+        "type": "string",
+        "format": "arm-id",
+        "readOnly": true
+      },
+      "error": {
+        "description": "Provides the error message if the connection fails",
+        "type": "string"
+      },
+      "expiryTime": {
+        "format": "date-time",
+        "type": "string"
+      },
+      "group": {
+        "description": "Group based on connection category",
+        "$ref": "#/definitions/ConnectionGroup",
+        "readOnly": true
+      },
+      "isSharedToAll": {
+        "type": "boolean"
+      },
+      "metadata": {
+        "description": "Store user metadata for this connection",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "peRequirement": {
+        "description": "Specifies how private endpoints are used with this connection: 'Required', 'NotRequired', or 'NotApplicable'.",
+        "$ref": "#/definitions/ManagedPERequirement"
+      },
+      "peStatus": {
+        "description": "Specifies the status of private endpoints for this connection: 'Inactive', 'Active', or 'NotApplicable'.",
+        "$ref": "#/definitions/ManagedPEStatus"
+      },
+      "sharedUserList": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        }
+      },
+      "target": {
+        "description": "The connection URL to be used.",
+        "type": "string"
+      },
+      "useWorkspaceManagedIdentity": {
+        "type": "boolean"
+      }
+    },
+    "discriminator": "authType"
+  },
+  "ConnectionAuthType": {
+    "description": "Authentication type of the connection target",
+    "enum": [
+      "PAT",
+      "ManagedIdentity",
+      "UsernamePassword",
+      "None",
+      "SAS",
+      "AccountKey",
+      "ServicePrincipal",
+      "AccessKey",
+      "ApiKey",
+      "CustomKeys",
+      "OAuth2",
+      "AAD"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ConnectionAuthType",
+      "modelAsString": true
+    }
+  },
+  "ConnectionCategory": {
+    "description": "Category of the connection",
+    "enum": [
+      "PythonFeed",
+      "ContainerRegistry",
+      "Git",
+      "S3",
+      "Snowflake",
+      "AzureSqlDb",
+      "AzureSynapseAnalytics",
+      "AzureMySqlDb",
+      "AzurePostgresDb",
+      "ADLSGen2",
+      "Redis",
+      "ApiKey",
+      "AzureOpenAI",
+      "AIServices",
+      "CognitiveSearch",
+      "CognitiveService",
+      "CustomKeys",
+      "AzureBlob",
+      "AzureOneLake",
+      "CosmosDb",
+      "CosmosDbMongoDbApi",
+      "AzureDataExplorer",
+      "AzureMariaDb",
+      "AzureDatabricksDeltaLake",
+      "AzureSqlMi",
+      "AzureTableStorage",
+      "AmazonRdsForOracle",
+      "AmazonRdsForSqlServer",
+      "AmazonRedshift",
+      "Db2",
+      "Drill",
+      "GoogleBigQuery",
+      "Greenplum",
+      "Hbase",
+      "Hive",
+      "Impala",
+      "Informix",
+      "MariaDb",
+      "MicrosoftAccess",
+      "MySql",
+      "Netezza",
+      "Oracle",
+      "Phoenix",
+      "PostgreSql",
+      "Presto",
+      "SapOpenHub",
+      "SapBw",
+      "SapHana",
+      "SapTable",
+      "Spark",
+      "SqlServer",
+      "Sybase",
+      "Teradata",
+      "Vertica",
+      "Pinecone",
+      "Cassandra",
+      "Couchbase",
+      "MongoDbV2",
+      "MongoDbAtlas",
+      "AmazonS3Compatible",
+      "FileServer",
+      "FtpServer",
+      "GoogleCloudStorage",
+      "Hdfs",
+      "OracleCloudStorage",
+      "Sftp",
+      "GenericHttp",
+      "ODataRest",
+      "Odbc",
+      "GenericRest",
+      "AmazonMws",
+      "Concur",
+      "Dynamics",
+      "DynamicsAx",
+      "DynamicsCrm",
+      "GoogleAdWords",
+      "Hubspot",
+      "Jira",
+      "Magento",
+      "Marketo",
+      "Office365",
+      "Eloqua",
+      "Responsys",
+      "OracleServiceCloud",
+      "PayPal",
+      "QuickBooks",
+      "Salesforce",
+      "SalesforceServiceCloud",
+      "SalesforceMarketingCloud",
+      "SapCloudForCustomer",
+      "SapEcc",
+      "ServiceNow",
+      "SharePointOnlineList",
+      "Shopify",
+      "Square",
+      "WebTable",
+      "Xero",
+      "Zoho",
+      "GenericContainerRegistry",
+      "Elasticsearch",
+      "OpenAI",
+      "Serp",
+      "BingLLMSearch",
+      "Serverless",
+      "ManagedOnlineEndpoint",
+      "AzureStorageAccount"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ConnectionCategory",
+      "modelAsString": true
+    }
+  },
+  "ConnectionGroup": {
+    "description": "Group based on connection category",
+    "enum": [
+      "Azure",
+      "AzureAI",
+      "Database",
+      "NoSQL",
+      "File",
+      "GenericProtocol",
+      "ServicesAndApps"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ConnectionGroup",
+      "modelAsString": true
+    }
+  },
+  "ManagedPERequirement": {
+    "enum": [
+      "Required",
+      "NotRequired",
+      "NotApplicable"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ManagedPERequirement",
+      "modelAsString": true
+    }
+  },
+  "ManagedPEStatus": {
+    "enum": [
+      "Inactive",
+      "Active",
+      "NotApplicable"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ManagedPEStatus",
+      "modelAsString": true
+    }
+  },
+  "PATAuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionPersonalAccessToken"
+      }
+    },
+    "x-ms-discriminator-value": "PAT"
+  },
+  "ConnectionPersonalAccessToken": {
+    "type": "object",
+    "properties": {
+      "pat": {
+        "type": "string",
+        "x-ms-secret": true
+      }
+    }
+  },
+  "ManagedIdentityAuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionManagedIdentity"
+      }
+    },
+    "x-ms-discriminator-value": "ManagedIdentity"
+  },
+  "ConnectionManagedIdentity": {
+    "type": "object",
+    "properties": {
+      "clientId": {
+        "type": "string"
+      },
+      "resourceId": {
+        "type": "string"
+      }
+    }
+  },
+  "UsernamePasswordAuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionUsernamePassword"
+      }
+    },
+    "x-ms-discriminator-value": "UsernamePassword"
+  },
+  "ConnectionUsernamePassword": {
+    "type": "object",
+    "properties": {
+      "password": {
+        "type": "string",
+        "x-ms-secret": true
+      },
+      "securityToken": {
+        "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
+        "type": "string",
+        "x-ms-secret": true
+      },
+      "username": {
+        "type": "string"
+      }
+    }
+  },
+  "NoneAuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "x-ms-discriminator-value": "None"
+  },
+  "SASAuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionSharedAccessSignature"
+      }
+    },
+    "x-ms-discriminator-value": "SAS"
+  },
+  "ConnectionSharedAccessSignature": {
+    "type": "object",
+    "properties": {
+      "sas": {
+        "type": "string",
+        "x-ms-secret": true
+      }
+    }
+  },
+  "AccountKeyAuthTypeConnectionProperties": {
+    "description": "This connection type covers the account key connection for Azure storage",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionAccountKey"
+      }
+    },
+    "x-ms-discriminator-value": "AccountKey"
+  },
+  "ConnectionAccountKey": {
+    "description": "Account key object for connection credential.",
+    "type": "object",
+    "properties": {
+      "key": {
+        "type": "string",
+        "x-ms-secret": true
+      }
+    }
+  },
+  "ServicePrincipalAuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionServicePrincipal"
+      }
+    },
+    "x-ms-discriminator-value": "ServicePrincipal"
+  },
+  "ConnectionServicePrincipal": {
+    "type": "object",
+    "properties": {
+      "clientId": {
+        "type": "string"
+      },
+      "clientSecret": {
+        "x-ms-secret": true,
+        "type": "string"
+      },
+      "tenantId": {
+        "type": "string"
+      }
+    }
+  },
+  "AccessKeyAuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionAccessKey"
+      }
+    },
+    "x-ms-discriminator-value": "AccessKey"
+  },
+  "ConnectionAccessKey": {
+    "type": "object",
+    "properties": {
+      "accessKeyId": {
+        "type": "string"
+      },
+      "secretAccessKey": {
+        "type": "string",
+        "x-ms-secret": true
+      }
+    }
+  },
+  "ApiKeyAuthConnectionProperties": {
+    "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\r\nAzureOpenAI:\r\n    Category:= AzureOpenAI\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {ApiKey} as .ApiKey\r\n    Target:= {ApiBase}\r\n            \r\nCognitiveService:\r\n    Category:= CognitiveService\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {SubscriptionKey} as ApiKey\r\n    Target:= ServiceRegion={serviceRegion}\r\n            \r\nCognitiveSearch:\r\n    Category:= CognitiveSearch\r\n    AuthType:= ApiKey (as type discriminator)\r\n    Credentials:= {Key} as ApiKey\r\n    Target:= {Endpoint}\r\n            \r\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionApiKey"
+      }
+    },
+    "x-ms-discriminator-value": "ApiKey"
+  },
+  "ConnectionApiKey": {
+    "description": "Api key object for connection credential.",
+    "type": "object",
+    "properties": {
+      "key": {
+        "type": "string",
+        "x-ms-secret": true
+      }
+    }
+  },
+  "CustomKeysConnectionProperties": {
+    "description": "Category:= CustomKeys\r\nAuthType:= CustomKeys (as type discriminator)\r\nCredentials:= {CustomKeys} as CustomKeys\r\nTarget:= {any value}\r\nUse Metadata property bag for ApiVersion and other metadata fields",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "description": "Custom Keys credential object",
+        "$ref": "#/definitions/CustomKeys"
+      }
+    },
+    "x-ms-discriminator-value": "CustomKeys"
+  },
+  "CustomKeys": {
+    "description": "Custom Keys credential object",
+    "type": "object",
+    "properties": {
+      "keys": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        }
+      }
+    }
+  },
+  "OAuth2AuthTypeConnectionProperties": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "properties": {
+      "credentials": {
+        "$ref": "#/definitions/ConnectionOAuth2"
+      }
+    },
+    "x-ms-discriminator-value": "OAuth2"
+  },
+  "ConnectionOAuth2": {
+    "description": "ClientId and ClientSecret are required. Other properties are optional\r\ndepending on each OAuth2 provider's implementation.",
+    "type": "object",
+    "properties": {
+      "authUrl": {
+        "description": "Required by Concur connection category",
+        "type": "string",
+        "format": "uri"
+      },
+      "clientId": {
+        "type": "string",
+        "description": "Client id in the format of UUID",
+        "format": "uuid"
+      },
+      "clientSecret": {
+        "type": "string",
+        "x-ms-secret": true
+      },
+      "developerToken": {
+        "description": "Required by GoogleAdWords connection category",
+        "type": "string",
+        "x-ms-secret": true
+      },
+      "password": {
+        "type": "string",
+        "x-ms-secret": true
+      },
+      "refreshToken": {
+        "description": "Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho\r\nwhere user needs to get RefreshToken offline",
+        "type": "string",
+        "x-ms-secret": true
+      },
+      "tenantId": {
+        "description": "Required by QuickBooks and Xero connection categories",
+        "type": "string"
+      },
+      "username": {
+        "description": "Concur, ServiceNow auth server AccessToken grant type is 'Password'\r\nwhich requires UsernamePassword",
+        "type": "string"
+      }
+    }
+  },
+  "AADAuthTypeConnectionProperties": {
+    "description": "This connection type covers the AAD auth for any applicable Azure service",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    ],
+    "x-ms-discriminator-value": "AAD"
+  },
+  "ConnectionUpdateContent": {
+    "description": "The properties that the Cognitive services connection will be updated with.",
+    "type": "object",
+    "properties": {
+      "properties": {
+        "description": "The properties that the Cognitive services connection will be updated with.",
+        "$ref": "#/definitions/ConnectionPropertiesV2"
+      }
+    }
+  },
+  "ConnectionPropertiesV2BasicResourceArmPaginatedResult": {
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "type": "string"
+      },
+      "value": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/ConnectionPropertiesV2BasicResource"
+        }
+      }
+    }
+  },
+  "CapabilityHostResource": {
+    "description": "Azure Resource Manager resource envelope.",
+    "required": [
+      "properties"
+    ],
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "[Required] Additional attributes of the entity.",
+        "$ref": "#/definitions/CapabilityHost"
+      }
+    },
+    "x-ms-client-name": "CapabilityHost",
+    "additionalProperties": false
+  },
+  "CapabilityHost": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ResourceBase"
+      }
+    ],
+    "properties": {
+      "aiServicesConnections": {
+        "description": "List of AI services connections.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "capabilityHostKind": {
+        "description": "Kind of this capability host.",
+        "$ref": "#/definitions/CapabilityHostKind"
+      },
+      "customerSubnet": {
+        "description": "Customer subnet info to help set up this capability host.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "provisioningState": {
+        "description": "Provisioning state for the CapabilityHost.",
+        "$ref": "#/definitions/CapabilityHostProvisioningState",
+        "readOnly": true,
+        "x-ms-mutability": [
+          "read"
+        ]
+      },
+      "storageConnections": {
+        "description": "List of connection names from those available in the account or project to be used as a storage resource.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "threadStorageConnections": {
+        "description": "List of connection names from those available in the account or project to be used for Thread storage.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "vectorStoreConnections": {
+        "description": "List of connection names from those available in the account or project to be used for vector database (e.g. CosmosDB).",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      }
+    },
+    "x-ms-client-name": "CapabilityHostProperties",
+    "additionalProperties": false
+  },
+  "CapabilityHostProvisioningState": {
+    "description": "Provisioning state of capability host.",
+    "enum": [
+      "Succeeded",
+      "Failed",
+      "Canceled",
+      "Creating",
+      "Updating",
+      "Deleting"
+    ],
+    "type": "string",
+    "readOnly": true,
+    "x-ms-enum": {
+      "name": "CapabilityHostProvisioningState",
+      "modelAsString": true,
+      "values": [
+        {
+          "value": "Succeeded"
+        },
+        {
+          "value": "Failed"
+        },
+        {
+          "value": "Canceled"
+        },
+        {
+          "value": "Creating"
+        },
+        {
+          "value": "Updating"
+        },
+        {
+          "value": "Deleting"
+        }
+      ]
+    },
+    "additionalProperties": false
+  },
+  "CapabilityHostKind": {
+    "enum": [
+      "Agents"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "CapabilityHostKind",
+      "modelAsString": true,
+      "values": [
+        {
+          "value": "Agents"
+        }
+      ]
+    },
+    "additionalProperties": false
+  },
+  "ResourceBase": {
+    "type": "object",
+    "properties": {
+      "description": {
+        "description": "The asset description text.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "tags": {
+        "description": "Tag dictionary. Tags can be added, removed, and updated.",
+        "type": "object",
+        "additionalProperties": {
+          "type": "string",
+          "x-nullable": true
+        },
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "NetworkInjection": {
+    "description": "Specifies in AI Foundry where virtual network injection occurs to secure scenarios like Agents entirely within the user's private network, eliminating public internet exposure while maintaining control over network configurations and resources.",
+    "type": "object",
+    "properties": {
+      "scenario": {
+        "type": "string",
+        "enum": [
+          "none",
+          "agent"
+        ],
+        "x-ms-enum": {
+          "name": "scenarioType",
+          "modelAsString": true
+        },
+        "description": "Specifies what features in AI Foundry network injection applies to. Currently only supports 'agent' for agent scenarios. 'none' means no network injection."
+      },
+      "subnetArmId": {
+        "description": "Specify the subnet for which your Agent Client is injected into.",
+        "type": "string",
+        "format": "arm-id",
+        "x-ms-arm-id-details": {
+          "allowedResources": [
+            {
+              "type": "Microsoft.Network/virtualNetworks/subnets"
+            }
           ]
         }
       },
-      "discriminator": "type"
-    },
-    "OutboundRuleBasicResource": {
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
-        }
-      ],
+      "useMicrosoftManagedNetwork": {
+        "description": "Boolean to enable Microsoft Managed Network for subnet delegation",
+        "type": "boolean"
+      }
+    }
+  },
+  "Project": {
+    "description": "Cognitive Services project is an Azure resource representing the provisioned account's project, it's type, location and SKU.",
+    "type": "object",
+    "properties": {
+      "identity": {
+        "$ref": "#/definitions/Identity"
+      },
+      "systemData": {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+        "readOnly": true
+      },
+      "tags": {
+        "type": "object",
+        "additionalProperties": {
+          "type": "string"
+        },
+        "x-ms-mutability": [
+          "read",
+          "create",
+          "update"
+        ],
+        "description": "Resource tags."
+      },
+      "location": {
+        "type": "string",
+        "x-ms-mutability": [
+          "read",
+          "create"
+        ],
+        "description": "The geo-location where the resource lives"
+      },
       "properties": {
-        "properties": {
+        "$ref": "#/definitions/ProjectProperties",
+        "description": "Properties of Cognitive Services project."
+      }
+    },
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/AzureEntityResource"
+      }
+    ]
+  },
+  "ProjectProperties": {
+    "description": "Properties of Cognitive Services Project'.",
+    "type": "object",
+    "properties": {
+      "provisioningState": {
+        "readOnly": true,
+        "type": "string",
+        "description": "Gets the status of the cognitive services project at the time the operation was called.",
+        "enum": [
+          "Accepted",
+          "Creating",
+          "Deleting",
+          "Moving",
+          "Failed",
+          "Succeeded",
+          "Canceled",
+          "ResolvingDNS"
+        ],
+        "x-ms-enum": {
+          "name": "ProvisioningState",
+          "modelAsString": true
+        }
+      },
+      "displayName": {
+        "type": "string",
+        "description": "The display name of the Cognitive Services Project."
+      },
+      "description": {
+        "type": "string",
+        "description": "The description of the Cognitive Services Project."
+      },
+      "endpoints": {
+        "readOnly": true,
+        "type": "object",
+        "description": "The list of endpoint for this Cognitive Services Project.",
+        "additionalProperties": {
+          "type": "string"
+        }
+      },
+      "isDefault": {
+        "readOnly": true,
+        "type": "boolean",
+        "description": "Indicates whether the project is the default project for the account."
+      }
+    }
+  },
+  "ProjectListResult": {
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link used to get the next page of projects.",
+        "type": "string"
+      },
+      "value": {
+        "readOnly": true,
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Project"
+        },
+        "description": "Gets the list of Cognitive Services projects and their properties."
+      }
+    },
+    "description": "The list of cognitive services projects operation response."
+  },
+  "QuotaTier": {
+    "description": "The quota tier information for the subscription",
+    "type": "object",
+    "properties": {
+      "properties": {
+        "$ref": "#/definitions/QuotaTierProperties",
+        "description": "Properties of quota tier resource."
+      }
+    },
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ]
+  },
+  "QuotaTierProperties": {
+    "description": "Properties of Quota Tier resource'.",
+    "type": "object",
+    "properties": {
+      "currentTierName": {
+        "type": "string",
+        "readOnly": true,
+        "description": "Name of the current quota tier for the subscription."
+      },
+      "tierUpgradePolicy": {
+        "type": "string",
+        "description": "Gets the tier upgrade policy for the subscription.",
+        "enum": [
+          "OnceUpgradeIsAvailable",
+          "NoAutoUpgrade"
+        ],
+        "x-ms-enum": {
+          "name": "TierUpgradePolicy",
+          "modelAsString": true
+        }
+      },
+      "assignmentDate": {
+        "type": "string",
+        "format": "date-time",
+        "readOnly": true,
+        "description": "The date on which the current tier was assigned to the subscription (UTC)."
+      },
+      "tierUpgradeEligibilityInfo": {
+        "$ref": "#/definitions/QuotaTierUpgradeEligibilityInfo",
+        "description": "Information about the quota tier upgrade eligibility for the subscription.",
+        "readOnly": true,
+        "x-nullable": true
+      }
+    }
+  },
+  "QuotaTierUpgradeEligibilityInfo": {
+    "description": "Information about the quota tier upgrade eligibility for the subscription.",
+    "type": "object",
+    "properties": {
+      "nextTierName": {
+        "type": "string",
+        "x-nullable": true,
+        "description": "Name of the next quota tier for the subscription."
+      },
+      "upgradeAvailabilityStatus": {
+        "type": "string",
+        "description": "Specifies whether an upgrade to the next quota tier is available.",
+        "enum": [
+          "Available",
+          "NotAvailable"
+        ],
+        "x-ms-enum": {
+          "name": "UpgradeAvailabilityStatus",
+          "modelAsString": true
+        }
+      },
+      "upgradeApplicableDate": {
+        "type": "string",
+        "format": "date-time",
+        "x-nullable": true,
+        "description": "The date after which the current tier will be upgraded to the next tier if the TierUpgradePolicy is \"OnceUpgradeIsAvailable\" (UTC)."
+      },
+      "upgradeUnavailabilityReason": {
+        "type": "string",
+        "x-nullable": true,
+        "description": "Reason in case the subscription is not eligible for upgrade to the next tier."
+      }
+    }
+  },
+  "QuotaTierListResult": {
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link used to get the next page of quota tiers.",
+        "type": "string"
+      },
+      "value": {
+        "readOnly": true,
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/QuotaTier"
+        },
+        "x-ms-identifiers": [
+          "id"
+        ],
+        "description": "Gets the list of Quota Tiers and their properties."
+      }
+    },
+    "description": "The list of Quota Tiers response."
+  },
+  "FirewallSku": {
+    "description": "Firewall Sku used for FQDN Rules",
+    "enum": [
+      "Standard",
+      "Basic"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "FirewallSku",
+      "modelAsString": true
+    }
+  },
+  "FqdnOutboundRule": {
+    "description": "FQDN Outbound Rule for the managed network of a cognitive services account.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/OutboundRule"
+      }
+    ],
+    "properties": {
+      "destination": {
+        "type": "string"
+      }
+    },
+    "x-ms-discriminator-value": "FQDN"
+  },
+  "IsolationMode": {
+    "description": "Isolation mode for the managed network of a cognitive services account.",
+    "enum": [
+      "Disabled",
+      "AllowInternetOutbound",
+      "AllowOnlyApprovedOutbound"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "IsolationMode",
+      "modelAsString": true
+    }
+  },
+  "ManagedNetworkSettings": {
+    "description": "Managed Network settings for a cognitive services account.",
+    "type": "object",
+    "properties": {
+      "isolationMode": {
+        "description": "Isolation mode for the managed network of a cognitive services account.",
+        "$ref": "#/definitions/IsolationMode"
+      },
+      "networkId": {
+        "type": "string",
+        "readOnly": true
+      },
+      "outboundRules": {
+        "type": "object",
+        "additionalProperties": {
           "description": "Outbound Rule for the managed network of a cognitive services account.",
           "$ref": "#/definitions/OutboundRule"
-        }
+        },
+        "x-nullable": true
+      },
+      "status": {
+        "description": "Status of the Provisioning for the managed network of a cognitive services account.",
+        "$ref": "#/definitions/ManagedNetworkProvisionStatus"
+      },
+      "firewallSku": {
+        "description": "Firewall Sku used for FQDN Rules",
+        "$ref": "#/definitions/FirewallSku"
+      },
+      "managedNetworkKind": {
+        "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+        "$ref": "#/definitions/ManagedNetworkKind"
+      },
+      "egressIpAddress": {
+        "type": "string",
+        "description": "Public IP address assigned to the Azure Firewall.",
+        "readOnly": true,
+        "x-nullable": true
       }
-    },
-    "OutboundRuleListResult": {
-      "description": "List of outbound rules for the managed network of a cognitive services account.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
-          "type": "string"
-        },
-        "value": {
-          "description": "The list of cognitive services accounts. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/OutboundRuleBasicResource"
-          }
-        }
-      }
-    },
-    "RuleCategory": {
-      "description": "Category of a managed network Outbound Rule of a cognitive services account.",
-      "enum": [
-        "Required",
-        "Recommended",
-        "UserDefined",
-        "Dependency"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RuleCategory",
-        "modelAsString": true
-      }
-    },
-    "RuleStatus": {
-      "description": "Type of a managed network Outbound Rule of a cognitive services account.",
-      "enum": [
-        "Inactive",
-        "Active",
-        "Provisioning",
-        "Deleting",
-        "Failed"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RuleStatus",
-        "modelAsString": true
-      }
-    },
-    "RuleType": {
-      "description": "Type of a managed network Outbound Rule of a cognitive services account.",
-      "enum": [
-        "FQDN",
-        "PrivateEndpoint",
-        "ServiceTag"
-      ],
-      "type": "string",
-      "x-ms-enum": {
-        "name": "RuleType",
-        "modelAsString": true
-      }
-    },
-    "AgentApplicationResource": {
-      "description": "Agent Application resource",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/AgenticApplication"
-        }
-      },
-      "x-ms-client-name": "AgentApplication",
-      "additionalProperties": false
-    },
-    "AgentApplicationResourceArmPaginatedResult": {
-      "description": "A paginated list of Agent Application entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of Agent Application objects. If null, there are no additional pages.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "value": {
-          "description": "An array of objects of type Agent Application.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentApplicationResource"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgentDefinitionResource": {
-      "description": "Agent Definition resource",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/AgentDefinition"
-        }
-      },
-      "x-ms-client-name": "AgentDefinition",
-      "additionalProperties": false
-    },
-    "AgentDefinitionResourceArmPaginatedResult": {
-      "description": "A paginated list of Agent Definition entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of Agent Definition objects. If null, there are no additional pages.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "value": {
-          "description": "An array of objects of type Agent Definition.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentDefinitionResource"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgentDeploymentResource": {
-      "description": "Agent Deployment resource",
-      "required": [
-        "properties"
-      ],
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ],
-      "properties": {
-        "properties": {
-          "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/AgentDeployment"
-        }
-      },
-      "x-ms-client-name": "AgentDeployment",
-      "additionalProperties": false
-    },
-    "AgentDeploymentResourceArmPaginatedResult": {
-      "description": "A paginated list of Agent Deployment entities.",
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link to the next page of Agent Deployment objects. If null, there are no additional pages.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "value": {
-          "description": "An array of objects of type Agent Deployment.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentDeploymentResource"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgenticApplication": {
-      "description": "Resource type representing an agentic application as a management construct.",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        }
-      ],
-      "properties": {
-        "description": {
-          "description": "The description of the application.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "displayName": {
-          "description": "The display name of the application.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "baseUri": {
-          "description": "The application's unique resource identifier.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "associatedResourceId": {
-          "description": "The resource ID of the account or project associated with this application.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "agents": {
-          "description": "The list of agent definitions comprising this application, returned as references to the objects under the parent project.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentReference"
-          },
-          "x-nullable": true
-        },
-        "deployments": {
-          "description": "The list of agent deployments of this application.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentDeployment"
-          },
-          "x-nullable": true
-        },
-        "applicationIdentity": {
-          "description": "The blueprint identity of the application.",
-          "$ref": "#/definitions/AssignedIdentity",
-          "x-nullable": true
-        },
-        "instanceIdentity": {
-          "description": "The instance identity of the application.",
-          "$ref": "#/definitions/AssignedIdentity",
-          "x-nullable": true
-        },
-        "provisioningState": {
-          "description": "Provisioning state of the application.",
-          "$ref": "#/definitions/AgenticApplicationProvisioningState",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgentDefinition": {
-      "description": "Agent Definition",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        }
-      ],
-      "properties": {
-        "agentId": {
-          "description": "Unique identifier for the agent.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "name": {
-          "description": "Name of the agent.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "version": {
-          "description": "Version of the agent.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "capabilities": {
-          "description": "Capabilities of the agent.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "modelReference": {
-          "description": "Reference to the underlying model used by the agent.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgentDeployment": {
-      "description": "Agent Deployment",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        }
-      ],
-      "properties": {
-        "deploymentId": {
-          "description": "Unique identifier for the deployment.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "agentId": {
-          "description": "Identifier of the agent being deployed.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "environment": {
-          "description": "Deployment environment (e.g., development, staging, production).",
-          "type": "string",
-          "x-nullable": true
-        },
-        "status": {
-          "description": "Status of the deployment.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "endpoint": {
-          "description": "Endpoint information for the deployed agent.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgentReference": {
-      "description": "Reference to an agent definition",
-      "type": "object",
-      "properties": {
-        "agentId": {
-          "description": "Unique identifier for the agent.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "version": {
-          "description": "Version of the agent.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgenticApplicationProvisioningState": {
-      "description": "Provisioning state of an agentic application.",
-      "type": "string",
-      "enum": [
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Creating",
-        "Updating",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "AgenticApplicationProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Succeeded",
-            "description": "The application was successfully provisioned."
-          },
-          {
-            "value": "Failed",
-            "description": "The application provisioning failed."
-          },
-          {
-            "value": "Canceled",
-            "description": "The application provisioning was canceled."
-          },
-          {
-            "value": "Creating",
-            "description": "The application is being created."
-          },
-          {
-            "value": "Updating",
-            "description": "The application is being updated."
-          },
-          {
-            "value": "Deleting",
-            "description": "The application is being deleted."
-          }
-        ]
-      }
-    },
-    "AssignedIdentity": {
-      "description": "Type representing an identity assignment",
-      "type": "object",
-      "required": [
-        "identityKind",
-        "identityType",
-        "principalId",
-        "tenantId"
-      ],
-      "properties": {
-        "identityKind": {
-          "description": "Specifies the kind of Entra identity described by this object.",
-          "$ref": "#/definitions/IdentityKind"
-        },
-        "identityType": {
-          "description": "Enumeration of identity types, from the perspective of management.",
-          "$ref": "#/definitions/IdentityType"
-        },
-        "principalId": {
-          "description": "The principal ID of the identity.",
-          "type": "string"
-        },
-        "tenantId": {
-          "description": "The tenant ID of the identity.",
-          "type": "string"
-        },
-        "subject": {
-          "description": "The subject of this identity assignment.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "provisioningState": {
-          "description": "Represents the provisioning state of an identity resource.",
-          "$ref": "#/definitions/IdentityProvisioningState",
-          "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "IdentityKind": {
-      "description": "Specifies the kind of Entra identity described by this object.",
-      "type": "string",
-      "enum": [
-        "AgentBlueprint",
-        "AgentInstance",
-        "AgenticUser",
-        "Managed",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityKind",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "AgentBlueprint",
-            "description": "Represents a class identity, used for agentic applications."
-          },
-          {
-            "value": "AgentInstance",
-            "description": "Represents an instance identity."
-          },
-          {
-            "value": "AgenticUser",
-            "description": "Represents an agentic instance identity with user-like traits."
-          },
-          {
-            "value": "Managed",
-            "description": "Represents a classic managed identity."
-          },
-          {
-            "value": "None",
-            "description": "No identity."
-          }
-        ]
-      }
-    },
-    "IdentityType": {
-      "description": "Enumeration of identity types, from the perspective of management.",
-      "type": "string",
-      "enum": [
-        "System",
-        "User",
-        "None"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityType",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "System",
-            "description": "Platform-managed identity."
-          },
-          {
-            "value": "User",
-            "description": "User-managed identity."
-          },
-          {
-            "value": "None",
-            "description": "No identity."
-          }
-        ]
-      }
-    },
-    "IdentityProvisioningState": {
-      "description": "Represents the provisioning state of an identity resource.",
-      "type": "string",
-      "enum": [
-        "Creating",
-        "Updating",
-        "Succeeded",
-        "Failed",
-        "Canceled",
-        "Deleting"
-      ],
-      "x-ms-enum": {
-        "name": "IdentityProvisioningState",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "Creating",
-            "description": "Identity is being created."
-          },
-          {
-            "value": "Updating",
-            "description": "Identity is being updated."
-          },
-          {
-            "value": "Succeeded",
-            "description": "Identity has been successfully provisioned."
-          },
-          {
-            "value": "Failed",
-            "description": "Identity provisioning has failed."
-          },
-          {
-            "value": "Canceled",
-            "description": "Identity provisioning has been canceled."
-          },
-          {
-            "value": "Deleting",
-            "description": "Identity is being deleted."
-          }
-        ]
-      }
-    },
-    "AgentCard": {
-      "description": "Represents a detailed description of an agent, including its name, functionality, hosting information, supported interaction modes, and available skills.",
-      "type": "object",
-      "properties": {
-        "name": {
-          "description": "Human-readable name for the Agent (e.g., 'Recipe Agent').",
-          "type": "string",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "Human-readable description of the Agent's function.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "url": {
-          "description": "URL address where the Agent is hosted.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "provider": {
-          "description": "Service provider information for the Agent.",
-          "$ref": "#/definitions/ProviderInfo",
-          "x-nullable": true
-        },
-        "version": {
-          "description": "Version of the Agent (format defined by provider, e.g., '1.0.0').",
-          "type": "string",
-          "x-nullable": true
-        },
-        "documentationUrl": {
-          "description": "URL for the Agent's documentation.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "defaultInputModes": {
-          "description": "Default interaction modes supported by the Agent across all skills.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "defaultOutputModes": {
-          "description": "Default output modes supported by the Agent across all skills.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "skills": {
-          "description": "Collection of capability units the Agent can perform.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/Skill"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "ProviderInfo": {
-      "description": "Service provider information for the Agent",
-      "type": "object",
-      "properties": {
-        "organization": {
-          "description": "Organization name of the provider.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "url": {
-          "description": "URL of the provider.",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "Skill": {
-      "description": "Collection of capability units the Agent can perform",
-      "type": "object",
-      "properties": {
-        "id": {
-          "description": "Unique identifier for the skill.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "name": {
-          "description": "Human-readable name for the skill.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "description": {
-          "description": "Skill description.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "tags": {
-          "description": "Tags describing the skill's capability category (e.g., 'cooking', 'customer support').",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "examples": {
-          "description": "Example scenarios or prompts the skill can execute (e.g., 'I need a recipe for bread').",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "inputModes": {
-          "description": "Input MIME types supported by the skill (if different from default).",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "outputModes": {
-          "description": "Output MIME types supported by the skill (if different from default).",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
     }
+  },
+  "ManagedNetworkProvisionOptions": {
+    "description": "Managed Network Provisioning options for managed network of a cognitive services account.",
+    "type": "object",
+    "properties": {}
+  },
+  "ManagedNetworkKind": {
+    "description": "The Kind of the managed network. Users can switch from V1 to V2 for granular access controls, but cannot switch back to V1 once V2 is enabled.",
+    "enum": [
+      "V1",
+      "V2"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ManagedNetworkKind",
+      "modelAsString": true
+    }
+  },
+  "ManagedNetworkSettingsBasicResource": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "Managed Network settings for a cognitive services account.",
+        "$ref": "#/definitions/ManagedNetworkSettings"
+      }
+    }
+  },
+  "ManagedNetworkStatus": {
+    "description": "Status for the managed network of a cognitive services account.",
+    "enum": [
+      "Inactive",
+      "Active"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ManagedNetworkStatus",
+      "modelAsString": true
+    }
+  },
+  "ManagedNetworkProvisionStatus": {
+    "description": "Status of the Provisioning for the managed network of a cognitive services account.",
+    "type": "object",
+    "properties": {
+      "status": {
+        "description": "Status for the managed network of a cognitive services account.",
+        "$ref": "#/definitions/ManagedNetworkStatus"
+      }
+    }
+  },
+  "ManagedNetworkListResult": {
+    "description": "List of managed networks of a cognitive services account.",
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+        "type": "string"
+      },
+      "value": {
+        "description": "The list of managed network settings of an account. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/ManagedNetworkSettingsPropertiesBasicResource"
+        }
+      }
+    }
+  },
+  "ManagedNetworkSettingsEx": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ManagedNetworkSettings"
+      }
+    ],
+    "properties": {
+      "changeableIsolationModes": {
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/IsolationMode"
+        },
+        "readOnly": true
+      }
+    }
+  },
+  "ManagedNetworkSettingsProperties": {
+    "description": "The properties of the managed network settings of a cognitive services account.",
+    "type": "object",
+    "properties": {
+      "managedNetwork": {
+        "description": "Managed Network settings for a cognitive services account.",
+        "$ref": "#/definitions/ManagedNetworkSettingsEx"
+      },
+      "provisioningState": {
+        "description": "The current deployment state of the managed network resource. The provisioningState is to indicate states for resource provisioning.",
+        "$ref": "#/definitions/ManagedNetworkProvisioningState",
+        "readOnly": true,
+        "x-ms-mutability": [
+          "read"
+        ]
+      }
+    }
+  },
+  "ManagedNetworkProvisioningState": {
+    "enum": [
+      "Deferred",
+      "Updating",
+      "Succeeded",
+      "Failed",
+      "Deleting",
+      "Deleted"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "ManagedNetworkProvisioningState",
+      "modelAsString": true
+    },
+    "readOnly": true,
+    "x-ms-mutability": [
+      "read"
+    ]
+  },
+  "ManagedNetworkSettingsPropertiesBasicResource": {
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "The properties of the managed network settings of a cognitive services account.",
+        "$ref": "#/definitions/ManagedNetworkSettingsProperties"
+      }
+    }
+  },
+  "OutboundRule": {
+    "description": "Outbound Rule for the managed network of a cognitive services account.",
+    "required": [
+      "type"
+    ],
+    "type": "object",
+    "properties": {
+      "category": {
+        "description": "Category of a managed network Outbound Rule of a cognitive services account.",
+        "$ref": "#/definitions/RuleCategory"
+      },
+      "status": {
+        "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+        "$ref": "#/definitions/RuleStatus"
+      },
+      "type": {
+        "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+        "$ref": "#/definitions/RuleType"
+      },
+      "errorInformation": {
+        "description": "Error information about an outbound rule of a cognitive services account if RuleStatus is failed.",
+        "type": "string",
+        "readOnly": true,
+        "x-ms-mutability": [
+          "read"
+        ]
+      },
+      "parentRuleNames": {
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "readOnly": true,
+        "x-ms-mutability": [
+          "read"
+        ]
+      }
+    },
+    "discriminator": "type"
+  },
+  "OutboundRuleBasicResource": {
+    "required": [
+      "properties"
+    ],
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "Outbound Rule for the managed network of a cognitive services account.",
+        "$ref": "#/definitions/OutboundRule"
+      }
+    }
+  },
+  "OutboundRuleListResult": {
+    "description": "List of outbound rules for the managed network of a cognitive services account.",
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link to the next page constructed using the continuationToken.  If null, there are no additional pages.",
+        "type": "string"
+      },
+      "value": {
+        "description": "The list of cognitive services accounts. Since this list may be incomplete, the nextLink field should be used to request the next list of cognitive services accounts.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/OutboundRuleBasicResource"
+        }
+      }
+    }
+  },
+  "RuleCategory": {
+    "description": "Category of a managed network Outbound Rule of a cognitive services account.",
+    "enum": [
+      "Required",
+      "Recommended",
+      "UserDefined",
+      "Dependency"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "RuleCategory",
+      "modelAsString": true
+    }
+  },
+  "RuleStatus": {
+    "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+    "enum": [
+      "Inactive",
+      "Active",
+      "Provisioning",
+      "Deleting",
+      "Failed"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "RuleStatus",
+      "modelAsString": true
+    }
+  },
+  "RuleType": {
+    "description": "Type of a managed network Outbound Rule of a cognitive services account.",
+    "enum": [
+      "FQDN",
+      "PrivateEndpoint",
+      "ServiceTag"
+    ],
+    "type": "string",
+    "x-ms-enum": {
+      "name": "RuleType",
+      "modelAsString": true
+    }
+  },
+  "AgentApplicationResource": {
+    "description": "Agent Application resource",
+    "required": [
+      "properties"
+    ],
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "[Required] Additional attributes of the entity.",
+        "$ref": "#/definitions/AgenticApplication"
+      }
+    },
+    "x-ms-client-name": "AgentApplication",
+    "additionalProperties": false
+  },
+  "AgentApplicationResourceArmPaginatedResult": {
+    "description": "A paginated list of Agent Application entities.",
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link to the next page of Agent Application objects. If null, there are no additional pages.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "value": {
+        "description": "An array of objects of type Agent Application.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AgentApplicationResource"
+        },
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "AgentDefinitionResource": {
+    "description": "Agent Definition resource",
+    "required": [
+      "properties"
+    ],
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "[Required] Additional attributes of the entity.",
+        "$ref": "#/definitions/AgentDefinition"
+      }
+    },
+    "x-ms-client-name": "AgentDefinition",
+    "additionalProperties": false
+  },
+  "AgentDefinitionResourceArmPaginatedResult": {
+    "description": "A paginated list of Agent Definition entities.",
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link to the next page of Agent Definition objects. If null, there are no additional pages.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "value": {
+        "description": "An array of objects of type Agent Definition.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AgentDefinitionResource"
+        },
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "AgentDeploymentResource": {
+    "description": "Agent Deployment resource",
+    "required": [
+      "properties"
+    ],
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+      }
+    ],
+    "properties": {
+      "properties": {
+        "description": "[Required] Additional attributes of the entity.",
+        "$ref": "#/definitions/AgentDeployment"
+      }
+    },
+    "x-ms-client-name": "AgentDeployment",
+    "additionalProperties": false
+  },
+  "AgentDeploymentResourceArmPaginatedResult": {
+    "description": "A paginated list of Agent Deployment entities.",
+    "type": "object",
+    "properties": {
+      "nextLink": {
+        "description": "The link to the next page of Agent Deployment objects. If null, there are no additional pages.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "value": {
+        "description": "An array of objects of type Agent Deployment.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AgentDeploymentResource"
+        },
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "AgenticApplication": {
+    "description": "Resource type representing an agentic application as a management construct.",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ResourceBase"
+      }
+    ],
+    "properties": {
+      "description": {
+        "description": "The description of the application.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "displayName": {
+        "description": "The display name of the application.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "baseUri": {
+        "description": "The application's unique resource identifier.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "associatedResourceId": {
+        "description": "The resource ID of the account or project associated with this application.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "agents": {
+        "description": "The list of agent definitions comprising this application, returned as references to the objects under the parent project.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AgentReference"
+        },
+        "x-nullable": true
+      },
+      "deployments": {
+        "description": "The list of agent deployments of this application.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/AgentDeployment"
+        },
+        "x-nullable": true
+      },
+      "applicationIdentity": {
+        "description": "The blueprint identity of the application.",
+        "$ref": "#/definitions/AssignedIdentity",
+        "x-nullable": true
+      },
+      "instanceIdentity": {
+        "description": "The instance identity of the application.",
+        "$ref": "#/definitions/AssignedIdentity",
+        "x-nullable": true
+      },
+      "provisioningState": {
+        "description": "Provisioning state of the application.",
+        "$ref": "#/definitions/AgenticApplicationProvisioningState",
+        "readOnly": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "AgentDefinition": {
+    "description": "Agent Definition",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ResourceBase"
+      }
+    ],
+    "properties": {
+      "agentId": {
+        "description": "Unique identifier for the agent.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "name": {
+        "description": "Name of the agent.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "version": {
+        "description": "Version of the agent.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "capabilities": {
+        "description": "Capabilities of the agent.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "modelReference": {
+        "description": "Reference to the underlying model used by the agent.",
+        "type": "string",
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "AgentDeployment": {
+    "description": "Agent Deployment",
+    "type": "object",
+    "allOf": [
+      {
+        "$ref": "#/definitions/ResourceBase"
+      }
+    ],
+    "properties": {
+      "deploymentId": {
+        "description": "Unique identifier for the deployment.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "agentId": {
+        "description": "Identifier of the agent being deployed.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "environment": {
+        "description": "Deployment environment (e.g., development, staging, production).",
+        "type": "string",
+        "x-nullable": true
+      },
+      "status": {
+        "description": "Status of the deployment.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "endpoint": {
+        "description": "Endpoint information for the deployed agent.",
+        "type": "string",
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "AgentReference": {
+    "description": "Reference to an agent definition",
+    "type": "object",
+    "properties": {
+      "agentId": {
+        "description": "Unique identifier for the agent.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "version": {
+        "description": "Version of the agent.",
+        "type": "string",
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "AgenticApplicationProvisioningState": {
+    "description": "Provisioning state of an agentic application.",
+    "type": "string",
+    "enum": [
+      "Succeeded",
+      "Failed",
+      "Canceled",
+      "Creating",
+      "Updating",
+      "Deleting"
+    ],
+    "x-ms-enum": {
+      "name": "AgenticApplicationProvisioningState",
+      "modelAsString": true,
+      "values": [
+        {
+          "value": "Succeeded",
+          "description": "The application was successfully provisioned."
+        },
+        {
+          "value": "Failed",
+          "description": "The application provisioning failed."
+        },
+        {
+          "value": "Canceled",
+          "description": "The application provisioning was canceled."
+        },
+        {
+          "value": "Creating",
+          "description": "The application is being created."
+        },
+        {
+          "value": "Updating",
+          "description": "The application is being updated."
+        },
+        {
+          "value": "Deleting",
+          "description": "The application is being deleted."
+        }
+      ]
+    }
+  },
+  "AssignedIdentity": {
+    "description": "Type representing an identity assignment",
+    "type": "object",
+    "required": [
+      "identityKind",
+      "identityType",
+      "principalId",
+      "tenantId"
+    ],
+    "properties": {
+      "identityKind": {
+        "description": "Specifies the kind of Entra identity described by this object.",
+        "$ref": "#/definitions/IdentityKind"
+      },
+      "identityType": {
+        "description": "Enumeration of identity types, from the perspective of management.",
+        "$ref": "#/definitions/IdentityType"
+      },
+      "principalId": {
+        "description": "The principal ID of the identity.",
+        "type": "string"
+      },
+      "tenantId": {
+        "description": "The tenant ID of the identity.",
+        "type": "string"
+      },
+      "subject": {
+        "description": "The subject of this identity assignment.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "provisioningState": {
+        "description": "Represents the provisioning state of an identity resource.",
+        "$ref": "#/definitions/IdentityProvisioningState",
+        "readOnly": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "IdentityKind": {
+    "description": "Specifies the kind of Entra identity described by this object.",
+    "type": "string",
+    "enum": [
+      "AgentBlueprint",
+      "AgentInstance",
+      "AgenticUser",
+      "Managed",
+      "None"
+    ],
+    "x-ms-enum": {
+      "name": "IdentityKind",
+      "modelAsString": true,
+      "values": [
+        {
+          "value": "AgentBlueprint",
+          "description": "Represents a class identity, used for agentic applications."
+        },
+        {
+          "value": "AgentInstance",
+          "description": "Represents an instance identity."
+        },
+        {
+          "value": "AgenticUser",
+          "description": "Represents an agentic instance identity with user-like traits."
+        },
+        {
+          "value": "Managed",
+          "description": "Represents a classic managed identity."
+        },
+        {
+          "value": "None",
+          "description": "No identity."
+        }
+      ]
+    }
+  },
+  "IdentityType": {
+    "description": "Enumeration of identity types, from the perspective of management.",
+    "type": "string",
+    "enum": [
+      "System",
+      "User",
+      "None"
+    ],
+    "x-ms-enum": {
+      "name": "IdentityType",
+      "modelAsString": true,
+      "values": [
+        {
+          "value": "System",
+          "description": "Platform-managed identity."
+        },
+        {
+          "value": "User",
+          "description": "User-managed identity."
+        },
+        {
+          "value": "None",
+          "description": "No identity."
+        }
+      ]
+    }
+  },
+  "IdentityProvisioningState": {
+    "description": "Represents the provisioning state of an identity resource.",
+    "type": "string",
+    "enum": [
+      "Creating",
+      "Updating",
+      "Succeeded",
+      "Failed",
+      "Canceled",
+      "Deleting"
+    ],
+    "x-ms-enum": {
+      "name": "IdentityProvisioningState",
+      "modelAsString": true,
+      "values": [
+        {
+          "value": "Creating",
+          "description": "Identity is being created."
+        },
+        {
+          "value": "Updating",
+          "description": "Identity is being updated."
+        },
+        {
+          "value": "Succeeded",
+          "description": "Identity has been successfully provisioned."
+        },
+        {
+          "value": "Failed",
+          "description": "Identity provisioning has failed."
+        },
+        {
+          "value": "Canceled",
+          "description": "Identity provisioning has been canceled."
+        },
+        {
+          "value": "Deleting",
+          "description": "Identity is being deleted."
+        }
+      ]
+    }
+  },
+  "AgentCard": {
+    "description": "Represents a detailed description of an agent, including its name, functionality, hosting information, supported interaction modes, and available skills.",
+    "type": "object",
+    "properties": {
+      "name": {
+        "description": "Human-readable name for the Agent (e.g., 'Recipe Agent').",
+        "type": "string",
+        "x-nullable": true
+      },
+      "description": {
+        "description": "Human-readable description of the Agent's function.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "url": {
+        "description": "URL address where the Agent is hosted.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "provider": {
+        "description": "Service provider information for the Agent.",
+        "$ref": "#/definitions/ProviderInfo",
+        "x-nullable": true
+      },
+      "version": {
+        "description": "Version of the Agent (format defined by provider, e.g., '1.0.0').",
+        "type": "string",
+        "x-nullable": true
+      },
+      "documentationUrl": {
+        "description": "URL for the Agent's documentation.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "defaultInputModes": {
+        "description": "Default interaction modes supported by the Agent across all skills.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "defaultOutputModes": {
+        "description": "Default output modes supported by the Agent across all skills.",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "skills": {
+        "description": "Collection of capability units the Agent can perform.",
+        "type": "array",
+        "items": {
+          "$ref": "#/definitions/Skill"
+        },
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "ProviderInfo": {
+    "description": "Service provider information for the Agent",
+    "type": "object",
+    "properties": {
+      "organization": {
+        "description": "Organization name of the provider.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "url": {
+        "description": "URL of the provider.",
+        "type": "string",
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
+  },
+  "Skill": {
+    "description": "Collection of capability units the Agent can perform",
+    "type": "object",
+    "properties": {
+      "id": {
+        "description": "Unique identifier for the skill.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "name": {
+        "description": "Human-readable name for the skill.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "description": {
+        "description": "Skill description.",
+        "type": "string",
+        "x-nullable": true
+      },
+      "tags": {
+        "description": "Tags describing the skill's capability category (e.g., 'cooking', 'customer support').",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "examples": {
+        "description": "Example scenarios or prompts the skill can execute (e.g., 'I need a recipe for bread').",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "inputModes": {
+        "description": "Input MIME types supported by the skill (if different from default).",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      },
+      "outputModes": {
+        "description": "Output MIME types supported by the skill (if different from default).",
+        "type": "array",
+        "items": {
+          "type": "string"
+        },
+        "x-nullable": true
+      }
+    },
+    "additionalProperties": false
   },
   "parameters": {
     "accountNameParameter": {
@@ -12238,7 +12300,9 @@
       "name": "raiIfcRuleName",
       "in": "path",
       "required": true,
-      "schema": { "type": "string" },
+      "schema": {
+        "type": "string"
+      },
       "description": "The name of the Rai IFC Rule",
       "x-ms-parameter-location": "method"
     },
@@ -12410,4 +12474,4 @@
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     }
   }
-
+}
