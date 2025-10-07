@@ -36,6 +36,7 @@ These settings apply only when `--tag=2024-06-15` is specified on the command li
 ```yaml $(tag) == '2024-06-15'
 input-file:
   - stable/2024-06-15/azure.developer.trustedsigning.json
+```
 
 ### Tag: 2023-06-15-preview
 
@@ -47,7 +48,6 @@ input-file:
 ```
 
 ## Suppression
-
 
 ``` yaml
 directive:
