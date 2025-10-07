@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-preview-2025-10-07` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-10-07'
 input-file:
-  - Microsoft.DevOpsInfrastructure/preview/2025-10-07/devopsinfrastructure.json
+  - Microsoft.DevOpsInfrastructure/preview/2025-10-07-preview/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2025-09-20
