@@ -11,22 +11,22 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-csharp":
-    package-dir: "Azure.ResourceManager.Touchcast.CogCache"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Touchcast.CogCache"
     flavor: azure
     clear-output-folder: true
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Touchcast.CogCache"
     service-dir: "sdk/touchcastcogcache"
   "@azure-tools/typespec-python":
     service-dir: "sdk/touchcastcogcache"
-    package-dir: "azure-mgmt-touchcastcogcache"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-touchcastcogcache"
     namespace: "azure.mgmt.touchcastcogcache"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/touchcastcogcache"
-    package-dir: "armtouchcastcogcache"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armtouchcastcogcache"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armtouchcastcogcache"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -35,15 +35,15 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-touchcastcogcache"
     service-dir: "sdk/touchcastcogcache"
-    package-dir: "azure-resourcemanager-touchcastcogcache"
     namespace: "com.azure.resourcemanager.touchcastcogcache"
     service-name: "Touchcast Cogcache"
     flavor: "azure"
   "@azure-tools/typespec-ts":
     flavor: azure
     experimental-extensible-enums: true
-    package-dir: "arm-touchcastcogcache"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-touchcastcogcache"
     package-details:
       name: "@azure/arm-touchcastcogcache"
 linter:

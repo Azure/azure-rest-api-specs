@@ -1,0 +1,87 @@
+{
+  "title": "StageMaps_CreateOrUpdateAtManagementGroupLevel",
+  "operationId": "StageMaps_CreateOrUpdateAtManagementGroupLevel",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "managementGroupName": "myManagementGroup",
+    "stageMapName": "TestStageMap",
+    "resource": {
+      "properties": {
+        "stages": [
+          {
+            "name": "testChangeState",
+            "sequence": 23,
+            "stageVariables": {},
+            "nestedStageMap": {
+              "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/subscription-infrastructure-stages",
+              "parameters": {}
+            }
+          }
+        ],
+        "parameters": {}
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "stages": [
+            {
+              "name": "testChangeState",
+              "sequence": 23,
+              "stageVariables": {},
+              "nestedStageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/subscription-infrastructure-stages",
+                "parameters": {}
+              }
+            }
+          ],
+          "parameters": {},
+          "provisioningState": "Succeeded"
+        },
+        "id": "/providers/Microsoft.ChangeSafety/stageMaps/testStageMap",
+        "name": "testStageMap",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "analytics@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "analytics@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "properties": {
+          "stages": [
+            {
+              "name": "testStageMap",
+              "sequence": 23,
+              "stageVariables": {},
+              "nestedStageMap": {
+                "resourceId": "/subscriptions/8585A8E5-6AD9-46A1-97DE-FEAA76D2E32F/providers/Microsoft.ChangeSafety/stageMaps/subscription-infrastructure-stages",
+                "parameters": {}
+              }
+            }
+          ],
+          "parameters": {},
+          "provisioningState": "Succeeded"
+        },
+        "id": "/providers/Microsoft.ChangeSafety/stageMaps/testStageMap",
+        "name": "testStageMap",
+        "type": "Microsoft.ChangeSafety/stageMaps",
+        "systemData": {
+          "createdBy": "analytics@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-09T07:30:16.534Z",
+          "lastModifiedBy": "analytics@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-09T07:30:16.534Z"
+        }
+      }
+    }
+  }
+}

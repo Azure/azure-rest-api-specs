@@ -57,6 +57,12 @@ describe("changedFiles", () => {
     ]);
   });
 
+  it("getChangedFiles returns empty array when no files are changed", async () => {
+    vi.mocked(simpleGit.simpleGit().diff).mockResolvedValue("");
+    await expect(getChangedFiles()).resolves.toEqual([]);
+    expect(simpleGit.simpleGit().diff).toHaveBeenCalledWith(["--name-only", "HEAD^", "HEAD"]);
+  });
+
   const files = [
     "cspell.json",
     "cspell.yaml",

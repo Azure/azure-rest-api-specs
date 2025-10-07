@@ -102,6 +102,7 @@ suppressions:
     from: 
       - offers.json
       - skus.json
+      - hci.json
 
   - code: PatchPropertiesCorrespondToPutProperties
     reason: already used in GA api version, fixing it will cause breaking change
@@ -144,6 +145,7 @@ suppressions:
     from:
       - arcSettings.json
       - updates.json
+      - hci.json
   
   - code: DeleteResponseCodes
     reason: already used in GA api version, fixing it will cause breaking change
@@ -154,6 +156,7 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - hci.json
   
   - code: LroLocationHeader
     reason: already used in GA api version, fixing it will cause breaking change
@@ -180,6 +183,7 @@ suppressions:
     from:
       - operations.json
       - updateSummaries.json
+      - hci.json
 
   - code: RequestSchemaForTrackedResourcesMustHaveTags
     reason: these are not tracked resources, so tags are not needed
@@ -194,11 +198,13 @@ suppressions:
       - updates.json
       - updateRuns.json
       - updateSummaries.json
+      - hci.json
 
   - code: AvoidAdditionalProperties
     reason: already used in GA api version, fixing it will cause breaking change
     from:
       - updates.json
+      - hci.json
 
   - code: EvenSegmentedPathForPutOperation
     reason: already used in GA api version, fixing it will cause breaking change
@@ -253,6 +259,16 @@ input-file:
   - stable/2025-10-01/updateSummaries.json
   - stable/2025-10-01/validatedSolutionRecipes.json
 ```
+
+### Tag: package-preview-2025-09-22-preview
+
+These settings apply only when `--tag=package-preview-2025-09-22-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-09-22-preview'
+input-file:
+  - preview/2025-09-22-preview/hci.json
+```
+
 
 ### Tag: package-preview-2025-09-15-preview
 

@@ -62,11 +62,10 @@ interface Clusters {
   #suppress "@azure-tools/typespec-azure-core/no-openapi"
   #suppress "@azure-tools/typespec-azure-core/no-operation-id"
   @doc("Create cluster identity.")
-  @operationId("Clusters_CreateIdentity")
   createClusterIdentity is ArmResourceActionAsync<
     Cluster,
     void,
-    ClusterIdentityResponse
+    StackHciClusterIdentityResponseResult
   >;
 
   @doc("Extends Software Assurance Benefit to a cluster.")
@@ -371,7 +370,7 @@ model RawCertificateData {
 }
 
 @doc("Cluster Identity details.")
-model ClusterIdentityResponse {
+model StackHciClusterIdentityResponseResult {
   @doc("Cluster identity properties.")
   @visibility(Lifecycle.Read)
   properties?: ClusterIdentityResponseProperties;

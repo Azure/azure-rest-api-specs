@@ -54,6 +54,23 @@ model ConfigTemplateVersionWithUpdateType {
   configTemplateVersion: ConfigTemplateVersion;
 }
 
+@added(Versions.v2025_08_01)
+@doc("Hierarchy Ids With Level for applying config Template which will further generate ARG objects")
+model HierarchySelector {
+  @doc("Hierarchy Ids")
+  hierarchyIds?: Azure.Core.armResourceIdentifier<[
+    {
+      type: "Microsoft.Edge/Targets";
+    },
+    {
+      type: "Microsoft.Edge/Sites";
+    }
+  ]>[];
+
+  @doc("Hierarchy Level")
+  level?: string;
+}
+
 @armResourceOperations
 interface ConfigTemplates {
   @doc("Get a Config Template Resource")
@@ -64,6 +81,13 @@ interface ConfigTemplates {
 
   @doc("update a Config Template Resource")
   update is ArmResourcePatchSync<ConfigTemplate, ConfigTemplateProperties>;
+
+  @added(Versions.v2025_08_01)
+  @doc("Apply a Config Template to a particular hierarchy node")
+  linkToHierarchies is ArmResourceActionNoResponseContentAsync<
+    ConfigTemplate,
+    HierarchySelector
+  >;
 
   @doc("Create or update a Config Template Version Resource with the specified UpdateType")
   createVersion is ArmResourceActionAsync<
