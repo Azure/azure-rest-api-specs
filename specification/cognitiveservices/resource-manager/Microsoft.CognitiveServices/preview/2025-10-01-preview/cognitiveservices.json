@@ -11523,6 +11523,16 @@
           "$ref": "#/definitions/AgentCard",
           "x-nullable": true
         },
+        "authorizationPolicy": {
+          "description": "Gets or sets the authorization policy for the application.",
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy",
+          "x-nullable": true
+        },
+        "isEnabled": {
+          "description": "Gets or sets a value indicating whether the application is enabled.",
+          "type": "boolean",
+          "readOnly": true
+        },
         "provisioningState": {
           "description": "Provisioning state of the application.",
           "$ref": "#/definitions/AgenticApplicationProvisioningState",
@@ -11889,6 +11899,170 @@
           "format": "int32"
         }
       },
+      "additionalProperties": false
+    },
+    "ApplicationAuthorizationPolicy": {
+      "description": "Represents a policy for authorizing applications based on specified authentication and authorization schemes.",
+      "type": "object",
+      "properties": {
+        "authenticationScheme": {
+          "description": "The authentication scheme.",
+          "$ref": "#/definitions/AuthenticationScheme",
+          "x-nullable": true
+        },
+        "authorizationScheme": {
+          "description": "The authorization scheme used for evaluating requests.",
+          "$ref": "#/definitions/AuthorizationScheme",
+          "x-nullable": true
+        },
+        "requirements": {
+          "description": "Set of requirements protecting access to this app and its resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AuthorizationRequirement"
+          },
+          "x-nullable": true
+        }
+      },
+      "additionalProperties": false
+    },
+    "AuthenticationScheme": {
+      "description": "Specifies the authentication schemes supported by the application.",
+      "type": "string",
+      "enum": [
+        "None",
+        "Bearer",
+        "ApiKey",
+        "OAuth2"
+      ],
+      "x-ms-enum": {
+        "name": "AuthenticationScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No authentication required."
+          },
+          {
+            "value": "Bearer",
+            "description": "Bearer token authentication."
+          },
+          {
+            "value": "ApiKey",
+            "description": "API key authentication."
+          },
+          {
+            "value": "OAuth2",
+            "description": "OAuth 2.0 authentication."
+          }
+        ]
+      }
+    },
+    "AuthorizationScheme": {
+      "description": "Specifies the authorization scheme to be used for access to this application's deployments.",
+      "type": "string",
+      "enum": [
+        "None",
+        "RoleBased",
+        "AttributeBased"
+      ],
+      "x-ms-enum": {
+        "name": "AuthorizationScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "None",
+            "description": "No authorization required."
+          },
+          {
+            "value": "RoleBased",
+            "description": "Role-based authorization."
+          },
+          {
+            "value": "AttributeBased",
+            "description": "Attribute-based authorization."
+          }
+        ]
+      }
+    },
+    "AuthorizationRequirement": {
+      "description": "Abstract base class for defining authorization requirements.",
+      "type": "object",
+      "required": [
+        "requirementType"
+      ],
+      "properties": {
+        "description": {
+          "description": "Description of the requirement.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "name": {
+          "description": "Name of the requirement; must be unique within the policy.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "version": {
+          "description": "Versioning tag for the requirement definition.",
+          "type": "string",
+          "x-nullable": true
+        },
+        "isEnforced": {
+          "description": "Boolean flag indicating whether this requirement is enforced.",
+          "type": "boolean"
+        },
+        "key": {
+          "description": "The name of the context property to evaluate (e.g. 'role', 'oid', 'sub').",
+          "type": "string",
+          "x-nullable": true
+        },
+        "allowedValues": {
+          "description": "The set of allowed values for the specified key.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-nullable": true
+        },
+        "requireAll": {
+          "description": "Boolean flag indicating whether all conditions must be met (true) or any one condition (false).",
+          "type": "boolean"
+        },
+        "requirementType": {
+          "description": "The type of authorization requirement.",
+          "type": "string"
+        }
+      },
+      "discriminator": "requirementType",
+      "additionalProperties": false
+    },
+    "RoleBasedAuthorizationRequirement": {
+      "description": "A role-based authorization requirement.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthorizationRequirement"
+        }
+      ],
+      "properties": {
+        "scope": {
+          "description": "The scope of the role enforced by this requirement (e.g. 'application', 'deployment').",
+          "type": "string",
+          "x-nullable": true
+        }
+      },
+      "x-ms-discriminator-value": "RoleBased",
+      "additionalProperties": false
+    },
+    "AttributeBasedAuthorizationRequirement": {
+      "description": "An attribute-based authorization requirement.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AuthorizationRequirement"
+        }
+      ],
+      "x-ms-discriminator-value": "AttributeBased",
       "additionalProperties": false
     },
     "ApplicationTrafficRoutingPolicy": {
