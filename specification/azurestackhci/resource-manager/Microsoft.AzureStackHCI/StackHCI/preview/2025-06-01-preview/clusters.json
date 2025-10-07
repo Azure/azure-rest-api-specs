@@ -964,38 +964,6 @@
         }
       }
     },
-    "AksClusterProperties": {
-      "type": "object",
-      "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.",
-      "properties": {
-        "aksImageDownload": {
-          "type": "string",
-          "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
-          "default": "Enabled",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "name": "AksImageDownload",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Enabled",
-                "value": "Enabled",
-                "description": "AKS Image should be downloaded."
-              },
-              {
-                "name": "Disabled",
-                "value": "Disabled",
-                "description": "AKS Image should not be downloaded."
-              }
-            ]
-          },
-          "readOnly": true
-        }
-      }
-    },
     "LogCollectionProperties": {
       "description": "Log Collection properties of the cluster.",
       "type": "object",
@@ -1497,10 +1465,6 @@
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
           "readOnly": true
-        },
-        "aksClusterProperties": {
-          "$ref": "#/definitions/AksClusterProperties",
-          "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios."
         }
       }
     },
