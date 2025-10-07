@@ -149,6 +149,16 @@ directive:
     - $.definitions.OperationStatus
     suppress:
       - BodyTopLevelProperties
+
+  - where:
+    - $.definitions.FeatureState.properties.defaultValues
+    suppress:
+      - AvoidAdditionalProperties
+
+  - where:
+    - $.definitions.InheritedProjectCatalogSettings.properties.defaultValues
+    suppress:
+      - AvoidAdditionalProperties
 ```
 
 ### Tag: package-preview-2025-10-01-preview
