@@ -26,8 +26,16 @@ These are the global settings for the Azure.Developer.TrustedSigning.
 
 ```yaml
 openapi-type: data-plane
-tag: 2023-06-15-preview
+tag: 2024-06-15
 ```
+
+### Tag: 2024-06-15
+
+These settings apply only when `--tag=2024-06-15` is specified on the command line.
+
+```yaml $(tag) == '2024-06-15'
+input-file:
+  - stable/2024-06-15/azure.developer.trustedsigning.json
 
 ### Tag: 2023-06-15-preview
 
