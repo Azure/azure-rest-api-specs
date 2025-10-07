@@ -40,32 +40,6 @@ input-file:
   - preview/0.1-preview/identityservice.json
 ```
 
-### Tag: package-2022-04-20-preview-ledger
-
-These settings apply only when `--tag=package-2022-04-20-preview-ledger` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-04-20-preview-ledger'
-input-file:
-  - preview/2022-04-20-preview/confidentialledger.json
-directive:
-  - suppress: HostParametersValidation
-    reason: Existing API, change would potentially be breaking.
-  - suppress: IntegerTypeMustHaveFormat
-    reason: Existing API, change would potentially be breaking.
-```
-
-### Tag: package-2022-04-20-preview-identity
-
-These settings apply only when `--tag=package-2022-04-20-preview-identity` is specified on the command line.
-
-```yaml $(tag) == 'package-2022-04-20-preview-identity'
-input-file:
-  - preview/2022-04-20-preview/identityservice.json
-directive:
-  - suppress: HostParametersValidation
-    reason: Existing API, change would potentially be breaking.
-```
-
 ### Tag: package-2022-05-13-ledger
 
 These settings apply only when `--tag=package-2022-05-13-ledger` is specified on the command line.
