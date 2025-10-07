@@ -637,34 +637,6 @@ model OptionalServices {
    * The name of custom location.
    */
   customLocation?: string;
-
-  /**
-   * AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.
-   */
-  aksClusterProperties?: AksClusterPropertiesIntent;
-}
-
-/**
- * AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.
- */
-model AksClusterPropertiesIntent {
-  /**
-   * Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'
-   */
-  aksImageDownload?: AksImageDownloadIntent = AksImageDownloadIntent.Enabled;
-}
-
-/**
- * Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'
- */
-union AksImageDownloadIntent {
-  string,
-
-  @doc("AKS Image should be downloaded.")
-  Enabled: "Enabled",
-
-  @doc("AKS Image should not be downloaded.")
-  Disabled: "Disabled",
 }
 
 /**
