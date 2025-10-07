@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -437,6 +438,18 @@ union AutoImageBuildStatus {
   Enabled: "Enabled",
 }
 
+@doc("Indicates whether auto image build is enabled/disabled for image definitions in the catalog.")
+@added(Versions.v2025_10_01_preview)
+union CatalogAutoImageBuildEnableStatus {
+  string,
+
+  @doc("Auto image build is disabled.")
+  Disabled: "Disabled",
+
+  @doc("Auto image build is enabled.")
+  Enabled: "Enabled",
+}
+
 @doc("Health status indicating whether a pool is available to create Dev Boxes.")
 union HealthStatus {
   string,
@@ -616,6 +629,27 @@ union DayOfWeek {
   Sunday: "Sunday",
 }
 
+@doc("The scope of an assignment.")
+@added(Versions.v2025_10_01_preview)
+union AssignedGroupScope {
+  string,
+
+  @doc("Assignment entitles group members to Dev Boxes in the Project.")
+  DevBox: "DevBox",
+}
+
+@doc("Indicates whether cancel on connect is enabled.")
+@added(Versions.v2025_10_01_preview)
+union CancelOnConnectEnableStatus {
+  string,
+
+  @doc("Cancel on connect is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Cancel on connect is disabled.")
+  Disabled: "Disabled",
+}
+
 model DevCenterListResult is Azure.Core.Page<DevCenter>;
 
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Legacy. Maintain compatibility with existing models."
@@ -658,6 +692,27 @@ model Encryption {
 model DevCenterProjectCatalogSettings {
   @doc("Whether project catalogs associated with projects in this dev center can be configured to sync catalog items.")
   catalogItemSyncEnableStatus?: CatalogItemSyncEnableStatus;
+}
+
+@doc("Inherited project catalog settings that combine project policy settings with dev center catalog settings.")
+model InheritedProjectCatalogSettings {
+  @doc("Indicates whether the feature's status, Enabled or Disabled, is configurable at the Project scope.")
+  @added(Versions.v2025_10_01_preview)
+  statusModifiable?: FeatureState.statusModifiable;
+
+  @doc("Indicates whether the feature values are configurable at the Project scope.")
+  @added(Versions.v2025_10_01_preview)
+  valuesModifiable?: FeatureState.valuesModifiable;
+
+  @doc("Indicates the default status of the feature.")
+  @added(Versions.v2025_10_01_preview)
+  defaultStatus?: FeatureState.defaultStatus;
+
+  @doc("The default values of the feature.")
+  @added(Versions.v2025_10_01_preview)
+  defaultValues?: FeatureState.defaultValues;
+
+  ...DevCenterProjectCatalogSettings;
 }
 
 @doc("Network settings for the Dev Center.")
@@ -754,6 +809,10 @@ model ProjectPolicyUpdateProperties {
 
   @doc("Resources that have access to the shared resources that are a part of this project policy.")
   scopes?: string[];
+
+  @doc("Configuration Policies part of this project policy.")
+  @added(Versions.v2025_10_01_preview)
+  configurationPolices?: ConfigurationPolicies;
 }
 
 @doc("A resource policy.")
@@ -812,8 +871,9 @@ model ProjectUpdateProperties {
   @doc("Settings to be used for customizations.")
   customizationSettings?: ProjectCustomizationSettings;
 
-  @doc("Dev Box Auto Delete settings.")
-  devBoxAutoDeleteSettings?: DevBoxAutoDeleteSettings;
+  @doc("Dev Box Schedule Delete settings.")
+  @renamedFrom(Versions.v2025_07_01_preview, "devBoxAutoDeleteSettings")
+  devBoxScheduleDeleteSettings?: DevBoxScheduleDeleteSettings;
 
   @doc("Indicates whether Azure AI services are enabled for a project.")
   azureAiServicesSettings?: AzureAiServicesSettings;
@@ -823,6 +883,11 @@ model ProjectUpdateProperties {
 
   @doc("Settings to be used for workspace storage.")
   workspaceStorageSettings?: WorkspaceStorageSettings;
+
+  @doc("List of Entra ID group assignments associated with this project.")
+  @added(Versions.v2025_10_01_preview)
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  assignedGroups?: AssignedGroup[];
 }
 
 @doc("Settings to be used when associating a project with a catalog.")
@@ -851,7 +916,7 @@ model ProjectCustomizationManagedIdentity {
 }
 
 @doc("Settings controlling the auto deletion of inactive dev boxes.")
-model DevBoxAutoDeleteSettings {
+model DevBoxScheduleDeleteSettings {
   @doc("Indicates the delete mode for Dev Boxes within this project.")
   deleteMode?: DevBoxDeleteMode;
 
@@ -860,6 +925,10 @@ model DevBoxAutoDeleteSettings {
 
   @doc("ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S.")
   gracePeriod?: string;
+
+  @doc("Indicates whether scheduled deletion should be canceled when a user connects to the dev box.")
+  @added(Versions.v2025_10_01_preview)
+  cancelOnConnectEnableStatus?: CancelOnConnectEnableStatus;
 }
 
 @doc("Configures Azure AI related services for the project.")
@@ -884,6 +953,16 @@ model WorkspaceStorageSettings {
   workspaceStorageMode?: WorkspaceStorageMode;
 }
 
+@doc("Represents an Entra group assigned to this Project, entitling all members to resources for the given scope.")
+@added(Versions.v2025_10_01_preview)
+model AssignedGroup {
+  @doc("The Entra group object ID (GUID).")
+  groupId?: string;
+
+  @doc("The scope of the assignment.")
+  scope?: AssignedGroupScope;
+}
+
 @doc("The project properties for partial update. Properties not provided in the update request will not be changed.")
 model ProjectUpdate is TrackedResourceUpdate {
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "Legacy"
@@ -899,11 +978,126 @@ model ProjectUpdate is TrackedResourceUpdate {
 model InheritedSettingsForProject {
   @doc("Dev Center settings to be used when associating a project with a catalog.")
   @visibility(Lifecycle.Read)
-  projectCatalogSettings?: DevCenterProjectCatalogSettings;
+  projectCatalogSettings?: InheritedProjectCatalogSettings;
 
   @doc("Network settings that will be enforced on this project.")
   @visibility(Lifecycle.Read)
   networkSettings?: ProjectNetworkSettings;
+
+  @doc("Azure AI project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  azureAiServicesSettings?: FeatureState;
+
+  @doc("Dev box schedule delete project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  devBoxScheduleDeleteSettings?: FeatureState;
+
+  @doc("Dev box limits project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  devBoxLimitsSettings?: FeatureState;
+
+  @doc("Display name project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  displayNameSettings?: FeatureState;
+
+  @doc("Dev box tunnel project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  devBoxTunnelSettings?: FeatureState;
+
+  @doc("Serverless GPU sessions project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  serverlessGpuSessionsSettings?: FeatureState;
+
+  @doc("User customizations project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  userCustomizationsSettings?: FeatureState;
+
+  @doc("Workspace storage project policy settings that will be enforced on this project.")
+  @added(Versions.v2025_10_01_preview)
+  @visibility(Lifecycle.Read)
+  workspaceStorageSettings?: FeatureState;
+}
+
+@doc("Represents policies to enforce configuration settings on a project.")
+@added(Versions.v2025_10_01_preview)
+model ConfigurationPolicies {
+  @doc("The property indicates the Azure AI services settings on a project.")
+  azureAiServicesFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether the setting is configurable at Project scope.")
+  devBoxScheduleDeleteFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether DevBox limits are configurable at Project scope.")
+  devBoxLimitsFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether project display name is configurable at Project scope.")
+  displayNameFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether DevBox tunnel settings are configurable at Pool scope.")
+  devBoxTunnelFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether project catalogs are configurable at Project scope.")
+  projectCatalogFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether serverless GPU sessions are configurable at Project scope.")
+  serverlessGpuSessionsFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether user customizations is configurable at Project scope.")
+  userCustomizationsFeatureStatus?: FeatureState;
+
+  @doc("Indicates whether workspace storage is configurable at Project scope.")
+  workspaceStorageFeatureStatus?: FeatureState;
+}
+
+@doc("Feature state.")
+@added(Versions.v2025_10_01_preview)
+model FeatureState {
+  @doc("Indicates whether the feature's status, Enabled or Disabled, is configurable at the Project scope.")
+  statusModifiable?: FeatureStateModifiable;
+
+  @doc("Indicates whether the feature values are configurable at the Project scope.")
+  valuesModifiable?: FeatureStateModifiable;
+
+  @doc("Indicates the default status of the feature.")
+  defaultStatus?: FeatureStatus;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "No other way to represent an arbirtary object containing default values."
+  @doc("The default values of the feature.")
+  defaultValues?: Record<string>;
+}
+
+@doc("Feature status.")
+@added(Versions.v2025_10_01_preview)
+union FeatureStatus {
+  string,
+
+  @doc("Feature is enabled.")
+  Enabled: "Enabled",
+
+  @doc("Feature is disabled.")
+  Disabled: "Disabled",
+
+  @doc("Auto Deploy feature status.")
+  AutoDeploy: "AutoDeploy",
+}
+
+@doc("Feature enablement status.")
+@added(Versions.v2025_10_01_preview)
+union FeatureStateModifiable {
+  string,
+
+  @doc("Feature is not modifiable.")
+  NotModifiable: "NotModifiable",
+
+  @doc("Feature is modifiable.")
+  Modifiable: "Modifiable",
 }
 
 @doc("Network settings for the project.")
@@ -1012,6 +1206,10 @@ model CatalogUpdateProperties {
 
   @doc("Indicates the type of sync that is configured for the catalog.")
   syncType?: CatalogSyncType;
+
+  @doc("Indicates whether the catalog is configured to automatically build image definitions. Defaults to enabled.")
+  @added(Versions.v2025_10_01_preview)
+  autoImageBuildEnableStatus?: CatalogAutoImageBuildEnableStatus;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Correct representation for resource tags."
   @doc("Resource tags.")

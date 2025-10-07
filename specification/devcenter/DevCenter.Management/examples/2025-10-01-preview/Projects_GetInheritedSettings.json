@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "projectName": "Contoso",
+    "resourceGroupName": "rg1",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+  },
+  "responses": {
+    "200": {
+            "body": {
+        "projectCatalogSettings": {
+          "catalogItemSyncEnableStatus": "Enabled",
+          "valuesModifiable": "Modifiable",
+          "defaultValues": {
+            "environmentDefinitionCatalogItemSync": "Enabled",
+            "imageDefinitionCatalogItemSync": "Enabled"
+          }
+        },
+        "networkSettings": {
+          "microsoftHostedNetworkEnableStatus": "Enabled"
+        },
+        "azureAiServicesSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "AutoDeploy"
+        },
+        "devBoxScheduleDeleteSettings": {
+          "statusModifiable": "NotModifiable",
+          "valuesModifiable": "Modifiable",
+          "defaultStatus": "Enabled",
+          "defaultValues": {
+            "inactiveThreshold": "P30D", 
+            "gracePeriod": "P3D",
+            "cancelOnConnectEnableStatus": "false"
+          }
+        },
+        "devBoxLimitsSettings": {
+          "statusModifiable": "Modifiable",
+          "valuesModifiable": "Modifiable",
+          "defaultValues": {
+              "maxDevBoxesPerUser": "10"
+          },
+          "defaultStatus": "Enabled"
+        },
+        "displayNameSettings": {
+          "statusModifiable": "NotModifiable",
+          "defaultStatus": "Disabled"
+        },
+        "devBoxTunnelSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "Disabled"
+        },
+        "serverlessGpuSessionsSettings": {
+          "statusModifiable": "Modifiable",
+          "valuesModifiable": "NotModifiable",
+          "defaultValues": {
+            "maxConcurrentSessionsPerProject": "3"
+          },
+          "defaultStatus": "AutoDeploy"
+        },
+        "userCustomizationsSettings": {
+          "statusModifiable": "Modifiable",
+          "defaultStatus": "Enabled"
+        },
+        "workspaceStorageSettings": {
+          "statusModifiable": "NotModifiable",
+          "defaultStatus": "Disabled"
+        }
+      }
+    }
+  },
+  "operationId": "Projects_GetInheritedSettings",
+  "title": "Projects_GetInheritedSettings"
+}
