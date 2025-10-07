@@ -25,7 +25,7 @@
   "securityDefinitions": {
     "azure_auth": {
       "type": "oauth2",
-      "description": "Azure Active Directory OAuth2 Flow.",
+      "description": "Microsoft Entra ID OAuth 2.0 Flow.",
       "flow": "implicit",
       "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
       "scopes": {
@@ -343,7 +343,7 @@
           "type": "string"
         },
         "status": {
-          "description": "The status of the check running (i.e. Failed, Succeeded, In Progress). This answers whether the check ran, and passed or failed.",
+          "description": "Represents the current status of the check being performed. Indicates whether the check has completed successfully, failed, or is still in progress.",
           "type": "string",
           "enum": [
             "Succeeded",
@@ -352,11 +352,28 @@
           ],
           "x-ms-enum": {
             "name": "status",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Succeeded",
+                "value": "Succeeded",
+                "description": "The check completed successfully."
+              },
+              {
+                "name": "Failed",
+                "value": "Failed",
+                "description": "The check completed but failed."
+              },
+              {
+                "name": "InProgress",
+                "value": "InProgress",
+                "description": "The check is currently in progress."
+              }
+            ]
           }
         },
         "severity": {
-          "description": "Severity of the result (Critical, Warning, Informational, Hidden). This answers how important the result is. Critical is the only update-blocking severity.",
+          "description": "Indicates the importance or impact level of the result. Determines whether the result is informational, a warning, or a critical issue that may block updates.",
           "type": "string",
           "enum": [
             "Critical",
@@ -366,7 +383,29 @@
           ],
           "x-ms-enum": {
             "name": "severity",
-            "modelAsString": true
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Critical",
+                "value": "Critical",
+                "description": "A critical issue that blocks updates and requires immediate attention."
+              },
+              {
+                "name": "Warning",
+                "value": "Warning",
+                "description": "A warning that may indicate a potential issue but does not block updates."
+              },
+              {
+                "name": "Informational",
+                "value": "Informational",
+                "description": "General information that does not indicate any issue."
+              },
+              {
+                "name": "Hidden",
+                "value": "Hidden",
+                "description": "The result is hidden and not shown in the output."
+              }
+            ]
           }
         },
         "description": {
