@@ -227,6 +227,7 @@ model Response {
    * Maximum number of output tokens for a single assistant response,
    * inclusive of tool calls, that was used in this response.
    */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
   max_output_tokens?: int32 | "inf";
 }
 
@@ -995,12 +996,14 @@ model ServerEventResponseAudioDone extends ServerEvent {
 /** Represents a delta update of blendshape animation frames for a specific output of a response. */
 @usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+
 model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_delta;
   response_id: string;
   item_id: string;
   output_index: int32;
   content_index: int32;
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
   frames: float32[][] | string;
   frame_index: int32;
 }
@@ -1134,6 +1137,7 @@ model ResponseCreateParams {
    * limit output tokens, or `inf` for the maximum available tokens for a
    * given model. Defaults to `inf`.
    */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
   max_output_tokens?: int32 | "inf";
 }
 

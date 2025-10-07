@@ -39,6 +39,7 @@ model FunctionTool extends Tool {
  * The combined set of available representations for a voicelive tool_choice parameter, encompassing both string
  * literal options like 'auto' as well as structured references to defined tools.
  */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
 union ToolChoice {
   ToolChoiceLiteral,
   ToolChoiceObject,
