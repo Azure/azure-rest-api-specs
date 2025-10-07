@@ -1539,7 +1539,7 @@ namespace SkillContext
 		cacheKeySuffix?: string;
 
 		@doc("Scopes to limit the cache entry to (scoped to user already by default)")
-		scopes?: Array<SkillUtilityCacheScope>;
+		scopes?: Record<SkillUtilityCacheScope>;
 
 		@doc("Time to live for the cache entry")
 		ttl?: duration;
