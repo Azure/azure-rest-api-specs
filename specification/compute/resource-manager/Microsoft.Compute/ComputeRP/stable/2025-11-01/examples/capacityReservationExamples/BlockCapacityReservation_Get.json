@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "subscriptionId": "{subscriptionId}",
+    "resourceGroupName": "myResourceGroup",
+    "api-version": "2025-11-01",
+    "capacityReservationGroupName": "blockCapacityReservationGroup",
+    "capacityReservationName": "blockCapacityReservation",
+    "$expand": "instanceView"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/capacityReservationGroups/blockCapacityReservationGroup/capacityReservations/blockCapacityReservation",
+        "properties": {
+          "platformFaultDomainCount": 3,
+          "reservationId": "{GUID}",
+          "provisioningTime": "2021-06-27T01:02:38.3138469+00:00",
+          "virtualMachinesAssociated": [
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+            },
+            {
+              "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM3"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "instanceView": {
+            "utilizationInfo": {
+              "currentCapacity": 5,
+              "virtualMachinesAllocated": [
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM1"
+                },
+                {
+                  "id": "/subscriptions/{subscription-id}/resourceGroups/myResourceGroup/providers/Microsoft.Compute/virtualMachines/myVM2"
+                }
+              ]
+            },
+            "statuses": [
+              {
+                "code": "ProvisioningState/succeeded",
+                "level": "Info",
+                "displayStatus": "Provisioning succeeded"
+              }
+            ]
+          },
+          "scheduleProfile": {
+            "start": "2025-08-01T12:00:00Z",
+            "end": "2025-08-02T11:30:00Z"
+          },
+          "timeCreated": "2021-06-27T01:02:38.3138469+00:00"
+        },
+        "location": "westus",
+        "tags": {
+          "department": "HR"
+        },
+        "sku": {
+          "name": "Standard_ND96isr_H100_v5",
+          "capacity": 1
+        },
+        "zones": [
+          "1"
+        ],
+        "name": "blockCapacityReservation"
+      }
+    }
+  },
+  "operationId": "CapacityReservations_Get",
+  "title": "Get a block capacity reservation."
+}
