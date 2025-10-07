@@ -1,15 +1,22 @@
 {
-  "title": "FleetManagedNamespaces_Get",
-  "operationId": "FleetManagedNamespaces_Get",
+  "title": "FleetManagedNamespaces_Update",
+  "operationId": "FleetManagedNamespaces_Update",
   "parameters": {
-    "api-version": "2025-08-01-preview",
+    "api-version": "2025-10-01-preview",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "rgfleets",
     "fleetName": "fleet1",
-    "managedNamespaceName": "namespace1"
+    "managedNamespaceName": "namespace1",
+    "properties": {},
+    "tags": {
+      "tag2": "tagValue2"
+    }
   },
   "responses": {
     "200": {
+      "headers": {
+        "ETag": "\"EtagValue\""
+      },
       "body": {
         "properties": {
           "managedNamespaceProperties": {
@@ -88,12 +95,11 @@
           },
           "status": {
             "lastOperationError": {}
-          },
-          "portalFqdn": "fleet1-namespace1-abc123.flt.eastus.azmk8s.io"
+          }
         },
         "eTag": "\"EtagValue\"",
         "tags": {
-          "tag1": "tagValue1"
+          "tag2": "tagValue2"
         },
         "location": "eastus",
         "id": "/subscriptions/subid1/resourcegroups/rg1/providers/Microsoft.ContainerService/fleets/fleet1/managedNamespaces/namespace1",
@@ -107,6 +113,11 @@
           "lastModifiedByType": "User",
           "lastModifiedAt": "2025-08-23T05:40:40.657Z"
         }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
       }
     }
   }
