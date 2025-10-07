@@ -17,6 +17,11 @@ import "./SavingsPlanOrderModel.tsp";
 import "./SavingsPlanModel.tsp";
 import "./ReservationOrderAliasResponse.tsp";
 import "./Discount.tsp";
+import "./Macc.tsp";
+import "./Contributor.tsp";
+import "./Credit.tsp";
+import "./ConditionalCredit.tsp";
+import "./CreditSource.tsp";
 import "./routes.tsp";
 import "./back-compatible.tsp";
 
@@ -43,6 +48,11 @@ enum Versions {
    * The 2024-11-01-preview API version.
    */
   v2024_11_01_preview: "2024-11-01-preview",
+
+  /**
+   * The 2025-05-01-preview API version.
+   */
+  v2025_05_01_preview: "2025-05-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
