@@ -27,7 +27,7 @@ model SchemaReferenceProperties {
 
 @doc("Schema Reference Resource")
 model SchemaReference is ExtensionResource<SchemaReferenceProperties> {
-  ...ResourceNameParameter<SchemaReference>;
+  ...ResourceNameParameter<SchemaReference, NamePattern = "^default$">;
   ...EntityTagProperty;
 }
 
