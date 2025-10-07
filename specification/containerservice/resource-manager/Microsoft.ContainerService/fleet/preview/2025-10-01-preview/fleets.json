@@ -1193,6 +1193,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_ListByFleet": {
+            "$ref": "./examples/FleetManagedNamespaces_ListByFleet.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1248,6 +1253,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Get": {
+            "$ref": "./examples/FleetManagedNamespaces_Get.json"
           }
         }
       },
@@ -1344,6 +1354,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_CreateOrUpdate": {
+            "$ref": "./examples/FleetManagedNamespaces_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1431,6 +1446,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Update": {
+            "$ref": "./examples/FleetManagedNamespaces_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -1504,6 +1524,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "FleetManagedNamespaces_Delete": {
+            "$ref": "./examples/FleetManagedNamespaces_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3396,6 +3421,11 @@
           "$ref": "#/definitions/FleetManagedNamespaceStatus",
           "description": "Status information of the last operation for fleet managed namespace.",
           "readOnly": true
+        },
+        "portalFqdn": {
+          "type": "string",
+          "description": "The Azure Portal FQDN of the Fleet hub.",
+          "readOnly": true
         }
       },
       "required": [
@@ -4876,7 +4906,7 @@
         },
         "maxConcurrency": {
           "type": "string",
-          "description": "The max number of upgrades that can run concurrently in this specific group.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the group you want to tolerate at a time.\nActual concurrency may be lower depending on stage-level concurrency limits or individual member conditions.\nGroup maxConcurrency has a min value of \"1\". The max value is min(number of clusters in the group, the stage maxConcurrency).\nIf no value is provided, defaults to 1.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the number of clusters in the group. \n      Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\" --> up to 3 members from this group upgrade at once.\n    • \"100%\" --> “all at once”, up to all members for this group upgrade at the same time.\n    • \"25%\" --> up to 25% of the members in the group will be upgraded at the same time.",
+          "description": "The max number of upgrades that can run concurrently in this specific group.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the group you want to tolerate at a time.\nActual concurrency may be lower depending on stage-level concurrency limits or individual member conditions.\nGroup maxConcurrency has a min value of \"1\". The max value is min(number of clusters in the group, the stage maxConcurrency).\nIf no value is provided, defaults to 1.\nAccepts either:\n    • A fixed count, e.g. \"3\"\n    • A percentage, e.g. \"25%\" (range 1–100). Percentage is of the number of clusters in the group. \n      Fractional results are rounded down. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\" --> up to 3 members from this group upgrade at once.\n    • \"100%\" --> “all at once”, up to all members for this group upgrade at the same time.\n    • \"25%\" --> up to 25% of the members in the group will be upgraded at the same time.",
           "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
         },
         "beforeGates": {
@@ -5211,7 +5241,7 @@
         },
         "maxConcurrency": {
           "type": "string",
-          "description": "The max number of upgrades that can run concurrently across all groups in this stage.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the stage you want to tolerate at a time.\nActual concurrency may be lower depending on group-level concurrency limits or individual member conditions.\nStage maxConcurrency has a min value of \"1\".\nAccepts either:\n    • A fixed count, e.g., \"3\"\n    • A percentage, e.g., \"25%\" (range 1–100). Percentage is of the total number of clusters across all groups in the stage.\n      Fractional results are rounded up. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\"     --> up to 3 clusters from this stage upgrade at once (across all groups).\n    • \"100%\"  --> “all at once”; up to all clusters in this stage upgrade at the same time.\n    • \"25%\"   --> up to 25% of the stage’s total clusters upgrade at the same time.",
+          "description": "The max number of upgrades that can run concurrently across all groups in this stage.\nActs as a ceiling (and not a quota) for the number of concurrent upgrades within the stage you want to tolerate at a time.\nActual concurrency may be lower depending on group-level concurrency limits or individual member conditions.\nStage maxConcurrency has a min value of \"1\".\nAccepts either:\n    • A fixed count, e.g., \"3\"\n    • A percentage, e.g., \"25%\" (range 1–100). Percentage is of the total number of clusters across all groups in the stage.\n      Fractional results are rounded down. A minimum of 1 upgrade is enforced.\nExamples:\n    • \"3\"     --> up to 3 clusters from this stage upgrade at once (across all groups).\n    • \"100%\"  --> “all at once”; up to all clusters in this stage upgrade at the same time.\n    • \"25%\"   --> up to 25% of the stage’s total clusters upgrade at the same time.",
           "pattern": "^(?:([1-9]\\d*)|([1-9]\\d?|100)%)$"
         },
         "beforeGates": {
