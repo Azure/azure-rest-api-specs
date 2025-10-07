@@ -1068,7 +1068,7 @@ model FeatureState {
   @doc("Indicates the default status of the feature.")
   defaultStatus?: FeatureStatus;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "No other way to represent an arbirtary object containing default values."
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "No other way to represent an arbitrary object containing default values."
   @doc("The default values of the feature.")
   defaultValues?: Record<string>;
 }
