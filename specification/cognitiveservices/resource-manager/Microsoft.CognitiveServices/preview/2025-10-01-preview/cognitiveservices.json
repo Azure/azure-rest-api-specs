@@ -1691,7 +1691,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/deploymentNameParameter"
+            "$ref": "#/parameters/deploymentNameForActionParameter"
           }
         ],
         "responses": {
@@ -1737,7 +1737,7 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "#/parameters/deploymentNameParameter"
+            "$ref": "#/parameters/deploymentNameForActionParameter"
           }
         ],
         "responses": {
@@ -11810,8 +11810,16 @@
       "in": "path",
       "required": true,
       "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the deployment associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "deploymentNameForActionParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the deployment for pause/resume actions",
       "x-ms-parameter-location": "method"
     },
     "raiPolicyNameParameter": {
