@@ -88,6 +88,19 @@ title:
   Microsoft Cognitive Language Service - Conversations
 modelerfour:
   lenient-model-deduplication: true
+suppressions:
+  - code: SecurityDefinitionDescription
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: OperationId
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: GetInOperationName
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: PathParameterSchema
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: EnumInsteadOfBoolean
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: EnumInsteadOfBoolean
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
 ```
 
 ### Release 2024-05-01
@@ -114,6 +127,19 @@ title:
   Microsoft Cognitive Language Service - Conversations
 modelerfour:
   lenient-model-deduplication: true
+suppressions:
+  - code: SecurityDefinitionDescription
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: OperationId
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: GetInOperationName
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: PathParameterSchema
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: EnumInsteadOfBoolean
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: EnumInsteadOfBoolean
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
 ```
 
 ### Release 2023-04-01

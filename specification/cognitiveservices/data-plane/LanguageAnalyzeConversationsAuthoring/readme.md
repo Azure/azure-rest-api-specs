@@ -63,6 +63,13 @@ title:
   Microsoft Cognitive Language Service - Conversations Authoring
 modelerfour:
   lenient-model-deduplication: true
+suppressions:
+  - code: EnumMustHaveType
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: MissingTypeObject
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
+  - code: XmsParameterLocation
+    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
 ```
 
 ### Release 2023-04-01
@@ -91,6 +98,11 @@ title:
   Microsoft Cognitive Language Service - Conversations Authoring
 modelerfour:
   lenient-model-deduplication: true
+suppressions:
+  - code: HostParametersValidation
+    reason: Older GA'd version not generated through typespec. Won't fix.
+  - code: XmsParameterLocation
+    reason: Older GA'd version not generated through typespec. Won't fix.
 ```
 
 ## Swagger to SDK
