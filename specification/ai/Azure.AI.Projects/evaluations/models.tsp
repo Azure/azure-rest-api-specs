@@ -78,7 +78,7 @@ model QueryResponseInlineMessage {
   query: string;
 
   /** The generated response corresponding to the input query. Can be image url. */
-  response: string;
+  response?: string;
 
   /** Optional contextual information that may provide additional details or background relevant to the query-response pair. */
   context?: string;
