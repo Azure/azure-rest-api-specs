@@ -812,7 +812,7 @@ model ProjectPolicyUpdateProperties {
 
   @doc("Configuration Policies part of this project policy.")
   @added(Versions.v2025_10_01_preview)
-  configurationPolices?: ConfigurationPolicies;
+  configurationPolicies?: ConfigurationPolicies;
 }
 
 @doc("A resource policy.")
