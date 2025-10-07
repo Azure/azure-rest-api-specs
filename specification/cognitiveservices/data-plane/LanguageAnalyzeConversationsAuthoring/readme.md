@@ -58,6 +58,7 @@ These settings apply only when `--tag=release_2023_11_15_preview` is specified o
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
   - preview/2023-11-15-preview/analyzeconversations-authoring.json
+  - preview/2023-11-15-preview/common.json
 title:
   Microsoft Cognitive Language Service - Conversations Authoring
 modelerfour:
@@ -85,6 +86,7 @@ These settings apply only when `--tag=release_2022_05_01` is specified on the co
 ``` yaml $(tag) == 'release_2022_05_01'
 input-file:
   - stable/2022-05-01/analyzeconversations-authoring.json
+  - stable/2022-05-01/common.json
 title:
   Microsoft Cognitive Language Service - Conversations Authoring
 modelerfour:

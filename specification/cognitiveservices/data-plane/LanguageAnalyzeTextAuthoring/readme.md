@@ -56,6 +56,7 @@ These settings apply only when `--tag=release_2023_11_15_preview` is specified o
 ``` yaml $(tag) == 'release_2023-11-15-preview'
 input-file:
   - preview/2023-11-15-preview/analyzetext-authoring.json
+  - preview/2023-11-15-preview/common.json
 title:
   Microsoft Cognitive Language Service - Text Authoring
 modelerfour:
