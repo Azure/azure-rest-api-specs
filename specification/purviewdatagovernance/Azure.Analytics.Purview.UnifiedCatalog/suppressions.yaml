@@ -1,0 +1,12 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  reason: "SDK generation is not supported for Purview Data Catalog for now"
+- tool: TypeSpecValidation
+  paths:
+    - "**/*.tsp"
+  rules:
+    - AvoidAnonymousParameter
+  reason: "Suppressing AvoidAnonymousParameter rule for Purview Data Catalog specification"
