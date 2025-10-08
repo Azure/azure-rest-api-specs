@@ -6369,11 +6369,7 @@
             "$ref": "#/parameters/projectNameParameter"
           },
           {
-            "in": "path",
-            "name": "appName",
-            "description": "Application name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/appNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -6470,18 +6466,10 @@
             "$ref": "#/parameters/projectNameParameter"
           },
           {
-            "in": "path",
-            "name": "appName",
-            "description": "Application name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/appNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "Agent Deployment name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/deploymentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -6530,18 +6518,10 @@
             "$ref": "#/parameters/projectNameParameter"
           },
           {
-            "in": "path",
-            "name": "appName",
-            "description": "Application name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/appNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "Agent Deployment name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/deploymentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -6593,19 +6573,10 @@
             "$ref": "#/parameters/projectNameParameter"
           },
           {
-            "in": "path",
-            "name": "appName",
-            "description": "Application name.",
-            "required": true,
-            "type": "string"
+            "$ref": "#/parameters/appNameParameter"
           },
           {
-            "in": "path",
-            "name": "deploymentName",
-            "description": "Agent Deployment name.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+            "$ref": "#/parameters/deploymentNameParameter"
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -11562,6 +11533,10 @@
           "items": {
             "$ref": "#/definitions/AgentProtocolVersion"
           },
+          "x-ms-identifiers": [
+            "protocol",
+            "version"
+          ],
           "x-nullable": true
         },
         "agents": {
@@ -11570,6 +11545,9 @@
           "items": {
             "$ref": "#/definitions/VersionedAgentReference"
           },
+          "x-ms-identifiers": [
+            "agentId"
+          ],
           "x-nullable": true
         },
         "deploymentType": {
@@ -11581,8 +11559,7 @@
           "$ref": "#/definitions/AgentDeploymentProvisioningState",
           "readOnly": true
         }
-      },
-      "additionalProperties": false
+      }
     },
     "ManagedAgentDeployment": {
       "description": "Represents a managed agent deployment where the underlying infrastructure is managed by the platform in the deployer's subscription.",
@@ -12347,7 +12324,17 @@
       "in": "path",
       "required": true,
       "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the deployment associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "appNameParameter": {
+      "name": "appName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the application associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
     "raiPolicyNameParameter": {
