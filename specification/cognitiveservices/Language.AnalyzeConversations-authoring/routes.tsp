@@ -56,19 +56,23 @@ op conversationAuthoringListSupportedLanguages is languageOperations.ResourceLis
  * Lists the deployments to which an Azure resource is assigned. This doesn't return deployments belonging to projects owned by this resource. It only returns deployments belonging to projects owned by other resources.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 op conversationAuthoringListAssignedResourceDeployments is languageOperations.ResourceList<
   AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
 
 /**
- * Lists the deployments resources assigned to the project.
+ * Lists the Language or AIService resources assigned to the project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@added(Versions.v2024_11_15_preview)
-op conversationAuthoringListDeploymentResources is languageOperations.ResourceList<
-  AnalyzeConversationAuthoringAssignedDeploymentResource,
+@added(Versions.v2025_05_15_preview)
+@renamedFrom(
+  Versions.v2025_11_01,
+  "conversationAuthoringListDeploymentResources"
+)
+op conversationAuthoringListProjectResources is languageOperations.ResourceList<
+  AnalyzeConversationAuthoringProjectResourceInfo,
   ListQueryParametersTrait<StandardListQueryParameters>
 >;
 
@@ -114,7 +118,8 @@ op conversationAuthoringListTrainedModels is languageOperations.ResourceList<
  * Lists the exported models belonging to a project.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-names"
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 op conversationAuthoringListExportedModels is languageOperations.ResourceList<
   AnalyzeConversationAuthoringExportedTrainedModel,
   ListQueryParametersTrait<StandardListQueryParameters>
@@ -191,7 +196,7 @@ interface ConversationAuthoringDeployment {
   >;
 
   /**
-   * Deletes a project deployment from the specified assigned resources.
+   * Deletes a deployment from the specified project-assigned resources.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/deployments/{deploymentName}/:delete-from-resources")
@@ -200,7 +205,7 @@ interface ConversationAuthoringDeployment {
     ConversationAuthoringDeployment.getDeploymentDeleteFromResourcesStatus
   )
   @access(Access.internal, "python")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   deleteDeploymentFromResources is Foundations.LongRunningOperation<
     {
       /**
@@ -217,11 +222,11 @@ interface ConversationAuthoringDeployment {
       deploymentName: string;
 
       /**
-       * The options for deleting the deployment.
+       * The Language or AIService resource list for deleting the deployment.\r\n            The deployment will only be deleted from the specified resources, and will remain for the rest.
        */
       @body
       @clientName("details", "csharp")
-      body: AnalyzeConversationAuthoringDeleteDeploymentOptions;
+      body: AnalyzeConversationAuthoringProjectAzureResourceIds;
     },
     AcceptedResponse,
     {},
@@ -231,7 +236,7 @@ interface ConversationAuthoringDeployment {
   /**
    * Gets the status of an existing delete deployment from specific resources job.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
   getDeploymentDeleteFromResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState>;
 
   /**
@@ -242,17 +247,18 @@ interface ConversationAuthoringDeployment {
 
 interface ConversationAuthoringProject {
   /**
-   * Assign new Azure resources to a project to allow deploying new deployments to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
+   * Assign new Language or AIService Azure resources to a project to allowing deployment to them. This API is available only via AAD authentication and not supported via subscription key authentication. For more details about AAD authentication, check here: https://learn.microsoft.com/en-us/azure/cognitive-services/authentication?tabs=powershell#authenticate-with-azure-active-directory
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:assign")
   @post
   @pollingOperation(
-    ConversationAuthoringProject.getAssignDeploymentResourcesStatus
+    ConversationAuthoringProject.getAssignProjectResourcesStatus
   )
   @access(Access.internal, "python")
-  @added(Versions.v2024_11_15_preview)
-  assignDeploymentResources is Foundations.LongRunningOperation<
+  @added(Versions.v2025_05_15_preview)
+  @renamedFrom(Versions.v2025_11_01, "assignDeploymentResources")
+  assignProjectResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -262,11 +268,11 @@ interface ConversationAuthoringProject {
       projectName: string;
 
       /**
-       * The new project resources info.
+       * The new project resources to be assigned.
        */
       @body
       @clientName("details", "csharp")
-      body: AnalyzeConversationAuthoringAssignDeploymentResourcesOptions;
+      body: AnalyzeConversationAuthoringProjectResourceAssignments;
     },
     AcceptedResponse,
     {},
@@ -274,17 +280,18 @@ interface ConversationAuthoringProject {
   >;
 
   /**
-   * Unassign resources from a project. This disallows deploying new deployments to these resources, and deletes existing deployments assigned to them.
+   * Unassign resources from a project. This disallows deployment to these resources.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/:unassign")
   @post
   @pollingOperation(
-    ConversationAuthoringProject.getUnassignDeploymentResourcesStatus
+    ConversationAuthoringProject.getUnassignProjectResourcesStatus
   )
   @access(Access.internal, "python")
-  @added(Versions.v2024_11_15_preview)
-  unassignDeploymentResources is Foundations.LongRunningOperation<
+  @renamedFrom(Versions.v2025_11_01, "unassignDeploymentResources")
+  @added(Versions.v2025_05_15_preview)
+  unassignProjectResources is Foundations.LongRunningOperation<
     {
       /**
        * The name of the project to use.
@@ -294,11 +301,15 @@ interface ConversationAuthoringProject {
       projectName: string;
 
       /**
-       * The info for the deployment resources to be deleted.
+       * The list of Language or AIService Azure resource IDs to be unassigned.
        */
       @body
       @clientName("details", "csharp")
-      body: AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions;
+      @typeChangedFrom(
+        Versions.v2025_11_01,
+        AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions
+      )
+      body: AnalyzeConversationAuthoringProjectAzureResourceIds;
     },
     AcceptedResponse,
     {},
@@ -306,19 +317,21 @@ interface ConversationAuthoringProject {
   >;
 
   /**
-   * Gets the status of an existing assign deployment resources job.
+   * Gets the status of an existing assign project resources job.
    */
-  @added(Versions.v2024_11_15_preview)
-  getAssignDeploymentResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringDeploymentResourcesJobState>;
+  @added(Versions.v2025_05_15_preview)
+  @renamedFrom(Versions.v2025_11_01, "getAssignDeploymentResourcesStatus")
+  getAssignProjectResourcesStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringProjectResourcesJobState>;
 
   /**
-   * Gets the status of an existing unassign deployment resources job.
+   * Gets the status of an existing unassign project resources job.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @route("/authoring/analyze-conversations/projects/{projectName}/resources/unassign/jobs/{jobId}")
   @get
-  @added(Versions.v2024_11_15_preview)
-  getUnassignDeploymentResourcesStatus is Azure.Core.Foundations.Operation<
+  @added(Versions.v2025_05_15_preview)
+  @renamedFrom(Versions.v2025_11_01, "getUnassignDeploymentResourcesStatus")
+  getUnassignProjectResourcesStatus is Azure.Core.Foundations.Operation<
     {
       /**
        * The name of the project to use.
@@ -333,7 +346,7 @@ interface ConversationAuthoringProject {
       @path
       jobId: string;
     },
-    AnalyzeConversationAuthoringDeploymentResourcesJobState,
+    AnalyzeConversationAuthoringProjectResourcesJobState,
     {},
     Foundations.ErrorResponse
   >;
@@ -535,7 +548,8 @@ interface ConversationAuthoringProject {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style"
   @post
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   @actionSeparator("/:")
   @action("authorize-copy")
   copyProjectAuthorization is languageOperations.ResourceAction<
@@ -552,7 +566,8 @@ interface ConversationAuthoringProject {
   @post
   @pollingOperation(ConversationAuthoringProject.getCopyProjectStatus)
   @access(Access.internal, "python")
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   copyProject is Foundations.LongRunningOperation<
     {
       /**
@@ -577,7 +592,8 @@ interface ConversationAuthoringProject {
   /**
    * Gets the status of an existing copy project job.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getCopyProjectStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringCopiedProjectJobState>;
 
   /**
@@ -645,7 +661,8 @@ interface ConversationAuthoringExportedModel {
   /**
    * Gets the details of an exported model.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getExportedModel is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedTrainedModel>;
 
   /**
@@ -657,7 +674,8 @@ interface ConversationAuthoringExportedModel {
   @pollingOperation(
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   @access(Access.internal, "python")
   deleteExportedModel is Foundations.LongRunningOperation<
     {
@@ -686,7 +704,8 @@ interface ConversationAuthoringExportedModel {
   @pollingOperation(
     ConversationAuthoringExportedModel.getExportedModelJobStatus
   )
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   @access(Access.internal, "python")
   createOrUpdateExportedModel is Foundations.LongRunningOperation<
     {
@@ -716,7 +735,8 @@ interface ConversationAuthoringExportedModel {
   /**
    * Gets the status for an existing job to create or update an exported model.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getExportedModelJobStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringExportedModelJobState>;
 }
 interface ConversationAuthoringTrainedModel {
@@ -737,7 +757,8 @@ interface ConversationAuthoringTrainedModel {
   @route("/authoring/analyze-conversations/projects/{projectName}/models/{trainedModelLabel}/:evaluate")
   @post
   @pollingOperation(ConversationAuthoringTrainedModel.getEvaluationStatus)
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   evaluateModel is Foundations.LongRunningOperation<
     {
       /**
@@ -795,7 +816,8 @@ interface ConversationAuthoringTrainedModel {
   /**
    * Gets the status for an evaluation job.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   getEvaluationStatus is languageOperations.ResourceRead<AnalyzeConversationAuthoringEvaluationJobState>;
 
   /**
