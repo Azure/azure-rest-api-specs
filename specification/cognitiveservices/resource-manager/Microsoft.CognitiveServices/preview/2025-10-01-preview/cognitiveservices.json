@@ -6267,7 +6267,7 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/AgentDefinitionResourceArmPaginatedResult"
+              "$ref": "#/definitions/AgentReferenceResourceArmPaginatedResult"
             }
           },
           "default": {
@@ -11356,7 +11356,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -11388,40 +11388,40 @@
       },
       "additionalProperties": false
     },
-    "AgentDefinitionResource": {
-      "description": "Agent Definition resource",
+    "AgentReferenceResource": {
+      "description": "Agent Reference resource",
       "required": [
         "properties"
       ],
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
         "properties": {
           "description": "[Required] Additional attributes of the entity.",
-          "$ref": "#/definitions/AgentDefinition"
+          "$ref": "#/definitions/AgentReference"
         }
       },
-      "x-ms-client-name": "AgentDefinition",
+      "x-ms-client-name": "AgentReference",
       "additionalProperties": false
     },
-    "AgentDefinitionResourceArmPaginatedResult": {
-      "description": "A paginated list of Agent Definition entities.",
+    "AgentReferenceResourceArmPaginatedResult": {
+      "description": "A paginated list of Agent Reference entities.",
       "type": "object",
       "properties": {
         "nextLink": {
-          "description": "The link to the next page of Agent Definition objects. If null, there are no additional pages.",
+          "description": "The link to the next page of Agent Reference objects. If null, there are no additional pages.",
           "type": "string",
           "x-nullable": true
         },
         "value": {
-          "description": "An array of objects of type Agent Definition.",
+          "description": "An array of objects of type Agent Reference.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/AgentDefinitionResource"
+            "$ref": "#/definitions/AgentReferenceResource"
           },
           "x-nullable": true
         }
@@ -11436,7 +11436,7 @@
       "type": "object",
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
       "properties": {
@@ -11483,7 +11483,7 @@
           "x-nullable": true
         },
         "baseUrl": {
-          "description": "The application's dedicated, invocation endpoint.",
+          "description": "The application's dedicated invocation endpoint.",
           "type": "string",
           "x-nullable": true
         },
@@ -11493,19 +11493,6 @@
           "items": {
             "$ref": "#/definitions/AgentReference"
           },
-          "x-nullable": true
-        },
-        "deployments": {
-          "description": "The list of agent deployments of this application; use this for a hierarchical view of deployed/in-use agent-version pairs by deployment.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AgentDeployment"
-          },
-          "x-nullable": true
-        },
-        "trafficRoutingPolicy": {
-          "description": "Gets or sets the traffic routing policy for the application's deployments.",
-          "$ref": "#/definitions/ApplicationTrafficRoutingPolicy",
           "x-nullable": true
         },
         "applicationIdentity": {
@@ -11518,65 +11505,25 @@
           "$ref": "#/definitions/AssignedIdentity",
           "x-nullable": true
         },
-        "card": {
-          "description": "Gets or sets the agent card associated with this agentic application instance.",
-          "$ref": "#/definitions/AgentCard",
-          "x-nullable": true
-        },
         "authorizationPolicy": {
-          "description": "Gets or sets the authorization policy for the application.",
+          "description": "Gets or sets the authorization policy associated with this agentic application instance.",
           "$ref": "#/definitions/ApplicationAuthorizationPolicy",
           "x-nullable": true
         },
-        "isEnabled": {
-          "description": "Gets or sets a value indicating whether the application is enabled.",
-          "type": "boolean",
-          "readOnly": true
+        "trafficRoutingPolicy": {
+          "description": "Gets or sets the traffic routing policy for the application's deployments.",
+          "$ref": "#/definitions/ApplicationTrafficRoutingPolicy",
+          "x-nullable": true
         },
         "provisioningState": {
           "description": "Provisioning state of the application.",
           "$ref": "#/definitions/AgenticApplicationProvisioningState",
           "readOnly": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AgentDefinition": {
-      "description": "Agent Definition",
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/ResourceBase"
-        }
-      ],
-      "properties": {
-        "agentId": {
-          "description": "Unique identifier for the agent.",
-          "type": "string",
-          "x-nullable": true
         },
-        "name": {
-          "description": "Name of the agent.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "version": {
-          "description": "Version of the agent.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "capabilities": {
-          "description": "Capabilities of the agent.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "modelReference": {
-          "description": "Reference to the underlying model used by the agent.",
-          "type": "string",
-          "x-nullable": true
+        "isEnabled": {
+          "description": "Enabledstate of the application.",
+          "type": "boolean",
+          "readOnly": true
         }
       },
       "additionalProperties": false
@@ -11584,6 +11531,10 @@
     "AgentDeployment": {
       "description": "Type representing an agent deployment as a management construct.",
       "type": "object",
+      "discriminator": "deploymentType",
+      "required": [
+        "deploymentType"
+      ],
       "allOf": [
         {
           "$ref": "#/definitions/ResourceBase"
@@ -11595,18 +11546,13 @@
           "type": "string",
           "x-nullable": true
         },
-        "id": {
+        "deploymentId": {
           "description": "Gets or sets the unique identifier of the deployment.",
           "type": "string",
           "x-nullable": true
         },
-        "associatedResourceId": {
-          "description": "The resource ID of the application associated with this deployment.",
-          "type": "string",
-          "x-nullable": true
-        },
         "state": {
-          "description": "Gets or sets the current operational state of the deployment (and, intrinsically, of the comprising agents).",
+          "description": "Gets or sets the current operational state of the deployment (and, intrinsicly, of the comprising agents).",
           "$ref": "#/definitions/AgentDeploymentState",
           "x-nullable": true
         },
@@ -11626,10 +11572,9 @@
           },
           "x-nullable": true
         },
-        "type": {
+        "deploymentType": {
           "description": "Gets or sets the type of deployment for the agent.",
-          "$ref": "#/definitions/AgentDeploymentType",
-          "x-nullable": true
+          "$ref": "#/definitions/AgentDeploymentType"
         },
         "provisioningState": {
           "description": "Gets or sets the provisioning state of the agent deployment.",
@@ -11639,16 +11584,52 @@
       },
       "additionalProperties": false
     },
+    "ManagedAgentDeployment": {
+      "description": "Represents a managed agent deployment where the underlying infrastructure is managed by the platform in the deployer's subscription.",
+      "type": "object",
+      "x-ms-discriminator-value": "Managed",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentDeployment"
+        }
+      ],
+      "additionalProperties": false
+    },
+    "HostedAgentDeployment": {
+      "description": "Represents a hosted agent deployment where the underlying infrastructure is owned by the platform.",
+      "type": "object",
+      "x-ms-discriminator-value": "Hosted",
+      "allOf": [
+        {
+          "$ref": "#/definitions/AgentDeployment"
+        }
+      ],
+      "properties": {
+        "minReplicas": {
+          "description": "Gets or sets the minimum number of replicas for this hosted deployment.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        },
+        "maxReplicas": {
+          "description": "Gets or sets the maximum number of replicas for this hosted deployment.",
+          "type": "integer",
+          "format": "int32",
+          "minimum": 0
+        }
+      },
+      "additionalProperties": false
+    },
     "AgentReference": {
       "description": "Type modeling a reference to a version of an agent definition.",
       "type": "object",
       "properties": {
-        "id": {
+        "agentId": {
           "description": "Gets the agent's unique identifier within the organization (subscription).",
           "type": "string",
           "x-nullable": true
         },
-        "name": {
+        "agentName": {
           "description": "Gets the agent's name (unique within the project/app).",
           "type": "string",
           "x-nullable": true
@@ -11665,7 +11646,7 @@
         }
       ],
       "properties": {
-        "version": {
+        "agentVersion": {
           "description": "Gets the agent's version (unique for each agent lineage).",
           "type": "string",
           "x-nullable": true
@@ -11894,175 +11875,91 @@
           "x-nullable": true
         },
         "trafficPercentage": {
-          "description": "The percentage of traffic allocated to this instance.",
+          "description": "Gets or sets the percentage of traffic allocated to this instance.",
           "type": "integer",
           "format": "int32"
         }
       },
       "additionalProperties": false
     },
+    "BuiltInAuthorizationScheme": {
+      "description": "Authorization scheme type.",
+      "type": "string",
+      "enum": [
+        "Default",
+        "OrganizationScope",
+        "Microsoft365",
+        "Custom"
+      ],
+      "x-ms-enum": {
+        "name": "BuiltInAuthorizationScheme",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Default",
+            "description": "Standard AzureML RBAC"
+          },
+          {
+            "value": "OrganizationScope",
+            "description": "Claim-based, requires membership in the tenant"
+          },
+          {
+            "value": "Microsoft365",
+            "description": "Microsoft365-specific (AzureBotService) authorization"
+          },
+          {
+            "value": "Custom",
+            "description": "Custom scheme defined by the application author"
+          }
+        ]
+      }
+    },
     "ApplicationAuthorizationPolicy": {
       "description": "Represents a policy for authorizing applications based on specified authentication and authorization schemes.",
       "type": "object",
-      "properties": {
-        "authenticationScheme": {
-          "description": "The authentication scheme.",
-          "$ref": "#/definitions/AuthenticationScheme",
-          "x-nullable": true
-        },
-        "authorizationScheme": {
-          "description": "The authorization scheme used for evaluating requests.",
-          "$ref": "#/definitions/AuthorizationScheme",
-          "x-nullable": true
-        },
-        "requirements": {
-          "description": "Set of requirements protecting access to this app and its resources.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/AuthorizationRequirement"
-          },
-          "x-nullable": true
-        }
-      },
-      "additionalProperties": false
-    },
-    "AuthenticationScheme": {
-      "description": "Specifies the authentication schemes supported by the application.",
-      "type": "string",
-      "enum": [
-        "None",
-        "Bearer",
-        "ApiKey",
-        "OAuth2"
-      ],
-      "x-ms-enum": {
-        "name": "AuthenticationScheme",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "None",
-            "description": "No authentication required."
-          },
-          {
-            "value": "Bearer",
-            "description": "Bearer token authentication."
-          },
-          {
-            "value": "ApiKey",
-            "description": "API key authentication."
-          },
-          {
-            "value": "OAuth2",
-            "description": "OAuth 2.0 authentication."
-          }
-        ]
-      }
-    },
-    "AuthorizationScheme": {
-      "description": "Specifies the authorization scheme to be used for access to this application's deployments.",
-      "type": "string",
-      "enum": [
-        "None",
-        "RoleBased",
-        "AttributeBased"
-      ],
-      "x-ms-enum": {
-        "name": "AuthorizationScheme",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "None",
-            "description": "No authorization required."
-          },
-          {
-            "value": "RoleBased",
-            "description": "Role-based authorization."
-          },
-          {
-            "value": "AttributeBased",
-            "description": "Attribute-based authorization."
-          }
-        ]
-      }
-    },
-    "AuthorizationRequirement": {
-      "description": "Abstract base class for defining authorization requirements.",
-      "type": "object",
+      "discriminator": "type",
       "required": [
-        "requirementType"
+        "type"
       ],
       "properties": {
-        "description": {
-          "description": "Description of the requirement.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "name": {
-          "description": "Name of the requirement; must be unique within the policy.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "version": {
-          "description": "Versioning tag for the requirement definition.",
-          "type": "string",
-          "x-nullable": true
-        },
-        "isEnforced": {
-          "description": "Boolean flag indicating whether this requirement is enforced.",
-          "type": "boolean"
-        },
-        "key": {
-          "description": "The name of the context property to evaluate (e.g. 'role', 'oid', 'sub').",
-          "type": "string",
-          "x-nullable": true
-        },
-        "allowedValues": {
-          "description": "The set of allowed values for the specified key.",
-          "type": "array",
-          "items": {
-            "type": "string"
-          },
-          "x-nullable": true
-        },
-        "requireAll": {
-          "description": "Boolean flag indicating whether all conditions must be met (true) or any one condition (false).",
-          "type": "boolean"
-        },
-        "requirementType": {
-          "description": "The type of authorization requirement.",
-          "type": "string"
+        "type": {
+          "description": "Authorization scheme type.",
+          "$ref": "#/definitions/BuiltInAuthorizationScheme"
         }
       },
-      "discriminator": "requirementType",
       "additionalProperties": false
     },
-    "RoleBasedAuthorizationRequirement": {
-      "description": "A role-based authorization requirement.",
+    "RoleBasedBuiltInAuthorizationPolicy": {
+      "description": "Built-in role-based authorization policy.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AuthorizationRequirement"
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy"
         }
       ],
-      "properties": {
-        "scope": {
-          "description": "The scope of the role enforced by this requirement (e.g. 'application', 'deployment').",
-          "type": "string",
-          "x-nullable": true
-        }
-      },
-      "x-ms-discriminator-value": "RoleBased",
+      "x-ms-discriminator-value": "Default",
       "additionalProperties": false
     },
-    "AttributeBasedAuthorizationRequirement": {
-      "description": "An attribute-based authorization requirement.",
+    "OrganizationSharedBuiltInAuthorizationPolicy": {
+      "description": "Built-in authorization policy scoped to organization/tenant.",
       "type": "object",
       "allOf": [
         {
-          "$ref": "#/definitions/AuthorizationRequirement"
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy"
         }
       ],
-      "x-ms-discriminator-value": "AttributeBased",
+      "x-ms-discriminator-value": "OrganizationScope",
+      "additionalProperties": false
+    },
+    "M365BuiltInAuthorizationPolicy": {
+      "description": "Represents a built-in authorization policy specific to Azure Bot Service/M365 authentication.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ApplicationAuthorizationPolicy"
+        }
+      ],
+      "x-ms-discriminator-value": "Microsoft365",
       "additionalProperties": false
     },
     "ApplicationTrafficRoutingPolicy": {
@@ -12074,7 +11971,7 @@
           "$ref": "#/definitions/TrafficRoutingProtocol"
         },
         "rules": {
-          "description": "The collection of traffic routing rules.",
+          "description": "Gets or sets the collection of traffic routing rules.",
           "type": "array",
           "items": {
             "$ref": "#/definitions/TrafficRoutingRule"
