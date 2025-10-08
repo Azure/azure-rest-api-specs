@@ -1,0 +1,57 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "tags": {
+        "key1": "value4",
+        "key2": "value5"
+      }
+    },
+    "creditName": "credit_20231212",
+    "resourceGroupName": "resource_group_name_01",
+    "subscriptionId": "97ee05f2-07d5-494d-908c-081a197f4277"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "credit_20231212",
+        "type": "Microsoft.BillingBenefits/credits",
+        "id": "/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/credits/credit_20231212",
+        "location": "global",
+        "properties": {
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "billingProfileResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/billingProfiles/{billingProfileResourceId}",
+          "credit": {
+            "amount": 20000,
+            "currencyCode": "USD",
+            "grain": "FullTerm"
+          },
+          "customerId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}/customers/{customerId}",
+          "endAt": "2024-12-12T00:00:00Z",
+          "productCode": "0002d726-0000-0160-330f-a0b98cdbbdc4",
+          "startAt": "2023-12-12T00:00:00Z",
+          "status": "Pending"
+        },
+        "systemData": {
+          "createdAt": "2023-12-12T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2023-12-12T01:01:01.1075056Z",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "value4",
+          "key2": "value5"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-05-01-preview",
+        "Location": "https://management.azure.com/subscriptions/97ee05f2-07d5-494d-908c-081a197f4277/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-05-01-preview",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "Credits_Update",
+  "title": "CreditTagsUpdate"
+}

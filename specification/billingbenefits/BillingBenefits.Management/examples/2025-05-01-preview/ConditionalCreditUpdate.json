@@ -1,0 +1,182 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "properties": {
+        "displayName": "Updated Conditional Credit 20250801",
+        "milestones": [
+          {
+            "name": "Q1 Updated Milestone",
+            "award": {
+              "credit": {
+                "amount": 6000,
+                "currencyCode": "USD",
+                "grain": "FullTerm"
+              },
+              "endAt": "2026-01-01T00:00:00Z",
+              "startAt": "2025-10-01T00:00:00Z"
+            },
+            "endAt": "2025-10-01T00:00:00Z",
+            "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+            "spendTarget": {
+              "amount": 60000,
+              "currencyCode": "USD"
+            }
+          },
+          {
+            "name": "Q2 Milestone",
+            "award": {
+              "credit": {
+                "amount": 10000,
+                "currencyCode": "USD",
+                "grain": "FullTerm"
+              },
+              "endAt": "2026-04-01T00:00:00Z",
+              "startAt": "2026-01-01T00:00:00Z"
+            },
+            "endAt": "2026-01-01T00:00:00Z",
+            "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
+            "spendTarget": {
+              "amount": 100000,
+              "currencyCode": "USD"
+            }
+          },
+          {
+            "name": "Q3 New Milestone",
+            "award": {
+              "credit": {
+                "amount": 15000,
+                "currencyCode": "USD",
+                "grain": "FullTerm"
+              },
+              "endAt": "2026-07-01T00:00:00Z",
+              "startAt": "2026-04-01T00:00:00Z"
+            },
+            "endAt": "2026-04-01T00:00:00Z",
+            "milestoneId": "550e8400-e29b-41d4-a716-446655440003",
+            "spendTarget": {
+              "amount": 150000,
+              "currencyCode": "USD"
+            }
+          }
+        ]
+      },
+      "tags": {
+        "key1": "updated_value1",
+        "key3": "value3"
+      }
+    },
+    "conditionalCreditName": "conditionalCredit_20250801",
+    "resourceGroupName": "resource_group_name_01",
+    "subscriptionId": "10000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "conditionalCredit_20250801",
+        "type": "Microsoft.BillingBenefits/conditionalCredits",
+        "id": "/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801",
+        "location": "global",
+        "properties": {
+          "allowContributors": "Enabled",
+          "billingAccountResourceId": "/providers/Microsoft.Billing/billingAccounts/{acctId:orgId}",
+          "displayName": "Updated Conditional Credit 20250801",
+          "endAt": "2026-07-01T00:00:00Z",
+          "entityType": "Primary",
+          "milestones": [
+            {
+              "name": "Q1 Updated Milestone",
+              "award": {
+                "balanceVersion": 13,
+                "credit": {
+                  "amount": 6000,
+                  "currencyCode": "USD",
+                  "grain": "FullTerm"
+                },
+                "endAt": "2026-01-01T00:00:00Z",
+                "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testcredit",
+                "startAt": "2025-10-01T00:00:00Z",
+                "systemId": "credit98765432"
+              },
+              "endAt": "2025-10-01T00:00:00Z",
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+              "spendTarget": {
+                "amount": 60000,
+                "currencyCode": "USD"
+              },
+              "status": "Completed"
+            },
+            {
+              "name": "Q2 Milestone",
+              "award": {
+                "balanceVersion": 13,
+                "credit": {
+                  "amount": 10000,
+                  "currencyCode": "USD",
+                  "grain": "FullTerm"
+                },
+                "endAt": "2026-04-01T00:00:00Z",
+                "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testcredit",
+                "startAt": "2026-01-01T00:00:00Z",
+                "systemId": "credit98765432"
+              },
+              "endAt": "2026-01-01T00:00:00Z",
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440002",
+              "spendTarget": {
+                "amount": 100000,
+                "currencyCode": "USD"
+              },
+              "status": "Active"
+            },
+            {
+              "name": "Q3 New Milestone",
+              "award": {
+                "balanceVersion": 13,
+                "credit": {
+                  "amount": 15000,
+                  "currencyCode": "USD",
+                  "grain": "FullTerm"
+                },
+                "endAt": "2026-07-01T00:00:00Z",
+                "resourceId": "/subscriptions/30000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.BillingBenefits/credits/testcredit",
+                "startAt": "2026-04-01T00:00:00Z",
+                "systemId": "credit98765432"
+              },
+              "endAt": "2026-04-01T00:00:00Z",
+              "milestoneId": "550e8400-e29b-41d4-a716-446655440003",
+              "spendTarget": {
+                "amount": 150000,
+                "currencyCode": "USD"
+              },
+              "status": "Scheduled"
+            }
+          ],
+          "productCode": "0001d726-0000-0160-330f-a0b98cdbbdc4",
+          "provisioningState": "Succeeded",
+          "startAt": "2025-07-01T00:00:00Z",
+          "status": "Active",
+          "systemId": "CONDITIONALCREDITS-SYSTEM-20250801"
+        },
+        "systemData": {
+          "createdAt": "2025-09-01T01:01:01.1075056Z",
+          "createdByType": "User",
+          "lastModifiedAt": "2025-09-01T02:15:30.2080047Z",
+          "lastModifiedByType": "User"
+        },
+        "tags": {
+          "key1": "updated_value1",
+          "key3": "value3"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/operationResults/4e2ffff7-b331-4fcb-ab11-b5fa49368188?api-version=2025-05-01-preview",
+        "Location": "https://management.azure.com/subscriptions/{primaryCloudSubId}/resourceGroups/resource_group_name_01/providers/Microsoft.BillingBenefits/conditionalCredits/conditionalCredit_20250801?api-version=2025-05-01-preview",
+        "Retry-After": 5
+      }
+    }
+  },
+  "operationId": "ConditionalCredits_Update",
+  "title": "ConditionalCreditUpdate"
+}
