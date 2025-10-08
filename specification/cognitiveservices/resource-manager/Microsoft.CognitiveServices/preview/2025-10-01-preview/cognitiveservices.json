@@ -1664,6 +1664,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments/{deploymentName}/pause": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Pause",
+        "summary": "Pause a deployment",
+        "description": "Pauses inferencing on a deployment by setting the deploymentState to 'Paused' (see #/definitions/DeploymentProperties/properties/deploymentState). Only Standard, DataZoneStandard, and GlobalStandard SKUs support this operation. Inference requests to the paused deployment endpoint will receive HTTP 423 (Locked). This operation is idempotent.",
+        "x-ms-examples": {
+          "PauseDeployment": {
+            "$ref": "./examples/PauseDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameForActionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Deployment paused successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments/{deploymentName}/resume": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Resume",
+        "summary": "Resume a deployment",
+        "description": "Resumes inferencing on a previously paused deployment by setting the deploymentState to 'Running' (see #/definitions/DeploymentProperties/properties/deploymentState). This operation is idempotent and can be safely called on already running deployments.",
+        "x-ms-examples": {
+          "ResumeDeployment": {
+            "$ref": "./examples/ResumeDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameForActionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Deployment resumed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans": {
       "get": {
         "tags": [
@@ -8401,6 +8493,52 @@
         "spilloverDeploymentName": {
           "type": "string",
           "description": "Specifies the deployment name that should serve requests when the request would have otherwise been throttled due to reaching current deployment throughput limit."
+        },
+        "serviceTier": {
+          "type": "string",
+          "description": "The service tier for the deployment. Determines the pricing and performance level for request processing. Use 'Default' for standard pricing or 'Priority' for higher-priority processing with premium pricing. Note: Pause operations are only supported on Standard, DataZoneStandard, and GlobalStandard SKUs.",
+          "enum": [
+            "Default",
+            "Priority"
+          ],
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "ServiceTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Default service tier meaning the request will be processed with the standard pricing and performance for the selected model."
+              },
+              {
+                "value": "Priority",
+                "description": "Priority service tier meaning the request will be processed with higher pricing and performance for the selected model."
+              }
+            ]
+          }
+        },
+        "deploymentState": {
+          "type": "string",
+          "description": "The state of the deployment. Controls whether the deployment is accepting inference requests. Use 'Running' for active deployments that process requests, or 'Paused' to temporarily stop inference while preserving the deployment configuration.",
+          "enum": [
+            "Running",
+            "Paused"
+          ],
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "DeploymentState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Running",
+                "description": "The deployment is running and accepting inference requests."
+              },
+              {
+                "value": "Paused",
+                "description": "The deployment is paused and not accepting inference requests."
+              }
+            ]
+          }
         }
       },
       "description": "Properties of Cognitive Services account deployment."
@@ -12326,6 +12464,15 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the deployment associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "deploymentNameForActionParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the deployment for pause/resume actions",
       "x-ms-parameter-location": "method"
     },
     "appNameParameter": {
