@@ -1109,7 +1109,7 @@ model DeviceClassProperties {
   /**
    * The list of installable update Ids.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   installableUpdates?: UpdateId[];
 }
 

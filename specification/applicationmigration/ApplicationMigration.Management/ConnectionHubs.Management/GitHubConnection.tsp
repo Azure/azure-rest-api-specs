@@ -34,7 +34,7 @@ model GitHubConnectionProperties {
   installationId: string;
 
   @doc("List of repositories.")
-  @OpenAPI.extension("x-ms-identifiers", #["url"])
+  @identifiers(#["url"])
   repos: Repository[];
 
   @doc("Connection status.")

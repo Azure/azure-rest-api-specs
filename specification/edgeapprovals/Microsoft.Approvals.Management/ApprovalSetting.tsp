@@ -21,7 +21,7 @@ model ApprovalSettingProperties {
   provisioningState?: ProvisioningState;
 
   @doc("The list of verification authorities.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   verificationAuthorities: VerificationAuthority[];
 
   @doc("The settings of the requested verifiable credentials in the approvals service.")

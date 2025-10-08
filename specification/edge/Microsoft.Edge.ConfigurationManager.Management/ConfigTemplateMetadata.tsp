@@ -41,7 +41,7 @@ model HierarchyMetadata {
 model ConfigTemplateMetadataProperties {
   @doc("Hierarchy ARM Ids")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   linkedHierarchies: HierarchyMetadata[];
 
   @doc("Provisioning state of resource")

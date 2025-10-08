@@ -137,11 +137,9 @@ model ArrayParameter extends Parameter {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format of Array types, which can be string, int, or object."
   @doc("Default value for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   defaultValue?: unknown[];
 
   @doc("Allowed list of the values for the parameter.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   allowedValues?: unknown[];
 }
@@ -158,9 +156,9 @@ model ObjectParameter extends Parameter {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   defaultValue?: {};
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "False positive"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Suppressing no-empty-model: Empty object literal required to generate OpenAPI schema with additionalProperties:true for flexible object parameter constraint validation."
   @doc("Allowed list of the values for the parameter.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   allowedValues?: Array<{}>;
 }

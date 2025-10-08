@@ -4,6 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.Monitor;
 
 @doc("Duration in HH:MM:SS format (e.g. 00:01:00) to match service response.")
@@ -19,11 +21,11 @@ model KqlmQueryResult {
   state: QueryState;
 
   @doc("The list of time series sets, where each set represents results for a query statement.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   timeSeriesSets: TimeSeriesSet[];
 
   @doc("The list of KQL-M query execution messages.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   executionMessages: ExecutionMessage[];
 }
 
@@ -44,7 +46,7 @@ model TimeSeriesSet {
   resultsMetadata: ResultsMetadata;
 
   @doc("The list of time series data.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   timeSeriesData: TimeSeriesData[];
 }
 
