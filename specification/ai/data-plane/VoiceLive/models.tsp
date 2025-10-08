@@ -548,7 +548,6 @@ model ServerEventInputAudioBufferCleared extends ServerEvent {
  * the audio buffer during VAD activation).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@usage(ResponseUsage)
 model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
   /** The event type, must be `input_audio_buffer.speech_started`. */
   type: ServerEventType.input_audio_buffer_speech_started;

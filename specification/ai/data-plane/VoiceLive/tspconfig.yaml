@@ -10,8 +10,10 @@ linter:
     - "@azure-tools/typespec-azure-rulesets/data-plane"
 options:
   "@azure-tools/typespec-autorest":
-    azure-resource-provider-folder: "data-plane"
+    emitter-output-dir: "{project-root}"
     omit-unreachable-types: false
+    output-file: "{version-status}/{version}/GeneratedSystemEvents.json"
+    azure-resource-provider-folder: "data-plane"
     emit-lro-options: "none"
   "@azure-tools/typespec-python":
     package-dir: "azure-ai-voicelive"

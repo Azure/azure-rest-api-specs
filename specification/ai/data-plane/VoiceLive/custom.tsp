@@ -512,6 +512,7 @@ model AudioNoiseReduction {
 
 /** Echo cancellation configuration for server-side audio processing. */
 @usage(RequestUsage)
+@example(#{ type: "server_echo_cancellation" })
 model AudioEchoCancellation {
   /** The type of echo cancellation model to use. */
   type: "server_echo_cancellation";
