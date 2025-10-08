@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Dashboard",
-    "version": "2024-11-01-preview",
+    "version": "2025-08-01",
     "description": "The Microsoft.Dashboard Rest API spec.",
     "x-typespec-generated": [
       {
@@ -1959,6 +1959,30 @@
         }
       }
     },
+    "CreatorCanAdmin": {
+      "type": "string",
+      "description": "The creator will have admin access for the Grafana instance.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "CreatorCanAdmin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Creator admin access is disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Creator admin access is enabled"
+          }
+        ]
+      }
+    },
     "EnterpriseConfigurations": {
       "type": "object",
       "description": "Enterprise settings of a Grafana instance",
@@ -1999,6 +2023,16 @@
         "name": {
           "type": "string",
           "description": "Grafana plugin display name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Grafana plugin type",
+          "readOnly": true
+        },
+        "author": {
+          "type": "string",
+          "description": "Grafana plugin author/publisher name",
           "readOnly": true
         }
       }
@@ -2369,6 +2403,10 @@
             ]
           }
         },
+        "creatorCanAdmin": {
+          "$ref": "#/definitions/CreatorCanAdmin",
+          "description": "The creator will have admin access for the Grafana instance."
+        },
         "deterministicOutboundIP": {
           "type": "string",
           "description": "Whether a Grafana instance uses deterministic outbound IPs.",
@@ -2490,6 +2528,10 @@
               }
             ]
           }
+        },
+        "creatorCanAdmin": {
+          "$ref": "#/definitions/CreatorCanAdmin",
+          "description": "The creator will have admin access for the Grafana instance."
         },
         "deterministicOutboundIP": {
           "type": "string",
@@ -3019,6 +3061,10 @@
         "name": {
           "type": "string",
           "description": "The name of the SKU."
+        },
+        "size": {
+          "$ref": "#/definitions/Size",
+          "description": "Specifies the capacity tier of the Grafana instance."
         }
       },
       "required": [
@@ -3055,6 +3101,30 @@
           "type": "boolean",
           "description": "Set to true to execute the CSRF check even if the login cookie is not in a request (default false)."
         }
+      }
+    },
+    "Size": {
+      "type": "string",
+      "description": "Specifies the capacity tier of the Grafana instance.",
+      "enum": [
+        "X1",
+        "X2"
+      ],
+      "x-ms-enum": {
+        "name": "Size",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "X1",
+            "value": "X1",
+            "description": "X1 capacity tier"
+          },
+          {
+            "name": "X2",
+            "value": "X2",
+            "description": "X2 capacity tier"
+          }
+        ]
       }
     },
     "Smtp": {
