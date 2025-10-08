@@ -1664,6 +1664,98 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments/{deploymentName}/pause": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Pause",
+        "summary": "Pause a deployment",
+        "description": "Pauses inferencing on a deployment by setting the deploymentState to 'Paused' (see #/definitions/DeploymentProperties/properties/deploymentState). Only Standard, DataZoneStandard, and GlobalStandard SKUs support this operation. Inference requests to the paused deployment endpoint will receive HTTP 423 (Locked). This operation is idempotent.",
+        "x-ms-examples": {
+          "PauseDeployment": {
+            "$ref": "./examples/PauseDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameForActionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Deployment paused successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/deployments/{deploymentName}/resume": {
+      "post": {
+        "tags": [
+          "Deployments"
+        ],
+        "operationId": "Deployments_Resume",
+        "summary": "Resume a deployment",
+        "description": "Resumes inferencing on a previously paused deployment by setting the deploymentState to 'Running' (see #/definitions/DeploymentProperties/properties/deploymentState). This operation is idempotent and can be safely called on already running deployments.",
+        "x-ms-examples": {
+          "ResumeDeployment": {
+            "$ref": "./examples/ResumeDeployment.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameForActionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Deployment resumed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Deployment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/commitmentPlans": {
       "get": {
         "tags": [
@@ -8504,6 +8596,52 @@
         "spilloverDeploymentName": {
           "type": "string",
           "description": "Specifies the deployment name that should serve requests when the request would have otherwise been throttled due to reaching current deployment throughput limit."
+        },
+        "serviceTier": {
+          "type": "string",
+          "description": "The service tier for the deployment. Determines the pricing and performance level for request processing. Use 'Default' for standard pricing or 'Priority' for higher-priority processing with premium pricing. Note: Pause operations are only supported on Standard, DataZoneStandard, and GlobalStandard SKUs.",
+          "enum": [
+            "Default",
+            "Priority"
+          ],
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "ServiceTier",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Default",
+                "description": "Default service tier meaning the request will be processed with the standard pricing and performance for the selected model."
+              },
+              {
+                "value": "Priority",
+                "description": "Priority service tier meaning the request will be processed with higher pricing and performance for the selected model."
+              }
+            ]
+          }
+        },
+        "deploymentState": {
+          "type": "string",
+          "description": "The state of the deployment. Controls whether the deployment is accepting inference requests. Use 'Running' for active deployments that process requests, or 'Paused' to temporarily stop inference while preserving the deployment configuration.",
+          "enum": [
+            "Running",
+            "Paused"
+          ],
+          "x-nullable": true,
+          "x-ms-enum": {
+            "name": "DeploymentState",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Running",
+                "description": "The deployment is running and accepting inference requests."
+              },
+              {
+                "value": "Paused",
+                "description": "The deployment is paused and not accepting inference requests."
+              }
+            ]
+          }
         }
       },
       "description": "Properties of Cognitive Services account deployment."
@@ -12214,264 +12352,272 @@
         }
       },
       "additionalProperties": false
+    }
+  },
+  "parameters": {
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of Cognitive Services account.",
+      "x-ms-parameter-location": "method"
     },
-    "parameters": {
-      "accountNameParameter": {
-        "name": "accountName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "maxLength": 64,
-        "minLength": 2,
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of Cognitive Services account.",
-        "x-ms-parameter-location": "method"
-      },
-      "locationParameter": {
-        "name": "location",
-        "in": "path",
-        "description": "Resource location.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "usageFilterParameter": {
-        "name": "$filter",
-        "in": "query",
-        "required": false,
-        "type": "string",
-        "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
-        "x-ms-parameter-location": "method"
-      },
-      "privateEndpointConnectionNameParameter": {
-        "name": "privateEndpointConnectionName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the private endpoint connection associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "deploymentNameParameter": {
-        "name": "deploymentName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the deployment associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "raiPolicyNameParameter": {
-        "name": "raiPolicyName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the RaiPolicy associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "raiBlocklistNameParameter": {
-        "name": "raiBlocklistName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the RaiBlocklist associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "raiBlocklistItemNameParameter": {
-        "name": "raiBlocklistItemName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the RaiBlocklist Item associated with the custom blocklist",
-        "x-ms-parameter-location": "method"
-      },
-      "raiTopicNameParameter": {
-        "name": "raiTopicName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the Rai Topic associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "raiIfcRuleNameParameter": {
-        "name": "raiIfcRuleName",
-        "in": "path",
-        "required": true,
-        "schema": {
-          "type": "string"
-        },
-        "description": "The name of the Rai IFC Rule",
-        "x-ms-parameter-location": "method"
-      },
-      "raiToolLabelNameParameter": {
-        "name": "raiToolLabelName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the Rai Tool Label",
-        "x-ms-parameter-location": "method"
-      },
-      "commitmentPlanNameParameter": {
-        "name": "commitmentPlanName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "commitmentPlanResourceNameParameter": {
-        "name": "commitmentPlanName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "commitmentPlanAssociationNameParameter": {
-        "name": "commitmentPlanAssociationName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the commitment plan association with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "encryptionScopeNameParameter": {
-        "name": "encryptionScopeName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the encryptionScope associated with the Cognitive Services Account",
-        "x-ms-parameter-location": "method"
-      },
-      "modelFormatFilterParameter": {
-        "name": "modelFormat",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The format of the Model",
-        "x-ms-parameter-location": "method"
-      },
-      "modelNameFilterParameter": {
-        "name": "modelName",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the Model",
-        "x-ms-parameter-location": "method"
-      },
-      "modelVersionFilterParameter": {
-        "name": "modelVersion",
-        "in": "query",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The version of the Model",
-        "x-ms-parameter-location": "method"
-      },
-      "defenderForAISettingNameParameter": {
-        "name": "defenderForAISettingName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the defender for AI setting.",
-        "x-ms-parameter-location": "method"
-      },
-      "nspConfigurationNameParameter": {
-        "name": "nspConfigurationName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^.*$",
-        "description": "The name of the NSP Configuration.",
-        "x-ms-parameter-location": "method"
-      },
-      "raiContentFilterNameParameter": {
-        "name": "filterName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of the RAI Content Filter.",
-        "x-ms-parameter-location": "method"
-      },
-      "projectNameParameter": {
-        "name": "projectName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "maxLength": 64,
-        "minLength": 2,
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-        "description": "The name of Cognitive Services account's project.",
-        "x-ms-parameter-location": "method"
-      },
-      "ConnectionName": {
-        "in": "path",
-        "name": "connectionName",
-        "description": "Friendly name of the connection",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-      },
-      "TargetParameter": {
-        "in": "query",
-        "name": "target",
-        "description": "Target of the connection.",
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "CategoryParameter": {
-        "in": "query",
-        "name": "category",
-        "description": "Category of the connection.",
-        "type": "string",
-        "x-ms-parameter-location": "method"
-      },
-      "capabilityHostNameParameter": {
-        "name": "capabilityHostName",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "The name of the capability host associated with the Cognitive Services Resource",
-        "x-ms-parameter-location": "method",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
-      },
-      "defaultParameter": {
-        "name": "default",
-        "in": "path",
-        "required": true,
-        "type": "string",
-        "description": "Default parameter. Leave the value as \"default\".",
-        "x-ms-parameter-location": "method"
-      },
-      "ManagedNetworkNameParameter": {
-        "in": "path",
-        "name": "managedNetworkName",
-        "description": "Name of the managedNetwork associated with the cognitive services account. Only 'default' is supported.",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-      },
-      "RuleName": {
-        "in": "path",
-        "name": "ruleName",
-        "description": "Name of the cognitive services account managed network outbound rule",
-        "required": true,
-        "type": "string",
-        "x-ms-parameter-location": "method",
-        "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
-      }
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "description": "Resource location.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "usageFilterParameter": {
+      "name": "$filter",
+      "in": "query",
+      "required": false,
+      "type": "string",
+      "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+      "x-ms-parameter-location": "method"
+    },
+    "privateEndpointConnectionNameParameter": {
+      "name": "privateEndpointConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the private endpoint connection associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "deploymentNameParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the deployment associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "deploymentNameForActionParameter": {
+      "name": "deploymentName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the deployment for pause/resume actions",
+      "x-ms-parameter-location": "method"
+    },
+    "raiPolicyNameParameter": {
+      "name": "raiPolicyName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the RaiPolicy associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "raiBlocklistNameParameter": {
+      "name": "raiBlocklistName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the RaiBlocklist associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "raiBlocklistItemNameParameter": {
+      "name": "raiBlocklistItemName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the RaiBlocklist Item associated with the custom blocklist",
+      "x-ms-parameter-location": "method"
+    },
+    "raiTopicNameParameter": {
+      "name": "raiTopicName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Rai Topic associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "raiIfcRuleNameParameter": {
+      "name": "raiIfcRuleName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Rai IFC Rule",
+      "x-ms-parameter-location": "method"
+    },
+    "raiToolLabelNameParameter": {
+      "name": "raiToolLabelName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Rai Tool Label",
+      "x-ms-parameter-location": "method"
+    },
+    "commitmentPlanNameParameter": {
+      "name": "commitmentPlanName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "commitmentPlanResourceNameParameter": {
+      "name": "commitmentPlanName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the commitmentPlan associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "commitmentPlanAssociationNameParameter": {
+      "name": "commitmentPlanAssociationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the commitment plan association with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "encryptionScopeNameParameter": {
+      "name": "encryptionScopeName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the encryptionScope associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "modelFormatFilterParameter": {
+      "name": "modelFormat",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The format of the Model",
+      "x-ms-parameter-location": "method"
+    },
+    "modelNameFilterParameter": {
+      "name": "modelName",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Model",
+      "x-ms-parameter-location": "method"
+    },
+    "modelVersionFilterParameter": {
+      "name": "modelVersion",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The version of the Model",
+      "x-ms-parameter-location": "method"
+    },
+    "defenderForAISettingNameParameter": {
+      "name": "defenderForAISettingName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the defender for AI setting.",
+      "x-ms-parameter-location": "method"
+    },
+    "nspConfigurationNameParameter": {
+      "name": "nspConfigurationName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^.*$",
+      "description": "The name of the NSP Configuration.",
+      "x-ms-parameter-location": "method"
+    },
+    "raiContentFilterNameParameter": {
+      "name": "filterName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the RAI Content Filter.",
+      "x-ms-parameter-location": "method"
+    },
+    "projectNameParameter": {
+      "name": "projectName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "maxLength": 64,
+      "minLength": 2,
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of Cognitive Services account's project.",
+      "x-ms-parameter-location": "method"
+    },
+    "ConnectionName": {
+      "in": "path",
+      "name": "connectionName",
+      "description": "Friendly name of the connection",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "TargetParameter": {
+      "in": "query",
+      "name": "target",
+      "description": "Target of the connection.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "CategoryParameter": {
+      "in": "query",
+      "name": "category",
+      "description": "Category of the connection.",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "capabilityHostNameParameter": {
+      "name": "capabilityHostName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the capability host associated with the Cognitive Services Resource",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9\\-_]{0,254}$"
+    },
+    "defaultParameter": {
+      "name": "default",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Default parameter. Leave the value as \"default\".",
+      "x-ms-parameter-location": "method"
+    },
+    "ManagedNetworkNameParameter": {
+      "in": "path",
+      "name": "managedNetworkName",
+      "description": "Name of the managedNetwork associated with the cognitive services account. Only 'default' is supported.",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
+    },
+    "RuleName": {
+      "in": "path",
+      "name": "ruleName",
+      "description": "Name of the cognitive services account managed network outbound rule",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_-]{2,32}$"
     }
   }
 }
