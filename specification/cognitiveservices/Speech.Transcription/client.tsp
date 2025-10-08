@@ -11,3 +11,9 @@ namespace Azure.Ai.Speech.Transcription;
 
 @@clientName(TranscriptionOptions.diarization, "diarizationOptions");
 @@clientName(TranscriptionOptions.channels, "activeChannels");
+
+// Java: Make models use setters instead of builders for backward compatibility
+@@access(TranscriptionOptions, Access.public, "java");
+@@access(TranscriptionDiarizationOptions, Access.public, "java");
+@@access(EnhancedModeProperties, Access.public, "java");
+@@access(PhraseListProperties, Access.public, "java");

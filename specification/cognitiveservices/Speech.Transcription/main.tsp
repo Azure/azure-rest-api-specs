@@ -12,11 +12,11 @@ using TypeSpec.Versioning;
 @service(#{ title: "Azure Speech Transcription API" })
 @useAuth(ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">)
 @server(
-  "{endpoint}/speechtotext",
+  "{endpoint}",
   "Azure Speech Services APIs for speech-to-text",
   {
-    @doc("Supported Cognitive Services endpoints (protocol and hostname, for example: https://westus.api.cognitive.microsoft.com.")
-    endpoint: string,
+    @doc("Supported Cognitive Services endpoints including the service path (for example: https://westus.api.cognitive.microsoft.com/speechtotext). Note: The endpoint should include the '/speechtotext' path.")
+    endpoint: url,
   }
 )
 @versioned(ServiceApiVersions)
@@ -25,5 +25,5 @@ namespace Azure.Ai.Speech.Transcription;
 @doc("Service API versions.")
 enum ServiceApiVersions {
   @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  V20251015: "2025-10-15",
+  V20251015: "2024-11-15",
 }

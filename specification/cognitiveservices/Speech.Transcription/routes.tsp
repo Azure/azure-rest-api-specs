@@ -11,7 +11,7 @@ namespace Azure.Ai.Speech.Transcription;
 
 #suppress "@azure-tools/typespec-azure-core/byos" "Support streaming input files"
 @post
-@route("/transcriptions:transcribe")
+@route("transcriptions:transcribe")
 @doc("Transcribes the provided audio stream.")
 op transcribe is Azure.Core.RpcOperation<
   TranscribeRequestContent,
@@ -31,7 +31,7 @@ op transcribe is Azure.Core.RpcOperation<
 @doc("Internal documentation endpoint - provides schema definitions for TranscriptionOptions model")
 @summary("Schema definitions (internal use only)")
 @tag("Internal")
-@route("/internal/schemas/transcription-options")
+@route("internal/schemas/transcription-options")
 op getTranscriptionOptionsSchema is Azure.Core.RpcOperation<
   {
     @doc("Returns the TranscriptionOptions schema definition for reference. See the TranscriptionOptions model in the OpenAPI specification.")
