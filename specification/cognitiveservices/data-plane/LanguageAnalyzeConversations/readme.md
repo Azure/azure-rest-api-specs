@@ -31,9 +31,9 @@ These settings apply only when `--tag=release_2025_11_01` is specified on the co
 
 ``` yaml $(tag) == 'release_2025-11-01'
 input-file:
-  - stable/2025-11-01/analyzeconversations-authoring.json
+  - stable/2025-11-01/analyzeconversations.json
 title:
-  Microsoft Cognitive Language Service
+  Microsoft Cognitive Language Service - Conversations
 modelerfour:
   lenient-model-deduplication: true
 ```
