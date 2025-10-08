@@ -25,6 +25,10 @@ model RecoveryChildJobProperties extends ChildJobProperties {
   @doc("The provisioning state of the recovery child job.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
+
+  @doc("A setting that indicates the protection solution selected.")
+  @visibility(Lifecycle.Read)
+  protectionSolutionType?: ResourceProtectionSolutionType;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"

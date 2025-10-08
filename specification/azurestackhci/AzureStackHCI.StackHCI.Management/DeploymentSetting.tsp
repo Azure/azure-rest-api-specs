@@ -181,6 +181,16 @@ model DeploymentDataContent {
   hostNetwork?: DeploymentSettingsHostNetwork;
 
   /**
+   * Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )
+   */
+  cloudEnvironment?: string;
+
+  /**
+   * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
+   */
+  isManagementCluster?: boolean;
+
+  /**
    * SDN Integration config to deploy AzureStackHCI Cluster.
    */
   sdnIntegration?: SdnIntegration;
@@ -311,6 +321,11 @@ model DeploymentCluster {
    * Specify the fileshare path for the local witness for your Azure Stack HCI cluster.
    */
   witnessPath?: string;
+
+  /**
+   * The authentication mode for the cluster witness. An example value 'ManagedIdentity'.
+   */
+  witnessAuthenticationMode?: string;
 
   /**
    * Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster.

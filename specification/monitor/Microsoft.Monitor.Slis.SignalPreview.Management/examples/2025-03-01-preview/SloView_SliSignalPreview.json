@@ -1,0 +1,309 @@
+{
+  "operationId": "SloView_SliSignalPreview",
+  "title": "SliSignalPreview",
+  "parameters": {
+    "api-version": "2025-03-01-preview",
+    "serviceGroupName": "testSG",
+    "body": {
+      "previewType": "slo",
+      "evaluationType": "RequestBased",
+      "goodSignals": {
+        "signalSources": [
+          {
+            "signalSourceId": "A",
+            "metricNamespace": "junminsg0220",
+            "metricName": "mfrei0728_1_mdmtest1_ppe1_raw1:maxOfAverage",
+            "sourceAmwAccountManagedIdentity": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TapIdentity1",
+            "sourceAmwAccountResourceId": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/microsoft.monitor/accounts/streaming-3p-slo-ppe1-eastus-raw1",
+            "filters": [],
+            "spatialAggregation": {
+              "type": "Count",
+              "dimensions": [
+                "Datacenter"
+              ]
+            }
+          },
+          {
+            "signalSourceId": "B",
+            "metricNamespace": "junminsg0220",
+            "metricName": "mfrei0728_2_mdmtest1_ppe1_raw1:maxOfAverage",
+            "sourceAmwAccountManagedIdentity": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TapIdentity1",
+            "sourceAmwAccountResourceId": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/microsoft.monitor/accounts/streaming-3p-slo-ppe1-eastus-raw1",
+            "filters": [],
+            "spatialAggregation": {
+              "type": "Count",
+              "dimensions": [
+                "Datacenter"
+              ]
+            }
+          }
+        ],
+        "signalFormula": "A + B"
+      },
+      "totalSignals": {
+        "signalSources": [
+          {
+            "signalSourceId": "A",
+            "metricNamespace": "junminsg0220",
+            "metricName": "mfrei0728_1_mdmtest1_ppe1_raw1:maxOfAverage",
+            "sourceAmwAccountManagedIdentity": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TapIdentity1",
+            "sourceAmwAccountResourceId": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/microsoft.monitor/accounts/streaming-3p-slo-ppe1-eastus-raw1",
+            "filters": [],
+            "spatialAggregation": {
+              "type": "Count",
+              "dimensions": [
+                "Datacenter"
+              ]
+            }
+          },
+          {
+            "signalSourceId": "B",
+            "metricNamespace": "junminsg0220",
+            "metricName": "mfrei0728_2_mdmtest1_ppe1_raw1:maxOfAverage",
+            "sourceAmwAccountManagedIdentity": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/Microsoft.ManagedIdentity/userAssignedIdentities/TapIdentity1",
+            "sourceAmwAccountResourceId": "/subscriptions/0f991b9d-ab0e-4827-9cc7-984d7319017d/resourceGroups/test-slis/providers/microsoft.monitor/accounts/streaming-3p-slo-ppe1-eastus-raw1",
+            "filters": [],
+            "spatialAggregation": {
+              "type": "Count",
+              "dimensions": [
+                "Datacenter"
+              ]
+            }
+          }
+        ],
+        "signalFormula": "A + B"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "requestId": "12345678-1234-1234-1234-123456789012",
+        "state": "Success",
+        "timeSeriesSets": [
+          {
+            "resultsMetadata": {
+              "startTimeUtc": "2024-01-01T00:00:00Z",
+              "endTimeUtc": "2024-01-01T01:00:00Z",
+              "dataResolution": "00:01:00",
+              "resultantDimensions": [
+                "Datacenter",
+                "ServiceGroup",
+                "SLO",
+                "MetricNamespace"
+              ],
+              "resultantSamplingTypes": [
+                "Value",
+                "Good",
+                "Total",
+                "Burnrate"
+              ],
+              "datapointsCount": 12
+            },
+            "timeSeriesData": [
+              {
+                "dimensionValues": {
+                  "Datacenter": "EastUS",
+                  "ServiceGroup": "test-service-group",
+                  "SLO": "RequestBasedSLO",
+                  "MetricNamespace": "junminsg0220"
+                },
+                "samplingTypesData": {
+                  "Value": [
+                    100.0,
+                    100.0,
+                    99.5,
+                    99.8,
+                    100.0,
+                    99.2,
+                    99.7,
+                    100.0,
+                    99.9,
+                    100.0,
+                    99.6,
+                    99.4
+                  ],
+                  "Good": [
+                    100.0,
+                    150.0,
+                    120.0,
+                    180.0,
+                    200.0,
+                    175.0,
+                    160.0,
+                    140.0,
+                    190.0,
+                    170.0,
+                    155.0,
+                    165.0
+                  ],
+                  "Total": [
+                    100.0,
+                    150.0,
+                    121.0,
+                    181.0,
+                    200.0,
+                    177.0,
+                    161.0,
+                    140.0,
+                    191.0,
+                    170.0,
+                    156.0,
+                    166.0
+                  ],
+                  "Burnrate": [
+                    0.0,
+                    0.0,
+                    0.8,
+                    0.3,
+                    0.0,
+                    1.2,
+                    0.5,
+                    0.0,
+                    0.1,
+                    0.0,
+                    0.6,
+                    0.9
+                  ]
+                }
+              },
+              {
+                "dimensionValues": {
+                  "Datacenter": "WestUS",
+                  "ServiceGroup": "test-service-group",
+                  "SLO": "RequestBasedSLO",
+                  "MetricNamespace": "junminsg0220"
+                },
+                "samplingTypesData": {
+                  "Value": [
+                    98.5,
+                    99.2,
+                    97.8,
+                    99.1,
+                    98.9,
+                    97.5,
+                    98.3,
+                    99.6,
+                    98.7,
+                    99.0,
+                    97.9,
+                    98.1
+                  ],
+                  "Good": [
+                    95.0,
+                    140.0,
+                    115.0,
+                    175.0,
+                    190.0,
+                    165.0,
+                    150.0,
+                    135.0,
+                    185.0,
+                    160.0,
+                    145.0,
+                    155.0
+                  ],
+                  "Total": [
+                    96.5,
+                    141.1,
+                    117.6,
+                    176.6,
+                    192.1,
+                    169.2,
+                    152.6,
+                    135.5,
+                    187.5,
+                    161.6,
+                    148.1,
+                    158.0
+                  ],
+                  "Burnrate": [
+                    2.1,
+                    1.1,
+                    3.0,
+                    1.2,
+                    1.5,
+                    3.4,
+                    2.3,
+                    0.5,
+                    1.8,
+                    1.4,
+                    2.9,
+                    2.6
+                  ]
+                }
+              },
+              {
+                "dimensionValues": {
+                  "Datacenter": "CentralUS",
+                  "ServiceGroup": "another-service-group",
+                  "SLO": "LatencyBasedSLO",
+                  "MetricNamespace": "junminsg0220"
+                },
+                "samplingTypesData": {
+                  "Value": [
+                    99.8,
+                    99.5,
+                    98.9,
+                    99.7,
+                    99.3,
+                    98.6,
+                    99.1,
+                    99.9,
+                    99.4,
+                    99.6,
+                    98.8,
+                    99.2
+                  ],
+                  "Good": [
+                    110.0,
+                    165.0,
+                    130.0,
+                    195.0,
+                    210.0,
+                    185.0,
+                    170.0,
+                    155.0,
+                    205.0,
+                    180.0,
+                    165.0,
+                    175.0
+                  ],
+                  "Total": [
+                    110.2,
+                    165.8,
+                    131.4,
+                    195.6,
+                    211.5,
+                    187.6,
+                    171.5,
+                    155.2,
+                    206.3,
+                    180.7,
+                    167.0,
+                    176.4
+                  ],
+                  "Burnrate": [
+                    0.3,
+                    0.7,
+                    1.5,
+                    0.4,
+                    0.9,
+                    1.9,
+                    1.2,
+                    0.1,
+                    0.8,
+                    0.5,
+                    1.6,
+                    1.0
+                  ]
+                }
+              }
+            ]
+          }
+        ],
+        "executionMessages": []
+      }
+    }
+  }
+}

@@ -310,6 +310,10 @@
           "type": "string",
           "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
         },
+        "witnessAuthenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'."
+        },
         "cloudAccountName": {
           "type": "string",
           "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
@@ -404,6 +408,14 @@
         "hostedApplication": {
           "$ref": "#/definitions/HostedApplicationIntent",
           "description": "Hosted Application details of the cluster."
+        },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
         },
         "sdnIntegration": {
           "$ref": "#/definitions/SdnIntegration",
@@ -735,6 +747,10 @@
         "confidentialVmIntent": {
           "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
           "description": "Captures the customer's intent to enable or disable confidential VM support on the cluster during initial deployment."
+        },
+        "aksClusterProperties": {
+          "$ref": "#/definitions/AksClusterPropertiesIntent",
+          "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios."
         }
       }
     },
@@ -755,6 +771,37 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        }
+      }
+    },
+    "AksClusterPropertiesIntent": {
+      "type": "object",
+      "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.",
+      "properties": {
+        "aksImageDownload": {
+          "type": "string",
+          "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AksImageDownloadIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "AKS Image should be downloaded."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "AKS Image should not be downloaded."
+              }
+            ]
+          }
         }
       }
     },
