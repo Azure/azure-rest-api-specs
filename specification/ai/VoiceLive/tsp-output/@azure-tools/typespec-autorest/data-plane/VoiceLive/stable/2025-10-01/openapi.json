@@ -12,12 +12,54 @@
   "schemes": [
     "https"
   ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}/voice-agent/realtime",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "Azure AI VoiceLive endpoint.",
+        "required": true,
+        "type": "string",
+        "format": "uri",
+        "x-ms-skip-url-encoding": true
+      }
+    ]
+  },
   "produces": [
     "application/json"
   ],
   "consumes": [
     "application/json"
   ],
+  "security": [
+    {
+      "ApiKeyAuth": []
+    },
+    {
+      "AadOauth2Auth": [
+        "https://ai.azure.com/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://ai.azure.com/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    },
+    "ApiKeyAuth": {
+      "type": "apiKey",
+      "name": "api-key",
+      "in": "header"
+    }
+  },
   "tags": [],
   "paths": {},
   "definitions": {
