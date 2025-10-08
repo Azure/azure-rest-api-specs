@@ -1209,12 +1209,12 @@
             "dedicatedRUs": {
               "type": "integer",
               "format": "int64",
-              "description": "Dedicated amount of RUs at fleetspace level."
+              "description": "Total dedicated throughput (RU/s) for fleetspace. Represents the sum of all manual provisioned throughput and all autoscale max RU/s across all shared throughput databases and dedicated throughput containers across all accounts in the fleetspace for 1 region."
             },
             "maxConsumableRUs": {
               "type": "integer",
               "format": "int64",
-              "description": "Additional RUs that can be obtained from throughput pooling."
+              "description": "When this fleetspace is enabled with pooling, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers across all accounts in the fleetspace for 1 region."
             }
           }
         }
