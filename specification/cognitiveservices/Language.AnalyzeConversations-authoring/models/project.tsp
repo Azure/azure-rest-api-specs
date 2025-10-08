@@ -1075,7 +1075,7 @@ model AnalyzeConversationAuthoringProjectResourceAssignmentInfo {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-@removed(Versions.v2025_11_01)
+@added(Versions.v2025_11_15_preview)
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
