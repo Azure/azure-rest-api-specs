@@ -46,6 +46,8 @@ model BrokerListenerProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("Kubernetes Service Types supported by Listener")

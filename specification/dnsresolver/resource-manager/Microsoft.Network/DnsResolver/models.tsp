@@ -1,10 +1,12 @@
 import "@typespec/rest";
 import "@typespec/http";
+import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
@@ -540,8 +542,22 @@ model DnsSecurityRuleProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
+  @removed(Versions.v2025_10_01_preview)
+  @renamedFrom(Versions.v2025_10_01_preview, "dnsResolverDomainLists")
   @identifiers(#[])
-  dnsResolverDomainLists: SubResource[];
+  oldDnsResolverDomainLists: SubResource[];
+
+  /**
+   * DNS resolver policy domains lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  dnsResolverDomainLists?: SubResource[] = #[];
+
+  /**
+   * Managed domain lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  managedDomainLists?: ManagedDomainList[] = #[];
 
   /**
    * The state of DNS security rule.
@@ -596,8 +612,13 @@ model DnsSecurityRulePatchProperties {
   /**
    * DNS resolver policy domains lists that the DNS security rule applies to.
    */
-  @identifiers(#[])
   dnsResolverDomainLists?: SubResource[];
+
+  /**
+   * Managed domain lists that the DNS security rule applies to.
+   */
+  @added(Versions.v2025_10_01_preview)
+  managedDomainLists?: ManagedDomainList[];
 
   /**
    * The state of DNS security rule.
@@ -722,4 +743,17 @@ model DnsResolverDomainListBulkProperties {
    * The action to take in the request, Upload or Download.
    */
   action: Action;
+}
+
+/**
+ * Describes Managed Domain List options for DNS security rules.
+ */
+@added(Versions.v2025_10_01_preview)
+union ManagedDomainList {
+  string,
+
+  /**
+   * Domain list managed by Azure DNS Threat Intelligence.
+   */
+  AzureDnsThreatIntel: "AzureDnsThreatIntel",
 }
