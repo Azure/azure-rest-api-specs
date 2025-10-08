@@ -26,11 +26,9 @@ SDK languages to be generated:
 **Goal**: Determine if the TypeSpec spec is already merged or if it's being modified.
 **Actions**:
 1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch: "Is your TypeSpec specification already merged in the main branch? (yes/no)"
-2. Prompt user and ask if api specification is in private preview stage: "Is your API specification in Private Preview stage? (yes/no)"
-   - If yes, inform user: "SDK generation is not supported for Private Preview stage" and end the workflow.
-3. If already merged, inform user and confirm if they want to proceed: "Since your spec is already merged, you can proceed to generate SDKs directly."
+2. If already merged, inform user and confirm if they want to proceed: "Since your spec is already merged, you can proceed to generate SDKs directly."
    - once confirmed, skip to step 6 for SDK generation
-4. If no, proceed to Step 3 to review and commit changes
+3. If no, proceed to Step 3 to review and commit changes
 **Success Criteria**: User decision on spec readiness obtained
 
 ## Step 3: Validate TypeSpec Specification
