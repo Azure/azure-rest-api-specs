@@ -1513,6 +1513,10 @@ model PublicIPAddressProperties {
   @visibility(Lifecycle.Read)
   ipConfiguration?: IPConfigurationArmReference;
 
+  @doc("natGateway using this public IP")
+  @visibility(Lifecycle.Read)
+  natGateway?: NatGatewayArmReference;
+
   @doc("Provisioning state of the public IP")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
@@ -1545,6 +1549,7 @@ model InboundNATRuleProperties {
 @doc("Inbound nat rule properties")
 model InboundNATRule {
   @doc("name of the inbound nat rule")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties of the inbound nat rule")
@@ -1563,6 +1568,11 @@ model NatGatewayProperties {
   @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
   @extension("x-ms-identifiers", #[])
   subnets?: VirtualNetworkSubnetArmReference[];
+
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NATGW has been associated with a vnet")
+  @extension("x-ms-identifiers", #[])
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+  inboundNATRules?: InboundNATRule[];
 
   @doc("Provisioning state of the public IP")
   @visibility(Lifecycle.Read)
@@ -1601,6 +1611,7 @@ model NatGatewayStatusProvisioningStatus {
 @doc("FrontendIP Configuration object for a load balancer.")
 model FrontendIPConfiguration {
   @doc("name for the frontend IP configuration.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties for this frontendIPConfiguration")
@@ -1645,6 +1656,7 @@ model BackendAddressPoolProperties {
 @doc("Backend address pool for the load balancer.")
 model BackendAddressPool {
   @doc("name of the backend pool.")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties for the backend pool")
@@ -1682,6 +1694,7 @@ model LoadBalancerBackendAddressProperties {
 @doc("LoadBalancer Backend Address")
 model LoadBalancerBackendAddress {
   @doc("name of the backend address")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("backend address properties")
@@ -1722,6 +1735,7 @@ model LoadBalancerRuleProperties {
 @doc("LoadBalancer Rules")
 model LoadBalancerRule {
   @doc("name of the load balancer rule")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("load balancer rule properties")
@@ -1751,6 +1765,7 @@ model ProbeProperties {
 @doc("Load balancer health probes")
 model Probe {
   @doc("name of the load balancer health probe")
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("load balancer rule properties")
