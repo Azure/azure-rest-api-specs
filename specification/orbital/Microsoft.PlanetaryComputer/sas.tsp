@@ -22,7 +22,9 @@ model SharedAccessSignatureToken {
   /**
    * The SAS token string used for authentication.
    */
-  @summary("Token") token: string;
+  @pattern("^[A-Za-z0-9+/=&%?-]+$")
+  @summary("Token")
+  token: string;
 }
 
 /**
@@ -41,7 +43,7 @@ model SignedLink {
   /**
    * The URL of the unsigned link.
    */
-  @summary("Href") href: string;
+  @summary("Href") href: url;
 }
 
 /**
@@ -153,7 +155,7 @@ interface Sas {
      */
     @summary("Href")
     @query
-    href: string,
+    href: url,
 
     /**
      * The duration, in minutes, that the SAS token will be valid. Only valid for approved users.
