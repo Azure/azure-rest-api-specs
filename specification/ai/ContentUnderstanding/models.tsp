@@ -333,7 +333,7 @@ model ContentFieldDefinition {
   enumDescriptions?: Record<string>;
 
   @doc("Reference to another field definition.")
-  ref?: string;
+  $ref?: string;
 }
 
 @doc("Generation method.")
