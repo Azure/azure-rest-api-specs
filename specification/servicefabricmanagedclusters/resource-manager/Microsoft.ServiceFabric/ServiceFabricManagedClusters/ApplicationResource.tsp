@@ -343,21 +343,6 @@ model ApplicationUserAssignedIdentity {
 }
 
 /**
- * An application parameter with overridden value from its default value specified in the application manifest.
- */
-model ApplicationParameter {
-  /**
-   * The name of the application parameter.
-   */
-  name: string;
-
-  /**
-   * The value of the application parameter.
-   */
-  value: string;
-}
-
-/**
  * Properties for application update request.
  */
 @added(Versions.v2025_10_01_preview)
@@ -365,7 +350,8 @@ model ApplicationUpdateParametersProperties {
   /**
    * List of application parameters with overridden values from their default values specified in the application manifest.
    */
-  parameters?: Array<ApplicationParameter>;
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Patch operation expects same format as create or update, used to pass string to string dictionary"
+  parameters?: Record<string>;
 }
 
 /**

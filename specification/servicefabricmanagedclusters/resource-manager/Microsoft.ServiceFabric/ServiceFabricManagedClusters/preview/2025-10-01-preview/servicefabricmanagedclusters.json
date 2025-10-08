@@ -4340,24 +4340,6 @@
         "maxPercentUnhealthyDeployedApplications"
       ]
     },
-    "ApplicationParameter": {
-      "type": "object",
-      "description": "An application parameter with overridden value from its default value specified in the application manifest.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "The name of the application parameter."
-        },
-        "value": {
-          "type": "string",
-          "description": "The value of the application parameter."
-        }
-      },
-      "required": [
-        "name",
-        "value"
-      ]
-    },
     "ApplicationResource": {
       "type": "object",
       "description": "The application resource.",
@@ -4644,10 +4626,10 @@
       "description": "Properties for application update request.",
       "properties": {
         "parameters": {
-          "type": "array",
+          "type": "object",
           "description": "List of application parameters with overridden values from their default values specified in the application manifest.",
-          "items": {
-            "$ref": "#/definitions/ApplicationParameter"
+          "additionalProperties": {
+            "type": "string"
           }
         }
       }
