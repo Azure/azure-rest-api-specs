@@ -59,6 +59,7 @@ model RequestSession {
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
   /** Maximum number of tokens to generate in the response. Default is unlimited. */
+  #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
   max_response_output_tokens?: int32 | "inf";
 }
 
@@ -209,6 +210,7 @@ union PersonalVoiceModels {
 // --- Top-level Voice union -------------------------------------------------
 
 /** Union of all supported voice configurations. */
+#suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how the service implemented the model...
 union Voice {
   OAIVoice,
   OpenAIVoice,
