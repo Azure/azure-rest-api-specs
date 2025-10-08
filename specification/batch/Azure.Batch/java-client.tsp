@@ -119,7 +119,6 @@ op listPoolsCustomization is Azure.Batch.ListOperation<
   {
     @doc("Optional parameters for List Pools operation.")
     @bodyIgnore
-    @bodyIgnore
     options?: BatchPoolsListOptions;
   },
   Azure.Batch.BatchPoolListResult
