@@ -40,7 +40,7 @@ SDK languages to be generated:
 1. Before running, inform user that TypeSpec validation takes around 20 - 30 seconds. Provide complete summary after 
 running the tool and highlight any errors and help user fix them.
 2. Run `azsdk_validate_typespec_project` to validate the TypeSpec project.
-3. If validation succeeds, proceed to Step 3
+3. If validation succeeds, proceed to Step 4
 4. If validation fails:
     - Display all compilation errors to user
     - Prompt: "Please fix the TypeSpec compilation errors before proceeding"
