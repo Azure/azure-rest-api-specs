@@ -12,7 +12,6 @@
   "schemes": [
     "https"
   ],
-  "host": "contoso-catalog.gwhqfdeddydpareu.uksouth.geocatalog.spatio.azure.com",
   "produces": [
     "application/json"
   ],
@@ -2179,7 +2178,7 @@
             "description": "Longitude",
             "required": true,
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           {
             "name": "latitude",
@@ -3751,7 +3750,7 @@
             "description": "The output height of the legend image",
             "required": false,
             "type": "number",
-            "format": "double",
+            "format": "float",
             "default": 0.15
           },
           {
@@ -3760,7 +3759,7 @@
             "description": "The output width of the legend image",
             "required": false,
             "type": "number",
-            "format": "double",
+            "format": "float",
             "default": 5
           },
           {
@@ -4895,7 +4894,7 @@
             "description": "Buffer on each side of the given tile. It must be a multiple of `0.5`. Output\n**tilesize** will be expanded to `tilesize + 2 * buffer` (e.g 0.5 = 257x257,\n1.0 = 258x258).",
             "required": false,
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           {
             "name": "color_formula",
@@ -4997,7 +4996,7 @@
               "median",
               "stdev",
               "lastbandlow",
-              "lastbandhight"
+              "lastbandhigh"
             ],
             "x-ms-enum": {
               "name": "PixelSelection",
@@ -5029,18 +5028,18 @@
                   "description": "Calculate median of available pixels"
                 },
                 {
-                  "name": "stdev",
+                  "name": "standardDeviation",
                   "value": "stdev",
                   "description": "Calculate standard deviation of available pixels"
                 },
                 {
-                  "name": "lastbandlow",
+                  "name": "lastBandLow",
                   "value": "lastbandlow",
                   "description": "Select image with lowest value in the last band"
                 },
                 {
-                  "name": "lastbandhight",
-                  "value": "lastbandhight",
+                  "name": "lastBandHigh",
+                  "value": "lastbandhigh",
                   "description": "Select image with highest value in the last band"
                 }
               ]
@@ -8283,7 +8282,8 @@
             "in": "query",
             "description": "HREF (URL) to sign",
             "required": true,
-            "type": "string"
+            "type": "string",
+            "format": "uri"
           },
           {
             "name": "duration",
@@ -8291,7 +8291,7 @@
             "description": "The duration, in minutes, that the SAS token will be valid. Only valid for approved users.",
             "required": false,
             "type": "integer",
-            "format": "int64",
+            "format": "int32",
             "x-ms-client-name": "durationInMinutes"
           }
         ],
@@ -8347,7 +8347,7 @@
             "description": "The duration, in minutes, that the SAS token will be valid. Only valid for approved users.",
             "required": false,
             "type": "integer",
-            "format": "int64",
+            "format": "int32",
             "x-ms-client-name": "durationInMinutes"
           }
         ],
@@ -8396,7 +8396,7 @@
             "description": "The duration, in minutes, that the SAS token will be valid. Only valid for approved users.",
             "required": false,
             "type": "integer",
-            "format": "int64",
+            "format": "int32",
             "x-ms-client-name": "durationInMinutes"
           }
         ],
@@ -9888,7 +9888,7 @@
             "description": "The optional limit parameter recommends the number of items that should be present in the response document.\n\nIf the limit parameter value is greater than advertised limit maximum, the server must return the\nmaximum possible number of items, rather than responding with an error.\n\nOnly items are counted that are on the first level of the collection in the response document.\nNested objects contained within the explicitly requested items must not be counted.\n\nMinimum = 1. Maximum = 10000. Default = 10.",
             "required": false,
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           },
           {
             "name": "bbox",
@@ -10689,7 +10689,7 @@
             "type": "array",
             "items": {
               "type": "number",
-              "format": "double"
+              "format": "float"
             },
             "collectionFormat": "csv",
             "x-ms-client-name": "boundingBox"
@@ -11021,12 +11021,14 @@
         "min": {
           "type": "number",
           "format": "float",
-          "description": "Minimum value in the band."
+          "description": "Minimum value in the band.",
+          "x-ms-client-name": "minimum"
         },
         "max": {
           "type": "number",
           "format": "float",
-          "description": "Maximum value in the band."
+          "description": "Maximum value in the band.",
+          "x-ms-client-name": "maximum"
         },
         "mean": {
           "type": "number",
@@ -12546,7 +12548,7 @@
           "description": "Bounding box coordinates [west, south, east, north]",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           "x-ms-client-name": "boundingBox"
         },
@@ -12612,7 +12614,7 @@
           "description": "Bounding box coordinates for the feature",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           "x-ms-client-name": "boundingBox"
         },
@@ -12696,7 +12698,7 @@
           "description": "Optional bounding box of the geometry.",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           "x-ms-client-name": "boundingBox"
         }
@@ -13241,7 +13243,7 @@
           "description": "The coordinates of the linestring.",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           }
         }
       },
@@ -13420,7 +13422,7 @@
             "type": "array",
             "items": {
               "type": "number",
-              "format": "double"
+              "format": "float"
             }
           }
         }
@@ -13444,7 +13446,7 @@
           "description": "The coordinates of the multipoint.",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           }
         }
       },
@@ -13471,7 +13473,7 @@
               "type": "array",
               "items": {
                 "type": "number",
-                "format": "double"
+                "format": "float"
               }
             }
           }
@@ -13744,7 +13746,7 @@
         "median",
         "stdev",
         "lastbandlow",
-        "lastbandhight"
+        "lastbandhigh"
       ],
       "x-ms-enum": {
         "name": "PixelSelection",
@@ -13776,18 +13778,18 @@
             "description": "Calculate median of available pixels"
           },
           {
-            "name": "stdev",
+            "name": "standardDeviation",
             "value": "stdev",
             "description": "Calculate standard deviation of available pixels"
           },
           {
-            "name": "lastbandlow",
+            "name": "lastBandLow",
             "value": "lastbandlow",
             "description": "Select image with lowest value in the last band"
           },
           {
-            "name": "lastbandhight",
-            "value": "lastbandhight",
+            "name": "lastBandHigh",
+            "value": "lastbandhigh",
             "description": "Select image with highest value in the last band"
           }
         ]
@@ -13825,7 +13827,7 @@
               "type": "array",
               "items": {
                 "type": "number",
-                "format": "double"
+                "format": "float"
               }
             }
           }
@@ -13861,7 +13863,7 @@
         },
         "bbox": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Geographic bounding box to filter items [west, south, east, north]",
           "x-ms-client-name": "boundingBox"
         },
@@ -14205,7 +14207,8 @@
         "token": {
           "type": "string",
           "title": "Token",
-          "description": "The SAS token string used for authentication."
+          "description": "The SAS token string used for authentication.",
+          "pattern": "^[A-Za-z0-9+/=&%?-]+$"
         }
       },
       "required": [
@@ -14287,6 +14290,7 @@
         },
         "href": {
           "type": "string",
+          "format": "uri",
           "title": "Href",
           "description": "The URL of the unsigned link."
         }
@@ -14756,7 +14760,7 @@
             "type": "array",
             "items": {
               "type": "number",
-              "format": "double"
+              "format": "float"
             }
           },
           "x-ms-client-name": "boundingBox"
@@ -14790,7 +14794,7 @@
           "description": "Bounding box coordinates for the feature",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           "x-ms-client-name": "boundingBox"
         },
@@ -14852,7 +14856,7 @@
           "description": "Array of coordinates defining the bounding box [west, south, east, north]",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           }
         }
       },
@@ -14876,7 +14880,7 @@
           "description": "Bounding box of all items in format [west, south, east, north].",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           "x-ms-client-name": "boundingBox"
         },
@@ -15125,7 +15129,7 @@
           "description": "Bounding box coordinates for the feature",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           "x-ms-client-name": "boundingBox"
         },
@@ -15765,7 +15769,7 @@
           "description": "Bounding box for spatial filtering in format [west, south, east, north].",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           },
           "x-ms-client-name": "boundingBox"
         },
@@ -16151,7 +16155,7 @@
           "description": "Precise position in CRS coordinates of the corner of origin (e.g. the top-left\ncorner) for this tile matrix. This position is also a corner of the (0, 0)\ntile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did\nnot exist.",
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           }
         },
         "tileWidth": {
@@ -16552,7 +16556,7 @@
           "maxItems": 4,
           "items": {
             "type": "number",
-            "format": "double"
+            "format": "float"
           }
         },
         "band_metadata": {
@@ -16635,7 +16639,7 @@
           "description": "Scales",
           "items": {
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
         },
         "offsets": {
@@ -16644,7 +16648,7 @@
           "description": "Offsets",
           "items": {
             "type": "integer",
-            "format": "int64"
+            "format": "int32"
           }
         },
         "colormap": {
@@ -16660,14 +16664,14 @@
         },
         "minzoom": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "title": "Minzoom",
           "description": "Minzoom",
           "x-ms-client-name": "minZoom"
         },
         "maxzoom": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "title": "Maxzoom",
           "description": "Maxzoom",
           "x-ms-client-name": "maxZoom"
@@ -16703,7 +16707,7 @@
         },
         "bbox": {
           "type": "number",
-          "format": "double",
+          "format": "float",
           "description": "Bounding box coordinates for the feature",
           "x-ms-client-name": "boundingBox"
         }
@@ -18486,7 +18490,7 @@
         "median",
         "stdev",
         "lastbandlow",
-        "lastbandhight"
+        "lastbandhigh"
       ],
       "x-ms-enum": {
         "name": "PixelSelection",
@@ -18518,18 +18522,18 @@
             "description": "Calculate median of available pixels"
           },
           {
-            "name": "stdev",
+            "name": "standardDeviation",
             "value": "stdev",
             "description": "Calculate standard deviation of available pixels"
           },
           {
-            "name": "lastbandlow",
+            "name": "lastBandLow",
             "value": "lastbandlow",
             "description": "Select image with lowest value in the last band"
           },
           {
-            "name": "lastbandhight",
-            "value": "lastbandhight",
+            "name": "lastBandHigh",
+            "value": "lastbandhigh",
             "description": "Select image with highest value in the last band"
           }
         ]
@@ -18614,7 +18618,7 @@
       "description": "The number of items to skip",
       "required": false,
       "type": "integer",
-      "format": "int64",
+      "format": "int32",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "skip"
     },
@@ -18624,7 +18628,7 @@
       "description": "The number of items to return",
       "required": false,
       "type": "integer",
-      "format": "int64",
+      "format": "int32",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "top"
     },
