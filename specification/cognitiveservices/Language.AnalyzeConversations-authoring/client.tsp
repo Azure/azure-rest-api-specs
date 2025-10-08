@@ -17,7 +17,7 @@ namespace Language.ConversationsAuthoringClientCustomizations;
 @@clientName(conversationAuthoringListAssignedResourceDeployments,
   "listAssignedResourceDeployments"
 );
-@@clientName(conversationAuthoringListDeploymentResources,
+@@clientName(conversationAuthoringListProjectResources,
   "listDeploymentResources"
 );
 @@clientName(conversationAuthoringListSupportedPrebuiltEntities,
@@ -193,10 +193,10 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "CreateDeploymentDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDeleteDeploymentOptions,
+@@clientName(AnalyzeConversationAuthoringProjectAzureResourceIds,
   "ConversationAuthoringDeleteDeploymentDetails"
 );
-@@clientName(AnalyzeConversationAuthoringDeleteDeploymentOptions,
+@@clientName(AnalyzeConversationAuthoringProjectAzureResourceIds,
   "DeleteDeploymentDetails",
   "python"
 );
@@ -312,37 +312,37 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "LoadSnapshotState",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedDeploymentResources,
+@@clientName(AnalyzeConversationAuthoringDeploymentResourcesInfoList,
   "ConversationAuthoringAssignedDeploymentResources"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedDeploymentResources,
+@@clientName(AnalyzeConversationAuthoringDeploymentResourcesInfoList,
   "AssignedDeploymentResources",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedDeploymentResource,
+@@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
   "ConversationAuthoringAssignedDeploymentResource"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedDeploymentResource,
+@@clientName(AnalyzeConversationAuthoringProjectResourceInfo,
   "AssignedDeploymentResource",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignedDeploymentResource.azureResourceId,
+@@clientName(AnalyzeConversationAuthoringProjectResourceInfo.azureResourceId,
   "resourceId"
 );
-@@clientName(AnalyzeConversationAuthoringAssignDeploymentResourcesOptions,
+@@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
   "ConversationAuthoringAssignDeploymentResourcesDetails"
 );
-@@clientName(AnalyzeConversationAuthoringAssignDeploymentResourcesOptions,
+@@clientName(AnalyzeConversationAuthoringProjectResourceAssignments,
   "AssignDeploymentResourcesDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringAssignDeploymentResourcesOptions.resourcesMetadata,
+@@clientName(AnalyzeConversationAuthoringProjectResourceAssignments.projectResources,
   "metadata"
 );
-@@clientName(AnalyzeConversationAuthoringResourceMetadata,
+@@clientName(AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
   "ConversationAuthoringResourceMetadata"
 );
-@@clientName(AnalyzeConversationAuthoringResourceMetadata,
+@@clientName(AnalyzeConversationAuthoringProjectResourceAssignmentInfo,
   "ResourceMetadata",
   "python"
 );
@@ -353,10 +353,10 @@ namespace Language.ConversationsAuthoringClientCustomizations;
   "UnassignDeploymentResourcesDetails",
   "python"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentResourcesJobState,
+@@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
   "ConversationAuthoringDeploymentResourcesState"
 );
-@@clientName(AnalyzeConversationAuthoringDeploymentResourcesJobState,
+@@clientName(AnalyzeConversationAuthoringProjectResourcesJobState,
   "DeploymentResourcesState",
   "python"
 );
@@ -799,21 +799,21 @@ namespace ConversationAuthoringProjectClient {
 
     listTrainingJobs is Language.Conversations.Authoring.conversationAuthoringListTrainingJobs;
 
-    listDeploymentResources is Language.Conversations.Authoring.conversationAuthoringListDeploymentResources;
+    listDeploymentResources is Language.Conversations.Authoring.conversationAuthoringListProjectResources;
 
     listDeployments is Language.Conversations.Authoring.conversationAuthoringListDeployments;
 
     listExportedModels is Language.Conversations.Authoring.conversationAuthoringListExportedModels;
 
-    assignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignDeploymentResources;
+    assignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.assignProjectResources;
 
-    unassignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignDeploymentResources;
-
-    @access(Access.internal, "python")
-    getAssignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignDeploymentResourcesStatus;
+    unassignDeploymentResources is Language.Conversations.Authoring.ConversationAuthoringProject.unassignProjectResources;
 
     @access(Access.internal, "python")
-    getUnassignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignDeploymentResourcesStatus;
+    getAssignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getAssignProjectResourcesStatus;
+
+    @access(Access.internal, "python")
+    getUnassignDeploymentResourcesStatus is Language.Conversations.Authoring.ConversationAuthoringProject.getUnassignProjectResourcesStatus;
 
     swapDeployments is Language.Conversations.Authoring.ConversationAuthoringProject.swapDeployments;
 
