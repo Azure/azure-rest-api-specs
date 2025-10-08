@@ -343,6 +343,21 @@ model ApplicationUserAssignedIdentity {
 }
 
 /**
+ * An application parameter with overridden value from its default value specified in the application manifest.
+ */
+model ApplicationParameter {
+  /**
+   * The name of the application parameter.
+   */
+  name: string;
+
+  /**
+   * The value of the application parameter.
+   */
+  value: string;
+}
+
+/**
  * Properties for application update request.
  */
 @added(Versions.v2025_10_01_preview)
@@ -350,8 +365,7 @@ model ApplicationUpdateParametersProperties {
   /**
    * List of application parameters with overridden values from their default values specified in the application manifest.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Day 0 property of app resource, used to pass string to string dictionary"
-  parameters?: Record<string>;
+  parameters?: Array<ApplicationParameter>;
 }
 
 /**
@@ -765,9 +779,4 @@ model RestartDeployedCodePackageRequest {
    * The activation id of a deployed service package. If ServicePackageActivationMode specified at the time of creating the service is 'SharedProcess' (or if it is not specified, in which case it defaults to 'SharedProcess'), then value of ServicePackageActivationId is always an empty string.
    */
   servicePackageActivationId?: string;
-
-  /**
-   * The confirmation from user to restart the deployed code package.
-   */
-  force?: boolean;
 }

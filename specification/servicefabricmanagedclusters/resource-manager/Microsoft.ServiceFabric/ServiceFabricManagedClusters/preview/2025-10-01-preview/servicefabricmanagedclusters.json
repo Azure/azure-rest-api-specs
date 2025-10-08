@@ -4340,6 +4340,24 @@
         "maxPercentUnhealthyDeployedApplications"
       ]
     },
+    "ApplicationParameter": {
+      "type": "object",
+      "description": "An application parameter with overridden value from its default value specified in the application manifest.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the application parameter."
+        },
+        "value": {
+          "type": "string",
+          "description": "The value of the application parameter."
+        }
+      },
+      "required": [
+        "name",
+        "value"
+      ]
+    },
     "ApplicationResource": {
       "type": "object",
       "description": "The application resource.",
@@ -4626,10 +4644,10 @@
       "description": "Properties for application update request.",
       "properties": {
         "parameters": {
-          "type": "object",
+          "type": "array",
           "description": "List of application parameters with overridden values from their default values specified in the application manifest.",
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/ApplicationParameter"
           }
         }
       }
@@ -7496,10 +7514,6 @@
         "servicePackageActivationId": {
           "type": "string",
           "description": "The activation id of a deployed service package. If ServicePackageActivationMode specified at the time of creating the service is 'SharedProcess' (or if it is not specified, in which case it defaults to 'SharedProcess'), then value of ServicePackageActivationId is always an empty string."
-        },
-        "force": {
-          "type": "boolean",
-          "description": "The confirmation from user to restart the deployed code package."
         }
       },
       "required": [
