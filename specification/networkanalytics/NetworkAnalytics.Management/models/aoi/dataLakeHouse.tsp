@@ -2,7 +2,6 @@ using TypeSpec.Versioning;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.NetworkAnalytics;
 
@@ -249,11 +248,11 @@ model NetworkAcls {
   virtualNetworkRule: VirtualNetworkRule[];
 
   @doc("IP rule with specific IP or IP range in CIDR format.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipRules: IPRules[];
 
   @doc("Resource Access Rules.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceAccessRules: ResourceAccessRules[];
 
   @doc("Default Action")

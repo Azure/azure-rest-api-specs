@@ -13,7 +13,6 @@ using Azure.Core;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.AzureResilienceManagement;
 
@@ -175,7 +174,7 @@ model MetricsPropertiesOfDrill {
   identity: AssociatedIdentity;
 
   @doc("Metrics associated with this Drill. These will be tracked through the Drill Run.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   metricsToTrack: MetricsToTrack[];
 }
 
@@ -383,15 +382,14 @@ model AddOrUpdateResourcesRequest {
 @doc("Add, Update, Delete resource lists")
 model ResourceLists {
   @doc("Include resource")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   includeResources?: IncludeOrUpdateResource[];
 
   @doc("Excluded resource")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   excludeResources?: armResourceIdentifier<[]>[];
 
   @doc("Update resource")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   updateResources?: IncludeOrUpdateResource[];
 }
 
@@ -412,17 +410,17 @@ model IncludeOrUpdateResource {
 model AddOrUpdateResourcesResponse {
   @doc("Failed Include resources.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedIncludeResourceList?: FailedDrillResource[];
 
   @doc("Failed Exclude resources.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedExcludeResourceList?: FailedDrillResource[];
 
   @doc("Failed Update resources.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   failedUpdateResourceList?: FailedDrillResource[];
 }
 

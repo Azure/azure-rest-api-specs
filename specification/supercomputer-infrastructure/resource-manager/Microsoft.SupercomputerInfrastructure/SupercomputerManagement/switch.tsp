@@ -62,7 +62,7 @@ model SwitchPacketCaptureRequest {
   interfaces: string[];
 
   /** The match rules to apply to the packet capture. */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   matchRules: SwitchPacketCaptureMatchRule[];
 
   /** The traffic direction to capture. */
@@ -165,7 +165,7 @@ model SwitchRetrieveDataRequest {
 /** The result of a retrieve data action over a switch. */
 model SwitchRetrieveDataResult {
   /** The value of the retrieve data action. */
-  @OpenAPI.extension("x-ms-identifiers", #["path", "value"])
+  @identifiers(#["path", "value"])
   value: SwitchRetrieveDataOutput[];
 }
 

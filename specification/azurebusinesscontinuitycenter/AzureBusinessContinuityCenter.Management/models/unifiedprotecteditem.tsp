@@ -566,7 +566,7 @@ model UnifiedProtectedItemProperties {
   solutionSpecificProtectionProperties: Record<SolutionSpecificProtectionProperties>;
 
   @doc("Detail of protected item.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read)
   protectedItems: SolutionSpecificProtectedItem[];
 

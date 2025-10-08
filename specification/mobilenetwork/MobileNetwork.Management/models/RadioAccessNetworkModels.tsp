@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-core";
 import "../common/CommonModels.tsp";
 
 using Azure.Core;
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -31,7 +31,7 @@ model RadioAccessNetworkProperties {
   metricsIngestion?: MetricsIngestion;
 
   @doc("A list of Access Points for this radio access network.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   accessPoints?: AccessPoint[];
 }
 

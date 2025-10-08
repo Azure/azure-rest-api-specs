@@ -239,13 +239,13 @@ model Peer {
   peerType?: PeerType;
 
   @doc("Connection details containing the IP address and port number")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   ipsAndPorts?: IpAndPortDetails[];
 
   @doc("Connection details containing the address records and port number")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   aRecordsAndPorts?: ArecordAndPortDetails[];
 
   @doc("The DNS SRV record of Operator Network, where Azure Communication Gateway will connect SIP Peers")
@@ -270,7 +270,7 @@ model CallPolicy {
 
   @doc("Routing priorities on a per-peer group and per-serviceLocation basis")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #["peerGroupName"])
+  @identifiers(#["peerGroupName"])
   peerGroupRoutings?: PeerGroupRouting[];
 }
 
@@ -286,7 +286,7 @@ model PeerGroupRouting {
 
   @doc("Routing Details about which service location would use which peer and at what priority")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   routings?: RoutingDetails[];
 }
 
@@ -316,12 +316,12 @@ model RoutingDetails {
 model DefaultMappings {
   @doc("Service to peer group mappings which tells what would be the default peer group for particular service")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #["service"])
+  @identifiers(#["service"])
   serviceToPeerGroup?: ServiceToPeerGroup[];
 
   @doc("peer group to Service mappings which tells what would be the default service for particular peer group")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #["peerGroup"])
+  @identifiers(#["peerGroup"])
   peerGroupToService?: PeerGroupToService[];
 }
 
@@ -403,13 +403,13 @@ model AcgAddressRanges {
 @added(Versions.v2024_02_16_preview)
 model AcgContactInfo {
   @doc("Azure Communication Gateway contact Peer details")
-  @OpenAPI.extension("x-ms-identifiers", #["peerGroupName"])
+  @identifiers(#["peerGroupName"])
   @visibility(Lifecycle.Read)
   peerGroups?: AcgContactPeerGroupDetails[];
 
   @doc("Azure Communication Gateway contact BackendServices details")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   backendServices?: AcgContactBackendServiceDetails[];
 }
 
@@ -493,7 +493,7 @@ model PeerGroupProperties {
 
   @doc("The point at the edge of an Operator Network, where Azure Communication Gateway will connect SIP Peers")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #["peerName"])
+  @identifiers(#["peerName"])
   peers?: Peer[];
 
   //Needed to add String value rather than using Union Value because of bug https://github.com/Azure/typespec-azure-pr/issues/4163
@@ -602,7 +602,7 @@ model ZoomTestLine {
 @added(Versions.v2023_09_21)
 model ZoomConfig {
   @doc("Zoom platform test lines.")
-  @OpenAPI.extension("x-ms-identifiers", #["phoneNumber"])
+  @identifiers(#["phoneNumber"])
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   testLines: ZoomTestLine[];
 
@@ -648,7 +648,7 @@ model DnsDelegationProperties {
 model DnsDelegationsProperties {
   @doc("DNS Domains to delegate for the creation of DNS Zones by the Azure Communications Gateway")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #["domain"])
+  @identifiers(#["domain"])
   @added(Versions.v2023_09_01)
   delegations?: DnsDelegationProperties[];
 }
@@ -667,7 +667,7 @@ model CustomSipHeader {
 model CustomSipHeadersProperties {
   @doc("The Custom SIP Headers to apply to the calls which traverse the Communications Gateway")
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @added(Versions.v2023_09_01)
   headers?: CustomSipHeader[];
 }
@@ -696,13 +696,13 @@ model CommunicationsGatewayProperties is ResourceProperties {
   status?: Status;
 
   @doc("The regions in which to deploy the resources needed for Teams Calling")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   serviceLocations: ServiceRegionProperties[];
 
   @doc("Logical SIP connection with specific properties connecting Azure Communication Gateway to an Operator’s Network, used to connect sessions for a specified service ")
   @added(Versions.v2024_02_16_preview)
-  @OpenAPI.extension("x-ms-identifiers", #["peerGroupName"])
+  @identifiers(#["peerGroupName"])
   @visibility(Lifecycle.Read, Lifecycle.Update, Lifecycle.Create)
   peerGroups?: PeerGroupProperties[];
 

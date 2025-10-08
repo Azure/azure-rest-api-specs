@@ -40,7 +40,7 @@ model MessagingCatalogProperties {
   documentation?: string;
 
   @doc("An array of additional metadata about the catalog.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   labels?: ResourceLabel[];
 
   @doc("A unique absolute URL for the list of endpoints for this catalog.")
@@ -73,7 +73,7 @@ model MessagingCatalogProperties {
 }
 
 @doc("Additional metadata about the entity.")
-@extension("x-ms-identifiers", #["name"])
+@identifiers(#["name"])
 model ResourceLabel {
   @doc("The name of the metadata label.")
   name?: string;
@@ -99,7 +99,7 @@ model MessagingCatalogUpdateProperties {
   documentation?: string;
 
   @doc("An array of additional metadata about the catalog.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   labels?: ResourceLabel[];
 }
 
