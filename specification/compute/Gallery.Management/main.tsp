@@ -19,6 +19,8 @@ import "./GalleryImage.tsp";
 import "./GalleryImageVersion.tsp";
 import "./GalleryApplication.tsp";
 import "./GalleryApplicationVersion.tsp";
+import "./GalleryScript.tsp";
+import "./GalleryScriptVersion.tsp";
 import "./GalleryInVMAccessControlProfile.tsp";
 import "./GalleryInVMAccessControlProfileVersion.tsp";
 import "./SharedGallery.tsp";
