@@ -7898,16 +7898,11 @@
         "jobResourceType": {
           "$ref": "#/definitions/JobResourceType",
           "description": "Discriminator for the JobResource object hierarchy."
-        },
-        "protectionSolutionType": {
-          "$ref": "#/definitions/ResourceProtectionSolutionType",
-          "description": "A setting that indicates the protection solution selected."
         }
       },
       "discriminator": "jobResourceType",
       "required": [
-        "jobResourceType",
-        "protectionSolutionType"
+        "jobResourceType"
       ]
     },
     "JobResourceType": {
@@ -8708,6 +8703,11 @@
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the recovery child job.",
           "readOnly": true
+        },
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected.",
+          "readOnly": true
         }
       },
       "allOf": [
@@ -9075,6 +9075,11 @@
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of the recovery job resource.",
+          "readOnly": true
+        },
+        "protectionSolutionType": {
+          "$ref": "#/definitions/ResourceProtectionSolutionType",
+          "description": "A setting that indicates the protection solution selected.",
           "readOnly": true
         }
       },
