@@ -16,7 +16,6 @@ namespace Language.Conversations.Authoring;
 /**
  * Represents a list of retrieved projects' metadata.
  */
-@clientName("ConversationAuthoringProjectsMetadata", "csharp")
 model AnalyzeConversationAuthoringProjectsMetadata {
   /**
    * The list of projects.
@@ -33,30 +32,25 @@ model AnalyzeConversationAuthoringProjectsMetadata {
  * Represents the metadata of a project.
  */
 @resource("authoring/analyze-conversations/projects")
-@clientName("ConversationAuthoringProjectMetadata", "csharp")
 model AnalyzeConversationAuthoringProjectMetadata {
   /**
    * Represents the project creation datetime.
    */
-  @clientName("createdOn", "csharp")
   createdDateTime: utcDateTime;
 
   /**
    * Represents the project creation datetime.
    */
-  @clientName("lastModifiedOn", "csharp")
   lastModifiedDateTime: utcDateTime;
 
   /**
    * Represents the project last trained datetime.
    */
-  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime?: utcDateTime;
 
   /**
    * Represents the project last deployed datetime.
    */
-  @clientName("lastDeployedOn", "csharp")
   lastDeployedDateTime?: utcDateTime;
 
   /**
@@ -75,7 +69,8 @@ model AnalyzeConversationAuthoringProjectMetadata {
    * The storage container name in case of conversation summarization.
    */
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   storageInputContainerName?: string;
 
   /**
@@ -108,7 +103,6 @@ model AnalyzeConversationAuthoringProjectMetadata {
 /**
  * Represents the settings used to define the project behavior.
  */
-@clientName("ConversationAuthoringProjectSettings", "csharp")
 model AnalyzeConversationAuthoringProjectSettings {
   /**
    * The threshold of the intent with the highest confidence, at which the prediction will automatically be changed to "None". The value of the threshold should be between 0 and 1 inclusive.
@@ -119,7 +113,6 @@ model AnalyzeConversationAuthoringProjectSettings {
 /**
  * An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/Microsoft/api-guidelines/blob/vNext/Guidelines.md#7102-error-condition-responses.
  */
-@clientName("ConversationAuthoringInnerErrorModel", "csharp")
 model InnerErrorModel {
   /**
    * One of a server-defined set of error codes.
@@ -150,7 +143,6 @@ model InnerErrorModel {
 /**
  * Represents the options used to create or update a project.
  */
-@clientName("ConversationAuthoringCreateProjectDetails", "csharp")
 model AnalyzeConversationAuthoringCreateProjectOptions {
   /**
    * Represents the project kind.
@@ -165,7 +157,8 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
   /**
    * The storage container name in case of conversation summarization.
    */
-  @added(Versions.v2024_11_15_preview)
+  @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   storageInputContainerName?: string;
 
   /**
@@ -192,8 +185,8 @@ model AnalyzeConversationAuthoringCreateProjectOptions {
 /**
  * Represents the options for authorizing a project copy to the current Azure resource.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringCopyAuthorizationDetails", "csharp")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationAuthoringCopyAuthorizationOptions {
   /**
    * Represents the project kind.
@@ -214,8 +207,8 @@ model AnalyzeConversationAuthoringCopyAuthorizationOptions {
 /**
  * Represents the options for copying an existing project to another Azure resource.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringCopyProjectDetails", "csharp")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationAuthoringCopiedProjectOptions {
   /**
    * Represents the project kind.
@@ -251,7 +244,6 @@ model AnalyzeConversationAuthoringCopiedProjectOptions {
 /**
  * Represents an exported project.
  */
-@clientName("ConversationAuthoringExportedProject", "csharp")
 model AnalyzeConversationAuthoringExportedProject {
   /**
    * The version of the exported file.
@@ -278,7 +270,6 @@ model AnalyzeConversationAuthoringExportedProject {
  * Represents the assets of an exported project.
  */
 @discriminator("projectKind")
-@clientName("ConversationAuthoringExportedProjectAsset", "csharp")
 model AnalyzeConversationAuthoringExportedProjectAssets {
   /**
    * The type of project containing the assets.
@@ -289,7 +280,6 @@ model AnalyzeConversationAuthoringExportedProjectAssets {
 /**
  * Represents the options for starting a new training job.
  */
-@clientName("ConversationAuthoringTrainingJobDetails", "csharp")
 model AnalyzeConversationAuthoringTrainingJobOptions {
   /**
    * Represents the output model label.
@@ -315,13 +305,13 @@ model AnalyzeConversationAuthoringTrainingJobOptions {
    * For customers to populate if they wish to use data generation for their model training job.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   dataGenerationSettings?: AnalyzeConversationAuthoringDataGenerationSettings;
 }
 
 /**
  * Represents the options used running the evaluation.
  */
-@clientName("ConversationAuthoringEvaluationDetails", "csharp")
 model AnalyzeConversationAuthoringEvaluationOptions {
   /**
    * Represents the evaluation kind. By default, the evaluation kind is set to percentage.
@@ -342,8 +332,8 @@ model AnalyzeConversationAuthoringEvaluationOptions {
 /**
  * Represents the state of a copy job.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringCopyProjectState", "csharp")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 @resource("copy/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringCopiedProjectJobState {
@@ -353,7 +343,6 @@ model AnalyzeConversationAuthoringCopiedProjectJobState {
 /**
  * Represents a job's state.
  */
-@clientName("ConversationAuthoringState", "csharp")
 model AnalyzeConversationAuthoringJobState {
   /**
    * The job ID.
@@ -365,19 +354,16 @@ model AnalyzeConversationAuthoringJobState {
   /**
    * The creation date time of the job.
    */
-  @clientName("createdOn", "csharp")
   createdDateTime: utcDateTime;
 
   /**
    * The last date time the job was updated.
    */
-  @clientName("lastUpdatedOn", "csharp")
   lastUpdatedDateTime: utcDateTime;
 
   /**
    * The expiration date time of the job.
    */
-  @clientName("expiresOn", "csharp")
   expirationDateTime?: utcDateTime;
 
   /**
@@ -399,7 +385,6 @@ model AnalyzeConversationAuthoringJobState {
 /**
  * Represents a list of retrieved deployments.
  */
-@clientName("ConversationAuthoringProjectDeployments", "csharp")
 model AnalyzeConversationAuthoringProjectDeployments {
   /**
    * The list of retrieved deployments.
@@ -415,7 +400,6 @@ model AnalyzeConversationAuthoringProjectDeployments {
 /**
  * Represents a project deployment.
  */
-@clientName("ConversationAuthoringProjectDeployment", "csharp")
 @resource("deployments")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringProjectDeployment {
@@ -434,19 +418,16 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents deployment last trained time.
    */
-  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime: utcDateTime;
 
   /**
    * Represents deployment last deployed time.
    */
-  @clientName("lastDeployedOn", "csharp")
   lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
    */
-  @clientName("deploymentExpiredOn", "csharp")
   deploymentExpirationDate: plainDate;
 
   /**
@@ -457,14 +438,19 @@ model AnalyzeConversationAuthoringProjectDeployment {
   /**
    * Represents the metadata of the assigned Azure resources.
    */
-  @added(Versions.v2024_11_15_preview)
-  assignedResources: AnalyzeConversationAuthoringDeploymentResource[];
+  @added(Versions.v2025_05_15_preview)
+  @typeChangedFrom(
+    Versions.v2025_11_01,
+    AnalyzeConversationAuthoringDeploymentResource[]
+  )
+  assignedResources: AnalyzeConversationAuthoringProjectResourceInfo[];
 }
 
 /**
  * Represents an Azure resource assigned to a deployment.
  */
-@clientName("ConversationAuthoringDeploymentResource", "csharp")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationAuthoringDeploymentResource {
   /**
    * Represents the Azure resource Id.
@@ -480,13 +466,13 @@ model AnalyzeConversationAuthoringDeploymentResource {
    * Represents the AOAI resource assigned for data generation.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   assignedAoaiResource?: AnalyzeConversationAuthoringDataGenerationConnectionInfo;
 }
 
 /**
  * Represents the options for creating or updating a project deployment.
  */
-@clientName("ConversationAuthoringCreateDeploymentDetails", "csharp")
 model AnalyzeConversationAuthoringCreateDeploymentOptions {
   /**
    * Represents the trained model label.
@@ -494,26 +480,29 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
   trainedModelLabel: string;
 
   /**
-   * Represents the resource IDs to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
+   * Represents the Language or AIService resource IDs that if provided,\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
-  @added(Versions.v2024_11_15_preview)
-  @removed(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_01)
   assignedResourceIds?: string[];
 
   /**
    * Represents the resources to be assigned to the deployment. If provided, the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   assignedResources?: AnalyzeConversationAuthoringDeploymentResource[];
 }
 
 /**
- * Represents the options for deleting a project deployment.
+ * Represents the payload for deleting a project deployment.
  */
-@clientName("ConversationAuthoringDeleteDeploymentDetails", "csharp")
-model AnalyzeConversationAuthoringDeleteDeploymentOptions {
+@renamedFrom(
+  Versions.v2025_11_01,
+  "AnalyzeConversationAuthoringDeleteDeploymentOptions"
+)
+model AnalyzeConversationAuthoringProjectAzureResourceIds {
   /**
-   * Represents the resource IDs to delete the deployment from. If not provided, the deployment will be rolled out from all the resources it is deployed to. If provided, it will delete the deployment only from the specified assigned resources, and leave it for the rest.
+   * Represents the Language or AIService resource IDs to unassign from the project or delete the deployment from.
    */
   assignedResourceIds?: string[];
 }
@@ -521,7 +510,6 @@ model AnalyzeConversationAuthoringDeleteDeploymentOptions {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("ConversationAuthoringDeploymentState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("jobs")
 model AnalyzeConversationAuthoringDeploymentJobState {
@@ -531,7 +519,6 @@ model AnalyzeConversationAuthoringDeploymentJobState {
 /**
  * Represents the state of an existing delete deployment from specific resources job.
  */
-@clientName("ConversationAuthoringDeploymentDeleteFromResourcesState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectDeployment)
 @resource("delete-from-resources/jobs")
 model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
@@ -541,7 +528,6 @@ model AnalyzeConversationAuthoringDeploymentDeleteFromResourcesJobState {
 /**
  * Represents the state of a deployment job.
  */
-@clientName("ConversationAuthoringSwapDeploymentsState", "csharp")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 @resource("deployments/swap/jobs")
 model AnalyzeConversationAuthoringSwapDeploymentsJobState {
@@ -551,7 +537,6 @@ model AnalyzeConversationAuthoringSwapDeploymentsJobState {
 /**
  * Represents the options for swapping two deployments together.
  */
-@clientName("ConversationAuthoringSwapDeploymentsDetails", "csharp")
 model AnalyzeConversationAuthoringSwapDeploymentsOptions {
   /**
    * Represents the first deployment name.
@@ -567,7 +552,6 @@ model AnalyzeConversationAuthoringSwapDeploymentsOptions {
 /**
  * Represents the state of an export job.
  */
-@clientName("ConversationAuthoringExportProjectState", "csharp")
 @resource("export/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringExportProjectJobState {
@@ -576,14 +560,12 @@ model AnalyzeConversationAuthoringExportProjectJobState {
   /**
    * The URL to use in order to download the exported project.
    */
-  @clientName("resultUri", "csharp")
   resultUrl?: string;
 }
 
 /**
  * Represents the state of an import job.
  */
-@clientName("ConversationAuthoringImportProjectState", "csharp")
 @resource("import/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringImportProjectJobState {
@@ -593,7 +575,6 @@ model AnalyzeConversationAuthoringImportProjectJobState {
 /**
  * Represents a list of retrieved trained models.
  */
-@clientName("ConversationAuthoringProjectTrainedModels", "csharp")
 model AnalyzeConversationAuthoringProjectTrainedModels {
   /**
    * The list of trained models.
@@ -609,7 +590,6 @@ model AnalyzeConversationAuthoringProjectTrainedModels {
 /**
  * Represents a trained model.
  */
-@clientName("ConversationAuthoringProjectTrainedModel", "csharp")
 @resource("models")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringProjectTrainedModel {
@@ -628,7 +608,6 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime: utcDateTime;
 
   /**
@@ -639,7 +618,6 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
   /**
    * The model expiration date.
    */
-  @clientName("modelExpiredOn", "csharp")
   modelExpirationDate: plainDate;
 
   /**
@@ -656,7 +634,6 @@ model AnalyzeConversationAuthoringProjectTrainedModel {
 /**
  * Represents the state of a evaluation job.
  */
-@clientName("ConversationAuthoringEvaluationState", "csharp")
 @resource("evaluate/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringEvaluationJobState {
@@ -669,12 +646,10 @@ model AnalyzeConversationAuthoringEvaluationJobState {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationAuthoringEvaluationJobResult", "csharp")
 model AnalyzeConversationAuthoringEvaluationJobResult {
   /**
    * Represents the options used running the evaluation.
    */
-  @clientName("evaluationDetails", "csharp")
   evaluationOptions: AnalyzeConversationAuthoringEvaluationOptions;
 
   /**
@@ -696,7 +671,6 @@ model AnalyzeConversationAuthoringEvaluationJobResult {
 /**
  * Represent a list of utterances' evaluation results.
  */
-@clientName("ConversationAuthoringEvalResults", "csharp")
 model AnalyzeConversationAuthoringEvaluationResults {
   /**
    * The utterances evaluation results.
@@ -746,7 +720,6 @@ model ProjectKindQueryParameter {
 /**
  * Represents the evaluation result for an utterance.
  */
-@clientName("UtteranceEvaluationResult", "csharp")
 @resource("evaluation/result")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringUtteranceEvaluationResult {
@@ -776,7 +749,6 @@ model AnalyzeConversationAuthoringUtteranceEvaluationResult {
 /**
  * Represents the comparison between the expected and predicted entities for an utterance.
  */
-@clientName("UtteranceEntitiesEvaluationResult", "csharp")
 model AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult {
   /**
    * Represents the expected entity labels.
@@ -792,7 +764,6 @@ model AnalyzeConversationAuthoringUtteranceEntitiesEvaluationResult {
 /**
  * Represents the evaluation output of an entity label or prediction.
  */
-@clientName("UtteranceEntityEvaluationResult", "csharp")
 model AnalyzeConversationAuthoringUtteranceEntityEvaluationResult {
   /**
    * Represents the entity category.
@@ -813,7 +784,6 @@ model AnalyzeConversationAuthoringUtteranceEntityEvaluationResult {
 /**
  * Represents the comparison between the expected and the predicted intent for an utterance.
  */
-@clientName("UtteranceIntentsEvaluationResult", "csharp")
 model AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult {
   /**
    * Represents the utterance's expected intent.
@@ -829,7 +799,6 @@ model AnalyzeConversationAuthoringUtteranceIntentsEvaluationResult {
 /**
  * Represents the evaluation result summary.
  */
-@clientName("ConversationAuthoringEvalSummary", "csharp")
 model AnalyzeConversationAuthoringEvaluationSummary {
   /**
    * Contains the data related to entities evaluation.
@@ -850,7 +819,6 @@ model AnalyzeConversationAuthoringEvaluationSummary {
 /**
  * Represents the evaluation result summary for the project's entities.
  */
-@clientName("EntitiesEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
   /**
    * Represents the confusion matrix between two entities (the two entities can be the same). The matrix is between the entity that was labelled and the entity that was predicted.
@@ -894,14 +862,12 @@ model AnalyzeConversationAuthoringEntitiesEvaluationSummary {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationAuthoringConfusionMatrixRow", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixRow
   is Record<AnalyzeConversationAuthoringConfusionMatrixCell>;
 
 /**
  * Represents a cell in a confusion matrix.
  */
-@clientName("ConversationAuthoringConfusionMatrixCell", "csharp")
 model AnalyzeConversationAuthoringConfusionMatrixCell {
   /**
    * Represents normalized value in percentages.
@@ -917,7 +883,6 @@ model AnalyzeConversationAuthoringConfusionMatrixCell {
 /**
  * Represents the evaluation result for an entity.
  */
-@clientName("ConversationAuthoringEntityEvalSummary", "csharp")
 model AnalyzeConversationAuthoringEntityEvaluationSummary {
   /**
    * Represents the model F1 score
@@ -958,7 +923,6 @@ model AnalyzeConversationAuthoringEntityEvaluationSummary {
 /**
  * Represents the evaluation summary for the project's intents.
  */
-@clientName("IntentsEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringIntentsEvaluationSummary {
   /**
    * Represents the confusion matrix between two intents (the two intents can be the same). The matrix is between the intent that was labelled and the intent that was predicted.
@@ -1004,7 +968,6 @@ model AnalyzeConversationAuthoringIntentsEvaluationSummary {
 /**
  * The evaluation summary for an intent.
  */
-@clientName("IntentEvaluationSummary", "csharp")
 model AnalyzeConversationAuthoringIntentEvaluationSummary {
   /**
    * Represents the model precision
@@ -1045,7 +1008,6 @@ model AnalyzeConversationAuthoringIntentEvaluationSummary {
 /**
  * Represents the state of loading a snapshot job.
  */
-@clientName("ConversationAuthoringLoadSnapshotState", "csharp")
 @resource("load-snapshot/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectTrainedModel)
 model AnalyzeConversationAuthoringLoadSnapshotJobState {
@@ -1055,13 +1017,16 @@ model AnalyzeConversationAuthoringLoadSnapshotJobState {
 /**
  * Represents the assigned deployment resources.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringAssignedDeploymentResources", "csharp")
-model AnalyzeConversationAuthoringAssignedDeploymentResources {
+@added(Versions.v2025_05_15_preview)
+@renamedFrom(
+  Versions.v2025_11_01,
+  "AnalyzeConversationAuthoringAssignedDeploymentResources"
+)
+model AnalyzeConversationAuthoringDeploymentResourcesInfoList {
   /**
    * The list of assigned deployment resources.
    */
-  value: AnalyzeConversationAuthoringAssignedDeploymentResource[];
+  value: AnalyzeConversationAuthoringProjectResourceInfo[];
 
   /**
    * The next page link.
@@ -1070,45 +1035,53 @@ model AnalyzeConversationAuthoringAssignedDeploymentResources {
 }
 
 /**
- * Represents the assigned deployment resource.
+ * Represents the assigned project resource.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringAssignedDeploymentResource", "csharp")
+@added(Versions.v2025_05_15_preview)
 @resource("resources")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-model AnalyzeConversationAuthoringAssignedDeploymentResource {
+@renamedFrom(
+  Versions.v2025_11_01,
+  "AnalyzeConversationAuthoringAssignedDeploymentResource"
+)
+model AnalyzeConversationAuthoringProjectResourceInfo {
   /**
-   * The resource ID.
+   * The Azure resource ID of the language or AI resource.
    */
   @key
   @visibility(Lifecycle.Read)
-  @clientName("resourceId", "csharp")
   azureResourceId: string;
 
   /**
-   * The resource region.
+   * The Azure resource region.
    */
   region: string;
 }
 
 /**
- * Represents the options for assigning Azure resources to a project.
+ * Represents the payload for assigning Azure resources to a project.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringAssignDeploymentResourcesDetails", "csharp")
-model AnalyzeConversationAuthoringAssignDeploymentResourcesOptions {
+@added(Versions.v2025_05_15_preview)
+@renamedFrom(
+  Versions.v2025_11_01,
+  "AnalyzeConversationAuthoringAssignDeploymentResourcesOptions"
+)
+model AnalyzeConversationAuthoringProjectResourceAssignments {
   /**
-   * Represents the metadata for the resources to be assigned.
+   * Represents the metadata for the project resources to be assigned.
    */
-  @clientName("metadata", "csharp")
-  resourcesMetadata: AnalyzeConversationAuthoringResourceMetadata[];
+  @renamedFrom(Versions.v2025_11_01, "resourcesMetadata")
+  projectResources: AnalyzeConversationAuthoringProjectResourceAssignmentInfo[];
 }
 
 /**
  * Represents metadata for the Azure resource..
  */
-@clientName("ConversationAuthoringResourceMetadata", "csharp")
-model AnalyzeConversationAuthoringResourceMetadata {
+@renamedFrom(
+  Versions.v2025_11_01,
+  "AnalyzeConversationAuthoringResourceMetadata"
+)
+model AnalyzeConversationAuthoringProjectResourceAssignmentInfo {
   /**
    * Represents the Azure resource ID.
    */
@@ -1128,8 +1101,7 @@ model AnalyzeConversationAuthoringResourceMetadata {
 /**
  * Represents the options to unassign Azure resources from a project.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringUnassignDeploymentResourcesDetails", "csharp")
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
   /**
    * Represents the assigned resource IDs to be unassigned.
@@ -1138,20 +1110,22 @@ model AnalyzeConversationAuthoringUnassignDeploymentResourcesOptions {
 }
 
 /**
- * Represents the state of a deployment resources job.
+ * Represents the state of a project resources job.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringDeploymentResourcesState", "csharp")
+@added(Versions.v2025_05_15_preview)
 @resource("resources/assign/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
-model AnalyzeConversationAuthoringDeploymentResourcesJobState {
+@renamedFrom(
+  Versions.v2025_11_01,
+  "AnalyzeConversationAuthoringDeploymentResourcesJobState"
+)
+model AnalyzeConversationAuthoringProjectResourcesJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
 
 /**
  * Represents a list of retrieved training jobs.
  */
-@clientName("ConversationAuthoringTrainingJobs", "csharp")
 model AnalyzeConversationAuthoringTrainingJobs {
   /**
    * The list of jobs.
@@ -1167,7 +1141,6 @@ model AnalyzeConversationAuthoringTrainingJobs {
 /**
  * Represents the state of a training job.
  */
-@clientName("ConversationAuthoringTrainingState", "csharp")
 @resource("train/jobs")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringTrainingJobState {
@@ -1182,7 +1155,6 @@ model AnalyzeConversationAuthoringTrainingJobState {
 /**
  * Represents the output of a training job.
  */
-@clientName("ConversationAuthoringTrainingJobResult", "csharp")
 model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents trained model label.
@@ -1208,6 +1180,7 @@ model AnalyzeConversationAuthoringTrainingJobResult {
    * Represents the model data generation status.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   dataGenerationStatus: AnalyzeConversationAuthoringSubTrainingJobState;
 
   /**
@@ -1218,14 +1191,12 @@ model AnalyzeConversationAuthoringTrainingJobResult {
   /**
    * Represents the estimated end date time for training and evaluation.
    */
-  @clientName("estimatedEndOn", "csharp")
   estimatedEndDateTime?: utcDateTime;
 }
 
 /**
  * Represents the detailed state of a training sub-operation.
  */
-@clientName("ConversationAuthoringSubTrainingState", "csharp")
 model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents progress percentage.
@@ -1235,13 +1206,11 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
   /**
    * Represents the start date time.
    */
-  @clientName("startedOn", "csharp")
   startDateTime?: utcDateTime;
 
   /**
    * Represents the end date time.
    */
-  @clientName("endedOn", "csharp")
   endDateTime?: utcDateTime;
 
   /**
@@ -1253,7 +1222,6 @@ model AnalyzeConversationAuthoringSubTrainingJobState {
 /**
  * Represents the state of a project deletion job.
  */
-@clientName("ConversationAuthoringProjectDeletionState", "csharp")
 model AnalyzeConversationAuthoringProjectDeletionJobState {
   ...AnalyzeConversationAuthoringJobState;
 }
@@ -1261,11 +1229,7 @@ model AnalyzeConversationAuthoringProjectDeletionJobState {
 /**
  * Represents the metadata for deployments assigned to a resource.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName(
-  "ConversationAuthoringAssignedResourceDeploymentsMetadata",
-  "csharp"
-)
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
   /**
    * The list of retrieved assigned project deployments.
@@ -1281,8 +1245,7 @@ model AnalyzeConversationAuthoringAssignedResourceDeploymentsMetadata {
 /**
  * Represents the metadata for assigned deployments for a project.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringAssignedProjectDeploymentsMetadata", "csharp")
+@added(Versions.v2025_05_15_preview)
 @resource("authoring/analyze-conversations/projects/global/deployments/resources")
 model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
   /**
@@ -1301,8 +1264,7 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentsMetadata {
 /**
  * Represents the metadata for an assigned deployment
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringAssignedProjectDeploymentMetadata", "csharp")
+@added(Versions.v2025_05_15_preview)
 model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents the deployment name.
@@ -1312,20 +1274,17 @@ model AnalyzeConversationAuthoringAssignedProjectDeploymentMetadata {
   /**
    * Represents deployment last deployed time.
    */
-  @clientName("lastDeployedOn", "csharp")
   lastDeployedDateTime: utcDateTime;
 
   /**
    * Represents deployment expiration date in the runtime.
    */
-  @clientName("DeploymentExpiresOn", "csharp")
   deploymentExpirationDate: plainDate;
 }
 
 /**
  * Represents a list of retrieved languages.
  */
-@clientName("ConversationAuthoringSupportedLanguages", "csharp")
 model AnalyzeConversationAuthoringSupportedLanguages {
   /**
    * The list of the languages.
@@ -1340,7 +1299,6 @@ model AnalyzeConversationAuthoringSupportedLanguages {
 /**
  * Represents a supported language.
  */
-@clientName("ConversationAuthoringSupportedLanguage", "csharp")
 @resource("authoring/analyze-conversations/projects/global/languages")
 model AnalyzeConversationAuthoringSupportedLanguage {
   /**
@@ -1359,7 +1317,6 @@ model AnalyzeConversationAuthoringSupportedLanguage {
 /**
  * Represents a list of the retrieved supported prebuilt entities.
  */
-@clientName("ConversationAuthoringPrebuiltEntities", "csharp")
 model AnalyzeConversationAuthoringPrebuiltEntities {
   /**
    * The supported prebuilt entities.
@@ -1375,7 +1332,6 @@ model AnalyzeConversationAuthoringPrebuiltEntities {
 /**
  * Represents a supported prebuilt entity.
  */
-@clientName("ConversationAuthoringPrebuiltEntity", "csharp")
 @resource("authoring/analyze-conversations/projects/global/prebuilt-entities")
 model AnalyzeConversationAuthoringPrebuiltEntity {
   /**
@@ -1399,7 +1355,6 @@ model AnalyzeConversationAuthoringPrebuiltEntity {
 /**
  * Represents a list of training config versions.
  */
-@clientName("ConversationAuthoringTrainingConfigVersions", "csharp")
 model AnalyzeConversationAuthoringTrainingConfigVersions {
   /**
    * The list of the training config versions.
@@ -1416,7 +1371,6 @@ model AnalyzeConversationAuthoringTrainingConfigVersions {
  * Represents a training config version.
  */
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "TODO: This client name renaming explicitly makes us run into the csharp issue. Please fix."
-@clientName("ConversationAuthoringTrainingConfigVersion", "csharp")
 @resource("authoring/analyze-conversations/projects/global/training-config-versions")
 model AnalyzeConversationAuthoringTrainingConfigVersion {
   /**
@@ -1435,7 +1389,6 @@ model AnalyzeConversationAuthoringTrainingConfigVersion {
 /**
  * Represents an entity with its components.
  */
-@clientName("ConversationExportedEntity", "csharp")
 model AnalyzeConversationAuthoringConversationExportedEntity {
   /**
    * The category of the entity.
@@ -1446,12 +1399,12 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
    * The entity description.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   description?: string;
 
   /**
    * The behavior to follow when the entity's components overlap with each other.
    */
-  @clientName("compositionMode", "csharp")
   compositionSetting?: CompositionSetting;
 
   /**
@@ -1478,7 +1431,6 @@ model AnalyzeConversationAuthoringConversationExportedEntity {
 /**
  * Represents a list component of an entity.
  */
-@clientName("ConversationAuthoringExportedEntityList", "csharp")
 model AnalyzeConversationAuthoringExportedEntityList {
   /**
    * The sub-lists of the list component.
@@ -1489,7 +1441,6 @@ model AnalyzeConversationAuthoringExportedEntityList {
 /**
  * Represents a sub-list inside a list component.
  */
-@clientName("ConversationAuthoringExportedEntitySublist", "csharp")
 model AnalyzeConversationAuthoringExportedEntitySublist {
   /**
    * The key of the sub-list.
@@ -1505,7 +1456,6 @@ model AnalyzeConversationAuthoringExportedEntitySublist {
 /**
  * Represents a list of synonyms inside a list component
  */
-@clientName("ConversationAuthoringExportedEntityListSynonym", "csharp")
 model AnalyzeConversationAuthoringExportedEntityListSynonym {
   /**
    * Represents the language of the synonyms. This is BCP-47 representation of a language. For example, use "en" for English, "en-gb" for English (UK), "es" for Spanish etc.
@@ -1521,7 +1471,6 @@ model AnalyzeConversationAuthoringExportedEntityListSynonym {
 /**
  * Represents an exported prebuilt entity component
  */
-@clientName("ConversationAuthoringExportedPrebuiltEntity", "csharp")
 model AnalyzeConversationAuthoringExportedPrebuiltEntity {
   /**
    * The prebuilt entity category.
@@ -1532,7 +1481,6 @@ model AnalyzeConversationAuthoringExportedPrebuiltEntity {
 /**
  * Represents a regex component of an entity.
  */
-@clientName("ExportedEntityRegex", "csharp")
 model AnalyzeConversationAuthoringExportedEntityRegex {
   /**
    * The regex expressions of the regex component. These expressions follow the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
@@ -1543,7 +1491,6 @@ model AnalyzeConversationAuthoringExportedEntityRegex {
 /**
  * Represents a regex expression inside a regex component. This expression follows the .NET regex syntax. For reference, check here: https://learn.microsoft.com/dotnet/standard/base-types/regular-expressions
  */
-@clientName("ExportedEntityRegexExpression", "csharp")
 model AnalyzeConversationAuthoringExportedEntityRegexExpression {
   /**
    * The key of the regex expression.
@@ -1564,7 +1511,6 @@ model AnalyzeConversationAuthoringExportedEntityRegexExpression {
 /**
  * Represents an exported intent of a conversational project.
  */
-@clientName("ConversationExportedIntent", "csharp")
 model AnalyzeConversationAuthoringConversationExportedIntent {
   /**
    * The intent category.
@@ -1575,20 +1521,22 @@ model AnalyzeConversationAuthoringConversationExportedIntent {
    * The intent description.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   description?: string;
 
   /**
    * The list of associated entities.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   associatedEntities?: AnalyzeConversationExportedAssociatedEntityLabel[];
 }
 
 /**
  * Represents an associated entity label for an intent.
  */
-@clientName("ConversationExportedAssociatedEntityLabel", "csharp")
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationExportedAssociatedEntityLabel {
   /**
    * The category of the entity label.
@@ -1599,7 +1547,6 @@ model AnalyzeConversationExportedAssociatedEntityLabel {
 /**
  * Represents the exported assets of a conversational project.
  */
-@clientName("ConversationExportedProjectAsset", "csharp")
 model AnalyzeConversationAuthoringConversationExportedProjectAsset
   extends AnalyzeConversationAuthoringExportedProjectAssets {
   /**
@@ -1626,7 +1573,6 @@ model AnalyzeConversationAuthoringConversationExportedProjectAsset
 /**
  * Represents an exported utterance for a conversational project.
  */
-@clientName("ConversationExportedUtterance", "csharp")
 model AnalyzeConversationAuthoringConversationExportedUtterance {
   /**
    * Represents the entity labels of the utterance.
@@ -1674,7 +1620,6 @@ union DatasetType {
 /**
  * Represents an entity label for an utterance.
  */
-@clientName("ExportedUtteranceEntityLabel", "csharp")
 model AnalyzeConversationAuthoringExportedUtteranceEntityLabel {
   /**
    * The category of the entity label.
@@ -1693,7 +1638,6 @@ model AnalyzeConversationAuthoringExportedUtteranceEntityLabel {
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("ConversationSummarizationExportedProjectAsset", "csharp")
 model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset {
   /**
    * Represents the conversations of the project.
@@ -1705,7 +1649,6 @@ model AnalyzeConversationAuthoringConversationSummarizationExportedProjectAsset 
  * Represents an exported conversation for a custom conversation summarization.
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
-@clientName("CustomConversationSummarizationConversation", "csharp")
 model AnalyzeConversationAuthoringCustomConversationSummarizationConversation {
   summaryLocation?: string;
 
@@ -1728,7 +1671,6 @@ model AnalyzeConversationAuthoringCustomConversationSummarizationConversation {
 /**
  * Defines the orchestration details for a Conversational project target.
  */
-@clientName("ExportedConversationOrchestration", "csharp")
 model AnalyzeConversationAuthoringExportedConversationOrchestration {
   /**
    * The name of the targeted project.
@@ -1744,7 +1686,6 @@ model AnalyzeConversationAuthoringExportedConversationOrchestration {
 /**
  * Represents the orchestration options for a Conversational project target.
  */
-@clientName("ExportedConversationOrchestrationDetails", "csharp")
 model AnalyzeConversationAuthoringExportedConversationOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1762,7 +1703,6 @@ model AnalyzeConversationAuthoringExportedConversationOrchestrationOptions
  * Represents the options used to define the orchestration behavior of an intent.
  */
 @discriminator("targetProjectKind")
-@clientName("ExportedOrchestrationDetails", "csharp")
 model AnalyzeConversationAuthoringExportedOrchestrationOptions {
   targetProjectKind: OrchestrationTargetProjectKind;
 }
@@ -1770,7 +1710,6 @@ model AnalyzeConversationAuthoringExportedOrchestrationOptions {
 /**
  * Defines the orchestration details for a LUIS application target.
  */
-@clientName("ExportedLuisOrchestration", "csharp")
 model AnalyzeConversationAuthoringExportedLuisOrchestration {
   /**
    * The LUIS application ID.
@@ -1791,7 +1730,6 @@ model AnalyzeConversationAuthoringExportedLuisOrchestration {
 /**
  * Represents the orchestration options for a LUIS application target.
  */
-@clientName("ExportedLuisOrchestrationDetails", "csharp")
 model AnalyzeConversationAuthoringExportedLuisOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1808,7 +1746,6 @@ model AnalyzeConversationAuthoringExportedLuisOrchestrationOptions
 /**
  * Defines the orchestration details for a Question Answering project target.
  */
-@clientName("ExportedQuestionAnsweringOrchestration", "csharp")
 model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration {
   /**
    * The name of the target project.
@@ -1819,7 +1756,6 @@ model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestration {
 /**
  * Represents the orchestration options for a Question Answering project target.
  */
-@clientName("ExportedQuestionAnsweringOrchestrationDetails", "csharp")
 model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions
   extends AnalyzeConversationAuthoringExportedOrchestrationOptions {
   /**
@@ -1836,7 +1772,6 @@ model AnalyzeConversationAuthoringExportedQuestionAnsweringOrchestrationOptions
 /**
  * Represents an exported intent for an orchestration project.
  */
-@clientName("OrchestrationExportedIntent", "csharp")
 model AnalyzeConversationAuthoringOrchestrationExportedIntent {
   /**
    * Specifies the behavior of this intent in the orchestration flow.
@@ -1852,13 +1787,13 @@ model AnalyzeConversationAuthoringOrchestrationExportedIntent {
    * The intent description.
    */
   @added(Versions.v2025_05_15_preview)
+  @removed(Versions.v2025_11_01)
   description?: string;
 }
 
 /**
  * Represents the assets of an orchestration project.
  */
-@clientName("OrchestrationExportedProjectAsset", "csharp")
 model AnalyzeConversationAuthoringOrchestrationExportedProjectAsset
   extends AnalyzeConversationAuthoringExportedProjectAssets {
   /**
@@ -1880,7 +1815,6 @@ model AnalyzeConversationAuthoringOrchestrationExportedProjectAsset
 /**
  * Represents an utterance of an orchestration project.
  */
-@clientName("OrchestrationExportedUtterance", "csharp")
 model AnalyzeConversationAuthoringOrchestrationExportedUtterance {
   /**
    * The utterance text.
@@ -1906,7 +1840,6 @@ model AnalyzeConversationAuthoringOrchestrationExportedUtterance {
 /**
  * Represents an exported trained model.
  */
-@clientName("ConversationAuthoringExportedTrainedModel", "csharp")
 @resource("exported-models")
 @parentResource(AnalyzeConversationAuthoringProjectMetadata)
 model AnalyzeConversationAuthoringExportedTrainedModel {
@@ -1925,19 +1858,16 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
   /**
    * The last trained date time of the model.
    */
-  @clientName("lastTrainedOn", "csharp")
   lastTrainedDateTime: utcDateTime;
 
   /**
    * The last exported date time of the model.
    */
-  @clientName("lastExportedModelOn", "csharp")
   lastExportedModelDateTime: utcDateTime;
 
   /**
    * The model expiration date.
    */
-  @clientName("modelExpiredOn", "csharp")
   modelExpirationDate: plainDate;
 
   /**
@@ -1948,8 +1878,8 @@ model AnalyzeConversationAuthoringExportedTrainedModel {
 /**
  * Represents the state of a job to create or updated an exported model.
  */
-@added(Versions.v2024_11_15_preview)
-@clientName("ConversationAuthoringExportedModelState", "csharp")
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 @resource("jobs")
 @parentResource(AnalyzeConversationAuthoringExportedTrainedModel)
 model AnalyzeConversationAuthoringExportedModelJobState {
@@ -1958,8 +1888,8 @@ model AnalyzeConversationAuthoringExportedModelJobState {
 /**
  * Represents the properties for the model file.
  */
-@clientName("ConversationAuthoringModelFile", "csharp")
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationAuthoringModelFile {
   /**
    * The name of the file.
@@ -1974,8 +1904,8 @@ model AnalyzeConversationAuthoringModelFile {
 /**
  * Represents the options for creating or replacing an exported model.
  */
-@clientName("ConversationAuthoringExportedModelDetails", "csharp")
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model ExportedModelOptions {
   /**
    * The trained model label.
@@ -1988,6 +1918,7 @@ model ExportedModelOptions {
  */
 #suppress "@azure-tools/typespec-azure-core/documentation-required"
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 union AnalyzeConversationAuthoringDataGenerationConnectionKind {
   string,
   AzureOpenAI: "AzureOpenAI",
@@ -1997,6 +1928,7 @@ union AnalyzeConversationAuthoringDataGenerationConnectionKind {
  * Represents the connection info for the Azure resource to use during data generation.
  */
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationAuthoringDataGenerationConnectionInfo {
   /**
    * Connection type for data generation settings. Currently only supports Azure OpenAI.
@@ -2019,6 +1951,7 @@ model AnalyzeConversationAuthoringDataGenerationConnectionInfo {
  * Settings to enable data generation for training augmentation.
  */
 @added(Versions.v2025_05_15_preview)
+@removed(Versions.v2025_11_01)
 model AnalyzeConversationAuthoringDataGenerationSettings {
   /**
    * Must be explicitly set to True to enable data generation to augment training data.

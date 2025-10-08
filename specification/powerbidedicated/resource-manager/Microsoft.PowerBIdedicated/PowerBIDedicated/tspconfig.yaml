@@ -12,7 +12,7 @@ options:
     output-file: "{version-status}/{version}/openapi.json"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-powerbidedicated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-powerbidedicated"
     namespace: "azure.mgmt.powerbidedicated"
     generate-test: true
     generate-sample: true
@@ -24,7 +24,7 @@ options:
     flavor: azure
   "@azure-tools/typespec-ts":
     service-dir: sdk/powerbidedicated
-    package-dir: "arm-powerbidedicated"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-powerbidedicated"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -32,8 +32,8 @@ options:
       name: "@azure/arm-powerbidedicated"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/powerbidedicated"
-    package-dir: "armpowerbidedicated"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armpowerbidedicated"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armpowerbidedicated"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

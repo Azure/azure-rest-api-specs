@@ -28,8 +28,8 @@ interface Offerings {
    */
   @autoRoute
   @get
-  @action("offerings")
   @list
+  @action("offerings")
   list is ArmProviderActionSync<
     Response = OfferingsListResult,
     Scope = SubscriptionActionScope,

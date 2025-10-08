@@ -15,6 +15,7 @@ namespace Language.Conversations;
 
 /** It is a wrap up of LUIS Generally Available response. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+@access(Access.internal, "python")
 model LuisTargetIntentResult extends TargetIntentResult {
   /** Kind of the project. */
   targetProjectKind: targetProjectKind.Luis;
@@ -25,9 +26,11 @@ model LuisTargetIntentResult extends TargetIntentResult {
 
 /** It is the response from a LUIS Generally Available application. */
 #suppress "@azure-tools/typespec-azure-core/bad-record-type"
+@access(Access.internal, "python")
 model LuisResult is Record<unknown>;
 
 /** This is a set of request parameters for LUIS Generally Available projects. */
+@access(Access.internal, "python")
 model LuisParameters extends AnalysisParameters {
   /** The type of a target service */
   targetProjectKind: targetProjectKind.Luis;
@@ -41,6 +44,7 @@ model LuisParameters extends AnalysisParameters {
 }
 
 /** This customizes how the service calls LUIS Generally Available projects. */
+@access(Access.internal, "python")
 model LuisCallingOptions {
   /** Enable verbose response. */
   verbose?: boolean;
