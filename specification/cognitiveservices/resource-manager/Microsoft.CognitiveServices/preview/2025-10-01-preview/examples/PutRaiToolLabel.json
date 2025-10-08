@@ -15,13 +15,13 @@
         },
         "projectScopes": [
           {
-            "project": "hualiang-project",
+            "project": "test-project",
             "labelValues": {
               "confidentiality": "low"
             }
           },
           {
-            "project": "sahana-project",
+            "project": "sample-project",
             "labelValues": {
               "confidentiality": "low"
             }
@@ -31,8 +31,7 @@
     }
   },
   "responses": {
-    "201": {
-      "description": "Successfully created new RAI Tool Label.",
+    "200": {
       "body": {
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiToolLabels/Web_Search",
         "type": "Microsoft.CognitiveServices/accounts/raiToolLabels",
@@ -46,13 +45,42 @@
           },
           "projectScopes": [
             {
-              "project": "hualiang-project",
+              "project": "test-project",
               "labelValues": {
                 "confidentiality": "low"
               }
             },
             {
-              "project": "sahana-project",
+              "project": "sample-project",
+              "labelValues": {
+                "confidentiality": "low"
+              }
+            }
+          ]
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/resourceGroupName/providers/Microsoft.CognitiveServices/accounts/accountName/raiToolLabels/Web_Search",
+        "type": "Microsoft.CognitiveServices/accounts/raiToolLabels",
+        "name": "Web_Search",
+        "properties": {
+          "toolConnectionName": "Web_Search",
+          "accountScope": {
+            "labelValues": {
+              "confidentiality": "low"
+            }
+          },
+          "projectScopes": [
+            {
+              "project": "test-project",
+              "labelValues": {
+                "confidentiality": "low"
+              }
+            },
+            {
+              "project": "sample-project",
               "labelValues": {
                 "confidentiality": "low"
               }

@@ -3113,7 +3113,7 @@
         "tags": [
           "RaiIfcRules"
         ],
-        "operationId": "RaiIfcRules_Create",
+        "operationId": "RaiIfcRules_CreateOrUpdate",
         "description": "Create the IFC Rule associated with the Azure OpenAI account.",
         "x-ms-examples": {
           "PutRaiIfcRule": {
@@ -3147,8 +3147,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Created/updated IFC Rule successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiIfcRule"
+            }
+          },
           "201": {
-            "description": "Created IFC Rule successfully.",
+            "description": "Created/updated IFC Rule successfully.",
             "schema": {
               "$ref": "#/definitions/RaiIfcRule"
             }
@@ -3307,7 +3313,7 @@
         "tags": [
           "RaiToolLabels"
         ],
-        "operationId": "RaiToolLabels_Create",
+        "operationId": "RaiToolLabels_CreateOrUpdate",
         "description": "Creates the RAI Tool Label associated with the Azure OpenAI account.",
         "x-ms-examples": {
           "PutRaiToolLabel": {
@@ -3341,8 +3347,14 @@
           }
         ],
         "responses": {
+          "200": {
+            "description": "Created/updated RAI Tool Label successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            }
+          },
           "201": {
-            "description": "Created RAI Tool Label successfully.",
+            "description": "Created/updated RAI Tool Label successfully.",
             "schema": {
               "$ref": "#/definitions/RaiToolLabel"
             }
