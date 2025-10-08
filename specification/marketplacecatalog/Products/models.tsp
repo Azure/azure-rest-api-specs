@@ -156,9 +156,8 @@ model OfferingProperties {
   type?: string;
 }
 
-@doc("Returns a subset of Product attributes")
-@resource("products")
-model ProductSummary {
+@doc("Base model containing common product attributes shared between ProductSummary and ProductDetails")
+model ProductBase {
   @doc("Product display name")
   displayName?: string;
 
@@ -242,9 +241,6 @@ model ProductSummary {
   @doc("Retail price of the product's cheapest plan")
   startingPrice?: MarketStartPrice;
 
-  @doc("Full set of plan/SKU attributes")
-  plans?: PlanSummary[];
-
   @doc("Maps to the list of compatible products")
   supportedProducts?: string[];
 
@@ -279,6 +275,15 @@ model ProductSummary {
   activeDirectoryAppId?: string;
 }
 
+@doc("Returns a subset of Product attributes")
+@resource("products")
+model ProductSummary {
+  ...ProductBase;
+
+  @doc("Full set of plan/SKU attributes")
+  plans?: PlanSummary[];
+}
+
 @doc("Represents a SKU attribute, which consists of a key and value. The attributes may differ across various services")
 model Attribute {
   @doc("The attribute key")
@@ -309,10 +314,11 @@ model MarketStartPrice {
   currency?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending ProductSummary with additional details"
 @doc("Summary description of the product")
 @resource("product")
-model ProductDetails extends ProductSummary {
+model ProductDetails {
+  ...ProductBase;
+
   @doc("List of product videos")
   videos?: ProductVideo[];
 
@@ -397,7 +403,6 @@ model ProductDetails extends ProductSummary {
   @doc("List of artifacts")
   artifacts?: Artifact[];
 
-  // Override properties that differ from base class
   @doc("Full set of plan/SKU attributes")
   plans?: PlanDetails[];
 }
@@ -435,9 +440,10 @@ model PlanMetadata {
   relatedSkus?: PlanSkuRelation[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "This inheritance is intentional for extending PlanSummary with additional details"
 @doc("Returns a subset of Plan attributes")
-model PlanDetails extends PlanSummary {
+model PlanDetails {
+  ...PlanSummary;
+
   @doc("The id")
   id?: string;
 
