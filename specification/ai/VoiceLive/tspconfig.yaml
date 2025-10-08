@@ -33,3 +33,24 @@ options:
     namespace: Azure.AI.VoiceLive
     model-namespace: false
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+  "@azure-tools/typespec-ts":
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/ai-voicelive"
+    package-details:
+      name: "@azure/ai-voicelive"
+    flavor: azure
+    is-modular-library: true
+  "@azure-tools/typespec-go":
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/"
+    service-dir: "sdk/ai/azvoicelive"
+    emitter-output-dir: "{output-dir}/{service-dir}/azsystemevents"
+    slice-elements-byval: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-ai-voicelive"
+    namespace: com.azure.ai.voicelive
+    use-eclipse-language-server: false
+    custom-types-subpackage: implementation.models
+    flavor: azure
+    dev-options:
+      loglevel: info
