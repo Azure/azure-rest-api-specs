@@ -264,6 +264,11 @@ model ChaosExperimentPropertiesOfDrill {
       type: "Microsoft.Chaos/experiments";
     }
   ]>;
+
+  @doc("Duration of faults.")
+  @visibility(Lifecycle.Read)
+  @minValue(0)
+  faultDurationInMin?: int32;
 }
 
 @doc("Reason why the Drill is in NeedsAttention state, and not ready to run.")
@@ -292,11 +297,20 @@ model AttentionReason {
   @doc("Permissions needed by the Drill MSI to read SLO object.")
   rbacNeededForDrillOnSlo?: string[];
 
+  @doc("Drill object does not have the necessary RBAC to read the Azure Health Model.")
+  drillRbacOnAzureHealthModel?: RBACState;
+
+  @doc("Permissions needed by the Drill MSI to read Azure Health Model.")
+  rbacNeededForDrillOnAzureHealthModel?: string[];
+
   @doc("Associated RO ready or not.")
   roReadiness?: RecoveryPlanState;
 
   @doc("RBAC required by Experiment MSI not setup on the target resources.")
   faultRbacOnTargets?: RBACState;
+
+  @doc("RBAC required by AutomationAccount for runbook MSI not setup on the target resources.")
+  runbookFaultRbacOnTargets?: RBACState;
 
   @doc("One or more Target or Capability object is deleted.")
   targets?: ExtensionObjectState;
@@ -360,7 +374,10 @@ model AddOrUpdateResourcesRequest {
   faultDurationInMin: int32;
 
   @doc("Add, Update, Delete resource lists")
-  resourceLists: ResourceLists;
+  resourceLists?: ResourceLists;
+
+  @doc("Whether to allow inclusion and update despite attention reasons.")
+  forceInclusionAndUpdate?: ForceInclusionAndUpdate;
 }
 
 @doc("Add, Update, Delete resource lists")
