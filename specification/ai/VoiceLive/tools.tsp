@@ -1,3 +1,4 @@
+
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
@@ -25,8 +26,8 @@ model Tool {
 /**
  * The definition of a function tool as used by the voicelive endpoint.
  */
-#suppress "@azure-tools/typespec-azure-core/no-unknown" // parameters are JSON schema format.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/no-unknown" // parameters are JSON schema format.
 model FunctionTool extends Tool {
   type: ToolType.function;
   name: string;

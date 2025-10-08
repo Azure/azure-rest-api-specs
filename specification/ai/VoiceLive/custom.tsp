@@ -9,24 +9,19 @@ using Azure.ClientGenerator.Core;
 
 namespace VoiceLive;
 
-/** Base for session configuration shared between request and response. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style. // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style. // Service message format is snake_case to remain close to OpenAI style.
+/** Base for session configuration shared between request and response. */
 model RequestSession {
   ...SessionBase;
-
   /** The model for the session. */
   `model`?: string;
-
   /** The modalities to be used in the session. */
   modalities?: Modality[];
-
   /** The animation configuration for the session. */
   animation?: Animation;
-
   /** The voice configuration for the session. */
   voice?: Voice;
-
   /** Optional instructions to guide the model's behavior throughout the session. */
   instructions?: string;
 
@@ -43,50 +38,37 @@ model RequestSession {
 
   /** Input audio format. Default is 'pcm16'. */
   input_audio_format?: InputAudioFormat = InputAudioFormat.pcm16;
-
   /** Output audio format. Default is 'pcm16'. */
   output_audio_format?: OutputAudioFormat = OutputAudioFormat.pcm16;
-
-  /** Type of turn detection to use. */
+  /** Type of turn detection to use. */  
   turn_detection?: TurnDetection;
-
   /** Configuration for input audio noise reduction. */
   input_audio_noise_reduction?: AudioNoiseReduction;
-
   /** Configuration for echo cancellation during server-side audio processing. */
   input_audio_echo_cancellation?: AudioEchoCancellation;
-
   /** Configuration for avatar streaming and behavior during the session. */
   avatar?: AvatarConfig;
-
   /** Configuration for input audio transcription. */
   input_audio_transcription?: AudioInputTranscriptionOptions;
-
   /** Types of timestamps to include in audio response content. */
   output_audio_timestamp_types?: AudioTimestampType[];
-
   /** Configuration for tools to be used during the session, if applicable. */
   tools?: Tool[];
-
   /** Specifies which tools the model is allowed to call during the session. */
   tool_choice?: ToolChoice;
-
   /** Controls the randomness of the model's output. Range: 0.0 to 1.0. Default is 0.7. */
   temperature?: float32;
-
   /** Maximum number of tokens to generate in the response. Default is unlimited. */
   #suppress "@azure-tools/typespec-autorest/union-unsupported" // This is how it's represented OpeAI Style.
   max_response_output_tokens?: int32 | "inf";
 }
 
-/** Base for session configuration in the response. */
 @usage(ResponseUsage)
+/** Base for session configuration in the response. */
 model ResponseSession is RequestSession {
   ...SessionBase;
-
   /** The agent configuration for the session, if applicable. */
   agent?: AgentConfig;
-
   /** The unique identifier for the session. */
   id?: string;
 }
@@ -94,28 +76,20 @@ model ResponseSession is RequestSession {
 /** Supported OpenAI voice names (string enum). */
 union OAIVoice {
   string,
-
   /** Alloy voice. */
   alloy: "alloy",
-
   /** Ash voice. */
   ash: "ash",
-
   /** Ballard voice. */
   ballad: "ballad",
-
   /** Coral voice. */
   coral: "coral",
-
   /** Echo voice. */
   echo: "echo",
-
   /** Sage voice. */
   sage: "sage",
-
   /** Shimmer voice. */
   shimmer: "shimmer",
-
   /** Verse voice. */
   verse: "verse",
 }
@@ -131,7 +105,6 @@ union OAIVoice {
 model OpenAIVoice {
   /** The type of the voice. */
   type: "openai";
-
   /** The name of the OpenAI voice. */
   name: OAIVoice;
 }
@@ -149,33 +122,30 @@ model AzureVoice {
 /** Union of all supported Azure voice types. */
 union AzureVoiceType {
   string,
-
   /** Azure custom voice. */
   azure_custom: "azure-custom",
-
   /** Azure standard voice. */
   azure_standard: "azure-standard",
-
   /** Azure personal voice. */
   azure_personal: "azure-personal",
 }
+@usage(DualUsage)
 /** Azure custom voice configuration. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@usage(DualUsage)
 model AzureCustomVoice extends AzureVoice {
   type: AzureVoiceType.azure_custom;
 
-  /** Voice name cannot be empty. */
   @minLength(1)
+  /** Voice name cannot be empty. */
   name: string;
 
-  /** Endpoint ID cannot be empty. */
   @minLength(1)
+  /** Endpoint ID cannot be empty. */
   endpoint_id: string;
 
-  /** Temperature must be between 0.0 and 1.0. */
   @minValue(0)
   @maxValue(1)
+  /** Temperature must be between 0.0 and 1.0. */
   temperature?: float32;
 
   custom_lexicon_url?: string;
@@ -188,18 +158,18 @@ model AzureCustomVoice extends AzureVoice {
 }
 
 /** Azure standard voice configuration. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(DualUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureStandardVoice extends AzureVoice {
   type: AzureVoiceType.azure_standard;
 
-  /** Voice name cannot be empty. */
   @minLength(1)
+  /** Voice name cannot be empty. */
   name: string;
 
-  /** Temperature must be between 0.0 and 1.0. */
   @minValue(0)
   @maxValue(1)
+  /** Temperature must be between 0.0 and 1.0. */
   temperature?: float32;
 
   custom_lexicon_url?: string;
@@ -215,13 +185,11 @@ model AzureStandardVoice extends AzureVoice {
 @usage(DualUsage)
 model AzurePersonalVoice extends AzureVoice {
   type: AzureVoiceType.azure_personal;
+  @minLength(1) /** Voice name cannot be empty. */  name: string;
 
-  /** Voice name cannot be empty. */
-  @minLength(1) name: string;
-
-  /** Temperature must be between 0.0 and 1.0. */
   @minValue(0)
   @maxValue(1)
+  /** Temperature must be between 0.0 and 1.0. */
   temperature?: float32;
 
   /** Underlying neural model to use for personal voice. */
@@ -231,13 +199,10 @@ model AzurePersonalVoice extends AzureVoice {
 /** PersonalVoice models */
 union PersonalVoiceModels {
   string,
-
   /** Use the latest Dragon model. */
   "DragonLatestNeural",
-
   /** Use the latest Phoenix model. */
   "PhoenixLatestNeural",
-
   /** Use the Phoenix V2 model. */
   "PhoenixV2Neural",
 }
@@ -252,17 +217,14 @@ union Voice {
   AzureVoice, // includes AzureCustomVoice, CustomVoice, AzurePersonalVoice
 }
 
-/** Input audio format types supported. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+/** Input audio format types supported. */
 union InputAudioFormat {
   string,
-
   /** 16-bit PCM audio format at default sampling rate (24kHz) */
   pcm16: "pcm16",
-
   /** G.711 μ-law (mu-law) audio format at 8kHz sampling rate */
   g711_ulaw: "g711_ulaw",
-
   /** G.711 A-law audio format at 8kHz sampling rate */
   g711_alaw: "g711_alaw",
 }
@@ -287,18 +249,17 @@ union OutputAudioFormat {
   g711_alaw: "g711_alaw",
 }
 
-/** Supported audio input transcription models. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+/** Supported audio input transcription models. */
 union AudioInputTranscriptionModel {
   string,
-
   /** OpenAI Whisper model. */
   whisper_1: "whisper-1",
 }
 
 /** Configuration for input audio transcription. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AudioInputTranscriptionOptions {
   /**
    * The transcription model to use. Supported values:
@@ -325,55 +286,44 @@ model AudioInputTranscriptionOptions {
 /** Supported modalities for the session. */
 union Modality {
   string,
-
   /** Text modality. */
   text: "text",
-
   /** Audio modality. */
   audio: "audio",
-
   /** Animation modality. */
   animation: "animation",
-
   /** Avatar modality. */
   avatar: "avatar",
 }
 
-/** Top-level union for end-of-utterance (EOU) semantic detection configuration. */
 @discriminator("model")
+/** Top-level union for end-of-utterance (EOU) semantic detection configuration. */
 @usage(RequestUsage)
 model EouDetection {
-  `model`:
-    | "semantic_detection_v1"
-    | "semantic_detection_v1_en"
-    | "semantic_detection_v1_multilingual"
-    | string;
+  `model`: "semantic_detection_v1" | "semantic_detection_v1_en" | "semantic_detection_v1_multilingual" | string;
 }
 
 /** Threshold level settings for Azure semantic end-of-utterance detection. */
-union EouThresholdLevel {
+union EouThresholdLevel
+{
   string,
-
   /** Low sensitivity threshold level. */
   "low",
-
   /** Medium sensitivity threshold level. */
   "medium",
-
   /** High sensitivity threshold level. */
   "high",
-
   /** Default sensitivity threshold level. */
-  "default",
+  "default"
 }
 /** Azure semantic end-of-utterance detection (default). */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetection extends EouDetection {
   `model`: "semantic_detection_v1";
 
   /** Threshold level setting. Recommended instead of `threshold`. One of `low`, `medium`, `high`, or `default`. */
-  threshold_level?: EouThresholdLevel;
+  threshold_level?: EouThresholdLevel; 
 
   /** Timeout in milliseconds. Recommended instead of `timeout`. */
   @minValue(0)
@@ -381,8 +331,8 @@ model AzureSemanticDetection extends EouDetection {
 }
 
 /** Azure semantic end-of-utterance detection (English-optimized). */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetectionEn extends EouDetection {
   `model`: "semantic_detection_v1_en";
 
@@ -395,8 +345,8 @@ model AzureSemanticDetectionEn extends EouDetection {
 }
 
 /** Azure semantic end-of-utterance detection (multilingual). */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticDetectionMultilingual extends EouDetection {
   `model`: "semantic_detection_v1_multilingual";
 
@@ -408,8 +358,8 @@ model AzureSemanticDetectionMultilingual extends EouDetection {
   timeout_ms?: int32;
 }
 
-/** Top-level union for turn detection configuration. */
 @discriminator("type")
+/** Top-level union for turn detection configuration. */
 @usage(RequestUsage)
 model TurnDetection {
   type: TurnDetectionType;
@@ -424,8 +374,8 @@ union TurnDetectionType {
 }
 
 /** Base model for VAD-based turn detection. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(DualUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerVad extends TurnDetection {
   type: TurnDetectionType.server_vad;
 
@@ -442,8 +392,8 @@ model ServerVad extends TurnDetection {
 }
 
 /** Server Speech Detection (Azure semantic VAD, default variant). */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(DualUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVad extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad;
 
@@ -463,8 +413,8 @@ model AzureSemanticVad extends TurnDetection {
 }
 
 /** Server Speech Detection (Azure semantic VAD, English-only). */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(DualUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVadEn extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_en;
 
@@ -483,8 +433,8 @@ model AzureSemanticVadEn extends TurnDetection {
 }
 
 /** Server Speech Detection (Azure semantic VAD). */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(DualUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AzureSemanticVadMultilingual extends TurnDetection {
   type: TurnDetectionType.azure_semantic_vad_multilingual;
 
@@ -512,7 +462,6 @@ model AudioNoiseReduction {
 
 /** Echo cancellation configuration for server-side audio processing. */
 @usage(RequestUsage)
-@example(#{ type: "server_echo_cancellation" })
 model AudioEchoCancellation {
   /** The type of echo cancellation model to use. */
   type: "server_echo_cancellation";
@@ -530,17 +479,15 @@ union AudioTimestampType {
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 union AnimationOutputType {
   string,
-
   /** Blendshapes output type. */
   blendshapes: "blendshapes",
-
   /** Viseme ID output type. */
   viseme_id: "viseme_id",
 }
 
 /** Configuration for animation outputs including blendshapes and visemes metadata. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model Animation {
   /** The name of the animation model to use. */
   model_name?: string = "default";
@@ -550,8 +497,8 @@ model Animation {
 }
 
 /** Configuration for avatar streaming and behavior during the session. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model AvatarConfig {
   /** Optional list of ICE servers to use for WebRTC connection establishment. */
   ice_servers?: IceServer[];
@@ -582,29 +529,25 @@ model IceServer {
   credential?: string;
 }
 
+@usage(RequestUsage)
 /** Configuration for the agent. */
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
-@usage(RequestUsage)
 model AgentConfig {
   /** The type of agent to use. */
   type: "agent";
-
   /** The name of the agent. */
   name: string;
-
   /** Optional description of the agent. */
   description?: string;
-
   /** The ID of the agent. */
   agent_id: string;
-
   /** The ID of the conversation thread. */
   thread_id: string;
 }
 
 /** Video streaming parameters for avatar. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VideoParams {
   /** Bitrate in bits per second (e.g., 2000000 for 2 Mbps). */
   bitrate?: int32 = 2000000;
@@ -628,8 +571,8 @@ model VideoParams {
 }
 
 /** Defines a video crop rectangle using top-left and bottom-right coordinates. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VideoCrop {
   /** Top-left corner of the crop region. Array of [x, y], must be non-negative integers. */
   @minItems(2)
@@ -653,8 +596,8 @@ model VideoResolution {
 }
 
 /** Defines a video background, either a solid color or an image URL (mutually exclusive). */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model Background {
   /** Background color in hex format (e.g., `#00FF00FF`). Cannot be set if `image_url` is provided. */
   color?: string;

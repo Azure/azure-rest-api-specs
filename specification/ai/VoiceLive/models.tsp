@@ -11,8 +11,8 @@ alias ResponseUsage = Azure.ClientGenerator.Core.Usage.output | Azure.ClientGene
 alias DualUsage = RequestUsage | ResponseUsage;
 
 /** Error object returned in case of API failure. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model VoiceLiveErrorDetails {
   /** Error code, or null if unspecified. */
   code?: string;
@@ -30,8 +30,8 @@ model VoiceLiveErrorDetails {
   event_id?: string;
 }
 
-/** Standard error response envelope. */
 @error
+/** Standard error response envelope. */
 @usage(ResponseUsage)
 model ErrorResponse {
   /** Error object returned in case of API failure. */
@@ -53,9 +53,9 @@ model LogProbProperties {
 
 // Tool customization: Adjust union to be a discriminated type base
 /** A voicelive client event. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @discriminator("type")
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEvent {
   /** The type of event. */
   type: ClientEventType;
@@ -91,8 +91,8 @@ model ClientEventSessionUpdate extends ClientEvent {
  * for avatar-related media negotiation.
 
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventSessionAvatarConnect extends ClientEvent {
   /** The event type, must be 'session.avatar.connect'. */
   type: ClientEventType.session_avatar_connect;
@@ -102,8 +102,8 @@ model ClientEventSessionAvatarConnect extends ClientEvent {
 }
 
 /** Indicates the start of a new audio input turn. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnStart extends ClientEvent {
   /** The event type, must be 'input_audio.turn.start'. */
   type: ClientEventType.input_audio_turn_start;
@@ -113,8 +113,8 @@ model ClientEventInputAudioTurnStart extends ClientEvent {
 }
 
 /** Appends audio data to an ongoing input turn. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnAppend extends ClientEvent {
   /** The event type, must be 'input_audio.turn.append'. */
   type: ClientEventType.input_audio_turn_append;
@@ -127,8 +127,8 @@ model ClientEventInputAudioTurnAppend extends ClientEvent {
 }
 
 /** Marks the end of an audio input turn. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnEnd extends ClientEvent {
   /** The event type, must be 'input_audio.turn.end'. */
   type: ClientEventType.input_audio_turn_end;
@@ -138,8 +138,8 @@ model ClientEventInputAudioTurnEnd extends ClientEvent {
 }
 
 /** Cancels an in-progress input audio turn. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventInputAudioTurnCancel extends ClientEvent {
   /** The event type, must be 'input_audio.turn.cancel'. */
   type: ClientEventType.input_audio_turn_cancel;
@@ -163,8 +163,8 @@ model ConversationItemBase {
 }
 
 /** The response resource. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model Response {
   /** The unique ID of the response. */
   id?: string;
@@ -326,8 +326,8 @@ model ClientEventConversationItemCreate extends ClientEvent {
  * If successful, the server will respond with a `conversation.item.truncated`
  * event.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventConversationItemTruncate extends ClientEvent {
   /** The event type, must be `conversation.item.truncate`. */
   type: ClientEventType.conversation_item_truncate;
@@ -356,8 +356,8 @@ model ClientEventConversationItemTruncate extends ClientEvent {
  * unless the item does not exist in the conversation history, in which case the
  * server will respond with an error.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventConversationItemDelete extends ClientEvent {
   /** The event type, must be `conversation.item.delete`. */
   type: ClientEventType.conversation_item_delete;
@@ -381,8 +381,8 @@ model ClientEventConversationItemDelete extends ClientEvent {
  * `instructions`, and `temperature`. These fields will override the Session's
  * configuration for this Response only.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventResponseCreate extends ClientEvent {
   /** The event type, must be `response.create`. */
   type: ClientEventType.response_create;
@@ -399,8 +399,8 @@ model ClientEventResponseCreate extends ClientEvent {
  * with a `response.cancelled` event or an error if there is no response to
  * cancel.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventResponseCancel extends ClientEvent {
   /** The event type, must be `response.cancel`. */
   type: ClientEventType.response_cancel;
@@ -428,8 +428,8 @@ model ServerEventError extends ServerEvent {
 }
 
 /** Details of the error. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventErrorDetails {
   /** The type of error (e.g., "invalid_request_error", "server_error"). */
   type: string;
@@ -477,8 +477,8 @@ model ServerEventSessionUpdated extends ServerEvent {
 }
 
 /** Sent when the server is in the process of establishing an avatar media connection and provides its SDP answer. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventSessionAvatarConnecting extends ServerEvent {
   /** The event type, must be 'session.avatar.connecting'. */
   type: ServerEventType.session_avatar_connecting;
@@ -494,9 +494,9 @@ model SessionBase {}
 
 // Tool customization: Adjust union to be a discriminated type base
 /** A voicelive server event. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @discriminator("type")
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEvent {
   /** The type of event. */
   type: ServerEventType;
@@ -511,8 +511,8 @@ model ServerEvent {
  * message item that will be created, thus a `conversation.item.created` event
  * will also be sent to the client.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventInputAudioBufferCommitted extends ServerEvent {
   /** The event type, must be `input_audio_buffer.committed`. */
   type: ServerEventType.input_audio_buffer_committed;
@@ -547,6 +547,7 @@ model ServerEventInputAudioBufferCleared extends ServerEvent {
  * `input_audio_buffer.speech_stopped` event (unless the client manually commits
  * the audio buffer during VAD activation).
  */
+@usage(ResponseUsage)
 #suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
   /** The event type, must be `input_audio_buffer.speech_started`. */
@@ -570,8 +571,8 @@ model ServerEventInputAudioBufferSpeechStarted extends ServerEvent {
  * the audio buffer. The server will also send an `conversation.item.created`
  * event with the user message item that is created from the audio buffer.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
   /** The event type, must be `input_audio_buffer.speech_stopped`. */
   type: ServerEventType.input_audio_buffer_speech_stopped;
@@ -599,8 +600,8 @@ model ServerEventInputAudioBufferSpeechStopped extends ServerEvent {
  * - The client has sent a `conversation.item.create` event to add a new Item
  * to the Conversation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemCreated extends ServerEvent {
   /** The event type, must be `conversation.item.created`. */
   type: ServerEventType.conversation_item_created;
@@ -627,8 +628,8 @@ model ServerEventConversationItemCreated extends ServerEvent {
  * The transcript may diverge somewhat from the model's interpretation, and
  * should be treated as a rough guide.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemInputAudioTranscriptionCompleted
   extends ServerEvent {
   /**
@@ -653,8 +654,8 @@ model ServerEventConversationItemInputAudioTranscriptionCompleted
  * request for a user message failed. These events are separate from other
  * `error` events so that the client can identify the related Item.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemInputAudioTranscriptionFailed
   extends ServerEvent {
   /**
@@ -681,8 +682,8 @@ model ServerEventConversationItemInputAudioTranscriptionFailed
  * This action will truncate the audio and remove the server-side text transcript
  * to ensure there is no text in the context that hasn't been heard by the user.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemTruncated extends ServerEvent {
   /** The event type, must be `conversation.item.truncated`. */
   type: ServerEventType.conversation_item_truncated;
@@ -705,8 +706,8 @@ model ServerEventConversationItemTruncated extends ServerEvent {
  * `conversation.item.delete` event. This event is used to synchronize the
  * server's understanding of the conversation history with the client's view.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemDeleted extends ServerEvent {
   /** The event type, must be `conversation.item.deleted`. */
   type: ServerEventType.conversation_item_deleted;
@@ -746,8 +747,8 @@ model ServerEventResponseDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when a new Item is created during Response generation. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseOutputItemAdded extends ServerEvent {
   /** The event type, must be `response.output_item.added`. */
   type: ServerEventType.response_output_item_added;
@@ -767,8 +768,8 @@ model ServerEventResponseOutputItemAdded extends ServerEvent {
  * Returned when an Item is done streaming. Also emitted when a Response is
  * interrupted, incomplete, or cancelled.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseOutputItemDone extends ServerEvent {
   /** The event type, must be `response.output_item.done`. */
   type: ServerEventType.response_output_item_done;
@@ -788,8 +789,8 @@ model ServerEventResponseOutputItemDone extends ServerEvent {
  * Returned when a new content part is added to an assistant message item during
  * response generation.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseContentPartAdded extends ServerEvent {
   /** The event type, must be `response.content_part.added`. */
   type: ServerEventType.response_content_part_added;
@@ -816,8 +817,8 @@ model ServerEventResponseContentPartAdded extends ServerEvent {
  * Returned when a content part is done streaming in an assistant message item.
  * Also emitted when a Response is interrupted, incomplete, or cancelled.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseContentPartDone extends ServerEvent {
   /** The event type, must be `response.content_part.done`. */
   type: ServerEventType.response_content_part_done;
@@ -841,8 +842,8 @@ model ServerEventResponseContentPartDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the text value of a "text" content part is updated. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseTextDelta extends ServerEvent {
   /** The event type, must be `response.text.delta`. */
   type: ServerEventType.response_text_delta;
@@ -868,8 +869,8 @@ model ServerEventResponseTextDelta extends ServerEvent {
  * Returned when the text value of a "text" content part is done streaming. Also
  * emitted when a Response is interrupted, incomplete, or cancelled.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseTextDone extends ServerEvent {
   /** The event type, must be `response.text.done`. */
   type: ServerEventType.response_text_done;
@@ -892,8 +893,8 @@ model ServerEventResponseTextDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated transcription of audio output is updated. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTranscriptDelta extends ServerEvent {
   /** The event type, must be `response.audio_transcript.delta`. */
   type: ServerEventType.response_audio_transcript_delta;
@@ -920,8 +921,8 @@ model ServerEventResponseAudioTranscriptDelta extends ServerEvent {
  * streaming. Also emitted when a Response is interrupted, incomplete, or
  * cancelled.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTranscriptDone extends ServerEvent {
   /** The event type, must be `response.audio_transcript.done`. */
   type: ServerEventType.response_audio_transcript_done;
@@ -944,8 +945,8 @@ model ServerEventResponseAudioTranscriptDone extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated audio is updated. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioDelta extends ServerEvent {
   /** The event type, must be `response.audio.delta`. */
   type: ServerEventType.response_audio_delta;
@@ -973,8 +974,8 @@ model ServerEventResponseAudioDelta extends ServerEvent {
  * Returned when the model-generated audio is done. Also emitted when a Response
  * is interrupted, incomplete, or cancelled.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioDone extends ServerEvent {
   /** The event type, must be `response.audio.done`. */
   type: ServerEventType.response_audio_done;
@@ -993,8 +994,9 @@ model ServerEventResponseAudioDone extends ServerEvent {
 }
 
 /** Represents a delta update of blendshape animation frames for a specific output of a response. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
+
 model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_delta;
   response_id: string;
@@ -1007,8 +1009,8 @@ model ServerEventResponseAnimationBlendshapeDelta extends ServerEvent {
 }
 
 /** Indicates the completion of blendshape animation processing for a specific output of a response. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
   type: ServerEventType.response_animation_blendshapes_done;
   response_id: string;
@@ -1017,8 +1019,8 @@ model ServerEventResponseAnimationBlendshapeDone extends ServerEvent {
 }
 
 /** Represents a word-level audio timestamp delta for a response. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTimestampDelta extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_delta;
   response_id: string;
@@ -1032,8 +1034,8 @@ model ServerEventResponseAudioTimestampDelta extends ServerEvent {
 }
 
 /** Indicates completion of audio timestamp delivery for a response. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAudioTimestampDone extends ServerEvent {
   type: ServerEventType.response_audio_timestamp_done;
   response_id: string;
@@ -1043,8 +1045,8 @@ model ServerEventResponseAudioTimestampDone extends ServerEvent {
 }
 
 /** Represents a viseme ID delta update for animation based on audio. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
   type: ServerEventType.response_animation_viseme_delta;
   response_id: string;
@@ -1056,8 +1058,8 @@ model ServerEventResponseAnimationVisemeDelta extends ServerEvent {
 }
 
 /** Indicates completion of viseme animation delivery for a response. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseAnimationVisemeDone extends ServerEvent {
   type: ServerEventType.response_animation_viseme_done;
   response_id: string;
@@ -1067,8 +1069,8 @@ model ServerEventResponseAnimationVisemeDone extends ServerEvent {
 }
 
 /** Create a new VoiceLive response with these parameters */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ResponseCreateParams {
   /** Whether to commit the response to the conversation. Defaults to true. */
   commit?: boolean = true;
@@ -1101,7 +1103,7 @@ model ResponseCreateParams {
    * into your voice", "laugh frequently"). The instructions are not guaranteed
    * to be followed by the model, but they provide guidance to the model on the
    * desired behavior.
-   *
+   * 
    * Note that the server sets default instructions which will be used if this
    * field is not set and are visible in the `session.created` event at the
    * start of the session.
@@ -1146,8 +1148,8 @@ model ResponseCreateParams {
  * unless the item does not exist in the conversation history, in which case the
  * server will respond with an error.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(RequestUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ClientEventConversationItemRetrieve extends ClientEvent {
   /** The event type, must be `conversation.item.retrieve`. */
   type: ClientEventType.conversation_item_retrieve;
@@ -1158,8 +1160,8 @@ model ClientEventConversationItemRetrieve extends ClientEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the text value of an input audio transcription content part is updated. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemInputAudioTranscriptionDelta
   extends ServerEvent {
   /** The event type, must be `conversation.item.input_audio_transcription.delta`. */
@@ -1180,8 +1182,8 @@ model ServerEventConversationItemInputAudioTranscriptionDelta
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when a conversation item is retrieved with `conversation.item.retrieve`. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventConversationItemRetrieved extends ServerEvent {
   /** The event type, must be `conversation.item.retrieved`. */
   type: ServerEventType.conversation_item_retrieved;
@@ -1194,8 +1196,8 @@ model ServerEventConversationItemRetrieved extends ServerEvent {
 
 // Tool customization (apply_discriminator): apply discriminated type
 /** Returned when the model-generated function call arguments are updated. */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseFunctionCallArgumentsDelta extends ServerEvent {
   /** The event type, must be `response.function_call_arguments.delta`. */
   type: ServerEventType.response_function_call_arguments_delta;
@@ -1221,8 +1223,8 @@ model ServerEventResponseFunctionCallArgumentsDelta extends ServerEvent {
  * Returned when the model-generated function call arguments are done streaming.
  * Also emitted when a Response is interrupted, incomplete, or cancelled.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 @usage(ResponseUsage)
+#suppress "@azure-tools/typespec-azure-core/casing-style" // Service message format is snake_case to remain close to OpenAI style.
 model ServerEventResponseFunctionCallArgumentsDone extends ServerEvent {
   /** The event type, must be `response.function_call_arguments.done`. */
   type: ServerEventType.response_function_call_arguments_done;
