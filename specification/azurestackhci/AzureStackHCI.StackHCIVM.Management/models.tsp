@@ -1569,9 +1569,9 @@ model NatGatewayProperties {
   @extension("x-ms-identifiers", #[])
   subnets?: VirtualNetworkSubnetArmReference[];
 
-  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NATGW has been associated with a vnet")
-  @extension("x-ms-identifiers", #[])
   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
+  @extension("x-ms-identifiers", #[])
   inboundNATRules?: InboundNATRule[];
 
   @doc("Provisioning state of the public IP")
