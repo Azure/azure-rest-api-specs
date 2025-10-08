@@ -128,13 +128,13 @@ interface MapsLegends {
        * The output height of the legend image
        */
       @query("height")
-      height?: float64 = 0.15;
+      height?: float32 = 0.15;
 
       /**
        * The output width of the legend image
        */
       @query("width")
-      width?: float64 = 5;
+      width?: float32 = 5;
 
       /**
        * Number of items to trim from the start of the cmap

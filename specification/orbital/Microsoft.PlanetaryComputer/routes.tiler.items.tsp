@@ -654,7 +654,7 @@ interface TilerPoints {
        * Longitude
        */
       @path
-      longitude: float64;
+      longitude: float32;
 
       /**
        * Latitude

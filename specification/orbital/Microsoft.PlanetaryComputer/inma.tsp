@@ -294,7 +294,7 @@ interface StacItems {
      *  Minimum = 1. Maximum = 10000. Default = 10.
      */
     @query
-    limit?: int64,
+    limit?: int32,
 
     /**
      * Only features that have a geometry that intersects the bounding box are selected.
@@ -859,11 +859,11 @@ model CollectionParameters is ApiVersionParameter {
 model OdataQuery {
   @doc("The number of items to return")
   @query("$top")
-  top?: int64;
+  top?: int32;
 
   @doc("The number of items to skip")
   @query("$skip")
-  skip?: int64;
+  skip?: int32;
 }
 
 interface StacCollections {

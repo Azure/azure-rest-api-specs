@@ -60,4 +60,4 @@ model IntervalLegendsResponse {
 /**
  * Interval type alias.
  */
-alias Interval = int64[];
+alias Interval = int32[];

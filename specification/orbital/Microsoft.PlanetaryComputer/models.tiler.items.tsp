@@ -220,7 +220,7 @@ model TilerInfo {
   @minItems(4)
   @maxItems(4)
   @summary("Bounds")
-  bounds: float64[];
+  bounds: float32[];
 
   /**
    * Band Metadata
@@ -289,13 +289,13 @@ model TilerInfo {
    * Scales
    */
   @summary("Scales")
-  scales?: int64[];
+  scales?: int32[];
 
   /**
    * Offsets
    */
   @summary("Offsets")
-  offsets?: int64[];
+  offsets?: int32[];
 
   /**
    * Colormap
@@ -308,14 +308,14 @@ model TilerInfo {
    */
   @summary("Minzoom")
   @encodedName("application/json", "minzoom")
-  minZoom?: int64;
+  minZoom?: int32;
 
   /**
    * Maxzoom
    */
   @summary("Maxzoom")
   @encodedName("application/json", "maxzoom")
-  maxZoom?: int64;
+  maxZoom?: int32;
 }
 /**
  * Union type for band metadata elements
@@ -531,7 +531,7 @@ model GeoJsonStatisticsForStacItemCollection {
    * Bounding box coordinates [west, south, east, north]
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64[];
+  boundingBox?: float32[];
 
   /**
    * Stac Version

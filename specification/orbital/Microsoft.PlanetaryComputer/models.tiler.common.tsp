@@ -298,7 +298,7 @@ model StacItemBounds {
    * Array of coordinates defining the bounding box [west, south, east, north]
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  bounds: float64[];
+  bounds: float32[];
 }
 
 /**
@@ -329,7 +329,7 @@ model TilerInfoGeoJsonFeature {
    * Bounding box coordinates for the feature
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64;
+  boundingBox?: float32;
 }
 
 /**

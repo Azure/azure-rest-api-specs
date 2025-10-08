@@ -107,7 +107,7 @@ interface Sas {
      */
     @summary("Duration")
     @query("duration")
-    durationInMinutes?: int64,
+    durationInMinutes?: int32,
   ): TokenResponse | ErrorResponse;
 
   /**
@@ -130,7 +130,7 @@ interface Sas {
      */
     @summary("Duration")
     @query("duration")
-    durationInMinutes?: int64,
+    durationInMinutes?: int32,
   ): OkResponse | ErrorResponse;
 
   /**
@@ -160,6 +160,6 @@ interface Sas {
      */
     @summary("Duration")
     @query("duration")
-    durationInMinutes?: int64,
+    durationInMinutes?: int32,
   ): SignedHrefResponse | ErrorResponse;
 }

@@ -166,7 +166,7 @@ interface MosaicsTileJsonOperations {
        */
       @query("buffer")
       @minValueExclusive(0)
-      buffer?: float64;
+      buffer?: float32;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)

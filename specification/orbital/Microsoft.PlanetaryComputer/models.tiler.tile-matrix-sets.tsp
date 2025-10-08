@@ -160,7 +160,7 @@ model TileMatrix {
    * tile. In previous version, this was 'topLeftCorner' and 'cornerOfOrigin' did
    * not exist.
    */
-  pointOfOrigin: float64[];
+  pointOfOrigin: float32[];
 
   /**
    * Pixel width of each tile at this level

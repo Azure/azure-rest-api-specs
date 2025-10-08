@@ -189,7 +189,7 @@ model StacSearchParameters {
    * Bounding box for spatial filtering in format [west, south, east, north].
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64[];
+  boundingBox?: float32[];
 
   /**
    * GeoJSON geometry for spatial filtering.
@@ -521,7 +521,7 @@ model StacExtensionSpatialExtent {
    * Array of bounding boxes defining the spatial extent, in format [[west, south, east, north]].
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64[][];
+  boundingBox?: float32[][];
 }
 
 /**
@@ -736,7 +736,7 @@ model StacItemCollection extends StacItemOrStacItemCollection {
    * Bounding box of all items in format [west, south, east, north].
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64[];
+  boundingBox?: float32[];
 
   /**
    * Context information for the search response.

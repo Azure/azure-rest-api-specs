@@ -16,7 +16,7 @@ model FeatureCollection {
    * Bounding box coordinates for the collection
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64[];
+  boundingBox?: float32[];
 }
 
 /**
@@ -44,7 +44,7 @@ model FeatureBase {
    * Bounding box coordinates for the feature
    */
   @encodedName("application/json", "bbox")
-  boundingBox: float64[];
+  boundingBox: float32[];
 }
 /**
  * GeoJSON Feature object representing a geographic entity
@@ -95,7 +95,7 @@ model Geometry {
    * Optional bounding box of the geometry.
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64[];
+  boundingBox?: float32[];
 }
 
 /**
@@ -160,7 +160,7 @@ model Polygon extends Geometry {
   /**
    * The coordinates of the polygon.
    */
-  coordinates: float64[][][];
+  coordinates: float32[][][];
 
   /**
    * The type of the polygon.
@@ -175,7 +175,7 @@ model MultiPolygon extends Geometry {
   /**
    * The coordinates of the multipolygon.
    */
-  coordinates: float64[][][];
+  coordinates: float32[][][];
 
   /**
    * The type of the multipolygon.
@@ -201,7 +201,7 @@ model GeometryCollection {
    * The bounding box of the geometry collection.
    */
   @encodedName("application/json", "bbox")
-  boundingBox?: float64[];
+  boundingBox?: float32[];
 }
 
 /**
@@ -228,7 +228,7 @@ model MultiLineString extends Geometry {
   /**
    * The coordinates of the multilinestring.
    */
-  coordinates: float64[][];
+  coordinates: float32[][];
 }
 
 /**
@@ -243,7 +243,7 @@ model LineString extends Geometry {
   /**
    * The coordinates of the linestring.
    */
-  coordinates: float64[];
+  coordinates: float32[];
 }
 
 /**
@@ -258,5 +258,5 @@ model MultiPoint extends Geometry {
   /**
    * The coordinates of the multipoint.
    */
-  coordinates: float64[];
+  coordinates: float32[];
 }
