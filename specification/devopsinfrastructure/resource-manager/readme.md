@@ -39,9 +39,9 @@ modelerfour:
 
 These settings apply only when `--tag=package-stable-2025-10-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-10-08'
+```yaml $(tag) == 'package-stable-2025-10-08'
 input-file:
-  - Microsoft.DevOpsInfrastructure/stable/2025-10-08-preview/devopsinfrastructure.json
+  - Microsoft.DevOpsInfrastructure/stable/2025-10-08-stable/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2025-09-20
