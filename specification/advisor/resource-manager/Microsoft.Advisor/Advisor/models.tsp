@@ -429,7 +429,7 @@ model ConfigDataProperties {
   /**
    * Advisor digest configuration. Valid only for subscriptions
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   digests?: DigestConfig[];
 }
 
@@ -593,7 +593,7 @@ model RecommendationProperties {
   /**
    * The list of recommended actions to implement recommendation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   actions?: Record<unknown>[];
 
   /**
@@ -919,7 +919,7 @@ model AdvisorScoreEntityProperties {
    * The historic Advisor score data.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   timeSeries?: TimeSeriesEntity[];
 }
 
@@ -971,7 +971,7 @@ model TimeSeriesEntity {
   /**
    * The past score data
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scoreHistory?: ScoreEntity[];
 }
 
@@ -1299,10 +1299,7 @@ model OperationEntityListResult is Azure.Core.Page<OperationEntity>;
 @@doc(AdvisorScoreEntityProperties.timeSeries,
   "The historic Advisor score data."
 );
-@@OpenAPI.extension(OperationEntityListResult.value,
-  "x-ms-identifiers",
-  #["name"]
-);
+@@identifiers(OperationEntityListResult.value, #["name"]);
 @@doc(RecommendationPropertiesResourceWorkload.id, "The Id of the Workload");
 @@doc(RecommendationPropertiesResourceWorkload.name,
   "The Name of the Workload"
