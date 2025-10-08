@@ -13,7 +13,7 @@ The current stable release of Language is 2024-11-01.
 ### Basic Information
 
 ```yaml
-tag: release_2025-05-15-preview
+tag: release_2025_11_01
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
