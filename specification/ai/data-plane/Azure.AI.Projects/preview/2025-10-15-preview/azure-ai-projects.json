@@ -3436,19 +3436,9 @@
     "CustomCredential": {
       "type": "object",
       "description": "Custom credential definition",
-      "properties": {
-        "keys": {
-          "type": "object",
-          "description": "The credential type",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
+      "additionalProperties": {
+        "type": "string"
       },
-      "required": [
-        "keys"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/BaseCredentials"
@@ -3721,6 +3711,33 @@
       ],
       "x-ms-discriminator-value": "AAD"
     },
+    "EvalCompareReport": {
+      "type": "object",
+      "description": "Insights from the evaluation comparison.",
+      "properties": {
+        "comparisons": {
+          "type": "array",
+          "description": "Comparison results for each treatment run against the baseline.",
+          "items": {
+            "$ref": "#/definitions/EvalRunResultComparison"
+          }
+        },
+        "method": {
+          "type": "string",
+          "description": "The statistical method used for comparison."
+        }
+      },
+      "required": [
+        "comparisons",
+        "method"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/InsightResult"
+        }
+      ],
+      "x-ms-discriminator-value": "EvaluationComparison"
+    },
     "EvalJsonlFileContentSource": {
       "type": "object",
       "description": "OpenAI definition: Eval inline file content or jsonl input data.",
@@ -3851,6 +3868,108 @@
         "status",
         "datasource_item",
         "results"
+      ]
+    },
+    "EvalRunResultCompareItem": {
+      "type": "object",
+      "description": "Metric comparison for a treatment against the baseline.",
+      "properties": {
+        "treatmentRunId": {
+          "type": "string",
+          "description": "The treatment run ID."
+        },
+        "treatmentRunSummary": {
+          "$ref": "#/definitions/EvalRunResultSummary",
+          "description": "Summary statistics of the treatment run."
+        },
+        "deltaEstimate": {
+          "type": "number",
+          "format": "float",
+          "description": "Estimated difference between treatment and baseline."
+        },
+        "pValue": {
+          "type": "number",
+          "format": "float",
+          "description": "P-value for the treatment effect."
+        },
+        "treatmentEffect": {
+          "$ref": "#/definitions/TreatmentEffectType",
+          "description": "Type of treatment effect."
+        }
+      },
+      "required": [
+        "treatmentRunId",
+        "treatmentRunSummary",
+        "deltaEstimate",
+        "pValue",
+        "treatmentEffect"
+      ]
+    },
+    "EvalRunResultComparison": {
+      "type": "object",
+      "description": "Comparison results for treatment runs against the baseline.",
+      "properties": {
+        "testingCriteria": {
+          "type": "string",
+          "description": "Name of the testing criteria."
+        },
+        "metric": {
+          "type": "string",
+          "description": "Metric being evaluated."
+        },
+        "evaluator": {
+          "type": "string",
+          "description": "Name of the evaluator for this testing criteria."
+        },
+        "baselineRunSummary": {
+          "$ref": "#/definitions/EvalRunResultSummary",
+          "description": "Summary statistics of the baseline run."
+        },
+        "compareItems": {
+          "type": "array",
+          "description": "List of comparison results for each treatment run.",
+          "items": {
+            "$ref": "#/definitions/EvalRunResultCompareItem"
+          }
+        }
+      },
+      "required": [
+        "testingCriteria",
+        "metric",
+        "evaluator",
+        "baselineRunSummary",
+        "compareItems"
+      ]
+    },
+    "EvalRunResultSummary": {
+      "type": "object",
+      "description": "Summary statistics of a metric in an evaluation run.",
+      "properties": {
+        "runId": {
+          "type": "string",
+          "description": "The evaluation run ID."
+        },
+        "sampleCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of samples in the evaluation run."
+        },
+        "average": {
+          "type": "number",
+          "format": "float",
+          "description": "Average value of the metric in the evaluation run."
+        },
+        "standardDeviation": {
+          "type": "number",
+          "format": "float",
+          "description": "Standard deviation of the metric in the evaluation run."
+        }
+      },
+      "required": [
+        "runId",
+        "sampleCount",
+        "average",
+        "standardDeviation"
       ]
     },
     "Evaluation": {
@@ -5317,6 +5436,25 @@
         ]
       }
     },
+    "PromptBasedEvaluatorDefinition": {
+      "type": "object",
+      "description": "Prompt-based evaluator",
+      "properties": {
+        "prompt_text": {
+          "type": "string",
+          "description": "The prompt text used for evaluation"
+        }
+      },
+      "required": [
+        "prompt_text"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluatorDefinition"
+        }
+      ],
+      "x-ms-discriminator-value": "prompt"
+    },
     "QueryResponseInlineMessage": {
       "type": "object",
       "description": "Query and response excepted input messsage defintion.",
@@ -5347,14 +5485,13 @@
           "type": "array",
           "description": "Optional list of tools or resources utilized during the evaluation or generation of the response.",
           "items": {
-            "type": "string"
+            "type": "object"
           }
         }
       },
       "required": [
         "type",
-        "query",
-        "response"
+        "query"
       ]
     },
     "RecurrenceSchedule": {
