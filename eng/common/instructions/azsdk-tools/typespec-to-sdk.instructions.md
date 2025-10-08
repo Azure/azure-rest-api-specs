@@ -22,7 +22,7 @@ SDK languages to be generated:
 6. If not in public repo, inform: "Please make spec changes in Azure/azure-rest-api-specs public repo to generate SDKs"
 **Success Criteria**: Valid TypeSpec project path identified
 
-## Step 2: Identify API spec readiness
+## Step 2: Identify API spec status
 **Goal**: Determine if the TypeSpec spec is already merged or if it's being modified.
 **Actions**:
 1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch: "Is your TypeSpec specification already merged in the main branch? (yes/no)"
