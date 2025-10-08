@@ -86,7 +86,9 @@ running the tool and highlight any errors and help user fix them.
     - API spec pull request number (if the API spec is not merged to the main branch, otherwise use 0)
     - API version
     - SDK release type (beta for preview API versions, stable otherwise)
-    - Language options: `Python`, `.NET`, `JavaScript`, `Java`, `Go`
+    - Language options:
+        For management plane: `Python`, `.NET`, `JavaScript`, `Java`, `Go`
+        For data plane: `Python`, `.NET`, `JavaScript`, `Java`
 2. Monitor pipeline status after 15 minutes and provide updates. If pipeline is in progress, inform user that it may take additional time and check the status later.
 3. Display generated SDK PR links when available
 4. If SDK pull request is available for all languages, ask user to review generated SDK pull request and mark them as ready for review when they are ready to get them reviewed and merged.
