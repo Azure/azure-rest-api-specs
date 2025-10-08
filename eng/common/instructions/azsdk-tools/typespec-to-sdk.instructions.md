@@ -18,7 +18,7 @@ SDK languages to be generated:
 2. If found, use the parent directory as project root
 3. If not found, prompt user: "Please provide the path to your TypeSpec project root directory"
 4. Validate the provided path contains required TypeSpec files
-5. Run `azsdk_check_typespec_project_in_public_repo` to verify repository
+5. Run `azsdk_typespec_check_project_in_public_repo` to verify repository
 6. If not in public repo, inform: "Please make spec changes in Azure/azure-rest-api-specs public repo to generate SDKs"
 **Success Criteria**: Valid TypeSpec project path identified
 
