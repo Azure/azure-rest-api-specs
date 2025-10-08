@@ -871,8 +871,12 @@ model ProjectUpdateProperties {
   @doc("Settings to be used for customizations.")
   customizationSettings?: ProjectCustomizationSettings;
 
+  @doc("Dev Box Auto Delete settings.")
+  @removed(Versions.v2025_10_01_preview)
+  devBoxAutoDeleteSettings?: DevBoxAutoDeleteSettings;
+
   @doc("Dev Box Schedule Delete settings.")
-  @renamedFrom(Versions.v2025_07_01_preview, "devBoxAutoDeleteSettings")
+  @added(Versions.v2025_10_01_preview)
   devBoxScheduleDeleteSettings?: DevBoxScheduleDeleteSettings;
 
   @doc("Indicates whether Azure AI services are enabled for a project.")
@@ -916,6 +920,19 @@ model ProjectCustomizationManagedIdentity {
 }
 
 @doc("Settings controlling the auto deletion of inactive dev boxes.")
+model DevBoxAutoDeleteSettings {
+  @doc("Indicates the delete mode for Dev Boxes within this project.")
+  deleteMode?: DevBoxDeleteMode;
+
+  @doc("ISO8601 duration required for the dev box to not be inactive prior to it being scheduled for deletion.  ISO8601 format PT[n]H[n]M[n]S.")
+  inactiveThreshold?: string;
+
+  @doc("ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S.")
+  gracePeriod?: string;
+}
+
+@doc("Settings controlling the auto deletion of inactive dev boxes.")
+@added(Versions.v2025_10_01_preview)
 model DevBoxScheduleDeleteSettings {
   @doc("Indicates the delete mode for Dev Boxes within this project.")
   deleteMode?: DevBoxDeleteMode;
@@ -927,7 +944,6 @@ model DevBoxScheduleDeleteSettings {
   gracePeriod?: string;
 
   @doc("Indicates whether scheduled deletion should be canceled when a user connects to the dev box.")
-  @added(Versions.v2025_10_01_preview)
   cancelOnConnectEnableStatus?: CancelOnConnectEnableStatus;
 }
 

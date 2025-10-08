@@ -9646,6 +9646,24 @@
         "value"
       ]
     },
+    "DevBoxAutoDeleteSettings": {
+      "type": "object",
+      "description": "Settings controlling the auto deletion of inactive dev boxes.",
+      "properties": {
+        "deleteMode": {
+          "$ref": "#/definitions/DevBoxDeleteMode",
+          "description": "Indicates the delete mode for Dev Boxes within this project."
+        },
+        "inactiveThreshold": {
+          "type": "string",
+          "description": "ISO8601 duration required for the dev box to not be inactive prior to it being scheduled for deletion.  ISO8601 format PT[n]H[n]M[n]S."
+        },
+        "gracePeriod": {
+          "type": "string",
+          "description": "ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S."
+        }
+      }
+    },
     "DevBoxDefinition": {
       "type": "object",
       "description": "Represents a definition for a Developer Machine.",
@@ -9804,24 +9822,6 @@
         "installAzureMonitorAgentEnableStatus": {
           "$ref": "#/definitions/InstallAzureMonitorAgentEnableStatus",
           "description": "Indicates whether to install the Azure Monitor Agent service on Dev Boxes that belong to this dev center"
-        }
-      }
-    },
-    "DevBoxScheduleDeleteSettings": {
-      "type": "object",
-      "description": "Settings controlling the auto deletion of inactive dev boxes.",
-      "properties": {
-        "deleteMode": {
-          "$ref": "#/definitions/DevBoxDeleteMode",
-          "description": "Indicates the delete mode for Dev Boxes within this project."
-        },
-        "inactiveThreshold": {
-          "type": "string",
-          "description": "ISO8601 duration required for the dev box to not be inactive prior to it being scheduled for deletion.  ISO8601 format PT[n]H[n]M[n]S."
-        },
-        "gracePeriod": {
-          "type": "string",
-          "description": "ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S."
         }
       }
     },
@@ -12583,9 +12583,9 @@
           "$ref": "#/definitions/ProjectCustomizationSettings",
           "description": "Settings to be used for customizations."
         },
-        "devBoxScheduleDeleteSettings": {
-          "$ref": "#/definitions/DevBoxScheduleDeleteSettings",
-          "description": "Dev Box Schedule Delete settings."
+        "devBoxAutoDeleteSettings": {
+          "$ref": "#/definitions/DevBoxAutoDeleteSettings",
+          "description": "Dev Box Auto Delete settings."
         },
         "azureAiServicesSettings": {
           "$ref": "#/definitions/AzureAiServicesSettings",
