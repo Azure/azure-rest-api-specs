@@ -280,10 +280,10 @@
             "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceWeb.json"
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceSharePoint": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceSharePoint.json"
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedSharePoint.json"
           },
           "SearchServiceCreateOrUpdateKnowledgeSourceOneLake": {
-            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceOneLake.json"
+            "$ref": "./examples/SearchServiceCreateOrUpdateKnowledgeSourceIndexedOneLake.json"
           }
         },
         "description": "Creates a new knowledge source or updates an knowledge source if it already exists.",
@@ -357,10 +357,10 @@
             "$ref": "./examples/SearchServiceDeleteKnowledgeSourceWeb.json"
           },
           "SearchServiceDeleteKnowledgeSourceSharePoint": {
-            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceSharePoint.json"
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedSharePoint.json"
           },
           "SearchServiceDeleteKnowledgeSourceOneLake": {
-            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceOneLake.json"
+            "$ref": "./examples/SearchServiceDeleteKnowledgeSourceIndexedOneLake.json"
           }
         },
         "description": "Deletes an existing knowledge source.",
@@ -417,10 +417,10 @@
             "$ref": "./examples/SearchServiceGetKnowledgeSourceWeb.json"
           },
           "SearchServiceGetKnowledgeSourceSharePoint": {
-            "$ref": "./examples/SearchServiceGetKnowledgeSourceSharePoint.json"
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedSharePoint.json"
           },
           "SearchServiceGetKnowledgeSourceOneLake": {
-            "$ref": "./examples/SearchServiceGetKnowledgeSourceOneLake.json"
+            "$ref": "./examples/SearchServiceGetKnowledgeSourceIndexedOneLake.json"
           }
         },
         "description": "Retrieves a knowledge source definition.",
@@ -473,10 +473,10 @@
             "$ref": "./examples/SearchServiceListKnowledgeSourcesWeb.json"
           },
           "SearchServiceListKnowledgeSourcesSharePoint": {
-            "$ref": "./examples/SearchServiceListKnowledgeSourcesSharePoint.json"
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedSharePoint.json"
           },
           "SearchServiceListKnowledgeSourcesOneLake": {
-            "$ref": "./examples/SearchServiceListKnowledgeSourcesOneLake.json"
+            "$ref": "./examples/SearchServiceListKnowledgeSourcesIndexedOneLake.json"
           }
         },
         "description": "Lists all knowledge sources available for a search service.",
@@ -522,10 +522,10 @@
             "$ref": "./examples/SearchServiceCreateKnowledgeSourceWeb.json"
           },
           "SearchServiceCreateKnowledgeSourceSharePoint": {
-            "$ref": "./examples/SearchServiceCreateKnowledgeSourceSharePoint.json"
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedSharePoint.json"
           },
           "SearchServiceCreateKnowledgeSourceOneLake": {
-            "$ref": "./examples/SearchServiceCreateKnowledgeSourceOneLake.json"
+            "$ref": "./examples/SearchServiceCreateKnowledgeSourceIndexedOneLake.json"
           }
         },
         "description": "Creates a new knowledge source.",
@@ -3044,6 +3044,27 @@
             "allSiteLibraries",
             "useQuery"
           ],
+          "x-ms-enum": {
+            "name": "IndexedSharePointContainerName",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "defaultSiteLibrary",
+                "name": "DefaultSiteLibrary",
+                "description": "Index content from the site's default document library."
+              },
+              {
+                "value": "allSiteLibraries",
+                "name": "AllSiteLibraries",
+                "description": "Index content from every document library in the site."
+              },
+              {
+                "value": "useQuery",
+                "name": "UseQuery",
+                "description": "Index only content that matches the query specified in the knowledge source."
+              }
+            ]
+          }, 
           "description": "Specifies which SharePoint libraries to access."
         },
         "query": {
@@ -3156,7 +3177,28 @@
               "userIds",
               "groupIds",
               "rbacScope"
-            ]
+            ],
+            "x-ms-enum": {
+              "name": "KnowledgeSourceIngestionPermissionOption",
+              "modelAsString": true,
+              "values": [
+                {
+                  "value": "userIds",
+                  "name": "UserIds",
+                  "description": "Ingest explicit user identifiers alongside document content."
+                },
+                {
+                  "value": "groupIds",
+                  "name": "GroupIds",
+                  "description": "Ingest group identifiers alongside document content."
+                },
+                {
+                  "value": "rbacScope",
+                  "name": "RbacScope",
+                  "description": "Ingest RBAC scope information alongside document content."
+                }
+              ]
+            }
           },
           "description": "Optional list of permission types to ingest together with document content. If specified, it will set the indexer permission options for the data source.",
           "x-nullable": true
@@ -3167,6 +3209,22 @@
             "minimal",
             "standard"
           ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceContentExtractionMode",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "minimal",
+                "name": "Minimal",
+                "description": "Extracts only essential metadata while deferring most content processing."
+              },
+              {
+                "value": "standard",
+                "name": "Standard",
+                "description": "Performs the full default content extraction pipeline."
+              }
+            ]
+          },
           "description": "Optional content extraction mode. Default is 'minimal'.",
           "default": "minimal",
           "x-nullable": true
@@ -3229,41 +3287,21 @@
         "allowedDomains": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WebKnowledgeSourceAllowedDomain"
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
           },
           "description": "Domains that are allowed for web results"
         },
         "blockedDomains": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/WebKnowledgeSourceBlockedDomain"
+            "$ref": "#/definitions/WebKnowledgeSourceDomain"
           },
           "description": "Domains that are blocked from web results"
         }
       },
       "description": "Domain allow/block configuration for web knowledge source."
     },
-    "WebKnowledgeSourceAllowedDomain": {
-      "type": "object",
-      "properties": {
-        "address": {
-          "type": "string",
-          "description": "The address of the domain."
-        },
-        "includeSubpages": {
-          "type": "boolean",
-          "description": "Whether or not to include subpages from this domain."
-        },
-        "rankingAdjustment": {
-          "$ref": "#/definitions/WebKnowledgeSourceDomainRankingAdjustmentKind"
-        }
-      },
-      "required": [
-        "address"
-      ],
-      "description": "Configuration for web knowledge source allowed domain."
-    },
-    "WebKnowledgeSourceBlockedDomain": {
+    "WebKnowledgeSourceDomain": {
       "type": "object",
       "properties": {
         "address": {
@@ -3278,37 +3316,7 @@
       "required": [
         "address"
       ],
-      "description": "Configuration for web knowledge source blocked domain."
-    },
-    "WebKnowledgeSourceDomainRankingAdjustmentKind": {
-      "type": "string",
-      "enum": [
-        "boost",
-        "superBoost",
-        "demote"
-      ],
-      "x-ms-enum": {
-        "name": "WebKnowledgeSourceRankingAdjustment",
-        "modelAsString": true,
-        "values": [
-          {
-            "value": "boost",
-            "name": "boost",
-            "description": "Raises the ranking of the chosen domain or subpage so it appears higher in the search results."
-          },
-          {
-            "value": "superBoost",
-            "name": "superBoost",
-            "description": "Applies a stronger positive weight than Boost, pushing the selected domain or subpage towards the very top of the results."
-          },
-          {
-            "value": "demote",
-            "name": "demote",
-            "description": "Lowers the ranking of the specified domain or subpage so it shows up further down the results list."
-          }
-        ]
-      },
-      "description": "The ranking adjustment to perform on the web results."
+      "description": "Configuration for web knowledge source domain."
     },
     "RemoteSharePointKnowledgeSource": {
       "type": "object",
@@ -3431,6 +3439,27 @@
             "active",
             "deleting"
           ],
+          "x-ms-enum": {
+            "name": "KnowledgeSourceSynchronizationStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "creating",
+                "name": "Creating",
+                "description": "The knowledge source is being provisioned."
+              },
+              {
+                "value": "active",
+                "name": "Active",
+                "description": "The knowledge source is active and synchronization runs are occurring."
+              },
+              {
+                "value": "deleting",
+                "name": "Deleting",
+                "description": "The knowledge source is being deleted and synchronization is paused."
+              }
+            ]
+          },
           "description": "The current synchronization status of the knowledge source."
         },
         "synchronizationInterval": {
@@ -3464,6 +3493,7 @@
       "properties": {
         "totalSynchronization": {
           "type": "integer",
+          "format": "int32",
           "description": "The total number of synchronizations completed."
         },
         "averageSynchronizationDuration": {
@@ -3472,6 +3502,7 @@
         },
         "averageItemsProcessedPerSynchronization": {
           "type": "integer",
+          "format": "int32",
           "description": "The average number of items processed per synchronization."
         }
       },
@@ -3492,14 +3523,17 @@
         },
         "itemUpdatesProcessed": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of item updates successfully processed in the current synchronization."
         },
         "itemsUpdatesFailed": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of item updates that failed in the current synchronization."
         },
         "itemsSkipped": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of items skipped in the current synchronization."
         }
       },
@@ -3526,14 +3560,17 @@
         },
         "itemUpdatesProcessed": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of item updates successfully processed in the last synchronization."
         },
         "itemsUpdatesFailed": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of item updates that failed in the last synchronization."
         },
         "itemsSkipped": {
           "type": "integer",
+          "format": "int32",
           "description": "The number of items skipped in the last synchronization."
         }
       },
@@ -8134,7 +8171,7 @@
         }
       },
       "description": "Specifies the Azure OpenAI resource used to vectorize a query string."
-    },    
+    },
     "VectorSearchVectorizer": {
       "type": "object",
       "discriminator": "kind",
