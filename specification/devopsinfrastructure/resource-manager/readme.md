@@ -27,7 +27,7 @@ These are the global settings for the devopsinfrastructure.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-preview-2025-10-07
+tag: package-stable-2025-10-08
 ```
 
 ``` yaml
@@ -35,13 +35,13 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-preview-2025-10-07
+### Tag: package-stable-2025-10-08
 
-These settings apply only when `--tag=package-preview-2025-10-07` is specified on the command line.
+These settings apply only when `--tag=package-stable-2025-10-08` is specified on the command line.
 
-```yaml $(tag) == 'package-preview-2025-10-07'
+```yaml $(tag) == 'package-preview-2025-10-08'
 input-file:
-  - Microsoft.DevOpsInfrastructure/preview/2025-10-07-preview/devopsinfrastructure.json
+  - Microsoft.DevOpsInfrastructure/stable/2025-10-08-preview/devopsinfrastructure.json
 ```
 
 ### Tag: package-stable-2025-09-20

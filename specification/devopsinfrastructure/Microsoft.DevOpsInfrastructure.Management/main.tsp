@@ -26,9 +26,9 @@ enum Versions {
   @armCommonTypesVersion(CommonTypes.Versions.v6)
   v2025_09_20: "2025-09-20",
 
-  /** 2025-10-07-preview version */
+  /** 2025-10-08 version */
   @armCommonTypesVersion(CommonTypes.Versions.v6)
-  v2025_10_07_preview: "2025-10-07-preview",
+  v2025_10_08: "2025-10-08",
 }
 
 model Pool is TrackedResource<PoolProperties> {
@@ -354,7 +354,7 @@ union LogonType {
 @doc("The network profile of the machines in the pool.")
 model NetworkProfile {
   @doc("The subnet id on which to put all machines created in the pool.")
-  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2025_10_07_preview)
+  @madeOptional(Microsoft.DevOpsInfrastructure.Versions.v2025_10_08)
   subnetId?: string;
 
   @doc("The number of static public IP addresses for outgoing connections assigned to the pool.")
