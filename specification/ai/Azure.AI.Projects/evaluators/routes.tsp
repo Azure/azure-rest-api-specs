@@ -25,12 +25,12 @@ alias ListEvaluatorVersionsParameters = {
 interface Evaluators {
   // GET /evaluators/{name}/versions
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."
-  @doc("List all versions of the given {name}", EvaluatorVersion)
+  @doc("List all versions of the given evaluator")
   @Rest.action("versions")
   @Rest.actionSeparator("/")
   @Http.get
   @list
-  listEvaluatorVersions is Azure.Core.StandardResourceOperations.ResourceAction<
+  listVersions is Azure.Core.StandardResourceOperations.ResourceAction<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters,
     Azure.Core.Page<EvaluatorVersion>
@@ -40,7 +40,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("List the latest version of each evaluator")
   @Rest.listsResource(EvaluatorVersion)
-  listEvaluators is Azure.Core.Foundations.ResourceList<
+  listLatestVersions is Azure.Core.Foundations.ResourceList<
     EvaluatorVersion,
     ListEvaluatorVersionsParameters,
     Azure.Core.Page<EvaluatorVersion>
