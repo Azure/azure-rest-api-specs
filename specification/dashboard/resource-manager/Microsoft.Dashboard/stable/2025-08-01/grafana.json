@@ -1,0 +1,3254 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Dashboard",
+    "version": "2025-08-01",
+    "description": "The Microsoft.Dashboard Rest API spec.",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "Operations"
+    },
+    {
+      "name": "ManagedGrafanas"
+    },
+    {
+      "name": "PrivateEndpointConnections"
+    },
+    {
+      "name": "PrivateLinkResources"
+    },
+    {
+      "name": "ManagedPrivateEndpointModels"
+    },
+    {
+      "name": "IntegrationFabrics"
+    },
+    {
+      "name": "ManagedDashboards"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Dashboard/operations": {
+      "get": {
+        "operationId": "Operations_List",
+        "tags": [
+          "Operations"
+        ],
+        "description": "List the operations for the provider",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dashboard/dashboards": {
+      "get": {
+        "operationId": "Dashboards_ListBySubscription",
+        "tags": [
+          "ManagedDashboards"
+        ],
+        "description": "List all resources of dashboards under the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboardListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dashboard_ListByResourceGroup": {
+            "$ref": "./examples/Dashboard_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Dashboard/grafana": {
+      "get": {
+        "operationId": "Grafana_List",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "List all resources of workspaces for Grafana under the specified subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafanaListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_List": {
+            "$ref": "./examples/Grafana_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/dashboards": {
+      "get": {
+        "operationId": "Dashboards_List",
+        "tags": [
+          "ManagedDashboards"
+        ],
+        "description": "List all resources of dashboards under the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboardListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dashboard_ListByResourceGroup": {
+            "$ref": "./examples/Dashboard_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/dashboards/{dashboardName}": {
+      "get": {
+        "operationId": "Dashboards_Get",
+        "tags": [
+          "ManagedDashboards"
+        ],
+        "description": "Get the properties of a specific dashboard for grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the Azure Managed Dashboard.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dashboard_Get": {
+            "$ref": "./examples/Dashboard_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedDashboards_Create",
+        "tags": [
+          "ManagedDashboards"
+        ],
+        "description": "Create or update a dashboard for grafana resource. This API is idempotent, so user can either create a new dashboard or update an existing dashboard.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the Azure Managed Dashboard.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboard"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedDashboard' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboard"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedDashboard' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboard"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dashboard_Create": {
+            "$ref": "./examples/Dashboard_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedDashboards_Update",
+        "tags": [
+          "ManagedDashboards"
+        ],
+        "description": "Update a dashboard for Grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the Azure Managed Dashboard.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboardUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedDashboard"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dashboard_Update": {
+            "$ref": "./examples/Dashboard_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "ManagedDashboards_Delete",
+        "tags": [
+          "ManagedDashboards"
+        ],
+        "description": "Delete a dashboard for Grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "dashboardName",
+            "in": "path",
+            "description": "The name of the Azure Managed Dashboard.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Dashboard_Delete": {
+            "$ref": "./examples/Dashboard_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana": {
+      "get": {
+        "operationId": "Grafana_ListByResourceGroup",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "List all resources of workspaces for Grafana under the specified resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafanaListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_ListByResourceGroup": {
+            "$ref": "./examples/Grafana_ListByResourceGroup.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}": {
+      "get": {
+        "operationId": "Grafana_Get",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "Get the properties of a specific workspace for Grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Get": {
+            "$ref": "./examples/Grafana_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "Grafana_Create",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "Create or update a workspace for Grafana resource. This API is idempotent, so user can either create a new grafana or update an existing grafana.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedGrafana' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedGrafana' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Create": {
+            "$ref": "./examples/Grafana_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "Grafana_Update",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "Update a workspace for Grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafanaUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedGrafana"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Update": {
+            "$ref": "./examples/Grafana_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "Grafana_Delete",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "Delete a workspace for Grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_Delete": {
+            "$ref": "./examples/Grafana_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/checkEnterpriseDetails": {
+      "post": {
+        "operationId": "Grafana_CheckEnterpriseDetails",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "Retrieve enterprise add-on details information",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/EnterpriseDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EnterpriseDetails_Post": {
+            "$ref": "./examples/EnterpriseDetails_Post.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/fetchAvailablePlugins": {
+      "post": {
+        "operationId": "Grafana_FetchAvailablePlugins",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "A synchronous resource action.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GrafanaAvailablePluginListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Grafana_FetchAvailablePlugins": {
+            "$ref": "./examples/Grafana_FetchAvailablePlugins.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/integrationFabrics": {
+      "get": {
+        "operationId": "IntegrationFabrics_List",
+        "tags": [
+          "IntegrationFabrics"
+        ],
+        "description": "List IntegrationFabric resources by ManagedGrafana",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabricListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_List": {
+            "$ref": "./examples/IntegrationFabrics_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/integrationFabrics/{integrationFabricName}": {
+      "get": {
+        "operationId": "IntegrationFabrics_Get",
+        "tags": [
+          "IntegrationFabrics"
+        ],
+        "description": "Get a IntegrationFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "description": "The integration fabric name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Get": {
+            "$ref": "./examples/IntegrationFabrics_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "IntegrationFabrics_Create",
+        "tags": [
+          "IntegrationFabrics"
+        ],
+        "description": "Create a IntegrationFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "description": "The integration fabric name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'IntegrationFabric' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "201": {
+            "description": "Resource 'IntegrationFabric' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Create": {
+            "$ref": "./examples/IntegrationFabrics_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "IntegrationFabrics_Update",
+        "tags": [
+          "IntegrationFabrics"
+        ],
+        "description": "Update a IntegrationFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "description": "The integration fabric name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabricUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/IntegrationFabric"
+            }
+          },
+          "202": {
+            "description": "Resource update request accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Update": {
+            "$ref": "./examples/IntegrationFabrics_Update.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "IntegrationFabrics_Delete",
+        "tags": [
+          "IntegrationFabrics"
+        ],
+        "description": "Delete a IntegrationFabric",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "integrationFabricName",
+            "in": "path",
+            "description": "The integration fabric name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,18}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              },
+              "location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "IntegrationFabrics_Delete": {
+            "$ref": "./examples/IntegrationFabrics_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/managedPrivateEndpoints": {
+      "get": {
+        "operationId": "ManagedPrivateEndpoints_List",
+        "tags": [
+          "ManagedPrivateEndpointModels"
+        ],
+        "description": "List all managed private endpoints of a grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModelListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_List": {
+            "$ref": "./examples/ManagedPrivateEndpoints_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/managedPrivateEndpoints/{managedPrivateEndpointName}": {
+      "get": {
+        "operationId": "ManagedPrivateEndpoints_Get",
+        "tags": [
+          "ManagedPrivateEndpointModels"
+        ],
+        "description": "Get a specific managed private endpoint of a grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "description": "The managed private endpoint name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Get": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "ManagedPrivateEndpoints_Create",
+        "tags": [
+          "ManagedPrivateEndpointModels"
+        ],
+        "description": "Create or update a managed private endpoint for a grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "description": "The managed private endpoint name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "The managed private endpoint to be created or updated.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource 'ManagedPrivateEndpointModel' update operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          },
+          "201": {
+            "description": "Resource 'ManagedPrivateEndpointModel' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Create": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Create.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "patch": {
+        "operationId": "ManagedPrivateEndpoints_Update",
+        "tags": [
+          "ManagedPrivateEndpointModels"
+        ],
+        "description": "Update a managed private endpoint for an existing grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "description": "The managed private endpoint name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "requestBodyParameters",
+            "in": "body",
+            "description": "Properties that can be updated to an existing managed private endpoint.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointUpdateParameters"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            }
+          },
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/ManagedPrivateEndpointModel"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoints_Patch": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Patch.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "ManagedPrivateEndpoints_Delete",
+        "tags": [
+          "ManagedPrivateEndpointModels"
+        ],
+        "description": "Delete a managed private endpoint for a grafana resource.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "managedPrivateEndpointName",
+            "in": "path",
+            "description": "The managed private endpoint name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Resource deleted successfully."
+          },
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Delete": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateEndpointConnections": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_List",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_List": {
+            "$ref": "./examples/PrivateEndpointConnections_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "operationId": "PrivateEndpointConnections_Get",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Get private endpoint connections.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The private endpoint connection name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Get": {
+            "$ref": "./examples/PrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "PrivateEndpointConnections_Approve",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Manual approve private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The private endpoint connection name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "",
+            "required": false,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Resource 'PrivateEndpointConnection' create operation succeeded",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Approve": {
+            "$ref": "./examples/PrivateEndpointConnections_Approve.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      },
+      "delete": {
+        "operationId": "PrivateEndpointConnections_Delete",
+        "tags": [
+          "PrivateEndpointConnections"
+        ],
+        "description": "Delete private endpoint connection",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateEndpointConnectionName",
+            "in": "path",
+            "description": "The private endpoint connection name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateEndpointConnections_Delete": {
+            "$ref": "./examples/PrivateEndpointConnections_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateLinkResources": {
+      "get": {
+        "operationId": "PrivateLinkResources_List",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "List all private link resources information for this grafana resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_List": {
+            "$ref": "./examples/PrivateLinkResources_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/privateLinkResources/{privateLinkResourceName}": {
+      "get": {
+        "operationId": "PrivateLinkResources_Get",
+        "tags": [
+          "PrivateLinkResources"
+        ],
+        "description": "Get specific private link resource information for this grafana resource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          },
+          {
+            "name": "privateLinkResourceName",
+            "in": "path",
+            "description": "",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateLinkResources_Get": {
+            "$ref": "./examples/PrivateLinkResources_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Dashboard/grafana/{workspaceName}/refreshManagedPrivateEndpoints": {
+      "post": {
+        "operationId": "ManagedPrivateEndpoints_Refresh",
+        "tags": [
+          "ManagedGrafanas"
+        ],
+        "description": "Refresh and sync managed private endpoints of a grafana resource to latest state.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "workspaceName",
+            "in": "path",
+            "description": "The workspace name of Azure Managed Grafana.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded."
+          },
+          "202": {
+            "description": "Resource operation accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ManagedPrivateEndpoint_Refresh": {
+            "$ref": "./examples/ManagedPrivateEndpoints_Refresh.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
+      }
+    }
+  },
+  "definitions": {
+    "AutoGeneratedDomainNameLabelScope": {
+      "type": "string",
+      "description": "Scope for dns deterministic name hash calculation",
+      "enum": [
+        "TenantReuse"
+      ],
+      "x-ms-enum": {
+        "name": "AutoGeneratedDomainNameLabelScope",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "TenantReuse",
+            "value": "TenantReuse"
+          }
+        ]
+      }
+    },
+    "AzureMonitorWorkspaceIntegration": {
+      "type": "object",
+      "description": "Integrations for Azure Monitor Workspace.",
+      "properties": {
+        "azureMonitorWorkspaceResourceId": {
+          "type": "string",
+          "description": "The resource Id of the connected Azure Monitor Workspace."
+        }
+      }
+    },
+    "CreatorCanAdmin": {
+      "type": "string",
+      "description": "The creator will have admin access for the Grafana instance.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "CreatorCanAdmin",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "Creator admin access is disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "Creator admin access is enabled"
+          }
+        ]
+      }
+    },
+    "EnterpriseConfigurations": {
+      "type": "object",
+      "description": "Enterprise settings of a Grafana instance",
+      "properties": {
+        "marketplacePlanId": {
+          "type": "string",
+          "description": "The Plan Id of the Azure Marketplace subscription for the Enterprise plugins"
+        },
+        "marketplaceAutoRenew": {
+          "$ref": "#/definitions/MarketplaceAutoRenew",
+          "description": "The AutoRenew setting of the Enterprise subscription"
+        }
+      }
+    },
+    "EnterpriseDetails": {
+      "type": "object",
+      "description": "Enterprise details of a Grafana instance",
+      "properties": {
+        "saasSubscriptionDetails": {
+          "$ref": "#/definitions/SaasSubscriptionDetails",
+          "description": "SaaS subscription details of a Grafana instance"
+        },
+        "marketplaceTrialQuota": {
+          "$ref": "#/definitions/MarketplaceTrialQuota",
+          "description": "The allocation details of the per subscription free trial slot of the subscription."
+        }
+      }
+    },
+    "GrafanaAvailablePlugin": {
+      "type": "object",
+      "description": "Available plugins of grafana",
+      "properties": {
+        "pluginId": {
+          "type": "string",
+          "description": "Grafana plugin id",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "description": "Grafana plugin display name",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "description": "Grafana plugin type",
+          "readOnly": true
+        },
+        "author": {
+          "type": "string",
+          "description": "Grafana plugin author/publisher name",
+          "readOnly": true
+        }
+      }
+    },
+    "GrafanaAvailablePluginListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GrafanaAvailablePlugin"
+          },
+          "x-ms-identifiers": [
+            "pluginId"
+          ]
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "GrafanaConfigurations": {
+      "type": "object",
+      "description": "Server configurations of a Grafana instance",
+      "properties": {
+        "smtp": {
+          "$ref": "#/definitions/Smtp",
+          "description": "Email server settings.\nhttps://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp"
+        },
+        "snapshots": {
+          "$ref": "#/definitions/Snapshots",
+          "description": "Grafana Snapshots settings"
+        },
+        "users": {
+          "$ref": "#/definitions/Users",
+          "description": "Grafana users settings"
+        },
+        "security": {
+          "$ref": "#/definitions/Security",
+          "description": "Grafana security settings"
+        },
+        "unifiedAlertingScreenshots": {
+          "$ref": "#/definitions/UnifiedAlertingScreenshots",
+          "description": "Grafana Unified Alerting Screenshots settings"
+        }
+      }
+    },
+    "GrafanaIntegrations": {
+      "type": "object",
+      "description": "GrafanaIntegrations is a bundled observability experience (e.g. pre-configured data source, tailored Grafana dashboards, alerting defaults) for common monitoring scenarios.",
+      "properties": {
+        "azureMonitorWorkspaceIntegrations": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/AzureMonitorWorkspaceIntegration"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "GrafanaPlugin": {
+      "type": "object",
+      "description": "Plugin of Grafana",
+      "properties": {
+        "pluginId": {
+          "type": "string",
+          "description": "Grafana plugin id",
+          "readOnly": true
+        }
+      }
+    },
+    "IntegrationFabric": {
+      "type": "object",
+      "description": "The integration fabric resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/IntegrationFabricProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "IntegrationFabricListResponse": {
+      "type": "object",
+      "description": "Paged collection of IntegrationFabric items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The IntegrationFabric items on this page",
+          "items": {
+            "$ref": "#/definitions/IntegrationFabric"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "IntegrationFabricProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "targetResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource Id of the Azure resource being integrated with Azure Managed Grafana. E.g., an Azure Kubernetes Service cluster."
+        },
+        "dataSourceResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "The resource Id of the Azure resource which is used to configure Grafana data source. E.g., an Azure Monitor Workspace, an Azure Data Explorer cluster, etc."
+        },
+        "scenarios": {
+          "type": "array",
+          "description": "A list of integration scenarios covered by this integration fabric",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IntegrationFabricPropertiesUpdateParameters": {
+      "type": "object",
+      "properties": {
+        "scenarios": {
+          "type": "array",
+          "description": "The new integration scenarios covered by this integration fabric.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "IntegrationFabricUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for a PATCH request to a Integration Fabric resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The new tags of the Integration Fabric resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/IntegrationFabricPropertiesUpdateParameters",
+          "description": "The new properties of this Integration Fabric resource"
+        }
+      }
+    },
+    "ManagedDashboard": {
+      "type": "object",
+      "description": "The managed dashboard resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedDashboardProperties",
+          "description": "Properties specific to the managed dashboard resource.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedDashboardListResponse": {
+      "type": "object",
+      "description": "Paged collection of ManagedDashboard items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedDashboard items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedDashboard"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedDashboardProperties": {
+      "type": "object",
+      "description": "Properties specific to the grafana resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedDashboardUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for a PATCH request to a managed dashboard resource.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The new tags of the managed dashboard resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ManagedGrafana": {
+      "type": "object",
+      "description": "The grafana resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedGrafanaProperties",
+          "description": "Properties specific to the grafana resource."
+        },
+        "sku": {
+          "$ref": "#/definitions/ResourceSku",
+          "description": "The Sku of the grafana resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed service identities assigned to this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "ManagedGrafanaListResponse": {
+      "type": "object",
+      "description": "Paged collection of ManagedGrafana items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedGrafana items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedGrafana"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedGrafanaProperties": {
+      "type": "object",
+      "description": "Properties specific to the grafana resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "grafanaVersion": {
+          "type": "string",
+          "description": "The Grafana software version.",
+          "readOnly": true
+        },
+        "endpoint": {
+          "type": "string",
+          "description": "The endpoint of the Grafana instance.",
+          "readOnly": true
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Indicate the state for enable or disable traffic over the public interface.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
+        },
+        "zoneRedundancy": {
+          "type": "string",
+          "description": "The zone redundancy setting of the Grafana instance.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneRedundancy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The api key setting of the Grafana instance.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApiKey",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "creatorCanAdmin": {
+          "$ref": "#/definitions/CreatorCanAdmin",
+          "description": "The creator will have admin access for the Grafana instance."
+        },
+        "deterministicOutboundIP": {
+          "type": "string",
+          "description": "Whether a Grafana instance uses deterministic outbound IPs.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "DeterministicOutboundIP",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "outboundIPs": {
+          "type": "array",
+          "description": "List of outbound IPs if deterministicOutboundIP is enabled.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "type": "array",
+          "description": "The private endpoint connections of the Grafana instance.",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true
+        },
+        "autoGeneratedDomainNameLabelScope": {
+          "$ref": "#/definitions/AutoGeneratedDomainNameLabelScope",
+          "description": "Scope for dns deterministic name hash calculation.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "grafanaIntegrations": {
+          "$ref": "#/definitions/GrafanaIntegrations",
+          "description": "GrafanaIntegrations is a bundled observability experience (e.g. pre-configured data source, tailored Grafana dashboards, alerting defaults) for common monitoring scenarios."
+        },
+        "enterpriseConfigurations": {
+          "$ref": "#/definitions/EnterpriseConfigurations",
+          "description": "Enterprise settings of a Grafana instance"
+        },
+        "grafanaConfigurations": {
+          "$ref": "#/definitions/GrafanaConfigurations",
+          "description": "Server configurations of a Grafana instance"
+        },
+        "grafanaPlugins": {
+          "type": "object",
+          "description": "Installed plugin list of the Grafana instance. Key is plugin id, value is plugin definition.",
+          "additionalProperties": {
+            "$ref": "#/definitions/GrafanaPlugin"
+          }
+        },
+        "grafanaMajorVersion": {
+          "type": "string",
+          "description": "The major Grafana software version to target."
+        }
+      }
+    },
+    "ManagedGrafanaPropertiesUpdateParameters": {
+      "type": "object",
+      "description": "The properties parameters for a PATCH request to a grafana resource.",
+      "properties": {
+        "zoneRedundancy": {
+          "type": "string",
+          "description": "The zone redundancy setting of the Grafana instance.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ZoneRedundancy",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "apiKey": {
+          "type": "string",
+          "description": "The api key setting of the Grafana instance.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "ApiKey",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "creatorCanAdmin": {
+          "$ref": "#/definitions/CreatorCanAdmin",
+          "description": "The creator will have admin access for the Grafana instance."
+        },
+        "deterministicOutboundIP": {
+          "type": "string",
+          "description": "Whether a Grafana instance uses deterministic outbound IPs.",
+          "default": "Disabled",
+          "enum": [
+            "Disabled",
+            "Enabled"
+          ],
+          "x-ms-enum": {
+            "name": "DeterministicOutboundIP",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              },
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              }
+            ]
+          }
+        },
+        "publicNetworkAccess": {
+          "type": "string",
+          "description": "Indicate the state for enable or disable traffic over the public interface.",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "PublicNetworkAccess",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled"
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled"
+              }
+            ]
+          }
+        },
+        "grafanaIntegrations": {
+          "$ref": "#/definitions/GrafanaIntegrations",
+          "description": "GrafanaIntegrations is a bundled observability experience (e.g. pre-configured data source, tailored Grafana dashboards, alerting defaults) for common monitoring scenarios."
+        },
+        "enterpriseConfigurations": {
+          "$ref": "#/definitions/EnterpriseConfigurations",
+          "description": "Enterprise settings of a Grafana instance"
+        },
+        "grafanaConfigurations": {
+          "$ref": "#/definitions/GrafanaConfigurations",
+          "description": "Server configurations of a Grafana instance"
+        },
+        "grafanaPlugins": {
+          "type": "object",
+          "description": "Update of Grafana plugin. Key is plugin id, value is plugin definition. If plugin definition is null, plugin with given plugin id will be removed. Otherwise, given plugin will be installed.",
+          "additionalProperties": {
+            "$ref": "#/definitions/GrafanaPlugin"
+          }
+        },
+        "grafanaMajorVersion": {
+          "type": "string",
+          "description": "The major Grafana software version to target."
+        }
+      }
+    },
+    "ManagedGrafanaUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for a PATCH request to a grafana resource.",
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "identity": {
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "description": "The managed identity of the grafana resource."
+        },
+        "tags": {
+          "type": "object",
+          "description": "The new tags of the grafana resource.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "$ref": "#/definitions/ManagedGrafanaPropertiesUpdateParameters",
+          "description": "Properties specific to the managed grafana resource."
+        }
+      }
+    },
+    "ManagedPrivateEndpointConnectionState": {
+      "type": "object",
+      "description": "The state of managed private endpoint connection.",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/ManagedPrivateEndpointConnectionStatus",
+          "description": "The approval/rejection status of managed private endpoint connection.",
+          "readOnly": true
+        },
+        "description": {
+          "type": "string",
+          "description": "Gets or sets the reason for approval/rejection of the connection.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpointConnectionStatus": {
+      "type": "string",
+      "description": "The approval/rejection status of managed private endpoint connection.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "x-ms-enum": {
+        "name": "ManagedPrivateEndpointConnectionStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Pending",
+            "value": "Pending"
+          },
+          {
+            "name": "Approved",
+            "value": "Approved"
+          },
+          {
+            "name": "Rejected",
+            "value": "Rejected"
+          },
+          {
+            "name": "Disconnected",
+            "value": "Disconnected"
+          }
+        ]
+      }
+    },
+    "ManagedPrivateEndpointModel": {
+      "type": "object",
+      "description": "The managed private endpoint resource type.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagedPrivateEndpointModelProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+        }
+      ]
+    },
+    "ManagedPrivateEndpointModelListResponse": {
+      "type": "object",
+      "description": "The list of managed private endpoints of a grafana resource",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The ManagedPrivateEndpointModel items on this page",
+          "items": {
+            "$ref": "#/definitions/ManagedPrivateEndpointModel"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "ManagedPrivateEndpointModelProperties": {
+      "type": "object",
+      "description": "Properties specific to the managed private endpoint.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "privateLinkResourceId": {
+          "type": "string",
+          "description": "The ARM resource ID of the resource for which the managed private endpoint is pointing to.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "privateLinkResourceRegion": {
+          "type": "string",
+          "description": "The region of the resource to which the managed private endpoint is pointing to.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "The group Ids of the managed private endpoint.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "requestMessage": {
+          "type": "string",
+          "description": "User input request message of the managed private endpoint.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "connectionState": {
+          "$ref": "#/definitions/ManagedPrivateEndpointConnectionState",
+          "description": "The state of managed private endpoint connection.",
+          "readOnly": true
+        },
+        "privateLinkServiceUrl": {
+          "type": "string",
+          "description": "The URL of the data store behind the private link service. It would be the URL in the Grafana data source configuration page without the protocol and port.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "privateLinkServicePrivateIP": {
+          "type": "string",
+          "description": "The private IP of private endpoint after approval. This property is empty before connection is approved.",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedPrivateEndpointUpdateParameters": {
+      "type": "object",
+      "description": "The parameters for a PATCH request to a managed private endpoint.",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "The new tags of the managed private endpoint.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "MarketplaceAutoRenew": {
+      "type": "string",
+      "description": "The AutoRenew setting of the Enterprise subscription",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "x-ms-enum": {
+        "name": "MarketplaceAutoRenew",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Disabled",
+            "value": "Disabled"
+          },
+          {
+            "name": "Enabled",
+            "value": "Enabled"
+          }
+        ]
+      }
+    },
+    "MarketplaceTrialQuota": {
+      "type": "object",
+      "description": "The allocation details of the per subscription free trial slot of the subscription.",
+      "properties": {
+        "availablePromotion": {
+          "type": "string",
+          "description": "Available enterprise promotion for the subscription",
+          "default": "None",
+          "enum": [
+            "None",
+            "FreeTrial"
+          ],
+          "x-ms-enum": {
+            "name": "AvailablePromotion",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "None",
+                "value": "None"
+              },
+              {
+                "name": "FreeTrial",
+                "value": "FreeTrial"
+              }
+            ]
+          }
+        },
+        "grafanaResourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource Id of the Grafana resource which is doing the trial.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.Dashboard/grafana"
+              }
+            ]
+          }
+        },
+        "trialStartAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time in UTC of when the trial starts."
+        },
+        "trialEndAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time in UTC of when the trial ends."
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "type": "object",
+      "description": "The Private Endpoint Connection resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateEndpointConnectionListResult": {
+      "type": "object",
+      "description": "The response of a PrivateEndpointConnection list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateEndpointConnection items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateEndpointConnectionProperties": {
+      "type": "object",
+      "description": "Properties of the PrivateEndpointConnectProperties.",
+      "properties": {
+        "privateEndpoint": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpoint",
+          "description": "The resource of private end point."
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateLinkServiceConnectionState",
+          "description": "A collection of information about the state of the connection between service consumer and provider."
+        },
+        "groupIds": {
+          "type": "array",
+          "description": "The private endpoint connection group ids.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "provisioningState": {
+          "$ref": "../../../../../common-types/resource-management/v3/privatelinks.json#/definitions/PrivateEndpointConnectionProvisioningState",
+          "description": "The provisioning state of the private endpoint connection resource.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "privateLinkServiceConnectionState"
+      ]
+    },
+    "PrivateLinkResource": {
+      "type": "object",
+      "description": "A private link resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateLinkResourceProperties",
+          "description": "Resource properties.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateLinkResourceListResult": {
+      "type": "object",
+      "description": "The response of a PrivateLinkResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateLinkResource items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateLinkResourceProperties": {
+      "type": "object",
+      "description": "Properties of a private link resource.",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        },
+        "groupId": {
+          "type": "string",
+          "description": "The private link resource group id.",
+          "readOnly": true
+        },
+        "requiredMembers": {
+          "type": "array",
+          "description": "The private link resource required member names.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "requiredZoneNames": {
+          "type": "array",
+          "description": "The private link resource Private link DNS zone name.",
+          "items": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "ProvisioningState": {
+      "type": "string",
+      "enum": [
+        "Accepted",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Deleted",
+        "NotSpecified"
+      ],
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Accepted",
+            "value": "Accepted"
+          },
+          {
+            "name": "Creating",
+            "value": "Creating"
+          },
+          {
+            "name": "Updating",
+            "value": "Updating"
+          },
+          {
+            "name": "Deleting",
+            "value": "Deleting"
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded"
+          },
+          {
+            "name": "Failed",
+            "value": "Failed"
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled"
+          },
+          {
+            "name": "Deleted",
+            "value": "Deleted"
+          },
+          {
+            "name": "NotSpecified",
+            "value": "NotSpecified"
+          }
+        ]
+      },
+      "readOnly": true
+    },
+    "ResourceSku": {
+      "type": "object",
+      "description": "Represents the SKU of a resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the SKU."
+        },
+        "size": {
+          "$ref": "#/definitions/Size",
+          "description": "Specifies the capacity tier of the Grafana instance."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SaasSubscriptionDetails": {
+      "type": "object",
+      "description": "SaaS subscription details of a Grafana instance",
+      "properties": {
+        "planId": {
+          "type": "string",
+          "description": "The plan Id of the SaaS subscription."
+        },
+        "offerId": {
+          "type": "string",
+          "description": "The offer Id of the SaaS subscription."
+        },
+        "publisherId": {
+          "type": "string",
+          "description": "The publisher Id of the SaaS subscription."
+        },
+        "term": {
+          "$ref": "#/definitions/SubscriptionTerm",
+          "description": "The billing term of the SaaS Subscription."
+        }
+      }
+    },
+    "Security": {
+      "type": "object",
+      "description": "Grafana security settings",
+      "properties": {
+        "csrfAlwaysCheck": {
+          "type": "boolean",
+          "description": "Set to true to execute the CSRF check even if the login cookie is not in a request (default false)."
+        }
+      }
+    },
+    "Size": {
+      "type": "string",
+      "description": "Specifies the capacity tier of the Grafana instance.",
+      "enum": [
+        "X1",
+        "X2"
+      ],
+      "x-ms-enum": {
+        "name": "Size",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "X1",
+            "value": "X1",
+            "description": "X1 capacity tier"
+          },
+          {
+            "name": "X2",
+            "value": "X2",
+            "description": "X2 capacity tier"
+          }
+        ]
+      }
+    },
+    "Smtp": {
+      "type": "object",
+      "description": "Email server settings.\nhttps://grafana.com/docs/grafana/v9.0/setup-grafana/configure-grafana/#smtp",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Enable this to allow Grafana to send email. Default is false",
+          "default": false
+        },
+        "host": {
+          "type": "string",
+          "description": "SMTP server hostname with port, e.g. test.email.net:587"
+        },
+        "user": {
+          "type": "string",
+          "description": "User of SMTP auth"
+        },
+        "password": {
+          "type": "string",
+          "format": "password",
+          "description": "Password of SMTP auth. If the password contains # or ;, then you have to wrap it with triple quotes",
+          "x-ms-secret": true
+        },
+        "fromAddress": {
+          "type": "string",
+          "description": "Address used when sending out emails\nhttps://pkg.go.dev/net/mail#Address"
+        },
+        "fromName": {
+          "type": "string",
+          "description": "Name to be used when sending out emails. Default is \"Azure Managed Grafana Notification\"\nhttps://pkg.go.dev/net/mail#Address"
+        },
+        "startTLSPolicy": {
+          "$ref": "#/definitions/StartTLSPolicy",
+          "description": "The StartTLSPolicy setting of the SMTP configuration\nhttps://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy"
+        },
+        "skipVerify": {
+          "type": "boolean",
+          "description": "Verify SSL for SMTP server. Default is false\nhttps://pkg.go.dev/crypto/tls#Config"
+        }
+      }
+    },
+    "Snapshots": {
+      "type": "object",
+      "description": "Grafana Snapshots settings",
+      "properties": {
+        "externalEnabled": {
+          "type": "boolean",
+          "description": "Set to false to disable external snapshot publish endpoint"
+        }
+      }
+    },
+    "StartTLSPolicy": {
+      "type": "string",
+      "description": "The StartTLSPolicy setting of the SMTP configuration\nhttps://pkg.go.dev/github.com/go-mail/mail#StartTLSPolicy",
+      "enum": [
+        "OpportunisticStartTLS",
+        "MandatoryStartTLS",
+        "NoStartTLS"
+      ],
+      "x-ms-enum": {
+        "name": "StartTLSPolicy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "OpportunisticStartTLS",
+            "value": "OpportunisticStartTLS"
+          },
+          {
+            "name": "MandatoryStartTLS",
+            "value": "MandatoryStartTLS"
+          },
+          {
+            "name": "NoStartTLS",
+            "value": "NoStartTLS"
+          }
+        ]
+      }
+    },
+    "SubscriptionTerm": {
+      "type": "object",
+      "description": "The current billing term of the SaaS Subscription.",
+      "properties": {
+        "termUnit": {
+          "type": "string",
+          "description": "The unit of the billing term."
+        },
+        "startDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time in UTC of when the billing term starts."
+        },
+        "endDate": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time in UTC of when the billing term ends."
+        }
+      }
+    },
+    "UnifiedAlertingScreenshots": {
+      "type": "object",
+      "description": "Grafana Unified Alerting Screenshots settings",
+      "properties": {
+        "captureEnabled": {
+          "type": "boolean",
+          "description": "Set to false to disable capture screenshot in Unified Alert due to performance issue."
+        }
+      }
+    },
+    "Users": {
+      "type": "object",
+      "description": "Grafana users settings",
+      "properties": {
+        "viewersCanEdit": {
+          "type": "boolean",
+          "description": "Set to true so viewers can access and use explore and perform temporary edits on panels in dashboards they have access to. They cannot save their changes."
+        },
+        "editorsCanAdmin": {
+          "type": "boolean",
+          "description": "Set to true so editors can administrate dashboards, folders and teams they create."
+        }
+      }
+    }
+  },
+  "parameters": {}
+}
