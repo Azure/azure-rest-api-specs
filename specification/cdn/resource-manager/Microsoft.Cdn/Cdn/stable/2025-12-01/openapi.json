@@ -7807,11 +7807,11 @@
         }
       },
       "put": {
-        "operationId": "RuleSets_Create",
+        "operationId": "RuleSets_CreateOrUpdate",
         "tags": [
           "RuleSets"
         ],
-        "description": "Creates a new rule set within the specified profile.",
+        "description": "Creates or update a batch rule set within the specified profile along with the rules associate to it.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -7842,7 +7842,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The rule set to create. Making it optional to be backwards compatible",
+            "description": "Resource create parameters.",
             "required": false,
             "schema": {
               "$ref": "#/definitions/RuleSet"
@@ -7885,8 +7885,8 @@
           }
         },
         "x-ms-examples": {
-          "RuleSets_Create": {
-            "$ref": "./examples/RuleSets_Create.json"
+          "RuleSets_CreateOrUpdate": {
+            "$ref": "./examples/RuleSets_CreateOrUpdate.json"
           }
         },
         "x-ms-long-running-operation-options": {

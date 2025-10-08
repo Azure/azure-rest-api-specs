@@ -7918,15 +7918,6 @@
             "description": "Name of the rule set under the profile which is unique globally.",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "resource",
-            "in": "body",
-            "description": "The rule set to create. Making it optional to be backwards compatible",
-            "required": false,
-            "schema": {
-              "$ref": "#/definitions/RuleSet"
-            }
           }
         ],
         "responses": {
@@ -7937,19 +7928,11 @@
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
+            "description": "Azure create operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/RuleSet"
             },
             "headers": {
-              "Azure-AsyncOperation": {
-                "type": "string",
-                "description": "A link to the status monitor"
-              },
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
               "Retry-After": {
                 "type": "integer",
                 "format": "int32",
@@ -7968,12 +7951,7 @@
           "RuleSets_Create": {
             "$ref": "./examples/RuleSets_Create.json"
           }
-        },
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation",
-          "final-state-schema": "#/definitions/RuleSet"
-        },
-        "x-ms-long-running-operation": true
+        }
       },
       "delete": {
         "operationId": "RuleSets_Delete",

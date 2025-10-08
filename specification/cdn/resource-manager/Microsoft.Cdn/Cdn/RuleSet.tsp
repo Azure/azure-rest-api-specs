@@ -36,16 +36,28 @@ interface RuleSets {
   /**
    * Creates a new rule set within the specified profile.
    */
-  @armResourceCreateOrUpdate(RuleSet)
-  @Azure.Core.useFinalStateVia("azure-async-operation")
-  create(
-    ...ResourceInstanceParameters<RuleSet>,
+  @removed(Versions.v2025_12_01)
+  @sharedRoute
+  @put
+  create is Azure.ResourceManager.Legacy.CustomPatchAsync<
+    RuleSet,
+    PatchModel = void,
+    Response = ArmResponse<RuleSet> | ArmCreatedResponse<RuleSet>
+  >;
 
-    /** The rule set to create. Making it optional to be backwards compatible */
-    @body resource?: RuleSet,
-  ): ArmResponse<RuleSet> | (ArmCreatedResponse<RuleSet> &
-    ArmAsyncOperationHeader<FinalResult = RuleSet> &
-    ArmLroLocationHeader<FinalResult = RuleSet>) | ErrorResponse;
+  /**
+   * Creates or update a batch rule set within the specified profile along with the rules associate to it.
+   */
+  @added(Versions.v2025_12_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
+  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrReplaceAsync<
+    RuleSet,
+    OptionalRequestBody = true,
+    Response = ArmResponse<RuleSet> | (ArmCreatedResponse<RuleSet> &
+      ArmAsyncOperationHeader<FinalResult = RuleSet> &
+      ArmLroLocationHeader<FinalResult = RuleSet>) | ErrorResponse
+  >;
 
   /**
    * Deletes an existing AzureFrontDoor rule set with the specified rule set name under the specified subscription, resource group and profile.
