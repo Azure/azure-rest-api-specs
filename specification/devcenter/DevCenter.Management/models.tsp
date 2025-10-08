@@ -695,6 +695,7 @@ model DevCenterProjectCatalogSettings {
 }
 
 @doc("Inherited project catalog settings that combine project policy settings with dev center catalog settings.")
+@added(Versions.v2025_10_01_preview)
 model InheritedProjectCatalogSettings {
   @doc("Indicates whether the feature's status, Enabled or Disabled, is configurable at the Project scope.")
   @added(Versions.v2025_10_01_preview)
@@ -920,6 +921,7 @@ model ProjectCustomizationManagedIdentity {
 }
 
 @doc("Settings controlling the auto deletion of inactive dev boxes.")
+@removed(Versions.v2025_10_01_preview)
 model DevBoxAutoDeleteSettings {
   @doc("Indicates the delete mode for Dev Boxes within this project.")
   deleteMode?: DevBoxDeleteMode;
@@ -994,6 +996,10 @@ model ProjectUpdate is TrackedResourceUpdate {
 model InheritedSettingsForProject {
   @doc("Dev Center settings to be used when associating a project with a catalog.")
   @visibility(Lifecycle.Read)
+  @typeChangedFrom(
+    Versions.v2025_10_01_preview,
+    DevCenterProjectCatalogSettings
+  )
   projectCatalogSettings?: InheritedProjectCatalogSettings;
 
   @doc("Network settings that will be enforced on this project.")

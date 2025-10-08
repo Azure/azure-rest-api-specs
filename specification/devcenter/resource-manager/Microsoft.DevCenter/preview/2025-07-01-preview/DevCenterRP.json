@@ -11462,22 +11462,12 @@
         }
       }
     },
-    "InheritedProjectCatalogSettings": {
-      "type": "object",
-      "description": "Inherited project catalog settings that combine project policy settings with dev center catalog settings.",
-      "properties": {
-        "catalogItemSyncEnableStatus": {
-          "$ref": "#/definitions/CatalogItemSyncEnableStatus",
-          "description": "Whether project catalogs associated with projects in this dev center can be configured to sync catalog items."
-        }
-      }
-    },
     "InheritedSettingsForProject": {
       "type": "object",
       "description": "Applicable inherited settings for a project.",
       "properties": {
         "projectCatalogSettings": {
-          "$ref": "#/definitions/InheritedProjectCatalogSettings",
+          "$ref": "#/definitions/DevCenterProjectCatalogSettings",
           "description": "Dev Center settings to be used when associating a project with a catalog.",
           "readOnly": true
         },
