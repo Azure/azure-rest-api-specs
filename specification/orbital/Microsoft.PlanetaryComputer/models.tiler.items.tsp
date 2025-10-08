@@ -399,12 +399,14 @@ model BandStatistics {
   /**
    * Minimum value in the band.
    */
-  min: float32;
+  @encodedName("application/json", "min")
+  minimum: float32;
 
   /**
    * Maximum value in the band.
    */
-  max: float32;
+  @encodedName("application/json", "max")
+  maximum: float32;
 
   /**
    * Mean value of the band.

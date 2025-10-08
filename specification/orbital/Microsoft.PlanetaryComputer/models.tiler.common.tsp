@@ -260,17 +260,17 @@ union PixelSelection {
   /**
    * Calculate standard deviation of available pixels
    */
-  stdev: "stdev",
+  standardDeviation: "stdev",
 
   /**
    * Select image with lowest value in the last band
    */
-  lastbandlow: "lastbandlow",
+  lastBandLow: "lastbandlow",
 
   /**
    * Select image with highest value in the last band
    */
-  lastbandhight: "lastbandhight",
+  lastBandHigh: "lastbandhigh",
 }
 
 /**
