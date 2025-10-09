@@ -103,13 +103,13 @@ model EvalRunOutputItem {
   eval_id?: string;
 
   /** Unix timestamp (in seconds) when the evaluation run was created. */
-  created_at: integer;
+  created_at: int64;
 
   /** The status of the evaluation run. */
   status: string;
 
   /** The identifier for the data source item. */
-  datasource_item_id?: integer;
+  datasource_item_id?: int32;
 
   /** Details of the input data source item. */
   datasource_item: {};
