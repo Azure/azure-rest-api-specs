@@ -7,7 +7,7 @@ Confidential Ledger provides SDKs for the following languages:
 - [Java](https://github.com/Azure/azure-sdk-for-java/blob/main/sdk/confidentialledger/azure-security-confidentialledger/swagger/README.md)
 - [C#](https://github.com/Azure/azure-sdk-for-net/blob/main/sdk/confidentialledger/Azure.Security.ConfidentialLedger/src/autorest.md)
 
-Please look to the typespec files under `Microsoft.ConfidentialLedger/` for the most up-to-date API changes.
+**Please look to the typespec files under `specification/confidentialledger/data-plane/ConfidentialLedger` for the most up-to-date API changes.**
 
 > see https://aka.ms/autorest
 
@@ -131,30 +131,6 @@ These settings apply only when `--tag=package-2024-12-09-preview-identity` is sp
 ```yaml $(tag) == 'package-2024-12-09-preview-identity'
 input-file:
   - preview/2024-12-09-preview/identityservice.json
-directive:
-  - suppress: HostParametersValidation
-    reason: Existing API, change would potentially be breaking.
-```
-
-### Tag: package-2024-12-09-preview-ledger-tsp
-
-These settings apply only when `--tag=package-2024-12-09-preview-ledger-tsp` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-12-09-preview-ledger-tsp'
-input-file:
-  - ConfidentialLedger/preview/2024-12-09-preview/confidentialledger.json
-directive:
-  - suppress: HostParametersValidation
-    reason: Existing API, change would potentially be breaking.
-```
-
-### Tag: package-2024-12-09-preview-identity-tsp
-
-These settings apply only when `--tag=package-2024-12-09-preview-identity-tsp` is specified on the command line.
-
-```yaml $(tag) == 'package-2024-12-09-preview-identity-tsp'
-input-file:
-  - ConfidentialLedgerIdentity/preview/2024-12-09-preview/identityservice.json
 directive:
   - suppress: HostParametersValidation
     reason: Existing API, change would potentially be breaking.
