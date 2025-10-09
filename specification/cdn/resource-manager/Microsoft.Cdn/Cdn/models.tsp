@@ -6458,7 +6458,7 @@ model SecurityPolicyWebApplicationFirewallParametersWithEmbeddedWafPolicy
   /**
    * Waf associations
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   associations?: SecurityPolicyWebApplicationFirewallAssociation[];
 
   /**
