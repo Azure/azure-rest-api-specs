@@ -940,10 +940,10 @@ model DevBoxScheduleDeleteSettings {
   deleteMode?: DevBoxDeleteMode;
 
   /** ISO8601 duration required for the dev box to not be inactive prior to it being scheduled for deletion.  ISO8601 format PT[n]H[n]M[n]S. */
-  inactiveThreshold?: string;
+  inactiveThreshold?: duration;
 
   /** ISO8601 duration required for the dev box to be marked for deletion prior to it being deleted. ISO8601 format PT[n]H[n]M[n]S. */
-  gracePeriod?: string;
+  gracePeriod?: duration;
 
   /** Indicates whether scheduled deletion should be canceled when a user connects to the dev box. */
   cancelOnConnectEnableStatus?: CancelOnConnectEnableStatus;
