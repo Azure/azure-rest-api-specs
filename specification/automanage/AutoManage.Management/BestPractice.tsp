@@ -92,6 +92,25 @@ interface BestPracticesVersions {
    * Get information about a Automanage best practice version
    */
   get is BestPracticesVersionOps.Read<BestPractice>;
+
+  /**
+   * Retrieve a list of Automanage best practices versions
+   */
+  @action("versions")
+  @list
+  @get
+  listByTenant is ArmProviderActionSync<
+    Response = ArmResponse<BestPracticeList>,
+    Scope = TenantActionScope,
+    Parameters = {
+      /** The Automanage best practice name. */
+      @path
+      @segment("bestPractices")
+      @key
+      bestPracticeName: string;
+    },
+    Error = ErrorResponse
+  >;
 }
 
 @@doc(BestPractice.name, "The Automanage best practice name.");

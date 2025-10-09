@@ -11,26 +11,23 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/automanage.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    package-dir: "Azure.ResourceManager.AutoManage"
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "{package-dir}"
+  "@azure-typespec/http-client-csharp-mgmt":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-name: "Azure.ResourceManager.AutoManage"
+    namespace: "{package-name}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-automanage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-automanage"
     namespace: "azure.mgmt.automanage"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-automanage"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-automanage"
     namespace: "com.azure.resourcemanager.automanage"
     service-name: "AutoManage" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: sdk/automanage
-    package-dir: "arm-automanage"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-automanage"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -39,7 +36,7 @@ options:
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/automanage"
     emitter-output-dir: "{output-dir}/{service-dir}/armautomanage"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armautomanage"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

@@ -14,29 +14,6 @@ using TypeSpec.OpenAPI;
 namespace Microsoft.Automanage;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-interface BestPracticesVersionsOperationGroup {
-  /**
-   * Retrieve a list of Automanage best practices versions
-   */
-  @autoRoute
-  @get
-  @action("versions")
-  @list
-  listByTenant is ArmProviderActionSync<
-    Response = ArmResponse<BestPracticeList>,
-    Scope = TenantActionScope,
-    Parameters = {
-      /** The Automanage best practice name. */
-      @path
-      @segment("bestPractices")
-      @key
-      bestPracticeName: string;
-    },
-    Error = ErrorResponse
-  >;
-}
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ConfigurationProfileAssignmentsOperationGroup {
   /**
    * Get list of configuration profile assignments
