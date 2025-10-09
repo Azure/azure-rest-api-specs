@@ -25,23 +25,22 @@ interface Evaluators {
   @get
   @doc("List all versions of the given Evaluator name", EvaluatorVersion)
   @route("/evaluators/{name}/versions")
-  op listEvaluatorVersions(
+  listEvaluatorVersions(
     @doc("Name of the evaluator")
-    @path name: string,
+    @path
+    name: string,
+
     ...OpenAIListRequestOptions,
   ): OpenAIPageableListOf<EvaluatorVersion>;
-
-
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"
   @get
   @doc("List the latest version of each Evaluator", EvaluatorVersion)
   @route("/evaluators")
-  op listVersions(
+  listVersions(
     ...OpenAIListRequestOptions,
   ): OpenAIPageableListOf<EvaluatorVersion>;
-
 
   // GET /evaluators/{name}/versions/{version}
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

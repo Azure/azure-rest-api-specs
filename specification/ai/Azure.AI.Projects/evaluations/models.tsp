@@ -72,7 +72,7 @@ model EvaluationRunOutputItemResult {
 @added(Versions.v2025_10_15_preview)
 model QueryResponseInlineMessage {
   /** The object type, which is always query_response_inline_message. */
-  type: "azure_query_response_inline_message";
+  type: "azure_ai_query_response_inline_message";
 
   /** The input query string provided by the user or system. Can be image url. */
   query: string;
@@ -85,6 +85,28 @@ model QueryResponseInlineMessage {
 
   /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
   tools?: {}[];
+
+  /** Additional properties for the query response inline message. */
+  properties?: Record<string>;
+}
+
+/** Query and response excepted input messsage defintion. */
+@added(Versions.v2025_10_15_preview)
+model EvaluatorMessage {
+  /** The object type, which is always query_response_inline_message. */
+  type: "azure_ai_evaluator_messages";
+
+  /** The input query string provided by the user or system. Can be image url. */
+  query: {}[];
+
+  /** The generated response corresponding to the input query. Can be image url. */
+  response?: {}[];
+
+  /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
+  tools?: {}[];
+
+  /** Additional properties for the query response inline message. */
+  properties?: Record<string>;
 }
 
 /** OpenAI definition: Eval output results. */
@@ -103,13 +125,13 @@ model EvalRunOutputItem {
   eval_id?: string;
 
   /** Unix timestamp (in seconds) when the evaluation run was created. */
-  created_at: integer;
+  created_at: int64;
 
   /** The status of the evaluation run. */
   status: string;
 
   /** The identifier for the data source item. */
-  datasource_item_id?: integer;
+  datasource_item_id?: int64;
 
   /** Details of the input data source item. */
   datasource_item: {};
