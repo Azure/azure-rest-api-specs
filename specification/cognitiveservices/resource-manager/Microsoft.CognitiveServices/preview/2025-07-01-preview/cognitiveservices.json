@@ -2928,84 +2928,6 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders": {
-      "get": {
-        "tags": [
-          "RaiExternalSafetyProviders"
-        ],
-        "operationId": "RaiExternalSafetyProvider_List",
-        "description": "Gets the safety providers associated with the subscription",
-        "x-ms-examples": {
-          "ListRaiExternalSafetyProviders": {
-            "$ref": "./examples/ListRaiExternalSafetyProviders.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Successfully retrieved safety providers.",
-            "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProviderResult"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders/{safetyProviderName}": {
-      "get": {
-        "tags": [
-          "RaiExternalSafetyProvider"
-        ],
-        "operationId": "RaiExternalSafetyProvider_Get",
-        "description": "Gets the specified external safety provider associated with the Subscription",
-        "x-ms-examples": {
-          "GetRaiExternalSafetyProvider": {
-            "$ref": "./examples/GetRaiExternalSafetyProvider.json"
-          }
-        },
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "#/parameters/safetyProviderNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK -- Get the safety provider successfully.",
-            "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProvider"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raitopics": {
       "get": {
         "tags": [
@@ -8164,14 +8086,6 @@
           },
           "x-ms-identifiers": [],
           "description": "The list of custom rai topics."
-        },
-        "safetyProviders": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/SafetyProviderConfig"
-          },
-          "x-ms-identifiers": [],
-          "description": "The list of Safety Providers."
         }
       }
     },
@@ -8200,20 +8114,6 @@
       "allOf": [
         {
           "$ref": "#/definitions/RaiTopicConfig"
-        }
-      ]
-    },
-    "SafetyProviderConfig": {
-      "description": "Gets or sets the source to which safety providers applies.",
-      "type": "object",
-      "properties": {
-        "source": {
-          "$ref": "#/definitions/RaiPolicyContentSource"
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/RaiSafetyProviderConfig"
         }
       ]
     },
@@ -8291,20 +8191,6 @@
         }
       }
     },
-    "RaiSafetyProviderConfig": {
-      "description": "Azure OpenAI RAI safety provider config.",
-      "type": "object",
-      "properties": {
-        "safetyProviderName": {
-          "type": "string",
-          "description": "Name of RAI Safety Provider."
-        },
-        "blocking": {
-          "type": "boolean",
-          "description": "If blocking would occur."
-        }
-      }
-    },
     "RaiContentFilterListResult": {
       "description": "The list of Content Filters.",
       "type": "object",
@@ -8372,93 +8258,6 @@
         }
       },
       "description": "The list of cognitive services RAI Topics."
-    },
-    "RaiExternalSafetyProvider": {
-      "description": "Cognitive Services Rai External Safety provider.",
-      "type": "object",
-      "properties": {
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "readOnly": true,
-          "description": "Resource Etag."
-        },
-        "tags": {
-          "type": "object",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read"
-          ],
-          "description": "Resource tags."
-        },
-        "properties": {
-          "$ref": "#/definitions/RaiExternalSafetyProviderProperties",
-          "description": "Properties of Cognitive Services Rai External Safety provider."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "RaiExternalSafetyProviderProperties": {
-      "description": "RAI External SafetyProvider properties.",
-      "type": "object",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the safety provider."
-        },
-        "name": {
-          "type": "string",
-          "description": "Name of the safety provider."
-        },
-        "mode": {
-          "type": "string",
-          "description": "Safety provider mode sync/async."
-        },
-        "url": {
-          "type": "string",
-          "format": "uri",
-          "description": "Webhook URL for the safety provider."
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Creation time of the safety provider."
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date-time",
-          "description": "Last modified time of the safety provider."
-        }
-      }
-    },
-    "RaiExternalSafetyProviderResult": {
-      "type": "object",
-      "properties": {
-        "nextLink": {
-          "description": "The link used to get the next page of Rai External Safety Provider.",
-          "type": "string"
-        },
-        "value": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/RaiExternalSafetyProvider"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ],
-          "description": "The list of RaiExternalSafetyProvider."
-        }
-      },
-      "description": "The list of cognitive services RAI External Safety Providers."
     },
     "RaiTopic": {
       "description": "Cognitive Services Rai Topic.",
@@ -9932,15 +9731,6 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the Rai Topic associated with the Cognitive Services Account",
-      "x-ms-parameter-location": "method"
-    },
-    "safetyProviderNameParameter": {
-      "name": "safetyProviderName",
-      "in": "path",
-      "required": true,
-      "type": "string",
-      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
-      "description": "The name of the Rai External Safety Provider associated with the Cognitive Services Account",
       "x-ms-parameter-location": "method"
     },
     "commitmentPlanNameParameter": {
