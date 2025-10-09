@@ -9,3 +9,8 @@ using Azure.ClientGenerator.Core;
   "etag",
   "java"
 );
+
+@@clientName(Microsoft.AppConfiguration,
+  "AppConfigurationManagementClient",
+  "javascript"
+);
