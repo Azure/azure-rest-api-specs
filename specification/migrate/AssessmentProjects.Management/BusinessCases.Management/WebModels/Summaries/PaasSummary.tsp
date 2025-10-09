@@ -130,22 +130,22 @@ model EstimatedCostByTarget {
 model AzureSqlSummary {
   @doc("Estimated cost by recommended offer.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   estimatedCostByOffer?: EstimatedCostByOffer[];
 
   @doc("Distribution by service tiers, retaining just to support older Business cases.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionByServiceTier?: SqlServiceTier[];
 
   @doc("Distribution by service tiers for SQL MI.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionByServiceTierForSqlMi?: SqlServiceTier[];
 
   @doc("Distribution by service tiers for SQL DB.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionByServiceTierForSqlDb?: SqlServiceTier[];
 }
 
@@ -164,17 +164,17 @@ model SqlServiceTier {
 model AzureAppServiceSummary {
   @doc("Estimated cost by recommendation offer.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   estimatedCostByOffer?: EstimatedCostByOffer[];
 
   @doc("Distribution by SKU.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionBySku?: AppServiceSku[];
 
   @doc("Distribution by application type.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionByApp?: WebAppDistribution[];
 }
 
@@ -208,17 +208,17 @@ model WebAppDistribution {
 model AzureAppServiceContainerSummary {
   @doc("Estimated cost by recommendation offer.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   estimatedCostByOffer?: EstimatedCostByOffer[];
 
   @doc("Distribution by SKU.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionBySku?: WebAppTargetSku[];
 
   @doc("Distribution by application type.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionByApp?: WebAppDistribution[];
 }
 
@@ -241,17 +241,17 @@ model WebAppTargetSku {
 model AzureKubernetesServiceSummary {
   @doc("Estimated cost by recommendation offer.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   estimatedCostByOffer?: EstimatedCostByOffer[];
 
   @doc("Distribution by SKU.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionBySku?: WebAppTargetSku[];
 
   @doc("Distribution by application type.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionByApp?: WebAppDistribution[];
 }
 
@@ -341,7 +341,7 @@ model OnPremisesSqlSummary {
 
   @doc("Distribution by SQL version.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionBySqlVersion?: SqlVersionDetails[];
 
   @doc("The SQL on premises utilization insights.")
@@ -350,7 +350,7 @@ model OnPremisesSqlSummary {
 
   @doc("Distribution by Sql Edition.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   distributionBySqlEdition?: DistributionByType[];
 }
 
@@ -377,6 +377,6 @@ model OnPremisesWebAppSummary {
 
   @doc("The number of web applications per web application type.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   numberOfWebAppsPerType?: NameValuePair<string, int32>[];
 }
