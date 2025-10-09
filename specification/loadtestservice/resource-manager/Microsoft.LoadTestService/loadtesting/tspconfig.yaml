@@ -25,12 +25,12 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-loadtesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-loadtesting"
     flavor: azure
     package-details:
       name: "@azure/arm-loadtesting"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-loadtesting"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-loadtesting"
     namespace: "azure.mgmt.loadtesting"
     flavor: "azure"
     generate-test: true
@@ -49,8 +49,8 @@ options:
       - "EncryptionPropertiesIdentity.resourceId"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/loadtesting"
-    package-dir: "armloadtesting"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armloadtesting"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armloadtesting"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
