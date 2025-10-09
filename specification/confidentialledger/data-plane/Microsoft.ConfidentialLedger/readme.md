@@ -18,7 +18,7 @@ Confidential Ledger provides SDKs for the following languages:
 These are the global settings for Confidential Ledger.
 
 ```yaml
-tag: package-preview-2024-12-09
+tag: package-2024-12-09-preview-ledger
 openapi-type: data-plane
 ```
 
