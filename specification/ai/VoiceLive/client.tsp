@@ -362,7 +362,6 @@ using Azure.ClientGenerator.Core;
 @@clientName(VoiceLive.Background, "VideoBackground", "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
 
-
 @@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "java");
@@ -373,14 +372,8 @@ using Azure.ClientGenerator.Core;
 @@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.public, "java");
 @@access(VoiceLive.ClientEventInputAudioClear, Access.public, "java");
 @@access(VoiceLive.ClientEventConversationItemCreate, Access.public, "java");
-@@access(VoiceLive.ClientEventConversationItemRetrieve,
-  Access.public,
-  "java"
-);
-@@access(VoiceLive.ClientEventConversationItemTruncate,
-  Access.public,
-  "java"
-);
+@@access(VoiceLive.ClientEventConversationItemRetrieve, Access.public, "java");
+@@access(VoiceLive.ClientEventConversationItemTruncate, Access.public, "java");
 @@access(VoiceLive.ClientEventConversationItemDelete, Access.public, "java");
 @@access(VoiceLive.ClientEventResponseCreate, Access.public, "java");
 @@access(VoiceLive.ClientEventResponseCancel, Access.public, "java");
@@ -405,20 +398,11 @@ using Azure.ClientGenerator.Core;
   Access.public,
   "java"
 );
-@@access(VoiceLive.ServerEventConversationItemRetrieved,
-  Access.public,
-  "java"
-);
-@@access(VoiceLive.ServerEventConversationItemTruncated,
-  Access.public,
-  "java"
-);
+@@access(VoiceLive.ServerEventConversationItemRetrieved, Access.public, "java");
+@@access(VoiceLive.ServerEventConversationItemTruncated, Access.public, "java");
 @@access(VoiceLive.ServerEventError, Access.public, "java");
 @@access(VoiceLive.ServerEventInputAudioBufferCleared, Access.public, "java");
-@@access(VoiceLive.ServerEventInputAudioBufferCommitted,
-  Access.public,
-  "java"
-);
+@@access(VoiceLive.ServerEventInputAudioBufferCommitted, Access.public, "java");
 @@access(VoiceLive.ServerEventInputAudioBufferSpeechStarted,
   Access.public,
   "java"
@@ -436,10 +420,7 @@ using Azure.ClientGenerator.Core;
   Access.public,
   "java"
 );
-@@access(VoiceLive.ServerEventResponseContentPartAdded,
-  Access.public,
-  "java"
-);
+@@access(VoiceLive.ServerEventResponseContentPartAdded, Access.public, "java");
 @@access(VoiceLive.ServerEventResponseContentPartDone, Access.public, "java");
 @@access(VoiceLive.ServerEventResponseCreated, Access.public, "java");
 @@access(VoiceLive.ServerEventResponseDone, Access.public, "java");
