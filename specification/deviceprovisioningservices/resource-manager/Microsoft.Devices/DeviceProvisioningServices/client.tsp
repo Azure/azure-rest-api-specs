@@ -5,6 +5,7 @@ using Microsoft.Devices;
 using Azure.Core;
 
 @@clientName(Microsoft.Devices, "IotDpsClient", "javascript");
+@@clientName(Microsoft.Devices, "IotDpsClient", "python");
 @@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
   "certificate_name1",
   "python"
