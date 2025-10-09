@@ -3115,7 +3115,7 @@ model OriginCapacityResourceProperties {
   /**
    * Whether to enable origin capacity for a specific origin
    */
-  enabled?: boolean;
+  enabled?: EnabledState;
 
   /**
    * The nearest origin capacity pop region for an origin
