@@ -174,6 +174,377 @@ model GetAssetStatisticsOptions {
   ...StatisticsQueryParameters;
 }
 
+/**
+ * Options for cropping GeoJSON
+ */
+model CropGeoJsonOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord-crs")
+  coordinateReferenceSystem?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @query("max_size")
+  maxSize?: int32 = 1024;
+
+  /**
+   * Dimension parameters for output image size
+   */
+  ...DimensionsQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+}
+
+/**
+ * Options for getting parts (cropped to bounding box)
+ */
+model GetPartOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst-crs")
+  dstCrs?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @query("max_size")
+  maxSize?: int32 = 1024;
+
+  /**
+   * Dimension parameters for output image size
+   */
+  ...DimensionsQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+
+  /**
+   * Subdataset parameters
+   */
+  ...SubDatasetQueryParameters;
+}
+
+/**
+ * Options for getting previews
+ */
+model GetPreviewOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * rio-color formula (info: https://github.com/mapbox/rio-color)
+   */
+  @query("color_formula")
+  colorFormula?: string;
+
+  /**
+   * Output Coordinate Reference System.
+   */
+  @query("dst-crs")
+  dstCrs?: string;
+
+  /**
+   * Resampling method.
+   */
+  @query("resampling")
+  resampling?: Resampling = Resampling.nearest;
+
+  /**
+   * Image output size limit if width and height limits are not set.
+   */
+  @query("max_size")
+  maxSize?: int32 = 1024;
+
+  /**
+   * Dimension parameters for output image size
+   */
+  ...DimensionsQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+
+  /**
+   * Subdataset parameters
+   */
+  ...SubDatasetQueryParameters;
+}
+
+/**
+ * Options for getting statistics
+ */
+model GetStatisticsOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Statistics query parameters
+   */
+  ...StatisticsQueryParameters;
+}
+
+/**
+ * Options for getting GeoJSON statistics
+ */
+model GetGeoJsonStatisticsOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Statistics query parameters
+   */
+  ...StatisticsQueryParameters;
+}
+
+/**
+ * Options for getting TileJSON
+ */
+model GetTileJsonOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Default will be automatically defined if the output image needs a mask (png) or not (jpeg).
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @maxValueExclusive(4)
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  /**
+   * Zoom query parameters
+   */
+  ...ZoomQueryParameters;
+
+  /**
+   * Tile matrix set parameters
+   */
+  ...TileMatrixSetQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+
+  /**
+   * Subdataset parameters
+   */
+  ...SubDatasetQueryParameters;
+}
+
+/**
+ * Options for mosaic tiles
+ */
+model GetMosaicTileOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Mosaic search parameters
+   */
+  ...MosaicSearchQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Tile matrix set parameters
+   */
+  ...TileMatrixSetQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+
+  /**
+   * Subdataset parameters
+   */
+  ...SubDatasetQueryParameters;
+}
+
+/**
+ * Options for mosaic TileJSON
+ */
+model GetMosaicTileJsonOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Mosaic search parameters
+   */
+  ...MosaicSearchQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Default will be automatically defined if the output image needs a mask (png) or not (jpeg).
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @maxValueExclusive(4)
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  /**
+   * Zoom query parameters
+   */
+  ...ZoomQueryParameters;
+
+  /**
+   * Tile matrix set parameters
+   */
+  ...TileMatrixSetQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+
+  /**
+   * Subdataset parameters
+   */
+  ...SubDatasetQueryParameters;
+}
+
+/**
+ * Options for mosaic WMTS capabilities
+ */
+model GetMosaicWmtsCapabilitiesOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Mosaic search parameters
+   */
+  ...MosaicSearchQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @maxValueExclusive(4)
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  /**
+   * Zoom query parameters
+   */
+  ...ZoomQueryParameters;
+
+  /**
+   * Tile matrix set parameters
+   */
+  ...TileMatrixSetQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+}
+
 // Override operations with grouped parameters
 
 /**
