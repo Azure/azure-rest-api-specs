@@ -326,3 +326,7 @@ using Microsoft.AzureStackHCI;
   "csharp"
 );
 @@clientName(VmSizeEnum, "HciVmSize", "csharp");
+@@clientName(VirtualMachineInstanceManagedDiskParameters,
+  "VirtualMachineInstanceManagedDiskContent",
+  "csharp"
+);
