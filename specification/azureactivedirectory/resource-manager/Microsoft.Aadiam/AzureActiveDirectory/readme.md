@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-preview-2017-04` is specified on t
 
 ```yaml $(tag) == 'package-preview-2017-04'
 input-file:
-  - Microsoft.Aadiam/preview/2017-04-01-preview/azureactivedirectory.json
+  - preview/2017-04-01-preview/azureactivedirectory.json
 ```
 ### Tag: package-preview-2020-07
 
@@ -44,17 +44,17 @@ These settings apply only when `--tag=package-preview-2020-07` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2020-07'
 input-file:
-  - Microsoft.Aadiam/preview/2020-07-01-preview/azureADMetrics.json
+  - preview/2020-07-01-preview/azureADMetrics.json
 ```
 
 ### Tag: package-preview-2020-03
 
 These settings apply only when `--tag=package-preview-2020-03` is specified on the command line.
 
-``` yaml $(tag) == 'package-preview-2020-07'
+``` yaml $(tag) == 'package-preview-2020-03'
 input-file:
-  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkForAzureAD.json
-  - Microsoft.Aadiam/preview/2020-03-01-preview/privateLinkResources.json
+  - preview/2020-03-01-preview/privateLinkForAzureAD.json
+  - preview/2020-03-01-preview/privateLinkResources.json
 ```
 
 ### Tag: package-2020-03
@@ -63,9 +63,9 @@ These settings apply only when `--tag=package-2020-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2020-03'
 input-file:
-  - Microsoft.Aadiam/stable/2020-03-01/privateLinkForAzureAD.json
-  - Microsoft.Aadiam/stable/2020-03-01/privateLinkResources.json
-  - Microsoft.Aadiam/stable/2020-03-01/privateEndpointConnections.json
+  - stable/2020-03-01/privateLinkForAzureAD.json
+  - stable/2020-03-01/privateLinkResources.json
+  - stable/2020-03-01/privateEndpointConnections.json
 ```
 
 ### Tag: package-2017-04-01
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2017-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2017-04-01'
 input-file:
-  - Microsoft.Aadiam/stable/2017-04-01/azureactivedirectory.json
+  - stable/2017-04-01/azureactivedirectory.json
 ```
 
 ## Suppression
