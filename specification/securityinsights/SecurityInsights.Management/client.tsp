@@ -8,3 +8,13 @@ using Azure.ClientGenerator.Core;
   "OperationActionType",
   "java"
 );
+@@clientName(MCASDataConnector, "McasDataConnector", "java");
+@@clientName(ASCDataConnector, "AscDataConnector", "java");
+@@clientName(MDATPDataConnector, "MdatpDataConnector", "java");
+@@clientName(AADDataConnector, "AadDataConnector", "java");
+@@clientName(MCASDataConnectorDataTypes, "McasDataConnectorDataTypes", "java");
+@@clientName(ScheduledAlertRuleTemplateProperties.lastUpdatedDateUTC, "lastUpdatedDateUtc", "java");
+@@clientName(ScheduledAlertRuleTemplateProperties.createdDateUTC, "createdDateUtc", "java");
+@@clientName(FusionAlertRuleTemplateProperties.lastUpdatedDateUTC, "lastUpdatedDateUtc", "java");
+@@clientName(FusionAlertRuleTemplateProperties.createdDateUTC, "createdDateUtc", "java");
+@@clientName(ActionResponse, "createdDateUtc", "java");
