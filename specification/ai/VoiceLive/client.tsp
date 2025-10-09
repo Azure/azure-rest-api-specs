@@ -361,3 +361,108 @@ using Azure.ClientGenerator.Core;
 );
 @@clientName(VoiceLive.Background, "VideoBackground", "csharp");
 @@alternateType(VoiceLive.RequestSession.turn_detection, unknown, "csharp");
+
+
+@@access(VoiceLive.ClientEventSessionUpdate, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioBufferAppend, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioBufferCommit, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioBufferClear, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioTurnStart, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioTurnAppend, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioTurnEnd, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioTurnCancel, Access.public, "java");
+@@access(VoiceLive.ClientEventInputAudioClear, Access.public, "java");
+@@access(VoiceLive.ClientEventConversationItemCreate, Access.public, "java");
+@@access(VoiceLive.ClientEventConversationItemRetrieve,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ClientEventConversationItemTruncate,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ClientEventConversationItemDelete, Access.public, "java");
+@@access(VoiceLive.ClientEventResponseCreate, Access.public, "java");
+@@access(VoiceLive.ClientEventResponseCancel, Access.public, "java");
+@@access(VoiceLive.ClientEventSessionAvatarConnect, Access.public, "java");
+
+@@access(VoiceLive.ServerEventSessionAvatarConnecting, Access.public, "java");
+@@access(VoiceLive.ServerEventSessionCreated, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseAudioDelta, Access.public, "java");
+@@access(VoiceLive.ResponseItem, Access.public, "java");
+@@access(VoiceLive.Response, Access.public, "java");
+@@access(VoiceLive.ServerEventConversationItemCreated, Access.public, "java");
+@@access(VoiceLive.ServerEventConversationItemDeleted, Access.public, "java");
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionCompleted,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionDelta,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventConversationItemInputAudioTranscriptionFailed,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventConversationItemRetrieved,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventConversationItemTruncated,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventError, Access.public, "java");
+@@access(VoiceLive.ServerEventInputAudioBufferCleared, Access.public, "java");
+@@access(VoiceLive.ServerEventInputAudioBufferCommitted,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventInputAudioBufferSpeechStarted,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventInputAudioBufferSpeechStopped,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventResponseAudioDone, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseAudioTranscriptDelta,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventResponseAudioTranscriptDone,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventResponseContentPartAdded,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventResponseContentPartDone, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseCreated, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseDone, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDelta,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventResponseFunctionCallArgumentsDone,
+  Access.public,
+  "java"
+);
+@@access(VoiceLive.ServerEventResponseOutputItemAdded, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseOutputItemDone, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseTextDelta, Access.public, "java");
+@@access(VoiceLive.ServerEventResponseTextDone, Access.public, "java");
+@@access(VoiceLive.ServerEventSessionUpdated, Access.public, "java");
+
+@@access(VoiceLive.ToolChoice, Access.public, "java");
+@@access(VoiceLive.Voice, Access.public, "java");
+
+@@clientName(VoiceLive.OAIVoice, "OpenAIVoiceName", "java");
+@@clientName(VoiceLive.ToolChoiceObject, "ToolChoiceSelection", "java");
+@@clientName(VoiceLive.ToolChoiceFunctionObject,
+  "ToolChoiceFunctionSelection",
+  "java"
+);
