@@ -55,7 +55,7 @@ model BusinessCaseProperties is AzureResourceProperties {
 
   @doc("Gets the state of business case reports.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   reportStatusDetails?: ReportDetails[];
 
   @doc("Gets the business case scope.")
@@ -122,7 +122,7 @@ model AzureSettings {
   performanceUtilizationPercentile?: float32 = 95;
 
   @doc("Gets migration completion percentage per year.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   perYearMigrationCompletionPercentage?: NameValuePair<string, float32>[];
 
   @doc("Gets infrastructure growth rate.")
@@ -215,7 +215,7 @@ model ComputeSettings {
   cpuOversubscriptionRatio: float32;
 
   @doc("SQL Server licensing settings.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   sqlServerLicensing: SqlServerLicensingSettings[];
 
   @doc("Windows Server licensing settings.")
@@ -365,7 +365,7 @@ model HypervVirtualizationManagementSettings {
   softwareAssuranceCost: float32;
 
   @doc("Licence and support list.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   licenseAndSupportList: HypervLicense[];
 }
 
@@ -381,7 +381,7 @@ model HypervLicense {
 @doc("Vsphere management settings.")
 model VsphereManagementSettings {
   @doc("Licence and support list.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   licenseAndSupportList: VsphereManagementLicense[];
 }
 
