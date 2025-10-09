@@ -358,3 +358,7 @@ op IotDpsResourceGetCustomized(
   "resourceGroup",
   "java"
 );
+@@clientName(SharedAccessSignatureAuthorizationRuleAccessRightsDescription,
+  "SharedAccessSignatureAuthorizationRule",
+  "java"
+);
