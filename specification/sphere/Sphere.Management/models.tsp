@@ -3,7 +3,6 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
