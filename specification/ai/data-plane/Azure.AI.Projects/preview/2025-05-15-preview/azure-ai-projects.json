@@ -1353,6 +1353,53 @@
         }
       }
     },
+    "/redTeams/operations/{operationId}": {
+      "get": {
+        "operationId": "RedTeams_OperationResults",
+        "description": "Poll for the operation results.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "operationId",
+            "in": "path",
+            "description": "Operation ID for the polling operation.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/ChatCompletions"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",
@@ -1360,6 +1407,15 @@
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.TopQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.SkipQueryParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.MaxPageSizeQueryParameter"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -1413,7 +1469,7 @@
           {
             "name": "name",
             "in": "path",
-            "description": "Identifier of the red team run.",
+            "description": "Identifier of the red team.",
             "required": true,
             "type": "string"
           },
@@ -1457,11 +1513,20 @@
     },
     "/redTeams/runs:run": {
       "post": {
-        "operationId": "RedTeams_Create",
+        "operationId": "RedTeams_CreateRun",
         "description": "Creates a redteam run.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
           },
           {
             "name": "RedTeam",
@@ -1492,13 +1557,473 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "RedTeams_Create_MaximumSet": {
-            "$ref": "./examples/RedTeams_Create_MaximumSet_Gen.json"
+        }
+      }
+    },
+    "/redTeams/runs:updateUpload/{name}": {
+      "patch": {
+        "operationId": "RedTeams_UploadUpdateRun",
+        "description": "Update the uploaded the result to an redteam run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
-          "RedTeams_Create_MinimumSet": {
-            "$ref": "./examples/RedTeams_Create_MinimumSet_Gen.json"
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the redteam run to update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "redteam",
+            "in": "body",
+            "description": "Redteam upload to update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedTeamUpload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RedTeam"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/runs:upload": {
+      "post": {
+        "operationId": "RedTeams_UploadRun",
+        "description": "Upload the result to a redteam run.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "redteam",
+            "in": "body",
+            "description": "Redteam to upload.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RedTeamUpload"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/RedTeam"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/attackobjectives": {
+      "get": {
+        "operationId": "RedTeams_GetAttackObjectives",
+        "description": "Get the attack objectives.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "riskTypes",
+            "in": "query",
+            "description": "Risk types for the attack objectives dataset",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "multi"
+          },
+          {
+            "name": "riskCategory",
+            "in": "query",
+            "description": "Risk category for the attack objectives.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "lang",
+            "in": "query",
+            "description": "The language for the attack objectives dataset, defaults to 'en'",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "strategy",
+            "in": "query",
+            "description": "The strategy",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/AttackObjective"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/chat/completions/submit": {
+      "post": {
+        "operationId": "RedTeams_SubmitSimulation",
+        "description": "Submit a request for simulation.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Properties of a Prompt Version.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SimulationDTO"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/LongRunningResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/jailbreak/{type}": {
+      "get": {
+        "operationId": "RedTeams_GetJailBreakDatasetWithType",
+        "description": "Get the jailbreak dataset with type.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "Type of jailbreak dataset",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/jailbreak/": {
+      "get": {
+        "operationId": "RedTeams_GetJailBreakDataset",
+        "description": "Get the jailbreak dataset.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/template/parameters/{type}": {
+      "get": {
+        "operationId": "RedTeams_GetTemplateParametersWithType",
+        "description": "Get template parameters with type.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "type",
+            "in": "path",
+            "description": "Type for the template parameters",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/template/parameters/": {
+      "get": {
+        "operationId": "RedTeams_GetTemplateParameters",
+        "description": "Get template parameters.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
+    "/redTeams/simulation/template/parameters/image": {
+      "get": {
+        "operationId": "RedTeams_GetTemplateParametersImage",
+        "description": "Get the template parameters image.",
+        "produces": [
+          "text/plain",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "x-ms-client-request-id",
+            "in": "header",
+            "description": "Client request ID header",
+            "required": false,
+            "type": "string",
+            "format": "uuid",
+            "x-ms-client-name": "clientRequestId"
+          },
+          {
+            "name": "path",
+            "in": "query",
+            "description": "Image path.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
           }
         }
       }
@@ -1713,6 +2238,62 @@
         }
       ],
       "x-ms-discriminator-value": "assistant"
+    },
+    "AttackMessage": {
+      "type": "object",
+      "description": "Message",
+      "properties": {
+        "Role": {
+          "type": "string",
+          "description": "The role."
+        },
+        "Content": {
+          "type": "string",
+          "description": "The content."
+        },
+        "Context": {
+          "type": "string",
+          "description": "The context."
+        }
+      }
+    },
+    "AttackObjective": {
+      "type": "object",
+      "description": "Attack Objective",
+      "properties": {
+        "Id": {
+          "type": "string",
+          "description": "The unique identifier."
+        },
+        "Metadata": {
+          "$ref": "#/definitions/Metadata",
+          "description": "The metadata."
+        },
+        "Source": {
+          "type": "array",
+          "description": "List of sources.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "Modality": {
+          "type": "string",
+          "description": "The modality."
+        },
+        "Messages": {
+          "type": "array",
+          "description": "The messages.",
+          "items": {
+            "$ref": "#/definitions/AttackMessage"
+          }
+        }
+      },
+      "required": [
+        "Id",
+        "Source",
+        "Modality",
+        "Messages"
+      ]
     },
     "AttackStrategy": {
       "type": "string",
@@ -1973,7 +2554,7 @@
       "properties": {
         "modelDeploymentName": {
           "type": "string",
-          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (e.g. `my-aoai-connection/gpt-4o`)."
+          "description": "Deployment name for AOAI model. Example: gpt-4o if in AIServices or connection based `connection_name/deployment_name` (i.e. `my-aoai-connection/gpt-4o`."
         }
       },
       "required": [
@@ -2022,6 +2603,251 @@
         "blobUri",
         "storageAccountArmId",
         "credential"
+      ]
+    },
+    "ChatChoice": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "message": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "The chat message for a given chat completions prompt.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "index",
+        "finish_reason",
+        "message"
+      ]
+    },
+    "ChatCompletions": {
+      "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "object": {
+          "type": "string",
+          "description": "The response object type"
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion.",
+          "readOnly": true
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          },
+          "readOnly": true
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "  Usage information for tokens processed and generated as part of this completions operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created",
+        "model",
+        "choices",
+        "usage"
+      ]
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message.",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "A description of the intended purpose of a message within a chat completions interaction.",
+      "enum": [
+        "system",
+        "developer",
+        "user",
+        "assistant",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The role that instructs or sets the behavior of the assistant."
+          },
+          {
+            "name": "developer",
+            "value": "developer",
+            "description": "The role that provides instructions to the model prioritized ahead of user messages."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input for chat completions."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The role that provides responses to system-instructed, user-prompted input."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
+          }
+        ]
+      }
+    },
+    "CompletionsFinishReason": {
+      "type": "string",
+      "description": "Representation of the manner in which a completions response concluded.",
+      "enum": [
+        "stop",
+        "length",
+        "content_filter",
+        "tool_calls"
+      ],
+      "x-ms-enum": {
+        "name": "CompletionsFinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completions ended normally and reached its end of token generation."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "Completions exhausted available token limits before generation could complete."
+          },
+          {
+            "name": "contentFiltered",
+            "value": "content_filter",
+            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          },
+          {
+            "name": "toolCalls",
+            "value": "tool_calls",
+            "description": "Completion ended with the model calling a provided tool for output."
+          }
+        ]
+      }
+    },
+    "CompletionsUsage": {
+      "type": "object",
+      "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens generated across all completions emissions.",
+          "readOnly": true
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens in the provided prompts for the completions request.",
+          "readOnly": true
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response.",
+          "readOnly": true
+        },
+        "completion_tokens_details": {
+          "$ref": "#/definitions/CompletionsUsageDetails",
+          "description": "Breakdown of tokens used in a completion.",
+          "readOnly": true
+        },
+        "prompt_tokens_details": {
+          "$ref": "#/definitions/PromptUsageDetails",
+          "description": "Breakdown of tokens used in the prompt/chat history.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "CompletionsUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in a completion.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input.",
+          "readOnly": true
+        },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to reasoning.",
+          "readOnly": true
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "audio_tokens",
+        "reasoning_tokens",
+        "total_tokens"
       ]
     },
     "Connection": {
@@ -2251,6 +3077,26 @@
         }
       ],
       "x-ms-discriminator-value": "CustomKeys"
+    },
+    "CustomizationParameters": {
+      "type": "object",
+      "description": "Customization Parameters",
+      "properties": {
+        "ApplicationScenario": {
+          "type": "string",
+          "description": "Application scenario."
+        },
+        "HarmCategories": {
+          "type": "array",
+          "description": "List of harm categories.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "HarmCategories"
+      ]
     },
     "DatasetType": {
       "type": "string",
@@ -2748,6 +3594,23 @@
       ],
       "x-ms-discriminator-value": "dataset"
     },
+    "LongRunningResponse": {
+      "type": "object",
+      "description": "Long Running Response",
+      "properties": {
+        "Location": {
+          "type": "string",
+          "description": "The location."
+        },
+        "OperationResult": {
+          "description": "The OperationResult."
+        }
+      },
+      "required": [
+        "Location",
+        "OperationResult"
+      ]
+    },
     "ManagedAzureAISearchIndex": {
       "type": "object",
       "description": "Managed Azure AI Search Index Definition",
@@ -2791,6 +3654,27 @@
       "discriminator": "role",
       "required": [
         "role"
+      ]
+    },
+    "Metadata": {
+      "type": "object",
+      "description": "Metadata",
+      "properties": {
+        "TargetHarms": {
+          "type": "array",
+          "description": "List of target harms.",
+          "items": {
+            "$ref": "#/definitions/TargetHarm"
+          }
+        },
+        "Language": {
+          "type": "string",
+          "description": "The language"
+        }
+      },
+      "required": [
+        "TargetHarms",
+        "Language"
       ]
     },
     "ModelDeployment": {
@@ -3083,19 +3967,43 @@
         ]
       }
     },
+    "PromptUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in the prompt/chat history.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input.",
+          "readOnly": true
+        },
+        "cached_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens cached.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "audio_tokens",
+        "cached_tokens"
+      ]
+    },
     "RedTeam": {
       "type": "object",
       "description": "Red team details.",
       "properties": {
         "id": {
           "type": "string",
-          "description": "Identifier of the red team run.",
-          "readOnly": true,
-          "x-ms-client-name": "name"
+          "description": "Identifier of the red team.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "displayName": {
           "type": "string",
-          "description": "Name of the red-team run."
+          "description": "Display name of the red-team scan."
         },
         "numTurns": {
           "type": "integer",
@@ -3111,8 +4019,7 @@
         },
         "simulationOnly": {
           "type": "boolean",
-          "description": "Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result.",
-          "default": false
+          "description": "Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result."
         },
         "riskCategories": {
           "type": "array",
@@ -3144,6 +4051,19 @@
           "description": "Status of the red-team. It is set by service and is read-only.",
           "readOnly": true
         },
+        "outputs": {
+          "type": "object",
+          "description": "Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}', 'logId': 'azureai://accounts/{AccountName}/projects/{myproject}/datasets/{dataset-name}/versions/{dataset-version}' }",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
         "target": {
           "$ref": "#/definitions/TargetConfig",
           "description": "Target configuration for the red-team run."
@@ -3151,7 +4071,95 @@
       },
       "required": [
         "id",
+        "numTurns",
+        "attackStrategies",
+        "simulationOnly",
+        "riskCategories",
+        "outputs",
         "target"
+      ]
+    },
+    "RedTeamUpload": {
+      "type": "object",
+      "description": "Red team details.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the red team.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display name of the red-team scan."
+        },
+        "numTurns": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of simulation rounds."
+        },
+        "attackStrategies": {
+          "type": "array",
+          "description": "List of attack strategies or nested lists of attack strategies.",
+          "items": {
+            "$ref": "#/definitions/AttackStrategy"
+          }
+        },
+        "simulationOnly": {
+          "type": "boolean",
+          "description": "Simulation-only or Simulation + Evaluation. Default false, if true the scan outputs conversation not evaluation result."
+        },
+        "riskCategories": {
+          "type": "array",
+          "description": "List of risk categories to generate attack objectives for.",
+          "items": {
+            "$ref": "#/definitions/RiskCategory"
+          }
+        },
+        "applicationScenario": {
+          "type": "string",
+          "description": "Application scenario for the red team operation, to generate scenario specific attacks."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Red team's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Red team's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the red-team. It is set by service and is read-only."
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Read-only result outputs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}' }",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "target": {
+          "$ref": "#/definitions/TargetConfig",
+          "description": "Target configuration for the red-team run."
+        }
+      },
+      "required": [
+        "id"
       ]
     },
     "RiskCategory": {
@@ -3161,7 +4169,10 @@
         "HateUnfairness",
         "Violence",
         "Sexual",
-        "SelfHarm"
+        "SelfHarm",
+        "ProtectedMaterial",
+        "CodeVulnerability",
+        "UngroundedAttributes"
       ],
       "x-ms-enum": {
         "name": "RiskCategory",
@@ -3186,6 +4197,21 @@
             "name": "SelfHarm",
             "value": "SelfHarm",
             "description": "Represents content related to self-harm."
+          },
+          {
+            "name": "ProtectedMaterial",
+            "value": "ProtectedMaterial",
+            "description": "Represents content involving protected material."
+          },
+          {
+            "name": "CodeVulnerability",
+            "value": "CodeVulnerability",
+            "description": "Represents content related to code vulnerabilities."
+          },
+          {
+            "name": "UngroundedAttributes",
+            "value": "UngroundedAttributes",
+            "description": "Represents content with ungrounded attributes."
           }
         ]
       }
@@ -3234,6 +4260,118 @@
         "type"
       ]
     },
+    "SimulationDTO": {
+      "type": "object",
+      "description": "Customization Parameters",
+      "properties": {
+        "Headers": {
+          "type": "object",
+          "description": "Additional headers.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "Params": {
+          "type": "object",
+          "description": "Parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "TemplateParameters": {
+          "type": "object",
+          "description": "Template parameters.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "CustomizationParameters": {
+          "$ref": "#/definitions/CustomizationParameters",
+          "description": "Customization parameters."
+        },
+        "Json": {
+          "type": "string",
+          "description": "Json."
+        },
+        "Url": {
+          "type": "string",
+          "description": "Url."
+        },
+        "TemplateKey": {
+          "type": "string",
+          "description": "Template key."
+        },
+        "SimulationType": {
+          "$ref": "#/definitions/SimulationType",
+          "description": "Type of Simulation."
+        },
+        "IsMicrosoftTenant": {
+          "type": "boolean",
+          "description": "'True' if Microsoft internal tenant and 'False' otherwise."
+        },
+        "SubscriptionId": {
+          "type": "string",
+          "description": "Azure subscription id."
+        },
+        "ResourceGroupName": {
+          "type": "string",
+          "description": "Resource group name."
+        },
+        "WorkspaceName": {
+          "type": "string",
+          "description": "Workspace name."
+        }
+      }
+    },
+    "SimulationResultDTO": {
+      "type": "object",
+      "description": "Simulation Result",
+      "properties": {
+        "StatusCode": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Status Code."
+        },
+        "Content": {
+          "type": "string",
+          "description": "Content."
+        }
+      },
+      "required": [
+        "StatusCode",
+        "Content"
+      ]
+    },
+    "SimulationType": {
+      "type": "string",
+      "description": "Simulation type.",
+      "enum": [
+        "Default",
+        "CustomPersona",
+        "HarmTurnGenerator"
+      ],
+      "x-ms-enum": {
+        "name": "SimulationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Default",
+            "value": "Default",
+            "description": "Default simulation type."
+          },
+          {
+            "name": "CustomPersona",
+            "value": "CustomPersona",
+            "description": "Custom persona simulation type."
+          },
+          {
+            "name": "HarmTurnGenerator",
+            "value": "HarmTurnGenerator",
+            "description": "Harm turn generator simulation type."
+          }
+        ]
+      }
+    },
     "Sku": {
       "type": "object",
       "description": "Sku information",
@@ -3268,6 +4406,34 @@
         "tier"
       ]
     },
+    "SystemData": {
+      "type": "object",
+      "description": "Metadata pertaining to creation and last modification of the resource.",
+      "properties": {
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp the resource was created at.",
+          "readOnly": true
+        },
+        "createdBy": {
+          "type": "string",
+          "description": "The identity that created the resource.",
+          "readOnly": true
+        },
+        "createdByType": {
+          "type": "string",
+          "description": "The identity type that created the resource.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp of resource last modification (UTC)",
+          "readOnly": true
+        }
+      }
+    },
     "SystemMessage": {
       "type": "object",
       "description": "A message authored by the system to guide model behavior.",
@@ -3300,6 +4466,20 @@
       "required": [
         "type"
       ]
+    },
+    "TargetHarm": {
+      "type": "object",
+      "description": "Target Harm",
+      "properties": {
+        "RiskType": {
+          "type": "string",
+          "description": "The risk type."
+        },
+        "RiskSubType": {
+          "type": "string",
+          "description": "The risk sub type."
+        }
+      }
     },
     "UserMessage": {
       "type": "object",
@@ -3374,6 +4554,34 @@
       "minLength": 1,
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
+    },
+    "Azure.Core.MaxPageSizeQueryParameter": {
+      "name": "maxpagesize",
+      "in": "query",
+      "description": "The maximum number of result items per page.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.SkipQueryParameter": {
+      "name": "skip",
+      "in": "query",
+      "description": "The number of result items to skip.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "default": 0,
+      "x-ms-parameter-location": "method"
+    },
+    "Azure.Core.TopQueryParameter": {
+      "name": "top",
+      "in": "query",
+      "description": "The number of result items to return.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method"
     }
   }
 }

@@ -6,6 +6,7 @@ import "@typespec/http";
 import "@typespec/versioning";
 
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
@@ -154,4 +155,24 @@ model OpenAIPageableListOf<T> {
   @encodedName("application/json", "has_more")
   @doc("A value indicating whether there are additional values available not captured in this list.")
   hasMore: boolean;
+}
+
+@doc("Metadata pertaining to creation and last modification of the resource.")
+@added(Versions.v2025_05_15_preview)
+model SystemData {
+  @visibility(Lifecycle.Read)
+  @doc("The timestamp the resource was created at.")
+  createdAt?: utcDateTime;
+
+  @visibility(Lifecycle.Read)
+  @doc("The identity that created the resource.")
+  createdBy?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The identity type that created the resource.")
+  createdByType?: string;
+
+  @visibility(Lifecycle.Read)
+  @doc("The timestamp of resource last modification (UTC)")
+  lastModifiedAt?: utcDateTime;
 }

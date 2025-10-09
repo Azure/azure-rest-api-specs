@@ -1225,6 +1225,251 @@
         "credential"
       ]
     },
+    "ChatChoice": {
+      "type": "object",
+      "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+      "properties": {
+        "index": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The ordered index associated with this chat completions choice."
+        },
+        "finish_reason": {
+          "$ref": "#/definitions/CompletionsFinishReason",
+          "description": "The reason that this chat completions choice completed its generated.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "message": {
+          "$ref": "#/definitions/ChatResponseMessage",
+          "description": "The chat message for a given chat completions prompt.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "index",
+        "finish_reason",
+        "message"
+      ]
+    },
+    "ChatCompletions": {
+      "type": "object",
+      "description": "Representation of the response data from a chat completions request.\nCompletions support a wide variety of tasks and generate text that continues from or \"completes\"\nprovided prompt data.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "A unique identifier associated with this chat completions response."
+        },
+        "object": {
+          "type": "string",
+          "description": "The response object type"
+        },
+        "created": {
+          "type": "integer",
+          "format": "unixtime",
+          "description": "The first timestamp associated with generation activity for this completions response,\nrepresented as seconds since the beginning of the Unix epoch of 00:00 on 1 Jan 1970.",
+          "readOnly": true
+        },
+        "model": {
+          "type": "string",
+          "description": "The model used for the chat completion.",
+          "readOnly": true
+        },
+        "choices": {
+          "type": "array",
+          "description": "The collection of completions choices associated with this completions response.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
+          "items": {
+            "$ref": "#/definitions/ChatChoice"
+          },
+          "readOnly": true
+        },
+        "usage": {
+          "$ref": "#/definitions/CompletionsUsage",
+          "description": "  Usage information for tokens processed and generated as part of this completions operation.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "object",
+        "created",
+        "model",
+        "choices",
+        "usage"
+      ]
+    },
+    "ChatResponseMessage": {
+      "type": "object",
+      "description": "A representation of a chat message as received in a response.",
+      "properties": {
+        "role": {
+          "$ref": "#/definitions/ChatRole",
+          "description": "The chat role associated with the message.",
+          "readOnly": true
+        },
+        "content": {
+          "type": "string",
+          "description": "The content of the message.",
+          "x-nullable": true,
+          "readOnly": true
+        },
+        "reasoning_content": {
+          "type": "string",
+          "description": "The reasoning content the model used for generating the response",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "role",
+        "content"
+      ]
+    },
+    "ChatRole": {
+      "type": "string",
+      "description": "A description of the intended purpose of a message within a chat completions interaction.",
+      "enum": [
+        "system",
+        "developer",
+        "user",
+        "assistant",
+        "tool"
+      ],
+      "x-ms-enum": {
+        "name": "ChatRole",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "system",
+            "value": "system",
+            "description": "The role that instructs or sets the behavior of the assistant."
+          },
+          {
+            "name": "developer",
+            "value": "developer",
+            "description": "The role that provides instructions to the model prioritized ahead of user messages."
+          },
+          {
+            "name": "user",
+            "value": "user",
+            "description": "The role that provides input for chat completions."
+          },
+          {
+            "name": "assistant",
+            "value": "assistant",
+            "description": "The role that provides responses to system-instructed, user-prompted input."
+          },
+          {
+            "name": "tool",
+            "value": "tool",
+            "description": "The role that represents extension tool activity within a chat completions operation."
+          }
+        ]
+      }
+    },
+    "CompletionsFinishReason": {
+      "type": "string",
+      "description": "Representation of the manner in which a completions response concluded.",
+      "enum": [
+        "stop",
+        "length",
+        "content_filter",
+        "tool_calls"
+      ],
+      "x-ms-enum": {
+        "name": "CompletionsFinishReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "stopped",
+            "value": "stop",
+            "description": "Completions ended normally and reached its end of token generation."
+          },
+          {
+            "name": "tokenLimitReached",
+            "value": "length",
+            "description": "Completions exhausted available token limits before generation could complete."
+          },
+          {
+            "name": "contentFiltered",
+            "value": "content_filter",
+            "description": "Completions generated a response that was identified as potentially sensitive per content\nmoderation policies."
+          },
+          {
+            "name": "toolCalls",
+            "value": "tool_calls",
+            "description": "Completion ended with the model calling a provided tool for output."
+          }
+        ]
+      }
+    },
+    "CompletionsUsage": {
+      "type": "object",
+      "description": "Representation of the token counts processed for a completions request.\nCounts consider all tokens across prompts, choices, choice alternates, best_of generations, and\nother consumers.",
+      "properties": {
+        "completion_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens generated across all completions emissions.",
+          "readOnly": true
+        },
+        "prompt_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens in the provided prompts for the completions request.",
+          "readOnly": true
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response.",
+          "readOnly": true
+        },
+        "completion_tokens_details": {
+          "$ref": "#/definitions/CompletionsUsageDetails",
+          "description": "Breakdown of tokens used in a completion.",
+          "readOnly": true
+        },
+        "prompt_tokens_details": {
+          "$ref": "#/definitions/PromptUsageDetails",
+          "description": "Breakdown of tokens used in the prompt/chat history.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "completion_tokens",
+        "prompt_tokens",
+        "total_tokens"
+      ]
+    },
+    "CompletionsUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in a completion.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input.",
+          "readOnly": true
+        },
+        "reasoning_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to reasoning.",
+          "readOnly": true
+        },
+        "total_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens processed for the completions request and response.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "audio_tokens",
+        "reasoning_tokens",
+        "total_tokens"
+      ]
+    },
     "Connection": {
       "type": "object",
       "description": "Response from the list and get connections operations",
@@ -2050,6 +2295,28 @@
           }
         ]
       }
+    },
+    "PromptUsageDetails": {
+      "type": "object",
+      "description": "A breakdown of tokens used in the prompt/chat history.",
+      "properties": {
+        "audio_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The number of tokens corresponding to audio input.",
+          "readOnly": true
+        },
+        "cached_tokens": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of tokens cached.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "audio_tokens",
+        "cached_tokens"
+      ]
     },
     "SASCredentials": {
       "type": "object",

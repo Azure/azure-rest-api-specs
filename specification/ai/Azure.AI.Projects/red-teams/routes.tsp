@@ -5,8 +5,11 @@ import "@azure-tools/typespec-azure-core";
 import "./models.tsp";
 
 using TypeSpec.Http;
+using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.Core.Traits;
+using Azure.Core.Foundations;
 
 namespace Azure.AI.Projects;
 
@@ -23,18 +26,220 @@ interface RedTeams {
   get is RedTeamOperations.ResourceRead<RedTeam>;
 
   @doc("List a redteam by name.")
-  list is RedTeamOperations.ResourceList<RedTeam>;
+  list is RedTeamOperations.ResourceList<
+    RedTeam,
+    ListQueryParametersTrait<StandardListQueryParameters>
+  >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Creates a redteam run.")
   @route("runs:run")
   @post
-  create is Azure.Core.Foundations.Operation<
+  createRun is Azure.Core.Foundations.Operation<
     {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
       @doc("Redteam to be run")
-      @body
+      @Http.bodyRoot
       RedTeam: RedTeam;
     },
     ResourceCreatedResponse<RedTeam>
+  >;
+
+  // Private Upload API
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Upload the result to a redteam run.")
+  @route("runs:upload")
+  @post
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  UploadRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Redteam to upload.")
+      @Http.bodyRoot
+      redteam: RedTeamUpload;
+    },
+    RedTeam
+  >;
+
+  #suppress "@typespec/http/patch-implicit-optional" ""
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Update the uploaded the result to an redteam run.")
+  @route("runs:updateUpload/{name}")
+  @patch
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  UploadUpdateRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Name of the redteam run to update.")
+      @path
+      name: string;
+
+      @doc("Redteam upload to update.")
+      @Http.bodyRoot
+      redteam: RedTeamUpload;
+    },
+    RedTeam
+  >;
+
+  // Simulation Private APIs
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the jailbreak dataset with type.")
+  @route("/simulation/jailbreak/{type}")
+  @get
+  getJailBreakDatasetWithType is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Type of jailbreak dataset")
+      @path
+      type: string;
+    },
+    Array<string>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  #suppress "@azure-tools/typespec-azure-core/no-query-explode"
+  @doc("Get the attack objectives.")
+  @route("/simulation/attackobjectives")
+  @get
+  getAttackObjectives is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Risk types for the attack objectives dataset")
+      @query(#{ explode: true })
+      riskTypes?: string[];
+
+      @doc("Risk category for the attack objectives.")
+      @query
+      riskCategory: string;
+
+      @doc("The language for the attack objectives dataset, defaults to 'en'")
+      @query
+      lang?: string;
+
+      @doc("The strategy")
+      @query
+      strategy?: string;
+    },
+    Array<AttackObjective>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the jailbreak dataset.")
+  @route("/simulation/jailbreak/")
+  @get
+  getJailBreakDataset is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+    },
+    Array<string>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get template parameters with type.")
+  @route("/simulation/template/parameters/{type}")
+  @get
+  getTemplateParametersWithType is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Type for the template parameters")
+      @path
+      type: string;
+    },
+    string
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get template parameters.")
+  @route("/simulation/template/parameters/")
+  @get
+  getTemplateParameters is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+    },
+    string
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Get the template parameters image.")
+  @route("/simulation/template/parameters/image")
+  @get
+  getTemplateParametersImage is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Image path.")
+      @query
+      path: string;
+    },
+    string
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  @doc("Submit a request for simulation.")
+  @route("/simulation/chat/completions/submit")
+  @post
+  submitSimulation is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Properties of a Prompt Version.")
+      @Http.bodyRoot
+      body: SimulationDTO;
+    },
+    ResourceCreatedOrOkResponse<LongRunningResponse>
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Waiting for bug fix: https://github.com/Azure/typespec-azure-pr/issues/3739."
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
+  @doc("Poll for the operation results.")
+  @route("/operations/{operationId}")
+  @get
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  operationResults is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Operation ID for the polling operation.")
+      @path
+      operationId: string;
+    },
+    {
+      @statusCode statusCode: 200;
+
+      @doc("The operation results.")
+      @body
+      operationResults: ChatCompletions;
+    }
   >;
 }
