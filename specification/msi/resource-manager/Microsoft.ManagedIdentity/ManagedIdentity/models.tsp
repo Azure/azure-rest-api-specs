@@ -90,7 +90,7 @@ model CloudErrorBody {
   /**
    * A list of additional details about the error.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   details?: CloudErrorBody[];
 }
 
@@ -159,10 +159,7 @@ model IdentityUpdate extends Azure.ResourceManager.Foundations.Resource {
  */
 model FederatedIdentityCredentialsListResult
   is Azure.Core.Page<FederatedIdentityCredential>;
-@@extension(FederatedIdentityCredentialsListResult.value,
-  "x-ms-identifiers",
-  #["id"]
-);
+@@identifiers(FederatedIdentityCredentialsListResult.value, #["id"]);
 
 /**
  * The properties associated with a federated identity credential.
@@ -193,7 +190,7 @@ model FederatedIdentityCredentialProperties {
 model OperationListResult is Azure.Core.Page<Operation>;
 @@summary(OperationListResult.value, "Operations List.");
 @@summary(OperationListResult.nextLink, "Next Link");
-@@extension(OperationListResult.value, "x-ms-identifiers", #["name"]);
+@@identifiers(OperationListResult.value, #["name"]);
 /**
  * Details of a REST API operation, returned from the Resource Provider Operations API
  */
