@@ -281,11 +281,20 @@ model ServicePrincipalProperties {
 }
 
 @@doc(BestPracticeList, "The response of the list best practice operation.");
+@@doc(BestPracticeList.value, "Result of the list BestPractice operation.");
 @@doc(ConfigurationProfileAssignmentList,
   "The response of the list configuration profile assignment operation."
+);
+@@doc(ConfigurationProfileAssignmentList.value,
+  "Result of the list configuration profile assignment operation."
 );
 @@doc(ConfigurationProfileList,
   "The response of the list configuration profile operation."
 );
+@@doc(ConfigurationProfileList.value,
+  "Result of the list ConfigurationProfile operation."
+);
 @@doc(ReportList, "The response of the list report operation.");
+@@doc(ReportList.value, "Result of the list report operation.");
 @@doc(ServicePrincipalListResult, "The list of ServicePrincipals.");
+@@doc(ServicePrincipalListResult.value, "The list of servicePrincipals.");

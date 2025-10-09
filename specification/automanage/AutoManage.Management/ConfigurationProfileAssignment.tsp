@@ -133,14 +133,6 @@ interface ConfigurationProfileAssignments {
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
-
-  /**
-   * Get list of configuration profile assignments
-   */
-  list is ConfigurationProfileAssignmentListOps.List<
-    ConfigurationProfileAssignment,
-    Response = ArmResponse<ConfigurationProfileAssignmentList>
-  >;
 }
 
 alias ConfigurationProfileHCRPAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<

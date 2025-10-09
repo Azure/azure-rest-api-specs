@@ -139,7 +139,7 @@ interface ConfigurationProfilesVersions {
   /**
    * Retrieve a list of configuration profile version for a configuration profile
    */
-  listByResourceGroup is ConfigurationProfilesVersionOps.List<
+  listChildResources is ConfigurationProfilesVersionOps.List<
     ConfigurationProfile,
     Response = ArmResponse<ConfigurationProfileList>
   >;

@@ -35,3 +35,18 @@ interface BestPracticesVersionsOperationGroup {
     Error = ErrorResponse
   >;
 }
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+interface ConfigurationProfileAssignmentsOperationGroup {
+  /**
+   * Get list of configuration profile assignments
+   */
+  @autoRoute
+  @list
+  @get
+  @action("configurationProfileAssignments")
+  list is ArmProviderActionSync<
+    Response = ConfigurationProfileAssignmentList,
+    Scope = Extension.ResourceGroup
+  >;
+}
