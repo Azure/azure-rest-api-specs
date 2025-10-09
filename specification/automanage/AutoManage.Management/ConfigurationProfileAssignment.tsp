@@ -121,6 +121,17 @@ interface ConfigurationProfileAssignments {
   /**
    * Get list of configuration profile assignments
    */
+  @list
+  @get
+  @action("configurationProfileAssignments")
+  list is ArmProviderActionSync<
+    Response = ConfigurationProfileAssignmentList,
+    Scope = Extension.ResourceGroup
+  >;
+
+  /**
+   * Get list of configuration profile assignments
+   */
   listByVirtualMachines is ConfigurationProfileAssignmentOps.List<
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>

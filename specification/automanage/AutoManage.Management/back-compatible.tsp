@@ -27,7 +27,3 @@ using Microsoft.Automanage;
 @@clientLocation(ConfigurationProfileHCIAssignments.listByClusterName,
   ConfigurationProfileAssignments
 );
-
-@@clientLocation(ConfigurationProfileAssignmentsOperationGroup.list,
-  ConfigurationProfileAssignments
-);
