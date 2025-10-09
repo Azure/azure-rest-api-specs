@@ -136,6 +136,10 @@ interface RedTeams {
       @doc("The strategy")
       @query
       strategy?: string;
+
+      @doc("The target, model/agent")
+      @query
+      target?: string;
     },
     Array<AttackObjective>
   >;
