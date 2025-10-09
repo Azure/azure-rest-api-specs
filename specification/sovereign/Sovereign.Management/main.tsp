@@ -14,8 +14,6 @@ using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.Core;
-using OpenAPI;
 
 @service(#{ title: "Cloud for Sovereignty Resource Provider." })
 @versioned(Versions)
