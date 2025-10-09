@@ -3658,7 +3658,7 @@
           "Map Legends"
         ],
         "summary": "Get ClassMap Legend",
-        "description": "Generate values and color swatches mapping for a given classmap.\n\nArgs:\ntrim_start (int, optional): Number of items to trim\nfrom the start of the cmap\ntrim_end (int, optional): Number of items to trim from the end of the cmap",
+        "description": "Generate values and color swatches mapping for a given classmap.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -3726,7 +3726,7 @@
           "Map Legends"
         ],
         "summary": "Get Legend",
-        "description": "Generate a legend image for a given colormap.\n\nIf the colormap has non-contiguous values at the beginning or end,\nwhich aren't desired in the output image, they can be trimmed by specifying\nthe number of values to trim.\n\nArgs:\ncmap_name (string): The name of the registered colormap to generate\na legend for\nheight (float, optional): The output height of the legend image\nwidth (float, optional): The output width of the legend image\ntrim_start (int, optional): Number of items to trim from\nthe start of the cmap\ntrim_end (int, optional): Number of items to trim from the end of the cmap\n\nReturns:\nHTTP response with jpeg encoded image data",
+        "description": "Generate a legend image for a given colormap.\n\nIf the colormap has non-contiguous values at the beginning or end,\nwhich aren't desired in the output image, they can be trimmed by specifying\nthe number of values to trim.",
         "produces": [
           "image/png",
           "application/json"
@@ -3815,7 +3815,7 @@
           "Map Legends"
         ],
         "summary": "Get Interval Legend",
-        "description": "Generate values and color swatches mapping for a given interval classmap.\n\nArgs:\ntrim_start (int, optional): Number of items to trim from\nthe start of the cmap\ntrim_end (int, optional): Number of items to trim from the end of the cmap",
+        "description": "Generate values and color swatches mapping for a given interval classmap.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8446,7 +8446,7 @@
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
         "summary": "Landing Page",
-        "description": "Endpoint.",
+        "description": "Return the STAC landing page.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8486,7 +8486,7 @@
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
         "summary": "Get Collections",
-        "description": "Endpoint.",
+        "description": "List all collections in the GeoCatalog instance",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -8833,7 +8833,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Create Collection Asset",
-        "description": "Create a new asset in the Collection metadata and write the associated\nfile to managed storage.\n\nArgs:\nrequest: The incoming request.\nasset: The Asset object to write, without a valid href to the asset.\nfile: The file to write.\ncollection_id: The ID of the collection to write the asset to.\ncontent_type: The content type of the request.\n\nReturns:\nA Response object containing the newly created asset.",
+        "description": "Create a new asset in the Collection metadata and write the associated\nfile to managed storage.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -8905,7 +8905,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Update Collection Asset",
-        "description": "Update an existing asset in a given collection.\n\nArgs:\nrequest: The incoming request.\nasset: The Asset object to update.\nfile: The file to update (optional).\ncollection_id: The ID of the collection to update the asset in.\nasset_id: The ID of the asset to update.\ncontent_type: The content type of the request.\n\nReturns:\nA Response object containing the updated asset.",
+        "description": "Update an existing asset in a given collection.",
         "consumes": [
           "multipart/form-data"
         ],
@@ -8984,7 +8984,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Delete Collection Asset",
-        "description": "Delete an asset from a given collection.\n\nArgs:\nrequest: The incoming request.\ncollection_id: The ID of the collection to delete the asset from.\nasset_id: The ID of the asset to delete.\n\nReturns:\nA Response object indicating the success of the deletion.",
+        "description": "Delete an asset from a given collection.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -9384,7 +9384,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Get Partitiontype",
-        "description": "Get the partitiontype for a GeoCatalog Collection.\n\nArgs:\ncollection_id: the collection id to get the partitiontype for.\n\nReturns:\nThe partitiontype for the collection.",
+        "description": "Get the partitiontype for a GeoCatalog Collection.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -9431,7 +9431,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Create Partitiontype",
-        "description": "Updates partition type for a GeoCatalog Collection. This will\ndetermine the partitioning scheme for items within the database,\nand can only be set before any items are loaded.\n\nIdeal partitioning schemes result in partitions of roughly 100k items each.\n\nThe default partitioning scheme is \"none\" which does not partition items.\n\nArgs:\ncollection_id: the collection id to add the partitiontype to.\npartitiontype: the partitiontype to add.\n\nReturns:\nNone",
+        "description": "Updates partition type for a GeoCatalog Collection. This will\ndetermine the partitioning scheme for items within the database,\nand can only be set before any items are loaded.\n\nIdeal partitioning schemes result in partitions of roughly 100k items each.\n\nThe default partitioning scheme is \"none\" which does not partition items.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -10291,7 +10291,7 @@
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
         "summary": "Collection Queryables",
-        "description": "Endpoint.",
+        "description": "List all queryables in a given collection",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -10529,7 +10529,7 @@
           "STAC Collection Configuration"
         ],
         "summary": "Get Collection Thumbnail",
-        "description": "Get thumbnail for given collection.\n\nArgs:\nrequest: The incoming request.\ncollection_id: The ID of the collection to retrieve assets for.\n\nReturns:\nthumbnail image",
+        "description": "Get thumbnail for given collection.",
         "produces": [
           "image/png",
           "image/jpeg",
@@ -10588,7 +10588,7 @@
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
         "summary": "Conformance Classes",
-        "description": "Endpoint.",
+        "description": "Returns the STAC conformance classes supported by this server.",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -10628,7 +10628,7 @@
           "SpatioTemporal Asset Catalog (STAC) API"
         ],
         "summary": "Queryables",
-        "description": "Endpoint.",
+        "description": "List all queryables in the GeoCatalog instance",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"

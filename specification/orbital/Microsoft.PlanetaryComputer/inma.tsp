@@ -873,7 +873,7 @@ model OdataQuery {
 
 interface StacCollections {
   /**
-   * Endpoint.
+   * List all collections in the GeoCatalog instance
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Collections")

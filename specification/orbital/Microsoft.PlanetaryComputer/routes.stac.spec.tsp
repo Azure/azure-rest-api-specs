@@ -9,7 +9,7 @@ namespace Microsoft.PlanetaryComputer;
 
 interface StacLandingPages {
   /**
-   * Endpoint.
+   * Return the STAC landing page.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Landing Page")
@@ -21,7 +21,7 @@ interface StacLandingPages {
 
 interface StacConformanceClass {
   /**
-   * Endpoint.
+   * Returns the STAC conformance classes.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Conformance Classes")
@@ -33,7 +33,7 @@ interface StacConformanceClass {
 
 interface StacSearch {
   /**
-   * Endpoint.
+   * STAC search operation with query parameters.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Search")
@@ -126,7 +126,7 @@ interface StacSearch {
     StacItemCollection
   >;
   /**
-   * Endpoint.
+   * STAC search operation.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Search")

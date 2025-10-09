@@ -12,11 +12,6 @@ namespace Microsoft.PlanetaryComputer;
 interface MapsIntervalLegends {
   /**
    * Generate values and color swatches mapping for a given interval classmap.
-   *
-   * Args:
-   *     trim_start (int, optional): Number of items to trim from
-   *         the start of the cmap
-   *     trim_end (int, optional): Number of items to trim from the end of the cmap
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Interval Legend")
@@ -52,11 +47,6 @@ interface MapsIntervalLegends {
 interface MapsClassMapLegends {
   /**
    * Generate values and color swatches mapping for a given classmap.
-   *
-   * Args:
-   *     trim_start (int, optional): Number of items to trim
-   *         from the start of the cmap
-   *     trim_end (int, optional): Number of items to trim from the end of the cmap
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get ClassMap Legend")
@@ -96,18 +86,6 @@ interface MapsLegends {
    * If the colormap has non-contiguous values at the beginning or end,
    * which aren't desired in the output image, they can be trimmed by specifying
    * the number of values to trim.
-   *
-   * Args:
-   *     cmap_name (string): The name of the registered colormap to generate
-   *         a legend for
-   *     height (float, optional): The output height of the legend image
-   *     width (float, optional): The output width of the legend image
-   *     trim_start (int, optional): Number of items to trim from
-   *         the start of the cmap
-   *     trim_end (int, optional): Number of items to trim from the end of the cmap
-   *
-   * Returns:
-   *     HTTP response with jpeg encoded image data
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Get Legend")
