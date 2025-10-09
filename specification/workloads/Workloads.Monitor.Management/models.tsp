@@ -1,6 +1,3 @@
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 using Azure.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
@@ -600,7 +597,7 @@ model SapLandscapeMonitorProperties {
    * Gets or sets the list Top Metric Thresholds for SAP Landscape Monitor Dashboard
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   topMetricsThresholds?: SapLandscapeMonitorMetricThresholds[];
 }
 
@@ -612,14 +609,14 @@ model SapLandscapeMonitorPropertiesGrouping {
    * Gets or sets the list of landscape to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   landscape?: SapLandscapeMonitorSidMapping[];
 
   /**
    * Gets or sets the list of Sap Applications to SID mappings.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   sapApplication?: SapLandscapeMonitorSidMapping[];
 }
 
@@ -1144,7 +1141,7 @@ model AlertRuleProperties {
   /**
    * The alert query parameters.
    */
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   alertQueryParameters?: AlertQueryParameter[];
 }
 
@@ -1245,7 +1242,7 @@ model AlertTemplateProperties {
    * Describes the Query Input Parameter properties in alerts template.
    */
   @maxItems(50)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   queryInputParameters?: AlertTemplateQueryInputParameter[];
 }
 
@@ -1444,7 +1441,7 @@ model InstanceGroupHealthStatusResponse {
   healthSnapshotId: string;
 
   /** The instances health status. */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   instances: InstanceHealthStatusResponse[];
 
   /** The link to the next page of results. */

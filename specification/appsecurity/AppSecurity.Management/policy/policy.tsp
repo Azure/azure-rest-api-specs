@@ -39,7 +39,7 @@ model PolicyProperties {
   logScrubbing?: LogScrubbing;
 
   @doc("User defined rules")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @maxItems(MaxCustomRulesCount) // AppGW custom rules limitation is 100
   customRules?: CustomRule[] = #[];
 
