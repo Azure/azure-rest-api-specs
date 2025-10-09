@@ -69,7 +69,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/FileSharesOperationListResult"
             }
           },
           "default": {
@@ -86,9 +86,6 @@
           "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1611,6 +1608,23 @@
       "required": [
         "properties"
       ]
+    },
+    "FileSharesOperationListResult": {
+      "type": "object",
+      "description": "A list of REST API operations supported by an Azure Resource Provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations supported by the resource provider",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results (if there are any)."
+        }
+      }
     },
     "LiveSharesUsageData": {
       "type": "object",
