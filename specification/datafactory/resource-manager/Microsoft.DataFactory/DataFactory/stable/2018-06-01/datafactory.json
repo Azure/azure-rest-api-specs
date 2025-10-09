@@ -1886,18 +1886,49 @@
             "description": "OK.",
             "schema": {
               "$ref": "#/definitions/IntegrationRuntimeResource"
+            },
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           },
-          "204": {
-            "description": "OK."
+          "202": {
+            "description": "Accepted.",
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
           },
           "default": {
             "description": "An error response received from the Azure Data Factory service.",
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            },
+            "headers": {
+              "location": {
+                "description": "URI to poll for asynchronous operation status.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
             }
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DataFactory/factories/{factoryName}/linkedservices": {
