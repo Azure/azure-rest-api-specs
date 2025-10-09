@@ -236,7 +236,7 @@ op IotDpsResourceListKeysCustomized(
 
 @@override(ProvisioningServiceDescriptions.listKeys,
   IotDpsResourceListKeysCustomized,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -265,7 +265,7 @@ op IotDpsResourceGetOperationResultCustomized(
 
 @@override(ProvisioningServiceDescriptionOperations.getOperationResult,
   IotDpsResourceGetOperationResultCustomized,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -293,7 +293,7 @@ op IotDpsResourceListKeysForKeyNameCustomized(
 
 @@override(ProvisioningServiceDescriptions.listKeysForKeyName,
   IotDpsResourceListKeysForKeyNameCustomized,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -317,7 +317,7 @@ op IotDpsResourceListValidSkusCustomized(
 
 @@override(ProvisioningServiceDescriptions.listValidSkus,
   IotDpsResourceListValidSkusCustomized,
-  "python"
+  "python,javascript"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
