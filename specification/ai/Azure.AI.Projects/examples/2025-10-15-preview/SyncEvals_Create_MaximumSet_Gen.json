@@ -1,0 +1,55 @@
+
+{
+  "title": "SyncEvals_Create_MaximumSet",
+  "operationId": "SyncEvals_Create",
+  "parameters": {
+    "api-version": "2025-10-15-preview",
+    "evaluation": {
+      "data_source": {
+        "uri": "https://example.com/eval-data.jsonl",
+        "type": "Jsonl"
+      },
+      "testing_criteria": [
+        {
+          "id": "evaluator1",
+          "name": "AccuracyEvaluator",
+          "description": "Evaluates the accuracy of the model."
+        },
+        {
+          "id": "evaluator2",
+          "name": "LatencyEvaluator",
+          "description": "Evaluates the latency of the model."
+        }
+      ],
+      "properties": {
+        "property1": "value1",
+        "property2": "value2"
+      }
+    }
+  },
+    "responses": {
+    "201": {
+      "body": {
+        "object": "eval.run.output_item",
+        "id": "aarhggbojnh",
+        "run_id": "run12345",
+        "eval_id": "eval67890",
+        "created_at": 1697395200,
+        "status": "completed",
+        "datasource_item_id": 123456789,
+        "datasource_item": {},
+        "results": [
+          {
+            "metric": "accuracy",
+            "value": 0.95
+          },
+          {
+            "metric": "latency",
+            "value": 120
+          }
+        ],
+        "sample": {}
+      }
+    }
+  }
+}
