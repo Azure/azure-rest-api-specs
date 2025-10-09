@@ -187,6 +187,14 @@ namespace Microsoft.EventGrid {
     succeededLockTokens: string[];
   }
 
+  @added(ServiceApiVersions.v2024_06_01)
+  @doc("Result of the isEmpty operation for an event subscription.")
+  model IsEmptyResult {
+    @doc("True if the event subscription currently has no available events to receive; otherwise false.")
+    @visibility(Lifecycle.Read)
+    isEmpty: boolean;
+  }
+
   alias ReleaseOptions = {
     @doc("Array of lock tokens.")
     lockTokens: string[];
@@ -345,5 +353,16 @@ namespace Microsoft.EventGrid {
       ...RenewLockOptions;
     },
     RenewCloudEventLocksResult
+  >;
+
+  // isEmpty Operation (implemented as an action for consistency with other colon-suffixed operations):
+  // POST https://{namespaceName}.{region}.eventgrid.azure.net/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:isEmpty?api-version={apiVersion}
+  @added(ServiceApiVersions.v2024_06_01)
+  @doc("Checks whether the specified event subscription currently has any available events. Returns true if no events are available; otherwise false.")
+  @action("isEmpty")
+  op isEmptyCloudEvents is StandardOperations.ResourceAction<
+    EventSubscription,
+    {},
+    IsEmptyResult
   >;
 }

@@ -496,6 +496,51 @@
           }
         }
       }
+    },
+    "/topics/{topicName}/eventsubscriptions/{eventSubscriptionName}:isEmpty": {
+      "post": {
+        "operationId": "IsEmptyCloudEvents",
+        "description": "Checks whether the specified event subscription currently has any available events. Returns true if no events are available; otherwise false.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "topicName",
+            "in": "path",
+            "description": "Topic Name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "eventSubscriptionName",
+            "in": "path",
+            "description": "Event Subscription Name.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/IsEmptyResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "x-ms-paths": {
@@ -733,6 +778,20 @@
       "required": [
         "lockToken",
         "error"
+      ]
+    },
+    "IsEmptyResult": {
+      "type": "object",
+      "description": "Result of the isEmpty operation for an event subscription.",
+      "properties": {
+        "isEmpty": {
+          "type": "boolean",
+          "description": "True if the event subscription currently has no available events to receive; otherwise false.",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "isEmpty"
       ]
     },
     "PublishResult": {
