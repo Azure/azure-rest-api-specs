@@ -455,22 +455,28 @@ function New-TypeSpecAPIViewTokens {
       Invoke-TypeSpecAPIViewParser -Type "New" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory
     }
 
-    # Generate Baseline TypeSpec APIView Tokens 
-    git checkout $TargetCommitId
-    Write-Host "Installing required dependencies to generate Baseline API review"
-    npm ci
-    LogGroupStart "npm ls -a" 
-    npm ls -a
-    LogGroupEnd 
-    foreach ($typeSpecProject in $typeSpecProjects) {
-      # Skip Baseline APIView Token for new projects
-      if (!(Test-Path -Path (Join-Path $typeSpecProject "tspconfig.yaml"))) {
-        Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
+    # Generate Baseline TypeSpec APIView Tokens
+    try {
+      git checkout $TargetCommitId
+      Write-Host "Installing required dependencies to generate Baseline API review"
+      npm ci
+      LogGroupStart "npm ls -a"
+      npm ls -a
+      LogGroupEnd
+      foreach ($typeSpecProject in $typeSpecProjects) {
+        # Skip Baseline APIView Token for new projects
+        if (!(Test-Path -Path (Join-Path $typeSpecProject "tspconfig.yaml"))) {
+          Write-Host "TypeSpec project $typeSpecProject is not found in pull request target branch. API review will not have a baseline revision."
+        }
+        else {
+          $tokenDirectory = Join-Path $typeSpecAPIViewArtifactsDirectory $(Split-Path $typeSpecProject -Leaf)
+          Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory | Out-Null
+        }
       }
-      else {
-        $tokenDirectory = Join-Path $typeSpecAPIViewArtifactsDirectory $(Split-Path $typeSpecProject -Leaf)
-        Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory | Out-Null
-      }
+    }
+    catch {
+      Write-Host "An error occurred while generating Baseline API review: $_"
+      Write-Host "Skipping Baseline API review generation."
     }
   }
   finally {
