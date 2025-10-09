@@ -73,7 +73,7 @@ model EnclaveVirtualNetworkModel {
   customCidrRange?: string;
 
   @doc("Subnet Configurations.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subnetConfigurations?: SubnetConfiguration[];
 
   @doc("Allow Subnet Communication.")
@@ -160,17 +160,17 @@ model VirtualEnclaveBaseModel {
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Enclave role assignments")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   enclaveRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
   @doc("Workload role assignments")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   workloadRoleAssignments?: RoleAssignmentItem[];
 
   @added(Microsoft.Mission.Versions.v2025_05_01_preview)
   @doc("Enclave specific policies")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   governedServiceList?: GovernedServiceItem[];
 }
 
