@@ -1,6 +1,6 @@
 parameters:
   "service-dir":
-    default: "sdk/web"
+    default: "sdk/domainregistration"
 emit:
   - "@azure-tools/typespec-autorest"
 options:
@@ -13,33 +13,33 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Web"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Domainregistration"
     clear-output-folder: true
     model-namespace: true
-    namespace: "Azure.ResourceManager.Web"
+    namespace: "Azure.ResourceManager.Domainregistration"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-web"
-    namespace: "azure.mgmt.web"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-domainregistration"
+    namespace: "azure.mgmt.domainregistration"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-web"
-    namespace: "com.azure.resourcemanager.web"
-    service-name: "Web" # human-readable service name, whitespace allowed
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-domainregistration"
+    namespace: "com.azure.resourcemanager.domainregistration"
+    service-name: "Domainregistration" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: sdk/web
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-web"
+    service-dir: sdk/domainregistration
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-domainregistration"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-web"
+      name: "@azure/arm-domainregistration"
   "@azure-tools/typespec-go":
-    service-dir: "sdk/resourcemanager/web"
-    emitter-output-dir: "{output-dir}/{service-dir}/armweb"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armweb"
+    service-dir: "sdk/resourcemanager/domainregistration"
+    emitter-output-dir: "{output-dir}/{service-dir}/armdomainregistration"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdomainregistration"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
