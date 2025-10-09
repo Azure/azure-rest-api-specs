@@ -80,6 +80,14 @@ model StandbyVirtualMachinePoolElasticityProfile {
   @maxValue(2000)
   @minValue(0)
   minReadyCapacity?: int64;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies the duration to wait after virtual machine provisioning before the virtual machine becomes available for use. The duration should be specified in ISO 8601 format (e.g., PT2S for 2 seconds).")
+  postProvisioningDelay?: string;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies the dynamic sizing configuration.")
+  dynamicSizing?: DynamicSizing;
 }
 
 @armResourceOperations

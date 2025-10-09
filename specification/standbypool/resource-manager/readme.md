@@ -27,7 +27,7 @@ These are the global settings for the standbypool.
 ``` yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2025-03
+tag: package-2025-10
 ```
 
 ### Suppression
@@ -44,12 +44,12 @@ modelerfour:
   flatten-models: false
 ```
 
-### Tag: package-2025-03
-These settings apply only when `--tag=package-2025-03` is specified on the command line.
+### tag: package-2025-10
+These settings apply only when `--tag=package-2025-10` is specified on the command line.
 
-```yaml $(tag) == 'package-2025-03'
+```yaml $(tag) == 'package-2025-10'
 input-file:
-  - Microsoft.StandbyPool/stable/2025-03-01/standbypool.json
+  - Microsoft.StandbyPool/stable/2025-10-01/standbypool.json
 ```
 
 ### Tag: package-2024-03
