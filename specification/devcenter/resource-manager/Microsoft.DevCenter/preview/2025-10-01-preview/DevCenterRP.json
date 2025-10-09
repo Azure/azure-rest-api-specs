@@ -8863,7 +8863,7 @@
       "description": "Represents an Entra group assigned to this Project, entitling all members to resources for the given scope.",
       "properties": {
         "groupId": {
-          "type": "string",
+          "$ref": "#/definitions/Azure.Core.uuid",
           "description": "The Entra group object ID (GUID)."
         },
         "scope": {
@@ -9009,6 +9009,11 @@
           }
         ]
       }
+    },
+    "Azure.Core.uuid": {
+      "type": "string",
+      "format": "uuid",
+      "description": "Universally Unique Identifier"
     },
     "AzureAiServicesMode": {
       "type": "string",

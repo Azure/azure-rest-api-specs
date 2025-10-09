@@ -975,7 +975,7 @@ model WorkspaceStorageSettings {
 @added(Versions.v2025_10_01_preview)
 model AssignedGroup {
   /** The Entra group object ID (GUID). */
-  groupId?: string;
+  groupId?: Azure.Core.uuid;
 
   /** The scope of the assignment. */
   scope?: AssignedGroupScope;
@@ -1090,8 +1090,8 @@ model FeatureState {
   /** Indicates the default status of the feature. */
   defaultStatus?: FeatureStatus;
 
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "No other way to represent an arbitrary object containing default values."
   /** The default values of the feature. */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "No other way to represent an arbitrary object containing default values."
   defaultValues?: Record<string>;
 }
 
