@@ -1,0 +1,94 @@
+{
+  "operationId": "Connectors_Create",
+  "title": "CreateConnector",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "testrg",
+    "api-version": "2025-01-01-preview",
+    "connectorName": "testconnector",
+    "storageAccountName": "teststorageaccount",
+    "resource": {
+      "location": "eastus",
+      "properties": {
+        "state": "Active",
+        "description": "Example connector",
+        "dataSourceType": "AWS_S3",
+        "source": {
+          "type": "Bucket",
+          "connection": {
+            "type": "Endpoint",
+            "endpoint": "https://example.com/bucket",
+            "tlsVerification": "Perform"
+          },
+          "authProperties": {
+            "type": "AccessKey",
+            "accessKeyId": "exampleKeyId",
+            "secretAccessKey": "exampleSecret",
+            "signingRegion": "us-west-2"
+          },
+          "hostOverride": "example.com"
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/testconnector",
+        "name": "testconnector",
+        "type": "Microsoft.Storage/storageAccounts/connectors",
+        "location": "eastus",
+        "properties": {
+          "uniqueId": "12345",
+          "state": "Active",
+          "creationTime": "2023-04-01T00:00:00Z",
+          "description": "Example connector",
+          "dataSourceType": "AWS_S3",
+          "source": {
+            "type": "Bucket",
+            "connection": {
+              "type": "Endpoint",
+              "endpoint": "https://example.com/bucket"
+            },
+            "authProperties": {
+              "type": "AccessKey",
+              "accessKeyId": "exampleKeyId",
+              "signingRegion": "us-west-2"
+            },
+            "hostOverride": "example.com"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testrg/providers/Microsoft.Storage/storageAccounts/teststorageaccount/connectors/testconnector",
+        "name": "testconnector",
+        "type": "Microsoft.Storage/storageAccounts/connectors",
+        "location": "eastus",
+        "properties": {
+          "uniqueId": "12345",
+          "state": "Active",
+          "creationTime": "2023-04-01T00:00:00Z",
+          "description": "Example connector",
+          "dataSourceType": "AWS_S3",
+          "source": {
+            "type": "Bucket",
+            "connection": {
+              "type": "Endpoint",
+              "endpoint": "https://example.com/bucket"
+            },
+            "authProperties": {
+              "type": "AccessKey",
+              "accessKeyId": "exampleKeyId",
+              "signingRegion": "us-west-2"
+            },
+            "hostOverride": "example.com"
+          },
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
