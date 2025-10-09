@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "../Security.KeyVault.Common/common.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Rest;
 using Azure.Core;
 

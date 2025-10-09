@@ -8,7 +8,7 @@ import "@typespec/openapi";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
+
 using Azure.ClientGenerator.Core;
 
 namespace BicepClient;

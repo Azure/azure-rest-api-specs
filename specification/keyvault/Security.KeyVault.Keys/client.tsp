@@ -3,7 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Versioning;
 
 @versioned(KeyVault.Versions)

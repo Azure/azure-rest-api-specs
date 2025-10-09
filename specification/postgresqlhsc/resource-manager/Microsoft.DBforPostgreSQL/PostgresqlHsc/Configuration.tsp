@@ -8,7 +8,7 @@ import "./Cluster.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using Azure.Core;
 
 namespace Microsoft.DBforPostgreSQL;

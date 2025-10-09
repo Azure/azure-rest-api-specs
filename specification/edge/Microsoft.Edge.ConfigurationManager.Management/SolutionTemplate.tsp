@@ -9,7 +9,6 @@ import "@typespec/openapi";
 import "./ProvisioningState.tsp";
 import "./UpdateType.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

@@ -6,7 +6,6 @@ import "@typespec/rest";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 @doc("Provides the standard '$filter' query parameter for list operations.")
 model FilterQueryParameter {

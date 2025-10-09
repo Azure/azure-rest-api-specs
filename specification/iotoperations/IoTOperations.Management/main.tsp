@@ -21,7 +21,7 @@ import "./models/akri/connector.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
+
 using Azure.ResourceManager;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style"

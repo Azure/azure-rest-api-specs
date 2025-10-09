@@ -8,7 +8,6 @@ import "./Target.tsp";
 import "./ProvisioningState.tsp";
 import "./AvailableSolutionTemplateVersion.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

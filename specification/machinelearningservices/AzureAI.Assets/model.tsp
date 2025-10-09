@@ -6,7 +6,6 @@ import "./common.tsp";
 import "@typespec/openapi";
 import "@typespec/versioning";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

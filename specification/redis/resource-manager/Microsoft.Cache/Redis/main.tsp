@@ -28,7 +28,6 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 /**
  * REST API for Azure Redis Cache Service.

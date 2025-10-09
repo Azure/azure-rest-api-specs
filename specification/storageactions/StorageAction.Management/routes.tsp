@@ -12,7 +12,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.StorageActions;
 

@@ -21,7 +21,7 @@ using Azure.ResourceManager.Foundations;
 using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
+
 /**
  * Azure Connected Cluster Resource Provider API for onboarding a Kubernetes Cluster to Azure Arc
  */

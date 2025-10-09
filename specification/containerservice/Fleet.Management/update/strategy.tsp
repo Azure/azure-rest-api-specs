@@ -11,7 +11,6 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 using Azure.Core;
 using Azure.Core.Traits;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerService;
 

@@ -8,7 +8,7 @@ import "./models.tsp";
 using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Rest;
 
 namespace Microsoft.Portal;

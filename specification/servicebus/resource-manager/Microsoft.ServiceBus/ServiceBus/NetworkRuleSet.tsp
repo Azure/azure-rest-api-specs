@@ -7,7 +7,6 @@ import "./SBNamespace.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceBus;
 /**

@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Rest;
 
 namespace Microsoft.Portal;

@@ -8,7 +8,6 @@ import "./DynamicConfiguration.tsp";
 import "./ProvisioningState.tsp";
 import "./State.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

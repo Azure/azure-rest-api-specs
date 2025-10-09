@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;

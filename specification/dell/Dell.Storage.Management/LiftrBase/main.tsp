@@ -2,7 +2,6 @@ import "@typespec/versioning";
 import "@typespec/openapi";
 
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;

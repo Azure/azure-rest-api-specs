@@ -6,7 +6,6 @@ import "@typespec/openapi";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ServiceBus;
 

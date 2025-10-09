@@ -2,7 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 

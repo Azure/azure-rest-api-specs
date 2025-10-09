@@ -6,7 +6,6 @@ using Azure.Core;
 using Azure.Core.Traits;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 #suppress "@azure-tools/typespec-azure-core/no-openapi" "Keeping this in the spec for now"
 @doc("Video translation API to translate video from source locale to target locale.")

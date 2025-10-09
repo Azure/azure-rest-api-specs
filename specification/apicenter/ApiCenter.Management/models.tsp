@@ -5,7 +5,7 @@ import "@typespec/openapi3";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Versioning;
 
 namespace Microsoft.ApiCenter;

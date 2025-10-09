@@ -9,7 +9,7 @@ import "../Microsoft.Edge.Shared/common.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Versioning;
 
 namespace Microsoft.Edge;

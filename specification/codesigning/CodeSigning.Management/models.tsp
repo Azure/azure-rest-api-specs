@@ -9,7 +9,7 @@ import "@typespec/versioning";
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.Core;
-using TypeSpec.OpenAPI;
+
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 using TypeSpec.Versioning;

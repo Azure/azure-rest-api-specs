@@ -5,7 +5,7 @@ import "@typespec/versioning";
 import "./models.tsp";
 
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using Azure.Core;

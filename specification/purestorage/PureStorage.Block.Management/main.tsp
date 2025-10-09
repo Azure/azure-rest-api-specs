@@ -12,7 +12,7 @@ using Azure.ResourceManager;
 using LiftrBase;
 using LiftrBase.Storage;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 

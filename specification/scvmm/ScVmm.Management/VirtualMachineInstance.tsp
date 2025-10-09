@@ -8,7 +8,6 @@ import "./custom.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ScVmm;
 /** Define the virtualMachineInstance. */

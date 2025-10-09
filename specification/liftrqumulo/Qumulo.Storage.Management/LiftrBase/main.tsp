@@ -8,7 +8,6 @@ import "@typespec/versioning";
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 using TypeSpec.Reflection;
-using TypeSpec.OpenAPI;
 
 @versioned(LiftrBase.Versions)
 namespace LiftrBase;

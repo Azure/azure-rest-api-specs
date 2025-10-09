@@ -3,7 +3,6 @@ import "@typespec/rest";
 import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.IoTOperations;
 

@@ -10,7 +10,6 @@ import "./Target.tsp";
 import "./Instance.tsp";
 import "./DeploymentStatus.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

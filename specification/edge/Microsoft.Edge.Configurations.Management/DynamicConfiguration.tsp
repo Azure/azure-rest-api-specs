@@ -9,7 +9,6 @@ import "./ConfigurationModel.tsp";
 import "./ConfigurationType.tsp";
 import "./ProvisioningState.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

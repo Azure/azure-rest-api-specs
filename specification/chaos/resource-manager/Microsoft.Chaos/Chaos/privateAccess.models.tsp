@@ -7,7 +7,6 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.Chaos;
 

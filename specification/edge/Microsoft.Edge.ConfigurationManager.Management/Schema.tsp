@@ -11,7 +11,6 @@ import "./SchemaVersion.tsp";
 import "./VersionParameter.tsp";
 import "./RemoveVersionResponse.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

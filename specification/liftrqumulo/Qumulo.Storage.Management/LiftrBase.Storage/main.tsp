@@ -8,7 +8,7 @@ import "@typespec/versioning";
 using Azure.ResourceManager;
 using LiftrBase;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
 using TypeSpec.Reflection;

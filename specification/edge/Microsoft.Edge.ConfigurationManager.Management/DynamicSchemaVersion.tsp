@@ -8,7 +8,6 @@ import "./ProvisioningState.tsp";
 import "./DynamicSchemaVersion.tsp";
 import "./SchemaVersion.tsp";
 
-using TypeSpec.OpenAPI;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;

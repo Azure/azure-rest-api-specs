@@ -10,7 +10,7 @@ import "@typespec/openapi";
 using Azure.ResourceManager;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
+
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
 

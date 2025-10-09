@@ -8,7 +8,6 @@ import "./CodeSigningAccount.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.CodeSigning;
 @doc("Certificate profile resource.")
