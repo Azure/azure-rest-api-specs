@@ -12,7 +12,7 @@ options:
     arm-resource-flattening: true
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-informaticadatamanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-informaticadatamanagement"
     namespace: "azure.mgmt.informaticadatamanagement"
     flavor: "azure"
     generate-test: true
@@ -22,16 +22,13 @@ options:
     namespace: "com.azure.resourcemanager.informaticadatamanagement"
     flavor: "azure"
     service-name: "Informatica DataManagement"
-  "@azure-tools/typespec-csharp":
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
+  "@azure-typespec/http-client-csharp-mgmt":
     namespace: "Azure.ResourceManager.InformaticaDataManagement"
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
   "@azure-tools/typespec-ts":
     service-dir: "sdk/informatica"
     experimental-extensible-enums: true
-    package-dir: "arm-informaticadatamanagement"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-informaticadatamanagement"
     flavor: azure
     package-details:
       name: "@azure/arm-informaticadatamanagement"
