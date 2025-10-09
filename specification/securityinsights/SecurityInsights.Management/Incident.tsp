@@ -19,6 +19,12 @@ model Incident is Azure.ResourceManager.ProxyResource<IncidentProperties> {
     SegmentName = "incidents",
     NamePattern = ""
   >;
+
+  /**
+   * Etag of the azure resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  etag?: string;
 }
 
 // Added manually only to fix KeyName difference from Incident resource, A.K.A. incidentId vs incidentIdentifier

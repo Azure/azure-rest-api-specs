@@ -22,6 +22,12 @@ model Relation is Azure.ResourceManager.ProxyResource<RelationProperties> {
     SegmentName = "relations",
     NamePattern = "^[a-zA-Z0-9-]{3,63}$"
   >;
+
+  /**
+   * Etag of the azure resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  etag?: string;
 }
 
 @armResourceOperations

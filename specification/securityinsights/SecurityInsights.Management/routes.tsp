@@ -71,11 +71,17 @@ interface SourceControlOperationGroup {
     @path
     workspaceName: string,
 
+    /**
+     * the provider namespace
+     */
     @path
     @segment("providers")
     @key
     securityInsights: "Microsoft.SecurityInsights",
 
+    /**
+     * The source control name.
+     */
     @path
     route: "listRepositories",
 

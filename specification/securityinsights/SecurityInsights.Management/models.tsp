@@ -2355,6 +2355,7 @@ model EntityManualTriggerRequestBody {
   incidentArmId?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SecurityInsights/incidents";
+      scopes: ["Extension"];
     }
   ]>;
 
@@ -3116,6 +3117,7 @@ model IncidentProperties {
   relatedAnalyticRuleIds?: Azure.Core.armResourceIdentifier<[
     {
       type: "Microsoft.SecurityInsights/alertRules";
+      scopes: ["Extension"];
     }
   ]>[];
 

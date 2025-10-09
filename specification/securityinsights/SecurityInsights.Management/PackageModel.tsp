@@ -20,6 +20,12 @@ model PackageModel is Azure.ResourceManager.ProxyResource<PackageProperties> {
     SegmentName = "contentPackages",
     NamePattern = ""
   >;
+
+  /**
+   * Etag of the azure resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  etag?: string;
 }
 
 @armResourceOperations

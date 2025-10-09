@@ -17,7 +17,8 @@ namespace Microsoft.SecurityInsights;
  * Alert rule.
  */
 @discriminator("kind")
-model AlertRule is Azure.ResourceManager.ProxyResource<{}> {
+model AlertRule
+  is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<AlertRuleKind> {
   ...ResourceNameParameter<
     Resource = AlertRule,
     KeyName = "ruleId",
@@ -26,10 +27,10 @@ model AlertRule is Azure.ResourceManager.ProxyResource<{}> {
   >;
 
   /**
-   * The alert rule kind
+   * Etag of the azure resource
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind: AlertRuleKind;
+  etag?: string;
 }
 
 @armResourceOperations

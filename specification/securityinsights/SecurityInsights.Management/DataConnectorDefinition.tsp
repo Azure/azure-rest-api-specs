@@ -24,6 +24,12 @@ model DataConnectorDefinition
     SegmentName = "dataConnectorDefinitions",
     NamePattern = "^[a-z0-9A-Z-_]*$"
   >;
+
+  /**
+   * Etag of the azure resource
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  etag?: string;
 }
 
 @armResourceOperations

@@ -9,7 +9,8 @@ alias OperationalInsights = Extension.ExternalResource<
   "Microsoft.OperationalInsights",
   "workspaces",
   "workspaceName",
-  Description = "The name of the monitor workspace."
+  Description = "The name of the monitor workspace.",
+  NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
 >;
 
 @armVirtualResource
