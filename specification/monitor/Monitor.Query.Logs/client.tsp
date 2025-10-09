@@ -23,7 +23,7 @@ namespace ClientCustomizations;
     name: "MonitorQueryLogsClient",
     service: MonitorQueryLogs,
   },
-  "!go, !csharp"
+  "!go"
 )
 interface MonitorQueryLogsClient {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -36,13 +36,22 @@ interface MonitorQueryLogsClient {
   batch is MonitorQueryLogs.Query.batch;
 }
 
-// go and C# client definition
+@@clientNamespace(MonitorQueryLogs,
+  "com.azure.monitor.query.logs.implementation",
+  "java"
+);
+@@clientNamespace(ClientCustomizations,
+  "com.azure.monitor.query.logs.implementation",
+  "java"
+);
+
+// go configuration
 @client(
   {
     name: "Client",
     service: MonitorQueryLogs,
   },
-  "go, csharp"
+  "go"
 )
 interface Client {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
@@ -55,17 +64,6 @@ interface Client {
   queryBatch is MonitorQueryLogs.Query.batch;
 }
 
-// Java configuration
-@@clientNamespace(MonitorQueryLogs,
-  "com.azure.monitor.query.logs.implementation",
-  "java"
-);
-@@clientNamespace(ClientCustomizations,
-  "com.azure.monitor.query.logs.implementation",
-  "java"
-);
-
-// go configuration
 @@access(Versions, Access.internal, "go,python");
 
 @@clientName(BatchQueryRequest.workspace, "WorkspaceID", "go");
@@ -91,16 +89,3 @@ interface Client {
   Access.internal,
   "python"
 );
-
-// .NET configuration
-@@clientName(Column, "LogsTableColumn", "csharp");
-@@clientName(ColumnDataType, "LogsColumnType", "csharp");
-@@clientName(Table, "LogsTable", "csharp");
-@@clientName(QueryResults, "LogsQueryResult", "csharp");
-@@clientName(BatchQueryResults, "LogsBatchQueryResult", "csharp");
-
-@@access(QueryBody, Access.internal, "csharp");
-@@access(BatchQueryRequest, Access.internal, "csharp");
-@@access(Client.queryBatch, Access.internal, "csharp");
-@@access(Client.queryWorkspace, Access.internal, "csharp");
-@@access(Client.queryResource, Access.internal, "csharp");

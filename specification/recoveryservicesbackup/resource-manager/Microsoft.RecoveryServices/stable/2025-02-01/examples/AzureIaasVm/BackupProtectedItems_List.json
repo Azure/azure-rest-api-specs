@@ -1,42 +1,40 @@
 {
   "parameters": {
-    "$filter": "backupManagementType eq 'AzureIaasVM' and itemType eq 'VM'",
-    "api-version": "2025-02-01",
-    "resourceGroupName": "SwaggerTestRg",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "NetSDKTestRsVault"
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "api-version": "2025-02-01",
+    "$filter": "backupManagementType eq 'AzureIaasVM' and itemType eq 'VM'"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/protectionContainers/IaasVMContainer;iaasvmcontainer;iaasvm-rg;iaasvm-1/protectedItems/VM;iaasvmcontainer;iaasvm-rg;iaasvm-1",
             "name": "VM;iaasvmcontainer;iaasvm-rg;iaasvm-1",
             "type": "Microsoft.RecoveryServices/vaults/backupFabrics/protectionContainers/protectedItems",
-            "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/protectionContainers/IaasVMContainer;iaasvmcontainer;iaasvm-rg;iaasvm-1/protectedItems/VM;iaasvmcontainer;iaasvm-rg;iaasvm-1",
             "properties": {
-              "backupManagementType": "AzureIaasVM",
-              "containerName": "iaasvmcontainer;iaasvm-rg;iaasvm-1",
               "friendlyName": "iaasvm-1",
+              "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1",
+              "protectionStatus": "Healthy",
+              "protectionState": "Protected",
               "healthStatus": "Passed",
               "lastBackupStatus": "Completed",
               "lastBackupTime": "2018-01-22T12:25:32.048723Z",
-              "lastRecoveryPoint": "2017-11-22T12:25:32.048723Z",
-              "policyId": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1",
-              "policyType": "V2",
               "protectedItemDataId": "636482643132986882",
               "protectedItemType": "Microsoft.ClassicCompute/virtualMachines",
-              "protectionState": "Protected",
-              "protectionStatus": "Healthy",
+              "backupManagementType": "AzureIaasVM",
+              "workloadType": "VM",
+              "containerName": "iaasvmcontainer;iaasvm-rg;iaasvm-1",
               "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1",
-              "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/providers/Microsoft.ClassicCompute/virtualMachines/iaasvm-1",
-              "workloadType": "VM"
+              "policyId": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1",
+              "lastRecoveryPoint": "2017-11-22T12:25:32.048723Z",
+              "policyType": "V2"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "BackupProtectedItems_List",
-  "title": "List protected items with backupManagementType filter as AzureIaasVm"
+  }
 }

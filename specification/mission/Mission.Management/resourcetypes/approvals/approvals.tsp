@@ -4,7 +4,6 @@ import "@typespec/versioning";
 
 using TypeSpec.Versioning;
 using Azure.Core;
-using Azure.ResourceManager;
 
 @doc("Microsoft Mission Resource Provider management API.")
 namespace Microsoft.Mission;
@@ -89,7 +88,7 @@ model ApprovalBaseModel {
   grandparentResourceId?: armResourceIdentifier;
 
   @added(Microsoft.Mission.Versions.v2024_12_01_preview)
-  @identifiers(#["approverEntraId"])
+  @OpenAPI.extension("x-ms-identifiers", #["approverEntraId"])
   @doc("List of approvers for the approval request")
   approvers?: Approver[];
 

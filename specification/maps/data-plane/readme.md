@@ -27,6 +27,7 @@ These are the global settings for MapsClient.
 ``` yaml
 title: MapsClient
 openapi-type: data-plane
+tag: package-stable-2023-06-01
 ```
 
 ### Suppression
@@ -45,4 +46,89 @@ directive:
   - suppress: RESPONSE_SCHEMA_NOT_IN_SPEC
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
 
+```
+
+### Tag: package-stable-2023-06-01
+
+These settings apply only when `--tag=package-stable-2023-06-01` is specified on the command line.
+
+```yaml $(tag) == 'package-stable-2023-06-01'
+input-file:
+  - Common/stable/2023-06-01/common.json
+  - DataRegistry/stable/2023-06-01/dataregistry.json
+  - Geolocation/preview/1.0/geolocation.json
+  - Render/stable/2022-08-01/render.json
+  - Route/preview/1.0/route.json
+  - Search/stable/2023-06-01/search.json
+  - Spatial/stable/2022-08-01/spatial.json
+  - Timezone/preview/1.0/timezone.json
+  - Traffic/preview/1.0/traffic.json
+  - Weather/stable/1.1/weather.json
+```
+
+### Tag: package-stable-1.0
+
+These settings apply only when `--tag=package-stable-1.0` is specified on the command line.
+
+```yaml $(tag) == 'package-stable-1.0'
+input-file:
+  - Render/preview/1.0/render.json
+  - Search/preview/1.0/search.json
+```
+
+### Tag: package-2023-10-01-preview
+
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+  - Route/preview/2023-10-01-preview/route.json
+```
+
+### Tag: package-2024-04-01-preview
+
+These settings apply only when `--tag=package-2024-04-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-04-01-preview'
+input-file:
+  - Search/preview/2024-04-01-preview/search.json
+  - Route/preview/2024-04-01-preview/route.json
+  - AsyncBatchManagement/preview/2024-04-01-preview/asyncBatchManagement.json
+```
+
+### Tag: package-deprecated
+
+These settings apply only when `--tag=package-deprecated` is specified on the command line.
+
+``` yaml $(tag) == 'package-deprecated'
+input-file:
+  - Microsoft.Maps/Alias/preview/2.0/alias.json
+  - Microsoft.Maps/Data/preview/1.0/data.json
+  - Data/preview/2.0/data.json
+  - Microsoft.Maps/Data/preview/2.0/data.json
+  - Data/preview/1.0/data.json
+  - Microsoft.Maps/DEM/preview/1.0/elevation.json
+  - Microsoft.Maps/Feedback/preview/1.0/feedback.json
+  - Microsoft.Maps/Geolocation/preview/1.0/geolocation.json
+  - Microsoft.Maps/Render/preview/1.0/render.json
+  - Microsoft.Maps/Render/preview/2.0/render.json
+  - Microsoft.Maps/Route/preview/1.0/route.json
+  - Microsoft.Maps/Search/preview/1.0/search.json
+  - Microsoft.Maps/Spatial/preview/1.0/spatial.json
+  - Microsoft.Maps/Timezone/preview/1.0/timezone.json
+  - Microsoft.Maps/Traffic/preview/1.0/traffic.json
+  - Microsoft.Maps/Weather/preview/1.0/weather.json
+```
+
+### Tag: package-creator
+
+These settings apply only when `--tag=package-creator` is specified on the command line.
+
+``` yaml $(tag) == 'package-creator'
+input-file:
+  - Microsoft.Maps/Dataset/preview/2.0/dataset.json
+  - Microsoft.Maps/DwgConversion/preview/2.0/dwgconversion.json
+  - Microsoft.Maps/FeatureState/preview/2.0/featurestate.json
+  - Microsoft.Maps/Tileset/preview/2.0/tileset.json
+  - Microsoft.Maps/WFS/preview/2.0/wfs.json
 ```

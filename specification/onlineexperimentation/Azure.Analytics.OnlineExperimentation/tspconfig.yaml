@@ -18,43 +18,42 @@ options:
     emitter-output-dir: "{project-root}/../"
     output-file: "{output-folder-base}/data-plane/OpenApi3/Microsoft.OnlineExperimentation/preview/{version}/onlineexperimentation.json"
   "@azure-tools/typespec-go":
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/azonlineexperimentation"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     service-dir: "sdk/analytics"
-    emitter-output-dir: "{output-dir}/{service-dir}/azonlineexperimentation"
+    package-dir: "azonlineexperimentation"
+    module-version: "0.0.1"
     generate-fakes: true
     inject-spans: true
     single-client: true
     slice-elements-byval: true
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-onlineexperimentation"
-    package-name: "azure-onlineexperimentation"
+    package-dir: "azure-onlineexperimentation"
+    package-name: "{package-dir}"
     namespace: "azure.onlineexperimentation"
     generate-test: false
     generate-sample: false
     package-mode: dataplane
     flavor: azure
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    namespace: "Azure.Analytics.OnlineExperimentation"
+    package-dir: "Azure.Analytics.OnlineExperimentation"
+    namespace: "{package-dir}"
     generate-convenience-methods: true
     generate-protocol-methods: true
     clear-output-folder: true
     model-namespace: false
     flavor: azure
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Analytics.OnlineExperimentation
     model-namespace: false
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/onlineexperimentation-rest"
-    is-modular-library: false
+    package-dir: "onlineexperimentation-rest"
     package-details:
       name: "@azure-rest/onlineexperimentation"
       description: "Azure Online Experimentation Service"
     generate-metadata: true
     flavor: azure
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-analytics-onlineexperimentation"
+    package-dir: "azure-analytics-onlineexperimentation"
     namespace: com.azure.analytics.onlineexperimentation
     partial-update: true
     flavor: azure

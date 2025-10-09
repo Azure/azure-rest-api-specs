@@ -4,54 +4,49 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskUpdate.properties);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
-);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(PrivateLinkResource.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSetUpdate.properties
-);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskEncryptionSetUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SnapshotUpdate.properties);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(SnapshotUpdate.properties);
 
 @@clientName(Disks.update, "Disks.update::parameters.properties", "disk");
 @@clientName(Disks.grantAccess,
   "Disks.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Disk.properties);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Disk.properties);
 
 @@clientName(DiskAccesses.update,
   "DiskAccesses.update::parameters.properties",
   "diskAccess"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskAccess.properties);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskAccess.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
-);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(DiskEncryptionSets.update,
   "DiskEncryptionSets.update::parameters.properties",
   "diskEncryptionSet"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskEncryptionSet.properties
-);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskEncryptionSet.properties);
 
 @@clientName(DiskRestorePoints.grantAccess,
   "DiskRestorePoints.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskRestorePoint.properties
-);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(DiskRestorePoint.properties);
 
 @@clientName(Snapshots.update,
   "Snapshots.update::parameters.properties",
@@ -61,8 +56,8 @@ using Microsoft.Compute;
   "Snapshots.grantAccess::parameters.body",
   "grantAccessData"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Snapshot.properties);
+#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+@@flattenProperty(Snapshot.properties);
 
 @@clientName(DiskAccesses.createOrUpdate::parameters.resource, "diskAccess");
 @@clientName(DiskAccesses.update::parameters.properties, "diskAccess");

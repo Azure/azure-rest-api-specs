@@ -21,7 +21,6 @@ interface MarketplaceAgreementsOperationGroup {
   @autoRoute
   @get
   @action("agreements")
-  @list
   list is ArmProviderActionSync<
     Response = ConfluentAgreementResourceListResponse,
     Scope = SubscriptionActionScope,

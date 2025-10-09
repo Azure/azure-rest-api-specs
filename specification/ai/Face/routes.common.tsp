@@ -76,12 +76,11 @@ op FaceResourceUpdateOperation<
   FaceErrorResponse
 >;
 
-@listsResource(TResource)
 op FaceResourceListOperation<
   TResource extends TypeSpec.Reflection.Model,
   TResourceItem extends TypeSpec.Reflection.Model = TResource,
   TQuery extends TypeSpec.Reflection.Model = {}
-> is Foundations.ResourceCollectionOperation<
+> is Foundations.ResourceList<
   TResource,
   ListRequestOptions & TQuery,
   Body<TResourceItem[]>,

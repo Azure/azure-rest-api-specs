@@ -1,5 +1,5 @@
-import "../Normalized Contract/StandardizedContracts/CommonModels.tsp";
-import "../Normalized Contract/StandardizedContracts/SummaryProperties.tsp";
+import "../../Common/StandardizedContracts/CommonModels.tsp";
+import "../../Common/StandardizedContracts/SummaryProperties.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
@@ -63,17 +63,17 @@ model AvsAssessmentSummaryPropertiesV2 is SummaryProperties {
   totalStorageInGB?: float32;
 
   @doc("Estimated AVS SKU for Assessment.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read)
   avsEstimatedNodes?: AvsEstimatedNode[];
 
   @doc("Estimated External Storage for Assessment.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read)
   avsEstimatedExternalStorages?: AvsEstimatedExternalStorage[];
 
   @doc("Estimated External Storage for Assessment.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read)
   avsEstimatedNetworks?: AvsEstimatedNetwork[];
 

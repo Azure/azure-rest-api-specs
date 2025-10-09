@@ -1,17 +1,52 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "environmentTypeName": "DevTest",
-    "projectName": "ContosoProj",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     "resourceGroupName": "rg1",
-    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+    "projectName": "ContosoProj",
+    "environmentTypeName": "DevTest"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/ContosoProj/environmentTypes/DevTest",
         "name": "DevTest",
         "type": "Microsoft.DevCenter/projects/environmentTypes",
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/ContosoProj/environmentTypes/DevTest",
+        "properties": {
+          "deploymentTargetId": "/subscriptions/00000000-0000-0000-0000-000000000000",
+          "status": "Enabled",
+          "provisioningState": "Succeeded",
+          "environmentCount": 1,
+          "creatorRoleAssignment": {
+            "roles": {
+              "4cbf0b6c-e750-441c-98a7-10da8387e4d6": {
+                "roleName": "Developer",
+                "description": "Allows Developer access to project virtual machine resources."
+              }
+            }
+          },
+          "userRoleAssignments": {
+            "e45e3m7c-176e-416a-b466-0c5ec8298f8a": {
+              "roles": {
+                "4cbf0b6c-e750-441c-98a7-10da8387e4d6": {
+                  "roleName": "Developer",
+                  "description": "Allows Developer access to project virtual machine resources."
+                }
+              }
+            }
+          }
+        },
+        "systemData": {
+          "createdBy": "User1@contoso.com",
+          "createdByType": "User",
+          "createdAt": "2020-11-18T18:24:24.818Z",
+          "lastModifiedBy": "User1@contoso.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:24:24.818Z"
+        },
+        "tags": {
+          "CostCenter": "RnD"
+        },
         "identity": {
           "type": "UserAssigned",
           "userAssignedIdentities": {
@@ -21,45 +56,8 @@
             }
           }
         },
-        "location": "centralus",
-        "properties": {
-          "creatorRoleAssignment": {
-            "roles": {
-              "4cbf0b6c-e750-441c-98a7-10da8387e4d6": {
-                "description": "Allows Developer access to project virtual machine resources.",
-                "roleName": "Developer"
-              }
-            }
-          },
-          "deploymentTargetId": "/subscriptions/00000000-0000-0000-0000-000000000000",
-          "environmentCount": 1,
-          "provisioningState": "Succeeded",
-          "status": "Enabled",
-          "userRoleAssignments": {
-            "e45e3m7c-176e-416a-b466-0c5ec8298f8a": {
-              "roles": {
-                "4cbf0b6c-e750-441c-98a7-10da8387e4d6": {
-                  "description": "Allows Developer access to project virtual machine resources.",
-                  "roleName": "Developer"
-                }
-              }
-            }
-          }
-        },
-        "systemData": {
-          "createdAt": "2020-11-18T18:24:24.818Z",
-          "createdBy": "User1@contoso.com",
-          "createdByType": "User",
-          "lastModifiedAt": "2020-11-18T18:24:24.818Z",
-          "lastModifiedBy": "User1@contoso.com",
-          "lastModifiedByType": "User"
-        },
-        "tags": {
-          "CostCenter": "RnD"
-        }
+        "location": "centralus"
       }
     }
-  },
-  "operationId": "ProjectEnvironmentTypes_Get",
-  "title": "ProjectEnvironmentTypes_Get"
+  }
 }

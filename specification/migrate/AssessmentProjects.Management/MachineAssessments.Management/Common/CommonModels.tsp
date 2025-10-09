@@ -1,3 +1,5 @@
+using OpenAPI;
+
 namespace Microsoft.Migrate;
 
 @doc("Details on the total up-time for the VM.")
@@ -76,6 +78,7 @@ model Error {
 
   @doc("Gets the error message parameters.")
   @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #[])
   messageParameters?: NameValuePair<string, string>[];
 
   @doc("Gets the time stamp when the error was updated.")

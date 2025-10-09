@@ -3863,9 +3863,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "HTTP 200 (Ok) if the operation completed successfully."
-          },
           "202": {
             "description": "HTTP 202 (Accepted) if the operation was successfully started and will complete asynchronously."
           },
@@ -5222,10 +5219,7 @@
           "$ref": "#/definitions/RaiMonitorConfig"
         },
         "networkInjections": {
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/NetworkInjection"
-          }
+          "$ref": "#/definitions/NetworkInjections"
         },
         "allowProjectManagement": {
           "type": "boolean",
@@ -8819,7 +8813,7 @@
       },
       "additionalProperties": false
     },
-    "NetworkInjection": {
+    "NetworkInjections": {
       "description": "Specifies in AI Foundry where virtual network injection occurs to secure scenarios like Agents entirely within the user's private network, eliminating public internet exposure while maintaining control over network configurations and resources.",
       "type": "object",
       "properties": {

@@ -98,9 +98,4 @@ namespace Informatica.DataManagement {
   );
 
   @@usage(ServerlessRuntimeNetworkProfileUpdate, Usage.output);
-
-  @@alternateType(Azure.ResourceManager.CommonTypes.Resource.id,
-    Azure.Core.armResourceIdentifier,
-    "csharp"
-  );
 }

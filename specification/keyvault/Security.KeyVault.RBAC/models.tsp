@@ -261,8 +261,8 @@ model RoleDefinition {
   /**
    * Role definition properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is necessary for Key Vault"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  #suppress "deprecated" "Property flattening is necessary for Key Vault"
+  @flattenProperty
   properties?: RoleDefinitionProperties;
 }
 
@@ -335,11 +335,12 @@ model RoleDefinitionCreateParameters {
 /**
  * Role definition list operation result.
  */
+@pagedResult
 model RoleDefinitionListResult {
   /**
    * Role definition list.
    */
-  @pageItems
+  @items
   value?: RoleDefinition[];
 
   /**
@@ -425,11 +426,12 @@ model RoleAssignmentProperties {
 /**
  * Role assignment list operation result.
  */
+@pagedResult
 model RoleAssignmentListResult {
   /**
    * Role assignment list.
    */
-  @pageItems
+  @items
   value?: RoleAssignment[];
 
   /**

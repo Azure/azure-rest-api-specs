@@ -1,64 +1,62 @@
 {
   "parameters": {
-    "$filter": "type eq 'BackupProtectedItemCountSummary'",
-    "api-version": "2025-02-01",
-    "resourceGroupName": "testRG",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "testVault"
+    "resourceGroupName": "testRG",
+    "vaultName": "testVault",
+    "api-version": "2025-02-01",
+    "$filter": "type eq 'BackupProtectedItemCountSummary'"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
-            "name": {
-              "localizedValue": "Azure Virtual Machine",
-              "value": "AzureIaasVM"
-            },
+            "unit": "Count",
             "currentValue": 7,
             "limit": -1,
-            "unit": "Count"
+            "name": {
+              "value": "AzureIaasVM",
+              "localizedValue": "Azure Virtual Machine"
+            }
           },
           {
-            "name": {
-              "localizedValue": "Azure Backup Agent",
-              "value": "MAB"
-            },
+            "unit": "Count",
             "currentValue": 3,
             "limit": -1,
-            "unit": "Count"
+            "name": {
+              "value": "MAB",
+              "localizedValue": "Azure Backup Agent"
+            }
           },
           {
-            "name": {
-              "localizedValue": "Azure Backup Server",
-              "value": "AzureBackupServer"
-            },
+            "unit": "Count",
             "currentValue": 1,
             "limit": -1,
-            "unit": "Count"
+            "name": {
+              "value": "AzureBackupServer",
+              "localizedValue": "Azure Backup Server"
+            }
           },
           {
-            "name": {
-              "localizedValue": "Azure Storage (Azure Files)",
-              "value": "AzureStorage"
-            },
+            "unit": "Count",
             "currentValue": 2,
             "limit": -1,
-            "unit": "Count"
+            "name": {
+              "value": "AzureStorage",
+              "localizedValue": "Azure Storage (Azure Files)"
+            }
           },
           {
-            "name": {
-              "localizedValue": "SQL in Azure VM",
-              "value": "AzureWorkload"
-            },
+            "unit": "Count",
             "currentValue": 2,
             "limit": -1,
-            "unit": "Count"
+            "name": {
+              "value": "AzureWorkload",
+              "localizedValue": "SQL in Azure VM"
+            }
           }
         ]
       }
     }
-  },
-  "operationId": "BackupUsageSummaries_List",
-  "title": "Get Protected Items Usages Summary"
+  }
 }

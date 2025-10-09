@@ -20,7 +20,6 @@ namespace Azure.ResourceManager.Legacy {
     @doc("List the operations for the provider")
     @segment("operations")
     @get
-    @list
     list(
       ...ApiVersionParameter,
 
@@ -347,7 +346,6 @@ namespace Azure.ResourceManager.Legacy {
     #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
     @get
     @autoRoute
-    @list
     @listsResource(Resource)
     @segmentOf(Resource)
     @Private.armRenameListByOperation(

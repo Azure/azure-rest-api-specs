@@ -198,6 +198,6 @@ model PaasDistribution {
 
   @doc("Distribution of webapps for each target type.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   webAppDistribution?: NameValuePair<string, int32>[];
 }

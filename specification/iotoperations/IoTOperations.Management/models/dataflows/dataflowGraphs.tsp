@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -48,8 +49,6 @@ model DataflowGraphProperties {
   /** The provisioning state of the dataflow graph. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  ...ResourceHealth;
 }
 
 /** DataflowGraph node properties. */
@@ -154,19 +153,12 @@ model DataflowGraphDestinationNodeSettings {
   /** Data destination at the endpoint. */
   dataDestination: string;
 
-  /** Headers for the output data. */
-  @identifiers(#["actionType"])
-  @added(Versions.`2025-10-01`)
-  headers?: DataflowGraphDestinationHeaderAction[];
-
   /** Output schema settings. */
-  @removed(Versions.`2025-10-01`)
   outputSchemaSettings?: DataflowGraphDestinationSchemaSettings;
 }
 
 /** DataflowGraph destination node output schema settings. */
 @added(Versions.`2025-07-01-preview`)
-@removed(Versions.`2025-10-01`)
 model DataflowGraphDestinationSchemaSettings {
   /** The format of the output data. */
   serializationFormat: DataflowGraphDestinationSchemaSerializationFormat;
@@ -177,7 +169,6 @@ model DataflowGraphDestinationSchemaSettings {
 
 /** Serialization format for dataflow graph. */
 @added(Versions.`2025-07-01-preview`)
-@removed(Versions.`2025-10-01`)
 union DataflowGraphDestinationSchemaSerializationFormat {
   string,
 
@@ -186,65 +177,6 @@ union DataflowGraphDestinationSchemaSerializationFormat {
 
   /** Delta serialization format. */
   Delta,
-}
-
-/** DataflowGraph Destination Header Action. */
-@added(Versions.`2025-10-01`)
-@discriminator("actionType")
-model DataflowGraphDestinationHeaderAction {
-  /** The type of header operation to perform. */
-  actionType: DataflowGraphDestinationHeaderActionType;
-}
-
-/** DataflowGraph Destination Header Action Types. */
-@added(Versions.`2025-10-01`)
-union DataflowGraphDestinationHeaderActionType {
-  string,
-
-  /** Add if not present type. */
-  AddIfNotPresent,
-
-  /** Remove type. */
-  Remove,
-
-  /** Add or Replace type. */
-  AddOrReplace,
-}
-
-/** DataflowGraph Destination Add if not present HeaderAction properties. */
-@added(Versions.`2025-10-01`)
-model DataflowGraphDestinationAddIfNotPresentHeaderAction
-  extends DataflowGraphDestinationHeaderAction {
-  actionType: AddIfNotPresent;
-
-  /** The name of the header to add. */
-  key: string;
-
-  /** The value of the header to add. */
-  value: string;
-}
-
-/** DataflowGraph Destination Remove HeaderAction properties. */
-@added(Versions.`2025-10-01`)
-model DataflowGraphDestinationRemoveHeaderAction
-  extends DataflowGraphDestinationHeaderAction {
-  actionType: Remove;
-
-  /** The name of the header to remove. */
-  key: string;
-}
-
-/** DataflowGraph Destination Add or Replace HeaderAction properties. */
-@added(Versions.`2025-10-01`)
-model DataflowGraphDestinationAddOrReplaceHeaderAction
-  extends DataflowGraphDestinationHeaderAction {
-  actionType: AddOrReplace;
-
-  /** The name of the header to add or replace. */
-  key: string;
-
-  /** The value of the header to add or replace. */
-  value: string;
 }
 
 /** DataflowGraph DataflowGraphNode Connection. */

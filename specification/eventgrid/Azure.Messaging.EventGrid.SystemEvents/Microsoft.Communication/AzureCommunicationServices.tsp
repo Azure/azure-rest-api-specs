@@ -183,7 +183,6 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   editTime: utcDateTime;
 
   /** The thread metadata */
-  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
   /** The updated thread properties */
@@ -645,19 +644,15 @@ model AcsRouterWorkerOfferAcceptedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Accepted Worker Labels */
-  @visibility(Lifecycle.Read)
   workerLabels: Record<string>;
 
   /** Router Worker Offer Accepted Worker Tags */
-  @visibility(Lifecycle.Read)
   workerTags: Record<string>;
 
   /** Router Worker Offer Accepted Job Labels */
-  @visibility(Lifecycle.Read)
   jobLabels: Record<string>;
 
   /** Router Worker Offer Accepted Job Tags */
-  @visibility(Lifecycle.Read)
   jobTags: Record<string>;
 }
 
@@ -697,7 +692,6 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   jobPriority?: int32;
 
   /** Router Worker Offer Issued Worker Labels */
-  @visibility(Lifecycle.Read)
   workerLabels: Record<string>;
 
   /** Router Worker Offer Issued Time in UTC */
@@ -711,15 +705,12 @@ model AcsRouterWorkerOfferIssuedEventData extends AcsRouterWorkerEventData {
   expiresOn: utcDateTime;
 
   /** Router Worker Offer Issued Worker Tags */
-  @visibility(Lifecycle.Read)
   workerTags: Record<string>;
 
   /** Router Worker Offer Issued Job Labels */
-  @visibility(Lifecycle.Read)
   jobLabels: Record<string>;
 
   /** Router Worker Offer Issued Job Tags */
-  @visibility(Lifecycle.Read)
   jobTags: Record<string>;
 }
 
@@ -752,11 +743,9 @@ model AcsRouterWorkerRegisteredEventData {
   totalCapacity?: int32;
 
   /** Router Worker Registered Labels */
-  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Worker Registered Tags */
-  @visibility(Lifecycle.Read)
   tags: Record<string>;
 }
 
@@ -768,11 +757,9 @@ model AcsRouterJobEventData extends AcsRouterEventData {
   queueId?: string;
 
   /** Router Job events Labels */
-  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Jobs events Tags */
-  @visibility(Lifecycle.Read)
   tags: Record<string>;
 }
 
@@ -817,7 +804,6 @@ model AcsRouterQueueDetails {
   name?: string;
 
   /** Router Queue Labels */
-  @visibility(Lifecycle.Read)
   labels: Record<string>;
 }
 
@@ -870,7 +856,6 @@ alias AcsChatMessageBaseEventData = {
   messageBody: string;
 
   /** The chat message metadata */
-  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 };
 
@@ -883,7 +868,6 @@ alias AcsChatThreadBaseEventData = {
   properties: Record<unknown>;
 
   /** The thread metadata */
-  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 
   /** The list of properties of participants who are part of the thread */
@@ -913,7 +897,6 @@ alias AcsChatThreadPropertiesBaseEventData = {
   properties: Record<unknown>;
 
   /** The thread metadata */
-  @visibility(Lifecycle.Read)
   metadata: Record<string>;
 };
 
@@ -1221,7 +1204,6 @@ model AcsChatThreadParticipantProperties {
   participantCommunicationIdentifier: CommunicationIdentifierModel;
 
   /** The metadata of the user */
-  @visibility(Lifecycle.Read)
   metadata?: Record<string>;
 }
 
@@ -1283,11 +1265,9 @@ model AcsRecordingChunkInfoProperties {
 /** Custom Context of Incoming Call */
 model AcsIncomingCallCustomContext {
   /** Sip Headers for incoming call */
-  @visibility(Lifecycle.Read)
   sipHeaders: Record<string>;
 
   /** Voip Headers for incoming call */
-  @visibility(Lifecycle.Read)
   voipHeaders: Record<string>;
 }
 
@@ -1396,11 +1376,9 @@ model AcsRouterWorkerUpdatedEventData {
   totalCapacity?: int32;
 
   /** Router Worker Updated Labels */
-  @visibility(Lifecycle.Read)
   labels: Record<string>;
 
   /** Router Worker Updated Tags */
-  @visibility(Lifecycle.Read)
   tags: Record<string>;
 
   /** Router Worker Properties Updated */

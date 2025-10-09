@@ -1,3 +1,4 @@
+output-dir: "{project-root}/"
 parameters:
   "service-dir":
     default: "sdk/nginx"
@@ -5,43 +6,38 @@ emit:
   - "@azure-tools/typespec-autorest"
 options:
   "@azure-tools/typespec-autorest":
-    omit-unreachable-types: true
+    use-read-only-status-schema: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/swagger.json"
-    emit-lro-options: "all"
-    examples-dir: "{project-root}/examples"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Nginx"
+    package-dir: "Azure.ResourceManager.Nginx.NginxPlus"
     clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.Nginx"
+    model-namespace: false
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-nginx"
-    namespace: "azure.mgmt.nginx"
+    flavor: azure
+    package-dir: "azure-mgmt-nginxplus"
+    namespace: "azure.mgmt.nginxplus"
     generate-test: true
     generate-sample: true
-    flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-nginx"
-    namespace: "com.azure.resourcemanager.nginx"
-    service-name: "Nginx" # human-readable service name, whitespace allowed
     flavor: azure
+    package-dir: "azure-resourcemanager-nginx"
+    namespace: "com.azure.resourcemanager.nginx"
+    service-name: "Nginx"
   "@azure-tools/typespec-ts":
-    service-dir: sdk/nginx
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-nginx"
-    is-modular-library: true
-    flavor: "azure"
     experimental-extensible-enums: true
+    package-dir: "arm-nginx"
+    flavor: azure
     package-details:
       name: "@azure/arm-nginx"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/nginx"
-    emitter-output-dir: "{output-dir}/{service-dir}/armnginx"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armnginx"
-    fix-const-stuttering: false
-    flavor: "azure"
+    package-dir: "armnginx"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true
     head-as-boolean: true
@@ -49,3 +45,5 @@ options:
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
+  disable:
+    "@azure-tools/typespec-azure-core/casing-style": "Allow uppercase namespaces for our RP"

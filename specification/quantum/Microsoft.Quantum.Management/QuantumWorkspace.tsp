@@ -7,7 +7,7 @@ import "./models.tsp";
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
-using TypeSpec.Versioning;
+using TypeSpec.OpenAPI;
 
 namespace Microsoft.Quantum;
 /**
@@ -79,15 +79,6 @@ interface Workspaces {
     ApiKeys,
     NoContentResponse
   >;
-}
-
-@armResourceOperations
-@added(Versions.v2025_08_11_preview)
-interface SuiteOffers {
-  /**
-   * Returns the SuiteOffer resource associated with the given name.
-   */
-  listBySubscription is ArmListBySubscription<QuantumSuiteOffer>;
 }
 
 @@doc(QuantumWorkspace.name, "The name of the quantum workspace resource.");

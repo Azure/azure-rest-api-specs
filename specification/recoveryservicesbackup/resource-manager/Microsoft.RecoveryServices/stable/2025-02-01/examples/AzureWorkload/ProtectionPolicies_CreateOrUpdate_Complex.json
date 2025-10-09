@@ -1,22 +1,48 @@
 {
   "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "NetSDKTestRsVault",
+    "policyName": "testPolicy1",
     "api-version": "2025-02-01",
     "parameters": {
       "properties": {
         "backupManagementType": "AzureWorkload",
+        "workLoadType": "SQLDataBase",
         "settings": {
-          "issqlcompression": false,
-          "timeZone": "Pacific Standard Time"
+          "timeZone": "Pacific Standard Time",
+          "issqlcompression": false
         },
         "subProtectionPolicy": [
           {
             "policyType": "Full",
+            "schedulePolicy": {
+              "schedulePolicyType": "SimpleSchedulePolicy",
+              "scheduleRunFrequency": "Weekly",
+              "scheduleRunTimes": [
+                "2018-01-24T10:00:00Z"
+              ],
+              "scheduleRunDays": [
+                "Sunday",
+                "Tuesday"
+              ]
+            },
             "retentionPolicy": {
-              "monthlySchedule": {
+              "retentionPolicyType": "LongTermRetentionPolicy",
+              "weeklySchedule": {
+                "daysOfTheWeek": [
+                  "Sunday",
+                  "Tuesday"
+                ],
+                "retentionTimes": [
+                  "2018-01-24T10:00:00Z"
+                ],
                 "retentionDuration": {
-                  "count": 1,
-                  "durationType": "Months"
-                },
+                  "count": 2,
+                  "durationType": "Weeks"
+                }
+              },
+              "monthlySchedule": {
                 "retentionScheduleFormatType": "Weekly",
                 "retentionScheduleWeekly": {
                   "daysOfTheWeek": [
@@ -28,33 +54,19 @@
                 },
                 "retentionTimes": [
                   "2018-01-24T10:00:00Z"
-                ]
-              },
-              "retentionPolicyType": "LongTermRetentionPolicy",
-              "weeklySchedule": {
-                "daysOfTheWeek": [
-                  "Sunday",
-                  "Tuesday"
                 ],
                 "retentionDuration": {
-                  "count": 2,
-                  "durationType": "Weeks"
-                },
-                "retentionTimes": [
-                  "2018-01-24T10:00:00Z"
-                ]
+                  "count": 1,
+                  "durationType": "Months"
+                }
               },
               "yearlySchedule": {
+                "retentionScheduleFormatType": "Weekly",
                 "monthsOfYear": [
                   "January",
                   "June",
                   "December"
                 ],
-                "retentionDuration": {
-                  "count": 1,
-                  "durationType": "Years"
-                },
-                "retentionScheduleFormatType": "Weekly",
                 "retentionScheduleWeekly": {
                   "daysOfTheWeek": [
                     "Sunday"
@@ -65,86 +77,96 @@
                 },
                 "retentionTimes": [
                   "2018-01-24T10:00:00Z"
-                ]
+                ],
+                "retentionDuration": {
+                  "count": 1,
+                  "durationType": "Years"
+                }
               }
-            },
-            "schedulePolicy": {
-              "schedulePolicyType": "SimpleSchedulePolicy",
-              "scheduleRunDays": [
-                "Sunday",
-                "Tuesday"
-              ],
-              "scheduleRunFrequency": "Weekly",
-              "scheduleRunTimes": [
-                "2018-01-24T10:00:00Z"
-              ]
             }
           },
           {
             "policyType": "Differential",
-            "retentionPolicy": {
-              "retentionDuration": {
-                "count": 8,
-                "durationType": "Days"
-              },
-              "retentionPolicyType": "SimpleRetentionPolicy"
-            },
             "schedulePolicy": {
               "schedulePolicyType": "SimpleSchedulePolicy",
-              "scheduleRunDays": [
-                "Friday"
-              ],
               "scheduleRunFrequency": "Weekly",
               "scheduleRunTimes": [
                 "2018-01-24T10:00:00Z"
+              ],
+              "scheduleRunDays": [
+                "Friday"
               ]
+            },
+            "retentionPolicy": {
+              "retentionPolicyType": "SimpleRetentionPolicy",
+              "retentionDuration": {
+                "count": 8,
+                "durationType": "Days"
+              }
             }
           },
           {
             "policyType": "Log",
+            "schedulePolicy": {
+              "schedulePolicyType": "LogSchedulePolicy",
+              "scheduleFrequencyInMins": 60
+            },
             "retentionPolicy": {
+              "retentionPolicyType": "SimpleRetentionPolicy",
               "retentionDuration": {
                 "count": 7,
                 "durationType": "Days"
-              },
-              "retentionPolicyType": "SimpleRetentionPolicy"
-            },
-            "schedulePolicy": {
-              "scheduleFrequencyInMins": 60,
-              "schedulePolicyType": "LogSchedulePolicy"
+              }
             }
           }
-        ],
-        "workLoadType": "SQLDataBase"
+        ]
       }
-    },
-    "policyName": "testPolicy1",
-    "resourceGroupName": "SwaggerTestRg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "NetSDKTestRsVault"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1",
         "name": "testPolicy1",
         "type": "Microsoft.RecoveryServices/vaults/backupPolicies",
-        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1",
         "properties": {
           "backupManagementType": "AzureWorkload",
-          "protectedItemsCount": 0,
+          "workLoadType": "SQLDataBase",
           "settings": {
-            "issqlcompression": false,
-            "timeZone": "Pacific Standard Time"
+            "timeZone": "Pacific Standard Time",
+            "issqlcompression": false
           },
           "subProtectionPolicy": [
             {
               "policyType": "Full",
+              "schedulePolicy": {
+                "schedulePolicyType": "SimpleSchedulePolicy",
+                "scheduleRunFrequency": "Weekly",
+                "scheduleRunDays": [
+                  "Sunday",
+                  "Tuesday"
+                ],
+                "scheduleRunTimes": [
+                  "2018-01-24T10:00:00Z"
+                ],
+                "scheduleWeeklyFrequency": 0
+              },
               "retentionPolicy": {
-                "monthlySchedule": {
+                "retentionPolicyType": "LongTermRetentionPolicy",
+                "weeklySchedule": {
+                  "daysOfTheWeek": [
+                    "Sunday",
+                    "Tuesday"
+                  ],
+                  "retentionTimes": [
+                    "2018-01-24T10:00:00Z"
+                  ],
                   "retentionDuration": {
-                    "count": 1,
-                    "durationType": "Months"
-                  },
+                    "count": 2,
+                    "durationType": "Weeks"
+                  }
+                },
+                "monthlySchedule": {
                   "retentionScheduleFormatType": "Weekly",
                   "retentionScheduleWeekly": {
                     "daysOfTheWeek": [
@@ -156,33 +178,19 @@
                   },
                   "retentionTimes": [
                     "2018-01-24T10:00:00Z"
-                  ]
-                },
-                "retentionPolicyType": "LongTermRetentionPolicy",
-                "weeklySchedule": {
-                  "daysOfTheWeek": [
-                    "Sunday",
-                    "Tuesday"
                   ],
                   "retentionDuration": {
-                    "count": 2,
-                    "durationType": "Weeks"
-                  },
-                  "retentionTimes": [
-                    "2018-01-24T10:00:00Z"
-                  ]
+                    "count": 1,
+                    "durationType": "Months"
+                  }
                 },
                 "yearlySchedule": {
+                  "retentionScheduleFormatType": "Weekly",
                   "monthsOfYear": [
                     "January",
                     "June",
                     "December"
                   ],
-                  "retentionDuration": {
-                    "count": 1,
-                    "durationType": "Years"
-                  },
-                  "retentionScheduleFormatType": "Weekly",
                   "retentionScheduleWeekly": {
                     "daysOfTheWeek": [
                       "Sunday"
@@ -193,70 +201,60 @@
                   },
                   "retentionTimes": [
                     "2018-01-24T10:00:00Z"
-                  ]
+                  ],
+                  "retentionDuration": {
+                    "count": 1,
+                    "durationType": "Years"
+                  }
                 }
-              },
-              "schedulePolicy": {
-                "schedulePolicyType": "SimpleSchedulePolicy",
-                "scheduleRunDays": [
-                  "Sunday",
-                  "Tuesday"
-                ],
-                "scheduleRunFrequency": "Weekly",
-                "scheduleRunTimes": [
-                  "2018-01-24T10:00:00Z"
-                ],
-                "scheduleWeeklyFrequency": 0
               }
             },
             {
               "policyType": "Differential",
-              "retentionPolicy": {
-                "retentionDuration": {
-                  "count": 8,
-                  "durationType": "Days"
-                },
-                "retentionPolicyType": "SimpleRetentionPolicy"
-              },
               "schedulePolicy": {
                 "schedulePolicyType": "SimpleSchedulePolicy",
+                "scheduleRunFrequency": "Weekly",
                 "scheduleRunDays": [
                   "Friday"
                 ],
-                "scheduleRunFrequency": "Weekly",
                 "scheduleRunTimes": [
                   "2018-01-24T10:00:00Z"
                 ],
                 "scheduleWeeklyFrequency": 0
+              },
+              "retentionPolicy": {
+                "retentionPolicyType": "SimpleRetentionPolicy",
+                "retentionDuration": {
+                  "count": 8,
+                  "durationType": "Days"
+                }
               }
             },
             {
               "policyType": "Log",
+              "schedulePolicy": {
+                "schedulePolicyType": "LogSchedulePolicy",
+                "scheduleFrequencyInMins": 60
+              },
               "retentionPolicy": {
+                "retentionPolicyType": "SimpleRetentionPolicy",
                 "retentionDuration": {
                   "count": 7,
                   "durationType": "Days"
-                },
-                "retentionPolicyType": "SimpleRetentionPolicy"
-              },
-              "schedulePolicy": {
-                "scheduleFrequencyInMins": 60,
-                "schedulePolicyType": "LogSchedulePolicy"
+                }
               }
             }
           ],
-          "workLoadType": "SQLDataBase"
+          "protectedItemsCount": 0
         }
       }
     },
     "202": {
       "headers": {
-        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operations/00000000-0000-0000-0000-000000000000?api-version=2016-06-01",
         "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-06-01",
+        "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/NetSDKTestRsVault/backupPolicies/testPolicy1/operations/00000000-0000-0000-0000-000000000000?api-version=2016-06-01",
         "Retry-After": 60
       }
     }
-  },
-  "operationId": "ProtectionPolicies_CreateOrUpdate",
-  "title": "Create or Update Full Azure Workload Protection Policy"
+  }
 }

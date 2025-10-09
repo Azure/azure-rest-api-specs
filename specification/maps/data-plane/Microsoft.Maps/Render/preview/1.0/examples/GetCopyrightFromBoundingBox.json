@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "api-version": "1.0",
+    "format": "json",
+    "mincoordinates": "52.41064,4.84228",
+    "maxcoordinates": "52.41072,4.84239",
+    "text": "yes",
+    "subscription-key": "[subscription-key]"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "formatVersion": "0.0.1",
+        "generalCopyrights": [
+          "© 1992 – 2016 TomTom. All rights reserved. This material is proprietary and the subject of copyright protection, database right protection and other intellectual property rights owned by TomTom or its suppliers. The use of this material is subject to the terms of a license agreement. Any unauthorized copying or disclosure of this material will lead to criminal and civil liabilities.",
+          "Data Source © 2016 TomTom",
+          "based on"
+        ],
+        "regions": [
+          {
+            "copyrights": [
+              "Topografische onderground Copyright © dienst voor het kadaster en de openbare registers, Apeldoorn 2016."
+            ],
+            "country": {
+              "ISO3": "NLD",
+              "label": "Netherlands"
+            }
+          }
+        ]
+      }
+    },
+    "400": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "400 BadRequest",
+          "message": "Bad request: one or more parameters were incorrectly specified or are mutually exclusive."
+        }
+      }
+    },
+    "401": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "401 Unauthorized",
+          "message": "Access denied due to invalid subscription key. Make sure to provide a valid key for an active subscription."
+        }
+      }
+    },
+    "403": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "403 Forbidden",
+          "message": "Permission, capacity, or authentication issues."
+        }
+      }
+    },
+    "404": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "404 NotFound",
+          "message": "Not Found: the requested resource could not be found, but it may be available again in the future."
+        }
+      }
+    },
+    "500": {
+      "headers": {},
+      "body": {
+        "error": {
+          "code": "500 InternalServerError",
+          "message": "An error occurred while processing the request. Please try again later."
+        }
+      }
+    }
+  }
+}

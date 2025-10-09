@@ -132,7 +132,7 @@ model StorageTaskPreviewActionProperties {
   /**
    * Properties of some sample blobs in the container to test for matches with the preview action.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   blobs: StorageTaskPreviewBlobProperties[];
 
   /**
@@ -153,7 +153,7 @@ model StorageTaskPreviewContainerProperties {
   /**
    * metadata key value pairs to be tested for a match against the provided condition.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metadata?: StorageTaskPreviewKeyValueProperties[];
 }
 
@@ -184,19 +184,19 @@ model StorageTaskPreviewBlobProperties {
   /**
    * properties key value pairs to be tested for a match against the provided condition.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   properties?: StorageTaskPreviewKeyValueProperties[];
 
   /**
    * metadata key value pairs to be tested for a match against the provided condition.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   metadata?: StorageTaskPreviewKeyValueProperties[];
 
   /**
    * tags key value pairs to be tested for a match against the provided condition.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   tags?: StorageTaskPreviewKeyValueProperties[];
 
   /**
@@ -299,7 +299,7 @@ model IfCondition {
   /**
    * List of operations to execute when the condition predicate satisfies.
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   operations: StorageTaskOperation[];
 }
 
@@ -336,7 +336,7 @@ model ElseCondition {
   /**
    * List of operations to execute in the else block
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   operations: StorageTaskOperation[];
 }
 
@@ -575,16 +575,19 @@ model StorageTasksListResult is Azure.Core.Page<StorageTask>;
 @@doc(StorageTaskReportInstance.properties,
   "Storage task execution report for a run instance."
 );
-@@identifiers(StorageTaskAssignmentsListResult.value, #[]);
+@@OpenAPI.extension(StorageTaskAssignmentsListResult.value,
+  "x-ms-identifiers",
+  #[]
+);
 @@doc(StorageTaskReportSummary.value, "Gets storage tasks run result summary.");
-@@identifiers(StorageTaskReportSummary.value, #[]);
+@@OpenAPI.extension(StorageTaskReportSummary.value, "x-ms-identifiers", #[]);
 @@doc(StorageTasksListResult,
   "The response from the List Storage Task operation."
 );
 @@doc(StorageTasksListResult.value,
   "Gets the list of storage tasks and their properties."
 );
-@@identifiers(StorageTasksListResult.value, #[]);
+@@OpenAPI.extension(StorageTasksListResult.value, "x-ms-identifiers", #[]);
 @@visibility(Azure.Core.Page.value, Lifecycle.Read);
 @@visibility(Azure.Core.Page.nextLink, Lifecycle.Read);
 @@visibility(StorageTaskPreviewBlobProperties.matchedBlock, Lifecycle.Read);

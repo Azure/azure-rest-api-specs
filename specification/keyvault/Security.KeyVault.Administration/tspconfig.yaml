@@ -24,11 +24,10 @@ options:
     "package-pprint-name": "Key Vault Administration"
     "package-version": "4.5.0"
     "namespace": "azure.keyvault.administration._generated"
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-keyvault-administration"
+    "package-dir": "azure-keyvault-administration"
   "@azure-tools/typespec-java":
-    api-version: "7.6"
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-security-keyvault-administration"
+    package-dir: "azure-security-keyvault-administration"
     namespace: "com.azure.security.keyvault.administration"
     models-subpackage: "implementation.models"
     custom-types: "KeyVaultDataAction,KeyVaultRoleDefinitionType,KeyVaultRoleScope,KeyVaultRoleType,KeyVaultSettingType"
@@ -39,18 +38,16 @@ options:
     generate-samples: false
     include-api-view-properties: false
   "@azure-typespec/http-client-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     namespace: Azure.Security.KeyVault.Administration
     model-namespace: true
   "@azure-tools/typespec-csharp":
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    package-dir: "Azure.Security.KeyVault.Administration"
     namespace: "Azure.Security.KeyVault.Administration"
     "output-path": "./src/Generated"
     flavor: azure
     use-model-reader-writer: false
-    clear-output-folder: true
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/keyvault-admin"
+    package-dir: "keyvault-admin"
     generate-metadata: true
     src-folder: "src/generated"
     experimental-extensible-enums: true

@@ -20,13 +20,7 @@ namespace Microsoft.Edge;
 @doc("Dynamic Schema Version Resource")
 @parentResource(DynamicSchema)
 @resource("versions")
-model DynamicSchemaVersion is ProxyResource<SchemaVersionProperties> {
-  ...ResourceNameParameter<
-    DynamicSchemaVersion,
-    NamePattern = "^(v2-)?[0-9]+\\.[0-9]+\\.[0-9]+$"
-  >;
-  ...EntityTagProperty;
-}
+model DynamicSchemaVersion is SchemaVersion;
 
 @armResourceOperations
 interface DynamicSchemaVersions {

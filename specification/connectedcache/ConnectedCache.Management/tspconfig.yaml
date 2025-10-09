@@ -11,31 +11,36 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/ConnectedCache.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
+    package-dir: "Azure.ResourceManager.ConnectedCache"
     clear-output-folder: true
     model-namespace: false
-    namespace: "Azure.ResourceManager.ConnectedCache"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    namespace: "{package-dir}"
   "@azure-tools/typespec-python":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-connectedcache"
+    package-dir: "azure-mgmt-connectedcache"
     namespace: "azure.mgmt.connectedcache"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-connectedcache"
+    package-dir: "azure-resourcemanager-connectedcache"
     namespace: "com.azure.resourcemanager.connectedcache"
     service-name: "Connected Cache"
     flavor: azure
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-connectedcache"
-    flavor: azure
-    experimental-extensible-enums: true
-    package-details:
+    package-dir: "arm-connectedcache"
+    azureSdkForJs: true
+    isModularLibrary: true
+    generateMetadata: true
+    flavor: "azure"
+    hierarchyClient: false
+    experimentalExtensibleEnums: true
+    enableOperationGroup: true
+    packageDetails:
       name: "@azure/arm-connectedcache"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/connectedcache"
-    emitter-output-dir: "{output-dir}/{service-dir}/armconnectedcache"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armconnectedcache"
+    package-dir: "armconnectedcache"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true

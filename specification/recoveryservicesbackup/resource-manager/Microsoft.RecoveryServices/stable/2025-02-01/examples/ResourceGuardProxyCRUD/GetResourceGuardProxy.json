@@ -1,35 +1,33 @@
 {
   "parameters": {
-    "api-version": "2025-02-01",
+    "subscriptionId": "0b352192-dcac-4cc7-992e-a96190ccc68c",
+    "vaultName": "sampleVault",
     "resourceGroupName": "SampleResourceGroup",
     "resourceGuardProxyName": "swaggerExample",
-    "subscriptionId": "0b352192-dcac-4cc7-992e-a96190ccc68c",
-    "vaultName": "sampleVault"
+    "api-version": "2025-02-01"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/backupmanagement/resources/sampleVault/backupResourceGuardProxies/swaggerExample",
         "name": "swaggerExample",
         "type": "Microsoft.RecoveryServices/vaults/backupResourceGuardProxies",
-        "id": "/backupmanagement/resources/sampleVault/backupResourceGuardProxies/swaggerExample",
         "properties": {
-          "description": "Please take JIT access before performing any of the critical operation",
-          "lastUpdatedTime": "2021-02-11T12:20:47.8210031Z",
+          "resourceGuardResourceId": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/vaultguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew",
           "resourceGuardOperationDetails": [
             {
-              "defaultResourceRequest": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/vaultguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew/deleteResourceGuardProxyRequests/default",
-              "vaultCriticalOperation": "Microsoft.DataProtection/resourceGuards/deleteResourceGuardProxyRequests"
+              "vaultCriticalOperation": "Microsoft.DataProtection/resourceGuards/deleteResourceGuardProxyRequests",
+              "defaultResourceRequest": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/vaultguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew/deleteResourceGuardProxyRequests/default"
             },
             {
-              "defaultResourceRequest": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/resourceguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew/disableSoftDeleteRequests/default",
-              "vaultCriticalOperation": "Microsoft.DataProtection/resourceGuards/disableSoftDeleteRequests"
+              "vaultCriticalOperation": "Microsoft.DataProtection/resourceGuards/disableSoftDeleteRequests",
+              "defaultResourceRequest": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/resourceguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew/disableSoftDeleteRequests/default"
             }
           ],
-          "resourceGuardResourceId": "/subscriptions/c999d45b-944f-418c-a0d8-c3fcfd1802c8/resourceGroups/vaultguardRGNew/providers/Microsoft.DataProtection/resourceGuards/VaultGuardTestNew"
+          "lastUpdatedTime": "2021-02-11T12:20:47.8210031Z",
+          "description": "Please take JIT access before performing any of the critical operation"
         }
       }
     }
-  },
-  "operationId": "ResourceGuardProxy_Get",
-  "title": "Get ResourceGuardProxy"
+  }
 }

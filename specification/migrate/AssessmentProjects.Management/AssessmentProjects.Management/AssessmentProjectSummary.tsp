@@ -1,4 +1,4 @@
-import "./Common/ArmModels/AzureResourceProperties.tsp";
+import "../Common/ArmModels/AzureResourceProperties.tsp";
 import "@azure-tools/typespec-autorest";
 
 using Autorest;
@@ -31,7 +31,7 @@ model AssessmentProjectSummaryProperties {
     feature.
     """)
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   errorSummaryAffectedEntities?: ErrorSummary[];
 
   @doc("Gets the number of private endpoint connections.")

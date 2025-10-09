@@ -1,6 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
-import "@typespec/versioning";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -9,7 +8,6 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
-using Versioning;
 
 namespace Microsoft.Compute;
 /**
@@ -67,13 +65,6 @@ model VirtualMachineScaleSet extends Foundations.TrackedResource {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   etag?: string;
-
-  /**
-   * Placement section specifies the user-defined constraints for virtual machine scale set hardware placement. This property cannot be changed once VMSS is provisioned. Minimum api-version: 2025-04-01.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  @added(Versions.v2025_04_01)
-  placement?: Placement;
 }
 
 @armResourceOperations
@@ -288,7 +279,6 @@ interface VirtualMachineScaleSets {
   @get
   @operationId("VirtualMachineScaleSets_GetOSUpgradeHistory")
   @action("osUpgradeHistory")
-  @list
   getOSUpgradeHistory is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -412,7 +402,6 @@ interface VirtualMachineScaleSets {
    */
   @get
   @action("skus")
-  @list
   listSkus is ComputeResourceActionSync<
     VirtualMachineScaleSet,
     void,
@@ -468,17 +457,6 @@ interface VirtualMachineScaleSets {
     void,
     Response = OkResponse
   >;
-
-  /**
-   * Scales out one or more virtual machines in a VM scale set.
-   */
-  @added(Versions.v2025_04_01)
-  @action("scaleOut")
-  scaleOut is ComputeResourceActionAsync<
-    VirtualMachineScaleSet,
-    VMScaleSetScaleOutInput,
-    Response = OkResponse
-  >;
 }
 
 @@doc(VirtualMachineScaleSet.name, "The name of the VM scale set.");
@@ -529,7 +507,4 @@ interface VirtualMachineScaleSets {
 );
 @@doc(VirtualMachineScaleSets.start::parameters.body,
   "A list of virtual machine instance IDs from the VM scale set."
-);
-@@doc(VirtualMachineScaleSets.scaleOut::parameters.body,
-  "The input object for ScaleOut API."
 );

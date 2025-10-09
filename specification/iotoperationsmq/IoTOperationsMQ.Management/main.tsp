@@ -26,6 +26,7 @@ namespace Microsoft.IoTOperationsMQ;
 /** Api versions */
 enum Versions {
   /** 2023-10-04-preview preview version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-10-04-preview`,
 }
 
@@ -41,7 +42,6 @@ interface Mq {
     MqResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -64,7 +64,6 @@ interface Broker {
     BrokerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -86,7 +85,6 @@ interface BrokerListener {
     BrokerListenerResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerListenerResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -108,7 +106,6 @@ interface BrokerAuthentication {
     BrokerAuthenticationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerAuthenticationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -130,7 +127,6 @@ interface BrokerAuthorization {
     BrokerAuthorizationResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     BrokerAuthorizationResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -152,7 +148,6 @@ interface MqttBridgeConnector {
     MqttBridgeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqttBridgeConnectorResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -174,7 +169,6 @@ interface MqttBridgeTopicMap {
     MqttBridgeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     MqttBridgeTopicMapResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -196,7 +190,6 @@ interface DiagnosticService {
     DiagnosticServiceResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DiagnosticServiceResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -218,7 +211,6 @@ interface DataLakeConnector {
     DataLakeConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DataLakeConnectorResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -240,7 +232,6 @@ interface DataLakeConnectorTopicMap {
     DataLakeTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     DataLakeTopicMapResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -262,7 +253,6 @@ interface KafkaConnector {
     KafkaConnectorResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     KafkaConnectorResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -284,7 +274,6 @@ interface KafkaConnectorTopicMap {
     KafkaTopicMapResource,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     KafkaTopicMapResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

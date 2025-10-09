@@ -1,0 +1,89 @@
+{
+  "parameters": {
+    "api-version": "2023-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "deploymentName": "myDeployment",
+    "body": {
+      "tags": {
+        "Environment": "Dev"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment",
+        "name": "myDeployment",
+        "type": "nginx.nginxplus/deployments",
+        "location": "westus",
+        "tags": {
+          "Environment": "Dev"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "nginxVersion": "nginx-1.19.6",
+          "managedResourceGroup": "myManagedResourceGroup",
+          "ipAddress": "1.1.1.1",
+          "networkProfile": {
+            "frontEndIPConfiguration": {
+              "publicIPAddresses": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
+                }
+              ],
+              "privateIPAddresses": [
+                {
+                  "privateIPAddress": "1.1.1.1",
+                  "privateIPAllocationMethod": "Static",
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+                }
+              ]
+            },
+            "networkInterfaceConfiguration": {
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+            }
+          },
+          "userProfile": {
+            "preferredEmail": "example@example.email"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Nginx.NginxPlus/nginxDeployments/myDeployment",
+        "name": "myDeployment",
+        "type": "nginx.nginxplus/deployments",
+        "location": "westus",
+        "tags": {
+          "Environment": "Dev"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "nginxVersion": "nginx-1.19.6",
+          "managedResourceGroup": "myManagedResourceGroup",
+          "networkProfile": {
+            "frontEndIPConfiguration": {
+              "publicIPAddresses": [
+                {
+                  "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/publicIPAddresses/myPublicIPAddress"
+                }
+              ],
+              "privateIPAddresses": [
+                {
+                  "privateIPAddress": "1.1.1.1",
+                  "privateIPAllocationMethod": "Static",
+                  "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+                }
+              ]
+            },
+            "networkInterfaceConfiguration": {
+              "subnetId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.Network/virtualNetworks/myVnet/subnets/mySubnet"
+            }
+          }
+        }
+      }
+    }
+  }
+}

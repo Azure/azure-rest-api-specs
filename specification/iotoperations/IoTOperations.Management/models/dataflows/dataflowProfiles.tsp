@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -46,8 +47,6 @@ model DataflowProfileProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
-  ...ResourceHealth;
 }
 
 @doc("DataflowProfile Diagnostics properties")

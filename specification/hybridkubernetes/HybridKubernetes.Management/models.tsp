@@ -21,10 +21,6 @@ union ConnectedClusterKind {
   ProvisionedCluster: "ProvisionedCluster",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AWS: "AWS",
-
-  @added(Versions.v2025_12_01_preview)
-  @doc("Represents a connected cluster hosted on Google Cloud Platform (GCP)")
-  GCP: "GCP",
 }
 
 /**
@@ -522,6 +518,7 @@ model ConnectedClusterPatch {
   /**
    * Describes the connected cluster resource properties that can be updated during PATCH operation.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: ConnectedClusterPatchProperties;
 }
 
@@ -543,12 +540,6 @@ model ConnectedClusterPatchProperties {
    * Indicates whether Azure Hybrid Benefit is opted in
    */
   azureHybridBenefit?: AzureHybridBenefit;
-
-  /**
-   * Indicates whether Gateway is enabled for the connected cluster resource
-   */
-  @added(Versions.v2025_12_01_preview)
-  gateway?: Gateway;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -578,7 +569,7 @@ model CredentialResults {
    * Base64-encoded Kubernetes configuration file.
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   kubeconfigs?: CredentialResult[];
 }
 
@@ -648,13 +639,14 @@ model ConnectedClusterList is Azure.Core.Page<ConnectedCluster>;
 /**
  * The paginated list of connected cluster API operations.
  */
+@Azure.Core.pagedResult
 model OperationList {
   /**
    * The list of connected cluster API operations.
    */
-  @pageItems
+  @Azure.Core.items
   @visibility(Lifecycle.Read)
-  @identifiers(#["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
   value: Operation[];
 
   /**

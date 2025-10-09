@@ -91,6 +91,18 @@ union OperationState {
   string,
 }
 
+// ------------------ Common Values ---------------
+alias Params = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+
+  @path
+  @minLength(1)
+  @segment("locations")
+  @doc("The location name.")
+  locationparameter: string;
+};
+
 // ------------------ Models ---------------
 @doc("The schedule details for the user request")
 model Schedule {
@@ -439,7 +451,7 @@ model CreateResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @identifiers(#["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }
@@ -457,7 +469,7 @@ model DeleteResourceOperationResponse {
   @visibility(Lifecycle.Read, Lifecycle.Create)
   location: azureLocation;
 
-  @identifiers(#["resourceId"])
+  @extension("x-ms-identifiers", #["resourceId"])
   @doc("The results from the start request if no errors exist")
   results?: Array<ResourceOperation>;
 }

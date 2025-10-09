@@ -17,6 +17,7 @@ namespace Microsoft.Community;
 /** Api versions */
 enum Versions {
   /** 2023-11-01 api version */
+  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-11-01`,
 }
 
@@ -141,7 +142,6 @@ interface CommunityTrainings {
     CommunityTraining,
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     CommunityTraining,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
+
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -34,24 +35,4 @@ model AkriConnectorProperties {
   /** The status of the last operation. */
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  /** The allocated devices for the connector. */
-  @visibility(Lifecycle.Read)
-  @added(Versions.`2025-10-01`)
-  @identifiers(#["deviceInboundEndpointName", "deviceName"])
-  allocatedDevices?: AkriConnectorAllocatedDevice[];
-
-  ...ResourceHealth;
-}
-
-/** AkriConnector allocated device. */
-@added(Versions.`2025-10-01`)
-model AkriConnectorAllocatedDevice {
-  /** The name of the inbound endpoint for the device. */
-  @visibility(Lifecycle.Read)
-  deviceInboundEndpointName: string;
-
-  /** The name of the device. */
-  @visibility(Lifecycle.Read)
-  deviceName: string;
 }

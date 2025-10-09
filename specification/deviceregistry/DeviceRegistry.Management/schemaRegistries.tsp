@@ -184,7 +184,6 @@ interface SchemaRegistries {
   // Using 'ArmCustomPatchAsync' instead of 'ArmResourcePatchAsync' to define the correct patch payload for the resource.
   // This is a workaround to fix the patch payload that otherwise will expose the 'location' field (not present in patch),
   // since otherwise it extends the ARM TrackedResource type.
-  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     SchemaRegistry,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<
@@ -204,17 +203,7 @@ interface SchemaRegistries {
 interface Schemas {
   get is ArmResourceRead<Schema>;
   createOrReplace is ArmResourceCreateOrReplaceSync<Schema>;
-  @added(Versions.v2024_09_01_preview)
-  @removed(Versions.v2024_11_01)
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_10_01, "delete")
-  deleteSync is ArmResourceDeleteSync<Schema>;
-
-  @added(Versions.v2025_10_01)
-  @sharedRoute
-  delete is ArmResourceDeleteWithoutOkAsync<Schema>;
+  delete is ArmResourceDeleteSync<Schema>;
   listBySchemaRegistry is ArmResourceListByParent<Schema>;
 }
 
@@ -225,16 +214,6 @@ interface Schemas {
 interface SchemaVersions {
   get is ArmResourceRead<SchemaVersion>;
   createOrReplace is ArmResourceCreateOrReplaceSync<SchemaVersion>;
-  @added(Versions.v2024_09_01_preview)
-  @removed(Versions.v2024_11_01)
-  @added(Versions.v2025_07_01_preview)
-  @removed(Versions.v2025_10_01)
-  @sharedRoute
-  @renamedFrom(Versions.v2025_10_01, "delete")
-  deleteSync is ArmResourceDeleteSync<SchemaVersion>;
-
-  @added(Versions.v2025_10_01)
-  @sharedRoute
-  delete is ArmResourceDeleteWithoutOkAsync<SchemaVersion>;
+  delete is ArmResourceDeleteSync<SchemaVersion>;
   listBySchema is ArmResourceListByParent<SchemaVersion>;
 }

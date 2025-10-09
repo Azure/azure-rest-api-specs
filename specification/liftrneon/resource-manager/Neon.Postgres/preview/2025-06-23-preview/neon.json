@@ -2007,6 +2007,25 @@
         "autoscalingLimitMaxCu"
       ]
     },
+    "Azure.ResourceManager.CommonTypes.TrackedResourceUpdate": {
+      "type": "object",
+      "title": "Tracked Resource",
+      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
+    },
     "Azure.ResourceManager.ResourceProvisioningState": {
       "type": "string",
       "description": "The provisioning state of a resource type.",
@@ -2651,6 +2670,37 @@
         "companyDetails"
       ]
     },
+    "LiftrBase.Data.OrganizationPropertiesUpdate": {
+      "type": "object",
+      "description": "Properties specific to Neon Organization resource",
+      "properties": {
+        "marketplaceDetails": {
+          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
+          "description": "Marketplace details of the resource.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "userDetails": {
+          "$ref": "#/definitions/LiftrBase.UserDetails",
+          "description": "Details of the user."
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/LiftrBase.CompanyDetails",
+          "description": "Details of the company."
+        },
+        "partnerOrganizationProperties": {
+          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationPropertiesUpdate",
+          "description": "Neon Organization properties"
+        },
+        "projectProperties": {
+          "$ref": "#/definitions/ProjectPropertiesUpdate",
+          "description": "Neon Project Properties"
+        }
+      }
+    },
     "LiftrBase.Data.PartnerOrganizationProperties": {
       "type": "object",
       "description": "Properties specific to Partner's organization",
@@ -3154,51 +3204,18 @@
     },
     "OrganizationResourceUpdate": {
       "type": "object",
-      "description": "The type used for update operations of the OrganizationResource.",
+      "description": "Organization Resource by Neon",
       "properties": {
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
         "properties": {
-          "$ref": "#/definitions/OrganizationResourceUpdateProperties",
+          "$ref": "#/definitions/LiftrBase.Data.OrganizationPropertiesUpdate",
           "description": "The resource-specific properties for this resource."
         }
-      }
-    },
-    "OrganizationResourceUpdateProperties": {
-      "type": "object",
-      "description": "The updatable properties of the OrganizationResource.",
-      "properties": {
-        "marketplaceDetails": {
-          "$ref": "#/definitions/LiftrBase.MarketplaceDetailsUpdate",
-          "description": "Marketplace details of the resource.",
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
-        "userDetails": {
-          "$ref": "#/definitions/LiftrBase.UserDetails",
-          "description": "Details of the user."
-        },
-        "companyDetails": {
-          "$ref": "#/definitions/LiftrBase.CompanyDetails",
-          "description": "Details of the company."
-        },
-        "partnerOrganizationProperties": {
-          "$ref": "#/definitions/LiftrBase.Data.PartnerOrganizationPropertiesUpdate",
-          "description": "Neon Organization properties"
-        },
-        "projectProperties": {
-          "$ref": "#/definitions/ProjectPropertiesUpdate",
-          "description": "Neon Project Properties"
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Azure.ResourceManager.CommonTypes.TrackedResourceUpdate"
         }
-      }
+      ]
     },
     "PgVersion": {
       "type": "object",

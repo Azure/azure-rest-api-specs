@@ -1,6 +1,9 @@
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -73,6 +76,6 @@ model WebAppServicePlanV3Properties {
 
   @doc("Cost components of the web app service plan.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   costComponents: CostComponent[];
 }

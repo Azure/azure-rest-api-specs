@@ -1,0 +1,3981 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "SignalRManagementClient",
+    "description": "REST API for Azure SignalR Service",
+    "version": "2025-01-01-preview"
+  },
+  "paths": {
+    "/providers/Microsoft.SignalRService/operations": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Lists all of the available REST API operations of the Microsoft.SignalRService provider.",
+        "operationId": "Operations_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of operations.",
+            "schema": {
+              "$ref": "#/definitions/OperationList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Checks that the resource name is valid and is not already in use.",
+        "operationId": "SignalR_CheckNameAvailability",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "The region",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters supplied to the operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NameAvailabilityParameters"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the name availability.",
+            "schema": {
+              "$ref": "#/definitions/NameAvailability"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalR_CheckNameAvailability": {
+            "$ref": "./examples/SignalR_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List resource usage quotas by location.",
+        "operationId": "Usages_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "path",
+            "name": "location",
+            "description": "the location like \"eastus\"",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the usage quotas of a subscription in specified region.",
+            "schema": {
+              "$ref": "#/definitions/SignalRUsageList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Usages_List": {
+            "$ref": "./examples/Usages_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.SignalRService/signalR": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Handles requests to list all resources in a subscription.",
+        "operationId": "SignalR_ListBySubscription",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of resources in the subscription.",
+            "schema": {
+              "$ref": "#/definitions/SignalRResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalR_ListBySubscription": {
+            "$ref": "./examples/SignalR_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Handles requests to list all resources in a resource group.",
+        "operationId": "SignalR_ListByResourceGroup",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the list of resources in a resourceGroup.",
+            "schema": {
+              "$ref": "#/definitions/SignalRResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalR_ListByResourceGroup": {
+            "$ref": "./examples/SignalR_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the resource and its properties.",
+        "operationId": "SignalR_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding resource.",
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalR_Get": {
+            "$ref": "./examples/SignalR_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a resource.",
+        "operationId": "SignalR_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a resource.",
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new resource and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result.."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalR_CreateOrUpdate": {
+            "$ref": "./examples/SignalR_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to delete a resource.",
+        "operationId": "SignalR_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalR_Delete": {
+            "$ref": "./examples/SignalR_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to update an exiting resource.",
+        "operationId": "SignalR_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a resource.",
+            "schema": {
+              "$ref": "#/definitions/SignalRResource"
+            }
+          },
+          "202": {
+            "description": "Accepted. The response indicates the exiting resource is now updating and contains a Location header to query the operation result..",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalR_Update": {
+            "$ref": "./examples/SignalR_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all custom certificates.",
+        "operationId": "SignalRCustomCertificates_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom certificates of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificateList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_List": {
+            "$ref": "./examples/SignalRCustomCertificates_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customCertificates/{certificateName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get a custom certificate.",
+        "operationId": "SignalRCustomCertificates_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_Get": {
+            "$ref": "./examples/SignalRCustomCertificates_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a custom certificate.",
+        "operationId": "SignalRCustomCertificates_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the certificate.",
+            "schema": {
+              "$ref": "#/definitions/CustomCertificate"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_CreateOrUpdate": {
+            "$ref": "./examples/SignalRCustomCertificates_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete a custom certificate.",
+        "operationId": "SignalRCustomCertificates_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "certificateName",
+            "description": "Custom certificate name",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success."
+          },
+          "204": {
+            "description": "No Content."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomCertificates_Delete": {
+            "$ref": "./examples/SignalRCustomCertificates_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all custom domains.",
+        "operationId": "SignalRCustomDomains_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes custom domains of the resource.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomainList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_List": {
+            "$ref": "./examples/SignalRCustomDomains_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/customDomains/{name}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get a custom domain.",
+        "operationId": "SignalRCustomDomains_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describe the corresponding custom domain.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_Get": {
+            "$ref": "./examples/SignalRCustomDomains_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a custom domain.",
+        "operationId": "SignalRCustomDomains_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          }
+        ],
+        "responses": {
+          "201": {
+            "description": "Created. The response describes the custom domain and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/CustomDomain"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_CreateOrUpdate": {
+            "$ref": "./examples/SignalRCustomDomains_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete a custom domain.",
+        "operationId": "SignalRCustomDomains_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Custom domain name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the custom domain is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalRCustomDomains_Delete": {
+            "$ref": "./examples/SignalRCustomDomains_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/listKeys": {
+      "post": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the access keys of the resource.",
+        "operationId": "SignalR_ListKeys",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes access keys of the resource.",
+            "schema": {
+              "$ref": "#/definitions/SignalRKeys"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalR_ListKeys": {
+            "$ref": "./examples/SignalR_ListKeys.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List private endpoint connections",
+        "operationId": "SignalRPrivateEndpointConnections_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of private endpoint connections.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnectionList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_List": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the specified private endpoint connection",
+        "operationId": "SignalRPrivateEndpointConnections_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a private endpoint connection.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_Get": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Update the state of specified private endpoint connection",
+        "operationId": "SignalRPrivateEndpointConnections_Update",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The resource of private endpoint and its properties",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates the private endpoint connection is updated successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateEndpointConnection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_Update": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete the specified private endpoint connection",
+        "operationId": "SignalRPrivateEndpointConnections_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v4/privatelinks.json#/parameters/PrivateEndpointConnectionName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the private endpoint connection is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalRPrivateEndpointConnections_Delete": {
+            "$ref": "./examples/SignalRPrivateEndpointConnections_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/privateLinkResources": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the private link resources that need to be created for a resource.",
+        "operationId": "SignalRPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of private link resources.",
+            "schema": {
+              "$ref": "#/definitions/PrivateLinkResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRPrivateLinkResources_List": {
+            "$ref": "./examples/SignalRPrivateLinkResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/regenerateKey": {
+      "post": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Regenerate the access key for the resource. PrimaryKey and SecondaryKey cannot be regenerated at the same time.",
+        "operationId": "SignalR_RegenerateKey",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameter that describes the Regenerate Key Operation.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RegenerateKeyParameters"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/SignalRKeys"
+            }
+          },
+          "202": {
+            "description": "Accepted and an async operation is executing in background to make the new key to take effect. The response contains new access keys and a Location header to query the async operation result.",
+            "schema": {
+              "$ref": "#/definitions/SignalRKeys"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalR_RegenerateKey": {
+            "$ref": "./examples/SignalR_RegenerateKey.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all replicas belong to this resource",
+        "operationId": "SignalRReplicas_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes replicas of the resource.",
+            "schema": {
+              "$ref": "#/definitions/ReplicaList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_List": {
+            "$ref": "./examples/SignalRReplicas_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the replica and its properties.",
+        "operationId": "SignalRReplicas_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes the corresponding replica.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_Get": {
+            "$ref": "./examples/SignalRReplicas_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a replica.",
+        "operationId": "SignalRReplicas_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the create or update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Updated. The response describes a replica.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "201": {
+            "description": "Created. The response describes the new replica and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_CreateOrUpdate": {
+            "$ref": "./examples/SignalRReplicas_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to delete a replica.",
+        "operationId": "SignalRReplicas_Delete",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the replica is deleted."
+          },
+          "204": {
+            "description": "Success. The response indicates the replica is deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_Delete": {
+            "$ref": "./examples/SignalRReplicas_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to update an exiting replica.",
+        "operationId": "SignalRReplicas_Update",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "Parameters for the update operation",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a replica.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            }
+          },
+          "202": {
+            "description": "Updated. The response describes the new replica and contains a Location header to query the operation result.",
+            "schema": {
+              "$ref": "#/definitions/Replica"
+            },
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_Update": {
+            "$ref": "./examples/SignalRReplicas_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/restart": {
+      "post": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to restart a replica.",
+        "operationId": "SignalRReplicas_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the restart operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success. The response indicates the operation is successful and no content will be returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalRReplicas_Restart": {
+            "$ref": "./examples/SignalRReplicas_Restart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List shared private link resources",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of shared private link resources.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRReplicaSharedPrivateLinkResources_List": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the specified shared private link resource",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a shared private link resource.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRReplicaSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a shared private link resource",
+        "operationId": "SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate",
+        "consumes": [
+          "application/json",
+          "text/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The shared private link resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates the shared private link resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the shared private link resource is created.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/SignalRReplicaSharedPrivateLinkResources_CreateOrUpdate.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/replicas/{replicaName}/skus": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all available skus of the replica resource.",
+        "operationId": "SignalR_ListReplicaSkus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          },
+          {
+            "$ref": "#/parameters/ReplicaName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes all available skus of the replica resource.",
+            "schema": {
+              "$ref": "#/definitions/SkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalR_ListReplicaSkus": {
+            "$ref": "./examples/SignalR_ListReplicaSkus.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/restart": {
+      "post": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Operation to restart a resource.",
+        "operationId": "SignalR_Restart",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted. The response indicates the restart operation is performed in the background.",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "Success. The response indicates the operation is successful and no content will be returned."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalR_Restart": {
+            "$ref": "./examples/SignalR_Restart.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List shared private link resources",
+        "operationId": "SignalRSharedPrivateLinkResources_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a list of shared private link resources.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResourceList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_List": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/sharedPrivateLinkResources/{sharedPrivateLinkResourceName}": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Get the specified shared private link resource",
+        "operationId": "SignalRSharedPrivateLinkResources_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes a shared private link resource.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_Get": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Create or update a shared private link resource",
+        "operationId": "SignalRSharedPrivateLinkResources_CreateOrUpdate",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "in": "body",
+            "name": "parameters",
+            "description": "The shared private link resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. The response indicates the shared private link resource is updated.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "201": {
+            "description": "Created. The response indicates the shared private link resource is created.",
+            "schema": {
+              "$ref": "#/definitions/SharedPrivateLinkResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_CreateOrUpdate": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "Delete the specified shared private link resource",
+        "operationId": "SignalRSharedPrivateLinkResources_Delete",
+        "parameters": [
+          {
+            "$ref": "#/parameters/SharedPrivateLinkResourceName"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response indicates the resource is already deleted."
+          },
+          "202": {
+            "description": "Accepted. The response indicates the delete operation is performed in the background."
+          },
+          "204": {
+            "description": "Success. The response indicates the private endpoint connection is already deleted."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-examples": {
+          "SignalRSharedPrivateLinkResources_Delete": {
+            "$ref": "./examples/SignalRSharedPrivateLinkResources_Delete.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.SignalRService/signalR/{resourceName}/skus": {
+      "get": {
+        "tags": [
+          "SignalR"
+        ],
+        "description": "List all available skus of the resource.",
+        "operationId": "SignalR_ListSkus",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success. The response describes all available skus of the resource.",
+            "schema": {
+              "$ref": "#/definitions/SkuList"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SignalR_ListSkus": {
+            "$ref": "./examples/SignalR_ListSkus.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ACLAction": {
+      "description": "Azure Networking ACL Action.",
+      "enum": [
+        "Allow",
+        "Deny"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ACLAction",
+        "modelAsString": true
+      }
+    },
+    "ApplicationFirewallSettings": {
+      "description": "Application firewall settings for the resource",
+      "type": "object",
+      "properties": {
+        "clientConnectionCountRules": {
+          "description": "Rules to control the client connection count",
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientConnectionCountRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "clientTrafficControlRules": {
+          "description": "Rules to control the client traffic",
+          "maxItems": 10,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ClientTrafficControlRule"
+          },
+          "x-ms-identifiers": []
+        },
+        "maxClientConnectionLifetimeInSeconds": {
+          "format": "int64",
+          "description": "Config to control the client connection lifetime in seconds, can be set to 0 to disable the config",
+          "maximum": 604800,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "ClientConnectionCountRule": {
+      "description": "A base class for client connection count rules",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "ThrottleByJwtSignatureRule",
+            "ThrottleByUserIdRule",
+            "ThrottleByJwtCustomClaimRule"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientConnectionCountRuleDiscriminator",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
+    },
+    "ClientTrafficControlRule": {
+      "description": "A base class for client traffic control rules",
+      "required": [
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "enum": [
+            "TrafficThrottleByJwtSignatureRule",
+            "TrafficThrottleByUserIdRule",
+            "TrafficThrottleByJwtCustomClaimRule"
+          ],
+          "type": "string",
+          "x-ms-enum": {
+            "name": "ClientTrafficControlRuleDiscriminator",
+            "modelAsString": true
+          }
+        }
+      },
+      "discriminator": "type"
+    },
+    "CustomCertificate": {
+      "description": "A custom certificate.",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomCertificateProperties"
+        }
+      }
+    },
+    "CustomCertificateList": {
+      "description": "Custom certificates list.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of custom certificates of this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomCertificate"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomCertificateProperties": {
+      "description": "Custom certificate properties.",
+      "required": [
+        "keyVaultBaseUri",
+        "keyVaultSecretName"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "keyVaultBaseUri": {
+          "description": "Base uri of the KeyVault that stores certificate.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "keyVaultSecretName": {
+          "description": "Certificate secret name.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "keyVaultSecretVersion": {
+          "description": "Certificate secret version.",
+          "type": "string",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        }
+      }
+    },
+    "CustomDomain": {
+      "description": "A custom domain",
+      "required": [
+        "properties"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/CustomDomainProperties"
+        }
+      }
+    },
+    "CustomDomainList": {
+      "description": "Custom domains list",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of custom domains that bind to this resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/CustomDomain"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "CustomDomainProperties": {
+      "description": "Properties of a custom domain.",
+      "required": [
+        "customCertificate",
+        "domainName"
+      ],
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "domainName": {
+          "description": "The custom domain name.",
+          "type": "string"
+        },
+        "customCertificate": {
+          "$ref": "#/definitions/ResourceReference"
+        }
+      }
+    },
+    "Dimension": {
+      "description": "Specifications of the Dimension of metrics.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The public facing name of the dimension.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the dimension.",
+          "type": "string"
+        },
+        "internalName": {
+          "description": "Name of the dimension as it appears in MDM.",
+          "type": "string"
+        },
+        "toBeExportedForShoebox": {
+          "description": "A Boolean flag indicating whether this dimension should be included for the shoebox export scenario.",
+          "type": "boolean"
+        }
+      }
+    },
+    "FeatureFlags": {
+      "description": "FeatureFlags is the supported features of Azure SignalR service.\r\n- ServiceMode: Flag for backend server for SignalR service. Values allowed: \"Default\": have your own backend server; \"Serverless\": your application doesn't have a backend server; \"Classic\": for backward compatibility. Support both Default and Serverless mode but not recommended; \"PredefinedOnly\": for future use.\r\n- EnableConnectivityLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableMessagingLogs: \"true\"/\"false\", to enable/disable the connectivity log category respectively.\r\n- EnableLiveTrace: Live Trace allows you to know what's happening inside Azure SignalR service, it will give you live traces in real time, it will be helpful when you developing your own Azure SignalR based web application or self-troubleshooting some issues. Please note that live traces are counted as outbound messages that will be charged. Values allowed: \"true\"/\"false\", to enable/disable live trace feature.",
+      "enum": [
+        "ServiceMode",
+        "EnableConnectivityLogs",
+        "EnableMessagingLogs",
+        "EnableLiveTrace"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "FeatureFlags",
+        "modelAsString": true
+      }
+    },
+    "IPRule": {
+      "description": "An IP rule",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "An IP or CIDR or ServiceTag",
+          "type": "string"
+        },
+        "action": {
+          "$ref": "#/definitions/ACLAction"
+        }
+      }
+    },
+    "KeyType": {
+      "description": "The type of access key.",
+      "enum": [
+        "Primary",
+        "Secondary",
+        "Salt"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "KeyType",
+        "modelAsString": true
+      }
+    },
+    "LiveTraceCategory": {
+      "description": "Live trace category configuration of a Microsoft.SignalRService resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the live trace category's name.\r\nAvailable values: ConnectivityLogs, MessagingLogs.\r\nCase insensitive.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Indicates whether or the live trace category is enabled.\r\nAvailable values: true, false.\r\nCase insensitive.",
+          "type": "string"
+        }
+      }
+    },
+    "LiveTraceConfiguration": {
+      "description": "Live trace configuration of a Microsoft.SignalRService resource.",
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "description": "Indicates whether or not enable live trace.\r\nWhen it's set to true, live trace client can connect to the service.\r\nOtherwise, live trace client can't connect to the service, so that you are unable to receive any log, no matter what you configure in \"categories\".\r\nAvailable values: true, false.\r\nCase insensitive.",
+          "default": "false",
+          "type": "string"
+        },
+        "categories": {
+          "description": "Gets or sets the list of category configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LiveTraceCategory"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "LogSpecification": {
+      "description": "Specifications of the Logs for Azure Monitoring.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the log.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the log.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIdentity": {
+      "description": "A class represent managed identities used for request and response",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/ManagedIdentityType"
+        },
+        "userAssignedIdentities": {
+          "description": "Get or set the user assigned identities",
+          "type": "object",
+          "additionalProperties": {
+            "$ref": "#/definitions/UserAssignedIdentityProperty"
+          }
+        },
+        "principalId": {
+          "description": "Get the principal id for the system assigned identity.\r\nOnly be used in response.",
+          "type": "string",
+          "readOnly": true
+        },
+        "tenantId": {
+          "description": "Get the tenant id for the system assigned identity.\r\nOnly be used in response",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ManagedIdentitySettings": {
+      "description": "Managed identity settings for upstream.",
+      "type": "object",
+      "properties": {
+        "resource": {
+          "description": "The Resource indicating the App ID URI of the target resource.\r\nIt also appears in the aud (audience) claim of the issued token.",
+          "type": "string"
+        }
+      }
+    },
+    "ManagedIdentityType": {
+      "description": "Represents the identity type: systemAssigned, userAssigned, None",
+      "enum": [
+        "None",
+        "SystemAssigned",
+        "UserAssigned"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ManagedIdentityType",
+        "modelAsString": true
+      }
+    },
+    "MetricSpecification": {
+      "description": "Specifications of the Metrics for Azure Monitoring.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the metric.",
+          "type": "string"
+        },
+        "displayName": {
+          "description": "Localized friendly display name of the metric.",
+          "type": "string"
+        },
+        "displayDescription": {
+          "description": "Localized friendly description of the metric.",
+          "type": "string"
+        },
+        "unit": {
+          "description": "The unit that makes sense for the metric.",
+          "type": "string"
+        },
+        "aggregationType": {
+          "description": "Only provide one value for this field. Valid values: Average, Minimum, Maximum, Total, Count.",
+          "type": "string"
+        },
+        "fillGapWithZero": {
+          "description": "Optional. If set to true, then zero will be returned for time duration where no metric is emitted/published. \r\nEx. a metric that returns the number of times a particular error code was emitted. The error code may not appear \r\noften, instead of the RP publishing 0, Shoebox can auto fill in 0s for time periods where nothing was emitted.",
+          "type": "string"
+        },
+        "category": {
+          "description": "The name of the metric category that the metric belongs to. A metric can only belong to a single category.",
+          "type": "string"
+        },
+        "dimensions": {
+          "description": "The dimensions of the metrics.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Dimension"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "NameAvailability": {
+      "description": "Result of the request to check name availability. It contains a flag and possible reason of failure.",
+      "type": "object",
+      "properties": {
+        "nameAvailable": {
+          "description": "Indicates whether the name is available or not.",
+          "type": "boolean"
+        },
+        "reason": {
+          "description": "The reason of the availability. Required if name is not available.",
+          "type": "string"
+        },
+        "message": {
+          "description": "The message of the operation.",
+          "type": "string"
+        }
+      }
+    },
+    "NameAvailabilityParameters": {
+      "description": "Data POST-ed to the nameAvailability action",
+      "required": [
+        "name",
+        "type"
+      ],
+      "type": "object",
+      "properties": {
+        "type": {
+          "description": "The resource type. Can be \"Microsoft.SignalRService/SignalR\", \"Microsoft.SignalRService/WebPubSub\", \"Microsoft.SignalRService/SignalR/replicas\" or \"Microsoft.SignalRService/WebPubSub/replicas\"",
+          "type": "string"
+        },
+        "name": {
+          "description": "The resource name to validate. e.g.\"my-resource-name\"",
+          "type": "string"
+        }
+      }
+    },
+    "NetworkACL": {
+      "description": "Network ACL",
+      "type": "object",
+      "properties": {
+        "allow": {
+          "description": "Allowed request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRRequestType"
+          },
+          "x-ms-identifiers": []
+        },
+        "deny": {
+          "description": "Denied request types. The value can be one or more of: ClientConnection, ServerConnection, RESTAPI.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRRequestType"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "Operation": {
+      "description": "REST API operation supported by resource provider.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Name of the operation with format: {provider}/{resource}/{operation}",
+          "type": "string"
+        },
+        "isDataAction": {
+          "description": "If the operation is a data action. (for data plane rbac)",
+          "type": "boolean"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay"
+        },
+        "origin": {
+          "description": "Optional. The intended executor of the operation; governs the display of the operation in the RBAC UX and the audit logs UX.",
+          "type": "string"
+        },
+        "properties": {
+          "x-ms-client-flatten": false,
+          "$ref": "#/definitions/OperationProperties"
+        }
+      }
+    },
+    "OperationDisplay": {
+      "description": "The object that describes a operation.",
+      "type": "object",
+      "properties": {
+        "provider": {
+          "description": "Friendly name of the resource provider",
+          "type": "string"
+        },
+        "resource": {
+          "description": "Resource type on which the operation is performed.",
+          "type": "string"
+        },
+        "operation": {
+          "description": "The localized friendly name for the operation.",
+          "type": "string"
+        },
+        "description": {
+          "description": "The localized friendly description for the operation",
+          "type": "string"
+        }
+      }
+    },
+    "OperationList": {
+      "description": "Result of the request to list REST API operations. It contains a list of operations.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of operations supported by the resource provider.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Extra Operation properties.",
+      "type": "object",
+      "properties": {
+        "serviceSpecification": {
+          "$ref": "#/definitions/ServiceSpecification"
+        }
+      }
+    },
+    "PrivateEndpoint": {
+      "description": "Private endpoint",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Full qualified Id of the private endpoint",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointACL": {
+      "description": "ACL for a private endpoint",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/NetworkACL"
+        }
+      ],
+      "properties": {
+        "name": {
+          "description": "Name of the private endpoint connection",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnection": {
+      "description": "A private endpoint connection to an azure resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateEndpointConnectionProperties"
+        }
+      }
+    },
+    "PrivateEndpointConnectionList": {
+      "description": "A list of private endpoint connections",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of the private endpoint connections",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateEndpointConnectionProperties": {
+      "description": "Private endpoint connection properties",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "privateEndpoint": {
+          "$ref": "#/definitions/PrivateEndpoint"
+        },
+        "groupIds": {
+          "description": "Group IDs",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "privateLinkServiceConnectionState": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionState"
+        }
+      }
+    },
+    "PrivateLinkResource": {
+      "description": "Private link resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/PrivateLinkResourceProperties"
+        }
+      }
+    },
+    "PrivateLinkResourceList": {
+      "description": "Contains a list of PrivateLinkResource and a possible link to query more results",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of PrivateLinkResource",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateLinkResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkResourceProperties": {
+      "description": "Private link resource properties",
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "Group Id of the private link resource",
+          "type": "string"
+        },
+        "requiredMembers": {
+          "description": "Required members of the private link resource",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "requiredZoneNames": {
+          "description": "Required private DNS zone names",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "shareablePrivateLinkResourceTypes": {
+          "description": "The list of resources that are onboarded to private link service",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ShareablePrivateLinkResourceType"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionState": {
+      "description": "Connection state of the private endpoint connection",
+      "type": "object",
+      "properties": {
+        "status": {
+          "$ref": "#/definitions/PrivateLinkServiceConnectionStatus"
+        },
+        "description": {
+          "description": "The reason for approval/rejection of the connection.",
+          "type": "string"
+        },
+        "actionsRequired": {
+          "description": "A message indicating if changes on the service provider require any updates on the consumer.",
+          "type": "string"
+        }
+      }
+    },
+    "PrivateLinkServiceConnectionStatus": {
+      "description": "Indicates whether the connection has been Approved/Rejected/Removed by the owner of the service.",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "PrivateLinkServiceConnectionStatus",
+        "modelAsString": true
+      }
+    },
+    "ProvisioningState": {
+      "description": "Provisioning state of the resource.",
+      "enum": [
+        "Unknown",
+        "Succeeded",
+        "Failed",
+        "Canceled",
+        "Running",
+        "Creating",
+        "Updating",
+        "Deleting",
+        "Moving"
+      ],
+      "type": "string",
+      "readOnly": true,
+      "x-ms-enum": {
+        "name": "ProvisioningState",
+        "modelAsString": true
+      }
+    },
+    "RegenerateKeyParameters": {
+      "description": "Parameters describes the request to regenerate access keys",
+      "type": "object",
+      "properties": {
+        "keyType": {
+          "$ref": "#/definitions/KeyType"
+        }
+      }
+    },
+    "Replica": {
+      "description": "A class represent a replica resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/ReplicaProperties"
+        }
+      }
+    },
+    "ReplicaList": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of the replica",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Replica"
+          }
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "ReplicaProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "regionEndpointEnabled": {
+          "description": "Enable or disable the regional endpoint. Default to \"Enabled\".\r\nWhen it's Disabled, new connections will not be routed to this endpoint, however existing connections will not be affected.",
+          "default": "Enabled",
+          "type": "string"
+        },
+        "resourceStopped": {
+          "description": "Stop or start the resource.  Default to \"false\".\r\nWhen it's true, the data plane of the resource is shutdown.\r\nWhen it's false, the data plane of the resource is started.",
+          "default": "false",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceLogCategory": {
+      "description": "Resource log category configuration of a Microsoft.SignalRService resource.",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "Gets or sets the resource log category's name.\r\nAvailable values: ConnectivityLogs, MessagingLogs.\r\nCase insensitive.",
+          "type": "string"
+        },
+        "enabled": {
+          "description": "Indicates whether or the resource log category is enabled.\r\nAvailable values: true, false.\r\nCase insensitive.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceLogConfiguration": {
+      "description": "Resource log configuration of a Microsoft.SignalRService resource.",
+      "type": "object",
+      "properties": {
+        "categories": {
+          "description": "Gets or sets the list of category configurations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ResourceLogCategory"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ResourceReference": {
+      "description": "Reference to a resource.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Resource ID.",
+          "type": "string"
+        }
+      }
+    },
+    "ResourceSku": {
+      "description": "The billing information of the resource.",
+      "required": [
+        "name"
+      ],
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the SKU. Required.\r\n\r\nAllowed values: Standard_S1, Free_F1, Premium_P1, Premium_P2",
+          "type": "string"
+        },
+        "tier": {
+          "$ref": "#/definitions/SignalRSkuTier"
+        },
+        "size": {
+          "description": "Not used. Retained for future use.",
+          "type": "string",
+          "readOnly": true
+        },
+        "family": {
+          "description": "Not used. Retained for future use.",
+          "type": "string",
+          "readOnly": true
+        },
+        "capacity": {
+          "format": "int32",
+          "description": "Optional, integer. The unit count of the resource.\r\n1 for Free_F1/Standard_S1/Premium_P1, 100 for Premium_P2 by default.\r\n\r\nIf present, following values are allowed:\r\n    Free_F1: 1;\r\n    Standard_S1: 1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium_P1:  1,2,3,4,5,6,7,8,9,10,20,30,40,50,60,70,80,90,100;\r\n    Premium_P2:  100,200,300,400,500,600,700,800,900,1000;",
+          "type": "integer"
+        }
+      }
+    },
+    "RouteSettings": {
+      "description": "Route settings for the resource",
+      "type": "object",
+      "properties": {
+        "serverBalanceWeight": {
+          "format": "int32",
+          "description": "Gets or sets the server balance weight.\r\nA higher value means a greater balance of client connections across different app server instances.\r\nA value of 0 distributes connections randomly, while a value of 255 ensures maximum balancing.\r\nThe default value is 255.\r\nRecommended ```255``` for multiple app servers in same size.",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "connectionBalanceWeight": {
+          "format": "int32",
+          "description": "Gets or sets the connection balance weight.\r\nA higher value means a greater balance of client connections across different server connections.\r\nA value of 0 distributes connections randomly, while a value of 255 ensures maximum balancing.\r\nThe default value is 255.\r\nRecommended ```255``` for all of the cases.",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        },
+        "latencyWeight": {
+          "format": "int32",
+          "description": "Gets or sets the weight for latency-based routing.\r\nA higher value increases the influence of latency-based routing.\r\nA value of 0 disables latency-based routing entirely, while a value of 255 enables it fully.\r\nThe default value is 0.\r\nRecommended ```255``` for replicas or app servers in different regions for disaster recovery.",
+          "maximum": 255,
+          "minimum": 0,
+          "type": "integer"
+        }
+      }
+    },
+    "ScaleType": {
+      "description": "The scale type applicable to the sku.",
+      "enum": [
+        "None",
+        "Manual",
+        "Automatic"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ScaleType",
+        "modelAsString": true
+      }
+    },
+    "ServerlessSettings": {
+      "description": "Serverless settings.",
+      "type": "object",
+      "properties": {
+        "connectionTimeoutInSeconds": {
+          "format": "int32",
+          "description": "Gets or sets Client Connection Timeout. Optional to be set.\r\nValue in seconds.\r\nDefault value is 30 seconds.\r\nCustomer should set the timeout to a shorter period if messages are expected to be sent in shorter intervals,\r\nand want the client to disconnect more quickly after the last message is sent.\r\nYou can set the timeout to a longer period if messages are expected to be sent in longer intervals,\r\nand they want to keep the same client connection alive during this session.\r\nThe service considers the client disconnected if it hasn't received a message (including keep-alive) in this interval.",
+          "default": 30,
+          "maximum": 120,
+          "minimum": 1,
+          "type": "integer"
+        },
+        "keepAliveIntervalInSeconds": {
+          "format": "int32",
+          "description": "Gets or sets the Keep-Alive Interval. Optional to set.\r\nValue is in seconds.\r\nThe default value is 15 seconds.\r\nCustomers should set this value to a shorter period if they want the service to send keep-alive messages more frequently, \r\nensuring timely checks of the connection status.\r\nConversely, customers can set this value to a longer period if they want the service to send keep-alive messages less frequently, \r\nreducing network traffic, but note that it may take longer to detect a disconnection.\r\nThis interval ensures that the connection is maintained by sending periodic keep-alive messages to the client.",
+          "maximum": 120,
+          "minimum": 1,
+          "type": "integer"
+        }
+      }
+    },
+    "ServerlessUpstreamSettings": {
+      "description": "The settings for the Upstream when the service is in server-less mode.",
+      "type": "object",
+      "properties": {
+        "templates": {
+          "description": "Gets or sets the list of Upstream URL templates. Order matters, and the first matching template takes effects.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/UpstreamTemplate"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "ServiceKind": {
+      "description": "The kind of the service",
+      "enum": [
+        "SignalR",
+        "RawWebSockets"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "ServiceKind",
+        "modelAsString": true
+      }
+    },
+    "ServiceSpecification": {
+      "description": "An object that describes a specification.",
+      "type": "object",
+      "properties": {
+        "metricSpecifications": {
+          "description": "Specifications of the Metrics for Azure Monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MetricSpecification"
+          },
+          "x-ms-identifiers": [
+            "name",
+            "unit"
+          ]
+        },
+        "logSpecifications": {
+          "description": "Specifications of the Logs for Azure Monitoring.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LogSpecification"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        }
+      }
+    },
+    "ShareablePrivateLinkResourceProperties": {
+      "description": "Describes the properties of a resource type that has been onboarded to private link service",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the resource type that has been onboarded to private link service",
+          "type": "string"
+        },
+        "groupId": {
+          "description": "The resource provider group id for the resource that has been onboarded to private link service",
+          "type": "string"
+        },
+        "type": {
+          "description": "The resource provider type for the resource that has been onboarded to private link service",
+          "type": "string"
+        }
+      }
+    },
+    "ShareablePrivateLinkResourceType": {
+      "description": "Describes a  resource type that has been onboarded to private link service",
+      "type": "object",
+      "properties": {
+        "name": {
+          "description": "The name of the resource type that has been onboarded to private link service",
+          "type": "string"
+        },
+        "properties": {
+          "$ref": "#/definitions/ShareablePrivateLinkResourceProperties"
+        }
+      }
+    },
+    "SharedPrivateLinkResource": {
+      "description": "Describes a Shared Private Link Resource",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SharedPrivateLinkResourceProperties"
+        }
+      }
+    },
+    "SharedPrivateLinkResourceList": {
+      "description": "A list of shared private link resources",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of the shared private link resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "Request URL that can be used to query next page of private endpoint connections. Returned when the total number of requested private endpoint connections exceed maximum page size.",
+          "type": "string"
+        }
+      }
+    },
+    "SharedPrivateLinkResourceProperties": {
+      "description": "Describes the properties of an existing Shared Private Link Resource",
+      "required": [
+        "groupId",
+        "privateLinkResourceId"
+      ],
+      "type": "object",
+      "properties": {
+        "groupId": {
+          "description": "The group id from the provider of resource the shared private link resource is for",
+          "type": "string"
+        },
+        "privateLinkResourceId": {
+          "description": "The resource id of the resource the shared private link resource is for",
+          "type": "string"
+        },
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "requestMessage": {
+          "description": "The request message for requesting approval of the shared private link resource",
+          "type": "string"
+        },
+        "fqdns": {
+          "description": "A list of FQDNs for third party private link service",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        },
+        "status": {
+          "readOnly": true,
+          "$ref": "#/definitions/SharedPrivateLinkResourceStatus"
+        }
+      }
+    },
+    "SharedPrivateLinkResourceStatus": {
+      "description": "Status of the shared private link resource",
+      "enum": [
+        "Pending",
+        "Approved",
+        "Rejected",
+        "Disconnected",
+        "Timeout"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SharedPrivateLinkResourceStatus",
+        "modelAsString": true
+      }
+    },
+    "SignalRCorsSettings": {
+      "description": "Cross-Origin Resource Sharing (CORS) settings.",
+      "type": "object",
+      "properties": {
+        "allowedOrigins": {
+          "description": "Gets or sets the list of origins that should be allowed to make cross-origin calls (for example: http://example.com:12345). Use \"*\" to allow all. If omitted, allow all by default.",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SignalRFeature": {
+      "description": "Feature of a resource, which controls the runtime behavior.",
+      "required": [
+        "flag",
+        "value"
+      ],
+      "type": "object",
+      "properties": {
+        "flag": {
+          "$ref": "#/definitions/FeatureFlags"
+        },
+        "value": {
+          "description": "Value of the feature flag. See Azure SignalR service document https://docs.microsoft.com/azure/azure-signalr/ for allowed values.",
+          "maxLength": 128,
+          "minLength": 1,
+          "type": "string"
+        },
+        "properties": {
+          "description": "Optional properties related to this feature.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      }
+    },
+    "SignalRKeys": {
+      "description": "A class represents the access keys of the resource.",
+      "type": "object",
+      "properties": {
+        "primaryKey": {
+          "description": "The primary access key.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "secondaryKey": {
+          "description": "The secondary access key.",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "primaryConnectionString": {
+          "description": "Connection string constructed via the primaryKey",
+          "type": "string",
+          "x-ms-secret": true
+        },
+        "secondaryConnectionString": {
+          "description": "Connection string constructed via the secondaryKey",
+          "type": "string",
+          "x-ms-secret": true
+        }
+      }
+    },
+    "SignalRNetworkACLs": {
+      "description": "Network ACLs for the resource",
+      "type": "object",
+      "properties": {
+        "defaultAction": {
+          "$ref": "#/definitions/ACLAction"
+        },
+        "publicNetwork": {
+          "$ref": "#/definitions/NetworkACL"
+        },
+        "privateEndpoints": {
+          "description": "ACLs for requests from private endpoints",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointACL"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ]
+        },
+        "ipRules": {
+          "description": "IP rules for filtering public traffic",
+          "maxItems": 30,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/IPRule"
+          },
+          "x-ms-identifiers": []
+        }
+      }
+    },
+    "SignalRProperties": {
+      "description": "A class that describes the properties of the resource",
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "readOnly": true,
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "externalIP": {
+          "description": "The publicly accessible IP of the resource.",
+          "type": "string",
+          "readOnly": true
+        },
+        "hostName": {
+          "description": "FQDN of the service instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "publicPort": {
+          "format": "int32",
+          "description": "The publicly accessible port of the resource which is designed for browser/client side usage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "serverPort": {
+          "format": "int32",
+          "description": "The publicly accessible port of the resource which is designed for customer server side usage.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "version": {
+          "description": "Version of the resource. Probably you need the same or higher version of client SDKs.",
+          "type": "string",
+          "readOnly": true
+        },
+        "privateEndpointConnections": {
+          "description": "Private endpoint connections to the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/PrivateEndpointConnection"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "sharedPrivateLinkResources": {
+          "description": "The list of shared private link resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SharedPrivateLinkResource"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "tls": {
+          "$ref": "#/definitions/SignalRTlsSettings"
+        },
+        "hostNamePrefix": {
+          "description": "Deprecated.",
+          "type": "string",
+          "readOnly": true
+        },
+        "features": {
+          "description": "List of the featureFlags.\r\n\r\nFeatureFlags that are not included in the parameters for the update operation will not be modified.\r\nAnd the response will only include featureFlags that are explicitly set. \r\nWhen a featureFlag is not explicitly set, its globally default value will be used\r\nBut keep in mind, the default value doesn't mean \"false\". It varies in terms of different FeatureFlags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRFeature"
+          },
+          "x-ms-identifiers": []
+        },
+        "liveTraceConfiguration": {
+          "$ref": "#/definitions/LiveTraceConfiguration"
+        },
+        "resourceLogConfiguration": {
+          "$ref": "#/definitions/ResourceLogConfiguration"
+        },
+        "cors": {
+          "$ref": "#/definitions/SignalRCorsSettings"
+        },
+        "serverless": {
+          "$ref": "#/definitions/ServerlessSettings"
+        },
+        "upstream": {
+          "$ref": "#/definitions/ServerlessUpstreamSettings"
+        },
+        "networkACLs": {
+          "$ref": "#/definitions/SignalRNetworkACLs"
+        },
+        "applicationFirewall": {
+          "$ref": "#/definitions/ApplicationFirewallSettings"
+        },
+        "publicNetworkAccess": {
+          "description": "Enable or disable public network access. Default to \"Enabled\".\r\nWhen it's Enabled, network ACLs still apply.\r\nWhen it's Disabled, public network access is always disabled no matter what you set in network ACLs.",
+          "default": "Enabled",
+          "type": "string"
+        },
+        "disableLocalAuth": {
+          "description": "DisableLocalAuth\r\nEnable or disable local auth with AccessKey\r\nWhen set as true, connection with AccessKey=xxx won't work.",
+          "default": false,
+          "type": "boolean"
+        },
+        "disableAadAuth": {
+          "description": "DisableLocalAuth\r\nEnable or disable aad auth\r\nWhen set as true, connection with AuthType=aad won't work.",
+          "default": false,
+          "type": "boolean"
+        },
+        "regionEndpointEnabled": {
+          "description": "Enable or disable the regional endpoint. Default to \"Enabled\".\r\nWhen it's Disabled, new connections will not be routed to this endpoint, however existing connections will not be affected.\r\nThis property is replica specific. Disable the regional endpoint without replica is not allowed.",
+          "default": "Enabled",
+          "type": "string"
+        },
+        "resourceStopped": {
+          "description": "Stop or start the resource.  Default to \"False\".\r\nWhen it's true, the data plane of the resource is shutdown.\r\nWhen it's false, the data plane of the resource is started.",
+          "default": "false",
+          "type": "string"
+        },
+        "routeSettings": {
+          "$ref": "#/definitions/RouteSettings"
+        }
+      }
+    },
+    "SignalRRequestType": {
+      "description": "The incoming request type to the service",
+      "enum": [
+        "ClientConnection",
+        "ServerConnection",
+        "RESTAPI",
+        "Trace"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SignalRRequestType",
+        "modelAsString": true
+      }
+    },
+    "SignalRResource": {
+      "description": "A class represent a resource.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "sku": {
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SignalRProperties"
+        },
+        "kind": {
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "$ref": "#/definitions/ServiceKind"
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedIdentity"
+        }
+      }
+    },
+    "SignalRResourceList": {
+      "description": "Object that includes an array of resources and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of the resources",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRResource"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "SignalRSkuTier": {
+      "description": "Optional tier of this particular SKU. 'Standard' or 'Free'. \r\n\r\n`Basic` is deprecated, use `Standard` instead.",
+      "enum": [
+        "Free",
+        "Basic",
+        "Standard",
+        "Premium"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "SignalRSkuTier",
+        "modelAsString": true
+      }
+    },
+    "SignalRTlsSettings": {
+      "description": "TLS settings for the resource",
+      "type": "object",
+      "properties": {
+        "clientCertEnabled": {
+          "description": "Request client certificate during TLS handshake if enabled. Not supported for free tier. Any input will be ignored for free tier.",
+          "default": false,
+          "type": "boolean"
+        }
+      }
+    },
+    "SignalRUsage": {
+      "description": "Object that describes a specific usage of the resources.",
+      "type": "object",
+      "properties": {
+        "id": {
+          "description": "Fully qualified ARM resource id",
+          "type": "string"
+        },
+        "currentValue": {
+          "format": "int64",
+          "description": "Current value for the usage quota.",
+          "type": "integer"
+        },
+        "limit": {
+          "format": "int64",
+          "description": "The maximum permitted value for the usage quota. If there is no limit, this value will be -1.",
+          "type": "integer"
+        },
+        "name": {
+          "$ref": "#/definitions/SignalRUsageName"
+        },
+        "unit": {
+          "description": "Representing the units of the usage quota. Possible values are: Count, Bytes, Seconds, Percent, CountPerSecond, BytesPerSecond.",
+          "type": "string"
+        }
+      }
+    },
+    "SignalRUsageList": {
+      "description": "Object that includes an array of the resource usages and a possible link for next set.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "List of the resource usages",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SignalRUsage"
+          },
+          "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string"
+        }
+      }
+    },
+    "SignalRUsageName": {
+      "description": "Localizable String object containing the name and a localized value.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The identifier of the usage.",
+          "type": "string"
+        },
+        "localizedValue": {
+          "description": "Localized name of the usage.",
+          "type": "string"
+        }
+      }
+    },
+    "Sku": {
+      "description": "Describes an available sku.\"",
+      "type": "object",
+      "properties": {
+        "resourceType": {
+          "description": "The resource type that this object applies to",
+          "type": "string",
+          "readOnly": true
+        },
+        "sku": {
+          "readOnly": true,
+          "$ref": "#/definitions/ResourceSku"
+        },
+        "capacity": {
+          "readOnly": true,
+          "$ref": "#/definitions/SkuCapacity"
+        }
+      }
+    },
+    "SkuCapacity": {
+      "description": "Describes scaling information of a sku.",
+      "type": "object",
+      "properties": {
+        "minimum": {
+          "format": "int32",
+          "description": "The lowest permitted capacity for this resource",
+          "type": "integer",
+          "readOnly": true
+        },
+        "maximum": {
+          "format": "int32",
+          "description": "The highest permitted capacity for this resource",
+          "type": "integer",
+          "readOnly": true
+        },
+        "default": {
+          "format": "int32",
+          "description": "The default capacity.",
+          "type": "integer",
+          "readOnly": true
+        },
+        "allowedValues": {
+          "description": "Allows capacity value list.",
+          "type": "array",
+          "items": {
+            "format": "int32",
+            "type": "integer"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "scaleType": {
+          "readOnly": true,
+          "$ref": "#/definitions/ScaleType"
+        }
+      }
+    },
+    "SkuList": {
+      "description": "The list skus operation response",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "The list of skus available for the resource.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Sku"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "resourceType",
+            "/sku/name",
+            "/sku/tier"
+          ]
+        },
+        "nextLink": {
+          "description": "The URL the client should use to fetch the next page (per server side paging).\r\nIt's null for now, added for future use.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ThrottleByJwtCustomClaimRule": {
+      "description": "Throttle the client connection by a custom JWT claim",
+      "required": [
+        "claimName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientConnectionCountRule"
+        }
+      ],
+      "properties": {
+        "claimName": {
+          "description": "The name of the claim in the JWT token. The client connection with the same claim value will be aggregated. If the claim is not found in the token, the connection will be allowed.",
+          "type": "string"
+        },
+        "maxCount": {
+          "format": "int32",
+          "description": "Maximum connection count allowed for the same Jwt claim value. Clients with the same Jwt claim will get rejected if the connection count exceeds this value. Default value is 20.",
+          "default": 20,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "ThrottleByJwtCustomClaimRule"
+    },
+    "ThrottleByJwtSignatureRule": {
+      "description": "Throttle the client connection by the JWT signature",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientConnectionCountRule"
+        }
+      ],
+      "properties": {
+        "maxCount": {
+          "format": "int32",
+          "description": "Maximum connection count allowed for the same JWT signature. Clients with the same JWT signature will get rejected if the connection count exceeds this value. Default value is 20.",
+          "default": 20,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "ThrottleByJwtSignatureRule"
+    },
+    "ThrottleByUserIdRule": {
+      "description": "Throttle the client connection by the user ID",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientConnectionCountRule"
+        }
+      ],
+      "properties": {
+        "maxCount": {
+          "format": "int32",
+          "description": "Maximum connection count allowed for the same user ID. Clients with the same user ID will get rejected if the connection count exceeds this value. Default value is 20.",
+          "default": 20,
+          "maximum": 2147483647,
+          "minimum": 0,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "ThrottleByUserIdRule"
+    },
+    "TrafficThrottleByJwtCustomClaimRule": {
+      "description": "Throttle the client traffic by a custom JWT claim",
+      "required": [
+        "claimName"
+      ],
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientTrafficControlRule"
+        }
+      ],
+      "properties": {
+        "claimName": {
+          "description": "The name of the claim in the JWT token. The message bytes with the same claim value will be aggregated. If the claim is not found in the token, the rule will be skipped.",
+          "type": "string"
+        },
+        "maxInboundMessageBytes": {
+          "format": "int64",
+          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT claim will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "aggregationWindowInSeconds": {
+          "format": "int32",
+          "description": "The aggregation window for the message bytes. The message bytes will be aggregated in this window and be reset after the window. Default value is 60 seconds.",
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 10,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "TrafficThrottleByJwtCustomClaimRule"
+    },
+    "TrafficThrottleByJwtSignatureRule": {
+      "description": "Throttle the client traffic by the JWT signature",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientTrafficControlRule"
+        }
+      ],
+      "properties": {
+        "maxInboundMessageBytes": {
+          "format": "int64",
+          "description": "Maximum accumulated inbound message bytes allowed for the same JWT signature within a time window. Clients with the same JWT signature will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "aggregationWindowInSeconds": {
+          "format": "int32",
+          "description": "The aggregation window for the message bytes. The message bytes will be aggregated in this window and be reset after the window. Default value is 60 seconds.",
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 10,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "TrafficThrottleByJwtSignatureRule"
+    },
+    "TrafficThrottleByUserIdRule": {
+      "description": "Throttle the client traffic by the user ID",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClientTrafficControlRule"
+        }
+      ],
+      "properties": {
+        "maxInboundMessageBytes": {
+          "format": "int64",
+          "description": "Maximum accumulated inbound message bytes allowed for the same user ID within a time window. Clients with the same user ID will get disconnected if the message bytes exceeds this value. Default value is 1GB.",
+          "minimum": 0,
+          "type": "integer"
+        },
+        "aggregationWindowInSeconds": {
+          "format": "int32",
+          "description": "The aggregation window for the message bytes. The message bytes will be aggregated in this window and be reset after the window. Default value is 60 seconds.",
+          "default": 60,
+          "maximum": 3600,
+          "minimum": 10,
+          "type": "integer"
+        }
+      },
+      "x-ms-discriminator-value": "TrafficThrottleByUserIdRule"
+    },
+    "UpstreamAuthSettings": {
+      "description": "Upstream auth settings. If not set, no auth is used for upstream messages.",
+      "type": "object",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/UpstreamAuthType"
+        },
+        "managedIdentity": {
+          "$ref": "#/definitions/ManagedIdentitySettings"
+        }
+      }
+    },
+    "UpstreamAuthType": {
+      "description": "Upstream auth type enum.",
+      "enum": [
+        "None",
+        "ManagedIdentity"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "UpstreamAuthType",
+        "modelAsString": true
+      }
+    },
+    "UpstreamTemplate": {
+      "description": "Upstream template item settings. It defines the Upstream URL of the incoming requests.\r\nThe template defines the pattern of the event, the hub or the category of the incoming request that matches current URL template.",
+      "required": [
+        "urlTemplate"
+      ],
+      "type": "object",
+      "properties": {
+        "hubPattern": {
+          "description": "Gets or sets the matching pattern for hub names. If not set, it matches any hub.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any hub name.\r\n    2. Combine multiple hubs with \",\", for example \"hub1,hub2\", it matches \"hub1\" and \"hub2\".\r\n    3. The single hub name, for example, \"hub1\", it matches \"hub1\".",
+          "type": "string"
+        },
+        "eventPattern": {
+          "description": "Gets or sets the matching pattern for event names. If not set, it matches any event.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any event name.\r\n    2. Combine multiple events with \",\", for example \"connect,disconnect\", it matches event \"connect\" and \"disconnect\".\r\n    3. The single event name, for example, \"connect\", it matches \"connect\".",
+          "type": "string"
+        },
+        "categoryPattern": {
+          "description": "Gets or sets the matching pattern for category names. If not set, it matches any category.\r\nThere are 3 kind of patterns supported:\r\n    1. \"*\", it to matches any category name.\r\n    2. Combine multiple categories with \",\", for example \"connections,messages\", it matches category \"connections\" and \"messages\".\r\n    3. The single category name, for example, \"connections\", it matches the category \"connections\".",
+          "type": "string"
+        },
+        "urlTemplate": {
+          "description": "Gets or sets the Upstream URL template. You can use 3 predefined parameters {hub}, {category} {event} inside the template, the value of the Upstream URL is dynamically calculated when the client request comes in.\r\nFor example, if the urlTemplate is `http://example.com/{hub}/api/{event}`, with a client request from hub `chat` connects, it will first POST to this URL: `http://example.com/chat/api/connect`.",
+          "type": "string"
+        },
+        "auth": {
+          "$ref": "#/definitions/UpstreamAuthSettings"
+        }
+      }
+    },
+    "UserAssignedIdentityProperty": {
+      "description": "Properties of user assigned identity.",
+      "type": "object",
+      "properties": {
+        "principalId": {
+          "description": "Get the principal id for the user assigned identity",
+          "type": "string",
+          "readOnly": true
+        },
+        "clientId": {
+          "description": "Get the client id for the user assigned identity",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "parameters": {
+    "ResourceName": {
+      "in": "path",
+      "name": "resourceName",
+      "description": "The name of the resource.",
+      "required": true,
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ReplicaName": {
+      "in": "path",
+      "name": "replicaName",
+      "description": "The name of the replica.",
+      "required": true,
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "SharedPrivateLinkResourceName": {
+      "in": "path",
+      "name": "sharedPrivateLinkResourceName",
+      "description": "The name of the shared private link resource.",
+      "required": true,
+      "maxLength": 63,
+      "minLength": 3,
+      "pattern": "^[a-zA-Z][a-zA-Z0-9-]{1,61}[a-zA-Z0-9]$",
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      },
+      "description": "Azure Active Directory OAuth2 Flow"
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ]
+}

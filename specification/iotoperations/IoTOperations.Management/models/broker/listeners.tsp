@@ -5,6 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 using TypeSpec.Rest;
+using OpenAPI;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -46,8 +47,6 @@ model BrokerListenerProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
-  ...ResourceHealth;
 }
 
 @doc("Kubernetes Service Types supported by Listener")

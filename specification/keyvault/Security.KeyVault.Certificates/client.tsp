@@ -42,9 +42,9 @@ op updateCertificate is KeyVaultOperation<
     /**
      * The parameters for certificate update.
      */
-    #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flattening is supported for legacy scenarios like Key Vault's"
+    #suppress "deprecated" "Property flattening is supported for legacy scenarios like Key Vault's"
     @body
-    @Azure.ClientGenerator.Core.Legacy.flattenProperty
+    @flattenProperty
     parameters: CertificateUpdateParameters;
   },
   CertificateBundle
@@ -104,7 +104,6 @@ op getCertificate is KeyVaultOperation<
 @summary("List certificates in a specified key vault")
 @route("/certificates")
 @get
-@list
 op listCertificateProperties is KeyVaultOperation<
   {
     /**
@@ -124,7 +123,6 @@ op listCertificateProperties is KeyVaultOperation<
 @summary("List certificate issuers for a specified key vault.")
 @route("/certificates/issuers")
 @get
-@list
 op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 
 /**
@@ -135,7 +133,6 @@ op listIssuerProperties is KeyVaultOperation<{}, CertificateIssuerListResult>;
 @summary("List the versions of a certificate.")
 @route("/certificates/{certificate-name}/versions")
 @get
-@list
 op listCertificatePropertiesVersions is KeyVaultOperation<
   {
     /**
@@ -156,7 +153,6 @@ op listCertificatePropertiesVersions is KeyVaultOperation<
 @summary("Lists the deleted certificates in the specified vault currently available for recovery.")
 @route("/deletedcertificates")
 @get
-@list
 op listDeletedCertificateProperties is KeyVaultOperation<
   {
     /**
@@ -235,9 +231,6 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 @@clientName(JsonWebKeyCurveName, "CurveName", "go");
 @@clientName(JsonWebKeyType, "KeyType", "go");
 
-@@alternateType(CertificateAttributes.recoveryLevel, string, "go");
-@@alternateType(CertificateOperation.error, string, "go");
-
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");
 
@@ -284,8 +277,7 @@ op listDeletedCertificateProperties is KeyVaultOperation<
   "ListDeletedCertificateProperties",
   "rust"
 );
-// Work around issue where previous @override prevent the following line from working without "KeyVault." prefix.
-@@clientName(KeyVault.updateCertificate, "UpdateCertificateProperties", "rust");
+@@clientName(updateCertificate, "UpdateCertificateProperties", "rust");
 
 @@clientName(getCertificateContacts, "GetContacts", "rust");
 @@clientName(deleteCertificateContacts, "DeleteContacts", "rust");

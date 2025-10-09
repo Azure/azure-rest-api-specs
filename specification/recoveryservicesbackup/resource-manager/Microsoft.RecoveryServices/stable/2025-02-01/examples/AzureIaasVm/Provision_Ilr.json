@@ -1,22 +1,22 @@
 {
   "parameters": {
-    "api-version": "2025-02-01",
-    "containerName": "iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "PythonSDKBackupTestRg",
+    "vaultName": "PySDKBackupTestRsVault",
     "fabricName": "Azure",
+    "containerName": "iaasvmcontainer;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+    "protectedItemName": "vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
+    "recoveryPointId": "1",
+    "api-version": "2025-02-01",
     "parameters": {
       "properties": {
         "initiatorName": "Hello World",
-        "objectType": "IaasVMILRRegistrationRequest",
         "recoveryPointId": "38823086363464",
         "renewExistingRegistration": true,
-        "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pysdktestrg/providers/Microsoft.Compute/virtualMachines/pysdktestv2vm1"
+        "virtualMachineId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/pysdktestrg/providers/Microsoft.Compute/virtualMachines/pysdktestv2vm1",
+        "objectType": "IaasVMILRRegistrationRequest"
       }
-    },
-    "protectedItemName": "vm;iaasvmcontainerv2;pysdktestrg;pysdktestv2vm1",
-    "recoveryPointId": "1",
-    "resourceGroupName": "PythonSDKBackupTestRg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "PySDKBackupTestRsVault"
+    }
   },
   "responses": {
     "202": {
@@ -26,7 +26,5 @@
         "Retry-After": 60
       }
     }
-  },
-  "operationId": "ItemLevelRecoveryConnections_Provision",
-  "title": "Provision Instant Item Level Recovery for Azure Vm"
+  }
 }

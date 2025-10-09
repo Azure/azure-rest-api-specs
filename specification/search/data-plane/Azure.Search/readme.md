@@ -26,7 +26,7 @@ These are the global settings for SearchServiceClient and SearchIndexClient.
 title: SearchClient
 opt-in-extensible-enums: true
 openapi-type: data-plane
-tag: package-2025-09-01
+tag: package-2025-08-01-preview
 
 directive:
   - where:
@@ -165,34 +165,6 @@ directive:
       -  $.definitions.SuggestResult.properties["@search.text"]
     suppress:
       - RequiredReadOnlyProperties
-```
-
-### Tag: package-2025-09-01
-
-These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-09-01'
-input-file:
-- stable/2025-09-01/searchservice.json
-- stable/2025-09-01/searchindex.json
-```
-
-### Tag: package-2025-09-searchservice
-
-These settings apply only when `--tag=package-2025-09-searchservice` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-09-searchservice'
-input-file:
-- stable/2025-09-01/searchservice.json
-```
-
-### Tag: package-2025-09-searchindex
-
-These settings apply only when `--tag=package-2025-09-searchindex` is specified on the command line.
-
-``` yaml $(tag) == 'package-2025-09-searchindex'
-input-file:
-- stable/2025-09-01/searchindex.json
 ```
 
 ### Tag: package-2025-08-01-preview

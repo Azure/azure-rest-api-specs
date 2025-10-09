@@ -63,8 +63,6 @@ model BrokerProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
-
-  ...ResourceHealth;
 }
 
 @doc("""
@@ -85,7 +83,6 @@ model BrokerPersistence {
     Client sets the specified user property key/value in the CONNECT/SUBSCRIBE/PUBLISH. 
     Optionally, if the customer specifies a configurable user property, it will work to enable persistence dynamically. The default user property key is 'aio-persistence' and value 'true'.
     """)
-  @removed(Versions.`2025-10-01`)
   dynamicSettings?: BrokerPersistenceDynamicSettings;
 
   @doc("The max size of the message buffer on disk. If a PVC template is specified using persistentVolumeClaimSpec Then this size is used as the request and limit sizes of that template. If a PVC template isn't specified Then local-path provisioner is requested with this size limit. Required.")
@@ -233,7 +230,6 @@ union BrokerStateStoreKeyType {
 
 @doc("Dynamic settings of the persistence.")
 @added(Versions.`2025-07-01-preview`)
-@removed(Versions.`2025-10-01`)
 model BrokerPersistenceDynamicSettings {
   @doc("The user property key to enable persistence.")
   userPropertyKey: string;
@@ -270,7 +266,6 @@ model BrokerSubscriberQueueCustomPolicySettings {
   dynamic?: BrokerSubscriberQueueDynamic;
 
   @doc("List of topics under which messages would be persisted to disk for each subscriber. Wildcards # and + supported.")
-  @removed(Versions.`2025-10-01`)
   topics?: string[];
 }
 

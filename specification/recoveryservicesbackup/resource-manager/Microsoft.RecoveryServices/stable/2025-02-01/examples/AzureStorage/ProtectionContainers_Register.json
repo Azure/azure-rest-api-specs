@@ -1,46 +1,44 @@
 {
   "parameters": {
-    "api-version": "2025-02-01",
-    "containerName": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "SwaggerTestRg",
+    "vaultName": "swaggertestvault",
     "fabricName": "Azure",
+    "containerName": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+    "api-version": "2025-02-01",
     "parameters": {
       "properties": {
-        "acquireStorageAccountLock": "Acquire",
-        "backupManagementType": "AzureStorage",
-        "containerType": "StorageContainer",
         "friendlyName": "swaggertestsa",
-        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa"
+        "backupManagementType": "AzureStorage",
+        "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa",
+        "containerType": "StorageContainer",
+        "acquireStorageAccountLock": "Acquire"
       }
-    },
-    "resourceGroupName": "SwaggerTestRg",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "vaultName": "swaggertestvault"
+    }
   },
   "responses": {
-    "200": {
-      "body": {
-        "name": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
-        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
-        "properties": {
-          "acquireStorageAccountLock": "Acquire",
-          "backupManagementType": "AzureStorage",
-          "containerType": "StorageContainer",
-          "friendlyName": "swaggertestsa",
-          "healthStatus": "Healthy",
-          "protectedItemCount": 0,
-          "registrationStatus": "Registered",
-          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa"
-        }
-      }
-    },
     "202": {
       "headers": {
         "Azure-AsyncOperation": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/operationsStatus/00000000-0000-0000-0000-000000000000?api-version=2019-05-13-preview",
         "Location": "https://management.azure.com/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa/operationResults/00000000-0000-0000-0000-000000000000?api-version=2016-12-01",
         "Retry-After": 60
       }
+    },
+    "200": {
+      "body": {
+        "id": "/Subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.RecoveryServices/vaults/swaggertestvault/backupFabrics/Azure/protectionContainers/StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+        "name": "StorageContainer;Storage;SwaggerTestRg;swaggertestsa",
+        "properties": {
+          "sourceResourceId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/SwaggerTestRg/providers/Microsoft.Storage/storageAccounts/swaggertestsa",
+          "protectedItemCount": 0,
+          "acquireStorageAccountLock": "Acquire",
+          "friendlyName": "swaggertestsa",
+          "backupManagementType": "AzureStorage",
+          "registrationStatus": "Registered",
+          "healthStatus": "Healthy",
+          "containerType": "StorageContainer"
+        }
+      }
     }
-  },
-  "operationId": "ProtectionContainers_Register",
-  "title": "RegisterAzure Storage ProtectionContainers"
+  }
 }

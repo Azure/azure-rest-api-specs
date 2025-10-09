@@ -1,8 +1,11 @@
-import "../Common/StandardizedContracts/SummaryProperties.tsp";
+import "../../Common/StandardizedContracts/SummaryProperties.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -35,11 +38,11 @@ model DiscoveredLightSummary {
   numberOfWebApps: int32;
 
   @doc("Number of web apps per type.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   numberOfWebAppsPerType?: WebAppsPerType[];
 
   @doc("Number of web servers per type.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   numberOfWebServersPerType?: WebServersPerType[];
 
   @doc("Number of web servers.")

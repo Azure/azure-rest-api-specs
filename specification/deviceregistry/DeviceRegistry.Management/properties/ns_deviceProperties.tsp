@@ -5,10 +5,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../common/provisioningState.tsp";
 import "../common/status.tsp";
-import "../common/x509CertificateCredentials.tsp";
 
 using TypeSpec.Versioning;
-using Azure.Core;
 
 namespace Microsoft.DeviceRegistry;
 
@@ -67,21 +65,6 @@ model NamespaceDeviceProperties {
   @doc("Provisioning state of the resource.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
-
-  @added(Versions.v2025_11_01_preview)
-  @doc("Policy used to issue device certificates.")
-  policy?: DeviceCredentialPolicy;
-}
-
-@added(Versions.v2025_11_01_preview)
-@doc("Defines the Policy used to issue device certificates if any.")
-model DeviceCredentialPolicy {
-  @doc("Resource Id of the Policy.")
-  resourceId?: armResourceIdentifier<[
-    {
-      type: "Microsoft.DeviceRegistry/namespaces/credentials/policies";
-    }
-  ]>;
 }
 
 @doc("Connection endpoint URL a device can use to connect to a service.")
@@ -147,8 +130,7 @@ model HostAuthentication {
   usernamePasswordCredentials?: UsernamePasswordCredentials;
 
   @doc("Defines the certificate reference when Certificate user authentication mode is selected.")
-  @typeChangedFrom(Versions.v2025_10_01, X509Credentials)
-  x509Credentials?: X509CertificateCredentials;
+  x509Credentials?: X509Credentials;
 }
 
 @doc("Defines the device status properties.")

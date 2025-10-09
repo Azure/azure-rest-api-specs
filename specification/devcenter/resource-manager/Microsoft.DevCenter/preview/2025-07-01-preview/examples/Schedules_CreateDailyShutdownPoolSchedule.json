@@ -1,69 +1,67 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
+    "resourceGroupName": "rg1",
+    "projectName": "DevProject",
+    "poolName": "DevPool",
+    "scheduleName": "autoShutdown",
     "body": {
       "properties": {
-        "type": "StopDevBox",
-        "frequency": "Daily",
         "state": "Enabled",
-        "time": "17:30",
-        "timeZone": "America/Los_Angeles"
+        "type": "StopDevBox",
+        "timeZone": "America/Los_Angeles",
+        "frequency": "Daily",
+        "time": "17:30"
       }
-    },
-    "poolName": "DevPool",
-    "projectName": "DevProject",
-    "resourceGroupName": "rg1",
-    "scheduleName": "autoShutdown",
-    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+    }
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/TestProject/pools/DevPool/schedules/autoShutdown",
         "name": "autoShutdown",
         "type": "Microsoft.DevCenter/pools/schedules",
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/TestProject/pools/DevPool/schedules/autoShutdown",
         "properties": {
-          "type": "StopDevBox",
-          "frequency": "Daily",
-          "provisioningState": "Succeeded",
           "state": "Enabled",
+          "type": "StopDevBox",
+          "timeZone": "America/Los_Angeles",
+          "frequency": "Daily",
           "time": "17:30",
-          "timeZone": "America/Los_Angeles"
+          "provisioningState": "Succeeded"
         },
         "systemData": {
-          "createdAt": "2020-11-18T18:00:36.993Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "lastModifiedAt": "2020-11-18T18:30:36.993Z",
+          "createdAt": "2020-11-18T18:00:36.993Z",
           "lastModifiedBy": "user1",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
         }
       }
     },
     "201": {
       "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/TestProject/pools/DevPool/schedules/autoShutdown",
         "name": "autoShutdown",
         "type": "Microsoft.DevCenter/pools/schedules",
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/projects/TestProject/pools/DevPool/schedules/autoShutdown",
         "properties": {
-          "type": "StopDevBox",
-          "frequency": "Daily",
-          "provisioningState": "Accepted",
           "state": "Enabled",
+          "type": "StopDevBox",
+          "timeZone": "America/Los_Angeles",
+          "frequency": "Daily",
           "time": "17:30",
-          "timeZone": "America/Los_Angeles"
+          "provisioningState": "Accepted"
         },
         "systemData": {
-          "createdAt": "2020-11-18T18:00:36.993Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "lastModifiedAt": "2020-11-18T18:30:36.993Z",
+          "createdAt": "2020-11-18T18:00:36.993Z",
           "lastModifiedBy": "user1",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
         }
       }
     }
-  },
-  "operationId": "Schedules_CreateOrUpdate",
-  "title": "Schedules_CreateDailyShutdownPoolSchedule"
+  }
 }

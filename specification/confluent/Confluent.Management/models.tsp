@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/versioning";
 
 using TypeSpec.Versioning;
-using Azure.ResourceManager;
+
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Confluent;
@@ -13,11 +13,12 @@ namespace Microsoft.Confluent;
 /**
  * Result of GET request to list Confluent operations.
  */
+@Azure.Core.pagedResult
 model OperationListResult {
   /**
    * List of Confluent operations supported by the Microsoft.Confluent provider.
    */
-  @pageItems
+  @Azure.Core.items
   value: OperationResult[];
 
   /**
@@ -336,7 +337,7 @@ model ErrorResponseBody {
    * Error detail
    */
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   details?: ErrorResponseBody[];
 }
 
@@ -1539,7 +1540,7 @@ model ListRegionsSuccessResponse {
   /**
    * List of regions supported by confluent
    */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   data?: RegionRecord[];
 }
 
@@ -2161,12 +2162,6 @@ model KafkaAzureBlobStorageSinkConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
-   * Kafka Service Account Name
-   */
-  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
-  serviceAccountName?: string;
-
-  /**
    * Kafka topics list
    */
   topics?: string[];
@@ -2233,12 +2228,6 @@ model KafkaAzureBlobStorageSourceConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
-   * Kafka Service Account Name
-   */
-  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
-  serviceAccountName?: string;
-
-  /**
    * Kafka topics Regex pattern
    */
   topicRegex?: string;
@@ -2293,12 +2282,6 @@ model KafkaAzureCosmosDBSinkConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
-
-  /**
-   * Kafka Service Account Name
-   */
-  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
-  serviceAccountName?: string;
 
   /**
    * Kafka topics list
@@ -2368,12 +2351,6 @@ model KafkaAzureCosmosDBSourceConnectorInfo extends PartnerInfoBase {
   serviceAccountId?: string;
 
   /**
-   * Kafka Service Account Name
-   */
-  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
-  serviceAccountName?: string;
-
-  /**
    * Kafka topics Regex pattern
    */
   topicRegex?: string;
@@ -2427,12 +2404,6 @@ model KafkaAzureSynapseAnalyticsSinkConnectorInfo extends PartnerInfoBase {
    * Kafka Service Account Id
    */
   serviceAccountId?: string;
-
-  /**
-   * Kafka Service Account Name
-   */
-  @added(Microsoft.Confluent.Versions.v2025_08_18_preview)
-  serviceAccountName?: string;
 
   /**
    * Kafka topics list

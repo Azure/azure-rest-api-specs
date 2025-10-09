@@ -151,9 +151,9 @@ model CodeSigningAccountPatch {
   @doc("Resource tags.")
   tags?: Record<string>;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  #suppress "deprecated" "Legacy flatten"
   @doc("Properties of the trusted signing account.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: CodeSigningAccountPatchProperties;
 }
 
@@ -248,11 +248,11 @@ model CertificateProfileProperties {
   @visibility(Lifecycle.Read)
   status?: CertificateProfileStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  #suppress "deprecated" "Legacy flatten"
   @doc("List of renewed certificates.")
   @visibility(Lifecycle.Read)
   @identifiers(#[])
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   certificates?: Certificate[];
 }
 
@@ -280,9 +280,9 @@ model Certificate {
   @doc("Status of the certificate.")
   status?: CertificateStatus;
 
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
+  #suppress "deprecated" "Legacy flatten"
   @doc("Revocations history of a certificate.")
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  @Azure.ClientGenerator.Core.flattenProperty
   revocation?: Revocation;
 }
 

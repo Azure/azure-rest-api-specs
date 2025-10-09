@@ -5,7 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "../Common/Models.tsp";
 import "../Common/Enums.tsp";
-import "../../Common/ArmModels/AzureResourceProperties.tsp";
+import "../../../Common/ArmModels/AzureResourceProperties.tsp";
 
 using Autorest;
 using TypeSpec.Http;
@@ -97,17 +97,17 @@ model AzureIaasVmSummary {
 
   @doc("Estimated cost by offer.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   estimatedCostByRecommendedOffer?: EstimatedCostByOffer[];
 
   @doc("The recommended VM family summary.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   recommendedVmFamilySummary?: RecommendedVmFamilySummary[];
 
   @doc("The cost by storage type.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   costByStorageType?: CostByStorageType[];
 }
 
@@ -135,17 +135,17 @@ model AzureIaasSqlSummary {
 
   @doc("Estimated cost by offer.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   estimatedCostByRecommendedOffer?: EstimatedCostByOffer[];
 
   @doc("The recommended VM family summary.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   recommendedVmFamilySummary?: RecommendedVmFamilySummary[];
 
   @doc("The cost by storage type.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   costByStorageType?: CostByStorageType[];
 }
 
@@ -186,12 +186,12 @@ model OnPremisesIaasSummary {
 
   @doc("The OS licensing details.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   osLicensingDetails?: IaasOsLicensingDetails[];
 
   @doc("The distribution by operating system.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   distributionByOperatingSystem?: DistributionByOperatingSystem[];
 
   @doc("The SQL on premises utilization insights.")
@@ -200,7 +200,7 @@ model OnPremisesIaasSummary {
 
   @doc("The distribution by virtualization.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   distributionByVirtualization?: DistributionByVirtualization[];
 
   @doc("Iaas OS Support Status Distribution.")
@@ -221,17 +221,17 @@ model OnPremisesIaasSummary {
 
   @doc("Distribution by Operating System Version.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   distributionByOperatingSystemVersion?: DistributionByType[];
 
   @doc("Distribution by Sql Version.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   distributionBySqlVersion?: DistributionByType[];
 
   @doc("Distribution by Sql Edition.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   distributionBySqlEdition?: DistributionByType[];
 
   @doc("The on premises Iaas Sustainability details.")

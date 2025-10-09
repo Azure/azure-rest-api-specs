@@ -1,0 +1,1872 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2018-08-31-preview",
+    "title": "Workload Monitor API",
+    "description": "APIs for workload monitoring",
+    "contact": {
+      "name": "Microsoft",
+      "email": "wlmengg@microsoft.com"
+    }
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get list of a monitors of a resource.",
+        "operationId": "Monitors_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one monitor is found.",
+            "schema": {
+              "$ref": "#/definitions/MonitorsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Monitors_ListByResource": {
+            "$ref": "./examples/Monitors_ListByResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitors/{monitorId}": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get details of a single monitor.",
+        "operationId": "Monitors_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "monitorId",
+            "in": "path",
+            "description": "Monitor Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. monitor is found.",
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Get": {
+            "$ref": "./examples/Monitors_Get.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Update a Monitor's configuration.",
+        "operationId": "Monitors_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "monitorId",
+            "in": "path",
+            "description": "Monitor Id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body of the Monitor PATCH object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. Existing monitor is updated.",
+            "schema": {
+              "$ref": "#/definitions/Monitor"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Monitors_Update": {
+            "$ref": "./examples/Monitors_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/components": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get list of components for a resource.",
+        "operationId": "Components_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$select"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$apply"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          },
+          {
+            "$ref": "#/parameters/$expand"
+          },
+          {
+            "$ref": "#/parameters/$top"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/ComponentsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Components_ListByResource": {
+            "$ref": "./examples/Components_ListByResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/components/{componentId}": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get details of a component.",
+        "operationId": "Components_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/componentId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$select"
+          },
+          {
+            "$ref": "#/parameters/$expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. component is found.",
+            "schema": {
+              "$ref": "#/definitions/Component"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Components_Get": {
+            "$ref": "./examples/Components_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitorInstances": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get list of monitor instances for a resource.",
+        "operationId": "MonitorInstances_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$select"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$apply"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          },
+          {
+            "$ref": "#/parameters/$expand"
+          },
+          {
+            "$ref": "#/parameters/$top"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/MonitorInstancesCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitorInstances_ListByResource": {
+            "$ref": "./examples/MonitorInstances_ListByResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/monitorInstances/{monitorInstanceId}": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get details of a monitorInstance.",
+        "operationId": "MonitorInstances_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/monitorInstanceId"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$select"
+          },
+          {
+            "$ref": "#/parameters/$expand"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. monitorInstance is found.",
+            "schema": {
+              "$ref": "#/definitions/MonitorInstance"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "MonitorInstances_Get": {
+            "$ref": "./examples/MonitorInstances_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/notificationSettings": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get list of notification settings for a resource.",
+        "operationId": "NotificationSettings_ListByResource",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSettingsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "NotificationSettings_ListByResource": {
+            "$ref": "./examples/NotificationSettings_ListByResource.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceNamespace}/{resourceType}/{resourceName}/providers/Microsoft.WorkloadMonitor/notificationSettings/{notificationSettingName}": {
+      "get": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Get a of notification setting for a resource.",
+        "operationId": "NotificationSettings_Get",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/notificationSettingName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationSettings_Get": {
+            "$ref": "./examples/NotificationSettings_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "WLIExtension"
+        ],
+        "summary": "Update notification settings for a resource.",
+        "operationId": "NotificationSettings_Update",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "resourceNamespace",
+            "in": "path",
+            "description": "The Namespace of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceType",
+            "in": "path",
+            "description": "The type of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "resourceName",
+            "in": "path",
+            "description": "Name of the resource.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/notificationSettingName"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "Body of the NotificationSetting PUT object.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/NotificationSetting"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/NotificationSetting"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "NotificationSettings_Update": {
+            "$ref": "./examples/NotificationSettings_Update.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WorkloadMonitor/componentsSummary": {
+      "get": {
+        "tags": [
+          "WorkloadInsights"
+        ],
+        "summary": "Get subscription wide details of components.",
+        "operationId": "ComponentsSummary_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$select"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$apply"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          },
+          {
+            "$ref": "#/parameters/$expand"
+          },
+          {
+            "$ref": "#/parameters/$top"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK. At least one component found.",
+            "schema": {
+              "$ref": "#/definitions/ComponentsCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ComponentsSummary_List": {
+            "$ref": "./examples/ComponentsSummary_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.WorkloadMonitor/monitorInstancesSummary": {
+      "get": {
+        "tags": [
+          "WorkloadInsights"
+        ],
+        "summary": "Get subscription wide health instances.",
+        "operationId": "MonitorInstancesSummary_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$select"
+          },
+          {
+            "$ref": "#/parameters/$filter"
+          },
+          {
+            "$ref": "#/parameters/$apply"
+          },
+          {
+            "$ref": "#/parameters/$orderby"
+          },
+          {
+            "$ref": "#/parameters/$expand"
+          },
+          {
+            "$ref": "#/parameters/$top"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/MonitorInstancesCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "MonitorInstancesSummary_List": {
+            "$ref": "./examples/MonitorInstancesSummary_List.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.WorkloadMonitor/operations": {
+      "get": {
+        "tags": [
+          "WorkloadInsights"
+        ],
+        "summary": "Gets the details of all operations possible on the resource provider.",
+        "operationId": "Operations_List",
+        "consumes": [],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/api-version"
+          },
+          {
+            "$ref": "#/parameters/$skiptoken"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/OperationListResult"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "MonitorsCollection": {
+      "description": "Model for collection of Monitor.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL for next set of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Collection of Monitor.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Monitor"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Monitor": {
+      "description": "Model for Monitor",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "description": "For optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitorProperties",
+          "description": "Properties of monitor instance",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MonitorProperties": {
+      "description": "Model for properties of a Monitor.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "Description of the monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorId": {
+          "description": "ID of the monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorName": {
+          "description": "Name of the monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorDisplayName": {
+          "description": "User friendly display name of the monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "parentMonitorName": {
+          "description": "Name of the parent monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "parentMonitorDisplayName": {
+          "description": "User friendly display name of the parent monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorType": {
+          "description": "Type of the monitor",
+          "enum": [
+            "Aggregate",
+            "Dependency",
+            "Unit"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MonitorType",
+            "modelAsString": false
+          }
+        },
+        "monitorCategory": {
+          "description": "Category of the monitor",
+          "enum": [
+            "AvailabilityHealth",
+            "Configuration",
+            "EntityHealth",
+            "PerformanceHealth",
+            "Security"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MonitorCategory",
+            "modelAsString": false
+          }
+        },
+        "componentTypeId": {
+          "description": "Component Type Id of monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentTypeName": {
+          "description": "Component Type Name of monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentTypeDisplayName": {
+          "description": "Component Type Display Name of the monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorState": {
+          "description": "Is the monitor state enabled or disabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MonitorState",
+            "modelAsString": false
+          }
+        },
+        "criteria": {
+          "description": "Collection of MonitorCriteria. For PATCH calls, instead of partial list, complete list of expected criteria should be passed for proper updating.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorCriteria"
+          },
+          "readOnly": true
+        },
+        "alertGeneration": {
+          "description": "Generates alerts or not",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AlertGeneration",
+            "modelAsString": true
+          }
+        },
+        "frequency": {
+          "format": "int32",
+          "description": "Frequency at which monitor condition is evaluated",
+          "type": "integer",
+          "readOnly": true
+        },
+        "lookbackDuration": {
+          "format": "int32",
+          "description": "The duration in minutes in the past during which the monitor is evaluated",
+          "type": "integer",
+          "readOnly": true
+        },
+        "documentationURL": {
+          "description": "URL pointing to the documentation of the monitor",
+          "type": "string",
+          "readOnly": true
+        },
+        "signalName": {
+          "description": "Name of the signal on which this monitor is configured.",
+          "type": "string",
+          "readOnly": true
+        },
+        "signalType": {
+          "description": "Type of the signal on which this monitor is configured.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "MonitorCriteria": {
+      "description": "Criteria for monitor configuration",
+      "type": "object",
+      "properties": {
+        "healthState": {
+          "description": "Target health state of the criteria",
+          "enum": [
+            "Error",
+            "Warning",
+            "Success",
+            "Unknown",
+            "Uninitialized"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HealthState",
+            "modelAsString": false
+          }
+        },
+        "threshold": {
+          "format": "double",
+          "description": "Threshold value for this criteria",
+          "type": "number",
+          "readOnly": true
+        },
+        "comparisonOperator": {
+          "description": "Comparison enum on threshold of this criteria",
+          "enum": [
+            "Equals",
+            "GreaterThan",
+            "GreaterThanOrEqual",
+            "LessThan",
+            "LessThanOrEqual",
+            "NotEquals"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "Operator",
+            "modelAsString": false
+          }
+        }
+      }
+    },
+    "ComponentsCollection": {
+      "description": "Model for collection of components.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Collection of components.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Component": {
+      "description": "Model for component.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "description": "For optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/ComponentProperties",
+          "description": "Properties of the component.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ComponentProperties": {
+      "description": "Model for properties of a component.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "description": "ID of the workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "solutionId": {
+          "description": "ID of the OMS solution this component belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "workloadType": {
+          "description": "Type of the workload.",
+          "enum": [
+            "BaseOS",
+            "SQL",
+            "IIS",
+            "Apache"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
+        },
+        "componentName": {
+          "description": "Name of the component.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentTypeId": {
+          "description": "ID of the component type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentTypeName": {
+          "description": "Name of the component type. Qualifies the type of component such as whether it is a SQL database, logical disk, website, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentTypeGroupCategory": {
+          "description": "Component type group category. Classification of component type groups into a logical category. e.g. Network, Disk, Memory, CPU.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthState": {
+          "description": "Health state of the component.",
+          "enum": [
+            "Error",
+            "Warning",
+            "Success",
+            "Unknown",
+            "Uninitialized"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HealthState",
+            "modelAsString": false
+          }
+        },
+        "healthStateCategory": {
+          "description": "Category of component's health state.",
+          "enum": [
+            "Identity",
+            "CustomGroup"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HealthStateCategory",
+            "modelAsString": true
+          }
+        },
+        "healthStateChangesStartTime": {
+          "format": "date-time",
+          "description": "Start time for health state changes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthStateChangesEndTime": {
+          "format": "date-time",
+          "description": "End time for health state changes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHealthStateChangeTime": {
+          "format": "date-time",
+          "description": "Time of last health state change.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmId": {
+          "description": "ID of the VM this component belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmName": {
+          "description": "Name of the VM this component belongs to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "vmTags": {
+          "description": "Tags on the VM this component belongs to.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "aggregateProperties": {
+          "description": "Properties requested in aggregation queries.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "children": {
+          "description": "component children.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Component"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MonitorInstancesCollection": {
+      "description": "Model for collection of health instances.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "Collection of health instances.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorInstance"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "MonitorInstance": {
+      "description": "Model for monitor instance.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "description": "For optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/MonitorInstanceProperties",
+          "description": "Properties of the monitor instance.",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "MonitorInstanceProperties": {
+      "description": "Model for properties of a monitor instance.",
+      "type": "object",
+      "properties": {
+        "workspaceId": {
+          "description": "ID of the workspace.",
+          "type": "string",
+          "readOnly": true
+        },
+        "solutionId": {
+          "description": "ID of the OMS solution this health instance belong to.",
+          "type": "string",
+          "readOnly": true
+        },
+        "workloadType": {
+          "description": "Type of the workload.",
+          "enum": [
+            "BaseOS",
+            "SQL",
+            "IIS",
+            "Apache"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "WorkloadType",
+            "modelAsString": true
+          }
+        },
+        "componentId": {
+          "description": "ID of the component.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentName": {
+          "description": "Name of the component.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentTypeId": {
+          "description": "ID of the component type.",
+          "type": "string",
+          "readOnly": true
+        },
+        "componentTypeName": {
+          "description": "Name of the component type. Qualifies the type of component such as whether it is a SQL database, logical disk, website, etc.",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorId": {
+          "description": "ID of the monitor instance.",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorName": {
+          "description": "Name of the monitor.",
+          "type": "string",
+          "readOnly": true
+        },
+        "monitorType": {
+          "description": "Type of the monitor. The qualifier for the health criteria depending on the functionality it performs such as Unit, Aggregate, Dependency.",
+          "enum": [
+            "Aggregate",
+            "Dependency",
+            "Unit"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MonitorType",
+            "modelAsString": false
+          }
+        },
+        "monitorCategory": {
+          "description": "Monitor type category. Indicates the attribute of the component that the health criteria monitors such as Performance, Availability, etc.",
+          "enum": [
+            "AvailabilityHealth",
+            "Configuration",
+            "EntityHealth",
+            "PerformanceHealth",
+            "Security"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "MonitorCategory",
+            "modelAsString": false
+          }
+        },
+        "healthState": {
+          "description": "Health state of monitor instance.",
+          "enum": [
+            "Error",
+            "Warning",
+            "Success",
+            "Unknown",
+            "Uninitialized"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HealthState",
+            "modelAsString": false
+          }
+        },
+        "healthStateCategory": {
+          "description": "Category of monitor instance's health state.",
+          "enum": [
+            "Identity",
+            "CustomGroup"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HealthStateCategory",
+            "modelAsString": true
+          }
+        },
+        "healthStateChanges": {
+          "description": "Health state changes.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/HealthStateChange"
+          },
+          "readOnly": true
+        },
+        "healthStateChangesStartTime": {
+          "format": "date-time",
+          "description": "Start time for health state changes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "healthStateChangesEndTime": {
+          "format": "date-time",
+          "description": "End time for health state changes.",
+          "type": "string",
+          "readOnly": true
+        },
+        "lastHealthStateChangeTime": {
+          "format": "date-time",
+          "description": "Time of last health state change.",
+          "type": "string",
+          "readOnly": true
+        },
+        "alertGeneration": {
+          "description": "Generates alert or not.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "AlertGeneration",
+            "modelAsString": true
+          }
+        },
+        "aggregateProperties": {
+          "description": "Properties requested in aggregation queries.",
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
+        "children": {
+          "description": "Health instance children.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/MonitorInstance"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "HealthStateChange": {
+      "description": "Model for health state change",
+      "type": "object",
+      "properties": {
+        "healthState": {
+          "description": "Health state of monitor instance.",
+          "enum": [
+            "Error",
+            "Warning",
+            "Success",
+            "Unknown",
+            "Uninitialized"
+          ],
+          "type": "string",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "HealthState",
+            "modelAsString": false
+          }
+        },
+        "healthStateChangeTime": {
+          "format": "date-time",
+          "description": "Time at which this Health state was reached.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "NotificationSettingsCollection": {
+      "description": "Model for collection of notificationSettings.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NotificationSetting"
+          }
+        },
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "x-ms-azure-resource": true
+    },
+    "NotificationSetting": {
+      "description": "Model for NotificationSetting.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v1/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "properties": {
+        "etag": {
+          "description": "For optimistic concurrency control.",
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NotificationSettingProperties",
+          "description": "Properties of Notification Settings",
+          "readOnly": true,
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "NotificationSettingProperties": {
+      "description": "Model for properties of a NotificationSetting.",
+      "type": "object",
+      "properties": {
+        "actionGroupResourceIds": {
+          "description": "List of action group resource ids to be notified",
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "OperationListResult": {
+      "description": "Container for a list of operations supported by the resource provider.",
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "URL to the next set of results.",
+          "type": "string",
+          "readOnly": true
+        },
+        "value": {
+          "description": "List of operations.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "Operation": {
+      "description": "Operation supported by the resource provider.",
+      "type": "object",
+      "properties": {
+        "display": {
+          "$ref": "#/definitions/OperationProperties",
+          "description": "The properties of the resource operation.",
+          "readOnly": true
+        },
+        "name": {
+          "description": "The name of the resource operation.",
+          "type": "string",
+          "readOnly": true
+        },
+        "origin": {
+          "description": "The origin of the operation.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "OperationProperties": {
+      "description": "Properties of an operation supported by the resource provider.",
+      "type": "object",
+      "properties": {
+        "description": {
+          "description": "The description of the resource provider.",
+          "type": "string",
+          "readOnly": true
+        },
+        "operation": {
+          "description": "This operation name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "provider": {
+          "description": "The provider name.",
+          "type": "string",
+          "readOnly": true
+        },
+        "resource": {
+          "description": "The resource name.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
+    "ErrorFieldContract": {
+      "description": "Error field contract.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Property level error code.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable representation of property-level error.",
+          "type": "string"
+        },
+        "target": {
+          "description": "Property name.",
+          "type": "string"
+        }
+      }
+    },
+    "ErrorResponse": {
+      "description": "Error body contract.",
+      "type": "object",
+      "properties": {
+        "code": {
+          "description": "Service-defined error code. This code serves as a sub-status for the HTTP error code specified in the response.",
+          "type": "string"
+        },
+        "message": {
+          "description": "Human-readable representation of the error.",
+          "type": "string"
+        },
+        "details": {
+          "description": "The list of invalid fields send in request, in case of validation error.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ErrorFieldContract"
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "api-version": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "2018-08-31-preview"
+      ]
+    },
+    "$select": {
+      "name": "$select",
+      "in": "query",
+      "description": "Properties to be returned in the response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "Filter to be applied on the operation.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$apply": {
+      "name": "$apply",
+      "in": "query",
+      "description": "Apply aggregation.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$orderby": {
+      "name": "$orderby",
+      "in": "query",
+      "description": "Sort the result on one or more properties.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$expand": {
+      "name": "$expand",
+      "in": "query",
+      "description": "Include properties inline in the response.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$top": {
+      "name": "$top",
+      "in": "query",
+      "description": "Limit the result to the specified number of rows.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "$skiptoken": {
+      "name": "$skiptoken",
+      "in": "query",
+      "description": "The page-continuation token to use with a paged version of this API.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "componentId": {
+      "name": "componentId",
+      "in": "path",
+      "description": "Component Id.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "monitorId": {
+      "name": "monitorId",
+      "in": "path",
+      "description": "Id of the Monitor.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "monitorInstanceId": {
+      "name": "monitorInstanceId",
+      "in": "path",
+      "description": "MonitorInstance Id.",
+      "required": true,
+      "type": "string",
+      "format": "uuid",
+      "x-ms-parameter-location": "method"
+    },
+    "notificationSettingName": {
+      "name": "notificationSettingName",
+      "in": "path",
+      "description": "Default string modeled as parameter for URL to work correctly.",
+      "required": true,
+      "type": "string",
+      "enum": [
+        "default"
+      ],
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

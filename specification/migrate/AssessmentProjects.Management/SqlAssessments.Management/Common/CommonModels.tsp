@@ -1,10 +1,15 @@
 import "./SqlEnums.tsp";
-import "../Normalized Contract/StandardizedContracts/CommonModels.tsp";
-import "../Normalized Contract/StandardizedContracts/AssessedWorkloadProperties.tsp";
-import "../Normalized Contract/StandardizedContracts/CostComponent.tsp";
-import "../Normalized Contract/StandardizedContracts/ProductSupportStatus.tsp";
+import "../../Common/StandardizedContracts/CommonModels.tsp";
+import "../../Common/StandardizedContracts/AssessedWorkloadProperties.tsp";
+import "../../Common/StandardizedContracts/CostComponent.tsp";
+import "../../Common/StandardizedContracts/ProductSupportStatus.tsp";
 
+using TypeSpec.Http;
+using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
+using OpenAPI;
 
 namespace Microsoft.Migrate;
 
@@ -16,7 +21,7 @@ model SqlAssessmentV2PaasSuitabilityData {
 
   @doc("Gets the replica azure SQL PAAS SKU.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   replicaAzureSqlSku?: AzureSqlPaasSkuDto[];
 
   @doc("Gets the shared resources.")
@@ -32,7 +37,7 @@ model SqlAssessmentV2PaasSuitabilityData {
   monthlyStorageCost?: float32;
 
   @doc("Gets the collection of cost components.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   costComponents?: CostComponent[];
 
   @doc("Gets the suitability for Microsoft cloud defender.")
@@ -49,12 +54,12 @@ model SqlAssessmentV2PaasSuitabilityData {
 
   @doc("Gets the list of migration guidelines applicable to this target.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   migrationGuidelines?: SqlMigrationGuideline[];
 
   @doc("Gets the list of SQL recommendation Reasoning.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   recommendationReasonings?: SqlRecommendationReasoning[];
 
   @doc("Gets the migration target platform.")
@@ -67,7 +72,7 @@ model SqlAssessmentV2PaasSuitabilityData {
 
   @doc("Gets the list of migrations issues.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   migrationIssues?: SqlAssessmentMigrationIssue[];
 }
 
@@ -129,7 +134,7 @@ model SqlRecommendationReasoning {
 
   @doc("Gets the Sql recommended reasoning parameters.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   contextParameters?: SqlRecommendationReasoningContext[];
 }
 
@@ -150,7 +155,7 @@ model SqlAssessmentV2IaasSuitabilityData {
 
   @doc("Gets the replica azure SQL IAAS SKU.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   replicaAzureSqlSku?: AzureSqlIaasSkuDto[];
 
   @doc("Gets the shared resources.")
@@ -166,7 +171,7 @@ model SqlAssessmentV2IaasSuitabilityData {
   monthlyStorageCost?: float32;
 
   @doc("Gets the collection of cost components.")
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   costComponents?: CostComponent[];
 
   @doc("Gets the suitability for Microsoft cloud defender.")
@@ -183,12 +188,12 @@ model SqlAssessmentV2IaasSuitabilityData {
 
   @doc("Gets the list of migration guidelines applicable to this target.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   migrationGuidelines?: SqlMigrationGuideline[];
 
   @doc("Gets the list of SQL recommendation Reasoning.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   recommendationReasonings?: SqlRecommendationReasoning[];
 
   @doc("Gets the migration target platform.")
@@ -201,7 +206,7 @@ model SqlAssessmentV2IaasSuitabilityData {
 
   @doc("Gets the list of migrations issues.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   migrationIssues?: SqlAssessmentMigrationIssue[];
 }
 
@@ -214,12 +219,12 @@ model AzureSqlIaasSkuDto {
 
   @doc("Gets the The list of data disk sizes.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   dataDiskSizes?: AzureManagedDiskSkuDto[];
 
   @doc("Gets the The list of log disk sizes.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   logDiskSizes?: AzureManagedDiskSkuDto[];
 
   @doc("Gets the target type.")
@@ -269,7 +274,7 @@ model SqlMigrationGuideline {
 
   @doc("Gets the migration guideline context.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   migrationGuidelineContext?: MigrationGuidelineContext[];
 }
 
@@ -289,6 +294,7 @@ model SqlPaaSTargetOptions {
   serviceTier?: AzureSqlServiceTier;
 
   @doc("Gets or sets the target location.")
+  @extension("x-ms-identifiers", #[])
   targetLocations?: AzureLocation[];
 }
 
@@ -346,6 +352,7 @@ model SqlVmSettings {
     Gets or sets the Azure VM families (calling instance series to keep it
     consistent with other targets).
     """)
+  @extension("x-ms-identifiers", #[])
   instanceSeries?: AzureVmFamily[];
 }
 
@@ -477,12 +484,12 @@ model SqlEntityRecommendations
 
   @doc("Gets the list of migration guidelines applicable to this target.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   migrationGuidelines?: SqlMigrationGuideline[];
 
   @doc("The product support status.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   recommendationReasonings?: SqlRecommendationReasoning[];
 
   @doc("Gets the migration target platform.")
@@ -497,6 +504,6 @@ model SqlEntityRecommendations
 model SqlAssessmentMigrationIssue is MigrationIssues {
   @doc("Gets the list of impacted objects.")
   @visibility(Lifecycle.Read)
-  @identifiers(#[])
+  @extension("x-ms-identifiers", #[])
   impactedObjects?: ImpactedAssessmentObject[];
 }

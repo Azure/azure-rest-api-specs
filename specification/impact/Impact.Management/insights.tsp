@@ -7,6 +7,7 @@ namespace Microsoft.Impact;
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using OpenAPI;
 using Azure.ResourceManager;
 
 @doc("Insight resource")

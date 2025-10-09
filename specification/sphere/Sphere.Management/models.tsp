@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 using TypeSpec.Http;
 using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
+using OpenAPI;
 
 namespace Microsoft.AzureSphere;
 
@@ -705,8 +706,8 @@ model ProductUpdate {
   /**
    * The updatable properties of the Product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: ProductUpdateProperties;
 }
 
@@ -727,8 +728,8 @@ model DeviceGroupUpdate {
   /**
    * The updatable properties of the DeviceGroup.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: DeviceGroupUpdateProperties;
 }
 
@@ -779,8 +780,8 @@ model DeviceUpdate {
   /**
    * The updatable properties of the Device.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flatten"
-  @Azure.ClientGenerator.Core.Legacy.flattenProperty
+  #suppress "deprecated" "Legacy flatten"
+  @Azure.ClientGenerator.Core.flattenProperty
   properties?: DeviceUpdateProperties;
 }
 

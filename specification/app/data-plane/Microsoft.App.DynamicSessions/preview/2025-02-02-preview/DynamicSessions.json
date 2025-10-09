@@ -1,0 +1,1135 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.App Dynamic Sessions service",
+    "version": "2025-02-02-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "x-ms-parameterized-host": {
+    "hostTemplate": "{endpoint}",
+    "useSchemePrefix": false,
+    "parameters": [
+      {
+        "name": "endpoint",
+        "in": "path",
+        "description": "The management endpoint of the session pool.",
+        "required": true,
+        "type": "string"
+      }
+    ]
+  },
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "AadOauth2Auth": [
+        "https://dynamicsessions.io/.default"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "AadOauth2Auth": {
+      "type": "oauth2",
+      "description": "The Azure Active Directory OAuth2 Flow",
+      "flow": "accessCode",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "https://dynamicsessions.io/.default": ""
+      },
+      "tokenUrl": "https://login.microsoftonline.com/common/oauth2/token"
+    }
+  },
+  "tags": [],
+  "paths": {
+    "/executions": {
+      "post": {
+        "operationId": "CodeExecution_Execute",
+        "description": "Execute code in a session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/ExecutionOperationIdHeader"
+          },
+          {
+            "name": "codeExecutionRequest",
+            "in": "body",
+            "description": "The request to execute code.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SessionCodeExecutionRequest"
+            }
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "The request has been accepted for processing, but processing has not yet completed.",
+            "schema": {
+              "$ref": "#/definitions/SessionCodeExecutionResource"
+            },
+            "headers": {
+              "Operation-Location": {
+                "type": "string",
+                "format": "uri",
+                "description": "The location for monitoring the operation state."
+              },
+              "operation-id": {
+                "type": "string",
+                "description": "The id of this execution operation."
+              },
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeExecution_Execute_Async_Completed": {
+            "$ref": "./examples/CodeExecution_Execute_Async_Completed.json"
+          },
+          "CodeExecution_Execute_Async_Running": {
+            "$ref": "./examples/CodeExecution_Execute_Async_Running.json"
+          },
+          "CodeExecution_Execute_Sync": {
+            "$ref": "./examples/CodeExecution_Execute_Sync.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "operation-location"
+        },
+        "x-ms-long-running-operation": true
+      }
+    },
+    "/executions/{executionId}": {
+      "get": {
+        "operationId": "CodeExecution_Get",
+        "description": "Get the code execution result.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "executionId",
+            "in": "path",
+            "description": "Session code execution id.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionCodeExecutionResource"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CodeExecution_Get_Completed": {
+            "$ref": "./examples/CodeExecution_Get_Completed.json"
+          },
+          "CodeExecution_Get_Running": {
+            "$ref": "./examples/CodeExecution_Get_Running.json"
+          }
+        }
+      }
+    },
+    "/files": {
+      "get": {
+        "operationId": "SessionResourceFiles_List",
+        "description": "List the file resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedSessionResourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_List": {
+            "$ref": "./examples/SessionResourceFiles_List.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      },
+      "post": {
+        "operationId": "SessionResourceFiles_Upload",
+        "description": "Upload a file to a session.",
+        "consumes": [
+          "multipart/form-data"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
+          },
+          {
+            "name": "file",
+            "in": "formData",
+            "description": "The file to upload.",
+            "required": true,
+            "type": "file"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionResourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_Upload": {
+            "$ref": "./examples/SessionResourceFiles_Upload.json"
+          }
+        }
+      }
+    },
+    "/files/{name}": {
+      "get": {
+        "operationId": "SessionResourceFiles_Get",
+        "description": "Get the file resource.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionResourceFile"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_Get": {
+            "$ref": "./examples/SessionResourceFiles_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SessionResourceFiles_Delete",
+        "description": "Delete the file.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. "
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_Delete": {
+            "$ref": "./examples/SessionResourceFiles_Delete.json"
+          }
+        }
+      }
+    },
+    "/files/{name}/content": {
+      "get": {
+        "operationId": "SessionResourceFiles_GetContent",
+        "description": "Get the content of the file.",
+        "produces": [
+          "application/octet-stream",
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the file.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          },
+          {
+            "$ref": "#/parameters/SessionResourceFilePathQueryParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "type": "file"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionResourceFiles_GetContent": {
+            "$ref": "./examples/SessionResourceFiles_GetContent.json"
+          }
+        }
+      }
+    },
+    "/listSessions": {
+      "get": {
+        "operationId": "ListSessions_Get",
+        "description": "List the sessions.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "skip",
+            "in": "query",
+            "description": "The offset for pagination purpose.",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionsListResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ListSessions_Get": {
+            "$ref": "./examples/ListSessions_Get.json"
+          }
+        }
+      }
+    },
+    "/metadata": {
+      "get": {
+        "operationId": "SessionPoolMetadata_Get",
+        "description": "Get the metadata information.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/SessionPoolMetadataResponse"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionPoolMetadata_Get": {
+            "$ref": "./examples/SessionPoolMetadata_Get.json"
+          }
+        }
+      }
+    },
+    "/session": {
+      "get": {
+        "operationId": "SessionManagement_Get",
+        "description": "Get the session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/Session"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionManagement_Get": {
+            "$ref": "./examples/SessionManagement_Get.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "SessionManagement_Delete",
+        "description": "Delete the session.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionIdentifier"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SessionManagement_Delete": {
+            "$ref": "./examples/SessionManagement_Delete.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Azure.Core.Foundations.Error": {
+      "type": "object",
+      "description": "The error object.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "message": {
+          "type": "string",
+          "description": "A human-readable representation of the error."
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the error."
+        },
+        "details": {
+          "type": "array",
+          "description": "An array of details about specific errors that led to this reported error.",
+          "items": {
+            "$ref": "#/definitions/Azure.Core.Foundations.Error"
+          }
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "An object containing more specific information than the current object about the error."
+        }
+      },
+      "required": [
+        "code",
+        "message"
+      ]
+    },
+    "Azure.Core.Foundations.ErrorResponse": {
+      "type": "object",
+      "description": "A response containing error details.",
+      "properties": {
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.Error",
+          "description": "The error object."
+        }
+      },
+      "required": [
+        "error"
+      ]
+    },
+    "Azure.Core.Foundations.InnerError": {
+      "type": "object",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
+      "properties": {
+        "code": {
+          "type": "string",
+          "description": "One of a server-defined set of error codes."
+        },
+        "innererror": {
+          "$ref": "#/definitions/Azure.Core.Foundations.InnerError",
+          "description": "Inner error."
+        }
+      }
+    },
+    "Azure.Core.Foundations.OperationState": {
+      "type": "string",
+      "description": "Enum describing allowed operation states.",
+      "enum": [
+        "NotStarted",
+        "Running",
+        "Succeeded",
+        "Failed",
+        "Canceled"
+      ],
+      "x-ms-enum": {
+        "name": "OperationState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "NotStarted",
+            "value": "NotStarted",
+            "description": "The operation has not started."
+          },
+          {
+            "name": "Running",
+            "value": "Running",
+            "description": "The operation is in progress."
+          },
+          {
+            "name": "Succeeded",
+            "value": "Succeeded",
+            "description": "The operation has completed successfully."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "The operation has failed."
+          },
+          {
+            "name": "Canceled",
+            "value": "Canceled",
+            "description": "The operation has been canceled by the user."
+          }
+        ]
+      }
+    },
+    "Azure.Core.eTag": {
+      "type": "string",
+      "description": "The ETag (or entity tag) HTTP response header is an identifier for a specific version of a resource.\nIt lets caches be more efficient and save bandwidth, as a web server does not need to resend a full response if the content was not changed.\n\nIt is a string of ASCII characters placed between double quotes, like \"675af34563dc-tr34\"."
+    },
+    "CodeExecutionIdentifier": {
+      "type": "object",
+      "description": "Session code execution identifier path parameter.",
+      "properties": {
+        "executionId": {
+          "type": "string",
+          "description": "The identifier of code execution."
+        }
+      },
+      "required": [
+        "executionId"
+      ]
+    },
+    "CodeInputType": {
+      "type": "string",
+      "description": "Code input type.",
+      "enum": [
+        "Inline",
+        "InlineBase64",
+        "InlineText"
+      ],
+      "x-ms-enum": {
+        "name": "CodeInputType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "inline",
+            "value": "Inline",
+            "description": "Inline."
+          },
+          {
+            "name": "inlineBase64",
+            "value": "InlineBase64",
+            "description": "InlineBase64."
+          },
+          {
+            "name": "inlineText",
+            "value": "InlineText",
+            "description": "InlineText."
+          }
+        ]
+      }
+    },
+    "ExecutionType": {
+      "type": "string",
+      "description": "Execution Type",
+      "enum": [
+        "Synchronous",
+        "Asynchronous"
+      ],
+      "x-ms-enum": {
+        "name": "ExecutionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "synchronous",
+            "value": "Synchronous",
+            "description": "Synchronous"
+          },
+          {
+            "name": "asynchronous",
+            "value": "Asynchronous",
+            "description": "Asynchronous"
+          }
+        ]
+      }
+    },
+    "JupyterKernel": {
+      "type": "object",
+      "description": "Jupyter kernel information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the kernel."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the kernel."
+        },
+        "projectUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Project URL of the kernel."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the kernel."
+        }
+      },
+      "required": [
+        "name",
+        "version",
+        "projectUrl",
+        "description"
+      ]
+    },
+    "Package": {
+      "type": "object",
+      "description": "Package information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the package."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the package."
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
+    },
+    "PagedSessionResourceFile": {
+      "type": "object",
+      "description": "Paged collection of SessionResourceFile items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The SessionResourceFile items on this page",
+          "items": {
+            "$ref": "#/definitions/SessionResourceFile"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "Runtime": {
+      "type": "object",
+      "description": "Runtime information.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the runtime."
+        },
+        "version": {
+          "type": "string",
+          "description": "Version of the runtime."
+        }
+      },
+      "required": [
+        "name",
+        "version"
+      ]
+    },
+    "Session": {
+      "type": "object",
+      "description": "The session resource.",
+      "properties": {
+        "identifier": {
+          "type": "string",
+          "description": "The identifier of the session."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the session was created."
+        },
+        "lastAccessedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the session was last accessed."
+        },
+        "expireAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date and time when the session will expire."
+        },
+        "etag": {
+          "$ref": "#/definitions/Azure.Core.eTag",
+          "description": "The ETag of the session, representing the underlying container ID."
+        }
+      },
+      "required": [
+        "identifier",
+        "createdAt",
+        "lastAccessedAt",
+        "expireAt",
+        "etag"
+      ]
+    },
+    "SessionCodeExecutionRequest": {
+      "type": "object",
+      "description": "The request to execute code.",
+      "properties": {
+        "codeInputType": {
+          "$ref": "#/definitions/CodeInputType",
+          "description": "The code input type of the code execution request."
+        },
+        "executionType": {
+          "$ref": "#/definitions/ExecutionType",
+          "description": "The execution type of the code execution request."
+        },
+        "code": {
+          "type": "string",
+          "description": "The string of the code to execute, based on CodeInputType."
+        },
+        "timeoutInSeconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "Code execution timeout in seconds."
+        }
+      },
+      "required": [
+        "codeInputType",
+        "executionType",
+        "code",
+        "timeoutInSeconds"
+      ]
+    },
+    "SessionCodeExecutionResource": {
+      "type": "object",
+      "description": "The session code execution resource.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Session code execution id.",
+          "readOnly": true
+        },
+        "identifier": {
+          "type": "string",
+          "description": "The identifier of the session."
+        },
+        "executionType": {
+          "$ref": "#/definitions/ExecutionType",
+          "description": "The execution type of the code execution request."
+        },
+        "status": {
+          "$ref": "#/definitions/Azure.Core.Foundations.OperationState",
+          "description": "The status of the code execution operation, indicates whether succeeded or not."
+        },
+        "error": {
+          "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse",
+          "description": "The error of this code execution if failed."
+        },
+        "result": {
+          "$ref": "#/definitions/SessionCodeExecutionResult",
+          "description": "The result of this code execution operation."
+        }
+      },
+      "required": [
+        "id",
+        "identifier",
+        "executionType",
+        "status"
+      ]
+    },
+    "SessionCodeExecutionResult": {
+      "type": "object",
+      "description": "The result of the code execution.",
+      "properties": {
+        "stdout": {
+          "type": "string",
+          "description": "The standard output of the code execution."
+        },
+        "stderr": {
+          "type": "string",
+          "description": "The standard error of the code execution."
+        },
+        "executionResult": {
+          "description": "The result of the code execution. The type of this field is same as the type of actual result of the code execution after being Json serialized."
+        },
+        "executionTimeInMilliseconds": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The execution time of the code in milliseconds."
+        }
+      }
+    },
+    "SessionPoolMetadataResponse": {
+      "type": "object",
+      "description": "SessionPool Metadata.",
+      "properties": {
+        "runtimes": {
+          "type": "array",
+          "description": "List of runtimes.",
+          "items": {
+            "$ref": "#/definitions/Runtime"
+          }
+        },
+        "preInstalledPackages": {
+          "type": "array",
+          "description": "List of pre-installed packages.",
+          "items": {
+            "$ref": "#/definitions/Package"
+          }
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation date in RFC3339 format."
+        },
+        "lastUpdatedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last updated date in RFC3339 format."
+        },
+        "jupyterKernel": {
+          "$ref": "#/definitions/JupyterKernel",
+          "description": "Jupyter kernel information."
+        }
+      },
+      "required": [
+        "runtimes",
+        "preInstalledPackages",
+        "createdAt",
+        "lastUpdatedAt",
+        "jupyterKernel"
+      ]
+    },
+    "SessionResourceFile": {
+      "type": "object",
+      "description": "Code execution file resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the file.",
+          "x-ms-mutability": [
+            "read",
+            "update",
+            "create"
+          ]
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the session resource file."
+        },
+        "contentType": {
+          "type": "string",
+          "description": "The type of the content of this file."
+        },
+        "sizeInBytes": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The size of the file."
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The date time in RFC3339 format when the file was last modified."
+        }
+      },
+      "required": [
+        "name",
+        "type",
+        "lastModifiedAt"
+      ]
+    },
+    "SessionResourceFileCollection": {
+      "type": "object",
+      "description": "Code execution file resource collection.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The files uploaded.",
+          "items": {
+            "$ref": "#/definitions/SessionResourceFile"
+          }
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "SessionResourceFileNamePathParameter": {
+      "type": "object",
+      "description": "The session resource file name parameter.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the file."
+        }
+      },
+      "required": [
+        "name"
+      ]
+    },
+    "SessionsListResponse": {
+      "type": "object",
+      "description": "The sessions list response.",
+      "properties": {
+        "sessions": {
+          "type": "array",
+          "description": "The list of sessions.",
+          "items": {
+            "$ref": "#/definitions/Session"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of sessions."
+        }
+      },
+      "required": [
+        "sessions"
+      ]
+    }
+  },
+  "parameters": {
+    "Azure.Core.Foundations.ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "description": "The API version to use for this operation.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "apiVersion"
+    },
+    "ExecutionOperationIdHeader": {
+      "name": "operation-id",
+      "in": "header",
+      "description": "The id of this execution operation.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "operationId"
+    },
+    "SessionIdentifier": {
+      "name": "identifier",
+      "in": "query",
+      "description": "The user-assigned identifier of the session.",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 256,
+      "pattern": "^[A-Za-z0-9-_]{1,256}$",
+      "x-ms-parameter-location": "method"
+    },
+    "SessionResourceFilePathQueryParameter": {
+      "name": "path",
+      "in": "query",
+      "description": "The path of the file after uploaded.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  }
+}

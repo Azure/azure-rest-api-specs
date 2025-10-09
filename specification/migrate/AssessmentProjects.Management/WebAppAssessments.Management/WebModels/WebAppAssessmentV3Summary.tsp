@@ -1,8 +1,10 @@
-import "../Common/StandardizedContracts/SummaryProperties.tsp";
+import "../../Common/StandardizedContracts/SummaryProperties.tsp";
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
+using Azure.Core;
 using Azure.ResourceManager;
-
+using OpenAPI;
 namespace Microsoft.Migrate;
 
 @doc("WebApp assessment summary resource.")
@@ -22,5 +24,6 @@ model WebAppAssessmentV3Summary is ProxyResource<WebAppSummaryProperties> {
 model WebAppSummaryProperties is SummaryProperties {
   @doc("Light summary of the discovered entity.")
   @visibility(Lifecycle.Read)
+  @extension("x-ms-identifiers", #[])
   discoveredEntityLightSummary?: DiscoveredEntityLightSummary;
 }

@@ -1,23 +1,19 @@
 {
   "parameters": {
     "api-version": "2025-07-01-preview",
-    "catalogName": "TeamCatalog",
-    "devCenterName": "ContosoDevCenter",
-    "imageDefinitionName": "WebDevBox",
+    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58ffff",
     "resourceGroupName": "rg1",
-    "subscriptionId": "0ac520ee-14c0-480f-b6c9-0a90c58fffff"
+    "devCenterName": "ContosoDevCenter",
+    "catalogName": "TeamCatalog",
+    "imageDefinitionName": "WebDevBox"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/ContosoDevCenter/catalogs/TeamCatalog/imagedefinitions/WebDevBox",
         "name": "WebDevBox",
         "type": "Microsoft.DevCenter/devcenters/catalogs/imagedefinitions",
-        "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/rg1/providers/Microsoft.DevCenter/devcenters/ContosoDevCenter/catalogs/TeamCatalog/imagedefinitions/WebDevBox",
         "properties": {
-          "activeImageReference": {
-            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/contosogallery/images/exampleImage/versions/1.0.0"
-          },
-          "autoImageBuild": "Enabled",
           "extends": {
             "imageDefinition": "it-base",
             "parameters": [
@@ -26,20 +22,6 @@
                 "value": "Community"
               }
             ]
-          },
-          "imageReference": {
-            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/contosogallery/images/exampleImage/versions/1.0.0"
-          },
-          "imageValidationErrorDetails": {
-            "code": "400",
-            "message": "Validation failed"
-          },
-          "imageValidationStatus": "Failed",
-          "latestBuild": {
-            "name": "0a28fc61-6f87-4611-8fe2-32df44ab93b7",
-            "endTime": "2020-11-18T18:25:12.952Z",
-            "startTime": "2020-11-18T18:25:02.224Z",
-            "status": "Running"
           },
           "tasks": [
             {
@@ -52,19 +34,35 @@
               ]
             }
           ],
-          "validationStatus": "Succeeded"
+          "imageReference": {
+            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/contosogallery/images/exampleImage/versions/1.0.0"
+          },
+          "latestBuild": {
+            "name": "0a28fc61-6f87-4611-8fe2-32df44ab93b7",
+            "status": "Running",
+            "startTime": "2020-11-18T18:25:02.224Z",
+            "endTime": "2020-11-18T18:25:12.952Z"
+          },
+          "activeImageReference": {
+            "id": "/subscriptions/0ac520ee-14c0-480f-b6c9-0a90c58ffff/resourceGroups/Example/providers/Microsoft.DevCenter/devcenters/Contoso/galleries/contosogallery/images/exampleImage/versions/1.0.0"
+          },
+          "imageValidationStatus": "Failed",
+          "validationStatus": "Succeeded",
+          "imageValidationErrorDetails": {
+            "code": "400",
+            "message": "Validation failed"
+          },
+          "autoImageBuild": "Enabled"
         },
         "systemData": {
-          "createdAt": "2020-11-18T18:00:36.993Z",
           "createdBy": "user1",
           "createdByType": "User",
-          "lastModifiedAt": "2020-11-18T18:30:36.993Z",
+          "createdAt": "2020-11-18T18:00:36.993Z",
           "lastModifiedBy": "user1",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2020-11-18T18:30:36.993Z"
         }
       }
     }
-  },
-  "operationId": "DevCenterCatalogImageDefinitions_GetByDevCenterCatalog",
-  "title": "ImageDefinitions_GetByDevCenterCatalog"
+  }
 }
