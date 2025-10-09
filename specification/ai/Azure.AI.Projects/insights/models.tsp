@@ -292,7 +292,6 @@ model InsightSummary {
 @doc("Token usage for cluster analysis")
 @added(Versions.v2025_10_15_preview)
 model ClusterTokenUsage {
-
   @doc("input token usage")
   inputTokenUsage: int32;
 
