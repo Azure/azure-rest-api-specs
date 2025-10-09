@@ -1,23 +1,28 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/rest";
+import "@typespec/http";
 
 using Azure.ClientGenerator.Core;
 using Microsoft.ServiceLinker;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.Versioning;
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DryrunPatch.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LinkerPatch.properties);
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ValidateOperationResult.properties
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(ConfigurationNameItem.properties
 );
 
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DaprConfigurationResource.properties
 );
 
@@ -25,14 +30,14 @@ using Microsoft.ServiceLinker;
 @@clientName(DryrunResources.updateDryrun::parameters.properties, "parameters");
 @@clientName(Linkers.createDryrun::parameters.resource, "parameters");
 @@clientName(Linkers.updateDryrun::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DryrunResource.properties);
 
 @@clientName(LinkerResources.createOrUpdate::parameters.resource, "parameters");
 @@clientName(LinkerResources.update::parameters.properties, "parameters");
 @@clientName(Linker.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Linker.update::parameters.properties, "parameters");
-#suppress "deprecated" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(LinkerResource.properties);
 
 // @@clientLocation decorators for operations with custom @operationId
@@ -88,3 +93,244 @@ using Microsoft.ServiceLinker;
   "The fully qualified Azure Resource manager identifier of the resource to be connected."
 );
 @@key(Azure.ResourceManager.Extension.ScopeParameter.scope, "resourceUri");
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op linkerResourcesGet(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesGet, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+): LinkerResource;
+
+@@override(LinkerResources.get, linkerResourcesGet);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op linkerResourcesCreateOrUpdate(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesCreateOrUpdate, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  resource: LinkerResource,
+): LinkerResource;
+
+@@override(LinkerResources.createOrUpdate, linkerResourcesCreateOrUpdate);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op linkerResourcesUpdate(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesUpdate, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  properties: LinkerPatch,
+): LinkerResource;
+
+@@override(LinkerResources.update, linkerResourcesUpdate);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op linkerResourcesDelete(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesDelete, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+): ArmDeletedNoContentResponse;
+
+@@override(LinkerResources.delete, linkerResourcesDelete);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op linkerResourcesList(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesList, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+): ResourceList;
+
+@@override(LinkerResources.list, linkerResourcesList);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op linkerResourcesValidate(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(linkerResourcesValidate, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  body: void,
+): ValidateOperationResult;
+
+@@override(LinkerResources.validate, linkerResourcesValidate);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op linkerResourcesGenerateConfigurations(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(
+    linkerResourcesGenerateConfigurations,
+    "java,python,go,javascript"
+  )
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  connectorName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  body?: ConfigurationInfo,
+): ConfigurationResult;
+
+@@override(LinkerResources.generateConfigurations,
+  linkerResourcesGenerateConfigurations
+);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op dryrunResourcesGetDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesGetDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+): DryrunResource;
+
+@@override(DryrunResources.getDryrun, dryrunResourcesGetDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op dryrunResourcesCreateDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesCreateDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @body resource: DryrunResource,
+): DryrunResource;
+
+@@override(DryrunResources.createDryrun, dryrunResourcesCreateDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op dryrunResourcesUpdateDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesUpdateDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @body properties: DryrunPatch,
+): DryrunResource;
+
+@@override(DryrunResources.updateDryrun, dryrunResourcesUpdateDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op dryrunResourcesDeleteDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesDeleteDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  dryrunName: string,
+): ArmDeletedResponse;
+
+@@override(DryrunResources.deleteDryrun, dryrunResourcesDeleteDryrun);
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+op dryrunResourcesListDryrun(
+  ...ApiVersionParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "customization"
+  @clientLocation(dryrunResourcesListDryrun, "java,python,go,javascript")
+  @typeChangedFrom(Azure.ResourceManager.CommonTypes.Versions.v4, string)
+  subscriptionId: Azure.Core.uuid,
+
+  ...ResourceGroupParameter,
+  ...Azure.ResourceManager.Legacy.Provider,
+  ...LocationParameter,
+): DryrunList;
+
+@@override(DryrunResources.listDryrun, dryrunResourcesListDryrun);
