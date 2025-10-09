@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
+using Http;
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.Devices;
-using Azure.Core;
 
 @@clientName(Microsoft.Devices, "IotDpsClient", "javascript");
 @@clientName(Microsoft.Devices, "IotDpsClient", "python");
@@ -188,4 +190,27 @@ using Azure.Core;
 @@clientName(ProvisioningServiceDescription.resourcegroup,
   "resourceGroup",
   "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceDeleteCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): void;
+
+@@override(ProvisioningServiceDescriptions.delete,
+  IotDpsResourceDeleteCustomized,
+  "python"
 );
