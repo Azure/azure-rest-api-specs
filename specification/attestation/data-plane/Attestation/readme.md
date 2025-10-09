@@ -71,7 +71,6 @@ These settings apply only when `--tag=package-2025-06-01` is specified on the co
 ``` yaml $(tag) == 'package-2025-06-01'
 input-file:
 - stable/2025-06-01/attestation.json
-- Microsoft.Attestation/stable/2025-06-01/attestation.json
 ```
 
 ---
