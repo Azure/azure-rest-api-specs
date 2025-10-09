@@ -35,7 +35,3 @@ using Microsoft.Automanage;
 @@clientLocation(ConfigurationProfileAssignmentsOperationGroup.list,
   ConfigurationProfileAssignments
 );
-
-@@clientLocation(ConfigurationProfilesVersions.listByResourceGroup,
-  ConfigurationProfiles
-);
