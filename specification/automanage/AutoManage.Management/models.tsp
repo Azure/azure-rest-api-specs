@@ -65,19 +65,7 @@ model ConfigurationProfileProperties {
 /**
  * The response of the list best practice operation.
  */
-model BestPracticeList {
-  /**
-   * Result of the list best practice operation.
-   */
-  @pageItems
-  value?: BestPractice[];
-
-  /**
-   * Url to get the next page.
-   */
-  @nextLink
-  nextLink?: string;
-}
+model BestPracticeList is Azure.Core.Page<BestPractice>;
 
 /**
  * Definition of the configuration profile.
@@ -104,19 +92,7 @@ model UpdateResource {
 /**
  * The response of the list configuration profile operation.
  */
-model ConfigurationProfileList {
-  /**
-   * Result of the list ConfigurationProfile operation.
-   */
-  @pageItems
-  value?: ConfigurationProfile[];
-
-  /**
-   * Url to get the next page.
-   */
-  @nextLink
-  nextLink?: string;
-}
+model ConfigurationProfileList is Azure.Core.Page<ConfigurationProfile>;
 
 /**
  * Automanage configuration profile assignment properties.
@@ -144,19 +120,8 @@ model ConfigurationProfileAssignmentProperties {
 /**
  * The response of the list configuration profile assignment operation.
  */
-model ConfigurationProfileAssignmentList {
-  /**
-   * Result of the list configuration profile assignment operation.
-   */
-  @pageItems
-  value?: ConfigurationProfileAssignment[];
-
-  /**
-   * Url to get the next page.
-   */
-  @nextLink
-  nextLink?: string;
-}
+model ConfigurationProfileAssignmentList
+  is Azure.Core.Page<ConfigurationProfileAssignment>;
 
 /**
  * Localized display information for this particular operation.
@@ -290,36 +255,12 @@ model ReportResource {
 /**
  * The response of the list report operation.
  */
-model ReportList {
-  /**
-   * Result of the list report operation.
-   */
-  @pageItems
-  value?: Report[];
-
-  /**
-   * Url to get the next page.
-   */
-  @nextLink
-  nextLink?: string;
-}
+model ReportList is Azure.Core.Page<Report>;
 
 /**
  * The list of ServicePrincipals.
  */
-model ServicePrincipalListResult {
-  /**
-   * The list of servicePrincipals.
-   */
-  @pageItems
-  value?: ServicePrincipal[];
-
-  /**
-   * Url to get the next page.
-   */
-  @nextLink
-  nextLink?: string;
-}
+model ServicePrincipalListResult is Azure.Core.Page<ServicePrincipal>;
 
 /**
  * The Service Principal properties for the subscription.
@@ -338,3 +279,13 @@ model ServicePrincipalProperties {
   @visibility(Lifecycle.Read)
   authorizationSet?: boolean;
 }
+
+@@doc(BestPracticeList, "The response of the list best practice operation.");
+@@doc(ConfigurationProfileAssignmentList,
+  "The response of the list configuration profile assignment operation."
+);
+@@doc(ConfigurationProfileList,
+  "The response of the list configuration profile operation."
+);
+@@doc(ReportList, "The response of the list report operation.");
+@@doc(ServicePrincipalListResult, "The list of ServicePrincipals.");

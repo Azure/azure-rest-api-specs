@@ -119,7 +119,7 @@ interface ConfigurationProfileAssignments {
   delete is ConfigurationProfileAssignmentOps.DeleteSync<ConfigurationProfileAssignment>;
 
   /**
-   * Get list of configuration profile assignments under a given virtual machine
+   * Get list of configuration profile assignments
    */
   listByVirtualMachines is ConfigurationProfileAssignmentOps.List<
     ConfigurationProfileAssignment,

@@ -46,3 +46,5 @@ enum Versions {
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
+
+@@doc(Operations.list, "Lists all of the available Automanage REST API operations.");

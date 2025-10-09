@@ -16,7 +16,7 @@ namespace Microsoft.Automanage;
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BestPracticesVersionsOperationGroup {
   /**
-   * Retrieve a list of Automanage best practices under a given tenant
+   * Retrieve a list of Automanage best practices versions
    */
   @autoRoute
   @get

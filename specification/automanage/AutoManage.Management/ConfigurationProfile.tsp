@@ -89,7 +89,7 @@ interface ConfigurationProfiles {
   >;
 
   /**
-   * Retrieve a list of configuration profile within a resource group
+   * Retrieve a list of configuration profile within a given resource group
    */
   listByResourceGroup is ConfigurationProfileOps.List<
     ConfigurationProfile,
@@ -137,7 +137,7 @@ interface ConfigurationProfilesVersions {
   delete is ConfigurationProfilesVersionOps.DeleteSync<ConfigurationProfile>;
 
   /**
-   * Retrieve a list of configuration profile within a given resource group
+   * Retrieve a list of configuration profile version for a configuration profile
    */
   listByResourceGroup is ConfigurationProfilesVersionOps.List<
     ConfigurationProfile,
