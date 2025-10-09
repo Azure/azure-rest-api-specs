@@ -691,6 +691,15 @@
           "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "x-ms-client-flatten": true
         },
+        "kind": {
+          "type": "string",
+          "description": "This property identifies the purpose of the Cluster deployment. For example, a valid value is AzureLocal",
+          "pattern": "^[-\\w\\._,\\(\\\\\\)]+$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
         "properties": {
           "description": "Cluster properties.",
           "$ref": "#/definitions/ClusterProperties",
