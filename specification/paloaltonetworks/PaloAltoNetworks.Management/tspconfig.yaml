@@ -12,18 +12,18 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-paloaltonetworks"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-paloaltonetworks"
     namespace: "azure.mgmt.paloaltonetworks"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-paloaltonetworks"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-paloaltonetworks"
     namespace: "com.azure.resourcemanager.paloaltonetworks"
     service-name: "PaloAltoNetworks" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    service-dir: sdk/paloaltonetworks
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-paloaltonetworks"
     package-dir: "arm-paloaltonetworks"
     is-modular-library: true
     flavor: "azure"
