@@ -636,6 +636,9 @@
           "Create Managed Cluster with Web App Routing Ingress Profile configured": {
             "$ref": "./examples/ManagedClustersCreate_IngressProfile_WebAppRouting.json"
           },
+          "Create Managed Cluster with Application Load Balancer Profile configured": {
+            "$ref": "./examples/ManagedClustersCreate_IngressProfile_ApplicationLoadBalancer.json"
+          },
           "Create Managed Cluster with AKS-managed NAT gateway as outbound type": {
             "$ref": "./examples/ManagedClustersCreate_ManagedNATGateway.json"
           },
@@ -10487,6 +10490,10 @@
         "webAppRouting": {
           "$ref": "#/definitions/ManagedClusterIngressProfileWebAppRouting",
           "description": "Web App Routing settings for the ingress profile."
+        },
+        "applicationLoadBalancer": {
+          "$ref": "#/definitions/ManagedClusterIngressProfileApplicationLoadBalancer",
+          "description": "Settings for the managed Application Load Balancer installation"
         }
       },
       "description": "Ingress profile for the container service cluster."
@@ -10556,6 +10563,22 @@
         }
       },
       "description": "Web App Routing settings for the ingress profile."
+    },
+    "ManagedClusterIngressProfileApplicationLoadBalancer": {
+      "type": "object",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Whether to enable Application Load Balancer."
+        },
+        "identity": {
+          "$ref": "#/definitions/UserAssignedIdentity",
+          "description": "Managed identity of the Application Load Balancer add-on. This is the identity that should be granted permissions to manage the associated Application Gateway for Containers resource.",
+          "readOnly": true,
+          "type": "object"
+        }
+      },
+      "description": "Application Load Balancer settings for the ingress profile."
     },
     "ManagedClusterIngressProfileNginx": {
       "type": "object",
