@@ -346,15 +346,15 @@ op IotDpsResourceGetCustomized(
 );
 
 // Java-specific client name fixes to mitigate TypeSpec migration breaks
-@@clientName(Microsoft.Devices.ProvisioningServiceDescription.DefinitionStages.WithResourcegroup,
-  "WithResourceGroup",
-  "java"
-);
 @@clientName(Microsoft.Devices.IotDpsPropertiesDescription.deviceProvisioningHostName,
   "deviceProvisioningHostname",
   "java"
 );
 @@clientName(Microsoft.Devices.IotDpsPropertiesDescription.serviceOperationsHostName,
   "serviceOperationsHostname",
+  "java"
+);
+@@clientName(Microsoft.Devices.ProvisioningServiceDescription.resourcegroup,
+  "resourceGroup",
   "java"
 );
