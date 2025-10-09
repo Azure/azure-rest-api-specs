@@ -1,0 +1,1095 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Microsoft.Monitor",
+    "version": "2025-03-01-preview",
+    "x-typespec-generated": [
+      {
+        "emitter": "@azure-tools/typespec-autorest"
+      }
+    ]
+  },
+  "schemes": [
+    "https"
+  ],
+  "host": "management.azure.com",
+  "produces": [
+    "application/json"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow.",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "tags": [
+    {
+      "name": "SloView"
+    }
+  ],
+  "paths": {
+    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/sliSignalPreview": {
+      "post": {
+        "operationId": "SloView_SliSignalPreview",
+        "tags": [
+          "SloView"
+        ],
+        "description": "Returns preview data for the signal.",
+        "parameters": [
+          {
+            "name": "serviceGroupName",
+            "in": "path",
+            "description": "The name of the service group.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9-]{3,24}$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The signal preview properties.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SignalPreviewSliProperties"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/KqlmQueryResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "SliSignalPreview": {
+            "$ref": "./examples/SloView_SliSignalPreview.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "Baseline": {
+      "type": "object",
+      "description": "Defines the target parameters for a Slo baseline.",
+      "properties": {
+        "value": {
+          "type": "number",
+          "format": "float",
+          "description": "The user-defined or Azure-defined target value used for comparison against the SLI value.",
+          "minimum": 0,
+          "maximum": 100
+        },
+        "evaluationPeriodDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The time frame (in days) used for SLI evaluation.",
+          "minimum": 1,
+          "maximum": 90
+        },
+        "evaluationCalculationType": {
+          "$ref": "#/definitions/EvaluationCalculationType",
+          "description": "Specifies how evaluation is calculated, either based on calendar days or a rolling window."
+        }
+      },
+      "required": [
+        "value",
+        "evaluationPeriodDays",
+        "evaluationCalculationType"
+      ]
+    },
+    "BaselineProperties": {
+      "type": "object",
+      "description": "Defines the properties of a baseline.",
+      "properties": {
+        "baseline": {
+          "$ref": "#/definitions/Baseline",
+          "description": "Defines the baseline target, which is compared against the SLI value to determine compliance."
+        }
+      },
+      "required": [
+        "baseline"
+      ]
+    },
+    "Condition": {
+      "type": "object",
+      "description": "Represents a filtering condition.",
+      "properties": {
+        "dimensionName": {
+          "type": "string",
+          "description": "Dimension name used in filtering."
+        },
+        "scalarFunction": {
+          "$ref": "#/definitions/ScalarFunction",
+          "description": "Scalar function applied for filtering."
+        },
+        "samplingType": {
+          "$ref": "#/definitions/SamplingType",
+          "description": "Defines the sampling type."
+        },
+        "operator": {
+          "$ref": "#/definitions/ConditionOperator",
+          "description": "Operator used in the filtering condition."
+        },
+        "value": {
+          "type": "string",
+          "description": "Value used in filtering."
+        }
+      },
+      "required": [
+        "operator",
+        "value"
+      ]
+    },
+    "ConditionOperator": {
+      "type": "string",
+      "description": "Defines operators used in filter conditions.",
+      "enum": [
+        "==",
+        "!=",
+        "<",
+        "<=",
+        ">",
+        ">=",
+        "@in",
+        "!in",
+        "startswith",
+        "!startswith",
+        "contains",
+        "!contains"
+      ],
+      "x-ms-enum": {
+        "name": "ConditionOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Equal",
+            "value": "==",
+            "description": "Equal to."
+          },
+          {
+            "name": "NotEqual",
+            "value": "!=",
+            "description": "Not equal to."
+          },
+          {
+            "name": "LessThan",
+            "value": "<",
+            "description": "Less than."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "<=",
+            "description": "Less than or equal to."
+          },
+          {
+            "name": "GreaterThan",
+            "value": ">",
+            "description": "Greater than."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": ">=",
+            "description": "Greater than or equal to."
+          },
+          {
+            "name": "In",
+            "value": "@in",
+            "description": "In operator."
+          },
+          {
+            "name": "NotIn",
+            "value": "!in",
+            "description": "Not in."
+          },
+          {
+            "name": "StartsWith",
+            "value": "startswith",
+            "description": "Starts with."
+          },
+          {
+            "name": "NotStartsWith",
+            "value": "!startswith",
+            "description": "Does not start with."
+          },
+          {
+            "name": "Contains",
+            "value": "contains",
+            "description": "Contains the value."
+          },
+          {
+            "name": "NotContains",
+            "value": "!contains",
+            "description": "Does not contain the value."
+          }
+        ]
+      }
+    },
+    "EvaluationCalculationType": {
+      "type": "string",
+      "description": "Specifies the method for evaluation calculation.",
+      "enum": [
+        "CalendarDays",
+        "RollingDays"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationCalculationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "CalendarDays",
+            "value": "CalendarDays",
+            "description": "Calculates evaluation based on a fixed calendar period."
+          },
+          {
+            "name": "RollingDays",
+            "value": "RollingDays",
+            "description": "Calculates evaluation using a rolling time window."
+          }
+        ]
+      }
+    },
+    "EvaluationType": {
+      "type": "string",
+      "description": "Specifies how the SLI is evaluated.",
+      "enum": [
+        "WindowBased",
+        "RequestBased"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "WindowBased",
+            "value": "WindowBased",
+            "description": "Evaluates SLI based on time windows."
+          },
+          {
+            "name": "RequestBased",
+            "value": "RequestBased",
+            "description": "Evaluates SLI based on request counts."
+          }
+        ]
+      }
+    },
+    "ExecutionMessage": {
+      "type": "object",
+      "description": "Represents a KQL-M query execution message.",
+      "properties": {
+        "severity": {
+          "$ref": "#/definitions/MessageSeverity",
+          "description": "The message severity."
+        },
+        "text": {
+          "type": "string",
+          "description": "The message text."
+        },
+        "documentationLink": {
+          "type": "string",
+          "description": "The message documentation link."
+        },
+        "statementContext": {
+          "$ref": "#/definitions/StatementContextInformation",
+          "description": "The message statement context."
+        }
+      },
+      "required": [
+        "severity",
+        "text",
+        "documentationLink",
+        "statementContext"
+      ]
+    },
+    "HmsDuration": {
+      "type": "string",
+      "description": "Duration in HH:MM:SS format (e.g. 00:01:00) to match service response.",
+      "pattern": "^[0-9]{2}:[0-9]{2}:[0-9]{2}$"
+    },
+    "KqlmQueryResult": {
+      "type": "object",
+      "description": "Represents the result of a KQL-M query.",
+      "properties": {
+        "requestId": {
+          "type": "string",
+          "description": "The request ID."
+        },
+        "state": {
+          "$ref": "#/definitions/QueryState",
+          "description": "The query state."
+        },
+        "timeSeriesSets": {
+          "type": "array",
+          "description": "The list of time series sets, where each set represents results for a query statement.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesSet"
+          },
+          "x-ms-identifiers": []
+        },
+        "executionMessages": {
+          "type": "array",
+          "description": "The list of KQL-M query execution messages.",
+          "items": {
+            "$ref": "#/definitions/ExecutionMessage"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "state",
+        "timeSeriesSets",
+        "executionMessages"
+      ]
+    },
+    "MessageSeverity": {
+      "type": "string",
+      "description": "Represents the severity of a message.",
+      "enum": [
+        "Error",
+        "Warning",
+        "Info"
+      ],
+      "x-ms-enum": {
+        "name": "MessageSeverity",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Error",
+            "value": "Error",
+            "description": "Error message."
+          },
+          {
+            "name": "Warning",
+            "value": "Warning",
+            "description": "Warning message."
+          },
+          {
+            "name": "Info",
+            "value": "Info",
+            "description": "Informational message."
+          }
+        ]
+      }
+    },
+    "PreviewType": {
+      "type": "string",
+      "description": "Defines the available preview types for signal preview.",
+      "enum": [
+        "goodsignal",
+        "totalsignal",
+        "signal",
+        "slo"
+      ],
+      "x-ms-enum": {
+        "name": "PreviewType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "GoodSignal",
+            "value": "goodsignal",
+            "description": "Preview for good signal."
+          },
+          {
+            "name": "TotalSignal",
+            "value": "totalsignal",
+            "description": "Preview for total signal."
+          },
+          {
+            "name": "Signal",
+            "value": "signal",
+            "description": "Preview for signal."
+          },
+          {
+            "name": "Slo",
+            "value": "slo",
+            "description": "Preview for SLO evaluation."
+          }
+        ]
+      }
+    },
+    "QueryState": {
+      "type": "string",
+      "description": "Represents the state of a KQL-M query.",
+      "enum": [
+        "Success",
+        "Failed"
+      ],
+      "x-ms-enum": {
+        "name": "QueryState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Success",
+            "value": "Success",
+            "description": "Query succeeded."
+          },
+          {
+            "name": "Failed",
+            "value": "Failed",
+            "description": "Query failed."
+          }
+        ]
+      }
+    },
+    "ResultsMetadata": {
+      "type": "object",
+      "description": "Represents metadata for a KQL-M query result.",
+      "properties": {
+        "startTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The start time for the KQL-M query result."
+        },
+        "endTimeUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The end time for the KQL-M query result."
+        },
+        "dataResolution": {
+          "$ref": "#/definitions/HmsDuration",
+          "description": "The data resolution of the KQL-M query result in HH:MM:SS format."
+        },
+        "resultantDimensions": {
+          "type": "array",
+          "description": "The list of output dimensions of the KQL-M query result.",
+          "items": {
+            "type": "string"
+          }
+        },
+        "resultantSamplingTypes": {
+          "type": "array",
+          "description": "The list of output sampling types of the KQL-M query result.",
+          "items": {
+            "$ref": "#/definitions/SamplingTypeProjection"
+          }
+        },
+        "datapointsCount": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of datapoints in the KQL-M query result."
+        }
+      },
+      "required": [
+        "startTimeUtc",
+        "endTimeUtc",
+        "dataResolution",
+        "resultantDimensions",
+        "resultantSamplingTypes",
+        "datapointsCount"
+      ]
+    },
+    "SamplingType": {
+      "type": "string",
+      "description": "Defines the available sampling types.",
+      "enum": [
+        "max",
+        "min",
+        "avg",
+        "sum"
+      ],
+      "x-ms-enum": {
+        "name": "SamplingType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "max",
+            "value": "max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "min",
+            "value": "min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "avg",
+            "value": "avg",
+            "description": "Average value."
+          },
+          {
+            "name": "sum",
+            "value": "sum",
+            "description": "Summation."
+          }
+        ]
+      }
+    },
+    "SamplingTypeProjection": {
+      "type": "string",
+      "description": "Represents sampling types used in SLI calculations.",
+      "enum": [
+        "Value",
+        "Good",
+        "Total",
+        "Uptime",
+        "Downtime",
+        "Burnrate"
+      ],
+      "x-ms-enum": {
+        "name": "SamplingTypeProjection",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Value",
+            "value": "Value",
+            "description": "The calculated SLI value."
+          },
+          {
+            "name": "Good",
+            "value": "Good",
+            "description": "Count of good requests or events."
+          },
+          {
+            "name": "Total",
+            "value": "Total",
+            "description": "Total count of requests or events."
+          },
+          {
+            "name": "Uptime",
+            "value": "Uptime",
+            "description": "Uptime measurement."
+          },
+          {
+            "name": "Downtime",
+            "value": "Downtime",
+            "description": "Downtime measurement."
+          },
+          {
+            "name": "Burnrate",
+            "value": "Burnrate",
+            "description": "Error budget burn rate."
+          }
+        ]
+      }
+    },
+    "SamplingTypesDataDictionary": {
+      "type": "object",
+      "description": "Dictionary of sampling types to metric values.",
+      "properties": {
+        "Burnrate": {
+          "type": "array",
+          "description": "Error budget burn rate values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Good": {
+          "type": "array",
+          "description": "Count of good requests or events values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Total": {
+          "type": "array",
+          "description": "Total count of requests or events values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Value": {
+          "type": "array",
+          "description": "The calculated SLI value.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Uptime": {
+          "type": "array",
+          "description": "Uptime measurement values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        },
+        "Downtime": {
+          "type": "array",
+          "description": "Downtime measurement values.",
+          "items": {
+            "type": "number",
+            "format": "double"
+          }
+        }
+      }
+    },
+    "ScalarFunction": {
+      "type": "string",
+      "description": "Defines scalar functions used in filtering.",
+      "enum": [
+        "max",
+        "min",
+        "avg",
+        "sum"
+      ],
+      "x-ms-enum": {
+        "name": "ScalarFunction",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "max",
+            "value": "max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "min",
+            "value": "min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "avg",
+            "value": "avg",
+            "description": "Average value."
+          },
+          {
+            "name": "sum",
+            "value": "sum",
+            "description": "Summation."
+          }
+        ]
+      }
+    },
+    "ServiceGroupBaseParameters": {
+      "type": "object",
+      "description": "ServiceGroup as parameter",
+      "properties": {
+        "serviceGroupName": {
+          "type": "string",
+          "description": "The name of the service group.",
+          "pattern": "^[a-zA-Z0-9-]{3,24}$"
+        }
+      },
+      "required": [
+        "serviceGroupName"
+      ]
+    },
+    "Signal": {
+      "type": "object",
+      "description": "Represents a signal model used in SLI calculations.",
+      "properties": {
+        "signalSources": {
+          "type": "array",
+          "description": "Sources of metrics used for SLIs.",
+          "items": {
+            "$ref": "#/definitions/SignalSource"
+          },
+          "x-ms-identifiers": [
+            "signalSourceId"
+          ]
+        },
+        "signalFormula": {
+          "type": "string",
+          "description": "Mathematical formula used to combine multiple metrics."
+        }
+      },
+      "required": [
+        "signalSources",
+        "signalFormula"
+      ]
+    },
+    "SignalPreviewSliProperties": {
+      "type": "object",
+      "description": "Defines the properties for signal preview SLI.",
+      "properties": {
+        "previewType": {
+          "$ref": "#/definitions/PreviewType",
+          "description": "The preview type for the signal preview operation."
+        },
+        "evaluationType": {
+          "$ref": "#/definitions/EvaluationType",
+          "description": "Determines how the SLI is evaluated—either based on request counts or time windows."
+        },
+        "baselineProperties": {
+          "$ref": "#/definitions/BaselineProperties",
+          "description": "Defines the SLO baseline associated with the SLI."
+        },
+        "windowUptimeCriteria": {
+          "$ref": "#/definitions/WindowUptimeCriteria",
+          "description": "Defines the uptime criteria for window-based SLIs."
+        },
+        "signals": {
+          "$ref": "#/definitions/Signal",
+          "description": "Signals used for window-based SLI calculations."
+        },
+        "goodSignals": {
+          "$ref": "#/definitions/Signal",
+          "description": "Represents good signals used in request-based SLI calculations."
+        },
+        "totalSignals": {
+          "$ref": "#/definitions/Signal",
+          "description": "Represents total signals used in request-based SLI calculations."
+        }
+      },
+      "required": [
+        "previewType",
+        "evaluationType"
+      ]
+    },
+    "SignalSource": {
+      "type": "object",
+      "description": "Represents a signal source used in SLIs.",
+      "properties": {
+        "signalSourceId": {
+          "type": "string",
+          "description": "Unique identifier for the signal source."
+        },
+        "sourceAmwAccountManagedIdentity": {
+          "type": "string",
+          "description": "Managed identity for authenticating the signal source."
+        },
+        "sourceAmwAccountResourceId": {
+          "type": "string",
+          "description": "Resource ID of the source AMW account."
+        },
+        "metricNamespace": {
+          "type": "string",
+          "description": "Namespace of the metric."
+        },
+        "metricName": {
+          "type": "string",
+          "description": "Name of the metric."
+        },
+        "filters": {
+          "type": "array",
+          "description": "Filters applied to modify signal values.",
+          "items": {
+            "$ref": "#/definitions/Condition"
+          },
+          "x-ms-identifiers": [
+            "dimensionName",
+            "scalarFunction",
+            "samplingType",
+            "value",
+            "operator"
+          ]
+        },
+        "spatialAggregation": {
+          "$ref": "#/definitions/SpatialAggregation",
+          "description": "Defines how measurements are aggregated across multiple time series."
+        },
+        "temporalAggregation": {
+          "$ref": "#/definitions/TemporalAggregation",
+          "description": "Defines how measurements are aggregated over a specific time window within the same time series."
+        }
+      },
+      "required": [
+        "signalSourceId",
+        "sourceAmwAccountManagedIdentity",
+        "sourceAmwAccountResourceId",
+        "metricNamespace",
+        "metricName",
+        "filters",
+        "spatialAggregation"
+      ]
+    },
+    "SpatialAggregation": {
+      "type": "object",
+      "description": "Represents the spatial aggregation model.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/SpatialAggregationType",
+          "description": "Type of spatial aggregation."
+        },
+        "dimensions": {
+          "type": "array",
+          "description": "Dimensions considered for spatial aggregation.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "type",
+        "dimensions"
+      ]
+    },
+    "SpatialAggregationType": {
+      "type": "string",
+      "description": "Defines the available aggregation types.",
+      "enum": [
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Count"
+      ],
+      "x-ms-enum": {
+        "name": "SpatialAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Count",
+            "value": "Count",
+            "description": "Count of occurrences."
+          }
+        ]
+      }
+    },
+    "StatementContextInformation": {
+      "type": "object",
+      "description": "Represents statement context information for a message.",
+      "properties": {
+        "lineNumber": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The line number in the input where the error occurred."
+        },
+        "charPositionInLine": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The character position within that line where the error occurred."
+        },
+        "charPositionAbsolute": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The character position within the entire statement text where the error occurred."
+        },
+        "errorSectionLength": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Length of text section which caused an error."
+        }
+      },
+      "required": [
+        "lineNumber",
+        "charPositionInLine",
+        "charPositionAbsolute",
+        "errorSectionLength"
+      ]
+    },
+    "TemporalAggregation": {
+      "type": "object",
+      "description": "Represents temporal aggregation settings.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/TemporalAggregationType",
+          "description": "Type of temporal aggregation."
+        },
+        "windowSizeMinutes": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Time window size for aggregation, in minutes."
+        }
+      },
+      "required": [
+        "type",
+        "windowSizeMinutes"
+      ]
+    },
+    "TemporalAggregationType": {
+      "type": "string",
+      "description": "Defines the available aggregation types.",
+      "enum": [
+        "Average",
+        "Min",
+        "Max",
+        "Sum",
+        "Rate",
+        "IRate",
+        "Delta",
+        "IDelta",
+        "Increase"
+      ],
+      "x-ms-enum": {
+        "name": "TemporalAggregationType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Average",
+            "value": "Average",
+            "description": "Average value."
+          },
+          {
+            "name": "Min",
+            "value": "Min",
+            "description": "Minimum value."
+          },
+          {
+            "name": "Max",
+            "value": "Max",
+            "description": "Maximum value."
+          },
+          {
+            "name": "Sum",
+            "value": "Sum",
+            "description": "Summation."
+          },
+          {
+            "name": "Rate",
+            "value": "Rate",
+            "description": "Rate over time."
+          },
+          {
+            "name": "IRate",
+            "value": "IRate",
+            "description": "Instance rate."
+          },
+          {
+            "name": "Delta",
+            "value": "Delta",
+            "description": "Delta over time."
+          },
+          {
+            "name": "IDelta",
+            "value": "IDelta",
+            "description": "Instance delta."
+          },
+          {
+            "name": "Increase",
+            "value": "Increase",
+            "description": "Increase over time."
+          }
+        ]
+      }
+    },
+    "TimeSeriesData": {
+      "type": "object",
+      "description": "Represents a time series data entry.",
+      "properties": {
+        "dimensionValues": {
+          "type": "object",
+          "description": "The dictionary of dimension names to dimension values.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "samplingTypesData": {
+          "$ref": "#/definitions/SamplingTypesDataDictionary",
+          "description": "The dictionary of sampling types to metric values (as list of doubles)."
+        }
+      },
+      "required": [
+        "dimensionValues",
+        "samplingTypesData"
+      ]
+    },
+    "TimeSeriesSet": {
+      "type": "object",
+      "description": "Represents a set of time series results for a query statement.",
+      "properties": {
+        "resultsMetadata": {
+          "$ref": "#/definitions/ResultsMetadata",
+          "description": "The KQL-M query result metadata."
+        },
+        "timeSeriesData": {
+          "type": "array",
+          "description": "The list of time series data.",
+          "items": {
+            "$ref": "#/definitions/TimeSeriesData"
+          },
+          "x-ms-identifiers": []
+        }
+      },
+      "required": [
+        "resultsMetadata",
+        "timeSeriesData"
+      ]
+    },
+    "WindowUptimeCriteria": {
+      "type": "object",
+      "description": "Represents criteria for determining uptime in window-based SLIs.",
+      "properties": {
+        "target": {
+          "type": "number",
+          "format": "float",
+          "description": "Threshold value used to determine uptime.",
+          "minimum": 0
+        },
+        "comparator": {
+          "$ref": "#/definitions/WindowUptimeCriteriaComparator",
+          "description": "Comparison operator used for uptime evaluation."
+        }
+      },
+      "required": [
+        "target",
+        "comparator"
+      ]
+    },
+    "WindowUptimeCriteriaComparator": {
+      "type": "string",
+      "description": "Defines comparison operators for window uptime criteria.",
+      "enum": [
+        "<",
+        ">",
+        "<=",
+        ">="
+      ],
+      "x-ms-enum": {
+        "name": "WindowUptimeCriteriaComparator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "LessThan",
+            "value": "<",
+            "description": "Less than the target value."
+          },
+          {
+            "name": "GreaterThan",
+            "value": ">",
+            "description": "Greater than the target value."
+          },
+          {
+            "name": "LessThanOrEqual",
+            "value": "<=",
+            "description": "Less than or equal to the target value."
+          },
+          {
+            "name": "GreaterThanOrEqual",
+            "value": ">=",
+            "description": "Greater than or equal to the target value."
+          }
+        ]
+      }
+    }
+  },
+  "parameters": {}
+}

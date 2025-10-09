@@ -181,6 +181,16 @@ model DeploymentDataContent {
   hostNetwork?: DeploymentSettingsHostNetwork;
 
   /**
+   * Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )
+   */
+  cloudEnvironment?: string;
+
+  /**
+   * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
+   */
+  isManagementCluster?: boolean;
+
+  /**
    * SDN Integration config to deploy AzureStackHCI Cluster.
    */
   sdnIntegration?: SdnIntegration;
@@ -311,6 +321,11 @@ model DeploymentCluster {
    * Specify the fileshare path for the local witness for your Azure Stack HCI cluster.
    */
   witnessPath?: string;
+
+  /**
+   * The authentication mode for the cluster witness. An example value 'ManagedIdentity'.
+   */
+  witnessAuthenticationMode?: string;
 
   /**
    * Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster.
@@ -622,6 +637,34 @@ model OptionalServices {
    * The name of custom location.
    */
   customLocation?: string;
+
+  /**
+   * AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.
+   */
+  aksClusterProperties?: AksClusterPropertiesIntent;
+}
+
+/**
+ * AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.
+ */
+model AksClusterPropertiesIntent {
+  /**
+   * Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'
+   */
+  aksImageDownload?: AksImageDownloadIntent = AksImageDownloadIntent.Enabled;
+}
+
+/**
+ * Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'
+ */
+union AksImageDownloadIntent {
+  string,
+
+  @doc("AKS Image should be downloaded.")
+  Enabled: "Enabled",
+
+  @doc("AKS Image should not be downloaded.")
+  Disabled: "Disabled",
 }
 
 /**

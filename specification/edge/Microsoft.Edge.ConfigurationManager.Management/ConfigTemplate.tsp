@@ -55,7 +55,6 @@ model ConfigTemplateVersionWithUpdateType {
 }
 
 @added(Versions.v2025_08_01)
-@removed(Versions.v2025_08_15_preview)
 @doc("Hierarchy Ids With Level for applying config Template which will further generate ARG objects")
 model HierarchySelector {
   @doc("Hierarchy Ids")
@@ -84,7 +83,6 @@ interface ConfigTemplates {
   update is ArmResourcePatchSync<ConfigTemplate, ConfigTemplateProperties>;
 
   @added(Versions.v2025_08_01)
-  @removed(Versions.v2025_08_15_preview)
   @doc("Apply a Config Template to a particular hierarchy node")
   linkToHierarchies is ArmResourceActionNoResponseContentAsync<
     ConfigTemplate,

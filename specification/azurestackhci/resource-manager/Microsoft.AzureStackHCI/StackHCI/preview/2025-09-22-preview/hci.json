@@ -4643,6 +4643,117 @@
         ]
       }
     },
+    "AksClusterProperties": {
+      "type": "object",
+      "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.",
+      "properties": {
+        "aksImageDownload": {
+          "type": "string",
+          "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AksImageDownload",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "AKS Image should be downloaded."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "AKS Image should not be downloaded."
+              }
+            ]
+          },
+          "readOnly": true
+        }
+      }
+    },
+    "AksClusterPropertiesIntent": {
+      "type": "object",
+      "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios.",
+      "properties": {
+        "aksImageDownload": {
+          "type": "string",
+          "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
+          "default": "Enabled",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "x-ms-enum": {
+            "name": "AksImageDownloadIntent",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "AKS Image should be downloaded."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "AKS Image should not be downloaded."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "AksImageDownload": {
+      "type": "string",
+      "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AksImageDownload",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AKS Image should be downloaded."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AKS Image should not be downloaded."
+          }
+        ]
+      }
+    },
+    "AksImageDownloadIntent": {
+      "type": "string",
+      "description": "Whether to download AKS image for Azure Stack HCI cluster. Possible values include: 'string', 'Enabled', 'Disabled'",
+      "enum": [
+        "Enabled",
+        "Disabled"
+      ],
+      "x-ms-enum": {
+        "name": "AksImageDownloadIntent",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enabled",
+            "value": "Enabled",
+            "description": "AKS Image should be downloaded."
+          },
+          {
+            "name": "Disabled",
+            "value": "Disabled",
+            "description": "AKS Image should not be downloaded."
+          }
+        ]
+      }
+    },
     "ArcConnectivityProperties": {
       "type": "object",
       "description": "Connectivity related configuration required by arc server.",
@@ -5558,6 +5669,20 @@
           "$ref": "#/definitions/SoftwareAssuranceProperties",
           "description": "Software Assurance properties of the cluster."
         },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )",
+          "readOnly": true
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters",
+          "readOnly": true
+        },
+        "clusterWitness": {
+          "$ref": "#/definitions/ClusterWitnessProperties",
+          "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations."
+        },
         "logCollectionProperties": {
           "$ref": "#/definitions/LogCollectionProperties",
           "description": "Log Collection properties of the cluster."
@@ -5750,6 +5875,21 @@
         "customLocationId": {
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
+          "readOnly": true
+        },
+        "aksClusterProperties": {
+          "$ref": "#/definitions/AksClusterProperties",
+          "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios."
+        }
+      }
+    },
+    "ClusterWitnessProperties": {
+      "type": "object",
+      "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.",
+      "properties": {
+        "authenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'.",
           "readOnly": true
         }
       }
@@ -6073,6 +6213,10 @@
           "type": "string",
           "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
         },
+        "witnessAuthenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'."
+        },
         "cloudAccountName": {
           "type": "string",
           "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
@@ -6190,6 +6334,14 @@
         "hostNetwork": {
           "$ref": "#/definitions/DeploymentSettingsHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
+        },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
         },
         "sdnIntegration": {
           "$ref": "#/definitions/SdnIntegration",
@@ -9629,6 +9781,10 @@
         "customLocation": {
           "type": "string",
           "description": "The name of custom location."
+        },
+        "aksClusterProperties": {
+          "$ref": "#/definitions/AksClusterPropertiesIntent",
+          "description": "AKS cluster properties for Azure Stack HCI. This object controls the download and configuration of AKS images for the cluster, including enabling or disabling image download. Future extensions may include specifying image version and image path for advanced deployment scenarios."
         }
       }
     },

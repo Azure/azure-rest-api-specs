@@ -25,7 +25,7 @@ model CodeScanReportConfigurations {
   reportFramework?: ReportFramework;
 
   @doc("The target platform for migration.")
-  azureTargets: MigrationTarget[];
+  azureTargets: AzureTarget[];
 }
 
 @doc("Details of the code scan report.")
@@ -59,7 +59,7 @@ model ReportRecommendations {
   cloudSuitability: CloudSuitability;
 
   @doc("Recommended target platform for migration.")
-  azureTarget: MigrationTarget;
+  azureTarget: AzureTarget;
 }
 
 @doc("CodeScanReport properties.")
