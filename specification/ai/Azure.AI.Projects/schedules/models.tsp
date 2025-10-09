@@ -127,7 +127,7 @@ model RecurrenceSchedule {
   type: RecurrenceType;
 }
 
-@doc("Hourly recurrencce schedule.")
+@doc("Hourly recurrence schedule.")
 @added(Versions.v2025_10_15_preview)
 model HourlyRecurrenceSchedule extends RecurrenceSchedule {
   type: RecurrenceType.Hourly;
