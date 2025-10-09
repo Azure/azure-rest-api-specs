@@ -24,6 +24,7 @@ interface Pools {
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<Pool>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Pool,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<Pool, PoolProperties>

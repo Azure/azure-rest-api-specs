@@ -14,7 +14,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
     service-dir: "sdk/network"
-    package-dir: "azure-mgmt-privatedns"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-privatedns"
     namespace: "azure.mgmt.privatedns"
     generate-test: true
     generate-sample: true
@@ -25,15 +25,15 @@ options:
     service-name: "PrivateDns" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-privatedns"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-privatedns"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-privatedns"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/privatedns"
-    package-dir: "armprivatedns"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armprivatedns"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armprivatedns"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

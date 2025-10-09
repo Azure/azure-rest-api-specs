@@ -12,8 +12,6 @@ namespace Informatica.DataManagement;
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -59,6 +57,7 @@ interface Organizations
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaOrganizationResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaOrganizationResource,
     InformaticaOrganizationResourceUpdate
@@ -90,6 +89,7 @@ interface ServerlessRuntimes
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader
   >;
   delete is ArmResourceDeleteWithoutOkAsync<InformaticaServerlessRuntimeResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     InformaticaServerlessRuntimeResource,
     InformaticaServerlessRuntimeResourceUpdate
