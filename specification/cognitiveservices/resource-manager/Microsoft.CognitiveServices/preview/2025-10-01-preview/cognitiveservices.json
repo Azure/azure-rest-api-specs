@@ -2441,6 +2441,140 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/raiPolicy": {
+      "get": {
+        "tags": [
+          "SubscriptionRaiPolicy"
+        ],
+        "operationId": "SubscriptionRaiPolicy_Get",
+        "description": "Gets the specified Content Filters associated with the Subscription.",
+        "x-ms-examples": {
+          "GetRaiPolicy": {
+            "$ref": "./examples/GetRaiPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Get the Content Filters successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "SubscriptionRaiPolicy"
+        ],
+        "operationId": "SubscriptionRaiPolicy_CreateOrUpdate",
+        "description": "Update the state of specified Content Filters associated with the subscription.",
+        "x-ms-examples": {
+          "PutRaiPolicy": {
+            "$ref": "./examples/PutRaiPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiPolicyNameParameter"
+          },
+          {
+            "name": "raiPolicy",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            },
+            "description": "Properties describing the Content Filters."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Create/Update the Content Filters successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            }
+          },
+          "201": {
+            "description": "Create the Content Filters successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiPolicy"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "SubscriptionRaiPolicy"
+        ],
+        "operationId": "SubscriptionRaiPolicy_Delete",
+        "description": "Deletes the specified Content Filters associated with the subscription.",
+        "x-ms-examples": {
+          "DeleteRaiPolicy": {
+            "$ref": "./examples/DeleteRaiPolicy.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiPolicyNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- the operation was successfully started and will complete asynchronously.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content -- The Content Filters does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiBlocklists/{raiBlocklistName}": {
       "get": {
         "tags": [
@@ -3193,6 +3327,66 @@
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/testRaiExternalSafetyProvider": {
+      "post": {
+        "tags": [
+          "TestRaiExternalSafetyProvider"
+        ],
+        "operationId": "TestRaiExternalSafetyProvider_CreateOrUpdate",
+        "description": "Test the rai safety provider associated with the subscription.",
+        "x-ms-examples": {
+          "TestRaiExternalSafetyProvider": {
+            "$ref": "./examples/TestRaiExternalSafetyProvider.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/safetyProviderNameParameter"
+          },
+          {
+            "name": "safetyProvider",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
+            },
+            "description": "Properties describing the rai external safety provider."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Tested the Safety Provider successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiExternalSafetyProvider"
+            }
+          },
+          "201": {
+            "description": "Tested the Safety Provider successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiExternalSafetyProvider"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
         }
       }
     },
