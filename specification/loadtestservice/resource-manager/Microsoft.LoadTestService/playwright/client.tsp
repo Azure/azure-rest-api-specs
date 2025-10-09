@@ -16,7 +16,7 @@ using Playwright.Management;
   "csharp"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest,
-  "PlaywrightNameAvailabilityRequest",
+  "PlaywrightNameAvailabilityContent",
   "csharp"
 );
 @@clientName(Azure.ResourceManager.CommonTypes.CheckNameAvailabilityReason,
@@ -28,9 +28,9 @@ using Playwright.Management;
   "csharp"
 );
 
-@@clientName(PlaywrightQuota, "PlaywrightQuotas", "csharp");
-@@clientName(PlaywrightWorkspaceQuota, "PlaywrightWorkspaceQuotas", "csharp");
-@@clientName(QuotaName, "PlaywrightQuotaNames", "csharp");
+// @@clientName(PlaywrightQuota, "PlaywrightQuotas", "csharp");
+// @@clientName(PlaywrightWorkspaceQuota, "PlaywrightWorkspaceQuotas", "csharp");
+@@clientName(QuotaName, "PlaywrightQuotaName", "csharp");
 @@clientName(ProvisioningState, "PlaywrightProvisioningState", "csharp");
 @@clientName(EnablementStatus, "PlaywrightEnablementStatus", "csharp");
 @@clientName(FreeTrialProperties, "PlaywrightFreeTrialProperties", "csharp");
