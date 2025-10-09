@@ -805,7 +805,7 @@ model ProjectPolicyProperties extends ProjectPolicyUpdateProperties {
 @doc("Properties of an project policy. These properties can be updated after the resource has been created.")
 model ProjectPolicyUpdateProperties {
   @doc("Resource policies that are a part of this project policy.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourcePolicies?: ResourcePolicy[];
 
   @doc("Resources that have access to the shared resources that are a part of this project policy.")
@@ -904,7 +904,7 @@ model ProjectCatalogSettings {
 @doc("Settings to be used for customizations.")
 model ProjectCustomizationSettings {
   @doc("The identities that can to be used in customization scenarios; e.g., to clone a repository.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   identities?: ProjectCustomizationManagedIdentity[];
 
   @doc("Indicates whether user customizations are enabled.")
@@ -1313,7 +1313,7 @@ model EnvironmentDefinitionParameter {
 model CatalogResourceValidationErrorDetails {
   @doc("Errors associated with resources synchronized from the catalog.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: CatalogErrorDetails[];
 }
 
@@ -1334,12 +1334,12 @@ model SyncErrorDetails {
 
   @doc("Catalog items that have conflicting names.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   conflicts?: CatalogConflictError[];
 
   @doc("Errors that occured during synchronization.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errors?: CatalogSyncError[];
 }
 
@@ -1362,7 +1362,7 @@ model CatalogSyncError {
 
   @doc("Errors associated with the file.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorDetails?: CatalogErrorDetails[];
 }
 
@@ -1471,7 +1471,7 @@ model DevCenterSku extends Azure.ResourceManager.CommonTypes.Sku {
 
   @doc("Collection of name/value pairs to describe the SKU capabilities.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: Capability[];
 }
 
@@ -1963,7 +1963,7 @@ model ImageDefinitionBuildTask {
   name?: string;
 
   @doc("Parameters for the task.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   parameters?: ImageDefinitionBuildTaskParametersItem[];
 
   @doc("Display name to help differentiate multiple instances of the same task.")
@@ -2008,7 +2008,7 @@ model PoolProperties extends PoolUpdateProperties {
 
   @doc("Details on the Pool health status to help diagnose issues. This is only populated when the pool status indicates the pool is in a non-healthy state")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["code"])
+  @identifiers(#["code"])
   healthStatusDetails?: HealthStatusDetail[];
 
   @doc("Indicates the number of provisioned Dev Boxes in this pool.")
@@ -2234,7 +2234,7 @@ model HealthCheckStatusDetailsProperties {
 
   @doc("Details for each health check item.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthChecks?: HealthCheck[];
 }
 
@@ -2281,7 +2281,7 @@ model OutboundEnvironmentEndpoint {
 
   @doc("The endpoints for this service for which the agent requires outbound access.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["domainName"])
+  @identifiers(#["domainName"])
   endpoints?: EndpointDependency[];
 }
 
@@ -2297,7 +2297,7 @@ model EndpointDependency {
 
   @doc("The list of connection details for this endpoint.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   endpointDetails?: EndpointDetail[];
 }
 
@@ -2346,10 +2346,7 @@ model CatalogListResult is Azure.Core.Page<Catalog>;
 @@visibility(DevBoxDefinitionListResult.value, Lifecycle.Read);
 @@visibility(DevCenterListResult.value, Lifecycle.Read);
 @@visibility(EncryptionSetListResult.value, Lifecycle.Read);
-@@OpenAPI.extension(OutboundEnvironmentEndpointCollection.value,
-  "x-ms-identifiers",
-  #["category"]
-);
+@@identifiers(OutboundEnvironmentEndpointCollection.value, #["category"]);
 @@visibility(EnvironmentDefinitionListResult.value, Lifecycle.Read);
 @@visibility(EnvironmentTypeListResult.value, Lifecycle.Read);
 @@visibility(GalleryListResult.value, Lifecycle.Read);
