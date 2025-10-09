@@ -28,9 +28,8 @@ directive:
     where: $.definitions.NetworkRuleSets["properties"]["applyToIoTCentral"]
     transform: $['default'] = 'False'
 
-  - from: iotcentral.json
+  - from: swagger-document
     where: $.definitions.Resource
-    transform: $['x-ms-client-name'] = "ARMResource"
-modelerfour:
-  lenient-model-deduplication: true
+    transform: >
+      $["x-ms-client-name"] = "ArmResource"
 ```
