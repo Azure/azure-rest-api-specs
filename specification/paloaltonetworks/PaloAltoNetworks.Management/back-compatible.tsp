@@ -281,7 +281,6 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(AzureResourceManagerUserAssignedIdentity,
   "Azure.ResourceManager.UserAssignedIdentity"
 );
-@@clientName(MetricsObject.provisioningState, "provisioningStateOnly");
 
 @@visibility(CertificateObjectGlobalRulestackResource.properties,
   Lifecycle.Read,
