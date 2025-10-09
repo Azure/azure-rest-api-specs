@@ -20,13 +20,28 @@ jobs:
     runs-on: ubuntu-24.04
 
     steps:
-      - uses: actions/checkout@v4
+      - name: Checkout self
+        uses: actions/checkout@v4
         with:
           # Must include all branches, for git branch logic in Avocado to work correctly
           fetch-depth: 0
 
+      - name: Checkout avocado@refs/pull/217/merge
+        uses: actions/checkout@v4
+        with:
+          repository: Azure/avocado
+          ref: refs/pull/217/merge
+          path: avocado
+
       - name: Setup Node and install deps
         uses: ./.github/actions/setup-node-install-deps
+        with:
+          working-directory: avocado
+
+      - name: Build avocado
+        run: |
+          npm run tsc
+        working-directory: avocado
 
       - name: Run Avocado
         id: run-avocado
@@ -37,7 +52,7 @@ jobs:
 
           echo "output-file=$AVOCADO_OUTPUT_FILE" >> "$GITHUB_OUTPUT"
 
-          npm exec --no -- avocado \
+          node avocado/bin/cli.js \
             --excludePaths \
               "/common-types/" \
               "/scenarios/" \
