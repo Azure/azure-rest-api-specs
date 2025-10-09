@@ -70,12 +70,14 @@ interface InferenceGroups {
   /**
    * Get InferenceGroup.
    */
+  @summary("Get InferenceGroup.")
   get is InferenceGroupOps.Read<InferenceGroup>;
 
   /**
    * Create or update InferenceGroup (asynchronous).
    */
   @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update InferenceGroup (asynchronous).")
   createOrUpdate is InferenceGroupOps.CreateOrUpdateAsync<
     InferenceGroup,
     Response = ArmResourceUpdatedResponse<InferenceGroup> | (ArmResourceCreatedResponse<
@@ -94,6 +96,7 @@ interface InferenceGroups {
    * Update InferenceGroup (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update InferenceGroup (asynchronous).")
   update is InferenceGroupOps.CustomPatchAsync<
     InferenceGroup,
     PatchModel = PartialMinimalTrackedResourceWithSku,
@@ -110,6 +113,7 @@ interface InferenceGroups {
    * Delete InferenceGroup (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete InferenceGroup (asynchronous).")
   delete is InferenceGroupOps.DeleteWithoutOkAsync<
     InferenceGroup,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -124,6 +128,7 @@ interface InferenceGroups {
   /**
    * List Inference Groups.
    */
+  @summary("List Inference Groups.")
   list is InferenceGroupOps.List<
     InferenceGroup,
     Parameters = {
@@ -164,6 +169,7 @@ interface InferenceGroups {
    * Retrieve status of delta models associated with the InferenceGroup and the target base model.
    */
   @action("deltaModels/getStatus")
+  @summary("Retrieve status of delta models associated with the InferenceGroup and the target base model.")
   getDeltaModelsStatusAsync is InferenceGroupOps.ActionSync<
     InferenceGroup,
     DeltaModelStatusRequest,
@@ -175,6 +181,7 @@ interface InferenceGroups {
    */
   @list
   @action("deltaModels/list")
+  @summary("List delta models associated with the InferenceGroup and the target base model.")
   listDeltaModelsAsync is InferenceGroupOps.ActionSync<
     InferenceGroup,
     DeltaModelListRequest,
@@ -185,6 +192,7 @@ interface InferenceGroups {
    * Modify delta models associated with the InferenceGroup and the target base model.
    */
   @action("deltaModels/modify")
+  @summary("Modify delta models associated with the InferenceGroup and the target base model.")
   modifyDeltaModelsAsync is InferenceGroupOps.ActionSync<
     InferenceGroup,
     DeltaModelModifyRequest,
@@ -194,6 +202,7 @@ interface InferenceGroups {
   /**
    * Retrieve inference group status.
    */
+  @summary("Retrieve inference group status.")
   getStatus is InferenceGroupOps.ActionSync<
     InferenceGroup,
     void,
@@ -206,6 +215,7 @@ interface InferenceGroups {
   @list
   @get
   @action("skus")
+  @summary("List Inference Group Skus.")
   listSkus is InferenceGroupOps.ActionSync<
     InferenceGroup,
     void,

@@ -77,6 +77,7 @@ interface InferenceEndpoints {
    * Create or update InferenceEndpoint (asynchronous).
    */
   @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update InferenceEndpoint (asynchronous).")
   createOrUpdate is InferenceEndpointOps.CreateOrUpdateAsync<
     InferenceEndpoint,
     Response = ArmResourceUpdatedResponse<InferenceEndpoint> | (ArmResourceCreatedResponse<
@@ -95,6 +96,7 @@ interface InferenceEndpoints {
    * Update InferenceEndpoint (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update InferenceEndpoint (asynchronous).")
   update is InferenceEndpointOps.CustomPatchAsync<
     InferenceEndpoint,
     PatchModel = void,
@@ -111,6 +113,7 @@ interface InferenceEndpoints {
    * Delete InferenceEndpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete InferenceEndpoint (asynchronous).")
   delete is InferenceEndpointOps.DeleteWithoutOkAsync<
     InferenceEndpoint,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -125,6 +128,7 @@ interface InferenceEndpoints {
   /**
    * List Inference Endpoints.
    */
+  @summary("List Inference Endpoints.")
   list is InferenceEndpointOps.List<
     InferenceEndpoint,
     Parameters = {

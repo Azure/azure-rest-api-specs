@@ -154,6 +154,7 @@ interface Workspaces {
   /**
    * Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.
    */
+  @summary("Lists all the keys associated with this workspace. This includes keys for the storage account, app insights and password for container registry.")
   listKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -163,6 +164,7 @@ interface Workspaces {
   /**
    * Get Azure Machine Learning Workspace notebook access token
    */
+  @summary("Get Azure Machine Learning Workspace notebook access token")
   listNotebookAccessToken is ArmResourceActionSync<
     Workspace,
     void,
@@ -172,6 +174,7 @@ interface Workspaces {
   /**
    * Lists keys of Azure Machine Learning Workspaces notebook.
    */
+  @summary("Lists keys of Azure Machine Learning Workspaces notebook.")
   listNotebookKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -181,6 +184,7 @@ interface Workspaces {
   /**
    * Lists keys of Azure Machine Learning Workspace's storage account.
    */
+  @summary("Lists keys of Azure Machine Learning Workspace's storage account.")
   listStorageAccountKeys is ArmResourceActionSync<
     Workspace,
     void,
@@ -218,6 +222,7 @@ interface Workspaces {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Connection_GetAllModels")
   @action("listConnectionModels")
+  @summary("Get all models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.")
   getAllModels is ArmResourceActionSync<
     Workspace,
     void,
