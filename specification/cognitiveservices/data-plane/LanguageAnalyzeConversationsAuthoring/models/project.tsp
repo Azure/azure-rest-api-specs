@@ -471,6 +471,7 @@ model AnalyzeConversationAuthoringCreateDeploymentOptions {
    * Represents the Language or AIService resource IDs that if provided,\n            the deployment will be rolled out to the resources provided here as well as the original resource in which the project is created.
    */
   @added(Versions.v2025_11_01)
+  @removed(Versions.v2025_11_15_preview)
   assignedResourceIds?: string[];
 
   /**
