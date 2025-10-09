@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.ServiceBus;
 
 model MigrationConfigListResult
@@ -630,7 +632,7 @@ model GeoDataReplicationProperties {
   /**
    * A list of regions where replicas of the namespace are maintained.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locations?: NamespaceReplicaLocation[];
 }
 
@@ -925,7 +927,7 @@ model NetworkSecurityPerimeterConfigurationProperties {
   /**
    * List of Provisioning Issues if any
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   provisioningIssues?: ProvisioningIssue[];
 
   /**
