@@ -1,7 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 
-// InMa
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
@@ -213,11 +212,6 @@ model CropGeoJsonOptions {
   maxSize?: int32 = 1024;
 
   /**
-   * Dimension parameters for output image size
-   */
-  ...DimensionsQueryParameters;
-
-  /**
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
@@ -244,6 +238,12 @@ model GetPartOptions {
   colorFormula?: string;
 
   /**
+   * Coordinate Reference System of the input coords. Default to `epsg:4326`.
+   */
+  @query("coord-crs")
+  coordinateReferenceSystem?: string;
+
+  /**
    * Output Coordinate Reference System.
    */
   @query("dst-crs")
@@ -262,19 +262,9 @@ model GetPartOptions {
   maxSize?: int32 = 1024;
 
   /**
-   * Dimension parameters for output image size
-   */
-  ...DimensionsQueryParameters;
-
-  /**
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
-
-  /**
-   * Subdataset parameters
-   */
-  ...SubDatasetQueryParameters;
 }
 
 /**
@@ -402,11 +392,6 @@ model GetTileJsonOptions {
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
-
-  /**
-   * Subdataset parameters
-   */
-  ...SubDatasetQueryParameters;
 }
 
 /**
@@ -429,19 +414,14 @@ model GetMosaicTileOptions {
   ...TerrainAlgorithmQueryParameters;
 
   /**
-   * Tile matrix set parameters
+   * Mosaic tile parameters
    */
-  ...TileMatrixSetQueryParameters;
+  ...MosaicTileQueryParameters;
 
   /**
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
-
-  /**
-   * Subdataset parameters
-   */
-  ...SubDatasetQueryParameters;
 }
 
 /**
@@ -464,6 +444,11 @@ model GetMosaicTileJsonOptions {
   ...TerrainAlgorithmQueryParameters;
 
   /**
+   * Zoom query parameters
+   */
+  ...ZoomQueryParameters;
+
+  /**
    * Default will be automatically defined if the output image needs a mask (png) or not (jpeg).
    */
   @query("tile_format")
@@ -474,27 +459,17 @@ model GetMosaicTileJsonOptions {
    */
   @maxValueExclusive(4)
   @query("tile_scale")
-  tileScale?: int32 = 1;
+  tileScale?: int32;
 
   /**
-   * Zoom query parameters
+   * Mosaic tile parameters
    */
-  ...ZoomQueryParameters;
-
-  /**
-   * Tile matrix set parameters
-   */
-  ...TileMatrixSetQueryParameters;
+  ...MosaicTileQueryParameters;
 
   /**
    * Visual rendering parameters
    */
   ...MiscTileQueryParameters;
-
-  /**
-   * Subdataset parameters
-   */
-  ...SubDatasetQueryParameters;
 }
 
 /**
@@ -505,11 +480,6 @@ model GetMosaicWmtsCapabilitiesOptions {
    * Asset query parameters for selecting and manipulating assets
    */
   ...AssetQueryParameters;
-
-  /**
-   * Mosaic search parameters
-   */
-  ...MosaicSearchQueryParameters;
 
   /**
    * Terrain algorithm parameters
@@ -667,6 +637,481 @@ op getAssetStatisticsCustomized(
 ): StacAssetStatistics;
 
 @@override(TilerAssetStatistics.getAll, getAssetStatisticsCustomized);
+
+/**
+ * Create image from a geojson feature with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropGeoJsonCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path format: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
+   */
+  options: CropGeoJsonOptions,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: StacItem,
+): TileResponse;
+
+@@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomized);
+
+/**
+ * Create image from a geojson feature with dimensions with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op cropGeoJsonWithDimensionsCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path width: float32,
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path height: float32,
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path format: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
+   */
+  options: CropGeoJsonOptions,
+
+  /**
+   * Request GeoJson body.
+   */
+  @body
+  body: StacItem,
+): TileResponse;
+
+@@override(TilerGeoJsons.cropWidthByHeightFormat,
+  cropGeoJsonWithDimensionsCustomized
+);
+
+/**
+ * Get Statistics from a geojson feature or featureCollection with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op listGeoJsonStatisticsCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for GeoJSON statistics including asset selection and statistical calculation parameters
+   */
+  options: GetGeoJsonStatisticsOptions,
+
+  /**
+   * Request GeoJson body
+   */
+  @body
+  body: StacItemCollection,
+): GeoJsonStatisticsForStacItemCollection;
+
+@@override(TilerGeoJsonStatistics.getAll, listGeoJsonStatisticsCustomized);
+
+/**
+ * Create image from part of a dataset with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getPartCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Bounding box minimum X coordinate
+   */
+  @path minx: float32,
+
+  /**
+   * Bounding box minimum Y coordinate
+   */
+  @path miny: float32,
+
+  /**
+   * Bounding box maximum X coordinate
+   */
+  @path maxx: float32,
+
+  /**
+   * Bounding box maximum Y coordinate
+   */
+  @path maxy: float32,
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path format: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for part generation including asset selection, terrain algorithms, and visual rendering
+   */
+  options: GetPartOptions,
+): TileResponse;
+
+@@override(TilerParts.getCroppedToBoundingBox, getPartCustomized);
+
+/**
+ * Create image from part of a dataset with dimensions with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getPartWithDimensionsCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Bounding box minimum X coordinate
+   */
+  @path minx: float32,
+
+  /**
+   * Bounding box minimum Y coordinate
+   */
+  @path miny: float32,
+
+  /**
+   * Bounding box maximum X coordinate
+   */
+  @path maxx: float32,
+
+  /**
+   * Bounding box maximum Y coordinate
+   */
+  @path maxy: float32,
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path width: float32,
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path height: float32,
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path format: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for part generation including asset selection, terrain algorithms, and visual rendering
+   */
+  options: GetPartOptions,
+): TileResponse;
+
+@@override(TilerParts.getCroppedToBoundingBoxWidthByHeight,
+  getPartWithDimensionsCustomized
+);
+
+/**
+ * Create preview of a dataset with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getPreviewCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for preview generation including asset selection, terrain algorithms, and visual rendering
+   */
+  options: GetPreviewOptions,
+): TileResponse;
+
+@@override(TilerPreviews.get, getPreviewCustomized);
+
+/**
+ * Create preview of a dataset with format with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getPreviewWithFormatCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path format: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for preview generation including asset selection, terrain algorithms, and visual rendering
+   */
+  options: GetPreviewOptions,
+): TileResponse;
+
+@@override(TilerPreviews.getFormat, getPreviewWithFormatCustomized);
+
+/**
+ * Merged assets statistics with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op listStatisticsCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for statistics including asset selection and statistical calculation parameters
+   */
+  options: GetStatisticsOptions,
+): StatisticsResponse;
+
+@@override(TilerStatistics.getAll, listStatisticsCustomized);
+
+/**
+ * Return the TileJson with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileJsonCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path tileMatrixSetId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for TileJSON generation including asset selection, terrain algorithms, and tile formatting
+   */
+  options: GetTileJsonOptions,
+): TileJsonMetaData;
+
+@@override(TilerTileJsonTileMatrixSets.get, getTileJsonCustomized);
+
+/**
+ * Return TileJSON document for a searchId with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getMosaicsTileJsonCustomized(
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path searchId: string,
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path tileMatrixSetId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for mosaic TileJSON generation including asset selection, terrain algorithms, and tile formatting
+   */
+  options: GetMosaicTileJsonOptions,
+): TileJsonMetaData;
+
+@@override(MosaicsTileMatrixSetsTileJson.get, getMosaicsTileJsonCustomized);
+
+/**
+ * Create map tile from mosaic with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getMosaicsTileCustomized(
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path searchId: string,
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path tileMatrixSetId: string,
+
+  /**
+   * Identifier (Z) selecting one of the scales defined in the TileMatrixSet
+   */
+  @path z: float32,
+
+  /**
+   * Column (X) index of the tile on the selected TileMatrix
+   */
+  @path x: float32,
+
+  /**
+   * Row (Y) index of the tile on the selected TileMatrix
+   */
+  @path y: float32,
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path scale: float32,
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path format: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for mosaic tile generation including asset selection, terrain algorithms, and visual rendering
+   */
+  options: GetMosaicTileOptions,
+): TileResponse;
+
+@@override(MosaicsTileMatrixSets.getZxyScaleByFormat, getMosaicsTileCustomized);
+
+/**
+ * OGC WMTS endpoint for mosaics with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getMosaicsWmtsCapabilitiesCustomized(
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path searchId: string,
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path tileMatrixSetId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for mosaic WMTS capabilities including asset selection, terrain algorithms, and tile formatting
+   */
+  options: GetMosaicWmtsCapabilitiesOptions,
+): WmtsCapabilitiesXmlResponse;
+
+@@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
+  getMosaicsWmtsCapabilitiesCustomized
+);
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
