@@ -1,8 +1,6 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 
-import "./main.tsp";
-
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using TypeSpec.Http;
@@ -300,38 +298,38 @@ op getAssetStatisticsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 @operationGroup
-interface IngestionClient {
+interface Ingestion {
   // Ingestion operations management
-  cancelIngestionOperation is IngestionOperations.delete;
-  cancelAllIngestionOperations is IngestionOperations.deleteAll;
-  getIngestionOperation is IngestionOperations.get;
-  listIngestionOperations is IngestionOperations.list;
+  cancelOperation is IngestionOperations.delete;
+  cancelAllOperations is IngestionOperations.deleteAll;
+  getOperation is IngestionOperations.get;
+  listOperations is IngestionOperations.list;
 
   // Ingestion runs operations
-  createIngestionRun is IngestionRuns.create;
-  getIngestionRun is IngestionRuns.get;
-  listIngestionRuns is IngestionRuns.list;
+  createRun is IngestionRuns.create;
+  getRun is IngestionRuns.get;
+  listRuns is IngestionRuns.list;
 
   // Ingestion operations
-  createIngestion is Ingestions.create;
-  deleteIngestion is Ingestions.delete;
-  getIngestion is Ingestions.get;
-  listIngestions is Ingestions.list;
-  updateIngestion is Ingestions.update;
+  create is Ingestions.create;
+  delete is Ingestions.delete;
+  get is Ingestions.get;
+  lists is Ingestions.list;
+  update is Ingestions.update;
 
   // Ingestion sources
-  createIngestionSource is IngestionSources.create;
-  createOrReplaceIngestionSource is IngestionSources.createOrReplace;
-  deleteIngestionSource is IngestionSources.delete;
-  getIngestionSource is IngestionSources.get;
-  listIngestionSources is IngestionSources.list;
+  createSource is IngestionSources.create;
+  createOrReplaceSource is IngestionSources.createOrReplace;
+  deleteSource is IngestionSources.delete;
+  getSource is IngestionSources.get;
+  listSources is IngestionSources.list;
   listManagedIdentities is IngestionSources.listManagedIdentities;
 }
 
 // === SpatioTemporal Asset Catalog (STAC) API ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
-interface StacClient {
+interface Stac {
   // Collection Assets
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
   createCollectionAsset is StacCollectionAssets.create;
@@ -404,7 +402,7 @@ interface StacClient {
   listQueryables is StacQueryables.getAll;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listQueryablesByCollection is StacQueryables.getAllByCollection;
+  listCollectionQueryables is StacQueryables.getAllByCollection;
 
   // STAC Search
   search is StacSearch.create;
@@ -413,14 +411,16 @@ interface StacClient {
 // === Tiles for STAC Items ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
-interface TilerClient {
+interface Tiler {
   // Tile Matrix Sets
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
-  getTileMatrixList is TileMatrixList.get;
+
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
+  listTileMatrices is TileMatrixList.get;
 
   // Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listAssetStatistics is TilerAssetStatistics.getAll;
+  getAssetStatistics is TilerAssetStatistics.getAll;
 
   // Basic Info and Assets
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."

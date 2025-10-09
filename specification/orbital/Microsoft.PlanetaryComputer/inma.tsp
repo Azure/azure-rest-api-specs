@@ -27,6 +27,7 @@ interface Ingestions {
   @doc("Get ingestions of a catalog")
   @route("/inma/collections/{collectionId}/ingestions")
   @get
+  @list
   list(...CollectionParameters, ...OdataQuery): Page<Ingestion> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -171,6 +172,7 @@ interface IngestionRuns {
   @doc("Get the runs of an ingestion")
   @route("/inma/collections/{collectionId}/ingestions/{ingestionId}/runs")
   @get
+  @list
   list(
     ...IngestionParameters,
     ...OdataQuery,
@@ -515,6 +517,7 @@ interface IngestionSources {
   @doc("Get ingestion sources in a geo-catalog")
   @route("/inma/ingestion-sources")
   @get
+  @list
   list(
     ...ApiVersionParameter,
     ...OdataQuery,
@@ -601,6 +604,7 @@ interface IngestionSources {
   @doc("Get all managed identities with access to storage accounts configured for a geo-catalog")
   @route("/inma/ingestion-sources/managed-identities")
   @get
+  @list
   listManagedIdentities(
     ...ApiVersionParameter,
   ): Page<ManagedIdentityMetadata> | ErrorResponse;
@@ -721,6 +725,7 @@ interface IngestionOperations {
   @doc("Get operations of a geo-catalog collection")
   @route("/inma/operations")
   @get
+  @list
   list(
     ...ApiVersionParameter,
     ...OdataQuery,
