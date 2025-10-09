@@ -2928,7 +2928,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiExternalSafetyProviders": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders": {
       "get": {
         "tags": [
           "RaiExternalSafetyProviders"
@@ -2941,12 +2941,6 @@
           }
         },
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -2973,7 +2967,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiExternalSafetyProviders/{safetyProviderName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/raiExternalSafetyProviders/{safetyProviderName}": {
       "get": {
         "tags": [
           "RaiExternalSafetyProvider"
@@ -2986,12 +2980,6 @@
           }
         },
         "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "#/parameters/accountNameParameter"
-          },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
@@ -8423,23 +8411,19 @@
       "description": "RAI External SafetyProvider properties.",
       "type": "object",
       "properties": {
-        "safetyProviderId": {
+        "id": {
           "type": "string",
           "description": "The unique identifier of the safety provider."
         },
-        "safetyProviderType": {
-          "type": "string",
-          "description": "The type of the safety provider."
-        },
-        "safetyProviderName": {
+        "name": {
           "type": "string",
           "description": "Name of the safety provider."
         },
-        "safetyProviderMode": {
+        "mode": {
           "type": "string",
           "description": "Safety provider mode sync/async."
         },
-        "webhookUrl": {
+        "url": {
           "type": "string",
           "format": "uri",
           "description": "Webhook URL for the safety provider."
