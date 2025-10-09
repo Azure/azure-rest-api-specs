@@ -45,22 +45,15 @@ enum Versions {
    * The 2025-08-01-preview API version.
    */
   v2025_08_01_preview: "2025-08-01-preview",
+
+  /**
+   * The 2025-12-01-preview API version.
+   */
+  v2025_12_01_preview: "2025-12-01-preview",
 }
 
-interface Operations {
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @tag("Operations")
-  @autoRoute
-  @doc("List the operations for the provider")
-  @segment("operations")
-  @get
-  @list
-  list(
-    ...ApiVersionParameter,
-
-    @path
-    @segment("providers")
-    @doc("The provider namespace (this parameter will not show up in operations).")
-    provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<OperationList> | ErrorResponse;
-}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationList>,
+      Error = ErrorResponse
+    > {}
