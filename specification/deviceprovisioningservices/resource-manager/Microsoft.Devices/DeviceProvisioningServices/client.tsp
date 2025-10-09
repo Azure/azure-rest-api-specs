@@ -260,9 +260,7 @@ op IotDpsResourceGetOperationResultCustomized(
   @path
   provisioningServiceName: string,
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
-  @query
-  asyncinfo?: string,
+  ...GetOperationResultParameters,
 ): AsyncOperationResult;
 
 @@override(ProvisioningServiceDescriptionOperations.getOperationResult,
