@@ -27,4 +27,8 @@ directive:
   - from: iotcentral.json
     where: $.definitions.NetworkRuleSets["properties"]["applyToIoTCentral"]
     transform: $['default'] = 'False'
+
+  - from: iotcentral.json
+    where: $.definitions.Resource
+    transform: $['x-ms-client-name'] = "ARMResource"
 ```
