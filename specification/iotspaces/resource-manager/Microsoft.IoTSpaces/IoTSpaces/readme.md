@@ -75,9 +75,5 @@ swagger-to-sdk:
   - repo: azure-powershell
 ```
 
-## Go
-
-See configuration in [readme.go.md](./readme.go.md)
-
 
 
