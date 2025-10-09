@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AzureDatabricksManagementClient",
-    "version": "2025-03-01-preview",
+    "version": "2022-04-01-preview",
     "description": "These APIs allow end users to operate on Azure Databricks Workspace resources."
   },
   "host": "management.azure.com",
@@ -50,23 +50,20 @@
           },
           "Get a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
             "$ref": "./examples/WorkspaceManagedDiskEncryptionGet.json"
-          },
-          "Get a workspace with Enhanced Security & Compliance Add-On": {
-            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceGet.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -93,31 +90,20 @@
         "x-ms-examples": {
           "Delete a workspace": {
             "$ref": "./examples/WorkspaceDelete.json"
-          },
-          "Delete a workspace with forceDeletion parameter": {
-            "$ref": "./examples/WorkspaceDeleteForceDeletion.json"
           }
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "name": "forceDeletion",
-            "in": "query",
-            "required": false,
-            "type": "boolean",
-            "default": false,
-            "description": "Optional parameter to retain default unity catalog data. By default the data will retained if Uc is enabled on the workspace."
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -166,9 +152,6 @@
           },
           "Update a workspace with Customer-Managed Key (CMK) encryption for Managed Disks": {
             "$ref": "./examples/WorkspaceManagedDiskEncryptionUpdate.json"
-          },
-          "Create or update a workspace with Enhanced Security & Compliance Add-On": {
-            "$ref": "./examples/WorkspaceEnhancedSecurityComplianceCreateOrUpdate.json"
           }
         },
         "parameters": [
@@ -182,16 +165,16 @@
             "description": "Parameters supplied to the create or update a workspace."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -233,16 +216,16 @@
             "description": "The update to the workspace."
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -284,13 +267,13 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -326,10 +309,10 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -365,7 +348,7 @@
         "operationId": "Operations_List",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -402,16 +385,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -448,16 +431,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/GroupId"
@@ -494,16 +477,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -540,16 +523,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -586,16 +569,16 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -647,16 +630,16 @@
         "x-ms-long-running-operation": true,
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           },
           {
             "$ref": "#/parameters/PrivateEndpointConnectionName"
@@ -696,16 +679,16 @@
         },
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "#/parameters/ResourceGroupName"
           },
           {
             "$ref": "#/parameters/WorkspaceName"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -741,7 +724,7 @@
           "description": "The system metadata relating to this resource",
           "type": "object",
           "readOnly": true,
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData"
         }
       },
       "required": [
@@ -829,10 +812,6 @@
             "entities"
           ]
         },
-        "enhancedSecurityCompliance": {
-          "description": "Contains settings related to the Enhanced Security and Compliance Add-On.",
-          "$ref": "#/definitions/EnhancedSecurityComplianceDefinition"
-        },
         "privateEndpointConnections": {
           "readOnly": true,
           "description": "Private endpoint connections created on the workspace",
@@ -864,73 +843,6 @@
           "x-ms-enum": {
             "modelAsString": true,
             "name": "RequiredNsgRules"
-          }
-        },
-        "defaultCatalog": {
-          "description": "Properties for Default Catalog configuration during workspace creation.",
-          "$ref": "#/definitions/DefaultCatalogProperties"
-        },
-        "isUcEnabled": {
-          "readOnly": true,
-          "description": "Indicates whether unity catalog enabled for the workspace or not.",
-          "type": "boolean"
-        },
-        "accessConnector": {
-          "description": "Access Connector Resource that is going to be associated with Databricks Workspace",
-          "type": "object",
-          "properties": {
-            "id": {
-              "type": "string",
-              "format": "arm-id",
-              "description": "The resource ID of Azure Databricks Access Connector Resource.",
-              "x-ms-arm-id-details": {
-                "allowedResources": [
-                  {
-                    "type": "Microsoft.Databricks/accessConnectors"
-                  }
-                ]
-              }
-            },
-            "identityType": {
-              "type": "string",
-              "description": "The identity type of the Access Connector Resource.",
-              "enum": [
-                "SystemAssigned",
-                "UserAssigned"
-              ],
-              "x-ms-enum": {
-                "modelAsString": true,
-                "name": "IdentityType"
-              }
-            },
-            "userAssignedIdentityId": {
-              "type": "string",
-              "format": "arm-id",
-              "description": "The resource ID of the User Assigned Identity associated with the Access Connector Resource. This is required for type 'UserAssigned' and not valid for type 'SystemAssigned'.",
-              "x-ms-arm-id-details": {
-                "allowedResources": [
-                  {
-                    "type": "Microsoft.ManagedIdentity/userAssignedIdentities"
-                  }
-                ]
-              }
-            }
-          },
-          "required": [
-            "id",
-            "identityType"
-          ]
-        },
-        "defaultStorageFirewall": {
-          "description": "Gets or Sets Default Storage Firewall configuration information",
-          "enum": [
-            "Disabled",
-            "Enabled"
-          ],
-          "type": "string",
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "defaultStorageFirewall"
           }
         }
       },
@@ -1068,104 +980,6 @@
         }
       }
     },
-    "EnhancedSecurityComplianceDefinition": {
-      "type": "object",
-      "description": "Status of settings related to the Enhanced Security and Compliance Add-On.",
-      "properties": {
-        "automaticClusterUpdate": {
-          "type": "string",
-          "description": "Status of automated cluster updates feature.",
-          "$ref": "#/definitions/AutomaticClusterUpdateDefinition"
-        },
-        "complianceSecurityProfile": {
-          "type": "object",
-          "description": "Status of Compliance Security Profile feature.",
-          "$ref": "#/definitions/ComplianceSecurityProfileDefinition"
-        },
-        "enhancedSecurityMonitoring": {
-          "type": "object",
-          "description": "Status of Enhanced Security Monitoring feature.",
-          "$ref": "#/definitions/EnhancedSecurityMonitoringDefinition"
-        }
-      }
-    },
-    "AutomaticClusterUpdateDefinition": {
-      "type": "object",
-      "description": "Status of automated cluster updates feature.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "AutomaticClusterUpdateValue"
-          }
-        }
-      }
-    },
-    "EnhancedSecurityMonitoringDefinition": {
-      "type": "object",
-      "description": "Status of Enhanced Security Monitoring feature.",
-      "properties": {
-        "value": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "EnhancedSecurityMonitoringValue"
-          }
-        }
-      }
-    },
-    "ComplianceSecurityProfileDefinition": {
-      "type": "object",
-      "description": "Status of Compliance Security Profile feature.",
-      "properties": {
-        "complianceStandards": {
-          "description": "Compliance standards associated with the workspace.",
-          "type": "array",
-          "items": {
-            "$ref": "#/definitions/ComplianceStandardDefinition"
-          }
-        },
-        "value": {
-          "type": "string",
-          "enum": [
-            "Enabled",
-            "Disabled"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true,
-            "name": "ComplianceSecurityProfileValue"
-          }
-        }
-      }
-    },
-    "ComplianceStandardDefinition": {
-      "description": "Compliance standard that can be associated with a workspace.",
-      "type": "string",
-      "enum": [
-        "NONE",
-        "HIPAA",
-        "PCI_DSS",
-        "CYBER_ESSENTIAL_PLUS",
-        "FEDRAMP_HIGH",
-        "CANADA_PROTECTED_B",
-        "IRAP_PROTECTED",
-        "ISMAP",
-        "HITRUST"
-      ],
-      "x-ms-enum": {
-        "modelAsString": true,
-        "name": "ComplianceStandard"
-      }
-    },
     "WorkspaceCustomParameterType": {
       "description": "Provisioning status of the workspace.",
       "readOnly": true,
@@ -1179,23 +993,6 @@
         "name": "CustomParameterType",
         "modelAsString": true
       }
-    },
-    "WorkspaceNoPublicIPBooleanParameter": {
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/WorkspaceCustomParameterType",
-          "description": "The type of variable that this is"
-        },
-        "value": {
-          "type": "boolean",
-          "description": "The value which should be used for this field."
-        }
-      },
-      "type": "object",
-      "required": [
-        "value"
-      ],
-      "description": "The value which should be used for this field."
     },
     "WorkspaceCustomBooleanParameter": {
       "properties": {
@@ -1264,8 +1061,8 @@
           "description": "The name of the Private Subnet within the Virtual Network"
         },
         "enableNoPublicIp": {
-          "$ref": "#/definitions/WorkspaceNoPublicIPBooleanParameter",
-          "description": "Boolean indicating whether the public IP should be disabled. Default value is true"
+          "$ref": "#/definitions/WorkspaceCustomBooleanParameter",
+          "description": "Should the Public IP be Disabled?"
         },
         "loadBalancerBackendPoolName": {
           "$ref": "#/definitions/WorkspaceCustomStringParameter",
@@ -1387,29 +1184,6 @@
         }
       },
       "description": "The object that contains details of encryption used on the workspace."
-    },
-    "DefaultCatalogProperties": {
-      "type": "object",
-      "properties": {
-        "initialType": {
-          "type": "string",
-          "description": "Defines the initial type of the default catalog. Possible values (case-insensitive):  HiveMetastore, UnityCatalog",
-          "enum": [
-            "HiveMetastore",
-            "UnityCatalog"
-          ],
-          "x-ms-enum": {
-            "name": "initialType",
-            "modelAsString": true
-          },
-          "default": "HiveMetastore"
-        },
-        "initialName": {
-          "type": "string",
-          "description": "Specifies the initial Name of default catalog. If not specified, the name of the workspace will be used."
-        }
-      },
-      "description": "These properties lets user specify default catalog properties during workspace creation."
     },
     "EncryptionEntitiesDefinition": {
       "properties": {
@@ -1958,6 +1732,31 @@
     }
   },
   "parameters": {
+    "SubscriptionIdParameter": {
+      "name": "subscriptionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The ID of the target subscription."
+    },
+    "ApiVersionParameter": {
+      "name": "api-version",
+      "in": "query",
+      "required": true,
+      "type": "string",
+      "description": "The API version to use for this operation."
+    },
+    "ResourceGroupName": {
+      "name": "resourceGroupName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "The name of the resource group. The name is case insensitive.",
+      "pattern": "^[-\\w\\._\\(\\)]+$",
+      "minLength": 1,
+      "maxLength": 90,
+      "x-ms-parameter-location": "method"
+    },
     "WorkspaceName": {
       "name": "workspaceName",
       "in": "path",
