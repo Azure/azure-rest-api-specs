@@ -1161,13 +1161,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Evaluators_ListLatestVersions_MaximumSet_Gen": {
+          "Evaluators_ListLatestVersions_MaximumSet": {
             "$ref": "./examples/Evaluators_ListLatestVersions_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1247,13 +1247,13 @@
             }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        },
         "x-ms-examples": {
-          "Evaluators_ListVersions_MaximumSet_Gen": {
+          "Evaluators_ListVersions_MaximumSet": {
             "$ref": "./examples/Evaluators_ListVersions_MaximumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -1332,11 +1332,8 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_CreateEvaluatorVersion_MaximumSet_Gen": {
+          "Evaluators_CreateEvaluatorVersion_MaximumSet": {
             "$ref": "./examples/Evaluators_CreateEvaluatorVersion_MaximumSet_Gen.json"
-          },
-          "Evaluators_CreateEvaluatorVersion_MinimumSet_Gen": {
-            "$ref": "./examples/Evaluators_CreateEvaluatorVersion_MinimumSet_Gen.json"
           }
         }
       }
@@ -1385,7 +1382,7 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_GetEvaluatorVersion_MaximumSet_Gen": {
+          "Evaluators_GetEvaluatorVersion_MaximumSet": {
             "$ref": "./examples/Evaluators_GetEvaluatorVersion_MaximumSet_Gen.json"
           }
         }
@@ -1433,7 +1430,7 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_UpdateEvaluatorVersion_MaximumSet_Gen": {
+          "Evaluators_UpdateEvaluatorVersion_MaximumSet": {
             "$ref": "./examples/Evaluators_UpdateEvaluatorVersion_MaximumSet_Gen.json"
           }
         }
@@ -1478,7 +1475,7 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_DeleteEvaluatorVersion_MaximumSet_Gen": {
+          "Evaluators_DeleteEvaluatorVersion_MaximumSet": {
             "$ref": "./examples/Evaluators_DeleteEvaluatorVersion_MaximumSet_Gen.json"
           }
         }
@@ -2472,10 +2469,10 @@
           }
         },
         "x-ms-examples": {
-          "SyncEvals_Create_MaximumSet_Gen": {
+          "SyncEvals_Create_MaximumSet": {
             "$ref": "./examples/SyncEvals_Create_MaximumSet_Gen.json"
           },
-          "SyncEvals_Create_MinimumSet_Gen": {
+          "SyncEvals_Create_MinimumSet": {
             "$ref": "./examples/SyncEvals_Create_MinimumSet_Gen.json"
           }
         }
@@ -3910,7 +3907,7 @@
         },
         "datasource_item_id": {
           "type": "integer",
-          "format": "int64",
+          "format": "int32",
           "description": "The identifier for the data source item."
         },
         "datasource_item": {
@@ -4560,13 +4557,13 @@
         },
         "created_at": {
           "type": "integer",
-          "format": "unixtime",
+          "format": "int64",
           "description": "Creation date/time of the evaluator",
           "readOnly": true
         },
         "modified_at": {
           "type": "integer",
-          "format": "unixtime",
+          "format": "int64",
           "description": "Last modified date/time of the evaluator",
           "readOnly": true
         },
