@@ -13,7 +13,7 @@ model SessionResourceFileCollection {
 /** Code execution file resource. */
 @resource("files")
 model SessionResourceFile {
-	/** The name of the file. */
+  /** The name of the file. */
   @key("name")
   @segment("files")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -31,7 +31,7 @@ model SessionResourceFile {
   /** The date time in RFC3339 format when the file was last modified. */
   lastModifiedAt: utcDateTime;
 
-  @added(Versions.v2025_10_02_preview)
   /** The directory path of the session resource file. */
+  @added(Versions.v2025_10_02_preview)
   directory?: string;
 }

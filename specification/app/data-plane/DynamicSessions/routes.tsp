@@ -144,7 +144,7 @@ interface ListSessions {
   @get
   get is Foundations.Operation<
     {
-  		/** The offset for pagination purpose. */
+      /** The offset for pagination purpose. */
       @query
       skip?: int32;
     },

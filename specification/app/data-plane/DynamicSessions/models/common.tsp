@@ -7,8 +7,8 @@ namespace Microsoft.App.DynamicSessions;
 
 /** The optional execution id header. */
 model ExecutionOperationIdHeader {
-  @header
   /** The id of this execution operation. */
+  @header
   operationId?: string;
 }
 
