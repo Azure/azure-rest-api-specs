@@ -4,7 +4,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Microsoft.Consumption;
 using Azure.ClientGenerator.Core;
 
-@@clientName(Microsoft.Consumption, "ConsumptionManagementClient", "python");
+@@clientName(Microsoft.Consumption,
+  "ConsumptionManagementClient",
+  "python,javascript"
+);
 
 // Fix property name changes from lowercase to uppercase (etag -> eTag)
 @@clientName(LotSummary.eTag, "etag", "java");
