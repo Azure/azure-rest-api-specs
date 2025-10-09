@@ -26,7 +26,7 @@ These are the global settings for the app.
 
 ``` yaml
 openapi-type: arm
-tag: package-2025-07-01
+tag: package-preview-2025-10-02-preview
 ```
 
 ### Suppression
@@ -43,35 +43,46 @@ directive:
     reason: False positive based on Azure common types. Managed Service Identity requires type, and the Managed Service Identity can be patched.
 ```
 
-### Tag: package-2025-07-01
-These settings apply only when `--tag=package-2025-07-01` is specified on the command line.
+### Tag: package-preview-2025-10-02-preview
 
-```yaml $(tag) == 'package-2025-07-01'
+These settings apply only when `--tag=package-preview-2025-10-02-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-10-02-preview'
 input-file:
-  - stable/2025-07-01/AuthConfigs.json
-  - stable/2025-07-01/AvailableWorkloadProfiles.json
-  - stable/2025-07-01/BillingMeters.json
-  - stable/2025-07-01/CommonDefinitions.json
-  - stable/2025-07-01/ConnectedEnvironments.json
-  - stable/2025-07-01/ConnectedEnvironmentsCertificates.json
-  - stable/2025-07-01/ConnectedEnvironmentsDaprComponents.json
-  - stable/2025-07-01/ConnectedEnvironmentsStorages.json
-  - stable/2025-07-01/ContainerApps.json
-  - stable/2025-07-01/ContainerAppsRevisions.json
-  - stable/2025-07-01/Diagnostics.json
-  - stable/2025-07-01/Global.json
-  - stable/2025-07-01/JavaComponents.json
-  - stable/2025-07-01/Jobs.json
-  - stable/2025-07-01/ManagedEnvironments.json
-  - stable/2025-07-01/ManagedEnvironmentsDaprComponents.json
-  - stable/2025-07-01/ManagedEnvironmentsHttpRouteConfig.json
-  - stable/2025-07-01/ManagedEnvironmentsMaintenanceConfigurations.json
-  - stable/2025-07-01/ManagedEnvironmentsStorages.json
-  - stable/2025-07-01/SessionPools.json
-  - stable/2025-07-01/SourceControls.json
-  - stable/2025-07-01/Subscriptions.json
-  - stable/2025-07-01/Usages.json
-  - stable/2025-07-01/LogicAppsExtension.json
+  - Microsoft.App/preview/2025-10-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2025-10-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2025-10-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2025-10-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2025-10-02-preview/Builders.json
+  - Microsoft.App/preview/2025-10-02-preview/Builds.json
+  - Microsoft.App/preview/2025-10-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsLabelHistory.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2025-10-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2025-10-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2025-10-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2025-10-02-preview/Global.json
+  - Microsoft.App/preview/2025-10-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/Jobs.json
+  - Microsoft.App/preview/2025-10-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - Microsoft.App/preview/2025-10-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-10-02-preview/SessionPools.json
+  - Microsoft.App/preview/2025-10-02-preview/SourceControls.json
+  - Microsoft.App/preview/2025-10-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2025-10-02-preview/Usages.json
 ```
 
 ### Tag: package-2025-01-01
@@ -80,27 +91,27 @@ These settings apply only when `--tag=package-2025-01-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-01-01'
 input-file:
-  - stable/2025-01-01/AuthConfigs.json
-  - stable/2025-01-01/AvailableWorkloadProfiles.json
-  - stable/2025-01-01/BillingMeters.json
-  - stable/2025-01-01/CommonDefinitions.json
-  - stable/2025-01-01/ConnectedEnvironments.json
-  - stable/2025-01-01/ConnectedEnvironmentsCertificates.json
-  - stable/2025-01-01/ConnectedEnvironmentsDaprComponents.json
-  - stable/2025-01-01/ConnectedEnvironmentsStorages.json
-  - stable/2025-01-01/ContainerApps.json
-  - stable/2025-01-01/ContainerAppsRevisions.json
-  - stable/2025-01-01/Diagnostics.json
-  - stable/2025-01-01/Global.json
-  - stable/2025-01-01/JavaComponents.json
-  - stable/2025-01-01/Jobs.json
-  - stable/2025-01-01/ManagedEnvironments.json
-  - stable/2025-01-01/ManagedEnvironmentsDaprComponents.json
-  - stable/2025-01-01/ManagedEnvironmentsStorages.json
-  - stable/2025-01-01/SessionPools.json
-  - stable/2025-01-01/SourceControls.json
-  - stable/2025-01-01/Subscriptions.json
-  - stable/2025-01-01/Usages.json
+  - Microsoft.App/stable/2025-01-01/AuthConfigs.json
+  - Microsoft.App/stable/2025-01-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2025-01-01/BillingMeters.json
+  - Microsoft.App/stable/2025-01-01/CommonDefinitions.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2025-01-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2025-01-01/ContainerApps.json
+  - Microsoft.App/stable/2025-01-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2025-01-01/Diagnostics.json
+  - Microsoft.App/stable/2025-01-01/Global.json
+  - Microsoft.App/stable/2025-01-01/JavaComponents.json
+  - Microsoft.App/stable/2025-01-01/Jobs.json
+  - Microsoft.App/stable/2025-01-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2025-01-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2025-01-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2025-01-01/SessionPools.json
+  - Microsoft.App/stable/2025-01-01/SourceControls.json
+  - Microsoft.App/stable/2025-01-01/Subscriptions.json
+  - Microsoft.App/stable/2025-01-01/Usages.json
 directive:
   - suppress: PatchBodyParametersSchema
     from: SessionPools.json
@@ -126,40 +137,40 @@ These settings apply only when `--tag=package-preview-2025-02-02-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2025-02-02-preview'
 input-file:
-  - preview/2025-02-02-preview/AppResiliency.json
-  - preview/2025-02-02-preview/AuthConfigs.json
-  - preview/2025-02-02-preview/AvailableWorkloadProfiles.json
-  - preview/2025-02-02-preview/BillingMeters.json
-  - preview/2025-02-02-preview/Builders.json
-  - preview/2025-02-02-preview/Builds.json
-  - preview/2025-02-02-preview/CommonDefinitions.json
-  - preview/2025-02-02-preview/ConnectedEnvironments.json
-  - preview/2025-02-02-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2025-02-02-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2025-02-02-preview/ConnectedEnvironmentsStorages.json
-  - preview/2025-02-02-preview/ContainerApps.json
-  - preview/2025-02-02-preview/ContainerAppsBuilds.json
-  - preview/2025-02-02-preview/ContainerAppsLabelHistory.json
-  - preview/2025-02-02-preview/ContainerAppsPatches.json
-  - preview/2025-02-02-preview/ContainerAppsRevisions.json
-  - preview/2025-02-02-preview/Diagnostics.json
-  - preview/2025-02-02-preview/DotNetComponents.json
-  - preview/2025-02-02-preview/FunctionsExtension.json
-  - preview/2025-02-02-preview/Global.json
-  - preview/2025-02-02-preview/JavaComponents.json
-  - preview/2025-02-02-preview/Jobs.json
-  - preview/2025-02-02-preview/LogicAppsExtension.json
-  - preview/2025-02-02-preview/ManagedEnvironments.json
-  - preview/2025-02-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
-  - preview/2025-02-02-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2025-02-02-preview/ManagedEnvironmentsDaprSubscriptions.json
-  - preview/2025-02-02-preview/ManagedEnvironmentsHttpRouteConfig.json
-  - preview/2025-02-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
-  - preview/2025-02-02-preview/ManagedEnvironmentsStorages.json
-  - preview/2025-02-02-preview/SessionPools.json
-  - preview/2025-02-02-preview/SourceControls.json
-  - preview/2025-02-02-preview/Subscriptions.json
-  - preview/2025-02-02-preview/Usages.json
+  - Microsoft.App/preview/2025-02-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2025-02-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2025-02-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2025-02-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2025-02-02-preview/Builders.json
+  - Microsoft.App/preview/2025-02-02-preview/Builds.json
+  - Microsoft.App/preview/2025-02-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2025-02-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2025-02-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2025-02-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-02-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-02-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2025-02-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2025-02-02-preview/ContainerAppsLabelHistory.json
+  - Microsoft.App/preview/2025-02-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2025-02-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2025-02-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2025-02-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2025-02-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2025-02-02-preview/Global.json
+  - Microsoft.App/preview/2025-02-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2025-02-02-preview/Jobs.json
+  - Microsoft.App/preview/2025-02-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2025-02-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2025-02-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2025-02-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2025-02-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2025-02-02-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - Microsoft.App/preview/2025-02-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - Microsoft.App/preview/2025-02-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2025-02-02-preview/SessionPools.json
+  - Microsoft.App/preview/2025-02-02-preview/SourceControls.json
+  - Microsoft.App/preview/2025-02-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2025-02-02-preview/Usages.json
 directive:
   - suppress: AvoidAdditionalProperties
     from: CommonDefinitions.json    
@@ -181,40 +192,40 @@ These settings apply only when `--tag=package-preview-2024-10` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-10'
 input-file:
-  - preview/2024-10-02-preview/AppResiliency.json
-  - preview/2024-10-02-preview/AuthConfigs.json
-  - preview/2024-10-02-preview/AvailableWorkloadProfiles.json
-  - preview/2024-10-02-preview/BillingMeters.json
-  - preview/2024-10-02-preview/Builders.json
-  - preview/2024-10-02-preview/Builds.json
-  - preview/2024-10-02-preview/CommonDefinitions.json
-  - preview/2024-10-02-preview/ConnectedEnvironments.json
-  - preview/2024-10-02-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2024-10-02-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2024-10-02-preview/ConnectedEnvironmentsStorages.json
-  - preview/2024-10-02-preview/ContainerApps.json
-  - preview/2024-10-02-preview/ContainerAppsBuilds.json
-  - preview/2024-10-02-preview/ContainerAppsPatches.json
-  - preview/2024-10-02-preview/ContainerAppsLabelHistory.json
-  - preview/2024-10-02-preview/ContainerAppsRevisions.json
-  - preview/2024-10-02-preview/Diagnostics.json
-  - preview/2024-10-02-preview/DotNetComponents.json
-  - preview/2024-10-02-preview/FunctionsExtension.json
-  - preview/2024-10-02-preview/Global.json
-  - preview/2024-10-02-preview/JavaComponents.json
-  - preview/2024-10-02-preview/Jobs.json
-  - preview/2024-10-02-preview/LogicAppsExtension.json
-  - preview/2024-10-02-preview/ManagedEnvironments.json
-  - preview/2024-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
-  - preview/2024-10-02-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2024-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
-  - preview/2024-10-02-preview/ManagedEnvironmentsHttpRouteConfig.json
-  - preview/2024-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
-  - preview/2024-10-02-preview/ManagedEnvironmentsStorages.json
-  - preview/2024-10-02-preview/SessionPools.json
-  - preview/2024-10-02-preview/SourceControls.json
-  - preview/2024-10-02-preview/Subscriptions.json
-  - preview/2024-10-02-preview/Usages.json
+  - Microsoft.App/preview/2024-10-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2024-10-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2024-10-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2024-10-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2024-10-02-preview/Builders.json
+  - Microsoft.App/preview/2024-10-02-preview/Builds.json
+  - Microsoft.App/preview/2024-10-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2024-10-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2024-10-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2024-10-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-10-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-10-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2024-10-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2024-10-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2024-10-02-preview/ContainerAppsLabelHistory.json
+  - Microsoft.App/preview/2024-10-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-10-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2024-10-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2024-10-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2024-10-02-preview/Global.json
+  - Microsoft.App/preview/2024-10-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2024-10-02-preview/Jobs.json
+  - Microsoft.App/preview/2024-10-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsHttpRouteConfig.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsMaintenanceConfigurations.json
+  - Microsoft.App/preview/2024-10-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-10-02-preview/SessionPools.json
+  - Microsoft.App/preview/2024-10-02-preview/SourceControls.json
+  - Microsoft.App/preview/2024-10-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2024-10-02-preview/Usages.json
 directive:
   - suppress: PatchBodyParametersSchema
     from: SessionPools.json
@@ -228,37 +239,37 @@ These settings apply only when `--tag=package-preview-2024-08` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-08'
 input-file:
-  - preview/2024-08-02-preview/AppResiliency.json
-  - preview/2024-08-02-preview/AuthConfigs.json
-  - preview/2024-08-02-preview/AvailableWorkloadProfiles.json
-  - preview/2024-08-02-preview/BillingMeters.json
-  - preview/2024-08-02-preview/Builders.json
-  - preview/2024-08-02-preview/Builds.json
-  - preview/2024-08-02-preview/CommonDefinitions.json
-  - preview/2024-08-02-preview/ConnectedEnvironments.json
-  - preview/2024-08-02-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2024-08-02-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2024-08-02-preview/ConnectedEnvironmentsStorages.json
-  - preview/2024-08-02-preview/ContainerApps.json
-  - preview/2024-08-02-preview/ContainerAppsBuilds.json
-  - preview/2024-08-02-preview/ContainerAppsPatches.json
-  - preview/2024-08-02-preview/ContainerAppsRevisions.json
-  - preview/2024-08-02-preview/Diagnostics.json
-  - preview/2024-08-02-preview/DotNetComponents.json
-  - preview/2024-08-02-preview/FunctionsExtension.json
-  - preview/2024-08-02-preview/Global.json
-  - preview/2024-08-02-preview/JavaComponents.json
-  - preview/2024-08-02-preview/Jobs.json
-  - preview/2024-08-02-preview/LogicAppsExtension.json
-  - preview/2024-08-02-preview/ManagedEnvironments.json
-  - preview/2024-08-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
-  - preview/2024-08-02-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2024-08-02-preview/ManagedEnvironmentsDaprSubscriptions.json
-  - preview/2024-08-02-preview/ManagedEnvironmentsStorages.json
-  - preview/2024-08-02-preview/SessionPools.json
-  - preview/2024-08-02-preview/SourceControls.json
-  - preview/2024-08-02-preview/Subscriptions.json
-  - preview/2024-08-02-preview/Usages.json
+  - Microsoft.App/preview/2024-08-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2024-08-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2024-08-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2024-08-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2024-08-02-preview/Builders.json
+  - Microsoft.App/preview/2024-08-02-preview/Builds.json
+  - Microsoft.App/preview/2024-08-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2024-08-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-08-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2024-08-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2024-08-02-preview/Global.json
+  - Microsoft.App/preview/2024-08-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/Jobs.json
+  - Microsoft.App/preview/2024-08-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-08-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-08-02-preview/SessionPools.json
+  - Microsoft.App/preview/2024-08-02-preview/SourceControls.json
+  - Microsoft.App/preview/2024-08-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2024-08-02-preview/Usages.json
 directive:
   - suppress: PatchBodyParametersSchema
     from: JavaComponents.json
@@ -272,37 +283,37 @@ These settings apply only when `--tag=package-preview-2024-02` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-02'
 input-file:
-  - preview/2024-02-02-preview/AppResiliency.json
-  - preview/2024-02-02-preview/AuthConfigs.json
-  - preview/2024-02-02-preview/AvailableWorkloadProfiles.json
-  - preview/2024-02-02-preview/BillingMeters.json
-  - preview/2024-02-02-preview/Builders.json
-  - preview/2024-02-02-preview/Builds.json
-  - preview/2024-02-02-preview/CommonDefinitions.json
-  - preview/2024-02-02-preview/ConnectedEnvironments.json
-  - preview/2024-02-02-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2024-02-02-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2024-02-02-preview/ConnectedEnvironmentsStorages.json
-  - preview/2024-02-02-preview/ContainerApps.json
-  - preview/2024-02-02-preview/ContainerAppsRevisions.json
-  - preview/2024-02-02-preview/ContainerAppsBuilds.json
-  - preview/2024-02-02-preview/ContainerAppsPatches.json
-  - preview/2024-02-02-preview/Diagnostics.json
-  - preview/2024-02-02-preview/DotNetComponents.json
-  - preview/2024-02-02-preview/Global.json
-  - preview/2024-02-02-preview/JavaComponents.json
-  - preview/2024-02-02-preview/Jobs.json
-  - preview/2024-02-02-preview/ManagedEnvironments.json
-  - preview/2024-02-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
-  - preview/2024-02-02-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2024-02-02-preview/ManagedEnvironmentsDaprSubscriptions.json
-  - preview/2024-02-02-preview/ManagedEnvironmentsStorages.json
-  - preview/2024-02-02-preview/SourceControls.json
-  - preview/2024-02-02-preview/Subscriptions.json
-  - preview/2024-02-02-preview/Usages.json
-  - preview/2024-02-02-preview/FunctionsExtension.json
-  - preview/2024-02-02-preview/LogicAppsExtension.json
-  - preview/2024-02-02-preview/SessionPools.json
+  - Microsoft.App/preview/2024-02-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2024-02-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2024-02-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2024-02-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2024-02-02-preview/Builders.json
+  - Microsoft.App/preview/2024-02-02-preview/Builds.json
+  - Microsoft.App/preview/2024-02-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsBuilds.json
+  - Microsoft.App/preview/2024-02-02-preview/ContainerAppsPatches.json
+  - Microsoft.App/preview/2024-02-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2024-02-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/Global.json
+  - Microsoft.App/preview/2024-02-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/Jobs.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2024-02-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2024-02-02-preview/SourceControls.json
+  - Microsoft.App/preview/2024-02-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2024-02-02-preview/Usages.json
+  - Microsoft.App/preview/2024-02-02-preview/FunctionsExtension.json
+  - Microsoft.App/preview/2024-02-02-preview/LogicAppsExtension.json
+  - Microsoft.App/preview/2024-02-02-preview/SessionPools.json
 directive:
   - suppress: PatchBodyParametersSchema
     from: JavaComponents.json
@@ -320,25 +331,25 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-03'
 input-file:
-  - stable/2024-03-01/AuthConfigs.json
-  - stable/2024-03-01/AvailableWorkloadProfiles.json
-  - stable/2024-03-01/BillingMeters.json
-  - stable/2024-03-01/CommonDefinitions.json
-  - stable/2024-03-01/ConnectedEnvironments.json
-  - stable/2024-03-01/ConnectedEnvironmentsCertificates.json
-  - stable/2024-03-01/ConnectedEnvironmentsDaprComponents.json
-  - stable/2024-03-01/ConnectedEnvironmentsStorages.json
-  - stable/2024-03-01/ContainerApps.json
-  - stable/2024-03-01/ContainerAppsRevisions.json
-  - stable/2024-03-01/Diagnostics.json
-  - stable/2024-03-01/Global.json
-  - stable/2024-03-01/Jobs.json
-  - stable/2024-03-01/ManagedEnvironments.json
-  - stable/2024-03-01/ManagedEnvironmentsDaprComponents.json
-  - stable/2024-03-01/ManagedEnvironmentsStorages.json
-  - stable/2024-03-01/SourceControls.json
-  - stable/2024-03-01/Subscriptions.json
-  - stable/2024-03-01/Usages.json
+  - Microsoft.App/stable/2024-03-01/AuthConfigs.json
+  - Microsoft.App/stable/2024-03-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2024-03-01/BillingMeters.json
+  - Microsoft.App/stable/2024-03-01/CommonDefinitions.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/ContainerApps.json
+  - Microsoft.App/stable/2024-03-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2024-03-01/Diagnostics.json
+  - Microsoft.App/stable/2024-03-01/Global.json
+  - Microsoft.App/stable/2024-03-01/Jobs.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2024-03-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2024-03-01/SourceControls.json
+  - Microsoft.App/stable/2024-03-01/Subscriptions.json
+  - Microsoft.App/stable/2024-03-01/Usages.json
 ```
 
 ### Tag: package-preview-2023-11
@@ -347,32 +358,32 @@ These settings apply only when `--tag=package-preview-2023-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-11'
 input-file:
-  - preview/2023-11-02-preview/AppResiliency.json
-  - preview/2023-11-02-preview/AuthConfigs.json
-  - preview/2023-11-02-preview/AvailableWorkloadProfiles.json
-  - preview/2023-11-02-preview/BillingMeters.json
-  - preview/2023-11-02-preview/Builders.json
-  - preview/2023-11-02-preview/Builds.json
-  - preview/2023-11-02-preview/CommonDefinitions.json
-  - preview/2023-11-02-preview/ConnectedEnvironments.json
-  - preview/2023-11-02-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2023-11-02-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2023-11-02-preview/ConnectedEnvironmentsStorages.json
-  - preview/2023-11-02-preview/ContainerApps.json
-  - preview/2023-11-02-preview/ContainerAppsRevisions.json
-  - preview/2023-11-02-preview/Diagnostics.json
-  - preview/2023-11-02-preview/Global.json
-  - preview/2023-11-02-preview/Jobs.json
-  - preview/2023-11-02-preview/ManagedEnvironments.json
-  - preview/2023-11-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
-  - preview/2023-11-02-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2023-11-02-preview/ManagedEnvironmentsDaprSubscriptions.json
-  - preview/2023-11-02-preview/ManagedEnvironmentsStorages.json
-  - preview/2023-11-02-preview/SourceControls.json
-  - preview/2023-11-02-preview/Subscriptions.json
-  - preview/2023-11-02-preview/Usages.json
-  - preview/2023-11-02-preview/JavaComponents.json
-  - preview/2023-11-02-preview/DotNetComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/AppResiliency.json
+  - Microsoft.App/preview/2023-11-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2023-11-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2023-11-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2023-11-02-preview/Builders.json
+  - Microsoft.App/preview/2023-11-02-preview/Builds.json
+  - Microsoft.App/preview/2023-11-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-11-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2023-11-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2023-11-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2023-11-02-preview/Global.json
+  - Microsoft.App/preview/2023-11-02-preview/Jobs.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2023-11-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-11-02-preview/SourceControls.json
+  - Microsoft.App/preview/2023-11-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2023-11-02-preview/Usages.json
+  - Microsoft.App/preview/2023-11-02-preview/JavaComponents.json
+  - Microsoft.App/preview/2023-11-02-preview/DotNetComponents.json
 ```
 
 ### Tag: package-preview-2023-08
@@ -381,30 +392,30 @@ These settings apply only when `--tag=package-preview-2023-08` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-08'
 input-file:
-  - preview/2023-08-01-preview/AppResiliency.json
-  - preview/2023-08-01-preview/AuthConfigs.json
-  - preview/2023-08-01-preview/AvailableWorkloadProfiles.json
-  - preview/2023-08-01-preview/BillingMeters.json
-  - preview/2023-08-01-preview/Builders.json
-  - preview/2023-08-01-preview/Builds.json
-  - preview/2023-08-01-preview/CommonDefinitions.json
-  - preview/2023-08-01-preview/ConnectedEnvironments.json
-  - preview/2023-08-01-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2023-08-01-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2023-08-01-preview/ConnectedEnvironmentsStorages.json
-  - preview/2023-08-01-preview/ContainerApps.json
-  - preview/2023-08-01-preview/ContainerAppsRevisions.json
-  - preview/2023-08-01-preview/Diagnostics.json
-  - preview/2023-08-01-preview/Global.json
-  - preview/2023-08-01-preview/Jobs.json
-  - preview/2023-08-01-preview/ManagedEnvironments.json
-  - preview/2023-08-01-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2023-08-01-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
-  - preview/2023-08-01-preview/ManagedEnvironmentsDaprSubscriptions.json
-  - preview/2023-08-01-preview/ManagedEnvironmentsStorages.json
-  - preview/2023-08-01-preview/SourceControls.json
-  - preview/2023-08-01-preview/Subscriptions.json
-  - preview/2023-08-01-preview/Usages.json
+  - Microsoft.App/preview/2023-08-01-preview/AppResiliency.json
+  - Microsoft.App/preview/2023-08-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2023-08-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2023-08-01-preview/BillingMeters.json
+  - Microsoft.App/preview/2023-08-01-preview/Builders.json
+  - Microsoft.App/preview/2023-08-01-preview/Builds.json
+  - Microsoft.App/preview/2023-08-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2023-08-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2023-08-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2023-08-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-08-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-08-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2023-08-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2023-08-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2023-08-01-preview/Global.json
+  - Microsoft.App/preview/2023-08-01-preview/Jobs.json
+  - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsDaprComponentResiliencyPolicies.json
+  - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsDaprSubscriptions.json
+  - Microsoft.App/preview/2023-08-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-08-01-preview/SourceControls.json
+  - Microsoft.App/preview/2023-08-01-preview/Subscriptions.json
+  - Microsoft.App/preview/2023-08-01-preview/Usages.json
 directive:
   - suppress: OperationIdNounVerb
     from: Builds.json
@@ -429,25 +440,25 @@ These settings apply only when `--tag=package-preview-2023-05` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-05'
 input-file:
-  - preview/2023-05-02-preview/AuthConfigs.json
-  - preview/2023-05-02-preview/AvailableWorkloadProfiles.json
-  - preview/2023-05-02-preview/BillingMeters.json
-  - preview/2023-05-02-preview/CommonDefinitions.json
-  - preview/2023-05-02-preview/ConnectedEnvironments.json
-  - preview/2023-05-02-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2023-05-02-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2023-05-02-preview/ConnectedEnvironmentsStorages.json
-  - preview/2023-05-02-preview/ContainerApps.json
-  - preview/2023-05-02-preview/ContainerAppsRevisions.json
-  - preview/2023-05-02-preview/Diagnostics.json
-  - preview/2023-05-02-preview/Global.json
-  - preview/2023-05-02-preview/Jobs.json
-  - preview/2023-05-02-preview/ManagedEnvironments.json
-  - preview/2023-05-02-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2023-05-02-preview/ManagedEnvironmentsStorages.json
-  - preview/2023-05-02-preview/SourceControls.json
-  - preview/2023-05-02-preview/Subscriptions.json
-  - preview/2023-05-02-preview/Usages.json
+  - Microsoft.App/preview/2023-05-02-preview/AuthConfigs.json
+  - Microsoft.App/preview/2023-05-02-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2023-05-02-preview/BillingMeters.json
+  - Microsoft.App/preview/2023-05-02-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-05-02-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-05-02-preview/ContainerApps.json
+  - Microsoft.App/preview/2023-05-02-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2023-05-02-preview/Diagnostics.json
+  - Microsoft.App/preview/2023-05-02-preview/Global.json
+  - Microsoft.App/preview/2023-05-02-preview/Jobs.json
+  - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-05-02-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-05-02-preview/SourceControls.json
+  - Microsoft.App/preview/2023-05-02-preview/Subscriptions.json
+  - Microsoft.App/preview/2023-05-02-preview/Usages.json
 ```
 
 ### Tag: package-2023-05
@@ -456,23 +467,23 @@ These settings apply only when `--tag=package-2023-05` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-05'
 input-file:
-  - stable/2023-05-01/AuthConfigs.json
-  - stable/2023-05-01/AvailableWorkloadProfiles.json
-  - stable/2023-05-01/BillingMeters.json
-  - stable/2023-05-01/CommonDefinitions.json
-  - stable/2023-05-01/ConnectedEnvironments.json
-  - stable/2023-05-01/ConnectedEnvironmentsCertificates.json
-  - stable/2023-05-01/ConnectedEnvironmentsDaprComponents.json
-  - stable/2023-05-01/ConnectedEnvironmentsStorages.json
-  - stable/2023-05-01/ContainerApps.json
-  - stable/2023-05-01/ContainerAppsRevisions.json
-  - stable/2023-05-01/Diagnostics.json
-  - stable/2023-05-01/Global.json
-  - stable/2023-05-01/Jobs.json
-  - stable/2023-05-01/ManagedEnvironments.json
-  - stable/2023-05-01/ManagedEnvironmentsDaprComponents.json
-  - stable/2023-05-01/ManagedEnvironmentsStorages.json
-  - stable/2023-05-01/SourceControls.json
+  - Microsoft.App/stable/2023-05-01/AuthConfigs.json
+  - Microsoft.App/stable/2023-05-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2023-05-01/BillingMeters.json
+  - Microsoft.App/stable/2023-05-01/CommonDefinitions.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2023-05-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2023-05-01/ContainerApps.json
+  - Microsoft.App/stable/2023-05-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2023-05-01/Diagnostics.json
+  - Microsoft.App/stable/2023-05-01/Global.json
+  - Microsoft.App/stable/2023-05-01/Jobs.json
+  - Microsoft.App/stable/2023-05-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2023-05-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2023-05-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2023-05-01/SourceControls.json
 ```
 
 ### Tag: package-preview-2023-04
@@ -481,23 +492,23 @@ These settings apply only when `--tag=package-preview-2023-04` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-04'
 input-file:
-  - preview/2023-04-01-preview/AuthConfigs.json
-  - preview/2023-04-01-preview/AvailableWorkloadProfiles.json
-  - preview/2023-04-01-preview/BillingMeters.json
-  - preview/2023-04-01-preview/CommonDefinitions.json
-  - preview/2023-04-01-preview/ConnectedEnvironments.json
-  - preview/2023-04-01-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2023-04-01-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2023-04-01-preview/ConnectedEnvironmentsStorages.json
-  - preview/2023-04-01-preview/ContainerApps.json
-  - preview/2023-04-01-preview/ContainerAppsRevisions.json
-  - preview/2023-04-01-preview/Diagnostics.json
-  - preview/2023-04-01-preview/Global.json
-  - preview/2023-04-01-preview/Jobs.json
-  - preview/2023-04-01-preview/ManagedEnvironments.json
-  - preview/2023-04-01-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2023-04-01-preview/ManagedEnvironmentsStorages.json
-  - preview/2023-04-01-preview/SourceControls.json
+  - Microsoft.App/preview/2023-04-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2023-04-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2023-04-01-preview/BillingMeters.json
+  - Microsoft.App/preview/2023-04-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2023-04-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2023-04-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2023-04-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-04-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-04-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2023-04-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2023-04-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2023-04-01-preview/Global.json
+  - Microsoft.App/preview/2023-04-01-preview/Jobs.json
+  - Microsoft.App/preview/2023-04-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2023-04-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2023-04-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2023-04-01-preview/SourceControls.json
 ```
 
 ### Tag: package-preview-2022-11
@@ -506,23 +517,23 @@ These settings apply only when `--tag=package-preview-2022-11` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-11'
 input-file:
-  - preview/2022-11-01-preview/AuthConfigs.json
-  - preview/2022-11-01-preview/AvailableWorkloadProfiles.json
-  - preview/2022-11-01-preview/BillingMeters.json
-  - preview/2022-11-01-preview/CommonDefinitions.json
-  - preview/2022-11-01-preview/ConnectedEnvironments.json
-  - preview/2022-11-01-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2022-11-01-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2022-11-01-preview/ConnectedEnvironmentsStorages.json
-  - preview/2022-11-01-preview/ContainerApps.json
-  - preview/2022-11-01-preview/Jobs.json
-  - preview/2022-11-01-preview/ContainerAppsRevisions.json
-  - preview/2022-11-01-preview/Diagnostics.json
-  - preview/2022-11-01-preview/Global.json
-  - preview/2022-11-01-preview/ManagedEnvironments.json
-  - preview/2022-11-01-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2022-11-01-preview/ManagedEnvironmentsStorages.json
-  - preview/2022-11-01-preview/SourceControls.json
+  - Microsoft.App/preview/2022-11-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2022-11-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2022-11-01-preview/BillingMeters.json
+  - Microsoft.App/preview/2022-11-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-11-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-11-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-11-01-preview/Jobs.json
+  - Microsoft.App/preview/2022-11-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-11-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2022-11-01-preview/Global.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-11-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-11-01-preview/SourceControls.json
 ```
 
 ### Tag: package-2022-10
@@ -531,22 +542,22 @@ These settings apply only when `--tag=package-2022-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-10'
 input-file:
-  - stable/2022-10-01/AuthConfigs.json
-  - stable/2022-10-01/AvailableWorkloadProfiles.json
-  - stable/2022-10-01/BillingMeters.json
-  - stable/2022-10-01/CommonDefinitions.json
-  - stable/2022-10-01/ConnectedEnvironments.json
-  - stable/2022-10-01/ConnectedEnvironmentsCertificates.json
-  - stable/2022-10-01/ConnectedEnvironmentsDaprComponents.json
-  - stable/2022-10-01/ConnectedEnvironmentsStorages.json
-  - stable/2022-10-01/ContainerApps.json
-  - stable/2022-10-01/ContainerAppsRevisions.json
-  - stable/2022-10-01/Diagnostics.json
-  - stable/2022-10-01/Global.json
-  - stable/2022-10-01/ManagedEnvironments.json
-  - stable/2022-10-01/ManagedEnvironmentsDaprComponents.json
-  - stable/2022-10-01/ManagedEnvironmentsStorages.json
-  - stable/2022-10-01/SourceControls.json
+  - Microsoft.App/stable/2022-10-01/AuthConfigs.json
+  - Microsoft.App/stable/2022-10-01/AvailableWorkloadProfiles.json
+  - Microsoft.App/stable/2022-10-01/BillingMeters.json
+  - Microsoft.App/stable/2022-10-01/CommonDefinitions.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironments.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2022-10-01/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/stable/2022-10-01/ContainerApps.json
+  - Microsoft.App/stable/2022-10-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2022-10-01/Diagnostics.json
+  - Microsoft.App/stable/2022-10-01/Global.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/stable/2022-10-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2022-10-01/SourceControls.json
 ```
 
 ### Tag: package-preview-2022-06
@@ -555,22 +566,22 @@ These settings apply only when `--tag=package-preview-2022-06` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2022-06'
 input-file:
-  - preview/2022-06-01-preview/AuthConfigs.json
-  - preview/2022-06-01-preview/CommonDefinitions.json
-  - preview/2022-06-01-preview/ContainerApps.json
-  - preview/2022-06-01-preview/ContainerAppsRevisions.json
-  - preview/2022-06-01-preview/ManagedEnvironmentsDaprComponents.json
-  - preview/2022-06-01-preview/Diagnostics.json
-  - preview/2022-06-01-preview/Global.json
-  - preview/2022-06-01-preview/ManagedEnvironments.json
-  - preview/2022-06-01-preview/ManagedEnvironmentsStorages.json
-  - preview/2022-06-01-preview/SourceControls.json
-  - preview/2022-06-01-preview/ConnectedEnvironments.json
-  - preview/2022-06-01-preview/ConnectedEnvironmentsCertificates.json
-  - preview/2022-06-01-preview/ConnectedEnvironmentsDaprComponents.json
-  - preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
-  - preview/2022-06-01-preview/AvailableWorkloadProfiles.json
-  - preview/2022-06-01-preview/BillingMeters.json
+  - Microsoft.App/preview/2022-06-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2022-06-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-06-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-06-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/Diagnostics.json
+  - Microsoft.App/preview/2022-06-01-preview/Global.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-06-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-06-01-preview/SourceControls.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironments.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsCertificates.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsDaprComponents.json
+  - Microsoft.App/preview/2022-06-01-preview/ConnectedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-06-01-preview/AvailableWorkloadProfiles.json
+  - Microsoft.App/preview/2022-06-01-preview/BillingMeters.json
 directive:
 - suppress: R3018
   from: AuthConfigs.json
@@ -586,15 +597,15 @@ These settings apply only when `--tag=package-2022-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2022-03'
 input-file:
-  - stable/2022-03-01/AuthConfigs.json
-  - stable/2022-03-01/CommonDefinitions.json
-  - stable/2022-03-01/ContainerApps.json
-  - stable/2022-03-01/ContainerAppsRevisions.json
-  - stable/2022-03-01/DaprComponents.json
-  - stable/2022-03-01/Global.json
-  - stable/2022-03-01/ManagedEnvironments.json
-  - stable/2022-03-01/ManagedEnvironmentsStorages.json
-  - stable/2022-03-01/SourceControls.json
+  - Microsoft.App/stable/2022-03-01/AuthConfigs.json
+  - Microsoft.App/stable/2022-03-01/CommonDefinitions.json
+  - Microsoft.App/stable/2022-03-01/ContainerApps.json
+  - Microsoft.App/stable/2022-03-01/ContainerAppsRevisions.json
+  - Microsoft.App/stable/2022-03-01/DaprComponents.json
+  - Microsoft.App/stable/2022-03-01/Global.json
+  - Microsoft.App/stable/2022-03-01/ManagedEnvironments.json
+  - Microsoft.App/stable/2022-03-01/ManagedEnvironmentsStorages.json
+  - Microsoft.App/stable/2022-03-01/SourceControls.json
 directive:
 - suppress: R3018
   from: AuthConfigs.json
@@ -610,15 +621,15 @@ These settings apply only when `--tag=package-2022-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-01-01-preview'
 input-file:
-  - preview/2022-01-01-preview/CommonDefinitions.json
-  - preview/2022-01-01-preview/ContainerApps.json
-  - preview/2022-01-01-preview/ContainerAppsRevisions.json
-  - preview/2022-01-01-preview/ManagedEnvironments.json
-  - preview/2022-01-01-preview/Global.json
-  - preview/2022-01-01-preview/SourceControls.json
-  - preview/2022-01-01-preview/DaprComponents.json
-  - preview/2022-01-01-preview/AuthConfigs.json
-  - preview/2022-01-01-preview/ManagedEnvironmentsStorages.json
+  - Microsoft.App/preview/2022-01-01-preview/CommonDefinitions.json
+  - Microsoft.App/preview/2022-01-01-preview/ContainerApps.json
+  - Microsoft.App/preview/2022-01-01-preview/ContainerAppsRevisions.json
+  - Microsoft.App/preview/2022-01-01-preview/ManagedEnvironments.json
+  - Microsoft.App/preview/2022-01-01-preview/Global.json
+  - Microsoft.App/preview/2022-01-01-preview/SourceControls.json
+  - Microsoft.App/preview/2022-01-01-preview/DaprComponents.json
+  - Microsoft.App/preview/2022-01-01-preview/AuthConfigs.json
+  - Microsoft.App/preview/2022-01-01-preview/ManagedEnvironmentsStorages.json
 directive:
 - suppress: R4009
   from: ContainerAppsRevisions.json
