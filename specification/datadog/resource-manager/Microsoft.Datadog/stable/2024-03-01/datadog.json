@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Datadog",
-    "version": "2023-10-20"
+    "version": "2024-03-01"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -498,7 +498,7 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2023-10-20 api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2024-03-01 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -2481,6 +2481,23 @@
         }
       }
     },
+    "AgentRules": {
+      "description": "Set of rules for managing agents for the Monitor resource.",
+      "type": "object",
+      "properties": {
+        "enableAgentMonitoring": {
+          "description": "Flag specifying if agent monitoring should be enabled for the Monitor resource.",
+          "type": "boolean"
+        },
+        "filteringTags": {
+          "description": "List of filtering tags to be used for capturing metrics. If empty, all resources will be captured. If only Exclude action is specified, the rules will apply to the list of all available resources. If Include actions are specified, the rules will only include resources with the associated tags.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FilteringTag"
+          }
+        }
+      }
+    },
     "MonitoringTagRulesProperties": {
       "description": "Definition of the properties for a TagRules resource.",
       "type": "object",
@@ -2493,6 +2510,9 @@
         },
         "metricRules": {
           "$ref": "#/definitions/MetricRules"
+        },
+        "agentRules": {
+          "$ref": "#/definitions/AgentRules"
         },
         "automuting": {
           "description": "Configuration to enable/disable auto-muting flag",
@@ -2637,7 +2657,10 @@
       "description": "Monitor resource name",
       "required": true,
       "type": "string",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "pattern": "^[a-zA-Z0-9_][a-zA-Z0-9_-]+$",
+      "minLength": 2,
+      "maxLength": 32
     },
     "DatadogOrganizationId": {
       "in": "query",

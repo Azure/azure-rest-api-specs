@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Datadog",
-    "version": "2025-01-07"
+    "version": "2025-06-11"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -498,7 +498,7 @@
         "tags": [
           "MonitorsResource"
         ],
-        "summary": "List all operations provided by Microsoft.Datadog for the 2025-01-07 api version.",
+        "summary": "List all operations provided by Microsoft.Datadog for the 2025-06-11 api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
@@ -2282,6 +2282,10 @@
         "cspm": {
           "description": "The configuration which describes the state of cloud security posture management. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
           "type": "boolean"
+        },
+        "resourceCollection": {
+          "description": "The configuration which describes the state of resource collection. This collects configuration information for all resources in a subscription.",
+          "type": "boolean"
         }
       }
     },
@@ -2451,6 +2455,10 @@
         },
         "cspm": {
           "description": "The new cloud security posture management value of the monitor resource. This collects configuration information for all resources in a subscription and track conformance to industry benchmarks.",
+          "type": "boolean"
+        },
+        "resourceCollection": {
+          "description": "The new resource collection value of the monitor resource. This collects configuration information for all resources in a subscription.",
           "type": "boolean"
         }
       }
