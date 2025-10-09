@@ -1,0 +1,73 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "location": "WestUS",
+    "parameters": {
+      "sourceBackupInstanceId": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/HelloTest/providers/Microsoft.DataProtection/backupVaults/HelloTestVault/backupInstances/653213d-c5b3-44f6-a0d9-db3c4f9d8e34",
+      "sourceRegion": "EastUS"
+    },
+    "resourceGroupName": "000pikumar",
+    "subscriptionId": "04cf684a-d41f-4550-9f70-7708a3a2283b"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "7fb2cddd-c5b3-44f6-a0d9-db3c4f9d5e35",
+            "type": "microsoft.dataprotection/backupvaults/backupInstances/recoveryPoints",
+            "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/HelloTest/providers/Microsoft.DataProtection/backupVaults/HelloTestVault/backupInstances/653213d-c5b3-44f6-a0d9-db3c4f9d8e34/recoveryPoints/7fb2cddd-c5b3-44f6-a0d9-db3c4f9d5f25",
+            "properties": {
+              "expiryTime": "2023-03-01T13:00:00Z",
+              "friendlyName": "panbha4",
+              "objectType": "AzureBackupDiscreteRecoveryPoint",
+              "recoveryPointDataStoresDetails": [
+                {
+                  "type": "Snapshot",
+                  "creationTime": "2019-03-01T13:00:00Z",
+                  "id": "0ff03512-b333-4509-a6c7-12164c8b1dce",
+                  "metaData": "123456"
+                },
+                {
+                  "type": "BackupStorage",
+                  "creationTime": "2019-03-01T13:00:00Z",
+                  "id": "5d8cfd30-722e-4bab-85f6-4a9d01ffc6f1",
+                  "metaData": "123456"
+                }
+              ],
+              "recoveryPointTime": "2019-03-01T13:00:00Z",
+              "recoveryPointType": "Full"
+            }
+          },
+          {
+            "name": "7fb2cddd-c5b3-44f6-a0d9-db3c4f9d5f25",
+            "type": "microsoft.dataprotection/backupvaults/backupInstances/recoveryPoints",
+            "id": "/subscriptions/04cf684a-d41f-4550-9f70-7708a3a2283b/resourceGroups/HelloTest/providers/Microsoft.DataProtection/backupVaults/HelloTestVault/backupInstances/653213d-c5b3-44f6-a0d9-db3c4f9d8e34/recoveryPoints/7fb2cddd-c5b3-44f6-a0d9-db3c4f9d5f25",
+            "properties": {
+              "friendlyName": "panbha4",
+              "objectType": "AzureBackupDiscreteRecoveryPoint",
+              "recoveryPointDataStoresDetails": [
+                {
+                  "type": "Snapshot",
+                  "creationTime": "2019-03-01T13:00:00Z",
+                  "id": "808cfd30-722e-4bab-85f6-4a9d01ffc6f2",
+                  "metaData": "123456"
+                },
+                {
+                  "type": "BackupStorage",
+                  "creationTime": "2019-03-01T13:00:00Z",
+                  "id": "798cfd30-722e-4bab-85f6-4a9d01ffc6f3",
+                  "metaData": "123456"
+                }
+              ],
+              "recoveryPointTime": "2019-03-01T13:00:00Z",
+              "recoveryPointType": "Full"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "FetchSecondaryRecoveryPoints_List",
+  "title": "Fetch SecondaryRPs"
+}

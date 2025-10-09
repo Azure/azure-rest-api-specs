@@ -864,17 +864,36 @@ model BingGroundingSearchConfiguration {
   @encodedName("application/json", "connection_id")
   connectionId: string;
 
-  @doc("The market where the results come from.")
+  @doc("""
+    The market where the results come from. Typically, market is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form: `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, `en-US`. The string is case insensitive. For a list of possible market values, see [Market codes](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes). If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market codes, Bing uses a best fit market code based on an internal mapping that is subject to change.
+    """)
   market?: string;
 
-  @doc("The language to use for user interface strings when calling Bing API.")
+  @doc("""
+    The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
+    For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
+    Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
+    If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
+    To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
+    To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
+    Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
+    """)
   @encodedName("application/json", "set_lang")
   setLang?: string;
 
-  @doc("The number of search results to return in the bing api response")
+  @doc("""
+    The number of search results to return in the response. The default is 5 and the maximum value is 50. The actual number delivered may be less than requested. 
+    - It is possible for multiple pages to include some overlap in results. 
+    - This parameter affects only web page results. It's possible that AI model might not use all search results returned by Bing.
+    """)
   count?: int64;
 
-  @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
+  @doc("""
+    Filter search results by the following case-insensitive age values:
+    - Day: Return webpages that Bing discovered within the last 24 hours.
+    - Week: Return webpages that Bing discovered within the last 7 days.
+    - Month: Return webpages that Bing discovered within the last 30 days. To get articles discovered by Bing during a specific timeframe, specify a date range in the form: `YYYY-MM-DD..YYYY-MM-DD`. For example, `freshness=2019-02-01..2019-05-30. To limit the results to a single date, set this parameter to a specific date. For example, freshness=2019-02-04`.
+    """)
   freshness?: string;
 }
 
@@ -1184,17 +1203,36 @@ model BingCustomSearchConfiguration {
   @encodedName("application/json", "instance_name")
   instanceName: string;
 
-  @doc("The market where the results come from.")
+  @doc("""
+    The market where the results come from. Typically, market is the country where the user is making the request from. However, it could be a different country if the user is not located in a country where Bing delivers results. The market must be in the form: `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, `en-US`. The string is case insensitive. For a list of possible market values, see [Market codes](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes). If known, you are encouraged to always specify the market. Specifying the market helps Bing route the request and return an appropriate and optimal response. If you specify a market that is not listed in Market codes, Bing uses a best fit market code based on an internal mapping that is subject to change.
+    """)
   market?: string;
 
-  @doc("The language to use for user interface strings when calling Bing API.")
+  @doc("""
+    The language to use for user interface strings. You may specify the language using either a 2-letter or 4-letter code. Using 4-letter codes is preferred.
+    For a list of supported language codes, see [Bing supported languages](https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/market-codes#bing-supported-language-codes).
+    Bing loads the localized strings if this parameter contains a valid 2-letter neutral culture code (for example `fr`) or a valid 4-letter specific culture code (`fr-ca`). For example, for `fr-ca`, Bing loads the `fr` neutral culture code strings.
+    If the parameter is not valid (for example, `zh`) or Bing doesn’t support the language (for example, `af`, `af-na`), Bing defaults to `en` (English).
+    To specify the 2-letter code, set this parameter to an ISO 639-1 language code.
+    To specify the 4-letter code, use the form `<language>-<country/region>` where `<language>` is an ISO 639-1 language code (neutral culture) and `<country/region>` is an ISO 3166 country/region (specific culture) code. For example, use `en-US` for United States English.
+    Although optional, you should always specify the language. Typically, you set this parameter to the same language specified by the market value unless the user wants the user interface strings displayed in a different language.
+    """)
   @encodedName("application/json", "set_lang")
   setLang?: string;
 
-  @doc("The number of search results to return in the bing api response")
+  @doc("""
+    The number of search results to return in the response. The default is 5 and the maximum value is 50. The actual number delivered may be less than requested. 
+    - It is possible for multiple pages to include some overlap in results. 
+    - This parameter affects only web page results. It's possible that AI model might not use all search results returned by Bing.
+    """)
   count?: int64;
 
-  @doc("Filter search results by a specific time range. Accepted values: https://learn.microsoft.com/bing/search-apis/bing-web-search/reference/query-parameters")
+  @doc("""
+    Filter search results by the following case-insensitive age values:
+    - Day: Return webpages that Bing discovered within the last 24 hours.
+    - Week: Return webpages that Bing discovered within the last 7 days.
+    - Month: Return webpages that Bing discovered within the last 30 days. To get articles discovered by Bing during a specific timeframe, specify a date range in the form: `YYYY-MM-DD..YYYY-MM-DD`. For example, `freshness=2019-02-01..2019-05-30. To limit the results to a single date, set this parameter to a specific date. For example, freshness=2019-02-04`.
+    """)
   freshness?: string;
 }
 
