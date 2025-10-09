@@ -2,6 +2,24 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateCreatedEventData,
+  Usage.output | Usage.json
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateCreatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateUpdatedEventData,
+  Usage.output | Usage.json
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateUpdatedEventData,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateDeletedEventData,
+  Usage.output | Usage.json
+);
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateDeletedEventData,
+  Access.public
+);
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsContainerServiceEventResourcesScheduledEventData,
   Usage.output | Usage.json
 );
