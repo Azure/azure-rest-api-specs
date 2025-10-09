@@ -19,10 +19,13 @@ model EvaluationTaxonomy {
   ...AssetBase;
 
   @doc("Input configuration for the evaluation taxonomy.")
-  input: EvaluationTaxonomyInput;
+  taxonomyInput: EvaluationTaxonomyInput;
 
   @doc("List of taxonomy categories.")
   taxonomyCategories: TaxonomyCategory[];
+
+  @doc("Additional properties for the evaluation taxonomy.")
+  properties?: Record<string>;
 }
 
 @added(Versions.v2025_10_15_preview)
@@ -55,7 +58,7 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   target: AzureAIAgentTarget;
 
   @doc("List of risk categories to evaluate against.")
-  risks: RiskCategory[];
+  riskCategories: RiskCategory[];
 }
 
 @added(Versions.v2025_10_15_preview)
@@ -101,6 +104,9 @@ model TaxonomyCategory {
 
   @doc("Description of the taxonomy category.")
   description?: string;
+
+  @doc("Risk category associated with this taxonomy category.")
+  riskCategory: RiskCategory;
 
   @doc("List of taxonomy sub categories.")
   subCategories: TaxonomySubCategory[];
