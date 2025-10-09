@@ -18,14 +18,7 @@ using OpenAPI;
 
 namespace Microsoft.FileShares;
 @doc("A list of REST API operations supported by an Azure Resource Provider.")
-model FileSharesOperationListResult {
-  @doc("List of operations supported by the resource provider")
-  @pageItems
-  value?: Operation[];
-
-  @doc("URL to get the next set of operation list results (if there are any).")
-  nextLink?: string;
-}
+model OperationListResult is Azure.Core.Page<Operation>;
 
 @doc("Service versions")
 enum Versions {
@@ -347,7 +340,7 @@ interface Operations {
   // be added to generate a description in swagger. Primarily done to satisfy lint in azure-rest-api-specs-pr repo.
   @tag("Operations")
   @autoRoute
-  @armResourceList(FileSharesOperationListResult)  @doc("List the operations for the provider")
+  @armResourceList(OperationListResult)  @doc("List the operations for the provider")
   @segment("operations")
   @get
   @list
@@ -358,7 +351,7 @@ interface Operations {
     @segment("providers")
     @doc("The provider namespace (this parameter will not show up in operations).")
     provider: "Microsoft.ThisWillBeReplaced",
-  ): ArmResponse<FileSharesOperationListResult> | ErrorResponse;
+  ): ArmResponse<OperationListResult> | ErrorResponse;
 }
 
 @doc("FileShareSnapshot resource")

@@ -69,7 +69,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/FileSharesOperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -86,6 +86,9 @@
           "Operations_List_MinimumSet": {
             "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1609,23 +1612,6 @@
         "properties"
       ]
     },
-    "FileSharesOperationListResult": {
-      "type": "object",
-      "description": "A list of REST API operations supported by an Azure Resource Provider.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "List of operations supported by the resource provider",
-          "items": {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Operation"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "description": "URL to get the next set of operation list results (if there are any)."
-        }
-      }
-    },
     "LiveSharesUsageData": {
       "type": "object",
       "description": "Usage data for live shares.",
@@ -1667,6 +1653,27 @@
           "description": "Root squash defines how root users on clients are mapped to the NFS share."
         }
       }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "A list of REST API operations supported by an Azure Resource Provider.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The Operation items on this page",
+          "items": {
+            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "Protocol": {
       "type": "string",
