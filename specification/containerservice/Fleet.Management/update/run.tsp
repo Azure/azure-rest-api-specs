@@ -265,13 +265,13 @@ model UpdateStageStatus {
   groups?: UpdateGroupStatus[];
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("The list of Gates that will run before this UpdateStage.")
   @added(Versions.v2025_04_01_preview)
   beforeGates?: UpdateRunGateStatus[];
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("The list of Gates that will run after this UpdateStage.")
   @added(Versions.v2025_04_01_preview)
   afterGates?: UpdateRunGateStatus[];
@@ -297,13 +297,13 @@ model UpdateGroupStatus {
   members?: MemberUpdateStatus[];
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("The list of Gates that will run before this UpdateGroup.")
   @added(Versions.v2025_04_01_preview)
   beforeGates?: UpdateRunGateStatus[];
 
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("The list of Gates that will run after this UpdateGroup.")
   @added(Versions.v2025_04_01_preview)
   afterGates?: UpdateRunGateStatus[];
