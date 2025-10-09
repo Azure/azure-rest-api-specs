@@ -31,4 +31,6 @@ directive:
   - from: iotcentral.json
     where: $.definitions.Resource
     transform: $['x-ms-client-name'] = "ARMResource"
+modelerfour:
+  lenient-model-deduplication: true
 ```
