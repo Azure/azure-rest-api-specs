@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-2022-12-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-12-01'
 input-file:
-  - Azure.Contoso.WidgetManager/stable/2022-12-01/widgets.json
+  - stable/2022-12-01/widgets.json
 ```
 
 ### Suppress non-TypeSpec SDK related linting rules
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
-  - Azure.Contoso.WidgetManager/preview/2022-11-01-preview/widgets.json
+  - preview/2022-11-01-preview/widgets.json
 ```
 
 ### Suppress non-TypeSpec SDK related linting rules
