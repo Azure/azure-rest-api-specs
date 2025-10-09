@@ -975,7 +975,7 @@ model WorkspaceStorageSettings {
 @added(Versions.v2025_10_01_preview)
 model AssignedGroup {
   /** The Entra group object ID (GUID). */
-  groupId?: Azure.Core.uuid;
+  objectId?: Azure.Core.uuid;
 
   /** The scope of the assignment. */
   scope?: AssignedGroupScope;
