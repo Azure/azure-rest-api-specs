@@ -271,44 +271,18 @@ model EndpointPropertiesCustomHeadersItem {
 /**
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
-model ProxyResource {
-  /**
-   * ARM resource id of the resource.
-   */
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * Name of the resource.
-   */
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  type?: Azure.Core.armResourceType;
-
-  /**
-   *  Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
-}
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
+model ProxyResource extends Resource {}
 
 /**
  * The core properties of ARM resources
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "For backward compatibility"
-@Azure.ResourceManager.Legacy.customAzureResource
 model Resource {
   /**
    * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
    */
-  id?: Azure.Core.armResourceIdentifier;
+  id?: armResourceIdentifier;
 
   /**
    * The name of the resource
@@ -319,12 +293,12 @@ model Resource {
   /**
    * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
    */
-  type?: Azure.Core.armResourceType;
+  type?: armResourceType;
 
   /**
    * Azure Resource Manager metadata containing createdBy and modifiedBy information.
    */
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
+  systemData?: SystemData;
 }
 
 /**
@@ -592,31 +566,9 @@ model MonitorConfigExpectedStatusCodeRangesItem {
 /**
  * The resource model definition for a ARM tracked top level resource
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-no-key" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-custom-resource-usage-discourage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Legacy.customAzureResource
-model TrackedResource {
-  /**
-   * ARM resource id of the resource.
-   */
-  id?: Azure.Core.armResourceIdentifier;
-
-  /**
-   * Name of the resource.
-   */
-  name?: string;
-
-  /**
-   * The type of the resource.
-   */
-  type?: Azure.Core.armResourceType;
-
-  /**
-   *  Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  systemData?: Azure.ResourceManager.CommonTypes.SystemData;
-
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model TrackedResource extends Resource {
   /**
    * Resource tags.
    */

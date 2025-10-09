@@ -1121,29 +1121,17 @@
       "type": "object",
       "description": "Class representing a Traffic Manager endpoint.",
       "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the Traffic Manager endpoint."
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
-        },
         "properties": {
           "$ref": "#/definitions/EndpointProperties",
           "description": "The properties of the Traffic Manager endpoint.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyResource"
+        }
+      ]
     },
     "EndpointMonitorStatus": {
       "type": "string",
@@ -1507,40 +1495,17 @@
       "type": "object",
       "description": "Class representing a Traffic Manager profile.",
       "properties": {
-        "id": {
-          "type": "string",
-          "format": "arm-id",
-          "description": "ARM resource id of the resource."
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the Traffic Manager profile."
-        },
-        "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "location": {
-          "type": "string",
-          "description": "The Azure Region where the resource lives"
-        },
         "properties": {
           "$ref": "#/definitions/ProfileProperties",
           "description": "The properties of the Traffic Manager profile.",
           "x-ms-client-flatten": true
         }
-      }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/TrackedResource"
+        }
+      ]
     },
     "ProfileListResult": {
       "type": "object",
@@ -1667,6 +1632,15 @@
         ]
       }
     },
+    "ProxyResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM proxy resource. It will have everything other than required location and tags",
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
+    },
     "QueryExperience": {
       "type": "object",
       "description": "Class representing a Traffic Manager HeatMap query experience properties.",
@@ -1712,6 +1686,51 @@
           }
         }
       }
+    },
+    "Resource": {
+      "type": "object",
+      "description": "The core properties of ARM resources",
+      "properties": {
+        "id": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+        },
+        "name": {
+          "type": "string",
+          "description": "The name of the Traffic Manager profile."
+        },
+        "type": {
+          "$ref": "#/definitions/Azure.Core.armResourceType",
+          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"."
+        },
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
+        }
+      }
+    },
+    "TrackedResource": {
+      "type": "object",
+      "description": "The resource model definition for a ARM tracked top level resource",
+      "properties": {
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "location": {
+          "type": "string",
+          "description": "The Azure Region where the resource lives"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/Resource"
+        }
+      ]
     },
     "TrafficFlow": {
       "type": "object",
