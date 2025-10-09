@@ -24,11 +24,6 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 These are the global settings for the storagepool.
 
-```yaml
-openapi-type: arm
-tag: package-2025-09
-```
-
 ### Tag: package-2025-09
 
 These settings apply only when `--tag=package-2025-09` is specified on the command line.
