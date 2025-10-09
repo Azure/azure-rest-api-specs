@@ -1,9 +1,11 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@typespec/http";
 
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
+using TypeSpec.Http;
 
 using Microsoft.PlanetaryComputer;
 
@@ -78,6 +80,221 @@ namespace Customizations;
 @@clientName(StacCollection, "StacCollectionModel", "csharp");
 @@clientName(StacItem, "StacItemModel", "csharp");
 @@clientName(StacItemCollection, "StacItemCollectionModel", "csharp");
+
+// === Method overrides ===
+
+// === Parameter Grouping Overrides ===
+
+/**
+ * Options for getting a tile from a dataset
+ */
+model GetTileOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Tile matrix set parameters
+   */
+  ...TileMatrixSetQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+
+  /**
+   * Subdataset parameters
+   */
+  ...SubDatasetQueryParameters;
+}
+
+/**
+ * Options for getting WMTS capabilities
+ */
+model GetWmtsCapabilitiesOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Terrain algorithm parameters
+   */
+  ...TerrainAlgorithmQueryParameters;
+
+  /**
+   * Output image type. Default is png.
+   */
+  @query("tile_format")
+  tileFormat?: TilerImageFormat = TilerImageFormat.png;
+
+  /**
+   * Tile scale factor affecting output size. Values > 1 produce larger tiles (e.g., 1=256x256, 2=512x512).
+   */
+  @maxValueExclusive(4)
+  @query("tile_scale")
+  tileScale?: int32 = 1;
+
+  /**
+   * Zoom query parameters
+   */
+  ...ZoomQueryParameters;
+
+  /**
+   * Tile matrix set parameters
+   */
+  ...TileMatrixSetQueryParameters;
+
+  /**
+   * Visual rendering parameters
+   */
+  ...MiscTileQueryParameters;
+}
+
+/**
+ * Options for getting asset statistics
+ */
+model GetAssetStatisticsOptions {
+  /**
+   * Asset query parameters for selecting and manipulating assets
+   */
+  ...AssetQueryParameters;
+
+  /**
+   * Statistics query parameters
+   */
+  ...StatisticsQueryParameters;
+}
+
+// Override operations with grouped parameters
+
+/**
+ * Create map tile from a dataset with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path tileMatrixSetId: string,
+
+  /**
+   * Identifier (Z) selecting one of the scales defined in the TileMatrixSet
+   */
+  @path z: float32,
+
+  /**
+   * Column (X) index of the tile on the selected TileMatrix
+   */
+  @path x: float32,
+
+  /**
+   * Row (Y) index of the tile on the selected TileMatrix
+   */
+  @path y: float32,
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path scale: float32,
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path format: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for tile generation including asset selection, terrain algorithms, and visual rendering
+   */
+  options: GetTileOptions,
+): TileResponse;
+
+@@override(TilerTileMatrixSets.getZxyScaleByFormat, getTileCustomized);
+
+/**
+ * OGC WMTS endpoint with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getWmtsCapabilitiesCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path tileMatrixSetId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for WMTS capabilities including asset selection, terrain algorithms, and tile formatting
+   */
+  options: GetWmtsCapabilitiesOptions,
+): WmtsCapabilitiesXmlResponse;
+
+@@override(TilerWmtsTileMatrixSets.getCapabilitiesXml,
+  getWmtsCapabilitiesCustomized
+);
+
+/**
+ * Per Asset statistics with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getAssetStatisticsCustomized(
+  /**
+   * STAC Collection Identifier
+   */
+  @path collectionId: string,
+
+  /**
+   * STAC Item Identifier
+   */
+  @path itemId: string,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
+   * Options for asset statistics including asset selection and statistical calculation parameters
+   */
+  options: GetAssetStatisticsOptions,
+): StacAssetStatistics;
+
+@@override(TilerAssetStatistics.getAll, getAssetStatisticsCustomized);
 
 // === Ingestion Management ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
