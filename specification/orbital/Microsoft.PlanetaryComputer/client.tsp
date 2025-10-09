@@ -1,6 +1,9 @@
 import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 
+// InMa
+import "./main.tsp";
+
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 using TypeSpec.Http;
