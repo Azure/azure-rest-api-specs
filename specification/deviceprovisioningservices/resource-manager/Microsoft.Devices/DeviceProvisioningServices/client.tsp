@@ -212,7 +212,7 @@ op IotDpsResourceDeleteCustomized(
 
 @@override(ProvisioningServiceDescriptions.delete,
   IotDpsResourceDeleteCustomized,
-  "python,go,java,javascript"
+  "python,go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -340,7 +340,7 @@ op IotDpsResourceGetCustomized(
 
 @@override(ProvisioningServiceDescriptions.get,
   IotDpsResourceGetCustomized,
-  "python,go,java,javascript"
+  "python,go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
@@ -393,7 +393,7 @@ op CertificateResponseDeleteCustomized(
 
 @@override(CertificateResponses.delete,
   CertificateResponseDeleteCustomized,
-  "python,go,java,javascript"
+  "python,go,java"
 );
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
