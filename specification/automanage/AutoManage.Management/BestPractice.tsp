@@ -77,13 +77,9 @@ interface BestPracticesVersions {
   /**
    * Retrieve a list of Automanage best practices versions
    */
-  @list
-  @get
-  @action("versions")
-  listByTenant is Extension.ActionSync<
-    Extension.Tenant,
+  @segment("versions")
+  listByTenant is BestPracticesVersionOps.List<
     BestPractice,
-    void,
     Response = BestPracticeList
   >;
 }
