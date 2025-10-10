@@ -1,0 +1,36 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "clusterName": "mycluster1",
+    "resourceGroupName": "resourceGroup1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "baseResourceStatus": [
+          {
+            "isZoneResilient": false,
+            "resourceName": "mycluster1storage",
+            "resourceType": "Microsoft.Storage/storageaccounts"
+          },
+          {
+            "isZoneResilient": true,
+            "resourceName": "PublicIP-mycluster1",
+            "resourceType": "Microsoft.Network/publicIPAddress"
+          },
+          {
+            "isZoneResilient": false,
+            "resourceName": "Primary",
+            "resourceType": "Microsoft.Compute/virtualmachinescalesets",
+            "details": "Status: InProgress, ZonalNodes: 3, RegionalNodes: 3"
+          }
+        ],
+        "isClusterZoneResilient": false
+      },
+      "headers": {}
+    }
+  },
+  "operationId": "managedAzResiliencyStatus_Get",
+  "title": "Az Resiliency status of Base Resources"
+}
