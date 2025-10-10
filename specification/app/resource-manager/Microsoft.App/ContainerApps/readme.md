@@ -62,6 +62,7 @@ input-file:
   - preview/2025-10-02-preview/ConnectedEnvironmentsStorages.json
   - preview/2025-10-02-preview/ContainerApps.json
   - preview/2025-10-02-preview/ContainerAppsBuilds.json
+  - preview/2025-10-02-preview/ContainerAppsFunctions.json
   - preview/2025-10-02-preview/ContainerAppsLabelHistory.json
   - preview/2025-10-02-preview/ContainerAppsPatches.json
   - preview/2025-10-02-preview/ContainerAppsRevisions.json
