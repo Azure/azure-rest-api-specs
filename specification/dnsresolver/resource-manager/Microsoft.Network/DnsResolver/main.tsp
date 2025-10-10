@@ -38,7 +38,6 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "DnsResolverManagementClient" })
 @versioned(Versions)
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.Network;
 
 /**
@@ -48,5 +47,12 @@ enum Versions {
   /**
    * The 2025-05-01 API version.
    */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_05_01: "2025-05-01",
+
+  /**
+   * The 2025-10-01-Preview API version.
+   */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
+  v2025_10_01_preview: "2025-10-01-preview",
 }

@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "resourceGroupName": "myResourceGroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceName": "myWorkspace"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nextLink": null,
+        "value": [
+          {
+            "name": "myConnection",
+            "type": "Microsoft.Dashboard/grafana/privateEndpointConnections",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Dashboard/grafana/myWorkspace/privateEndpointConnections/myConnection",
+            "properties": {
+              "groupIds": [
+                "grafana"
+              ],
+              "privateEndpoint": {
+                "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/Microsoft.Network/privateEndpoint/myEndpoint"
+              },
+              "privateLinkServiceConnectionState": {
+                "description": "string",
+                "actionsRequired": "None",
+                "status": "Pending"
+              },
+              "provisioningState": "Accepted"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "PrivateEndpointConnections_List",
+  "title": "PrivateEndpointConnections_List"
+}
