@@ -1,0 +1,85 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./CassandraKeyspaceGetResults.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DocumentDB;
+/**
+ * An Azure Cosmos DB Cassandra view.
+ */
+@parentResource(CassandraKeyspaceGetResults)
+model CassandraViewGetResults
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CassandraViewGetProperties> {
+  ...ResourceNameParameter<
+    Resource = CassandraViewGetResults,
+    KeyName = "viewName",
+    SegmentName = "views",
+    NamePattern = ""
+  >;
+
+  /**
+   * Identity for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: ManagedServiceIdentity;
+}
+
+@armResourceOperations
+interface CassandraViewGetResultsOperationGroup {
+  /**
+   * Gets the Cassandra view under an existing Azure Cosmos DB database account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CassandraResources_GetCassandraView")
+  getCassandraView is ArmResourceRead<CassandraViewGetResults>;
+
+  /**
+   * Create or update an Azure Cosmos DB Cassandra View
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("CassandraResources_CreateUpdateCassandraView")
+  createUpdateCassandraView is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+    CassandraViewGetResults,
+    Request = CassandraViewCreateUpdateParameters,
+    Response = ArmResourceUpdatedResponse<CassandraViewGetResults> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = CassandraViewGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Deletes an existing Azure Cosmos DB Cassandra view.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @operationId("CassandraResources_DeleteCassandraView")
+  deleteCassandraView is ArmResourceDeleteWithoutOkAsync<
+    CassandraViewGetResults,
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+  >;
+
+  /**
+   * Lists the Cassandra materialized views under an existing Azure Cosmos DB database account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CassandraResources_ListCassandraViews")
+  listCassandraViews is ArmResourceListByParent<
+    CassandraViewGetResults,
+    Response = ArmResponse<CassandraViewListResult>
+  >;
+}
+
+@@doc(CassandraViewGetResults.name, "Cosmos DB view name.");
+@@doc(CassandraViewGetResults.properties,
+  "The properties of an Azure Cosmos DB Cassandra view"
+);
+@@doc(CassandraViewGetResultsOperationGroup.createUpdateCassandraView::parameters.resource,
+  "The parameters to provide for the current Cassandra View."
+);

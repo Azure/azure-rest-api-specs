@@ -1,0 +1,93 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./DatabaseAccountGetResults.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DocumentDB;
+/**
+ * An Azure Cosmos DB Table.
+ */
+@parentResource(DatabaseAccountGetResults)
+model TableGetResults
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<TableGetProperties> {
+  ...ResourceNameParameter<
+    Resource = TableGetResults,
+    KeyName = "tableName",
+    SegmentName = "tables",
+    NamePattern = ""
+  >;
+
+  /**
+   * Identity for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: ManagedServiceIdentity;
+}
+
+@armResourceOperations
+interface TableGetResultsOperationGroup {
+  /**
+   * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TableResources_GetTable")
+  getTable is ArmResourceRead<TableGetResults>;
+
+  /**
+   * Create or update an Azure Cosmos DB Table
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("TableResources_CreateUpdateTable")
+  createUpdateTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+    TableGetResults,
+    Request = TableCreateUpdateParameters,
+    Response = ArmResourceUpdatedResponse<TableGetResults> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = TableGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Deletes an existing Azure Cosmos DB Table.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TableResources_DeleteTable")
+  deleteTable is ArmResourceDeleteWithoutOkAsync<TableGetResults>;
+
+  /**
+   * Lists the Tables under an existing Azure Cosmos DB database account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TableResources_ListTables")
+  listTables is ArmResourceListByParent<
+    TableGetResults,
+    Response = ArmResponse<TableListResult>
+  >;
+
+  /**
+   * Retrieves continuous backup information for a table.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("TableResources_RetrieveContinuousBackupInformation")
+  retrieveContinuousBackupInformation is ArmResourceActionAsync<
+    TableGetResults,
+    ContinuousBackupRestoreLocation,
+    ArmResponse<BackupInformation>
+  >;
+}
+
+@@doc(TableGetResults.name, "Cosmos DB table name.");
+@@doc(TableGetResults.properties, "The properties of an Azure Cosmos DB Table");
+@@doc(TableGetResultsOperationGroup.createUpdateTable::parameters.resource,
+  "The parameters to provide for the current Table."
+);
+@@doc(TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
+  "The name of the continuous backup restore location."
+);

@@ -1,0 +1,81 @@
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+import "@typespec/openapi";
+import "@typespec/rest";
+import "./models.tsp";
+import "./CassandraKeyspaceGetResults.tsp";
+
+using TypeSpec.Rest;
+using Azure.ResourceManager;
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+
+namespace Microsoft.DocumentDB;
+/**
+ * An Azure Cosmos DB Cassandra table.
+ */
+@parentResource(CassandraKeyspaceGetResults)
+model CassandraTableGetResults
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<CassandraTableGetProperties> {
+  ...ResourceNameParameter<
+    Resource = CassandraTableGetResults,
+    KeyName = "tableName",
+    SegmentName = "tables",
+    NamePattern = ""
+  >;
+
+  /**
+   * Identity for the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: ManagedServiceIdentity;
+}
+
+@armResourceOperations
+interface CassandraTableGetResultsOperationGroup {
+  /**
+   * Gets the Cassandra table under an existing Azure Cosmos DB database account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CassandraResources_GetCassandraTable")
+  getCassandraTable is ArmResourceRead<CassandraTableGetResults>;
+
+  /**
+   * Create or update an Azure Cosmos DB Cassandra Table
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @operationId("CassandraResources_CreateUpdateCassandraTable")
+  createUpdateCassandraTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
+    CassandraTableGetResults,
+    Request = CassandraTableCreateUpdateParameters,
+    Response = ArmResourceUpdatedResponse<CassandraTableGetResults> | ArmAcceptedLroResponse,
+    LroHeaders = ArmLroLocationHeader<FinalResult = CassandraTableGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader
+  >;
+
+  /**
+   * Deletes an existing Azure Cosmos DB Cassandra table.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CassandraResources_DeleteCassandraTable")
+  deleteCassandraTable is ArmResourceDeleteWithoutOkAsync<CassandraTableGetResults>;
+
+  /**
+   * Lists the Cassandra table under an existing Azure Cosmos DB database account.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  @operationId("CassandraResources_ListCassandraTables")
+  listCassandraTables is ArmResourceListByParent<
+    CassandraTableGetResults,
+    Response = ArmResponse<CassandraTableListResult>
+  >;
+}
+
+@@doc(CassandraTableGetResults.name, "Cosmos DB table name.");
+@@doc(CassandraTableGetResults.properties,
+  "The properties of an Azure Cosmos DB Cassandra table"
+);
+@@doc(CassandraTableGetResultsOperationGroup.createUpdateCassandraTable::parameters.resource,
+  "The parameters to provide for the current Cassandra Table."
+);
