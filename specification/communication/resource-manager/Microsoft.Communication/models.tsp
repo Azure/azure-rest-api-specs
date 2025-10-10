@@ -407,7 +407,7 @@ union ProvisioningState {
 /**
  * The keyType to regenerate. Must be either 'primary' or 'secondary'(case-insensitive).
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyType {
   /**
    * Primary
@@ -452,7 +452,8 @@ model OperationDisplay {
 /**
  * Data POST-ed to the nameAvailability action
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NameAvailabilityParameters
   extends Azure.ResourceManager.CommonTypes.CheckNameAvailabilityRequest {}
 
@@ -547,7 +548,7 @@ model CommunicationServiceProperties {
 /**
  * A class representing update parameters for CommunicationService resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CommunicationServiceResourceUpdate extends TaggedResource {
   /**
    * The properties of the service.
@@ -588,7 +589,7 @@ model TaggedResource {
   /**
    * Tags of the service which is a list of key value pairs that describe the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 }
@@ -686,26 +687,31 @@ model DomainPropertiesVerificationStates {
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Domain?: VerificationStatusRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SPF?: VerificationStatusRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DKIM?: VerificationStatusRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DKIM2?: VerificationStatusRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DMARC?: VerificationStatusRecord;
 }
 
@@ -733,26 +739,31 @@ model DomainPropertiesVerificationRecords {
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Domain?: DnsRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SPF?: DnsRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DKIM?: DnsRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DKIM2?: DnsRecord;
 
   /**
    * A class that represents a VerificationStatus record.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DMARC?: DnsRecord;
 }
 
@@ -788,7 +799,7 @@ model DnsRecord {
 /**
  * A class that describes the PATCH request parameters of a Domains resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UpdateDomainRequestParameters extends TaggedResource {
   /**
    * A class that describes the updatable properties of a Domains resource.
@@ -841,7 +852,8 @@ model EmailServiceProperties {
 /**
  * A class representing update parameters for EmailService resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EmailServiceResourceUpdate extends TaggedResource {}
 
 /**
@@ -882,8 +894,11 @@ model SenderUsernameProperties {
   provisioningState?: ProvisioningState;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VerifiedExchangeOnlineDomainList is string[];
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DomainsResourceList {
   /**
    * A list of verified domains.
