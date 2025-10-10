@@ -1072,6 +1072,265 @@
         }
       }
     },
+    "/evaluationrules": {
+      "get": {
+        "operationId": "EvaluationRules_List",
+        "description": "List all evaluation rules.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionType",
+            "in": "query",
+            "description": "Filter by the type of evaluation rule.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "continuousEvaluation",
+              "humanEvaluation"
+            ],
+            "x-ms-enum": {
+              "name": "EvaluationRuleActionType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "continuousEvaluation",
+                  "value": "continuousEvaluation",
+                  "description": "Continuous evaluation."
+                },
+                {
+                  "name": "humanEvaluation",
+                  "value": "humanEvaluation",
+                  "description": "Human evaluation."
+                }
+              ]
+            }
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "description": "Filter by the agent name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "description": "Filter by the enabled status.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluationRule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "EvaluationRules_List_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_List_MaximumSet_Gen.json"
+          },
+          "EvaluationRules_List_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_List_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
+    "/evaluationrules/{id}": {
+      "get": {
+        "operationId": "EvaluationRules_GetEvaluationRule",
+        "description": "Get an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_GetEvaluationRule_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_GetEvaluationRule_MaximumSet_Gen.json"
+          },
+          "EvaluationRules_GetEvaluationRule_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_GetEvaluationRule_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EvaluationRules_CreateOrUpdate",
+        "description": "Create or update an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "evaluationRule",
+            "in": "body",
+            "description": "Evaluation rule resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_CreateOrUpdate_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "EvaluationRules_CreateOrUpdate_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationRules_Delete",
+        "description": "Delete an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_Delete_MaximumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_Delete_MaximumSet_Gen.json"
+          },
+          "EvaluationRules_Delete_MinimumSet_Gen": {
+            "$ref": "./examples/EvaluationRules_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -6051,6 +6310,27 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEvaluationRule": {
+      "type": "object",
+      "description": "Paged collection of EvaluationRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluationRule items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluationRule"
           }
         },
         "nextLink": {
