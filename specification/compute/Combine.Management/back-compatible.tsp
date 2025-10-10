@@ -526,3 +526,11 @@ using Microsoft.Compute;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGalleryImageVersion.properties
 );
+
+@@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.listByRestorePoint,
+  "DiskRestorePoint",
+  "!csharp"
+);
+@@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
