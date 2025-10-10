@@ -9707,10 +9707,29 @@
       "type": "string",
       "enum": [
         "Prompt",
-        "Completion"
+        "Completion",
+        "PreToolCall",
+        "PostToolCall",
+        "PreRun",
+        "PostRun"
       ],
       "x-ms-enum": {
         "name": "RaiPolicyContentSource",
+        "modelAsString": true
+      }
+    },
+    "RaiActionType": {
+      "type": "string",
+      "description": "The action types to apply to the content filters",
+      "enum": [
+        "None",
+        "BLOCKING",
+        "ANNOTATING",
+        "HITL",
+        "RETRY"
+      ],
+      "x-ms-enum": {
+        "name": "RaiActionType",
         "modelAsString": true
       }
     },
@@ -9745,6 +9764,9 @@
         },
         "source": {
           "$ref": "#/definitions/RaiPolicyContentSource"
+        },
+        "action": {
+          "$ref": "#/definitions/RaiActionType"
         }
       }
     },
