@@ -107,7 +107,7 @@ interface EnvironmentVersions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryEnvironmentVersions_List")
-  @summary("List environment versions.")
+  @summary("List versions.")
   list is EnvironmentVersionOps.List<
     EnvironmentVersion,
     Parameters = {

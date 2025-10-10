@@ -15,7 +15,7 @@
     "/providers/microsoft.MachineLearningServices/operations": {
       "get": {
         "operationId": "Operations_List",
-        "summary": "Lists all of the available Azure Machine Learning Services REST API operations.",
+        "summary": "Lists all of the available Azure Machine Learning Workspaces REST API operations",
         "description": "List the operations for the provider",
         "parameters": [],
         "responses": {
@@ -1767,6 +1767,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/data/{name}/versions": {
       "get": {
         "operationId": "RegistryDataVersions_List",
+        "summary": "List data versions in the data container",
         "description": "List data versions in the data container",
         "parameters": [
           {
@@ -2365,7 +2366,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/environments/{environmentName}/versions": {
       "get": {
         "operationId": "RegistryEnvironmentVersions_List",
-        "summary": "List environment versions.",
+        "summary": "List versions.",
         "description": "List versions.",
         "parameters": [
           {
@@ -3275,7 +3276,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}": {
       "get": {
         "operationId": "Workspaces_Get",
-        "summary": "Get workspace.",
+        "summary": "Gets the properties of the specified machine learning workspace.",
         "description": "Gets the properties of the specified machine learning workspace.",
         "parameters": [
           {
@@ -3308,7 +3309,7 @@
       },
       "put": {
         "operationId": "Workspaces_CreateOrUpdate",
-        "summary": "Create or update workspace.",
+        "summary": "Creates or updates a workspace with the specified parameters.",
         "description": "Creates or updates a workspace with the specified parameters.",
         "parameters": [
           {
@@ -3359,7 +3360,7 @@
       },
       "patch": {
         "operationId": "Workspaces_Update",
-        "summary": "Update workspace.",
+        "summary": "Updates a machine learning workspace with the specified parameters.",
         "description": "Updates a machine learning workspace with the specified parameters.",
         "parameters": [
           {
@@ -3410,7 +3411,7 @@
       },
       "delete": {
         "operationId": "Workspaces_Delete",
-        "summary": "Delete workspace.",
+        "summary": "Deletes a machine learning workspace.",
         "description": "Deletes a machine learning workspace.",
         "parameters": [
           {
@@ -12277,7 +12278,7 @@
       },
       "put": {
         "operationId": "Jobs_CreateOrUpdate",
-        "summary": "Creates and executes a Job. \r\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.",
+        "summary": "Creates and executes a Job.\r\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.",
         "description": "Creates and executes a Job.\nFor update case, the Tags in the definition passed in will replace Tags in the existing job.",
         "parameters": [
           {
@@ -12624,6 +12625,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks": {
       "get": {
         "operationId": "ManagedNetworkSettings_List",
+        "summary": "List the managed network settings for a machine learning workspace.",
         "description": "List API for managed network settings of a machine learning workspace.",
         "parameters": [
           {
@@ -12661,6 +12663,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}": {
       "get": {
         "operationId": "ManagedNetworkSettings_Get",
+        "summary": "Get the managed network settings for a machine learning workspace.",
         "description": "Get API for managed network settings of a machine learning workspace.",
         "parameters": [
           {
@@ -12700,6 +12703,7 @@
       },
       "put": {
         "operationId": "ManagedNetworkSettings_Put",
+        "summary": "PUT API for managed network settings of a machine learning workspace.",
         "description": "PUT API for managed network settings of a machine learning workspace.",
         "parameters": [
           {
@@ -12757,6 +12761,7 @@
       },
       "patch": {
         "operationId": "ManagedNetworkSettings_Patch",
+        "summary": "Patch API for managed network settings of a machine learning workspace.",
         "description": "Patch API for managed network settings of a machine learning workspace.",
         "parameters": [
           {
@@ -12815,6 +12820,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/batchOutboundRules": {
       "post": {
         "operationId": "OutboundRules_Post",
+        "summary": "The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.",
         "description": "The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.",
         "parameters": [
           {
@@ -12877,6 +12883,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules": {
       "get": {
         "operationId": "OutboundRule_List",
+        "summary": "The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.",
         "description": "The GET API for retrieveing the list of outbound rules of the managed network associated with the machine learning workspace.",
         "parameters": [
           {
@@ -12921,6 +12928,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/managedNetworks/{managedNetworkName}/outboundRules/{ruleName}": {
       "get": {
         "operationId": "OutboundRule_Get",
+        "summary": "The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.",
         "description": "The GET API for retrieveing a single outbound rule of the managed network associated with the machine learning workspace.",
         "parameters": [
           {
@@ -13031,6 +13039,7 @@
       },
       "delete": {
         "operationId": "OutboundRule_Delete",
+        "summary": "The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.",
         "description": "The DELETE API for deleting a single outbound rule of the managed network associated with the machine learning workspace.",
         "parameters": [
           {
@@ -13086,6 +13095,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions": {
       "get": {
         "operationId": "MarketplaceSubscriptions_List",
+        "summary": "List containers.",
         "description": "List containers.",
         "parameters": [
           {
@@ -13128,6 +13138,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}": {
       "get": {
         "operationId": "MarketplaceSubscriptions_Get",
+        "summary": "",
         "description": "Get container.",
         "parameters": [
           {
@@ -13166,6 +13177,7 @@
       },
       "put": {
         "operationId": "MarketplaceSubscriptions_CreateOrUpdate",
+        "summary": "Create or update Marketplace Subscription (asynchronous).",
         "description": "Create or update Marketplace Subscription (asynchronous).",
         "parameters": [
           {
@@ -13234,6 +13246,7 @@
       },
       "delete": {
         "operationId": "MarketplaceSubscriptions_Delete",
+        "summary": "Delete Marketplace Subscription (asynchronous).",
         "description": "Delete Marketplace Subscription (asynchronous).",
         "parameters": [
           {
@@ -13286,6 +13299,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models": {
       "get": {
         "operationId": "ModelContainers_List",
+        "summary": "List model containers.",
         "description": "List model containers.",
         "parameters": [
           {
@@ -13349,6 +13363,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}": {
       "get": {
         "operationId": "ModelContainers_Get",
+        "summary": "Get container.",
         "description": "Get container.",
         "parameters": [
           {
@@ -13387,6 +13402,7 @@
       },
       "put": {
         "operationId": "ModelContainers_CreateOrUpdate",
+        "summary": "Create or update container.",
         "description": "Create or update container.",
         "parameters": [
           {
@@ -13439,6 +13455,7 @@
       },
       "delete": {
         "operationId": "ModelContainers_Delete",
+        "summary": "Delete container.",
         "description": "Delete container.",
         "parameters": [
           {
@@ -13479,6 +13496,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions": {
       "get": {
         "operationId": "ModelVersions_List",
+        "summary": "List model versions.",
         "description": "List model versions.",
         "parameters": [
           {
@@ -13584,6 +13602,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}": {
       "get": {
         "operationId": "ModelVersions_Get",
+        "summary": "Get version.",
         "description": "Get version.",
         "parameters": [
           {
@@ -13628,6 +13647,7 @@
       },
       "put": {
         "operationId": "ModelVersions_CreateOrUpdate",
+        "summary": "Create or update version.",
         "description": "Create or update version.",
         "parameters": [
           {
@@ -13686,6 +13706,7 @@
       },
       "delete": {
         "operationId": "ModelVersions_Delete",
+        "summary": "Delete version.",
         "description": "Delete version.",
         "parameters": [
           {
@@ -13885,6 +13906,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}": {
       "get": {
         "operationId": "OnlineEndpoints_Get",
+        "summary": "Get Online Endpoint.",
         "description": "Get Online Endpoint.",
         "parameters": [
           {
@@ -13923,6 +13945,7 @@
       },
       "put": {
         "operationId": "OnlineEndpoints_CreateOrUpdate",
+        "summary": "Create or update Online Endpoint (asynchronous).",
         "description": "Create or update Online Endpoint (asynchronous).",
         "parameters": [
           {
@@ -13991,6 +14014,7 @@
       },
       "patch": {
         "operationId": "OnlineEndpoints_Update",
+        "summary": "Update Online Endpoint (asynchronous).",
         "description": "Update Online Endpoint (asynchronous).",
         "parameters": [
           {
@@ -14052,6 +14076,7 @@
       },
       "delete": {
         "operationId": "OnlineEndpoints_Delete",
+        "summary": "Delete Online Endpoint (asynchronous).",
         "description": "Delete Online Endpoint (asynchronous).",
         "parameters": [
           {
@@ -14107,6 +14132,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments": {
       "get": {
         "operationId": "OnlineDeployments_List",
+        "summary": "List Inference Endpoint Deployments.",
         "description": "List Inference Endpoint Deployments.",
         "parameters": [
           {
@@ -14166,6 +14192,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}": {
       "get": {
         "operationId": "OnlineDeployments_Get",
+        "summary": "Get Inference Deployment.",
         "description": "Get Inference Deployment Deployment.",
         "parameters": [
           {
@@ -14213,6 +14240,7 @@
       },
       "put": {
         "operationId": "OnlineDeployments_CreateOrUpdate",
+        "summary": "Create or update Inference Endpoint Deployment (asynchronous).",
         "description": "Create or update Inference Endpoint Deployment (asynchronous).",
         "parameters": [
           {
@@ -14290,6 +14318,7 @@
       },
       "patch": {
         "operationId": "OnlineDeployments_Update",
+        "summary": "Update Online Deployment (asynchronous).",
         "description": "Update Online Deployment (asynchronous).",
         "parameters": [
           {
@@ -14360,6 +14389,7 @@
       },
       "delete": {
         "operationId": "OnlineDeployments_Delete",
+        "summary": "Delete Inference Endpoint Deployment (asynchronous).",
         "description": "Delete Inference Endpoint Deployment (asynchronous).",
         "parameters": [
           {
@@ -14421,6 +14451,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/getLogs": {
       "post": {
         "operationId": "OnlineDeployments_GetLogs",
+        "summary": "Polls an Endpoint operation.",
         "description": "Polls an Endpoint operation.",
         "parameters": [
           {
@@ -14475,6 +14506,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/deployments/{deploymentName}/skus": {
       "get": {
         "operationId": "OnlineDeployments_ListSkus",
+        "summary": "List Inference Endpoint Deployment Skus.",
         "description": "List Inference Endpoint Deployment Skus.",
         "parameters": [
           {
@@ -14538,6 +14570,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/listKeys": {
       "post": {
         "operationId": "OnlineEndpoints_ListKeys",
+        "summary": "List EndpointAuthKeys for an Endpoint using Key-based authentication.",
         "description": "List EndpointAuthKeys for an Endpoint using Key-based authentication.",
         "parameters": [
           {
@@ -14578,6 +14611,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/regenerateKeys": {
       "post": {
         "operationId": "OnlineEndpoints_RegenerateKeys",
+        "summary": "Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).",
         "description": "Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).",
         "parameters": [
           {
@@ -14633,6 +14667,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints/{endpointName}/token": {
       "post": {
         "operationId": "OnlineEndpoints_GetToken",
+        "summary": "Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.",
         "description": "Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.",
         "parameters": [
           {
@@ -14673,6 +14708,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundNetworkDependenciesEndpoints": {
       "get": {
         "operationId": "Workspaces_ListOutboundNetworkDependenciesEndpoints",
+        "summary": "Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.",
         "description": "Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.",
         "parameters": [
           {
@@ -14707,6 +14743,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules": {
       "get": {
         "operationId": "ManagedNetworkSettingsRule_List",
+        "summary": "Lists the managed network outbound rules for a machine learning workspace.",
         "description": "Lists the managed network outbound rules for a machine learning workspace.",
         "parameters": [
           {
@@ -14744,6 +14781,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/outboundRules/{ruleName}": {
       "get": {
         "operationId": "ManagedNetworkSettingsRule_Get",
+        "summary": "Gets an outbound rule from the managed network of a machine learning workspace.",
         "description": "Gets an outbound rule from the managed network of a machine learning workspace.",
         "parameters": [
           {
@@ -14783,6 +14821,7 @@
       },
       "put": {
         "operationId": "ManagedNetworkSettingsRule_CreateOrUpdate",
+        "summary": "Creates or updates an outbound rule in the managed network of a machine learning workspace.",
         "description": "Creates or updates an outbound rule in the managed network of a machine learning workspace.",
         "parameters": [
           {
@@ -14840,6 +14879,7 @@
       },
       "delete": {
         "operationId": "ManagedNetworkSettingsRule_Delete",
+        "summary": "Deletes an outbound rule from the managed network of a machine learning workspace.",
         "description": "Deletes an outbound rule from the managed network of a machine learning workspace.",
         "parameters": [
           {
@@ -14891,6 +14931,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/prepareNotebook": {
       "post": {
         "operationId": "Workspaces_PrepareNotebook",
+        "summary": "Prepare Azure Machine Learning Workspace's notebook resource",
         "description": "Prepare Azure Machine Learning Workspace's notebook resource",
         "parameters": [
           {
@@ -14935,6 +14976,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections": {
       "get": {
         "operationId": "PrivateEndpointConnections_List",
+        "summary": "Called by end-users to get all PE connections.",
         "description": "Called by end-users to get all PE connections.",
         "parameters": [
           {
@@ -14972,6 +15014,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateEndpointConnections/{privateEndpointConnectionName}": {
       "get": {
         "operationId": "PrivateEndpointConnections_Get",
+        "summary": "Called by end-users to get a PE connection.",
         "description": "Called by end-users to get a PE connection.",
         "parameters": [
           {
@@ -15010,6 +15053,7 @@
       },
       "put": {
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
+        "summary": "Called by end-users to approve or reject a PE connection.",
         "description": "Called by end-users to approve or reject a PE connection.\nThis method must validate and forward the call to NRP.",
         "parameters": [
           {
@@ -15056,6 +15100,7 @@
       },
       "delete": {
         "operationId": "PrivateEndpointConnections_Delete",
+        "summary": "Called by end-users to delete a PE connection.",
         "description": "Called by end-users to delete a PE connection.",
         "parameters": [
           {
@@ -15096,6 +15141,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/privateLinkResources": {
       "get": {
         "operationId": "PrivateLinkResources_List",
+        "summary": "Called by Client (Portal, CLI, etc) to get available \"private link resources\" for the workspace.\r\nEach \"private link resource\" is a connection endpoint (IP address) to the resource.\r\nPre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.\r\nOther RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.\r\nDefined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupIds\".",
         "description": "Called by Client (Portal, CLI, etc) to get available \"private link resources\" for the workspace.\nEach \"private link resource\" is a connection endpoint (IP address) to the resource.\nPre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.\nOther RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.\nDefined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupIds\".",
         "parameters": [
           {
@@ -15133,6 +15179,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/provisionManagedNetwork": {
       "post": {
         "operationId": "ManagedNetworkProvisions_ProvisionManagedNetwork",
+        "summary": "Provisions the managed network of a machine learning workspace.",
         "description": "Provisions the managed network of a machine learning workspace.",
         "parameters": [
           {
@@ -15184,6 +15231,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/resyncKeys": {
       "post": {
         "operationId": "Workspaces_ResyncKeys",
+        "summary": "Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry",
         "description": "Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry",
         "parameters": [
           {
@@ -15225,6 +15273,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules": {
       "get": {
         "operationId": "Schedules_List",
+        "summary": "List schedules in specified workspace.",
         "description": "List schedules in specified workspace.",
         "parameters": [
           {
@@ -15282,6 +15331,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/schedules/{name}": {
       "get": {
         "operationId": "Schedules_Get",
+        "summary": "Get schedule.",
         "description": "Get schedule.",
         "parameters": [
           {
@@ -15320,6 +15370,7 @@
       },
       "put": {
         "operationId": "Schedules_CreateOrUpdate",
+        "summary": "Create or update schedule.",
         "description": "Create or update schedule.",
         "parameters": [
           {
@@ -15388,6 +15439,7 @@
       },
       "delete": {
         "operationId": "Schedules_Delete",
+        "summary": "Delete schedule.",
         "description": "Delete schedule.",
         "parameters": [
           {
@@ -15443,6 +15495,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints": {
       "get": {
         "operationId": "ServerlessEndpoints_List",
+        "summary": "List Serverless Endpoints.",
         "description": "List Serverless Endpoints.",
         "parameters": [
           {
@@ -15485,6 +15538,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}": {
       "get": {
         "operationId": "ServerlessEndpoints_Get",
+        "summary": "Get Serverless Endpoint.",
         "description": "Get Serverless Endpoint.",
         "parameters": [
           {
@@ -15523,6 +15577,7 @@
       },
       "put": {
         "operationId": "ServerlessEndpoints_CreateOrUpdate",
+        "summary": "Create or update Serverless Endpoint (asynchronous).",
         "description": "Create or update Serverless Endpoint (asynchronous).",
         "parameters": [
           {
@@ -15591,6 +15646,7 @@
       },
       "patch": {
         "operationId": "ServerlessEndpoints_Update",
+        "summary": "Update Serverless Endpoint (asynchronous).",
         "description": "Update Serverless Endpoint (asynchronous).",
         "parameters": [
           {
@@ -15652,6 +15708,7 @@
       },
       "delete": {
         "operationId": "ServerlessEndpoints_Delete",
+        "summary": "Delete Serverless Endpoint (asynchronous).",
         "description": "Delete Serverless Endpoint (asynchronous).",
         "parameters": [
           {
@@ -15704,6 +15761,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/listKeys": {
       "post": {
         "operationId": "ServerlessEndpoints_ListKeys",
+        "summary": "List EndpointAuthKeys for an Endpoint using Key-based authentication.",
         "description": "List EndpointAuthKeys for an Endpoint using Key-based authentication.",
         "parameters": [
           {
@@ -15744,6 +15802,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/serverlessEndpoints/{name}/regenerateKeys": {
       "post": {
         "operationId": "ServerlessEndpoints_RegenerateKeys",
+        "summary": "Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).",
         "description": "Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).",
         "parameters": [
           {

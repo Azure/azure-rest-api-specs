@@ -84,4 +84,4 @@ enum Versions {
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@summary(Operations.list, "Lists all of the available Azure Machine Learning Services REST API operations.");
+@@summary(Operations.list, "Lists all of the available Azure Machine Learning Workspaces REST API operations");

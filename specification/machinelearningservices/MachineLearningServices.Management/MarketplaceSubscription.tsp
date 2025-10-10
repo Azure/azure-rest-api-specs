@@ -33,12 +33,14 @@ interface MarketplaceSubscriptions {
   /**
    * Get container.
    */
+  @summary("")
   get is ArmResourceRead<MarketplaceSubscription>;
 
   /**
    * Create or update Marketplace Subscription (asynchronous).
    */
   @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update Marketplace Subscription (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     MarketplaceSubscription,
     Response = ArmResourceUpdatedResponse<MarketplaceSubscription> | (ArmResourceCreatedResponse<
@@ -56,6 +58,7 @@ interface MarketplaceSubscriptions {
   /**
    * Delete Marketplace Subscription (asynchronous).
    */
+  @summary("Delete Marketplace Subscription (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     MarketplaceSubscription,
     Response = (ArmDeleteAcceptedLroResponse & {
@@ -70,6 +73,7 @@ interface MarketplaceSubscriptions {
   /**
    * List containers.
    */
+  @summary("List containers.")
   list is ArmResourceListByParent<
     MarketplaceSubscription,
     Parameters = {

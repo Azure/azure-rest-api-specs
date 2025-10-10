@@ -37,12 +37,14 @@ interface OnlineEndpoints {
   /**
    * Get Online Endpoint.
    */
+  @summary("Get Online Endpoint.")
   get is ArmResourceRead<OnlineEndpoint>;
 
   /**
    * Create or update Online Endpoint (asynchronous).
    */
   @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update Online Endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OnlineEndpoint,
     Response = ArmResourceUpdatedResponse<OnlineEndpoint> | (ArmResourceCreatedResponse<
@@ -61,6 +63,7 @@ interface OnlineEndpoints {
    * Update Online Endpoint (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update Online Endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithIdentity,
@@ -77,6 +80,7 @@ interface OnlineEndpoints {
    * Delete Online Endpoint (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete Online Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineEndpoint,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -142,11 +146,13 @@ interface OnlineEndpoints {
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
+  @summary("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
   listKeys is ArmResourceActionSync<OnlineEndpoint, void, EndpointAuthKeys>;
 
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).
    */
+  @summary("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpoint,
     RegenerateEndpointKeysRequest,
@@ -157,6 +163,7 @@ interface OnlineEndpoints {
    * Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.
    */
   @action("token")
+  @summary("Retrieve a valid AML token for an Endpoint using AMLToken-based authentication.")
   getToken is ArmResourceActionSync<
     OnlineEndpoint,
     void,

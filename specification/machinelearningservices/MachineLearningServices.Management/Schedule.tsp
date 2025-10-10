@@ -30,11 +30,13 @@ interface Schedules {
   /**
    * Get schedule.
    */
+  @summary("Get schedule.")
   get is ArmResourceRead<Schedule>;
 
   /**
    * Create or update schedule.
    */
+  @summary("Create or update schedule.")
   @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Schedule,
@@ -54,6 +56,7 @@ interface Schedules {
    * Delete schedule.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete schedule.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Schedule,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -68,6 +71,7 @@ interface Schedules {
   /**
    * List schedules in specified workspace.
    */
+  @summary("List schedules in specified workspace.")
   list is ArmResourceListByParent<
     Schedule,
     Parameters = {

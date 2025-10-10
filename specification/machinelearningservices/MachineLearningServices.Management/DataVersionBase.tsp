@@ -144,6 +144,7 @@ interface DataVersionBases {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryDataVersions_List")
+  @summary("List data versions in the data container")
   list is DataVersionBaseOps.List<
     DataVersionBase,
     Parameters = {

@@ -34,14 +34,14 @@ interface Workspaces {
   /**
    * Gets the properties of the specified machine learning workspace.
    */
-  @summary("Get workspace.")
+  @summary("Gets the properties of the specified machine learning workspace.")
   get is ArmResourceRead<Workspace>;
 
   /**
    * Creates or updates a workspace with the specified parameters.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @summary("Create or update workspace.")
+  @summary("Creates or updates a workspace with the specified parameters.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Workspace,
     Response = ArmResourceUpdatedResponse<Workspace> | ArmAcceptedLroResponse,
@@ -53,7 +53,7 @@ interface Workspaces {
    * Updates a machine learning workspace with the specified parameters.
    */
   @patch(#{ implicitOptionality: false })
-  @summary("Update workspace.")
+  @summary("Updates a machine learning workspace with the specified parameters.")
   update is ArmCustomPatchAsync<
     Workspace,
     PatchModel = WorkspaceUpdateParameters
@@ -63,7 +63,7 @@ interface Workspaces {
    * Deletes a machine learning workspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @summary("Delete workspace.")
+  @summary("Deletes a machine learning workspace.")
   delete is ArmResourceDeleteWithoutOkAsync<
     Workspace,
     Parameters = {
@@ -196,6 +196,7 @@ interface Workspaces {
    */
   @get
   @action("outboundNetworkDependenciesEndpoints")
+  @summary("Called by Client (Portal, CLI, etc) to get a list of all external outbound dependencies (FQDNs) programmatically.")
   listOutboundNetworkDependenciesEndpoints is ArmResourceActionSync<
     Workspace,
     void,
@@ -205,6 +206,7 @@ interface Workspaces {
   /**
    * Prepare Azure Machine Learning Workspace's notebook resource
    */
+  @summary("Prepare Azure Machine Learning Workspace's notebook resource")
   prepareNotebook is ArmResourceActionAsync<
     Workspace,
     void,
@@ -214,6 +216,7 @@ interface Workspaces {
   /**
    * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
    */
+  @summary("Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry")
   resyncKeys is ArmResourceActionAsync<Workspace, void, OkResponse>;
 
   /**
@@ -269,6 +272,7 @@ interface Workspaces {
   @list
   @get
   @action("privateLinkResources")
+  @summary("Called by Client (Portal, CLI, etc) to get available \"private link resources\" for the workspace.\r\nEach \"private link resource\" is a connection endpoint (IP address) to the resource.\r\nPre single connection endpoint per workspace: the Data Plane IP address, returned by DNS resolution.\r\nOther RPs, such as Azure Storage, have multiple - one for Blobs, other for Queues, etc.\r\nDefined in the \"[NRP] Private Endpoint Design\" doc, topic \"GET API for GroupIds\".")
   privateLinkResourcesList is ArmResourceActionSync<
     Workspace,
     void,
@@ -280,6 +284,7 @@ interface Workspaces {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkProvisions_ProvisionManagedNetwork")
+  @summary("Provisions the managed network of a machine learning workspace.")
   provisionManagedNetwork is ArmResourceActionAsync<
     Workspace,
     ManagedNetworkProvisionOptions,

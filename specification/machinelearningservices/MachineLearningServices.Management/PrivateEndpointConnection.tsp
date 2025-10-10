@@ -38,6 +38,7 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to get a PE connection.
    */
+  @summary("Called by end-users to get a PE connection.")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
@@ -45,6 +46,7 @@ interface PrivateEndpointConnections {
    * This method must validate and forward the call to NRP.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  @summary("Called by end-users to approve or reject a PE connection.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>
@@ -53,11 +55,13 @@ interface PrivateEndpointConnections {
   /**
    * Called by end-users to delete a PE connection.
    */
+  @summary("Called by end-users to delete a PE connection.")
   delete is ArmResourceDeleteSync<PrivateEndpointConnection>;
 
   /**
    * Called by end-users to get all PE connections.
    */
+  @summary("Called by end-users to get all PE connections.")
   list is ArmResourceListByParent<
     PrivateEndpointConnection,
     Response = ArmResponse<PrivateEndpointConnectionListResult>

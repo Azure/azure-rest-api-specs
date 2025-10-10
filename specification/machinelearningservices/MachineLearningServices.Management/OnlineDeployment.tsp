@@ -37,12 +37,14 @@ interface OnlineDeployments {
   /**
    * Get Inference Deployment Deployment.
    */
+  @summary("Get Inference Deployment.")
   get is ArmResourceRead<OnlineDeployment>;
 
   /**
    * Create or update Inference Endpoint Deployment (asynchronous).
    */
   @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update Inference Endpoint Deployment (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     OnlineDeployment,
     Response = ArmResourceUpdatedResponse<OnlineDeployment> | (ArmResourceCreatedResponse<
@@ -61,6 +63,7 @@ interface OnlineDeployments {
    * Update Online Deployment (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update Online Deployment (asynchronous).")
   update is ArmCustomPatchAsync<
     OnlineDeployment,
     PatchModel = PartialMinimalTrackedResourceWithSku,
@@ -77,6 +80,7 @@ interface OnlineDeployments {
    * Delete Inference Endpoint Deployment (asynchronous).
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete Inference Endpoint Deployment (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     OnlineDeployment,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -91,6 +95,7 @@ interface OnlineDeployments {
   /**
    * List Inference Endpoint Deployments.
    */
+  @summary("List Inference Endpoint Deployments.")
   list is ArmResourceListByParent<
     OnlineDeployment,
     Parameters = {
@@ -118,6 +123,7 @@ interface OnlineDeployments {
   /**
    * Polls an Endpoint operation.
    */
+  @summary("Polls an Endpoint operation.")
   getLogs is ArmResourceActionSync<
     OnlineDeployment,
     DeploymentLogsRequest,
@@ -130,6 +136,7 @@ interface OnlineDeployments {
   @list
   @get
   @action("skus")
+  @summary("List Inference Endpoint Deployment Skus.")
   listSkus is ArmResourceActionSync<
     OnlineDeployment,
     void,

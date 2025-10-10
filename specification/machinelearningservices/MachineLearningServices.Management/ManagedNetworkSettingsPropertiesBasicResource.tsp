@@ -30,6 +30,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettings_Get")
+  @summary("Get the managed network settings for a machine learning workspace.")
   get is ArmResourceRead<ManagedNetworkSettingsPropertiesBasicResource>;
 
   /**
@@ -38,6 +39,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
   @operationId("ManagedNetworkSettings_Put")
+  @summary("PUT API for managed network settings of a machine learning workspace.")
   put is ArmResourceCreateOrReplaceAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     Response = ArmResourceUpdatedResponse<ManagedNetworkSettingsPropertiesBasicResource> | ArmAcceptedLroResponse,
@@ -51,6 +53,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettings_Patch")
   @patch(#{ implicitOptionality: false })
+  @summary("Patch API for managed network settings of a machine learning workspace.")
   patch is Azure.ResourceManager.Legacy.CustomPatchAsync<
     ManagedNetworkSettingsPropertiesBasicResource,
     PatchModel = ManagedNetworkSettingsPropertiesBasicResource,
@@ -62,6 +65,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ManagedNetworkSettings_List")
+  @summary("List the managed network settings for a machine learning workspace.")
   list is ArmResourceListByParent<
     ManagedNetworkSettingsPropertiesBasicResource,
     Response = ManagedNetworkListResult
@@ -72,6 +76,7 @@ interface ManagedNetworkSettingsPropertiesBasicResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("OutboundRules_Post")
+  @summary("The POST API for updating the outbound rules of the managed network associated with the machine learning workspace.")
   @action("batchOutboundRules")
   @list
   @post

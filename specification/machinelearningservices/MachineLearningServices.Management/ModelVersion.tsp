@@ -207,6 +207,7 @@ interface ModelVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelVersions_Get")
+  @summary("Get version.")
   get is ModelVersionOperationGroupOps.Read<ModelVersion>;
 
   /**
@@ -214,6 +215,7 @@ interface ModelVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelVersions_CreateOrUpdate")
+  @summary("Create or update version.")
   createOrUpdate is ModelVersionOperationGroupOps.CreateOrUpdateSync<ModelVersion>;
 
   /**
@@ -221,6 +223,7 @@ interface ModelVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelVersions_Delete")
+  @summary("Delete version.")
   delete is ModelVersionOperationGroupOps.DeleteSync<ModelVersion>;
 
   /**
@@ -228,6 +231,7 @@ interface ModelVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelVersions_List")
+  @summary("List model versions.")
   list is ModelVersionOperationGroupOps.List<
     ModelVersion,
     Parameters = {

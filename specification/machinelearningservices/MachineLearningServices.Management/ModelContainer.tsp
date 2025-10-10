@@ -152,6 +152,7 @@ interface ModelContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelContainers_Get")
+  @summary("Get container.")
   get is ModelContainerOperationGroupOps.Read<ModelContainer>;
 
   /**
@@ -159,6 +160,7 @@ interface ModelContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelContainers_CreateOrUpdate")
+  @summary("Create or update container.")
   createOrUpdate is ModelContainerOperationGroupOps.CreateOrUpdateSync<ModelContainer>;
 
   /**
@@ -166,6 +168,7 @@ interface ModelContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelContainers_Delete")
+  @summary("Delete container.")
   delete is ModelContainerOperationGroupOps.DeleteSync<ModelContainer>;
 
   /**
@@ -173,6 +176,7 @@ interface ModelContainerOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelContainers_List")
+  @summary("List model containers.")
   list is ModelContainerOperationGroupOps.List<
     ModelContainer,
     Parameters = {

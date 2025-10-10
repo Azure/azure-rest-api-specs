@@ -40,12 +40,14 @@ interface ServerlessEndpoints {
   /**
    * Get Serverless Endpoint.
    */
+  @summary("Get Serverless Endpoint.")
   get is ArmResourceRead<ServerlessEndpoint>;
 
   /**
    * Create or update Serverless Endpoint (asynchronous).
    */
   @Azure.Core.useFinalStateVia("original-uri")
+  @summary("Create or update Serverless Endpoint (asynchronous).")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ServerlessEndpoint,
     Response = ArmResourceUpdatedResponse<ServerlessEndpoint> | (ArmResourceCreatedResponse<
@@ -64,6 +66,7 @@ interface ServerlessEndpoints {
    * Update Serverless Endpoint (asynchronous).
    */
   @patch(#{ implicitOptionality: false })
+  @summary("Update Serverless Endpoint (asynchronous).")
   update is ArmCustomPatchAsync<
     ServerlessEndpoint,
     PatchModel = PartialMinimalTrackedResourceWithSkuAndIdentity,
@@ -79,6 +82,7 @@ interface ServerlessEndpoints {
   /**
    * Delete Serverless Endpoint (asynchronous).
    */
+  @summary("Delete Serverless Endpoint (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServerlessEndpoint,
     Response = (ArmDeleteAcceptedLroResponse & {
@@ -93,6 +97,7 @@ interface ServerlessEndpoints {
   /**
    * List Serverless Endpoints.
    */
+  @summary("List Serverless Endpoints.")
   list is ArmResourceListByParent<
     ServerlessEndpoint,
     Parameters = {
@@ -108,11 +113,13 @@ interface ServerlessEndpoints {
   /**
    * List EndpointAuthKeys for an Endpoint using Key-based authentication.
    */
+  @summary("List EndpointAuthKeys for an Endpoint using Key-based authentication.")
   listKeys is ArmResourceActionSync<ServerlessEndpoint, void, EndpointAuthKeys>;
 
   /**
    * Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).
    */
+  @summary("Regenerate EndpointAuthKeys for an Endpoint using Key-based authentication (asynchronous).")
   regenerateKeys is ArmResourceActionAsync<
     ServerlessEndpoint,
     RegenerateEndpointKeysRequest,
