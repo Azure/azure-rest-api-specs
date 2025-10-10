@@ -46,11 +46,32 @@
                 },
                 {
                   "path": "/vectorPath2",
-                  "type": "quantizedFlat"
+                  "type": "quantizedFlat",
+                  "quantizationByteSize": 100,
+                  "vectorIndexShardKey": [
+                    "/vectorShardKey1"
+                  ]
                 },
                 {
                   "path": "/vectorPath3",
-                  "type": "diskANN"
+                  "type": "diskANN",
+                  "quantizationByteSize": 100,
+                  "indexingSearchListSize": 25,
+                  "vectorIndexShardKey": [
+                    "/vectorShardKey1",
+                    "/vectorShardKey2"
+                  ]
+                }
+              ],
+              "fullTextIndexes": [
+                {
+                  "path": "/ftPath1"
+                },
+                {
+                  "path": "/ftPath2"
+                },
+                {
+                  "path": "/ftPath3"
                 }
               ]
             },

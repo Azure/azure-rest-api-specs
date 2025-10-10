@@ -7041,6 +7041,15 @@
         "enablePerRegionPerPartitionAutoscale": {
           "description": "Flag to indicate enabling/disabling of PerRegionPerPartitionAutoscale feature on the account",
           "type": "boolean"
+        },
+        "enablePriorityBasedExecution": {
+          "description": "Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account",
+          "type": "boolean"
+        },
+        "defaultPriorityLevel": {
+          "description": "Enum to indicate default Priority Level of request for Priority Based Execution.",
+          "type": "string",
+          "$ref": "#/definitions/DefaultPriorityLevel"
         }
       }
     },
@@ -7203,6 +7212,15 @@
         "enablePerRegionPerPartitionAutoscale": {
           "description": "Flag to indicate enabling/disabling of PerRegionPerPartitionAutoscale feature on the account",
           "type": "boolean"
+        },
+        "enablePriorityBasedExecution": {
+          "description": "Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account",
+          "type": "boolean"
+        },
+        "defaultPriorityLevel": {
+          "description": "Enum to indicate default Priority Level of request for Priority Based Execution.",
+          "type": "string",
+          "$ref": "#/definitions/DefaultPriorityLevel"
         }
       },
       "required": [
@@ -7389,6 +7407,15 @@
         "enablePerRegionPerPartitionAutoscale": {
           "description": "Flag to indicate enabling/disabling of PerRegionPerPartitionAutoscale feature on the account",
           "type": "boolean"
+        },
+        "enablePriorityBasedExecution": {
+          "description": "Flag to indicate enabling/disabling of Priority Based Execution Preview feature on the account",
+          "type": "boolean"
+        },
+        "defaultPriorityLevel": {
+          "description": "Enum to indicate default Priority Level of request for Priority Based Execution.",
+          "type": "string",
+          "$ref": "#/definitions/DefaultPriorityLevel"
         }
       }
     },
@@ -8290,6 +8317,13 @@
           "items": {
             "$ref": "#/definitions/VectorIndex"
           }
+        },
+        "fullTextIndexes": {
+          "description": "List of paths to include in the full text indexing",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/FullTextIndexPath"
+          }
         }
       }
     },
@@ -8409,6 +8443,31 @@
             "name": "VectorIndexType",
             "modelAsString": true
           }
+        },
+        "quantizationByteSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "The number of bytes used in product quantization of the vectors. A larger value may result in better recall for vector searches at the expense of latency. This is only applicable for the quantizedFlat and diskANN vector index types.",
+          "minimum": 4
+        },
+        "indexingSearchListSize": {
+          "type": "integer",
+          "format": "int64",
+          "description": "This is the size of the candidate list of approximate neighbors stored while building the DiskANN index as part of the optimization processes. Large values may improve recall at the expense of latency. This is only applicable for the diskANN vector index type.",
+          "default": 100,
+          "minimum": 25,
+          "maximum": 500
+        },
+        "vectorIndexShardKey": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "example": [
+            "/vectorShardKey1",
+            "/vectorShardKey2"
+          ],
+          "description": "Array of shard keys for the vector index. This is only applicable for the quantizedFlat and diskANN vector index types."
         }
       },
       "required": [
@@ -8461,6 +8520,19 @@
         "dataType",
         "distanceFunction",
         "dimensions"
+      ]
+    },
+    "FullTextIndexPath": {
+      "type": "object",
+      "description": "Represents the full text index path.",
+      "properties": {
+        "path": {
+          "type": "string",
+          "description": "The path to the full text field in the document."
+        }
+      },
+      "required": [
+        "path"
       ]
     },
     "FullTextPath": {
@@ -9854,6 +9926,10 @@
           "items": {
             "$ref": "#/definitions/TableName"
           }
+        },
+        "sourceBackupLocation": {
+          "type": "string",
+          "description": "The source backup location for restore."
         }
       },
       "allOf": [
@@ -10194,6 +10270,18 @@
       ],
       "x-ms-enum": {
         "name": "MinimalTlsVersion",
+        "modelAsString": true
+      }
+    },
+    "DefaultPriorityLevel": {
+      "description": "Enum to indicate default priorityLevel of requests",
+      "type": "string",
+      "enum": [
+        "High",
+        "Low"
+      ],
+      "x-ms-enum": {
+        "name": "DefaultPriorityLevel",
         "modelAsString": true
       }
     }
