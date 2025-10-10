@@ -19,7 +19,7 @@ model StorageMover
     Resource = StorageMover,
     KeyName = "storageMoverName",
     SegmentName = "storageMovers",
-    NamePattern = ""
+    NamePattern = "^[A-Za-z0-9][A-Za-z0-9_-]{0,63}$"
   >;
 }
 
