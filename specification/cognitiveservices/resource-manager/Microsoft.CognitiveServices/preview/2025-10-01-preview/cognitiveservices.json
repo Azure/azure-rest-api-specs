@@ -6492,12 +6492,6 @@
           },
           {
             "in": "query",
-            "name": "searchText",
-            "description": "Search text for filtering agent deployments.",
-            "type": "string"
-          },
-          {
-            "in": "query",
             "name": "orderBy",
             "description": "Field to order by.",
             "type": "string"
@@ -11604,13 +11598,13 @@
           },
           "x-nullable": true
         },
-        "applicationIdentity": {
-          "description": "The blueprint identity of the application.",
+        "agentIdentityBlueprint": {
+          "description": "The EntraId Agentic Blueprint of the application.",
           "$ref": "#/definitions/AssignedIdentity",
           "x-nullable": true
         },
-        "instanceIdentity": {
-          "description": "The (default) instance identity of the application.",
+        "defaultInstanceIdentity": {
+          "description": "The (default) agent instance identity of the application.",
           "$ref": "#/definitions/AssignedIdentity",
           "x-nullable": true
         },
@@ -11823,8 +11817,7 @@
         "Failed",
         "Deleting",
         "Deleted",
-        "Updating",
-        "None"
+        "Updating"
       ],
       "x-ms-enum": {
         "name": "AgentDeploymentState",
@@ -11861,10 +11854,6 @@
           {
             "value": "Updating",
             "description": "The deployment is being updated."
-          },
-          {
-            "value": "None",
-            "description": "Invalid state"
           }
         ]
       }
@@ -11875,8 +11864,7 @@
       "enum": [
         "Managed",
         "Hosted",
-        "Custom",
-        "None"
+        "Custom"
       ],
       "x-ms-enum": {
         "name": "AgentDeploymentType",
@@ -11893,10 +11881,6 @@
           {
             "value": "Custom",
             "description": "The underlying infra is provisioned by the deployer (BYO)"
-          },
-          {
-            "value": "None",
-            "description": "Invalid type"
           }
         ]
       }
@@ -11910,8 +11894,7 @@
         "Canceled",
         "Creating",
         "Updating",
-        "Deleting",
-        "None"
+        "Deleting"
       ],
       "x-ms-enum": {
         "name": "AgentDeploymentProvisioningState",
@@ -11940,10 +11923,6 @@
           {
             "value": "Deleting",
             "description": "The deployment is being deleted."
-          },
-          {
-            "value": "None",
-            "description": "Invalid state"
           }
         ]
       }
@@ -11952,8 +11931,7 @@
       "description": "Traffic routing protocol, used to distribute an application's inbound traffic to its deployments.",
       "type": "string",
       "enum": [
-        "FixedRatio",
-        "None"
+        "FixedRatio"
       ],
       "x-ms-enum": {
         "name": "TrafficRoutingProtocol",
@@ -11962,10 +11940,6 @@
           {
             "value": "FixedRatio",
             "description": "Percentage based routing"
-          },
-          {
-            "value": "None",
-            "description": "Invalid type"
           }
         ]
       }
@@ -11974,7 +11948,7 @@
       "description": "Represents a rule for routing traffic to a specific deployment.",
       "type": "object",
       "properties": {
-        "id": {
+        "ruleId": {
           "description": "The identifier of this traffic routing rule.",
           "type": "string",
           "x-nullable": true
