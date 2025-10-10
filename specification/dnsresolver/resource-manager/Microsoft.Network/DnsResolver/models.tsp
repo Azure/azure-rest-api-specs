@@ -4,11 +4,8 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Network;
 
@@ -209,7 +206,7 @@ model InboundEndpointProperties {
   /**
    * IP configurations for the inbound endpoint.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipConfigurations: IpConfiguration[];
 
   /**
@@ -342,7 +339,7 @@ model ForwardingRuleProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers: TargetDnsServer[];
 
   /**
@@ -397,7 +394,7 @@ model ForwardingRulePatchProperties {
   /**
    * DNS servers to forward the DNS query to.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDnsServers?: TargetDnsServer[];
 
   /**
@@ -544,7 +541,7 @@ model DnsSecurityRuleProperties {
    */
   @removed(Versions.v2025_10_01_preview)
   @renamedFrom(Versions.v2025_10_01_preview, "dnsResolverDomainLists")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   oldDnsResolverDomainLists: SubResource[];
 
   /**
