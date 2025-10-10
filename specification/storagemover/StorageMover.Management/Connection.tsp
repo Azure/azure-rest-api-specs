@@ -34,10 +34,7 @@ interface Connections {
    * Creates or updates a Connection resource.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
-    Connection,
-    Response = ArmResourceUpdatedResponse<Connection>
-  >;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<Connection>;
 
   /**
    * Gets a Connection resource.
@@ -57,8 +54,9 @@ interface Connections {
    * Returns 409 if there are active jobs using this connection.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  delete is ArmResourceDeleteSync<
+  delete is ArmResourceDeleteWithoutOkAsync<
     Connection,
+    Response = ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 }
 
