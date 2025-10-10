@@ -1,10 +1,13 @@
 import "@azure-tools/typespec-client-generator-core";
+import "@azure-tools/typespec-azure-resource-manager";
 import "./main.tsp";
+using Http;
+using Azure.Core;
 using Azure.ClientGenerator.Core;
 using Microsoft.Devices;
-using Azure.Core;
 
 @@clientName(Microsoft.Devices, "IotDpsClient", "javascript");
+@@clientName(Microsoft.Devices, "IotDpsClient", "python");
 @@clientName(Microsoft.Devices.CertificateNameQuery1.`certificate.name`,
   "certificate_name1",
   "python"
@@ -187,4 +190,155 @@ using Azure.Core;
 @@clientName(ProvisioningServiceDescription.resourcegroup,
   "resourceGroup",
   "csharp"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceDeleteCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): void;
+
+@@override(ProvisioningServiceDescriptions.delete,
+  IotDpsResourceDeleteCustomized,
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceListKeysCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  @body body: void,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): SharedAccessSignatureAuthorizationRuleListResult;
+
+@@override(ProvisioningServiceDescriptions.listKeys,
+  IotDpsResourceListKeysCustomized,
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceGetOperationResultCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  operationId: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...GetOperationResultParameters,
+): AsyncOperationResult;
+
+@@override(ProvisioningServiceDescriptionOperations.getOperationResult,
+  IotDpsResourceGetOperationResultCustomized,
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceListKeysForKeyNameCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  @body body: void,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  keyName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): SharedAccessSignatureAuthorizationRuleAccessRightsDescription;
+
+@@override(ProvisioningServiceDescriptions.listKeysForKeyName,
+  IotDpsResourceListKeysForKeyNameCustomized,
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceListValidSkusCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  @body body: void,
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): IotDpsSkuDefinitionListResult;
+
+@@override(ProvisioningServiceDescriptions.listValidSkus,
+  IotDpsResourceListValidSkusCustomized,
+  "python"
+);
+
+#suppress "@azure-tools/typespec-azure-core/casing-style" "customization"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "customization"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+op IotDpsResourceGetCustomized(
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provider: "Microsoft.ThisWillBeReplaced",
+
+  ...Azure.ResourceManager.CommonTypes.ApiVersionParameter,
+  ...Azure.ResourceManager.CommonTypes.SubscriptionIdParameter,
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "override"
+  @path
+  provisioningServiceName: string,
+
+  ...Azure.ResourceManager.CommonTypes.ResourceGroupNameParameter,
+): ProvisioningServiceDescription;
+
+@@override(ProvisioningServiceDescriptions.get,
+  IotDpsResourceGetCustomized,
+  "python"
 );
