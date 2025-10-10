@@ -39,17 +39,7 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
-  - Microsoft.CostManagement/stable/2025-03-01/common-types.json
-  - Microsoft.CostManagement/stable/2025-03-01/costallocation.json
-  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.benefits.json
-  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.budgets.json
-  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.exports.json
-  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.generatecostdetailsreport.json
-  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.generatedetailedcostreport.json
-  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.json
-  - Microsoft.CostManagement/stable/2025-03-01/costmanagement.pricesheets.json
-  - Microsoft.CostManagement/stable/2025-03-01/scheduledActions.json
-  - Microsoft.CostManagement/stable/2025-03-01/settings.json
+  - Microsoft.CostManagement/stable/2025-03-01/openapi.json
 ```
 
 ### Tag: package-preview-2024-10-01-preview
