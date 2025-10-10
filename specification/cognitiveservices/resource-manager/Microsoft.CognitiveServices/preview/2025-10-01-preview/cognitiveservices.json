@@ -3162,7 +3162,7 @@
         "tags": [
           "RaiExternalSafetyProvider"
         ],
-        "operationId": "RaiExternalSafetyProvider_List",
+        "operationId": "RaiExternalSafetyProviders_List",
         "description": "Gets the safety providers associated with the subscription",
         "x-ms-examples": {
           "ListRaiExternalSafetyProviders": {
@@ -3223,7 +3223,7 @@
           "200": {
             "description": "OK -- Get the safety provider successfully.",
             "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProvider"
+              "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
             }
           },
           "default": {
@@ -3269,7 +3269,7 @@
           "200": {
             "description": "Created/updated the Safety Provider successfully.",
             "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProvider"
+              "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
             }
           },
           "201": {
@@ -3334,7 +3334,7 @@
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/testRaiExternalSafetyProvider/{safetyProviderName}": {
-      "post": {
+      "put": {
         "tags": [
           "TestRaiExternalSafetyProvider"
         ],
@@ -3375,13 +3375,13 @@
           "200": {
             "description": "Tested the Safety Provider successfully.",
             "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProvider"
+              "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
             }
           },
           "201": {
             "description": "Tested the Safety Provider successfully.",
             "schema": {
-              "$ref": "#/definitions/RaiExternalSafetyProvider"
+              "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
             }
           },
           "default": {
@@ -9891,11 +9891,11 @@
       "description": "RAI External SafetyProvider properties.",
       "type": "object",
       "properties": {
-        "id": {
+        "providerId": {
           "type": "string",
           "description": "The unique identifier of the safety provider."
         },
-        "name": {
+        "providerName": {
           "type": "string",
           "description": "Name of the safety provider."
         },
@@ -9930,7 +9930,7 @@
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/RaiExternalSafetyProvider"
+            "$ref": "#/definitions/RaiExternalSafetyProviderSchema"
           },
           "x-ms-identifiers": [
             "name"
