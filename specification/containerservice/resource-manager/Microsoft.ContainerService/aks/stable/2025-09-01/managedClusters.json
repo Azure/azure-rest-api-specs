@@ -947,6 +947,330 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces": {
+      "get": {
+        "tags": [
+          "ManagedNamespaces"
+        ],
+        "operationId": "ManagedNamespaces_ListByManagedCluster",
+        "summary": "Gets a list of managed namespaces in the specified managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedNamespaceListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List namespaces by Managed Cluster": {
+            "$ref": "./examples/ManagedNamespacesList.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces/{managedNamespaceName}": {
+      "get": {
+        "tags": [
+          "ManagedNamespaces"
+        ],
+        "operationId": "ManagedNamespaces_Get",
+        "summary": "Gets the specified namespace of a managed cluster.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedNamespace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get Managed Namespace": {
+            "$ref": "./examples/ManagedNamespacesGet.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ManagedNamespaces"
+        ],
+        "operationId": "ManagedNamespaces_CreateOrUpdate",
+        "summary": "Creates or updates a namespace managed by ARM for the specified managed cluster. Users can configure aspects like resource quotas, network ingress/egress policies, and more. See aka.ms/aks/managed-namespaces for more details.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ManagedNamespace"
+            },
+            "description": "The namespace to create or update."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The existing namespace was successfully updated.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ManagedNamespace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          },
+          "201": {
+            "description": "The new namespace was successfully created.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "#/definitions/ManagedNamespace"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Create/Update Managed Namespace": {
+            "$ref": "./examples/ManagedNamespacesCreate_Update.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ManagedNamespaces"
+        ],
+        "operationId": "ManagedNamespaces_Delete",
+        "summary": "Deletes a namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URL to query for status of the operation.",
+                "type": "string"
+              },
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "NoContent",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string"
+              }
+            },
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-examples": {
+          "Delete Managed Namespace": {
+            "$ref": "./examples/ManagedNamespacesDelete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ManagedNamespaces"
+        ],
+        "operationId": "ManagedNamespaces_Update",
+        "summary": "Updates tags on a managed namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+          },
+          {
+            "name": "parameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/TagsObject"
+            },
+            "description": "Parameters supplied to the patch namespace operation, we only support patch tags for now."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ManagedNamespace"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Update Managed Namespace Tags": {
+            "$ref": "./examples/ManagedNamespacesUpdateTags.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedClusters/{resourceName}/managedNamespaces/{managedNamespaceName}/listCredential": {
+      "post": {
+        "tags": [
+          "ManagedNamespaces"
+        ],
+        "operationId": "ManagedNamespaces_ListCredential",
+        "summary": "Lists the credentials of a namespace.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ResourceNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ManagedNamespaceNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/CredentialResults"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "List managed namespace credentials": {
+            "$ref": "./examples/ManagedNamespacesListCredentialResult.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerService/managedclusters/{resourceName}/agentPools/{agentPoolName}/abort": {
       "post": {
         "tags": [
@@ -3836,6 +4160,227 @@
         }
       },
       "description": "Agent Pool."
+    },
+    "ManagedNamespaceListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ManagedNamespace"
+          },
+          "description": "The list of managed namespaces."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of results, if any."
+        }
+      },
+      "description": "The result of a request to list managed namespaces in a managed cluster."
+    },
+    "ManagedNamespace": {
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "#/definitions/SubResource"
+        }
+      ],
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
+          "readOnly": true,
+          "description": "The system metadata relating to this resource."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The tags to be persisted on the managed cluster namespace."
+        },
+        "eTag": {
+          "description": "Unique read-only string used to implement optimistic concurrency. The eTag value will change when the resource is updated. Specify an if-match or if-none-match header with the eTag value for a subsequent request to enable optimistic concurrency per the normal eTag convention.",
+          "readOnly": true,
+          "type": "string"
+        },
+        "location": {
+          "type": "string",
+          "description": "The location of the namespace.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "properties": {
+          "description": "Properties of a namespace.",
+          "$ref": "#/definitions/NamespaceProperties"
+        }
+      },
+      "description": "Namespace managed by ARM."
+    },
+    "NamespaceProperties": {
+      "type": "object",
+      "description": "Properties of a namespace managed by ARM",
+      "properties": {
+        "provisioningState": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The current provisioning state of the namespace.",
+          "enum": [
+            "Updating",
+            "Deleting",
+            "Creating",
+            "Succeeded",
+            "Failed",
+            "Canceled"
+          ],
+          "x-ms-enum": {
+            "name": "NamespaceProvisioningState",
+            "modelAsString": true
+          }
+        },
+        "labels": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The labels of managed namespace."
+        },
+        "annotations": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "description": "The annotations of managed namespace."
+        },
+        "portalFqdn": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The special FQDN used by the Azure Portal to access the Managed Cluster. This FQDN is for use only by the Azure Portal and should not be used by other clients. The Azure Portal requires certain Cross-Origin Resource Sharing (CORS) headers to be sent in some responses, which Kubernetes APIServer doesn't handle by default. This special FQDN supports CORS, allowing the Azure Portal to function properly."
+        },
+        "defaultResourceQuota": {
+          "description": "The default resource quota enforced upon the namespace. Customers can have other Kubernetes resource quota objects under the namespace. Resource quotas are additive; if multiple resource quotas are applied to a given namespace, then the effective limit will be one such that all quotas on the namespace can be satisfied.",
+          "$ref": "#/definitions/ResourceQuota"
+        },
+        "defaultNetworkPolicy": {
+          "description": "The default network policy enforced upon the namespace. Customers can have other Kubernetes network policy objects under the namespace. Network policies are additive; if a policy or policies apply to a given pod for a given direction, the connections allowed in that direction for the pod is the union of what all applicable policies allow.",
+          "$ref": "#/definitions/NetworkPolicies"
+        },
+        "adoptionPolicy": {
+          "type": "string",
+          "description": "Action if Kubernetes namespace with same name already exists.",
+          "enum": [
+            "Never",
+            "IfIdentical",
+            "Always"
+          ],
+          "x-ms-enum": {
+            "name": "AdoptionPolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Never",
+                "description": "If the namespace already exists in Kubernetes, attempts to create that same namespace in ARM will fail."
+              },
+              {
+                "value": "IfIdentical",
+                "description": "Take over the existing namespace to be managed by ARM, if there is no difference."
+              },
+              {
+                "value": "Always",
+                "description": "Always take over the existing namespace to be managed by ARM, some fields might be overwritten."
+              }
+            ]
+          }
+        },
+        "deletePolicy": {
+          "type": "string",
+          "description": "Delete options of a namespace.",
+          "enum": [
+            "Keep",
+            "Delete"
+          ],
+          "x-ms-enum": {
+            "name": "DeletePolicy",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Keep",
+                "description": "Only delete the ARM resource, keep the Kubernetes namespace. Also delete the ManagedByARM label."
+              },
+              {
+                "value": "Delete",
+                "description": "Delete both the ARM resource and the Kubernetes namespace together."
+              }
+            ]
+          }
+        }
+      }
+    },
+    "ResourceQuota": {
+      "type": "object",
+      "description": "Resource quota for the namespace.",
+      "properties": {
+        "cpuRequest": {
+          "type": "string",
+          "description": "CPU request of the namespace in one-thousandth CPU form. See [CPU resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu) for more details."
+        },
+        "cpuLimit": {
+          "type": "string",
+          "description": "CPU limit of the namespace in one-thousandth CPU form. See [CPU resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-cpu) for more details."
+        },
+        "memoryRequest": {
+          "type": "string",
+          "description": "Memory request of the namespace in the power-of-two equivalents form: Ei, Pi, Ti, Gi, Mi, Ki. See [Memory resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory) for more details."
+        },
+        "memoryLimit": {
+          "type": "string",
+          "description": "Memory limit of the namespace in the power-of-two equivalents form: Ei, Pi, Ti, Gi, Mi, Ki. See [Memory resource units](https://kubernetes.io/docs/concepts/configuration/manage-resources-containers/#meaning-of-memory) for more details."
+        }
+      }
+    },
+    "NetworkPolicies": {
+      "type": "object",
+      "description": "Default network policy of the namespace, specifying ingress and egress rules.",
+      "properties": {
+        "ingress": {
+          "$ref": "#/definitions/PolicyRule",
+          "description": "Ingress policy for the network.",
+          "default": "AllowSameNamespace"
+        },
+        "egress": {
+          "$ref": "#/definitions/PolicyRule",
+          "description": "Egress policy for the network.",
+          "default": "AllowAll"
+        }
+      }
+    },
+    "PolicyRule": {
+      "type": "string",
+      "description": "Enum representing different network policy rules.",
+      "enum": [
+        "DenyAll",
+        "AllowAll",
+        "AllowSameNamespace"
+      ],
+      "x-ms-enum": {
+        "name": "PolicyRule",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "DenyAll",
+            "description": "Deny all network traffic."
+          },
+          {
+            "value": "AllowAll",
+            "description": "Allow all network traffic."
+          },
+          {
+            "value": "AllowSameNamespace",
+            "description": "Allow traffic within the same namespace."
+          }
+        ]
+      }
     },
     "ManagedClusterWindowsProfile": {
       "type": "object",
@@ -8261,6 +8806,17 @@
     }
   },
   "parameters": {
+    "ManagedNamespaceNameParameter": {
+      "name": "managedNamespaceName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "minLength": 1,
+      "maxLength": 63,
+      "pattern": "[a-z0-9]([-a-z0-9]*[a-z0-9])?",
+      "description": "The name of the managed namespace.",
+      "x-ms-parameter-location": "method"
+    },
     "ResourceNameParameter": {
       "name": "resourceName",
       "in": "path",
