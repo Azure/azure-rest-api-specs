@@ -12,20 +12,5 @@ using Microsoft.DurableTask;
 @@clientName(Microsoft.DurableTask, "DurableTaskManagementClient", "java");
 
 // csharp
-@@clientName(Scheduler, "Scheduler", "csharp");
-@@clientName(SchedulerProperties, "SchedulerProperties", "csharp");
-@@clientName(TaskHub, "TaskHub", "csharp");
-@@clientName(TaskHubProperties, "TaskHubProperties", "csharp");
-@@clientName(ProvisioningState, "ProvisioningState", "csharp");
-@@clientName(SchedulerUpdate, "SchedulerPatch", "csharp");
 @@clientName(SchedulerPropertiesUpdate, "SchedulerPatchProperties", "csharp");
-@@clientName(SchedulerSku, "SchedulerSku", "csharp");
-@@clientName(SchedulerSkuUpdate, "SchedulerSkuUpdate", "csharp");
 @@clientName(RedundancyState, "SchedulerRedundancyState", "csharp");
-@@clientName(PurgeableOrchestrationState,
-  "PurgeableOrchestrationState",
-  "csharp"
-);
-@@clientName(RetentionPolicyDetails, "RetentionPolicyDetails", "csharp");
-@@clientName(RetentionPolicy, "RetentionPolicy", "csharp");
-@@clientName(RetentionPolicyProperties, "RetentionPolicyProperties", "csharp");
