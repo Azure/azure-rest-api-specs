@@ -1,0 +1,38 @@
+{
+  "operationId": "Observe",
+  "parameters": {
+    "api-version": "2025-09-01-preview",
+    "body": {
+      "datasetToDatasourceMappings": [
+        {
+          "datasetAliasName": "CustomerData",
+          "datasourceId": "ds-123e4567-e89b-12d3-a456-426614174000"
+        },
+        {
+          "datasetAliasName": "OrdersData",
+          "datasourceId": "223e4567-e89b-12d3-a456-426614174111"
+        },
+        {
+          "datasetAliasName": "ProductsData",
+          "datasourceId": "323e4567-e89b-12d3-a456-426614174222"
+        }
+      ],
+      "redundancyCheck": true
+    },
+    "businessDomainId": "abcdef12-3456-7890-abcd-ef1234567890",
+    "dataAssetId": "123e4567-e89b-12d3-a456-426614174000",
+    "dataProductId": "223e4567-e89b-12d3-a456-426614174111"
+  },
+  "title": "Observation_Create",
+  "responses": {
+    "202": {
+      "body": {
+        "value": "323e4567-e89b-12d3-a456-426614174225",
+        "statuslro": "In Progress"
+      },
+      "headers": {
+        "azure-AsyncOperation": "In Progress"
+      }
+    }
+  }
+}
