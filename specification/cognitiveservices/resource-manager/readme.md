@@ -109,6 +109,16 @@ suppressions:
     reason: Same as existing account resource, trying to have the same behavior
     where:
       - $.definitions.ProjectProperties.properties.endpoints
+  - code: AvoidAdditionalProperties
+    reason: Provide customers ability to assign customize labels to rules.
+    where:
+      - $.definitions.RaiToolLabelProperties.properties.accountScope.properties.labelValues
+      - $.definitions.RaiToolLabelProperties.properties.projectScopes.items.properties.labelValues
+      - $.definitions.RaiIfcRuleProperties.properties.conditions
+  - code: AvoidAdditionalProperties
+    reason: Provide customers ability to define custom conditions for when a rule is activated.
+    where:
+      - $.definitions.RaiIfcRuleProperties.properties.conditions
 ```
 
 ### Tag: package-2025-09-01
