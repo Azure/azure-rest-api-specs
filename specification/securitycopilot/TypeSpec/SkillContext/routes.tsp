@@ -191,7 +191,7 @@ op getCachedEntity(
 op setCachedEntity(
 @header("X-MS-SecurityCopilot-EvaluationToken") evaluationToken: string,
 @body setCachedEntityRequest : SetCachedEntityRequest,
-): NoContentResponse;
+): boolean;
 
 @post
 @route("/skillContext/createMemoryAsync")
