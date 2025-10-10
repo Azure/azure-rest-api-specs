@@ -55,7 +55,6 @@ namespace Customizations;
   "IngestionSourcesPagedResult",
   "csharp"
 );
-@@clientName(Ingestion, "IngestionConfiguration", "csharp");
 
 // Models ending with "Request" - rename to "Content"
 @@clientName(ImageRequest, "ImageContent", "csharp");
@@ -1118,7 +1117,7 @@ op getMosaicsWmtsCapabilitiesCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 @operationGroup
-@clientName("Ingestion", "csharp")
+@clientName("IngestionClient", "csharp")
 interface Ingestion {
   // Ingestion operations management
   cancelOperation is IngestionOperations.delete;
