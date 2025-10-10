@@ -12,30 +12,3 @@ using Azure.ResourceManager;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.Network;
-
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
-interface ProfilesOperationGroup {
-  /**
-   * Checks the availability of a Traffic Manager Relative DNS name.
-   */
-  @autoRoute
-  @action("checkTrafficManagerNameAvailability")
-  checkTrafficManagerRelativeDnsNameAvailability is ArmProviderActionSync<
-    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
-    Response = TrafficManagerNameAvailability,
-    Error = CloudError
-  >;
-  /**
-   * Checks the availability of a Traffic Manager Relative DNS name.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Profiles_checkTrafficManagerNameAvailabilityV2")
-  @autoRoute
-  checkTrafficManagerNameAvailabilityV2 is ArmProviderActionSync<
-    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
-    Response = TrafficManagerNameAvailability,
-    Scope = SubscriptionActionScope,
-    Parameters = {},
-    Error = CloudError
-  >;
-}

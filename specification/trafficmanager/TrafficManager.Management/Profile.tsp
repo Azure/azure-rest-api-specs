@@ -88,6 +88,29 @@ interface Profiles {
    * Lists all Traffic Manager profiles within a subscription.
    */
   listBySubscription is ProfileSubscriptionOps.List<Profile>;
+
+  /**
+   * Checks the availability of a Traffic Manager Relative DNS name.
+   */
+  @action("checkTrafficManagerNameAvailability")
+  checkTrafficManagerRelativeDnsNameAvailability is ArmProviderActionSync<
+    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
+    Response = TrafficManagerNameAvailability,
+    Error = CloudError
+  >;
+
+  /**
+   * Checks the availability of a Traffic Manager Relative DNS name.
+   */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("Profiles_checkTrafficManagerNameAvailabilityV2")
+  checkTrafficManagerNameAvailabilityV2 is ArmProviderActionSync<
+    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
+    Response = TrafficManagerNameAvailability,
+    Scope = SubscriptionActionScope,
+    Parameters = {},
+    Error = CloudError
+  >;
 }
 
 @@doc(Profile.name, "The name of the Traffic Manager profile.");
@@ -97,4 +120,10 @@ interface Profiles {
 );
 @@doc(Profiles.update::parameters.properties,
   "The Traffic Manager profile parameters supplied to the Update operation."
+);
+@@doc(Profiles.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
+  "The Traffic Manager name parameters supplied to the CheckTrafficManagerNameAvailability operation."
+);
+@@doc(Profiles.checkTrafficManagerNameAvailabilityV2::parameters.body,
+  "The Traffic Manager name parameters supplied to the CheckTrafficManagerNameAvailability operation."
 );
