@@ -928,7 +928,7 @@
         },
         "sdnProperties": {
           "description": "Software Defined Networking Properties of the cluster",
-          "$ref": "#/definitions/SdnProperties"
+          "$ref": "./hciCommon.json#/definitions/SdnProperties"
         },
         "localAvailabilityZones": {
           "type": "array",
@@ -1769,26 +1769,6 @@
       },
       "additionalProperties": false,
       "readOnly": true
-    },
-    "SdnProperties": {
-      "type": "object",
-      "description": "Represents the Software Defined Networking (SDN) configuration state of the Azure Stack HCI cluster.",
-      "properties": {
-        "sdnStatus": {
-          "$ref": "./hciCommon.json#/definitions/SdnStatus",
-          "readOnly": true
-        },
-        "sdnDomainName": {
-          "type": "string",
-          "description": "The fully qualified domain name (FQDN) associated with the SDN deployment. This value is propagated from the Device Management Extension to the cluster resource. It is typically in the format `<sdnPrefix>-nc.<domain>` when SDN is enabled. May be null or absent in unsupported or disabled states.",
-          "readOnly": true
-        },
-        "sdnApiAddress": {
-          "type": "string",
-          "description": "Represents the API address for the SDN deployment.",
-          "readOnly": true
-        }
-      }
     },
     "ConfidentialVmProperties": {
       "type": "object",
