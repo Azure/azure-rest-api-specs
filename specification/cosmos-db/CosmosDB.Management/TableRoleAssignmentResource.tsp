@@ -42,7 +42,7 @@ interface TableRoleAssignmentResources {
   @operationId("TableResources_CreateUpdateTableRoleAssignment")
   createUpdateTableRoleAssignment is ArmResourceCreateOrReplaceAsync<
     TableRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<TableRoleAssignmentResource> | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<TableRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
     LroHeaders = ArmLroLocationHeader<FinalResult = TableRoleAssignmentResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -55,7 +55,7 @@ interface TableRoleAssignmentResources {
   @operationId("TableResources_DeleteTableRoleAssignment")
   deleteTableRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     TableRoleAssignmentResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**

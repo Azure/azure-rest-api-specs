@@ -48,7 +48,7 @@ interface ThroughputPoolResources {
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     ThroughputPoolResource,
     PatchModel = ThroughputPoolUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = ThroughputPoolResource> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputPoolResource> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -58,7 +58,10 @@ interface ThroughputPoolResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThroughputPool_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ThroughputPoolResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ThroughputPoolResource,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * List all the ThroughputPools in a given resource group.

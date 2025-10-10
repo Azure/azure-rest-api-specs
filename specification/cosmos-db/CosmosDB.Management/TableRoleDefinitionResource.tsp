@@ -42,7 +42,7 @@ interface TableRoleDefinitionResources {
   @operationId("TableResources_CreateUpdateTableRoleDefinition")
   createUpdateTableRoleDefinition is ArmResourceCreateOrReplaceAsync<
     TableRoleDefinitionResource,
-    Response = ArmResourceUpdatedResponse<TableRoleDefinitionResource> | ArmAcceptedLroResponse,
+    Response = ArmResourceUpdatedResponse<TableRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableRoleDefinitionResource>>,
     LroHeaders = ArmLroLocationHeader<FinalResult = TableRoleDefinitionResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
@@ -55,7 +55,7 @@ interface TableRoleDefinitionResources {
   @operationId("TableResources_DeleteTableRoleDefinition")
   deleteTableRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     TableRoleDefinitionResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**

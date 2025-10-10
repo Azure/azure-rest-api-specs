@@ -46,7 +46,10 @@ interface ThroughputPoolAccountResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThroughputPoolAccount_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<ThroughputPoolAccountResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ThroughputPoolAccountResource,
+    Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
+  >;
 
   /**
    * Lists all the Azure Cosmos DB accounts available under the subscription.
