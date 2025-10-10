@@ -48,6 +48,7 @@ interface RestorableDatabaseAccountsOperationGroup {
   @action("restorableDatabaseAccounts")
   list is ArmProviderActionSync<
     Response = RestorableDatabaseAccountsListResult,
-    Scope = SubscriptionActionScope
+    Scope = SubscriptionActionScope,
+    Error = CloudError
   >;
 }

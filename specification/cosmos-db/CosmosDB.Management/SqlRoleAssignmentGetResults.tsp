@@ -32,7 +32,10 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlResources_GetSqlRoleAssignment")
-  getSqlRoleAssignment is ArmResourceRead<SqlRoleAssignmentGetResults>;
+  getSqlRoleAssignment is ArmResourceRead<
+    SqlRoleAssignmentGetResults,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates an Azure Cosmos DB SQL Role Assignment.
@@ -45,7 +48,8 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
     Request = SqlRoleAssignmentCreateUpdateParameters,
     Response = ArmResourceUpdatedResponse<SqlRoleAssignmentGetResults> | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleAssignmentGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -56,7 +60,8 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   @operationId("SqlResources_DeleteSqlRoleAssignment")
   deleteSqlRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     SqlRoleAssignmentGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -66,7 +71,8 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   @operationId("SqlResources_ListSqlRoleAssignments")
   listSqlRoleAssignments is ArmResourceListByParent<
     SqlRoleAssignmentGetResults,
-    Response = ArmResponse<SqlRoleAssignmentListResult>
+    Response = ArmResponse<SqlRoleAssignmentListResult>,
+    Error = CloudError
   >;
 }
 

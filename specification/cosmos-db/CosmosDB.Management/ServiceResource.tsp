@@ -32,7 +32,7 @@ interface ServiceResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Service_Get")
-  get is ArmResourceRead<ServiceResource>;
+  get is ArmResourceRead<ServiceResource, Error = CloudError>;
 
   /**
    * Creates a service.
@@ -45,7 +45,8 @@ interface ServiceResources {
     Request = ServiceResourceCreateUpdateParameters,
     Response = ArmResourceUpdatedResponse<ServiceResource> | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = ServiceResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -56,7 +57,8 @@ interface ServiceResources {
   @operationId("Service_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -66,7 +68,8 @@ interface ServiceResources {
   @operationId("Service_List")
   list is ArmResourceListByParent<
     ServiceResource,
-    Response = ArmResponse<ServiceResourceListResult>
+    Response = ArmResponse<ServiceResourceListResult>,
+    Error = CloudError
   >;
 }
 

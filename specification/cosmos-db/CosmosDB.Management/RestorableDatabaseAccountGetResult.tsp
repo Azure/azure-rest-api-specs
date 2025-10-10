@@ -41,7 +41,8 @@ interface RestorableDatabaseAccountGetResults {
   @operationId("RestorableDatabaseAccounts_GetByLocation")
   getByLocation is ArmResourceRead<
     RestorableDatabaseAccountGetResult,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -52,7 +53,8 @@ interface RestorableDatabaseAccountGetResults {
   listByLocation is ArmResourceListByParent<
     RestorableDatabaseAccountGetResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<RestorableDatabaseAccountsListResult>
+    Response = ArmResponse<RestorableDatabaseAccountsListResult>,
+    Error = CloudError
   >;
 
   /**
@@ -67,7 +69,8 @@ interface RestorableDatabaseAccountGetResults {
     RestorableDatabaseAccountGetResult,
     void,
     ArmResponse<RestorableSqlDatabasesListResult>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -101,7 +104,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("endTime")
       endTime?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -129,7 +133,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("restoreTimestampInUtc")
       restoreTimestampInUtc?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -144,7 +149,8 @@ interface RestorableDatabaseAccountGetResults {
     RestorableDatabaseAccountGetResult,
     void,
     ArmResponse<RestorableMongodbDatabasesListResult>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -178,7 +184,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("endTime")
       endTime?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -206,7 +213,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("restoreTimestampInUtc")
       restoreTimestampInUtc?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -221,7 +229,8 @@ interface RestorableDatabaseAccountGetResults {
     RestorableDatabaseAccountGetResult,
     void,
     ArmResponse<RestorableGremlinDatabasesListResult>,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -255,7 +264,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("endTime")
       endTime?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -283,7 +293,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("restoreTimestampInUtc")
       restoreTimestampInUtc?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -311,7 +322,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("endTime")
       endTime?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -339,7 +351,8 @@ interface RestorableDatabaseAccountGetResults {
        */
       @query("restoreTimestampInUtc")
       restoreTimestampInUtc?: string;
-    }
+    },
+    Error = CloudError
   >;
 }
 

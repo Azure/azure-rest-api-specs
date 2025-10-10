@@ -79,7 +79,8 @@ interface GremlinGraphGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     GremlinGraphGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>
+    ArmResponse<BackupInformation>,
+    Error = CloudError
   >;
 }
 

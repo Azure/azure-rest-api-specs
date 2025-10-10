@@ -32,7 +32,10 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("SqlResources_GetSqlRoleDefinition")
-  getSqlRoleDefinition is ArmResourceRead<SqlRoleDefinitionGetResults>;
+  getSqlRoleDefinition is ArmResourceRead<
+    SqlRoleDefinitionGetResults,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates an Azure Cosmos DB SQL Role Definition.
@@ -45,7 +48,8 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
     Request = SqlRoleDefinitionCreateUpdateParameters,
     Response = ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults> | ArmAcceptedLroResponse,
     LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -56,7 +60,8 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
   @operationId("SqlResources_DeleteSqlRoleDefinition")
   deleteSqlRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     SqlRoleDefinitionGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -66,7 +71,8 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
   @operationId("SqlResources_ListSqlRoleDefinitions")
   listSqlRoleDefinitions is ArmResourceListByParent<
     SqlRoleDefinitionGetResults,
-    Response = ArmResponse<SqlRoleDefinitionListResult>
+    Response = ArmResponse<SqlRoleDefinitionListResult>,
+    Error = CloudError
   >;
 }
 

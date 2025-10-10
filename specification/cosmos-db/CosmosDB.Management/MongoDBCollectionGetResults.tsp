@@ -96,7 +96,8 @@ interface MongoDBCollectionGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     MongoDBCollectionGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>
+    ArmResponse<BackupInformation>,
+    Error = CloudError
   >;
 }
 

@@ -79,7 +79,8 @@ interface TableGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     TableGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>
+    ArmResponse<BackupInformation>,
+    Error = CloudError
   >;
 }
 

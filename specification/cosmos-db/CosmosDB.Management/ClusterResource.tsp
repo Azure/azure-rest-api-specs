@@ -138,11 +138,10 @@ interface ClusterResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraClusters_GetCommandAsync")
   @get
-  @action("{commandId}")
-  getCommandAsync is ArmResourceActionSync<
+  getCommandAsync is ArmResourceRead<
     ClusterResource,
-    void,
-    ArmResponse<CommandPublicResource>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
+    Response = ArmResponse<CommandPublicResource>,
     Parameters = {
       /**
        * Managed Cassandra cluster command id.
@@ -151,6 +150,7 @@ interface ClusterResources {
       @minLength(1)
       @pattern("^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$")
       @path
+      @segment("commands")
       commandId: string;
     }
   >;
@@ -175,11 +175,10 @@ interface ClusterResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraClusters_GetBackup")
   @get
-  @action("{backupId}")
-  getBackup is ArmResourceActionSync<
+  getBackup is ArmResourceRead<
     ClusterResource,
-    void,
-    ArmResponse<BackupResource>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
+    Response = ArmResponse<BackupResource>,
     Parameters = {
       /**
        * Id of a restorable backup of a Cassandra cluster.
@@ -188,6 +187,7 @@ interface ClusterResources {
       @minLength(1)
       @pattern("^[0-9]+$")
       @path
+      @segment("backups")
       backupId: string;
     }
   >;

@@ -91,7 +91,8 @@ interface SqlContainerGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     SqlContainerGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>
+    ArmResponse<BackupInformation>,
+    Error = CloudError
   >;
 }
 
