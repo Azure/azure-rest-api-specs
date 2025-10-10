@@ -1,0 +1,469 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2025-01-01",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/connectedEnvironments": {
+      "get": {
+        "tags": [
+          "ConnectedEnvironments"
+        ],
+        "summary": "Get all connectedEnvironments for a subscription.",
+        "description": "Get all connectedEnvironments for a subscription.",
+        "operationId": "ConnectedEnvironments_ListBySubscription",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List connected environments by subscription": {
+            "$ref": "./examples/ConnectedEnvironments_ListBySubscription.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments": {
+      "get": {
+        "tags": [
+          "ConnectedEnvironments"
+        ],
+        "operationId": "ConnectedEnvironments_ListByResourceGroup",
+        "description": "Get all connectedEnvironments in a resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironmentCollection"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List environments by resource group": {
+            "$ref": "./examples/ConnectedEnvironments_ListByResourceGroup.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}": {
+      "get": {
+        "tags": [
+          "ConnectedEnvironments"
+        ],
+        "operationId": "ConnectedEnvironments_Get",
+        "description": "Get the properties of an connectedEnvironment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connectedEnvironment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironment"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Get connected environment by connectedEnvironmentName": {
+            "$ref": "./examples/ConnectedEnvironments_Get.json"
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "ConnectedEnvironments"
+        ],
+        "description": "Creates or updates an connectedEnvironment.",
+        "operationId": "ConnectedEnvironments_CreateOrUpdate",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connectedEnvironment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "environmentEnvelope",
+            "in": "body",
+            "description": "Configuration details of the connectedEnvironment.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironment"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironment"
+            }
+          },
+          "201": {
+            "description": "Created",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironment"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Create kube environments": {
+            "$ref": "./examples/ConnectedEnvironments_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "ConnectedEnvironments"
+        ],
+        "summary": "Delete an connectedEnvironment.",
+        "description": "Delete an connectedEnvironment.",
+        "operationId": "ConnectedEnvironments_Delete",
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connectedEnvironment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Delete operation completed"
+          },
+          "202": {
+            "description": "Delete operation is accepted",
+            "headers": {
+              "Location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "ConnectedEnvironment does not exist"
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Delete connected environment by connectedEnvironmentName": {
+            "$ref": "./examples/ConnectedEnvironments_Delete.json"
+          }
+        }
+      },
+      "patch": {
+        "tags": [
+          "ConnectedEnvironments"
+        ],
+        "summary": "Update connected Environment's properties.",
+        "description": "Patches a Managed Environment. Only patching of tags is supported currently",
+        "operationId": "ConnectedEnvironments_Update",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the connectedEnvironment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ConnectedEnvironment"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Patch Managed Environment": {
+            "$ref": "./examples/ConnectedEnvironments_Patch.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/connectedEnvironments/{connectedEnvironmentName}/checkNameAvailability": {
+      "post": {
+        "tags": [
+          "ConnectedEnvironments"
+        ],
+        "summary": "Checks the resource connectedEnvironmentName availability.",
+        "description": "Checks if resource connectedEnvironmentName is available.",
+        "operationId": "ConnectedEnvironments_CheckNameAvailability",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "connectedEnvironmentName",
+            "in": "path",
+            "description": "Name of the Managed Environment.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "checkNameAvailabilityRequest",
+            "in": "body",
+            "description": "The check connectedEnvironmentName availability request.",
+            "required": true,
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/CheckNameAvailabilityResponse"
+            }
+          },
+          "default": {
+            "description": "Error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Certificates_CheckNameAvailability": {
+            "$ref": "./examples/ConnectedEnvironmentsCertificates_CheckNameAvailability.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "ConnectedEnvironment": {
+      "description": "An environment for Kubernetes cluster specialized for web workloads by Azure App Service",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+        }
+      ],
+      "properties": {
+        "extendedLocation": {
+          "$ref": "./CommonDefinitions.json#/definitions/ExtendedLocation"
+        },
+        "properties": {
+          "description": "ConnectedEnvironment resource specific properties",
+          "type": "object",
+          "properties": {
+            "provisioningState": {
+              "description": "Provisioning state of the Kubernetes Environment.",
+              "enum": [
+                "Succeeded",
+                "Failed",
+                "Canceled",
+                "Waiting",
+                "InitializationInProgress",
+                "InfrastructureSetupInProgress",
+                "InfrastructureSetupComplete",
+                "ScheduledForDelete"
+              ],
+              "type": "string",
+              "readOnly": true,
+              "x-ms-enum": {
+                "name": "ConnectedEnvironmentProvisioningState",
+                "modelAsString": true
+              }
+            },
+            "deploymentErrors": {
+              "description": "Any errors that occurred during deployment or deployment validation",
+              "type": "string",
+              "readOnly": true
+            },
+            "defaultDomain": {
+              "description": "Default Domain Name for the cluster",
+              "type": "string",
+              "readOnly": true
+            },
+            "staticIp": {
+              "description": "Static IP of the connectedEnvironment",
+              "type": "string"
+            },
+            "daprAIConnectionString": {
+              "type": "string",
+              "description": "Application Insights connection string used by Dapr to export Service to Service communication telemetry",
+              "x-ms-secret": true
+            },
+            "customDomainConfiguration": {
+              "$ref": "./CommonDefinitions.json#/definitions/CustomDomainConfiguration",
+              "description": "Custom domain configuration for the environment"
+            }
+          },
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "ConnectedEnvironmentCollection": {
+      "description": "Collection of connectedEnvironments",
+      "type": "object",
+      "properties": {
+        "value": {
+          "description": "Collection of resources.",
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/ConnectedEnvironment"
+          }
+        },
+        "nextLink": {
+          "description": "Link to next page of resources.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    }
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "flow": "implicit",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ]
+}

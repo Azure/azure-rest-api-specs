@@ -243,6 +243,7 @@ export function createDummySwagger(fromSwagger: string, toSwagger: string): void
   if (swaggerJson["x-ms-parameterized-host"]) {
     delete swaggerJson["x-ms-parameterized-host"];
   }
+  swaggerJson.responses = {};
   swaggerJson.parameters = {};
   swaggerJson.definitions = {};
   writeFileSync(toSwagger, JSON.stringify(swaggerJson, null, 2));
