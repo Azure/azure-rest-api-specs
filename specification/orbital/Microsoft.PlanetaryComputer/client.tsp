@@ -604,7 +604,8 @@ op getWmtsCapabilitiesCustomized(
 ): WmtsCapabilitiesXmlResponse;
 
 @@override(TilerWmtsTileMatrixSets.getCapabilitiesXml,
-  getWmtsCapabilitiesCustomized
+  getWmtsCapabilitiesCustomized,
+  "!csharp"
 );
 
 /**
@@ -725,7 +726,8 @@ op cropGeoJsonWithDimensionsCustomized(
 ): TileResponse;
 
 @@override(TilerGeoJsons.cropWidthByHeightFormat,
-  cropGeoJsonWithDimensionsCustomized
+  cropGeoJsonWithDimensionsCustomized,
+  "!csharp"
 );
 
 /**
@@ -880,7 +882,8 @@ op getPartWithDimensionsCustomized(
 ): TileResponse;
 
 @@override(TilerParts.getCroppedToBoundingBoxWidthByHeight,
-  getPartWithDimensionsCustomized
+  getPartWithDimensionsCustomized,
+  "!csharp"
 );
 
 /**
@@ -1119,7 +1122,8 @@ op getMosaicsWmtsCapabilitiesCustomized(
 ): WmtsCapabilitiesXmlResponse;
 
 @@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
-  getMosaicsWmtsCapabilitiesCustomized
+  getMosaicsWmtsCapabilitiesCustomized,
+  "!csharp"
 );
 
 // === Ingestion Management ===
