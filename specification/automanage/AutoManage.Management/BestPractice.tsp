@@ -24,37 +24,18 @@ model BestPractice
   >;
 }
 
-alias BestPracticeOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Automanage";
-  },
-  {},
-  {
-    /** The Automanage best practice name. */
-    @path
-    @segment("bestPractices")
-    @key
-    bestPracticeName: string;
-  }
->;
-
 @armResourceOperations
 interface BestPractices {
   /**
    * Get information about a Automanage best practice
    */
-  get is BestPracticeOps.Read<BestPractice>;
+  get is Extension.Read<Extension.Tenant, BestPractice>;
 
   /**
    * Retrieve a list of Automanage best practices
    */
-  listByTenant is BestPracticeOps.List<
+  listByTenant is Extension.ListByTarget<
+    Extension.Tenant,
     BestPractice,
     Response = ArmResponse<BestPracticeList>
   >;
@@ -96,20 +77,14 @@ interface BestPracticesVersions {
   /**
    * Retrieve a list of Automanage best practices versions
    */
-  @action("versions")
   @list
   @get
-  listByTenant is ArmProviderActionSync<
-    Response = ArmResponse<BestPracticeList>,
-    Scope = TenantActionScope,
-    Parameters = {
-      /** The Automanage best practice name. */
-      @path
-      @segment("bestPractices")
-      @key
-      bestPracticeName: string;
-    },
-    Error = ErrorResponse
+  @action("versions")
+  listByTenant is Extension.ActionSync<
+    Extension.Tenant,
+    BestPractice,
+    void,
+    Response = BestPracticeList
   >;
 }
 
