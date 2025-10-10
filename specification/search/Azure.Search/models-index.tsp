@@ -502,7 +502,7 @@ model SearchOptions {
   $filter?: string;
 
   @doc("The list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.")
-  // @query("highlight")
+  @query("highlight")
   highlightFields?: string[];
 
   @doc("A string tag that is appended to hit highlights. Must be set with highlightPreTag. Default is &lt;/em&gt;.")

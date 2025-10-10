@@ -752,3 +752,4 @@ namespace SearchServiceClient {
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
+@@clientNamespace(Search.SearchOptions, "Azure.Search.Documents.Indexes");
