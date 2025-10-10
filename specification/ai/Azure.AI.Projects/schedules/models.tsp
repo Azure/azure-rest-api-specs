@@ -211,17 +211,34 @@ union ScheduleTaskType {
 
 @doc("Schedule task model.")
 @added(Versions.v2025_10_15_preview)
+@discriminator("type")
 model ScheduleTask {
   @doc("Type of the task.")
   type: ScheduleTaskType;
 
   @doc("Configuration for the task.")
   configuration: Record<string>;
+}
 
-  #suppress "@azure-tools/typespec-azure-core/no-unknown"
-  #suppress "@azure-tools/typespec-autorest/union-unsupported"
-  @doc("Definition of the task.")
-  definition: Evaluation | Insight;
+@doc("Evaluation task for the schedule.")
+@added(Versions.v2025_10_15_preview)
+model EvaluationScheduleTask extends ScheduleTask {
+  type: ScheduleTaskType.Evaluation;
+
+  @doc("Identifier of the evaluation group.")
+  evalId: string;
+
+  @doc("The evaluation run payload.")
+  evalRun: {};
+}
+
+@doc("Insight task for the schedule.")
+@added(Versions.v2025_10_15_preview)
+model InsightScheduleTask extends ScheduleTask {
+  type: ScheduleTaskType.Insight;
+
+  @doc("The insight payload.")
+  insight: Insight;
 }
 
 @resource("schedules")
