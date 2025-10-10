@@ -85,6 +85,13 @@ input-file:
   - preview/2024-04-01-preview/route.json
 ```
 
+These settings apply only when `--tag=package-2023-10-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2023-10-01-preview'
+input-file:
+  - preview/2023-10-01-preview/route.json
+```
+
 ### Tag: package-stable-deprecated-1.0
 
 These settings apply only when `--tag=package-stable-deprecated-1.0` is specified on the command line.

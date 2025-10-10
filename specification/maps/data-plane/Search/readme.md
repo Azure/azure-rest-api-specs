@@ -132,7 +132,7 @@ input-file:
 
 suppressions:
   - code: XmsEnumValidation
-    reason: The Search 1.0 API is already released and nearing the end of its lifecycle, new customers are encouraged to use the newer version of the API and any updates the this version risks introducing breaking changes to existing customers.
+    reason: The Search 1.0 API is already released and nearing the end of its lifecycle, new customers are encouraged to use the newer version of the API and any updates to this version risks introducing breaking changes to existing customers.
 ```
 
 # Code Generation
