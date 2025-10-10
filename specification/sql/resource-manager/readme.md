@@ -31,6 +31,17 @@ tag: package-composite-v5
 
 The following packages may be composed from multiple api-versions.
 
+### Tag: package-preview-2025-08-01-preview
+
+These settings apply only when `--tag=package-preview-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2025-08-01-preview'
+input-file:
+  - Microsoft.Sql/preview/2025-08-01-preview/TopQueries.json
+  - Microsoft.Sql/preview/2025-08-01-preview/TopQueriesQueryText.json
+  - Microsoft.Sql/preview/2025-08-01-preview/TopQueryStatistics.json
+```
+
 ### Tag: package-preview-2024-11-01-preview
 
 These settings apply only when `--tag=package-preview-2024-11-01-preview` is specified on the command line.
@@ -1888,6 +1899,9 @@ input-file:
 - ./Microsoft.Sql/preview/2024-11-01-preview/LongTermRetentionBackups.json
 - ./Microsoft.Sql/preview/2024-11-01-preview/LongTermRetentionPolicies.json
 - ./Microsoft.Sql/preview/2024-11-01-preview/DatabaseOperations.json
+- ./Microsoft.Sql/preview/2025-08-01-preview/TopQueries.json
+- ./Microsoft.Sql/preview/2025-08-01-preview/TopQueriesQueryText.json
+- ./Microsoft.Sql/preview/2025-08-01-preview/TopQueryStatistics.json
 
 # Needed when there is more than one input file
 override-info:

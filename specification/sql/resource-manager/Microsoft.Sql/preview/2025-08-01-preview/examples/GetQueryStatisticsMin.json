@@ -1,0 +1,83 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "resourceGroupName": "Default-SQL-Group",
+    "serverName": "testsvr",
+    "databaseName": "TestDB",
+    "topQueryName": "42",
+    "api-version": "2025-08-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "queryId": 42,
+            "intervals": [
+              {
+                "intervalStartTime": "2025-08-23T21:00:00Z",
+                "intervalType": "PT1H",
+                "executionCount": 1,
+                "metrics": [
+                  {
+                    "name": "cpu",
+                    "displayName": "Cpu",
+                    "unit": "percentage",
+                    "min": 0.038243201388888891,
+                    "max": 0.038243201388888891,
+                    "avg": 0.038243201388888891,
+                    "sum": 0.038243201388888891,
+                    "stdev": 0.0
+                  },
+                  {
+                    "name": "io",
+                    "displayName": "Physical Io Reads",
+                    "unit": "percentage",
+                    "min": 0.0001013888888888889,
+                    "max": 0.0001013888888888889,
+                    "avg": 0.0001013888888888889,
+                    "sum": 0.0001013888888888889,
+                    "stdev": 0.0
+                  },
+                  {
+                    "name": "logIo",
+                    "displayName": "Log Writes",
+                    "unit": "percentage",
+                    "min": 0.0,
+                    "max": 0.0,
+                    "avg": 0.0,
+                    "sum": 0.0,
+                    "stdev": 0.0
+                  },
+                  {
+                    "name": "memory",
+                    "displayName": "Memory consumption",
+                    "unit": "KB",
+                    "min": 8336.0,
+                    "max": 8336.0,
+                    "avg": 8336.0,
+                    "sum": 8336.0,
+                    "stdev": 0.0
+                  },
+                  {
+                    "name": "duration",
+                    "displayName": "Query duration",
+                    "unit": "microseconds",
+                    "min": 11091296.0,
+                    "max": 11091296.0,
+                    "avg": 11091296.0,
+                    "sum": 11091296.0,
+                    "stdev": 0.0
+                  }
+                ]
+              }
+            ],
+            "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/Default-SQL-Group/providers/Microsoft.Sql/servers/testsvr/databases/TestDB/topQueries/42/statistics",
+            "type": "Microsoft.Sql/servers/databases/topQueries/statistics",
+            "name": "TestDB"
+          }
+        ]
+      }
+    }
+  }
+}
