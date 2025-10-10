@@ -3306,6 +3306,21 @@ model RuleSetProperties extends AFDStateProperties {
    */
   @visibility(Lifecycle.Read)
   profileName?: string;
+
+  /**
+   * Indicates whether rule set is in batch mode. When batch mode is enabled, rules will be processed in a batch along with the rule set.
+   * When batch mode is disabled, rules would need to be processed independently.
+   * This property can only be set during rule set creation and cannot be updated later.
+   * For switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.
+   */
+  batchMode?: boolean;
+
+  /**
+   * A list of rules that are part of this rule set provided the rule set is in batch mode.
+   * This property will be ignored if the rule set is not in batch mode.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  rules?: BatchRuleProperties[];
 }
 
 /**
@@ -3315,6 +3330,21 @@ model RuleSetProperties extends AFDStateProperties {
 model RuleProperties {
   ...RuleUpdatePropertiesParameters;
   ...AFDStateProperties;
+}
+
+/**
+ * The JSON object that contains a rule with its name for batch mode operations.
+ */
+model BatchRuleProperties {
+  /**
+   * Name of the rule.
+   */
+  @maxLength(60)
+  @minLength(1)
+  @pattern("^[a-zA-Z][a-zA-Z0-9]{0,59}$")
+  name: string;
+
+  ...RuleProperties;
 }
 
 /**
