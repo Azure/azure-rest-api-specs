@@ -898,10 +898,6 @@ model SenderUsernameProperties {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VerifiedExchangeOnlineDomainList is string[];
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model DomainsResourceList {
-  /**
-   * A list of verified domains.
-   */
-  value: string[];
-}
+model DomainsResourceList is string[];
