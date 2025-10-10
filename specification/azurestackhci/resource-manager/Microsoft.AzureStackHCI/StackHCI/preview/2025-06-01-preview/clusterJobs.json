@@ -449,15 +449,6 @@
     "HciConfigureArcGatewayJobProperties": {
       "type": "object",
       "description": "Properties for configuring arc gateway to a cluster.",
-      "properties": {
-        "confidentialVmIntent": {
-          "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
-          "description": "Defines the customer's intent for updating confidential VM properties"
-        }
-      },
-      "required": [
-        "confidentialVmIntent"
-      ],
       "allOf": [
         {
           "$ref": "#/definitions/ClusterJobProperties"
@@ -467,6 +458,15 @@
     },
     "HciConfigureCVMJobProperties": {
       "type": "object",
+      "properties": {
+        "confidentialVmIntent": {
+          "$ref": "./hciCommon.json#/definitions/ConfidentialVmIntent",
+          "description": "Defines the customer's intent for updating confidential VM properties"
+        }
+      },
+      "required": [
+        "confidentialVmIntent"
+      ],
       "description": "Properties for configuring cvm (Confidential VM) intent for the cluster.",
       "allOf": [
         {
