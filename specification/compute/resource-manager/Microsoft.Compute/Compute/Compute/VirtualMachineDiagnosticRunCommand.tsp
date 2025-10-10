@@ -21,7 +21,7 @@ namespace Microsoft.Compute;
 model VirtualMachineDiagnosticRunCommand
   is Azure.ResourceManager.TrackedResource<VirtualMachineRunCommandProperties> {
   ...ResourceNameParameter<
-    Resource = VirtualMachineDiagnosticRunCommand,
+    Resource = VirtualMachineRunCommand,
     KeyName = "runCommandName",
     SegmentName = "diagnosticRunCommands",
     NamePattern = ""
