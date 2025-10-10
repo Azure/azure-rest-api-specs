@@ -698,7 +698,7 @@ model ResourceCapabilities extends ResourceCapabilitiesBase {
  */
 model CapabilitiesProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsZones?: DNSZone[];
 }
 
@@ -739,7 +739,7 @@ model CapabilitiesResponse extends ResourceCapabilitiesBase {
  */
 model CapabilitiesResponseProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dnsZones?: DNSZoneResponse[];
 }
 
