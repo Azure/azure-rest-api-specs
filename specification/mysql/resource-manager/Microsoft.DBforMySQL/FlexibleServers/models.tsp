@@ -735,7 +735,7 @@ model ConfigurationListForBatchUpdate {
   /**
    * The list of server configurations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   value?: ConfigurationForBatchUpdate[];
 
   /**
@@ -1484,7 +1484,7 @@ model CapabilityProperties {
    * A list of supported flexible server editions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedFlexibleServerEditions?: ServerEditionCapability[];
 }
 
@@ -1502,14 +1502,14 @@ model ServerEditionCapability {
    * A list of supported storage editions
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedStorageEditions?: StorageEditionCapability[];
 
   /**
    * A list of supported server versions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedServerVersions?: ServerVersionCapability[];
 }
 
@@ -1574,7 +1574,7 @@ model ServerVersionCapability {
    * A list of supported Skus
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedSkus?: SkuCapability[];
 }
 
@@ -1643,21 +1643,21 @@ model CapabilityPropertiesV2 {
    * A list of supported flexible server editions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedFlexibleServerEditions?: ServerEditionCapabilityV2[];
 
   /**
    * A list of supported server versions.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedServerVersions?: ServerVersionCapabilityV2[];
 
   /**
    * A list of supported features.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedFeatures?: FeatureProperty[];
 }
 
@@ -1687,14 +1687,14 @@ model ServerEditionCapabilityV2 {
    * A list of supported storage editions
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedStorageEditions?: StorageEditionCapability[];
 
   /**
    * A list of supported Skus
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   supportedSkus?: SkuCapabilityV2[];
 }
 
@@ -1799,7 +1799,7 @@ model VirtualNetworkSubnetUsageResult {
    * A list of delegated subnet usage
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   delegatedSubnetsUsage?: DelegatedSubnetUsage[];
 }
 
