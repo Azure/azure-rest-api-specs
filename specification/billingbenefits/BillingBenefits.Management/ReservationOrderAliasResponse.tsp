@@ -13,14 +13,9 @@ namespace Microsoft.BillingBenefits;
 /**
  * Reservation order alias
  */
-#suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-@Azure.ResourceManager.Private.armResourceInternal(
-  ReservationOrderAliasResponseProperties
-)
-@TypeSpec.Http.Private.includeInapplicableMetadataInPayload(false)
 @tenantResource
-model ReservationOrderAliasResponse extends Foundations.ProxyResource {
+model ReservationOrderAliasResponse
+  is Azure.ResourceManager.ProxyResource<ReservationOrderAliasResponseProperties> {
   ...ResourceNameParameter<
     Resource = ReservationOrderAliasResponse,
     KeyName = "reservationOrderAliasName",
@@ -39,11 +34,6 @@ model ReservationOrderAliasResponse extends Foundations.ProxyResource {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
-
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @doc("The resource-specific properties for this resource.")
-  properties?: ReservationOrderAliasResponseProperties;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
