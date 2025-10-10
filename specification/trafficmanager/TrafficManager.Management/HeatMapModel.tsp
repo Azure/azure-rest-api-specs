@@ -30,13 +30,7 @@ alias HeatMapModelsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<HeatMapModel>;
-
-    /**
-     * The name of the Traffic Manager profile.
-     */
-    @path
-    @segment("trafficmanagerprofiles")
-    profileName: string;
+    ...ParentKeysOf<HeatMapModel>;
   },
   {
     /**

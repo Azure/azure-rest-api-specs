@@ -30,21 +30,15 @@ alias EndpointsOps = Azure.ResourceManager.Legacy.LegacyOperations<
     ...SubscriptionIdParameter;
     ...ResourceGroupParameter;
     ...Azure.ResourceManager.Legacy.Provider<Endpoint>;
-
-    /**
-     * The name of the Traffic Manager profile.
-     */
-    @path
-    @segment("trafficmanagerprofiles")
-    profileName: string;
-
+    ...ParentKeysOf<Endpoint>;
+  },
+  {
     /**
      * The type of the Traffic Manager endpoint.
      */
     @path
     endpointType: EndpointType;
-  },
-  {
+
     /**
      * The name of the Traffic Manager endpoint.
      */
