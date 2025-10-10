@@ -1117,6 +1117,7 @@ op getMosaicsWmtsCapabilitiesCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 @operationGroup
+@clientName("Ingestion", "csharp")
 interface Ingestion {
   // Ingestion operations management
   cancelOperation is IngestionOperations.delete;
@@ -1148,6 +1149,7 @@ interface Ingestion {
 // === SpatioTemporal Asset Catalog (STAC) API ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
+@clientName("StacClient", "csharp")
 interface Stac {
   // Collection Assets
   #suppress "@azure-tools/typespec-azure-core/byos" "Multipart form data is appropriate for asset uploads in STAC collections"
@@ -1230,6 +1232,7 @@ interface Stac {
 // === Tiles for STAC Items ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
+@clientName("TilerClient", "csharp")
 interface Tiler {
   // Tile Matrix Sets
   getTileMatrixDefinitions is TileMatrixDefinitions.get;
@@ -1320,6 +1323,7 @@ interface Tiler {
 // === Shared Access Signature (SAS) ===
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 @operationGroup
+@clientName("SharedAccessSignatureClient", "csharp")
 interface SharedAccessSignature {
   // Sign HREF for read access
   getSign is Sas.getSign;
