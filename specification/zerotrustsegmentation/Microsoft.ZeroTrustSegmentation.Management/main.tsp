@@ -121,7 +121,7 @@ model SetLabelRecord {
   macAddress: string;
 
   @doc("Labels as key-value pairs")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labels?: LabelPair[];
 }
 
@@ -137,7 +137,7 @@ model LabelPair {
 @doc("The request model for the SetLabels API")
 model SetLabelsRequest {
   @doc("List of labels that need to be updated")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labels: SetLabelRecord[];
 }
 
@@ -162,7 +162,7 @@ model Graph {
   vertices: Vertex[];
 
   @doc("List of edges connecting the vertices in the graph")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   edges: Edge[];
 
   @doc("Total weights for all edges in the graph")
@@ -190,7 +190,7 @@ model Vertex {
   name?: string;
 
   @doc("Labels associated with the vertex as key-value pairs")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   labels: LabelPair[];
 }
 

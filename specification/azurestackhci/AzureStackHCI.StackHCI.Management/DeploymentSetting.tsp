@@ -7,8 +7,6 @@ import "./Cluster.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 /**
@@ -71,7 +69,6 @@ model DeploymentSettingsProperties {
   /**
    * Azure resource ids of Arc machines to be part of cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   arcNodeResourceIds: string[];
 
   /**
@@ -87,7 +84,6 @@ model DeploymentSettingsProperties {
   /**
    * Scale units will contains list of deployment data
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   deploymentConfiguration: DeploymentConfiguration;
 
   /**
@@ -109,7 +105,7 @@ model DeploymentConfiguration {
   /**
    * Scale units will contains list of deployment data
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scaleUnits: ScaleUnits[];
 }
 
@@ -166,13 +162,13 @@ model DeploymentDataContent {
   /**
    * InfrastructureNetwork config to deploy AzureStackHCI Cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   infrastructureNetwork?: InfrastructureNetwork[];
 
   /**
    * list of physical nodes config to deploy AzureStackHCI Cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   physicalNodes?: PhysicalNodes[];
 
   /**
@@ -208,7 +204,7 @@ model DeploymentDataContent {
   /**
    * secrets used for cloud deployment.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["secretName"])
+  @identifiers(#["secretName"])
   secrets?: EceDeploymentSecrets[];
 
   /**
@@ -219,7 +215,7 @@ model DeploymentDataContent {
   /**
    * Local Availability Zone information for HCI cluster
    */
-  @OpenAPI.extension("x-ms-identifiers", #["localAvailabilityZoneName"])
+  @identifiers(#["localAvailabilityZoneName"])
   localAvailabilityZones?: LocalAvailabilityZones[];
 
   /**
@@ -376,7 +372,7 @@ model InfrastructureNetwork {
   /**
    * Range of IP addresses from which addresses are allocated for nodes within a subnet.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ipPools?: IpPools[];
 
   /**
@@ -427,13 +423,13 @@ model DeploymentSettingsHostNetwork {
   /**
    * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   intents?: DeploymentSettingsIntents[];
 
   /**
    * List of StorageNetworks config to deploy AzureStackHCI Cluster.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   storageNetworks?: DeploymentSettingsStorageNetworks[];
 
   /**
@@ -555,7 +551,7 @@ model DeploymentSettingsStorageNetworks {
    * List of Storage adapter physical nodes config to deploy AzureStackHCI Cluster.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-  @OpenAPI.extension("x-ms-identifiers", #["physicalNode"])
+  @identifiers(#["physicalNode"])
   storageAdapterIPInfo?: DeploymentSettingsStorageAdapterIPInfo[];
 }
 
@@ -653,7 +649,7 @@ model AssemblyInfo {
    * Payload properties for Validated Solution Recipe for AzureStackHCI Cluster
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   payload?: AssemblyInfoPayload[];
 }
 
@@ -698,13 +694,13 @@ model SbePartnerInfo {
   /**
    * List of SBE partner properties for AzureStackHCI cluster deployment.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   partnerProperties?: SbePartnerProperties[];
 
   /**
    * SBE credentials list for AzureStackHCI cluster deployment.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["secretName"])
+  @identifiers(#["secretName"])
   credentialList?: SbeCredentials[];
 }
 

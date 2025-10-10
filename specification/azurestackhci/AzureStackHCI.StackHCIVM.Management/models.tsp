@@ -1102,7 +1102,7 @@ model IPPoolInfo {
 model NetworkSecurityGroupProperties {
   @doc("A collection of references to network interfaces that are currently using this NSG.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 
   @doc("A collection of references to logical networks that are currently using this NSG")
@@ -1562,12 +1562,12 @@ model InboundNATRule {
 model NatGatewayProperties {
   #suppress "@azure-tools/typespec-azure-core/casing-style" "IP is a short form. The casing is correct."
   @doc("List of public ip addresses that the gateway can use for NAT.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   publicIPAddresses?: PublicIPAddressArmReference[];
 
   @visibility(Lifecycle.Read)
   @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subnets?: VirtualNetworkSubnetArmReference[];
 
   #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
@@ -1644,7 +1644,7 @@ model FrontendIPConfigurationProperties {
 @doc("Backend address pool for the load balancer.")
 model BackendAddressPoolProperties {
   @doc("List of backend addresses for the backend pool")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   loadBalancerBackendAddresses?: LoadBalancerBackendAddress[];
 
   @doc("Reference to the virtual network for this backend pool. Mutually exclusive with logicalNetwork")
@@ -2300,7 +2300,7 @@ model VirtualMachineInstancePropertiesHardwareProfileVirtualMachineGPU {
 @doc("NetworkProfile - describes the network configuration the virtual machine instance")
 model VirtualMachineInstancePropertiesNetworkProfile {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 
@@ -2610,7 +2610,7 @@ model StorageProfileUpdate {
 @doc("NetworkProfile - describes the network update configuration the virtual machine instance")
 model NetworkProfileUpdate {
   @doc("NetworkInterfaces - list of network interfaces to be attached to the virtual machine instance")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   networkInterfaces?: NetworkInterfaceArmReference[];
 }
 

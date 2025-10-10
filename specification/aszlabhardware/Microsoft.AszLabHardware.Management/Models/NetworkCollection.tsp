@@ -1,6 +1,6 @@
 import "./NetDevice.tsp";
 
-using OpenAPI;
+using Azure.ResourceManager;
 
 @doc("Information regarding the network of the server")
 model NetworkCollection {
@@ -8,6 +8,6 @@ model NetworkCollection {
   systemMacs?: string[];
 
   @doc("Information about the individual network devices of the server")
-  @extension("x-ms-identifiers", #["netDeviceId"])
+  @identifiers(#["netDeviceId"])
   netDevices?: NetDevice[];
 }
