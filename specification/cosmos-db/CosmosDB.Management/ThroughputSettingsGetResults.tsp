@@ -57,7 +57,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 
@@ -163,7 +163,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps_2 = Azure.ResourceManager.Le
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -264,7 +264,7 @@ alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -361,7 +361,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps_3 = Azure.ResourceManager.Le
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -465,7 +465,7 @@ alias TableResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 
@@ -533,7 +533,7 @@ alias CassandraResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 
@@ -607,9 +607,10 @@ alias ThroughputSettingsGetResultsOperationGroupOps_4 = Azure.ResourceManager.Le
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
+
 #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
 @armResourceOperations
 interface ThroughputSettingsGetResultsOperationGroup_4 {
@@ -689,7 +690,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps_5 = Azure.ResourceManager.Le
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
@@ -765,7 +766,7 @@ alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 
@@ -839,7 +840,7 @@ alias ThroughputSettingsGetResultsOperationGroupOps_6 = Azure.ResourceManager.Le
     @path
     @segment("throughputSettings")
     @key
-    default: string;
+    default: "default";
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"

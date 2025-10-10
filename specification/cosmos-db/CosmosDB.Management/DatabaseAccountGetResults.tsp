@@ -227,6 +227,7 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
@@ -254,6 +255,7 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
@@ -281,6 +283,7 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
     }
   >;
@@ -302,12 +305,14 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
@@ -335,12 +340,14 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
@@ -368,12 +375,14 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
     }
   >;
@@ -395,18 +404,21 @@ interface DatabaseAccounts {
        * Cosmos DB region, with spaces between words and each word capitalized.
        */
       @path
+      @segment("region")
       region: string;
 
       /**
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
@@ -434,6 +446,7 @@ interface DatabaseAccounts {
        * Cosmos DB region, with spaces between words and each word capitalized.
        */
       @path
+      @segment("region")
       region: string;
 
       /**
@@ -451,7 +464,7 @@ interface DatabaseAccounts {
   @operationId("PercentileSourceTarget_ListMetrics")
   @list
   @get
-  @action("metrics")
+  @action("percentile/metrics")
   percentileSourceTargetListMetrics is ArmResourceActionSync<
     DatabaseAccountGetResults,
     void,
@@ -461,12 +474,14 @@ interface DatabaseAccounts {
        * Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.
        */
       @path
+      @segment("sourceRegion")
       sourceRegion: string;
 
       /**
        * Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.
        */
       @path
+      @segment("targetRegion")
       targetRegion: string;
 
       /**
@@ -484,7 +499,7 @@ interface DatabaseAccounts {
   @operationId("PercentileTarget_ListMetrics")
   @list
   @get
-  @action("metrics")
+  @action("percentile/metrics")
   percentileTargetListMetrics is ArmResourceActionSync<
     DatabaseAccountGetResults,
     void,
@@ -494,6 +509,7 @@ interface DatabaseAccounts {
        * Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.
        */
       @path
+      @segment("targetRegion")
       targetRegion: string;
 
       /**
@@ -542,18 +558,21 @@ interface DatabaseAccounts {
        * Cosmos DB region, with spaces between words and each word capitalized.
        */
       @path
+      @segment("region")
       region: string;
 
       /**
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
@@ -581,12 +600,14 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
@@ -614,12 +635,14 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
@@ -647,18 +670,21 @@ interface DatabaseAccounts {
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
        * Partition Key Range Id for which to get data.
        */
       @path
+      @segment("partitionKeyRangeId")
       partitionKeyRangeId: string;
 
       /**
@@ -686,24 +712,28 @@ interface DatabaseAccounts {
        * Cosmos DB region, with spaces between words and each word capitalized.
        */
       @path
+      @segment("region")
       region: string;
 
       /**
        * Cosmos DB database rid.
        */
       @path
+      @segment("databases")
       databaseRid: string;
 
       /**
        * Cosmos DB collection rid.
        */
       @path
+      @segment("collections")
       collectionRid: string;
 
       /**
        * Partition Key Range Id for which to get data.
        */
       @path
+      @segment("partitionKeyRangeId")
       partitionKeyRangeId: string;
 
       /**

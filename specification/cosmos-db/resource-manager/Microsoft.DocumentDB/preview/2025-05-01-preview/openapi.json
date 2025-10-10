@@ -2796,1055 +2796,6 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{region}/{databaseRid}/{collectionRid}/{partitionKeyRangeId}/metrics": {
-      "get": {
-        "operationId": "PartitionKeyRangeIdRegion_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given partition key range id and region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "region",
-            "in": "path",
-            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "partitionKeyRangeId",
-            "in": "path",
-            "description": "Partition Key Range Id for which to get data.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PartitionMetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": {
-            "$ref": "./examples/CosmosDBPKeyRangeIdRegionGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{region}/{databaseRid}/{collectionRid}/metrics": {
-      "get": {
-        "operationId": "CollectionRegion_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given database account, collection and region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "region",
-            "in": "path",
-            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBRegionCollectionGetMetrics": {
-            "$ref": "./examples/CosmosDBRegionCollectionGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/{collectionRid}/{partitionKeyRangeId}/metrics": {
-      "get": {
-        "operationId": "PartitionKeyRangeId_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given partition key range id.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "partitionKeyRangeId",
-            "in": "path",
-            "description": "Partition Key Range Id for which to get data.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PartitionMetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": {
-            "$ref": "./examples/CosmosDBPKeyRangeIdGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{region}/{databaseRid}/{collectionRid}/partitions/metrics": {
-      "get": {
-        "operationId": "CollectionPartitionRegion_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given collection and region, split by partition.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "region",
-            "in": "path",
-            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PartitionMetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": {
-            "$ref": "./examples/CosmosDBCollectionPartitionRegionGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/{collectionRid}/metricDefinitions": {
-      "get": {
-        "operationId": "Collection_ListMetricDefinitions",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves metric definitions for the given collection.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricDefinitionsListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBCollectionGetMetricDefinitions": {
-            "$ref": "./examples/CosmosDBCollectionGetMetricDefinitions.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/{collectionRid}/metrics": {
-      "get": {
-        "operationId": "Collection_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given database account and collection.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBCollectionGetMetrics": {
-            "$ref": "./examples/CosmosDBCollectionGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{sourceRegion}/{targetRegion}/metrics": {
-      "get": {
-        "operationId": "PercentileSourceTarget_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "sourceRegion",
-            "in": "path",
-            "description": "Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "targetRegion",
-            "in": "path",
-            "description": "Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PercentileMetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": {
-            "$ref": "./examples/CosmosDBPercentileSourceTargetGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/{collectionRid}/partitions/metrics": {
-      "get": {
-        "operationId": "CollectionPartition_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given collection, split by partition.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PartitionMetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": {
-            "$ref": "./examples/CosmosDBCollectionPartitionGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/{collectionRid}/partitions/usages": {
-      "get": {
-        "operationId": "CollectionPartition_ListUsages",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the usages (most recent storage data) for the given collection, split by partition.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PartitionUsagesResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBCollectionGetUsages": {
-            "$ref": "./examples/CosmosDBCollectionPartitionGetUsages.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/{collectionRid}/usages": {
-      "get": {
-        "operationId": "Collection_ListUsages",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the usages (most recent storage data) for the given collection.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "collectionRid",
-            "in": "path",
-            "description": "Cosmos DB collection rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UsagesResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBCollectionGetUsages": {
-            "$ref": "./examples/CosmosDBCollectionGetUsages.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/metricDefinitions": {
-      "get": {
-        "operationId": "Database_ListMetricDefinitions",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves metric definitions for the given database.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricDefinitionsListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseGetMetricDefinitions": {
-            "$ref": "./examples/CosmosDBDatabaseGetMetricDefinitions.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/metrics": {
-      "get": {
-        "operationId": "Database_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given database account and database.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseGetMetrics": {
-            "$ref": "./examples/CosmosDBDatabaseGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{region}/metrics": {
-      "get": {
-        "operationId": "DatabaseAccountRegion_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given database account and region.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "region",
-            "in": "path",
-            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/MetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": {
-            "$ref": "./examples/CosmosDBDatabaseAccountRegionGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{targetRegion}/metrics": {
-      "get": {
-        "operationId": "PercentileTarget_ListMetrics",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the metrics determined by the given filter for the given account target region. This url is only for PBS and Replication Latency data",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "targetRegion",
-            "in": "path",
-            "description": "Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
-            "required": true,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/PercentileMetricListResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseAccountRegionGetMetrics": {
-            "$ref": "./examples/CosmosDBPercentileTargetGetMetrics.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/{databaseRid}/usages": {
-      "get": {
-        "operationId": "Database_ListUsages",
-        "tags": [
-          "DatabaseAccounts"
-        ],
-        "description": "Retrieves the usages (most recent data) for the given database.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "accountName",
-            "in": "path",
-            "description": "Cosmos DB database account name.",
-            "required": true,
-            "type": "string",
-            "minLength": 3,
-            "maxLength": 50,
-            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
-          },
-          {
-            "name": "databaseRid",
-            "in": "path",
-            "description": "Cosmos DB database rid.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "$filter",
-            "in": "query",
-            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
-            "required": false,
-            "type": "string",
-            "x-ms-client-name": "filter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/UsagesResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CosmosDBDatabaseGetUsages": {
-            "$ref": "./examples/CosmosDBDatabaseGetUsages.json"
-          }
-        }
-      }
-    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces": {
       "get": {
         "operationId": "CassandraResources_ListCassandraKeyspaces",
@@ -4383,7 +3334,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default": {
       "get": {
         "operationId": "CassandraResources_GetCassandraTableThroughput",
         "tags": [
@@ -4419,13 +3370,6 @@
             "name": "tableName",
             "in": "path",
             "description": "Cosmos DB table name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4489,13 +3433,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -4544,7 +3481,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraTableToAutoscale",
         "tags": [
@@ -4580,13 +3517,6 @@
             "name": "tableName",
             "in": "path",
             "description": "Cosmos DB table name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4631,7 +3561,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraTableToManualThroughput",
         "tags": [
@@ -4667,13 +3597,6 @@
             "name": "tableName",
             "in": "path",
             "description": "Cosmos DB table name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4718,7 +3641,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default": {
       "get": {
         "operationId": "CassandraResources_GetCassandraKeyspaceThroughput",
         "tags": [
@@ -4747,13 +3670,6 @@
             "name": "keyspaceName",
             "in": "path",
             "description": "Cosmos DB keyspace name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4810,13 +3726,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "updateThroughputParameters",
             "in": "body",
             "description": "Resource create parameters.",
@@ -4865,7 +3774,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraKeyspaceToAutoscale",
         "tags": [
@@ -4894,13 +3803,6 @@
             "name": "keyspaceName",
             "in": "path",
             "description": "Cosmos DB keyspace name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -4945,7 +3847,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraKeyspaceToManualThroughput",
         "tags": [
@@ -4974,13 +3876,6 @@
             "name": "keyspaceName",
             "in": "path",
             "description": "Cosmos DB keyspace name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -5311,7 +4206,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default": {
       "get": {
         "operationId": "CassandraResources_GetCassandraViewThroughput",
         "tags": [
@@ -5347,13 +4242,6 @@
             "name": "viewName",
             "in": "path",
             "description": "Cosmos DB view name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -5417,13 +4305,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -5472,7 +4353,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraViewToAutoscale",
         "tags": [
@@ -5508,13 +4389,6 @@
             "name": "viewName",
             "in": "path",
             "description": "Cosmos DB view name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -5559,7 +4433,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/cassandraKeyspaces/{keyspaceName}/views/{viewName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "CassandraResources_MigrateCassandraViewToManualThroughput",
         "tags": [
@@ -5595,13 +4469,6 @@
             "name": "viewName",
             "in": "path",
             "description": "Cosmos DB view name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -7163,6 +6030,615 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metricDefinitions": {
+      "get": {
+        "operationId": "Collection_ListMetricDefinitions",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves metric definitions for the given collection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCollectionGetMetricDefinitions": {
+            "$ref": "./examples/CosmosDBCollectionGetMetricDefinitions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/metrics": {
+      "get": {
+        "operationId": "Collection_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given database account and collection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCollectionGetMetrics": {
+            "$ref": "./examples/CosmosDBCollectionGetMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics": {
+      "get": {
+        "operationId": "PartitionKeyRangeId_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given partition key range id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partitionKeyRangeId",
+            "in": "path",
+            "description": "Partition Key Range Id for which to get data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPKeyRangeIdGetMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics": {
+      "get": {
+        "operationId": "CollectionPartition_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given collection, split by partition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBCollectionPartitionGetMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/partitions/usages": {
+      "get": {
+        "operationId": "CollectionPartition_ListUsages",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the usages (most recent storage data) for the given collection, split by partition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionUsagesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCollectionGetUsages": {
+            "$ref": "./examples/CosmosDBCollectionPartitionGetUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/collections/{collectionRid}/usages": {
+      "get": {
+        "operationId": "Collection_ListUsages",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the usages (most recent storage data) for the given collection.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBCollectionGetUsages": {
+            "$ref": "./examples/CosmosDBCollectionGetUsages.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metricDefinitions": {
+      "get": {
+        "operationId": "Database_ListMetricDefinitions",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves metric definitions for the given database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricDefinitionsListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseGetMetricDefinitions": {
+            "$ref": "./examples/CosmosDBDatabaseGetMetricDefinitions.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/metrics": {
+      "get": {
+        "operationId": "Database_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given database account and database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseGetMetrics": {
+            "$ref": "./examples/CosmosDBDatabaseGetMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/databases/{databaseRid}/usages": {
+      "get": {
+        "operationId": "Database_ListUsages",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the usages (most recent data) for the given database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of usages to return. The supported parameter is name.value (name of the metric, can have an or of multiple names).",
+            "required": false,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/UsagesResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseGetUsages": {
+            "$ref": "./examples/CosmosDBDatabaseGetUsages.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/failoverPriorityChange": {
       "post": {
         "operationId": "DatabaseAccounts_FailoverPriorityChange",
@@ -8124,7 +7600,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default": {
       "get": {
         "operationId": "GremlinResources_GetGremlinGraphThroughput",
         "tags": [
@@ -8160,13 +7636,6 @@
             "name": "graphName",
             "in": "path",
             "description": "Cosmos DB graph name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -8230,13 +7699,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -8285,7 +7747,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinGraphToAutoscale",
         "tags": [
@@ -8321,13 +7783,6 @@
             "name": "graphName",
             "in": "path",
             "description": "Cosmos DB graph name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -8372,7 +7827,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/graphs/{graphName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinGraphToManualThroughput",
         "tags": [
@@ -8408,13 +7863,6 @@
             "name": "graphName",
             "in": "path",
             "description": "Cosmos DB graph name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -8459,7 +7907,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default": {
       "get": {
         "operationId": "GremlinResources_GetGremlinDatabaseThroughput",
         "tags": [
@@ -8488,13 +7936,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -8551,13 +7992,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "updateThroughputParameters",
             "in": "body",
             "description": "Resource create parameters.",
@@ -8606,7 +8040,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinDatabaseToAutoscale",
         "tags": [
@@ -8635,13 +8069,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -8686,7 +8113,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "GremlinResources_MigrateGremlinDatabaseToManualThroughput",
         "tags": [
@@ -8715,13 +8142,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -10743,7 +10163,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default": {
       "get": {
         "operationId": "MongoDBResources_GetMongoDBCollectionThroughput",
         "tags": [
@@ -10779,13 +10199,6 @@
             "name": "collectionName",
             "in": "path",
             "description": "Cosmos DB collection name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -10849,13 +10262,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -10904,7 +10310,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBCollectionToAutoscale",
         "tags": [
@@ -10940,13 +10346,6 @@
             "name": "collectionName",
             "in": "path",
             "description": "Cosmos DB collection name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -10991,7 +10390,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBCollectionToManualThroughput",
         "tags": [
@@ -11027,13 +10426,6 @@
             "name": "collectionName",
             "in": "path",
             "description": "Cosmos DB collection name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -11078,7 +10470,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/{default}/redistributeThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "MongoDBResources_MongoDBContainerRedistributeThroughput",
         "tags": [
@@ -11114,13 +10506,6 @@
             "name": "collectionName",
             "in": "path",
             "description": "Cosmos DB collection name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -11174,7 +10559,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/{default}/retrieveThroughputDistribution": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/collections/{collectionName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "MongoDBResources_MongoDBContainerRetrieveThroughputDistribution",
         "tags": [
@@ -11210,13 +10595,6 @@
             "name": "collectionName",
             "in": "path",
             "description": "Cosmos DB collection name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -11354,7 +10732,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default": {
       "get": {
         "operationId": "MongoDBResources_GetMongoDBDatabaseThroughput",
         "tags": [
@@ -11383,13 +10761,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -11446,13 +10817,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "updateThroughputParameters",
             "in": "body",
             "description": "Resource create parameters.",
@@ -11501,7 +10865,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBDatabaseToAutoscale",
         "tags": [
@@ -11530,13 +10894,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -11581,7 +10938,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBDatabaseToManualThroughput",
         "tags": [
@@ -11610,13 +10967,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -11661,7 +11011,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/{default}/redistributeThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "MongoDBResources_MongoDBDatabaseRedistributeThroughput",
         "tags": [
@@ -11690,13 +11040,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -11750,7 +11093,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/{default}/retrieveThroughputDistribution": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/mongodbDatabases/{databaseName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "MongoDBResources_MongoDBDatabaseRetrieveThroughputDistribution",
         "tags": [
@@ -11779,13 +11122,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -13778,6 +13114,311 @@
         "x-ms-long-running-operation": true
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/metrics": {
+      "get": {
+        "operationId": "CollectionRegion_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given database account, collection and region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBRegionCollectionGetMetrics": {
+            "$ref": "./examples/CosmosDBRegionCollectionGetMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitionKeyRangeId/{partitionKeyRangeId}/metrics": {
+      "get": {
+        "operationId": "PartitionKeyRangeIdRegion_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given partition key range id and region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "partitionKeyRangeId",
+            "in": "path",
+            "description": "Partition Key Range Id for which to get data.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPKeyRangeIdRegionGetMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/databases/{databaseRid}/collections/{collectionRid}/partitions/metrics": {
+      "get": {
+        "operationId": "CollectionPartitionRegion_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given collection and region, split by partition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "databaseRid",
+            "in": "path",
+            "description": "Cosmos DB database rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "collectionRid",
+            "in": "path",
+            "description": "Cosmos DB collection rid.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PartitionMetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBCollectionPartitionRegionGetMetrics.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/region/{region}/metrics": {
+      "get": {
+        "operationId": "DatabaseAccountRegion_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given database account and region.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "region",
+            "in": "path",
+            "description": "Cosmos DB region, with spaces between words and each word capitalized.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/MetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBDatabaseAccountRegionGetMetrics.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/services": {
       "get": {
         "operationId": "Service_List",
@@ -14067,6 +13708,77 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sourceRegion/{sourceRegion}/targetRegion/{targetRegion}/percentile/metrics": {
+      "get": {
+        "operationId": "PercentileSourceTarget_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "sourceRegion",
+            "in": "path",
+            "description": "Source region from which data is written. Cosmos DB region, with spaces between words and each word capitalized.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "targetRegion",
+            "in": "path",
+            "description": "Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PercentileMetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPercentileSourceTargetGetMetrics.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases": {
@@ -15316,7 +15028,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default": {
       "get": {
         "operationId": "SqlResources_GetSqlContainerThroughput",
         "tags": [
@@ -15352,13 +15064,6 @@
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -15422,13 +15127,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "resource",
             "in": "body",
             "description": "Resource create parameters.",
@@ -15477,7 +15175,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "SqlResources_MigrateSqlContainerToAutoscale",
         "tags": [
@@ -15513,13 +15211,6 @@
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -15564,7 +15255,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "SqlResources_MigrateSqlContainerToManualThroughput",
         "tags": [
@@ -15600,13 +15291,6 @@
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -15651,7 +15335,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/{default}/redistributeThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "SqlResources_SqlContainerRedistributeThroughput",
         "tags": [
@@ -15687,13 +15371,6 @@
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -15747,7 +15424,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/{default}/retrieveThroughputDistribution": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/containers/{containerName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "SqlResources_SqlContainerRetrieveThroughputDistribution",
         "tags": [
@@ -15783,13 +15460,6 @@
             "name": "containerName",
             "in": "path",
             "description": "Cosmos DB container name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -16549,7 +16219,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default": {
       "get": {
         "operationId": "SqlResources_GetSqlDatabaseThroughput",
         "tags": [
@@ -16578,13 +16248,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -16641,13 +16304,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "updateThroughputParameters",
             "in": "body",
             "description": "The parameters to provide for the RUs per second of the current SQL database.",
@@ -16696,7 +16352,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "SqlResources_MigrateSqlDatabaseToAutoscale",
         "tags": [
@@ -16725,13 +16381,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -16776,7 +16425,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "SqlResources_MigrateSqlDatabaseToManualThroughput",
         "tags": [
@@ -16805,13 +16454,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -16856,7 +16498,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/{default}/redistributeThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/redistributeThroughput": {
       "post": {
         "operationId": "SqlResources_SqlDatabaseRedistributeThroughput",
         "tags": [
@@ -16885,13 +16527,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -16945,7 +16580,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/{default}/retrieveThroughputDistribution": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/sqlDatabases/{databaseName}/throughputSettings/default/retrieveThroughputDistribution": {
       "post": {
         "operationId": "SqlResources_SqlDatabaseRetrieveThroughputDistribution",
         "tags": [
@@ -16974,13 +16609,6 @@
             "name": "databaseName",
             "in": "path",
             "description": "Cosmos DB database name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           },
@@ -18411,7 +18039,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/{default}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default": {
       "get": {
         "operationId": "TableResources_GetTableThroughput",
         "tags": [
@@ -18440,13 +18068,6 @@
             "name": "tableName",
             "in": "path",
             "description": "Cosmos DB table name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -18503,13 +18124,6 @@
             "type": "string"
           },
           {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
-            "required": true,
-            "type": "string"
-          },
-          {
             "name": "updateThroughputParameters",
             "in": "body",
             "description": "Resource create parameters.",
@@ -18558,7 +18172,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/{default}/migrateToAutoscale": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToAutoscale": {
       "post": {
         "operationId": "TableResources_MigrateTableToAutoscale",
         "tags": [
@@ -18587,13 +18201,6 @@
             "name": "tableName",
             "in": "path",
             "description": "Cosmos DB table name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -18638,7 +18245,7 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/{default}/migrateToManualThroughput": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/tables/{tableName}/throughputSettings/default/migrateToManualThroughput": {
       "post": {
         "operationId": "TableResources_MigrateTableToManualThroughput",
         "tags": [
@@ -18667,13 +18274,6 @@
             "name": "tableName",
             "in": "path",
             "description": "Cosmos DB table name.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "default",
-            "in": "path",
-            "description": "undefined",
             "required": true,
             "type": "string"
           }
@@ -18716,6 +18316,70 @@
           "final-state-schema": "#/definitions/Azure.ResourceManager.ArmResponse%3CThroughputSettingsGetResults%3E"
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/targetRegion/{targetRegion}/percentile/metrics": {
+      "get": {
+        "operationId": "PercentileTarget_ListMetrics",
+        "tags": [
+          "DatabaseAccounts"
+        ],
+        "description": "Retrieves the metrics determined by the given filter for the given account target region. This url is only for PBS and Replication Latency data",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "accountName",
+            "in": "path",
+            "description": "Cosmos DB database account name.",
+            "required": true,
+            "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
+            "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+          },
+          {
+            "name": "targetRegion",
+            "in": "path",
+            "description": "Target region to which data is written. Cosmos DB region, with spaces between words and each word capitalized.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "$filter",
+            "in": "query",
+            "description": "An OData filter expression that describes a subset of metrics to return. The parameters that can be filtered are name.value (name of the metric, can have an or of multiple names), startTime, endTime, and timeGrain. The supported operator is eq.",
+            "required": true,
+            "type": "string",
+            "x-ms-client-name": "filter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PercentileMetricListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountRegionGetMetrics": {
+            "$ref": "./examples/CosmosDBPercentileTargetGetMetrics.json"
+          }
+        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/usages": {
