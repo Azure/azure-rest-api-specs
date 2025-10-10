@@ -22,6 +22,6 @@ namespace Microsoft.ComputeBulkActions;
 enum Versions {
   /** 2025-10-30-preview version */
   @useDependency(Azure.Core.Versions.v1_0_Preview_2)
-  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2025-10-30-preview`,
 }

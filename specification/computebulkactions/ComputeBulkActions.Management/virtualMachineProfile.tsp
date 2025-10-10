@@ -197,13 +197,13 @@ union DiffDiskOptions {
 union DiffDiskPlacement {
   string,
 
-  @doc("CacheDisk")
+  @doc("CacheDisk disk placement")
   CacheDisk: "CacheDisk",
 
-  @doc("ResourceDisk")
+  @doc("ResourceDisk disk placement")
   ResourceDisk: "ResourceDisk",
 
-  @doc("NvmeDisk")
+  @doc("NvmeDisk disk placement")
   NvmeDisk: "NvmeDisk",
 }
 
@@ -211,19 +211,19 @@ union DiffDiskPlacement {
 union DiskCreateOptionTypes {
   string,
 
-  @doc("FromImage")
+  @doc("Create disk FromImage")
   FromImage: "FromImage",
 
-  @doc("Empty")
+  @doc("Empty value")
   Empty: "Empty",
 
-  @doc("Attach")
+  @doc("Create disk by Attach")
   Attach: "Attach",
 
-  @doc("Copy")
+  @doc("Create disk by Copy")
   Copy: "Copy",
 
-  @doc("Restore")
+  @doc("Create disk by Restore")
   Restore: "Restore",
 }
 
@@ -231,10 +231,10 @@ union DiskCreateOptionTypes {
 union DiskDeleteOptionTypes {
   string,
 
-  @doc("Delete")
+  @doc("Delete the disk upon VM deletion")
   Delete: "Delete",
 
-  @doc("Detach")
+  @doc("Detach the disk upon VM deletion")
   Detach: "Detach",
 }
 
@@ -242,10 +242,10 @@ union DiskDeleteOptionTypes {
 union OperatingSystemTypes {
   string,
 
-  @doc("Windows")
+  @doc("Windows OS")
   Windows: "Windows",
 
-  @doc("Linux")
+  @doc("Linux OS")
   Linux: "Linux",
 }
 
@@ -269,25 +269,25 @@ union CachingTypes {
 union StorageAccountTypes {
   string,
 
-  @doc("Standard_LRS")
+  @doc("Standard_LRS storage account type")
   Standard_LRS: "Standard_LRS",
 
-  @doc("Premium_LRS")
+  @doc("Premium_LRS storage account type")
   Premium_LRS: "Premium_LRS",
 
-  @doc("StandardSSD_LRS")
+  @doc("StandardSSD_LRS storage account type")
   StandardSSD_LRS: "StandardSSD_LRS",
 
-  @doc("UltraSSD_LRS")
+  @doc("UltraSSD_LRS storage account type")
   UltraSSD_LRS: "UltraSSD_LRS",
 
-  @doc("Premium_ZRS")
+  @doc("Premium_ZRS storage account type")
   Premium_ZRS: "Premium_ZRS",
 
-  @doc("StandardSSD_ZRS")
+  @doc("StandardSSD_ZRS storage account type")
   StandardSSD_ZRS: "StandardSSD_ZRS",
 
-  @doc("PremiumV2_LRS")
+  @doc("PremiumV2_LRS storage account type")
   PremiumV2_LRS: "PremiumV2_LRS",
 }
 
@@ -364,13 +364,13 @@ model VMDiskSecurityProfile {
 union SecurityEncryptionTypes {
   string,
 
-  @doc("VMGuestStateOnly")
+  @doc("VMGuestStateOnly encryption")
   VMGuestStateOnly: "VMGuestStateOnly",
 
-  @doc("DiskWithVMGuestState")
+  @doc("DiskWithVMGuestState encryption")
   DiskWithVMGuestState: "DiskWithVMGuestState",
 
-  @doc("NonPersistedTPM")
+  @doc("NonPersistedTPM encryption")
   NonPersistedTPM: "NonPersistedTPM",
 }
 
@@ -429,7 +429,7 @@ model ApiEntityReference {
 union DiskDetachOptionTypes {
   string,
 
-  @doc("ForceDetach")
+  @doc("ForceDetach the disk")
   ForceDetach: "ForceDetach",
 }
 
@@ -439,10 +439,10 @@ union DiskDetachOptionTypes {
 union DiskControllerTypes {
   string,
 
-  @doc("SCSI")
+  @doc("SCSI disk controller type")
   SCSI: "SCSI",
 
-  @doc("NVMe")
+  @doc("NVMe disk controller type")
   NVMe: "NVMe",
 }
 
@@ -638,10 +638,10 @@ model WinRMListener {
 union SettingNames {
   string,
 
-  @doc("AutoLogon")
+  @doc("AutoLogon mode")
   AutoLogon: "AutoLogon",
 
-  @doc("FirstLogonCommands")
+  @doc("FirstLogonCommands mode")
   FirstLogonCommands: "FirstLogonCommands",
 }
 
@@ -651,13 +651,13 @@ union SettingNames {
 union WindowsVMGuestPatchMode {
   string,
 
-  @doc("Manual")
+  @doc("Manual VM guest patch mode")
   Manual: "Manual",
 
-  @doc("AutomaticByOS")
+  @doc("AutomaticByOS VM guest patch mode")
   AutomaticByOS: "AutomaticByOS",
 
-  @doc("AutomaticByPlatform")
+  @doc("AutomaticByPlatform VM guest patch mode")
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -667,10 +667,10 @@ union WindowsVMGuestPatchMode {
 union WindowsPatchAssessmentMode {
   string,
 
-  @doc("ImageDefault")
+  @doc("ImageDefault patch assessment mode")
   ImageDefault: "ImageDefault",
 
-  @doc("AutomaticByPlatform")
+  @doc("AutomaticByPlatform patch assessment mode")
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -683,13 +683,13 @@ union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   @doc("Unknown")
   Unknown: "Unknown",
 
-  @doc("IfRequired")
+  @doc("IfRequired reboot setting")
   IfRequired: "IfRequired",
 
-  @doc("Never")
+  @doc("Never reboot setting")
   Never: "Never",
 
-  @doc("Always")
+  @doc("Always reboot setting")
   Always: "Always",
 }
 
@@ -699,10 +699,10 @@ union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
 union ProtocolTypes {
   string,
 
-  @doc("Http")
+  @doc("Http protocol")
   Http: "Http",
 
-  @doc("Https")
+  @doc("Https protocol")
   Https: "Https",
 }
 
@@ -811,10 +811,10 @@ union LinuxVMGuestPatchMode {
 union LinuxPatchAssessmentMode {
   string,
 
-  @doc("ImageDefault")
+  @doc("ImageDefault mode")
   ImageDefault: "ImageDefault",
 
-  @doc("AutomaticByPlatform")
+  @doc("AutomaticByPlatform mode")
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -824,16 +824,16 @@ union LinuxPatchAssessmentMode {
 union LinuxVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
 
-  @doc("Unknown")
+  @doc("Unknown reboot setting")
   Unknown: "Unknown",
 
-  @doc("IfRequired")
+  @doc("Reboot if required")
   IfRequired: "IfRequired",
 
-  @doc("Never")
+  @doc("Never reboot")
   Never: "Never",
 
-  @doc("Always")
+  @doc("Always reboot")
   Always: "Always",
 }
 
@@ -1060,16 +1060,16 @@ union DeleteOptions {
 union DomainNameLabelScopeTypes {
   string,
 
-  @doc("TenantReuse")
+  @doc("TenantReuse scope type")
   TenantReuse: "TenantReuse",
 
-  @doc("SubscriptionReuse")
+  @doc("SubscriptionReuse scope type")
   SubscriptionReuse: "SubscriptionReuse",
 
-  @doc("ResourceGroupReuse")
+  @doc("ResourceGroupReuse scope type")
   ResourceGroupReuse: "ResourceGroupReuse",
 
-  @doc("NoReuse")
+  @doc("NoReuse scope type")
   NoReuse: "NoReuse",
 }
 
@@ -1077,10 +1077,10 @@ union DomainNameLabelScopeTypes {
 union IPVersions {
   string,
 
-  @doc("IPv4")
+  @doc("IPv4 version")
   IPv4: "IPv4",
 
-  @doc("IPv6")
+  @doc("IPv6 version")
   IPv6: "IPv6",
 }
 
@@ -1088,10 +1088,10 @@ union IPVersions {
 union NetworkApiVersion {
   string,
 
-  @doc("2020-11-01")
+  @doc("2020-11-01 version")
   `2020-11-01`: "2020-11-01",
 
-  @doc("2022-11-01")
+  @doc("2022-11-01 version")
   `2022-11-01`: "2022-11-01",
 }
 
@@ -1109,10 +1109,10 @@ model PublicIPAddressSku {
 union PublicIPAddressSkuName {
   string,
 
-  @doc("Basic")
+  @doc("Basic IP sku name")
   Basic: "Basic",
 
-  @doc("Standard")
+  @doc("Standard IP sku name")
   Standard: "Standard",
 }
 
@@ -1120,10 +1120,10 @@ union PublicIPAddressSkuName {
 union PublicIPAddressSkuTier {
   string,
 
-  @doc("Regional")
+  @doc("Regional IP address sku tier")
   Regional: "Regional",
 
-  @doc("Global")
+  @doc("Global IP address sku tier")
   Global: "Global",
 }
 
@@ -1131,10 +1131,10 @@ union PublicIPAddressSkuTier {
 union PublicIPAllocationMethod {
   string,
 
-  @doc("Dynamic")
+  @doc("Dynamic IP allocation")
   Dynamic: "Dynamic",
 
-  @doc("Static")
+  @doc("Static IP allocation")
   Static: "Static",
 }
 
@@ -1144,13 +1144,13 @@ union PublicIPAllocationMethod {
 union NetworkInterfaceAuxiliaryMode {
   string,
 
-  @doc("None")
+  @doc("None mode")
   None: "None",
 
-  @doc("AcceleratedConnections")
+  @doc("AcceleratedConnections mode")
   AcceleratedConnections: "AcceleratedConnections",
 
-  @doc("Floating")
+  @doc("Floating mode")
   Floating: "Floating",
 }
 
@@ -1160,19 +1160,19 @@ union NetworkInterfaceAuxiliaryMode {
 union NetworkInterfaceAuxiliarySku {
   string,
 
-  @doc("None")
+  @doc("None: None sku")
   None: "None",
 
-  @doc("A1")
+  @doc("A1 sku")
   A1: "A1",
 
-  @doc("A2")
+  @doc("A2 sku")
   A2: "A2",
 
-  @doc("A4")
+  @doc("A4 sku")
   A4: "A4",
 
-  @doc("A8")
+  @doc("A8 sku")
   A8: "A8",
 }
 
@@ -1344,10 +1344,10 @@ model HostEndpointSettings {
 union SecurityTypes {
   string,
 
-  @doc("TrustedLaunch")
+  @doc("TrustedLaunch security type")
   TrustedLaunch: "TrustedLaunch",
 
-  @doc("ConfidentialVM")
+  @doc("ConfidentialVM security type")
   ConfidentialVM: "ConfidentialVM",
 }
 
@@ -1357,10 +1357,10 @@ union SecurityTypes {
 union Mode {
   string,
 
-  @doc("Audit")
+  @doc("Audit mode")
   Audit: "Audit",
 
-  @doc("Enforce")
+  @doc("Enforce mode")
   Enforce: "Enforce",
 }
 
@@ -1370,12 +1370,12 @@ union Mode {
 union Modes {
   string,
 
-  @doc("Audit")
+  @doc("Audit mode")
   Audit: "Audit",
 
-  @doc("Enforce")
+  @doc("Enforce mode")
   Enforce: "Enforce",
 
-  @doc("Disabled")
+  @doc("Disabled mode")
   Disabled: "Disabled",
 }
