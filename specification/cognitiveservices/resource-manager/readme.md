@@ -109,6 +109,11 @@ suppressions:
     reason: Same as existing account resource, trying to have the same behavior
     where:
       - $.definitions.ProjectProperties.properties.endpoints
+  - code: TopLevelResourcesListByResourceGroup
+    reason: These are subscription level resources and are modeled after the RaiPolicy List operation
+    where: 
+      - $.definitions.RaiExternalSafetyProvider
+      - $.definitions.RaiExternalSafetyProviderSchema
 ```
 
 ### Tag: package-2025-09-01
