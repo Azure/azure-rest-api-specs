@@ -1545,46 +1545,6 @@
             "description": "The name of the resource",
             "required": true,
             "type": "string"
-          },
-          {
-            "name": "type",
-            "in": "query",
-            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
-            "required": false,
-            "type": "string",
-            "enum": [
-              "builtin",
-              "custom",
-              "all"
-            ],
-            "x-ms-enum": {
-              "modelAsString": true,
-              "values": [
-                {
-                  "name": "built_in",
-                  "value": "builtin",
-                  "description": "Built-in evaluator (Microsoft provided)"
-                },
-                {
-                  "name": "custom",
-                  "value": "custom",
-                  "description": "Custom evaluator"
-                },
-                {
-                  "name": "all",
-                  "value": "all"
-                }
-              ]
-            }
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
           }
         ],
         "responses": {

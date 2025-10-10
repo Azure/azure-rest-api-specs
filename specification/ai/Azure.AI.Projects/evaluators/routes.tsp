@@ -91,7 +91,7 @@ interface Evaluators {
   @Http.post
   createEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
-    ListEvaluatorVersionsParameters,
+    {},
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
   >;
 
