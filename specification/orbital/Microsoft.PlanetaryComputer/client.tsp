@@ -38,9 +38,6 @@ namespace Customizations;
 @@alternateType(RegisterMosaic.filter, string, "csharp,java");
 
 // Address naming convention violations for C# SDK
-// Models ending with "Response" - rename to "Result"
-@@clientName(StacAssetStatistics, "AssetStatisticsResult", "csharp");
-
 @@clientName(GeoJsonStatisticsItemResponse,
   "GeoJsonStatisticsItemResult",
   "csharp"
@@ -58,28 +55,25 @@ namespace Customizations;
 
 // Models ending with "Request" - rename to "Content"
 @@clientName(ImageRequest, "ImageContent", "csharp");
-@@clientName(StacSearchParameters, "SearchPostContent", "csharp");
 
 // Models ending with "Definition" - rename appropriately
-@@clientName(StacQueryable, "QueryableProperty", "csharp");
-@@clientName(Ingestion, "IngestionConfiguration", "csharp");
+@@clientName(Ingestion, "IngestionDefinition", "csharp");
 
 // Models ending with "Operation" - rename to "Info"
-@@clientName(Operation, "LongRunningOperation", "csharp");
-@@clientName(IngestionRunOperation, "IngestionRunInfo", "csharp");
+@@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
 
 // Generic single-word class names - add descriptive prefixes
 @@clientName(Geometry, "GeoJsonGeometry", "csharp");
 @@clientName(Point, "GeoJsonPoint", "csharp");
 @@clientName(Polygon, "GeoJsonPolygon", "csharp");
 @@clientName(Resampling, "ResamplingMethod", "csharp");
-@@clientName(TileMatrixSetId, "TileMatrixSetId", "csharp");
+@@clientName(Operation, "LongRunningOperation", "csharp");
 
 // Additional model renames for C#
-@@clientName(RenderOption, "RenderOptionModel", "csharp");
-@@clientName(StacCollection, "StacCollectionModel", "csharp");
-@@clientName(StacItem, "StacItemModel", "csharp");
-@@clientName(StacItemCollection, "StacItemCollectionModel", "csharp");
+@@clientName(RenderOption, "RenderConfiguration", "csharp");
+@@clientName(StacCollection, "StacCollectionResource", "csharp");
+@@clientName(StacItem, "StacItemResource", "csharp");
+@@clientName(StacItemCollection, "StacItemCollectionResource", "csharp");
 
 // === Method overrides ===
 
@@ -1117,8 +1111,8 @@ op getMosaicsWmtsCapabilitiesCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 @operationGroup
-@clientName("IngestionClient", "csharp")
-interface Ingestion {
+@clientName("IngestionManagementClient", "csharp")
+interface IngestionManagement {
   // Ingestion operations management
   cancelOperation is IngestionOperations.delete;
   cancelAllOperations is IngestionOperations.deleteAll;
