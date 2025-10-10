@@ -223,7 +223,7 @@ model ManagedOnBehalfOfConfiguration {
   /**
    * Managed-On-Behalf-Of broker resources
    */
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   moboBrokerResources?: MoboBrokerResource[];
 }
 

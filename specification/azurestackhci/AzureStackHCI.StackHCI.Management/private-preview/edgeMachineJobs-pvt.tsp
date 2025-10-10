@@ -448,7 +448,7 @@ model EceActionStatus {
 
   @doc("List of steps of Edge device job.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: Step[];
 }
 
@@ -491,7 +491,7 @@ model Step {
 
   @doc("List of nested steps during job execution..")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: Step[];
 
   @doc("List of exceptions in job execution.")

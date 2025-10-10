@@ -49,7 +49,7 @@ model SharedStorageProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("List of Chambers connected to the shared storage.")
-  @extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   chambers: Array<ConnectedChamber>;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)

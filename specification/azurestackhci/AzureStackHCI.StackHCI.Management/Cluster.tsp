@@ -334,7 +334,7 @@ model ClusterProperties {
   /**
    * List of secret locations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secretsLocations?: SecretsLocationDetails[];
 
   /**
@@ -346,7 +346,7 @@ model ClusterProperties {
   /**
    * Local Availability Zone information for HCI cluster
    */
-  @OpenAPI.extension("x-ms-identifiers", #["localAvailabilityZoneName"])
+  @identifiers(#["localAvailabilityZoneName"])
   localAvailabilityZones?: LocalAvailabilityZones[];
 }
 
@@ -413,7 +413,7 @@ model LogCollectionProperties {
    * Log collection session details for the cluster.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   logCollectionSessionDetails?: ClustersLogCollectionSession[];
 }
 
@@ -524,14 +524,14 @@ model RemoteSupportProperties {
    * Remote support node settings for the cluster.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   remoteSupportNodeSettings?: ClustersRemoteSupportNodeSettings[];
 
   /**
    * Remote support session details for the cluster.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
 }
 
@@ -919,7 +919,7 @@ model SecretsLocationsChangeRequest {
   /**
    * List of secret locations
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   properties?: SecretsLocationDetails[];
 }
 

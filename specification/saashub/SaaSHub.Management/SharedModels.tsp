@@ -5,12 +5,7 @@ import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "./versions.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using OpenAPI;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using Azure.Core;
 using TypeSpec.Versioning;
 
 @versioned(SaaSHubVersions)
@@ -371,21 +366,21 @@ model CanCreateResultAdditionalInfo {
    * Additional detail when request payload failed promotion constraints. Null when constraints passed or not applicable.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   promotion?: CanCreateResultPromotionInfo[];
 
   /**
    * Additional evaluation eligibility result for qualifying co-term resources for a future price concession. Null when constraints passed or not applicable.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   futurePrice?: CanCreateResultFuturePriceInfo[];
 
   /**
    * Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   coTermDates?: CoTermDateEligibilityResult[];
 }
 
@@ -403,7 +398,7 @@ model CanCreateResultAddOnInfo {
    * AddOn eligibility constraints.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   eligibilityConstraints?: EligibilityConstraint[];
 }
 
@@ -450,7 +445,7 @@ model CanCreateResultPromotionInfo {
    * Promotion eligibility constraints.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   eligibilityConstraints?: EligibilityConstraint[];
 }
 
@@ -480,14 +475,13 @@ model CanCreateResultFuturePriceInfo {
    * List of qualifying resources for the future price concession
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   qualifyingResources?: CanCreateResultFuturePriceQualifyingResource[];
 
   /**
    * Types of future price concession. E.g. FuturePriceNotToExceedCap, PercentageDiscount
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   futurePriceConcessionTypes?: string[];
 
   /**
@@ -626,7 +620,7 @@ model CanUpdateResultAdditionalInfo {
    * Additional detail when request payload failed coTerm constraints. Null when constraints passed or not applicable. Relevant scenarios: coterm, scheduled conversion with coterm.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   coTermDates?: CoTermDateEligibilityResult[];
 }
 
@@ -644,7 +638,7 @@ model RefundableQuantityResult {
    * Batches of refundable quantity with their respective refund window end date.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   refundableQuantities?: RefundableQuantityResultRefundableQuantitiesInfo[];
 }
 
@@ -674,7 +668,7 @@ model GetRefundableQuantityResponse {
    * List of refundable quantity information with event details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   refundableQuantities?: GetRefundableQuantityInfo[];
 
   /**
@@ -864,13 +858,13 @@ model SeatBasedResourceProperties {
   /**
    * Resource tokens for various authorization and context purposes.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   resourceTokens?: ResourceToken[];
 
   /**
    * Schedule actions for future terms and changes
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scheduleActions?: ScheduleAction[];
 }
 
@@ -892,7 +886,7 @@ model MergeSourceSeatBasedResource {
   /**
    * Resource tokens for various authorization and context purposes (for merge source).
    */
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   resourceTokens?: ResourceToken[];
 }
 
@@ -966,7 +960,7 @@ model ScheduleAction {
   /**
    * Resource tokens for various authorization and context purposes.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   resourceTokens?: ResourceToken[];
 }
 
@@ -1150,6 +1144,6 @@ model ProposalResponse {
    * List of line items in the proposal.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lineItems?: ProposalLineItem[];
 }
