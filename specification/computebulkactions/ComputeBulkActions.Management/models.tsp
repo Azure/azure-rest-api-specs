@@ -255,7 +255,7 @@ model LaunchBulkInstancesOperation
   @doc("The ID of the LaunchBulkInstancesOperation")
   @key("launchBulkInstancesOperationID")
   @segment("launchBulkInstancesOperations")
-  @pattern("^[^_\\W][\\w\\-._]{0,79}(?<![-.])$")
+  @pattern("^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$")
   @path
   name: string;
 

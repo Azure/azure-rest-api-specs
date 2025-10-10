@@ -101,7 +101,7 @@
             "description": "The ID of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -146,7 +146,7 @@
             "description": "The ID of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "resource",
@@ -206,7 +206,7 @@
             "description": "The ID of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -253,7 +253,7 @@
             "description": "The ID of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           }
         ],
         "responses": {
@@ -2947,16 +2947,6 @@
           "type": "boolean",
           "description": "Indicates whether the extension should be automatically upgraded by the platform if there is a newer version of the extension available."
         },
-        "settings": {
-          "type": "object",
-          "description": "JSON formatted public settings for the extension.",
-          "additionalProperties": {}
-        },
-        "protectedSettings": {
-          "type": "object",
-          "description": "The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.",
-          "additionalProperties": {}
-        },
         "suppressFailures": {
           "type": "boolean",
           "description": "Indicates whether failures stemming from the extension will be suppressed (Operational failures such as not connecting to the VM will not be suppressed regardless of this value). The default is false."
@@ -3020,13 +3010,6 @@
         "properties": {
           "$ref": "#/definitions/VirtualMachineNetworkInterfaceConfigurationProperties",
           "description": "Describes a virtual machine network profile's IP configuration."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags applied to the networkInterface address created by this NetworkInterfaceConfiguration",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
@@ -3242,13 +3225,6 @@
         "sku": {
           "$ref": "#/definitions/PublicIPAddressSku",
           "description": "Describes the public IP Sku. It can only be set with OrchestrationMode as Flexible."
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags applied to the publicIP address created by this PublicIPAddressConfiguration",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       },
       "required": [
