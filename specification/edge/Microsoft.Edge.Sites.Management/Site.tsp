@@ -53,13 +53,11 @@ interface SitesBySubscription {
   delete is Extension.DeleteSync<Extension.Subscription, Site>;
 }
 
-/** A service group */
-@tenantResource
-model ServiceGroup
-  is Extension.ExternalResource<
+alias ServiceGroup = Extension.ExternalResource<
     "Microsoft.Management",
     "serviceGroups",
-    "servicegroupName"
+    "servicegroupName",
+    ParentType = "Tenant"
   >;
 
 @armResourceOperations(#{ omitTags: true })
