@@ -9978,6 +9978,14 @@
       "description": "RAI External SafetyProvider schema properties.",
       "type": "object",
       "properties": {
+        "providerId": {
+          "type": "string",
+          "description": "The unique identifier of the safety provider."
+        },
+        "providerName": {
+          "type": "string",
+          "description": "Name of the safety provider."
+        },
         "mode": {
           "type": "string",
           "description": "Safety provider mode sync/async."
@@ -9999,6 +10007,18 @@
           "type": "string",
           "format": "uri",
           "description": "The Key Vault URI that contains the api key for safety provider urls."
+        },
+        "createdAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Creation time of the safety provider.",
+          "readOnly": true
+        },
+        "lastModifiedAt": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Last modified time of the safety provider.",
+          "readOnly": true
         }
       }
     },
