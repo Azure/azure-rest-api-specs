@@ -12,29 +12,29 @@ using Microsoft.DurableTask;
 @@clientName(Microsoft.DurableTask, "DurableTaskManagementClient", "java");
 
 // csharp
-@@clientName(Scheduler, "DurableTaskScheduler", "csharp");
-@@clientName(SchedulerProperties, "DurableTaskSchedulerProperties", "csharp");
-@@clientName(TaskHub, "DurableTaskHub", "csharp");
-@@clientName(TaskHubProperties, "DurableTaskHubProperties", "csharp");
-@@clientName(ProvisioningState, "DurableTaskProvisioningState", "csharp");
-@@clientName(SchedulerUpdate, "DurableTaskSchedulerPatch", "csharp");
+@@clientName(Scheduler, "Scheduler", "csharp");
+@@clientName(SchedulerProperties, "SchedulerProperties", "csharp");
+@@clientName(TaskHub, "TaskHub", "csharp");
+@@clientName(TaskHubProperties, "TaskHubProperties", "csharp");
+@@clientName(ProvisioningState, "ProvisioningState", "csharp");
+@@clientName(SchedulerUpdate, "SchedulerPatch", "csharp");
 @@clientName(SchedulerPropertiesUpdate,
-  "DurableTaskSchedulerPatchProperties",
+  "SchedulerPatchProperties",
   "csharp"
 );
-@@clientName(SchedulerSku, "DurableTaskSchedulerSku", "csharp");
-@@clientName(SchedulerSkuUpdate, "DurableTaskSchedulerSkuUpdate", "csharp");
-@@clientName(RedundancyState, "DurableTaskResourceRedundancyState", "csharp");
+@@clientName(SchedulerSku, "SchedulerSku", "csharp");
+@@clientName(SchedulerSkuUpdate, "SchedulerSkuUpdate", "csharp");
+@@clientName(RedundancyState, "SchedulerRedundancyState", "csharp");
 @@clientName(PurgeableOrchestrationState,
-  "DurableTaskPurgeableOrchestrationState",
+  "PurgeableOrchestrationState",
   "csharp"
 );
 @@clientName(RetentionPolicyDetails,
-  "DurableTaskRetentionPolicyDetails",
+  "RetentionPolicyDetails",
   "csharp"
 );
-@@clientName(RetentionPolicy, "DurableTaskRetentionPolicy", "csharp");
+@@clientName(RetentionPolicy, "RetentionPolicy", "csharp");
 @@clientName(RetentionPolicyProperties,
-  "DurableTaskRetentionPolicyProperties",
+  "RetentionPolicyProperties",
   "csharp"
 );
