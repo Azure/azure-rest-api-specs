@@ -26,8 +26,8 @@ See [aka.ms/azsdk/spec-dirs](https://aka.ms/azsdk/spec-dirs).
 
 These examples provide a starting point for how a library should be structured, as well as the expected options that libraries should use:
 
-* Data plane: [https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/data-plane/WidgetAnalytics](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/data-plane/WidgetAnalytics)
-* Management plane (ARM): [https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/resource-manager/Microsoft.Widget/Widget](https://github.com/Azure/azure-rest-api-specs/tree/main/specification/widget/resource-manager/Microsoft.Widget/Widget)
+* Data plane: [https://aka.ms/azsdk/tspconfig-sample-dpg](https://aka.ms/azsdk/tspconfig-sample-dpg)
+* Management plane (ARM): [https://aka.ms/azsdk/tspconfig-sample-mpg](https://aka.ms/azsdk/tspconfig-sample-mpg)
 
 ## Next steps
 
