@@ -276,7 +276,7 @@ interface StacItems {
    *
    * Every feature in a dataset belongs to a collection. A dataset may
    * consist of multiple feature collections. A feature collection is often a
-   * collection of features of a similar type, based on a common schema.")
+   * collection of features of a similar type, based on a common schema.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @route("/stac/collections/{collectionId}/items")
