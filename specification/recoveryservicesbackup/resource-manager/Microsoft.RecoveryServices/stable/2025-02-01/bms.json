@@ -134,6 +134,72 @@
     },
     {
       "name": "ResourceGuardProxies"
+    },
+    {
+      "name": "ProtectionIntent"
+    },
+    {
+      "name": "BackupStatus"
+    },
+    {
+      "name": "FeatureSupport"
+    },
+    {
+      "name": "BackupProtectionIntent"
+    },
+    {
+      "name": "BackupUsageSummaries"
+    },
+    {
+      "name": "Jobs"
+    },
+    {
+      "name": "BackupProtectedItems"
+    },
+    {
+      "name": "Operation"
+    },
+    {
+      "name": "ValidateOperation"
+    },
+    {
+      "name": "ValidateOperationResults"
+    },
+    {
+      "name": "ValidateOperationStatuses"
+    },
+    {
+      "name": "ProtectionContainerRefreshOperationResults"
+    },
+    {
+      "name": "ProtectableContainers"
+    },
+    {
+      "name": "BackupOperationResults"
+    },
+    {
+      "name": "BackupOperationStatuses"
+    },
+    {
+      "name": "BackupProtectableItems"
+    },
+    {
+      "name": "BackupProtectionContainers"
+    },
+    {
+      "name": "SoftDeletedContainers"
+    },
+    {
+      "name": "SecurityPINs"
+    },
+    {
+      "name": "FetchTieringCost"
+    },
+    {
+      "name": "GetTieringCostOperationResult"
+    },
+    {
+      "name": "TieringCostOperationStatus"
     }
   ],
   "paths": {
@@ -176,6 +242,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection": {
       "post": {
         "operationId": "ProtectionIntent_Validate",
+        "tags": [
+          "ProtectionIntent"
+        ],
         "summary": "It will validate followings\n1. Vault capacity\n2. VM is already protected\n3. Any VM related configuration passed in properties.",
         "description": "It will validate followings\n1. Vault capacity\n2. VM is already protected\n3. Any VM related configuration passed in properties.",
         "parameters": [
@@ -226,6 +295,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupStatus": {
       "post": {
         "operationId": "BackupStatus_Get",
+        "tags": [
+          "BackupStatus"
+        ],
         "summary": "Get the container backup status",
         "description": "Get the container backup status",
         "parameters": [
@@ -276,6 +348,9 @@
     "/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupValidateFeatures": {
       "post": {
         "operationId": "FeatureSupport_Validate",
+        "tags": [
+          "FeatureSupport"
+        ],
         "summary": "It will validate if given feature with resource properties is supported in service",
         "description": "It will validate if given feature with resource properties is supported in service",
         "parameters": [
@@ -326,6 +401,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDeletedProtectionContainers": {
       "get": {
         "operationId": "DeletedProtectionContainers_List",
+        "tags": [
+          "SoftDeletedContainers"
+        ],
         "description": "Lists the soft deleted containers registered to Recovery Services Vault.",
         "parameters": [
           {
@@ -787,6 +865,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}": {
       "get": {
         "operationId": "ProtectionContainerRefreshOperationResults_Get",
+        "tags": [
+          "ProtectionContainerRefreshOperationResults"
+        ],
         "description": "Provides the result of the refresh operation triggered by the BeginRefresh operation.",
         "parameters": [
           {
@@ -844,6 +925,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers": {
       "get": {
         "operationId": "ProtectableContainers_List",
+        "tags": [
+          "ProtectableContainers"
+        ],
         "description": "Lists the containers that can be registered to Recovery Services Vault.",
         "parameters": [
           {
@@ -2377,6 +2461,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers": {
       "post": {
         "operationId": "ProtectionContainers_Refresh",
+        "tags": [
+          "ProtectionContainers"
+        ],
         "description": "Discovers all the containers in the subscription that can be backed up to Recovery Services Vault. This is an\nasynchronous operation. To know the status of the operation, call GetRefreshOperationResult API.",
         "parameters": [
           {
@@ -2725,6 +2812,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport": {
       "post": {
         "operationId": "Jobs_Export",
+        "tags": [
+          "Jobs"
+        ],
         "description": "Triggers export of jobs specified by filters and returns an OperationID to track.",
         "parameters": [
           {
@@ -2772,6 +2862,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}": {
       "get": {
         "operationId": "BackupOperationResults_Get",
+        "tags": [
+          "BackupOperationResults"
+        ],
         "description": "Provides the status of the delete operations such as deleting backed up item. Once the operation has started, the\nstatus code in the response would be Accepted. It will continue to be in this state till it reaches completion. On\nsuccessful completion, the status code will be OK. This method expects OperationID as an argument. OperationID is\npart of the Location header of the operation response.",
         "parameters": [
           {
@@ -2825,6 +2918,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}": {
       "get": {
         "operationId": "BackupOperationStatuses_Get",
+        "tags": [
+          "BackupOperationStatuses"
+        ],
         "description": "Fetches the status of an operation such as triggering a backup, restore. The status can be in progress, completed\nor failed. You can refer to the OperationStatus enum for all the possible states of an operation. Some operations\ncreate jobs. This method returns the list of jobs when the operation is complete.",
         "parameters": [
           {
@@ -3272,6 +3368,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems": {
       "get": {
         "operationId": "BackupProtectableItems_List",
+        "tags": [
+          "BackupProtectableItems"
+        ],
         "description": "Provides a pageable list of protectable objects within your subscription according to the query filter and the\npagination parameters.",
         "parameters": [
           {
@@ -3332,6 +3431,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems": {
       "get": {
         "operationId": "BackupProtectedItems_List",
+        "tags": [
+          "BackupProtectedItems"
+        ],
         "description": "Provides a pageable list of all items that are backed up within a vault.",
         "parameters": [
           {
@@ -3392,6 +3494,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionContainers": {
       "get": {
         "operationId": "BackupProtectionContainers_List",
+        "tags": [
+          "BackupProtectionContainers"
+        ],
         "description": "Lists the containers registered to Recovery Services Vault.",
         "parameters": [
           {
@@ -3445,6 +3550,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionIntents": {
       "get": {
         "operationId": "BackupProtectionIntent_List",
+        "tags": [
+          "BackupProtectionIntent"
+        ],
         "description": "Provides a pageable list of all intents that are present within a vault.",
         "parameters": [
           {
@@ -3780,6 +3888,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSecurityPIN": {
       "post": {
         "operationId": "SecurityPINs_Get",
+        "tags": [
+          "SecurityPINs"
+        ],
         "description": "Get the security PIN.",
         "parameters": [
           {
@@ -3838,6 +3949,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/fetchTieringCost": {
       "post": {
         "operationId": "FetchTieringCost_Post",
+        "tags": [
+          "FetchTieringCost"
+        ],
         "description": "Provides the details of the tiering related sizes and cost.\nStatus of the operation can be fetched using GetTieringCostOperationStatus API and result using GetTieringCostOperationResult API.",
         "parameters": [
           {
@@ -3921,6 +4035,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationResults/{operationId}": {
       "get": {
         "operationId": "GetTieringCostOperationResult_Get",
+        "tags": [
+          "GetTieringCostOperationResult"
+        ],
         "description": "Gets the result of async operation for tiering cost",
         "parameters": [
           {
@@ -3973,6 +4090,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationsStatus/{operationId}": {
       "get": {
         "operationId": "TieringCostOperationStatus_Get",
+        "tags": [
+          "TieringCostOperationStatus"
+        ],
         "description": "Gets the status of async operations of tiering cost",
         "parameters": [
           {
@@ -4025,6 +4145,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTriggerValidateOperation": {
       "post": {
         "operationId": "ValidateOperation_Trigger",
+        "tags": [
+          "ValidateOperation"
+        ],
         "description": "Validate operation for specified backed up item in the form of an asynchronous operation. Returns tracking headers which can be tracked using GetValidateOperationResult API.",
         "parameters": [
           {
@@ -4089,6 +4212,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries": {
       "get": {
         "operationId": "BackupUsageSummaries_List",
+        "tags": [
+          "BackupUsageSummaries"
+        ],
         "description": "Fetches the backup management usage summaries of the vault.",
         "parameters": [
           {
@@ -4152,6 +4278,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperation": {
       "post": {
         "operationId": "Operation_Validate",
+        "tags": [
+          "Operation"
+        ],
         "description": "Validate operation for specified backed up item. This is a synchronous operation.",
         "parameters": [
           {
@@ -4207,6 +4336,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationResults/{operationId}": {
       "get": {
         "operationId": "ValidateOperationResults_Get",
+        "tags": [
+          "ValidateOperationResults"
+        ],
         "description": "Fetches the result of a triggered validate operation.",
         "parameters": [
           {
@@ -4260,6 +4392,9 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationsStatuses/{operationId}": {
       "get": {
         "operationId": "ValidateOperationStatuses_Get",
+        "tags": [
+          "ValidateOperationStatuses"
+        ],
         "description": "Fetches the status of a triggered validate operation. The status can be in progress, completed\nor failed. You can refer to the OperationStatus enum for all the possible states of the operation.\nIf operation has completed, this method returns the list of errors obtained while validating the operation.",
         "parameters": [
           {

@@ -410,7 +410,12 @@ export class TspConfigGoModuleMatchPatternSubRule extends TspconfigEmitterOption
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
     const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) return { success: false };
+    if (module === undefined && containingModule === undefined) {
+      return this.createFailedResult(
+        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
+        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+      );
+    }
     if (module === undefined) return { success: true };
     return super.validate(config);
   }
@@ -427,7 +432,12 @@ export class TspConfigGoContainingModuleMatchPatternSubRule extends TspconfigEmi
   protected validate(config: any): RuleResult {
     const module = config?.options?.[this.emitterName]?.["module"];
     const containingModule = config?.options?.[this.emitterName]?.["containing-module"];
-    if (module === undefined && containingModule === undefined) return { success: false };
+    if (module === undefined && containingModule === undefined) {
+      return this.createFailedResult(
+        `Neither "options.${this.emitterName}.module" nor "options.${this.emitterName}.containing-module" is defined`,
+        `Please add either "options.${this.emitterName}.module" or "options.${this.emitterName}.containing-module" with a value matching the pattern "${this.expectedValue}"`,
+      );
+    }
     if (containingModule === undefined) return { success: true };
     return super.validate(config);
   }
