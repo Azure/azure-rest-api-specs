@@ -1549,6 +1549,7 @@ model InboundNATRuleProperties {
 @doc("Inbound nat rule properties")
 model InboundNATRule {
   @doc("name of the inbound nat rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
@@ -1611,6 +1612,7 @@ model NatGatewayStatusProvisioningStatus {
 @doc("FrontendIP Configuration object for a load balancer.")
 model FrontendIPConfiguration {
   @doc("name for the frontend IP configuration.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
@@ -1656,6 +1658,7 @@ model BackendAddressPoolProperties {
 @doc("Backend address pool for the load balancer.")
 model BackendAddressPool {
   @doc("name of the backend pool.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
@@ -1694,11 +1697,11 @@ model LoadBalancerBackendAddressProperties {
 @doc("LoadBalancer Backend Address")
 model LoadBalancerBackendAddress {
   @doc("name of the backend address")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("backend address properties")
-  @visibility(Lifecycle.Read)
   properties: LoadBalancerBackendAddressProperties;
 }
 
@@ -1735,6 +1738,7 @@ model LoadBalancerRuleProperties {
 @doc("LoadBalancer Rules")
 model LoadBalancerRule {
   @doc("name of the load balancer rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
@@ -1765,6 +1769,7 @@ model ProbeProperties {
 @doc("Load balancer health probes")
 model Probe {
   @doc("name of the load balancer health probe")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
   @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 

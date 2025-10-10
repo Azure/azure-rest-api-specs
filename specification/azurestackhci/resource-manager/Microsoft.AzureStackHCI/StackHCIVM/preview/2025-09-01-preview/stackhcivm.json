@@ -5620,7 +5620,11 @@
         "name": {
           "type": "string",
           "description": "name of the backend pool.",
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/BackendAddressPoolProperties",
@@ -5911,7 +5915,11 @@
         "name": {
           "type": "string",
           "description": "name for the frontend IP configuration.",
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/FrontendIPConfigurationProperties",
@@ -6692,7 +6700,11 @@
         "name": {
           "type": "string",
           "description": "name of the inbound nat rule",
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/InboundNATRuleProperties",
@@ -6854,12 +6866,15 @@
         "name": {
           "type": "string",
           "description": "name of the backend address",
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/LoadBalancerBackendAddressProperties",
-          "description": "backend address properties",
-          "readOnly": true
+          "description": "backend address properties"
         }
       },
       "required": [
@@ -7063,7 +7078,11 @@
         "name": {
           "type": "string",
           "description": "name of the load balancer rule",
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/LoadBalancerRuleProperties",
@@ -8244,7 +8263,11 @@
         "name": {
           "type": "string",
           "description": "name of the load balancer health probe",
-          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$"
+          "pattern": "^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         },
         "properties": {
           "$ref": "#/definitions/ProbeProperties",
