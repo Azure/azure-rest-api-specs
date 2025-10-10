@@ -20,7 +20,7 @@ output-folder: $(azureresourceschema-folder)/schemas
 
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.TestBase/preview/2020-12-16-preview/testbase.json
+  - Microsoft.TestBase/TestBase/preview/2020-12-16-preview/testbase.json
 ```
 
 ### Tag: schema-testbase-2022-04-01-preview and azureresourceschema
@@ -29,7 +29,7 @@ input-file:
 output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.TestBase/preview/2022-04-01-preview/testbase.json
+  - Microsoft.TestBase/TestBase/preview/2022-04-01-preview/testbase.json
 ```
 
 ### Tag: schema-testbase-2023-11-01-preview and azureresourceschema
@@ -37,10 +37,10 @@ input-file:
 output-folder: $(azureresourceschema-folder)/schemas
 # all the input files in this apiVersion
 input-file:
-  - Microsoft.TestBase/preview/2023-11-01-preview/testbase.json
-  - Microsoft.TestBase/preview/2023-11-01-preview/chat.json
-  - Microsoft.TestBase/preview/2023-11-01-preview/draftpackage.json
-  - Microsoft.TestBase/preview/2023-11-01-preview/actionrequest.json
-  - Microsoft.TestBase/preview/2023-11-01-preview/customimage.json
-  - Microsoft.TestBase/preview/2023-11-01-preview/credential.json
+  - Microsoft.TestBase/TestBase/preview/2023-11-01-preview/testbase.json
+  - Microsoft.TestBase/TestBase/preview/2023-11-01-preview/chat.json
+  - Microsoft.TestBase/TestBase/preview/2023-11-01-preview/draftpackage.json
+  - Microsoft.TestBase/TestBase/preview/2023-11-01-preview/actionrequest.json
+  - Microsoft.TestBase/TestBase/preview/2023-11-01-preview/customimage.json
+  - Microsoft.TestBase/TestBase/preview/2023-11-01-preview/credential.json
 ```
