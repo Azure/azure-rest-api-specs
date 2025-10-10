@@ -159,6 +159,11 @@ directive:
     - $.definitions.InheritedProjectCatalogSettings.properties.defaultValues
     suppress:
       - AvoidAdditionalProperties
+
+  - where:
+    - $.definitions["Azure.Core.uuid"].format
+    suppress: 
+      - GuidUsage
 ```
 
 ### Tag: package-preview-2025-10-01-preview
