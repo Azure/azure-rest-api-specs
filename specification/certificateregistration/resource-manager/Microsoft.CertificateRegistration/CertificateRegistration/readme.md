@@ -51,10 +51,7 @@ These settings apply only when `--tag=package-2024-11` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-11'
 input-file:
-  - stable/2024-11-01/AppServiceCertificateOrders.json
-  - stable/2024-11-01/CertificateOrdersDiagnostics.json
-  - stable/2024-11-01/CertificateRegistrationProvider.json
-  - stable/2024-11-01/CommonDefinitions.json
+  - stable/2024-11-01/openapi.json
 ```
 
 ### Tag: package-2024-04
