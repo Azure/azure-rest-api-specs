@@ -4,6 +4,11 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using PaloAltoNetworks.Cloudngfw;
 
+@@clientName(PaloAltoNetworks.Cloudngfw,
+  "PaloAltoNetworksNgfwMgmtClient",
+  "python"
+);
+
 // Java
 @@clientName(SupportInfo.helpURL, "helpUrl", "java");
 @@clientName(SupportInfo.supportURL, "supportUrl", "java");

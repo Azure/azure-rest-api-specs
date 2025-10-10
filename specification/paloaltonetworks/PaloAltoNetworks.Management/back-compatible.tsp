@@ -276,10 +276,12 @@ using PaloAltoNetworks.Cloudngfw;
 @@clientName(AdvSecurityObjectModel, "advSecurityObjectModel");
 
 @@clientName(AzureResourceManagerManagedIdentityProperties,
-  "Azure.ResourceManager.ManagedIdentityProperties"
+  "Azure.ResourceManager.ManagedIdentityProperties",
+  "!python"
 );
 @@clientName(AzureResourceManagerUserAssignedIdentity,
-  "Azure.ResourceManager.UserAssignedIdentity"
+  "Azure.ResourceManager.UserAssignedIdentity",
+  "!python"
 );
 
 @@visibility(CertificateObjectGlobalRulestackResource.properties,
