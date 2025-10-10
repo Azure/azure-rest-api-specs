@@ -202,66 +202,87 @@ union ConversationPiiCategories {
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Driver's license number category */
   DriversLicenseNumber: "DriversLicenseNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Passport number category */
   PassportNumber: "PassportNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Person type category */
   PersonType: "PersonType",
 
+  @added(Versions.v2025_11_15_preview)
   /** Organization category */
   Organization: "Organization",
 
+  @added(Versions.v2025_11_15_preview)
   /** ABA routing number category */
   ABARoutingNumber: "ABARoutingNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Bank account number category */
   BankAccountNumber: "BankAccountNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Date of birth category */
   DateOfBirth: "DateOfBirth",
 
+  @added(Versions.v2025_11_15_preview)
   /** International Bank Account Number category */
   IBAN: "IBAN",
 
+  @added(Versions.v2025_11_15_preview)
   /** SWIFT code category */
   SWIFTCode: "SWIFTCode",
 
+  @added(Versions.v2025_11_15_preview)
   /** Vehicle identification number category */
   VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Age category */
   Age: "Age",
 
+  @added(Versions.v2025_11_15_preview)
   /** Date category */
   Date: "Date",
 
+  @added(Versions.v2025_11_15_preview)
   /** Zip code category */
   ZipCode: "ZipCode",
 
+  @added(Versions.v2025_11_15_preview)
   /** Government issued ID category */
   GovernmentIssuedId: "GovernmentIssuedId",
 
+  @added(Versions.v2025_11_15_preview)
   /** Card verification value category */
   CVV: "CardVerificationValue",
 
+  @added(Versions.v2025_11_15_preview)
   /** Health card number category */
   HealthCardNumber: "HealthCardNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Social insurance number category */
   SocialInsuranceNumber: "SocialInsuranceNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Medicare beneficiary ID category */
   MedicareBeneficiaryId: "MedicareBeneficiaryId",
 
+  @added(Versions.v2025_11_15_preview)
   /** Github account category */
   GithubAccount: "GithubAccount",
 
+  @added(Versions.v2025_11_15_preview)
   /** Location category */
   Location: "Location",
 
+  @added(Versions.v2025_11_15_preview)
   /** GPE category */
   GPE: "GPE",
 
@@ -298,66 +319,87 @@ union ConversationPiiCategoriesExclude {
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Driver's license number category */
   DriversLicenseNumber: "DriversLicenseNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Passport number category */
   PassportNumber: "PassportNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Person type category */
   PersonType: "PersonType",
 
+  @added(Versions.v2025_11_15_preview)
   /** Organization category */
   Organization: "Organization",
 
+  @added(Versions.v2025_11_15_preview)
   /** ABA routing number category */
   ABARoutingNumber: "ABARoutingNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Bank account number category */
   BankAccountNumber: "BankAccountNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Date of birth category */
   DateOfBirth: "DateOfBirth",
 
+  @added(Versions.v2025_11_15_preview)
   /** International Bank Account Number category */
   IBAN: "IBAN",
 
+  @added(Versions.v2025_11_15_preview)
   /** SWIFT code category */
   SWIFTCode: "SWIFTCode",
 
+  @added(Versions.v2025_11_15_preview)
   /** Vehicle identification number category */
   VehicleIdentificationNumber: "VehicleIdentificationNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Age category */
   Age: "Age",
 
+  @added(Versions.v2025_11_15_preview)
   /** Date category */
   Date: "Date",
 
+  @added(Versions.v2025_11_15_preview)
   /** Zip code category */
   ZipCode: "ZipCode",
 
+  @added(Versions.v2025_11_15_preview)
   /** Government issued ID category */
   GovernmentIssuedId: "GovernmentIssuedId",
 
+  @added(Versions.v2025_11_15_preview)
   /** Card verification value category */
   CVV: "CardVerificationValue",
 
+  @added(Versions.v2025_11_15_preview)
   /** Health card number category */
   HealthCardNumber: "HealthCardNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Social insurance number category */
   SocialInsuranceNumber: "SocialInsuranceNumber",
 
+  @added(Versions.v2025_11_15_preview)
   /** Medicare beneficiary ID category */
   MedicareBeneficiaryId: "MedicareBeneficiaryId",
 
+  @added(Versions.v2025_11_15_preview)
   /** Github account category */
   GithubAccount: "GithubAccount",
 
+  @added(Versions.v2025_11_15_preview)
   /** Location category */
   Location: "Location",
 
+  @added(Versions.v2025_11_15_preview)
   /** GPE category */
   GPE: "GPE",
 }
