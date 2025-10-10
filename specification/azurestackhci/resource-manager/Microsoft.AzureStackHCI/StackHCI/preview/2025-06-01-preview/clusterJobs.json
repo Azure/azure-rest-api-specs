@@ -194,6 +194,9 @@
         "x-ms-examples": {
           "ClusterJobs_CreateOrUpdate_ConfigureArcGateway": {
             "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureArcGateway.json"
+          },
+          "ClusterJobs_CreateOrUpdate_ConfigureCVM": {
+            "$ref": "./examples/ClusterJobs_CreateOrUpdate_ConfigureCVM.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -377,7 +380,8 @@
       "type": "string",
       "description": "ClusterJob Type supported.",
       "enum": [
-        "ConfigureArcGateway"
+        "ConfigureArcGateway",
+        "ConfigureCVM"
       ],
       "x-ms-enum": {
         "name": "HciJobType",
@@ -387,6 +391,11 @@
             "name": "ConfigureArcGateway",
             "value": "ConfigureArcGateway",
             "description": "Job to configure arc gateway for the cluster."
+          },
+          {
+            "name": "ConfigureCVM",
+            "value": "ConfigureCVM",
+            "description": "Job to configure cvm (Confidential VM) intent for the cluster."
           }
         ]
       }
@@ -446,6 +455,16 @@
         }
       ],
       "x-ms-discriminator-value": "ConfigureArcGateway"
+    },
+    "HciConfigureCVMJobProperties": {
+      "type": "object",
+      "description": "Properties for configuring cvm (Confidential VM) intent for the cluster.",
+      "allOf": [
+        {
+          "$ref": "#/definitions/ClusterJobProperties"
+        }
+      ],
+      "x-ms-discriminator-value": "ConfigureCVM"
     },
     "JobReportedProperties": {
       "type": "object",
