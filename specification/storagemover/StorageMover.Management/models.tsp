@@ -1431,4 +1431,3 @@ model ConnectionUpdateParameters {
   /** The status of the Connection. */
   connectionStatus?: ConnectionStatus;
 }
-
