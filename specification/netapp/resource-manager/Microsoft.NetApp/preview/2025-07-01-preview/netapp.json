@@ -11020,33 +11020,11 @@
         "size": {
           "type": "integer",
           "format": "int64",
-          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).",
-          "default": 4398046511104
+          "description": "Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776)."
         },
         "qosType": {
-          "type": "string",
-          "description": "The qos type of the pool",
-          "default": "Auto",
-          "enum": [
-            "Auto",
-            "Manual"
-          ],
-          "x-ms-enum": {
-            "name": "QosType",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Auto",
-                "value": "Auto",
-                "description": "qos type Auto"
-              },
-              {
-                "name": "Manual",
-                "value": "Manual",
-                "description": "qos type Manual"
-              }
-            ]
-          }
+          "$ref": "#/definitions/QosType",
+          "description": "The qos type of the pool"
         },
         "coolAccess": {
           "type": "boolean",
@@ -11203,11 +11181,31 @@
             "create"
           ]
         }
-      },
-      "required": [
-        "size",
-        "serviceLevel"
-      ]
+      }
+    },
+    "QosType": {
+      "type": "string",
+      "description": "The qos type of the pool",
+      "enum": [
+        "Auto",
+        "Manual"
+      ],
+      "x-ms-enum": {
+        "name": "QosType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Auto",
+            "value": "Auto",
+            "description": "qos type Auto"
+          },
+          {
+            "name": "Manual",
+            "value": "Manual",
+            "description": "qos type Manual"
+          }
+        ]
+      }
     },
     "QueryNetworkSiblingSetRequest": {
       "type": "object",
@@ -11772,6 +11770,48 @@
           "description": "Displays the total bytes transferred",
           "readOnly": true
         }
+      }
+    },
+    "ServiceLevel": {
+      "type": "string",
+      "description": "The service level of the file system",
+      "enum": [
+        "Standard",
+        "Premium",
+        "Ultra",
+        "StandardZRS",
+        "Flexible"
+      ],
+      "x-ms-enum": {
+        "name": "ServiceLevel",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Standard",
+            "value": "Standard",
+            "description": "Standard service level"
+          },
+          {
+            "name": "Premium",
+            "value": "Premium",
+            "description": "Premium service level"
+          },
+          {
+            "name": "Ultra",
+            "value": "Ultra",
+            "description": "Ultra service level"
+          },
+          {
+            "name": "StandardZRS",
+            "value": "StandardZRS",
+            "description": "Zone redundant storage service level. This will be deprecated soon."
+          },
+          {
+            "name": "Flexible",
+            "value": "Flexible",
+            "description": "Flexible service level"
+          }
+        ]
       }
     },
     "ServiceSpecification": {
@@ -13282,53 +13322,13 @@
       "description": "Patchable volume properties",
       "properties": {
         "serviceLevel": {
-          "type": "string",
-          "description": "The service level of the file system",
-          "default": "Premium",
-          "enum": [
-            "Standard",
-            "Premium",
-            "Ultra",
-            "StandardZRS",
-            "Flexible"
-          ],
-          "x-ms-enum": {
-            "name": "ServiceLevel",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "Standard",
-                "value": "Standard",
-                "description": "Standard service level"
-              },
-              {
-                "name": "Premium",
-                "value": "Premium",
-                "description": "Premium service level"
-              },
-              {
-                "name": "Ultra",
-                "value": "Ultra",
-                "description": "Ultra service level"
-              },
-              {
-                "name": "StandardZRS",
-                "value": "StandardZRS",
-                "description": "Zone redundant storage service level. This will be deprecated soon."
-              },
-              {
-                "name": "Flexible",
-                "value": "Flexible",
-                "description": "Flexible service level"
-              }
-            ]
-          }
+          "$ref": "#/definitions/ServiceLevel",
+          "description": "The service level of the file system"
         },
         "usageThreshold": {
           "type": "integer",
           "format": "int64",
           "description": "Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.",
-          "default": 107374182400,
           "minimum": 53687091200,
           "maximum": 2638827906662400
         },
@@ -13354,20 +13354,17 @@
         },
         "isDefaultQuotaEnabled": {
           "type": "boolean",
-          "description": "Specifies if default quota is enabled for the volume.",
-          "default": false
+          "description": "Specifies if default quota is enabled for the volume."
         },
         "defaultUserQuotaInKiBs": {
           "type": "integer",
           "format": "int64",
-          "description": "Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .",
-          "default": 0
+          "description": "Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies ."
         },
         "defaultGroupQuotaInKiBs": {
           "type": "integer",
           "format": "int64",
-          "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.",
-          "default": 0
+          "description": "Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies."
         },
         "unixPermissions": {
           "$ref": "#/definitions/UnixPermissions",
@@ -14036,7 +14033,6 @@
       },
       "required": [
         "creationToken",
-        "usageThreshold",
         "subnetId"
       ]
     },

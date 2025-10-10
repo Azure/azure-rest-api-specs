@@ -47,12 +47,12 @@ model PoolProperties {
   /**
    * Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).
    */
-  size: int64 = 4398046511104;
+  size?: int64 = 4398046511104;
 
   /**
    * The service level of the file system
    */
-  serviceLevel: ServiceLevel = ServiceLevel.Premium;
+  serviceLevel?: ServiceLevel = ServiceLevel.Premium;
 
   /**
    * Azure lifecycle management
@@ -143,12 +143,12 @@ model PoolPatchProperties {
   /**
    * Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).
    */
-  size?: int64 = 4398046511104;
+  size?: int64;
 
   /**
    * The qos type of the pool
    */
-  qosType?: QosType = QosType.Auto;
+  qosType?: QosType;
 
   /**
    * If enabled (true) the pool can contain cool Access enabled volumes.

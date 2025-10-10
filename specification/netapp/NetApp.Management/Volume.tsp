@@ -68,7 +68,7 @@ model VolumeProperties {
    */
   @maxValue(2638827906662400)
   @minValue(53687091200)
-  usageThreshold: int64 = 107374182400;
+  usageThreshold?: int64 = 107374182400;
 
   /**
    * Set of export policy rules
@@ -1199,14 +1199,14 @@ model VolumePatchProperties {
   /**
    * The service level of the file system
    */
-  serviceLevel?: ServiceLevel = ServiceLevel.Premium;
+  serviceLevel?: ServiceLevel;
 
   /**
    * Maximum storage quota allowed for a file system in bytes. This is a soft quota used for alerting only. For regular volumes, valid values are in the range 50GiB to 100TiB. For large volumes, valid values are in the range 100TiB to 500TiB, and on an exceptional basis, from to 2400GiB to 2400TiB. Values expressed in bytes as multiples of 1 GiB.
    */
   @maxValue(2638827906662400)
   @minValue(53687091200)
-  usageThreshold?: int64 = 107374182400;
+  usageThreshold?: int64;
 
   /**
    * Set of export policy rules
@@ -1231,17 +1231,17 @@ model VolumePatchProperties {
   /**
    * Specifies if default quota is enabled for the volume.
    */
-  isDefaultQuotaEnabled?: boolean = false;
+  isDefaultQuotaEnabled?: boolean;
 
   /**
    * Default user quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies .
    */
-  defaultUserQuotaInKiBs?: int64 = 0;
+  defaultUserQuotaInKiBs?: int64;
 
   /**
    * Default group quota for volume in KiBs. If isDefaultQuotaEnabled is set, the minimum value of 4 KiBs applies.
    */
-  defaultGroupQuotaInKiBs?: int64 = 0;
+  defaultGroupQuotaInKiBs?: int64;
 
   /**
    * UNIX permissions for NFS volume accepted in octal 4 digit format. First digit selects the set user ID(4), set group ID (2) and sticky (1) attributes. Second digit selects permission for the owner of the file: read (4), write (2) and execute (1). Third selects permissions for other users in the same group. the fourth for other users not in the group. 0755 - gives read/write/execute permissions to owner and read/execute to group and other users.
