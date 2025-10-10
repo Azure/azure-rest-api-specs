@@ -8,6 +8,7 @@ import "@typespec/rest";
 import "@typespec/versioning";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "./models.tsp";
 
 using Azure.Core;
 using Azure.ResourceManager;
@@ -35,6 +36,10 @@ enum Versions {
   @doc("API Version 2025-03-01.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   `2025-03-01`,
+
+  @doc("API Version 2025-10-01.")
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  `2025-10-01`,
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}

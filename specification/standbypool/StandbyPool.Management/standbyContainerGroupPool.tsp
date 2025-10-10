@@ -59,6 +59,10 @@ model StandbyContainerGroupPoolElasticityProfile {
 
   @doc("Specifies refill policy of the pool.")
   refillPolicy?: RefillPolicy;
+
+  @added(Microsoft.StandbyPool.Versions.`2025-10-01`)
+  @doc("Specifies the dynamic sizing configuration.")
+  dynamicSizing?: DynamicSizing;
 }
 
 @added(Microsoft.StandbyPool.Versions.`2023-12-01-preview`)
