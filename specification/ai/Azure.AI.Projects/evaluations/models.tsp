@@ -421,3 +421,47 @@ model modelResponseGenerationTarget extends EvaluationTarget {
   @doc("Optional parameters passed to the model for evaluation.")
   modelParams: Record<unknown>;
 }
+
+@doc("Message content.")
+@added(Versions.v2025_05_15_preview)
+model Content {
+  @doc("The type of content.")
+  Messages: unknown[];
+}
+
+@doc("Represents the data transfer object for an annotation.")
+@added(Versions.v2025_05_15_preview)
+model AnnotationDTO {
+  @doc("The task associated with the annotation.")
+  AnnotationTask: string;
+
+  @doc("The type of content being annotated.")
+  ContentType: string;
+
+  @doc("A list of user-provided text inputs.")
+  UserTextList: string[];
+
+  @doc("A collection of content objects related to the annotation.")
+  Contents: Content[];
+
+  @doc("A list of metrics associated with the annotation.")
+  MetricList: string[];
+
+  @doc("The version of the prompt used for the annotation.")
+  PromptVersion: string;
+
+  @doc("The user agent information.")
+  UserAgent: string;
+
+  @doc("The partner identifier.")
+  PartnerId: string;
+
+  @doc("The model identifier.")
+  ModelId: string;
+
+  @doc("The type of inference performed.")
+  InferenceType: string;
+
+  @doc("The client request identifier.")
+  ClientRequestId: string;
+}
