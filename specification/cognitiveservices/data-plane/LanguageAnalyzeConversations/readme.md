@@ -13,7 +13,7 @@ The current stable release of Language is 2024-11-01.
 ### Basic Information
 
 ```yaml
-tag: release_2025_05_15_preview
+tag: release_2025_11_15_preview
 add-credentials: true
 clear-output-folder: true
 openapi-type: data-plane
@@ -38,32 +38,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Release 2025-05-15-preview
-
-These settings apply only when `--tag=release_2025_05_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2025-05-15-preview'
-input-file:
-  - preview/2025-05-15-preview/analyzeconversations.json
-title:
-  Microsoft Cognitive Language Service - Conversations
-modelerfour:
-  lenient-model-deduplication: true
-```
-
-### Release 2024-11-15-preview
-
-These settings apply only when `--tag=release_2024_11_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2024-11-15-preview'
-input-file:
-  - preview/2024-11-15-preview/analyzeconversations.json
-title:
-  Microsoft Cognitive Language Service - Conversations
-modelerfour:
-  lenient-model-deduplication: true
-```
-
 ### Release 2024-11-01
 
 These settings apply only when `--tag=release_2024_11_01` is specified on the command line.
@@ -77,32 +51,6 @@ modelerfour:
   lenient-model-deduplication: true
 ```
 
-### Release 2024-05-15-preview
-
-These settings apply only when `--tag=release_2024_05_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2024-05-15-preview'
-input-file:
-  - preview/2024-05-15-preview/analyzeconversations.json
-title:
-  Microsoft Cognitive Language Service - Conversations
-modelerfour:
-  lenient-model-deduplication: true
-suppressions:
-  - code: SecurityDefinitionDescription
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: OperationId
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: GetInOperationName
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: PathParameterSchema
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: EnumInsteadOfBoolean
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: EnumInsteadOfBoolean
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-```
-
 ### Release 2024-05-01
 
 These settings apply only when `--tag=release_2024_05_01` is specified on the command line.
@@ -114,32 +62,6 @@ title:
   Microsoft Cognitive Language Service - Conversations
 modelerfour:
   lenient-model-deduplication: true
-```
-
-### Release 2023-11-15-preview
-
-These settings apply only when `--tag=release_2023_11_15_preview` is specified on the command line.
-
-``` yaml $(tag) == 'release_2023-11-15-preview'
-input-file:
-  - preview/2023-11-15-preview/analyzeconversations.json
-title:
-  Microsoft Cognitive Language Service - Conversations
-modelerfour:
-  lenient-model-deduplication: true
-suppressions:
-  - code: SecurityDefinitionDescription
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: OperationId
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: GetInOperationName
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: PathParameterSchema
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: EnumInsteadOfBoolean
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
-  - code: EnumInsteadOfBoolean
-    reason: Older preview version not generated through typespec. Won't fix. Cleanup stale preview instead.
 ```
 
 ### Release 2023-04-01
