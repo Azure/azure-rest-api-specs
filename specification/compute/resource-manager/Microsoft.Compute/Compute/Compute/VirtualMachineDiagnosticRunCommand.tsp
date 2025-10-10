@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "@typespec/versioning";
@@ -7,6 +8,7 @@ import "./models.tsp";
 import "./VirtualMachine.tsp";
 
 using TypeSpec.Rest;
+using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
@@ -195,6 +197,22 @@ interface VirtualMachineScaleSetVMDiagnosticRunCommands {
     Response = VirtualMachineDiagnosticRunCommandsListResult
   >;
 }
+
+@@clientName(VirtualMachineDiagnosticRunCommands.createOrUpdate::parameters.body,
+  "runCommand"
+);
+
+@@clientName(VirtualMachineDiagnosticRunCommands.update::parameters.body,
+  "runCommand"
+);
+
+@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.createOrUpdate::parameters.body,
+  "runCommand"
+);
+
+@@clientName(VirtualMachineScaleSetVMDiagnosticRunCommands.update::parameters.body,
+  "runCommand"
+);
 
 @@doc(VirtualMachineDiagnosticRunCommand.name,
   "The name of the virtual machine diagnostic run command."
