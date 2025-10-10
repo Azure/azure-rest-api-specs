@@ -26,7 +26,24 @@ These are the global settings for the KeyVault API.
 
 ``` yaml
 openapi-type: data-plane
-tag: package-preview-2025-06-01-preview
+tag: package-preview-2026-01-01-preview
+```
+
+### Tag: package-preview-2026-01-01-preview
+
+These settings apply only when `--tag=package-preview-2026-01-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2026-01-01-preview'
+input-file:
+  - Microsoft.KeyVault/preview/2026-01-01-preview/backuprestore.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/certificates.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/common.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/keys.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/rbac.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/secrets.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/securitydomain.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/settings.json
+  - Microsoft.KeyVault/preview/2026-01-01-preview/storage.json
 ```
 
 ### Tag: package-preview-2025-06-01-preview
@@ -600,4 +617,24 @@ directive:
     from: rbac.json
     where: $..parameters[?(@.name=='scope')]
     reason: Suppress an invalid error caused by a bug in the linter.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.CertificateInfoObject
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.TransferKey
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainObject
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainOperationStatus
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
+  - suppress: MissingTypeObject
+    from: securitydomain.json
+    where: $.definitions.SecurityDomainJsonWebKey
+    reason: The schema is considered an object but without a 'type:object', adding suppression to maintain existing behavior.
 ```
