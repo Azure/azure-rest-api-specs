@@ -55,6 +55,7 @@ namespace Customizations;
   "IngestionSourcesPagedResult",
   "csharp"
 );
+@@clientName(Ingestion, "IngestionConfiguration", "csharp");
 
 // Models ending with "Request" - rename to "Content"
 @@clientName(ImageRequest, "ImageContent", "csharp");
