@@ -24,6 +24,5 @@ namespace Azure.Ai.Speech.BatchTranscription;
 
 @doc("Service API versions.")
 enum ServiceApiVersions {
-  @TypeSpec.Versioning.useDependency(Azure.Core.Versions.v1_0_Preview_2)
   V20251015: "2025-10-15",
 }
