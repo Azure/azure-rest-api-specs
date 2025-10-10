@@ -60,6 +60,6 @@ namespace Azure.AI.Projects {
     v2025_05_15_preview: "2025-05-15-preview",
 
     @doc("Azure AI API version 2025-10-15-preview.")
-    v2025_10_15_preview: "2025-10-15-preview",
+    v2025_11_15_preview: "2025-11-15-preview",
   }
 }
