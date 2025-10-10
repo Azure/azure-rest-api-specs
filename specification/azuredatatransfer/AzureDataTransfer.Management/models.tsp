@@ -1483,8 +1483,7 @@ model Action {
   /**
    * Targets for the action
    */
-  @madeOptional(Versions.v2025_10_10_preview)
-  targets?: string[];
+  targets: string[];
 
   /**
    * Business justification for the action
