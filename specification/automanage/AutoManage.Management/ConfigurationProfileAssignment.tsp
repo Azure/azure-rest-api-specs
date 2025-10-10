@@ -49,56 +49,12 @@ alias ConfigurationProfileAssignmentBySubscriptionOps = Azure.ResourceManager.Le
   }
 >;
 
-alias ConfigurationProfileAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Compute";
-
-    /** The name of the virtual machine. */
-    @path
-    @segment("virtualMachines")
-    @key
-    vmName: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-
-    /** The configuration profile assignment name. */
-    @path
-    @segment("configurationProfileAssignments")
-    @key
-    configurationProfileAssignmentName: string;
-  }
->;
-
-alias ConfigurationProfileAssignmentListOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-
-    /** The configuration profile assignment name. */
-    @path
-    @segment("configurationProfileAssignments")
-    @key
-    configurationProfileAssignmentName: string;
-  }
+alias ConfigurationProfileAssignmentExternalResource = Extension.ExternalResource<
+  "Microsoft.Compute",
+  "virtualMachines",
+  "vmName",
+  NamePattern = "",
+  Description = "The name of the virtual machine."
 >;
 
 @armResourceOperations
@@ -106,33 +62,41 @@ interface ConfigurationProfileAssignments {
   /**
    * Get information about a configuration profile assignment
    */
-  get is ConfigurationProfileAssignmentOps.Read<ConfigurationProfileAssignment>;
+  get is Extension.Read<
+    ConfigurationProfileAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Creates an association between a VM and Automanage configuration profile
    */
-  createOrUpdate is ConfigurationProfileAssignmentOps.CreateOrUpdateSync<ConfigurationProfileAssignment>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    ConfigurationProfileAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Delete a configuration profile assignment
    */
-  delete is ConfigurationProfileAssignmentOps.DeleteSync<ConfigurationProfileAssignment>;
-
-  /**
-   * Get list of configuration profile assignments
-   */
-  @list
-  @get
-  @action("configurationProfileAssignments")
-  list is ArmProviderActionSync<
-    Response = ConfigurationProfileAssignmentList,
-    Scope = Extension.ResourceGroup
+  delete is Extension.DeleteSync<
+    ConfigurationProfileAssignmentExternalResource,
+    ConfigurationProfileAssignment
   >;
 
   /**
    * Get list of configuration profile assignments
    */
-  listByVirtualMachines is ConfigurationProfileAssignmentOps.List<
+  list is Extension.ListByTarget<
+    Extension.ResourceGroup,
+    ConfigurationProfileAssignment,
+    Response = ConfigurationProfileAssignmentList
+  >;
+
+  /**
+   * Get list of configuration profile assignments
+   */
+  listByVirtualMachines is Extension.ListByTarget<
+    ConfigurationProfileAssignmentExternalResource,
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
@@ -140,42 +104,19 @@ interface ConfigurationProfileAssignments {
   /**
    * Get list of configuration profile assignments under a given subscription
    */
-  listBySubscription is ConfigurationProfileAssignmentBySubscriptionOps.List<
+  listBySubscription is Extension.ListByTarget<
+    Extension.Subscription,
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
 
-alias ConfigurationProfileHCRPAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.HybridCompute";
-
-    /** The name of the Arc machine. */
-    @path
-    @segment("machines")
-    @key
-    machineName: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-
-    /** The configuration profile assignment name. */
-    @path
-    @segment("configurationProfileAssignments")
-    @key
-    configurationProfileAssignmentName: string;
-  }
+alias ConfigurationProfileHCRPAssignmentExternalResource = Extension.ExternalResource<
+  "Microsoft.HybridCompute",
+  "machines",
+  "machineName",
+  NamePattern = "",
+  Description = "The name of the Arc machine."
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -184,57 +125,43 @@ interface ConfigurationProfileHCRPAssignments {
   /**
    * Get information about a configuration profile assignment
    */
-  get is ConfigurationProfileHCRPAssignmentOps.Read<ConfigurationProfileAssignment>;
+  get is Extension.Read<
+    ConfigurationProfileHCRPAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Creates an association between a ARC machine and Automanage configuration profile
    */
-  createOrUpdate is ConfigurationProfileHCRPAssignmentOps.CreateOrUpdateSync<ConfigurationProfileAssignment>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    ConfigurationProfileHCRPAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Delete a configuration profile assignment
    */
-  delete is ConfigurationProfileHCRPAssignmentOps.DeleteSync<ConfigurationProfileAssignment>;
+  delete is Extension.DeleteSync<
+    ConfigurationProfileHCRPAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Get list of configuration profile assignments
    */
-  listByMachineName is ConfigurationProfileHCRPAssignmentOps.List<
+  listByMachineName is Extension.ListByTarget<
+    ConfigurationProfileHCRPAssignmentExternalResource,
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
 }
 
-alias ConfigurationProfileHCIAssignmentOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-    ...ResourceGroupParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.AzureStackHci";
-
-    /** The name of the Arc machine. */
-    @path
-    @segment("clusters")
-    @key
-    clusterName: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<ConfigurationProfileAssignment>;
-
-    /** The configuration profile assignment name. */
-    @path
-    @segment("configurationProfileAssignments")
-    @key
-    configurationProfileAssignmentName: string;
-  }
+alias ConfigurationProfileHCIAssignmentExternalResource = Extension.ExternalResource<
+  "Microsoft.AzureStackHci",
+  "clusters",
+  "clusterName",
+  NamePattern = "",
+  Description = "The name of the Arc machine."
 >;
 
 #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -243,22 +170,32 @@ interface ConfigurationProfileHCIAssignments {
   /**
    * Get information about a configuration profile assignment
    */
-  get is ConfigurationProfileHCIAssignmentOps.Read<ConfigurationProfileAssignment>;
+  get is Extension.Read<
+    ConfigurationProfileHCIAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Creates an association between a AzureStackHCI cluster and Automanage configuration profile
    */
-  createOrUpdate is ConfigurationProfileHCIAssignmentOps.CreateOrUpdateSync<ConfigurationProfileAssignment>;
+  createOrUpdate is Extension.CreateOrReplaceSync<
+    ConfigurationProfileHCIAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Delete a configuration profile assignment
    */
-  delete is ConfigurationProfileHCIAssignmentOps.DeleteSync<ConfigurationProfileAssignment>;
+  delete is Extension.DeleteSync<
+    ConfigurationProfileHCIAssignmentExternalResource,
+    ConfigurationProfileAssignment
+  >;
 
   /**
    * Get list of configuration profile assignments
    */
-  listByClusterName is ConfigurationProfileHCIAssignmentOps.List<
+  listByClusterName is Extension.ListByTarget<
+    ConfigurationProfileHCIAssignmentExternalResource,
     ConfigurationProfileAssignment,
     Response = ArmResponse<ConfigurationProfileAssignmentList>
   >;
