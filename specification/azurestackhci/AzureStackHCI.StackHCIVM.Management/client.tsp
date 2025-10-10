@@ -98,8 +98,17 @@ using Microsoft.AzureStackHCI;
   "IsCreatingFromLocal",
   "csharp"
 );
+@@clientName(VirtualMachineInstanceProperties.hostNodeIpAddress,
+  "HostNodeIPAddress",
+  "csharp"
+);
+@@clientName(VirtualMachineInstanceProperties.osProfile, "OSProfile", "csharp");
 @@clientName(VirtualMachineInstanceUpdateProperties,
   "HciVmInstancePatchProperties",
+  "csharp"
+);
+@@clientName(VirtualMachineInstanceUpdateProperties.osProfile,
+  "OSProfile",
   "csharp"
 );
 @@clientName(VirtualHardDisk, "HciVmVirtualHardDisk", "csharp");
