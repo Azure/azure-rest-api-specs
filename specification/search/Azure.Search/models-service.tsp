@@ -4187,10 +4187,8 @@ model RescoringOptions {
 }
 
 @doc("Response from a List Indexes request. If successful, it includes the full definitions of all indexes.")
-@pagedResult
 model ListIndexesResult {
   @doc("The indexes in the Search service.")
-  @items
   value: SearchIndex[];
 }
 
@@ -4265,11 +4263,9 @@ model SearchAlias {
 
 @doc("Response from a List Aliases request. If successful, it includes the associated index mappings for all aliases.")
 @added(Versions.v2025_08_01_preview)
-@pagedResult
 model ListAliasesResult {
   @doc("The aliases in the Search service.")
   @visibility(Lifecycle.Read)
-  @items
   value: SearchAlias[];
 }
 
@@ -6146,11 +6142,9 @@ model IndexStatisticsSummary {
 
 @doc("Response from a request to retrieve stats summary of all indexes. If successful, it includes the stats of each index in the service.")
 @added(Versions.v2025_08_01_preview)
-@pagedResult
 model ListIndexStatsSummary {
   @doc("The Statistics summary of all indexes in the Search service.")
   @visibility(Lifecycle.Read)
-  @items
   value: IndexStatisticsSummary[];
 }
 

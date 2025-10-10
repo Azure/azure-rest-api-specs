@@ -6,6 +6,7 @@
  */
 import "@typespec/rest";
 import "@typespec/http";
+import "@azure-tools/typespec-azure-core";
 import "./routes-service.tsp";
 import "./routes-index.tsp";
 
@@ -30,10 +31,8 @@ namespace Search;
 @doc("The available API versions.")
 enum Versions {
   @doc("The 2024-07-01 API version.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2024_07_01: "2024-07-01",
 
   @doc("The 2025-08-01-preview API version.")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2025_08_01_preview: "2025-08-01-preview",
 }
