@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2025-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-06-01-preview'
 input-file:
-  - Microsoft.StorageDiscovery/preview/2025-06-01-preview/storageDiscoveryWorkspace.json
+  - preview/2025-06-01-preview/storageDiscoveryWorkspace.json
 suppressions:
   - code: ArmResourcePropertiesBag
     from: storageDiscoveryWorkspace.json
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2025-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2025-09-01'
 input-file:
-  - Microsoft.StorageDiscovery/stable/2025-09-01/storageDiscoveryWorkspace.json
+  - stable/2025-09-01/storageDiscoveryWorkspace.json
 suppressions:
   - code: ArmResourcePropertiesBag
     from: storageDiscoveryWorkspace.json
