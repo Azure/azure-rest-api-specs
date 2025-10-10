@@ -512,6 +512,7 @@ interface Aliases {
   >;
   @doc("Lists all aliases available for a search service.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/aliases")
   @get
   list is SearchOperation<{}, ListAliasesResult>;
