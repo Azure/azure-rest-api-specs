@@ -633,6 +633,77 @@ interface Agents {
   get is SearchAgentOperation<{}, KnowledgeAgent>;
 }
 
+@added(Versions.v2025_08_01_preview)
+interface Sources {
+  @doc("Creates a new knowledge source.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/knowledgesources")
+  @post
+  create is SearchOperation<
+    {
+      @doc("The definition of the knowledge source to create.")
+      @body
+      knowledgeSource: KnowledgeSource;
+    },
+    KnowledgeSource & {
+      @doc("A process exit code.")
+      @statusCode
+      code: "201";
+    }
+  >;
+
+  @doc("Lists all knowledge sources available for a search service.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @route("/knowledgesources")
+  @get
+  list is SearchOperation<{}, ListKnowledgeSourcesResult>;
+
+  @doc("Creates a new knowledge source or updates an knowledge source if it already exists.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @route("/knowledgesources('{sourceName}')")
+  @put
+  createOrUpdate is SearchSourceOperation<
+    {
+      ...matchingHeader;
+      ...preferHeader;
+
+      @doc("The definition of the knowledge source to create or update.")
+      @body
+      knowledgeSource: KnowledgeSource;
+    },
+    KnowledgeSource & {
+      @doc("A process exit code.")
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "200" | "201";
+    }
+  >;
+
+  @doc("Deletes an existing knowledge source.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/knowledgesources('{sourceName}')")
+  @delete
+  delete is SearchSourceOperation<
+    {
+      ...matchingHeader;
+    },
+    {
+      @doc("A process exit code.")
+      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+      @statusCode
+      code: "204" | "404";
+    }
+  >;
+
+  @doc("Retrieves a knowledge source definition.")
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @route("/knowledgesources('{sourceName}')")
+  @get
+  get is SearchSourceOperation<{}, KnowledgeSource>;
+}
+
 @doc("Gets service level statistics for a search service.")
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
 @route("/servicestats")

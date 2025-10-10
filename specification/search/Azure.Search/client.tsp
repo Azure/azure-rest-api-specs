@@ -222,6 +222,53 @@ namespace SearchServiceClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Aliases.create;
   }
+
+  @operationGroup()
+  interface Agents {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    createOrUpdate is Search.Agents.createOrUpdate;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    delete is Search.Agents.delete;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    get is Search.Agents.get;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    list is Search.Agents.list;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    create is Search.Agents.create;
+  }
+
+  @operationGroup()
+  interface Sources {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    createOrUpdate is Search.Sources.createOrUpdate;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    delete is Search.Sources.delete;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    get is Search.Sources.get;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    list is Search.Sources.list;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    create is Search.Sources.create;
+  }
+
   interface Root {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -232,6 +279,18 @@ namespace SearchServiceClient {
     getIndexStatsSummary is Search.getIndexStatsSummary;
   }
 }
+
+
+@@access(VectorSearchAlgorithmKind, Access.public);
+@@usage(VectorSearchAlgorithmKind, Usage.input);
+@@access(VectorSearchVectorizerKind, Access.public);
+@@usage(VectorSearchVectorizerKind, Usage.input);
+@@access(SearchIndexPermissionFilterOption, Access.public);
+@@usage(SearchIndexPermissionFilterOption, Usage.input);
+@@access(IndexerResyncBody, Access.public);
+@@usage(IndexerResyncBody, Usage.input);
+@@access(KnowledgeAgentAzureOpenAiModel, Access.public);
+@@usage(KnowledgeAgentAzureOpenAiModel, Usage.input);
 
 @@clientNamespace(Search.ErrorResponse, "Azure.Search.Documents");
 @@clientNamespace(Search.ErrorDetail, "Azure.Search.Documents");
@@ -294,6 +353,7 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.VectorizableImageBinaryQuery, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorSimilarityThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.SearchScoreThreshold, "Azure.Search.Documents");
+@@clientNamespace(Search.QueryResultDocumentInnerHit, "Azure.Search.Documents");
 
 @@clientNamespace(Search.SearchIndexerDataSourceType, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.BlobIndexerParsingMode, "Azure.Search.Documents.Indexes");
@@ -401,6 +461,24 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.TextWeights, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ScoringFunction, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.CorsOptions, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgent, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeSourceReference, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgentOutputConfiguration, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgentOutputConfigurationModality, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgentRequestLimits, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ListKnowledgeAgentsResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgentModel, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgentModelKind, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgentAzureOpenAiModel, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.AzureOpenAiParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeSource, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeSourceKind, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexKnowledgeSource, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexKnowledgeSourceParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.AzureBlobKnowledgeSource, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.AzureBlobKnowledgeSourceParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ListKnowledgeSourcesResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.CreatedResources, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchSuggester, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.LexicalAnalyzer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.LexicalTokenizer, "Azure.Search.Documents.Indexes");
@@ -548,13 +626,12 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.ChatCompletionSchemaProperties, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ChatCompletionSkill, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingProperties, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.QueryResultDocumentInnerHit, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.WebApiHttpHeaders, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchOptions, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexPermissionFilterOption, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexerResyncBody, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexerResyncOption, "Azure.Search.Documents.Indexes");
 
-@@access(VectorSearchAlgorithmKind, Access.public);
-@@usage(VectorSearchAlgorithmKind, Usage.input);
-@@access(VectorSearchVectorizerKind, Access.public);
-@@usage(VectorSearchVectorizerKind, Usage.input);
 @@clientName(VectorQuery.k, "kNearestNeighbors");
 @@clientName(SearchDocumentsResult.value, "results");
 @@clientName(SearchRequest.count, "includeTotalResultCount");
@@ -752,4 +829,3 @@ namespace SearchServiceClient {
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizerV2.`@odata.type`, "odataType");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
-@@clientNamespace(Search.SearchOptions, "Azure.Search.Documents.Indexes");

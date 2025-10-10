@@ -74,6 +74,18 @@ alias agentNamePath = {
   agentName: string;
 };
 
+alias sourceNamePath = {
+  @doc("The name of the knowledge source.")
+  @path
+  sourceName: string;
+};
+
+alias querySourceAuthorizationHeader = {
+  @doc("Token identifying the user for which the query is being executed. This token is used to enforce security restrictions on documents.")
+  @header("x-ms-query-source-authorization")
+  querySourceAuthorization?: string;
+};
+
 @doc("Client initialization options for SearchIndexClient.")
 model SearchIndexClientOptions {
   @doc("The name of the index.")
@@ -99,7 +111,7 @@ alias SearchIndexOperation<
   Traits extends Reflection.Model = {},
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
-  TParams & ClientRequestIdHeader & indexNamePath,
+  TParams & ClientRequestIdHeader & indexNamePath & querySourceAuthorizationHeader,
   TResponse,
   Traits,
   TError
@@ -172,6 +184,18 @@ alias SearchAgentOperation<
   TError extends Reflection.Model = ErrorResponse
 > = Foundations.Operation<
   TParams & ClientRequestIdHeader & agentNamePath,
+  TResponse,
+  Traits,
+  TError
+>;
+
+alias SearchSourceOperation<
+  TParams extends Reflection.Model,
+  TResponse,
+  Traits extends Reflection.Model = {},
+  TError extends Reflection.Model = ErrorResponse
+> = Foundations.Operation<
+  TParams & ClientRequestIdHeader & sourceNamePath,
   TResponse,
   Traits,
   TError

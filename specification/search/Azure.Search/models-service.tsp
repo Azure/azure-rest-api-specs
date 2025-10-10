@@ -3857,6 +3857,10 @@ model SearchIndex {
   @doc("Contains configuration options related to vector search.")
   vectorSearch?: VectorSearch;
 
+  @doc("A value indicating whether permission filtering is enabled for the index.")
+  @added(Versions.v2025_08_01_preview)
+  permissionFilterOption?: SearchIndexPermissionFilterOption;
+
   @doc("The ETag of the index.")
   @encodedName("application/json", "@odata.etag")
   eTag?: string;
@@ -4422,6 +4426,116 @@ model AzureOpenAiParameters {
 
   @doc("The authentication method to use when connecting to the Azure OpenAI resource.")
   authenticationMethod?: string;
+}
+
+// Knowledge Source models
+@discriminator("kind")
+@doc("Represents a knowledge source definition.")
+@added(Versions.v2025_08_01_preview)
+model KnowledgeSource {
+  @doc("The name of the knowledge source.")
+  @key("sourceName")
+  @visibility(Lifecycle.Read)
+  name: string;
+
+  @doc("Optional user-defined description.")
+  description?: string;
+
+  @doc("The type of the knowledge source.")
+  #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @added(Versions.v2025_08_01_preview)
+  kind: KnowledgeSourceKind;
+
+  @doc("The ETag of the agent.")
+  eTag?: string;
+
+  @doc("A description of an encryption key that you create in Azure Key Vault.")
+  encryptionKey?: SearchResourceEncryptionKey;
+}
+
+@doc("The kind of the knowledge source.")
+@added(Versions.v2025_08_01_preview)
+union KnowledgeSourceKind {
+  string,
+
+  @doc("A knowledge source that reads data from a Search Index.")
+  SearchIndex: "searchIndex",
+
+  @doc("A knowledge source that read and ingest data from Azure Blob Storage to a Search Index.")
+  AzureBlob: "azureBlob",
+}
+
+@doc("Knowledge Source targeting a search index.")
+@added(Versions.v2025_08_01_preview)
+model SearchIndexKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.SearchIndex;
+
+  @doc("The parameters for the knowledge source.")
+  searchIndexParameters: SearchIndexKnowledgeSourceParameters;
+}
+
+@doc("Parameters for search index knowledge source.")
+@added(Versions.v2025_08_01_preview)
+model SearchIndexKnowledgeSourceParameters {
+  @doc("The name of the Search index.")
+  searchIndexName: string;
+
+  @doc("Used to request additional fields for referenced source data.")
+  sourceDataSelect?: string;
+}
+
+@doc("Configuration for Azure Blob Storage knowledge source.")
+@added(Versions.v2025_08_01_preview)
+model AzureBlobKnowledgeSource extends KnowledgeSource {
+  kind: KnowledgeSourceKind.AzureBlob;
+
+  @doc("The type of the knowledge source.")
+  azureBlobParameters: AzureBlobKnowledgeSourceParameters;
+}
+
+@doc("Parameters for Azure Blob Storage knowledge source.")
+@added(Versions.v2025_08_01_preview)
+model AzureBlobKnowledgeSourceParameters {
+  @doc("An explicit identity to use for this knowledge source. ")
+  identity?: SearchIndexerDataIdentity;
+
+  @doc("Key-based connection string or the ResourceId format if using a managed identity.")
+  connectionString: string;
+
+  @doc("The name of the blob storage container.")
+  containerName: string;
+
+  @doc("Optional folder path within the container.")
+  folderPath?: string;
+
+  @doc("Optional vectorizer configuration for vectorizing content.")
+  embeddingModel?: VectorSearchVectorizer;
+
+  @doc("Optional chat completion model for image verbalization or context extraction.")
+  chatCompletionModel?: KnowledgeAgentModel;
+
+  @doc("Optional schedule for data ingestion.")
+  ingestionSchedule?: IndexingSchedule;
+
+  @doc("Resources created by the knowledge source.")
+  @visibility(Lifecycle.Read)
+  createdResources?: CreatedResources;
+
+  @doc("Indicates whether image verbalization should be disabled.")
+  disableImageVerbalization?: boolean;
+}
+
+@doc("Result from listing knowledge sources.")
+@added(Versions.v2025_08_01_preview)
+model ListKnowledgeSourcesResult {
+  @doc("The knowledge sources in the service.")
+  value: KnowledgeSource[];
+}
+
+@doc("Resources created by the knowledge source. Keys represent resource types (e.g., 'datasource', 'indexer', 'skillset', 'index') and values represent resource names.")
+@added(Versions.v2025_08_01_preview)
+model CreatedResources {
+  ...Record<string>;
 }
 
 @doc("Response from a get service statistics request. If successful, it includes service level counters and limits.")
