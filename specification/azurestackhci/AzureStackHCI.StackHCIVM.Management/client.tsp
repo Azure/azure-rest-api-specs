@@ -2,6 +2,7 @@ import "./main.tsp";
 import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
+using Azure.Core;
 using Microsoft.AzureStackHCI;
 
 @@clientName(Microsoft.AzureStackHCI, "AzureStackHCIVmClient", "python");
@@ -12,12 +13,24 @@ using Microsoft.AzureStackHCI;
 );
 
 @@clientName(Route, "HciVmNetworkingRoute", "csharp");
+@@clientName(RouteProperties.nextHopIpAddress, "NextHopIPAddress", "csharp");
 @@clientName(RouteTable, "HciVmNetworkingRouteTable", "csharp");
+@@clientName(RouteTable.etag, "ETag", "csharp");
 @@clientName(Subnet, "HciVmNetworkingSubnet", "csharp");
+@@clientName(SubnetProperties.ipAllocationMethod,
+  "IPAllocationMethod",
+  "csharp"
+);
+@@clientName(SubnetProperties.ipConfigurationReferences,
+  "IPConfigurationReferences",
+  "csharp"
+);
+@@clientName(SubnetProperties.ipPools, "IPPools", "csharp");
 @@clientName(Status, "HciVmOperationStatus", "csharp");
 @@clientName(StatusTypes, "HybridMachineAgentInstallationStatusType", "csharp");
 @@clientName(SecurityTypes, "HciVmSecurityType", "csharp");
 @@clientName(IPPool, "HciVmNetworkingIPPool", "csharp");
+@@clientName(IPPool.ipPoolType, "IPPoolType", "csharp");
 @@clientName(ProvisioningStateEnum, "HciVmProvisioningState", "csharp");
 @@clientName(StatusLevelTypes, "HciVmStatusLevelType", "csharp");
 @@clientName(PowerStateEnum, "HciVmPowerState", "csharp");
@@ -32,6 +45,7 @@ using Microsoft.AzureStackHCI;
 );
 @@clientName(GalleryImage, "HciVmGalleryImage", "csharp");
 @@clientName(GalleryImageProperties, "HciVmGalleryImageProperties", "csharp");
+@@clientName(GalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(GuestAgent, "HciVmGuestAgent", "csharp");
 @@clientName(GuestAgentProperties, "HciVmGuestAgentProperties", "csharp");
 @@clientName(HybridIdentityMetadata, "HciVmHybridIdentityMetadata", "csharp");
@@ -49,9 +63,14 @@ using Microsoft.AzureStackHCI;
   "HciVmMarketplaceGalleryImageProperties",
   "csharp"
 );
+@@clientName(MarketplaceGalleryImageProperties.osType, "OSType", "csharp");
 @@clientName(NetworkInterface, "HciVmNetworkInterface", "csharp");
 @@clientName(NetworkInterfaceProperties,
   "HciVmNetworkInterfaceProperties",
+  "csharp"
+);
+@@clientName(NetworkInterfaceProperties.ipConfigurations,
+  "IPConfigurations",
   "csharp"
 );
 @@clientName(NetworkInterfacesUpdateProperties,
@@ -198,8 +217,24 @@ using Microsoft.AzureStackHCI;
   "HciVmOSProfileLinuxConfiguration",
   "csharp"
 );
+@@clientName(OsProfileUpdateLinuxConfiguration.provisionVMAgent,
+  "provisionVmAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateLinuxConfiguration.provisionVMConfigAgent,
+  "provisionVmConfigAgent",
+  "csharp"
+);
 @@clientName(OsProfileUpdateWindowsConfiguration,
   "HciVmOSProfileWindowsConfiguration",
+  "csharp"
+);
+@@clientName(OsProfileUpdateWindowsConfiguration.provisionVMAgent,
+  "provisionVmAgent",
+  "csharp"
+);
+@@clientName(OsProfileUpdateWindowsConfiguration.provisionVMConfigAgent,
+  "provisionVmConfigAgent",
   "csharp"
 );
 @@clientName(SecurityEncryptionType, "HciVmSecurityEncryptionType", "csharp");
@@ -316,6 +351,10 @@ using Microsoft.AzureStackHCI;
   "HciVmInstanceStorageProfileOSDisk",
   "csharp"
 );
+@@clientName(VirtualMachineInstancePropertiesStorageProfileOsDisk.osType,
+  "OSType",
+  "csharp"
+);
 @@clientName(VirtualMachineInstanceStatus, "HciVmInstanceStatus", "csharp");
 @@clientName(VirtualMachineInstanceStatusProvisioningStatus,
   "HciVmInstanceProvisioningStatus",
@@ -330,3 +369,4 @@ using Microsoft.AzureStackHCI;
   "VirtualMachineInstanceManagedDiskContent",
   "csharp"
 );
+@@clientName(SecurityTypes.ConfidentialVM, "ConfidentialVm", "csharp");
