@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @doc("Evaluation Taxonomy Definition")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @resource("evaluation_taxonomies")
 model EvaluationTaxonomy {
   ...AssetBase;
@@ -28,7 +28,7 @@ model EvaluationTaxonomy {
   properties?: Record<string>;
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Type of the evaluation taxonomy input.")
 union EvaluationTaxonomyInputType {
   string,
@@ -40,7 +40,7 @@ union EvaluationTaxonomyInputType {
   policy: "policy",
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @discriminator("type")
 @doc("Input configuration for the evaluation taxonomy.")
 model EvaluationTaxonomyInput {
@@ -48,7 +48,7 @@ model EvaluationTaxonomyInput {
   type: EvaluationTaxonomyInputType;
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Input configuration for the evaluation taxonomy when the input type is agent.")
 model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   @doc("Input type of the evaluation taxonomy.")
@@ -61,7 +61,7 @@ model AgentTaxonomyInput extends EvaluationTaxonomyInput {
   riskCategories: RiskCategory[];
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Target type.")
 union TargetType {
   string,
@@ -70,7 +70,7 @@ union TargetType {
   azureAIAgent: "AzureAIAgent",
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Azure AI Agent target configuration.")
 model AzureAIAgentTarget {
   @doc("Type of the target.")
@@ -86,7 +86,7 @@ model AzureAIAgentTarget {
   tools: ToolDescription[];
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Tool description.")
 model ToolDescription {
   @doc("Name of the tool.")
@@ -96,7 +96,7 @@ model ToolDescription {
   description: string;
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Taxonomy category definition.")
 model TaxonomyCategory {
   @doc("Name of the taxonomy category.")
@@ -115,7 +115,7 @@ model TaxonomyCategory {
   properties?: Record<string>;
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Taxonomy sub-category definition.")
 model TaxonomySubCategory {
   @doc("Name of the taxonomy sub-category.")

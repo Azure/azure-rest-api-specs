@@ -14,7 +14,7 @@ using Azure.Core.Foundations;
 namespace Azure.AI.Projects;
 
 @doc("The response body for cluster insights.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @resource("insights")
 model Insight {
   @doc("The unique identifier for the insights report.")
@@ -42,14 +42,14 @@ model Insight {
 }
 
 @doc("Configuration of the model used in the insight generation.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model InsightModelConfiguration {
   @doc("The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/<modelDeploymentName>'.")
   modelDeploymentName: string;
 }
 
 @doc("The request of the insights report.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @discriminator("type")
 model InsightRequest {
   @doc("The type of request.")
@@ -57,7 +57,7 @@ model InsightRequest {
 }
 
 @doc("Insights on set of Evaluation Results")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationRunClusterInsightsRequest extends InsightRequest {
   @doc("The type of insights request.")
   type: InsightType.EvaluationRunClusterInsight;
@@ -73,7 +73,7 @@ model EvaluationRunClusterInsightsRequest extends InsightRequest {
 }
 
 @doc("Insights on set of Agent Evaluation Results")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model AgentClusterInsightsRequest extends InsightRequest {
   @doc("The type of request.")
   type: InsightType.AgentClusterInsight;
@@ -86,7 +86,7 @@ model AgentClusterInsightsRequest extends InsightRequest {
 }
 
 @doc("Evaluation Comparison Request")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationComparisonRequest extends InsightRequest {
   @doc("The type of request.")
   type: InsightType.EvaluationComparison;
@@ -102,7 +102,7 @@ model EvaluationComparisonRequest extends InsightRequest {
 }
 
 @doc("The request of the insights.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union InsightType {
   @doc("Insights on an Evaluation run result.")
   EvaluationRunClusterInsight: "EvaluationRunClusterInsight",
@@ -117,7 +117,7 @@ union InsightType {
 }
 
 @doc("Metadata about the insights.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model InsightsMetadata {
   @doc("The timestamp when the insights were created.")
   createdAt: utcDateTime;
@@ -127,7 +127,7 @@ model InsightsMetadata {
 }
 
 @doc("The result of the insights.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @discriminator("type")
 model InsightResult {
   @doc("The type of insights result.")
@@ -135,7 +135,7 @@ model InsightResult {
 }
 
 @doc("Insights from the evaluation comparison.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvalCompareReport extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.EvaluationComparison;
@@ -148,7 +148,7 @@ model EvalCompareReport extends InsightResult {
 }
 
 @doc("Comparison results for treatment runs against the baseline.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvalRunResultComparison {
   @doc("Name of the testing criteria.")
   testingCriteria: string;
@@ -167,7 +167,7 @@ model EvalRunResultComparison {
 }
 
 @doc("Summary statistics of a metric in an evaluation run.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvalRunResultSummary {
   @doc("The evaluation run ID.")
   runId: string;
@@ -183,7 +183,7 @@ model EvalRunResultSummary {
 }
 
 @doc("Metric comparison for a treatment against the baseline.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvalRunResultCompareItem {
   @doc("The treatment run ID.")
   treatmentRunId: string;
@@ -202,7 +202,7 @@ model EvalRunResultCompareItem {
 }
 
 @doc("Treatment Effect Type.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union TreatmentEffectType {
   @doc("Not enough samples to determine treatment effect.")
   TooFewSamples: "TooFewSamples",
@@ -223,7 +223,7 @@ union TreatmentEffectType {
 }
 
 @doc("Insights from the cluster analysis.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ClusterInsightResult {
   @doc("Summary of the insights report.")
   summary: InsightSummary;
@@ -253,7 +253,7 @@ model ClusterInsightResult {
 }
 
 @doc("Insights from the evaluation run cluster analysis.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationRunClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.EvaluationRunClusterInsight;
@@ -262,7 +262,7 @@ model EvaluationRunClusterInsightResult extends InsightResult {
 }
 
 @doc("Insights from the agent cluster analysis.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model AgentClusterInsightResult extends InsightResult {
   @doc("The type of insights result.")
   type: InsightType.AgentClusterInsight;
@@ -271,7 +271,7 @@ model AgentClusterInsightResult extends InsightResult {
 }
 
 @doc("Summary of the error cluster analysis.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model InsightSummary {
   @doc("Total number of samples analyzed.")
   sampleCount: int32;
@@ -290,7 +290,7 @@ model InsightSummary {
 }
 
 @doc("Token usage for cluster analysis")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ClusterTokenUsage {
   @doc("input token usage")
   inputTokenUsage: int32;
@@ -303,7 +303,7 @@ model ClusterTokenUsage {
 }
 
 @doc("Coordinates for the analysis chart.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ChartCoordinate {
   @doc("X-axis coordinate.")
   x: int32;
@@ -316,7 +316,7 @@ model ChartCoordinate {
 }
 
 @doc("The type of sample used in the analysis.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union SampleType {
   @doc("A sample from the evaluation result.")
   EvaluationResultSample: "EvaluationResultSample",
@@ -325,7 +325,7 @@ union SampleType {
 }
 
 @doc("A sample from the analysis.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @discriminator("type")
 model InsightSample {
   @doc("The unique identifier for the analysis sample.")
@@ -342,7 +342,7 @@ model InsightSample {
 }
 
 @doc("A sample from the evaluation result.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationResultSample extends InsightSample {
   @doc("Evaluation Result Sample Type")
   type: SampleType.EvaluationResultSample;
@@ -352,7 +352,7 @@ model EvaluationResultSample extends InsightSample {
 }
 
 @doc("Result of the evaluation.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvalResult {
   @doc("name of the check")
   name: string;
@@ -368,7 +368,7 @@ model EvalResult {
 }
 
 @doc("A cluster of analysis samples.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model InsightCluster {
   @doc("The id of the analysis cluster.")
   id: string;

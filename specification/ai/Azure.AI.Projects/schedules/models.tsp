@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @doc("Schedule provisioning status.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union ScheduleProvisioningStatus {
   string,
 
@@ -34,7 +34,7 @@ union ScheduleProvisioningStatus {
 }
 
 @doc("Type of the trigger.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union TriggerType {
   string,
 
@@ -50,14 +50,14 @@ union TriggerType {
 
 @doc("Base model for Trigger of the schedule.")
 @discriminator("type")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model Trigger {
   @doc("Type of the trigger.")
   type: TriggerType;
 }
 
 @doc("Cron based trigger.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model CronTrigger extends Trigger {
   type: TriggerType.Cron;
 
@@ -75,7 +75,7 @@ model CronTrigger extends Trigger {
 }
 
 @doc("Recurrence type.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union RecurrenceType {
   string,
 
@@ -93,7 +93,7 @@ union RecurrenceType {
 }
 
 @doc("Days of the week for recurrence schedule.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union DayOfWeek {
   string,
 
@@ -120,7 +120,7 @@ union DayOfWeek {
 }
 
 @doc("Recurrence schedule model.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @discriminator("type")
 model RecurrenceSchedule {
   @doc("Recurrence type for the recurrence schedule.")
@@ -128,13 +128,13 @@ model RecurrenceSchedule {
 }
 
 @doc("Hourly recurrencce schedule.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model HourlyRecurrenceSchedule extends RecurrenceSchedule {
   type: RecurrenceType.Hourly;
 }
 
 @doc("Daily recurrence schedule.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model DailyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Daily recurrence type.")
   type: RecurrenceType.Daily;
@@ -144,7 +144,7 @@ model DailyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Weekly recurrence schedule.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Weekly recurrence type.")
   type: RecurrenceType.Weekly;
@@ -154,7 +154,7 @@ model WeeklyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Monthly recurrence schedule.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
   @doc("Monthly recurrence type.")
   type: RecurrenceType.Monthly;
@@ -164,7 +164,7 @@ model MonthlyRecurrenceSchedule extends RecurrenceSchedule {
 }
 
 @doc("Recurrence based trigger.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model RecurrenceTrigger extends Trigger {
   @doc("Type of the trigger.")
   type: TriggerType.Recurrence;
@@ -186,7 +186,7 @@ model RecurrenceTrigger extends Trigger {
 }
 
 @doc("One-time trigger.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model OneTimeTrigger extends Trigger {
   type: TriggerType.OneTime;
 
@@ -198,7 +198,7 @@ model OneTimeTrigger extends Trigger {
 }
 
 @doc("Type of the task.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union ScheduleTaskType {
   string,
 
@@ -210,7 +210,7 @@ union ScheduleTaskType {
 }
 
 @doc("Schedule task model.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @discriminator("type")
 model ScheduleTask {
   @doc("Type of the task.")
@@ -221,7 +221,7 @@ model ScheduleTask {
 }
 
 @doc("Evaluation task for the schedule.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationScheduleTask extends ScheduleTask {
   type: ScheduleTaskType.Evaluation;
 
@@ -233,7 +233,7 @@ model EvaluationScheduleTask extends ScheduleTask {
 }
 
 @doc("Insight task for the schedule.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model InsightScheduleTask extends ScheduleTask {
   type: ScheduleTaskType.Insight;
 
@@ -243,7 +243,7 @@ model InsightScheduleTask extends ScheduleTask {
 
 @resource("schedules")
 @doc("Schedule model.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model Schedule {
   @doc("Identifier of the schedule.")
   @key("id")
@@ -284,7 +284,7 @@ model Schedule {
 
 @doc("Schedule run model.")
 @resource("schedules/{scheduleId}/runs")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ScheduleRun {
   @doc("Identifier of the schedule run.")
   @key("id")

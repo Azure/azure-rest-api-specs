@@ -16,7 +16,7 @@ alias ServiceTraits = SupportsClientRequestId &
 
 alias EvaluationsOperations = Azure.Core.ResourceOperations<ServiceTraits>;
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 interface SyncEvals {
   /** Synchronize evaluation runs from connected resources. */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"

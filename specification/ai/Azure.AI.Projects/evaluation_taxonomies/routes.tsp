@@ -27,7 +27,7 @@ alias EvaluationTaxonomiesFilterQueryParamsTraits = {
 };
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "We are using service specific operation templates"
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 interface EvaluationTaxonomies {
   @doc("Get an evaluation run by name.")
   get is EvaluationTaxonomiesOperations.ResourceRead<EvaluationTaxonomy>;
