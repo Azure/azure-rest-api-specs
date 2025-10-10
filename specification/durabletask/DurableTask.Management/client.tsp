@@ -18,10 +18,7 @@ using Microsoft.DurableTask;
 @@clientName(TaskHubProperties, "TaskHubProperties", "csharp");
 @@clientName(ProvisioningState, "ProvisioningState", "csharp");
 @@clientName(SchedulerUpdate, "SchedulerPatch", "csharp");
-@@clientName(SchedulerPropertiesUpdate,
-  "SchedulerPatchProperties",
-  "csharp"
-);
+@@clientName(SchedulerPropertiesUpdate, "SchedulerPatchProperties", "csharp");
 @@clientName(SchedulerSku, "SchedulerSku", "csharp");
 @@clientName(SchedulerSkuUpdate, "SchedulerSkuUpdate", "csharp");
 @@clientName(RedundancyState, "SchedulerRedundancyState", "csharp");
@@ -29,12 +26,6 @@ using Microsoft.DurableTask;
   "PurgeableOrchestrationState",
   "csharp"
 );
-@@clientName(RetentionPolicyDetails,
-  "RetentionPolicyDetails",
-  "csharp"
-);
+@@clientName(RetentionPolicyDetails, "RetentionPolicyDetails", "csharp");
 @@clientName(RetentionPolicy, "RetentionPolicy", "csharp");
-@@clientName(RetentionPolicyProperties,
-  "RetentionPolicyProperties",
-  "csharp"
-);
+@@clientName(RetentionPolicyProperties, "RetentionPolicyProperties", "csharp");
