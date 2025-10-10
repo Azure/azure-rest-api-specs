@@ -1548,6 +1548,12 @@ namespace SkillContext
 		dataType: SkillUtilityCacheDataType;
 	}
 
+	@doc("Response model for setting cached entity")
+	model SetCachedEntityDtoResponse {
+		@doc("Indicates whether the cache entry was successfully set.")
+		Success: boolean;
+	}
+
 	@doc("Defines the state of debugging through local PluginHost")
 	enum LocalPluginHostDebugState {
 		None,
