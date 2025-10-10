@@ -202,6 +202,69 @@ union ConversationPiiCategories {
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
 
+  /** Driver's license number category */
+  DriversLicenseNumber: "DriversLicenseNumber",
+
+  /** Passport number category */
+  PassportNumber: "PassportNumber",
+
+  /** Person type category */
+  PersonType: "PersonType",
+
+  /** Organization category */
+  Organization: "Organization",
+
+  /** ABA routing number category */
+  ABARoutingNumber: "ABARoutingNumber",
+
+  /** Bank account number category */
+  BankAccountNumber: "BankAccountNumber",
+
+  /** Date of birth category */
+  DateOfBirth: "DateOfBirth",
+
+  /** International Bank Account Number category */
+  IBAN: "IBAN",
+
+  /** SWIFT code category */
+  SWIFTCode: "SWIFTCode",
+
+  /** Vehicle identification number category */
+  VehicleIdentificationNumber: "VehicleIdentificationNumber",
+
+  /** Age category */
+  Age: "Age",
+
+  /** Date category */
+  Date: "Date",
+
+  /** Zip code category */
+  ZipCode: "ZipCode",
+
+  /** Government issued ID category */
+  GovernmentIssuedId: "GovernmentIssuedId",
+
+  /** Card verification value category */
+  CVV: "CardVerificationValue",
+
+  /** Health card number category */
+  HealthCardNumber: "HealthCardNumber",
+
+  /** Social insurance number category */
+  SocialInsuranceNumber: "SocialInsuranceNumber",
+
+  /** Medicare beneficiary ID category */
+  MedicareBeneficiaryId: "MedicareBeneficiaryId",
+
+  /** Github account category */
+  GithubAccount: "GithubAccount",
+
+  /** Location category */
+  Location: "Location",
+
+  /** GPE category */
+  GPE: "GPE",
+
   /** All categories */
   All: "All",
 
@@ -234,6 +297,69 @@ union ConversationPiiCategoriesExclude {
 
   /** US social security number category */
   USSocialSecurityNumber: "USSocialSecurityNumber",
+
+  /** Driver's license number category */
+  DriversLicenseNumber: "DriversLicenseNumber",
+
+  /** Passport number category */
+  PassportNumber: "PassportNumber",
+
+  /** Person type category */
+  PersonType: "PersonType",
+
+  /** Organization category */
+  Organization: "Organization",
+
+  /** ABA routing number category */
+  ABARoutingNumber: "ABARoutingNumber",
+
+  /** Bank account number category */
+  BankAccountNumber: "BankAccountNumber",
+
+  /** Date of birth category */
+  DateOfBirth: "DateOfBirth",
+
+  /** International Bank Account Number category */
+  IBAN: "IBAN",
+
+  /** SWIFT code category */
+  SWIFTCode: "SWIFTCode",
+
+  /** Vehicle identification number category */
+  VehicleIdentificationNumber: "VehicleIdentificationNumber",
+
+  /** Age category */
+  Age: "Age",
+
+  /** Date category */
+  Date: "Date",
+
+  /** Zip code category */
+  ZipCode: "ZipCode",
+
+  /** Government issued ID category */
+  GovernmentIssuedId: "GovernmentIssuedId",
+
+  /** Card verification value category */
+  CVV: "CardVerificationValue",
+
+  /** Health card number category */
+  HealthCardNumber: "HealthCardNumber",
+
+  /** Social insurance number category */
+  SocialInsuranceNumber: "SocialInsuranceNumber",
+
+  /** Medicare beneficiary ID category */
+  MedicareBeneficiaryId: "MedicareBeneficiaryId",
+
+  /** Github account category */
+  GithubAccount: "GithubAccount",
+
+  /** Location category */
+  Location: "Location",
+
+  /** GPE category */
+  GPE: "GPE",
 }
 
 /** Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will be * as before. We allow specific ascii characters for redaction. */
