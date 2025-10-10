@@ -1370,9 +1370,43 @@
     },
     "/evaluators": {
       "get": {
-        "operationId": "Evaluators_ListVersions",
-        "description": "List the latest version of each Evaluator",
+        "operationId": "Evaluators_ListLatestVersions",
+        "description": "List the latest version of each evaluator",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom",
+              "all"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "built_in",
+                  "value": "builtin",
+                  "description": "Built-in evaluator (Microsoft provided)"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "Custom evaluator"
+                },
+                {
+                  "name": "all",
+                  "value": "all"
+                }
+              ]
+            }
+          },
           {
             "name": "limit",
             "in": "query",
@@ -1381,85 +1415,83 @@
             "type": "integer",
             "format": "int32",
             "default": 20
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/EvaluatorVersion"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
+              "$ref": "#/definitions/PagedEvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
+        },
+        "x-ms-examples": {
+          "Evaluators_ListLatestVersions_MaximumSet": {
+            "$ref": "./examples/Evaluators_ListLatestVersions_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
     "/evaluators/{name}/versions": {
       "get": {
-        "operationId": "Evaluators_ListEvaluatorVersions",
-        "description": "List all versions of the given Evaluator name",
+        "operationId": "Evaluators_ListVersions",
+        "description": "List all versions of the given evaluator",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
           {
             "name": "name",
             "in": "path",
-            "description": "Name of the evaluator",
+            "description": "The name of the resource",
             "required": true,
             "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom",
+              "all"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "built_in",
+                  "value": "builtin",
+                  "description": "Built-in evaluator (Microsoft provided)"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "Custom evaluator"
+                },
+                {
+                  "name": "all",
+                  "value": "all"
+                }
+              ]
+            }
           },
           {
             "name": "limit",
@@ -1469,71 +1501,35 @@
             "type": "integer",
             "format": "int32",
             "default": 20
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/EvaluatorVersion"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
+              "$ref": "#/definitions/PagedEvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
+        },
+        "x-ms-examples": {
+          "Evaluators_ListVersions_MaximumSet": {
+            "$ref": "./examples/Evaluators_ListVersions_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -1569,6 +1565,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluators_CreateEvaluatorVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_CreateEvaluatorVersion_MaximumSet_Gen.json"
           }
         }
       }
@@ -1615,6 +1616,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Evaluators_GetEvaluatorVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_GetEvaluatorVersion_MaximumSet_Gen.json"
+          }
         }
       },
       "patch": {
@@ -1658,6 +1664,11 @@
               }
             }
           }
+        },
+        "x-ms-examples": {
+          "Evaluators_UpdateEvaluatorVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_UpdateEvaluatorVersion_MaximumSet_Gen.json"
+          }
         }
       },
       "delete": {
@@ -1697,6 +1708,11 @@
                 "description": "String error code indicating what went wrong."
               }
             }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluators_DeleteEvaluatorVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_DeleteEvaluatorVersion_MaximumSet_Gen.json"
           }
         }
       }
@@ -4998,6 +5014,10 @@
           "type": "number",
           "format": "float",
           "description": "Maximum value for the metric. If not specified, it is assumed to be unbounded."
+        },
+        "is_primary": {
+          "type": "boolean",
+          "description": "Indicates if this metric is primary when there are multiple metrics."
         }
       }
     },
@@ -5121,12 +5141,14 @@
           "readOnly": true
         },
         "created_at": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Creation date/time of the evaluator",
           "readOnly": true
         },
         "modified_at": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Last modified date/time of the evaluator",
           "readOnly": true
         },
@@ -5890,6 +5912,27 @@
           "description": "The EvaluationTaxonomy items on this page",
           "items": {
             "$ref": "#/definitions/EvaluationTaxonomy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEvaluatorVersion": {
+      "type": "object",
+      "description": "Paged collection of EvaluatorVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluatorVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluatorVersion"
           }
         },
         "nextLink": {
