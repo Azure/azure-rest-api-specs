@@ -42,9 +42,6 @@ model DstsSubjectNameBasedServiceClientIdentityGroupResourceProperties {
   @Azure.ResourceManager.identifiers(#[])
   claimExpansions?: Array<ClaimExpansion>;
 
-  @doc("List of dSTS instances for the service client identity group. A list contains specific dSTS instances to create identities on. Optional.")
-  dstsInstances?: Array<string>;
-
   @doc("It is used only during update request. List of member SCI ids to enforce group properties on. Each element should be a valid GUID. Optional.")
   enforceServiceClientIdentityIds?: Array<string>;
 
