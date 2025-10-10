@@ -1091,8 +1091,17 @@ model FeatureState {
   defaultStatus?: FeatureStatus;
 
   /** The default values of the feature. */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "No other way to represent an arbitrary object containing default values."
-  defaultValues?: Record<string>;
+  defaultValues?: DefaultValue[];
+}
+
+/** A default value that can be provided for a feature property. */
+@added(Versions.v2025_10_01_preview)
+model DefaultValue {
+  /** The name of the feature property. */
+  name?: string;
+
+  /** The default value to be applied for the given property. */
+  value?: string;
 }
 
 /** Feature status. */

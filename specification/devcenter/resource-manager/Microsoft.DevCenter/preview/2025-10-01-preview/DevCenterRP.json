@@ -9759,6 +9759,20 @@
         ]
       }
     },
+    "DefaultValue": {
+      "type": "object",
+      "description": "A default value that can be provided for a feature property.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the feature property."
+        },
+        "value": {
+          "type": "string",
+          "description": "The default value to be applied for the given property."
+        }
+      }
+    },
     "DefinitionParametersItem": {
       "type": "object",
       "description": "Parameters for the task.",
@@ -10665,10 +10679,10 @@
           "description": "Indicates the default status of the feature."
         },
         "defaultValues": {
-          "type": "object",
+          "type": "array",
           "description": "The default values of the feature.",
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/DefaultValue"
           }
         }
       }
@@ -11695,10 +11709,10 @@
           "description": "Indicates the default status of the feature."
         },
         "defaultValues": {
-          "type": "object",
+          "type": "array",
           "description": "The default values of the feature.",
-          "additionalProperties": {
-            "type": "string"
+          "items": {
+            "$ref": "#/definitions/DefaultValue"
           }
         },
         "catalogItemSyncEnableStatus": {

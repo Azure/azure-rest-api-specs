@@ -151,16 +151,6 @@ directive:
       - BodyTopLevelProperties
 
   - where:
-    - $.definitions.FeatureState.properties.defaultValues
-    suppress:
-      - AvoidAdditionalProperties
-
-  - where:
-    - $.definitions.InheritedProjectCatalogSettings.properties.defaultValues
-    suppress:
-      - AvoidAdditionalProperties
-
-  - where:
     - $.definitions["Azure.Core.uuid"].format
     suppress: 
       - GuidUsage
