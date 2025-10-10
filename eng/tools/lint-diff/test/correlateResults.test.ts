@@ -1,28 +1,28 @@
-import { test, describe, expect } from "vitest";
+import { describe, expect, test } from "vitest";
 
-import {
-  AutorestRunResult,
-  LintDiffViolation,
-  Source,
-  BeforeAfter,
-} from "../src/lintdiff-types.js";
-import {
-  correlateRuns,
-  getViolations,
-  getLintDiffViolations,
-  arrayIsEqual,
-  getNewItems,
-  isSameSources,
-} from "../src/correlateResults.js";
-import { relativizePath } from "../src/util.js";
-import { isWindows } from "./test-util.js";
 import { Readme } from "@azure-tools/specs-shared/readme";
 import { resolve } from "path";
+import {
+  arrayIsEqual,
+  correlateRuns,
+  getLintDiffViolations,
+  getNewItems,
+  getViolations,
+  isSameSources,
+} from "../src/correlateResults.js";
+import {
+  AutorestRunResult,
+  BeforeAfter,
+  LintDiffViolation,
+  Source,
+} from "../src/lintdiff-types.js";
+import { relativizePath } from "../src/util.js";
+import { isWindows } from "./test-util.js";
 
-const __dirname = new URL('.', import.meta.url).pathname;
+const __dirname = new URL(".", import.meta.url).pathname;
 
 describe.skipIf(isWindows())("correlateRuns", () => {
-  test("correlates before and after runs with matching readme and tag", async() => {
+  test("correlates before and after runs with matching readme and tag", async () => {
     const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
     const beforePath = resolve(fixtureRoot, "before");
     const afterPath = resolve(fixtureRoot, "after");
@@ -31,7 +31,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
       {
         rootPath: beforePath,
         readme: new Readme(
-          resolve(beforePath, "specification/service1/resource-manager/readme.md")
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
         ),
         tag: "tag1",
         stdout: "stdout",
@@ -43,9 +43,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     const afterChecks: AutorestRunResult[] = [
       {
         rootPath: afterPath,
-        readme: new Readme(
-          resolve(afterPath, "specification/service1/resource-manager/readme.md")
-        ),
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
         tag: "tag1",
         stdout: "stdout",
         stderr: "stderr",
@@ -61,7 +59,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     });
   });
 
-  test("correlates before and after runs with matching readme and a default tag", async() => {
+  test("correlates before and after runs with matching readme and a default tag", async () => {
     const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
     const beforePath = resolve(fixtureRoot, "before");
     const afterPath = resolve(fixtureRoot, "after");
@@ -70,7 +68,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
       {
         rootPath: beforePath,
         readme: new Readme(
-          resolve(beforePath, "specification/service1/resource-manager/readme.md")
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
         ),
         tag: "default-tag",
         stdout: "stdout",
@@ -82,9 +80,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     const afterChecks: AutorestRunResult[] = [
       {
         rootPath: afterPath,
-        readme: new Readme(
-          resolve(afterPath, "specification/service1/resource-manager/readme.md")
-        ),
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
         tag: "tag1",
         stdout: "stdout",
         stderr: "stderr",
@@ -100,7 +96,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     });
   });
 
-  test("correlates before and after runs with matching readme but no tag", async() => {
+  test("correlates before and after runs with matching readme but no tag", async () => {
     const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
     const beforePath = resolve(fixtureRoot, "before");
     const afterPath = resolve(fixtureRoot, "after");
@@ -108,9 +104,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     const afterChecks: AutorestRunResult[] = [
       {
         rootPath: afterPath,
-        readme: new Readme(
-          resolve(afterPath, "specification/service1/resource-manager/readme.md")
-        ),
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
         tag: "tag2",
         stdout: "stdout",
         stderr: "stderr",
@@ -125,8 +119,8 @@ describe.skipIf(isWindows())("correlateRuns", () => {
       after: afterChecks[0],
     });
   });
-  
-  test("uses no baseline if there are no matching before checks", async() => { 
+
+  test("uses no baseline if there are no matching before checks", async () => {
     const fixtureRoot = resolve(__dirname, "fixtures/correlateRuns");
     const beforePath = resolve(fixtureRoot, "before");
     const afterPath = resolve(fixtureRoot, "after");
@@ -135,7 +129,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
       {
         rootPath: beforePath,
         readme: new Readme(
-          resolve(beforePath, "specification/service1/resource-manager/readme.md")
+          resolve(beforePath, "specification/service1/resource-manager/readme.md"),
         ),
         tag: "",
         stdout: "stdout",
@@ -147,9 +141,7 @@ describe.skipIf(isWindows())("correlateRuns", () => {
     const afterChecks: AutorestRunResult[] = [
       {
         rootPath: afterPath,
-        readme: new Readme(
-          resolve(afterPath, "specification/service1/resource-manager/readme.md")
-        ),
+        readme: new Readme(resolve(afterPath, "specification/service1/resource-manager/readme.md")),
         tag: "tag2",
         stdout: "stdout",
         stderr: "stderr",
@@ -318,7 +310,9 @@ describe("getLintDiffViolations", async () => {
   }
 
   test("treats fatal errors as errors", () => {
-    const runResult = createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"fatal","message":"openapiValidatorPluginFunc: Failed validating: TypeError: azure-openapi-validator/core/src/runner.ts/LintRunner.runRules/processRule error. ruleName: RequiredPropertiesMissingInResourceModel, specFilePath: file:///mnt/vss/_work/1/azure-rest-api-specs/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json, jsonPath: , errorName: TypeError, errorMessage: Cannot read properties of undefined (reading 'readOnly')"}`);
+    const runResult = createRunResult(
+      `{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"fatal","message":"openapiValidatorPluginFunc: Failed validating: TypeError: azure-openapi-validator/core/src/runner.ts/LintRunner.runRules/processRule error. ruleName: RequiredPropertiesMissingInResourceModel, specFilePath: file:///mnt/vss/_work/1/azure-rest-api-specs/specification/monitor/resource-manager/Microsoft.Insights/stable/2018-01-01/metrics_API.json, jsonPath: , errorName: TypeError, errorMessage: Cannot read properties of undefined (reading 'readOnly')"}`,
+    );
     const violations = getLintDiffViolations(runResult);
 
     expect(violations.length).toEqual(1);
@@ -345,18 +339,15 @@ describe("getLintDiffViolations", async () => {
     expect(violations[0].code).toEqual("ArmResourcePropertiesBag");
   });
 
-  test(
-    "returns an empty array on violations that don't have extensionname @microsoft.azure/openapi-validator",
-    () => {
-      const runResult =
-        createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
+  test("returns an empty array on violations that don't have extensionname @microsoft.azure/openapi-validator", () => {
+    const runResult =
+      createRunResult(`{"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"spectralPluginFunc: Validating OpenAPI spec. TypeSpec-generated: true. Path: 'file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json'"}
 {"pluginName":"spectral","extensionName":"THIS IS FILTERED OUT","level":"error","message":"Top level property names should not be repeated inside the properties bag for ARM resource 'CodeSigningAccount'. Properties [properties.sku] conflict with ARM top level properties. Please rename these.","code":"ArmResourcePropertiesBag","details":{"jsonpath":["definitions","CodeSigningAccount"],"validationCategory":"ARMViolation","providerNamespace":false,"resourceType":false,"range":{"start":{"line":1036,"column":27},"end":{"line":1051,"column":6}}},"source":[{"document":"file:///home/djurek/azure-rest-api-specs/specification/codesigning/resource-manager/Microsoft.CodeSigning/stable/2025-03-30/codeSigningAccount.json","position":{"line":1036,"column":5}}]}
 {"pluginName":"spectral","extensionName":"@microsoft.azure/openapi-validator","level":"information","message":"openapiValidatorPluginFunc: Return"}`);
 
-      const violations = getLintDiffViolations(runResult);
-      expect(violations).toEqual([]);
-    },
-  );
+    const violations = getLintDiffViolations(runResult);
+    expect(violations).toEqual([]);
+  });
 
   test("returns a violation with code FATAL if the result.code is undefined", () => {
     const runResult = createRunResult(
@@ -408,7 +399,6 @@ describe("arrayIsEqual", () => {
     expect(result).toEqual(true);
   });
 });
-
 
 describe("getNewItems", () => {
   test("returns empty array when no before or after", () => {

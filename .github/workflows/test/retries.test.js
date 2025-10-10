@@ -1,5 +1,5 @@
-import { describe, it, expect, beforeEach, afterEach, vi } from "vitest";
-import { retry, fetchWithRetry } from "../src/retries.js";
+import { afterEach, beforeEach, describe, expect, it, vi } from "vitest";
+import { fetchWithRetry, retry } from "../src/retries.js";
 
 // Mock console.log to avoid cluttering test output
 const originalConsoleLog = console.log;
@@ -22,10 +22,7 @@ describe("retry function", () => {
   });
 
   it("should retry when function fails and then succeed", async () => {
-    const mockFn = vi
-      .fn()
-      .mockRejectedValueOnce(new Error("failure"))
-      .mockResolvedValue("success");
+    const mockFn = vi.fn().mockRejectedValueOnce(new Error("failure")).mockResolvedValue("success");
 
     // Use fake timers
     vi.useFakeTimers();

@@ -326,7 +326,7 @@
       },
       "patch": {
         "operationId": "Jobs_Update",
-        "description": "Update job properties.",
+        "description": "OLD METHOD: Update job properties.",
         "consumes": [
           "application/json-patch+json"
         ],
@@ -1245,7 +1245,7 @@
     },
     "Azure.Core.Foundations.InnerError": {
       "type": "object",
-      "description": "An object containing more specific information about the error. As per Microsoft One API guidelines - https://github.com/microsoft/api-guidelines/blob/vNext/azure/Guidelines.md#handling-errors.",
+      "description": "An object containing more specific information about the error. As per Azure REST API guidelines - https://aka.ms/AzureRestApiGuidelines#handling-errors.",
       "properties": {
         "code": {
           "type": "string",
@@ -1538,18 +1538,6 @@
           "description": "The time when a job was successfully cancelled.",
           "readOnly": true
         },
-        "tags": {
-          "type": "array",
-          "description": "List of user-supplied tags associated with the job.",
-          "items": {
-            "type": "string"
-          },
-          "x-ms-mutability": [
-            "read",
-            "update",
-            "create"
-          ]
-        },
         "quantumComputingData": {
           "$ref": "#/definitions/QuantumComputingData",
           "description": "Quantum computing data.",
@@ -1576,6 +1564,18 @@
           "description": "The format of the output data.",
           "x-ms-mutability": [
             "read",
+            "create"
+          ]
+        },
+        "tags": {
+          "type": "array",
+          "description": "List of user-supplied tags associated with the job.",
+          "items": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "update",
             "create"
           ]
         }

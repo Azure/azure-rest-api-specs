@@ -106,7 +106,7 @@ interface StorageTasks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("reports")
-  @operationId("StorageTasksReport_List")
+  @list
   list is ArmResourceActionSync<
     StorageTask,
     void,
@@ -132,7 +132,7 @@ interface StorageTasks {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @get
   @action("storageTaskAssignments")
-  @operationId("StorageTaskAssignment_List")
+  @list
   storageTaskAssignmentList is ArmResourceActionSync<
     StorageTask,
     void,

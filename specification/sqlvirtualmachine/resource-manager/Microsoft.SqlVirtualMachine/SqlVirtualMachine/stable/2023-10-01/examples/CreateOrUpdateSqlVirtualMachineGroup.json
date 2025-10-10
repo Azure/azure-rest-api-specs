@@ -1,0 +1,85 @@
+{
+  "parameters": {
+    "api-version": "2023-10-01",
+    "parameters": {
+      "location": "northeurope",
+      "properties": {
+        "sqlImageOffer": "SQL2016-WS2016",
+        "sqlImageSku": "Enterprise",
+        "wsfcDomainProfile": {
+          "clusterBootstrapAccount": "testrpadmin",
+          "clusterOperatorAccount": "testrp@testdomain.com",
+          "clusterSubnetType": "MultiSubnet",
+          "domainFqdn": "testdomain.com",
+          "isSqlServiceAccountGmsa": false,
+          "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+          "sqlServiceAccount": "sqlservice@testdomain.com",
+          "storageAccountPrimaryKey": "<primary storage access key>",
+          "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+        }
+      },
+      "tags": {
+        "mytag": "myval"
+      }
+    },
+    "resourceGroupName": "testrg",
+    "sqlVirtualMachineGroupName": "testvmgroup",
+    "subscriptionId": "00000000-1111-2222-3333-444444444444"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "testvmgroup",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+        "location": "northeurope",
+        "properties": {
+          "provisioningState": "UpdatingDomainful",
+          "sqlImageOffer": "SQL2016-WS2016",
+          "sqlImageSku": "Enterprise",
+          "wsfcDomainProfile": {
+            "clusterBootstrapAccount": "testrpadmin",
+            "clusterOperatorAccount": "testrp@testdomain.com",
+            "clusterSubnetType": "MultiSubnet",
+            "domainFqdn": "testdomain.com",
+            "isSqlServiceAccountGmsa": false,
+            "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+            "sqlServiceAccount": "sqlservice@testdomain.com",
+            "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+          }
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "name": "testvmgroup",
+        "type": "Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups",
+        "id": "/subscriptions/00000000-1111-2222-3333-444444444444/resourceGroups/testrg/providers/Microsoft.SqlVirtualMachine/sqlVirtualMachineGroups/testvmgroup",
+        "location": "northeurope",
+        "properties": {
+          "provisioningState": "ProvisioningDomainful",
+          "sqlImageOffer": "SQL2016-WS2016",
+          "sqlImageSku": "Enterprise",
+          "wsfcDomainProfile": {
+            "clusterBootstrapAccount": "testrpadmin",
+            "clusterOperatorAccount": "testrp@testdomain.com",
+            "clusterSubnetType": "MultiSubnet",
+            "domainFqdn": "testdomain.com",
+            "isSqlServiceAccountGmsa": false,
+            "ouPath": "OU=WSCluster,DC=testdomain,DC=com",
+            "sqlServiceAccount": "sqlservice@testdomain.com",
+            "storageAccountUrl": "https://storgact.blob.core.windows.net/"
+          }
+        },
+        "tags": {
+          "mytag": "myval"
+        }
+      }
+    }
+  },
+  "operationId": "SqlVirtualMachineGroups_CreateOrUpdate",
+  "title": "Creates or updates a SQL virtual machine group."
+}

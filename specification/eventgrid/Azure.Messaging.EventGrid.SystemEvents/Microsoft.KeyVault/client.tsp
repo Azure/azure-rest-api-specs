@@ -3,61 +3,61 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 //Models
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNewVersionCreatedEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNewVersionCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNearExpiryEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateNearExpiryEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateExpiredEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultCertificateExpiredEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNewVersionCreatedEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNewVersionCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNearExpiryEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyNearExpiryEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultKeyExpiredEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultKeyExpiredEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNewVersionCreatedEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNewVersionCreatedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNearExpiryEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretNearExpiryEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultSecretExpiredEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.KeyVaultAccessPolicyChangedEventData,
-  Usage.output
+  Usage.output | Usage.json
 );
 @@access(Microsoft.EventGrid.SystemEvents.KeyVaultAccessPolicyChangedEventData,
   Access.public

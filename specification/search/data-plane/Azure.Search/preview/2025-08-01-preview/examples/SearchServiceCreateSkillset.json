@@ -1,0 +1,479 @@
+{
+  "operationId": "Skillsets_Create",
+  "title": "SearchServiceCreateSkillset",
+  "parameters": {
+    "endpoint": "https://previewexampleservice.search.windows.net",
+    "api-version": "2025-08-01-preview",
+    "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
+    "skillset": {
+      "name": "tempskillset",
+      "description": "Skillset for extracting entities and more",
+      "skills": [
+        {
+          "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
+          "name": "skill2",
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/content"
+            },
+            {
+              "name": "countryHint",
+              "source": "/document/countryHint"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "languageCode",
+              "targetName": "languageCode"
+            }
+          ]
+        },
+        {
+          "textSplitMode": "pages",
+          "maximumPageLength": 4000,
+          "unit": "azureOpenAITokens",
+          "azureOpenAITokenizerParameters": {
+            "encoderModelName": "cl100k_base",
+            "allowedSpecialTokens": [
+              "[START]",
+              "[END]"
+            ]
+          },
+          "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+          "name": "skill3",
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/content"
+            },
+            {
+              "name": "languageCode",
+              "source": "/document/languageCode"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "textItems",
+              "targetName": "pages"
+            }
+          ]
+        },
+        {
+          "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+          "name": "skill4",
+          "context": "/document/pages/*",
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/content"
+            },
+            {
+              "name": "languageCode",
+              "source": "/document/languageCode"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "keyPhrases",
+              "targetName": "keyPhrases"
+            }
+          ]
+        },
+        {
+          "uri": "https://contoso.example.org/",
+          "httpMethod": "POST",
+          "timeout": "PT5S",
+          "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+          "name": "skill5",
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/content"
+            },
+            {
+              "name": "languageCode",
+              "source": "/document/languageCode"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "customresult",
+              "targetName": "result"
+            }
+          ]
+        },
+        {
+          "outputMode": "oneToMany",
+          "markdownHeaderDepth": "h3",
+          "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+          "name": "docIntelligenceLayoutSkill",
+          "context": "/document",
+          "inputs": [
+            {
+              "name": "file_data",
+              "source": "/document/content"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "markdown_document",
+              "targetName": "markdown_document"
+            }
+          ]
+        },
+        {
+          "outputFormat": "text",
+          "outputMode": "oneToMany",
+          "extractionOptions": [
+            "images",
+            "locationMetadata"
+          ],
+          "chunkingProperties": {
+            "unit": "characters",
+            "maximumLength": 500,
+            "overlapLength": 50
+          },
+          "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+          "name": "docIntelligenceLayoutSkill#2",
+          "context": "/document",
+          "inputs": [
+            {
+              "name": "file_data",
+              "source": "/document/content"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "text_sections",
+              "targetName": "text_sections"
+            },
+            {
+              "name": "normalized_images",
+              "targetName": "normalized_images"
+            }
+          ]
+        },
+        {
+          "apiKey": "<api-key>",
+          "commonModelParameters": {
+            "model": "gpt-4o",
+            "frequencyPenalty": 0,
+            "presencePenalty": 0,
+            "maxTokens": 0,
+            "temperature": 0,
+            "seed": 0,
+            "stop": []
+          },
+          "extraParameters": {
+            "safe_mode": true
+          },
+          "extraParametersBehavior": "error",
+          "responseFormat": {
+            "type": "jsonSchema",
+            "jsonSchemaProperties": {
+              "name": "Some Name",
+              "description": "Some Description",
+              "strict": true,
+              "schema": {
+                "type": "object",
+                "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}",
+                "required": [
+                  "steps",
+                  "answer"
+                ],
+                "additionalProperties": false
+              }
+            }
+          },
+          "uri": "https://azs-grok-aoai.openai.azure.com/openai/deployments/azs-grok-gpt-4o/chat/completions",
+          "timeout": "PT30S",
+          "degreeOfParallelism": 5,
+          "@odata.type": "#Microsoft.Skills.Custom.ChatCompletionSkill",
+          "name": "chatCompletionSkill",
+          "context": "/document/normalized_images/*",
+          "inputs": [
+            {
+              "name": "text",
+              "source": "/document/content"
+            },
+            {
+              "name": "systemMessage",
+              "source": "/document/system_message"
+            },
+            {
+              "name": "userMessage",
+              "source": "/document/user_message"
+            },
+            {
+              "name": "image",
+              "source": "/document/normalized_images/*"
+            },
+            {
+              "name": "imageDetail",
+              "source": "/document/detail"
+            }
+          ],
+          "outputs": [
+            {
+              "name": "response",
+              "targetName": "response"
+            }
+          ]
+        }
+      ],
+      "cognitiveServices": {
+        "key": "myKey",
+        "subdomainUrl": "https://mySubdomainName.cognitiveservices.azure.com",
+        "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey",
+        "description": "Description of the Azure AI service resource attached to a skillset"
+      },
+      "@odata.etag": "0x1234568AE7E58A1"
+    }
+  },
+  "responses": {
+    "201": {
+      "body": {
+        "@odata.etag": "0x1234568AE7E58A1",
+        "name": "tempskillset",
+        "description": "Skillset for extracting entities and more",
+        "skills": [
+          {
+            "@odata.type": "#Microsoft.Skills.Text.LanguageDetectionSkill",
+            "name": "skill2",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "countryHint",
+                "source": "/document/countryHint",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "languageCode",
+                "targetName": "languageCode"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Text.SplitSkill",
+            "name": "skill3",
+            "textSplitMode": "pages",
+            "maximumPageLength": 4000,
+            "unit": "azureOpenAITokens",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "textItems",
+                "targetName": "pages"
+              }
+            ],
+            "azureOpenAITokenizerParameters": {
+              "encoderModelName": "cl100k_base",
+              "allowedSpecialTokens": [
+                "[START]",
+                "[END]"
+              ]
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Text.KeyPhraseExtractionSkill",
+            "name": "skill4",
+            "context": "/document/pages/*",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "keyPhrases",
+                "targetName": "keyPhrases"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.WebApiSkill",
+            "name": "skill5",
+            "uri": "https://contoso.example.org/",
+            "httpMethod": "POST",
+            "timeout": "PT5S",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "languageCode",
+                "source": "/document/languageCode",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "customresult",
+                "targetName": "result"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "markdownHeaderDepth": "h3",
+            "extractionOptions": [],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "markdown_document",
+                "targetName": "markdown_document"
+              }
+            ]
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill",
+            "name": "docIntelligenceLayoutSkill#2",
+            "context": "/document",
+            "outputMode": "oneToMany",
+            "outputFormat": "text",
+            "extractionOptions": [
+              "images",
+              "locationMetadata"
+            ],
+            "inputs": [
+              {
+                "name": "file_data",
+                "source": "/document/content",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "text_sections",
+                "targetName": "text_sections"
+              },
+              {
+                "name": "normalized_images",
+                "targetName": "normalized_images"
+              }
+            ],
+            "chunkingProperties": {
+              "unit": "characters",
+              "maximumLength": 500,
+              "overlapLength": 50
+            }
+          },
+          {
+            "@odata.type": "#Microsoft.Skills.Custom.ChatCompletionSkill",
+            "name": "chatCompletionSkill",
+            "context": "/document/normalized_images/*",
+            "uri": "https://azs-grok-aoai.openai.azure.com/openai/deployments/azs-grok-gpt-4o/chat/completions",
+            "timeout": "PT30S",
+            "degreeOfParallelism": 5,
+            "apiKey": "<api-key>",
+            "extraParametersBehavior": "error",
+            "inputs": [
+              {
+                "name": "text",
+                "source": "/document/content",
+                "inputs": []
+              },
+              {
+                "name": "systemMessage",
+                "source": "/document/system_message",
+                "inputs": []
+              },
+              {
+                "name": "userMessage",
+                "source": "/document/user_message",
+                "inputs": []
+              },
+              {
+                "name": "image",
+                "source": "/document/normalized_images/*",
+                "inputs": []
+              },
+              {
+                "name": "imageDetail",
+                "source": "/document/detail",
+                "inputs": []
+              }
+            ],
+            "outputs": [
+              {
+                "name": "response",
+                "targetName": "response"
+              }
+            ],
+            "commonModelParameters": {
+              "model": "gpt-4o",
+              "frequencyPenalty": 0,
+              "presencePenalty": 0,
+              "maxTokens": 0,
+              "temperature": 0,
+              "seed": 0,
+              "stop": []
+            },
+            "extraParameters": {
+              "safe_mode": true
+            },
+            "responseFormat": {
+              "type": "jsonSchema",
+              "jsonSchemaProperties": {
+                "name": "Some Name",
+                "description": "Some Description",
+                "strict": true,
+                "schema": {
+                  "type": "object",
+                  "additionalProperties": false,
+                  "required": [
+                    "steps",
+                    "answer"
+                  ],
+                  "properties": "{\"steps\": {\"type\": \"array\", \"description\": \"A list of reasoning steps.\", \"items\": {\"type\": \"string\"}}, \"answer\": {\"type\": \"string\", \"description\": \"The final answer.\"}}"
+                }
+              }
+            }
+          }
+        ],
+        "cognitiveServices": {
+          "@odata.type": "#Microsoft.Azure.Search.AIServicesByKey",
+          "description": "Description of the Azure AI service resource attached to a skillset",
+          "key": "myKey",
+          "subdomainUrl": "https://mySubdomainName.cognitiveservices.azure.com"
+        }
+      }
+    }
+  }
+}

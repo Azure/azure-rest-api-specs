@@ -25,10 +25,12 @@ export function generatePrompts(jsonObj: any): string[] {
     }
   }
 
-  const suggestionsAsString = suggestedFixes.map(s => s.suggestion);
+  const suggestionsAsString = suggestedFixes.map((s) => s.suggestion);
   if (suggestedFixes.length > 0) {
     jsonOutput.suggestions.push(...suggestedFixes);
-    suggestionsAsString.unshift(`You are an expert in TypeSpec. Follow the prompt exactly as written. Do not add any additional suggestions or modifications unless explicitly requested.`);
+    suggestionsAsString.unshift(
+      `You are an expert in TypeSpec. Follow the prompt exactly as written. Do not add any additional suggestions or modifications unless explicitly requested.`,
+    );
     for (let i = 1; i < suggestionsAsString.length; i++) {
       suggestionsAsString[i] = `${i}. ${suggestionsAsString[i]}`;
     }

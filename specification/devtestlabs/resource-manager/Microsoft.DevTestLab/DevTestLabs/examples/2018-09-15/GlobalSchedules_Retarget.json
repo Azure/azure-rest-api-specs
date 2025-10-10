@@ -1,0 +1,22 @@
+{
+  "parameters": {
+    "name": "{scheduleName}",
+    "api-version": "2018-09-15",
+    "resourceGroupName": "resourceGroupName",
+    "retargetScheduleProperties": {
+      "currentResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{targetLab}",
+      "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{currentLab}"
+    },
+    "subscriptionId": "{subscriptionId}"
+  },
+  "responses": {
+    "200": {},
+    "202": {
+      "headers": {
+        "location": "https://management.azure.com/subscriptions/{subscriptionId}/resourceGroup/{resourceGroupName}/providers/Microsoft.DevTestLabs/locations/{location}"
+      }
+    }
+  },
+  "operationId": "GlobalSchedules_Retarget",
+  "title": "GlobalSchedules_Retarget"
+}

@@ -73,3 +73,5 @@ using Microsoft.Dashboard;
   "java"
 );
 @@clientName(Smtp.startTLSPolicy, "startTlsPolicy", "java");
+@@clientName(Microsoft.Dashboard, "DashboardManagementClient", "javascript");
+@@clientName(Microsoft.Dashboard, "DashboardManagementClient", "python");

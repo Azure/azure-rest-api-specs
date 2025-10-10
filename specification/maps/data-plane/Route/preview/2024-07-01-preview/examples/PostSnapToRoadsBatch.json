@@ -66,10 +66,6 @@
   "responses": {
     "200": {
       "body": {
-        "summary": {
-          "successfulRequests": 1,
-          "totalRequests": 2
-        },
         "batchItems": [
           {
             "type": "FeatureCollection",
@@ -77,30 +73,32 @@
               {
                 "type": "Feature",
                 "geometry": {
+                  "type": "Point",
                   "coordinates": [
-                    -122.336769,
-                    47.590885
-                  ],
-                  "type": "Point"
+                    -122.336773,
+                    47.590876
+                  ]
                 },
                 "properties": {
                   "inputIndex": 0,
-                  "name": "WA-99 N",
+                  "isInterpolated": false,
+                  "name": "State Rte-99 N",
                   "speedLimitInKilometersPerHour": 80
                 }
               },
               {
                 "type": "Feature",
                 "geometry": {
+                  "type": "Point",
                   "coordinates": [
                     -122.336008,
-                    47.601609
-                  ],
-                  "type": "Point"
+                    47.601606
+                  ]
                 },
                 "properties": {
                   "inputIndex": 1,
-                  "name": "WA-99 N",
+                  "isInterpolated": false,
+                  "name": "State Rte-99 N",
                   "speedLimitInKilometersPerHour": 80
                 }
               }
@@ -109,10 +107,14 @@
           {
             "error": {
               "code": "BadRequest",
-              "message": "The distance between two consecutive points (-122.133269,47.6470965) (-74.00487,40.71396) must be within 2.5 kilometers of each other."
+              "message": "The distance between two consecutive points (-122.133269,47.6470965) (-74.00487,40.71396) must be within 6 kilometers of each other."
             }
           }
-        ]
+        ],
+        "summary": {
+          "successfulRequests": 1,
+          "totalRequests": 2
+        }
       }
     }
   }

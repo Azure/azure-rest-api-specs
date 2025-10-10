@@ -1,0 +1,34 @@
+{
+  "operationId": "CloudHsmClusterBackupStatus_Get",
+  "parameters": {
+    "api-version": "2025-03-31",
+    "cloudHsmClusterName": "chsm1",
+    "jobId": "572a45927fc240e1ac075de27371680b",
+    "resourceGroupName": "rgcloudhsm",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "title": "CloudHsmCluster_Get_Backup_Status_MaximumSet_Gen",
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "azureStorageBlobContainerUri": "https://myaccount.blob.core.windows.net/sascontainer/sasContainer",
+          "endTime": "2022-09-12T12:00:00.0000000Z",
+          "jobId": "572a45927fc240e1ac075de27371680b",
+          "startTime": "2022-09-12T12:00:00.0000000Z",
+          "status": "InProgress",
+          "statusDetails": "Backup operation is in progress"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "https://chsm-prebackup-polling-uri/",
+        "Retry-After": 5
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://chsm-prebackup-polling-uri/"
+      }
+    }
+  }
+}

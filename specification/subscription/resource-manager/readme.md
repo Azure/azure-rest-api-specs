@@ -4,10 +4,10 @@
 
 This is the AutoRest configuration file for Subscription.
 
-
-
 ---
+
 ## Getting Started
+
 To build the SDK for Subscription, simply [Install AutoRest](https://aka.ms/autorest/install) and in this folder, run:
 
 > `autorest`
@@ -15,12 +15,14 @@ To build the SDK for Subscription, simply [Install AutoRest](https://aka.ms/auto
 To see additional help and options, run:
 
 > `autorest --help`
+
 ---
 
 ## Configuration
 
 ### Suppression
-``` yaml
+
+```yaml
 directive:
   - suppress: R2059
   - suppress: PutResponseCodes
@@ -46,22 +48,22 @@ directive:
     reason: The delete operation response for subscription changed directory expected to return 200 on every user's request, once it's deleted it will return 404, since it's a change on the existing api with new version, but creating workitem - "https://msazure.visualstudio.com/One/_workitems/edit/29188912", to refactor the call on delete request and will return 204 as no content in such cases to take this item in future ref.
 ```
 
-
 ### Basic Information
+
 These are the global settings for the Subscription API.
 
-``` yaml
+```yaml
 openapi-type: arm
-tag: package-2021-10
+tag: package-2024-08-preview
 ```
 
 ### Tag: package-2024-08-preview
 
 These settings apply only when `--tag=package-2024-08-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-08-preview'
+```yaml $(tag) == 'package-2024-08-preview'
 input-file:
-- Microsoft.Subscription/preview/2024-08-01-preview/subscriptions.json
+  - Microsoft.Subscription/preview/2024-08-01-preview/subscriptions.json
 title: Initiate, Get and Accept Subscription Changed Directory
 description: Initiate, Get and Accept Subscription Changed Directory
 ```
@@ -70,10 +72,9 @@ description: Initiate, Get and Accept Subscription Changed Directory
 
 These settings apply only when `--tag=package-2021-10` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-10'
+```yaml $(tag) == 'package-2021-10'
 input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
-- Microsoft.Subscription/stable/2021-10-01/subscriptions.json
+  - Microsoft.Subscription/stable/2021-10-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -82,10 +83,9 @@ description: The subscription client
 
 These settings apply only when `--tag=package-2020-09` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-09'
+```yaml $(tag) == 'package-2020-09'
 input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
-- Microsoft.Subscription/stable/2020-09-01/subscriptions.json
+  - Microsoft.Subscription/stable/2020-09-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -94,9 +94,9 @@ description: The subscription client
 
 These settings apply only when `--tag=package-2020-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-01'
+```yaml $(tag) == 'package-2020-01'
 input-file:
-- Microsoft.Subscription/stable/2020-01-01/subscriptions.json
+  - Microsoft.Subscription/stable/2020-01-01/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -105,10 +105,9 @@ description: The subscription client
 
 These settings apply only when `--tag=package-2019-10-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-10-preview'
+```yaml $(tag) == 'package-2019-10-preview'
 input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
-- Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
+  - Microsoft.Subscription/preview/2019-10-01-preview/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -117,12 +116,9 @@ description: The subscription client
 
 These settings apply only when `--tag=package-2019-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-03-preview'
+```yaml $(tag) == 'package-2019-03-preview'
 input-file:
-- Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
-- Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
-- Microsoft.Subscription/preview/2018-03-01-preview/operations.json
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+  - Microsoft.Subscription/preview/2019-03-01-preview/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -131,10 +127,9 @@ description: The subscription client
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-11-preview'
+```yaml $(tag) == 'package-2018-11-preview'
 input-file:
-- Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+  - Microsoft.Subscription/preview/2018-11-01-preview/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -143,10 +138,9 @@ description: The subscription client
 
 These settings apply only when `--tag=package-2018-03-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-03-preview'
+```yaml $(tag) == 'package-2018-03-preview'
 input-file:
-- Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
+  - Microsoft.Subscription/preview/2018-03-01-preview/subscriptions.json
 title: SubscriptionClient
 description: The subscription client
 ```
@@ -155,21 +149,21 @@ description: The subscription client
 
 These settings apply only when `--tag=package-2017-11-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-11-preview'
+```yaml $(tag) == 'package-2017-11-preview'
 input-file:
-- Microsoft.Subscription/preview/2017-11-01-preview/subscriptionDefinitions.json
+  - Microsoft.Subscription/preview/2017-11-01-preview/subscriptionDefinitions.json
 ```
 
 ---
-# Code Generation
 
+# Code Generation
 
 ## Swagger to SDK
 
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net
   - repo: azure-sdk-for-go
@@ -194,7 +188,7 @@ See configuration in [readme.go.md](./readme.go.md)
 These settings apply only when `--java` is specified on the command line.
 Please also specify `--azure-libraries-for-java-folder=<path to the root directory of your azure-libraries-for-java clone>`.
 
-``` yaml $(java)
+```yaml $(java)
 azure-arm: true
 fluent: true
 namespace: com.microsoft.azure.management.subscription
@@ -205,7 +199,7 @@ output-folder: $(azure-libraries-for-java-folder)/azure-mgmt-subscription
 
 ### Java multi-api
 
-``` yaml $(java) && $(multiapi)
+```yaml $(java) && $(multiapi)
 batch:
   - tag: package-2019-10-preview
   - tag: package-2017-11-preview
@@ -216,7 +210,7 @@ batch:
 These settings apply only when `--tag=package-2019-10-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
+```yaml $(tag) == 'package-2019-10-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.subscription.v2019_10_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/subscription/mgmt-v2019_10_01_preview
@@ -229,25 +223,10 @@ generate-interface: true
 These settings apply only when `--tag=package-2017-11-preview --java` is specified on the command line.
 Please also specify `--azure-libraries-for-java=<path to the root directory of your azure-sdk-for-java clone>`.
 
-``` yaml $(tag) == 'package-2017-11-preview' && $(java) && $(multiapi)
+```yaml $(tag) == 'package-2017-11-preview' && $(java) && $(multiapi)
 java:
   namespace: com.microsoft.azure.management.subscription.v2017_11_01_preview
   output-folder: $(azure-libraries-for-java-folder)/sdk/subscription/mgmt-v2017_11_01_preview
 regenerate-manager: true
 generate-interface: true
 ```
-
-### Tag: package-2016-06-01
-
-These settings apply only when `--tag=package-2016-06-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-2016-06-01'
-input-file:
-- Microsoft.Subscription/stable/2016-06-01/subscriptions.json
-title: SubscriptionClient
-description: The subscription client
-```
-
-
-
-

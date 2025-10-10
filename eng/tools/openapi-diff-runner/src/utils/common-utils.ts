@@ -1,52 +1,23 @@
-import { existsSync, readFileSync } from "node:fs";
+import { readFile } from "node:fs/promises";
+import { Context } from "../types/breaking-change.js";
 import { FilePosition } from "../types/message.js";
-import { logMessage } from "../log.js";
 
-export function blobHref(file: unknown): string {
-  // GitHub Actions scenario
-  if (process.env.GITHUB_ACTIONS) {
-    const repoName = process.env.GITHUB_HEAD_REPOSITORY || process.env.GITHUB_REPOSITORY;
-    const sha = process.env.GITHUB_SHA || process.env.GITHUB_EVENT_PULL_REQUEST_HEAD_SHA;
-    return `https://github.com/${repoName}/blob/${sha}/${file}`;
-  }
-
-  // Local development scenario
-  return `${file}`;
+export function blobHref(repo: string, sha: string, file: string): string {
+  return `https://github.com/${repo}/blob/${sha}/${file}`;
 }
 
 /**
  * Get the Github url of targeted swagger file.
+ * @param repo The repository name in the format "owner/repoName"
+ * @param branch The branch name, e.g. "main"
  * @param file Swagger file starts with "specification"
  */
-export function targetHref(file: string) {
-  return file
-    ? `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${getTargetBranch()}/${file}`
-    : "";
+export function targetHref(repo: string, branch: string, file: string) {
+  return file ? `https://github.com/${repo}/blob/${branch}/${file}` : "";
 }
 
-export function branchHref(file: string, branch: string = "main") {
-  return file ? `https://github.com/${process.env.GITHUB_REPOSITORY}/blob/${branch}/${file}` : "";
-}
-
-/**
- * Gets the name of the target branch to which the PR is sent.
- * If the environment variable is undefined then the method returns 'main' as the default value.
- * @returns {string} branchName The target branch name.
- */
-export function getTargetBranch(): string {
-  // For GitHub Actions, use GITHUB_BASE_REF for pull requests, fallback to GITHUB_REF_NAME for direct pushes
-  const githubBaseRef = process.env["GITHUB_BASE_REF"]; // Target branch for PR
-  const githubRefName = process.env["GITHUB_REF_NAME"]; // Current branch name
-  logMessage(
-    `@@@@@ process.env['GITHUB_BASE_REF'] - ${githubBaseRef}, process.env['GITHUB_REF_NAME'] - ${githubRefName}`,
-  );
-
-  // For pull requests, use GITHUB_BASE_REF (target branch)
-  // For direct pushes, use GITHUB_REF_NAME (current branch) or fallback to "main"
-  let result = githubBaseRef || githubRefName || "main";
-  result = result.trim();
-  logMessage(`>>>>> The target branch is: "${result}".`);
-  return result;
+export function branchHref(repo: string, file: string, branch: string = "main") {
+  return file ? `https://github.com/${repo}/blob/${branch}/${file}` : "";
 }
 
 /**
@@ -76,29 +47,52 @@ export function getRelativeSwaggerPathToRepo(
   return filePath.substring(position, filePath.length);
 }
 
-export function sourceBranchHref(file: string, filePos?: FilePosition): string {
-  return blobHref(getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos));
+export function sourceBranchHref(
+  repo: string,
+  sha: string,
+  file: string,
+  filePos?: FilePosition,
+): string {
+  return blobHref(repo, sha, getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos));
 }
 
-export function targetBranchHref(file: string, filePos?: FilePosition): string {
-  return targetHref(getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos));
+export function targetBranchHref(
+  repo: string,
+  branch: string,
+  file: string,
+  filePos?: FilePosition,
+): string {
+  return targetHref(
+    repo,
+    branch,
+    getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos),
+  );
 }
 
 export function specificBranchHref(
+  repo: string,
   file: string,
   branchName: string,
   filePos?: FilePosition,
 ): string {
   return branchHref(
+    repo,
     getGithubStyleFilePath(getRelativeSwaggerPathToRepo(file), filePos),
     branchName,
   );
 }
 
-export function getVersionFromInputFile(filePath: string, withPreview = false): string | undefined {
+export async function getVersionFromInputFile(
+  filePath: string,
+  withPreview = false,
+): Promise<string> {
   const apiVersionRegex = /^\d{4}-\d{2}-\d{2}(|-preview|-privatepreview|-alpha|-beta|-rc)$/;
-  const segments = filePath.split("/");
-  if (filePath.indexOf("data-plane") !== -1) {
+
+  // Normalize path separators to forward slashes for consistent processing
+  const normalizedPath = filePath.replace(/\\/g, "/");
+  const segments = normalizedPath.split("/");
+
+  if (normalizedPath.indexOf("data-plane") !== -1) {
     if (segments && segments.length > 1) {
       for (const s of segments.entries()) {
         if (["stable", "preview"].some((v) => v === s[1])) {
@@ -120,10 +114,20 @@ export function getVersionFromInputFile(filePath: string, withPreview = false): 
       }
     }
   }
-  if (existsSync(filePath)) {
-    return JSON.parse(readFileSync(filePath).toString())?.info?.version;
+
+  let version = "";
+  // If no regex match found, try to read version from file content
+  try {
+    const fileContent = await readFile(filePath, "utf8");
+    const parsedContent = JSON.parse(fileContent);
+    version = parsedContent?.info?.version;
+  } catch (error) {
+    throw new Error(`Failed to read version from file:${filePath}, cause: ${error}`);
   }
-  return undefined;
+  if (!version) {
+    throw new Error(`Version not found in file: ${filePath}`);
+  }
+  return version;
 }
 
 export function getArgumentValue(args: string[], flag: string, defaultValue: string): string {
@@ -204,4 +208,45 @@ export function processOadRuntimeErrorMessage(
 export function specIsPreview(specPath: string): boolean {
   // Example input value: specification/maps/data-plane/Creator/preview/2022-09-01-preview/wayfind.json
   return specPath.includes("/preview/") && !specPath.includes("/stable/");
+}
+
+export function convertRawErrorToUnifiedMsg(
+  context: Context,
+  errType: string,
+  errorMsg: string,
+  levelType = "Error",
+  location: string | undefined = undefined,
+): string {
+  const extra: { [index: string]: string } = {};
+  extra.details = errorMsg;
+  if (location) {
+    extra.location = targetBranchHref(context.targetRepo, context.prTargetBranch, location);
+  }
+  const result = {
+    type: "Raw",
+    level: levelType,
+    message: errType,
+    time: new Date(),
+    extra: {
+      ...extra,
+    },
+  };
+  return JSON.stringify(result);
+}
+
+/**
+ * Check if the PR targets a production branch.
+ * The production branches are defined at https://aka.ms/azsdk/pr-brch-deep
+ * @param targetRepo The repository name, e.g. "azure-rest-api-specs" or "azure-rest-api-specs-pr".
+ * @param targetBranch The target branch of the PR.
+ * @returns {boolean} True if the PR targets a production branch, false otherwise.
+ */
+export function checkPrTargetsProductionBranch(targetRepo: string, targetBranch: string): boolean {
+  const targetsPublicProductionBranch =
+    targetRepo.endsWith("azure-rest-api-specs") && targetBranch === "main";
+
+  const targetsPrivateProductionBranch =
+    targetRepo.endsWith("azure-rest-api-specs-pr") && targetBranch === "RPSaaSMaster";
+
+  return targetsPublicProductionBranch || targetsPrivateProductionBranch;
 }

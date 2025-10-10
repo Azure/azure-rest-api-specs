@@ -1,0 +1,10 @@
+- tool: TypeSpecValidation
+  paths:
+    - tspconfig.yaml
+  rules:
+    - SdkTspConfigValidation
+  sub-rules:
+    # Suppress JS package & dir names related to RLC, which require "rest" in the name. We do not use RLC.
+    - options.@azure-tools/typespec-ts.package-dir
+    - options.@azure-tools/typespec-ts.package-details.name
+  reason: 'See above comments for details'

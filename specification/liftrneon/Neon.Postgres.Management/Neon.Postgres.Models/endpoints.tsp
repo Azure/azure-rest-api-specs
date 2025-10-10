@@ -1,10 +1,8 @@
 import "./commons.tsp"; // Import common types
 
-using TypeSpec.Http;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
-using LiftrBase.Data;
 
 namespace Neon.Postgres;
 
@@ -33,6 +31,30 @@ model EndpointProperties {
 
   @doc("The type of the endpoint")
   endpointType?: EndpointType;
+
+  @doc("Unique identifier for the compute endpoint")
+  @pattern("^[a-z0-9-]{1,60}$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  endpointId?: string;
+
+  @doc("Name of the compute endpoint")
+  @pattern("^\\S.{0,62}\\S$|^\\S$")
+  @added(Neon.Postgres.Versions.v3_preview)
+  computeName?: string;
+
+  @doc("The current status of the compute endpoint")
+  @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
+  status?: EndpointStatus;
+
+  @doc("The timestamp when the compute endpoint was last active")
+  @added(Neon.Postgres.Versions.v3_preview)
+  @visibility(Lifecycle.Read)
+  lastActive?: string;
+
+  @doc("The compute units size range for autoscaling (MinCU-MaxCU)")
+  @added(Neon.Postgres.Versions.v3_preview)
+  size?: AutoscalingSize;
 }
 
 @doc("The compute endpoint type. Either read_write or read_only.")
@@ -45,4 +67,29 @@ union EndpointType {
 
   @doc("ReadWrite compute endpoint type")
   ReadWrite: "read_write",
+}
+
+@doc("The current status of the compute endpoint.")
+@added(Neon.Postgres.Versions.v3_preview)
+union EndpointStatus {
+  string,
+
+  @doc("The compute endpoint is currently initializing")
+  Init: "init",
+
+  @doc("The compute endpoint is currently active")
+  Active: "active",
+
+  @doc("The compute endpoint is currently idle")
+  Idle: "idle",
+}
+
+@doc("Represents the compute units size range for autoscaling")
+@added(Neon.Postgres.Versions.v3_preview)
+model AutoscalingSize {
+  @doc("The minimum compute units for autoscaling")
+  autoscalingLimitMinCu: float32;
+
+  @doc("The maximum compute units for autoscaling")
+  autoscalingLimitMaxCu: float32;
 }

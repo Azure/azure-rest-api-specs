@@ -1,7 +1,6 @@
-import { marked } from "marked";
-import { kebabCase } from "change-case";
-import axios from "axios";
 import { Readme } from "@azure-tools/specs-shared/readme";
+import { kebabCase } from "change-case";
+import { marked } from "marked";
 
 export enum MarkdownType {
   Arm = "arm",
@@ -16,11 +15,12 @@ export enum MarkdownType {
  */
 // TODO: Should this be placed in the Readme class?
 export async function getOpenapiType(readme: Readme): Promise<MarkdownType> {
-  const openapiType = (await readme.getGlobalConfig() as { "openapi-type"?: string })["openapi-type"];
+  const openapiType = ((await readme.getGlobalConfig()) as { "openapi-type"?: string })[
+    "openapi-type"
+  ];
   if (openapiType && Object.values(MarkdownType).includes(openapiType as MarkdownType)) {
     return openapiType as MarkdownType;
   }
-
 
   // Fallback, no openapi-type found in the file. Look at path to determine type
   // resource-manager: Arm
@@ -84,7 +84,10 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   const rpcRules: string[] = [];
   let response;
   try {
-    response = await axios.get(docUrl);
+    response = await fetch(docUrl);
+    if (!response.ok) {
+      throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+    }
   } catch (e: any) {
     // TODO: Retry? Fail ungracefully?
     console.log(`GET ${docUrl} failed with ${e.message} .`);
@@ -93,7 +96,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   }
 
   // Use marked to parse the markdown and extract the related ARM guideline codes
-  const tokens = marked.lexer(response.data);
+  const tokens = marked.lexer(await response.text());
   for (let i = 0; i < tokens.length; i++) {
     const token = tokens[i];
     if (
@@ -119,7 +122,7 @@ export async function getRelatedArmRpcFromDoc(ruleName: string): Promise<string[
   return rpcRules;
 }
 
-export async function getDefaultTag(readme: Readme): Promise<string> { 
-  const tag = (await readme.getGlobalConfig() as { tag?: string }).tag;
+export async function getDefaultTag(readme: Readme): Promise<string> {
+  const tag = ((await readme.getGlobalConfig()) as { tag?: string }).tag;
   return tag ? tag : "";
 }

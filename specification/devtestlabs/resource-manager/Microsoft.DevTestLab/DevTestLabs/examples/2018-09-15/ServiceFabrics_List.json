@@ -1,0 +1,123 @@
+{
+  "parameters": {
+    "api-version": "2018-09-15",
+    "labName": "{labName}",
+    "resourceGroupName": "resourceGroupName",
+    "subscriptionId": "{subscriptionId}",
+    "userName": "{userName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "{serviceFabricName}",
+            "type": "Microsoft.DevTestLab/labs/users/serviceFabrics",
+            "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/users/{userName}/servicefabrics/{serviceFabricName}",
+            "location": "{location}",
+            "properties": {
+              "applicableSchedule": {
+                "name": "{scheduleName}",
+                "type": "{scheduleType}",
+                "id": "/subscriptions/{subscriptionId}/resourceGroups/resourceGroupName/providers/Microsoft.DevTestLab/labs/{labName}/schedules/{scheduleName}",
+                "location": "{location}",
+                "properties": {
+                  "labVmsShutdown": {
+                    "name": "{scheduleName}",
+                    "type": "Microsoft.DevTestLab/labs/schedules",
+                    "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/schedules/{scheduleName}",
+                    "location": "{location}",
+                    "properties": {
+                      "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+                      "dailyRecurrence": {
+                        "time": "{timeOfTheDayTheScheduleWillOccurEveryDay}"
+                      },
+                      "hourlyRecurrence": {
+                        "minute": 30
+                      },
+                      "notificationSettings": {
+                        "emailRecipient": "{email}",
+                        "notificationLocale": "EN",
+                        "status": "{Enabled|Disabled}",
+                        "timeInMinutes": 15,
+                        "webhookUrl": "{webhookUrl}"
+                      },
+                      "provisioningState": "Creating",
+                      "status": "{Enabled|Disabled}",
+                      "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}",
+                      "taskType": "{myLabVmTaskType}",
+                      "timeZoneId": "Pacific Standard Time",
+                      "uniqueIdentifier": "{uniqueIdentifier}",
+                      "weeklyRecurrence": {
+                        "time": "{timeOfTheDayTheScheduleWillOccurOnThoseDays}",
+                        "weekdays": [
+                          "Monday",
+                          "Wednesday",
+                          "Friday"
+                        ]
+                      }
+                    },
+                    "tags": {
+                      "tagName1": "tagValue1"
+                    }
+                  },
+                  "labVmsStartup": {
+                    "name": "{scheduleName}",
+                    "type": "Microsoft.DevTestLab/labs/schedules",
+                    "id": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}/schedules/{scheduleName}",
+                    "location": "{location}",
+                    "properties": {
+                      "createdDate": "2018-10-01T18:40:48.1739018-07:00",
+                      "dailyRecurrence": {
+                        "time": "{timeOfTheDayTheScheduleWillOccurEveryDay}"
+                      },
+                      "hourlyRecurrence": {
+                        "minute": 30
+                      },
+                      "notificationSettings": {
+                        "emailRecipient": "{email}",
+                        "notificationLocale": "EN",
+                        "status": "{Enabled|Disabled}",
+                        "timeInMinutes": 15,
+                        "webhookUrl": "{webhookUrl}"
+                      },
+                      "provisioningState": "Creating",
+                      "status": "{Enabled|Disabled}",
+                      "targetResourceId": "/subscriptions/{subscriptionId}/resourcegroups/resourceGroupName/providers/microsoft.devtestlab/labs/{labName}",
+                      "taskType": "{myLabVmTaskType}",
+                      "timeZoneId": "Pacific Standard Time",
+                      "uniqueIdentifier": "{uniqueIdentifier}",
+                      "weeklyRecurrence": {
+                        "time": "{timeOfTheDayTheScheduleWillOccurOnThoseDays}",
+                        "weekdays": [
+                          "Monday",
+                          "Wednesday",
+                          "Friday"
+                        ]
+                      }
+                    },
+                    "tags": {
+                      "tagName1": "tagValue1"
+                    }
+                  }
+                },
+                "tags": {
+                  "tagName1": "tagValue1"
+                }
+              },
+              "environmentId": "{environmentId}",
+              "externalServiceFabricId": "{serviceFabricId}",
+              "provisioningState": "Succeeded",
+              "uniqueIdentifier": "{uniqueIdentifier}"
+            },
+            "tags": {
+              "tagName1": "tagValue1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "ServiceFabrics_List",
+  "title": "ServiceFabrics_List"
+}

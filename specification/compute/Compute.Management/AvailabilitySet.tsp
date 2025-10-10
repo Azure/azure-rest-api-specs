@@ -85,6 +85,7 @@ interface AvailabilitySets {
    */
   @get
   @action("vmSizes")
+  @list
   listAvailableSizes is ComputeResourceActionSync<
     AvailabilitySet,
     void,
