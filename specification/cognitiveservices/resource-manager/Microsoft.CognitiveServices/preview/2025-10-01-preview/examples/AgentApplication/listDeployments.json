@@ -17,16 +17,24 @@
             "name": "deploy-001",
             "type": "Microsoft.CognitiveServices/accounts/projects/applications/deployments",
             "properties": {
-              "description": "Production deployment for customer support agents",
-              "tags": {
-                "environment": "production",
-                "region": "eastus"
-              },
-              "deploymentId": "deploy-001",
-              "agentId": "agent-001",
-              "environment": "production",
-              "status": "Running",
-              "endpoint": "https://eastus.api.azureml.ms/agents/agent-001"
+              "displayName": "Production deployment for customer support agents",
+              "deploymentId": "550e8400-e29b-41d4-a716-446655440001",
+              "state": "Running",
+              "deploymentType": "Managed",
+              "protocols": [
+                {
+                  "protocol": "Agent",
+                  "version": "1.0"
+                }
+              ],
+              "agents": [
+                {
+                  "agentId": "agent-001",
+                  "agentName": "CustomerSupportAgent",
+                  "agentVersion": "1.2.0"
+                }
+              ],
+              "provisioningState": "Succeeded"
             },
             "systemData": {
               "createdAt": "2024-09-29T12:34:56.999Z",
@@ -42,16 +50,26 @@
             "name": "deploy-002",
             "type": "Microsoft.CognitiveServices/accounts/projects/applications/deployments",
             "properties": {
-              "description": "Staging deployment for testing new features",
-              "tags": {
-                "environment": "staging",
-                "region": "westus"
-              },
-              "deploymentId": "deploy-002",
-              "agentId": "agent-002",
-              "environment": "staging",
-              "status": "Running",
-              "endpoint": "https://westus.api.azureml.ms/agents/agent-002"
+              "displayName": "Staging deployment for testing new features",
+              "deploymentId": "550e8400-e29b-41d4-a716-446655440002",
+              "state": "Running",
+              "deploymentType": "Hosted",
+              "protocols": [
+                {
+                  "protocol": "Agent",
+                  "version": "1.0"
+                }
+              ],
+              "agents": [
+                {
+                  "agentId": "agent-002",
+                  "agentName": "TechnicalSupportAgent",
+                  "agentVersion": "1.1.0"
+                }
+              ],
+              "provisioningState": "Succeeded",
+              "minReplicas": 2,
+              "maxReplicas": 10
             },
             "systemData": {
               "createdAt": "2024-09-29T12:34:56.999Z",
