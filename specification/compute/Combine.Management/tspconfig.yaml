@@ -13,10 +13,17 @@ options:
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armcompute"
     fix-const-stuttering: true
     flavor: "azure"
-    generate-samples: true
+    generate-samples: false
     generate-fakes: true
     head-as-boolean: true
     inject-spans: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories: 
+      - specification/compute/Common.Management/
+      - specification/compute/Compute.Management/
+      - specification/compute/Disk.Management/
+      - specification/compute/Gallery.Management/
+      - specification/compute/Sku.Management/
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
