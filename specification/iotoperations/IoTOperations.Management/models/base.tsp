@@ -1,5 +1,7 @@
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-azure-core";
 
+using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
@@ -27,6 +29,7 @@ union ExtendedLocationType {
 }
 
 @doc("The enum defining status of resource.")
+@lroStatus
 union ProvisioningState {
   string,
   ResourceProvisioningState,
@@ -43,6 +46,31 @@ union ProvisioningState {
   @doc("Resource has been Accepted.")
   Accepted: "Accepted",
 }
+
+@doc("The health state of the resource.")
+@added(Versions.`2025-10-01`)
+union ResourceHealthState {
+  string,
+
+  @doc("Resource is Available and functioning as expected.")
+  Available,
+
+  @doc("Resource health is degraded.")
+  Degraded,
+
+  @doc("Resource is not functioning as expected.")
+  Unavailable,
+
+  @doc("Resource state is unknown.")
+  Unknown,
+}
+
+alias ResourceHealth = {
+  @doc("The health state of the resource.")
+  @added(Versions.`2025-10-01`)
+  @visibility(Lifecycle.Read)
+  healthState?: ResourceHealthState = Unknown;
+};
 
 @doc("Mode properties")
 union OperationalMode {

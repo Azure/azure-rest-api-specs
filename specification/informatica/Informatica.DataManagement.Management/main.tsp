@@ -12,8 +12,6 @@ namespace Informatica.DataManagement;
 
 using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
-using OpenAPI;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;

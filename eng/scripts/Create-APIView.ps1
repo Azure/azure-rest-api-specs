@@ -469,7 +469,13 @@ function New-TypeSpecAPIViewTokens {
       }
       else {
         $tokenDirectory = Join-Path $typeSpecAPIViewArtifactsDirectory $(Split-Path $typeSpecProject -Leaf)
-        Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory | Out-Null
+        try {
+          Invoke-TypeSpecAPIViewParser -Type "Baseline" -ProjectPath $typeSpecProject -ResourceProvider $(Split-Path $typeSpecProject -Leaf) -TokenDirectory $tokenDirectory | Out-Null
+        }
+        catch {
+          Write-Host "Failed to generate Baseline APIView Token for project $typeSpecProject. Error: $_"
+          Write-Host "Skipping Baseline API review generation for $typeSpecProject"
+        }
       }
     }
   }

@@ -1,0 +1,88 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01",
+    "profileName": "profile1",
+    "resourceGroupName": "RG",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "endpoint1",
+            "type": "Microsoft.Cdn/profiles/endpoints",
+            "id": "/subscriptions/subid/resourcegroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1",
+            "location": "CentralUs",
+            "properties": {
+              "contentTypesToCompress": [],
+              "customDomains": [
+                {
+                  "name": "www-someDomain-net",
+                  "properties": {
+                    "hostName": "www.someDomain.Net",
+                    "validationData": null
+                  }
+                }
+              ],
+              "defaultOriginGroup": {
+                "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/originGroups/originGroup1"
+              },
+              "geoFilters": [],
+              "hostName": "endpoint1.azureedge.net",
+              "isCompressionEnabled": false,
+              "isHttpAllowed": true,
+              "isHttpsAllowed": true,
+              "optimizationType": "DynamicSiteAcceleration",
+              "originGroups": [
+                {
+                  "name": "originGroup1",
+                  "properties": {
+                    "healthProbeSettings": {
+                      "probeIntervalInSeconds": 120,
+                      "probePath": "/health.aspx",
+                      "probeProtocol": "Http",
+                      "probeRequestType": "GET"
+                    },
+                    "origins": [
+                      {
+                        "id": "/subscriptions/subid/resourceGroups/RG/providers/Microsoft.Cdn/profiles/profile1/endpoints/endpoint1/origins/www-bing-com"
+                      }
+                    ],
+                    "responseBasedOriginErrorDetectionSettings": {
+                      "responseBasedDetectedErrorTypes": "TcpErrorsOnly",
+                      "responseBasedFailoverThresholdPercentage": 10
+                    }
+                  }
+                }
+              ],
+              "originHostHeader": "www.bing.com",
+              "originPath": null,
+              "origins": [
+                {
+                  "name": "www-bing-com",
+                  "properties": {
+                    "enabled": true,
+                    "hostName": "www.bing.com",
+                    "httpPort": 80,
+                    "httpsPort": 443,
+                    "originHostHeader": "www.someDomain2.net",
+                    "priority": 2,
+                    "weight": 50
+                  }
+                }
+              ],
+              "probePath": "/image",
+              "provisioningState": "Succeeded",
+              "queryStringCachingBehavior": "NotSet",
+              "resourceState": "Running"
+            },
+            "tags": {}
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Endpoints_ListByProfile",
+  "title": "Endpoints_ListByProfile"
+}

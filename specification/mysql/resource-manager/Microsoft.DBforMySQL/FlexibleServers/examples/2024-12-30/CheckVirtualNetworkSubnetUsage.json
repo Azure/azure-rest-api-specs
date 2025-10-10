@@ -1,0 +1,30 @@
+{
+  "parameters": {
+    "api-version": "2024-12-30",
+    "locationName": "WestUS",
+    "parameters": {
+      "virtualNetworkResourceId": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/testrg/providers/Microsoft.Network/virtualNetworks/testvnet"
+    },
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "delegatedSubnetsUsage": [
+          {
+            "subnetName": "test-subnet-1",
+            "usage": 2
+          },
+          {
+            "subnetName": "test-subnet-2",
+            "usage": 3
+          }
+        ],
+        "location": "WestUS",
+        "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+      }
+    }
+  },
+  "operationId": "CheckVirtualNetworkSubnetUsage_Execute",
+  "title": "CheckVirtualNetworkSubnetUsage"
+}

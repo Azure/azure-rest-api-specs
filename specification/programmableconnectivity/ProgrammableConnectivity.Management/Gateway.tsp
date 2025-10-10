@@ -150,7 +150,7 @@ model ApplicationOwnerProperties {
   /**
    * List of local representatives.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["countryCode"])
+  @identifiers(#["countryCode"])
   localRepresentatives: LocalRepresentative[];
 }
 

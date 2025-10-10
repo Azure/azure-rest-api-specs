@@ -346,10 +346,7 @@ model TextMatchingRuleset {
   /**
    * A list of text patterns to block, each with matching rules and case sensitivity options.
    */
-  @OpenAPI.extension(
-    "x-ms-identifiers",
-    #["text", "matchType", "caseSensitivity"]
-  )
+  @identifiers(#["text", "matchType", "caseSensitivity"])
   deny?: {
     ...TextMatch;
   }[];

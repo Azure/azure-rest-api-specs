@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 @versioned(KeyVault.Versions)
 namespace Customizations;
 
-@@clientName(KeyVault, "Certificate", "java");
+@@clientName(KeyVault, "CertificateClient", "java");
 @@clientName(KeyVault, "Client", "go");
 @@clientName(KeyVault, "Certificate", "rust");
 
@@ -234,6 +234,9 @@ op listDeletedCertificateProperties is KeyVaultOperation<
 
 @@clientName(JsonWebKeyCurveName, "CurveName", "go");
 @@clientName(JsonWebKeyType, "KeyType", "go");
+
+@@alternateType(CertificateAttributes.recoveryLevel, string, "go");
+@@alternateType(CertificateOperation.error, string, "go");
 
 // Rust configuration
 @@clientName(setCertificateContacts, "SetContacts", "rust");

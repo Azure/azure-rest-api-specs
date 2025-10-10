@@ -31,7 +31,7 @@ model AssessmentProjectSummaryProperties {
     feature.
     """)
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorSummaryAffectedEntities?: ErrorSummary[];
 
   @doc("Gets the number of private endpoint connections.")

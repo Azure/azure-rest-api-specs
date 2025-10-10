@@ -15,7 +15,6 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using OpenAPI;
 
 namespace Microsoft.StandbyPool;
 

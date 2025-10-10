@@ -21,7 +21,7 @@ options:
     service-name: "reviews"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-reviews"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-reviews"
     is-modular-library: true
     flavor: "azure"
     experimentalExtensibleEnums: true
@@ -35,8 +35,8 @@ options:
       name: "@azure/arm-reviews"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/reviews"
-    package-dir: "armreviews"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armreviews"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armreviews"
     fix-const-stuttering: true
     flavor: "azure"
     generate-fakes: true
@@ -45,8 +45,8 @@ options:
     head-as-boolean: true
     inject-spans: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-reviews"
-    package-name: "{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-reviews"
+    package-name: "azure-mgmt-reviews"
     namespace: "azure.mgmt.reviews"
     generate-test: true
     generate-sample: true

@@ -18,7 +18,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.RecoveryServices"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-recoveryservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-recoveryservices"
     namespace: "azure.mgmt.recoveryservices"
     generate-test: true
     generate-sample: true
@@ -29,15 +29,15 @@ options:
     service-name: "RecoveryServices" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-recoveryservices"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservices"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-recoveryservices"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservices"
-    package-dir: "armrecoveryservices"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservices"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservices"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true

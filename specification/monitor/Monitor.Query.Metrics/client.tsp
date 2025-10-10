@@ -63,3 +63,19 @@ using MonitorQueryMetrics;
 @@clientName(MetricResultsResponseValuesItem.endtime, "endTime", "javascript");
 @@clientName(MetricResultsResponseValuesItem.value, "metrics", "javascript");
 @@clientName(Metric.displayDescription, "description", "javascript");
+
+// .NET configuration
+@@clientName(MonitorQueryMetrics, "MetricsClient", "csharp");
+@@clientName(MetricResultsResponse, "MetricsQueryResourcesResult", "csharp");
+@@clientName(MetricResultsResponseValuesItem, "MetricsQueryResult", "csharp");
+@@clientName(Metric, "MetricResult", "csharp");
+
+@@clientName(MetricResultsResponseValuesItem.value, "Metrics", "csharp");
+@@clientName(MetricResultsResponseValuesItem.interval, "Granularity", "csharp");
+@@clientName(Metric.displayDescription, "Description", "csharp");
+@@clientName(Metric.timeseries, "TimeSeries", "csharp");
+@@clientName(TimeSeriesElement.data, "Values", "csharp");
+
+@@access(ResourceIdList, Access.internal, "csharp");
+@@access(MonitorQueryMetrics.batch, Access.internal, "csharp");
+@@access(MetricResultsResponseValuesItem.resourceid, Access.internal, "csharp");

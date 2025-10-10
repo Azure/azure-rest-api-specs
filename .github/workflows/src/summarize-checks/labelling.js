@@ -51,7 +51,6 @@ import {
  * @property {boolean} dataPlaneRequired - Whether a data plane review is required.
  * @property {boolean} suppressionReviewRequired - Whether a suppression review is required.
  * @property {boolean} isNewApiVersion - Whether this PR introduces a new API version.
- * @property {boolean} rpaasExceptionRequired - Whether an RPaaS exception is required.
  * @property {boolean} rpaasRpNotInPrivateRepo - Whether the RPaaS RP is not present in the private repo.
  * @property {boolean} rpaasChange - Whether this PR includes RPaaS changes.
  * @property {boolean} newRP - Whether this PR introduces a new resource provider.
@@ -505,8 +504,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   );
   ciNewRPNamespaceWithoutRpaaSLabel.shouldBePresent = impactAssessment.rpaasRPMissing || false;
 
-  const rpaasExceptionLabel = new Label("RPaaSException", labelContext.present);
-  rpaasExceptionLabel.shouldBePresent = impactAssessment.rpaasExceptionRequired || false;
+  const rpaasExceptionLabelPresent = "RPaaSException" in labelContext.present;
 
   const ciRpaasRPNotInPrivateRepoLabel = new Label(
     "CI-RpaaSRPNotInPrivateRepo",
@@ -541,7 +539,7 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
       labelContext,
       armReviewLabel.shouldBePresent,
       impactAssessment.rpaasRPMissing,
-      impactAssessment.rpaasExceptionRequired,
+      rpaasExceptionLabelPresent,
       impactAssessment.rpaasRpNotInPrivateRepo,
     );
   }
@@ -555,7 +553,6 @@ export async function processImpactAssessment(labelContext, impactAssessment) {
   rpassReviewRequiredLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   newRPNamespaceLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciNewRPNamespaceWithoutRpaaSLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
-  rpaasExceptionLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
   ciRpaasRPNotInPrivateRepoLabel.applyStateChange(labelContext.toAdd, labelContext.toRemove);
 
   // this is the only labelling that was part of original pipelinebot logic, it handles the rotation of
