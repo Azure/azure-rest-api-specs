@@ -40,14 +40,7 @@ interface AzureDataTransfer {
   @autoRoute
   listFlowProfiles is ArmProviderActionSync<
     Request = ListFlowProfilesRequest,
-    Response = {
-      /**
-       * A list of FlowProfile metadata created under the specified pipeline.
-       */
-      @added(Versions.v2025_05_30_preview)
-      @bodyRoot
-      flowProfileList?: FlowProfileMetadata[];
-    }
+    Response = FlowProfilesListResult
   >;
 
   /**
