@@ -9,6 +9,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using TypeSpec.Versioning;
 
 namespace Microsoft.Compute;
 /**
@@ -75,6 +76,7 @@ model VirtualMachineScaleSetVM
    * The identity of the standalone virtual machine associated with this VMSS VM. This property is only applicable to Virtual Machine Scale Sets with Flexible orchestration mode. Minimum api-version: 2025-04-01
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @added(Versions.v2025_04_01)
   @visibility(Lifecycle.Read)
   virtualMachineResourceId?: string;
 }
