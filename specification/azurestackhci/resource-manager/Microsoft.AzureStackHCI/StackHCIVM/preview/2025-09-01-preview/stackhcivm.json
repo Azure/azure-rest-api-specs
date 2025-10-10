@@ -7125,8 +7125,35 @@
           "description": "Reference for the health probe for this connection"
         },
         "loadDistribution": {
-          "$ref": "#/definitions/LoadBalancerRuleSessionPersistenceType",
-          "description": "SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)"
+          "type": "string",
+          "description": "SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)",
+          "default": "Default",
+          "enum": [
+            "Default",
+            "SourceIP",
+            "SourceIPProtocol"
+          ],
+          "x-ms-enum": {
+            "name": "LoadBalancerRuleSessionPersistenceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Default",
+                "value": "Default",
+                "description": "Default - 5-tuple hashing"
+              },
+              {
+                "name": "SourceIP",
+                "value": "SourceIP",
+                "description": "Source IP - 2-tuple hashing looking at src-dst ip"
+              },
+              {
+                "name": "SourceIPProtocol",
+                "value": "SourceIPProtocol",
+                "description": "SourceIPProtocol - 3-tuple hashing looking at src-dst ip and ip protocol"
+              }
+            ]
+          }
         },
         "idleTimeoutInMinutes": {
           "type": "integer",
@@ -8299,19 +8326,19 @@
         "intervalInSeconds": {
           "type": "integer",
           "format": "int32",
-          "description": "Probe interval in seconds (5-300) default 15"
+          "description": "Probe interval in seconds (5-300) default 15",
+          "default": 15
         },
         "numberOfProbes": {
           "type": "integer",
           "format": "int32",
-          "description": "number of consecutive probe failures before marking unhealthy (1-20) default 2"
+          "description": "number of consecutive probe failures before marking unhealthy (1-20) default 2",
+          "default": 2
         }
       },
       "required": [
         "protocol",
-        "port",
-        "intervalInSeconds",
-        "numberOfProbes"
+        "port"
       ]
     },
     "ProvisioningAction": {

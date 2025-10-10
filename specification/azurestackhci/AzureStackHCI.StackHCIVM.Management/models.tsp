@@ -1728,7 +1728,7 @@ model LoadBalancerRuleProperties {
   probe?: LoadBalancerProbeReference;
 
   @doc("SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)")
-  loadDistribution?: LoadBalancerRuleSessionPersistenceType;
+  loadDistribution?: LoadBalancerRuleSessionPersistenceType = LoadBalancerRuleSessionPersistenceType.Default;
 
   @doc("Time for which connections are preserved before being torn down.")
   idleTimeoutInMinutes?: int32;
@@ -1759,10 +1759,10 @@ model ProbeProperties {
   requestPath?: string;
 
   @doc("Probe interval in seconds (5-300) default 15")
-  intervalInSeconds: int32;
+  intervalInSeconds?: int32 = 15;
 
   @doc("number of consecutive probe failures before marking unhealthy (1-20) default 2")
-  numberOfProbes: int32;
+  numberOfProbes?: int32 = 2;
 }
 
 @added(Versions.v2025_09_01_preview)
