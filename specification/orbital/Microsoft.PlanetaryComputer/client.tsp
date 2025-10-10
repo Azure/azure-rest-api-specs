@@ -567,7 +567,10 @@ op getTileCustomized(
   options: GetTileOptions,
 ): TileResponse;
 
-@@override(TilerTileMatrixSets.getZxyScaleByFormat, getTileCustomized);
+@@override(TilerTileMatrixSets.getZxyScaleByFormat,
+  getTileCustomized,
+  "!csharp"
+);
 
 /**
  * OGC WMTS endpoint with grouped parameters.
@@ -630,7 +633,10 @@ op getAssetStatisticsCustomized(
   options: GetAssetStatisticsOptions,
 ): StacAssetStatistics;
 
-@@override(TilerAssetStatistics.getAll, getAssetStatisticsCustomized);
+@@override(TilerAssetStatistics.getAll,
+  getAssetStatisticsCustomized,
+  "!csharp"
+);
 
 /**
  * Create image from a geojson feature with grouped parameters.
@@ -669,7 +675,7 @@ op cropGeoJsonCustomized(
   body: StacItem,
 ): TileResponse;
 
-@@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomized);
+@@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomized, "!csharp");
 
 /**
  * Create image from a geojson feature with dimensions with grouped parameters.
@@ -754,7 +760,10 @@ op listGeoJsonStatisticsCustomized(
   body: StacItemCollection,
 ): GeoJsonStatisticsForStacItemCollection;
 
-@@override(TilerGeoJsonStatistics.getAll, listGeoJsonStatisticsCustomized);
+@@override(TilerGeoJsonStatistics.getAll,
+  listGeoJsonStatisticsCustomized,
+  "!csharp"
+);
 
 /**
  * Create image from part of a dataset with grouped parameters.
@@ -807,7 +816,7 @@ op getPartCustomized(
   options: GetPartOptions,
 ): TileResponse;
 
-@@override(TilerParts.getCroppedToBoundingBox, getPartCustomized);
+@@override(TilerParts.getCroppedToBoundingBox, getPartCustomized, "!csharp");
 
 /**
  * Create image from part of a dataset with dimensions with grouped parameters.
@@ -900,7 +909,7 @@ op getPreviewCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-@@override(TilerPreviews.get, getPreviewCustomized);
+@@override(TilerPreviews.get, getPreviewCustomized, "!csharp");
 
 /**
  * Create preview of a dataset with format with grouped parameters.
@@ -933,7 +942,7 @@ op getPreviewWithFormatCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-@@override(TilerPreviews.getFormat, getPreviewWithFormatCustomized);
+@@override(TilerPreviews.getFormat, getPreviewWithFormatCustomized, "!csharp");
 
 /**
  * Merged assets statistics with grouped parameters.
@@ -961,7 +970,7 @@ op listStatisticsCustomized(
   options: GetStatisticsOptions,
 ): StatisticsResponse;
 
-@@override(TilerStatistics.getAll, listStatisticsCustomized);
+@@override(TilerStatistics.getAll, listStatisticsCustomized, "!csharp");
 
 /**
  * Return the TileJson with grouped parameters.
@@ -994,7 +1003,7 @@ op getTileJsonCustomized(
   options: GetTileJsonOptions,
 ): TileJsonMetaData;
 
-@@override(TilerTileJsonTileMatrixSets.get, getTileJsonCustomized);
+@@override(TilerTileJsonTileMatrixSets.get, getTileJsonCustomized, "!csharp");
 
 /**
  * Return TileJSON document for a searchId with grouped parameters.
@@ -1022,7 +1031,10 @@ op getMosaicsTileJsonCustomized(
   options: GetMosaicTileJsonOptions,
 ): TileJsonMetaData;
 
-@@override(MosaicsTileMatrixSetsTileJson.get, getMosaicsTileJsonCustomized);
+@@override(MosaicsTileMatrixSetsTileJson.get,
+  getMosaicsTileJsonCustomized,
+  "!csharp"
+);
 
 /**
  * Create map tile from mosaic with grouped parameters.
@@ -1075,7 +1087,10 @@ op getMosaicsTileCustomized(
   options: GetMosaicTileOptions,
 ): TileResponse;
 
-@@override(MosaicsTileMatrixSets.getZxyScaleByFormat, getMosaicsTileCustomized);
+@@override(MosaicsTileMatrixSets.getZxyScaleByFormat,
+  getMosaicsTileCustomized,
+  "!csharp"
+);
 
 /**
  * OGC WMTS endpoint for mosaics with grouped parameters.
