@@ -1,7 +1,7 @@
 {
   "swagger": "2.0",
   "info": {
-    "version": "2025-03-01",
+    "version": "2025-10-01",
     "title": "WebApplicationFirewallManagement",
     "description": "APIs to manage web application firewall rules."
   },
@@ -855,6 +855,10 @@
           "description": "Describes the override action to be applied when rule matches.",
           "$ref": "#/definitions/ActionType"
         },
+        "sensitivity": {
+          "description": "Describes the override sensitivity to be applied when rule matches.",
+          "$ref": "#/definitions/SensitivityType"
+        },
         "exclusions": {
           "type": "array",
           "items": {
@@ -970,6 +974,11 @@
           "readOnly": true,
           "$ref": "#/definitions/ActionType"
         },
+        "defaultSensitivity": {
+          "description": "Describes the default sensitivity to be applied when the managed rule matches.",
+          "readOnly": true,
+          "$ref": "#/definitions/SensitivityType"
+        },
         "description": {
           "description": "Describes the functionality of the managed rule.",
           "readOnly": true,
@@ -1038,6 +1047,33 @@
         "modelAsString": true
       }
     },
+    "SensitivityType": {
+      "description": "Defines the sensitivity for the rule.",
+      "type": "string",
+      "enum": [
+        "Low",
+        "Medium",
+        "High"
+      ],
+      "x-ms-enum": {
+        "name": "SensitivityType",
+        "modelAsString": true,
+        "values": [
+          {
+            "value": "Low",
+            "description": "Low Sensitivity - triggers the rule by larger spikes in traffic"
+          },
+          {
+            "value": "Medium",
+            "description": "Medium Sensitivity - triggers the rule by moderate spikes in traffic"
+          },
+          {
+            "value": "High",
+            "description": "High Sensitivity - triggers the rule by smaller spikes in traffic"
+          }
+        ]
+      }
+    }
     "WebApplicationFirewallScrubbingRules": {
       "description": "Defines the contents of the log scrubbing rules.",
       "type": "object",
