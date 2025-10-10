@@ -7,7 +7,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
 
 @armProviderNamespace("Microsoft.AgriculturePlatform")
@@ -82,12 +81,12 @@ model AgriServiceResourceProperties {
   managedOnBehalfOfConfiguration?: ManagedOnBehalfOfConfiguration;
 
   @doc("Data connector credentials of AgriService instance.")
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   dataConnectorCredentials?: DataConnectorCredentialMap[];
 
   @doc("AgriService installed solutions.")
-  @OpenAPI.extension("x-ms-identifiers", #["key"])
+  @identifiers(#["key"])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   installedSolutions?: InstalledSolutionMap[];
 }

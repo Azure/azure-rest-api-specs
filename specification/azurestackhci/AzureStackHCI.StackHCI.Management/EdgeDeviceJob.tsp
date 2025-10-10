@@ -124,7 +124,7 @@ model EdgeDeviceJobsEceActionStatus {
    * List of steps of Edge device job.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: EdgeDeviceJobsStep[];
 }
 
@@ -172,7 +172,7 @@ model EdgeDeviceJobsStep {
    * List of nested steps during job execution..
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: EdgeDeviceJobsStep[];
 
   /**
@@ -353,7 +353,7 @@ model RemoteSupportReportedProperties {
    * Details of the remote support session.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["sessionId"])
+  @identifiers(#["sessionId"])
   sessionDetails?: RemoteSupportSession[];
 }
 

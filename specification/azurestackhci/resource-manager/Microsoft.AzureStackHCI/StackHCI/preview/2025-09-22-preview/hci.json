@@ -5558,6 +5558,20 @@
           "$ref": "#/definitions/SoftwareAssuranceProperties",
           "description": "Software Assurance properties of the cluster."
         },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )",
+          "readOnly": true
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters",
+          "readOnly": true
+        },
+        "clusterWitness": {
+          "$ref": "#/definitions/ClusterWitnessProperties",
+          "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations."
+        },
         "logCollectionProperties": {
           "$ref": "#/definitions/LogCollectionProperties",
           "description": "Log Collection properties of the cluster."
@@ -5750,6 +5764,17 @@
         "customLocationId": {
           "type": "string",
           "description": "Name of the on-prem cluster connected to this resource.",
+          "readOnly": true
+        }
+      }
+    },
+    "ClusterWitnessProperties": {
+      "type": "object",
+      "description": "Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.",
+      "properties": {
+        "authenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'.",
           "readOnly": true
         }
       }
@@ -6073,6 +6098,10 @@
           "type": "string",
           "description": "Specify the fileshare path for the local witness for your Azure Stack HCI cluster."
         },
+        "witnessAuthenticationMode": {
+          "type": "string",
+          "description": "The authentication mode for the cluster witness. An example value 'ManagedIdentity'."
+        },
         "cloudAccountName": {
           "type": "string",
           "description": "Specify the Azure Storage account name for cloud witness for your Azure Stack HCI cluster."
@@ -6190,6 +6219,14 @@
         "hostNetwork": {
           "$ref": "#/definitions/DeploymentSettingsHostNetwork",
           "description": "HostNetwork config to deploy AzureStackHCI Cluster."
+        },
+        "cloudEnvironment": {
+          "type": "string",
+          "description": "Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )"
+        },
+        "isManagementCluster": {
+          "type": "boolean",
+          "description": "Is Management Cluster, when true indicates that the cluster is used for managing other clusters"
         },
         "sdnIntegration": {
           "$ref": "#/definitions/SdnIntegration",
@@ -6543,8 +6580,7 @@
           "description": "Azure resource ids of Arc machines to be part of cluster.",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "deploymentMode": {
           "$ref": "#/definitions/DeploymentMode",
@@ -6577,8 +6613,7 @@
         },
         "deploymentConfiguration": {
           "$ref": "#/definitions/DeploymentConfiguration",
-          "description": "Scale units will contains list of deployment data",
-          "x-ms-identifiers": []
+          "description": "Scale units will contains list of deployment data"
         },
         "reportedProperties": {
           "$ref": "#/definitions/EceReportedProperties",
@@ -6701,8 +6736,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         }
       }
     },
@@ -8384,8 +8418,7 @@
           "items": {
             "type": "string"
           },
-          "readOnly": true,
-          "x-ms-identifiers": []
+          "readOnly": true
         },
         "defaultIsolationId": {
           "type": "string",
@@ -9242,8 +9275,7 @@
           "description": "DNS Servers for NIC",
           "items": {
             "type": "string"
-          },
-          "x-ms-identifiers": []
+          }
         },
         "defaultIsolationId": {
           "type": "string",

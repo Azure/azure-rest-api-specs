@@ -3,10 +3,7 @@ import "./CodeScanReport.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using OpenAPI;
 
 namespace Microsoft.ApplicationMigration;
 
@@ -29,14 +26,14 @@ model CodeScanIssueProperties {
   storyPoints: int32;
 
   @doc("Reference links for the issue.")
-  @OpenAPI.extension("x-ms-identifiers", #["url"])
+  @identifiers(#["url"])
   referenceLinks?: ReferenceLink[];
 
   @doc("The number of occurrences of the issue.")
   occurrences: int32;
 
-  @doc("The migration targets affected by this issue.")
-  azureTargets: MigrationTarget[];
+  @doc("The migration targets applicable for this issue.")
+  azureTargets: AzureTarget[];
 }
 
 @parentResource(CodeScanReport)

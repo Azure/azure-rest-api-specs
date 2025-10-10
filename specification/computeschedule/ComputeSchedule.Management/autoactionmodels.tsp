@@ -295,7 +295,7 @@ model AutoActionResourceListResponse is Azure.Core.Page<AutoActionResource>;
 @doc("Request model to attach a list of auto action resources.")
 model AutoActionResourceAttachRequest {
   @doc("List of resources to be attached/patched")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<AutoActionResource>;
 }
 
@@ -312,7 +312,7 @@ model AutoActionResourceDetachRequest {
 @doc("Request model perform a resource operation in a list of resources")
 model AutoActionResourcePatchRequest {
   @doc("The list of resources we watch to patch")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<AutoActionResource>;
 }
 
@@ -337,7 +337,7 @@ model AutoActionResourceOperationResponse {
   totalResources: int32;
 
   @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 

@@ -17,11 +17,23 @@ model Supercomputer is TrackedResource<SupercomputerProperties> {
 model SupercomputerProperties {
   /** The identifier of the physical site where the supercomputer hardware is located. */
   @visibility(Lifecycle.Read)
-  siteId: string;
+  siteId?: string;
+
+  /** The SKU of the supercomputer. */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
+  tier: SupercomputerTier;
 
   /** The status of the last operation on the supercomputer. */
   @visibility(Lifecycle.Read)
   provisioningState?: SupercomputerProvisioningState;
+}
+
+/** The available tiers of supercomputers. */
+union SupercomputerTier {
+  /** A supercomputer in a Fairwater site. */
+  Fairwater: "Fairwater",
+
+  string,
 }
 
 /** The resource provisioning state. */

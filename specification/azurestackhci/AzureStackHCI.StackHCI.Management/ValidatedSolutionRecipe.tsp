@@ -86,7 +86,7 @@ model ValidatedSolutionRecipeContent {
   /**
    * Represents components available in a validated solution recipe.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   components: ValidatedSolutionRecipeComponent[];
 }
 
@@ -112,13 +112,13 @@ model ValidatedSolutionRecipeCapabilities {
   /**
    * Represents the cluster capabilities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   clusterCapabilities: ValidatedSolutionRecipeCapability[];
 
   /**
    * Represents the node capabilities.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   nodeCapabilities: ValidatedSolutionRecipeCapability[];
 }
 
@@ -164,7 +164,7 @@ model ValidatedSolutionRecipeComponent {
   /**
    * Represents the component's payloads.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   payloads?: ValidatedSolutionRecipeComponentPayload[];
 
   /**

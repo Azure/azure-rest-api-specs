@@ -5,10 +5,7 @@ import "@azure-tools/typespec-azure-core";
 import "./common.tsp";
 
 using Azure.Core;
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -82,17 +79,16 @@ model JobTaskDetail {
   @visibility(Lifecycle.Read)
   taskName?: string;
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Identifiers of linked jobs to this task.")
   @visibility(Lifecycle.Read)
   linkedJobIds?: armResourceIdentifier[];
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("User Comments.")
   @visibility(Lifecycle.Read)
   userComments?: JobUserComment[];
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("List of sub-tasks associated with this job.")
   @visibility(Lifecycle.Read)
   subTasksList?: JobTaskDetail[];
@@ -100,7 +96,7 @@ model JobTaskDetail {
 
 @doc("Additional information for job.")
 model JobExtendedInfo {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("List of tasks associated with this job.")
   @visibility(Lifecycle.Read)
   tasksList?: JobTaskDetail[];
@@ -120,7 +116,6 @@ model JobErrorInfo {
   @visibility(Lifecycle.Read)
   errorMessage?: string;
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("A list of recommendations to resolve the error.")
   @visibility(Lifecycle.Read)
   recommendations?: string[];
@@ -169,14 +164,14 @@ model BaseJobProperties {
   @visibility(Lifecycle.Read)
   operation?: string;
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Details of any retries that have been attempted for this job.")
   retryDetails?: JobRetryDetails[];
 
   @doc("Additional information about the job.")
   jobExtendedInfo?: JobExtendedInfo;
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("User Comments.")
   @visibility(Lifecycle.Read)
   userComments?: JobUserComment[];
