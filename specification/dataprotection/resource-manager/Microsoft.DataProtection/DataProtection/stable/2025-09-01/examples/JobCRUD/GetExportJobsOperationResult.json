@@ -1,0 +1,28 @@
+{
+  "parameters": {
+    "operationId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-09-01",
+    "resourceGroupName": "SwaggerTestRg",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "vaultName": "NetSDKTestRsVault"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "blobSasKey": "someKey",
+        "blobUrl": "https://azureblob.blob.core.windows.net/reportcontainer/exportjobsreport00000000-0000-0000-0000-000000000000",
+        "excelFileBlobSasKey": "someKey",
+        "excelFileBlobUrl": "https://azureblob.blob.core.windows.net/reportcontainer/exportjobsreport00000000-0000-0000-0000-000000000000_ExcelFile.xlsx"
+      },
+      "headers": {}
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/SwaggerTestRg/providers/Microsoft.DataProtection/backupVaults/NetSDKTestRsVault/backupJobs/operations/00000000-0000-0000-0000-000000000000?api-version=2025-09-01",
+        "Retry-After": 60
+      }
+    }
+  },
+  "operationId": "ExportJobsOperationResult_Get",
+  "title": "Get Export Jobs Operation Result"
+}
