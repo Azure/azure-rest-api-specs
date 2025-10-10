@@ -6942,7 +6942,8 @@
               "type": "string",
               "enum": [
                 "IPTABLES",
-                "IPVS"
+                "IPVS",
+                "NFTABLES"
               ],
               "x-ms-enum": {
                 "name": "mode",
@@ -6955,10 +6956,14 @@
                   {
                     "value": "IPVS",
                     "description": "IPVS proxy mode. Must be using Kubernetes version >= 1.22."
+                  },
+                  {
+                    "value": "NFTABLES",
+                    "description": "NFTables proxy mode. Must be using Kubernetes version >= 1.33."
                   }
                 ]
               },
-              "description": "Specify which proxy mode to use ('IPTABLES' or 'IPVS')"
+              "description": "Specify which proxy mode to use ('IPTABLES', 'IPVS' or 'NFTABLES')"
             },
             "ipvsConfig": {
               "type": "object",
