@@ -21,8 +21,6 @@ namespace Microsoft.DependencyMap;
 /** The available API versions. */
 enum Versions {
   /** 2025-01-31-preview version */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_01_31_preview: "2025-01-31-preview",
 }
 
