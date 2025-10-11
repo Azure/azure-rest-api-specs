@@ -42,6 +42,8 @@ model BrokerAuthenticationProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("Set of broker authentication policies. Only one method is supported for each entry.")
