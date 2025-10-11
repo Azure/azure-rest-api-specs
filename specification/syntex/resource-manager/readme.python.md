@@ -12,12 +12,7 @@ package-version: 1.0.0b1
 clear-output-folder: true
 ```
 
-``` yaml $(python-mode) == 'update' && $(track2)
+``` yaml
 no-namespace-folders: true
 output-folder: $(python-sdks-folder)/syntex/azure-mgmt-syntex/azure/mgmt/syntex
-```
-
-``` yaml $(python-mode) == 'create' && $(track2)
-basic-setup-py: true
-output-folder: $(python-sdks-folder)/syntex/azure-mgmt-syntex
 ```
