@@ -13,14 +13,12 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-storage"
-    package-dir: "azure-mgmt-storage"
     namespace: "azure.mgmt.storage"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-storage-generated"
-    package-dir: "azure-resourcemanager-storage-generated"
     namespace: "com.azure.resourcemanager.storage.generated"
     service-name: "Storage" # human-readable service name, whitespace allowed
     flavor: azure
@@ -32,7 +30,6 @@ options:
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-storage"
     service-dir: sdk/storage
-    package-dir: "arm-storage"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
