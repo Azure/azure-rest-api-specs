@@ -43,7 +43,7 @@ These settings apply only when `--tag=package-2025-03-21-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-03-21-preview'
 input-file:
-  - Dell.Storage/preview/2025-03-21-preview/Dell.Storage.json
+  - preview/2025-03-21-preview/Dell.Storage.json
 ```
 
 ---
