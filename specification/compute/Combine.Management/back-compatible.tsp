@@ -534,3 +534,27 @@ using Microsoft.Compute;
 );
 @@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
 @@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
+
+@@clientLocation(VirtualMachineScaleSetVMS.approveRollingUpgrade, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.deallocate, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.getInstanceView, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.reimage, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.reimageAll, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.simulateEviction, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.attachDetachDataDisks, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.performMaintenance, "VirtualMachineScaleSetVM", "!csharp");
+
+@@clientLocation(VirtualMachineScaleSetVMS.powerOff, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.redeploy, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.restart, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData, "VirtualMachineScaleSetVM", "!csharp");
+
+@@clientLocation(VirtualMachineScaleSetVMS.start, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.runCommand, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.restart, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData, "VirtualMachineScaleSetVM", "!csharp");
+
+@@clientLocation(VirtualMachineScaleSetVMS.get, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.update, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.delete, "VirtualMachineScaleSetVM", "!csharp");
+@@clientLocation(VirtualMachineScaleSetVMS.list, "VirtualMachineScaleSetVM", "!csharp");
