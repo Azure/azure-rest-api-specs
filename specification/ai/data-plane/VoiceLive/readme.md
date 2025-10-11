@@ -24,4 +24,9 @@ These settings apply only when `--tag=package-2025-10-01` is specified on the co
 ```yaml $(tag) == 'package-2025-10-01'
 input-file:
   - stable/2025-10-01/GeneratedSystemEvents.json
+
+suppressions:
+  - code: ValidFormats
+    from: GeneratedSystemEvents.json
+    where: $.definitions.ServerEventResponseAudioDelta.properties.delta.format
 ```
