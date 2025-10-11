@@ -23,7 +23,7 @@ alias EvaluationRuleOperations = Azure.Core.ResourceOperations<EvaluationRuleTra
 interface EvaluationRules {
   // GET /evaluationrules/{id}
   @doc("Get an evaluation rule.")
-  getEvaluationRule is EvaluationRuleOperations.ResourceRead<EvaluationRule>;
+  get is EvaluationRuleOperations.ResourceRead<EvaluationRule>;
 
   // DELETE /evaluationrules/{id}
   @doc("Delete an evaluation rule.")
