@@ -39,7 +39,7 @@ model SessionResourceFilePathQueryParameter {
 /** The session resource file recursive list parameter. */
 @added(Versions.v2025_10_02_preview)
 model SessionResourceFileRecursiveListParameter {
-  /** Whether to recursively list files. */
+  /** Whether to recursively list files. Default to false that would only list files in the current directory. */
   @query
   @added(Versions.v2025_10_02_preview)
   recursive?: boolean;
