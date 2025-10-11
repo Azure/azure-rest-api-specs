@@ -420,6 +420,7 @@ interface Indexes {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/indexes")
+  @list
   @get
   list is SearchOperation<selectQuery, ListIndexesResult>;
 
@@ -514,6 +515,7 @@ interface Aliases {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/aliases")
+  @list
   @get
   list is SearchOperation<{}, ListAliasesResult>;
 
@@ -715,6 +717,7 @@ op getServiceStatistics is SearchOperation<{}, SearchServiceStatistics>;
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
 @added(Versions.v2025_08_01_preview)
 @route("/indexstats")
+@list
 @get
 op getIndexStatsSummary is SearchOperation<{}, ListIndexStatsSummary>;
 
