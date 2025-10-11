@@ -55,17 +55,6 @@ union DiskStorageAccountTypes {
 }
 
 /**
- * The hypervisor generation of the Virtual Machine. Applicable to OS disks only.
- */
-union HyperVGeneration {
-  string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V1: "V1",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  V2: "V2",
-}
-
-/**
  * CPU architecture supported by an OS disk.
  */
 union Architecture {
@@ -79,7 +68,6 @@ union Architecture {
 /**
  * Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM
  */
-@added(Versions.v2025_01_02)
 union SupportedSecurityOption {
   string,
 
@@ -239,7 +227,6 @@ union EncryptionType {
 /**
  * Determines on how to handle disks with slow I/O.
  */
-@added(Versions.v2025_01_02)
 union AvailabilityPolicyDiskDelay {
   string,
 
@@ -257,7 +244,6 @@ union AvailabilityPolicyDiskDelay {
 /**
  * The state of snapshot which determines the access availability of the snapshot.
  */
-@added(Versions.v2025_01_02)
 union SnapshotAccessState {
   string,
 
@@ -506,15 +492,6 @@ union CopyCompletionErrorReason {
 }
 
 /**
- * The Operating System type.
- */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
-enum OperatingSystemTypes {
-  Windows,
-  Linux,
-}
-
-/**
  * The List Disks operation response.
  */
 model DiskList is Azure.Core.Page<Disk>;
@@ -538,7 +515,6 @@ model DiskSku {
 /**
  * In the case of an availability or connectivity issue with the data disk, specify the behavior of your VM
  */
-@added(Versions.v2025_01_02)
 model AvailabilityPolicy {
   /**
    * Determines on how to handle disks with slow I/O.
@@ -729,7 +705,6 @@ model DiskProperties {
   /**
    * Determines how platform treats disk failures
    */
-  @added(Versions.v2025_01_02)
   availabilityPolicy?: AvailabilityPolicy;
 }
 
@@ -780,7 +755,6 @@ model SupportedCapabilities {
   /**
    * Refers to the security capability of the disk supported to create a Trusted launch or Confidential VM
    */
-  @added(Versions.v2025_01_02)
   supportedSecurityOption?: SupportedSecurityOption;
 }
 
@@ -840,7 +814,6 @@ model CreationData {
   securityDataUri?: string;
 
   /** If createOption is ImportSecure, this is the URI of a blob to be imported into VM metadata for Confidential VM. */
-  @added(Versions.v2025_01_02)
   securityMetadataUri?: url;
 
   /**
@@ -861,7 +834,6 @@ model CreationData {
   /**
    * For snapshots created from Premium SSD v2 or Ultra disk, this property determines the time in minutes the snapshot is retained for instant access to enable faster restore.
    */
-  @added(Versions.v2025_01_02)
   @minValue(1)
   instantAccessDurationMinutes?: int64;
 }
@@ -1152,7 +1124,6 @@ model DiskUpdateProperties {
   /**
    * Determines how platform treats disk failures
    */
-  @added(Versions.v2025_01_02)
   availabilityPolicy?: AvailabilityPolicy;
 }
 
@@ -1203,7 +1174,6 @@ model AccessUri {
   /** A SAS uri for accessing a VM metadata. */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Respecting name of the variable"
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_01_02)
   securityMetadataAccessSAS?: string;
 }
 
@@ -1397,21 +1367,6 @@ model EncryptionSetIdentity {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   userAssignedIdentities?: Record<UserAssignedIdentitiesValue>;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-model UserAssignedIdentitiesValue {
-  /**
-   * The principal id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  principalId?: string;
-
-  /**
-   * The client id of user assigned identity.
-   */
-  @visibility(Lifecycle.Read)
-  clientId?: string;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1833,7 +1788,6 @@ model SnapshotProperties {
    * The state of snapshot which determines the access availability of the snapshot.
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_01_02)
   snapshotAccessState?: SnapshotAccessState;
 }
 
@@ -1935,7 +1889,6 @@ model SnapshotUpdateProperties {
    * The state of snapshot which determines the access availability of the snapshot.
    */
   @visibility(Lifecycle.Read)
-  @added(Versions.v2025_01_02)
   snapshotAccessState?: SnapshotAccessState;
 }
 
