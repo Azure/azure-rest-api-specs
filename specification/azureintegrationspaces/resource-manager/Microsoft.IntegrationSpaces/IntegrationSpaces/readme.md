@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2023-11-14-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-11-14-preview'
 input-file:
-  - Microsoft.IntegrationSpaces/preview/2023-11-14-preview/openapi.json
+  - preview/2023-11-14-preview/openapi.json
 ```
 
 ---
