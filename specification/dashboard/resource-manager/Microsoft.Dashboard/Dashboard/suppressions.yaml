@@ -1,0 +1,26 @@
+# Suppressions for Dashboard service
+# These versions exist as swagger but are not yet defined in TypeSpec
+
+# Preview versions not in TypeSpec
+- tool: TypeSpecRequirement
+  path: ./preview/2021-09-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2022-05-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2022-10-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./preview/2023-10-01-preview/*.json
+  reason: Brownfield service not ready to migrate
+# Stable versions not in TypeSpec
+- tool: TypeSpecRequirement
+  path: ./stable/2022-08-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2023-09-01/*.json
+  reason: Brownfield service not ready to migrate
+- tool: TypeSpecRequirement
+  path: ./stable/2024-10-01/*.json
+  reason: Brownfield service not ready to migrate
