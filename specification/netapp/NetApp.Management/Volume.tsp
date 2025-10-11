@@ -68,7 +68,7 @@ model VolumeProperties {
    */
   @maxValue(2638827906662400)
   @minValue(53687091200)
-  usageThreshold?: int64 = 107374182400;
+  usageThreshold: int64 = 107374182400;
 
   /**
    * Set of export policy rules

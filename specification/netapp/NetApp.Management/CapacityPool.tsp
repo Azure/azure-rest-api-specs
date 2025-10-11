@@ -47,12 +47,12 @@ model PoolProperties {
   /**
    * Provisioned size of the pool (in bytes). Allowed values are in 1TiB chunks (value must be multiple of 1099511627776).
    */
-  size?: int64 = 4398046511104;
+  size: int64 = 4398046511104;
 
   /**
    * The service level of the file system
    */
-  serviceLevel?: ServiceLevel = ServiceLevel.Premium;
+  serviceLevel: ServiceLevel = ServiceLevel.Premium;
 
   /**
    * Azure lifecycle management
