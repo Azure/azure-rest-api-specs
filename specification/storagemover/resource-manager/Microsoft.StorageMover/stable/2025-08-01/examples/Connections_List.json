@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2025-08-01",
+    "resourceGroupName": "examples-rg",
+    "storageMoverName": "examples-storageMoverName",
+    "subscriptionId": "60bcfc77-6589-4da2-b7fd-f9ec9322cf95"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "example-connection",
+            "type": "Microsoft.StorageMover/storageMovers/connections",
+            "id": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/connections/example-connection",
+            "properties": {
+              "description": "Example Connection Description",
+              "privateLinkServiceId": "/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.Network/privateLinkServices/example-pls",
+              "connectionStatus": "Approved"
+            }
+          }
+        ],
+        "nextLink": "https://management.azure.com/subscriptions/60bcfc77-6589-4da2-b7fd-f9ec9322cf95/resourceGroups/examples-rg/providers/Microsoft.StorageMover/storageMovers/examples-storageMoverName/connections?$skipToken=abc123"
+      }
+    }
+  },
+  "operationId": "Connections_List",
+  "title": "Connections_List"
+}
