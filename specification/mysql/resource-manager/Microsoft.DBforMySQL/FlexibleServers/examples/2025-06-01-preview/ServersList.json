@@ -1,0 +1,181 @@
+{
+  "parameters": {
+    "api-version": "2025-06-01-preview",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "mysqltestserver1",
+            "type": "Microsoft.DBforMySQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver1",
+            "location": "Southeast Asia",
+            "properties": {
+              "administratorLogin": "cloudsa",
+              "availabilityZone": "1",
+              "backup": {
+                "backupIntervalHours": 24,
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2021-06-17T07:08:17.4259886+00:00",
+                "geoRedundantBackup": "Disabled"
+              },
+              "databasePort": 3306,
+              "fullVersion": "5.7.44",
+              "fullyQualifiedDomainName": "mysqltestserver1.database.mysql.azure.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled",
+                "replicationMode": "BinaryLog"
+              },
+              "maintenancePolicy": {
+                "patchStrategy": "Regular"
+              },
+              "maintenanceWindow": {
+                "batchOfMaintenance": "Default",
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "replicaCapacity": 10,
+              "replicationRole": "None",
+              "state": "Ready",
+              "storage": {
+                "autoGrow": "Enabled",
+                "iops": 369,
+                "storageRedundancy": "LocalRedundancy",
+                "storageSizeGB": 23,
+                "storageSku": "Premium_LRS"
+              },
+              "version": "5.7"
+            },
+            "sku": {
+              "name": "Standard_B1ms",
+              "tier": "Burstable"
+            },
+            "tags": {
+              "num": "1"
+            }
+          },
+          {
+            "name": "mysqltestserver2",
+            "type": "Microsoft.DBforMySQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup2/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver2",
+            "location": "Southeast Asia",
+            "properties": {
+              "administratorLogin": "cloudsa",
+              "availabilityZone": "2",
+              "backup": {
+                "backupIntervalHours": 24,
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2021-06-17T07:08:17.4259886+00:00",
+                "geoRedundantBackup": "Disabled"
+              },
+              "databasePort": 3306,
+              "fullVersion": "5.7.44",
+              "fullyQualifiedDomainName": "mysqltestserver2.mysql.database.azure.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled",
+                "replicationMode": "BinaryLog"
+              },
+              "maintenancePolicy": {
+                "patchStrategy": "Default"
+              },
+              "maintenanceWindow": {
+                "batchOfMaintenance": "Default",
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "replicaCapacity": 10,
+              "replicationRole": "None",
+              "state": "Ready",
+              "storage": {
+                "autoGrow": "Enabled",
+                "iops": 369,
+                "storageRedundancy": "LocalRedundancy",
+                "storageSizeGB": 23,
+                "storageSku": "Premium_LRS"
+              },
+              "version": "5.7"
+            },
+            "sku": {
+              "name": "Standard_D2ds_v4",
+              "tier": "GeneralPurpose"
+            },
+            "tags": {
+              "num": "1"
+            }
+          },
+          {
+            "name": "mysqltestserver3",
+            "type": "Microsoft.DBforMySQL/flexibleServers",
+            "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/TestGroup3/providers/Microsoft.DBforMySQL/flexibleServers/mysqltestserver3",
+            "location": "Southeast Asia",
+            "properties": {
+              "administratorLogin": "cloudsa",
+              "availabilityZone": "1",
+              "backup": {
+                "backupIntervalHours": 24,
+                "backupRetentionDays": 7,
+                "earliestRestoreDate": "2021-06-24T06:28:19.0611667+00:00",
+                "geoRedundantBackup": "Disabled"
+              },
+              "databasePort": 3306,
+              "fullVersion": "5.7.44",
+              "fullyQualifiedDomainName": "mysqltestserver3.mysql.database.azure.com",
+              "highAvailability": {
+                "mode": "Disabled",
+                "state": "NotEnabled",
+                "replicationMode": "BinaryLog"
+              },
+              "maintenancePolicy": {
+                "patchStrategy": "Default"
+              },
+              "maintenanceWindow": {
+                "batchOfMaintenance": "Default",
+                "customWindow": "Disabled",
+                "dayOfWeek": 0,
+                "startHour": 0,
+                "startMinute": 0
+              },
+              "network": {
+                "publicNetworkAccess": "Enabled"
+              },
+              "replicaCapacity": 10,
+              "replicationRole": "None",
+              "state": "Ready",
+              "storage": {
+                "autoGrow": "Enabled",
+                "iops": 600,
+                "storageRedundancy": "ZoneRedundancy",
+                "storageSizeGB": 100,
+                "storageSku": "Premium_ZRS"
+              },
+              "version": "5.7"
+            },
+            "sku": {
+              "name": "Standard_E2ds_v4",
+              "tier": "MemoryOptimized"
+            },
+            "tags": {
+              "num": "1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Servers_List",
+  "title": "List servers in a subscription"
+}
