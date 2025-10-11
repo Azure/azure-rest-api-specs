@@ -43,9 +43,8 @@ interface ClientEncryptionKeyGetResultsOperationGroup {
   createUpdateClientEncryptionKey is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ClientEncryptionKeyGetResults,
     Request = ClientEncryptionKeyCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ClientEncryptionKeyGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ClientEncryptionKeyGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ClientEncryptionKeyGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ClientEncryptionKeyGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

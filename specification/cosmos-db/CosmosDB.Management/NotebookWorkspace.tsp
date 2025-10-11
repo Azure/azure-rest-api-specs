@@ -73,13 +73,25 @@ interface NotebookWorkspaces {
   regenerateAuthToken is ArmResourceActionAsync<
     NotebookWorkspace,
     void,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
    * Starts the notebook workspace
    */
-  start is ArmResourceActionAsync<NotebookWorkspace, void, OkResponse>;
+  start is ArmResourceActionAsync<
+    NotebookWorkspace,
+    void,
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
+  >;
 }
 
 @@doc(NotebookWorkspace.name, "The name of the notebook workspace resource.");

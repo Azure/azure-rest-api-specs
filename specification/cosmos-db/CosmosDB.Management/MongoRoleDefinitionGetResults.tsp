@@ -43,9 +43,8 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   createUpdateMongoRoleDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoRoleDefinitionGetResults,
     Request = MongoRoleDefinitionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

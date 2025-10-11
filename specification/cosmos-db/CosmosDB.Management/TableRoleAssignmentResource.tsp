@@ -42,9 +42,8 @@ interface TableRoleAssignmentResources {
   @operationId("TableResources_CreateUpdateTableRoleAssignment")
   createUpdateTableRoleAssignment is ArmResourceCreateOrReplaceAsync<
     TableRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<TableRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = TableRoleAssignmentResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<TableRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableRoleAssignmentResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

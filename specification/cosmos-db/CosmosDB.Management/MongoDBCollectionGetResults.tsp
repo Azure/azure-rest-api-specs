@@ -51,9 +51,8 @@ interface MongoDBCollectionGetResultsOperationGroup {
   createUpdateMongoDBCollection is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBCollectionGetResults,
     Request = MongoDBCollectionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoDBCollectionGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MongoDBCollectionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MongoDBCollectionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoDBCollectionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -85,7 +84,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
   listMongoDBCollectionPartitionMerge is ArmResourceActionAsync<
     MongoDBCollectionGetResults,
     MergeParameters,
-    ArmResponse<PhysicalPartitionStorageInfoCollection>
+    PhysicalPartitionStorageInfoCollection
   >;
 
   /**
@@ -96,7 +95,7 @@ interface MongoDBCollectionGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     MongoDBCollectionGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>,
+    BackupInformation,
     Error = CloudError
   >;
 }

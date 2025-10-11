@@ -52,9 +52,8 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   createUpdateMongoDBDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBDatabaseGetResults,
     Request = MongoDBDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoDBDatabaseGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MongoDBDatabaseGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MongoDBDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoDBDatabaseGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -86,7 +85,7 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   mongoDBDatabasePartitionMerge is ArmResourceActionAsync<
     MongoDBDatabaseGetResults,
     MergeParameters,
-    ArmResponse<PhysicalPartitionStorageInfoCollection>
+    PhysicalPartitionStorageInfoCollection
   >;
 }
 

@@ -49,9 +49,8 @@ interface SqlStoredProcedureGetResultsOperationGroup {
   createUpdateSqlStoredProcedure is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlStoredProcedureGetResults,
     Request = SqlStoredProcedureCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlStoredProcedureGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SqlStoredProcedureGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<SqlStoredProcedureGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlStoredProcedureGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

@@ -49,9 +49,8 @@ interface GremlinDatabaseGetResultsOperationGroup {
   createUpdateGremlinDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinDatabaseGetResults,
     Request = GremlinDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GremlinDatabaseGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = GremlinDatabaseGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<GremlinDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GremlinDatabaseGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

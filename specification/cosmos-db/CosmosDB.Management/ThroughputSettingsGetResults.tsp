@@ -79,9 +79,8 @@ interface ThroughputSettingsGetResultsOperationGroup {
   updateSqlDatabaseThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -93,7 +92,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   migrateSqlDatabaseToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -105,7 +104,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   migrateSqlDatabaseToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -117,7 +116,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   sqlDatabaseRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 
   /**
@@ -129,7 +128,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   sqlDatabaseRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 }
 alias ThroughputSettingsGetResultsOperationGroupOps_2 = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -186,9 +185,8 @@ interface ThroughputSettingsGetResultsOperationGroup_2 {
   updateSqlContainerThroughput is ThroughputSettingsGetResultsOperationGroupOps_2.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -200,7 +198,7 @@ interface ThroughputSettingsGetResultsOperationGroup_2 {
   migrateSqlContainerToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -212,7 +210,7 @@ interface ThroughputSettingsGetResultsOperationGroup_2 {
   migrateSqlContainerToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -224,7 +222,7 @@ interface ThroughputSettingsGetResultsOperationGroup_2 {
   sqlContainerRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 
   /**
@@ -236,7 +234,7 @@ interface ThroughputSettingsGetResultsOperationGroup_2 {
   sqlContainerRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps_2.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 }
 alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -283,9 +281,8 @@ interface MongoDBResources {
   updateMongoDBDatabaseThroughput is MongoDBResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -296,7 +293,7 @@ interface MongoDBResources {
   migrateMongoDBDatabaseToAutoscale is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -307,7 +304,7 @@ interface MongoDBResources {
   migrateMongoDBDatabaseToManualThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -317,7 +314,7 @@ interface MongoDBResources {
   mongoDBDatabaseRetrieveThroughputDistribution is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 
   /**
@@ -327,7 +324,7 @@ interface MongoDBResources {
   mongoDBDatabaseRedistributeThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 }
 alias ThroughputSettingsGetResultsOperationGroupOps_3 = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -385,9 +382,8 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   updateMongoDBCollectionThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -399,7 +395,7 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   mongoDBContainerRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 
   /**
@@ -412,7 +408,7 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   mongoDBContainerRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    ArmResponse<PhysicalPartitionThroughputInfoResult>
+    PhysicalPartitionThroughputInfoResult
   >;
 
   /**
@@ -424,7 +420,7 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   migrateMongoDBCollectionToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -437,7 +433,7 @@ interface ThroughputSettingsGetResultsOperationGroup_3 {
   migrateMongoDBCollectionToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_3.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 }
 alias TableResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -483,9 +479,8 @@ interface TableResources {
   updateTableThroughput is TableResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -495,7 +490,7 @@ interface TableResources {
   migrateTableToAutoscale is TableResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -505,7 +500,7 @@ interface TableResources {
   migrateTableToManualThroughput is TableResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 }
 alias CassandraResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -551,9 +546,8 @@ interface CassandraResources {
   updateCassandraKeyspaceThroughput is CassandraResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -563,7 +557,7 @@ interface CassandraResources {
   migrateCassandraKeyspaceToAutoscale is CassandraResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -573,7 +567,7 @@ interface CassandraResources {
   migrateCassandraKeyspaceToManualThroughput is CassandraResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 }
 alias ThroughputSettingsGetResultsOperationGroupOps_4 = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -630,9 +624,8 @@ interface ThroughputSettingsGetResultsOperationGroup_4 {
   updateCassandraTableThroughput is ThroughputSettingsGetResultsOperationGroupOps_4.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -644,7 +637,7 @@ interface ThroughputSettingsGetResultsOperationGroup_4 {
   migrateCassandraTableToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_4.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -656,7 +649,7 @@ interface ThroughputSettingsGetResultsOperationGroup_4 {
   migrateCassandraTableToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_4.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 }
 alias ThroughputSettingsGetResultsOperationGroupOps_5 = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -712,9 +705,8 @@ interface ThroughputSettingsGetResultsOperationGroup_5 {
   updateCassandraViewThroughput is ThroughputSettingsGetResultsOperationGroupOps_5.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -726,7 +718,7 @@ interface ThroughputSettingsGetResultsOperationGroup_5 {
   migrateCassandraViewToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_5.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -738,7 +730,7 @@ interface ThroughputSettingsGetResultsOperationGroup_5 {
   migrateCassandraViewToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_5.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 }
 alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -784,9 +776,8 @@ interface GremlinResources {
   updateGremlinDatabaseThroughput is GremlinResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -796,7 +787,7 @@ interface GremlinResources {
   migrateGremlinDatabaseToAutoscale is GremlinResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -806,7 +797,7 @@ interface GremlinResources {
   migrateGremlinDatabaseToManualThroughput is GremlinResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 }
 alias ThroughputSettingsGetResultsOperationGroupOps_6 = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -862,9 +853,8 @@ interface ThroughputSettingsGetResultsOperationGroup_6 {
   updateGremlinGraphThroughput is ThroughputSettingsGetResultsOperationGroupOps_6.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -876,7 +866,7 @@ interface ThroughputSettingsGetResultsOperationGroup_6 {
   migrateGremlinGraphToAutoscale is ThroughputSettingsGetResultsOperationGroupOps_6.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 
   /**
@@ -888,7 +878,7 @@ interface ThroughputSettingsGetResultsOperationGroup_6 {
   migrateGremlinGraphToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps_6.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ArmResponse<ThroughputSettingsGetResults>
+    ThroughputSettingsGetResults
   >;
 }
 

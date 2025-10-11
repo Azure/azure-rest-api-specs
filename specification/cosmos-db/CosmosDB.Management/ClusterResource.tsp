@@ -59,7 +59,8 @@ interface ClusterResources {
   update is ArmCustomPatchAsync<
     ClusterResource,
     PatchModel = ClusterResource,
-    Response = ArmResponse<ClusterResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<ClusterResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ClusterResource> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ClusterResource;
     })
@@ -115,7 +116,7 @@ interface ClusterResources {
   invokeCommandAsync is ArmResourceActionAsync<
     ClusterResource,
     CommandAsyncPostBody,
-    ArmResponse<CommandPublicResource>
+    CommandPublicResource
   >;
 
   /**

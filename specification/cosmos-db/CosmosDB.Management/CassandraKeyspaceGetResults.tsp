@@ -49,9 +49,8 @@ interface CassandraKeyspaceGetResultsOperationGroup {
   createUpdateCassandraKeyspace is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraKeyspaceGetResults,
     Request = CassandraKeyspaceCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraKeyspaceGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CassandraKeyspaceGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<CassandraKeyspaceGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraKeyspaceGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

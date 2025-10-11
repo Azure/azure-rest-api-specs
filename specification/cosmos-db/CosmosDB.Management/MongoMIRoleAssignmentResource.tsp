@@ -46,9 +46,8 @@ interface MongoMIRoleAssignmentResources {
   @operationId("MongoMIResources_CreateUpdateMongoMIRoleAssignment")
   createUpdateMongoMIRoleAssignment is ArmResourceCreateOrReplaceAsync<
     MongoMIRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<MongoMIRoleAssignmentResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MongoMIRoleAssignmentResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MongoMIRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoMIRoleAssignmentResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

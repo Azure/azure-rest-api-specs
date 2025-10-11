@@ -46,9 +46,8 @@ interface MongoMIRoleDefinitionResources {
   @operationId("MongoMIResources_CreateUpdateMongoMIRoleDefinition")
   createUpdateMongoMIRoleDefinition is ArmResourceCreateOrReplaceAsync<
     MongoMIRoleDefinitionResource,
-    Response = ArmResourceUpdatedResponse<MongoMIRoleDefinitionResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MongoMIRoleDefinitionResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MongoMIRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoMIRoleDefinitionResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

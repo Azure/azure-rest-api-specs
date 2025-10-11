@@ -42,9 +42,8 @@ interface CassandraRoleAssignmentResources {
   @operationId("CassandraResources_CreateUpdateCassandraRoleAssignment")
   createUpdateCassandraRoleAssignment is ArmResourceCreateOrReplaceAsync<
     CassandraRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<CassandraRoleAssignmentResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CassandraRoleAssignmentResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<CassandraRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraRoleAssignmentResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

@@ -46,9 +46,8 @@ interface SqlRoleDefinitionGetResultsOperationGroup {
   createUpdateSqlRoleDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlRoleDefinitionGetResults,
     Request = SqlRoleDefinitionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader,
+    Response = ArmResourceUpdatedResponse<SqlRoleDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlRoleDefinitionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
     Error = CloudError
   >;
 

@@ -49,9 +49,8 @@ interface SqlContainerGetResultsOperationGroup {
   createUpdateSqlContainer is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlContainerGetResults,
     Request = SqlContainerCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlContainerGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SqlContainerGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<SqlContainerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlContainerGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -80,7 +79,7 @@ interface SqlContainerGetResultsOperationGroup {
   listSqlContainerPartitionMerge is ArmResourceActionAsync<
     SqlContainerGetResults,
     MergeParameters,
-    ArmResponse<PhysicalPartitionStorageInfoCollection>
+    PhysicalPartitionStorageInfoCollection
   >;
 
   /**
@@ -91,7 +90,7 @@ interface SqlContainerGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     SqlContainerGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>,
+    BackupInformation,
     Error = CloudError
   >;
 }

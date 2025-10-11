@@ -42,9 +42,8 @@ interface CassandraRoleDefinitionResources {
   @operationId("CassandraResources_CreateUpdateCassandraRoleDefinition")
   createUpdateCassandraRoleDefinition is ArmResourceCreateOrReplaceAsync<
     CassandraRoleDefinitionResource,
-    Response = ArmResourceUpdatedResponse<CassandraRoleDefinitionResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CassandraRoleDefinitionResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<CassandraRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraRoleDefinitionResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

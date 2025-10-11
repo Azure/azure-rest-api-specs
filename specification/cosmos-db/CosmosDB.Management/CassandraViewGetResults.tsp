@@ -49,9 +49,8 @@ interface CassandraViewGetResultsOperationGroup {
   createUpdateCassandraView is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraViewGetResults,
     Request = CassandraViewCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraViewGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CassandraViewGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<CassandraViewGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraViewGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -62,7 +61,8 @@ interface CassandraViewGetResultsOperationGroup {
   @operationId("CassandraResources_DeleteCassandraView")
   deleteCassandraView is ArmResourceDeleteWithoutOkAsync<
     CassandraViewGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraViewGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

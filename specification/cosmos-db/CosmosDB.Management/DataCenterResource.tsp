@@ -55,7 +55,8 @@ interface DataCenterResources {
   update is ArmCustomPatchAsync<
     DataCenterResource,
     PatchModel = DataCenterResource,
-    Response = ArmResponse<DataCenterResource> | (ArmAcceptedLroResponse & {
+    Response = ArmResponse<DataCenterResource> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = DataCenterResource> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: DataCenterResource;
     })

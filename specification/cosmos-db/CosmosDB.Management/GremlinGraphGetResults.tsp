@@ -49,9 +49,8 @@ interface GremlinGraphGetResultsOperationGroup {
   createUpdateGremlinGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinGraphGetResults,
     Request = GremlinGraphCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GremlinGraphGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = GremlinGraphGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<GremlinGraphGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GremlinGraphGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -79,7 +78,7 @@ interface GremlinGraphGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     GremlinGraphGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>,
+    BackupInformation,
     Error = CloudError
   >;
 }

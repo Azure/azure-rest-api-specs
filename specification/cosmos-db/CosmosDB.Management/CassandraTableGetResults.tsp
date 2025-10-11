@@ -49,9 +49,8 @@ interface CassandraTableGetResultsOperationGroup {
   createUpdateCassandraTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraTableGetResults,
     Request = CassandraTableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraTableGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = CassandraTableGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<CassandraTableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraTableGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

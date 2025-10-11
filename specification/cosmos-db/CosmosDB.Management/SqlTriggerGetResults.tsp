@@ -49,9 +49,8 @@ interface SqlTriggerGetResultsOperationGroup {
   createUpdateSqlTrigger is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlTriggerGetResults,
     Request = SqlTriggerCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlTriggerGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SqlTriggerGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<SqlTriggerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlTriggerGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

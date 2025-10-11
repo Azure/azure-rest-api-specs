@@ -88,10 +88,12 @@ interface DatabaseAccounts {
   /**
    * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
    */
-  failoverPriorityChange is ArmResourceActionAsync<
+  failoverPriorityChange is ArmResourceActionAsyncBase<
     DatabaseAccountGetResults,
-    FailoverPolicies,
-    NoContentResponse
+    Request = FailoverPolicies,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+      Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DatabaseAccountGetResults>
   >;
 
   /**
@@ -118,7 +120,11 @@ interface DatabaseAccounts {
   offlineRegion is ArmResourceActionAsync<
     DatabaseAccountGetResults,
     RegionForOnlineOffline,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -127,7 +133,11 @@ interface DatabaseAccounts {
   onlineRegion is ArmResourceActionAsync<
     DatabaseAccountGetResults,
     RegionForOnlineOffline,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**
@@ -157,7 +167,11 @@ interface DatabaseAccounts {
   regenerateKey is ArmResourceActionAsync<
     DatabaseAccountGetResults,
     DatabaseAccountRegenerateKeyParameters,
-    OkResponse
+    {
+      @body body: void;
+    },
+    LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader<FinalResult = void>
   >;
 
   /**

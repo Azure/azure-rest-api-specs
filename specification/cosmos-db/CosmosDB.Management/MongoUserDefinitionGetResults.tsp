@@ -43,9 +43,8 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   createUpdateMongoUserDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoUserDefinitionGetResults,
     Request = MongoUserDefinitionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoUserDefinitionGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<MongoUserDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoUserDefinitionGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

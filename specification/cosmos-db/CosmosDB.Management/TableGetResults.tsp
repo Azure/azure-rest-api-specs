@@ -49,9 +49,8 @@ interface TableGetResultsOperationGroup {
   createUpdateTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     TableGetResults,
     Request = TableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<TableGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = TableGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<TableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TableGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -79,7 +78,7 @@ interface TableGetResultsOperationGroup {
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     TableGetResults,
     ContinuousBackupRestoreLocation,
-    ArmResponse<BackupInformation>,
+    BackupInformation,
     Error = CloudError
   >;
 }

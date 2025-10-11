@@ -42,9 +42,8 @@ interface GremlinRoleDefinitionResources {
   @operationId("GremlinResources_CreateUpdateGremlinRoleDefinition")
   createUpdateGremlinRoleDefinition is ArmResourceCreateOrReplaceAsync<
     GremlinRoleDefinitionResource,
-    Response = ArmResourceUpdatedResponse<GremlinRoleDefinitionResource> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = GremlinRoleDefinitionResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<GremlinRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GremlinRoleDefinitionResource> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**

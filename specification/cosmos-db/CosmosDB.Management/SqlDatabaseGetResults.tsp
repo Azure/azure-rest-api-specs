@@ -45,9 +45,8 @@ interface SqlResources {
   createUpdateSqlDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlDatabaseGetResults,
     Request = SqlDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlDatabaseGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = SqlDatabaseGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<SqlDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlDatabaseGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
@@ -70,7 +69,7 @@ interface SqlResources {
   sqlDatabasePartitionMerge is ArmResourceActionAsync<
     SqlDatabaseGetResults,
     MergeParameters,
-    ArmResponse<PhysicalPartitionStorageInfoCollection>
+    PhysicalPartitionStorageInfoCollection
   >;
 }
 

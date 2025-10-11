@@ -45,9 +45,8 @@ interface GraphResources {
   createUpdateGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GraphResourceGetResults,
     Request = GraphResourceCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GraphResourceGetResults> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = GraphResourceGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = ArmResourceUpdatedResponse<GraphResourceGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GraphResourceGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
