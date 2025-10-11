@@ -24,21 +24,21 @@ interface QuestionAnsweringProjects {
    * Gets all projects for a user.
    */
   listProjects is LanguageOperations.ResourceList<
-    QuestionAnsweringProjectMetadata,
+    QuestionAnsweringProject,
     ListProjectsQueryParams
   >;
 
   /**
    * Get the requested project metadata.
    */
-  getProjectDetails is LanguageOperations.ResourceRead<QuestionAnsweringProjectMetadata>;
+  getProjectDetails is LanguageOperations.ResourceRead<QuestionAnsweringProject>;
 
   /**
    * Create or update a project.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Need to rename the body"
   createProject is ResourceCreateOrUpdateWithJsonContentType<
-    QuestionAnsweringProjectMetadata,
+    QuestionAnsweringProject,
     {},
     ServiceTraits,
     ErrorResponse
@@ -91,8 +91,9 @@ interface QuestionAnsweringProjects {
       /**
        * Knowledge base Import or Export format.
        */
-      @query("format")
-      format?: format = format.json;
+  @query("format")
+  @clientName("file_format", "python")
+  format?: format = format.json;
 
       /**
        * Kind of the asset of the project.
@@ -133,8 +134,9 @@ interface QuestionAnsweringProjects {
       /**
        * Knowledge base Import or Export format.
        */
-      @query("format")
-      format?: format = format.json;
+  @query("format")
+  @clientName("file_format", "python")
+  format?: format = format.json;
 
       /**
        * Kind of the asset of the project.
@@ -243,8 +245,8 @@ interface QuestionAnsweringProjects {
   /**
    * Gets all the synonyms of a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GA'd method"
-  getSynonyms is LanguageOperations.ResourceList<
+  @renamedFrom(Versions.v2023_04_01, "getSynonyms")
+  listSynonyms is LanguageOperations.ResourceList<
     WordAlterations,
     ListSynonymsQueryParams
   >;
@@ -279,8 +281,8 @@ interface QuestionAnsweringProjects {
   /**
    * Gets all the sources of a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GA'd method"
-  getSources is LanguageOperations.ResourceList<
+  @renamedFrom(Versions.v2023_04_01, "getSources")
+  listSources is LanguageOperations.ResourceList<
     QnaSourceRecord,
     ListSourcesQueryParams
   >;
@@ -359,8 +361,8 @@ interface QuestionAnsweringProjects {
   /**
    * Gets all the QnAs of a project.
    */
-  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GA'd method"
-  getQnas is LanguageOperations.ResourceList<
+  @renamedFrom(Versions.v2023_04_01, "getQnas")
+  listQnas is LanguageOperations.ResourceList<
     RetrieveQnaRecord,
     ListQnaQueryParams
   >;
