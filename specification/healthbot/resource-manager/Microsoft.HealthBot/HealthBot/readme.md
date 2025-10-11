@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-05-25` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-25'
 input-file:
-  - Microsoft.HealthBot/stable/2025-05-25/healthbot.json
+  - stable/2025-05-25/healthbot.json
 ```
 
 ### Tag: package-2024-02
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.HealthBot/stable/2024-02-01/healthbot.json
+  - stable/2024-02-01/healthbot.json
 ```
 
 ### Tag: package-2023-05-01
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2023-05-01` is specified on the co
 
 ```yaml $(tag) == 'package-2023-05-01'
 input-file:
-  - Microsoft.HealthBot/stable/2023-05-01/healthbot.json
+  - stable/2023-05-01/healthbot.json
 ```
 
 ### Tag: package-2022-08-08
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2022-08-08` is specified on the co
 
 ```yaml $(tag) == 'package-2022-08-08'
 input-file:
-  - Microsoft.HealthBot/stable/2022-08-08/healthbot.json
+  - stable/2022-08-08/healthbot.json
 ```
 
 ---
@@ -75,7 +75,7 @@ These settings apply only when `--tag=package-2021-08-24` is specified on the co
 
 ```yaml $(tag) == 'package-2021-08-24'
 input-file:
-  - Microsoft.HealthBot/stable/2021-08-24/healthbot.json
+  - stable/2021-08-24/healthbot.json
 ```
 
 ---
@@ -86,7 +86,7 @@ These settings apply only when `--tag=package-2021-06-10` is specified on the co
 
 ```yaml $(tag) == 'package-2021-06-10'
 input-file:
-  - Microsoft.HealthBot/stable/2021-06-10/healthbot.json
+  - stable/2021-06-10/healthbot.json
 ```
 
 ---
@@ -97,7 +97,7 @@ These settings apply only when `--tag=package-2020-10-20-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-10-20-preview'
 input-file:
-  - Microsoft.HealthBot/preview/2020-10-20-preview/healthbot.json
+  - preview/2020-10-20-preview/healthbot.json
 ```
 
 ---
@@ -108,7 +108,7 @@ These settings apply only when `--tag=package-2020-10-20` is specified on the co
 
 ```yaml $(tag) == 'package-2020-10-20'
 input-file:
-  - Microsoft.HealthBot/stable/2020-10-20/healthbot.json
+  - stable/2020-10-20/healthbot.json
 ```
 
 ---
@@ -119,7 +119,7 @@ These settings apply only when `--tag=package-2020-12-08-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-12-08-preview'
 input-file:
-  - Microsoft.HealthBot/preview/2020-12-08-preview/healthbot.json
+  - preview/2020-12-08-preview/healthbot.json
 ```
 
 ---
@@ -130,7 +130,7 @@ These settings apply only when `--tag=package-2020-12-08` is specified on the co
 
 ```yaml $(tag) == 'package-2020-12-08'
 input-file:
-  - Microsoft.HealthBot/stable/2020-12-08/healthbot.json
+  - stable/2020-12-08/healthbot.json
 ```
 
 ---
