@@ -12,9 +12,178 @@ using TypeSpec.Versioning;
 
 namespace Azure.AI.Projects;
 
+/** Azure AI Evaluator class definition. */
+@added(Versions.v2025_10_15_preview)
+model AzureAIEvaluator {
+  /** The object type, which is always `azure_ai_evaluator`. */
+  type: "azure_ai_evaluator";
+
+  /** User provided name of the Azure AI Evaluator object instance. */
+  name: string;
+
+  /** The reference name of the evaluator. */
+  evaluator_name: string;
+
+  /** The optional reference version of the evaluator. */
+  evaluator_version?: string;
+
+  /** The initialization parameters for the evaluation. */
+  initialization_parameters?: {};
+
+  /** The model to use for the evaluation. */
+  data_mapping?: Record<string>;
+}
+
+/** Expect format of the results list of the evaluation run output items. */
+@added(Versions.v2025_10_15_preview)
+model EvaluationRunOutputItemResult {
+  /** The result type (e.g., "string_check", "azure_ai_evaluator"). */
+  type: string;
+
+  /** The name of the test criteria (e.g., "my_string_check_grader", "my_fluency"). */
+  name: string;
+
+  /** Whether the test criteria passed or failed. */
+  passed: boolean;
+
+  /** The numeric score for this test criteria metric. */
+  score: float64;
+
+  /** The name of the metric (e.g., "fluency", "f1_score"). Most evaluators only have a single metric with the same name as the evaluator. */
+  metric: string;
+
+  /** The label associated with the test criteria metric (e.g., "pass", "fail", "good", "bad", etc.). */
+  label?: string;
+
+  /** The threshold used to determine pass/fail for this test criteria, if it is numerical. */
+  threshold?: float64;
+
+  /** The reason for the test criteria metric. */
+  reason?: string;
+
+  /** A sample from the evaluation run output item, if available. */
+  sample?: {};
+
+  /** Additional details about the test criteria metric. */
+  properties: Record<unknown>;
+}
+
+/** Query and response excepted input messsage defintion. */
+@added(Versions.v2025_10_15_preview)
+model QueryResponseInlineMessage {
+  /** The object type, which is always query_response_inline_message. */
+  type: "azure_ai_query_response_inline_message";
+
+  /** The input query string provided by the user or system. Can be image url. */
+  query: string;
+
+  /** The generated response corresponding to the input query. Can be image url. */
+  response?: string;
+
+  /** Optional contextual information that may provide additional details or background relevant to the query-response pair. */
+  context?: string;
+
+  /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
+  tools?: {}[];
+
+  /** Additional properties for the query response inline message. */
+  properties?: Record<string>;
+}
+
+/** Query and response excepted input messsage defintion. */
+@added(Versions.v2025_10_15_preview)
+model EvaluatorMessage {
+  /** The object type, which is always query_response_inline_message. */
+  type: "azure_ai_evaluator_messages";
+
+  /** The input query string provided by the user or system. Can be image url. */
+  query: {}[];
+
+  /** The generated response corresponding to the input query. Can be image url. */
+  response?: {}[];
+
+  /** Optional list of tools or resources utilized during the evaluation or generation of the response. */
+  tools?: {}[];
+
+  /** Additional properties for the query response inline message. */
+  properties?: Record<string>;
+}
+
+/** OpenAI definition: Eval output results. */
+@added(Versions.v2025_10_15_preview)
+model EvalRunOutputItem {
+  /** The type of the object. Always eval.run.output_item */
+  object: "eval.run.output_item" = "eval.run.output_item";
+
+  /** Unique identifier for the evaluation run output item. */
+  id?: string;
+
+  /** The identifier of the evaluation run associated with this output item. */
+  run_id?: string;
+
+  /** The identifier of the evaluation group. */
+  eval_id?: string;
+
+  /** Unix timestamp (in seconds) when the evaluation run was created. */
+  created_at: int64;
+
+  /** The status of the evaluation run. */
+  status: string;
+
+  /** The identifier for the data source item. */
+  datasource_item_id?: int64;
+
+  /** Details of the input data source item. */
+  datasource_item: {};
+
+  /** A list of results from the evaluation run. Expected Object: EvaluationRunOutputItemResult. */
+  results: {}[];
+
+  /** A sample containing the input and output of the evaluation run. */
+  sample?: {};
+}
+
+/** OpenAI definition: Eval inline file content or jsonl input data. */
+@added(Versions.v2025_10_15_preview)
+model EvalJsonlFileContentSource {
+  /** The type of jsonl source. Always `file_content`. */
+  type: "file_content" = "file_content";
+
+  /** The content of the jsonl file. */
+  content: {
+    /** Expected schema: QueryResponseInlineMessage */
+    item: {};
+
+    /** optional sample. */
+    sample?: {};
+  };
+}
+
+/** Eval jsonl input data. */
+@added(Versions.v2025_10_15_preview)
+model CreateEvalJsonlRunDataSource {
+  /** The type of data source. Always jsonl. */
+  type: "jsonl" = "jsonl";
+
+  /** Determines what populates the `item` namespace in the data source. */
+  source: EvalJsonlFileContentSource;
+}
+
+/** OpenAI Input data source definition for eval. */
+@added(Versions.v2025_10_15_preview)
+model SyncEvalInput {
+  /** Identifier of the evaluator. */
+  data_source: CreateEvalJsonlRunDataSource;
+
+  /** Evaluators to be used for the evaluation. */
+  testing_criteria: AzureAIEvaluator[];
+
+  /** Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed. */
+  properties?: Record<string>;
+}
+
 @doc("Evaluator Configuration")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model EvaluatorConfiguration {
   @doc("Identifier of the evaluator.")
   id: string;
@@ -30,7 +199,6 @@ model EvaluatorConfiguration {
 @doc("Abstract data class.")
 @discriminator("type")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model InputData {
   @doc("Type of the data")
   type: string;
@@ -38,7 +206,6 @@ model InputData {
 
 @doc("Dataset as source for evaluation.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model InputDataset extends InputData {
   type: "dataset";
 
@@ -49,7 +216,6 @@ model InputDataset extends InputData {
 @doc("Evaluation Definition")
 @resource("runs")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model Evaluation {
   @doc("Identifier of the evaluation.")
   @key("name")
@@ -85,7 +251,6 @@ model Evaluation {
 
 @doc("Definition for sampling strategy.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model AgentEvaluationSamplingConfiguration {
   @doc("Name of the sampling strategy.")
   name: string;
@@ -99,7 +264,6 @@ model AgentEvaluationSamplingConfiguration {
 
 @doc("The redaction configuration will allow the user to control what is redacted.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model AgentEvaluationRedactionConfiguration {
   @doc("Redact score properties. If not specified, the default is to redact in production.")
   redactScoreProperties?: boolean;
@@ -107,7 +271,6 @@ model AgentEvaluationRedactionConfiguration {
 
 @doc("Evaluation request for agent run.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model AgentEvaluationRequest {
   @doc("Identifier of the agent run.")
   runId: string;
@@ -130,7 +293,6 @@ model AgentEvaluationRequest {
 
 @doc("Result for the agent evaluation evaluator run.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model AgentEvaluationResult {
   @doc("Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion.")
   evaluator: string;
@@ -165,7 +327,6 @@ model AgentEvaluationResult {
 
 @doc("Evaluation response for agent evaluation run.")
 @added(Versions.v2025_05_15_preview)
-@removed(Versions.v1)
 model AgentEvaluation {
   @doc("Identifier of the agent evaluation run.")
   id: string;
@@ -182,7 +343,6 @@ model AgentEvaluation {
 
 @doc("Abstract base model representing a single message in a conversation.")
 @discriminator("role")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model Message {
   @doc("The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'.")
@@ -190,7 +350,6 @@ model Message {
 }
 
 @doc("A message authored by the system to guide model behavior.")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model SystemMessage extends Message {
   @doc("Indicates this is a system message.")
@@ -201,7 +360,6 @@ model SystemMessage extends Message {
 }
 
 @doc("A message authored by a developer to guide the model during evaluation.")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model DeveloperMessage extends Message {
   @doc("Indicates this is a developer message.")
@@ -212,7 +370,6 @@ model DeveloperMessage extends Message {
 }
 
 @doc("A message authored by the end user as input to the model.")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model UserMessage extends Message {
   @doc("Indicates this is a user message.")
@@ -223,7 +380,6 @@ model UserMessage extends Message {
 }
 
 @doc("A message generated by the assistant in response to previous messages.")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model AssistantMessage extends Message {
   @doc("Indicates this is an assistant message.")
@@ -234,7 +390,6 @@ model AssistantMessage extends Message {
 }
 
 @doc("Allowed types of evaluation targets.")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 union EvaluationTargetType {
   @doc("Evaluation target that uses a model for response generation.")
@@ -245,7 +400,6 @@ union EvaluationTargetType {
 
 @doc("Abstract base model for defining evaluation targets.")
 @discriminator("type")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model EvaluationTarget {
   @doc("Discriminator that defines the type of the evaluation target.")
@@ -253,7 +407,6 @@ model EvaluationTarget {
 }
 
 @doc("Evaluation target for generating responses using a given model and dataset.")
-@removed(Versions.v1)
 @added(Versions.v2025_05_15_preview)
 model modelResponseGenerationTarget extends EvaluationTarget {
   @doc("The type of evaluation target. Always 'modelResponseGeneration'.")
