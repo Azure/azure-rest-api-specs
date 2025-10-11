@@ -93,3 +93,5 @@ interface ApplicationPackages {
 @@doc(ApplicationPackages.activate::parameters.body,
   "The parameters for the request."
 );
+@@extension(Applications.create::parameters.resource, "required", false);
+@@extension(ApplicationPackages.create::parameters.resource, "required", false);
