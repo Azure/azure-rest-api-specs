@@ -33,6 +33,9 @@ namespace Azure.Developer.TrustedSigning;
 enum Versions {
   @doc("The 2023-06-15-preview version.")
   v2023_06_15_preview: "2023-06-15-preview",
+
+  @doc("The 2024-06-15 version.")
+  v2024_06_15: "2024-06-15",
 }
 
 interface CertificateProfileOperations {
@@ -53,6 +56,17 @@ interface CertificateProfileOperations {
   getSignRootCertificate is RpcOperation<
     SigningOptions,
     BytesBody<"application/x-x509-ca-cert">
+  >;
+
+  #suppress "@azure-tools/typespec-azure-core/rpc-operation-request-body" "no body included, bytesbody is the response object."
+  #suppress "@azure-tools/typespec-azure-core/no-rpc-path-params" "Service needs rpc paths to follow pattern of other services."
+  @summary("Gets the signing certificate chain for that account and profile.")
+  @doc("The certificate chain is generated as part of each profile renewal.")
+  @route("/codesigningaccounts/{accountName}/certificateprofiles/{certificateProfile}/sign/certchain")
+  @added(Versions.v2024_06_15)
+  getSignCertificateChain is RpcOperation<
+    SigningOptions,
+    BytesBody<"application/pkcs7-mime">
   >;
 
   @summary("Gets a list of extended key usage object identifiers that are allowed for this account and profile combination.")
