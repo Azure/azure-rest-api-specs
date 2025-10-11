@@ -568,6 +568,7 @@ model TrackedResource extends Resource {
    * Resource tags.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @visibility(Lifecycle.Create, Lifecycle.Read, Lifecycle.Update)
   tags?: Record<string>;
 
   /**
