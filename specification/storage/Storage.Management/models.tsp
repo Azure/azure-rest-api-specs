@@ -5706,7 +5706,7 @@ model TriggerParameters {
   endBy?: utcDateTime;
 
   /**
-   * When to start task execution. This is an optional field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'
+   * When to start task execution. This is a required field when ExecutionTrigger.properties.type is 'RunOnce'; this property should not be present when ExecutionTrigger.properties.type is 'OnSchedule'
    */
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   startOn?: utcDateTime;
