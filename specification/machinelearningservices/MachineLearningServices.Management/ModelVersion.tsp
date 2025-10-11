@@ -303,6 +303,7 @@ interface ModelVersionOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ModelVersions_Publish")
+  @summary("Publish version asset into registry.")
   publish is ModelVersionOperationGroupOps.ActionAsync<
     ModelVersion,
     DestinationAsset,

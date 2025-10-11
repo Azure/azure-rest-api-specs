@@ -40,15 +40,20 @@ interface FeaturestoreEntityContainers {
    * Create or update container.
    */
   @summary("Create or update container.")
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturestoreEntityContainer,
-    Response = ArmResourceUpdatedResponse<FeaturestoreEntityContainer> | (ArmResourceCreatedResponse<FeaturestoreEntityContainer> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = ArmResourceUpdatedResponse<FeaturestoreEntityContainer> | (ArmResourceCreatedResponse<
+      FeaturestoreEntityContainer,
+      ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**

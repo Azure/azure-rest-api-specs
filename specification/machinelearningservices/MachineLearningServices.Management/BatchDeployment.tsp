@@ -44,15 +44,20 @@ interface BatchDeployments {
    * Creates/updates a batch inference deployment (asynchronous).
    */
   @summary("Creates/updates a batch inference deployment (asynchronous).")
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BatchDeployment,
-    Response = ArmResourceUpdatedResponse<BatchDeployment> | (ArmResourceCreatedResponse<BatchDeployment> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = ArmResourceUpdatedResponse<BatchDeployment> | (ArmResourceCreatedResponse<
+      BatchDeployment,
+      LroHeaders = ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**

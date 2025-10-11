@@ -45,7 +45,7 @@ interface ComputeResources {
   @operationId("Compute_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ComputeResource,
-    LroHeaders = ArmLroLocationHeader<FinalResult = ComputeResource> &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = ComputeResource> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -77,7 +77,7 @@ interface ComputeResources {
       @query("underlyingResourceAction")
       underlyingResourceAction: UnderlyingResourceAction;
     },
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**

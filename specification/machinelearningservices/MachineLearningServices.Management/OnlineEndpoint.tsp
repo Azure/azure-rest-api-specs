@@ -95,6 +95,7 @@ interface OnlineEndpoints {
   /**
    * List Online Endpoints.
    */
+  @summary("List Online Endpoints.")
   list is ArmResourceListByParent<
     OnlineEndpoint,
     Parameters = {

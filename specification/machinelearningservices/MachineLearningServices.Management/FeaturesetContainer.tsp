@@ -37,22 +37,27 @@ interface FeaturesetContainers {
    * Create or update container.
    */
   @summary("Create or update container.")
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturesetContainer,
-    Response = ArmResourceUpdatedResponse<FeaturesetContainer> | (ArmResourceCreatedResponse<FeaturesetContainer> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = ArmResourceUpdatedResponse<FeaturesetContainer> | (ArmResourceCreatedResponse<
+      FeaturesetContainer,
+      LroHeaders = ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**
    * Delete container.
    */
-  @summary("Delete container.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete container.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturesetContainer,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {

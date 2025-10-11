@@ -25,11 +25,12 @@ model PrivateEndpointConnection
   >;
   ...Azure.ResourceManager.ManagedServiceIdentityProperty;
   ...Azure.ResourceManager.ResourceSkuProperty;
+
   /**
    * *Same as workspace location.
    */
   location?: string;
-  
+
   tags?: Record<string>;
 }
 
@@ -46,7 +47,7 @@ interface PrivateEndpointConnections {
    * This method must validate and forward the call to NRP.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @summary("Called by end-users to approve or reject a PE connection.")
+  @summary("Called by end-users to approve or reject a PE connection.\r\nThis method must validate and forward the call to NRP.")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     PrivateEndpointConnection,
     Response = ArmResourceUpdatedResponse<PrivateEndpointConnection>

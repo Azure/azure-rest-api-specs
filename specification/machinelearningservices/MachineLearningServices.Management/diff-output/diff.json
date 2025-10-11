@@ -2321,9 +2321,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -2579,9 +2581,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -2801,7 +2805,7 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/CapabilityHostResource",
-                "__new": "#/definitions/CodeContainer"
+                "__new": "#/definitions/CapabilityHost"
               }
             }
           },
@@ -2809,13 +2813,15 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/CapabilityHostResource",
-                "__new": "#/definitions/CodeContainer"
+                "__new": "#/definitions/CapabilityHost"
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -2857,9 +2863,6 @@
                 }
               }
             }
-          },
-          "200__added": {
-            "description": "ignore"
           }
         }
       }
@@ -3659,16 +3662,18 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}": {
       "put": {
+        "x-ms-long-running-operation-options__added": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ComputeResource"
+        },
         "responses": {
           "201": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
-              },
-              "Location__added": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -3694,9 +3699,12 @@
         "responses": {
           "202": {
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "format__added": "uri",
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               },
               "Location": {
                 "description": {
@@ -5403,9 +5411,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -5616,9 +5626,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -5961,9 +5973,11 @@
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -6162,7 +6176,7 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/FeaturestoreEntityVersionResource",
-                "__new": "#/definitions/FeaturesetVersion"
+                "__new": "#/definitions/FeaturestoreEntityVersion"
               }
             }
           },
@@ -6170,13 +6184,15 @@
             "schema": {
               "$ref": {
                 "__old": "#/definitions/FeaturestoreEntityVersionResource",
-                "__new": "#/definitions/FeaturesetVersion"
+                "__new": "#/definitions/FeaturestoreEntityVersion"
               }
             },
             "headers": {
-              "Azure-AsyncOperation__deleted": {
-                "type": "string",
-                "description": "URI to poll for asynchronous operation status."
+              "Azure-AsyncOperation": {
+                "description": {
+                  "__old": "URI to poll for asynchronous operation status.",
+                  "__new": "A link to the status monitor"
+                }
               }
             }
           }
@@ -7533,10 +7549,6 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}": {
       "get": {
         "description__added": "Get container.",
-        "summary": {
-          "__old": "Get container.",
-          "__new": ""
-        },
         "parameters": [
           [
             "-",
@@ -8048,7 +8060,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/publish": {
       "post": {
-        "summary__deleted": "Publish version asset into registry.",
         "description__added": "Publish version asset into registry.",
         "parameters": [
           [
@@ -8093,7 +8104,6 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
       "get": {
-        "summary__deleted": "List Online Endpoints.",
         "description__added": "List Online Endpoints.",
         "parameters": [
           [
@@ -8851,11 +8861,7 @@
         "description__added": "Called by end-users to get a PE connection."
       },
       "put": {
-        "description__added": "Called by end-users to approve or reject a PE connection.\nThis method must validate and forward the call to NRP.",
-        "summary": {
-          "__old": "Called by end-users to approve or reject a PE connection.\r\nThis method must validate and forward the call to NRP.",
-          "__new": "Called by end-users to approve or reject a PE connection."
-        }
+        "description__added": "Called by end-users to approve or reject a PE connection.\nThis method must validate and forward the call to NRP."
       },
       "delete": {
         "description__added": "Called by end-users to delete a PE connection."

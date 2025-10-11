@@ -77,11 +77,11 @@ enum Versions {
   /**
    * The 2025-07-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2025_07_01_preview: "2025-07-01-preview",
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
 
-@@summary(Operations.list, "Lists all of the available Azure Machine Learning Workspaces REST API operations");
+@@summary(Operations.list,
+  "Lists all of the available Azure Machine Learning Workspaces REST API operations"
+);

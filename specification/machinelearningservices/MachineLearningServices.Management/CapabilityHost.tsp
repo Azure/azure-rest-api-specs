@@ -30,22 +30,27 @@ interface CapabilityHosts {
   /**
    * Get capabilityHost.
    */
-  @summary("Get capabilityHost.") 
+  @summary("Get capabilityHost.")
   get is ArmResourceRead<CapabilityHost>;
 
   /**
    * Create or update capabilityHost.
    */
   @summary("Create or update capabilityHost.")
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     CapabilityHost,
-    Response = ArmResourceUpdatedResponse<CodeContainer> | (ArmResourceCreatedResponse<CodeContainer> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = ArmResourceUpdatedResponse<CapabilityHost> | (ArmResourceCreatedResponse<
+      CapabilityHost,
+      LroHeaders = ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**
@@ -54,7 +59,7 @@ interface CapabilityHosts {
   @summary("Delete capabilityHost.")
   delete is ArmResourceDeleteWithoutOkAsync<
     CapabilityHost,
-    Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
+    Response = (ArmDeleteAcceptedLroResponse & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */

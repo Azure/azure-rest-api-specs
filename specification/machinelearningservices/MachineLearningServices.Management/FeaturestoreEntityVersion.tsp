@@ -40,22 +40,27 @@ interface FeaturestoreEntityVersions {
    * Create or update version.
    */
   @summary("Create or update version.")
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     FeaturestoreEntityVersion,
-    Response = ArmResourceUpdatedResponse<FeaturesetVersion> | (ArmResourceCreatedResponse<FeaturesetVersion> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = ArmResourceUpdatedResponse<FeaturestoreEntityVersion> | (ArmResourceCreatedResponse<
+      FeaturestoreEntityVersion,
+      ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**
    * Delete version.
    */
-  @summary("Delete version.")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete version.")
   delete is ArmResourceDeleteWithoutOkAsync<
     FeaturestoreEntityVersion,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {

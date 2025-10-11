@@ -33,7 +33,7 @@ interface MarketplaceSubscriptions {
   /**
    * Get container.
    */
-  @summary("")
+  @summary("Get container.")
   get is ArmResourceRead<MarketplaceSubscription>;
 
   /**

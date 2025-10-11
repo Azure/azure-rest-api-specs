@@ -3588,6 +3588,10 @@
               "$ref": "#/definitions/BatchEndpoint"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -3882,6 +3886,10 @@
               "$ref": "#/definitions/BatchDeployment"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -4148,15 +4156,19 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CodeContainer"
+              "$ref": "#/definitions/CapabilityHost"
             }
           },
           "201": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/CodeContainer"
+              "$ref": "#/definitions/CapabilityHost"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -4202,9 +4214,6 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "ignore"
-          },
           "202": {
             "description": "ignore",
             "headers": {
@@ -5361,9 +5370,9 @@
               "$ref": "#/definitions/ComputeResource"
             },
             "headers": {
-              "Location": {
+              "Azure-AsyncOperation": {
                 "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+                "description": "A link to the status monitor"
               }
             }
           },
@@ -5402,6 +5411,10 @@
           "Update an AKS Compute": {
             "$ref": "./examples/Compute/createOrUpdate/AKSCompute.json"
           }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ComputeResource"
         },
         "x-ms-long-running-operation": true
       },
@@ -5503,6 +5516,11 @@
           "202": {
             "description": "ignore",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -9773,6 +9791,10 @@
               "$ref": "#/definitions/FeaturesetContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10046,6 +10068,10 @@
               "$ref": "#/definitions/FeaturesetVersion"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10510,6 +10536,10 @@
               "$ref": "#/definitions/FeaturestoreEntityContainer"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -10774,15 +10804,19 @@
           "200": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/FeaturesetVersion"
+              "$ref": "#/definitions/FeaturestoreEntityVersion"
             }
           },
           "201": {
             "description": "ignore",
             "schema": {
-              "$ref": "#/definitions/FeaturesetVersion"
+              "$ref": "#/definitions/FeaturestoreEntityVersion"
             },
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
               "x-ms-async-operation-timeout": {
                 "type": "string",
                 "format": "duration",
@@ -13138,7 +13172,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/marketplaceSubscriptions/{name}": {
       "get": {
         "operationId": "MarketplaceSubscriptions_Get",
-        "summary": "",
+        "summary": "Get container.",
         "description": "Get container.",
         "parameters": [
           {
@@ -13753,6 +13787,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/models/{name}/versions/{version}/publish": {
       "post": {
         "operationId": "ModelVersions_Publish",
+        "summary": "Publish version asset into registry.",
         "description": "Publish version asset into registry.",
         "parameters": [
           {
@@ -13814,6 +13849,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/onlineEndpoints": {
       "get": {
         "operationId": "OnlineEndpoints_List",
+        "summary": "List Online Endpoints.",
         "description": "List Online Endpoints.",
         "parameters": [
           {
@@ -15053,7 +15089,7 @@
       },
       "put": {
         "operationId": "PrivateEndpointConnections_CreateOrUpdate",
-        "summary": "Called by end-users to approve or reject a PE connection.",
+        "summary": "Called by end-users to approve or reject a PE connection.\r\nThis method must validate and forward the call to NRP.",
         "description": "Called by end-users to approve or reject a PE connection.\nThis method must validate and forward the call to NRP.",
         "parameters": [
           {

@@ -44,15 +44,20 @@ interface BatchEndpoints {
    * Creates a batch inference endpoint (asynchronous).
    */
   @summary("Create a batch inference endpoint (asynchronous).")
+  @Azure.Core.useFinalStateVia("original-uri")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     BatchEndpoint,
-    Response = ArmResourceUpdatedResponse<BatchEndpoint> | (ArmResourceCreatedResponse<BatchEndpoint> & {
-      /**
-       * Timeout for the client to use when polling the asynchronous operation.
-       */
-      @header("x-ms-async-operation-timeout")
-      timeout: duration;
-    })
+    Response = ArmResourceUpdatedResponse<BatchEndpoint> | (ArmResourceCreatedResponse<
+      BatchEndpoint,
+      LroHeaders = ArmAsyncOperationHeader
+    > &
+      Azure.Core.Foundations.RetryAfterHeader & {
+        /**
+         * Timeout for the client to use when polling the asynchronous operation.
+         */
+        @header("x-ms-async-operation-timeout")
+        timeout: duration;
+      })
   >;
 
   /**
@@ -115,11 +120,7 @@ interface BatchEndpoints {
    */
   @action("listkeys")
   @summary("Lists batch Inference Endpoint keys.")
-  listKeys is ArmResourceActionSync<
-    BatchEndpoint,
-    void,
-    EndpointAuthKeys
-  >;
+  listKeys is ArmResourceActionSync<BatchEndpoint, void, EndpointAuthKeys>;
 }
 
 @@doc(BatchEndpoint.name, "Name for the Batch Endpoint.");
