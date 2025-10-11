@@ -3094,8 +3094,8 @@
       "type": "string",
       "description": "The vault's create mode to indicate whether the vault need to be recovered or not.",
       "enum": [
-        "recover",
-        "default"
+        "default",
+        "recover"
       ],
       "x-ms-enum": {
         "name": "CreateMode",
@@ -5738,16 +5738,20 @@
           "$ref": "#/definitions/VaultProperties",
           "description": "Properties of the vault"
         },
-        "location": {
-          "type": "string",
-          "description": "Azure location of the key vault resource."
-        },
         "tags": {
           "type": "object",
-          "description": "Tags assigned to the key vault resource.",
+          "description": "Resource tags.",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "location": {
+          "type": "string",
+          "description": "The geo-location where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "required": [
@@ -5755,7 +5759,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
         }
       ]
     },

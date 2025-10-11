@@ -14,10 +14,11 @@ options:
     emit-lro-options: "all"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.KeyVault"
+    namespace: "Azure.ResourceManager.KeyVault"
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
     model-namespace: true
-    namespace: "Azure.ResourceManager.KeyVault"
+    enable-bicep-serialization: true
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-keyvault"
     namespace: "azure.mgmt.keyvault"

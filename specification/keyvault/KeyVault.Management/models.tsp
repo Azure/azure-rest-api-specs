@@ -513,8 +513,8 @@ enum SkuName {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum CreateMode {
-  recover,
   default,
+  recover,
 }
 
 /**
@@ -522,8 +522,8 @@ enum CreateMode {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultCreateMode {
-  recover,
   default,
+  recover,
 }
 
 /**
@@ -531,8 +531,8 @@ enum KeyVaultCreateMode {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyVaultPatchMode {
-  recover,
   default,
+  recover,
 }
 
 /**
@@ -540,8 +540,8 @@ enum KeyVaultPatchMode {
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ManagedHsmCreateMode {
-  recover,
   default,
+  recover,
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

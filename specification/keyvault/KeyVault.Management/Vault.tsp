@@ -13,26 +13,17 @@ namespace Microsoft.KeyVault;
 /**
  * Resource information with extended details.
  */
-model Vault is Azure.ResourceManager.ProxyResource<VaultProperties, false> {
+model Vault
+  is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<
+    VaultProperties,
+    false
+  > {
   ...ResourceNameParameter<
     Resource = Vault,
     KeyName = "vaultName",
     SegmentName = "vaults",
     NamePattern = ""
   >;
-
-  /**
-   * Azure location of the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  location?: string;
-
-  /**
-   * Tags assigned to the key vault resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  tags?: Record<string>;
 }
 
 @armResourceOperations
