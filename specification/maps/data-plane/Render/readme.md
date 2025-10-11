@@ -47,8 +47,10 @@ modelerfour:
 directive:
   - suppress: INVALID_TYPE
     reason: false positive from oav is breaking our example validation. See azure/oav#1021.
-```
 
+  - suppress: IntegerTypeMustHaveFormat
+    reason: Data-plane specs can suppress violations of this rule, since it only exists for the benefit of SDKs generated from swagger, and data-plane SDKs are generated directly from TypeSpec (https://github.com/Azure/azure-rest-api-specs/wiki/Swagger-LintDiff#integertypemusthaveformat).
+```
 
 ### Tag: package-stable-2024-04-01
 
@@ -58,6 +60,7 @@ These settings apply only when `--tag=package-stable-2024-04-01` is specified on
 input-file:
   - stable/2024-04-01/render.json
 ```
+
 ### Tag: package-stable-2022-08-01
 
 These settings apply only when `--tag=package-stable-2022-08-01` is specified on the command line.
@@ -73,7 +76,7 @@ These settings apply only when `--tag=package-stable-2.1` is specified on the co
 
 ``` yaml $(tag) == 'package-stable-2.1'
 input-file:
-  - preview/2.1/render.json
+  - stable/2.1/render.json
 ```
 
 ### Tag: package-stable-2.0
@@ -82,7 +85,7 @@ These settings apply only when `--tag=package-stable-2.0` is specified on the co
 
 ``` yaml $(tag) == 'package-stable-2.0'
 input-file:
-  - preview/2.0/render.json
+  - stable/2.0/render.json
 ```
 
 ### Tag: package-deprecated-1.0
