@@ -11,28 +11,26 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/trafficmanager.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
-    arm-resource-flattening: true
-  "@azure-tools/typespec-csharp":
+  "@azure-typespec/http-client-csharp-mgmt":
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
-    flavor: azure
-    clear-output-folder: true
-    model-namespace: true
-    namespace: "Azure.ResourceManager.TrafficManager"
+    package-name: "Azure.ResourceManager.TrafficManager"
+    namespace: "{package-name}"
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-trafficmanager"
     namespace: "azure.mgmt.trafficmanager"
-    flavor: "azure"
     generate-test: true
     generate-sample: true
+    flavor: "azure"
   "@azure-tools/typespec-java":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-trafficmanager"
     namespace: "com.azure.resourcemanager.trafficmanager"
-    service-name: "Traffic Manager"
-    flavor: "azure"
-  "@azure-tools/typespec-ts":
-    experimental-extensible-enums: true
-    emitter-output-dir: "{output-dir}/{service-dir}/arm-trafficmanager"
+    service-name: "TrafficManager"
     flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-trafficmanager"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
     package-details:
       name: "@azure/arm-trafficmanager"
   "@azure-tools/typespec-go":
