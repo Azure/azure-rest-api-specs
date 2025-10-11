@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-10-01'
 input-file:
-  - ArizeAi.ObservabilityEval/stable/2024-10-01/openapi.json
+  - stable/2024-10-01/openapi.json
 ```
 
 ### Tag:  package-2024-10-01-preview
@@ -44,5 +44,5 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - ArizeAi.ObservabilityEval/preview/2024-10-01-preview/openapi.json
+  - preview/2024-10-01-preview/openapi.json
 ```
