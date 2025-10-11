@@ -1036,10 +1036,6 @@
         ]
       }
     },
-    "Azure.Core.armResourceType": {
-      "type": "string",
-      "description": "Represents an Azure Resource Type."
-    },
     "CheckTrafficManagerRelativeDnsNameAvailabilityParameters": {
       "type": "object",
       "description": "Parameters supplied to check Traffic Manager name operation.",
@@ -1700,19 +1696,15 @@
         "id": {
           "type": "string",
           "format": "arm-id",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}"
+          "description": "Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}"
         },
         "name": {
           "type": "string",
-          "description": "The name of the Traffic Manager endpoint."
+          "description": "The name of the resource"
         },
         "type": {
-          "$ref": "#/definitions/Azure.Core.armResourceType",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"."
-        },
-        "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information."
+          "type": "string",
+          "description": "The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles."
         }
       }
     },
@@ -1729,7 +1721,11 @@
         },
         "location": {
           "type": "string",
-          "description": "The Azure Region where the resource lives"
+          "description": "The Azure Region where the resource lives",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "allOf": [

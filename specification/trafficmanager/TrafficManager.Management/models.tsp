@@ -280,7 +280,7 @@ model ProxyResource extends Resource {}
  */
 model Resource {
   /**
-   * Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}
+   * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}
    */
   id?: armResourceIdentifier;
 
@@ -291,14 +291,9 @@ model Resource {
   name?: string;
 
   /**
-   * The type of the resource. E.g. "Microsoft.Compute/virtualMachines" or "Microsoft.Storage/storageAccounts".
+   * The type of the resource. Ex- Microsoft.Network/trafficManagerProfiles.
    */
-  type?: armResourceType;
-
-  /**
-   * Azure Resource Manager metadata containing createdBy and modifiedBy information.
-   */
-  systemData?: SystemData;
+  type?: string;
 }
 
 /**
@@ -578,6 +573,7 @@ model TrackedResource extends Resource {
   /**
    * The Azure Region where the resource lives
    */
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   location?: string;
 }
 
