@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2019-09-16-preview` is specified o
 
 ```yaml $(tag) == 'package-2019-09-16-preview'
 input-file:
-  - Microsoft.WindowsESU/preview/2019-09-16-preview/windowsesu.json
+  - preview/2019-09-16-preview/windowsesu.json
 ```
 
 ---
