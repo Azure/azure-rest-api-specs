@@ -64,4 +64,4 @@ op getDeletedAccountCustomized(
   provider: "Microsoft.ThisWillBeReplaced",
   subscriptionId: Azure.Core.uuid,
 ): Azure.ResourceManager.ArmResponse<Microsoft.Storage.DeletedAccount> | Microsoft.Storage.ErrorResponse;
-@@override(DeletedAccounts.get, getDeletedAccountCustomized, "java");
+@@override(DeletedAccounts.get, getDeletedAccountCustomized, "java,go");
