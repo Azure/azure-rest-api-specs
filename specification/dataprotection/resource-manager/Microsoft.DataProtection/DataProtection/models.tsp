@@ -5,12 +5,8 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@azure-tools/typespec-client-generator-core";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DataProtection;
 
@@ -612,7 +608,7 @@ model BackupVault {
   /**
    * Storage Settings
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageSettings: StorageSetting[];
 
   /**
@@ -1004,7 +1000,7 @@ model Error {
    * The error additional info.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   additionalInfo?: Azure.ResourceManager.Foundations.ErrorAdditionalInfo[];
 
   /**
@@ -1017,7 +1013,7 @@ model Error {
    * The error details.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: Error[];
 
   /**
@@ -1278,7 +1274,7 @@ model ClientDiscoveryForServiceSpecification {
   /**
    * List of log specifications of this operation.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   logSpecifications?: ClientDiscoveryForLogSpecification[];
 }
 
@@ -1572,13 +1568,13 @@ model PolicyParameters {
   /**
    * Gets or sets the DataStore Parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   dataStoreParametersList?: DataStoreParameters[];
 
   /**
    * Gets or sets the Backup Data Source Parameters
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   backupDatasourceParametersList?: BackupDatasourceParameters[];
 }
 
@@ -1638,7 +1634,7 @@ model UserFacingError {
   /**
    * Additional related Errors
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   details?: UserFacingError[];
 
   /**
@@ -2020,7 +2016,7 @@ model AzureBackupJob {
    * A List, detailing the errors related to the job
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorDetails?: UserFacingError[];
 
   /**
@@ -2162,7 +2158,7 @@ model JobExtendedInfo {
    * List of Sub Tasks of the job
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   subTasks?: JobSubTask[];
 
   /**
@@ -2175,7 +2171,7 @@ model JobExtendedInfo {
    * A List, detailing the warnings related to the job
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   warningDetails?: UserFacingWarningDetail[];
 }
 
@@ -2357,7 +2353,7 @@ model AzureBackupFindRestorableTimeRangesResponse {
   /**
    * Returns the Restore Ranges available on the Backup Instance.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restorableTimeRanges?: RestorableTimeRange[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2494,7 +2490,7 @@ model ResourceGuard {
    * {readonly} List of operation details those are protected by the ResourceGuard resource
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceGuardOperations?: ResourceGuardOperation[];
 
   /**
@@ -2572,7 +2568,7 @@ model ResourceGuardProxyBase {
   resourceGuardResourceId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resourceGuardOperationDetails?: ResourceGuardOperationDetail[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -3015,7 +3011,7 @@ model KubernetesClusterBackupDatasourceParameters
   /**
    * Gets or sets the backup hook references. This property sets the hook reference to be executed during backup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   backupHookReferences?: NamespacedNameResource[];
 
   /**
@@ -3080,7 +3076,7 @@ model AzureRetentionRule extends BasePolicyRule {
   isDefault?: boolean;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   lifecycles: SourceLifeCycle[];
 
   objectType: "AzureRetentionRule";
@@ -3101,7 +3097,7 @@ model SourceLifeCycle {
   sourceDataStore: DataStoreInfoBase;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   targetDataStoreCopySettings?: TargetCopySetting[];
 }
 
@@ -3151,7 +3147,7 @@ model BackupPolicy extends BaseBackupPolicy {
   /**
    * Policy rule dictionary that contains rules for each backuptype i.e Full/Incremental/Logs etc
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   policyRules: BasePolicyRule[];
 
   objectType: "BackupPolicy";
@@ -3254,7 +3250,7 @@ model FeatureValidationResponse extends FeatureValidationResponseBase {
   /**
    * Response features
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   features?: SupportedFeature[];
 
   /**
@@ -3312,7 +3308,7 @@ model ItemLevelRestoreTargetInfo extends RestoreTargetInfoBase {
   /**
    * Restore Criteria
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restoreCriteria: ItemLevelRestoreCriteria[];
 
   /**
@@ -3481,7 +3477,7 @@ model KubernetesClusterRestoreCriteria extends ItemLevelRestoreCriteria {
   /**
    * Gets or sets the restore hook references. This property sets the hook reference to be executed during restore.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restoreHookReferences?: NamespacedNameResource[];
 
   /**
@@ -3549,7 +3545,7 @@ model KubernetesClusterVaultTierRestoreCriteria
   /**
    * Gets or sets the restore hook references. This property sets the hook reference to be executed during restore from vault.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   restoreHookReferences?: NamespacedNameResource[];
 
   /**
@@ -3659,7 +3655,7 @@ model ScheduleBasedBackupCriteria extends BackupCriteria {
   /**
    * This is day of the month from 1 to 28 other wise last of month
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   daysOfMonth?: Day[];
 
   /**
@@ -3700,7 +3696,7 @@ model ScheduleBasedTriggerContext extends TriggerContext {
   /**
    * List of tags that can be applicable for given schedule.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   taggingCriteria: TaggingCriteria[];
 
   /**
@@ -3716,7 +3712,7 @@ model TaggingCriteria {
   /**
    * Criteria which decides whether the tag can be applied to a triggered backup.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   criteria?: BackupCriteria[];
 
   /**
