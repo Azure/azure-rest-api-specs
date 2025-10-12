@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-preview-2024-04-01-preview` is spe
 
 ```yaml $(tag) == 'package-preview-2024-04-01-preview'
 input-file:
-  - Microsoft.OffAzureSpringBoot/preview/2024-04-01-preview/springbootdiscovery.json
+  - preview/2024-04-01-preview/springbootdiscovery.json
 ```
 ### Tag: package-2023-01-01-preview
 
@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2023-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-01-01-preview'
 input-file:
-  - Microsoft.OffAzureSpringBoot/preview/2023-01-01-preview/springbootdiscovery.json
+  - preview/2023-01-01-preview/springbootdiscovery.json
 ```
 
 ---
