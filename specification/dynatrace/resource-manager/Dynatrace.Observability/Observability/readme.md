@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-04-24` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-24'
 input-file:
-  - Dynatrace.Observability/stable/2024-04-24/dynatrace.json
+  - stable/2024-04-24/dynatrace.json
 suppressions:
     - code: ProvisioningStateMustBeReadOnly
       from: dynatrace.json
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2023-04-27` is specified on the co
 
 ```yaml $(tag) == 'package-2023-04-27'
 input-file:
-  - Dynatrace.Observability/stable/2023-04-27/dynatrace.json
+  - stable/2023-04-27/dynatrace.json
 ```
 
 ### Tag: package-2021-09-01
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2021-09-01` is specified on the co
 
 ```yaml $(tag) == 'package-2021-09-01'
 input-file:
-  - Dynatrace.Observability/stable/2021-09-01/dynatrace.json
+  - stable/2021-09-01/dynatrace.json
 ```
 
 ### Tag: package-2021-09-01-preview
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2021-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-09-01-preview'
 input-file:
-  - Dynatrace.Observability/preview/2021-09-01-preview/dynatrace.json
+  - preview/2021-09-01-preview/dynatrace.json
 ```
 
 ---
