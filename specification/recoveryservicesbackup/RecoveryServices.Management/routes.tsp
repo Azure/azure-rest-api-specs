@@ -27,6 +27,7 @@ interface ProtectionIntentOperationGroup {
     """)
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupPreValidateProtection")
   @post
+  @tag("ProtectionIntent")
   validate(
     ...ApiVersionParameter,
 
@@ -54,6 +55,7 @@ interface BackupStatus {
   @summary("Get the container backup status")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupStatus")
   @post
+  @tag("BackupStatus")
   get(
     ...ApiVersionParameter,
 
@@ -81,6 +83,7 @@ interface FeatureSupport {
   @summary("It will validate if given feature with resource properties is supported in service")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.RecoveryServices/locations/{azureRegion}/backupValidateFeatures")
   @post
+  @tag("FeatureSupport")
   validate(
     ...ApiVersionParameter,
 
@@ -108,6 +111,7 @@ interface BackupProtectionIntent {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionIntents")
   @get
   @list
+  @tag("BackupProtectionIntent")
   list(
     ...ApiVersionParameter,
 
@@ -142,6 +146,7 @@ interface BackupUsageSummaries {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupUsageSummaries")
   @get
   @list
+  @tag("BackupUsageSummaries")
   list(
     ...ApiVersionParameter,
 
@@ -176,6 +181,7 @@ interface Jobs {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupJobsExport")
   @post
+  @tag("Jobs")
   export(
     ...ApiVersionParameter,
 
@@ -204,6 +210,7 @@ interface BackupProtectedItems {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectedItems")
   @get
   @list
+  @tag("BackupProtectedItems")
   list(
     ...ApiVersionParameter,
 
@@ -237,6 +244,7 @@ interface OperationOperationGroup {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperation")
   @post
+  @tag("Operation")
   validate(
     ...ApiVersionParameter,
 
@@ -264,6 +272,7 @@ interface ValidateOperation {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTriggerValidateOperation")
   @post
+  @tag("ValidateOperation")
   trigger(
     ...ApiVersionParameter,
 
@@ -295,6 +304,7 @@ interface ValidateOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationResults/{operationId}")
   @get
+  @tag("ValidateOperationResults")
   get(
     ...ApiVersionParameter,
 
@@ -324,6 +334,7 @@ interface ValidateOperationStatuses {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupValidateOperationsStatuses/{operationId}")
   @get
+  @tag("ValidateOperationStatuses")
   get(
     ...ApiVersionParameter,
 
@@ -352,6 +363,7 @@ interface ProtectionContainerRefreshOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/operationResults/{operationId}")
   @get
+  @tag("ProtectionContainerRefreshOperationResults")
   get(
     ...ApiVersionParameter,
 
@@ -386,6 +398,7 @@ interface ProtectableContainers {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/protectableContainers")
   @get
   @list
+  @tag("ProtectableContainers")
   list(
     ...ApiVersionParameter,
 
@@ -419,6 +432,7 @@ interface ProtectionContainersOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupFabrics/{fabricName}/refreshContainers")
   @post
+  @tag("ProtectionContainers")
   refresh(
     ...ApiVersionParameter,
 
@@ -457,6 +471,7 @@ interface BackupOperationResults {
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperationResults/{operationId}")
   @get
+  @tag("BackupOperationResults")
   get(
     ...ApiVersionParameter,
 
@@ -490,6 +505,7 @@ interface BackupOperationStatuses {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupOperations/{operationId}")
   @get
+  @tag("BackupOperationStatuses")
   get(
     ...ApiVersionParameter,
 
@@ -519,6 +535,7 @@ interface BackupProtectableItems {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectableItems")
   @get
   @list
+  @tag("BackupProtectableItems")
   list(
     ...ApiVersionParameter,
 
@@ -553,6 +570,7 @@ interface BackupProtectionContainers {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupProtectionContainers")
   @get
   @list
+  @tag("BackupProtectionContainers")
   list(
     ...ApiVersionParameter,
 
@@ -581,6 +599,7 @@ interface DeletedProtectionContainers {
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupDeletedProtectionContainers")
   @get
   @list
+  @tag("SoftDeletedContainers")
   list(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -608,6 +627,7 @@ interface SecurityPINs {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupSecurityPIN")
   @post
+  @tag("SecurityPINs")
   get(
     ...ApiVersionParameter,
 
@@ -641,6 +661,7 @@ interface FetchTieringCost {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/fetchTieringCost")
   @post
+  @tag("FetchTieringCost")
   post(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -678,6 +699,7 @@ interface GetTieringCostOperationResult {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationResults/{operationId}")
   @get
+  @tag("GetTieringCostOperationResult")
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
@@ -705,6 +727,7 @@ interface TieringCostOperationStatus {
    */
   @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.RecoveryServices/vaults/{vaultName}/backupTieringCost/default/operationsStatus/{operationId}")
   @get
+  @tag("TieringCostOperationStatus")
   get(
     ...ApiVersionParameter,
     ...SubscriptionIdParameter,
