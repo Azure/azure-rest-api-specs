@@ -3319,7 +3319,7 @@ model RuleSetProperties extends AFDStateProperties {
    * A list of rules that are part of this rule set provided the rule set is in batch mode.
    * This property will be ignored if the rule set is not in batch mode.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @OpenAPI.extension("x-ms-identifiers", #["ruleName"])
   rules?: BatchRuleProperties[];
 }
 
@@ -3342,7 +3342,7 @@ model BatchRuleProperties {
   @maxLength(60)
   @minLength(1)
   @pattern("^[a-zA-Z][a-zA-Z0-9]{0,59}$")
-  name: string;
+  ruleName: string;
 
   ...RuleProperties;
 }

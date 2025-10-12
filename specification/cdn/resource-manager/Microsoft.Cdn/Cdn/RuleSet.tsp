@@ -99,3 +99,4 @@ interface RuleSets {
 // Mark batch mode properties as added in version 2025-12-01
 @@added(RuleSetProperties.batchMode, Versions.v2025_12_01);
 @@added(RuleSetProperties.rules, Versions.v2025_12_01);
+@@added(BatchRuleProperties, Versions.v2025_12_01);
