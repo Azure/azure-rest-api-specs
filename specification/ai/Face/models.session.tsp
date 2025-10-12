@@ -21,7 +21,8 @@ union LivenessOperationMode {
 }
 
 @doc("Request model for creating liveness session.")
-model CreateLivenessSessionContent {
+@renamedFrom(Versions.v1_2, "CreateLivenessSessionContent")
+model CreateLivenessSessionOptions {
   @doc("Type of liveness mode the client should follow.")
   livenessOperationMode: LivenessOperationMode;
 
@@ -46,8 +47,9 @@ model CreateLivenessSessionContent {
 
 #suppress "@azure-tools/typespec-autorest/unsupported-multipart-type" "Provide convenient interface for multipart/form-data in SDK"
 @doc("Request for creating liveness with verify session.")
+@friendlyName("CreateLivenessWithVerifySessionJsonContent")
 model CreateLivenessWithVerifySessionJsonContent
-  is CreateLivenessSessionContent {
+  is CreateLivenessSessionOptions {
   @doc("Whether or not return the verify image hash.")
   @added(Versions.v1_2_preview_1)
   returnVerifyImageHash?: boolean;
