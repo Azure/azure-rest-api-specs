@@ -65,6 +65,20 @@ union PendingUploadCredentialType {
   sas: "SAS",
 }
 
+@doc("List View Type Definition")
+union ListViewType {
+  string,
+
+  @doc("List only active items.")
+  ActiveOnly: "ActiveOnly",
+
+  @doc("List only archived items.")
+  ArchivedOnly: "ArchivedOnly",
+
+  @doc("List all items.")
+  All: "All",
+}
+
 @doc("Represents a request for a pending upload.")
 model PendingUploadRequest {
   @doc("If PendingUploadId is not provided, a random GUID will be used.")
@@ -119,6 +133,13 @@ model BlobReference {
 model AssetCredentialResponse {
   @doc("Credential info to access the storage account.")
   blobReference: BlobReference;
+}
+
+@doc("Asset Credential Request")
+@added(Versions.v2025_05_15_preview)
+model AssetCredentialRequest {
+  @doc("Blob URI")
+  BlobUri: string;
 }
 
 alias OpenAIListRequestOptions = {

@@ -2433,6 +2433,19 @@
       ],
       "x-ms-discriminator-value": "ApiKey"
     },
+    "AssetCredentialRequest": {
+      "type": "object",
+      "description": "Asset Credential Request",
+      "properties": {
+        "BlobUri": {
+          "type": "string",
+          "description": "Blob URI"
+        }
+      },
+      "required": [
+        "BlobUri"
+      ]
+    },
     "AssetCredentialResponse": {
       "type": "object",
       "description": "Represents a reference to a blob for consumption",
@@ -3833,6 +3846,36 @@
         }
       ],
       "x-ms-discriminator-value": "dataset"
+    },
+    "ListViewType": {
+      "type": "string",
+      "description": "List View Type Definition",
+      "enum": [
+        "ActiveOnly",
+        "ArchivedOnly",
+        "All"
+      ],
+      "x-ms-enum": {
+        "name": "ListViewType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "ActiveOnly",
+            "value": "ActiveOnly",
+            "description": "List only active items."
+          },
+          {
+            "name": "ArchivedOnly",
+            "value": "ArchivedOnly",
+            "description": "List only archived items."
+          },
+          {
+            "name": "All",
+            "value": "All",
+            "description": "List all items."
+          }
+        ]
+      }
     },
     "LongRunningResponse": {
       "type": "object",
