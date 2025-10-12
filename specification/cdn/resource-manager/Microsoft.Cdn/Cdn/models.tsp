@@ -3313,6 +3313,7 @@ model RuleSetProperties extends AFDStateProperties {
    * This property can only be set during rule set creation and cannot be updated later.
    * For switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.
    */
+  @visibility(Lifecycle.Read)
   batchMode?: boolean;
 
   /**
