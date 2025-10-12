@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Nginx.NginxPlus",
-    "version": "2024-01-01-preview"
+    "version": "2024-11-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -26,6 +26,211 @@
     }
   },
   "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/apiKeys/{apiKeyName}": {
+      "put": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "Create or update an API Key for the Nginx deployment in order to access the dataplane API endpoint",
+        "operationId": "ApiKeys_CreateOrUpdate",
+        "consumes": [
+          "application/json"
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiKeyNameParameter"
+          },
+          {
+            "in": "body",
+            "name": "body",
+            "description": "The API Key object containing fields (e.g. secret text, expiration date) to upsert the key.",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKeyRequest"
+            }
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The API Key was successfully updated and returned.",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
+            }
+          },
+          "201": {
+            "description": "The API Key was successfully created and returned.",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiKeys_CreateOrUpdate": {
+            "$ref": "./examples/ApiKeys_CreateOrUpdate.json"
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "Delete API key for Nginx deployment",
+        "operationId": "ApiKeys_Delete",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiKeyNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "The API key resource does not exist."
+          },
+          "200": {
+            "description": "The API key was successfully deleted."
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiKeys_Delete": {
+            "$ref": "./examples/ApiKeys_Delete.json"
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "Get the specified API Key of the given Nginx deployment",
+        "operationId": "ApiKeys_Get",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "#/parameters/ApiKeyNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "ApiKeys_Get": {
+            "$ref": "./examples/ApiKeys_Get.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/apiKeys": {
+      "get": {
+        "tags": [
+          "NginxApiKey"
+        ],
+        "summary": "List all API Keys of the given Nginx deployment",
+        "operationId": "ApiKeys_List",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DeploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Success",
+            "schema": {
+              "$ref": "#/definitions/NginxDeploymentApiKeyListResponse"
+            }
+          },
+          "default": {
+            "description": "Default error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "ApiKeys_List": {
+            "$ref": "./examples/ApiKeys_List.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Nginx.NginxPlus/nginxDeployments/{deploymentName}/certificates/{certificateName}": {
       "get": {
         "tags": [
@@ -38,10 +243,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -54,7 +259,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -67,7 +272,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -91,10 +296,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -107,7 +312,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -134,7 +339,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -159,10 +364,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -175,7 +380,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -191,7 +396,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -215,16 +420,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -237,7 +442,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -263,16 +468,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -285,7 +490,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -311,10 +516,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -327,20 +532,20 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -364,10 +569,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -380,14 +585,14 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
             "name": "body",
             "description": "The NGINX configuration",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationRequest"
             }
           }
         ],
@@ -395,19 +600,19 @@
           "200": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "201": {
             "description": "Success",
             "schema": {
-              "$ref": "#/definitions/NginxConfiguration"
+              "$ref": "#/definitions/NginxConfigurationResponse"
             }
           },
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -432,10 +637,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -448,7 +653,7 @@
             "type": "string"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -464,7 +669,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -491,10 +696,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
@@ -508,7 +713,7 @@
             "pattern": "^[a-z][a-z0-9]*$"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "name": "body",
@@ -527,9 +732,9 @@
             }
           },
           "default": {
-            "description": "Default error response",
+            "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -552,16 +757,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -574,7 +779,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -601,16 +806,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -636,7 +841,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -664,16 +869,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
             "in": "body",
@@ -699,13 +904,16 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "Deployments_Update": {
             "$ref": "./examples/Deployments_Update.json"
+          },
+          "Deployments_UpdateSubnet": {
+            "$ref": "./examples/Deployments_UpdateSubnet.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -721,16 +929,16 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/DeploymentNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -746,7 +954,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -770,10 +978,10 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -786,7 +994,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -812,13 +1020,13 @@
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -831,7 +1039,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -850,14 +1058,14 @@
         "tags": [
           "NginxDeployment"
         ],
-        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-01-01-preview api version.",
+        "summary": "List all operations provided by Nginx.NginxPlus for the 2024-11-01-preview api version.",
         "operationId": "Operations_List",
         "produces": [
           "application/json"
         ],
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -870,7 +1078,7 @@
           "default": {
             "description": "Default error response.",
             "schema": {
-              "$ref": "#/definitions/ResourceProviderDefaultErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -1026,7 +1234,7 @@
           "type": "string"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1056,6 +1264,41 @@
         }
       }
     },
+    "NginxConfigurationProtectedFileRequest": {
+      "type": "object",
+      "properties": {
+        "content": {
+          "type": "string",
+          "x-ms-secret": true,
+          "description": "The content of the protected file. This value is a PUT only value. If you perform a GET request on this value, it will be empty because it is a protected file."
+        },
+        "virtualPath": {
+          "type": "string",
+          "description": "The virtual path of the protected file.",
+          "example": "/etc/nginx/protected-file.cert"
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "The hash of the content of the file. This value is used to determine if the file has changed.",
+          "example": "sha256:1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF"
+        }
+      }
+    },
+    "NginxConfigurationProtectedFileResponse": {
+      "type": "object",
+      "properties": {
+        "virtualPath": {
+          "type": "string",
+          "description": "The virtual path of the protected file.",
+          "example": "/etc/nginx/protected-file.cert"
+        },
+        "contentHash": {
+          "type": "string",
+          "description": "The hash of the content of the file. This value is used to determine if the file has changed.",
+          "example": "sha256:1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF1234567890ABCDEF"
+        }
+      }
+    },
     "NginxConfigurationPackage": {
       "type": "object",
       "properties": {
@@ -1071,7 +1314,7 @@
         }
       }
     },
-    "NginxConfigurationProperties": {
+    "NginxConfigurationResponseProperties": {
       "type": "object",
       "properties": {
         "provisioningState": {
@@ -1087,7 +1330,7 @@
         "protectedFiles": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NginxConfigurationFile"
+            "$ref": "#/definitions/NginxConfigurationProtectedFileResponse"
           },
           "x-ms-identifiers": []
         },
@@ -1099,7 +1342,35 @@
         }
       }
     },
-    "NginxConfiguration": {
+    "NginxConfigurationRequestProperties": {
+      "type": "object",
+      "properties": {
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState"
+        },
+        "files": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationFile"
+          },
+          "x-ms-identifiers": []
+        },
+        "protectedFiles": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
+          },
+          "x-ms-identifiers": []
+        },
+        "package": {
+          "$ref": "#/definitions/NginxConfigurationPackage"
+        },
+        "rootFile": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxConfigurationResponse": {
       "type": "object",
       "x-ms-azure-resource": true,
       "properties": {
@@ -1116,13 +1387,35 @@
           "readOnly": true
         },
         "properties": {
-          "$ref": "#/definitions/NginxConfigurationProperties"
-        },
-        "location": {
-          "type": "string"
+          "$ref": "#/definitions/NginxConfigurationResponseProperties"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "readOnly": true
+        }
+      }
+    },
+    "NginxConfigurationRequest": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxConfigurationRequestProperties"
+        },
+        "systemData": {
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1135,20 +1428,12 @@
           "description": "Results of a list operation.",
           "type": "array",
           "items": {
-            "$ref": "#/definitions/NginxConfiguration"
+            "$ref": "#/definitions/NginxConfigurationResponse"
           }
         },
         "nextLink": {
           "description": "Link to the next set of results, if any.",
           "type": "string"
-        }
-      }
-    },
-    "ResourceProviderDefaultErrorResponse": {
-      "type": "object",
-      "properties": {
-        "error": {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorDetail"
         }
       }
     },
@@ -1356,10 +1641,6 @@
           "type": "string",
           "readOnly": true
         },
-        "managedResourceGroup": {
-          "type": "string",
-          "description": "The managed resource group to deploy VNet injection related network resources."
-        },
         "networkProfile": {
           "$ref": "#/definitions/NginxNetworkProfile"
         },
@@ -1382,6 +1663,27 @@
         },
         "userProfile": {
           "$ref": "#/definitions/NginxDeploymentUserProfile"
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Settings for NGINX App Protect (NAP)",
+          "required": [
+            "webApplicationFirewallSettings"
+          ],
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            },
+            "webApplicationFirewallStatus": {
+              "$ref": "#/definitions/WebApplicationFirewallStatus",
+              "readOnly": true
+            }
+          }
+        },
+        "dataplaneApiEndpoint": {
+          "type": "string",
+          "description": "Dataplane API endpoint for the caller to update the NGINX state of the deployment.",
+          "readOnly": true
         }
       }
     },
@@ -1420,7 +1722,7 @@
           "type": "string"
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
+          "$ref": "../../../../../../common-types/resource-management/v2/types.json#/definitions/systemData",
           "readOnly": true
         }
       }
@@ -1440,8 +1742,20 @@
         "userProfile": {
           "$ref": "#/definitions/NginxDeploymentUserProfile"
         },
+        "networkProfile": {
+          "$ref": "#/definitions/NginxNetworkProfile"
+        },
         "autoUpgradeProfile": {
           "$ref": "#/definitions/AutoUpgradeProfile"
+        },
+        "nginxAppProtect": {
+          "type": "object",
+          "description": "Update settings for NGINX App Protect (NAP)",
+          "properties": {
+            "webApplicationFirewallSettings": {
+              "$ref": "#/definitions/WebApplicationFirewallSettings"
+            }
+          }
         }
       }
     },
@@ -1475,6 +1789,93 @@
           "type": "array",
           "items": {
             "$ref": "#/definitions/NginxDeployment"
+          }
+        },
+        "nextLink": {
+          "type": "string"
+        }
+      }
+    },
+    "NginxDeploymentApiKeyRequestProperties": {
+      "type": "object",
+      "properties": {
+        "secretText": {
+          "type": "string",
+          "format": "password",
+          "description": "Secret text to be used as a Dataplane API Key. This is a write only property that can never be read back, but the first three characters will be returned in the 'hint' property.",
+          "x-ms-secret": true
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time after which this Dataplane API Key is no longer valid."
+        }
+      }
+    },
+    "NginxDeploymentApiKeyResponseProperties": {
+      "type": "object",
+      "properties": {
+        "hint": {
+          "type": "string",
+          "readOnly": true,
+          "description": "The first three characters of the secret text to help identify it in use. This property is read-only."
+        },
+        "endDateTime": {
+          "format": "date-time",
+          "type": "string",
+          "description": "The time after which this Dataplane API Key is no longer valid."
+        }
+      }
+    },
+    "NginxDeploymentApiKeyRequest": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentApiKeyRequestProperties"
+        }
+      }
+    },
+    "NginxDeploymentApiKeyResponse": {
+      "type": "object",
+      "x-ms-azure-resource": true,
+      "properties": {
+        "id": {
+          "type": "string",
+          "readOnly": true
+        },
+        "name": {
+          "type": "string",
+          "readOnly": true
+        },
+        "type": {
+          "type": "string",
+          "readOnly": true
+        },
+        "properties": {
+          "$ref": "#/definitions/NginxDeploymentApiKeyResponseProperties"
+        }
+      }
+    },
+    "NginxDeploymentApiKeyListResponse": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/NginxDeploymentApiKeyResponse"
           }
         },
         "nextLink": {
@@ -1561,7 +1962,7 @@
             "protectedFiles": {
               "type": "array",
               "items": {
-                "$ref": "#/definitions/NginxConfigurationFile"
+                "$ref": "#/definitions/NginxConfigurationProtectedFileRequest"
               },
               "x-ms-identifiers": []
             },
@@ -1593,6 +1994,12 @@
               "type": "array",
               "items": {
                 "$ref": "#/definitions/AnalysisDiagnostic"
+              }
+            },
+            "diagnostics": {
+              "type": "array",
+              "items": {
+                "$ref": "#/definitions/DiagnosticItem"
               }
             }
           }
@@ -1641,6 +2048,154 @@
           "example": "nginx-azure-load-balancer-allowed-directives"
         }
       }
+    },
+    "DiagnosticItem": {
+      "type": "object",
+      "description": "A diagnostic is a message associated with an NGINX config. The Analyzer returns diagnostics with a level indicating the importance of the diagnostic with optional category",
+      "required": [
+        "directive",
+        "description",
+        "file",
+        "line",
+        "message",
+        "rule",
+        "level"
+      ],
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the diagnostic"
+        },
+        "directive": {
+          "type": "string",
+          "example": "worker_processes"
+        },
+        "description": {
+          "type": "string",
+          "example": "Some directives cannot be overridden by the user provided configuration"
+        },
+        "file": {
+          "type": "string",
+          "description": "the filepath of the most relevant config file.",
+          "example": "nginx.conf"
+        },
+        "line": {
+          "type": "number",
+          "example": 2
+        },
+        "message": {
+          "type": "string",
+          "example": "the value will be overridden with `4000`"
+        },
+        "rule": {
+          "type": "string",
+          "example": "overridden directives"
+        },
+        "level": {
+          "type": "string",
+          "enum": [
+            "Info",
+            "Warning"
+          ],
+          "description": "Warning or Info",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "level"
+          },
+          "example": "Warning"
+        },
+        "category": {
+          "type": "string",
+          "description": "Category of warning like Best-practices, Recommendation, Security etc.",
+          "example": "Security"
+        }
+      }
+    },
+    "WebApplicationFirewallSettings": {
+      "type": "object",
+      "description": "Settings for the NGINX App Protect Web Application Firewall (WAF)",
+      "properties": {
+        "activationState": {
+          "type": "string",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "description": "The activation state of the WAF. Use 'Enabled' to enable the WAF and 'Disabled' to disable it.",
+          "x-ms-enum": {
+            "modelAsString": true,
+            "name": "activationState"
+          }
+        }
+      }
+    },
+    "WebApplicationFirewallStatus": {
+      "type": "object",
+      "description": "The status of the NGINX App Protect Web Application Firewall",
+      "properties": {
+        "attackSignaturesPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing attack signatures for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "botSignaturesPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing bot signatures for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "threatCampaignsPackage": {
+          "$ref": "#/definitions/WebApplicationFirewallPackage",
+          "readOnly": true,
+          "description": "Package containing threat campaigns for the NGINX App Protect Web Application Firewall (WAF)."
+        },
+        "componentVersions": {
+          "$ref": "#/definitions/WebApplicationFirewallComponentVersions",
+          "readOnly": true,
+          "description": "Versions of the NGINX App Protect Web Application Firewall (WAF) components."
+        }
+      }
+    },
+    "WebApplicationFirewallPackage": {
+      "type": "object",
+      "description": "NGINX App Protect Web Application Firewall (WAF) Package. Contains the version and revision date of the package.",
+      "required": [
+        "version",
+        "revisionDatetime"
+      ],
+      "properties": {
+        "version": {
+          "type": "string",
+          "example": "2.02",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) package."
+        },
+        "revisionDatetime": {
+          "type": "string",
+          "example": "2024-02-21T15:50:53Z",
+          "format": "date-time",
+          "description": "The date and time of the package revision."
+        }
+      }
+    },
+    "WebApplicationFirewallComponentVersions": {
+      "type": "object",
+      "readOnly": true,
+      "required": [
+        "wafEngineVersion",
+        "wafNginxVersion"
+      ],
+      "description": "Versions of the NGINX App Protect Web Application Firewall (WAF) components.",
+      "properties": {
+        "wafEngineVersion": {
+          "type": "string",
+          "example": "10.624.0",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) engine."
+        },
+        "wafNginxVersion": {
+          "type": "string",
+          "example": "4.815.0",
+          "description": "The version of the NGINX App Protect Web Application Firewall (WAF) module for NGINX."
+        }
+      }
     }
   },
   "parameters": {
@@ -1648,6 +2203,15 @@
       "in": "path",
       "name": "deploymentName",
       "description": "The name of targeted NGINX deployment",
+      "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    },
+    "ApiKeyNameParameter": {
+      "in": "path",
+      "name": "apiKeyName",
+      "description": "The resource name of the API key",
       "pattern": "^([a-z0-9A-Z][a-z0-9A-Z-]{0,28}[a-z0-9A-Z]|[a-z0-9A-Z])$",
       "required": true,
       "type": "string",

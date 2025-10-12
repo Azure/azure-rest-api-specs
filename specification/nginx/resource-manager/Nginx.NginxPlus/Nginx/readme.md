@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2021-05-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-05-01-preview'
 input-file:
-- Nginx.NginxPlus/preview/2021-05-01-preview/swagger.json
+- preview/2021-05-01-preview/swagger.json
 ```
 
 ### Tag: package-2022-08-01
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2022-08-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-08-01'
 input-file:
-- Nginx.NginxPlus/stable/2022-08-01/swagger.json
+- stable/2022-08-01/swagger.json
 ```
 
 ### Tag: package-2022-11-01-preview
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2022-11-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-11-01-preview'
 input-file:
-- Nginx.NginxPlus/preview/2022-11-01-preview/swagger.json
+- preview/2022-11-01-preview/swagger.json
 ```
 
 ### Tag: package-2023-04-01
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2023-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-04-01'
 input-file:
-- Nginx.NginxPlus/stable/2023-04-01/swagger.json
+- stable/2023-04-01/swagger.json
 ```
 
 ### Tag: package-2023-09-01
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-09-01'
 input-file:
-- Nginx.NginxPlus/stable/2023-09-01/swagger.json
+- stable/2023-09-01/swagger.json
 ```
 
 ### Tag: package-preview-2024-01
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - Nginx.NginxPlus/preview/2024-01-01-preview/swagger.json
+  - preview/2024-01-01-preview/swagger.json
 ```
 
 ### Tag: package-preview-2024-06-01
@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-preview-2024-06-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2024-06-01'
 input-file:
-  - Nginx.NginxPlus/preview/2024-06-01-preview/swagger.json
+  - preview/2024-06-01-preview/swagger.json
 ```
 
 ### Tag: package-preview-2024-09-01
@@ -100,7 +100,7 @@ These settings apply only when `--tag=package-preview-2024-09-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2024-09-01'
 input-file:
-  - Nginx.NginxPlus/preview/2024-09-01-preview/swagger.json
+  - preview/2024-09-01-preview/swagger.json
 ```
 
 ### Tag: package-preview-2024-11-01
@@ -109,7 +109,7 @@ These settings apply only when `--tag=package-preview-2024-11-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2024-11-01'
 input-file:
-  - Nginx.NginxPlus/preview/2024-11-01-preview/swagger.json
+  - preview/2024-11-01-preview/swagger.json
 ```
 
 ### Tag: package-preview-2025-03-01
@@ -118,5 +118,5 @@ These settings apply only when `--tag=package-preview-2025-03-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-03-01'
 input-file:
-  - Nginx.NginxPlus/preview/2025-03-01-preview/swagger.json
+  - preview/2025-03-01-preview/swagger.json
 ```
