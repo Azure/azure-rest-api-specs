@@ -1,0 +1,78 @@
+{
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "0b352192-dcac-4cc7-992e-a96190ccc68c"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "ExampleVault1",
+            "type": "Microsoft.DataProtection/BackupVaults",
+            "id": "/subscriptions/0b352192-dcac-4cc7-992e-a96190ccc68c/resourceGroups/SampleResourceGroup2/providers/Microsoft.DataProtection/BackupVaults/ExampleVault1",
+            "location": "WestUS",
+            "properties": {
+              "bcdrSecurityLevel": "Good",
+              "featureSettings": {
+                "crossRegionRestoreSettings": {
+                  "state": "Enabled"
+                }
+              },
+              "provisioningState": "Succeeded",
+              "secureScore": "Adequate",
+              "securitySettings": {
+                "softDeleteSettings": {
+                  "retentionDurationInDays": 14,
+                  "state": "Enabled"
+                }
+              },
+              "storageSettings": [
+                {
+                  "type": "LocallyRedundant",
+                  "datastoreType": "VaultStore"
+                }
+              ]
+            },
+            "tags": {
+              "key1": "val1"
+            }
+          },
+          {
+            "name": "ExampleVault2",
+            "type": "Microsoft.DataProtection/BackupVaults",
+            "id": "/subscriptions/0b352192-dcac-4cc7-992e-a96190ccc68c/resourceGroups/SampleResourceGroup/providers/Microsoft.DataProtection/BackupVaults/ExampleVault2",
+            "location": "WestUS",
+            "properties": {
+              "bcdrSecurityLevel": "Good",
+              "featureSettings": {
+                "crossRegionRestoreSettings": {
+                  "state": "Enabled"
+                }
+              },
+              "provisioningState": "Succeeded",
+              "secureScore": "Adequate",
+              "securitySettings": {
+                "softDeleteSettings": {
+                  "retentionDurationInDays": 14,
+                  "state": "Enabled"
+                }
+              },
+              "storageSettings": [
+                {
+                  "type": "LocallyRedundant",
+                  "datastoreType": "VaultStore"
+                }
+              ]
+            },
+            "tags": {
+              "key1": "val1"
+            }
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "BackupVaults_GetInSubscription",
+  "title": "Get BackupVaults in Subscription"
+}
