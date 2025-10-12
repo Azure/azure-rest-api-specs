@@ -54,6 +54,9 @@
           },
           "Get pricings on subscription - CloudPosture plan": {
             "$ref": "./examples/Pricings/GetPricingByNameCloudPosture_example.json"
+          },
+          "Get pricings on subscription - Managed by M365 security rule": {
+            "$ref": "./examples/Pricings/GetPricingByNameExternallyUpdated_example.json"
           }
         },
         "tags": [
@@ -289,7 +292,8 @@
                               "message": "Successfully enabled extension"
                             }
                           }
-                        ]
+                        ],
+                        "securityOperatorResourceId": "/providers/Microsoft.Management/managementGroups/ContosoGroup/providers/Microsoft.Security/securityOperators/ContosoOperator"
                       }
                     }
                   },
@@ -317,9 +321,11 @@
                             "operationStatus": {
                               "code": "Succeeded",
                               "message": "Successfully enabled extension"
-                            }
+                            },
+                            "securityOperatorResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/ContosoHighPrivilegedOperator"
                           }
-                        ]
+                        ],
+                        "securityOperatorResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/ContosoOperator"
                       }
                     }
                   }
@@ -363,7 +369,8 @@
                               "message": "Successfully enabled extension"
                             }
                           }
-                        ]
+                        ],
+                        "securityOperatorResourceId": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/securityOperators/ContosoOperator"
                       }
                     }
                   },
@@ -535,7 +542,7 @@
         "inheritedFrom": {
           "type": "string",
           "readOnly": true,
-          "description": "The id of the scope inherited from. \"Null\" if not inherited. This field is only available for resource-level pricing."
+          "description": "The id of the scope inherited from. \"Null\" if not inherited."
         },
         "resourcesCoverageStatus": {
           "type": "string",
@@ -585,6 +592,33 @@
           },
           "readOnly": true,
           "description": "Optional. List of plans that replace this plan. This property exists only if this plan is deprecated."
+        },
+        "securityOperatorResourceId": {
+          "type": "string",
+          "description": "Resource Id of Microsoft.Security/SecurityOperator, as an extension resource of Subscription (format: /subscriptions/{subscriptionId}/providers/Microsoft.Security/securityOperators/{operatorName}) or Management Group (format: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/securityOperators/{operatorName}).<br><br>The Security Operator should be created with a System Managed Identity which is used by Microsoft Defender for Cloud to operate on scope according to Plan configuration."
+        },
+        "originatedFrom": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Optional. Indicates the origin of the most recent configuration change when the update was performed by a management system other than direct Azure Resource Manager (ARM).",
+          "enum": [
+            "M365"
+          ],
+          "x-ms-enum": {
+            "name": "originatedFrom",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "M365",
+                "description": "Indicates that the configuration change originated from Microsoft 365."
+              }
+            ]
+          }
+        },
+        "managedBy": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Optional. Indicates who exclusively manage the configuration when the last update was performed by a management system other than direct Azure Resource Manager (ARM)."
         }
       },
       "required": [
@@ -631,6 +665,10 @@
           "$ref": "#/definitions/OperationStatus",
           "readOnly": true,
           "description": "Optional. A status describing the success/failure of the extension's enablement/disablement operation."
+        },
+        "securityOperatorResourceId": {
+          "type": "string",
+          "description": "Resource Id of Microsoft.Security/SecurityOperator, as an extension resource of Subscription (format: /subscriptions/{subscriptionId}/providers/Microsoft.Security/securityOperators/{operatorName}) or Management Group (format: /providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Security/securityOperators/{operatorName}).<br><br>The Security Operator should be created with a System Managed Identity which is used by Microsoft Defender for Cloud to operate on scope according to Extension configuration."
         }
       },
       "required": [
