@@ -274,23 +274,6 @@ union PixelSelection {
 }
 
 /**
- * Format specification for image request outputs
- */
-union TilerImageExportFormat {
-  string,
-
-  /**
-   * Portable Network Graphics format
-   */
-  png: "png",
-
-  /**
-   * Cloud Optimized GeoTIFF format
-   */
-  cog: "cog",
-}
-
-/**
  * Geographic extent of a dataset expressed as a bounding box
  */
 model StacItemBounds {
