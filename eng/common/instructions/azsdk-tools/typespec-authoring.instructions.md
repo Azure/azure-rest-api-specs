@@ -12,7 +12,9 @@ This instruction applies to all tasks involving **TypeSpec**, including:
 - Editing or refactoring existing TypeSpec files
 - Resolving TypeSpec-related issues
 
-## Scenario A: Add a new api version for a service
+## ⚙️ Workflow Guidance
+
+When encountering a TypeSpec-related task, follow this process:
 
 ### Step 1: Call the `azsdk-qa-bot` tool
 
@@ -25,6 +27,9 @@ Parse the response from `azsdk-qa-bot` to identify the recommended fix or implem
 ### Step 3: Execute the solution
 
 Apply the extracted solution to update the TypeSpec file accordingly.
+
+
+**When the task is to add a new api version, add following extra step:**
 
 ### Step 4: Suggestion follow up action
 
