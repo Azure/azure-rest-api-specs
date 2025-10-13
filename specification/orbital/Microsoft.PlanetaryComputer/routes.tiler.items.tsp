@@ -159,23 +159,7 @@ interface TilerAssetStatistics {
   getAll is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
+      ...getAssetStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
     StacAssetStatistics
@@ -194,23 +178,7 @@ interface TilerStatistics {
   getAll is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
+      ...listStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
     StatisticsResponse
@@ -229,22 +197,7 @@ interface TilerGeoJsonStatistics {
   getAll is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
+      ...listGeoJsonStatisticsCustomizedCommonSignatures;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
@@ -338,47 +291,7 @@ interface TilerTileMatrixSets {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
-       */
-      @path
-      scale: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
-
+      ...getTileCustomizedCommonSignatures;
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
       ...SubDatasetQueryParameters;
@@ -457,32 +370,9 @@ interface TilerTileJsonTileMatrixSets {
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
+      ...getTileJsonCustomizedCommonSignatures;
 
       /**
        * Default will be automatically defined if the output image needs a mask (png) or
@@ -564,6 +454,331 @@ interface TilerWmts {
   >;
 }
 
+// Common signature aliases for client overrides
+alias getWmtsCapabilitiesCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
+alias getTileCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getAssetStatisticsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias cropGeoJsonCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias cropGeoJsonWithDimensionsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path
+  width: float32;
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path
+  height: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias listGeoJsonStatisticsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias getPartCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getPartWithDimensionsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  ...BoundingBoxPathParameters;
+
+  /**
+   * Width in pixels for the output image.
+   */
+  @path
+  width: float32;
+
+  /**
+   * Height in pixels for the output image.
+   */
+  @path
+  height: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getPreviewCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias getPreviewWithFormatCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias listStatisticsCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+};
+
+alias getTileJsonCustomizedCommonSignatures = {
+  /**
+   * STAC Collection Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  collectionId: string;
+
+  /**
+   * STAC Item Identifier
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  itemId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
 interface TilerWmtsTileMatrixSets {
   /**
    * OGC WMTS endpoint.
@@ -577,30 +792,7 @@ interface TilerWmtsTileMatrixSets {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
+      ...getWmtsCapabilitiesCustomizedCommonSignatures;
 
       /**
        * Output image type. Default is png.
@@ -693,30 +885,7 @@ interface TilerPreviews {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...getPreviewWithFormatCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -759,22 +928,7 @@ interface TilerPreviews {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
+      ...getPreviewCustomizedCommonSignatures;
 
       /**
        * Output format for the tile or image (e.g., png, jpeg, webp).
@@ -826,44 +980,7 @@ interface TilerParts {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      ...BoundingBoxPathParameters;
-
-      /**
-       * Width in pixels for the output image.
-       */
-      @path
-      width: float32;
-
-      /**
-       * Height in pixels for the output image.
-       */
-      @path
-      height: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...getPartWithDimensionsCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -911,32 +1028,7 @@ interface TilerParts {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      ...BoundingBoxPathParameters;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...getPartCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -988,42 +1080,7 @@ interface TilerGeoJsons {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Width in pixels for the output image.
-       */
-      @path
-      width: float32;
-
-      /**
-       * Height in pixels for the output image.
-       */
-      @path
-      height: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp).
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...cropGeoJsonWithDimensionsCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)
@@ -1071,30 +1128,7 @@ interface TilerGeoJsons {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * STAC Collection Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
-      /**
-       * STAC Item Identifier
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      itemId: string;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
+      ...cropGeoJsonCustomizedCommonSignatures;
 
       /**
        * rio-color formula (info: https://github.com/mapbox/rio-color)

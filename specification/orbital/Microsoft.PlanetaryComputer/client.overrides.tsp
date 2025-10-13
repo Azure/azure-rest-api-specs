@@ -11,411 +11,6 @@ using Microsoft.PlanetaryComputer;
 
 // === Common signature aliases for Python overrides ===
 
-alias getTileCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Identifier selecting one of the TileMatrixSetId supported
-   */
-  @path tileMatrixSetId: string;
-
-  /**
-   * Identifier (Z) selecting one of the scales defined in the TileMatrixSet
-   */
-  @path z: float32;
-
-  /**
-   * Column (X) index of the tile on the selected TileMatrix
-   */
-  @path x: float32;
-
-  /**
-   * Row (Y) index of the tile on the selected TileMatrix
-   */
-  @path y: float32;
-
-  /**
-   * Numeric scale factor for the tile. Higher values produce larger tiles
-   */
-  @path scale: float32;
-
-  /**
-   * Output format for the tile or image (e.g., png, jpeg, webp)
-   */
-  @path format: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getWmtsCapabilitiesCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Identifier selecting one of the TileMatrixSetId supported
-   */
-  @path tileMatrixSetId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getAssetStatisticsCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias cropGeoJsonCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Output format for the tile or image (e.g., png, jpeg, webp)
-   */
-  @path format: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias cropGeoJsonWithDimensionsCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Width in pixels for the output image.
-   */
-  @path width: float32;
-
-  /**
-   * Height in pixels for the output image.
-   */
-  @path height: float32;
-
-  /**
-   * Output format for the tile or image (e.g., png, jpeg, webp)
-   */
-  @path format: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias listGeoJsonStatisticsCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getPartCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Bounding box minimum X coordinate
-   */
-  @path minx: float32;
-
-  /**
-   * Bounding box minimum Y coordinate
-   */
-  @path miny: float32;
-
-  /**
-   * Bounding box maximum X coordinate
-   */
-  @path maxx: float32;
-
-  /**
-   * Bounding box maximum Y coordinate
-   */
-  @path maxy: float32;
-
-  /**
-   * Output format for the tile or image (e.g., png, jpeg, webp)
-   */
-  @path format: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getPartWithDimensionsCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Bounding box minimum X coordinate
-   */
-  @path minx: float32;
-
-  /**
-   * Bounding box minimum Y coordinate
-   */
-  @path miny: float32;
-
-  /**
-   * Bounding box maximum X coordinate
-   */
-  @path maxx: float32;
-
-  /**
-   * Bounding box maximum Y coordinate
-   */
-  @path maxy: float32;
-
-  /**
-   * Width in pixels for the output image.
-   */
-  @path width: float32;
-
-  /**
-   * Height in pixels for the output image.
-   */
-  @path height: float32;
-
-  /**
-   * Output format for the tile or image (e.g., png, jpeg, webp)
-   */
-  @path format: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getPreviewCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getPreviewWithFormatCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Output format for the tile or image (e.g., png, jpeg, webp)
-   */
-  @path format: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias listStatisticsCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getTileJsonCustomizedCommonSignatures = {
-  /**
-   * STAC Collection Identifier
-   */
-  @path collectionId: string;
-
-  /**
-   * STAC Item Identifier
-   */
-  @path itemId: string;
-
-  /**
-   * Identifier selecting one of the TileMatrixSetId supported
-   */
-  @path tileMatrixSetId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getMosaicsTileJsonCustomizedCommonSignatures = {
-  /**
-   * Search Id (pgSTAC Search Hash)
-   */
-  @path searchId: string;
-
-  /**
-   * Identifier selecting one of the TileMatrixSetId supported
-   */
-  @path tileMatrixSetId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getMosaicsTileCustomizedCommonSignatures = {
-  /**
-   * Search Id (pgSTAC Search Hash)
-   */
-  @path searchId: string;
-
-  /**
-   * Identifier selecting one of the TileMatrixSetId supported
-   */
-  @path tileMatrixSetId: string;
-
-  /**
-   * Identifier (Z) selecting one of the scales defined in the TileMatrixSet
-   */
-  @path z: float32;
-
-  /**
-   * Column (X) index of the tile on the selected TileMatrix
-   */
-  @path x: float32;
-
-  /**
-   * Row (Y) index of the tile on the selected TileMatrix
-   */
-  @path y: float32;
-
-  /**
-   * Numeric scale factor for the tile. Higher values produce larger tiles
-   */
-  @path scale: float32;
-
-  /**
-   * Output format for the tile or image (e.g., png, jpeg, webp)
-   */
-  @path format: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
-alias getMosaicsWmtsCapabilitiesCustomizedCommonSignatures = {
-  /**
-   * Search Id (pgSTAC Search Hash)
-   */
-  @path searchId: string;
-
-  /**
-   * Identifier selecting one of the TileMatrixSetId supported
-   */
-  @path tileMatrixSetId: string;
-
-  /**
-   * API version
-   */
-  @query apiVersion: string;
-};
-
 // === Method overrides ===
 
 // === Parameter Grouping Overrides ===
@@ -860,6 +455,11 @@ op getTileCustomized(
   ...getTileCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for tile generation including asset selection, terrain algorithms, and visual rendering
    */
   options: GetTileOptions,
@@ -871,6 +471,11 @@ op getTileCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getTileCustomizedPython(
   ...getTileCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for tile generation including asset selection, terrain algorithms, and visual rendering
@@ -896,6 +501,11 @@ op getWmtsCapabilitiesCustomized(
   ...getWmtsCapabilitiesCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for WMTS capabilities including asset selection, terrain algorithms, and tile formatting
    */
   options: GetWmtsCapabilitiesOptions,
@@ -907,6 +517,11 @@ op getWmtsCapabilitiesCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getWmtsCapabilitiesCustomizedPython(
   ...getWmtsCapabilitiesCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for WMTS capabilities including asset selection, terrain algorithms, and tile formatting
@@ -932,6 +547,11 @@ op getAssetStatisticsCustomized(
   ...getAssetStatisticsCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for asset statistics including asset selection and statistical calculation parameters
    */
   options: GetAssetStatisticsOptions,
@@ -943,6 +563,11 @@ op getAssetStatisticsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getAssetStatisticsCustomizedPython(
   ...getAssetStatisticsCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for asset statistics including asset selection and statistical calculation parameters
@@ -968,6 +593,11 @@ op cropGeoJsonCustomized(
   ...cropGeoJsonCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
    */
   options: CropGeoJsonOptions,
@@ -985,6 +615,11 @@ op cropGeoJsonCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op cropGeoJsonCustomizedPython(
   ...cropGeoJsonCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
@@ -1010,6 +645,11 @@ op cropGeoJsonWithDimensionsCustomized(
   ...cropGeoJsonWithDimensionsCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
    */
   options: CropGeoJsonOptions,
@@ -1027,6 +667,11 @@ op cropGeoJsonWithDimensionsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op cropGeoJsonWithDimensionsCustomizedPython(
   ...cropGeoJsonWithDimensionsCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
@@ -1058,6 +703,11 @@ op listGeoJsonStatisticsCustomized(
   ...listGeoJsonStatisticsCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for GeoJSON statistics including asset selection and statistical calculation parameters
    */
   options: GetGeoJsonStatisticsOptions,
@@ -1075,6 +725,11 @@ op listGeoJsonStatisticsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op listGeoJsonStatisticsCustomizedPython(
   ...listGeoJsonStatisticsCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for GeoJSON statistics including asset selection and statistical calculation parameters
@@ -1106,6 +761,11 @@ op getPartCustomized(
   ...getPartCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
    */
   options: GetPartOptions,
@@ -1117,6 +777,11 @@ op getPartCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPartCustomizedPython(
   ...getPartCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
@@ -1139,6 +804,11 @@ op getPartWithDimensionsCustomized(
   ...getPartWithDimensionsCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
    */
   options: GetPartOptions,
@@ -1150,6 +820,11 @@ op getPartWithDimensionsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPartWithDimensionsCustomizedPython(
   ...getPartWithDimensionsCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for part generation including asset selection, terrain algorithms, and visual rendering
@@ -1175,6 +850,11 @@ op getPreviewCustomized(
   ...getPreviewCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
    */
   options: GetPreviewOptions,
@@ -1186,6 +866,11 @@ op getPreviewCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPreviewCustomizedPython(
   ...getPreviewCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
@@ -1205,6 +890,11 @@ op getPreviewWithFormatCustomized(
   ...getPreviewWithFormatCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
    */
   options: GetPreviewOptions,
@@ -1216,6 +906,11 @@ op getPreviewWithFormatCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getPreviewWithFormatCustomizedPython(
   ...getPreviewWithFormatCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for preview generation including asset selection, terrain algorithms, and visual rendering
@@ -1238,6 +933,11 @@ op listStatisticsCustomized(
   ...listStatisticsCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for statistics including asset selection and statistical calculation parameters
    */
   options: GetStatisticsOptions,
@@ -1250,6 +950,11 @@ op listStatisticsCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 op listStatisticsCustomizedPython(
   ...listStatisticsCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for statistics including asset selection and statistical calculation parameters
@@ -1269,6 +974,11 @@ op getTileJsonCustomized(
   ...getTileJsonCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for TileJSON generation including asset selection, terrain algorithms, and tile formatting
    */
   options: GetTileJsonOptions,
@@ -1280,6 +990,11 @@ op getTileJsonCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getTileJsonCustomizedPython(
   ...getTileJsonCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for TileJSON generation including asset selection, terrain algorithms, and tile formatting
@@ -1302,6 +1017,11 @@ op getMosaicsTileJsonCustomized(
   ...getMosaicsTileJsonCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for mosaic TileJSON generation including asset selection, terrain algorithms, and tile formatting
    */
   options: GetMosaicTileJsonOptions,
@@ -1313,6 +1033,11 @@ op getMosaicsTileJsonCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getMosaicsTileJsonCustomizedPython(
   ...getMosaicsTileJsonCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for mosaic TileJSON generation including asset selection, terrain algorithms, and tile formatting
@@ -1338,6 +1063,11 @@ op getMosaicsTileCustomized(
   ...getMosaicsTileCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for mosaic tile generation including asset selection, terrain algorithms, and visual rendering
    */
   options: GetMosaicTileOptions,
@@ -1349,6 +1079,11 @@ op getMosaicsTileCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getMosaicsTileCustomizedPython(
   ...getMosaicsTileCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for mosaic tile generation including asset selection, terrain algorithms, and visual rendering
@@ -1374,6 +1109,11 @@ op getMosaicsWmtsCapabilitiesCustomized(
   ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures,
 
   /**
+   * API version
+   */
+  @query apiVersion: string,
+
+  /**
    * Options for mosaic WMTS capabilities including asset selection, terrain algorithms, and tile formatting
    */
   options: GetMosaicWmtsCapabilitiesOptions,
@@ -1385,6 +1125,11 @@ op getMosaicsWmtsCapabilitiesCustomized(
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
 op getMosaicsWmtsCapabilitiesCustomizedPython(
   ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures,
+
+  /**
+   * API version
+   */
+  @query apiVersion: string,
 
   /**
    * Options for mosaic WMTS capabilities including asset selection, terrain algorithms, and tile formatting

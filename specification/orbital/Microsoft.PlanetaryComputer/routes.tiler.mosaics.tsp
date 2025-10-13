@@ -8,6 +8,78 @@ using TypeSpec.Rest;
 using TypeSpec.Http;
 
 namespace Microsoft.PlanetaryComputer;
+
+// Common signature aliases for client overrides
+alias getMosaicsTileCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+
+  ...ZxyPathParameters;
+
+  /**
+   * Numeric scale factor for the tile. Higher values produce larger tiles
+   */
+  @path
+  scale: float32;
+
+  /**
+   * Output format for the tile or image (e.g., png, jpeg, webp)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  format: string;
+};
+
+alias getMosaicsTileJsonCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
+alias getMosaicsWmtsCapabilitiesCustomizedCommonSignatures = {
+  /**
+   * Search Id (pgSTAC Search Hash)
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  searchId: string;
+
+  /**
+   * Identifier selecting one of the TileMatrixSetId supported
+   */
+  @path
+  @maxLength(500)
+  @pattern(".*")
+  tileMatrixSetId: string;
+};
+
 interface MosaicsTiles {
   /**
    * Create map tile.
@@ -71,42 +143,10 @@ interface MosaicsTileMatrixSets {
   @get
   getZxyScaleByFormat is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
-      ...ZxyPathParameters;
-
-      /**
-       * Numeric scale factor for the tile. Higher values produce larger tiles (default: "1")
-       */
-      @path
-      scale: float32;
-
-      /**
-       * Output format for the tile or image (e.g., png, jpeg, webp) (default: "png").
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      format: string;
-
+      ...getMosaicsTileCustomizedCommonSignatures;
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
@@ -244,26 +284,10 @@ interface MosaicsTileMatrixSetsTileJson {
   @get
   get is Azure.Core.Foundations.Operation<
     {
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
       ...AssetQueryParameters;
       ...MosaicSearchQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
-
+      ...getMosaicsTileJsonCustomizedCommonSignatures;
       ...ZoomQueryParameters;
 
       /**
@@ -350,22 +374,7 @@ interface MosaicsWmtsMosaicsTileMatrixSets {
     {
       ...AssetQueryParameters;
       ...TerrainAlgorithmQueryParameters;
-
-      /**
-       * Search Id (pgSTAC Search Hash)
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      searchId: string;
-
-      /**
-       * Identifier selecting one of the TileMatrixSetId supported
-       */
-      @path
-      @maxLength(500)
-      @pattern(".*")
-      tileMatrixSetId: string;
+      ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures;
 
       /**
        * Output image type. Default is png.
