@@ -677,7 +677,7 @@ model PolicyCertificatesModificationResult {
   /**
    * The result of the operation
    */
-  @encodedName("application/json", "x-ms-certificate-result")
+  @encodedName("application/json", "x-ms-policycertificates-result")
   certificateResolution?: CertificateModification;
 }
 
