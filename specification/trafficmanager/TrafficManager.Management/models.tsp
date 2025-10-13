@@ -278,6 +278,7 @@ model ProxyResource extends Resource {}
 /**
  * The core properties of ARM resources
  */
+@Azure.ResourceManager.Legacy.customAzureResource
 model Resource {
   /**
    * Fully qualified resource Id for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficManagerProfiles/{resourceName}

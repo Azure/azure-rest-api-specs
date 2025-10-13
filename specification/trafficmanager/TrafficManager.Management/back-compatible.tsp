@@ -13,10 +13,10 @@ using Microsoft.Network;
 @@clientName(Profiles.createOrUpdate::parameters.resource, "parameters");
 @@clientName(Profiles.update::parameters.properties, "parameters");
 
-@@clientName(Profiles.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
+@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
   "parameters"
 );
-@@clientName(Profiles.checkTrafficManagerNameAvailabilityV2::parameters.body,
+@@clientName(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2::parameters.body,
   "parameters"
 );
 
@@ -45,3 +45,14 @@ using Microsoft.Network;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserMetricsModel.properties
 );
+
+@@clientLocation(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
+  Profiles
+);
+@@clientName(ProfilesOperationGroup.checkTrafficManagerRelativeDnsNameAvailability,
+  "CheckTrafficManagerRelativeDnsNameAvailability"
+);
+@@clientLocation(ProfilesOperationGroup.checkTrafficManagerNameAvailabilityV2,
+  Profiles
+);
+@@clientLocation(HeatMapModels.get, "HeatMap");

@@ -13,13 +13,8 @@ namespace Microsoft.Network;
 /**
  * Class representing a Traffic Manager profile.
  */
-model Profile is Azure.ResourceManager.TrackedResource<ProfileProperties> {
-  ...ResourceNameParameter<
-    Resource = Profile,
-    KeyName = "profileName",
-    SegmentName = "trafficmanagerprofiles",
-    NamePattern = ""
-  >;
+model Profile extends TrackedResource {
+  properties?: ProfileProperties;
 }
 
 @armResourceOperations
@@ -54,19 +49,6 @@ interface Profiles {
   >;
 
   /**
-   * Lists all Traffic Manager profiles within a resource group.
-   */
-  listByResourceGroup is ArmResourceListByParent<
-    Profile,
-    BaseParameters = {
-      ...ApiVersionParameter;
-      ...SubscriptionIdParameter;
-      ...ResourceGroupParameter;
-    },
-    Error = CloudError
-  >;
-
-  /**
    * Lists all Traffic Manager profiles within a subscription.
    */
   listBySubscription is ArmResourceListByParent<
@@ -75,29 +57,6 @@ interface Profiles {
       ...ApiVersionParameter;
       ...SubscriptionIdParameter;
     },
-    Error = CloudError
-  >;
-
-  /**
-   * Checks the availability of a Traffic Manager Relative DNS name.
-   */
-  @action("checkTrafficManagerNameAvailability")
-  checkTrafficManagerRelativeDnsNameAvailability is ArmProviderActionSync<
-    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
-    Response = TrafficManagerNameAvailability,
-    Error = CloudError
-  >;
-
-  /**
-   * Checks the availability of a Traffic Manager Relative DNS name.
-   */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: added in TypeSpec migration, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Profiles_checkTrafficManagerNameAvailabilityV2")
-  checkTrafficManagerNameAvailabilityV2 is ArmProviderActionSync<
-    Request = CheckTrafficManagerRelativeDnsNameAvailabilityParameters,
-    Response = TrafficManagerNameAvailability,
-    Scope = SubscriptionActionScope,
-    Parameters = {},
     Error = CloudError
   >;
 }
@@ -109,10 +68,4 @@ interface Profiles {
 );
 @@doc(Profiles.update::parameters.properties,
   "The Traffic Manager profile parameters supplied to the Update operation."
-);
-@@doc(Profiles.checkTrafficManagerRelativeDnsNameAvailability::parameters.body,
-  "The Traffic Manager name parameters supplied to the CheckTrafficManagerNameAvailability operation."
-);
-@@doc(Profiles.checkTrafficManagerNameAvailabilityV2::parameters.body,
-  "The Traffic Manager name parameters supplied to the CheckTrafficManagerNameAvailability operation."
 );
