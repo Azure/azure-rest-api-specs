@@ -1,0 +1,127 @@
+{
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "scopeId": "subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23",
+    "batchPricingRequest": {
+      "plansConfigurations": [
+        {
+          "planName": "VirtualMachines",
+          "properties": {
+            "pricingTier": "Standard",
+            "subPlan": "P2",
+            "extensions": [
+              {
+                "name": "AgentlessVmScanning",
+                "isEnabled": "True"
+              }
+            ]
+          }
+        },
+        {
+          "planName": "SqlServers",
+          "properties": {
+            "pricingTier": "Standard",
+            "extensions": [
+              {
+                "name": "InvalidExtension",
+                "isEnabled": "True"
+              }
+            ]
+          }
+        },
+        {
+          "planName": "CloudPosture",
+          "properties": {
+            "pricingTier": "Standard",
+            "extensions": [
+              {
+                "name": "AgentlessDiscoveryForKubernetes",
+                "isEnabled": "True"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "results": [
+          {
+            "planName": "VirtualMachines",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/VirtualMachines",
+              "name": "VirtualMachines",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "subPlan": "P2",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered",
+                "extensions": [
+                  {
+                    "name": "AgentlessVmScanning",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "planName": "SqlServers",
+            "success": false,
+            "error": {
+              "code": "ExtensionNotSupported",
+              "message": "Extension 'InvalidExtension' is not supported for plan 'SqlServers'. Supported extensions: [AgentlessVmScanning, FileIntegrityMonitoring]",
+              "details": [
+                {
+                  "code": "InvalidExtensionConfiguration",
+                  "message": "The extension 'InvalidExtension' is not valid for the SqlServers pricing plan"
+                }
+              ]
+            }
+          },
+          {
+            "planName": "CloudPosture",
+            "success": true,
+            "result": {
+              "id": "/subscriptions/20ff7fc3-e762-44dd-bd96-b71116dcdc23/providers/Microsoft.Security/pricings/CloudPosture",
+              "name": "CloudPosture",
+              "type": "Microsoft.Security/pricings",
+              "properties": {
+                "pricingTier": "Standard",
+                "freeTrialRemainingTime": "PT0S",
+                "enablementTime": "2023-03-01T12:42:42.1921106Z",
+                "enforce": "False",
+                "resourcesCoverageStatus": "FullyCovered",
+                "extensions": [
+                  {
+                    "name": "AgentlessDiscoveryForKubernetes",
+                    "isEnabled": "True",
+                    "operationStatus": {
+                      "code": "Succeeded",
+                      "message": "Successfully enabled extension"
+                    }
+                  }
+                ]
+              }
+            }
+          }
+        ],
+        "summary": {
+          "totalRequested": 3,
+          "successfulUpdates": 2,
+          "failedUpdates": 1
+        }
+      }
+    }
+  }
+}
