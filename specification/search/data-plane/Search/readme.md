@@ -26,84 +26,32 @@ These are the global settings for the AI Search API.
 ``` yaml
 # common
 openapi-type: data-plane
-tag: package-2025-03-01-preview
+tag: package-2025-08-01-preview
 ```
 
-### Tag: package-2025-03-01-preview
+### Tag: package-2025-08-01-preview
 
-These settings apply only when `--tag=package-2025-03-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
 
 ``` yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
-- preview/2025-03-01-preview/search.json
+- preview/2025-08-01-preview/search.json
 suppressions:
   - code: LroExtension 
     from: search.json
     reason: Legacy swagger file
 ```
 
-### Tag: package-2024-07-01
+### Tag: package-2025-09-01
 
-These settings apply only when `--tag=package-2024-07-01` is specified on the command line.
+These settings apply only when `--tag=package-2025-09-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2024-07-01'
+``` yaml $(tag) == 'package-2025-09-01'
 input-file:
-- stable/2024-07-01/search.json
+- stable/2025-09-01/search.json
 suppressions:
   - code: LroExtension 
     from: search.json
-    reason: Legacy swagger file
-```
-
-### Tag: package-searchindex-2025-03-01-preview
-
-These settings apply only when `--tag=package-searchindex-2025-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-searchindex-2025-03-01-preview'
-input-file:
-- preview/2025-03-01-preview/searchindex.json
-suppressions:
-  - code: LroExtension 
-    from: searchindex.json
-    reason: Legacy swagger file
-```
-
-### Tag: package-searchservice-2025-03-01-preview
-
-These settings apply only when `--tag=package-searchservice-2025-03-01-preview` is specified on the command line.
-
-``` yaml $(tag) == 'package-searchservice-2025-03-01-preview'
-input-file:
-- preview/2025-03-01-preview/searchservice.json
-suppressions:
-  - code: LroExtension 
-    from: searchservice.json
-    reason: Legacy swagger file
-```
-
-### Tag: package-searchindex-2024-07-01
-
-These settings apply only when `--tag=package-searchindex-2024-07-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-searchindex-2024-07-01'
-input-file:
-- stable/2024-07-01/searchindex.json
-suppressions:
-  - code: LroExtension 
-    from: searchindex.json
-    reason: Legacy swagger file
-```
-
-### Tag: package-searchservice-2024-07-01
-
-These settings apply only when `--tag=package-searchservice-2024-07-01` is specified on the command line.
-
-``` yaml $(tag) == 'package-searchservice-2024-07-01'
-input-file:
-- stable/2024-07-01/searchservice.json
-suppressions:
-  - code: LroExtension 
-    from: searchservice.json
     reason: Legacy swagger file
 ```
 
