@@ -1,4 +1,3 @@
-import "./models.tsp";
 import "./MongoDatabase.tsp";
 
 using TypeSpec.Rest;

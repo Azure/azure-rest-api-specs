@@ -1,4 +1,4 @@
-import "./models.tsp";
+import "@azure-tools/typespec-client-generator-core";
 import "./MongoInstance.tsp";
 
 using TypeSpec.Rest;
