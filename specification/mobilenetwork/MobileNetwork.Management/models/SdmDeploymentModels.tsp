@@ -3,7 +3,7 @@ import "@typespec/versioning";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 using TypeSpec.Versioning;
 
 namespace Microsoft.MobileNetwork;
@@ -16,7 +16,7 @@ model SdmDeploymentResourceProperties {
   provisioningState?: ProvisioningState;
 
   @doc("Azure for Operators 5G Core Subscriber Data Management component parameters.  One set per component type")
-  @extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   componentParameters: QualifiedComponentDeploymentParameters[];
 
   @doc("Reference to cluster where the Network Function is deployed")

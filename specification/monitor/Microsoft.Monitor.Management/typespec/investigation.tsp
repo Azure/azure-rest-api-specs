@@ -312,7 +312,7 @@ model Investigation {
   result?: InvestigationResult;
 
   @doc("Child investigations.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   healthChecks?: Investigation[];
 }
 

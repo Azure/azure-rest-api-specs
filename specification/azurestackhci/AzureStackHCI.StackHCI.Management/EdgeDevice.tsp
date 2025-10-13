@@ -4,10 +4,7 @@ import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
 
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.AzureStackHCI;
 // FIXME: EdgeDevice has no properties property
@@ -171,7 +168,6 @@ model NicDetail {
   /**
    * DNS Servers for NIC
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dnsServers?: string[];
 
   /**
@@ -227,7 +223,7 @@ model EdgeDevicesExtension {
    * Error details while installing Arc extension.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   errorDetails?: EdgeDeviceErrorDetail[];
 
   /**
@@ -257,7 +253,7 @@ model ExtensionProfile {
    * List of Arc extensions installed on edge device.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["extensionName"])
+  @identifiers(#["extensionName"])
   extensions?: EdgeDevicesExtension[];
 }
 
@@ -332,14 +328,14 @@ model HciNetworkProfile {
    * List of NIC Details of device.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["adapterName"])
+  @identifiers(#["adapterName"])
   nicDetails?: HciNicDetail[];
 
   /**
    * List of switch details for edge device.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["switchName"])
+  @identifiers(#["switchName"])
   switchDetails?: SwitchDetail[];
 
   /**
@@ -399,7 +395,6 @@ model HciNicDetail {
    * DNS Servers for NIC
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   dnsServers?: string[];
 
   /**
@@ -471,7 +466,7 @@ model SwitchDetail {
    * This represents extensions installed on virtualSwitch.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["extensionName"])
+  @identifiers(#["extensionName"])
   extensions?: SwitchExtension[];
 }
 
@@ -506,14 +501,14 @@ model EdgeDevicesHostNetwork {
    * The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["intentName"])
+  @identifiers(#["intentName"])
   intents?: EdgeDevicesIntents[];
 
   /**
    * List of StorageNetworks config to deploy AzureStackHCI Cluster.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["networkAdapterName"])
+  @identifiers(#["networkAdapterName"])
   storageNetworks?: EdgeDevicesStorageNetworks[];
 
   /**
@@ -680,7 +675,7 @@ model EdgeDevicesStorageNetworks {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["physicalNode"])
+  @identifiers(#["physicalNode"])
   storageAdapterIPInfo?: EdgeDevicesStorageAdapterIPInfo[];
 }
 

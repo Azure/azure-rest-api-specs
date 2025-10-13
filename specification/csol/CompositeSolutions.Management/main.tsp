@@ -89,12 +89,12 @@ model CompositeSolutionDefinitionProperties {
 
   @visibility(Lifecycle.Read)
   @doc("Parameters for the composite solution")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters?: Array<Parameter>;
 
   @visibility(Lifecycle.Read)
   @doc("Credentials for the composite solution")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   credentials?: Array<Credential>;
 
   @visibility(Lifecycle.Read)
@@ -123,7 +123,7 @@ model CompositeSolutionProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Bundle Parameters.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   parameters: Array<ParameterValue>;
 
   // This isn't actually a secret, but a reference to a secret in AKV, so is it safe to return back in the read request?

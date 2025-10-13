@@ -766,7 +766,7 @@ model WindowsClusterReportedProperties {
 
   @doc("List of nodes reported by the cluster.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   nodes?: WindowsClusterNode[];
 }
 
