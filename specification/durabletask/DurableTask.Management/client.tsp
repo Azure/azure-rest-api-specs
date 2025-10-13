@@ -14,11 +14,14 @@ using Microsoft.DurableTask;
 // csharp
 @@clientName(Scheduler, "Scheduler", "csharp");
 @@clientName(SchedulerProperties, "SchedulerProperties", "csharp");
-@@clientName(TaskHub, "TaskHub", "csharp");
-@@clientName(TaskHubProperties, "TaskHubProperties", "csharp");
+@@clientName(TaskHub, "SchedulerTaskHub", "csharp");
+@@clientName(TaskHubProperties, "SchedulerTaskHubProperties", "csharp");
 @@clientName(ProvisioningState, "ProvisioningState", "csharp");
 @@clientName(SchedulerUpdate, "SchedulerPatch", "csharp");
-@@clientName(SchedulerPropertiesUpdate, "SchedulerPatchProperties", "csharp");
+@@clientName(SchedulerPropertiesUpdate,
+  "SchedulerPatchProperties",
+  "csharp"
+);
 @@clientName(SchedulerSku, "SchedulerSku", "csharp");
 @@clientName(SchedulerSkuUpdate, "SchedulerSkuUpdate", "csharp");
 @@clientName(RedundancyState, "ResourceRedundancyState", "csharp");
