@@ -333,6 +333,21 @@ model MetadataEntityProperties {
 }
 
 /**
+ * A simple name/value pair used in metadata properties.
+ */
+model NameValuePair {
+  /**
+   * The property name.
+   */
+  name: string;
+
+  /**
+   * The property value.
+   */
+  value: string;
+}
+
+/**
  * The metadata supported value detail.
  */
 model MetadataSupportedValueDetail {
@@ -345,6 +360,36 @@ model MetadataSupportedValueDetail {
    * The display name.
    */
   displayName?: string;
+
+  /**
+   * The category of the recommendation.
+   */
+  recommendationCategory?: Category;
+
+  /**
+   * The business impact of the recommendation.
+   */
+  recommendationImpact?: Impact;
+
+  /**
+   * The sub-category of the recommendation.
+   */
+  recommendationSubCategory?: Control;
+
+  /**
+   * The resource type the recommendation applies to.
+   */
+  supportedResourceType?: string;
+
+  /**
+   * Description of changes.
+   */
+  descriptionOfChanges?: unknown[];
+
+  /**
+   * Additional name/value properties.
+   */
+  properties?: NameValuePair[];
 }
 
 /**
