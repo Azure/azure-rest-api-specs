@@ -59,7 +59,7 @@ namespace Microsoft.Monitor {
      * List of private endpoint connections
      */
     @visibility(Lifecycle.Read)
-    @TypeSpec.OpenAPI.extension("x-ms-identifiers", #["id"])
+    @identifiers(#["id"])
     privateEndpointConnections?: Azure.ResourceManager.CommonTypes.PrivateEndpointConnection[];
 
     /**

@@ -1111,6 +1111,5 @@ enum Versions {
   c2025_04_01_Preview: "2025-04-01-preview",
 
   @doc("Azure Communication Messages 2025-09-01-preview api version")
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   c2025_09_01_Preview: "2025-09-01-preview",
 }

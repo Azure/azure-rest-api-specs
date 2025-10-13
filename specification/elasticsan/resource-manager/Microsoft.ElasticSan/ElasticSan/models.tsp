@@ -265,14 +265,14 @@ model SkuInformation {
    * Availability of the SKU for the location/zone
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   locationInfo?: SkuLocationInfo[];
 
   /**
    * The capability information in the specified SKU.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   capabilities?: SKUCapability[];
 }
 
