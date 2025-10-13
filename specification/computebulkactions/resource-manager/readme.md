@@ -41,7 +41,7 @@ suppressions:
   - code: DefinitionsPropertiesNamesCamelCase
     reason: SSD is the abbreviation for solid state drive used in the property name.
     from: computebulkactions.json
-    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+    where: $.definitions.AdditionalCapabilities.properties.ultraSSDEnabled
 ```
 
 # Code Generation
