@@ -86,6 +86,8 @@ using MonitorQueryMetrics;
 );
 
 @@access(ResourceIdList, Access.internal, "csharp");
+@@access(Metric.errorCode, Access.internal, "csharp");
+@@access(Metric.errorMessage, Access.internal, "csharp");
 @@access(MonitorQueryMetrics.batch, Access.internal, "csharp");
 @@access(MetricResultsResponseValuesItem.resourceid, Access.internal, "csharp");
 @@access(MetricResultsResponseValuesItem.starttime, Access.internal, "csharp");
