@@ -465,32 +465,9 @@ op getTileCustomized(
   options: GetTileOptions,
 ): TileResponse;
 
-/**
- * Create map tile from a dataset with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getTileCustomizedPython(
-  ...getTileCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for tile generation including asset selection, terrain algorithms, and visual rendering
-   */
-  ...GetTileOptions,
-): TileResponse;
-
 @@override(TilerTileMatrixSets.getZxyScaleByFormat,
   getTileCustomized,
-  "!python"
-);
-
-@@override(TilerTileMatrixSets.getZxyScaleByFormat,
-  getTileCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -511,32 +488,9 @@ op getWmtsCapabilitiesCustomized(
   options: GetWmtsCapabilitiesOptions,
 ): WmtsCapabilitiesXmlResponse;
 
-/**
- * OGC WMTS endpoint with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getWmtsCapabilitiesCustomizedPython(
-  ...getWmtsCapabilitiesCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for WMTS capabilities including asset selection, terrain algorithms, and tile formatting
-   */
-  ...GetWmtsCapabilitiesOptions,
-): WmtsCapabilitiesXmlResponse;
-
 @@override(TilerWmtsTileMatrixSets.getCapabilitiesXml,
   getWmtsCapabilitiesCustomized,
-  "!python"
-);
-
-@@override(TilerWmtsTileMatrixSets.getCapabilitiesXml,
-  getWmtsCapabilitiesCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -557,32 +511,9 @@ op getAssetStatisticsCustomized(
   options: GetAssetStatisticsOptions,
 ): StacAssetStatistics;
 
-/**
- * Per Asset statistics with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getAssetStatisticsCustomizedPython(
-  ...getAssetStatisticsCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for asset statistics including asset selection and statistical calculation parameters
-   */
-  ...GetAssetStatisticsOptions,
-): StacAssetStatistics;
-
 @@override(TilerAssetStatistics.getAll,
   getAssetStatisticsCustomized,
-  "!python"
-);
-
-@@override(TilerAssetStatistics.getAll,
-  getAssetStatisticsCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -609,33 +540,7 @@ op cropGeoJsonCustomized(
   body: StacItem,
 ): TileResponse;
 
-/**
- * Create image from a geojson feature with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op cropGeoJsonCustomizedPython(
-  ...cropGeoJsonCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
-   */
-  ...CropGeoJsonOptions,
-
-  /**
-   * Request GeoJson body.
-   */
-  @body
-  body: StacItem,
-): TileResponse;
-
-@@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomized, "!python");
-
-@@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomizedPython, "python");
+@@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomized, "!python,!csharp");
 
 /**
  * Create image from a geojson feature with dimensions with grouped parameters.
@@ -661,38 +566,9 @@ op cropGeoJsonWithDimensionsCustomized(
   body: StacItem,
 ): TileResponse;
 
-/**
- * Create image from a geojson feature with dimensions with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op cropGeoJsonWithDimensionsCustomizedPython(
-  ...cropGeoJsonWithDimensionsCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for GeoJSON cropping including asset selection, terrain algorithms, and visual rendering
-   */
-  ...CropGeoJsonOptions,
-
-  /**
-   * Request GeoJson body.
-   */
-  @body
-  body: StacItem,
-): TileResponse;
-
 @@override(TilerGeoJsons.cropWidthByHeightFormat,
   cropGeoJsonWithDimensionsCustomized,
-  "!python"
-);
-
-@@override(TilerGeoJsons.cropWidthByHeightFormat,
-  cropGeoJsonWithDimensionsCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -719,38 +595,9 @@ op listGeoJsonStatisticsCustomized(
   body: StacItemCollection,
 ): GeoJsonStatisticsForStacItemCollection;
 
-/**
- * Get Statistics from a geojson feature or featureCollection with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op listGeoJsonStatisticsCustomizedPython(
-  ...listGeoJsonStatisticsCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for GeoJSON statistics including asset selection and statistical calculation parameters
-   */
-  ...GetGeoJsonStatisticsOptions,
-
-  /**
-   * Request GeoJson body
-   */
-  @body
-  body: StacItemCollection,
-): GeoJsonStatisticsForStacItemCollection;
-
 @@override(TilerGeoJsonStatistics.getAll,
   listGeoJsonStatisticsCustomized,
-  "!python"
-);
-
-@@override(TilerGeoJsonStatistics.getAll,
-  listGeoJsonStatisticsCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -771,30 +618,7 @@ op getPartCustomized(
   options: GetPartOptions,
 ): TileResponse;
 
-/**
- * Create image from part of a dataset with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getPartCustomizedPython(
-  ...getPartCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for part generation including asset selection, terrain algorithms, and visual rendering
-   */
-  ...GetPartOptions,
-): TileResponse;
-
-@@override(TilerParts.getCroppedToBoundingBox, getPartCustomized, "!python");
-
-@@override(TilerParts.getCroppedToBoundingBox,
-  getPartCustomizedPython,
-  "python"
-);
+@@override(TilerParts.getCroppedToBoundingBox, getPartCustomized, "!python,!csharp");
 
 /**
  * Create image from part of a dataset with dimensions with grouped parameters.
@@ -814,32 +638,9 @@ op getPartWithDimensionsCustomized(
   options: GetPartOptions,
 ): TileResponse;
 
-/**
- * Create image from part of a dataset with dimensions with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getPartWithDimensionsCustomizedPython(
-  ...getPartWithDimensionsCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for part generation including asset selection, terrain algorithms, and visual rendering
-   */
-  ...GetPartOptions,
-): TileResponse;
-
 @@override(TilerParts.getCroppedToBoundingBoxWidthByHeight,
   getPartWithDimensionsCustomized,
-  "!python"
-);
-
-@@override(TilerParts.getCroppedToBoundingBoxWidthByHeight,
-  getPartWithDimensionsCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -860,27 +661,7 @@ op getPreviewCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-/**
- * Create preview of a dataset with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getPreviewCustomizedPython(
-  ...getPreviewCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for preview generation including asset selection, terrain algorithms, and visual rendering
-   */
-  ...GetPreviewOptions,
-): TileResponse;
-
-@@override(TilerPreviews.get, getPreviewCustomized, "!python");
-
-@@override(TilerPreviews.get, getPreviewCustomizedPython, "python");
+@@override(TilerPreviews.get, getPreviewCustomized, "!python,!csharp");
 
 /**
  * Create preview of a dataset with format with grouped parameters.
@@ -900,30 +681,7 @@ op getPreviewWithFormatCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-/**
- * Create preview of a dataset with format with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getPreviewWithFormatCustomizedPython(
-  ...getPreviewWithFormatCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for preview generation including asset selection, terrain algorithms, and visual rendering
-   */
-  ...GetPreviewOptions,
-): TileResponse;
-
-@@override(TilerPreviews.getFormat, getPreviewWithFormatCustomized, "!python");
-
-@@override(TilerPreviews.getFormat,
-  getPreviewWithFormatCustomizedPython,
-  "python"
-);
+@@override(TilerPreviews.getFormat, getPreviewWithFormatCustomized, "!python,!csharp");
 
 /**
  * Merged assets statistics with grouped parameters.
@@ -943,28 +701,7 @@ op listStatisticsCustomized(
   options: GetStatisticsOptions,
 ): StatisticsResponse;
 
-/**
- * Merged assets statistics with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-#suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
-op listStatisticsCustomizedPython(
-  ...listStatisticsCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for statistics including asset selection and statistical calculation parameters
-   */
-  ...GetStatisticsOptions,
-): StatisticsResponse;
-
-@@override(TilerStatistics.getAll, listStatisticsCustomized, "!python");
-
-@@override(TilerStatistics.getAll, listStatisticsCustomizedPython, "python");
+@@override(TilerStatistics.getAll, listStatisticsCustomized, "!python,!csharp");
 
 /**
  * Return the TileJson with grouped parameters.
@@ -984,30 +721,7 @@ op getTileJsonCustomized(
   options: GetTileJsonOptions,
 ): TileJsonMetaData;
 
-/**
- * Return the TileJson with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getTileJsonCustomizedPython(
-  ...getTileJsonCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for TileJSON generation including asset selection, terrain algorithms, and tile formatting
-   */
-  ...GetTileJsonOptions,
-): TileJsonMetaData;
-
-@@override(TilerTileJsonTileMatrixSets.get, getTileJsonCustomized, "!python");
-
-@@override(TilerTileJsonTileMatrixSets.get,
-  getTileJsonCustomizedPython,
-  "python"
-);
+@@override(TilerTileJsonTileMatrixSets.get, getTileJsonCustomized, "!python,!csharp");
 
 /**
  * Return TileJSON document for a searchId with grouped parameters.
@@ -1027,32 +741,9 @@ op getMosaicsTileJsonCustomized(
   options: GetMosaicTileJsonOptions,
 ): TileJsonMetaData;
 
-/**
- * Return TileJSON document for a searchId with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getMosaicsTileJsonCustomizedPython(
-  ...getMosaicsTileJsonCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for mosaic TileJSON generation including asset selection, terrain algorithms, and tile formatting
-   */
-  ...GetMosaicTileJsonOptions,
-): TileJsonMetaData;
-
 @@override(MosaicsTileMatrixSetsTileJson.get,
   getMosaicsTileJsonCustomized,
-  "!python"
-);
-
-@@override(MosaicsTileMatrixSetsTileJson.get,
-  getMosaicsTileJsonCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -1073,32 +764,9 @@ op getMosaicsTileCustomized(
   options: GetMosaicTileOptions,
 ): TileResponse;
 
-/**
- * Create map tile from mosaic with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getMosaicsTileCustomizedPython(
-  ...getMosaicsTileCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for mosaic tile generation including asset selection, terrain algorithms, and visual rendering
-   */
-  ...GetMosaicTileOptions,
-): TileResponse;
-
 @@override(MosaicsTileMatrixSets.getZxyScaleByFormat,
   getMosaicsTileCustomized,
-  "!python"
-);
-
-@@override(MosaicsTileMatrixSets.getZxyScaleByFormat,
-  getMosaicsTileCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
 
 /**
@@ -1119,30 +787,7 @@ op getMosaicsWmtsCapabilitiesCustomized(
   options: GetMosaicWmtsCapabilitiesOptions,
 ): WmtsCapabilitiesXmlResponse;
 
-/**
- * OGC WMTS endpoint for mosaics with grouped parameters (Python-specific).
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getMosaicsWmtsCapabilitiesCustomizedPython(
-  ...getMosaicsWmtsCapabilitiesCustomizedCommonSignatures,
-
-  /**
-   * API version
-   */
-  @query apiVersion: string,
-
-  /**
-   * Options for mosaic WMTS capabilities including asset selection, terrain algorithms, and tile formatting
-   */
-  ...GetMosaicWmtsCapabilitiesOptions,
-): WmtsCapabilitiesXmlResponse;
-
 @@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
   getMosaicsWmtsCapabilitiesCustomized,
-  "!python"
-);
-
-@@override(MosaicsWmtsMosaicsTileMatrixSets.getCapabilitiesXml,
-  getMosaicsWmtsCapabilitiesCustomizedPython,
-  "python"
+  "!python,!csharp"
 );
