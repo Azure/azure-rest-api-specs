@@ -2,10 +2,7 @@
 import "@typespec/rest";
 import "./models-index.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
-using Azure.Core;
-using TypeSpec.Versioning;
 
 namespace Search;
 

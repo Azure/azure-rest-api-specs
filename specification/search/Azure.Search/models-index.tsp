@@ -4,10 +4,9 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-client-generator-core";
 import "./models-shared.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.ClientGenerator.Core;
+
 namespace Search;
 
 @doc("Allows the user to choose whether a semantic call should fail completely, or to return partial results.")

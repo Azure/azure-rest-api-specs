@@ -3,10 +3,7 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "./models-shared.tsp";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using TypeSpec.Versioning;
-using Azure.Core;
 
 namespace Search;
 

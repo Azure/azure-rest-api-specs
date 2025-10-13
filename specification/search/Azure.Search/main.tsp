@@ -10,7 +10,6 @@ import "@azure-tools/typespec-azure-core";
 import "./routes-service.tsp";
 import "./routes-index.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 

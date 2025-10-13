@@ -2,7 +2,6 @@
 import "@typespec/rest";
 import "./models-service.tsp";
 
-using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
 
