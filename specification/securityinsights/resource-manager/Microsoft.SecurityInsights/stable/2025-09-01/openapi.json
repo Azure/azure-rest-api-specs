@@ -646,7 +646,7 @@
             "description": "The action",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ActionResponse"
+              "$ref": "#/definitions/ActionRequest"
             }
           }
         ],
@@ -661,6 +661,13 @@
             "description": "Resource 'ActionResponse' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/ActionResponse"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -6217,6 +6224,22 @@
       },
       "required": [
         "logicAppResourceId"
+      ]
+    },
+    "ActionRequest": {
+      "type": "object",
+      "description": "Action for alert rule.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ActionRequestProperties",
+          "description": "Action properties for put request",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ResourceWithEtag"
+        }
       ]
     },
     "ActionRequestProperties": {
@@ -14538,6 +14561,21 @@
           "description": "Gets or sets a value indicating whether the permission is custom actions (POST)."
         }
       }
+    },
+    "ResourceWithEtag": {
+      "type": "object",
+      "description": "An azure resource object with an Etag property",
+      "properties": {
+        "etag": {
+          "type": "string",
+          "description": "Etag of the azure resource"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/Resource"
+        }
+      ]
     },
     "RestApiPollerDataConnector": {
       "type": "object",

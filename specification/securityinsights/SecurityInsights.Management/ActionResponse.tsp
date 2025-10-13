@@ -6,6 +6,7 @@ import "./models.tsp";
 import "./AlertRule.tsp";
 
 using TypeSpec.Rest;
+using TypeSpec.Http;
 using Azure.ResourceManager;
 
 namespace Microsoft.SecurityInsights;
@@ -44,11 +45,18 @@ interface ActionResponses {
   /**
    * Creates or updates the action of alert rule.
    */
+  // Customized resource creation, since request body isn't the resource itself
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  createOrUpdate is Extension.CreateOrReplaceSync<
-    OperationalInsights,
-    ActionResponse,
-    Error = CloudError
+  @autoRoute
+  @put
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    Azure.ResourceManager.Extension.ExtensionInstanceParameters<
+      OperationalInsights,
+      ActionResponse
+    >,
+    ActionRequest,
+    ArmResourceUpdatedResponse<ActionResponse> | ArmResourceCreatedResponse<ActionResponse>,
+    ErrorResponse = CloudError
   >;
 
   /**
