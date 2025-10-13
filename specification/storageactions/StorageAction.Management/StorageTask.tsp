@@ -13,7 +13,6 @@ namespace Microsoft.StorageActions;
 /**
  * Represents Storage Task.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model StorageTask
   is Azure.ResourceManager.TrackedResource<StorageTaskProperties, false> {
   ...ResourceNameParameter<
