@@ -1072,6 +1072,259 @@
         }
       }
     },
+    "/evaluationrules": {
+      "get": {
+        "operationId": "EvaluationRules_List",
+        "description": "List all evaluation rules.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionType",
+            "in": "query",
+            "description": "Filter by the type of evaluation rule.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "continuousEvaluation",
+              "humanEvaluation"
+            ],
+            "x-ms-enum": {
+              "name": "EvaluationRuleActionType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "continuousEvaluation",
+                  "value": "continuousEvaluation",
+                  "description": "Continuous evaluation."
+                },
+                {
+                  "name": "humanEvaluation",
+                  "value": "humanEvaluation",
+                  "description": "Human evaluation."
+                }
+              ]
+            }
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "description": "Filter by the agent name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "description": "Filter by the enabled status.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluationRule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_List_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_List_MaximumSet_Gen.json"
+          },
+          "EvaluationRules_List_MinimumSet": {
+            "$ref": "./examples/EvaluationRules_List_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluationrules/{id}": {
+      "get": {
+        "operationId": "EvaluationRules_Get",
+        "description": "Get an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_Get_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EvaluationRules_CreateOrUpdate",
+        "description": "Create or update an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "evaluationRule",
+            "in": "body",
+            "description": "Evaluation rule resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_CreateOrUpdate_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationRules_Delete",
+        "description": "Delete an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_Delete_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_Delete_MaximumSet_Gen.json"
+          },
+          "EvaluationRules_Delete_MinimumSet": {
+            "$ref": "./examples/EvaluationRules_Delete_MinimumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/evaluations/runs": {
       "get": {
         "operationId": "Evaluations_List",
@@ -2997,6 +3250,10 @@
         "blobReference"
       ]
     },
+    "AssetId": {
+      "type": "string",
+      "description": "Identifier of a saved asset."
+    },
     "AssistantMessage": {
       "type": "object",
       "description": "A message generated by the assistant in response to previous messages.",
@@ -3697,6 +3954,30 @@
           }
         ]
       }
+    },
+    "ContinuousEvaluationRuleAction": {
+      "type": "object",
+      "description": "Evaluation rule action for continuous evaluation.",
+      "properties": {
+        "evalId": {
+          "type": "string",
+          "description": "Eval Id to add continuous evaluation runs to."
+        },
+        "maxHourlyRuns": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of evaluation runs allowed per hour."
+        }
+      },
+      "required": [
+        "evalId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "continuousEvaluation"
     },
     "CosmosDBIndex": {
       "type": "object",
@@ -4500,6 +4781,131 @@
       ],
       "x-ms-discriminator-value": "EvaluationResultSample"
     },
+    "EvaluationRule": {
+      "type": "object",
+      "description": "Evaluation rule model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the evaluation rule.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for the evaluation rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the evaluation rule."
+        },
+        "action": {
+          "$ref": "#/definitions/EvaluationRuleAction",
+          "description": "Definition of the evaluation rule action."
+        },
+        "filter": {
+          "$ref": "#/definitions/EvaluationRuleFilter",
+          "description": "Filter condition of the evaluation rule."
+        },
+        "eventType": {
+          "$ref": "#/definitions/EvaluationRuleEventType",
+          "description": "Event type that the evaluation rule applies to."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the evaluation rule is enabled. Default is true."
+        },
+        "systemData": {
+          "type": "object",
+          "description": "System metadata for the evaluation rule.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "action",
+        "eventType",
+        "enabled",
+        "systemData"
+      ]
+    },
+    "EvaluationRuleAction": {
+      "type": "object",
+      "description": "Evaluation action model.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationRuleActionType",
+          "description": "Type of the evaluation action."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluationRuleActionType": {
+      "type": "string",
+      "description": "Type of the evaluation action.",
+      "enum": [
+        "continuousEvaluation",
+        "humanEvaluation"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationRuleActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "continuousEvaluation",
+            "value": "continuousEvaluation",
+            "description": "Continuous evaluation."
+          },
+          {
+            "name": "humanEvaluation",
+            "value": "humanEvaluation",
+            "description": "Human evaluation."
+          }
+        ]
+      }
+    },
+    "EvaluationRuleEventType": {
+      "type": "string",
+      "description": "Type of the evaluation rule event.",
+      "enum": [
+        "response.completed",
+        "manual"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationRuleEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "responseCompleted",
+            "value": "response.completed",
+            "description": "Response completed."
+          },
+          {
+            "name": "manual",
+            "value": "manual",
+            "description": "Manual trigger."
+          }
+        ]
+      }
+    },
+    "EvaluationRuleFilter": {
+      "type": "object",
+      "description": "Evaluation filter model.",
+      "properties": {
+        "agentName": {
+          "type": "string",
+          "description": "Filter by agent name."
+        }
+      },
+      "required": [
+        "agentName"
+      ]
+    },
     "EvaluationRunClusterInsightResult": {
       "type": "object",
       "description": "Insights from the evaluation run cluster analysis.",
@@ -5288,6 +5694,25 @@
       ],
       "x-ms-discriminator-value": "Hourly"
     },
+    "HumanEvaluationRuleAction": {
+      "type": "object",
+      "description": "Evaluation rule action for human evaluation.",
+      "properties": {
+        "templateId": {
+          "$ref": "#/definitions/AssetId",
+          "description": "Human evaluation template Id."
+        }
+      },
+      "required": [
+        "templateId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "humanEvaluation"
+    },
     "Index": {
       "type": "object",
       "description": "Index resource Definition",
@@ -5891,6 +6316,27 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEvaluationRule": {
+      "type": "object",
+      "description": "Paged collection of EvaluationRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluationRule items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluationRule"
           }
         },
         "nextLink": {
