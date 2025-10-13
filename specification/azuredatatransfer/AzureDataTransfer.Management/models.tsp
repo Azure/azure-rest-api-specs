@@ -1628,3 +1628,25 @@ model PipelineConnectionProperties {
   @visibility(Lifecycle.Read)
   internalMetadata?: InternalMetadataProperties;
 }
+
+/**
+ * Defines the required request body for retrieving Pipeline metadata for a provided pipeline.
+ */
+@added(Versions.v2025_05_30_preview)
+model ListPipelineMetadataRequest {
+  /**
+   * The name of the pipeline for which to retrieve associated metadata.
+   */
+  pipeline: string;
+}
+
+/**
+ * Defines the response body for retrieving Pipeline metadata for a provided pipeline.
+ */
+@added(Versions.v2025_05_30_preview)
+model ListPipelineMetadataResult {
+  /**
+   * Returns the features associated with this pipeline.
+   */
+  features: string[];
+}
