@@ -178,6 +178,9 @@ input-file:
   - Microsoft.Sql/preview/2025-02-01-preview/VirtualNetworkRules.json
   - Microsoft.Sql/preview/2025-02-01-preview/WorkloadClassifiers.json
   - Microsoft.Sql/preview/2025-02-01-preview/WorkloadGroups.json
+  - Microsoft.Sql/preview/2025-08-01-preview/TopQueries.json
+  - Microsoft.Sql/preview/2025-08-01-preview/TopQueriesQueryText.json
+  - Microsoft.Sql/preview/2025-08-01-preview/TopQueryStatistics.json
 ```
 
 ### Tag: package-preview-2024-11-01-preview
