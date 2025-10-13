@@ -641,12 +641,6 @@ using Azure.ClientGenerator.Core;
 @@usage(Microsoft.EventGrid.SystemEvents.AcsChatThreadDeletedReasonType,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyKind,
-  Access.public
-);
-@@usage(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyKind,
-  Usage.output | Usage.json
-);
 
 //useSystemTextJsonConverter decorators
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,

@@ -1044,6 +1044,7 @@ model AcsEmailDeliveryReportStatusDetails {
 }
 
 /** The Acs Chat retention policy model */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 model AcsChatRetentionPolicyModel {
   /** The chat retention policy type. */
   kind?: AcsChatRetentionPolicyKind;
