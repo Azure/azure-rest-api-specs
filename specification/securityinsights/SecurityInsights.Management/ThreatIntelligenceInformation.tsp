@@ -38,7 +38,6 @@ interface ThreatIntelligenceInformations {
    * View a threat intelligence indicator by name.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicator_Get")
   get is Extension.Read<
     OperationalInsights,
     ThreatIntelligenceInformation,
@@ -49,7 +48,6 @@ interface ThreatIntelligenceInformations {
    * Update a threat Intelligence indicator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicator_Create")
   create is Extension.CreateOrReplaceSync<
     OperationalInsights,
     ThreatIntelligenceIndicatorModel,
@@ -61,7 +59,6 @@ interface ThreatIntelligenceInformations {
    * Delete a threat intelligence indicator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicator_Delete")
   delete is Extension.DeleteSync<
     OperationalInsights,
     ThreatIntelligenceInformation,
@@ -72,7 +69,6 @@ interface ThreatIntelligenceInformations {
    * Get all threat intelligence indicators.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicators_List")
   list is Extension.ListByTarget<
     OperationalInsights,
     ThreatIntelligenceInformation,
@@ -109,7 +105,6 @@ interface ThreatIntelligenceInformations {
    * Append tags to a threat intelligence indicator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicator_AppendTags")
   appendTags is Extension.ActionSync<
     OperationalInsights,
     ThreatIntelligenceInformation,
@@ -122,7 +117,6 @@ interface ThreatIntelligenceInformations {
    * Replace tags added to a threat intelligence indicator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicator_ReplaceTags")
   replaceTags is Extension.ActionSync<
     OperationalInsights,
     ThreatIntelligenceInformation,

@@ -35,7 +35,6 @@ interface ProductPackageModels {
    * Gets a package by its identifier from the catalog.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductPackage_Get")
   get is Extension.Read<
     OperationalInsights,
     ProductPackageModel,
@@ -49,7 +48,6 @@ interface ProductPackageModels {
    * - properties/packagedContent
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductPackages_List")
   list is Extension.ListByTarget<
     OperationalInsights,
     ProductPackageModel,

@@ -35,7 +35,6 @@ interface ProductTemplateModels {
    * Gets a template by its identifier.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductTemplate_Get")
   get is Extension.Read<
     OperationalInsights,
     ProductTemplateModel,
@@ -46,7 +45,6 @@ interface ProductTemplateModels {
    * Gets all templates in the catalog.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductTemplates_List")
   list is Extension.ListByTarget<
     OperationalInsights,
     ProductTemplateModel,

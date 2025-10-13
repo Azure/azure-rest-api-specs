@@ -34,14 +34,12 @@ interface MetadataModels {
    * Get a Metadata.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Metadata_Get")
   get is Extension.Read<OperationalInsights, MetadataModel, Error = CloudError>;
 
   /**
    * Create a Metadata.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Metadata_Create")
   create is Extension.CreateOrReplaceSync<
     OperationalInsights,
     MetadataModel,
@@ -52,7 +50,6 @@ interface MetadataModels {
    * Update an existing Metadata.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Metadata_Update")
   @patch(#{ implicitOptionality: false })
   update is Extension.CustomPatchSync<
     OperationalInsights,
@@ -64,7 +61,6 @@ interface MetadataModels {
    * Delete a Metadata.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Metadata_Delete")
   delete is Extension.DeleteSync<
     OperationalInsights,
     MetadataModel,
@@ -75,7 +71,6 @@ interface MetadataModels {
    * List of all metadata
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Metadata_List")
   list is Extension.ListByTarget<
     OperationalInsights,
     MetadataModel,

@@ -34,14 +34,12 @@ interface PackageModels {
    * Gets an installed packages by its id.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentPackages_Get")
   get is Extension.Read<OperationalInsights, PackageModel, Error = CloudError>;
 
   /**
    * Install a package to the workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentPackage_Install")
   install is Extension.CreateOrReplaceSync<
     OperationalInsights,
     PackageModel,
@@ -52,7 +50,6 @@ interface PackageModels {
    * Uninstall a package from the workspace.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentPackage_Uninstall")
   uninstall is Extension.DeleteSync<
     OperationalInsights,
     PackageModel,
@@ -63,7 +60,6 @@ interface PackageModels {
    * Gets all installed packages.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentPackages_List")
   list is Extension.ListByTarget<
     OperationalInsights,
     PackageModel,

@@ -37,14 +37,12 @@ interface TemplateModels {
    * - properties/dependantTemplates
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentTemplate_Get")
   get is Extension.Read<OperationalInsights, TemplateModel, Error = CloudError>;
 
   /**
    * Install a template.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentTemplate_Install")
   install is Extension.CreateOrReplaceSync<
     OperationalInsights,
     TemplateModel,
@@ -55,7 +53,6 @@ interface TemplateModels {
    * Delete an installed template.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentTemplate_Delete")
   delete is Extension.DeleteSync<
     OperationalInsights,
     TemplateModel,
@@ -69,7 +66,6 @@ interface TemplateModels {
    * - properties/dependantTemplates
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentTemplates_List")
   list is Extension.ListByTarget<
     OperationalInsights,
     TemplateModel,

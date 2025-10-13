@@ -7,8 +7,6 @@ import "./AlertRule.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
-using TypeSpec.Http;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
 /**
@@ -37,7 +35,6 @@ interface ActionResponses {
    * Gets the action of alert rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Actions_Get")
   get is Extension.Read<
     OperationalInsights,
     ActionResponse,
@@ -48,7 +45,6 @@ interface ActionResponses {
    * Creates or updates the action of alert rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Actions_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     ActionResponse,
@@ -59,7 +55,6 @@ interface ActionResponses {
    * Delete the action of alert rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Actions_Delete")
   delete is Extension.DeleteSync<
     OperationalInsights,
     ActionResponse,
@@ -70,7 +65,6 @@ interface ActionResponses {
    * Gets all actions of alert rule.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Actions_ListByAlertRule")
   listByAlertRule is Extension.ListByTarget<
     OperationalInsights,
     ActionResponse,

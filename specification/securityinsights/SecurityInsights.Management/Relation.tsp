@@ -36,14 +36,12 @@ interface Relations {
    * Gets a relation for a given incident.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IncidentRelations_Get")
   get is Extension.Read<OperationalInsights, Relation, Error = CloudError>;
 
   /**
    * Creates or updates a relation for a given incident.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IncidentRelations_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
     OperationalInsights,
     Relation,
@@ -54,7 +52,6 @@ interface Relations {
    * Deletes a relation for a given incident.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IncidentRelations_Delete")
   delete is Extension.DeleteSync<
     OperationalInsights,
     Relation,
@@ -65,7 +62,6 @@ interface Relations {
    * Gets all relations for a given incident.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IncidentRelations_List")
   list is Extension.ListByTarget<
     OperationalInsights,
     Relation,
