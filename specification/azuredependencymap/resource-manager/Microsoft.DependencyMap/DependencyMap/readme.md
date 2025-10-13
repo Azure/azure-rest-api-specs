@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-01-31-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-01-31-preview'
 input-file:
-  - Microsoft.DependencyMap/preview/2025-01-31-preview/dependencyMap.json
+  - preview/2025-01-31-preview/dependencyMap.json
 ```
 
 ```yaml
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2025-05-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-05-01-preview'
 input-file:
-  - Microsoft.DependencyMap/preview/2025-05-01-preview/dependencyMap.json
+  - preview/2025-05-01-preview/dependencyMap.json
 ```
 
 ---
@@ -64,5 +64,5 @@ These settings apply only when `--tag=package-2025-07-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-07-01-preview'
 input-file:
-  - Microsoft.DependencyMap/preview/2025-07-01-preview/dependencyMap.json
+  - preview/2025-07-01-preview/dependencyMap.json
 ```
