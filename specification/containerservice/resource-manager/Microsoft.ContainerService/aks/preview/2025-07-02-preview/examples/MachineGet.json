@@ -1,0 +1,56 @@
+{
+  "parameters": {
+    "api-version": "2025-07-02-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rg1",
+    "resourceName": "clustername1",
+    "agentPoolName": "agentpool1",
+    "machineName": "aks-nodepool1-42263519-vmss00000t"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/26fe00f8-9173-4872-9134-bb1d2e00343a/resourceGroups/dummyRG/providers/Microsoft.ContainerService/managedClusters/round/agentPools/nodepool1/machines/aks-nodepool1-25481572-vmss000000",
+        "name": "aks-nodepool1-25481572-vmss000000",
+        "type": "Microsoft.ContainerService/managedClusters/agentPools/machines",
+        "zones": [
+          "1"
+        ],
+        "properties": {
+          "network": {
+            "ipAddresses": [
+              {
+                "ip": "172.20.2.4",
+                "family": "IPv4"
+              },
+              {
+                "ip": "10.0.0.1",
+                "family": "IPv4"
+              }
+            ]
+          },
+          "resourceId": "/subscriptions/26fe00f8-9173-4872-9134-bb1d2e00343a/resourceGroups/dummyRG/providers/Microsoft.Compute/virtualMachineScaleSets/aks-nodepool1-25481572-vmss/virtualMachines/0",
+          "provisioningState": "Succeeded",
+          "kubernetes": {
+            "orchestratorVersion": "1.30",
+            "currentOrchestratorVersion": "1.30.6",
+            "nodeLabels": {
+              "key1": "val1"
+            },
+            "nodeTaints": [
+              "Key1=Value1:NoSchedule"
+            ],
+            "kubeletDiskType": "OS",
+            "maxPods": 110
+          },
+          "hardware": {
+            "vmSize": "Standard_DS1_v2"
+          },
+          "priority": "Spot",
+          "mode": "User",
+          "nodeImageVersion": "AKSUbuntu:1604:2023.03.11"
+        }
+      }
+    }
+  }
+}
