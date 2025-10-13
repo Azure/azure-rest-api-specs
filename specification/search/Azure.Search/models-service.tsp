@@ -3812,7 +3812,7 @@ model SearchIndex {
   name: string;
 
    @doc("The description of the index.")
-  description: string;
+  description?: string;
 
   @doc("The fields of the index.")
   fields: SearchField[];
@@ -4710,18 +4710,8 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
 }
 
-// @doc("//  * Emits the entire input as a single token. This tokenizer is implemented using //  * Apache Lucene. //")
-// model KeywordTokenizer extends LexicalTokenizer {
-//   @doc("//    * The read buffer size in bytes. Default is 256. //")
-//   bufferSize?: int32 = 256;
-
-//   @doc("//    * A URI fragment specifying the type of tokenizer. //")
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-//   `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizer";
-// }
-
 @doc("Emits the entire input as a single token. This tokenizer is implemented using Apache Lucene.")
-model KeywordTokenizerV2 extends LexicalTokenizer {
+model KeywordTokenizer extends LexicalTokenizer {
   @doc("The maximum token length. Default is 256. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.")
   @maxValue(300)
   maxTokenLength?: int32 = 256;
@@ -4785,7 +4775,7 @@ model NGramTokenizer extends LexicalTokenizer {
 }
 
 @doc("Tokenizer for path-like hierarchies. This tokenizer is implemented using Apache Lucene.")
-model PathHierarchyTokenizerV2 extends LexicalTokenizer {
+model PathHierarchyTokenizer extends LexicalTokenizer {
   @doc("The delimiter character to use. Default is \"/\".")
   delimiter?: string = "/";
 
@@ -4823,18 +4813,8 @@ model PatternTokenizer extends LexicalTokenizer {
   `@odata.type`: "#Microsoft.Azure.Search.PatternTokenizer";
 }
 
-// @doc("//  * Breaks text following the Unicode Text Segmentation rules. This tokenizer is //  * implemented using Apache Lucene. //")
-// model LuceneStandardTokenizer extends LexicalTokenizer {
-//   @doc("//    * The maximum token length. Default is 255. Tokens longer than the maximum length //    * are split. //")
-//   maxTokenLength?: int32 = 255;
-
-//   @doc("//    * A URI fragment specifying the type of tokenizer. //")
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-//   `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizer";
-// }
-
 @doc("Breaks text following the Unicode Text Segmentation rules. This tokenizer is implemented using Apache Lucene.")
-model LuceneStandardTokenizerV2 extends LexicalTokenizer {
+model LuceneStandardTokenizer extends LexicalTokenizer {
   @doc("The maximum token length. Default is 255. Tokens longer than the maximum length are split. The maximum token length that can be used is 300 characters.")
   @maxValue(300)
   maxTokenLength?: int32 = 255;
@@ -4919,26 +4899,9 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
 }
 
-// @doc("//  * Generates n-grams of the given size(s) starting from the front or the back of //  * an input token. This token filter is implemented using Apache Lucene. //")
-// #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-// model EdgeNGramTokenFilter extends TokenFilter {
-//   @doc("//    * The minimum n-gram length. Default is 1. Must be less than the value of maxGram. //")
-//   minGram?: int32 = 1;
-
-//   @doc("//    * The maximum n-gram length. Default is 2. //")
-//   maxGram?: int32 = 2;
-
-//   @doc("//    * Specifies which side of the input the n-gram should be generated from. Default //    * is \"front\". //")
-//   side?: EdgeNGramTokenFilterSide;
-
-//   @doc("//    * A URI fragment specifying the type of token filter. //")
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-//   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilter";
-// }
-
 @doc("Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-model EdgeNGramTokenFilterV2 extends TokenFilter {
+model EdgeNGramTokenFilter extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
   minGram?: int32 = 1;
@@ -5019,23 +4982,9 @@ model LimitTokenFilter extends TokenFilter {
   `@odata.type`: "#Microsoft.Azure.Search.LimitTokenFilter";
 }
 
-// @doc("//  * Generates n-grams of the given size(s). This token filter is implemented using //  * Apache Lucene. //")
-// #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-// model NGramTokenFilter extends TokenFilter {
-//   @doc("//    * The minimum n-gram length. Default is 1. Must be less than the value of maxGram. //")
-//   minGram?: int32 = 1;
-
-//   @doc("//    * The maximum n-gram length. Default is 2. //")
-//   maxGram?: int32 = 2;
-
-//   @doc("//    * A URI fragment specifying the type of token filter. //")
-//   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-//   `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilter";
-// }
-
 @doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
-model NGramTokenFilterV2 extends TokenFilter {
+model NGramTokenFilter extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
   minGram?: int32 = 1;
