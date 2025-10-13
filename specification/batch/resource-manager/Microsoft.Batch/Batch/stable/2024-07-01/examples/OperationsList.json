@@ -1,0 +1,1221 @@
+{
+  "parameters": {
+    "api-version": "2024-07-01"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "name": "Microsoft.Batch/batchAccounts/providers/Microsoft.Insights/diagnosticSettings/read",
+            "display": {
+              "description": "Gets the diagnostic setting for the resource",
+              "operation": "Read diagnostic setting",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/providers/Microsoft.Insights/diagnosticSettings/write",
+            "display": {
+              "description": "Creates or updates the diagnostic setting for the resource",
+              "operation": "Write diagnostic setting",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/providers/Microsoft.Insights/logDefinitions/read",
+            "display": {
+              "description": "Gets the available logs for the Batch service",
+              "operation": "Read Batch service log definitions",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Account Log Definitions"
+            },
+            "isDataAction": false,
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "logSpecifications": [
+                  {
+                    "name": "ServiceLog",
+                    "blobDuration": "PT1H",
+                    "displayName": "Service Logs"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/providers/Microsoft.Insights/metricDefinitions/read",
+            "display": {
+              "description": "Gets the available metrics for the Batch service",
+              "operation": "Read Batch service metric definitions",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Account Metric Definitions"
+            },
+            "isDataAction": false,
+            "origin": "system",
+            "properties": {
+              "serviceSpecification": {
+                "metricSpecifications": [
+                  {
+                    "name": "CoreCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Total number of dedicated cores in the batch account",
+                    "displayName": "Dedicated Core Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "TotalNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Total number of dedicated nodes in the batch account",
+                    "displayName": "Dedicated Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "LowPriorityCoreCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Total number of low-priority cores in the batch account",
+                    "displayName": "LowPriority Core Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "TotalLowPriorityNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Total number of low-priority nodes in the batch account",
+                    "displayName": "Low-Priority Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "CreatingNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of nodes being created",
+                    "displayName": "Creating Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "StartingNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of nodes starting",
+                    "displayName": "Starting Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "WaitingForStartTaskNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of nodes waiting for the Start Task to complete",
+                    "displayName": "Waiting For Start Task Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "StartTaskFailedNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of nodes where the Start Task has failed",
+                    "displayName": "Start Task Failed Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "IdleNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of idle nodes",
+                    "displayName": "Idle Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "OfflineNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of offline nodes",
+                    "displayName": "Offline Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "RebootingNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of rebooting nodes",
+                    "displayName": "Rebooting Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "ReimagingNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of reimaging nodes",
+                    "displayName": "Reimaging Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "RunningNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of running nodes",
+                    "displayName": "Running Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "LeavingPoolNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of nodes leaving the Pool",
+                    "displayName": "Leaving Pool Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "UnusableNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of unusable nodes",
+                    "displayName": "Unusable Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "PreemptedNodeCount",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "displayDescription": "Number of preempted nodes",
+                    "displayName": "Preempted Node Count",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "lockAggregationType": "Total",
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "TaskStartEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of tasks that have started",
+                    "displayName": "Task Start Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "TaskCompleteEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of tasks that have completed",
+                    "displayName": "Task Complete Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "TaskFailEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      },
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of tasks that have completed in a failed state",
+                    "displayName": "Task Fail Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "PoolCreateEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of pools that have been created",
+                    "displayName": "Pool Create Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "PoolResizeStartEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of pool resizes that have started",
+                    "displayName": "Pool Resize Start Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "PoolResizeCompleteEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of pool resizes that have completed",
+                    "displayName": "Pool Resize Complete Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "PoolDeleteStartEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of pool deletes that have started",
+                    "displayName": "Pool Delete Start Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "PoolDeleteCompleteEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "poolId",
+                        "displayName": "Pool ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of pool deletes that have completed",
+                    "displayName": "Pool Delete Complete Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "JobDeleteCompleteEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of jobs that have been successfully deleted.",
+                    "displayName": "Job Delete Complete Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "JobDeleteStartEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of jobs that have been requested to be deleted.",
+                    "displayName": "Job Delete Start Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "JobDisableCompleteEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of jobs that have been successfully disabled.",
+                    "displayName": "Job Disable Complete Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "JobDisableStartEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of jobs that have been requested to be disabled.",
+                    "displayName": "Job Disable Start Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "JobStartEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of jobs that have been successfully started.",
+                    "displayName": "Job Start Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "JobTerminateCompleteEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of jobs that have been successfully terminated.",
+                    "displayName": "Job Terminate Complete Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  },
+                  {
+                    "name": "JobTerminateStartEvent",
+                    "aggregationType": "Total",
+                    "availabilities": [
+                      {
+                        "blobDuration": "PT1H",
+                        "timeGrain": "PT1M"
+                      }
+                    ],
+                    "dimensions": [
+                      {
+                        "name": "jobId",
+                        "displayName": "Job ID",
+                        "toBeExportedForShoebox": true
+                      }
+                    ],
+                    "displayDescription": "Total number of jobs that have been requested to be terminated.",
+                    "displayName": "Job Terminate Start Events",
+                    "enableRegionalMdmAccount": false,
+                    "fillGapWithZero": false,
+                    "supportsInstanceLevelAggregation": false,
+                    "unit": "Count"
+                  }
+                ]
+              }
+            }
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/jobs/read",
+            "display": {
+              "description": "Lists jobs on a Batch account or gets the properties of a job",
+              "operation": "List or Get Jobs",
+              "provider": "Microsoft Batch",
+              "resource": "Jobs"
+            },
+            "isDataAction": true
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/jobs/write",
+            "display": {
+              "description": "Creates a new job on a Batch account or updates an existing job",
+              "operation": "Create or Update Job",
+              "provider": "Microsoft Batch",
+              "resource": "Jobs"
+            },
+            "isDataAction": true
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/jobs/delete",
+            "display": {
+              "description": "Deletes a job from a Batch account",
+              "operation": "Delete Job",
+              "provider": "Microsoft Batch",
+              "resource": "Jobs"
+            },
+            "isDataAction": true
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/jobSchedules/read",
+            "display": {
+              "description": "Lists job schedules on a Batch account or gets the properties of a job schedule",
+              "operation": "List or Get Job Schedules",
+              "provider": "Microsoft Batch",
+              "resource": "Job Schedules"
+            },
+            "isDataAction": true
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/jobSchedules/write",
+            "display": {
+              "description": "Creates a new job schedule on a Batch account or updates an existing job schedule",
+              "operation": "Create or Update Job Schedule",
+              "provider": "Microsoft Batch",
+              "resource": "Job Schedules"
+            },
+            "isDataAction": true
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/jobSchedules/delete",
+            "display": {
+              "description": "Deletes a job schedule from a Batch account",
+              "operation": "Delete Job Schedule",
+              "provider": "Microsoft Batch",
+              "resource": "Job Schedules"
+            },
+            "isDataAction": true
+          },
+          {
+            "name": "Microsoft.Batch/operations/read",
+            "display": {
+              "description": "Lists operations available on Microsoft.Batch resource provider",
+              "operation": "List Available Batch Operations",
+              "provider": "Microsoft Batch",
+              "resource": "Available Batch Operations"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/read",
+            "display": {
+              "description": "Lists Batch accounts or gets the properties of a Batch account",
+              "operation": "List or Get Batch Accounts",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/write",
+            "display": {
+              "description": "Creates a new Batch account or updates an existing Batch account",
+              "operation": "Create or Update Batch Account",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/delete",
+            "display": {
+              "description": "Deletes a Batch account",
+              "operation": "Delete Batch Account",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/listkeys/action",
+            "display": {
+              "description": "Lists access keys for a Batch account",
+              "operation": "List Batch Account Keys",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/regeneratekeys/action",
+            "display": {
+              "description": "Regenerates access keys for a Batch account",
+              "operation": "Regenerate Batch Account Keys",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/locations/quotas/read",
+            "display": {
+              "description": "Gets Batch quotas of the specified subscription at the specified Azure region",
+              "operation": "Get Batch Quotas",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Quotas"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/locations/checkNameAvailability/action",
+            "display": {
+              "description": "Checks that the account name is valid and not in use.",
+              "operation": "Check Name Availability",
+              "provider": "Microsoft Batch",
+              "resource": "Name Availability"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/operationResults/read",
+            "display": {
+              "description": "Gets the results of a long running Batch account operation",
+              "operation": "Get Batch account operation results",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Resource Provider"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/locations/accountOperationResults/read",
+            "display": {
+              "description": "Gets the results of a long running Batch account operation",
+              "operation": "Get Batch account operation results",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Resource Provider"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/register/action",
+            "display": {
+              "description": "Registers the subscription for the Batch Resource Provider and enables the creation of Batch accounts",
+              "operation": "Register the Batch Resource Provider",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Resource Provider"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/unregister/action",
+            "display": {
+              "description": "Unregisters the subscription for the Batch Resource Provider preventing the creation of Batch accounts",
+              "operation": "Unregister the Batch Resource Provider",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Resource Provider"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/syncAutoStorageKeys/action",
+            "display": {
+              "description": "Synchronizes access keys for the auto storage account configured for a Batch account",
+              "operation": "Synchronize Auto Storage Account Keys",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Accounts"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/applications/read",
+            "display": {
+              "description": "Lists applications or gets the properties of an application",
+              "operation": "List or Get Applications",
+              "provider": "Microsoft Batch",
+              "resource": "Applications"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/applications/write",
+            "display": {
+              "description": "Creates a new application or updates an existing application",
+              "operation": "Create or Update Application",
+              "provider": "Microsoft Batch",
+              "resource": "Applications"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/applications/delete",
+            "display": {
+              "description": "Deletes an application",
+              "operation": "Delete Application",
+              "provider": "Microsoft Batch",
+              "resource": "Applications"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/applications/versions/read",
+            "display": {
+              "description": "Gets the properties of an application package",
+              "operation": "Get Application Package",
+              "provider": "Microsoft Batch",
+              "resource": "Application Packages"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/applications/versions/write",
+            "display": {
+              "description": "Creates a new application package or updates an existing application package",
+              "operation": "Create or Update Application Package",
+              "provider": "Microsoft Batch",
+              "resource": "Application Packages"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/applications/versions/delete",
+            "display": {
+              "description": "Deletes an application package",
+              "operation": "Delete Application Package",
+              "provider": "Microsoft Batch",
+              "resource": "Application Packages"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/applications/versions/activate/action",
+            "display": {
+              "description": "Activates an application package",
+              "operation": "Activate Application Package",
+              "provider": "Microsoft Batch",
+              "resource": "Application Packages"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/certificates/read",
+            "display": {
+              "description": "Lists certificates on a Batch account or gets the properties of a certificate",
+              "operation": "List or Get Certificates",
+              "provider": "Microsoft Batch",
+              "resource": "Certificates"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/certificates/write",
+            "display": {
+              "description": "Creates a new certificate on a Batch account or updates an existing certificate",
+              "operation": "Create or Update Certificate",
+              "provider": "Microsoft Batch",
+              "resource": "Certificates"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/certificates/delete",
+            "display": {
+              "description": "Deletes a certificate from a Batch account",
+              "operation": "Delete Certificate",
+              "provider": "Microsoft Batch",
+              "resource": "Certificates"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/certificates/cancelDelete/action",
+            "display": {
+              "description": "Cancels the failed deletion of a certificate on a Batch account",
+              "operation": "Cancel Delete Certificate",
+              "provider": "Microsoft Batch",
+              "resource": "Certificates"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/certificateOperationResults/read",
+            "display": {
+              "description": "Gets the results of a long running certificate operation on a Batch account",
+              "operation": "Get Certificate Operation Results",
+              "provider": "Microsoft Batch",
+              "resource": "Certificates"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/pools/read",
+            "display": {
+              "description": "Lists pools on a Batch account or gets the properties of a pool",
+              "operation": "List or Get Pools",
+              "provider": "Microsoft Batch",
+              "resource": "Pools"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/pools/write",
+            "display": {
+              "description": "Creates a new pool on a Batch account or updates an existing pool",
+              "operation": "Create or Update Pool",
+              "provider": "Microsoft Batch",
+              "resource": "Pools"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/pools/delete",
+            "display": {
+              "description": "Deletes a pool from a Batch account",
+              "operation": "Delete Pool",
+              "provider": "Microsoft Batch",
+              "resource": "Pools"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/pools/stopResize/action",
+            "display": {
+              "description": "Stops an ongoing resize operation on a Batch account pool",
+              "operation": "Stop Pool Resize",
+              "provider": "Microsoft Batch",
+              "resource": "Pools"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/pools/disableAutoscale/action",
+            "display": {
+              "description": "Disables automatic scaling for a Batch account pool",
+              "operation": "Disable Pool AutoScale",
+              "provider": "Microsoft Batch",
+              "resource": "Pools"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/poolOperationResults/read",
+            "display": {
+              "description": "Gets the results of a long running pool operation on a Batch account",
+              "operation": "Get Pool Operation Results",
+              "provider": "Microsoft Batch",
+              "resource": "Pools"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/locations/virtualMachineSkus/read",
+            "display": {
+              "description": "Lists available Batch supported Virtual Machine VM sizes at the given location",
+              "operation": "List Supported Batch Virtual Machine VM",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Supported Skus"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/locations/cloudServiceSkus/read",
+            "display": {
+              "description": "Lists available Batch supported Cloud Service VM sizes at the given location",
+              "operation": "List Supported Batch Cloud Service VM",
+              "provider": "Microsoft Batch",
+              "resource": "Batch Supported Skus"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateLinkResources/read",
+            "display": {
+              "description": "Gets the properties of a Private link resource or Lists Private link resources on a Batch account",
+              "operation": "Get or List Private link resources",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateLinkResources"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnections/write",
+            "display": {
+              "description": "Update an existing Private endpoint connection on a Batch account",
+              "operation": "Update Private endpoint connection",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnections"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnections/read",
+            "display": {
+              "description": "Gets Private endpoint connection or Lists Private endpoint connections on a Batch account",
+              "operation": "Get or List Private endpoint connection",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnections"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnectionResults/read",
+            "display": {
+              "description": "Gets the results of a long running Batch account private endpoint connection operation",
+              "operation": "Get Batch account private endpoint connection operation results",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnections"
+            },
+            "isDataAction": false
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnectionProxies/validate/action",
+            "display": {
+              "description": "Validates a Private endpoint connection proxy on a Batch account",
+              "operation": "Validates a Private endpoint connection proxy",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnectionProxies"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnectionProxies/write",
+            "display": {
+              "description": "Create a new Private endpoint connection proxy on a Batch account",
+              "operation": "Create or Update Private endpoint connection proxy",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnectionProxies"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnectionProxies/read",
+            "display": {
+              "description": "Gets Private endpoint connection proxy on a Batch account",
+              "operation": "Get Private endpoint connection proxy",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnectionProxies"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnectionProxies/delete",
+            "display": {
+              "description": "Delete a Private endpoint connection proxy on a Batch account",
+              "operation": "Delete Private endpoint connection proxy",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnectionProxies"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/privateEndpointConnectionProxyResults/read",
+            "display": {
+              "description": "Gets the results of a long running Batch account private endpoint connection proxy operation",
+              "operation": "Get Batch account private endpoint connection proxy operation results",
+              "provider": "Microsoft Batch",
+              "resource": "PrivateEndpointConnectionProxies"
+            },
+            "isDataAction": false,
+            "origin": "system"
+          },
+          {
+            "name": "Microsoft.Batch/batchAccounts/outboundNetworkDependenciesEndpoints/read",
+            "display": {
+              "description": "Lists the outbound network dependency endpoints for a Batch account",
+              "operation": "List Outbound Network Dependency Endpoints",
+              "provider": "Microsoft Batch",
+              "resource": "Outbound Network Dependencies Endpoints"
+            },
+            "isDataAction": false,
+            "origin": "user,system"
+          }
+        ]
+      }
+    }
+  },
+  "operationId": "Operations_List",
+  "title": "OperationsList"
+}

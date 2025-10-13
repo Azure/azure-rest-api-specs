@@ -93,5 +93,7 @@ interface ApplicationPackages {
 @@doc(ApplicationPackages.activate::parameters.body,
   "The parameters for the request."
 );
+#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
 @@extension(Applications.create::parameters.resource, "required", false);
+#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
 @@extension(ApplicationPackages.create::parameters.resource, "required", false);

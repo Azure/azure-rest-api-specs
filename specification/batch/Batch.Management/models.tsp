@@ -916,6 +916,7 @@ model BatchAccountCreateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
 
@@ -1134,11 +1135,13 @@ model BatchAccountProperties {
   /**
    * The network profile only takes effect when publicNetworkAccess is enabled.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   networkProfile?: NetworkProfile | null;
 
   /**
    * List of private endpoint connections associated with the Batch account
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[] | null;
 
@@ -1157,18 +1160,22 @@ model BatchAccountProperties {
   /**
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
   dedicatedCoreQuota?: int32 | null;
 
   /**
    * For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
   lowPriorityCoreQuota?: int32 | null;
 
   /**
    * A list of the dedicated core quota per Virtual Machine family for the Batch account. For accounts with PoolAllocationMode set to UserSubscription, quota is managed on the subscription so this value is not returned.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   dedicatedCoreQuotaPerVMFamily?: VirtualMachineFamilyCoreQuota[] | null;
@@ -1176,6 +1183,7 @@ model BatchAccountProperties {
   /**
    * If this flag is true, dedicated core quota is enforced via both the dedicatedCoreQuotaPerVMFamily and dedicatedCoreQuota properties on the account. If this flag is false, dedicated core quota is enforced only via the dedicatedCoreQuota property on the account and does not consider Virtual Machine family.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   @visibility(Lifecycle.Read)
   dedicatedCoreQuotaPerVMFamilyEnforced?: boolean;
 
@@ -1194,6 +1202,7 @@ model BatchAccountProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   @visibility(Lifecycle.Read)
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 }
@@ -1435,6 +1444,7 @@ model BatchAccountUpdateProperties {
   /**
    * List of allowed authentication modes for the Batch account that can be used to authenticate with the data plane. This does not affect authentication with the control plane.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
   allowedAuthenticationModes?: AuthenticationMode[] | null;
 
   /**
@@ -1651,6 +1661,7 @@ model Operation {
   /**
    * Properties of the operation.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   properties?: Record<unknown>;
 }
 
@@ -2047,6 +2058,8 @@ model PoolProperties {
   /**
    * Determines how a pool communicates with the Batch service.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-nullable" ""
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" ""
   @visibility(Lifecycle.Read)
   currentNodeCommunicationMode?: NodeCommunicationMode | null;
 
@@ -2216,6 +2229,7 @@ model DataDisk {
   /**
    * The initial disk size in GB when creating new data disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   diskSizeGB: int32;
 
   /**
@@ -2330,11 +2344,13 @@ model VMExtension {
   /**
    * JSON formatted public settings for the extension.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   settings?: Record<unknown>;
 
   /**
    * The extension can contain either protectedSettings or protectedSettingsFromKeyVault or no protected settings at all.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" ""
   protectedSettings?: Record<unknown>;
 
   /**
@@ -2350,6 +2366,7 @@ model OSDisk {
   /**
    * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   ephemeralOSDiskSettings?: DiffDiskSettings;
 
   /**
@@ -2363,6 +2380,7 @@ model OSDisk {
   /**
    * The initial disk size in GB when creating new OS disk.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   diskSizeGB?: int32;
 
   /**
@@ -2397,6 +2415,7 @@ model ManagedDisk {
 /**
  * Specifies the security profile settings for the managed disk. **Note**: It can only be set for Confidential VMs and is required when using Confidential VMs.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model VMDiskSecurityProfile {
   /**
    * Specifies the EncryptionType of the managed disk. It is set to VMGuestStateOnly for encryption of just the VMGuestState blob, and NonPersistedTPM for not persisting firmware state in the VMGuestState blob. **Note**: It can be set for only Confidential VMs and required when using Confidential VMs.
@@ -2569,6 +2588,7 @@ model NetworkConfiguration {
   /**
    * The public IP Address configuration of the networking configuration of a Pool.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   publicIPAddressConfiguration?: PublicIPAddressConfiguration;
 
   /**
@@ -2652,6 +2672,7 @@ model NetworkSecurityGroupRule {
 /**
  * The public IP Address configuration of the networking configuration of a Pool.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model PublicIPAddressConfiguration {
   /**
    * The default value is BatchManaged
@@ -2903,6 +2924,7 @@ model TaskContainerSettings {
   /**
    * If this array is null or be not present, container task will mount entire temporary disk drive in windows (or AZ_BATCH_NODE_ROOT_DIR in Linux). It won't' mount any data paths into container if this array is set as empty.
    */
+  @OpenAPI.extension("x-ms-identifiers", #[])
   containerHostBatchBindMounts?: ContainerHostBatchBindMountEntry[];
 }
 
@@ -3087,6 +3109,7 @@ model AzureBlobFileSystemConfiguration {
 /**
  * Information used to connect to an NFS file system.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" ""
 model NFSMountConfiguration {
   /**
    * The URI of the file system to mount.
@@ -3176,6 +3199,7 @@ model UpgradePolicy {
   /**
    * The configuration parameters used for performing automatic OS upgrade.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   automaticOSUpgradePolicy?: AutomaticOSUpgradePolicy;
 
   /**
@@ -3187,6 +3211,7 @@ model UpgradePolicy {
 /**
  * The configuration parameters used for performing automatic OS upgrade.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style"
 model AutomaticOSUpgradePolicy {
   /**
    * Whether OS image rollback feature should be disabled.
@@ -3196,6 +3221,7 @@ model AutomaticOSUpgradePolicy {
   /**
    * Indicates whether OS upgrades should automatically be applied to scale set instances in a rolling fashion when a newer version of the OS image becomes available. <br /><br /> If this is set to true for Windows based pools, [WindowsConfiguration.enableAutomaticUpdates](https://learn.microsoft.com/rest/api/batchmanagement/pool/create?tabs=HTTP#windowsconfiguration) cannot be set to true.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" ""
   enableAutomaticOSUpgrade?: boolean;
 
   /**

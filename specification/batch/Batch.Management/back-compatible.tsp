@@ -4,10 +4,13 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Batch;
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@flattenProperty(BatchAccountCreateParameters.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@flattenProperty(BatchAccountUpdateParameters.properties);
 
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
 @@flattenProperty(CertificateCreateOrUpdateParameters.properties);
 
 @@clientName(ContainerRegistry.username, "userName");
