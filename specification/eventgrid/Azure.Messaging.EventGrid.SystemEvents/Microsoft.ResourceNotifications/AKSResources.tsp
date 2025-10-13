@@ -12,20 +12,20 @@ namespace Microsoft.EventGrid.SystemEvents;
 Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.AKSResources.FleetGateCreated event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(ResourceNotificationsAKSResourcesFleetGateCreatedExample)
+@example(MicrosoftResourceNotificationsAKSResourcesFleetGateCreatedExample)
 model ResourceNotificationsAKSResourcesFleetGateCreatedEventData extends ResourceNotificationsResourceUpdatedEventData {}
 
 /**
 Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.AKSResources.FleetGateUpdated event.
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
-@example(ResourceNotificationsAKSResourcesFleetGateUpdatedExample)
+@example(MicrosoftResourceNotificationsAKSResourcesFleetGateUpdatedExample)
 model ResourceNotificationsAKSResourcesFleetGateUpdatedEventData extends ResourceNotificationsResourceUpdatedEventData {}
 
 /**
 Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.AKSResources.FleetGateDeleted event.
 */
-@example(ResourceNotificationsAKSResourcesFleetGateDeletedExample)
+@example(MicrosoftAKSResourcesFleetGateDeletedExample)
 model ResourceNotificationsAKSResourcesFleetGateDeletedEventData {
   /** resourceInfo details for deleted event */
   resourceInfo: {
