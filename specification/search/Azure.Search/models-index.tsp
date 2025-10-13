@@ -56,7 +56,6 @@ union QueryRewritesType {
 }
 
 @doc("Enables a debugging tool that can be used to further explore your search results. You can enable multiple debug modes simultaneously by separating them with a | character, for example: semantic|queryRewrites.")
-@added(Versions.v2025_08_01_preview)
 union QueryDebugMode {
   string,
 
@@ -64,18 +63,22 @@ union QueryDebugMode {
   Disabled: "disabled",
 
   @doc("Allows the user to further explore their reranked results.")
+  @added(Versions.v2025_08_01_preview)
   Semantic: "semantic",
 
   @doc("Allows the user to further explore their hybrid and vector query results.")
   Vector: "vector",
 
   @doc("Allows the user to explore the list of query rewrites generated for their search request.")
+  @added(Versions.v2025_08_01_preview)
   QueryRewrites: "queryRewrites",
 
   @doc("Allows the user to retrieve scoring information regarding vectors matched within a collection of complex types.")
+  @added(Versions.v2025_08_01_preview)
   InnerHits: "innerHits",
 
   @doc("Turn on all debug options.")
+  @added(Versions.v2025_08_01_preview)
   All: "all",
 }
 

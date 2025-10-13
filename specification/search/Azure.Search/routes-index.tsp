@@ -15,7 +15,7 @@ interface Documents {
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
   @route("/indexes('{indexName}')/docs/$count")
   @get
-  count is SearchIndexOperation<{}, int32>;
+  count is SearchIndexOperation<{}, int64>;
 
   @doc("Searches for documents in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"

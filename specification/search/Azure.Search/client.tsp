@@ -92,6 +92,11 @@ namespace SearchServiceClient {
   
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    @added(Search.Versions.v2025_08_01_preview)
+    resync is Search.Indexers.resync;
+  
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     resetDocs is Search.Indexers.resetDocs;
   
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -200,6 +205,7 @@ namespace SearchServiceClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     analyze is Search.Indexes.analyze;
   }
+  @added(Search.Versions.v2025_08_01_preview)
   @operationGroup()
   interface Aliases {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -223,6 +229,7 @@ namespace SearchServiceClient {
     create is Search.Aliases.create;
   }
 
+  @added(Search.Versions.v2025_08_01_preview)
   @operationGroup()
   interface Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -246,6 +253,7 @@ namespace SearchServiceClient {
     create is Search.Agents.create;
   }
 
+  @added(Search.Versions.v2025_08_01_preview)
   @operationGroup()
   interface Sources {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
@@ -276,6 +284,7 @@ namespace SearchServiceClient {
   
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    @added(Search.Versions.v2025_08_01_preview)
     getIndexStatsSummary is Search.getIndexStatsSummary;
   }
 }

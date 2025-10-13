@@ -99,6 +99,7 @@ interface Indexers {
 
   @doc("Resync selective options from the datasource to be re-ingested by the indexer.\"")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @added(Versions.v2025_08_01_preview)
   @route("/indexers('{indexerName}')/search.resync")
   @post
   resync is SearchIndexerOperation<
