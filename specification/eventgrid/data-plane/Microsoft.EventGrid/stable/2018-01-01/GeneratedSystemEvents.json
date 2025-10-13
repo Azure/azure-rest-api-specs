@@ -699,6 +699,45 @@
         }
       ]
     },
+    "AcsChatRetentionPolicy": {
+      "type": "object",
+      "description": "Schema of common properties of all chat retention policy",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AcsChatRetentionPolicyKind",
+          "description": "The chat retention policy kind."
+        },
+        "deleteThreadAfterDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The delete thread after number of days."
+        }
+      }
+    },
+    "AcsChatRetentionPolicyKind": {
+      "type": "string",
+      "description": "Interactive reply kind",
+      "enum": [
+        "none",
+        "threadCreationDate"
+      ],
+      "x-ms-enum": {
+        "name": "AcsChatRetentionPolicyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "none",
+            "value": "none",
+            "description": "None"
+          },
+          {
+            "name": "threadCreationDate",
+            "value": "threadCreationDate",
+            "description": "ThreadCreationDate"
+          }
+        ]
+      }
+    },
     "AcsChatThreadCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
@@ -726,7 +765,12 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicy",
+          "description": "The retention policy for the chat."
         }
       },
       "required": [
@@ -767,7 +811,8 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1707,7 +1752,8 @@
           "items": {
             "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1760,7 +1806,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1819,7 +1866,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1854,7 +1902,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1987,7 +2036,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "requestedWorkerSelectors": {
           "type": "array",
@@ -1995,7 +2045,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2031,7 +2082,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scheduledOn": {
           "type": "string",
@@ -2068,7 +2120,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -2076,7 +2129,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scheduledOn": {
           "type": "string",
@@ -2216,7 +2270,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -2224,7 +2279,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scheduledOn": {
           "type": "string",
@@ -2257,7 +2313,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "expiredAttachedWorkerSelectors": {
           "type": "array",
@@ -2265,7 +2322,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2650,7 +2708,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "totalCapacity": {
           "type": "integer",
@@ -2763,7 +2822,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "totalCapacity": {
           "type": "integer",
@@ -2842,7 +2902,8 @@
           "items": {
             "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "receivedTimestamp": {
           "type": "string",
@@ -6897,7 +6958,8 @@
           "items": {
             "$ref": "#/definitions/MapsGeofenceGeometry"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "invalidPeriodGeofenceGeometryId": {
           "type": "array",

@@ -1253,6 +1253,13 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
+        },
+        "retentionPolicy": {
+          "description": "The retention policy for the chat.",
+          "type": "object",
+          "items": {
+            "$ref": "#/definitions/AcsChatRetentionPolicy"
+          }
         }
       },
       "required": [
@@ -2362,6 +2369,37 @@
         "threadId": {
           "description": "The chat thread id",
           "type": "string"
+        }
+      }
+    },
+    "AcsChatRetentionPolicy": {
+      "description": "Schema of common properties of all chat retention policy",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The chat retention policy kind.",
+          "type": "string",
+          "enum": [
+            "None",
+            "ThreadCreationDate"
+          ],
+          "x-ms-enum": {
+            "name": "acsChatRetentionPolicyKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "none"
+              },
+              {
+                "value": "threadCreationDate"
+              }
+            ]
+          }
+        },
+        "deleteThreadAfterDays": {
+          "description": "The delete thread after number of days.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },

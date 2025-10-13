@@ -152,6 +152,9 @@ model AcsChatThreadCreatedWithUserEventData
 model AcsChatThreadCreatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadBaseEventData;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatThreadWithUserDeletedExample)
@@ -1561,6 +1564,15 @@ model AcsMessageChannelEventError {
   channelMessage?: string;
 }
 
+/** Schema of common properties of all chat retention policy */
+model AcsChatRetentionPolicy {
+  /** The chat retention policy kind. */
+  kind?: AcsChatRetentionPolicyKind;
+
+  /** The delete thread after number of days. */
+  deleteThreadAfterDays?: int32;
+}
+
 /** Interactive reply kind */
 union AcsInteractiveReplyKind {
   /** Messaged interactive reply type is ButtonReply */
@@ -1571,6 +1583,17 @@ union AcsInteractiveReplyKind {
 
   /** Messaged interactive reply type is Unknown */
   "unknown",
+
+  string,
+}
+
+/** Interactive reply kind */
+union AcsChatRetentionPolicyKind {
+  /** None */
+  "none",
+
+  /** ThreadCreationDate */
+  "threadCreationDate",
 
   string,
 }

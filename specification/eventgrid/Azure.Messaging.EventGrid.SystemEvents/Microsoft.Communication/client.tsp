@@ -629,6 +629,18 @@ using Azure.ClientGenerator.Core;
 @@access(Microsoft.EventGrid.SystemEvents.CommunicationCloudEnvironmentModel,
   Access.public
 );
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicy,
+  Usage.output | Usage.json
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicy,
+  Access.public
+);
+@@usage(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyKind,
+  Usage.output | Usage.json
+);
+@@access(Microsoft.EventGrid.SystemEvents.AcsChatRetentionPolicyKind,
+  Access.public
+);
 
 //useSystemTextJsonConverter decorators
 @@useSystemTextJsonConverter(Microsoft.EventGrid.SystemEvents.AcsCallStartedEventData,
