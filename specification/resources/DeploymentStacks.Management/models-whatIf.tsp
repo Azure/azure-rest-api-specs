@@ -17,7 +17,7 @@ namespace Microsoft.Resources.DeploymentStacks;
 @added(Versions.v2025_07_01)
 model DeploymentStackWhatIfResult
   is Azure.ResourceManager.ProxyResource<DeploymentStackWhatIfResultProperties> {
-  ...DeploymentStackWhatIfNameParameter;
+  ...DeploymentStackWhatIfResultNameParameter;
 
   /** The geo-location where the resource lives. Required for subscription and management group scoped stacks. The location is inherited from the resource group for resource group scoped stacks. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
@@ -30,12 +30,16 @@ model DeploymentStackWhatIfResult
   tags?: Record<string>;
 }
 
-alias DeploymentStackWhatIfNameParameter = ResourceNameParameter<
+alias DeploymentStackWhatIfResultNameParameter = ResourceNameParameter<
   Resource = DeploymentStackWhatIfResult,
-  KeyName = "deploymentStackWhatIfName",
+  KeyName = "deploymentStackWhatIfResultName",
   SegmentName = "deploymentStackWhatIfResults",
   NamePattern = "^[-\\w\\._\\(\\)]+$"
 >;
+
+@@maxLength(DeploymentStackWhatIfResult.name, 90);
+@@minLength(DeploymentStackWhatIfResult.name, 1);
+@@doc(DeploymentStackWhatIfResult.name, "Name of the deployment stack what-if result.");
 
 /**
  * DeploymentStack WhatIfResult Properties
@@ -320,6 +324,11 @@ union DeploymentStackWhatIfChangeType {
    * 	The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change.
    */
   NoChange: "noChange",
+
+  /**
+   * The resource is not supported by What-If.
+   */
+  Unsupported: "unsupported"
 }
 
 /**

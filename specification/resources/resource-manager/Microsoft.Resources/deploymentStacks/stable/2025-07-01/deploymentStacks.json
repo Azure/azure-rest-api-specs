@@ -61,7 +61,7 @@
   "paths": {
     "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults": {
       "get": {
-        "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_ListWhatIf",
+        "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_List",
         "tags": [
           "DeploymentStacksWhatIfResultsAtManagementGroup"
         ],
@@ -93,9 +93,9 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfResultName}": {
       "get": {
-        "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_GetWhatIf",
+        "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_Get",
         "tags": [
           "DeploymentStacksWhatIfResultsAtManagementGroup"
         ],
@@ -108,11 +108,13 @@
             "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -145,11 +147,13 @@
             "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
@@ -212,11 +216,13 @@
             "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
@@ -251,13 +257,13 @@
         }
       }
     },
-    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}/whatIf": {
+    "/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfResultName}/whatIf": {
       "post": {
         "operationId": "DeploymentStacksWhatIfResultsAtManagementGroup_WhatIf",
         "tags": [
           "DeploymentStacksWhatIfResultsAtManagementGroup"
         ],
-        "description": "Exports the template used to create the Deployment stack at the specified scope.",
+        "description": "Returns property-level changes that will be made by the deployment if executed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -266,11 +272,13 @@
             "$ref": "#/parameters/ManagementGroupIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -653,7 +661,7 @@
     },
     "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults": {
       "get": {
-        "operationId": "DeploymentStacksWhatIfResultsAtSubscription_ListWhatIf",
+        "operationId": "DeploymentStacksWhatIfResultsAtSubscription_List",
         "tags": [
           "DeploymentStacksWhatIfResultsAtSubscription"
         ],
@@ -685,9 +693,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfResultName}": {
       "get": {
-        "operationId": "DeploymentStacksWhatIfResultsAtSubscription_GetWhatIf",
+        "operationId": "DeploymentStacksWhatIfResultsAtSubscription_Get",
         "tags": [
           "DeploymentStacksWhatIfResultsAtSubscription"
         ],
@@ -700,11 +708,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -737,11 +747,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
@@ -804,11 +816,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
@@ -843,13 +857,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}/whatIf": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfResultName}/whatIf": {
       "post": {
         "operationId": "DeploymentStacksWhatIfResultsAtSubscription_WhatIf",
         "tags": [
           "DeploymentStacksWhatIfResultsAtSubscription"
         ],
-        "description": "Exports the template used to create the Deployment stack at the specified scope.",
+        "description": "Returns property-level changes that will be made by the deployment if executed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -858,11 +872,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -1245,7 +1261,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults": {
       "get": {
-        "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_ListWhatIf",
+        "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_List",
         "tags": [
           "DeploymentStacksWhatIfResultsAtResourceGroup"
         ],
@@ -1280,9 +1296,9 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfResultName}": {
       "get": {
-        "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_GetWhatIf",
+        "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_Get",
         "tags": [
           "DeploymentStacksWhatIfResultsAtResourceGroup"
         ],
@@ -1298,11 +1314,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -1338,11 +1356,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
@@ -1408,11 +1428,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           },
           {
@@ -1447,13 +1469,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfName}/whatIf": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Resources/deploymentStackWhatIfResults/{deploymentStackWhatIfResultName}/whatIf": {
       "post": {
         "operationId": "DeploymentStacksWhatIfResultsAtResourceGroup_WhatIf",
         "tags": [
           "DeploymentStacksWhatIfResultsAtResourceGroup"
         ],
-        "description": "Exports the template used to create the Deployment stack at the specified scope.",
+        "description": "Returns property-level changes that will be made by the deployment if executed.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -1465,11 +1487,13 @@
             "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
-            "name": "deploymentStackWhatIfName",
+            "name": "deploymentStackWhatIfResultName",
             "in": "path",
-            "description": "The name of the DeploymentStackWhatIfResult",
+            "description": "Name of the deployment stack what-if result.",
             "required": true,
             "type": "string",
+            "minLength": 1,
+            "maxLength": 90,
             "pattern": "^[-\\w\\._\\(\\)]+$"
           }
         ],
@@ -2655,7 +2679,8 @@
         "delete",
         "detach",
         "modify",
-        "noChange"
+        "noChange",
+        "unsupported"
       ],
       "x-ms-enum": {
         "name": "DeploymentStackWhatIfChangeType",
@@ -2685,6 +2710,11 @@
             "name": "NoChange",
             "value": "noChange",
             "description": "The resource exists in the current state and the desired state and will be redeployed when the deployment is executed. The properties of the resource will not change."
+          },
+          {
+            "name": "Unsupported",
+            "value": "unsupported",
+            "description": "The resource is not supported by What-If."
           }
         ]
       }

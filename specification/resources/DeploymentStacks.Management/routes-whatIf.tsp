@@ -17,13 +17,13 @@ namespace Microsoft.Resources.DeploymentStacks;
 @added(Versions.v2025_07_01)
 interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Model> {
   /** Gets the Deployment stack with the given name. */
-  getWhatIf is ArmResourceRead<
+  get is ArmResourceRead<
     DeploymentStackWhatIfResult,
     BaseParameters = TBaseParams
   >;
 
   /** Lists Deployment stacks at the specified scope. */
-  listWhatIf is ArmResourceListByParent<
+  list is ArmResourceListByParent<
     DeploymentStackWhatIfResult,
     BaseParameters = TBaseParams
   >;
@@ -42,7 +42,7 @@ interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Mo
     Response = ArmDeletedResponse | ArmDeletedNoContentResponse
   >;
 
-  /** Exports the template used to create the Deployment stack at the specified scope. */
+  /** Returns property-level changes that will be made by the deployment if executed. */
   @action("whatIf")
   whatIf is ArmResourceActionSync<
     DeploymentStackWhatIfResult,
