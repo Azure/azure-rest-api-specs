@@ -6379,13 +6379,13 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/listDeployments": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/enable": {
       "post": {
         "tags": [
           "AgentApplication"
         ],
-        "summary": "Lists deployments for an Agent Application.",
-        "operationId": "AgentApplications_ListDeployments",
+        "summary": "Enables an Agent Application.",
+        "operationId": "AgentApplications_Enable",
         "produces": [
           "application/json"
         ],
@@ -6415,10 +6415,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Success",
-            "schema": {
-              "$ref": "#/definitions/AgentDeploymentResourceArmPaginatedResult"
-            }
+            "description": "OK"
           },
           "default": {
             "description": "Error",
@@ -6428,12 +6425,61 @@
           }
         },
         "x-ms-examples": {
-          "List Deployments for Agent Application.": {
-            "$ref": "./examples/AgentApplication/listDeployments.json"
+          "Enable Agent Application.": {
+            "$ref": "./examples/AgentApplication/enable.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{name}/disable": {
+      "post": {
+        "tags": [
+          "AgentApplication"
+        ],
+        "summary": "Disables an Agent Application.",
+        "operationId": "AgentApplications_Disable",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "in": "path",
+            "name": "name",
+            "description": "Agent Application name.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
           }
         },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
+        "x-ms-examples": {
+          "Disable Agent Application.": {
+            "$ref": "./examples/AgentApplication/disable.json"
+          }
         }
       }
     },
@@ -6714,6 +6760,108 @@
           }
         },
         "x-ms-long-running-operation": true
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}/start": {
+      "post": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Starts an Agent Deployment.",
+        "operationId": "AgentDeployments_Start",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Start Agent Deployment.": {
+            "$ref": "./examples/AgentDeployment/start.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/projects/{projectName}/applications/{appName}/deployments/{deploymentName}/stop": {
+      "post": {
+        "tags": [
+          "AgentDeployment"
+        ],
+        "summary": "Stops an Agent Deployment.",
+        "operationId": "AgentDeployments_Stop",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/projectNameParameter"
+          },
+          {
+            "$ref": "#/parameters/appNameParameter"
+          },
+          {
+            "$ref": "#/parameters/deploymentNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "default": {
+            "description": "Error",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Stop Agent Deployment.": {
+            "$ref": "./examples/AgentDeployment/stop.json"
+          }
+        }
       }
     }
   },
