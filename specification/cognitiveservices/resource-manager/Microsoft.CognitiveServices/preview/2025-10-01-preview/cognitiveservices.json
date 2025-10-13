@@ -3438,6 +3438,206 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiToolLabels/{raiToolConnectionName}": {
+      "get": {
+        "tags": [
+          "RaiToolLabels"
+        ],
+        "operationId": "RaiToolLabels_Get",
+        "description": "Gets the specified RAI Tool Label associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "GetRaiToolLabel": {
+            "$ref": "./examples/GetRaiToolLabel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiToolConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK -- Retrieved RAI Tool Label successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "RaiToolLabels"
+        ],
+        "operationId": "RaiToolLabels_CreateOrUpdate",
+        "description": "Creates the RAI Tool Label associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "PutRaiToolLabel": {
+            "$ref": "./examples/PutRaiToolLabel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiToolConnectionNameParameter"
+          },
+          {
+            "name": "raiToolLabel",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            },
+            "description": "Properties describing the RAI Tool Label."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Created/updated RAI Tool Label successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            }
+          },
+          "201": {
+            "description": "Created/updated RAI Tool Label successfully.",
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabel"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "RaiToolLabels"
+        ],
+        "operationId": "RaiToolLabels_Delete",
+        "description": "Deletes the specified RAI Tool Label associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "DeleteRaiToolLabel": {
+            "$ref": "./examples/DeleteRaiToolLabel.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/raiToolConnectionNameParameter"
+          }
+        ],
+        "responses": {
+          "202": {
+            "description": "Accepted -- delete operation started.",
+            "headers": {
+              "location": {
+                "type": "string"
+              }
+            }
+          },
+          "204": {
+            "description": "No Content -- RAI Tool Label does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.CognitiveServices/accounts/{accountName}/raiToolLabels": {
+      "get": {
+        "tags": [
+          "RaiToolLabels"
+        ],
+        "operationId": "RaiToolLabels_List",
+        "description": "Lists all RAI Tool Labels associated with the Azure OpenAI account.",
+        "x-ms-examples": {
+          "ListRaiToolLabels": {
+            "$ref": "./examples/ListRaiToolLabels.json"
+          }
+        },
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Successfully retrieved RAI Tool Labels.",
+            "schema": {
+              "$ref": "#/definitions/RaiToolLabelResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.CognitiveServices/locations/{location}/raiContentFilters": {
       "get": {
         "tags": [
@@ -10129,10 +10329,29 @@
       "type": "string",
       "enum": [
         "Prompt",
-        "Completion"
+        "Completion",
+        "PreToolCall",
+        "PostToolCall",
+        "PreRun",
+        "PostRun"
       ],
       "x-ms-enum": {
         "name": "RaiPolicyContentSource",
+        "modelAsString": true
+      }
+    },
+    "RaiActionType": {
+      "type": "string",
+      "description": "The action types to apply to the content filters",
+      "enum": [
+        "None",
+        "BLOCKING",
+        "ANNOTATING",
+        "HITL",
+        "RETRY"
+      ],
+      "x-ms-enum": {
+        "name": "RaiActionType",
         "modelAsString": true
       }
     },
@@ -10167,6 +10386,9 @@
         },
         "source": {
           "$ref": "#/definitions/RaiPolicyContentSource"
+        },
+        "action": {
+          "$ref": "#/definitions/RaiActionType"
         }
       }
     },
@@ -10524,6 +10746,111 @@
           "description": "Last modified time of the custom topic."
         }
       }
+    },
+    "RaiToolLabelResult": {
+      "type": "object",
+      "properties": {
+        "nextLink": {
+          "description": "The link used to get the next page of RaiToolLabels.",
+          "type": "string"
+        },
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/RaiToolLabel"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of RAI Tool Labels."
+        }
+      },
+      "description": "The list of Cognitive Services RAI Tool Labels."
+    },
+    "RaiToolLabel": {
+      "description": "Cognitive Services RAI Tool Label resource.",
+      "type": "object",
+      "properties": {
+        "systemData": {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
+          "readOnly": true
+        },
+        "etag": {
+          "type": "string",
+          "readOnly": true,
+          "description": "Resource Etag."
+        },
+        "tags": {
+          "type": "object",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ],
+          "description": "Resource tags."
+        },
+        "properties": {
+          "$ref": "#/definitions/RaiToolLabelProperties",
+          "description": "Properties of the RAI Tool Label."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "RaiToolLabelProperties": {
+      "description": "RAI Tool Label properties.",
+      "type": "object",
+      "properties": {
+        "toolConnectionName": {
+          "type": "string",
+          "description": "The unique tool connection name, e.g., 'Web_Search'."
+        },
+        "accountScope": {
+          "type": "object",
+          "description": "Account-level tool label definition.",
+          "properties": {
+            "labelValues": {
+              "type": "object",
+              "additionalProperties": {
+                "type": "string"
+              },
+              "description": "Dictionary of label key-value pairs for the account scope."
+            }
+          }
+        },
+        "projectScopes": {
+          "type": "array",
+          "description": "List of project-level tool label definitions.",
+          "items": {
+            "type": "object",
+            "properties": {
+              "project": {
+                "type": "string",
+                "description": "Project name to which this scope applies."
+              },
+              "labelValues": {
+                "type": "object",
+                "additionalProperties": {
+                  "type": "string"
+                },
+                "description": "Dictionary of label key-value pairs for the project scope."
+              }
+            },
+            "required": [
+              "project",
+              "labelValues"
+            ]
+          }
+        }
+      },
+      "required": [
+        "toolConnectionName"
+      ]
     },
     "NetworkSecurityPerimeterConfigurationList": {
       "description": "A list of NSP configurations for an Cognitive Services account.",
@@ -13217,6 +13544,15 @@
       "type": "string",
       "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
       "description": "The name of the Rai Topic associated with the Cognitive Services Account",
+      "x-ms-parameter-location": "method"
+    },
+    "raiToolConnectionNameParameter": {
+      "name": "raiToolConnectionName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "pattern": "^[a-zA-Z0-9][a-zA-Z0-9_.-]*$",
+      "description": "The name of the Rai Tool Label",
       "x-ms-parameter-location": "method"
     },
     "safetyProviderNameParameter": {
