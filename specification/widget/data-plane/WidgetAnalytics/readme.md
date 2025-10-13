@@ -14,7 +14,7 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-v1
+tag: package-2022-12-01
 ```
 
 ### Tag: package-v1
