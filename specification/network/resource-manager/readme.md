@@ -4117,10 +4117,10 @@ directive:
     reason: This is a false alarm for a list response. Arm documentation states 'Collection Get calls must only have "value" and "nextLink" as top level properties in its model.'
   - suppress: SystemDataDefinitionsCommonTypes
     from: networkManagerSecurityUserConfiguration.json
-    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
+    reason: All microsoft.network specs reference a separate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: SystemDataDefinitionsCommonTypes
     from: networkManagerRoutingConfiguration.json
-    reason: All microsoft.network specs reference a seperate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
+    reason: All microsoft.network specs reference a separate systemData defined in networking file. If we use the common type, it causes duplicate schema error in dotnet sdk generation.
   - suppress: RequiredPropertiesMissingInResourceModel
     from: applicationGateway.json
     reason: name, id and type properties are inherited from the upper level
