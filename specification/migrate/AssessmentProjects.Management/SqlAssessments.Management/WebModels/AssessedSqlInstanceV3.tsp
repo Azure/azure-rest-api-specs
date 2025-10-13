@@ -49,7 +49,7 @@ model SqlInstanceExtendedDetails {
 
   @doc("Gets the storage details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   storageTypeBasedDetails?: AssessedSqlInstanceStorageDetails[];
 
   @doc("Gets the product support status related details.")
@@ -77,7 +77,7 @@ model SqlInstanceExtendedDetails {
 
   @doc("Gets the list of recommended target reasoning.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   recommendedTargetReasonings?: SqlRecommendationReasoning[];
 
   @doc("SQL instance edition.")
@@ -98,7 +98,7 @@ model SqlInstanceExtendedDetails {
 
   @doc("The logical disk details.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   logicalDisks?: AssessedSqlInstanceDiskDetails[];
 
   @doc("The databases summary.")
