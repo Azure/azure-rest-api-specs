@@ -7,10 +7,7 @@
  * Version: 0.10.9
  * Date: 2025-02-17T04:24:54.141Z
  */
-import "@typespec/rest";
-import "@typespec/versioning";
-import "@azure-tools/typespec-azure-core";
-import "@azure-tools/typespec-azure-resource-manager";
+
 import "./models.tsp";
 import "./MongoSite.tsp";
 import "./MongoInstance.tsp";
