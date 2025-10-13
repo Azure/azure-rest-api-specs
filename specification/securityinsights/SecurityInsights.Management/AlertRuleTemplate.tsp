@@ -10,7 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
-// FIXME: AlertRuleTemplate has no properties property
 /**
  * Alert rule template.
  */

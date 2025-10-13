@@ -10,7 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
-// FIXME: DataConnectorDefinition has no properties property
 /**
  * An Azure resource, which encapsulate the entire info requires to display a data connector page in Azure portal,
  * and the info required to define data connections.

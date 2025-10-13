@@ -10,7 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
-// FIXME: DataConnector has no properties property
 /**
  * Data connector.
  */

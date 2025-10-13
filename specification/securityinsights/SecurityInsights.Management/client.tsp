@@ -12,6 +12,7 @@ using Azure.ClientGenerator.Core;
 @@clientName(ASCDataConnector, "AscDataConnector", "java");
 @@clientName(MDATPDataConnector, "MdatpDataConnector", "java");
 @@clientName(AADDataConnector, "AadDataConnector", "java");
+@@clientName(AATPDataConnector, "AatpDataConnector", "java");
 @@clientName(MCASDataConnectorDataTypes, "McasDataConnectorDataTypes", "java");
 @@clientName(ScheduledAlertRuleTemplateProperties.lastUpdatedDateUTC,
   "lastUpdatedDateUtc",
@@ -29,3 +30,16 @@ using Azure.ClientGenerator.Core;
   "createdDateUtc",
   "java"
 );
+@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.lastUpdatedDateUTC,
+  "lastUpdatedDateUtc",
+  "java"
+);
+@@clientName(MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties.createdDateUTC,
+  "createdDateUtc",
+  "java"
+);
+@@clientName(MailMessageEntityProperties.senderIP, "senderIp", "java");
+@@clientName(HostEntityProperties.omsAgentID, "omsAgentId", "java");
+@@clientName(HostEntityProperties.azureID, "azureId", "java");
+@@clientName(HostEntityProperties.hostName, "hostname", "java");
+@@clientName(IncidentEntitiesResponse.metaData, "metadata", "java");

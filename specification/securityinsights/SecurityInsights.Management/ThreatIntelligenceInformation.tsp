@@ -10,7 +10,6 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
-// FIXME: ThreatIntelligenceInformation has no properties property
 /**
  * Threat intelligence information object.
  */
