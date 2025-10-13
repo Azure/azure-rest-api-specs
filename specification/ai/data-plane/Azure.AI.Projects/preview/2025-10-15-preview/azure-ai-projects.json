@@ -3971,7 +3971,13 @@
       },
       "required": [
         "evalId"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "continuousEvaluation"
     },
     "CosmosDBIndex": {
       "type": "object",
@@ -5699,7 +5705,13 @@
       },
       "required": [
         "templateId"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "humanEvaluation"
     },
     "Index": {
       "type": "object",
