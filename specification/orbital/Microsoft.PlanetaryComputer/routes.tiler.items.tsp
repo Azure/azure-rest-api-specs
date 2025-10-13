@@ -187,17 +187,17 @@ interface TilerStatistics {
 
 interface TilerGeoJsonStatistics {
   /**
-   * Get Statistics from a geojson feature or featureCollection.
+   * Get Statistics from a geojson feature.
    */
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @summary("Geojson Statistics")
   @tag("Tiles for STAC Items")
   @route("/data/collections/{collectionId}/items/{itemId}/statistics")
   @post
-  getAll is Azure.Core.Foundations.Operation<
+  get is Azure.Core.Foundations.Operation<
     {
       ...AssetQueryParameters;
-      ...listGeoJsonStatisticsCustomizedCommonSignatures;
+      ...getGeoJsonStatisticsCustomizedCommonSignatures;
 
       /**
        * Coordinate Reference System of the input coords. Default to `epsg:4326`.
@@ -211,9 +211,9 @@ interface TilerGeoJsonStatistics {
        * Request GeoJson body
        */
       @body
-      body: FeatureCollection;
+      body: Feature;
     },
-    GeoJsonStatisticsForStacItemCollection
+    StacItemStatisticsGeoJson
   >;
 }
 
@@ -605,7 +605,7 @@ alias cropGeoJsonWithDimensionsCustomizedCommonSignatures = {
   format: string;
 };
 
-alias listGeoJsonStatisticsCustomizedCommonSignatures = {
+alias getGeoJsonStatisticsCustomizedCommonSignatures = {
   /**
    * STAC Collection Identifier
    */

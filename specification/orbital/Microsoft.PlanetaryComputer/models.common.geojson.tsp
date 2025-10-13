@@ -51,7 +51,6 @@ model Feature {
    */
   type: FeatureType;
 
-
   /**
    * Feature properties
    */

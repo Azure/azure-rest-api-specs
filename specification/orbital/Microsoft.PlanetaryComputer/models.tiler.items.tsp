@@ -512,78 +512,9 @@ model WmtsCapabilities {
 }
 
 /**
- *
- * https://github.com/radiantearth/stac-spec/blob/v1.0.0/item-spec/itemcollection-spec.md
- */
-/**
- * Collection of STAC items with statistical information
- */
-model GeoJsonStatisticsForStacItemCollection {
-  /**
-   * GeoJSON type identifier for StacItemCollection
-   */
-  type: StacItemCollectionType;
-
-  /**
-   * Array of STAC items with statistics
-   */
-  features: GeoJsonStatisticsItemResponse[];
-
-  /**
-   * Bounding box coordinates [west, south, east, north]
-   */
-  @encodedName("application/json", "bbox")
-  boundingBox?: float32[];
-
-  /**
-   * Stac Version
-   */
-  @minLength(1)
-  @encodedName("application/json", "stac_version")
-  stacVersion?: string = "1.0.0";
-
-  /**
-   * MSFT Created
-   */
-  @encodedName("application/json", "msft:_created")
-  createdOn?: string;
-
-  /**
-   * MSFT Updated
-   */
-  @encodedName("application/json", "msft:_updated")
-  updatedOn?: string;
-
-  /**
-   * MSFT Short Description
-   */
-  @maxLength(300)
-  @encodedName("application/json", "short_description")
-  shortDescription?: string;
-
-  /**
-   * List of STAC extension URLs used by this item collection
-   */
-  @encodedName("application/json", "stac_extensions")
-  stacExtensions?: url[];
-
-  /**
-   * Related links for the item collection
-   */
-  links?: StacLink[];
-
-  /**
-   * Pagination context for the response
-   *
-   * See the [STAC Context Extension](https://github.com/radiantearth/stac-api-spec/tree/master/extensions/context#context-extension-specification)
-   */
-  context?: StacContextExtension;
-}
-
-/**
  * STAC Item representing a spatiotemporal asset with statistical information
  */
-model GeoJsonStatisticsItemResponse {
+model StacItemStatisticsGeoJson {
   ...Feature;
   ...StacMicrosoftProperties;
 

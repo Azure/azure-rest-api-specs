@@ -38,10 +38,6 @@ namespace Customizations;
 @@alternateType(RegisterMosaic.filter, string, "csharp,java");
 
 // Address naming convention violations for C# SDK
-@@clientName(GeoJsonStatisticsItemResponse,
-  "GeoJsonStatisticsItemResult",
-  "csharp"
-);
 @@clientName(InfoOperationResponse, "InfoOperationResult", "csharp");
 @@clientName(TilerMosaicSearchRegistrationResponse,
   "TilerMosaicSearchRegistrationResult",
@@ -216,7 +212,7 @@ interface Tiler {
 
   // Statistics
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listGeoJsonStatistics is TilerGeoJsonStatistics.getAll;
+  getGeoJsonStatistics is TilerGeoJsonStatistics.get;
 
   // Basic Info and Assets
   getInfoGeoJson is TilerInfoGeoJsonOperations.get;

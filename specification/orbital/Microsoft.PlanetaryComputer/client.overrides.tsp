@@ -569,8 +569,8 @@ op cropGeoJsonWithDimensionsCustomized(
  * Get Statistics from a geojson feature or featureCollection with grouped parameters.
  */
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op listGeoJsonStatisticsCustomized(
-  ...listGeoJsonStatisticsCustomizedCommonSignatures,
+op getGeoJsonStatisticsCustomized(
+  ...getGeoJsonStatisticsCustomizedCommonSignatures,
 
   /**
    * API version
@@ -586,11 +586,11 @@ op listGeoJsonStatisticsCustomized(
    * Request GeoJson body
    */
   @body
-  body: FeatureCollection,
-): GeoJsonStatisticsForStacItemCollection;
+  body: Feature,
+): StacItemStatisticsGeoJson;
 
-@@override(TilerGeoJsonStatistics.getAll,
-  listGeoJsonStatisticsCustomized,
+@@override(TilerGeoJsonStatistics.get,
+  getGeoJsonStatisticsCustomized,
   "!python,!csharp"
 );
 
