@@ -8314,7 +8314,7 @@
           "200": {
             "description": "Successful Response",
             "schema": {
-              "$ref": "#/definitions/SignedLink"
+              "$ref": "#/definitions/SharedAccessSignatureSignedLink"
             }
           },
           "default": {
@@ -12477,24 +12477,6 @@
         "coordinates"
       ]
     },
-    "FeaturePolygonDictStrRioTilerModelsInfoType": {
-      "type": "string",
-      "description": "Type identifying Feature Polygon objects containing rio-tiler model information",
-      "enum": [
-        "Feature"
-      ],
-      "x-ms-enum": {
-        "name": "FeaturePolygonDictStrRioTilerModelsInfoType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "Feature",
-            "value": "Feature",
-            "description": "Standard GeoJSON Feature type identifier"
-          }
-        ]
-      }
-    },
     "FeatureType": {
       "type": "string",
       "description": "Type identifier for GeoJSON Feature objects",
@@ -13125,27 +13107,6 @@
           }
         ]
       }
-    },
-    "IngestionSourcesPagedResponse": {
-      "type": "object",
-      "description": "Ingestion Sources paged response",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "Ingestion sources",
-          "items": {
-            "$ref": "#/definitions/IngestionSourceSummary"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "Next page"
-        }
-      },
-      "required": [
-        "value"
-      ]
     },
     "IngestionStatus": {
       "type": "string",
@@ -14207,6 +14168,40 @@
         }
       }
     },
+    "SharedAccessSignatureSignedHrefResponse": {
+      "type": "object",
+      "description": "Successful Response",
+      "properties": {
+        "body": {
+          "$ref": "#/definitions/SharedAccessSignatureSignedLink",
+          "title": "Response Signed Href Api Sign Get",
+          "description": "Response body"
+        }
+      }
+    },
+    "SharedAccessSignatureSignedLink": {
+      "type": "object",
+      "title": "UnsignedLink",
+      "description": "Represents a link that has not been signed with a SAS token.\nThe expiry field will be null for unsigned links.",
+      "properties": {
+        "msft:expiry": {
+          "type": "string",
+          "format": "date-time",
+          "title": "Msft:Expiry",
+          "description": "The expiry date of the signed link. This indicates when the link will no longer be valid.",
+          "x-ms-client-name": "expiresOn"
+        },
+        "href": {
+          "type": "string",
+          "format": "uri",
+          "title": "Href",
+          "description": "The URL of the unsigned link."
+        }
+      },
+      "required": [
+        "href"
+      ]
+    },
     "SharedAccessSignatureToken": {
       "type": "object",
       "title": "Managed Storage Shared Access Signature (SAS) Token",
@@ -14280,38 +14275,17 @@
       ],
       "x-ms-discriminator-value": "SasToken"
     },
-    "SignedHrefResponse": {
+    "SharedAccessSignatureTokenResponse": {
       "type": "object",
       "description": "Successful Response",
       "properties": {
         "body": {
-          "$ref": "#/definitions/SignedLink",
-          "title": "Response Signed Href Api Sign Get",
+          "$ref": "#/definitions/SharedAccessSignatureToken",
           "description": "Response body"
-        }
-      }
-    },
-    "SignedLink": {
-      "type": "object",
-      "title": "UnsignedLink",
-      "description": "Represents a link that has not been signed with a SAS token.\nThe expiry field will be null for unsigned links.",
-      "properties": {
-        "msft:expiry": {
-          "type": "string",
-          "format": "date-time",
-          "title": "Msft:Expiry",
-          "description": "The expiry date of the signed link. This indicates when the link will no longer be valid.",
-          "x-ms-client-name": "expiresOn"
-        },
-        "href": {
-          "type": "string",
-          "format": "uri",
-          "title": "Href",
-          "description": "The URL of the unsigned link."
         }
       },
       "required": [
-        "href"
+        "body"
       ]
     },
     "StacAsset": {
@@ -16474,30 +16448,6 @@
         "band_names"
       ]
     },
-    "TilerImageExportFormat": {
-      "type": "string",
-      "description": "Format specification for image request outputs",
-      "enum": [
-        "png",
-        "cog"
-      ],
-      "x-ms-enum": {
-        "name": "TilerImageExportFormat",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "png",
-            "value": "png",
-            "description": "Portable Network Graphics format"
-          },
-          {
-            "name": "cog",
-            "value": "cog",
-            "description": "Cloud Optimized GeoTIFF format"
-          }
-        ]
-      }
-    },
     "TilerImageFormat": {
       "type": "string",
       "description": "Image format specifier for tile and image requests",
@@ -16822,19 +16772,6 @@
       },
       "required": [
         "search"
-      ]
-    },
-    "TokenResponse": {
-      "type": "object",
-      "description": "Successful Response",
-      "properties": {
-        "body": {
-          "$ref": "#/definitions/SharedAccessSignatureToken",
-          "description": "Response body"
-        }
-      },
-      "required": [
-        "body"
       ]
     },
     "UserCollectionSettings": {

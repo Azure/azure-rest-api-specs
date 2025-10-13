@@ -8,18 +8,6 @@ using TypeSpec.Http;
 namespace Microsoft.PlanetaryComputer;
 
 /**
- * Type identifying Feature Polygon objects containing rio-tiler model information
- */
-union FeaturePolygonDictStrRioTilerModelsInfoType {
-  string,
-
-  /**
-   * Standard GeoJSON Feature type identifier
-   */
-  Feature: "Feature",
-}
-
-/**
  * Resampling algorithm to use when reading source raster data at different resolutions
  */
 union Resampling {

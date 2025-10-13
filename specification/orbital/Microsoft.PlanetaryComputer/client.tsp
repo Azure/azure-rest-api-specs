@@ -48,10 +48,6 @@ namespace Customizations;
   "csharp"
 );
 @@clientName(StatisticsResponse, "StatisticsResult", "csharp");
-@@clientName(IngestionSourcesPagedResponse,
-  "IngestionSourcesPagedResult",
-  "csharp"
-);
 
 // Models ending with "Request" - rename to "Content"
 @@clientName(ImageRequest, "ImageContent", "csharp");

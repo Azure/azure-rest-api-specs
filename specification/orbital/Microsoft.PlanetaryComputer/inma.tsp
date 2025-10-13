@@ -610,15 +610,6 @@ interface IngestionSources {
   ): Page<ManagedIdentityMetadata> | ErrorResponse;
 }
 
-@doc("Ingestion Sources paged response")
-model IngestionSourcesPagedResponse {
-  @doc("Ingestion sources")
-  value: IngestionSourceSummary[];
-
-  @doc("Next page")
-  nextLink?: url;
-}
-
 @doc("Ingestion source summary")
 model IngestionSourceSummary {
   @doc("Ingestion source id")

@@ -32,7 +32,7 @@ model SharedAccessSignatureToken {
  * The expiry field will be null for unsigned links.
  */
 @summary("UnsignedLink")
-model SignedLink {
+model SharedAccessSignatureSignedLink {
   /**
    * The expiry date of the signed link. This indicates when the link will no longer be valid.
    */
@@ -49,7 +49,7 @@ model SignedLink {
 /**
  * Successful Response
  */
-model TokenResponse {
+model SharedAccessSignatureTokenResponse {
   /**
    * Status code
    */
@@ -65,7 +65,7 @@ model TokenResponse {
 /**
  * Successful Response
  */
-model SignedHrefResponse {
+model SharedAccessSignatureSignedHrefResponse {
   /**
    * Status code
    */
@@ -77,7 +77,7 @@ model SignedHrefResponse {
    */
   @summary("Response Signed Href Api Sign Get")
   @body
-  body?: SignedLink;
+  body?: SharedAccessSignatureSignedLink;
 }
 
 interface Sas {
@@ -110,7 +110,7 @@ interface Sas {
     @summary("Duration")
     @query("duration")
     durationInMinutes?: int32,
-  ): TokenResponse | ErrorResponse;
+  ): SharedAccessSignatureTokenResponse | ErrorResponse;
 
   /**
    * Revoke a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)
@@ -163,5 +163,5 @@ interface Sas {
     @summary("Duration")
     @query("duration")
     durationInMinutes?: int32,
-  ): SignedHrefResponse | ErrorResponse;
+  ): SharedAccessSignatureSignedHrefResponse | ErrorResponse;
 }
