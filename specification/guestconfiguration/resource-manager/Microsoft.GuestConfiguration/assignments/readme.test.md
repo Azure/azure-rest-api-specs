@@ -4,5 +4,5 @@ These settings apply only when `--tag=package-2022-01-25` is specified on the co
 
 ```yaml $(tag) == 'package-2022-01-25'
 test-resources:
-  - Microsoft.GuestConfiguration/stable/2022-01-25/scenarios/GuestAssignmentTests.yaml
+  - stable/2022-01-25/scenarios/GuestAssignmentTests.yaml
 ```
