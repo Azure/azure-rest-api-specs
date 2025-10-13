@@ -683,6 +683,9 @@
         },
         "userEngagementTracking": {
           "$ref": "#/definitions/UserEngagementTracking"
+        },
+        "allowAnySenderUsername": {
+          "$ref": "#/definitions/AllowAnySenderUsername"
         }
       }
     },
@@ -711,6 +714,18 @@
         "modelAsString": true
       }
     },
+    "AllowAnySenderUsername": {
+      "description": "If enabled, any sender username can be used to send an email from this domain.",
+      "enum": [
+        "Disabled",
+        "Enabled"
+      ],
+      "type": "string",
+      "x-ms-enum": {
+        "name": "AllowAnySenderUsername",
+        "modelAsString": true
+      }
+    },
     "DomainResource": {
       "description": "A class representing a Domains resource.",
       "type": "object",
@@ -733,6 +748,9 @@
       "properties": {
         "userEngagementTracking": {
           "$ref": "#/definitions/UserEngagementTracking"
+        },
+        "allowAnySenderUsername": {
+          "$ref": "#/definitions/AllowAnySenderUsername"
         }
       }
     },
