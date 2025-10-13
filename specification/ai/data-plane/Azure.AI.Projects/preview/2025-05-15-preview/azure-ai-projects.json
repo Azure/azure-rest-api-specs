@@ -3630,6 +3630,77 @@
         ]
       }
     },
+    "EvaluationUpload": {
+      "type": "object",
+      "description": "Upload a local SDK evaluation run. Currently update supports status, outputs, properties, and tags updates.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Identifier of the evaluation.",
+          "readOnly": true
+        },
+        "data": {
+          "$ref": "#/definitions/InputData",
+          "description": "Data for evaluation."
+        },
+        "target": {
+          "$ref": "#/definitions/EvaluationTarget",
+          "description": "Evaluation target specifying the model config and parameters",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
+        },
+        "systemData": {
+          "$ref": "#/definitions/SystemData",
+          "description": "Metadata containing createdBy and modifiedBy information.",
+          "readOnly": true
+        },
+        "status": {
+          "type": "string",
+          "description": "Status of the evaluation. For upload: Failed or Completed."
+        },
+        "tags": {
+          "type": "object",
+          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "properties": {
+          "type": "object",
+          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
+          "additionalProperties": {
+            "type": "string"
+          }
+        },
+        "evaluators": {
+          "type": "object",
+          "description": "Evaluators to be used for the evaluation.",
+          "additionalProperties": {
+            "$ref": "#/definitions/EvaluatorConfiguration"
+          }
+        },
+        "outputs": {
+          "type": "object",
+          "description": "Outputs of the evaluation as a dictionary of IDs. Example: { 'evaluationResultId': 'azureai://accounts/{AccountName}/projects/{myproject}/evaluationresults/{name}/versions/{version}'}",
+          "additionalProperties": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "id"
+      ]
+    },
     "EvaluatorConfiguration": {
       "type": "object",
       "description": "Evaluator Configuration",
