@@ -965,7 +965,7 @@ model ServerEventResponseAudioDelta extends ServerEvent {
 
   // Tool customization: use encoded type for audio data
   /** Base64-encoded audio data delta. */
-  @encode("base64")
+  // @encode(BytesKnownEncoding.base64)
   delta: bytes;
 }
 
