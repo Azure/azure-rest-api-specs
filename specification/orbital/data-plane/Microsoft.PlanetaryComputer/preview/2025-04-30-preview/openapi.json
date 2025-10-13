@@ -12488,6 +12488,12 @@
         "type": {
           "$ref": "#/definitions/FeatureType",
           "description": "GeoJSON type identifier for Feature"
+        },
+        "properties": {
+          "type": "object",
+          "description": "Feature properties",
+          "default": {},
+          "additionalProperties": {}
         }
       },
       "required": [
@@ -12676,6 +12682,12 @@
           "$ref": "#/definitions/FeatureType",
           "description": "GeoJSON type identifier for Feature"
         },
+        "properties": {
+          "type": "object",
+          "description": "Feature properties",
+          "default": {},
+          "additionalProperties": {}
+        },
         "msft:_created": {
           "type": "string",
           "description": "MSFT Created",
@@ -12716,10 +12728,6 @@
           "type": "string",
           "description": "ID of the STAC collection this item belongs to"
         },
-        "properties": {
-          "$ref": "#/definitions/StacItemProperties",
-          "description": "Properties"
-        },
         "_msft:ts": {
           "type": "string",
           "description": "MSFT Timestamp",
@@ -12744,8 +12752,7 @@
         "geometry",
         "type",
         "id",
-        "bbox",
-        "properties"
+        "bbox"
       ]
     },
     "Geometry": {

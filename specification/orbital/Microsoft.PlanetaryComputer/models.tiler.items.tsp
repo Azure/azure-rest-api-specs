@@ -611,12 +611,6 @@ model GeoJsonStatisticsItemResponse {
   collection?: string;
 
   /**
-   * Properties
-   */
-  #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
-  properties: StacItemProperties;
-
-  /**
    * MSFT Timestamp
    */
   @encodedName("application/json", "_msft:ts")

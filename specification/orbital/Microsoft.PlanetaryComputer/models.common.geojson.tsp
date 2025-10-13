@@ -50,6 +50,13 @@ model Feature {
    * GeoJSON type identifier for Feature
    */
   type: FeatureType;
+
+
+  /**
+   * Feature properties
+   */
+  #suppress "@azure-tools/typespec-azure-core/bad-record-type" "Properties are user-provided"
+  properties?: Record<unknown> = #{};
 }
 
 /**
