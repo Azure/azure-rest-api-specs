@@ -91,9 +91,8 @@ interface QuestionAnsweringProjects {
       /**
        * Knowledge base Import or Export format.
        */
-  @query("format")
-  @clientName("file_format", "python")
-  format?: format = format.json;
+    @query("format")
+      format?: format = format.json;
 
       /**
        * Kind of the asset of the project.
@@ -134,9 +133,8 @@ interface QuestionAnsweringProjects {
       /**
        * Knowledge base Import or Export format.
        */
-  @query("format")
-  @clientName("file_format", "python")
-  format?: format = format.json;
+    @query("format")
+      format?: format = format.json;
 
       /**
        * Kind of the asset of the project.
@@ -245,8 +243,8 @@ interface QuestionAnsweringProjects {
   /**
    * Gets all the synonyms of a project.
    */
-  @renamedFrom(Versions.v2023_04_01, "getSynonyms")
-  listSynonyms is LanguageOperations.ResourceList<
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GA'd method"
+  getSynonyms is LanguageOperations.ResourceList<
     WordAlterations,
     ListSynonymsQueryParams
   >;
@@ -281,8 +279,8 @@ interface QuestionAnsweringProjects {
   /**
    * Gets all the sources of a project.
    */
-  @renamedFrom(Versions.v2023_04_01, "getSources")
-  listSources is LanguageOperations.ResourceList<
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GA'd method"
+  getSources is LanguageOperations.ResourceList<
     QnaSourceRecord,
     ListSourcesQueryParams
   >;
@@ -361,8 +359,8 @@ interface QuestionAnsweringProjects {
   /**
    * Gets all the QnAs of a project.
    */
-  @renamedFrom(Versions.v2023_04_01, "getQnas")
-  listQnas is LanguageOperations.ResourceList<
+  #suppress "@azure-tools/typespec-azure-core/use-standard-names" "GA'd method"
+  getQnas is LanguageOperations.ResourceList<
     RetrieveQnaRecord,
     ListQnaQueryParams
   >;
