@@ -91,10 +91,6 @@ using Microsoft.DocumentDB;
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(CassandraViewCreateUpdateParameters.properties);
 
-@@clientName(CommandPostBody.`cassandra-stop-start`, "cassandraStopStart");
-
-@@clientName(CommandAsyncPostBody.`cassandra-stop-start`, "cassandraStopStart");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(MongoRoleDefinitionCreateUpdateParameters.properties);
 

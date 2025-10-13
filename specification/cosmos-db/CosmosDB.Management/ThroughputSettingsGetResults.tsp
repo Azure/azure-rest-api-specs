@@ -835,6 +835,7 @@ alias GremlinResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
   }
 >;
 #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
 @armResourceOperations
 interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   /**

@@ -45,6 +45,7 @@ interface FleetspaceResources {
    * Update the properties of an existing Azure Cosmos DB fleetspace under a fleet.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "non-standard operations"
   @operationId("Fleetspace_Update")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<

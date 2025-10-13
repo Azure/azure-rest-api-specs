@@ -14,6 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB storedProcedure.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
 @parentResource(SqlContainerGetResults)
 model SqlStoredProcedureGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlStoredProcedureGetProperties> {

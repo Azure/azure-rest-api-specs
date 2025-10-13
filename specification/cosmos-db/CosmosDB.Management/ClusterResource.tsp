@@ -96,6 +96,7 @@ interface ClusterResources {
   /**
    * Invoke a command like nodetool for cassandra maintenance
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("CassandraClusters_InvokeCommand")
   invokeCommand is ArmResourceActionAsyncBase<

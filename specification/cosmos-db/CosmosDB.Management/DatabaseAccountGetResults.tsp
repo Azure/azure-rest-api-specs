@@ -32,7 +32,7 @@ model DatabaseAccountGetResults
    * Indicates the type of database account. This can only be set at database account creation.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
-  kind?: DatabaseAccountKind;
+  kind?: DatabaseAccountKind = DatabaseAccountKind.GlobalDocumentDB;
 }
 
 @armResourceOperations
@@ -88,6 +88,7 @@ interface DatabaseAccounts {
   /**
    * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   failoverPriorityChange is ArmResourceActionAsyncBase<
     DatabaseAccountGetResults,
     Request = FailoverPolicies,

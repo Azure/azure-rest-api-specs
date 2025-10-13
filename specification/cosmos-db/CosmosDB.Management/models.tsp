@@ -11,8 +11,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
-model NetworkSecurityPerimeterConfigurationProperties {}
+model ThroughputPoolsListResult is ResourceListResult<ThroughputPoolResource>;
 
 /**
  * The type of identity that created the resource.
@@ -1080,6 +1079,7 @@ model CopyJobProperties {
   /**
    * Worker count
    */
+  @minValue(0)
   workerCount?: int32;
 
   /**
@@ -1154,7 +1154,9 @@ model ARMProxyResource {
 /**
  * An error response from the service.
  */
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @error
+@Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
   /**
    * Error Response.
@@ -1427,6 +1429,7 @@ model IpAddressOrRange {
   /**
    * A single IPv4 address or a single IPv4 address range in CIDR format. Provided IPs must be well-formatted and cannot be contained in one of the following ranges: 10.0.0.0/8, 100.64.0.0/10, 172.16.0.0/12, 192.168.0.0/16, since these are not enforceable by the IP address filter. Example of valid inputs: “23.40.210.245” or “23.40.210.0/8”.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   ipAddressOrRange?: string;
 }
 
@@ -1494,6 +1497,7 @@ model Location {
   /**
    * The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
    */
+  @minValue(0)
   failoverPriority?: int32;
 
   /**
@@ -1520,6 +1524,7 @@ model FailoverPolicy {
   /**
    * The failover priority of the region. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
    */
+  @minValue(0)
   failoverPriority?: int32;
 }
 
@@ -2209,7 +2214,10 @@ model DatabaseAccountCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Indicates the type of database account. This can only be set at database account creation.
    */
-  kind?: DatabaseAccountKind;
+  kind?: DatabaseAccountKind = DatabaseAccountKind.GlobalDocumentDB;
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  identity?: ManagedServiceIdentity;
 
   /**
    * Properties to create and update Azure Cosmos DB database accounts.
@@ -2232,7 +2240,7 @@ model DatabaseAccountCreateUpdateProperties {
   locations: Location[];
 
   /**
-   * The offer type for the database
+   * The offer type for the Cosmos DB database account.
    */
   databaseAccountOfferType: "Standard";
 
@@ -2427,7 +2435,7 @@ model FailoverPolicies {
   /**
    * List of failover policies.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   @OpenAPI.extension("x-ms-identifiers", #[])
   failoverPolicies: FailoverPolicy[];
 }
@@ -3961,6 +3969,7 @@ model PhysicalPartitionStorageInfoCollection {
   /**
    * List of physical partitions and their properties.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   @visibility(Lifecycle.Read)
   physicalPartitionStorageInfoCollection?: PhysicalPartitionStorageInfo[];
 }
@@ -5244,6 +5253,7 @@ model DataTransferJobProperties {
   /**
    * Worker count
    */
+  @minValue(0)
   workerCount?: int32;
 
   /**
@@ -5296,6 +5306,7 @@ model ClusterResourceProperties {
   /**
    * The status of the resource at the time the operation was called.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ManagedCassandraProvisioningState;
 
   /**
@@ -5600,6 +5611,7 @@ model CommandOutput {
   /**
    * Output of the command.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   commandOutput?: string;
 }
 
@@ -5615,6 +5627,7 @@ model CommandAsyncPostBody {
   /**
    * The arguments for the command to be run
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   arguments?: unknown;
 
   /**
@@ -5651,6 +5664,7 @@ model CommandPublicResource {
   /**
    * The arguments for the command to be run
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   arguments?: unknown;
 
   /**
@@ -5767,6 +5781,7 @@ model DataCenterResourceProperties {
   /**
    * The status of the resource at the time the operation was called.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: ManagedCassandraProvisioningState;
 
   /**
@@ -6098,6 +6113,7 @@ model MongoRoleDefinitionResource {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type?: MongoRoleDefinitionType;
 
   /**
@@ -6160,6 +6176,7 @@ model Role {
   /**
    * The role name.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   role?: string;
 }
 
@@ -6367,6 +6384,7 @@ model SqlRoleDefinitionResource {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type?: RoleDefinitionType;
 
   /**
@@ -7565,6 +7583,7 @@ model TableRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   id?: string;
 
   /**
@@ -7575,6 +7594,7 @@ model TableRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type?: RoleDefinitionType;
 
   /**
@@ -7642,6 +7662,7 @@ model ThroughputPoolProperties {
   /**
    * A provisioning state of the ThroughputPool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
   provisioningState?: Status;
 
   /**
@@ -7653,6 +7674,7 @@ model ThroughputPoolProperties {
 /**
  * Represents a throughput pool resource for updates.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model ThroughputPoolUpdate {
   /**
    * Properties of the throughput pool.
@@ -7667,6 +7689,7 @@ model ThroughputPoolAccountProperties {
   /**
    * A provisioning state of the ThroughputPool Account.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: Status;
 
   /**
@@ -7694,6 +7717,7 @@ model CassandraRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   id?: string;
 
   /**
@@ -7704,6 +7728,7 @@ model CassandraRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type?: RoleDefinitionType;
 
   /**
@@ -7773,6 +7798,7 @@ model MongoMIRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   id?: string;
 
   /**
@@ -7783,6 +7809,7 @@ model MongoMIRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type?: RoleDefinitionType;
 
   /**
@@ -7852,6 +7879,7 @@ model GremlinRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   id?: string;
 
   /**
@@ -7862,6 +7890,7 @@ model GremlinRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   type?: RoleDefinitionType;
 
   /**
@@ -7929,6 +7958,7 @@ model FleetResourceProperties {
   /**
    * A provisioning state of the Fleet.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: Status;
 }
 
@@ -8031,6 +8061,7 @@ model ErrorDetailAutoGenerated {
 /**
  * Represents a fleet resource for updates.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
 model FleetResourceUpdate {
   /**
    * Properties to update Azure Cosmos DB fleet resource.
@@ -8043,6 +8074,7 @@ model FleetAnalyticsProperties {
   /**
    * A provisioning state of the FleetAnalytics.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: Status;
 
   /**
@@ -8070,6 +8102,7 @@ model FleetspaceProperties {
   /**
    * A provisioning state of the Fleetspace.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: Status;
 
   /**
@@ -8125,6 +8158,7 @@ model FleetspaceAccountProperties {
   /**
    * A provisioning state of the Fleetspace Account.
    */
+  @visibility(Lifecycle.Read)
   provisioningState?: Status;
 
   /**
@@ -8546,11 +8580,13 @@ model PeriodicModeProperties {
   /**
    * An integer representing the interval in minutes between two backups
    */
+  @minValue(0)
   backupIntervalInMinutes?: int32;
 
   /**
    * An integer representing the time (in hours) that each backup is retained
    */
+  @minValue(0)
   backupRetentionIntervalInHours?: int32;
 
   /**
@@ -8587,8 +8623,7 @@ model ContinuousModeProperties {
 /**
  * A base CosmosDB data source/sink
  */
-@discriminator("component")
-model BaseCosmosDataTransferDataSourceSink extends DataTransferDataSourceSink {
+model BaseCosmosDataTransferDataSourceSink is DataTransferDataSourceSink {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   remoteAccountName?: string;
 }

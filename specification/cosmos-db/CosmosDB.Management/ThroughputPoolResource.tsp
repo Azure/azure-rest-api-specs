@@ -45,6 +45,7 @@ interface ThroughputPoolResources {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThroughputPool_Update")
   @patch(#{ implicitOptionality: false })
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     ThroughputPoolResource,
     PatchModel = ThroughputPoolUpdate,
@@ -68,14 +69,20 @@ interface ThroughputPoolResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThroughputPools_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<ThroughputPoolResource>;
+  listByResourceGroup is ArmResourceListByParent<
+    ThroughputPoolResource,
+    Response = ArmResponse<ThroughputPoolsListResult>
+  >;
 
   /**
    * Lists all the Azure Cosmos DB Throughput Pools available under the subscription.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThroughputPools_List")
-  list is ArmListBySubscription<ThroughputPoolResource>;
+  list is ArmListBySubscription<
+    ThroughputPoolResource,
+    Response = ArmResponse<ThroughputPoolsListResult>
+  >;
 }
 
 @@maxLength(ThroughputPoolResource.name, 50);
