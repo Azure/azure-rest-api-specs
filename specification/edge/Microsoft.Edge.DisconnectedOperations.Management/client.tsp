@@ -6,7 +6,15 @@ using Azure.ClientGenerator.Core;
 using Azure.ResourceManager;
 using Microsoft.Edge;
 
+@@clientName(Microsoft.Edge,
+  "DisconnectedOperationsManagementClient",
+  "javascript"
+);
 @@clientName(Microsoft.Edge, "DisconnectedOperationsMgmt", "python");
+@@clientName(Microsoft.Edge.Versions.v2025_06_01,
+  "V20250601Preview",
+  "javascript"
+);
 
 @@clientName(Artifact, "DisconnectedOperationsArtifact", "csharp");
 @@clientName(Image, "DisconnectedOperationsImage", "csharp");
