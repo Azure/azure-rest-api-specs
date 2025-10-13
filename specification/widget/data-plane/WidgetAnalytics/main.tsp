@@ -21,6 +21,9 @@ enum Versions {
 
   @doc("The 2022-12-01 version.")
   v2022_12_01: "2022-12-01",
+
+  @doc("The v1 version.")
+  v1: "v1",
 }
 
 @doc("A widget.")
