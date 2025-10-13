@@ -59,12 +59,40 @@
               "id": "/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.Storage/storageAccounts/myStorageAccount",
               "status": "managed",
               "denyStatus": "denyDelete"
+            },
+            {
+              "extension": {
+                "name": "Contoso",
+                "version": "2.0.0",
+                "configId": "ExtensionGeneratedConfigIdHereWithAnyFormat"
+              },
+              "type": "Contoso/example@v1",
+              "identifiers": {
+                "id": "example1"
+              },
+              "status": "managed",
+              "denyStatus": "notSupported"
             }
           ],
           "outputs": {
             "myOut": "myVal"
           },
-          "duration": "PT1D12H"
+          "duration": "PT1D12H",
+          "deploymentExtensions": [
+            {
+              "name": "Contoso",
+              "version": "2.0.0",
+              "configId": "ExtensionGeneratedConfigIdHereWithAnyFormat",
+              "config": {
+                "configOne": {
+                  "value": "config1Value"
+                },
+                "configTwo": {
+                  "value": true
+                }
+              }
+            }
+          ]
         }
       }
     }
