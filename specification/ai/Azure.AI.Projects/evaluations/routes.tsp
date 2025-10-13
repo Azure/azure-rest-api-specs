@@ -152,4 +152,48 @@ interface Evaluations {
       operationResults: Record<unknown>[];
     }
   >;
+
+  // Upload API set
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Upload the result to an evaluation run.")
+  @route("runs:upload")
+  @post
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  UploadRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Evaluation to upload.")
+      @Http.bodyRoot
+      evaluation: EvaluationUpload;
+    },
+    Evaluation
+  >;
+
+  #suppress "@typespec/http/patch-implicit-optional" ""
+  #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
+  @doc("Update the uploaded the result to an evaluation run.")
+  @route("runs:updateUpload/{name}")
+  @patch
+  @useAuth(BearerAuth)
+  @added(Versions.v2025_05_15_preview)
+  UploadUpdateRun is Azure.Core.Foundations.Operation<
+    {
+      @doc("Client request ID header")
+      @header("x-ms-client-request-id")
+      clientRequestId?: uuid;
+
+      @doc("Name of the evaluation run to update.")
+      @path
+      name: string;
+
+      @doc("Evaluation upload to update.")
+      @Http.bodyRoot
+      evaluation: EvaluationUpload;
+    },
+    Evaluation
+  >;
 }
