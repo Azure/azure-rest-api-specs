@@ -699,6 +699,45 @@
         }
       ]
     },
+    "AcsChatRetentionPolicyKind": {
+      "type": "string",
+      "description": "The chat retention policy type.",
+      "enum": [
+        "None",
+        "ThreadCreationDate"
+      ],
+      "x-ms-enum": {
+        "name": "AcsChatRetentionPolicyKind",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "None",
+            "value": "None",
+            "description": "None"
+          },
+          {
+            "name": "ThreadCreationDate",
+            "value": "ThreadCreationDate",
+            "description": "Thread Creation Date"
+          }
+        ]
+      }
+    },
+    "AcsChatRetentionPolicyModel": {
+      "type": "object",
+      "description": "The Acs Chat retention policy model",
+      "properties": {
+        "kind": {
+          "$ref": "#/definitions/AcsChatRetentionPolicyKind",
+          "description": "The chat retention policy type."
+        },
+        "deleteThreadAfterDays": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Specifies when the chat should be deleted."
+        }
+      }
+    },
     "AcsChatThreadCreatedEventData": {
       "type": "object",
       "description": "Schema of the Data property of an EventGridEvent for a Microsoft.Communication.ChatThreadCreated event.",
@@ -726,7 +765,12 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicyModel",
+          "description": "The chat retention policy"
         }
       },
       "required": [
@@ -767,7 +811,12 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicyModel",
+          "description": "The chat retention policy"
         }
       },
       "required": [
@@ -793,6 +842,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The deletion time of the thread"
+        },
+        "reason": {
+          "$ref": "#/definitions/AcsChatThreadDeletedReasonType",
+          "description": "The deleteion reason of the thread"
         }
       },
       "required": [
@@ -803,6 +856,30 @@
           "$ref": "#/definitions/AcsChatThreadEventInThreadBaseProperties"
         }
       ]
+    },
+    "AcsChatThreadDeletedReasonType": {
+      "type": "string",
+      "description": "The deletion reason of the chat.",
+      "enum": [
+        "DeletedByUser",
+        "DeletedByPolicy"
+      ],
+      "x-ms-enum": {
+        "name": "AcsChatThreadDeletedReasonType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "DeletedByUser",
+            "value": "DeletedByUser",
+            "description": "Deleted By User"
+          },
+          {
+            "name": "DeletedByPolicy",
+            "value": "DeletedByPolicy",
+            "description": "Deleted By Policy"
+          }
+        ]
+      }
     },
     "AcsChatThreadEventBaseProperties": {
       "type": "object",
@@ -896,6 +973,10 @@
             "type": "string"
           },
           "readOnly": true
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicyModel",
+          "description": "The chat retention policy"
         }
       },
       "required": [
@@ -934,6 +1015,10 @@
           "type": "object",
           "description": "The updated thread properties",
           "additionalProperties": {}
+        },
+        "retentionPolicy": {
+          "$ref": "#/definitions/AcsChatRetentionPolicyModel",
+          "description": "The chat retention policy"
         }
       },
       "required": [
@@ -958,6 +1043,10 @@
           "type": "string",
           "format": "date-time",
           "description": "The deletion time of the thread"
+        },
+        "reason": {
+          "$ref": "#/definitions/AcsChatThreadDeletedReasonType",
+          "description": "The deleteion reason of the thread"
         }
       },
       "required": [
@@ -1707,7 +1796,8 @@
           "items": {
             "$ref": "#/definitions/AcsRecordingChunkInfoProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1760,7 +1850,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1819,7 +1910,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterCommunicationError"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1854,7 +1946,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -1987,7 +2080,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "requestedWorkerSelectors": {
           "type": "array",
@@ -1995,7 +2089,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2031,7 +2126,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scheduledOn": {
           "type": "string",
@@ -2068,7 +2164,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -2076,7 +2173,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scheduledOn": {
           "type": "string",
@@ -2216,7 +2314,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "expiredRequestedWorkerSelectors": {
           "type": "array",
@@ -2224,7 +2323,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "scheduledOn": {
           "type": "string",
@@ -2257,7 +2357,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "expiredAttachedWorkerSelectors": {
           "type": "array",
@@ -2265,7 +2366,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterWorkerSelector"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         }
       },
       "required": [
@@ -2650,7 +2752,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "totalCapacity": {
           "type": "integer",
@@ -2763,7 +2866,8 @@
           "items": {
             "$ref": "#/definitions/AcsRouterChannelConfiguration"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "totalCapacity": {
           "type": "integer",
@@ -2842,7 +2946,8 @@
           "items": {
             "$ref": "#/definitions/AcsSmsDeliveryAttemptProperties"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "receivedTimestamp": {
           "type": "string",
@@ -6897,7 +7002,8 @@
           "items": {
             "$ref": "#/definitions/MapsGeofenceGeometry"
           },
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-identifiers": []
         },
         "invalidPeriodGeofenceGeometryId": {
           "type": "array",
