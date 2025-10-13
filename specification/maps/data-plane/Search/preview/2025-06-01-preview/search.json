@@ -661,7 +661,7 @@
           {
             "name": "coordinates",
             "in": "query",
-            "description": "Either `coordinates` or `bbox` must be provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
+            "description": "Required when `bbox` is not provided. A point on the earth specified as a longitude and latitude. When you specify this parameter, the user’s location is taken into account and the results returned may be more relevant to the user. Example: &coordinates=lon,lat\n\n**Note:** `coordinates` becomes a secondary signal if `bbox` is provided.",
             "required": false,
             "type": "array",
             "items": {
@@ -676,7 +676,7 @@
           {
             "name": "bbox",
             "in": "query",
-            "description": "Either `coordinates` or `bbox` must be provided. A rectangular area on the earth defined as a bounding box object. The sides of the rectangle are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2.\n\nMinimum size: approximately 0.00001 degrees (~0.01 meters).\n\n  Maximum size: up to the full global extent (-180,-90 to 180,90)",
+            "description": "Required when `coordinates` is not provided. A rectangular area on the earth defined as a bounding box object. The sides of the rectangle are defined by longitude and latitude values. When you specify this parameter, the geographical area is taken into account when computing the results of a location query.\n\nExample: lon1,lat1,lon2,lat2.\n\nMinimum size: approximately 0.00001 degrees (~0.01 meters).\n\n  Maximum size: up to the full global extent (-180,-90 to 180,90)",
             "required": false,
             "type": "array",
             "items": {
