@@ -70,12 +70,12 @@ interface QuestionAnsweringAuthoringClientOperations {
   addFeedback is Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.addFeedback;
 }
 
-@@clientName(Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.export::parameters.format,
+@@clientName(Language.QuestionAnswering.Authoring.ExportJobParameters.format,
   "file_format",
   "python"
 );
 
-@@clientName(Language.QuestionAnswering.Authoring.QuestionAnsweringProjects.`import`::parameters.format,
+@@clientName(Language.QuestionAnswering.Authoring.ImportJobParameters.format,
   "file_format",
   "python"
 );
