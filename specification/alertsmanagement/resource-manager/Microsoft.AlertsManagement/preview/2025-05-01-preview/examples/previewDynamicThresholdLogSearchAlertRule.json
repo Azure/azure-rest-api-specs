@@ -1,53 +1,42 @@
 {
   "parameters": {
-    "subscriptionId": "dd4bfc94-a096-412b-9c43-4bd13e35afbc",
+    "resourceUri": "subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/myWorkspace",
     "api-version": "2025-05-01-preview",
     "parameters": {
       "location": "eastus",
       "properties": {
-        "lookbackPeriod": "P1D",
+        "timespan": "PT24H",
         "scheduledQueryRuleProperties": {
           "location": "eastus",
           "properties": {
             "description": "Performance rule",
             "severity": 4,
             "enabled": true,
-            "evaluationFrequency": "PT5M",
+            "evaluationFrequency": "PT1H",
             "scopes": [
-              "/subscriptions/aaf177ed-1330-a9f2-80ea-fd3d7783b147/resourceGroups/scopeResourceGroup1/providers/Microsoft.Compute/virtualMachines/vm1"
+              "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.OperationalInsights/workspaces/myWorkspace"
             ],
-            "windowSize": "PT10M",
+            "windowSize": "PT1H",
             "criteria": {
               "allOf": [
                 {
                   "criterionType": "DynamicThresholdCriterion",
-                  "query": "Perf | where ObjectName == \"Processor\"",
-                  "timeAggregation": "Average",
-                  "metricMeasureColumn": "% Processor Time",
-                  "resourceIdColumn": "resourceId",
+                  "query": "Alert",
+                  "timeAggregation": "Count",
                   "dimensions": [
                     {
-                      "name": "ComputerIp",
-                      "operator": "Exclude",
-                      "values": [
-                        "192.168.1.1"
-                      ]
-                    },
-                    {
-                      "name": "OSType",
+                      "name": "AlertName",
                       "operator": "Include",
                       "values": [
-                        "*"
+                        "alert"
                       ]
                     }
                   ],
-                  "operator": "GreaterOrLessThan",
-                  "alertSensitivity": "Medium",
-                  "ignoreDataBefore": "2024-06-01T21:00:00.000Z"
+                  "operator": "GreaterThan",
+                  "alertSensitivity": "Medium"
                 }
               ]
-            },
-            "muteActionsDuration": "PT30M"
+            }
           }
         }
       }
@@ -60,12 +49,8 @@
           {
             "dimensionCombination": [
               {
-                "name": "Region",
-                "value": "East US"
-              },
-              {
-                "name": "Environment",
-                "value": "Production"
+                "name": "AlertName",
+                "value": "Alert1"
               }
             ],
             "evaluations": [
