@@ -300,33 +300,33 @@ using Microsoft.DocumentDB;
 @@clientName(ThroughputSettingsGetResultsOperationGroup.sqlDatabaseRedistributeThroughput::parameters.body,
   "redistributeThroughputParameters"
 );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.getSqlContainerThroughput,
-//   SqlResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput,
-//   SqlResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
-//   "updateThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToAutoscale,
-//   SqlResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToManualThroughput,
-//   SqlResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution,
-//   SqlResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
-//   "retrieveThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput,
-//   SqlResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
-//   "redistributeThroughputParameters"
-// );
+@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.getSqlContainerThroughput,
+  SqlResources
+);
+@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput,
+  SqlResources
+);
+@@clientName(SqlResourcesThroughputSettingsGetResultsOperationGroup.updateSqlContainerThroughput::parameters.resource,
+  "updateThroughputParameters"
+);
+@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToAutoscale,
+  SqlResources
+);
+@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.migrateSqlContainerToManualThroughput,
+  SqlResources
+);
+@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution,
+  SqlResources
+);
+@@clientName(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRetrieveThroughputDistribution::parameters.body,
+  "retrieveThroughputParameters"
+);
+@@clientLocation(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput,
+  SqlResources
+);
+@@clientName(SqlResourcesThroughputSettingsGetResultsOperationGroup.sqlContainerRedistributeThroughput::parameters.body,
+  "redistributeThroughputParameters"
+);
 @@clientName(MongoDBResources.updateMongoDBDatabaseThroughput::parameters.resource,
   "updateThroughputParameters"
 );
@@ -336,87 +336,87 @@ using Microsoft.DocumentDB;
 @@clientName(MongoDBResources.mongoDBDatabaseRedistributeThroughput::parameters.body,
   "redistributeThroughputParameters"
 );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.getMongoDBCollectionThroughput,
-//   MongoDBResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput,
-//   MongoDBResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
-//   "updateThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution,
-//   MongoDBResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
-//   "retrieveThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput,
-//   MongoDBResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
-//   "redistributeThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToAutoscale,
-//   MongoDBResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToManualThroughput,
-//   MongoDBResources
-// );
+@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.getMongoDBCollectionThroughput,
+  MongoDBResources
+);
+@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput,
+  MongoDBResources
+);
+@@clientName(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.updateMongoDBCollectionThroughput::parameters.resource,
+  "updateThroughputParameters"
+);
+@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution,
+  MongoDBResources
+);
+@@clientName(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRetrieveThroughputDistribution::parameters.body,
+  "retrieveThroughputParameters"
+);
+@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput,
+  MongoDBResources
+);
+@@clientName(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.mongoDBContainerRedistributeThroughput::parameters.body,
+  "redistributeThroughputParameters"
+);
+@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToAutoscale,
+  MongoDBResources
+);
+@@clientLocation(MongoDBResourcesThroughputSettingsGetResultsOperationGroup.migrateMongoDBCollectionToManualThroughput,
+  MongoDBResources
+);
 @@clientName(TableResources.updateTableThroughput::parameters.resource,
   "updateThroughputParameters"
 );
 @@clientName(CassandraResources.updateCassandraKeyspaceThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.getCassandraTableThroughput,
-//   CassandraResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput,
-//   CassandraResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
-//   "updateThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToAutoscale,
-//   CassandraResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToManualThroughput,
-//   CassandraResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.getCassandraViewThroughput,
-//   CassandraResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput,
-//   CassandraResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
-//   "updateThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToAutoscale,
-//   CassandraResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToManualThroughput,
-//   CassandraResources
-// );
+@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.getCassandraTableThroughput,
+  CassandraResources
+);
+@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput,
+  CassandraResources
+);
+@@clientName(CassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraTableThroughput::parameters.resource,
+  "updateThroughputParameters"
+);
+@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToAutoscale,
+  CassandraResources
+);
+@@clientLocation(CassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraTableToManualThroughput,
+  CassandraResources
+);
+@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.getCassandraViewThroughput,
+  CassandraResources
+);
+@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput,
+  CassandraResources
+);
+@@clientName(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.updateCassandraViewThroughput::parameters.resource,
+  "updateThroughputParameters"
+);
+@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToAutoscale,
+  CassandraResources
+);
+@@clientLocation(ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup.migrateCassandraViewToManualThroughput,
+  CassandraResources
+);
 @@clientName(GremlinResources.updateGremlinDatabaseThroughput::parameters.resource,
   "updateThroughputParameters"
 );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.getGremlinGraphThroughput,
-//   GremlinResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput,
-//   GremlinResources
-// );
-// @@clientName(ThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
-//   "updateThroughputParameters"
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToAutoscale,
-//   GremlinResources
-// );
-// @@clientLocation(ThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToManualThroughput,
-//   GremlinResources
-// );
+@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.getGremlinGraphThroughput,
+  GremlinResources
+);
+@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput,
+  GremlinResources
+);
+@@clientName(GremlinResourcesThroughputSettingsGetResultsOperationGroup.updateGremlinGraphThroughput::parameters.resource,
+  "updateThroughputParameters"
+);
+@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToAutoscale,
+  GremlinResources
+);
+@@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToManualThroughput,
+  GremlinResources
+);
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(ThroughputSettingsGetResults.properties);
 

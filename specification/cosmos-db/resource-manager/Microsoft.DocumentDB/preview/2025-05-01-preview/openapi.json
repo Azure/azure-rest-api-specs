@@ -61,13 +61,13 @@
       "name": "ThroughputSettingsGetResultsOperationGroup"
     },
     {
-      "name": "ThroughputSettingsGetResultsOperationGroup_2"
+      "name": "SqlResourcesThroughputSettingsGetResultsOperationGroup"
     },
     {
       "name": "MongoDBResources"
     },
     {
-      "name": "ThroughputSettingsGetResultsOperationGroup_3"
+      "name": "MongoDBResourcesThroughputSettingsGetResultsOperationGroup"
     },
     {
       "name": "TableResources"
@@ -76,16 +76,16 @@
       "name": "CassandraResources"
     },
     {
-      "name": "ThroughputSettingsGetResultsOperationGroup_4"
+      "name": "CassandraResourcesThroughputSettingsGetResultsOperationGroup"
     },
     {
-      "name": "ThroughputSettingsGetResultsOperationGroup_5"
+      "name": "ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup"
     },
     {
       "name": "GremlinResources"
     },
     {
-      "name": "ThroughputSettingsGetResultsOperationGroup_6"
+      "name": "GremlinResourcesThroughputSettingsGetResultsOperationGroup"
     },
     {
       "name": "ClientEncryptionKeyGetResultsOperationGroup"
@@ -3342,7 +3342,7 @@
       "get": {
         "operationId": "CassandraResources_GetCassandraTableThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_4"
+          "CassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
@@ -3401,7 +3401,7 @@
       "put": {
         "operationId": "CassandraResources_UpdateCassandraTableThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_4"
+          "CassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Update RUs per second of an Azure Cosmos DB Cassandra table",
         "parameters": [
@@ -3439,7 +3439,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The RUs per second of the parameters to provide for the current Cassandra table.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -3490,7 +3490,7 @@
       "post": {
         "operationId": "CassandraResources_MigrateCassandraTableToAutoscale",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_4"
+          "CassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB Cassandra table from manual throughput to autoscale",
         "parameters": [
@@ -3570,7 +3570,7 @@
       "post": {
         "operationId": "CassandraResources_MigrateCassandraTableToManualThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_4"
+          "CassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB Cassandra table from autoscale to manual throughput",
         "parameters": [
@@ -3733,7 +3733,7 @@
           {
             "name": "updateThroughputParameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The RUs per second of the parameters to provide for the current Cassandra Keyspace.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -4218,7 +4218,7 @@
       "get": {
         "operationId": "CassandraResources_GetCassandraViewThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_5"
+          "ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Gets the RUs per second of the Cassandra view under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
@@ -4277,7 +4277,7 @@
       "put": {
         "operationId": "CassandraResources_UpdateCassandraViewThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_5"
+          "ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Update RUs per second of an Azure Cosmos DB Cassandra view",
         "parameters": [
@@ -4315,7 +4315,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The RUs per second of the parameters to provide for the current Cassandra view.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -4366,7 +4366,7 @@
       "post": {
         "operationId": "CassandraResources_MigrateCassandraViewToAutoscale",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_5"
+          "ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB Cassandra view from manual throughput to autoscale",
         "parameters": [
@@ -4446,7 +4446,7 @@
       "post": {
         "operationId": "CassandraResources_MigrateCassandraViewToManualThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_5"
+          "ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB Cassandra view from autoscale to manual throughput",
         "parameters": [
@@ -7617,7 +7617,7 @@
       "get": {
         "operationId": "GremlinResources_GetGremlinGraphThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_6"
+          "GremlinResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Gets the Gremlin graph throughput under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
@@ -7676,7 +7676,7 @@
       "put": {
         "operationId": "GremlinResources_UpdateGremlinGraphThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_6"
+          "GremlinResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Update RUs per second of an Azure Cosmos DB Gremlin graph",
         "parameters": [
@@ -7714,7 +7714,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The RUs per second of the parameters to provide for the current Gremlin graph.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -7765,7 +7765,7 @@
       "post": {
         "operationId": "GremlinResources_MigrateGremlinGraphToAutoscale",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_6"
+          "GremlinResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB Gremlin graph from manual throughput to autoscale",
         "parameters": [
@@ -7845,7 +7845,7 @@
       "post": {
         "operationId": "GremlinResources_MigrateGremlinGraphToManualThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_6"
+          "GremlinResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB Gremlin graph from autoscale to manual throughput",
         "parameters": [
@@ -8008,7 +8008,7 @@
           {
             "name": "updateThroughputParameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The RUs per second of the parameters to provide for the current Gremlin database.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -10188,7 +10188,7 @@
       "get": {
         "operationId": "MongoDBResources_GetMongoDBCollectionThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_3"
+          "MongoDBResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.",
         "parameters": [
@@ -10247,7 +10247,7 @@
       "put": {
         "operationId": "MongoDBResources_UpdateMongoDBCollectionThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_3"
+          "MongoDBResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Update the RUs per second of an Azure Cosmos DB MongoDB collection",
         "parameters": [
@@ -10285,7 +10285,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The RUs per second of the parameters to provide for the current MongoDB collection.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -10336,7 +10336,7 @@
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBCollectionToAutoscale",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_3"
+          "MongoDBResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB MongoDB collection from manual throughput to autoscale",
         "parameters": [
@@ -10416,7 +10416,7 @@
       "post": {
         "operationId": "MongoDBResources_MigrateMongoDBCollectionToManualThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_3"
+          "MongoDBResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB MongoDB collection from autoscale to manual throughput",
         "parameters": [
@@ -10496,7 +10496,7 @@
       "post": {
         "operationId": "MongoDBResources_MongoDBContainerRedistributeThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_3"
+          "MongoDBResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Redistribute throughput for an Azure Cosmos DB MongoDB container",
         "parameters": [
@@ -10534,7 +10534,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide for redistributing throughput for the current MongoDB container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedistributeThroughputParameters"
@@ -10585,7 +10585,7 @@
       "post": {
         "operationId": "MongoDBResources_MongoDBContainerRetrieveThroughputDistribution",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_3"
+          "MongoDBResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Retrieve throughput distribution for an Azure Cosmos DB MongoDB container",
         "parameters": [
@@ -10623,7 +10623,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide for retrieving throughput distribution for the current MongoDB container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RetrieveThroughputParameters"
@@ -10841,7 +10841,7 @@
           {
             "name": "updateThroughputParameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The RUs per second of the parameters to provide for the current MongoDB database.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -11069,7 +11069,7 @@
           {
             "name": "redistributeThroughputParameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide for redistributing throughput for the current MongoDB database.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedistributeThroughputParameters"
@@ -11151,7 +11151,7 @@
           {
             "name": "retrieveThroughputParameters",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide for retrieving throughput distribution for the current MongoDB database.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RetrieveThroughputParameters"
@@ -15058,7 +15058,7 @@
       "get": {
         "operationId": "SqlResources_GetSqlContainerThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_2"
+          "SqlResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.",
         "parameters": [
@@ -15117,7 +15117,7 @@
       "put": {
         "operationId": "SqlResources_UpdateSqlContainerThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_2"
+          "SqlResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Update RUs per second of an Azure Cosmos DB SQL container",
         "parameters": [
@@ -15155,7 +15155,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The parameters to provide for the RUs per second of the current SQL container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
@@ -15206,7 +15206,7 @@
       "post": {
         "operationId": "SqlResources_MigrateSqlContainerToAutoscale",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_2"
+          "SqlResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB SQL container from manual throughput to autoscale",
         "parameters": [
@@ -15286,7 +15286,7 @@
       "post": {
         "operationId": "SqlResources_MigrateSqlContainerToManualThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_2"
+          "SqlResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Migrate an Azure Cosmos DB SQL container from autoscale to manual throughput",
         "parameters": [
@@ -15366,7 +15366,7 @@
       "post": {
         "operationId": "SqlResources_SqlContainerRedistributeThroughput",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_2"
+          "SqlResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Redistribute throughput for an Azure Cosmos DB SQL container",
         "parameters": [
@@ -15404,7 +15404,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide for redistributing throughput for the current SQL container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RedistributeThroughputParameters"
@@ -15455,7 +15455,7 @@
       "post": {
         "operationId": "SqlResources_SqlContainerRetrieveThroughputDistribution",
         "tags": [
-          "ThroughputSettingsGetResultsOperationGroup_2"
+          "SqlResourcesThroughputSettingsGetResultsOperationGroup"
         ],
         "description": "Retrieve throughput distribution for an Azure Cosmos DB SQL container",
         "parameters": [
@@ -15493,7 +15493,7 @@
           {
             "name": "body",
             "in": "body",
-            "description": "The content of the action request",
+            "description": "The parameters to provide for retrieving throughput distribution for the current SQL container.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/RetrieveThroughputParameters"
@@ -18166,7 +18166,7 @@
           {
             "name": "updateThroughputParameters",
             "in": "body",
-            "description": "Resource create parameters.",
+            "description": "The parameters to provide for the RUs per second of the current Table.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsUpdateParameters"
