@@ -119,6 +119,11 @@ suppressions:
     reason: Provide customers ability to define custom conditions for when a rule is activated.
     where:
       - $.definitions.RaiIfcRuleProperties.properties.conditions
+  - code: TopLevelResourcesListByResourceGroup
+    reason: These are subscription level resources and are modeled after the RaiPolicy List operation
+    where: 
+      - $.definitions.RaiExternalSafetyProvider
+      - $.definitions.RaiExternalSafetyProviderSchema
 ```
 
 ### Tag: package-2025-09-01
