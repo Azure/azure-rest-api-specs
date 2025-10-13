@@ -131,6 +131,8 @@ interface EasmClient {
 @@clientName(EasmClient.listDiscoGroup, "GetDiscoveryGroups", "csharp");
 @@clientName(EasmClient.listRuns, "GetDiscoveryGroupRuns", "csharp");
 @@clientName(EasmClient.createOrReplaceDiscoGroup,
-  "CreateOrUpdateDiscoveryGroup",
+  "CreateOrReplaceDiscoveryGroup",
   "csharp"
 );
+@@clientName(EasmClient.getDiscoTemplate, "GetDiscoveryTemplate", "csharp");
+@@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
