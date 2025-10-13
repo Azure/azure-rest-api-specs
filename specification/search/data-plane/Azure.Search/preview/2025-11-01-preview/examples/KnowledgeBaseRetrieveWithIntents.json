@@ -1,6 +1,6 @@
 {
   "operationId": "KnowledgeRetrieval_Retrieve",
-  "title": "KnowledgeBaseRetrieve",
+  "title": "KnowledgeBaseRetrieveWithIntents",
   "parameters": {
     "endpoint": "https://previewexampleservice.search.windows.net",
     "knowledgeBaseName": "base-preview-test",
@@ -8,31 +8,26 @@
     "x-ms-client-request-id": "00000000-0000-0000-0000-000000000000",
     "x-ms-query-source-authorization": null,
     "retrievalRequest": {
-      "messages": [
+      "intents": [
         {
-          "role": "user",
-          "content": [
-            {
-              "text": "hello world",
-              "type": "text"
-            }
-          ]
+          "search": "foo",
+          "type": "semantic"
         }
       ],
       "maxRuntimeInSeconds": 60,
       "maxOutputSize": 100000,
       "retrievalReasoningEffort": {
-        "kind": "low"
+        "kind": "minimal"
       },
       "includeActivity": true,
-      "outputMode": "answerSynthesis",
+      "outputMode": "extractiveData",
       "knowledgeSourceParams": [
         {
           "filterAddOn": "foo eq bar",
           "knowledgeSourceName": "ks-preview-test",
           "includeReferences": true,
           "includeReferenceSourceData": true,
-          "alwaysQuerySource": false,
+          "alwaysQuerySource": true,
           "rerankerThreshold": 2.1,
           "kind": "searchIndex"
         }
@@ -54,57 +49,31 @@
         ],
         "activity": [
           {
-            "type": "modelQueryPlanning",
+            "type": "searchIndex",
             "id": 0,
-            "inputTokens": 11,
-            "outputTokens": 22,
-            "elapsedMs": 10
-          },
-          {
-            "type": "searchIndex",
-            "id": 1,
             "knowledgeSourceName": "ks-preview-test",
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 2,
             "elapsedMs": 1234,
             "searchIndexArguments": {
-              "search": "hello world",
-              "filter": "foo eq bar"
-            }
-          },
-          {
-            "type": "searchIndex",
-            "id": 2,
-            "knowledgeSourceName": "ks-preview-test",
-            "queryTime": "2025-01-01T00:08:45.045Z",
-            "count": 2,
-            "elapsedMs": 1234,
-            "searchIndexArguments": {
-              "search": "hello world two",
+              "search": "foo",
               "filter": "foo eq bar"
             }
           },
           {
             "type": "agenticReasoning",
-            "id": 3,
+            "id": 1,
             "retrievalReasoningEffort": {
-              "kind": "low"
+              "kind": "minimal"
             },
-            "reasoningTokens": 74
-          },
-          {
-            "type": "modelAnswerSynthesis",
-            "id": 4,
-            "inputTokens": 664,
-            "outputTokens": 1328,
-            "elapsedMs": 10
+            "reasoningTokens": 37
           }
         ],
         "references": [
           {
             "type": "searchIndex",
             "id": "83dd7d40",
-            "activitySource": 1,
+            "activitySource": 0,
             "sourceData": {
               "id": "myDocKey1",
               "title": "high_doc",
@@ -116,7 +85,7 @@
           {
             "type": "searchIndex",
             "id": "83dd7d41",
-            "activitySource": 1,
+            "activitySource": 0,
             "sourceData": {
               "id": "myDocKey2",
               "title": "low_doc",
@@ -129,7 +98,7 @@
       }
     },
     "206": {
-	   "body": {
+		"body": {
         "response": [
           {
             "content": [
@@ -142,27 +111,20 @@
         ],
         "activity": [
           {
-            "type": "modelQueryPlanning",
-            "id": 0,
-            "inputTokens": 11,
-            "outputTokens": 22,
-            "elapsedMs": 10
-          },
-          {
             "type": "searchIndex",
-            "id": 1,
+            "id": 0,
             "knowledgeSourceName": "ks-preview-test",
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 2,
             "elapsedMs": 1234,
             "searchIndexArguments": {
-              "search": "hello world",
+              "search": "foo",
               "filter": "foo eq bar"
             }
           },
-          {
+		  {
             "type": "web",
-            "id": 2,
+            "id": 1,
             "knowledgeSourceName": "ks-preview-web",
             "queryTime": "2025-01-01T00:08:45.045Z",
             "count": 10,
@@ -183,25 +145,18 @@
           },
           {
             "type": "agenticReasoning",
-            "id": 3,
+            "id": 2,
             "retrievalReasoningEffort": {
-              "kind": "low"
+              "kind": "minimal"
             },
-            "reasoningTokens": 74
-          },
-          {
-            "type": "modelAnswerSynthesis",
-            "id": 4,
-            "inputTokens": 664,
-            "outputTokens": 1328,
-            "elapsedMs": 10
+            "reasoningTokens": 37
           }
         ],
         "references": [
           {
             "type": "searchIndex",
             "id": "83dd7d40",
-            "activitySource": 1,
+            "activitySource": 0,
             "sourceData": {
               "id": "myDocKey1",
               "title": "high_doc",
@@ -213,7 +168,7 @@
           {
             "type": "searchIndex",
             "id": "83dd7d41",
-            "activitySource": 1,
+            "activitySource": 0,
             "sourceData": {
               "id": "myDocKey2",
               "title": "low_doc",
