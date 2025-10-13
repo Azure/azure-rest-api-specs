@@ -211,7 +211,7 @@ interface TilerGeoJsonStatistics {
        * Request GeoJson body
        */
       @body
-      body: StacItemCollection;
+      body: FeatureCollection;
     },
     GeoJsonStatisticsForStacItemCollection
   >;
@@ -1112,7 +1112,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: StacItem;
+      body: Feature;
     },
     TileResponse
   >;
@@ -1161,7 +1161,7 @@ interface TilerGeoJsons {
        * Request GeoJson body.
        */
       @body
-      body: StacItem;
+      body: Feature;
     },
     TileResponse
   >;

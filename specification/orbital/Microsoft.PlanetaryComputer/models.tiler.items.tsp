@@ -588,6 +588,17 @@ model GeoJsonStatisticsItemResponse {
   ...StacMicrosoftProperties;
 
   /**
+   * Unique identifier for the feature
+   */
+  id: string;
+
+  /**
+   * Bounding box coordinates for the feature
+   */
+  @encodedName("application/json", "bbox")
+  boundingBox: float32[];
+
+  /**
    * Stac Version
    */
   @minLength(1)

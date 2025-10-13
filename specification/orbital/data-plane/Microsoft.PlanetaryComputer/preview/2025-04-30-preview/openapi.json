@@ -1504,7 +1504,7 @@
             "description": "Request GeoJson body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItem"
+              "$ref": "#/definitions/Feature"
             }
           }
         ],
@@ -1973,7 +1973,7 @@
             "description": "Request GeoJson body.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItem"
+              "$ref": "#/definitions/Feature"
             }
           }
         ],
@@ -2974,7 +2974,7 @@
             "description": "Request GeoJson body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/StacItemCollection"
+              "$ref": "#/definitions/FeatureCollection"
             }
           }
         ],
@@ -12477,6 +12477,72 @@
         "coordinates"
       ]
     },
+    "Feature": {
+      "type": "object",
+      "description": "GeoJSON Feature object representing a geographic entity",
+      "properties": {
+        "geometry": {
+          "$ref": "#/definitions/Geometry",
+          "description": "Geometry object defining the feature's shape"
+        },
+        "type": {
+          "$ref": "#/definitions/FeatureType",
+          "description": "GeoJSON type identifier for Feature"
+        }
+      },
+      "required": [
+        "geometry",
+        "type"
+      ]
+    },
+    "FeatureCollection": {
+      "type": "object",
+      "description": "GeoJSON FeatureCollection containing multiple Feature objects",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/FeatureCollectionType",
+          "description": "GeoJSON type identifier for FeatureCollection"
+        },
+        "features": {
+          "type": "array",
+          "description": "Array of GeoJSON Feature objects",
+          "items": {
+            "$ref": "#/definitions/Feature"
+          }
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box coordinates for the collection",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "x-ms-client-name": "boundingBox"
+        }
+      },
+      "required": [
+        "type",
+        "features"
+      ]
+    },
+    "FeatureCollectionType": {
+      "type": "string",
+      "description": "Type identifier for GeoJSON FeatureCollection objects",
+      "enum": [
+        "FeatureCollection"
+      ],
+      "x-ms-enum": {
+        "name": "FeatureCollectionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "FeatureCollection",
+            "value": "FeatureCollection",
+            "description": "Standard GeoJSON FeatureCollection type identifier"
+          }
+        ]
+      }
+    },
     "FeatureType": {
       "type": "string",
       "description": "Type identifier for GeoJSON Feature objects",
@@ -12606,19 +12672,6 @@
           "$ref": "#/definitions/Geometry",
           "description": "Geometry object defining the feature's shape"
         },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box coordinates for the feature",
-          "items": {
-            "type": "number",
-            "format": "float"
-          },
-          "x-ms-client-name": "boundingBox"
-        },
-        "id": {
-          "type": "string",
-          "description": "Unique identifier for the feature"
-        },
         "type": {
           "$ref": "#/definitions/FeatureType",
           "description": "GeoJSON type identifier for Feature"
@@ -12638,6 +12691,19 @@
           "description": "MSFT Short Description",
           "maxLength": 300,
           "x-ms-client-name": "shortDescription"
+        },
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the feature"
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box coordinates for the feature",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "x-ms-client-name": "boundingBox"
         },
         "stac_version": {
           "type": "string",
@@ -12676,9 +12742,9 @@
       },
       "required": [
         "geometry",
-        "bbox",
-        "id",
         "type",
+        "id",
+        "bbox",
         "properties"
       ]
     },
@@ -14778,15 +14844,6 @@
           "$ref": "#/definitions/Geometry",
           "description": "Geometry object defining the feature's shape"
         },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box coordinates for the feature",
-          "items": {
-            "type": "number",
-            "format": "float"
-          },
-          "x-ms-client-name": "boundingBox"
-        },
         "id": {
           "type": "string",
           "description": "Unique identifier for the feature",
@@ -14799,6 +14856,15 @@
         "collection": {
           "type": "string",
           "description": "ID of the STAC collection this item belongs to."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box coordinates for the feature",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "x-ms-client-name": "boundingBox"
         },
         "properties": {
           "$ref": "#/definitions/StacItemProperties",
@@ -14824,8 +14890,8 @@
       },
       "required": [
         "geometry",
-        "bbox",
         "id",
+        "bbox",
         "properties",
         "assets"
       ],
@@ -15113,15 +15179,6 @@
           "$ref": "#/definitions/Geometry",
           "description": "Geometry object defining the feature's shape"
         },
-        "bbox": {
-          "type": "array",
-          "description": "Bounding box coordinates for the feature",
-          "items": {
-            "type": "number",
-            "format": "float"
-          },
-          "x-ms-client-name": "boundingBox"
-        },
         "id": {
           "type": "string",
           "description": "Unique identifier for the feature",
@@ -15134,6 +15191,15 @@
         "collection": {
           "type": "string",
           "description": "ID of the STAC collection this item belongs to."
+        },
+        "bbox": {
+          "type": "array",
+          "description": "Bounding box coordinates for the feature",
+          "items": {
+            "type": "number",
+            "format": "float"
+          },
+          "x-ms-client-name": "boundingBox"
         },
         "properties": {
           "$ref": "#/definitions/StacItemPropertiesUpdate",

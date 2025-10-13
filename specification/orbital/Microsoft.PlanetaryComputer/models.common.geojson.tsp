@@ -39,23 +39,12 @@ model FeatureBase {
    * Geometry object defining the feature's shape
    */
   geometry: Geometry;
-
-  /**
-   * Bounding box coordinates for the feature
-   */
-  @encodedName("application/json", "bbox")
-  boundingBox: float32[];
 }
 /**
  * GeoJSON Feature object representing a geographic entity
  */
 model Feature {
   ...FeatureBase;
-
-  /**
-   * Unique identifier for the feature
-   */
-  id: string;
 
   /**
    * GeoJSON type identifier for Feature

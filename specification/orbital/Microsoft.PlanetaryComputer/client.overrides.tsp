@@ -531,7 +531,7 @@ op cropGeoJsonCustomized(
    * Request GeoJson body.
    */
   @body
-  body: StacItem,
+  body: Feature,
 ): TileResponse;
 
 @@override(TilerGeoJsons.cropFormat, cropGeoJsonCustomized, "!python,!csharp");
@@ -557,7 +557,7 @@ op cropGeoJsonWithDimensionsCustomized(
    * Request GeoJson body.
    */
   @body
-  body: StacItem,
+  body: Feature,
 ): TileResponse;
 
 @@override(TilerGeoJsons.cropWidthByHeightFormat,
@@ -586,7 +586,7 @@ op listGeoJsonStatisticsCustomized(
    * Request GeoJson body
    */
   @body
-  body: StacItemCollection,
+  body: FeatureCollection,
 ): GeoJsonStatisticsForStacItemCollection;
 
 @@override(TilerGeoJsonStatistics.getAll,

@@ -654,6 +654,12 @@ model StacItem extends StacItemOrStacItemCollection {
   collection?: string;
 
   /**
+   * Bounding box coordinates for the feature
+   */
+  @encodedName("application/json", "bbox")
+  boundingBox: float32[];
+
+  /**
    * Attributes associated with the feature
    */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" ""
