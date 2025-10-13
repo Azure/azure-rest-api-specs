@@ -23,7 +23,7 @@ These settings apply only when `--tag=package-v1` is specified on the command li
 
 ```yaml $(tag) == 'package-v1'
 input-file:
-  - stable/v1/widgetanalytics.json
+  - compatible/v1/widgetanalytics.json
 ```
 
 ### Suppress non-TypeSpec SDK related linting rules
