@@ -1,0 +1,199 @@
+{
+  "title": "Lists publically available products in the marketplace.",
+  "operationId": "ListProducts",
+  "parameters": {
+    "market": "US",
+    "api-version": "2025-05-01",
+    "language": "en",
+    "locations": [
+      "eastus"
+    ],
+    "hideKeys": [
+      "preview-key-1"
+    ],
+    "$filter": "productType eq 'VirtualMachine'",
+    "$search": "Microsoft"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "displayName": "Enterprise Virtual Machine Solution",
+            "popularity": 1.0,
+            "categoryIds": [
+              "compute",
+              "monitoring-and-diagnostics",
+              "security",
+              "storage",
+              "virtualMachine"
+            ],
+            "industryIds": [
+              "financial-services",
+              "healthcare",
+              "manufacturing",
+              "retail"
+            ],
+            "publisherId": "microsoft",
+            "azureBenefit": "Eligible",
+            "badges": [
+              "PreferredSolution",
+              "PowerBICertified",
+              "AdditionalPurchaseRequirement"
+            ],
+            "publisherType": "Microsoft",
+            "publishingStage": "Public",
+            "uniqueProductId": "microsoft.microsoft-enterprise-vm-solution",
+            "productType": "VirtualMachine",
+            "productSubType": "Azure",
+            "productFamily": "Compute",
+            "operatingSystems": [
+              "windows.server.2022",
+              "linux.ubuntu.20.04"
+            ],
+            "pricingTypes": [
+              "Payg",
+              "Free",
+              "FreeTrial",
+              "Byol",
+              "Ri"
+            ],
+            "publisherDisplayName": "Microsoft",
+            "longSummary": "Complete enterprise virtualization platform with integrated monitoring, security, and management features. Includes automated backup, disaster recovery, and compliance tools.",
+            "summary": "Secure and scalable virtual machine solution for enterprise workloads",
+            "smallIconUri": "https://example.com/images/small-icon.png",
+            "description": "Enterprise-grade virtual machine solution with integrated monitoring, security, and backup capabilities. Designed for high-availability workloads with automatic scaling and disaster recovery features.",
+            "cspLegalTermsUri": "https://example.com/legal/csp/terms",
+            "privacyPolicyUri": "https://example.com/privacy-policy",
+            "ratingBuckets": [
+              "AboveOne",
+              "AboveTwo",
+              "AboveThree",
+              "AboveFour"
+            ],
+            "ratingAverage": 4.5,
+            "ratingCount": 1250,
+            "startingPrice": {
+              "market": "US",
+              "termUnits": "Monthly",
+              "meterUnits": "Hour",
+              "minTermPrice": 29.99,
+              "minMeterPrice": 0.12,
+              "currency": "USD"
+            },
+            "linkedAddInsTypes": {
+              "monitoring": "Azure Monitor",
+              "backup": "Azure Backup",
+              "security": "Azure Security Center"
+            },
+            "activeDirectoryAppId": "someId",
+            "plans": [
+              {
+                "planId": "enterprise-standard",
+                "uniquePlanId": "microsoft-enterprise-vm-solution-enterprise-standard",
+                "displayName": "Enterprise Standard",
+                "vmArchitectureType": "X64Gen2",
+                "cspState": "OptIn",
+                "metadata": {
+                  "generation": "Gen2",
+                  "altStackReference": "enterprise-arm64"
+                },
+                "categoryIds": [
+                  "compute",
+                  "enterprise"
+                ],
+                "hasProtectedArtifacts": false,
+                "pricingTypes": [
+                  "Payg",
+                  "Ri"
+                ],
+                "vmSecuritytypes": [
+                  "Trusted",
+                  "Confidential"
+                ],
+                "summary": "Enterprise-grade VM with enhanced security features",
+                "description": "Standard enterprise configuration with high availability and disaster recovery capabilities",
+                "skuId": "ent-std-001",
+                "planType": "VirtualMachine",
+                "displayRank": "1",
+                "isPrivate": false,
+                "hasRi": true
+              }
+            ],
+            "supportedProducts": [
+              "azure-monitor",
+              "azure-backup",
+              "azure-security-center"
+            ],
+            "applicableProducts": [
+              "azure-kubernetes-service",
+              "azure-container-apps",
+              "azure-functions"
+            ],
+            "lastModifiedDateTime": "2025-02-14T23:31:25.5733368Z",
+            "locations": [
+              "East US",
+              "West Europe",
+              "Southeast Asia"
+            ],
+            "serviceFamily": "Compute",
+            "service": "Virtual Machines",
+            "productId": "microsoft-enterprise-vm-001",
+            "hasRiPlans": true,
+            "hasMarketplaceFootprint": true,
+            "attributes": [
+              {
+                "key": "deploymentType",
+                "value": "SingleVM"
+              },
+              {
+                "key": "vmSize",
+                "value": "Standard_D2s_v3"
+              },
+              {
+                "key": "tier",
+                "value": "Premium"
+              }
+            ]
+          },
+          {
+            "displayName": "Azure Service Example",
+            "popularity": 0.0,
+            "publisherId": "Microsoft",
+            "azureBenefit": "NotEligible",
+            "publisherType": "Microsoft",
+            "uniqueProductId": "azure-service-unique-id",
+            "productType": "AzureServices",
+            "productSubType": "Azure",
+            "productFamily": "Management",
+            "pricingTypes": [
+              "Payg"
+            ],
+            "publisherDisplayName": "Microsoft",
+            "description": "Managed service offering for enterprise workloads",
+            "locations": [
+              "US West 2",
+              "UK South",
+              "BR South"
+            ],
+            "serviceFamily": "Management",
+            "service": "Azure Services",
+            "productId": "azure-service-id",
+            "hasMarketplaceFootprint": false,
+            "attributes": [
+              {
+                "key": "serviceType",
+                "value": "Managed"
+              },
+              {
+                "key": "category",
+                "value": "Enterprise"
+              }
+            ]
+          }
+        ],
+        "nextLink": "https://catalogapi.azure.com/products?api-version=2025-05-01&market=US&language=en&locations=eastus&hideKeys=preview-key-1&$filter=productType%20eq%20%27VirtualMachine%27&$search=Microsoft&$skiptoken=W3s..."
+      }
+    }
+  }
+}
