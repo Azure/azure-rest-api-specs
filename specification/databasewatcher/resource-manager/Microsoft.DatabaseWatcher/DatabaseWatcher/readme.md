@@ -34,7 +34,7 @@ tag: package-2025-01-02
 These settings apply only when `--tag=package-2025-01-02` is specified on the command line.
 ```yaml $(tag) == 'package-2025-01-02'
 input-file:
-  - Microsoft.DatabaseWatcher/stable/2025-01-02/Watcher.json
+  - stable/2025-01-02/Watcher.json
 ```
 
 ### Tag: package-2024-10-01-preview
@@ -43,7 +43,7 @@ These settings apply only when `--tag=package-2024-10-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-10-01-preview'
 input-file:
-  - Microsoft.DatabaseWatcher/preview/2024-10-01-preview/Watcher.json
+  - preview/2024-10-01-preview/Watcher.json
 ```
 
 ### Tag: package-2024-07-19-preview
@@ -52,7 +52,7 @@ These settings apply only when `--tag=package-2024-07-19-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-07-19-preview'
 input-file:
-  - Microsoft.DatabaseWatcher/preview/2024-07-19-preview/Watcher.json
+  - preview/2024-07-19-preview/Watcher.json
 ```
 
 ### Tag: package-2023-09-01-preview
@@ -61,7 +61,7 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
-  - Microsoft.DatabaseWatcher/preview/2023-09-01-preview/Watcher.json
+  - preview/2023-09-01-preview/Watcher.json
 ```
 
 ---
