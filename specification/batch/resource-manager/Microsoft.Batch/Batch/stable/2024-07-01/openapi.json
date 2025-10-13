@@ -3617,11 +3617,15 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "This property is mutually exclusive with both sasKey and identity; exactly one must be specified."
+          "format": "password",
+          "description": "This property is mutually exclusive with both sasKey and identity; exactly one must be specified.",
+          "x-ms-secret": true
         },
         "sasKey": {
           "type": "string",
-          "description": "This property is mutually exclusive with both accountKey and identity; exactly one must be specified."
+          "format": "password",
+          "description": "This property is mutually exclusive with both accountKey and identity; exactly one must be specified.",
+          "x-ms-secret": true
         },
         "blobfuseOptions": {
           "type": "string",
@@ -3656,7 +3660,9 @@
         },
         "accountKey": {
           "type": "string",
-          "description": "The Azure Storage account key."
+          "format": "password",
+          "description": "The Azure Storage account key.",
+          "x-ms-secret": true
         },
         "relativeMountPath": {
           "type": "string",
@@ -4155,7 +4161,9 @@
         },
         "password": {
           "type": "string",
-          "description": "This must not be specified if the certificate format is Cer."
+          "format": "password",
+          "description": "This must not be specified if the certificate format is Cer.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4410,7 +4418,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password to use for authentication against the CIFS file system."
+          "format": "password",
+          "description": "The password to use for authentication against the CIFS file system.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -4569,7 +4579,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password to log into the registry server."
+          "format": "password",
+          "description": "The password to log into the registry server.",
+          "x-ms-secret": true
         },
         "registryServer": {
           "type": "string",
@@ -5261,7 +5273,9 @@
         },
         "sshPrivateKey": {
           "type": "string",
-          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done)."
+          "format": "password",
+          "description": "The private key must not be password protected. The private key is used to automatically configure asymmetric-key based authentication for SSH between nodes in a Linux pool when the pool's enableInterNodeCommunication property is true (it is ignored if enableInterNodeCommunication is false). It does this by placing the key pair into the user's .ssh directory. If not specified, password-less SSH is not configured between nodes (no modification of the user's .ssh directory is done).",
+          "x-ms-secret": true
         }
       }
     },
@@ -7282,7 +7296,9 @@
         },
         "password": {
           "type": "string",
-          "description": "The password for the user account."
+          "format": "password",
+          "description": "The password for the user account.",
+          "x-ms-secret": true
         },
         "elevationLevel": {
           "$ref": "#/definitions/ElevationLevel",

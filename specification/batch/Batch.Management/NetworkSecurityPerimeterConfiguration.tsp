@@ -30,21 +30,21 @@ interface NetworkSecurityPerimeterConfigurations {
   /**
    * Gets information about the specified NSP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeter_GetConfiguration")
   getConfiguration is ArmResourceRead<NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Lists all of the NSP configurations in the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeter_ListConfigurations")
   listConfigurations is ArmResourceListByParent<NetworkSecurityPerimeterConfiguration>;
 
   /**
    * Reconciles the specified NSP configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("NetworkSecurityPerimeter_ReconcileConfiguration")
   @action("reconcile")
   reconcileConfiguration is ArmResourceActionAsyncBase<

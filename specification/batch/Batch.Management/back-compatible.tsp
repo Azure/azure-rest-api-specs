@@ -4,13 +4,13 @@ using Azure.ClientGenerator.Core;
 using Azure.ClientGenerator.Core.Legacy;
 using Microsoft.Batch;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BatchAccountCreateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(BatchAccountUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" ""
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@flattenProperty(CertificateCreateOrUpdateParameters.properties);
 
 @@clientName(ContainerRegistry.username, "userName");

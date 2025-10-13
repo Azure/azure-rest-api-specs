@@ -30,14 +30,14 @@ interface PrivateLinkResources {
   /**
    * Gets information about the specified private link resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResource_Get")
   get is ArmResourceRead<PrivateLinkResource>;
 
   /**
    * Lists all of the private link resources in the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PrivateLinkResource_ListByBatchAccount")
   listByBatchAccount is ArmResourceListByParent<
     PrivateLinkResource,

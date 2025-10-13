@@ -26,7 +26,7 @@ model Pool is Azure.ResourceManager.ProxyResource<PoolProperties> {
   /**
    * The type of identity used for the Batch Pool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: BatchPoolIdentity;
 }
 
@@ -35,7 +35,7 @@ interface Pools {
   /**
    * Gets information about the specified pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Pool_Get")
   get is ArmResourceRead<
     Pool,
@@ -48,8 +48,8 @@ interface Pools {
   /**
    * Creates a new pool inside the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Pool_Create")
   create is ArmResourceCreateOrReplaceSync<
     Pool,
@@ -75,7 +75,7 @@ interface Pools {
   /**
    * Updates the properties of an existing pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Pool_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -97,8 +97,8 @@ interface Pools {
   /**
    * Deletes the specified pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Pool_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     Pool,
@@ -108,7 +108,7 @@ interface Pools {
   /**
    * Lists all of the pools in the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Pool_ListByBatchAccount")
   listByBatchAccount is ArmResourceListByParent<
     Pool,
@@ -149,7 +149,7 @@ interface Pools {
   /**
    * Disables automatic scaling for a pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Pool_DisableAutoScale")
   disableAutoScale is ArmResourceActionSync<
     Pool,
@@ -163,7 +163,7 @@ interface Pools {
   /**
    * This does not restore the pool to its previous state before the resize operation: it only stops any further changes being made, and the pool maintains its current state. After stopping, the pool stabilizes at the number of nodes it was at when the stop operation was done. During the stop operation, the pool allocation state changes first to stopping and then to steady. A resize operation need not be an explicit resize pool request; this API can also be used to halt the initial sizing of the pool when it is created.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Pool_StopResize")
   stopResize is ArmResourceActionSync<
     Pool,

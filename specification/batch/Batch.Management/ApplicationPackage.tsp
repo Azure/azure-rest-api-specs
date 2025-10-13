@@ -30,15 +30,15 @@ interface ApplicationPackages {
   /**
    * Gets information about the specified application package.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationPackage_Get")
   get is ArmResourceRead<ApplicationPackage>;
 
   /**
    * Creates an application package record. The record contains a storageUrl where the package should be uploaded to.  Once it is uploaded the `ApplicationPackage` needs to be activated using `ApplicationPackageActive` before it can be used. If the auto storage account was configured to use storage keys, the URL returned will contain a SAS.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationPackage_Create")
   create is ArmResourceCreateOrReplaceSync<
     ApplicationPackage,
@@ -48,14 +48,14 @@ interface ApplicationPackages {
   /**
    * Deletes an application package record and its associated binary file.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationPackage_Delete")
   delete is ArmResourceDeleteSync<ApplicationPackage>;
 
   /**
    * Lists all of the application packages in the specified application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationPackage_List")
   list is ArmResourceListByParent<
     ApplicationPackage,
@@ -72,7 +72,7 @@ interface ApplicationPackages {
   /**
    * Activates the specified application package. This should be done after the `ApplicationPackage` was created and uploaded. This needs to be done before an `ApplicationPackage` can be used on Pools or Tasks.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ApplicationPackage_Activate")
   activate is ArmResourceActionSync<
     ApplicationPackage,
@@ -93,7 +93,7 @@ interface ApplicationPackages {
 @@doc(ApplicationPackages.activate::parameters.body,
   "The parameters for the request."
 );
-#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@extension(Applications.create::parameters.resource, "required", false);
-#suppress "@azure-tools/typespec-azure-core/no-openapi" ""
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@extension(ApplicationPackages.create::parameters.resource, "required", false);

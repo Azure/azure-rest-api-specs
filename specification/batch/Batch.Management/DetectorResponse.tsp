@@ -30,14 +30,14 @@ interface DetectorResponses {
   /**
    * Gets information about the given detector for a given Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_GetDetector")
   getDetector is ArmResourceRead<DetectorResponse>;
 
   /**
    * Gets information about the detectors available for a given Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_ListDetectors")
   listDetectors is ArmResourceListByParent<DetectorResponse>;
 }

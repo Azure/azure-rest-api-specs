@@ -13,12 +13,12 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.Batch;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface LocationOperationGroup {
   /**
    * Gets the Batch service quotas for the specified subscription at the given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Location_GetQuotas")
   @autoRoute
   @get
@@ -38,7 +38,7 @@ interface LocationOperationGroup {
   /**
    * Gets the list of Batch supported Virtual Machine VM sizes available at the given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Location_ListSupportedVirtualMachineSkus")
   @autoRoute
   @list
@@ -71,7 +71,7 @@ interface LocationOperationGroup {
   /**
    * Checks whether the Batch account name is available in the specified region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Location_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<

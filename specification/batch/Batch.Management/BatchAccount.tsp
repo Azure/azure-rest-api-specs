@@ -25,7 +25,7 @@ model BatchAccount
   /**
    * The identity of the Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: BatchAccountIdentity;
 }
 
@@ -34,15 +34,15 @@ interface BatchAccounts {
   /**
    * Gets information about the specified Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_Get")
   get is ArmResourceRead<BatchAccount>;
 
   /**
    * Creates a new Batch account with the specified parameters. Existing accounts cannot be updated with this API and should instead be updated with the Update Batch Account API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_Create")
   create is ArmResourceCreateOrReplaceAsync<
     BatchAccount,
@@ -53,7 +53,7 @@ interface BatchAccounts {
   /**
    * Updates the properties of an existing Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
@@ -64,8 +64,8 @@ interface BatchAccounts {
   /**
    * Deletes the specified Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     BatchAccount,
@@ -75,21 +75,21 @@ interface BatchAccounts {
   /**
    * Gets information about the Batch accounts associated with the specified resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<BatchAccount>;
 
   /**
    * Gets information about the Batch accounts associated with the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_List")
   list is ArmListBySubscription<BatchAccount>;
 
   /**
    * Synchronizes access keys for the auto-storage account configured for the specified Batch account, only if storage key authentication is being used.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_SynchronizeAutoStorageKeys")
   @action("syncAutoStorageKeys")
   synchronizeAutoStorageKeys is ArmResourceActionSync<
@@ -101,7 +101,7 @@ interface BatchAccounts {
   /**
    * This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, regenerating the keys will fail.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_RegenerateKey")
   @action("regenerateKeys")
   regenerateKey is ArmResourceActionSync<
@@ -113,7 +113,7 @@ interface BatchAccounts {
   /**
    * This operation applies only to Batch accounts with allowedAuthenticationModes containing 'SharedKey'. If the Batch account doesn't contain 'SharedKey' in its allowedAuthenticationMode, clients cannot use shared keys to authenticate, and must use another allowedAuthenticationModes instead. In this case, getting the keys will fail.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_GetKeys")
   @action("listKeys")
   getKeys is ArmResourceActionSync<
@@ -125,7 +125,7 @@ interface BatchAccounts {
   /**
    * Lists the endpoints that a Batch Compute Node under this Batch Account may call as part of Batch service administration. If you are deploying a Pool inside of a virtual network that you specify, you must make sure your network allows outbound access to these endpoints. Failure to allow access to these endpoints may cause Batch to mark the affected nodes as unusable. For more information about creating a pool inside of a virtual network, see https://learn.microsoft.com/azure/batch/batch-virtual-network.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("BatchAccount_ListOutboundNetworkDependenciesEndpoints")
   @get
   @list
