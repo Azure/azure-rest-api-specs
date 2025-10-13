@@ -78,7 +78,96 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations/{launchBulkInstancesOperationID}": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations": {
+      "get": {
+        "operationId": "BulkActions_ListBySubscription",
+        "tags": [
+          "BulkActions"
+        ],
+        "description": "List LaunchBulkInstancesOperation resources by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LaunchBulkInstancesOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BulkActions_ListBySubscription": {
+            "$ref": "./examples/BulkActions_ListBySubscription_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/locations/{location}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations": {
+      "get": {
+        "operationId": "BulkActions_ListByResourceGroup",
+        "tags": [
+          "BulkActions"
+        ],
+        "description": "List LaunchBulkInstancesOperation resources by resource group.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LaunchBulkInstancesOperationListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "BulkActions_ListByResourceGroup": {
+            "$ref": "./examples/BulkActions_ListByResourceGroup_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/locations/{location}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations/{launchBulkInstancesOperationID}": {
       "get": {
         "operationId": "BulkActions_Get",
         "tags": [
@@ -94,6 +183,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "launchBulkInstancesOperationID",
@@ -141,6 +238,14 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
             "name": "launchBulkInstancesOperationID",
             "in": "path",
             "description": "The ID of the LaunchBulkInstancesOperation",
@@ -169,6 +274,17 @@
             "description": "Resource 'LaunchBulkInstancesOperation' create operation succeeded",
             "schema": {
               "$ref": "#/definitions/LaunchBulkInstancesOperation"
+            },
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
             }
           },
           "default": {
@@ -182,7 +298,11 @@
           "BulkActions_CreateOrUpdate - generated by [MaximumSet] rule - generated by [MaximumSet] rule - generated by [MaximumSet] rule": {
             "$ref": "./examples/BulkActions_CreateOrUpdate_MaximumSet_Gen.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "BulkActions_Delete",
@@ -199,6 +319,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "launchBulkInstancesOperationID",
@@ -230,7 +358,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations/{launchBulkInstancesOperationID}/cancel": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/locations/{location}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations/{launchBulkInstancesOperationID}/cancel": {
       "post": {
         "operationId": "BulkActions_Cancel",
         "tags": [
@@ -246,6 +374,14 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
           },
           {
             "name": "launchBulkInstancesOperationID",
@@ -274,7 +410,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations/{name}/virtualMachines": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/locations/{location}/providers/Microsoft.ComputeBulkActions/launchBulkInstancesOperations/{name}/virtualMachines": {
       "get": {
         "operationId": "BulkActions_ListVirtualMachines",
         "tags": [
@@ -292,12 +428,20 @@
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "location",
+            "in": "path",
+            "description": "The location name.",
+            "required": true,
+            "type": "string",
+            "minLength": 1
+          },
+          {
             "name": "name",
             "in": "path",
             "description": "The name of the LaunchBulkInstancesOperation",
             "required": true,
             "type": "string",
-            "pattern": "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
+            "pattern": "^[0-9a-fA-F]{8}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{4}-[0-9a-fA-F]{12}$"
           },
           {
             "name": "$filter",
@@ -612,17 +756,17 @@
           {
             "name": "None",
             "value": "None",
-            "description": "None"
+            "description": "Caching type:None"
           },
           {
             "name": "ReadOnly",
             "value": "ReadOnly",
-            "description": "ReadOnly"
+            "description": "Caching type:ReadOnly"
           },
           {
             "name": "ReadWrite",
             "value": "ReadWrite",
-            "description": "ReadWrite"
+            "description": "Caching type:ReadWrite"
           }
         ]
       }
@@ -800,12 +944,12 @@
           {
             "name": "Delete",
             "value": "Delete",
-            "description": "Delete"
+            "description": "Delete network interface when the VM is deleted"
           },
           {
             "name": "Detach",
             "value": "Detach",
-            "description": "Detach"
+            "description": "Detach network interface when the VM is deleted"
           }
         ]
       }
@@ -833,7 +977,7 @@
           {
             "name": "Local",
             "value": "Local",
-            "description": "Local"
+            "description": "Local Ephemeral disk option: Local"
           }
         ]
       }
@@ -1278,6 +1422,27 @@
         }
       ]
     },
+    "LaunchBulkInstancesOperationListResult": {
+      "type": "object",
+      "description": "The response of a LaunchBulkInstancesOperation list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LaunchBulkInstancesOperation items on this page",
+          "items": {
+            "$ref": "#/definitions/LaunchBulkInstancesOperation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "LaunchBulkInstancesOperationProperties": {
       "type": "object",
       "description": "Details of the LaunchBulkInstancesOperation.",
@@ -1465,12 +1630,12 @@
           {
             "name": "ImageDefault",
             "value": "ImageDefault",
-            "description": "ImageDefault"
+            "description": "ImageDefault linux VM guest patch mode"
           },
           {
             "name": "AutomaticByPlatform",
             "value": "AutomaticByPlatform",
-            "description": "AutomaticByPlatform"
+            "description": "AutomaticByPlatform linux VM guest patch mode"
           }
         ]
       }
@@ -3433,22 +3598,22 @@
           {
             "name": "Unknown",
             "value": "Unknown",
-            "description": "Unknown"
+            "description": "Reboot setting for Unknown"
           },
           {
             "name": "IfRequired",
             "value": "IfRequired",
-            "description": "IfRequired reboot setting"
+            "description": "Reboot setting for IfRequired"
           },
           {
             "name": "Never",
             "value": "Never",
-            "description": "Never reboot setting"
+            "description": "Reboot setting for Never"
           },
           {
             "name": "Always",
             "value": "Always",
-            "description": "Always reboot setting"
+            "description": "Reboot setting for Always"
           }
         ]
       }

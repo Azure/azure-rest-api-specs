@@ -189,7 +189,7 @@ model DiffDiskSettings {
 union DiffDiskOptions {
   string,
 
-  @doc("Local")
+  @doc("Local Ephemeral disk option: Local")
   Local: "Local",
 }
 
@@ -253,13 +253,13 @@ union OperatingSystemTypes {
 union CachingTypes {
   string,
 
-  @doc("None")
+  @doc("Caching type:None")
   None: "None",
 
-  @doc("ReadOnly")
+  @doc("Caching type:ReadOnly")
   ReadOnly: "ReadOnly",
 
-  @doc("ReadWrite")
+  @doc("Caching type:ReadWrite")
   ReadWrite: "ReadWrite",
 }
 
@@ -680,16 +680,16 @@ union WindowsPatchAssessmentMode {
 union WindowsVMGuestPatchAutomaticByPlatformRebootSetting {
   string,
 
-  @doc("Unknown")
+  @doc("Reboot setting for Unknown")
   Unknown: "Unknown",
 
-  @doc("IfRequired reboot setting")
+  @doc("Reboot setting for IfRequired")
   IfRequired: "IfRequired",
 
-  @doc("Never reboot setting")
+  @doc("Reboot setting for Never")
   Never: "Never",
 
-  @doc("Always reboot setting")
+  @doc("Reboot setting for Always")
   Always: "Always",
 }
 
@@ -798,10 +798,10 @@ model LinuxVMGuestPatchAutomaticByPlatformSettings {
 union LinuxVMGuestPatchMode {
   string,
 
-  @doc("ImageDefault")
+  @doc("ImageDefault linux VM guest patch mode")
   ImageDefault: "ImageDefault",
 
-  @doc("AutomaticByPlatform")
+  @doc("AutomaticByPlatform linux VM guest patch mode")
   AutomaticByPlatform: "AutomaticByPlatform",
 }
 
@@ -1049,10 +1049,10 @@ model VirtualMachineIpTag {
 union DeleteOptions {
   string,
 
-  @doc("Delete")
+  @doc("Delete network interface when the VM is deleted")
   Delete: "Delete",
 
-  @doc("Detach")
+  @doc("Detach network interface when the VM is deleted")
   Detach: "Detach",
 }
 

@@ -37,6 +37,11 @@ These settings apply only when `--tag=package-2025-10-30-preview` is specified o
 ```yaml $(tag) == 'package-2025-10-30-preview'
 input-file:
   - Microsoft.ComputeBulkActions/preview/2025-10-30-preview/computebulkactions.json
+suppressions:  
+  - code: DefinitionsPropertiesNamesCamelCase
+    reason: SSD is the abbreviation for solid state drive used in the property name.
+    from: computebulkactions.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
 ```
 
 # Code Generation

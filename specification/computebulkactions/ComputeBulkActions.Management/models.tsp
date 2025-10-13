@@ -9,12 +9,31 @@ import "./virtualMachineExtension.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using TypeSpec.Versioning;
 using Azure.Core;
 using Azure.ResourceManager;
-using TypeSpec.OpenAPI;
 
 namespace Microsoft.ComputeBulkActions;
+
+// ------------------ Common Values ---------------
+alias CommonParams = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+};
+
+alias LocationParameter = {
+  /** The location name. */
+  @path
+  @minLength(1)
+  @segment("locations")
+  @key
+  location: azureLocation;
+};
+
+alias CustomParams = {
+  ...CommonParams;
+  ...LocationParameter;
+};
 
 // ------------------ Union --------------- //
 @doc("The status of the LaunchBulkInstancesOperation.")
@@ -248,6 +267,7 @@ model ManagedServiceIdentityUpdate
 model ResourcePlanUpdate
   is OptionalProperties<UpdateableProperties<Azure.ResourceManager.CommonTypes.Plan>>;
 
+@resourceGroupResource
 @doc("A LaunchBulkInstancesOperation resource")
 model LaunchBulkInstancesOperation
   is ProxyResource<LaunchBulkInstancesOperationProperties> {
