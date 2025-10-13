@@ -7,9 +7,10 @@
 
 import eslint from "@eslint/js";
 import eslintPluginUnicorn from "eslint-plugin-unicorn";
+import { defineConfig } from "eslint/config";
 import tseslint from "typescript-eslint";
 
-const config = tseslint.config(
+const config = defineConfig(
   // ========================================
   // ESLint + TS-ESLint configs
   // ========================================

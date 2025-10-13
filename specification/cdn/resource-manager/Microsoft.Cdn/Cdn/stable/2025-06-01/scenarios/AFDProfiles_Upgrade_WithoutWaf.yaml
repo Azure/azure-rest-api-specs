@@ -1,0 +1,28 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/Azure/azure-rest-api-specs/main/documentation/api-scenario/references/v1.2/schema.json
+scope: ResourceGroup
+variables:
+  afdprofileName:
+    type: string
+    prefix: afdprofile
+scenarios:
+  - scenario: GeneratedScenario
+    steps:
+      - step: CheckNameAvailabilityWithSubscription
+        operationId: CheckNameAvailabilityWithSubscription
+        exampleFile: ../examples/CheckNameAvailabilityWithSubscription.json
+      - step: AFDProfiles_Create
+        operationId: Profiles_Create
+        parameters:
+          profileName: $(afdprofileName)
+          profile: 
+            location: "global"
+            sku:
+              name: Standard_AzureFrontDoor
+            identity: 
+              type: "SystemAssigned"
+      - step: AFDProfiles_Upgrade
+        operationId: AFDProfiles_Upgrade
+        parameters:
+          profileName: $(afdprofileName)
+          profileUpgradeParameters: 
+            wafMappingList: []

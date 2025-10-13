@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 @versioned(KeyVault.Versions)
 namespace Customizations;
 
-@@clientName(KeyVault, "Secret", "java");
+@@clientName(KeyVault, "SecretClient", "java");
 @@clientName(KeyVault, "Secret", "rust");
 @@clientName(KeyVault, "Client", "go");
 
@@ -72,6 +72,13 @@ op getSecret is KeyVaultOperation<
     @path("secret-version")
     @clientName("version", "go")
     secretVersion: string;
+
+    /**
+     * The media type (MIME type) of the certificate. If a supported format is specified, the certificate content is converted to the requested format. Currently, only PFX to PEM conversion is supported. If an unsupported format is specified, the request is rejected. If not specified, the certificate is returned in its original format without conversion.
+     */
+    @Versioning.added(KeyVault.Versions.v2025_06_01_preview)
+    @query("outContentType")
+    outContentType?: ContentType;
   },
   SecretBundle
 >;
