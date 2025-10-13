@@ -21,7 +21,7 @@ alias ListEvaluatorVersionsParameters = {
   limit?: int32 = 20;
 };
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 interface Evaluators {
   // GET /evaluators/{name}/versions
   #suppress "@azure-tools/typespec-azure-core/verb-conflict" "Resource action used as a building block."

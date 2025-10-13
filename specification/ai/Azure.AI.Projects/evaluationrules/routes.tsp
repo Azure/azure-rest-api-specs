@@ -19,7 +19,7 @@ alias EvaluationRuleTraits = SupportsClientRequestId &
 
 alias EvaluationRuleOperations = Azure.Core.ResourceOperations<EvaluationRuleTraits>;
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 interface EvaluationRules {
   // GET /evaluationrules/{id}
   @doc("Get an evaluation rule.")

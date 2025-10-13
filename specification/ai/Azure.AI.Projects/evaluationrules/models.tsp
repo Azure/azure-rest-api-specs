@@ -12,7 +12,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 @doc("Type of the evaluation action.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union EvaluationRuleActionType {
   string,
 
@@ -24,7 +24,7 @@ union EvaluationRuleActionType {
 }
 
 @doc("Evaluation action model.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @discriminator("type")
 model EvaluationRuleAction {
   @doc("Type of the evaluation action.")
@@ -32,7 +32,7 @@ model EvaluationRuleAction {
 }
 
 @doc("Evaluation rule action for continuous evaluation.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
   type: EvaluationRuleActionType.continuousEvaluation;
 
@@ -44,7 +44,7 @@ model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
 }
 
 @doc("Evaluation rule action for human evaluation.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model HumanEvaluationRuleAction extends EvaluationRuleAction {
   type: EvaluationRuleActionType.humanEvaluation;
 
@@ -52,19 +52,19 @@ model HumanEvaluationRuleAction extends EvaluationRuleAction {
   templateId: AssetId;
 }
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 @doc("Identifier of a saved asset.")
 scalar AssetId extends string;
 
 @doc("Evaluation filter model.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationRuleFilter {
   @doc("Filter by agent name.")
   agentName: string;
 }
 
 @doc("Type of the evaluation rule event.")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 union EvaluationRuleEventType {
   string,
 
@@ -77,7 +77,7 @@ union EvaluationRuleEventType {
 
 @doc("Evaluation rule model.")
 @resource("evaluationrules")
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationRule {
   @doc("Unique identifier for the evaluation rule.")
   @key

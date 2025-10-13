@@ -27,7 +27,7 @@ alias SchedulesFilterQueryParamsTraits = {
   enabled?: boolean;
 };
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 interface Schedules {
   @doc("Delete a schedule.")
   delete is ScheduleOperations.ResourceDelete<Schedule>;

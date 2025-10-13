@@ -13,7 +13,7 @@ using TypeSpec.Versioning;
 namespace Azure.AI.Projects;
 
 /** Azure AI Evaluator class definition. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model AzureAIEvaluator {
   /** The object type, which is always `azure_ai_evaluator`. */
   type: "azure_ai_evaluator";
@@ -35,7 +35,7 @@ model AzureAIEvaluator {
 }
 
 /** Expect format of the results list of the evaluation run output items. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluationRunOutputItemResult {
   /** The result type (e.g., "string_check", "azure_ai_evaluator"). */
   type: string;
@@ -69,7 +69,7 @@ model EvaluationRunOutputItemResult {
 }
 
 /** Query and response excepted input messsage defintion. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model QueryResponseInlineMessage {
   /** The object type, which is always query_response_inline_message. */
   type: "azure_ai_query_response_inline_message";
@@ -91,7 +91,7 @@ model QueryResponseInlineMessage {
 }
 
 /** Query and response excepted input messsage defintion. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvaluatorMessage {
   /** The object type, which is always query_response_inline_message. */
   type: "azure_ai_evaluator_messages";
@@ -110,7 +110,7 @@ model EvaluatorMessage {
 }
 
 /** OpenAI definition: Eval output results. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvalRunOutputItem {
   /** The type of the object. Always eval.run.output_item */
   object: "eval.run.output_item" = "eval.run.output_item";
@@ -144,7 +144,7 @@ model EvalRunOutputItem {
 }
 
 /** OpenAI definition: Eval inline file content or jsonl input data. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model EvalJsonlFileContentSource {
   /** The type of jsonl source. Always `file_content`. */
   type: "file_content" = "file_content";
@@ -160,7 +160,7 @@ model EvalJsonlFileContentSource {
 }
 
 /** Eval jsonl input data. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model CreateEvalJsonlRunDataSource {
   /** The type of data source. Always jsonl. */
   type: "jsonl" = "jsonl";
@@ -170,7 +170,7 @@ model CreateEvalJsonlRunDataSource {
 }
 
 /** OpenAI Input data source definition for eval. */
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 model SyncEvalInput {
   /** Identifier of the evaluator. */
   data_source: CreateEvalJsonlRunDataSource;
