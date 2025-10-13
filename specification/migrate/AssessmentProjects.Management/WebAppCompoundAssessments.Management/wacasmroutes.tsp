@@ -2,7 +2,6 @@ import "./Common/DataModels/DownloadUrl.tsp";
 import "./WebModels/WebAppCompoundAssessments.tsp";
 import "./WebModels/WacaSummary.tsp";
 import "./WebModels/AssessedWebApps.tsp";
-import "./WebModels/RecalculateSummariesInput.tsp";
 
 using TypeSpec.Versioning;
 using Azure.ResourceManager;
@@ -26,13 +25,6 @@ interface CompoundAssessmentOperations {
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Download URL Post body is empty."
   @added(WACAApiVersions.v2024_03_03_preview)
   downloadUrl is ArmResourceActionAsync<CompoundAssessment, {}, DownloadUrl>;
-
-  @added(WACAApiVersions.v2025_09_09_preview)
-  recalculateSummaries is ArmResourceActionSync<
-    CompoundAssessment,
-    RecalculateSummariesInput,
-    void
-  >;
 }
 
 @armResourceOperations
@@ -51,7 +43,4 @@ interface AssessedWebAppOperations {
 
   @added(WACAApiVersions.v2025_09_09_preview)
   listByParent is ArmResourceListByParent<AssessedWebApps>;
-
-  @added(WACAApiVersions.v2025_09_09_preview)
-  update is ArmCustomPatchSync<AssessedWebApps, AssessedWebApps>;
 }

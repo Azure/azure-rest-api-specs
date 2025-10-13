@@ -410,76 +410,6 @@
             "$ref": "./examples/AssessedWebAppOperations_Get_MaximumSet_Gen.json"
           }
         }
-      },
-      "patch": {
-        "operationId": "AssessedWebAppOperations_Update",
-        "tags": [
-          "AssessedWebAppOperations"
-        ],
-        "description": "Update a AssessedWebApps",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Assessment Project Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "compoundAssessmentName",
-            "in": "path",
-            "description": "Compound Assessment ARM name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "assessedWebAppName",
-            "in": "path",
-            "description": "Assessed web app ARM name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "properties",
-            "in": "body",
-            "description": "The resource properties to be updated.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AssessedWebApps"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/AssessedWebApps"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AssessedWebAppOperations_Update": {
-            "$ref": "./examples/AssessedWebAppOperations_Update_MaximumSet_Gen.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webAppCompoundAssessments/{compoundAssessmentName}/downloadUrl": {
@@ -562,67 +492,6 @@
           "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webAppCompoundAssessments/{compoundAssessmentName}/recalculateSummaries": {
-      "post": {
-        "operationId": "CompoundAssessmentOperations_RecalculateSummaries",
-        "tags": [
-          "CompoundAssessmentOperations"
-        ],
-        "description": "A synchronous resource action.",
-        "parameters": [
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "projectName",
-            "in": "path",
-            "description": "Assessment Project Name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "compoundAssessmentName",
-            "in": "path",
-            "description": "Compound Assessment ARM name",
-            "required": true,
-            "type": "string",
-            "pattern": "^[^<>&:\\?/#]{1,260}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/RecalculateSummariesInput"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "CompoundAssessmentOperations_RecalculateSummaries": {
-            "$ref": "./examples/CompoundAssessmentOperations_RecalculateSummaries_MaximumSet_Gen.json"
-          }
-        }
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Migrate/assessmentProjects/{projectName}/webAppCompoundAssessments/{compoundAssessmentName}/summaries": {
@@ -7050,60 +6919,6 @@
         ]
       },
       "readOnly": true
-    },
-    "RecalculateSummariesInput": {
-      "type": "object",
-      "description": "Recalculate summaries input.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/RecalculateSummariesProperties",
-          "description": "Recalculate summaries properties."
-        }
-      }
-    },
-    "RecalculateSummariesProperties": {
-      "type": "object",
-      "description": "Recalculate summaries properties.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/RecalculateSummariesTypeEnum",
-          "description": "Recalculate summaries type."
-        },
-        "assessmentStatus": {
-          "$ref": "#/definitions/AssessmentStatus",
-          "description": "Assessment status."
-        }
-      }
-    },
-    "RecalculateSummariesTypeEnum": {
-      "type": "string",
-      "description": "Recalculate summaries type enum.",
-      "enum": [
-        "None",
-        "AppAware",
-        "StateChange"
-      ],
-      "x-ms-enum": {
-        "name": "RecalculateSummariesTypeEnum",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "None",
-            "value": "None",
-            "description": "None"
-          },
-          {
-            "name": "AppAware",
-            "value": "AppAware",
-            "description": "App aware"
-          },
-          {
-            "name": "StateChange",
-            "value": "StateChange",
-            "description": "State change"
-          }
-        ]
-      }
     },
     "RecommendedFor": {
       "type": "object",
