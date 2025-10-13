@@ -31,7 +31,7 @@ interface PriceSheetOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -220,7 +220,7 @@ interface BalancesOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -247,7 +247,7 @@ interface BalancesOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -286,7 +286,7 @@ interface ReservationsSummariesOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Capacity",
+    providerNamespace: "Microsoft.Capacity",
 
     /**
      * Order Id of the reservation
@@ -326,7 +326,7 @@ interface ReservationsSummariesOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Capacity",
+    providerNamespace: "Microsoft.Capacity",
 
     /**
      * Order Id of the reservation
@@ -429,7 +429,7 @@ interface ReservationsDetailsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Capacity",
+    providerNamespace: "Microsoft.Capacity",
 
     /**
      * Order Id of the reservation
@@ -463,7 +463,7 @@ interface ReservationsDetailsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Capacity",
+    providerNamespace: "Microsoft.Capacity",
 
     /**
      * Order Id of the reservation
@@ -639,7 +639,7 @@ interface ReservationTransactionsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -685,7 +685,7 @@ interface ReservationTransactionsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -729,7 +729,7 @@ interface AggregatedCostOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Management",
+    providerNamespace: "Microsoft.Management",
 
     /**
      * Order Id of the reservation
@@ -761,7 +761,7 @@ interface AggregatedCostOperationGroup {
     /** the provider namespace */
     @path
     @segment("providers")
-    providerNamespace: "microsoft.Management",
+    providerNamespace: "Microsoft.Management",
 
     /**
      * Order Id of the reservation
@@ -773,7 +773,7 @@ interface AggregatedCostOperationGroup {
     /** the provider namespace */
     @path
     @segment("providers")
-    billingproviderNamespace: "microsoft.Billing",
+    billingproviderNamespace: "Microsoft.Billing",
 
     /**
      * Billing Period Name.
@@ -805,7 +805,7 @@ interface EventsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -853,7 +853,7 @@ interface EventsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -891,7 +891,7 @@ interface LotsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -927,7 +927,7 @@ interface LotsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
@@ -961,7 +961,7 @@ interface LotsOperationGroup {
     @path
     @segment("providers")
     @key
-    providerNamespace: "microsoft.Billing",
+    providerNamespace: "Microsoft.Billing",
 
     /**
      * BillingAccount ID
