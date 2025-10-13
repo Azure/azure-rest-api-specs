@@ -128,6 +128,7 @@ interface EasmClient {
   "csharp"
 );
 @@clientName(EasmClient.runDiscoGroup, "RunDiscoveryGroup", "csharp");
+@@clientName(EasmClient.getDiscoGroup, "GetDiscoveryGroup", "csharp");
 @@clientName(EasmClient.listDiscoGroup, "GetDiscoveryGroups", "csharp");
 @@clientName(EasmClient.listRuns, "GetDiscoveryGroupRuns", "csharp");
 @@clientName(EasmClient.createOrReplaceDiscoGroup,
@@ -136,3 +137,4 @@ interface EasmClient {
 );
 @@clientName(EasmClient.getDiscoTemplate, "GetDiscoveryTemplate", "csharp");
 @@clientName(EasmClient.listDiscoTemplate, "GetDiscoveryTemplates", "csharp");
+@@clientName(EasmClient.validateDiscoGroup, "ValidateDiscoveryGroup", "csharp");
