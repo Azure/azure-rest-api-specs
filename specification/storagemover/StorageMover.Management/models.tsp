@@ -858,7 +858,7 @@ model JobDefinitionUpdateProperties {
    * List of connections associated to this job
    */
   @added(Versions.v2025_08_01)
-  connections?: string[];
+  connections?: Azure.Core.armResourceIdentifier[];
 }
 
 /**
