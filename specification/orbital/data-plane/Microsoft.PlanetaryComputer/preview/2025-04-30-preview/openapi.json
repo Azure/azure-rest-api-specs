@@ -401,24 +401,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "collectionId",
-            "in": "path",
-            "description": "STAC Collection Identifier",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
-            "name": "itemId",
-            "in": "path",
-            "description": "STAC Item Identifier",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
             "$ref": "#/parameters/AssetQueryParameters.assets"
           },
           {
@@ -441,6 +423,24 @@
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "collectionId",
+            "in": "path",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
+            "name": "itemId",
+            "in": "path",
+            "description": "STAC Item Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
           },
           {
             "name": "tileMatrixSetId",
@@ -1145,7 +1145,7 @@
           {
             "name": "format",
             "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp).",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
             "required": true,
             "type": "string",
             "maxLength": 500,
@@ -1384,7 +1384,7 @@
           {
             "name": "format",
             "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp).",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
             "required": true,
             "type": "string",
             "maxLength": 500,
@@ -1630,7 +1630,7 @@
           {
             "name": "format",
             "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp).",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
             "required": true,
             "type": "string",
             "maxLength": 500,
@@ -1847,7 +1847,7 @@
           {
             "name": "format",
             "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp) (default: \"png\").",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
             "required": true,
             "type": "string",
             "maxLength": 500,
@@ -2648,7 +2648,7 @@
           {
             "name": "format",
             "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp).",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
             "required": true,
             "type": "string",
             "maxLength": 500,
@@ -3582,7 +3582,7 @@
           {
             "name": "scale",
             "in": "path",
-            "description": "Numeric scale factor for the tile. Higher values produce larger tiles (default: \"1\")",
+            "description": "Numeric scale factor for the tile. Higher values produce larger tiles",
             "required": true,
             "type": "number",
             "format": "float"
@@ -3590,7 +3590,7 @@
           {
             "name": "format",
             "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp) (default: \"png\").",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
             "required": true,
             "type": "string",
             "maxLength": 500,
@@ -4173,15 +4173,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "searchId",
-            "in": "path",
-            "description": "Search Id (pgSTAC Search Hash)",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
             "$ref": "#/parameters/AssetQueryParameters.assets"
           },
           {
@@ -4219,6 +4210,15 @@
           },
           {
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
+          },
+          {
+            "name": "searchId",
+            "in": "path",
+            "description": "Search Id (pgSTAC Search Hash)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
           },
           {
             "name": "tileMatrixSetId",
@@ -6722,15 +6722,6 @@
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
           },
           {
-            "name": "searchId",
-            "in": "path",
-            "description": "Search Id (pgSTAC Search Hash)",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*"
-          },
-          {
             "$ref": "#/parameters/AssetQueryParameters.assets"
           },
           {
@@ -6770,6 +6761,15 @@
             "$ref": "#/parameters/TerrainAlgorithmQueryParameters.algorithmParams"
           },
           {
+            "name": "searchId",
+            "in": "path",
+            "description": "Search Id (pgSTAC Search Hash)",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*"
+          },
+          {
             "name": "tileMatrixSetId",
             "in": "path",
             "description": "Identifier selecting one of the TileMatrixSetId supported",
@@ -6790,7 +6790,7 @@
           {
             "name": "scale",
             "in": "path",
-            "description": "Numeric scale factor for the tile. Higher values produce larger tiles (default: \"1\")",
+            "description": "Numeric scale factor for the tile. Higher values produce larger tiles",
             "required": true,
             "type": "number",
             "format": "float"
@@ -6798,7 +6798,7 @@
           {
             "name": "format",
             "in": "path",
-            "description": "Output format for the tile or image (e.g., png, jpeg, webp) (default: \"png\").",
+            "description": "Output format for the tile or image (e.g., png, jpeg, webp)",
             "required": true,
             "type": "string",
             "maxLength": 500,

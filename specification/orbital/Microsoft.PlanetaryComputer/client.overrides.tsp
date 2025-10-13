@@ -9,12 +9,6 @@ using TypeSpec.Http;
 
 using Microsoft.PlanetaryComputer;
 
-// === Common signature aliases for Python overrides ===
-
-// === Method overrides ===
-
-// === Parameter Grouping Overrides ===
-
 /**
  * Options for getting a tile from a dataset
  */
