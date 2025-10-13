@@ -612,7 +612,10 @@ op getPartCustomized(
   options: GetPartOptions,
 ): TileResponse;
 
-@@override(TilerParts.getCroppedToBoundingBox, getPartCustomized, "!python,!csharp");
+@@override(TilerParts.getCroppedToBoundingBox,
+  getPartCustomized,
+  "!python,!csharp"
+);
 
 /**
  * Create image from part of a dataset with dimensions with grouped parameters.
@@ -675,7 +678,10 @@ op getPreviewWithFormatCustomized(
   options: GetPreviewOptions,
 ): TileResponse;
 
-@@override(TilerPreviews.getFormat, getPreviewWithFormatCustomized, "!python,!csharp");
+@@override(TilerPreviews.getFormat,
+  getPreviewWithFormatCustomized,
+  "!python,!csharp"
+);
 
 /**
  * Merged assets statistics with grouped parameters.
@@ -715,7 +721,10 @@ op getTileJsonCustomized(
   options: GetTileJsonOptions,
 ): TileJsonMetaData;
 
-@@override(TilerTileJsonTileMatrixSets.get, getTileJsonCustomized, "!python,!csharp");
+@@override(TilerTileJsonTileMatrixSets.get,
+  getTileJsonCustomized,
+  "!python,!csharp"
+);
 
 /**
  * Return TileJSON document for a searchId with grouped parameters.
