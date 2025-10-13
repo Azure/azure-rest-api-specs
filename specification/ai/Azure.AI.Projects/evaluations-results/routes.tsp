@@ -56,6 +56,7 @@ op VersionedResourceAction<
 interface EvaluationResults
   extends VersionedOperations<
       EvaluationResult,
+      InputParameters<EvaluationResult, "evaluationResult">,
       ListEvaluationResultsParameters,
       ListEvaluationResultsParameters
     > {

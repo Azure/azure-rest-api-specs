@@ -885,10 +885,10 @@
         }
       }
     },
-    "/evaluationResults/{name}": {
-      "patch": {
-        "operationId": "EvaluationResults_CreateOrUpdateVersion",
-        "description": "Create a new or update an existing EvaluationResult with the given version id",
+    "/evaluationResults/{name}/versions": {
+      "get": {
+        "operationId": "EvaluationResults_ListVersions",
+        "description": "List all versions of the given EvaluationResult",
         "parameters": [
           {
             "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
@@ -960,50 +960,6 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/EvaluationResult"
-            }
-          },
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/EvaluationResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        }
-      }
-    },
-    "/evaluationResults/{name}/versions": {
-      "get": {
-        "operationId": "EvaluationResults_ListVersions",
-        "description": "List all versions of the given EvaluationResult",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "The name of the resource",
-            "required": true,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
               "$ref": "#/definitions/PagedEvaluationResult"
             }
           },
@@ -1051,6 +1007,67 @@
         "responses": {
           "200": {
             "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      },
+      "patch": {
+        "operationId": "EvaluationResults_CreateOrUpdateVersion",
+        "description": "Create a new or update an existing EvaluationResult with the given version id",
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "description": "The specific version id of the EvaluationResult to create or update.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "evaluationResult",
+            "in": "body",
+            "description": "The EvaluationResult to create or update.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationResult"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationResult"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
               "$ref": "#/definitions/EvaluationResult"
             }
