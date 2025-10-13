@@ -21,7 +21,6 @@ namespace Microsoft.ComputeBulkActions;
 // Order matters here as versions lower in the enum list will inherit models and routes from versions above it
 enum Versions {
   /** 2025-10-30-preview version */
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
   `2025-10-30-preview`,
 }
