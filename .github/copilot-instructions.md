@@ -181,6 +181,12 @@ Follow [typespec docs](../eng/common/instructions/azsdk-tools/typespec-docs.inst
 [no-enum]: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum
 [typespec-structure-guidelines]: ../documentation/typespec-structure-guidelines.md
 
+# Authoring typespec
+
+Guide the user to define and update TypeSpec based API spec for a service.
+
+Follow [typespec authoring](..\eng\common\instructions\azsdk-tools\typespec-authoring.instructions.md) to define or update Typespec based spec for service
+
 # SDK generation from TypeSpec
 
 ## Agent context for TypeSpec and SDK process
