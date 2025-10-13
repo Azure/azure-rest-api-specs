@@ -14,7 +14,31 @@ use the native TypeSpec code generation configured in the tspconfig.yaml file.
 
 ```yaml
 openapi-type: data-plane
-tag: package-2022-12-01
+tag: package-v1
+```
+
+### Tag: package-v1
+
+These settings apply only when `--tag=package-v1` is specified on the command line.
+
+```yaml $(tag) == 'package-v1'
+input-file:
+  - stable/v1/widgetanalytics.json
+```
+
+### Suppress non-TypeSpec SDK related linting rules
+
+These set of linting rules aren't applicable to the new TypeSpec SDK code generators so suppressing them here. Eventually we will
+opt-out these rules from running in the linting tools for TypeSpec generated swagger files.
+
+```yaml
+suppressions:
+  - code: AvoidAnonymousTypes
+  - code: PatchInOperationName
+  - code: OperationIdNounVerb
+  - code: RequiredReadOnlyProperties
+  - code: SchemaNamesConvention
+  - code: SchemaDescriptionOrTitle
 ```
 
 ### Tag: package-2022-12-01
