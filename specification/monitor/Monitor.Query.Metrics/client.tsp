@@ -73,6 +73,8 @@ using MonitorQueryMetrics;
 
 @@clientName(MetricResultsResponseValuesItem.value, "Metrics", "csharp");
 @@clientName(MetricResultsResponseValuesItem.interval, "Granularity", "csharp");
+@@clientName(MetricResultsResponseValuesItem.starttime, "StartTime", "csharp");
+@@clientName(MetricResultsResponseValuesItem.endtime, "EndTime", "csharp");
 @@clientName(Metric.displayDescription, "Description", "csharp");
 @@clientName(Metric.timeseries, "TimeSeries", "csharp");
 @@clientName(Metric.name, "LocalizedName", "csharp");
