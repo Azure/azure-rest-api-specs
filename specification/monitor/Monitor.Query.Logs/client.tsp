@@ -93,14 +93,34 @@ interface Client {
 );
 
 // .NET configuration
-@@clientName(Column, "LogsTableColumn", "csharp");
-@@clientName(ColumnDataType, "LogsColumnType", "csharp");
-@@clientName(Table, "LogsTable", "csharp");
-@@clientName(QueryResults, "LogsQueryResult", "csharp");
-@@clientName(BatchQueryResults, "LogsBatchQueryResult", "csharp");
+@@clientName(Metric, "MetricResult", "csharp");
+@@clientName(MonitorQueryMetrics, "MetricsClient", "csharp");
+@@clientName(MetricResultsResponse, "MetricsQueryResourcesResult", "csharp");
+@@clientName(MetricResultsResponseValuesItem, "MetricsQueryResult", "csharp");
+@@clientName(TimeSeriesElement, "MetricTimeSeriesElement", "csharp");
 
-@@access(QueryBody, Access.internal, "csharp");
-@@access(BatchQueryRequest, Access.internal, "csharp");
-@@access(Client.queryBatch, Access.internal, "csharp");
-@@access(Client.queryWorkspace, Access.internal, "csharp");
-@@access(Client.queryResource, Access.internal, "csharp");
+@@clientName(MetricResultsResponseValuesItem.value, "Metrics", "csharp");
+@@clientName(MetricResultsResponseValuesItem.interval, "Granularity", "csharp");
+@@clientName(MetricResultsResponseValuesItem.starttime, "StartTime", "csharp");
+@@clientName(MetricResultsResponseValuesItem.endtime, "EndTime", "csharp");
+@@clientName(Metric.displayDescription, "Description", "csharp");
+@@clientName(Metric.timeseries, "TimeSeries", "csharp");
+@@clientName(Metric.name, "LocalizedName", "csharp");
+@@clientName(TimeSeriesElement.data, "Values", "csharp");
+@@clientName(MetricResultsResponseValuesItem.resourceid,
+  "ResourceId",
+  "csharp"
+);
+@@clientName(MetricResultsResponseValuesItem.resourceregion,
+  "ResourceRegion",
+  "csharp"
+);
+
+@@access(ResourceIdList, Access.internal, "csharp");
+@@access(Metric.name, Access.internal, "csharp");
+@@access(Metric.errorCode, Access.internal, "csharp");
+@@access(Metric.errorMessage, Access.internal, "csharp");
+@@access(MonitorQueryMetrics.batch, Access.internal, "csharp");
+@@access(MetricResultsResponseValuesItem.resourceid, Access.internal, "csharp");
+@@access(MetricResultsResponseValuesItem.starttime, Access.internal, "csharp");
+@@access(MetricResultsResponseValuesItem.endtime, Access.internal, "csharp");
