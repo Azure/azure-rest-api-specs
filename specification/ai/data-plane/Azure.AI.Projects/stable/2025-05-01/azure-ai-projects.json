@@ -1225,6 +1225,29 @@
         "credential"
       ]
     },
+    "BlobReferenceForConsumption": {
+      "type": "object",
+      "description": "Represents a reference to a blob for consumption",
+      "properties": {
+        "blobUri": {
+          "type": "string",
+          "description": "Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path"
+        },
+        "storageAccountArmId": {
+          "type": "string",
+          "description": "ARM ID of the storage account to use."
+        },
+        "credential": {
+          "$ref": "#/definitions/SasCredential",
+          "description": "Credential info to access the storage account."
+        }
+      },
+      "required": [
+        "blobUri",
+        "storageAccountArmId",
+        "credential"
+      ]
+    },
     "ChatChoice": {
       "type": "object",
       "description": "The representation of a single prompt completion as part of an overall chat completions request.\nGenerally, `n` choices are generated per provided prompt with a default value of 1.\nToken limits and other settings may limit the number of choices generated.",
@@ -2258,7 +2281,7 @@
           "type": "string",
           "description": "BlobReference is the only supported type.",
           "enum": [
-            "BlobReference"
+            "TemporaryBlobReference"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -2273,6 +2296,10 @@
       "type": "object",
       "description": "Represents the response for a pending upload request",
       "properties": {
+        "blobReferenceForConsumption": {
+          "$ref": "#/definitions/BlobReferenceForConsumption",
+          "description": "Container-level read, write, list SAS."
+        },
         "blobReference": {
           "$ref": "#/definitions/BlobReference",
           "description": "Container-level read, write, list SAS."
@@ -2289,7 +2316,7 @@
           "type": "string",
           "description": "BlobReference is the only supported type",
           "enum": [
-            "BlobReference"
+            "TemporaryBlobReference"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -2297,6 +2324,7 @@
         }
       },
       "required": [
+        "blobReferenceForConsumption",
         "blobReference",
         "pendingUploadId",
         "pendingUploadType"
@@ -2307,7 +2335,8 @@
       "description": "The type of pending upload.",
       "enum": [
         "None",
-        "BlobReference"
+        "BlobReference",
+        "TemporaryBlobReference"
       ],
       "x-ms-enum": {
         "name": "PendingUploadType",
@@ -2322,6 +2351,11 @@
             "name": "BlobReference",
             "value": "BlobReference",
             "description": "Blob Reference is the only supported type."
+          },
+          {
+            "name": "temporaryBlobReference",
+            "value": "TemporaryBlobReference",
+            "description": "Temporary Blob Reference is the only supported type."
           }
         ]
       }

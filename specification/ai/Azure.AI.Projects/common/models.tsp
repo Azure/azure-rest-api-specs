@@ -55,6 +55,9 @@ union PendingUploadType {
 
   @doc("Blob Reference is the only supported type.")
   BlobReference: "BlobReference",
+
+  @doc("Temporary Blob Reference is the only supported type.")
+  temporaryBlobReference: "TemporaryBlobReference",
 }
 
 @doc("The type of credential used to access the storage account.")
@@ -88,11 +91,14 @@ model PendingUploadRequest {
   connectionName?: string;
 
   @doc("BlobReference is the only supported type.")
-  pendingUploadType: PendingUploadType.BlobReference;
+  pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
 
 @doc("Represents the response for a pending upload request")
 model PendingUploadResponse {
+  @doc("Container-level read, write, list SAS.")
+  blobReferenceForConsumption: BlobReferenceForConsumption;
+
   @doc("Container-level read, write, list SAS.")
   blobReference: BlobReference;
 
@@ -103,7 +109,7 @@ model PendingUploadResponse {
   version?: string;
 
   @doc("BlobReference is the only supported type")
-  pendingUploadType: PendingUploadType.BlobReference;
+  pendingUploadType: PendingUploadType.temporaryBlobReference;
 }
 
 @doc("SAS Credential definition")
@@ -119,6 +125,18 @@ model SasCredential {
 
 @doc("Blob reference details.")
 model BlobReference {
+  @doc("Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path")
+  blobUri: Uri;
+
+  @doc("ARM ID of the storage account to use.")
+  storageAccountArmId: string;
+
+  @doc("Credential info to access the storage account.")
+  credential: SasCredential;
+}
+
+@doc("Represents a reference to a blob for consumption")
+model BlobReferenceForConsumption {
   @doc("Blob URI path for client to upload data. Example: https://blob.windows.core.net/Container/Path")
   blobUri: Uri;
 
