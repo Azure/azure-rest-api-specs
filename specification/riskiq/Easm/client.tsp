@@ -134,6 +134,10 @@ interface EasmClient {
 @@clientName(Easm.DailyDeltaTypeResponse, "DailyDeltaTypeResult", "csharp");
 @@clientName(Easm.DeltaDetailsRequest, "DeltaDetailsRequestContent", "csharp");
 @@clientName(Easm.DeltaSummaryRequest, "DeltaSummaryRequestContent", "csharp");
+@@clientName(Easm.DiscoGroupSummaryResult,
+  "DiscoveryGroupSummaryResult",
+  "csharp"
+);
 @@clientName(Easm.Policy, "EasmPolicy", "csharp");
 @@clientName(EasmClient.runDiscoGroup, "RunDiscoveryGroup", "csharp");
 @@clientName(EasmClient.getDiscoGroup, "GetDiscoveryGroup", "csharp");
