@@ -33,7 +33,9 @@ model EvaluationRuleAction {
 
 @doc("Evaluation rule action for continuous evaluation.")
 @added(Versions.v2025_10_15_preview)
-model ContinuousEvaluationRuleAction {
+model ContinuousEvaluationRuleAction extends EvaluationRuleAction {
+  type: EvaluationRuleActionType.continuousEvaluation;
+
   @doc("Eval Id to add continuous evaluation runs to.")
   evalId: string;
 
@@ -43,7 +45,9 @@ model ContinuousEvaluationRuleAction {
 
 @doc("Evaluation rule action for human evaluation.")
 @added(Versions.v2025_10_15_preview)
-model HumanEvaluationRuleAction {
+model HumanEvaluationRuleAction extends EvaluationRuleAction {
+  type: EvaluationRuleActionType.humanEvaluation;
+
   @doc("Human evaluation template Id.")
   templateId: AssetId;
 }

@@ -1214,9 +1214,6 @@
         "x-ms-examples": {
           "EvaluationRules_Get_MaximumSet": {
             "$ref": "./examples/EvaluationRules_Get_MaximumSet_Gen.json"
-          },
-          "EvaluationRules_Get_MinimumSet": {
-            "$ref": "./examples/EvaluationRules_Get_MinimumSet_Gen.json"
           }
         }
       },
@@ -1273,9 +1270,6 @@
         "x-ms-examples": {
           "EvaluationRules_CreateOrUpdate_MaximumSet": {
             "$ref": "./examples/EvaluationRules_CreateOrUpdate_MaximumSet_Gen.json"
-          },
-          "EvaluationRules_CreateOrUpdate_MinimumSet": {
-            "$ref": "./examples/EvaluationRules_CreateOrUpdate_MinimumSet_Gen.json"
           }
         }
       },
@@ -3977,7 +3971,13 @@
       },
       "required": [
         "evalId"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "continuousEvaluation"
     },
     "CosmosDBIndex": {
       "type": "object",
@@ -5705,7 +5705,13 @@
       },
       "required": [
         "templateId"
-      ]
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "humanEvaluation"
     },
     "Index": {
       "type": "object",
