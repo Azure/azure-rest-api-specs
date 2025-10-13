@@ -2564,10 +2564,10 @@
             "pattern": "^[a-zA-Z0-9-]{3,24}$"
           },
           {
-            "name": "body",
+            "name": "requestBody",
             "in": "body",
             "description": "The content of the action request",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/EntityManualTriggerRequestBody"
             }
@@ -2580,7 +2580,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3887,7 +3887,7 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/listRepositories": {
       "post": {
-        "operationId": "SourceControl_listRepositories",
+        "operationId": "SourceControl_ListRepositories",
         "description": "Gets a list of repositories metadata.",
         "parameters": [
           {
@@ -3931,11 +3931,6 @@
             "schema": {
               "$ref": "#/definitions/CloudError"
             }
-          }
-        },
-        "x-ms-examples": {
-          "Get repository list.": {
-            "$ref": "./examples/repositories/GetRepositories.json"
           }
         },
         "x-ms-pageable": {
@@ -16975,8 +16970,7 @@
       "properties": {
         "warning": {
           "$ref": "#/definitions/WarningBody",
-          "description": "Warning data.",
-          "readOnly": true
+          "description": "Warning data."
         }
       }
     },

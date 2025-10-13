@@ -28,13 +28,14 @@ interface EntitiesOperationGroup {
    * Triggers playbook on a specific entity.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Entities_RunPlaybook")
   @autoRoute
   runPlaybook is Extension.ActionSync<
     OperationalInsights,
     EntityResource,
     Request = EntityManualTriggerRequestBody,
-    Response = void
+    OptionalRequestBody = true,
+    Response = void,
+    Error = CloudError
   >;
 }
 
@@ -45,7 +46,6 @@ interface SourceControlOperationGroup {
    */
   // Due to TypeSpec provider action limitation: https://github.com/Azure/typespec-azure/issues/3224#issuecomment-3257368342
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("SourceControl_listRepositories")
   @autoRoute
   @list
   @post
@@ -113,7 +113,6 @@ interface ThreatIntelligenceIndicatorOperationGroup {
    * Query threat intelligence indicators as per filtering criteria.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ThreatIntelligenceIndicator_QueryIndicators")
   @autoRoute
   @action("queryIndicators")
   @list

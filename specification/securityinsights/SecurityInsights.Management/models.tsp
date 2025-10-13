@@ -4421,7 +4421,6 @@ model Warning {
   /**
    * Warning data.
    */
-  @visibility(Lifecycle.Read)
   warning?: WarningBody;
 }
 

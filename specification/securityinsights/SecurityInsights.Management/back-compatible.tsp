@@ -285,6 +285,9 @@ using Azure.ClientGenerator.Core.Legacy;
 @@flattenProperty(WatchlistItem.properties);
 
 @@clientLocation(EntitiesOperationGroup.runPlaybook, "Entities");
+@@clientName(EntitiesOperationGroup.runPlaybook::parameters.body,
+  "requestBody"
+);
 
 @@clientLocation(SourceControlOperationGroup.listRepositories, "SourceControl");
 @@clientName(SourceControlOperationGroup.listRepositories, "listRepositories");
