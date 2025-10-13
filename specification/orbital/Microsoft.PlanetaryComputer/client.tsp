@@ -515,14 +515,8 @@ model GetMosaicWmtsCapabilitiesOptions {
   ...MiscTileQueryParameters;
 }
 
-// Override operations with grouped parameters
-
+alias getTileCustomizedCommonSignatures = {
 /**
- * Create map tile from a dataset with grouped parameters.
- */
-#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
-op getTileCustomized(
-  /**
    * STAC Collection Identifier
    */
   @path collectionId: string,
@@ -566,6 +560,16 @@ op getTileCustomized(
    * API version
    */
   @query apiVersion: string,
+};
+
+// Override operations with grouped parameters
+
+/**
+ * Create map tile from a dataset with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileCustomized(
+  ...getTileCustomizedCommonSignatures,
 
   /**
    * Options for tile generation including asset selection, terrain algorithms, and visual rendering
@@ -573,7 +577,23 @@ op getTileCustomized(
   options: GetTileOptions,
 ): TileResponse;
 
-@@override(TilerTileMatrixSets.getZxyScaleByFormat, getTileCustomized);
+@@override(TilerTileMatrixSets.getZxyScaleByFormat, getTileCustomized, "!python");
+
+/**
+ * Create map tile from a dataset with grouped parameters.
+ */
+#suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation override."
+op getTileCustomizedPython(
+  ...getTileCustomizedCommonSignatures,
+
+  /**
+   * Options for tile generation including asset selection, terrain algorithms, and visual rendering
+   */
+  ...GetTileOptions,
+): TileResponse;
+
+@@override(TilerTileMatrixSets.getZxyScaleByFormat, getTileCustomizedPython, "python");
+
 
 /**
  * OGC WMTS endpoint with grouped parameters.
