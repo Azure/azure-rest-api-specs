@@ -16,7 +16,7 @@ namespace Customizations;
 @clientInitialization(Search.SearchIndexClientOptions)
 @clientNamespace("Azure.Search.Documents")
 namespace SearchIndexClient {
-  @operationGroup()
+  @operationGroup
   interface Documents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
@@ -62,216 +62,216 @@ namespace SearchIndexClient {
 })
 @clientNamespace("Azure.Search.Documents.Indexes")
 namespace SearchServiceClient {
-  @operationGroup()
+  @operationGroup
   interface DataSources {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.DataSources.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.DataSources.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.DataSources.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.DataSources.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.DataSources.create;
   }
-  @operationGroup()
+  @operationGroup
   interface Indexers {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     reset is Search.Indexers.reset;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @added(Search.Versions.v2025_08_01_preview)
     resync is Search.Indexers.resync;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     resetDocs is Search.Indexers.resetDocs;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     run is Search.Indexers.run;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Indexers.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.Indexers.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.Indexers.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.Indexers.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Indexers.create;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     getStatus is Search.Indexers.getStatus;
   }
-  @operationGroup()
+  @operationGroup
   interface Skillsets {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Skillsets.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.Skillsets.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.Skillsets.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.Skillsets.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Skillsets.create;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     resetSkills is Search.Skillsets.resetSkills;
   }
-  @operationGroup()
+  @operationGroup
   interface SynonymMaps {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.SynonymMaps.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.SynonymMaps.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.SynonymMaps.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.SynonymMaps.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.SynonymMaps.create;
   }
-  @operationGroup()
+  @operationGroup
   interface Indexes {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Indexes.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.Indexes.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.Indexes.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.Indexes.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Indexes.create;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     getStatistics is Search.Indexes.getStatistics;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     analyze is Search.Indexes.analyze;
   }
   @added(Search.Versions.v2025_08_01_preview)
-  @operationGroup()
+  @operationGroup
   interface Aliases {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Aliases.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.Aliases.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.Aliases.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.Aliases.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Aliases.create;
   }
 
   @added(Search.Versions.v2025_08_01_preview)
-  @operationGroup()
+  @operationGroup
   interface Agents {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Agents.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.Agents.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.Agents.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.Agents.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Agents.create;
   }
 
   @added(Search.Versions.v2025_08_01_preview)
-  @operationGroup()
+  @operationGroup
   interface Sources {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     createOrUpdate is Search.Sources.createOrUpdate;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     delete is Search.Sources.delete;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     get is Search.Sources.get;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     list is Search.Sources.list;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     create is Search.Sources.create;
@@ -281,14 +281,13 @@ namespace SearchServiceClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     getServiceStatistics is Search.getServiceStatistics;
-  
+
     #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @added(Search.Versions.v2025_08_01_preview)
     getIndexStatsSummary is Search.getIndexStatsSummary;
   }
 }
-
 
 @@access(VectorSearchAlgorithmKind, Access.public);
 @@usage(VectorSearchAlgorithmKind, Usage.input);
@@ -319,7 +318,9 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.SemanticFieldState, "Azure.Search.Documents");
 @@clientNamespace(Search.SemanticErrorReason, "Azure.Search.Documents");
 @@clientNamespace(Search.SemanticSearchResultsType, "Azure.Search.Documents");
-@@clientNamespace(Search.SemanticQueryRewritesResultType, "Azure.Search.Documents");
+@@clientNamespace(Search.SemanticQueryRewritesResultType,
+  "Azure.Search.Documents"
+);
 @@clientNamespace(Search.QueryType, "Azure.Search.Documents");
 @@clientNamespace(Search.SearchMode, "Azure.Search.Documents");
 @@clientNamespace(Search.ScoringStatistics, "Azure.Search.Documents");
@@ -330,7 +331,9 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.QueryAnswerResult, "Azure.Search.Documents");
 @@clientNamespace(Search.DebugInfo, "Azure.Search.Documents");
 @@clientNamespace(Search.QueryRewritesDebugInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryRewritesValuesDebugInfo, "Azure.Search.Documents");
+@@clientNamespace(Search.QueryRewritesValuesDebugInfo,
+  "Azure.Search.Documents"
+);
 @@clientNamespace(Search.SearchRequest, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorQuery, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorThreshold, "Azure.Search.Documents");
@@ -339,10 +342,16 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.QueryCaptionResult, "Azure.Search.Documents");
 @@clientNamespace(Search.DocumentDebugInfo, "Azure.Search.Documents");
 @@clientNamespace(Search.SemanticDebugInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryResultDocumentSemanticField, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryResultDocumentRerankerInput, "Azure.Search.Documents");
+@@clientNamespace(Search.QueryResultDocumentSemanticField,
+  "Azure.Search.Documents"
+);
+@@clientNamespace(Search.QueryResultDocumentRerankerInput,
+  "Azure.Search.Documents"
+);
 @@clientNamespace(Search.VectorsDebugInfo, "Azure.Search.Documents");
-@@clientNamespace(Search.QueryResultDocumentSubscores, "Azure.Search.Documents");
+@@clientNamespace(Search.QueryResultDocumentSubscores,
+  "Azure.Search.Documents"
+);
 @@clientNamespace(Search.TextResult, "Azure.Search.Documents");
 @@clientNamespace(Search.SingleVectorFieldResult, "Azure.Search.Documents");
 @@clientNamespace(Search.SuggestDocumentsResult, "Azure.Search.Documents");
@@ -359,111 +368,243 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.VectorizedQuery, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorizableTextQuery, "Azure.Search.Documents");
 @@clientNamespace(Search.VectorizableImageUrlQuery, "Azure.Search.Documents");
-@@clientNamespace(Search.VectorizableImageBinaryQuery, "Azure.Search.Documents");
+@@clientNamespace(Search.VectorizableImageBinaryQuery,
+  "Azure.Search.Documents"
+);
 @@clientNamespace(Search.VectorSimilarityThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.SearchScoreThreshold, "Azure.Search.Documents");
 @@clientNamespace(Search.QueryResultDocumentInnerHit, "Azure.Search.Documents");
 
-@@clientNamespace(Search.SearchIndexerDataSourceType, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.BlobIndexerParsingMode, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MarkdownParsingSubmode, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexerDataSourceType,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.BlobIndexerParsingMode,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.MarkdownParsingSubmode,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.MarkdownHeaderDepth, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.BlobIndexerDataToExtract, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.BlobIndexerImageAction, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.BlobIndexerPDFTextRotationAlgorithm, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerExecutionEnvironment, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerExecutionStatusDetail, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.BlobIndexerDataToExtract,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.BlobIndexerImageAction,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.BlobIndexerPDFTextRotationAlgorithm,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexerExecutionEnvironment,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexerExecutionStatusDetail,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.IndexingMode, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.IndexProjectionMode, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchFieldDataType, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.LexicalAnalyzerName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LexicalNormalizerName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorEncodingFormat, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchAlgorithmKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchVectorizerKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchCompressionKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchCompressionRescoreStorageMethod, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LexicalTokenizerName, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.LexicalNormalizerName,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorEncodingFormat,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorSearchAlgorithmKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorSearchVectorizerKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorSearchCompressionKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorSearchCompressionRescoreStorageMethod,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.LexicalTokenizerName,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.TokenFilterName, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.CharFilterName, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.RegexFlags, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchAlgorithmMetric, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchCompressionTarget, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureOpenAIModelName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AIFoundryModelCatalogName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KeyPhraseExtractionSkillLanguage, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.VectorSearchAlgorithmMetric,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorSearchCompressionTarget,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureOpenAIModelName,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AIFoundryModelCatalogName,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KeyPhraseExtractionSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.OcrSkillLanguage, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.OcrLineEnding, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ImageAnalysisSkillLanguage, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ImageAnalysisSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.VisualFeature, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ImageDetail, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.EntityCategory, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EntityRecognitionSkillLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SentimentSkillLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PIIDetectionSkillMaskingMode, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.EntityRecognitionSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SentimentSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.PIIDetectionSkillMaskingMode,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SplitSkillLanguage, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.TextSplitMode, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SplitSkillUnit, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SplitSkillEncoderModelName, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CustomEntityLookupSkillLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TextTranslationSkillLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputMode, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillMarkdownHeaderDepth, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SplitSkillEncoderModelName,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.CustomEntityLookupSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.TextTranslationSkillLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputMode,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillMarkdownHeaderDepth,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.IndexerStatus, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerExecutionStatus, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ScoringFunctionInterpolation, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ScoringFunctionAggregation, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexerExecutionStatus,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ScoringFunctionInterpolation,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ScoringFunctionAggregation,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.TokenCharacterKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MicrosoftTokenizerLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MicrosoftStemmingTokenizerLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CjkBigramTokenFilterScripts, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EdgeNGramTokenFilterSide, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.MicrosoftTokenizerLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.MicrosoftStemmingTokenizerLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.CjkBigramTokenFilterScripts,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EdgeNGramTokenFilterSide,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.PhoneticEncoder, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SnowballTokenFilterLanguage, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.StemmerTokenFilterLanguage, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SnowballTokenFilterLanguage,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.StemmerTokenFilterLanguage,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.StopwordsList, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerDataSource, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DataSourceCredentials, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerDataContainer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DataChangeDetectionPolicy, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DataDeletionDetectionPolicy, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchResourceEncryptionKey, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureActiveDirectoryApplicationCredentials, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListDataSourcesResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexerDataSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DataSourceCredentials,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerDataContainer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DataChangeDetectionPolicy,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DataDeletionDetectionPolicy,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchResourceEncryptionKey,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureActiveDirectoryApplicationCredentials,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ListDataSourcesResult,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.DocumentKeysOrIds, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndexer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.IndexingSchedule, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.IndexingParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexingParametersConfiguration, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexingParametersConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.FieldMapping, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.FieldMappingFunction, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.FieldMappingFunction,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SearchIndexerCache, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ListIndexersResult, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndexerStatus, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerExecutionResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.IndexerExecutionResult,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.IndexerCurrentState, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchIndexerError, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerWarning, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexerWarning,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SearchIndexerLimits, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerSkillset, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexerSkillset,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SearchIndexerSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.InputFieldMappingEntry, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.OutputFieldMappingEntry, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CognitiveServicesAccount, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStore, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjection, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreTableProjectionSelector, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjectionSelector, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreObjectProjectionSelector, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreBlobProjectionSelector, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreFileProjectionSelector, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerIndexProjection, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerIndexProjectionSelector, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerIndexProjectionsParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.InputFieldMappingEntry,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.OutputFieldMappingEntry,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.CognitiveServicesAccount,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStore,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjection,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStoreTableProjectionSelector,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStoreProjectionSelector,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStoreObjectProjectionSelector,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStoreBlobProjectionSelector,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStoreFileProjectionSelector,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerIndexProjection,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerIndexProjectionSelector,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerIndexProjectionsParameters,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.ListSkillsetsResult, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SkillNames, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SynonymMap, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListSynonymMapsResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ListSynonymMapsResult,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SearchIndex, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchField, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ScoringProfile, "Azure.Search.Documents.Indexes");
@@ -471,22 +612,48 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.ScoringFunction, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.CorsOptions, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.KnowledgeAgent, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeSourceReference, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeAgentOutputConfiguration, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeAgentOutputConfigurationModality, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeAgentRequestLimits, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListKnowledgeAgentsResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeSourceReference,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeAgentOutputConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeAgentOutputConfigurationModality,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeAgentRequestLimits,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ListKnowledgeAgentsResult,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.KnowledgeAgentModel, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeAgentModelKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KnowledgeAgentAzureOpenAiModel, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureOpenAiParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KnowledgeAgentModelKind,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.KnowledgeAgentAzureOpenAiModel,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureOpenAiParameters,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.KnowledgeSource, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.KnowledgeSourceKind, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexKnowledgeSource, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexKnowledgeSourceParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureBlobKnowledgeSource, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureBlobKnowledgeSourceParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListKnowledgeSourcesResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureBlobKnowledgeSource,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureBlobKnowledgeSourceParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ListKnowledgeSourcesResult,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.CreatedResources, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchSuggester, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.LexicalAnalyzer, "Azure.Search.Documents.Indexes");
@@ -496,148 +663,316 @@ namespace SearchServiceClient {
 @@clientNamespace(Search.LexicalNormalizer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SimilarityAlgorithm, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SemanticSearch, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SemanticConfiguration, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SemanticPrioritizedFields, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SemanticConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SemanticPrioritizedFields,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SemanticField, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.VectorSearch, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.VectorSearchProfile, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchAlgorithmConfiguration, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchVectorizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VectorSearchCompression, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.VectorSearchAlgorithmConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorSearchVectorizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VectorSearchCompression,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.RescoringOptions, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ListIndexesResult, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.GetIndexStatisticsResult, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.GetIndexStatisticsResult,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.AnalyzeRequest, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.AnalyzeResult, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.AnalyzedTokenInfo, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchAlias, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ListAliasesResult, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchServiceStatistics, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchServiceCounters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchServiceStatistics,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchServiceCounters,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.ResourceCounter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchServiceLimits, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.CustomAnalyzer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.PatternAnalyzer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LuceneStandardAnalyzer, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.LuceneStandardAnalyzer,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.StopAnalyzer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.CustomNormalizer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ClassicTokenizer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.EdgeNGramTokenizer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.KeywordTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MicrosoftLanguageTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MicrosoftLanguageStemmingTokenizer, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.MicrosoftLanguageTokenizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.MicrosoftLanguageStemmingTokenizer,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.NGramTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PathHierarchyTokenizer, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.PathHierarchyTokenizer,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.PatternTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LuceneStandardTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.UaxUrlEmailTokenizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AsciiFoldingTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CjkBigramTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CommonGramTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DictionaryDecompounderTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EdgeNGramTokenFilter, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.LuceneStandardTokenizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.UaxUrlEmailTokenizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AsciiFoldingTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.CjkBigramTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.CommonGramTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DictionaryDecompounderTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.EdgeNGramTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.ElisionTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.KeepTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KeywordMarkerTokenFilter, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KeywordMarkerTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.LengthTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.LimitTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.NGramTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PatternCaptureTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PatternReplaceTokenFilter, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.PatternCaptureTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.PatternReplaceTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.PhoneticTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ShingleTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SnowballTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.StemmerTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.StemmerOverrideTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.StopwordsTokenFilter, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.StemmerOverrideTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.StopwordsTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SynonymTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.TruncateTokenFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.UniqueTokenFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.WordDelimiterTokenFilter, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.WordDelimiterTokenFilter,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.MappingCharFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.PatternReplaceCharFilter, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ClassicSimilarityAlgorithm, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.BM25SimilarityAlgorithm, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.HnswAlgorithmConfiguration, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.PatternReplaceCharFilter,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ClassicSimilarityAlgorithm,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.BM25SimilarityAlgorithm,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.HnswAlgorithmConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.HnswParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ExhaustiveKnnAlgorithmConfiguration, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ExhaustiveKnnParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ScalarQuantizationCompression, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ScalarQuantizationParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.BinaryQuantizationCompression, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureOpenAIVectorizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureOpenAIVectorizerParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerDataIdentity, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ExhaustiveKnnAlgorithmConfiguration,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ExhaustiveKnnParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ScalarQuantizationCompression,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ScalarQuantizationParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.BinaryQuantizationCompression,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureOpenAIVectorizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureOpenAIVectorizerParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerDataIdentity,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.WebApiVectorizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.WebApiVectorizerParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AIServicesVisionVectorizer, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AIServicesVisionParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.WebApiVectorizerParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AIServicesVisionVectorizer,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AIServicesVisionParameters,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.AMLVectorizer, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.AMLParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerDataNoneIdentity, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerDataUserAssignedIdentity, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.HighWaterMarkChangeDetectionPolicy, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SqlIntegratedChangeTrackingPolicy, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SoftDeleteColumnDeletionDetectionPolicy, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.NativeBlobSoftDeleteDeletionDetectionPolicy, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DistanceScoringFunction, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DistanceScoringParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.FreshnessScoringFunction, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.FreshnessScoringParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MagnitudeScoringFunction, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.MagnitudeScoringParameters, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexerDataNoneIdentity,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerDataUserAssignedIdentity,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.HighWaterMarkChangeDetectionPolicy,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SqlIntegratedChangeTrackingPolicy,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SoftDeleteColumnDeletionDetectionPolicy,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.NativeBlobSoftDeleteDeletionDetectionPolicy,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DistanceScoringFunction,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DistanceScoringParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.FreshnessScoringFunction,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.FreshnessScoringParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.MagnitudeScoringFunction,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.MagnitudeScoringParameters,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.TagScoringFunction, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TagScoringParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexerKnowledgeStoreParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DefaultCognitiveServicesAccount, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CognitiveServicesAccountKey, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AIServicesAccountKey, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AIServicesAccountIdentity, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.TagScoringParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.SearchIndexerKnowledgeStoreParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DefaultCognitiveServicesAccount,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.CognitiveServicesAccountKey,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AIServicesAccountKey,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AIServicesAccountIdentity,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.CustomEntity, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.CustomEntityAlias, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ConditionalSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.KeyPhraseExtractionSkill, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.KeyPhraseExtractionSkill,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.OcrSkill, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.ImageAnalysisSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.LanguageDetectionSkill, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.LanguageDetectionSkill,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.ShaperSkill, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.MergeSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EntityRecognitionSkill, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.EntityRecognitionSkill,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.SentimentSkill, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SentimentSkillV3, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.EntityLinkingSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.EntityRecognitionSkillV3, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.EntityRecognitionSkillV3,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.PIIDetectionSkill, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SplitSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureOpenAITokenizerParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.CustomEntityLookupSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.TextTranslationSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentExtractionSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkill, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.AzureOpenAITokenizerParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.CustomEntityLookupSkill,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.TextTranslationSkill,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DocumentExtractionSkill,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkill,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.WebApiSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureMachineLearningSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.AzureOpenAIEmbeddingSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.VisionVectorizeSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexStatisticsSummary, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ListIndexStatsSummary, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.AzureMachineLearningSkill,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.AzureOpenAIEmbeddingSkill,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.VisionVectorizeSkill,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexStatisticsSummary,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ListIndexStatsSummary,
+  "Azure.Search.Documents.Indexes"
+);
 
-@@clientNamespace(Search.ChatCompletionExtraParametersBehavior, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ChatCompletionResponseFormatType, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingUnit, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillExtractionOptions, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputFormat, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.IndexerPermissionOption, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionExtraParametersBehavior,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ChatCompletionResponseFormatType,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingUnit,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillExtractionOptions,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillOutputFormat,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.IndexerPermissionOption,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.PermissionFilter, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.RankingOrder, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ChatCompletionCommonModelParameters, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ChatCompletionResponseFormat, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ChatCompletionSchema, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.ChatCompletionSchemaProperties, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.ChatCompletionCommonModelParameters,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ChatCompletionResponseFormat,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ChatCompletionSchema,
+  "Azure.Search.Documents.Indexes"
+);
+@@clientNamespace(Search.ChatCompletionSchemaProperties,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.ChatCompletionSkill, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingProperties, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.DocumentIntelligenceLayoutSkillChunkingProperties,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.WebApiHttpHeaders, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.SearchOptions, "Azure.Search.Documents.Indexes");
-@@clientNamespace(Search.SearchIndexPermissionFilterOption, "Azure.Search.Documents.Indexes");
+@@clientNamespace(Search.SearchIndexPermissionFilterOption,
+  "Azure.Search.Documents.Indexes"
+);
 @@clientNamespace(Search.IndexerResyncBody, "Azure.Search.Documents.Indexes");
 @@clientNamespace(Search.IndexerResyncOption, "Azure.Search.Documents.Indexes");
 

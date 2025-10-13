@@ -489,13 +489,13 @@ union AutocompleteMode {
 }
 
 @doc("Parameters grouped for search operations.")
-model SearchOptions {  
+model SearchOptions {
   @doc("A value that specifies whether to fetch the total count of results. Default is false. Setting this value to true may have a performance impact. Note that the count returned is an approximation.")
   @query("$count")
   includeTotalResultCount?: boolean;
 
-  @doc("The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs.")
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
+  @doc("The list of facet expressions to apply to the search query. Each facet expression contains a field name, optionally followed by a comma-separated list of name:value pairs.")
   @query(#{ name: "facet", explode: true })
   facets?: string[];
 
@@ -527,8 +527,8 @@ model SearchOptions {
   @query
   queryType?: QueryType;
 
-  @doc("The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\" (without the quotes).")
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing"
+  @doc("The list of parameter values to be used in scoring functions (for example, referencePointParameter) using the format name-values. For example, if the scoring profile defines a function with a parameter called 'mylocation' the parameter string would be \"mylocation--122.2,44.8\" (without the quotes).")
   @query(#{ name: "scoringParameter", explode: true })
   scoringParameters?: string[];
 
@@ -739,8 +739,8 @@ model SearchDocumentsResult {
   semanticQueryRewritesResultType?: SemanticQueryRewritesResultType;
 }
 
-@doc("A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("A single bucket of a facet query result. Reports the number of documents with a field value falling within a particular range or having a particular value or interval.")
 model FacetResult is Record<unknown> {
   @doc("The approximate count of documents falling within the bucket described by this facet.")
   count?: int64;
@@ -757,8 +757,8 @@ model FacetResult is Record<unknown> {
   sum?: int64;
 }
 
-@doc("An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("An answer is a text passage extracted from the contents of the most relevant documents that matched the query. Answers are extracted from the top search results. Answer candidates are scored and the top answers are selected.")
 model QueryAnswerResult is Record<unknown> {
   @doc("The score value represents how relevant the answer is to the query relative to other answers returned for the query.")
   score?: float64;
@@ -966,8 +966,8 @@ model HybridSearch {
   countAndFacetMode?: HybridCountAndFacetMode;
 }
 
-@doc("Contains a document found by a search query, plus associated metadata.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("Contains a document found by a search query, plus associated metadata.")
 model SearchResult {
   ...Record<unknown>;
 
@@ -998,8 +998,8 @@ model SearchResult {
   documentDebugInfo?: DocumentDebugInfo[];
 }
 
-@doc("Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("Captions are the most representative passages from the document relatively to the search query. They are often used as document summary. Captions are only returned for queries of type `semantic`.")
 model QueryCaptionResult {
   ...Record<unknown>;
 
@@ -1140,8 +1140,8 @@ model SuggestDocumentsResult {
   coverage?: float64;
 }
 
-@doc("A result containing a document found by a suggestion query, plus associated metadata.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("A result containing a document found by a suggestion query, plus associated metadata.")
 model SuggestResult {
   ...Record<unknown>;
 
@@ -1192,8 +1192,8 @@ model IndexBatch {
   value: IndexAction[];
 }
 
-@doc("Represents an index action that operates on a document.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("Represents an index action that operates on a document.")
 model IndexAction {
   ...Record<unknown>;
 
@@ -1202,16 +1202,16 @@ model IndexAction {
   actionType?: IndexActionType;
 }
 
-@doc("A document retrieved via a document lookup operation.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("A document retrieved via a document lookup operation.")
 model LookupDocument {
   ...Record<unknown>;
 }
 
 @doc("Response containing the status of operations for all documents in the indexing request.")
 model IndexDocumentsResult {
-  @doc("Response containing the status of operations for all actions in the batch.")
   #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union" "return status code"
+  @doc("Response containing the status of operations for all actions in the batch.")
   @statusCode
   _: 200 | 207;
 

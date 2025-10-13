@@ -7,16 +7,16 @@ using TypeSpec.Http;
 namespace Search;
 
 interface Documents {
-  @doc("Queries the number of documents in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @doc("Queries the number of documents in the index.")
   @route("/indexes('{indexName}')/docs/$count")
   @get
   count is SearchIndexOperation<{}, int64>;
 
-  @doc("Searches for documents in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @doc("Searches for documents in the index.")
   @route("/indexes('{indexName}')/docs")
   @get
   searchGet is SearchIndexOperation<
@@ -30,9 +30,9 @@ interface Documents {
     SearchDocumentsResult
   >;
 
-  @doc("Searches for documents in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @doc("Searches for documents in the index.")
   @route("/indexes('{indexName}')/docs/search.post.search")
   @post
   searchPost is SearchIndexOperation<
@@ -44,8 +44,8 @@ interface Documents {
     SearchDocumentsResult
   >;
 
-  @doc("Retrieves a document from the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @doc("Retrieves a document from the index.")
   @route("/indexes('{indexName}')/docs('{key}')")
   @get
   get is SearchIndexOperation<
@@ -61,9 +61,9 @@ interface Documents {
     LookupDocument
   >;
 
-  @doc("Suggests documents in the index that match the given partial query text.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @doc("Suggests documents in the index that match the given partial query text.")
   @route("/indexes('{indexName}')/docs/search.suggest")
   @get
   suggestGet is SearchIndexOperation<
@@ -81,8 +81,8 @@ interface Documents {
     SuggestDocumentsResult
   >;
 
-  @doc("Suggests documents in the index that match the given partial query text.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @doc("Suggests documents in the index that match the given partial query text.")
   @route("/indexes('{indexName}')/docs/search.post.suggest")
   @post
   suggestPost is SearchIndexOperation<
@@ -94,8 +94,8 @@ interface Documents {
     SuggestDocumentsResult
   >;
 
-  @doc("Sends a batch of document write actions to the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @doc("Sends a batch of document write actions to the index.")
   @route("/indexes('{indexName}')/docs/search.index")
   @post
   index is SearchIndexOperation<
@@ -107,9 +107,9 @@ interface Documents {
     IndexDocumentsResult
   >;
 
-  @doc("Autocompletes incomplete query terms based on input text and matching terms in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+  @doc("Autocompletes incomplete query terms based on input text and matching terms in the index.")
   @route("/indexes('{indexName}')/docs/search.autocomplete")
   @get
   autocompleteGet is SearchIndexOperation<
@@ -157,8 +157,8 @@ interface Documents {
     AutocompleteResult
   >;
 
-  @doc("Autocompletes incomplete query terms based on input text and matching terms in the index.")
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+  @doc("Autocompletes incomplete query terms based on input text and matching terms in the index.")
   @route("/indexes('{indexName}')/docs/search.post.autocomplete")
   @post
   autocompletePost is SearchIndexOperation<
@@ -170,4 +170,3 @@ interface Documents {
     AutocompleteResult
   >;
 }
-

@@ -3112,7 +3112,7 @@ union IndexerResyncOption {
 @added(Versions.v2025_08_01_preview)
 model IndexerResyncBody {
   @doc("Indexer to re-ingest pre-selected permissions data from data source to index.")
-  options?: IndexerResyncOption[],
+  options?: IndexerResyncOption[];
 }
 
 @doc("Represents a datasource definition, which can be used to configure an indexer.")
@@ -3175,18 +3175,18 @@ model SearchIndexerDataContainer {
 @doc("Base type for data change detection policies.")
 @discriminator("@odata.type")
 model DataChangeDetectionPolicy {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 }
 
 @doc("Base type for data deletion detection policies.")
 @discriminator("@odata.type")
 model DataDeletionDetectionPolicy {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 }
 
@@ -3299,13 +3299,13 @@ model IndexingParameters {
   @doc("The maximum number of items in a single batch that can fail indexing for the batch to still be considered successful. -1 means no limit. Default is 0.")
   maxFailedItemsPerBatch?: int32;
 
-  @doc("A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @doc("A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
   configuration?: IndexingParametersConfiguration;
 }
 
-@doc("A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("A dictionary of indexer-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
 model IndexingParametersConfiguration {
   ...Record<unknown>;
 
@@ -3383,8 +3383,8 @@ model FieldMappingFunction {
   @doc("The name of the field mapping function.")
   name: string;
 
-  @doc("A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @doc("A dictionary of parameter name/value pairs to pass to the function. Each value must be of a primitive type.")
   parameters?: Record<unknown>;
 }
 
@@ -3599,9 +3599,9 @@ model SearchIndexerSkillset {
 @doc("Base type for skills.")
 @discriminator("@odata.type")
 model SearchIndexerSkill {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 
   @doc("The name of the skill which uniquely identifies it within the skillset. A skill with no name defined will be given a default name of its 1-based index in the skills array, prefixed with the character '#'.")
@@ -3647,9 +3647,9 @@ model OutputFieldMappingEntry {
 @doc("Base type for describing any Azure AI service resource attached to a skillset.")
 @discriminator("@odata.type")
 model CognitiveServicesAccount {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 
   @doc("Description of the Azure AI service resource attached to a skillset.")
@@ -3668,8 +3668,8 @@ model SearchIndexerKnowledgeStore {
   @added(Versions.v2025_08_01_preview)
   identity?: SearchIndexerDataIdentity;
 
-  @doc("A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @doc("A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
   @added(Versions.v2025_08_01_preview)
   parameters?: SearchIndexerKnowledgeStoreParameters;
 }
@@ -3686,8 +3686,8 @@ model SearchIndexerKnowledgeStoreProjection {
   files?: SearchIndexerKnowledgeStoreFileProjectionSelector[];
 }
 
-@doc("Description for what data to store in Azure Tables.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("Description for what data to store in Azure Tables.")
 model SearchIndexerKnowledgeStoreTableProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
   @doc("Name of the Azure table to store projected data in.")
@@ -3712,21 +3712,21 @@ model SearchIndexerKnowledgeStoreProjectionSelector {
   inputs?: InputFieldMappingEntry[];
 }
 
-@doc("Projection definition for what data to store in Azure Blob.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("Projection definition for what data to store in Azure Blob.")
 model SearchIndexerKnowledgeStoreObjectProjectionSelector
   extends SearchIndexerKnowledgeStoreBlobProjectionSelector {}
 
-@doc("Abstract class to share properties between concrete selectors.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("Abstract class to share properties between concrete selectors.")
 model SearchIndexerKnowledgeStoreBlobProjectionSelector
   extends SearchIndexerKnowledgeStoreProjectionSelector {
   @doc("Blob container to store projections in.")
   storageContainer: string;
 }
 
-@doc("Projection definition for what data to store in Azure Files.")
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@doc("Projection definition for what data to store in Azure Files.")
 model SearchIndexerKnowledgeStoreFileProjectionSelector
   extends SearchIndexerKnowledgeStoreBlobProjectionSelector {}
 
@@ -3735,8 +3735,8 @@ model SearchIndexerIndexProjection {
   @doc("A list of projections to be performed to secondary search indexes.")
   selectors: SearchIndexerIndexProjectionSelector[];
 
-  @doc("A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @doc("A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
   parameters?: SearchIndexerIndexProjectionsParameters;
 }
 
@@ -3755,8 +3755,8 @@ model SearchIndexerIndexProjectionSelector {
   mappings: InputFieldMappingEntry[];
 }
 
-@doc("A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("A dictionary of index projection-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
 model SearchIndexerIndexProjectionsParameters {
   ...Record<unknown>;
 
@@ -3770,8 +3770,8 @@ model ListSkillsetsResult {
   value: SearchIndexerSkillset[];
 }
 
-@doc("The type of the skill names.")
 #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict"
+@doc("The type of the skill names.")
 @added(Versions.v2025_08_01_preview)
 model SkillNames {
   @doc("the names of skills to be reset.")
@@ -3808,7 +3808,7 @@ model SearchIndex {
   @doc("The name of the index.")
   name: string;
 
-   @doc("The description of the index.")
+  @doc("The description of the index.")
   description?: string;
 
   @doc("The fields of the index.")
@@ -3948,8 +3948,8 @@ model TextWeights {
   weights: Record<float64>;
 }
 
-@doc("Base type for functions that can modify document scores during ranking.")
 #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+@doc("Base type for functions that can modify document scores during ranking.")
 @discriminator("type")
 model ScoringFunction {
   @doc("The name of the field used as input to the scoring function.")
@@ -3989,9 +3989,9 @@ model SearchSuggester {
 @doc("Base type for analyzers.")
 @discriminator("@odata.type")
 model LexicalAnalyzer {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 
   @doc("The name of the analyzer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters.")
@@ -4001,9 +4001,9 @@ model LexicalAnalyzer {
 @doc("Base type for tokenizers.")
 @discriminator("@odata.type")
 model LexicalTokenizer {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 
   @doc("The name of the tokenizer. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters.")
@@ -4013,9 +4013,9 @@ model LexicalTokenizer {
 @doc("Base type for token filters.")
 @discriminator("@odata.type")
 model TokenFilter {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 
   @doc("The name of the token filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters.")
@@ -4025,9 +4025,9 @@ model TokenFilter {
 @doc("Base type for character filters.")
 @discriminator("@odata.type")
 model CharFilter {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 
   @doc("The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters.")
@@ -4038,9 +4038,9 @@ model CharFilter {
 @added(Versions.v2025_08_01_preview)
 @discriminator("@odata.type")
 model LexicalNormalizer {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 
   @doc("The name of the char filter. It must only contain letters, digits, spaces, dashes or underscores, can only start and end with alphanumeric characters, and is limited to 128 characters.")
@@ -4050,9 +4050,9 @@ model LexicalNormalizer {
 @doc("Base type for similarity algorithms. Similarity algorithms are used to calculate scores that tie queries to documents. The higher the score, the more relevant the document is to that specific query. Those scores are used to rank the search results.")
 @discriminator("@odata.type")
 model SimilarityAlgorithm {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: string;
 }
 
@@ -4381,8 +4381,8 @@ model ListKnowledgeAgentsResult {
 @doc("Specifies the connection parameters for the model to use for query planning.")
 @added(Versions.v2025_08_01_preview)
 model KnowledgeAgentModel {
-  @doc("The AI model to be used for query planning.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The AI model to be used for query planning.")
   kind: KnowledgeAgentModelKind;
 }
 
@@ -4399,9 +4399,9 @@ union KnowledgeAgentModelKind {
 @added(Versions.v2025_08_01_preview)
 model KnowledgeAgentAzureOpenAiModel extends KnowledgeAgentModel {
   kind: KnowledgeAgentModelKind.AzureOpenAI;
-  
-  @doc("Azure OpenAI parameters.")
+
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("Azure OpenAI parameters.")
   azureOpenAIParameters: AzureOpenAiParameters;
 }
 
@@ -4440,8 +4440,8 @@ model KnowledgeSource {
   @doc("Optional user-defined description.")
   description?: string;
 
-  @doc("The type of the knowledge source.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
+  @doc("The type of the knowledge source.")
   @added(Versions.v2025_08_01_preview)
   kind: KnowledgeSourceKind;
 
@@ -4615,8 +4615,8 @@ model CustomAnalyzer extends LexicalAnalyzer {
   @doc("A list of character filters used to prepare input text before it is processed by the tokenizer. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed.")
   charFilters?: CharFilterName[];
 
-  @doc("A URI fragment specifying the type of analyzer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of analyzer.")
   `@odata.type`: "#Microsoft.Azure.Search.CustomAnalyzer";
 }
 
@@ -4634,8 +4634,8 @@ model PatternAnalyzer extends LexicalAnalyzer {
   @doc("A list of stopwords.")
   stopwords?: string[];
 
-  @doc("A URI fragment specifying the type of analyzer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of analyzer.")
   `@odata.type`: "#Microsoft.Azure.Search.PatternAnalyzer";
 }
 
@@ -4648,8 +4648,8 @@ model LuceneStandardAnalyzer extends LexicalAnalyzer {
   @doc("A list of stopwords.")
   stopwords?: string[];
 
-  @doc("A URI fragment specifying the type of analyzer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of analyzer.")
   `@odata.type`: "#Microsoft.Azure.Search.StandardAnalyzer";
 }
 
@@ -4658,8 +4658,8 @@ model StopAnalyzer extends LexicalAnalyzer {
   @doc("A list of stopwords.")
   stopwords?: string[];
 
-  @doc("A URI fragment specifying the type of analyzer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of analyzer.")
   `@odata.type`: "#Microsoft.Azure.Search.StopAnalyzer";
 }
 
@@ -4672,8 +4672,8 @@ model CustomNormalizer extends LexicalNormalizer {
   @doc("A list of character filters used to prepare input text before it is processed. For instance, they can replace certain characters or symbols. The filters are run in the order in which they are listed.")
   charFilters?: CharFilterName[];
 
-  @doc("A URI fragment specifying the type of normalizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of normalizer.")
   `@odata.type`: "#Microsoft.Azure.Search.CustomNormalizer";
 }
 
@@ -4683,13 +4683,13 @@ model ClassicTokenizer extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 255;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.ClassicTokenizer";
 }
 
-@doc("Tokenizes the input from an edge into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Tokenizes the input from an edge into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.")
 model EdgeNGramTokenizer extends LexicalTokenizer {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
@@ -4702,8 +4702,8 @@ model EdgeNGramTokenizer extends LexicalTokenizer {
   @doc("Character classes to keep in the tokens.")
   tokenChars?: TokenCharacterKind[];
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenizer";
 }
 
@@ -4713,8 +4713,8 @@ model KeywordTokenizer extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 256;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.KeywordTokenizerV2";
 }
 
@@ -4730,8 +4730,8 @@ model MicrosoftLanguageTokenizer extends LexicalTokenizer {
   @doc("The language to use. The default is English.")
   language?: MicrosoftTokenizerLanguage;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.MicrosoftLanguageTokenizer";
 }
 
@@ -4747,13 +4747,13 @@ model MicrosoftLanguageStemmingTokenizer extends LexicalTokenizer {
   @doc("The language to use. The default is English.")
   language?: MicrosoftStemmingTokenizerLanguage;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.MicrosoftLanguageStemmingTokenizer";
 }
 
-@doc("Tokenizes the input into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Tokenizes the input into n-grams of the given size(s). This tokenizer is implemented using Apache Lucene.")
 model NGramTokenizer extends LexicalTokenizer {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
@@ -4766,8 +4766,8 @@ model NGramTokenizer extends LexicalTokenizer {
   @doc("Character classes to keep in the tokens.")
   tokenChars?: TokenCharacterKind[];
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.NGramTokenizer";
 }
 
@@ -4789,8 +4789,8 @@ model PathHierarchyTokenizer extends LexicalTokenizer {
   @doc("The number of initial tokens to skip. Default is 0.")
   skip?: int32;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.PathHierarchyTokenizerV2";
 }
 
@@ -4805,8 +4805,8 @@ model PatternTokenizer extends LexicalTokenizer {
   @doc("The zero-based ordinal of the matching group in the regular expression pattern to extract into tokens. Use -1 if you want to use the entire pattern to split the input into tokens, irrespective of matching groups. Default is -1.")
   group?: int32 = -1;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.PatternTokenizer";
 }
 
@@ -4816,8 +4816,8 @@ model LuceneStandardTokenizer extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 255;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.StandardTokenizerV2";
 }
 
@@ -4827,8 +4827,8 @@ model UaxUrlEmailTokenizer extends LexicalTokenizer {
   @maxValue(300)
   maxTokenLength?: int32 = 255;
 
-  @doc("A URI fragment specifying the type of tokenizer.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of tokenizer.")
   `@odata.type`: "#Microsoft.Azure.Search.UaxUrlEmailTokenizer";
 }
 
@@ -4837,8 +4837,8 @@ model AsciiFoldingTokenFilter extends TokenFilter {
   @doc("A value indicating whether the original token will be kept. Default is false.")
   preserveOriginal?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.AsciiFoldingTokenFilter";
 }
 
@@ -4850,8 +4850,8 @@ model CjkBigramTokenFilter extends TokenFilter {
   @doc("A value indicating whether to output both unigrams and bigrams (if true), or just bigrams (if false). Default is false.")
   outputUnigrams?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.CjkBigramTokenFilter";
 }
 
@@ -4866,8 +4866,8 @@ model CommonGramTokenFilter extends TokenFilter {
   @doc("A value that indicates whether the token filter is in query mode. When in query mode, the token filter generates bigrams and then removes common words and single terms followed by a common word. Default is false.")
   queryMode?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.CommonGramTokenFilter";
 }
 
@@ -4891,13 +4891,13 @@ model DictionaryDecompounderTokenFilter extends TokenFilter {
   @doc("A value indicating whether to add only the longest matching subword to the output. Default is false.")
   onlyLongestMatch?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.DictionaryDecompounderTokenFilter";
 }
 
-@doc("Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Generates n-grams of the given size(s) starting from the front or the back of an input token. This token filter is implemented using Apache Lucene.")
 model EdgeNGramTokenFilter extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
@@ -4910,8 +4910,8 @@ model EdgeNGramTokenFilter extends TokenFilter {
   @doc("Specifies which side of the input the n-gram should be generated from. Default is \"front\".")
   side?: EdgeNGramTokenFilterSide;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.EdgeNGramTokenFilterV2";
 }
 
@@ -4920,8 +4920,8 @@ model ElisionTokenFilter extends TokenFilter {
   @doc("The set of articles to remove.")
   articles?: string[];
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.ElisionTokenFilter";
 }
 
@@ -4933,8 +4933,8 @@ model KeepTokenFilter extends TokenFilter {
   @doc("A value indicating whether to lower case all words first. Default is false.")
   keepWordsCase?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.KeepTokenFilter";
 }
 
@@ -4946,8 +4946,8 @@ model KeywordMarkerTokenFilter extends TokenFilter {
   @doc("A value indicating whether to ignore case. If true, all words are converted to lower case first. Default is false.")
   ignoreCase?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.KeywordMarkerTokenFilter";
 }
 
@@ -4961,8 +4961,8 @@ model LengthTokenFilter extends TokenFilter {
   @maxValue(300)
   max?: int32 = 300;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.LengthTokenFilter";
 }
 
@@ -4974,13 +4974,13 @@ model LimitTokenFilter extends TokenFilter {
   @doc("A value indicating whether all tokens from the input must be consumed even if maxTokenCount is reached. Default is false.")
   consumeAllTokens?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.LimitTokenFilter";
 }
 
-@doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Generates n-grams of the given size(s). This token filter is implemented using Apache Lucene.")
 model NGramTokenFilter extends TokenFilter {
   @doc("The minimum n-gram length. Default is 1. Maximum is 300. Must be less than the value of maxGram.")
   @maxValue(300)
@@ -4990,8 +4990,8 @@ model NGramTokenFilter extends TokenFilter {
   @maxValue(300)
   maxGram?: int32 = 2;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.NGramTokenFilterV2";
 }
 
@@ -5003,8 +5003,8 @@ model PatternCaptureTokenFilter extends TokenFilter {
   @doc("A value indicating whether to return the original token even if one of the patterns matches. Default is true.")
   preserveOriginal?: boolean = true;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.PatternCaptureTokenFilter";
 }
 
@@ -5016,8 +5016,8 @@ model PatternReplaceTokenFilter extends TokenFilter {
   @doc("The replacement text.")
   replacement: string;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.PatternReplaceTokenFilter";
 }
 
@@ -5029,8 +5029,8 @@ model PhoneticTokenFilter extends TokenFilter {
   @doc("A value indicating whether encoded tokens should replace original tokens. If false, encoded tokens are added as synonyms. Default is true.")
   replace?: boolean = true;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.PhoneticTokenFilter";
 }
 
@@ -5056,8 +5056,8 @@ model ShingleTokenFilter extends TokenFilter {
   @doc("The string to insert for each position at which there is no token. Default is an underscore (\"_\").")
   filterToken?: string = "_";
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.ShingleTokenFilter";
 }
 
@@ -5066,8 +5066,8 @@ model SnowballTokenFilter extends TokenFilter {
   @doc("The language to use.")
   language: SnowballTokenFilterLanguage;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.SnowballTokenFilter";
 }
 
@@ -5076,8 +5076,8 @@ model StemmerTokenFilter extends TokenFilter {
   @doc("The language to use.")
   language: StemmerTokenFilterLanguage;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.StemmerTokenFilter";
 }
 
@@ -5086,8 +5086,8 @@ model StemmerOverrideTokenFilter extends TokenFilter {
   @doc("A list of stemming rules in the following format: \"word => stem\", for example: \"ran => run\".")
   rules: string[];
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.StemmerOverrideTokenFilter";
 }
 
@@ -5105,8 +5105,8 @@ model StopwordsTokenFilter extends TokenFilter {
   @doc("A value indicating whether to ignore the last search term if it's a stop word. Default is true.")
   removeTrailing?: boolean = true;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.StopwordsTokenFilter";
 }
 
@@ -5121,8 +5121,8 @@ model SynonymTokenFilter extends TokenFilter {
   @doc("A value indicating whether all words in the list of synonyms (if => notation is not used) will map to one another. If true, all words in the list of synonyms (if => notation is not used) will map to one another. The following list: incredible, unbelievable, fabulous, amazing is equivalent to: incredible, unbelievable, fabulous, amazing => incredible, unbelievable, fabulous, amazing. If false, the following list: incredible, unbelievable, fabulous, amazing will be equivalent to: incredible, unbelievable, fabulous, amazing => incredible. Default is true.")
   expand?: boolean = true;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.SynonymTokenFilter";
 }
 
@@ -5132,8 +5132,8 @@ model TruncateTokenFilter extends TokenFilter {
   @maxValue(300)
   length?: int32 = 300;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.TruncateTokenFilter";
 }
 
@@ -5142,8 +5142,8 @@ model UniqueTokenFilter extends TokenFilter {
   @doc("A value indicating whether to remove duplicates only at the same position. Default is false.")
   onlyOnSamePosition?: boolean;
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.UniqueTokenFilter";
 }
 
@@ -5179,8 +5179,8 @@ model WordDelimiterTokenFilter extends TokenFilter {
   @doc("A list of tokens to protect from being delimited.")
   protectedWords?: string[];
 
-  @doc("A URI fragment specifying the type of token filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of token filter.")
   `@odata.type`: "#Microsoft.Azure.Search.WordDelimiterTokenFilter";
 }
 
@@ -5189,8 +5189,8 @@ model MappingCharFilter extends CharFilter {
   @doc("A list of mappings of the following format: \"a=>b\" (all occurrences of the character \"a\" will be replaced with character \"b\").")
   mappings: string[];
 
-  @doc("A URI fragment specifying the type of char filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of char filter.")
   `@odata.type`: "#Microsoft.Azure.Search.MappingCharFilter";
 }
 
@@ -5202,20 +5202,20 @@ model PatternReplaceCharFilter extends CharFilter {
   @doc("The replacement text.")
   replacement: string;
 
-  @doc("A URI fragment specifying the type of char filter.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of char filter.")
   `@odata.type`: "#Microsoft.Azure.Search.PatternReplaceCharFilter";
 }
 
 @doc("Legacy similarity algorithm which uses the Lucene TFIDFSimilarity implementation of TF-IDF. This variation of TF-IDF introduces static document length normalization as well as coordinating factors that penalize documents that only partially match the searched queries.")
 model ClassicSimilarityAlgorithm extends SimilarityAlgorithm {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: "#Microsoft.Azure.Search.ClassicSimilarity";
 }
 
-@doc("Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter).")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Ranking function based on the Okapi BM25 similarity algorithm. BM25 is a TF-IDF-like algorithm that includes length normalization (controlled by the 'b' parameter) as well as term frequency saturation (controlled by the 'k1' parameter).")
 model BM25SimilarityAlgorithm extends SimilarityAlgorithm {
   @doc("This property controls the scaling function between the term frequency of each matching terms and the final relevance score of a document-query pair. By default, a value of 1.2 is used. A value of 0.0 means the score does not scale with an increase in term frequency.")
   k1?: float64;
@@ -5223,8 +5223,8 @@ model BM25SimilarityAlgorithm extends SimilarityAlgorithm {
   @doc("This property controls how the length of a document affects the relevance score. By default, a value of 0.75 is used. A value of 0.0 means no length normalization is applied, while a value of 1.0 means the score is fully normalized by the length of the document.")
   b?: float64;
 
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: "#Microsoft.Azure.Search.BM25Similarity";
 }
 
@@ -5295,8 +5295,8 @@ model BinaryQuantizationCompression extends VectorSearchCompression {
   kind: "binaryQuantization";
 }
 
-@doc("Specifies the Azure OpenAI resource used to vectorize a query string.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Specifies the Azure OpenAI resource used to vectorize a query string.")
 model AzureOpenAIVectorizer extends VectorSearchVectorizer {
   @doc("Contains the parameters specific to Azure OpenAI embedding vectorization.")
   azureOpenAIParameters?: AzureOpenAIVectorizerParameters;
@@ -5305,8 +5305,8 @@ model AzureOpenAIVectorizer extends VectorSearchVectorizer {
   kind: "azureOpenAI";
 }
 
-@doc("Specifies the parameters for connecting to the Azure OpenAI resource.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Specifies the parameters for connecting to the Azure OpenAI resource.")
 model AzureOpenAIVectorizerParameters {
   @doc("The resource URI of the Azure OpenAI resource.")
   resourceUri?: url;
@@ -5327,9 +5327,9 @@ model AzureOpenAIVectorizerParameters {
 @doc("Abstract base type for data identities.")
 @discriminator("@odata.type")
 model SearchIndexerDataIdentity {
-  @doc("A URI fragment specifying the type of identity.")
   #suppress "@azure-tools/typespec-azure-core/no-string-discriminator" "Existing"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of identity.")
   `@odata.type`: string;
 }
 
@@ -5363,8 +5363,8 @@ model WebApiVectorizerParameters {
   authIdentity?: SearchIndexerDataIdentity;
 }
 
-@doc("Clears the identity property of a datasource.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Clears the identity property of a datasource.")
 @added(Versions.v2025_08_01_preview)
 model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   @doc("Contains the parameters specific to AI Services Vision embedding vectorization.")
@@ -5374,8 +5374,8 @@ model AIServicesVisionVectorizer extends VectorSearchVectorizer {
   kind: "aiServicesVision";
 }
 
-@doc("Specifies the AI Services Vision parameters for vectorizing a query image or text.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Specifies the AI Services Vision parameters for vectorizing a query image or text.")
 @added(Versions.v2025_08_01_preview)
 model AIServicesVisionParameters {
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
@@ -5391,8 +5391,8 @@ model AIServicesVisionParameters {
   authIdentity?: SearchIndexerDataIdentity;
 }
 
-@doc("Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Specifies an Azure Machine Learning endpoint deployed via the Azure AI Foundry Model Catalog for generating the vector embedding of a query string.")
 @added(Versions.v2025_08_01_preview)
 model AMLVectorizer extends VectorSearchVectorizer {
   @doc("Specifies the properties of the AML vectorizer.")
@@ -5402,8 +5402,8 @@ model AMLVectorizer extends VectorSearchVectorizer {
   kind: "aml";
 }
 
-@doc("Specifies the properties for connecting to an AML vectorizer.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Specifies the properties for connecting to an AML vectorizer.")
 @added(Versions.v2025_08_01_preview)
 model AMLParameters {
   @doc("(Required for no authentication or key authentication) The scoring URI of the AML service to which the JSON payload will be sent. Only the https URI scheme is allowed.")
@@ -5427,8 +5427,8 @@ model AMLParameters {
 
 @doc("Clears the identity property of a datasource.")
 model SearchIndexerDataNoneIdentity extends SearchIndexerDataIdentity {
-  @doc("The discriminator for derived types.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("The discriminator for derived types.")
   `@odata.type`: "#Microsoft.Azure.Search.DataNoneIdentity";
 }
 
@@ -5437,8 +5437,8 @@ model SearchIndexerDataUserAssignedIdentity extends SearchIndexerDataIdentity {
   @doc("The fully qualified Azure resource Id of a user assigned managed identity typically in the form \"/subscriptions/12345678-1234-1234-1234-1234567890ab/resourceGroups/rg/providers/Microsoft.ManagedIdentity/userAssignedIdentities/myId\" that should have been assigned to the search service.")
   userAssignedIdentity: string;
 
-  @doc("A URI fragment specifying the type of identity.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of identity.")
   `@odata.type`: "#Microsoft.Azure.Search.DataUserAssignedIdentity";
 }
 
@@ -5447,15 +5447,15 @@ model HighWaterMarkChangeDetectionPolicy extends DataChangeDetectionPolicy {
   @doc("The name of the high water mark column.")
   highWaterMarkColumnName: string;
 
-  @doc("A URI fragment specifying the type of data change detection policy.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of data change detection policy.")
   `@odata.type`: "#Microsoft.Azure.Search.HighWaterMarkChangeDetectionPolicy";
 }
 
 @doc("Defines a data change detection policy that captures changes using the Integrated Change Tracking feature of Azure SQL Database.")
 model SqlIntegratedChangeTrackingPolicy extends DataChangeDetectionPolicy {
-  @doc("A URI fragment specifying the type of data change detection policy.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of data change detection policy.")
   `@odata.type`: "#Microsoft.Azure.Search.SqlIntegratedChangeTrackingPolicy";
 }
 
@@ -5468,8 +5468,8 @@ model SoftDeleteColumnDeletionDetectionPolicy
   @doc("The marker value that identifies an item as deleted.")
   softDeleteMarkerValue?: string;
 
-  @doc("A URI fragment specifying the type of data deletion detection policy.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of data deletion detection policy.")
   `@odata.type`: "#Microsoft.Azure.Search.SoftDeleteColumnDeletionDetectionPolicy";
 }
 
@@ -5477,8 +5477,8 @@ model SoftDeleteColumnDeletionDetectionPolicy
 @added(Versions.v2025_08_01_preview)
 model NativeBlobSoftDeleteDeletionDetectionPolicy
   extends DataDeletionDetectionPolicy {
-  @doc("A URI fragment specifying the type of data deletion detection policy.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of data deletion detection policy.")
   `@odata.type`: "#Microsoft.Azure.Search.NativeBlobSoftDeleteDeletionDetectionPolicy";
 }
 
@@ -5551,8 +5551,8 @@ model TagScoringParameters {
   tagsParameter: string;
 }
 
-@doc("A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
 #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+@doc("A dictionary of knowledge store-specific configuration properties. Each name is the name of a specific property. Each value must be of a primitive type.")
 model SearchIndexerKnowledgeStoreParameters {
   ...Record<unknown>;
 
@@ -5562,8 +5562,8 @@ model SearchIndexerKnowledgeStoreParameters {
 
 @doc("An empty object that represents the default Azure AI service resource for a skillset.")
 model DefaultCognitiveServicesAccount extends CognitiveServicesAccount {
-  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   `@odata.type`: "#Microsoft.Azure.Search.DefaultCognitiveServices";
 }
 
@@ -5572,13 +5572,13 @@ model CognitiveServicesAccountKey extends CognitiveServicesAccount {
   @doc("The key used to provision the Azure AI service resource attached to a skillset.")
   key: string;
 
-  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   `@odata.type`: "#Microsoft.Azure.Search.CognitiveServicesByKey";
 }
 
-@doc("The account key of an Azure AI service resource that's attached to a skillset, to be used with the resource's subdomain.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("The account key of an Azure AI service resource that's attached to a skillset, to be used with the resource's subdomain.")
 @added(Versions.v2025_08_01_preview)
 model AIServicesAccountKey extends CognitiveServicesAccount {
   @doc("The key used to provision the Azure AI service resource attached to a skillset.")
@@ -5587,13 +5587,13 @@ model AIServicesAccountKey extends CognitiveServicesAccount {
   @doc("The subdomain url for the corresponding AI Service.")
   subdomainUrl: string;
 
-  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   `@odata.type`: "#Microsoft.Azure.Search.AIServicesByKey";
 }
 
-@doc("The multi-region account of an Azure AI service resource that's attached to a skillset.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("The multi-region account of an Azure AI service resource that's attached to a skillset.")
 @added(Versions.v2025_08_01_preview)
 model AIServicesAccountIdentity extends CognitiveServicesAccount {
   @doc("The user-assigned managed identity used for connections to AI Service. If not specified, the system-assigned managed identity is used. On updates to the skillset, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
@@ -5602,8 +5602,8 @@ model AIServicesAccountIdentity extends CognitiveServicesAccount {
   @doc("The subdomain url for the corresponding AI Service.")
   subdomainUrl: string;
 
-  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of Azure AI service resource attached to a skillset.")
   `@odata.type`: "#Microsoft.Azure.Search.AIServicesByIdentity";
 }
 
@@ -5663,8 +5663,8 @@ model CustomEntityAlias {
 
 @doc("A skill that enables scenarios that require a Boolean operation to determine the data to assign to an output.")
 model ConditionalSkill extends SearchIndexerSkill {
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Util.ConditionalSkill";
 }
 
@@ -5679,8 +5679,8 @@ model KeyPhraseExtractionSkill extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
   modelVersion?: string;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.KeyPhraseExtractionSkill";
 }
 
@@ -5695,8 +5695,8 @@ model OcrSkill extends SearchIndexerSkill {
   @doc("Defines the sequence of characters to use between the lines of text recognized by the OCR skill. The default value is \"space\".")
   lineEnding?: OcrLineEnding;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Vision.OcrSkill";
 }
 
@@ -5711,8 +5711,8 @@ model ImageAnalysisSkill extends SearchIndexerSkill {
   @doc("A string indicating which domain-specific details to return.")
   details?: ImageDetail[];
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Vision.ImageAnalysisSkill";
 }
 
@@ -5724,15 +5724,15 @@ model LanguageDetectionSkill extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
   modelVersion?: string;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.LanguageDetectionSkill";
 }
 
 @doc("A skill for reshaping the outputs. It creates a complex type to support composite fields (also known as multipart fields).")
 model ShaperSkill extends SearchIndexerSkill {
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Util.ShaperSkill";
 }
 
@@ -5744,8 +5744,8 @@ model MergeSkill extends SearchIndexerSkill {
   @doc("The tag indicates the end of the merged text. By default, the tag is an empty space.")
   insertPostTag?: string = " ";
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.MergeSkill";
 }
 
@@ -5763,8 +5763,8 @@ model EntityRecognitionSkill extends SearchIndexerSkill {
   @doc("A value between 0 and 1 that be used to only include entities whose confidence score is greater than the value specified. If not set (default), or if explicitly set to null, all entities will be included.")
   minimumPrecision?: float64;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.EntityRecognitionSkill";
 }
 
@@ -5773,8 +5773,8 @@ model SentimentSkill extends SearchIndexerSkill {
   @doc("A value indicating which language code to use. Default is `en`.")
   defaultLanguageCode?: SentimentSkillLanguage;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.SentimentSkill";
 }
 
@@ -5789,8 +5789,8 @@ model SentimentSkillV3 extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
   modelVersion?: string;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.V3.SentimentSkill";
 }
 
@@ -5806,8 +5806,8 @@ model EntityLinkingSkill extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the Text Analytics service. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
   modelVersion?: string;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.V3.EntityLinkingSkill";
 }
 
@@ -5826,13 +5826,13 @@ model EntityRecognitionSkillV3 extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the Text Analytics API. It will default to the latest available when not specified. We recommend you do not specify this value unless absolutely necessary.")
   modelVersion?: string;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.V3.EntityRecognitionSkill";
 }
 
-@doc("Using the Text Analytics API, extracts personal information from an input text and gives you the option of masking it.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Using the Text Analytics API, extracts personal information from an input text and gives you the option of masking it.")
 model PIIDetectionSkill extends SearchIndexerSkill {
   @doc("A value indicating which language code to use. Default is `en`.")
   defaultLanguageCode?: string;
@@ -5857,8 +5857,8 @@ model PIIDetectionSkill extends SearchIndexerSkill {
   @doc("If specified, will set the PII domain to include only a subset of the entity categories. Possible values include: 'phi', 'none'. Default is 'none'.")
   domain?: string;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.PIIDetectionSkill";
 }
 
@@ -5883,18 +5883,18 @@ model SplitSkill extends SearchIndexerSkill {
   @added(Versions.v2025_08_01_preview)
   unit?: SplitSkillUnit;
 
-  @doc("Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("Only applies if the unit is set to azureOpenAITokens. If specified, the splitSkill will use these parameters when performing the tokenization. The parameters are a valid 'encoderModelName' and an optional 'allowedSpecialTokens' property.")
   @added(Versions.v2025_08_01_preview)
   azureOpenAITokenizerParameters?: AzureOpenAITokenizerParameters;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.SplitSkill";
 }
 
-@doc("Azure OpenAI Tokenizer parameters.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Azure OpenAI Tokenizer parameters.")
 @added(Versions.v2025_08_01_preview)
 model AzureOpenAITokenizerParameters {
   @doc("Only applies if the unit is set to azureOpenAITokens. Options include 'R50k_base', 'P50k_base', 'P50k_edit' and 'CL100k_base'. The default value is 'CL100k_base'.")
@@ -5924,8 +5924,8 @@ model CustomEntityLookupSkill extends SearchIndexerSkill {
   @doc("A global flag for FuzzyEditDistance. If FuzzyEditDistance is not set in CustomEntity, this value will be the default value.")
   globalDefaultFuzzyEditDistance?: int32;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.CustomEntityLookupSkill";
 }
 
@@ -5940,8 +5940,8 @@ model TextTranslationSkill extends SearchIndexerSkill {
   @doc("The language code to translate documents from when neither the fromLanguageCode input nor the defaultFromLanguageCode parameter are provided, and the automatic language detection is unsuccessful. Default is `en`.")
   suggestedFrom?: TextTranslationSkillLanguage;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.TranslationSkill";
 }
 
@@ -5953,12 +5953,12 @@ model DocumentExtractionSkill extends SearchIndexerSkill {
   @doc("The type of data to be extracted for the skill. Will be set to 'contentAndMetadata' if not defined.")
   dataToExtract?: string;
 
-  @doc("A dictionary of configurations for the skill.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @doc("A dictionary of configurations for the skill.")
   configuration?: Record<unknown>;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Util.DocumentExtractionSkill";
 }
 
@@ -5980,8 +5980,8 @@ model DocumentIntelligenceLayoutSkill extends SearchIndexerSkill {
   @doc("Controls the cardinality for chunking the content.")
   chunkingProperties?: DocumentIntelligenceLayoutSkillChunkingProperties;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Util.DocumentIntelligenceLayoutSkill";
 }
 
@@ -6011,8 +6011,8 @@ model WebApiSkill extends SearchIndexerSkill {
   @doc("The user-assigned managed identity used for outbound connections. If an authResourceId is provided and it's not specified, the system-assigned managed identity is used. On updates to the indexer, if the identity is unspecified, the value remains unchanged. If set to \"none\", the value of this property is cleared.")
   authIdentity?: SearchIndexerDataIdentity;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Custom.WebApiSkill";
 }
 
@@ -6037,21 +6037,21 @@ model AzureMachineLearningSkill extends SearchIndexerSkill {
   @doc("(Optional) When specified, indicates the number of calls the indexer will make in parallel to the endpoint you have provided. You can decrease this value if your endpoint is failing under too high of a request load, or raise it if your endpoint is able to accept more requests and you would like an increase in the performance of the indexer. If not set, a default value of 5 is used. The degreeOfParallelism can be set to a maximum of 10 and a minimum of 1.")
   degreeOfParallelism?: int32;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Custom.AmlSkill";
 }
 
-@doc("Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource.")
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+@doc("Allows you to generate a vector embedding for a given text input using the Azure OpenAI resource.")
 model AzureOpenAIEmbeddingSkill extends SearchIndexerSkill {
   ...AzureOpenAIVectorizerParameters;
 
   @doc("The number of dimensions the resulting output embeddings should have. Only supported in text-embedding-3 and later models.")
   dimensions?: int32;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Text.AzureOpenAIEmbeddingSkill";
 }
 
@@ -6061,8 +6061,8 @@ model VisionVectorizeSkill extends SearchIndexerSkill {
   @doc("The version of the model to use when calling the AI Services Vision service. It will default to the latest available when not specified.")
   modelVersion: string;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Vision.VectorizeSkill";
 }
 
@@ -6166,8 +6166,8 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   @doc("Common language model parameters that customers can tweak. If omitted, reasonable defaults will be applied.")
   commonModelParameters?: ChatCompletionCommonModelParameters;
 
-  @doc("Open-type dictionary for model-specific parameters that should be appended to the chat completions call. Follows Azure AI Foundry's extensibility pattern.")
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "model should have additionalProperties"
+  @doc("Open-type dictionary for model-specific parameters that should be appended to the chat completions call. Follows Azure AI Foundry's extensibility pattern.")
   extraParameters?: Record<unknown>;
 
   @doc("How extra parameters are handled by Azure AI Foundry. Default is 'error'.")
@@ -6176,8 +6176,8 @@ model ChatCompletionSkill extends SearchIndexerSkill {
   @doc("Determines how the LLM should format its response. Defaults to 'text' response type.")
   responseFormat?: ChatCompletionResponseFormat;
 
-  @doc("A URI fragment specifying the type of skill.")
   #suppress "@azure-tools/typespec-azure-core/casing-style" "Maintain compatibility with existing models."
+  @doc("A URI fragment specifying the type of skill.")
   `@odata.type`: "#Microsoft.Skills.Custom.ChatCompletionSkill";
 }
 
