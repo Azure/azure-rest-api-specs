@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2022-09-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-09-15-preview'
 input-file:
-  - Microsoft.Syntex/preview/2022-09-15-preview/syntex.json
+  - preview/2022-09-15-preview/syntex.json
 ```
 
 ---
