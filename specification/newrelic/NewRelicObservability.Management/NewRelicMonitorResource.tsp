@@ -17,7 +17,7 @@ model NewRelicMonitorResource
     Resource = NewRelicMonitorResource,
     KeyName = "monitorName",
     SegmentName = "monitors",
-    NamePattern = "^.*$"
+    NamePattern = ""
   >;
 
   /**
