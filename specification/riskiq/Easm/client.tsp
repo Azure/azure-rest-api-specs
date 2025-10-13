@@ -127,6 +127,14 @@ interface EasmClient {
   "DiscoveryGroupNameParameter",
   "csharp"
 );
+@@clientName(Easm.DeltaTypeResponse, "DeltaTypeResult", "csharp");
+@@clientName(Easm.ActionParameters, "ActionParametersContent", "csharp");
+@@clientName(Easm.AssetChainRequest, "AssetChainRequestContent", "csharp");
+@@clientName(Easm.AssetsExportRequest, "AssetsExportRequestContent", "csharp");
+@@clientName(Easm.DailyDeltaTypeResponse, "DailyDeltaTypeResult", "csharp");
+@@clientName(Easm.DeltaDetailsRequest, "DeltaDetailsRequestContent", "csharp");
+@@clientName(Easm.DeltaSummaryRequest, "DeltaSummaryRequestContent", "csharp");
+@@clientName(Easm.Policy, "EasmPolicy", "csharp");
 @@clientName(EasmClient.runDiscoGroup, "RunDiscoveryGroup", "csharp");
 @@clientName(EasmClient.getDiscoGroup, "GetDiscoveryGroup", "csharp");
 @@clientName(EasmClient.listDiscoGroup, "GetDiscoveryGroups", "csharp");
