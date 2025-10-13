@@ -500,7 +500,7 @@ model SearchOptions {
   facets?: string[];
 
   @doc("The OData $filter expression to apply to the search query.")
-  @query
+  @query("$filter")
   $filter?: string;
 
   @doc("The list of field names to use for hit highlights. Only searchable fields can be used for hit highlighting.")
@@ -553,15 +553,15 @@ model SearchOptions {
   sessionId?: string;
 
   @doc("The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.")
-  @query
+  @query("$select")
   $select?: string[];
 
   @doc("The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead.")
-  @query
+  @query("$skip")
   $skip?: int32;
 
   @doc("The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results.")
-  @query
+  @query("$top")
   $top?: int32;
 
   @doc("The name of the semantic configuration that lists which fields should be used for semantic ranking, captions, highlights, and answers")
@@ -618,7 +618,7 @@ model SearchOptions {
 @doc("Parameters grouped for suggest operations.")
 model SuggestOptions {
   @doc("An OData expression that filters the documents considered for suggestions.")
-  @query
+  @query("$filter")
   $filter?: string;
 
   @doc("A value indicating whether to use fuzzy matching for the suggestions query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy suggestions queries are slower and consume more resources.")
@@ -646,11 +646,11 @@ model SuggestOptions {
   searchFields?: string[];
 
   @doc("The list of fields to retrieve. If unspecified, only the key field will be included in the results.")
-  @query
+  @query("$select")
   $select?: string[];
 
   @doc("The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5.")
-  @query
+  @query("$top")
   $top?: int32;
 }
 
@@ -661,7 +661,7 @@ model AutocompleteOptions {
   autocompleteMode?: AutocompleteMode;
 
   @doc("An OData expression that filters the documents used to produce completed terms for the Autocomplete result.")
-  @query
+  @query("$filter")
   $filter?: string;
 
   @doc("A value indicating whether to use fuzzy matching for the autocomplete query. Default is false. When set to true, the query will find terms even if there's a substituted or missing character in the search text. While this provides a better experience in some scenarios, it comes at a performance cost as fuzzy autocomplete queries are slower and consume more resources.")
@@ -685,7 +685,7 @@ model AutocompleteOptions {
   searchFields?: string[];
 
   @doc("The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5.")
-  @query
+  @query("$top")
   $top?: int32;
 }
 
