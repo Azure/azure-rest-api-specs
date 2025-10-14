@@ -1,7 +1,5 @@
 import "@azure-tools/typespec-azure-core";
 
-using TypeSpec.Versioning;
-
 namespace ConfidentialLedgerCommon;
 
 op LedgerOperation<
