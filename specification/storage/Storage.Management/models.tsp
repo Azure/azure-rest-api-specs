@@ -11,6 +11,14 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Storage;
 
+/**
+ * Geo Priority Replication enablement status for the storage account.
+ */
+model GeoPriorityReplicationStatus {
+  /** Indicates whether Blob Geo Priority Replication is enabled for the storage account. */
+  isBlobEnabled?: boolean;
+}
+
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AllowedMethods {
   string,
@@ -2945,6 +2953,11 @@ model StorageAccountPropertiesCreateParameters {
    * Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.
    */
   dnsEndpointType?: DnsEndpointType;
+
+  /**
+   * Status indicating whether Geo Priority Replication is enabled for the account.
+   */
+  geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
 }
 
 /**
@@ -3595,6 +3608,11 @@ model StorageAccountProperties {
    */
   @visibility(Lifecycle.Read)
   accountMigrationInProgress?: boolean;
+
+  /**
+   * Status indicating whether Geo Priority Replication is enabled for the account.
+   */
+  geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
 }
 
 /**
@@ -4132,6 +4150,11 @@ model StorageAccountPropertiesUpdateParameters {
    * Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier.
    */
   dnsEndpointType?: DnsEndpointType;
+
+  /**
+   * Status indicating whether Geo Priority Replication is enabled for the account.
+   */
+  geoPriorityReplicationStatus?: GeoPriorityReplicationStatus;
 }
 
 /**
@@ -5059,6 +5082,11 @@ model ObjectReplicationPolicyProperties {
    * Optional. The object replication policy metrics feature options.
    */
   metrics?: ObjectReplicationPolicyPropertiesMetrics;
+
+  /**
+   * Optional. The object replication policy priority replication feature options.
+   */
+  priorityReplication?: ObjectReplicationPolicyPropertiesPriorityReplication;
 }
 
 /**
@@ -5107,6 +5135,16 @@ model ObjectReplicationPolicyFilter {
 model ObjectReplicationPolicyPropertiesMetrics {
   /**
    * Indicates whether object replication metrics feature is enabled for the policy.
+   */
+  enabled?: boolean;
+}
+
+/**
+ * Optional. The object replication policy priority replication feature options.
+ */
+model ObjectReplicationPolicyPropertiesPriorityReplication {
+  /**
+   * Indicates whether object replication priority replication feature is enabled for the policy.
    */
   enabled?: boolean;
 }
