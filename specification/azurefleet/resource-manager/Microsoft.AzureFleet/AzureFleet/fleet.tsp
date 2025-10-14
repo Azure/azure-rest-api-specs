@@ -625,48 +625,35 @@ interface Fleets {
 
   listBySubscription is ArmListBySubscription<Fleet>;
 
-  @autoRoute
-  @listsResource(VirtualMachineScaleSet)
-  @armResourceList(VirtualMachineScaleSet)
+  /** List VirtualMachineScaleSet resources of an instance Fleet. */
+  @action("virtualMachineScaleSets")
   @get
   @list
-  @doc("List VirtualMachineScaleSet resources by Fleet")
-  listVirtualMachineScaleSets(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<
-      Fleet,
-      NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
-    >,
-  ): ArmResponse<VirtualMachineScaleSetListResult> | ErrorResponse;
+  listVirtualMachineScaleSets is ArmResourceActionSync<
+    Fleet,
+    void,
+    VirtualMachineScaleSetListResult
+  >;
 
   /** List VirtualMachine resources of an instance Fleet. */
   @added(Versions.v2025_07_01_preview)
-  @autoRoute
-  @listsResource(VirtualMachine)
-  @armResourceList(VirtualMachine)
+  @action("virtualMachines")
   @list
   @get
-  listVirtualMachines(
-    ...ApiVersionParameter,
-    ...SubscriptionIdParameter,
-    ...ResourceGroupParameter,
-    ...ProviderNamespace<Fleet>,
-    ...ResourceNameParameter<
-      Fleet,
-      NamePattern = "^[^_\\W][\\w\\-._]{0,79}(?<![-.])$"
-    >,
+  listVirtualMachines is ArmResourceActionSync<
+    Fleet,
+    void,
+    VirtualMachineListResult,
+    Parameters = {
+      /** Filter expression to filter the virtual machines. */
+      @query
+      $filter?: string;
 
-    /** Filter expression to filter the virtual machines. */
-    @query
-    $filter?: string,
-
-    /** Skip token for pagination. Uses the token from a previous response to fetch the next page of results. */
-    @query
-    $skiptoken?: string,
-  ): ArmResponse<VirtualMachineListResult> | ErrorResponse;
+      /** Skip token for pagination. Uses the token from a previous response to fetch the next page of results. */
+      @query
+      $skiptoken?: string;
+    }
+  >;
 
   /** Cancels an instance Fleet creation that is in progress. */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
