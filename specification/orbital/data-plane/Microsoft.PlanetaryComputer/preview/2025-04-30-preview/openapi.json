@@ -4909,7 +4909,8 @@
             "in": "query",
             "description": "STAC Collection ID",
             "required": false,
-            "type": "string"
+            "type": "string",
+            "x-ms-client-name": "collectionId"
           },
           {
             "name": "resampling",
@@ -6905,6 +6906,16 @@
             "pattern": ".*"
           },
           {
+            "name": "collection",
+            "in": "query",
+            "description": "STAC Collection Identifier",
+            "required": true,
+            "type": "string",
+            "maxLength": 500,
+            "pattern": ".*",
+            "x-ms-client-name": "collectionId"
+          },
+          {
             "$ref": "#/parameters/ZxyPathParameters.z"
           },
           {
@@ -6962,16 +6973,6 @@
             "type": "string",
             "maxLength": 500,
             "pattern": ".*"
-          },
-          {
-            "name": "collection",
-            "in": "query",
-            "description": "STAC Collection Identifier",
-            "required": true,
-            "type": "string",
-            "maxLength": 500,
-            "pattern": ".*",
-            "x-ms-client-name": "collectionId"
           },
           {
             "$ref": "#/parameters/MosaicSearchQueryParameters.scanLimit"

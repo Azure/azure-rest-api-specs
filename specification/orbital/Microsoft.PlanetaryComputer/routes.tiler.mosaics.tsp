@@ -218,7 +218,7 @@ interface MosaicsTileJsonOperations {
        * STAC Collection ID
        */
       @query("collection")
-      collection?: string;
+      collectionId?: string;
 
       /**
        * Resampling method
@@ -454,14 +454,6 @@ interface MosaicsAssetsForTiles {
       @pattern(".*")
       searchId: string;
 
-      /**
-       * STAC Collection Identifier
-       */
-      @query("collection")
-      @maxLength(500)
-      @pattern(".*")
-      collectionId: string;
-
       ...MosaicSearchQueryParameters;
       ...ZxyPathParameters;
 
@@ -504,6 +496,14 @@ interface MosaicsAssetsForTileMatrixSets {
       @maxLength(500)
       @pattern(".*")
       tileMatrixSetId: string;
+
+      /**
+       * STAC Collection Identifier
+       */
+      @query("collection")
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
 
       ...ZxyPathParameters;
     },
