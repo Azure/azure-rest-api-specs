@@ -1648,11 +1648,16 @@
               "description": "Specifies root squash settings of the AML file system."
             }
           },
+          "networkAccessIdentity": {
+              "description": "The managed identity used by the AML file system to access the network.",
+              "$ref": "storagecache.json#/definitions/URLString"
+            },
           "type": "object",
           "required": [
             "filesystemSubnet",
             "storageCapacityTiB",
-            "maintenanceWindow"
+            "maintenanceWindow",
+            "networkAccessIdentity"
           ]
         }
       }
@@ -1803,13 +1808,18 @@
           "type": "array",
           "description": "Only blobs in the non-logging container that start with one of the paths/prefixes in this array get imported into the cluster namespace. This is only used during initial creation of the AML file system and has '/' as the default value. It automatically creates an import job resource that can be deleted.",
           "items": {
-            "type": "string"
+             "type": "string"
           }
+        },
+        "storageAccountAccessIdentity": {
+          "$ref": "storagecache.json#/definitions/URLString",
+          "description": "The identity used by the AML file system to access the storage account."
         }
       },
       "required": [
         "container",
-        "loggingContainer"
+        "loggingContainer",
+        "storageAccountAccessIdentity"
       ]
     },
     "AmlFilesystemRootSquashSettings": {
