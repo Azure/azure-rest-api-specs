@@ -1562,7 +1562,7 @@
             "$ref": "#/parameters/SearchOptions.facets"
           },
           {
-            "$ref": "#/parameters/SearchOptions.%24filter"
+            "$ref": "#/parameters/SearchOptions.filter"
           },
           {
             "$ref": "#/parameters/SearchOptions.highlightFields"
@@ -1601,13 +1601,13 @@
             "$ref": "#/parameters/SearchOptions.sessionId"
           },
           {
-            "$ref": "#/parameters/SearchOptions.%24select"
+            "$ref": "#/parameters/SearchOptions.select"
           },
           {
-            "$ref": "#/parameters/SearchOptions.%24skip"
+            "$ref": "#/parameters/SearchOptions.skip"
           },
           {
-            "$ref": "#/parameters/SearchOptions.%24top"
+            "$ref": "#/parameters/SearchOptions.top"
           },
           {
             "$ref": "#/parameters/SearchOptions.semanticConfiguration"
@@ -2151,7 +2151,7 @@
             "type": "string"
           },
           {
-            "$ref": "#/parameters/SuggestOptions.%24filter"
+            "$ref": "#/parameters/SuggestOptions.filter"
           },
           {
             "$ref": "#/parameters/SuggestOptions.useFuzzyMatching"
@@ -2172,10 +2172,10 @@
             "$ref": "#/parameters/SuggestOptions.searchFields"
           },
           {
-            "$ref": "#/parameters/SuggestOptions.%24select"
+            "$ref": "#/parameters/SuggestOptions.select"
           },
           {
-            "$ref": "#/parameters/SuggestOptions.%24top"
+            "$ref": "#/parameters/SuggestOptions.top"
           },
           {
             "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
@@ -3604,7 +3604,7 @@
           "$ref": "#/definitions/AutocompleteMode",
           "description": "Specifies the mode for Autocomplete. The default is 'oneTerm'. Use 'twoTerms' to get shingles and 'oneTermWithContext' to use the current context while producing auto-completed terms."
         },
-        "$filter": {
+        "filter": {
           "type": "string",
           "description": "An OData expression that filters the documents used to produce completed terms for the Autocomplete result."
         },
@@ -3632,7 +3632,7 @@
             "type": "string"
           }
         },
-        "$top": {
+        "top": {
           "type": "integer",
           "format": "int32",
           "description": "The number of auto-completed terms to retrieve. This must be a value between 1 and 100. The default is 5."
@@ -17346,44 +17346,6 @@
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "apiVersion"
     },
-    "SearchOptions.$filter": {
-      "name": "$filter",
-      "in": "query",
-      "description": "The OData $filter expression to apply to the search query.",
-      "required": false,
-      "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SearchOptions.$select": {
-      "name": "$select",
-      "in": "query",
-      "description": "The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method"
-    },
-    "SearchOptions.$skip": {
-      "name": "$skip",
-      "in": "query",
-      "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
-    "SearchOptions.$top": {
-      "name": "$top",
-      "in": "query",
-      "description": "The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
-    },
     "SearchOptions.answers": {
       "name": "answers",
       "in": "query",
@@ -17504,6 +17466,15 @@
       "collectionFormat": "multi",
       "x-ms-parameter-location": "method",
       "x-ms-client-name": "facets"
+    },
+    "SearchOptions.filter": {
+      "name": "$filter",
+      "in": "query",
+      "description": "The OData $filter expression to apply to the search query.",
+      "required": false,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
     },
     "SearchOptions.highlightFields": {
       "name": "highlight",
@@ -18164,6 +18135,19 @@
       },
       "x-ms-parameter-location": "method"
     },
+    "SearchOptions.select": {
+      "name": "$select",
+      "in": "query",
+      "description": "The list of fields to retrieve. If unspecified, all fields marked as retrievable in the schema are included.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "select"
+    },
     "SearchOptions.semanticConfiguration": {
       "name": "semanticConfiguration",
       "in": "query",
@@ -18238,6 +18222,16 @@
       "type": "string",
       "x-ms-parameter-location": "method"
     },
+    "SearchOptions.skip": {
+      "name": "$skip",
+      "in": "query",
+      "description": "The number of search results to skip. This value cannot be greater than 100,000. If you need to scan documents in sequence, but cannot use $skip due to this limitation, consider using $orderby on a totally-ordered key and $filter with a range query instead.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "skip"
+    },
     "SearchOptions.speller": {
       "name": "speller",
       "in": "query",
@@ -18266,34 +18260,24 @@
       },
       "x-ms-parameter-location": "method"
     },
-    "SuggestOptions.$filter": {
+    "SearchOptions.top": {
+      "name": "$top",
+      "in": "query",
+      "description": "The number of search results to retrieve. This can be used in conjunction with $skip to implement client-side paging of search results. If results are truncated due to server-side paging, the response will include a continuation token that can be used to issue another Search request for the next page of results.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
+    },
+    "SuggestOptions.filter": {
       "name": "$filter",
       "in": "query",
       "description": "An OData expression that filters the documents considered for suggestions.",
       "required": false,
       "type": "string",
-      "x-ms-parameter-location": "method"
-    },
-    "SuggestOptions.$select": {
-      "name": "$select",
-      "in": "query",
-      "description": "The list of fields to retrieve. If unspecified, only the key field will be included in the results.",
-      "required": false,
-      "type": "array",
-      "items": {
-        "type": "string"
-      },
-      "collectionFormat": "csv",
-      "x-ms-parameter-location": "method"
-    },
-    "SuggestOptions.$top": {
-      "name": "$top",
-      "in": "query",
-      "description": "The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5.",
-      "required": false,
-      "type": "integer",
-      "format": "int32",
-      "x-ms-parameter-location": "method"
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "filter"
     },
     "SuggestOptions.highlightPostTag": {
       "name": "highlightPostTag",
@@ -18344,6 +18328,29 @@
       },
       "collectionFormat": "csv",
       "x-ms-parameter-location": "method"
+    },
+    "SuggestOptions.select": {
+      "name": "$select",
+      "in": "query",
+      "description": "The list of fields to retrieve. If unspecified, only the key field will be included in the results.",
+      "required": false,
+      "type": "array",
+      "items": {
+        "type": "string"
+      },
+      "collectionFormat": "csv",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "select"
+    },
+    "SuggestOptions.top": {
+      "name": "$top",
+      "in": "query",
+      "description": "The number of suggestions to retrieve. The value must be a number between 1 and 100. The default is 5.",
+      "required": false,
+      "type": "integer",
+      "format": "int32",
+      "x-ms-parameter-location": "method",
+      "x-ms-client-name": "top"
     },
     "SuggestOptions.useFuzzyMatching": {
       "name": "fuzzy",
