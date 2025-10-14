@@ -378,6 +378,28 @@ input-file:
   - stable/2024-04-01/updates.json
 ```
 
+### Tag: package-preview-2024-02
+
+These settings apply only when `--tag=package-preview-2024-02` is specified on the command line.
+
+```yaml $(tag) == 'package-preview-2024-02'
+input-file:
+  - preview/2024-02-15-preview/arcSettings.json
+  - preview/2024-02-15-preview/clusters.json
+  - preview/2024-02-15-preview/deploymentSettings.json
+  - preview/2024-02-15-preview/edgeDevices.json
+  - preview/2024-02-15-preview/extensions.json
+  - preview/2024-02-15-preview/offers.json
+  - preview/2024-02-15-preview/operations.json
+  - preview/2024-02-15-preview/publishers.json
+  - preview/2024-02-15-preview/securitySettings.json
+  - preview/2024-02-15-preview/skus.json
+  - preview/2024-02-15-preview/updateRuns.json
+  - preview/2024-02-15-preview/updateSummaries.json
+  - preview/2024-02-15-preview/updates.json
+  - preview/2024-02-15-preview/hciCommon.json
+```
+
 ---
 
 # Code Generation
