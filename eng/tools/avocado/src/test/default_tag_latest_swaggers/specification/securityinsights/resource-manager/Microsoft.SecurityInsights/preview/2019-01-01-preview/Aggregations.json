@@ -1,0 +1,97 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Security Insights",
+    "description": "API spec for Microsoft.SecurityInsights (Azure Security Insights) resource provider",
+    "version": "2019-01-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{operationalInsightsResourceProvider}/workspaces/{workspaceName}/providers/Microsoft.SecurityInsights/aggregations/{aggregationsName}": {
+      "get": {
+        "x-ms-examples": {
+          "Get aggregative data for all cases under the defined workspace, between the time range if specified.": {
+            "$ref": "./examples/aggregations/GetCasesAggregations.json"
+          }
+        },
+        "tags": [
+          "Aggregations"
+        ],
+        "description": "Get aggregative result for the given resources under the defined workspace",
+        "operationId": "CasesAggregations_Get",
+        "parameters": [
+          {
+            "$ref": "SecurityInsights.json#/parameters/ApiVersion"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/SubscriptionId"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/ResourceGroupName"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/OperationalInsightsResourceProvider"
+          },
+          {
+            "$ref": "SecurityInsights.json#/parameters/WorkspaceName"
+          },
+          {
+            "$ref": "#/parameters/AggregationsName"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/Aggregations"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "SecurityInsights.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    }
+  },
+  "parameters": {
+    "AggregationsName": {
+      "description": "The aggregation name. Supports - Cases",
+      "in": "path",
+      "name": "aggregationsName",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method"
+    }
+  },
+  "definitions": {}
+}
