@@ -134,45 +134,6 @@
         }
       }
     },
-    "/providers/Microsoft.AzureDataTransfer/listPipelineMetadata": {
-      "post": {
-        "operationId": "AzureDataTransfer_ListPipelineMetadata",
-        "description": "Retrieves a list of FlowProfile resources associated with a specified pipeline.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The request body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/ListPipelineMetadataRequest"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/ListPipelineMetadataResult"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "AzureDataTransfer_ListPipelineMetadata": {
-            "$ref": "./examples/AzureDataTransfer_ListPipelineMetadata.json"
-          }
-        }
-      }
-    },
     "/providers/Microsoft.AzureDataTransfer/operations": {
       "get": {
         "operationId": "Operations_List",
@@ -4614,35 +4575,6 @@
           ]
         }
       }
-    },
-    "ListPipelineMetadataRequest": {
-      "type": "object",
-      "description": "Defines the required request body for retrieving Pipeline metadata for a provided pipeline.",
-      "properties": {
-        "pipeline": {
-          "type": "string",
-          "description": "The name of the pipeline for which to retrieve associated metadata."
-        }
-      },
-      "required": [
-        "pipeline"
-      ]
-    },
-    "ListPipelineMetadataResult": {
-      "type": "object",
-      "description": "Defines the response body for retrieving Pipeline metadata for a provided pipeline.",
-      "properties": {
-        "features": {
-          "type": "array",
-          "description": "Returns the features associated with this pipeline.",
-          "items": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "features"
-      ]
     },
     "MessagingOptions": {
       "type": "object",

@@ -69,7 +69,7 @@ interface AzureDataTransfer {
   /**
    * Retrieves a list of FlowProfile resources associated with a specified pipeline.
    */
-  @added(Versions.v2025_05_30_preview)
+  @added(Versions.v2025_10_10_preview)
   @autoRoute
   listPipelineMetadata is ArmProviderActionSync<
     Request = ListPipelineMetadataRequest,

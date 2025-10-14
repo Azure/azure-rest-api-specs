@@ -2,17 +2,19 @@
   "title": "AzureDataTransfer_ListPipelineMetadata",
   "operationId": "AzureDataTransfer_ListPipelineMetadata",
   "parameters": {
-    "api-version": "2025-05-30-preview",
+    "api-version": "2025-10-10-preview",
     "body": {
-        "pipeline": "testPipeline"
+        "pipeline": "testPipeline",
+        "direction": "Send"
     }
   },
   "responses": {
     "200": {
       "body": {
         "features": [
-          "Feature1",
-          "Feature2"
+          {
+            "name": "FeatureA"
+          }
         ]
       }
     }
