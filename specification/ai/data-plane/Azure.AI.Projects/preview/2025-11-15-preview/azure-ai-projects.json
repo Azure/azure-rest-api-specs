@@ -1558,6 +1558,256 @@
         }
       }
     },
+    "/evaluationrules": {
+      "get": {
+        "operationId": "EvaluationRules_List",
+        "description": "List all evaluation rules.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "actionType",
+            "in": "query",
+            "description": "Filter by the type of evaluation rule.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "continuousEvaluation",
+              "humanEvaluation"
+            ],
+            "x-ms-enum": {
+              "name": "EvaluationRuleActionType",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "continuousEvaluation",
+                  "value": "continuousEvaluation",
+                  "description": "Continuous evaluation."
+                },
+                {
+                  "name": "humanEvaluation",
+                  "value": "humanEvaluation",
+                  "description": "Human evaluation."
+                }
+              ]
+            }
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "description": "Filter by the agent name.",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "enabled",
+            "in": "query",
+            "description": "Filter by the enabled status.",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluationRule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_List_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_List_MaximumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluationrules/{id}": {
+      "get": {
+        "operationId": "EvaluationRules_Get",
+        "description": "Get an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_Get_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_Get_MaximumSet_Gen.json"
+          }
+        }
+      },
+      "put": {
+        "operationId": "EvaluationRules_CreateOrUpdate",
+        "description": "Create or update an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "evaluationRule",
+            "in": "body",
+            "description": "Evaluation rule resource",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          },
+          "201": {
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/EvaluationRule"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_CreateOrUpdate_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_CreateOrUpdate_MaximumSet_Gen.json"
+          },
+          "EvaluationRules_CreateOrUpdate_MinimumSet": {
+            "$ref": "./examples/EvaluationRules_CreateOrUpdate_MinimumSet_Gen.json"
+          }
+        }
+      },
+      "delete": {
+        "operationId": "EvaluationRules_Delete",
+        "description": "Delete an evaluation rule.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "id",
+            "in": "path",
+            "description": "Unique identifier for the evaluation rule.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "204": {
+            "description": "There is no content to send for this request, but the headers may be useful. ",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "EvaluationRules_Delete_MaximumSet": {
+            "$ref": "./examples/EvaluationRules_Delete_MaximumSet_Gen.json"
+          }
+        }
+      }
+    },
     "/evaluations/checkannotation": {
       "get": {
         "operationId": "Evaluations_CheckAnnotation",
@@ -2133,9 +2383,43 @@
     },
     "/evaluators": {
       "get": {
-        "operationId": "Evaluators_ListVersions",
-        "description": "List the latest version of each Evaluator",
+        "operationId": "Evaluators_ListLatestVersions",
+        "description": "List the latest version of each evaluator",
         "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom",
+              "all"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "built_in",
+                  "value": "builtin",
+                  "description": "Built-in evaluator (Microsoft provided)"
+                },
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "Custom evaluator"
+                },
+                {
+                  "name": "all",
+                  "value": "all"
+                }
+              ]
+            }
+          },
           {
             "name": "limit",
             "in": "query",
@@ -2144,69 +2428,114 @@
             "type": "integer",
             "format": "int32",
             "default": 20
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
           }
         ],
         "responses": {
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
+              "$ref": "#/definitions/PagedEvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Evaluators_ListLatestVersions_MaximumSet": {
+            "$ref": "./examples/Evaluators_ListLatestVersions_MaximumSet_Gen.json"
+          },
+          "Evaluators_ListLatestVersions_MinimumSet": {
+            "$ref": "./examples/Evaluators_ListLatestVersions_MinimumSet_Gen.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/evaluators/{name}/versions": {
+      "get": {
+        "operationId": "Evaluators_ListVersions",
+        "description": "List all versions of the given evaluator",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "The name of the resource",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "type",
+            "in": "query",
+            "description": "Filter evaluators by type. Possible values: 'all', 'custom', 'builtin'.",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "builtin",
+              "custom",
+              "all"
+            ],
+            "x-ms-enum": {
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "built_in",
+                  "value": "builtin",
+                  "description": "Built-in evaluator (Microsoft provided)"
                 },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/EvaluatorVersion"
-                  }
+                {
+                  "name": "custom",
+                  "value": "custom",
+                  "description": "Custom evaluator"
                 },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
+                {
+                  "name": "all",
+                  "value": "all"
                 }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
               ]
+            }
+          },
+          {
+            "name": "limit",
+            "in": "query",
+            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
+            "required": false,
+            "type": "integer",
+            "format": "int32",
+            "default": 20
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedEvaluatorVersion"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
             }
           }
         },
@@ -2217,102 +2546,9 @@
           "Evaluators_ListVersions_MinimumSet": {
             "$ref": "./examples/Evaluators_ListVersions_MinimumSet_Gen.json"
           }
-        }
-      }
-    },
-    "/evaluators/{name}/versions": {
-      "get": {
-        "operationId": "Evaluators_ListEvaluatorVersions",
-        "description": "List all versions of the given Evaluator name",
-        "parameters": [
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Name of the evaluator",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "name": "limit",
-            "in": "query",
-            "description": "A limit on the number of objects to be returned. Limit can range between 1 and 100, and the default is 20.",
-            "required": false,
-            "type": "integer",
-            "format": "int32",
-            "default": 20
-          },
-          {
-            "name": "after",
-            "in": "query",
-            "description": "A cursor for use in pagination. after is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, ending with obj_foo, your subsequent call can include after=obj_foo in order to fetch the next page of the list.",
-            "required": false,
-            "type": "string"
-          },
-          {
-            "name": "before",
-            "in": "query",
-            "description": "A cursor for use in pagination. before is an object ID that defines your place in the list. For instance, if you make a list request and receive 100 objects, starting with obj_foo, your subsequent call can include before=obj_foo in order to fetch the previous page of the list.",
-            "required": false,
-            "type": "string"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "type": "object",
-              "description": "The response data for a requested list of items.",
-              "properties": {
-                "object": {
-                  "type": "string",
-                  "description": "The object type, which is always list.",
-                  "enum": [
-                    "list"
-                  ],
-                  "x-ms-enum": {
-                    "modelAsString": false
-                  }
-                },
-                "data": {
-                  "type": "array",
-                  "description": "The requested list of items.",
-                  "items": {
-                    "$ref": "#/definitions/EvaluatorVersion"
-                  }
-                },
-                "first_id": {
-                  "type": "string",
-                  "description": "The first ID represented in this list.",
-                  "x-ms-client-name": "firstId"
-                },
-                "last_id": {
-                  "type": "string",
-                  "description": "The last ID represented in this list.",
-                  "x-ms-client-name": "lastId"
-                },
-                "has_more": {
-                  "type": "boolean",
-                  "description": "A value indicating whether there are additional values available not captured in this list.",
-                  "x-ms-client-name": "hasMore"
-                }
-              },
-              "required": [
-                "object",
-                "data",
-                "first_id",
-                "last_id",
-                "has_more"
-              ]
-            }
-          }
         },
-        "x-ms-examples": {
-          "Evaluators_ListEvaluatorVersions_MaximumSet": {
-            "$ref": "./examples/Evaluators_ListEvaluatorVersions_MaximumSet_Gen.json"
-          },
-          "Evaluators_ListEvaluatorVersions_MinimumSet": {
-            "$ref": "./examples/Evaluators_ListEvaluatorVersions_MinimumSet_Gen.json"
-          }
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       },
       "post": {
@@ -4050,54 +4286,6 @@
           }
         }
       }
-    },
-    "/sync_evals:run": {
-      "post": {
-        "operationId": "SyncEvals_Create",
-        "description": "Synchronize evaluation runs from connected resources.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "eval",
-            "in": "body",
-            "description": "Creates a sync eval run.",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/SyncEvalInput"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/EvalRunOutputItem"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SyncEvals_Create_MaximumSet": {
-            "$ref": "./examples/SyncEvals_Create_MaximumSet_Gen.json"
-          },
-          "SyncEvals_Create_MinimumSet": {
-            "$ref": "./examples/SyncEvals_Create_MinimumSet_Gen.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -4512,6 +4700,10 @@
       "required": [
         "blobReference"
       ]
+    },
+    "AssetId": {
+      "type": "string",
+      "description": "Identifier of a saved asset."
     },
     "AssistantMessage": {
       "type": "object",
@@ -5551,6 +5743,30 @@
         "Messages"
       ]
     },
+    "ContinuousEvaluationRuleAction": {
+      "type": "object",
+      "description": "Evaluation rule action for continuous evaluation.",
+      "properties": {
+        "evalId": {
+          "type": "string",
+          "description": "Eval Id to add continuous evaluation runs to."
+        },
+        "maxHourlyRuns": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of evaluation runs allowed per hour."
+        }
+      },
+      "required": [
+        "evalId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "continuousEvaluation"
+    },
     "CosmosDBIndex": {
       "type": "object",
       "description": "CosmosDB Vector Store Index Definition",
@@ -6450,6 +6666,131 @@
       ],
       "x-ms-discriminator-value": "EvaluationResultSample"
     },
+    "EvaluationRule": {
+      "type": "object",
+      "description": "Evaluation rule model.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique identifier for the evaluation rule.",
+          "readOnly": true
+        },
+        "displayName": {
+          "type": "string",
+          "description": "Display Name for the evaluation rule."
+        },
+        "description": {
+          "type": "string",
+          "description": "Description for the evaluation rule."
+        },
+        "action": {
+          "$ref": "#/definitions/EvaluationRuleAction",
+          "description": "Definition of the evaluation rule action."
+        },
+        "filter": {
+          "$ref": "#/definitions/EvaluationRuleFilter",
+          "description": "Filter condition of the evaluation rule."
+        },
+        "eventType": {
+          "$ref": "#/definitions/EvaluationRuleEventType",
+          "description": "Event type that the evaluation rule applies to."
+        },
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether the evaluation rule is enabled. Default is true."
+        },
+        "systemData": {
+          "type": "object",
+          "description": "System metadata for the evaluation rule.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        }
+      },
+      "required": [
+        "id",
+        "action",
+        "eventType",
+        "enabled",
+        "systemData"
+      ]
+    },
+    "EvaluationRuleAction": {
+      "type": "object",
+      "description": "Evaluation action model.",
+      "properties": {
+        "type": {
+          "$ref": "#/definitions/EvaluationRuleActionType",
+          "description": "Type of the evaluation action."
+        }
+      },
+      "discriminator": "type",
+      "required": [
+        "type"
+      ]
+    },
+    "EvaluationRuleActionType": {
+      "type": "string",
+      "description": "Type of the evaluation action.",
+      "enum": [
+        "continuousEvaluation",
+        "humanEvaluation"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationRuleActionType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "continuousEvaluation",
+            "value": "continuousEvaluation",
+            "description": "Continuous evaluation."
+          },
+          {
+            "name": "humanEvaluation",
+            "value": "humanEvaluation",
+            "description": "Human evaluation."
+          }
+        ]
+      }
+    },
+    "EvaluationRuleEventType": {
+      "type": "string",
+      "description": "Type of the evaluation rule event.",
+      "enum": [
+        "response.completed",
+        "manual"
+      ],
+      "x-ms-enum": {
+        "name": "EvaluationRuleEventType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "responseCompleted",
+            "value": "response.completed",
+            "description": "Response completed."
+          },
+          {
+            "name": "manual",
+            "value": "manual",
+            "description": "Manual trigger."
+          }
+        ]
+      }
+    },
+    "EvaluationRuleFilter": {
+      "type": "object",
+      "description": "Evaluation filter model.",
+      "properties": {
+        "agentName": {
+          "type": "string",
+          "description": "Filter by agent name."
+        }
+      },
+      "required": [
+        "agentName"
+      ]
+    },
     "EvaluationRunClusterInsightResult": {
       "type": "object",
       "description": "Insights from the evaluation run cluster analysis.",
@@ -7035,6 +7376,10 @@
           "type": "number",
           "format": "float",
           "description": "Maximum value for the metric. If not specified, it is assumed to be unbounded."
+        },
+        "is_primary": {
+          "type": "boolean",
+          "description": "Indicates if this metric is primary when there are multiple metrics."
         }
       }
     },
@@ -7158,12 +7503,14 @@
           "readOnly": true
         },
         "created_at": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Creation date/time of the evaluator",
           "readOnly": true
         },
         "modified_at": {
-          "type": "string",
+          "type": "integer",
+          "format": "int64",
           "description": "Last modified date/time of the evaluator",
           "readOnly": true
         },
@@ -7302,6 +7649,25 @@
         }
       ],
       "x-ms-discriminator-value": "Hourly"
+    },
+    "HumanEvaluationRuleAction": {
+      "type": "object",
+      "description": "Evaluation rule action for human evaluation.",
+      "properties": {
+        "templateId": {
+          "$ref": "#/definitions/AssetId",
+          "description": "Human evaluation template Id."
+        }
+      },
+      "required": [
+        "templateId"
+      ],
+      "allOf": [
+        {
+          "$ref": "#/definitions/EvaluationRuleAction"
+        }
+      ],
+      "x-ms-discriminator-value": "humanEvaluation"
     },
     "ImageSource": {
       "type": "object",
@@ -8036,6 +8402,27 @@
         "value"
       ]
     },
+    "PagedEvaluationRule": {
+      "type": "object",
+      "description": "Paged collection of EvaluationRule items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluationRule items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluationRule"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "PagedEvaluationTaxonomy": {
       "type": "object",
       "description": "Paged collection of EvaluationTaxonomy items",
@@ -8045,6 +8432,27 @@
           "description": "The EvaluationTaxonomy items on this page",
           "items": {
             "$ref": "#/definitions/EvaluationTaxonomy"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedEvaluatorVersion": {
+      "type": "object",
+      "description": "Paged collection of EvaluatorVersion items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EvaluatorVersion items on this page",
+          "items": {
+            "$ref": "#/definitions/EvaluatorVersion"
           }
         },
         "nextLink": {
