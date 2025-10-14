@@ -17,7 +17,6 @@ using Azure.ResourceManager;
 @service({
   title: "Microsoft.Cdn/EdgeAction"
 })
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 @versioned(Versions)
 namespace Microsoft.Cdn;
 

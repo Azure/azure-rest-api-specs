@@ -63,7 +63,14 @@ scalar EdgeActionVersionId
 @doc("The status of the current operation")
 @Azure.Core.lroStatus
 enum ProvisioningState {
-  ...ResourceProvisioningState,
+  @doc("The operation completed successfully")
+  Succeeded,
+
+  @doc("The operation failed")
+  Failed,
+
+  @doc("The operation was canceled")
+  Canceled,
 
   @doc("Initial provisioning in progress")
   Provisioning,
