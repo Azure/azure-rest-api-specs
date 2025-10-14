@@ -2585,7 +2585,9 @@
             "description": "The name of the backup.",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
+            "minLength": 1,
+            "maxLength": 128,
+            "pattern": "^[-\\w\\._]+$"
           }
         ],
         "responses": {

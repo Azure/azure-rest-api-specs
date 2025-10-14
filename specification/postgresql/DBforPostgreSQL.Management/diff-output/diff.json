@@ -991,35 +991,19 @@
             }
           ],
           [
-            "~",
-            {
-              "name": {
-                "__old": "backupName",
-                "__new": "serverName"
-              },
-              "minLength": {
-                "__old": 1,
-                "__new": 3
-              },
-              "maxLength": {
-                "__old": 128,
-                "__new": 63
-              },
-              "pattern": {
-                "__old": "^[-\\w\\._]+$",
-                "__new": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
-              }
-            }
-          ],
-          [
             "+",
             {
-              "name": "backupName",
+              "name": "serverName",
               "in": "path",
               "required": true,
               "type": "string",
+              "minLength": 3,
+              "maxLength": 63,
               "pattern": "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
             }
+          ],
+          [
+            " "
           ]
         ]
       }

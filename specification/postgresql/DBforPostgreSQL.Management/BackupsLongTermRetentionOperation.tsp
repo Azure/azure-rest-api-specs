@@ -52,7 +52,7 @@ interface BackupsLongTermRetentionOperations {
   /**
    * Gets the results of a long retention backup operation for a server.
    */
-  get is ArmResourceRead<BackupsLongTermRetentionOperation>;
+  get is BackupsLongTermRetentionOperationAlias.Read<BackupsLongTermRetentionOperation>;
 
   /**
    * Lists the results of the long term retention backup operations for a server.
