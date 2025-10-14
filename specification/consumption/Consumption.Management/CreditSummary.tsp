@@ -28,6 +28,13 @@ model CreditSummary
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
+
+  /**
+   * A list of Tag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 alias CreditSummariesOps = Azure.ResourceManager.Legacy.ExtensionOperations<

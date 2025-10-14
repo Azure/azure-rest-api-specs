@@ -29,3 +29,8 @@ using Azure.ClientGenerator.Core;
   "paygCostInUsd",
   "java"
 );
+
+@@clientName(LegacyChargeSummaryProperties.azureMarketplaceCharges,
+  "marketplaceCharges",
+  "go"
+);
