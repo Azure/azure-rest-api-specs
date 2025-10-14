@@ -1355,10 +1355,10 @@
           },
           {
             "in": "body",
-            "name": "assessmentId",
-            "description": "The assessment ID for which to create the GitHub issue.",
+            "name": "createIssueRequest",
+            "description": "The request model containing details for creating the GitHub issue.",
             "schema": {
-              "type": "string"
+              "$ref": "#/definitions/IssueCreationRequest"
             }
           }
         ],
@@ -2642,6 +2642,16 @@
         "name": "InventoryListKind",
         "modelAsString": true,
         "modelAsExtensible": true
+      }
+    },
+    "IssueCreationRequest": {
+      "description": "The issue creation request model",
+      "type": "object",
+      "properties": {
+        "securityAssessmentResourceId": {
+          "description": "The security assessment resource id that the issue will be opened based on.",
+          "type": "string"
+        }
       }
     },
     "OnboardingState": {
