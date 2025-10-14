@@ -7,6 +7,16 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/ComputeRP/{version-status}/{version}/ComputeRP.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-compute"
+    namespace: "com.azure.resourcemanager.compute.compute"
+    service-name: "Compute"
+    flavor: azure
+    client-side-validations: true
+  "@azure-tools/typespec-client-generator-cli":
+    additionalDirectories:
+      - "specification/compute/Common.Management/"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

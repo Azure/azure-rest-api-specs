@@ -9,6 +9,13 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/Skus/{version-status}/{version}/skus.json"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-java":
+    service-dir: "sdk/compute"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-compute-sku"
+    namespace: "com.azure.resourcemanager.compute.sku"
+    service-name: "Compute Sku"
+    flavor: azure
+    client-side-validations: true
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
