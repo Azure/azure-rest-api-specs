@@ -26,7 +26,10 @@ enum Versions {
   `2025-09-01-preview`
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations extends Azure.ResourceManager.Operations {
+    @Autorest.example("./examples/Operations_List.json", "List Operations")
+    list is Azure.ResourceManager.Operations.list;
+}
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
@@ -74,8 +77,13 @@ model EdgeActionOperation is ProxyResource<EdgeActionOperationProperties> {
 
 @armResourceOperations
 interface EdgeActionOperations {
+    @Autorest.example("./examples/EdgeActionOperations_Get.json", "Get EdgeActionOperation")
     get is ArmResourceRead<EdgeActionOperation>;
+    
+    @Autorest.example("./examples/EdgeActionOperations_ListByResourceGroup.json", "List EdgeActionOperations by ResourceGroup")
     listByResourceGroup is ArmResourceListByParent<EdgeActionOperation>;
+    
+    @Autorest.example("./examples/EdgeActionOperations_ListBySubscription.json", "List EdgeActionOperations by Subscription")
     listBySubscription is ArmListBySubscription<EdgeActionOperation>;
 }
 
@@ -123,6 +131,7 @@ interface EdgeActionVersions {
     @Autorest.example("./examples/EdgeActionsVersions_ListByEdgeAction.json", "List EdgeActionVersions by EdgeAction")
     listByResourceGroup is ArmResourceListByParent<EdgeActionVersion>;
     
+    @Autorest.example("./examples/EdgeActionVersions_ListBySubscription.json", "List EdgeActionVersions by Subscription")
     listBySubscription is ArmListBySubscription<EdgeActionVersion>;
     
     @Autorest.example("./examples/EdgeActionVersions_DeployVersionCode.json", "Deploy Version Code")
@@ -131,6 +140,7 @@ interface EdgeActionVersions {
     @Autorest.example("./examples/EdgeActionVersions_GetVersionCode.json", "Get Version Code")
     getVersionCode is ArmResourceActionAsync<EdgeActionVersion, EmptyBody, VersionCode>;
     
+    @Autorest.example("./examples/EdgeActionVersions_SwapDefault.json", "Swap Default Version")
     swapDefault is ArmResourceActionAsync<EdgeActionVersion, EmptyBody, EmptyBody>;
 }
 
@@ -151,5 +161,6 @@ interface EdgeActionExecutionFilters {
     @Autorest.example("./examples/EdgeActionsExecutionFilters_ListByEdgeAction.json", "List EdgeActionExecutionFilters by EdgeAction")
     listByResourceGroup is ArmResourceListByParent<EdgeActionExecutionFilter>;
     
+    @Autorest.example("./examples/EdgeActionExecutionFilters_ListBySubscription.json", "List EdgeActionExecutionFilters by Subscription")
     listBySubscription is ArmListBySubscription<EdgeActionExecutionFilter>;
 }
