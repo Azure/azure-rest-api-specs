@@ -10,11 +10,11 @@ import * as avocado from "../src/index.js";
 
 describe("avocado", () => {
   it("get default tag", () => {
-    const readme = readFileSync("src/test/test-readmes/readme.md").toString();
+    const readme = readFileSync("test/test-readmes/readme.md").toString();
     const m = md.parse(readme);
     const r = avocado.isContainsMultiVersion(m);
     assert.deepStrictEqual(r, false);
-    const readme1 = readFileSync("src/test/test-readmes/readme1.md").toString();
+    const readme1 = readFileSync("test/test-readmes/readme1.md").toString();
     const m1 = md.parse(readme1);
     const r1 = avocado.isContainsMultiVersion(m1);
     assert.deepStrictEqual(r1, false);
@@ -32,7 +32,7 @@ describe("avocado", () => {
 
 describe("check default tag should contains all apiVersion", () => {
   it("check RP level folder securityinsights", () => {
-    const root = "src/test/default_tag_latest_swaggers/specification/";
+    const root = "test/default_tag_latest_swaggers/specification/";
     const rpFolder = path.join(root, "securityinsights");
     const res = avocado.validateRPMustContainAllLatestApiVersionSwagger(rpFolder).toArray();
     assert.deepStrictEqual(res.length, 21);
@@ -66,7 +66,7 @@ describe("check default tag should contains all apiVersion", () => {
   });
 
   it("get all swagger api path from swagger file", () => {
-    const root = "src/test/default_tag_latest_swaggers/specification/";
+    const root = "test/default_tag_latest_swaggers/specification/";
     const swaggerPath = path.join(
       root,
       "securityinsights/resource-manager/Microsoft.SecurityInsights/stable/2021-04-01/Incidents.json",
@@ -87,7 +87,7 @@ describe("check default tag should contains all apiVersion", () => {
   });
 
   it("get all swagger api path with x-ms-paths", () => {
-    const root = "src/test/swagger_fixtures/";
+    const root = "test/swagger_fixtures/";
     const swaggerPath = path.join(root, "apimapis.json");
     const swagger = JSON.parse(readFileSync(swaggerPath).toString());
     const result: string[] = avocado.getAllPathFromSwagger(swagger);

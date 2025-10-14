@@ -10,7 +10,7 @@ import * as readme from "../src/readme.js";
 
 describe("readme test", () => {
   it("getTagsToSwaggerFilesMapping", () => {
-    let readmePath = "src/test/readmes/signalr.md";
+    let readmePath = "test/readmes/signalr.md";
     let ret = readme.getTagsToSwaggerFilesMapping(readmePath);
     let expectedKeys = [
       "package-2022-08-01-preview",
@@ -26,7 +26,7 @@ describe("readme test", () => {
     ];
     assert.deepStrictEqual(Array.from(ret.keys()), expectedKeys);
 
-    readmePath = "src/test/readmes/cognitiveservice-language.md";
+    readmePath = "test/readmes/cognitiveservice-language.md";
     ret = readme.getTagsToSwaggerFilesMapping(readmePath);
     expectedKeys = [
       "release_2022_10_01_preview",
@@ -44,7 +44,7 @@ describe("readme test", () => {
   });
 
   it("Test get default tag", () => {
-    const readmePath = "src/test/readmes/signalr.md";
+    const readmePath = "test/readmes/signalr.md";
     const readmeContent = fs.readFileSync(readmePath, "utf-8");
     const readmeFile = parse(readmeContent);
     const defaultTag = readme.getDefaultTag(readmeFile.markDown);

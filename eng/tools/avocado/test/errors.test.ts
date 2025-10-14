@@ -8,7 +8,7 @@ describe("errors", () => {
       {
         code: "NOT_AUTOREST_MARKDOWN",
         message: "The `readme.md` is not an AutoRest markdown file.",
-        readMeUrl: "src/test/not_autorest_markdown/specification/readme.md",
+        readMeUrl: "test/not_autorest_markdown/specification/readme.md",
         helpUrl:
           "http://azure.github.io/autorest/user/literate-file-formats/configuration.html#the-file-format",
         level: "Error",
@@ -16,16 +16,16 @@ describe("errors", () => {
       {
         code: "NO_JSON_FILE_FOUND",
         message: "no_json_file_found",
-        readMeUrl: "src/test/no_file_found/specification/readme.md",
-        jsonUrl: "src/test/no_file_found/specification/specs/some.json",
+        readMeUrl: "test/no_file_found/specification/readme.md",
+        jsonUrl: "test/no_file_found/specification/specs/some.json",
         level: "Error",
       },
       {
         code: "UNREFERENCED_JSON_FILE",
         message: "The example JSON file is not referenced from the swagger file.",
-        readMeUrl: "src/test/unreferenced_example/specification/testRP/readme.md",
+        readMeUrl: "test/unreferenced_example/specification/testRP/readme.md",
         jsonUrl:
-          "src/test/unreferenced_example/specification/testRP/specs/examples/orphan_example.json",
+          "test/unreferenced_example/specification/testRP/specs/examples/orphan_example.json",
         level: "Error",
       },
       {
@@ -40,15 +40,15 @@ describe("errors", () => {
             line: 3,
           },
           token: "}",
-          url: "src/test/invalid_json_trailing_comma/specification/testRP/specs/some.json",
+          url: "test/invalid_json_trailing_comma/specification/testRP/specs/some.json",
         },
         level: "Error",
       },
       {
         code: "CIRCULAR_REFERENCE",
         message: "The JSON file has a circular reference.",
-        readMeUrl: "src/test/circular_reference/specification/testRP/readme.md",
-        jsonUrl: "src/test/circular_reference/specification/testRP/specs/c.json",
+        readMeUrl: "test/circular_reference/specification/testRP/readme.md",
+        jsonUrl: "test/circular_reference/specification/testRP/specs/c.json",
         level: "Warning",
       },
       {
@@ -56,20 +56,20 @@ describe("errors", () => {
         code: "MISSING_README",
         message:
           "Can not find readme.md in the folder. If no readme.md file, it will block SDK generation.",
-        folderUrl: "src/test/no_readme/specification/resource-provider-A/resource-manager",
+        folderUrl: "test/no_readme/specification/resource-provider-A/resource-manager",
       },
       {
         code: "INCONSISTENT_API_VERSION",
         level: "Error",
         message: "The API version of the swagger is inconsistent with its file path.",
-        jsonUrl: "src/test/api_version_inconsistent/specification/testRP/specs/2020-05-01/b.json",
-        readMeUrl: "src/test/api_version_inconsistent/specification/testRP/readme.md",
+        jsonUrl: "test/api_version_inconsistent/specification/testRP/specs/2020-05-01/b.json",
+        readMeUrl: "test/api_version_inconsistent/specification/testRP/readme.md",
       },
       {
         code: "MULTIPLE_API_VERSION",
         level: "Error",
         message: "The default tag contains multiple API versions swaggers.",
-        readMeUrl: "src/test/api_version_inconsistent/specification/testRP/readme.md",
+        readMeUrl: "test/api_version_inconsistent/specification/testRP/readme.md",
         tag: "package-2020-01-01",
       },
       {
@@ -139,7 +139,7 @@ describe("errors", () => {
       [
         {
           tag: "json",
-          path: '{"code":"unexpected token","kind":"structure","message":"unexpected token, token: }, line: 3, column: 1","position":{"column":1,"line":3},"token":"}","url":"src/test/invalid_json_trailing_comma/specification/testRP/specs/some.json"}',
+          path: '{"code":"unexpected token","kind":"structure","message":"unexpected token, token: }, line: 3, column: 1","position":{"column":1,"line":3},"token":"}","url":"test/invalid_json_trailing_comma/specification/testRP/specs/some.json"}',
         },
       ],
       [
