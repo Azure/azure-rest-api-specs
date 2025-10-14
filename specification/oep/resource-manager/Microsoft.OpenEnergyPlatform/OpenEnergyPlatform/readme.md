@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2021-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-06-01-preview'
 input-file:
-  - Microsoft.OpenEnergyPlatform/preview/2021-06-01-preview/oep.json
+  - ./preview/2021-06-01-preview/oep.json
 ```
 
 ### Tag: package-2022-04-04-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2022-04-04-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-04-04-preview'
 input-file:
-  - Microsoft.OpenEnergyPlatform/preview/2022-04-04-preview/oep.json
+  - ./preview/2022-04-04-preview/oep.json
 ```
 
 ## Suppression
