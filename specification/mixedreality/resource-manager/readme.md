@@ -71,6 +71,17 @@ directive:
     reason: Secrets are OK to return in a POST response.
 ```
 
+### Tag: package-2025-10
+
+These settings apply only when `--tag=package-2025-10-01` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-10-01'
+input-file:
+  - Microsoft.MixedReality/stable/2025-10-01/proxy.json
+modelerfour:
+  lenient-model-deduplication: true
+```
+
 ### Tag: package-2025-01
 
 These settings apply only when `--tag=package-2025-01-01` is specified on the command line.
