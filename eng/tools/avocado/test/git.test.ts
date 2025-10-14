@@ -2,7 +2,7 @@
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
 import { describe, it } from "vitest";
-import { git } from "../index.js";
+import { git } from "../src/index.js";
 import * as tmpDir from "./tmp-dir.js";
 
 describe("git", () => {

@@ -3,7 +3,7 @@
 
 import * as assert from "assert";
 import { describe, it } from "vitest";
-import { childProcess } from "../index.js";
+import { childProcess } from "../src/index.js";
 import { generate } from "./generate-stdout.js";
 
 describe("child-process", () => {

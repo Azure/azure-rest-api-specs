@@ -5,7 +5,7 @@
 
 import * as assert from "assert";
 import { describe, it } from "vitest";
-import * as docs from "../docs.js";
+import * as docs from "../src/docs.js";
 
 describe("docs test getSwaggerFiles", () => {
   it("Test getSwaggerFiles for signalR service ", () => {

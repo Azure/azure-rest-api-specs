@@ -1,6 +1,6 @@
 import * as assert from "assert";
 import { describe, it } from "vitest";
-import { Error, getPathInfoFromError } from "../errors.js";
+import { Error, getPathInfoFromError } from "../src/errors.js";
 
 describe("errors", () => {
   it("test get path info from error", () => {
