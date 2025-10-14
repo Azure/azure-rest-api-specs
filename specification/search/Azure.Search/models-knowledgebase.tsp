@@ -403,7 +403,6 @@ model KnowledgeBaseIndexedOneLakeActivityArguments {
 
 #suppress "@azure-tools/typespec-azure-core/no-multiple-discriminator" "Existing"
 @doc("Represents a web retrieval activity record.")
-@discriminator("type")
 @added(Versions.v2025_11_01_preview)
 model KnowledgeBaseWebActivityRecord
   extends KnowledgeBaseRetrievalActivityRecord {
