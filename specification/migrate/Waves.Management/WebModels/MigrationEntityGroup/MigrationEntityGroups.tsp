@@ -29,11 +29,7 @@ model MigrationEntityGroup is ProxyResource<MigrationEntityGroupProperties> {
 @doc("Migration Entity Group Properties class.")
 model MigrationEntityGroupProperties is AzureResourceProperties {
   @doc("Application id ")
-  applicationId: armResourceIdentifier<[
-    {
-      type: "Microsoft.ApplicationMigration/discoveryHubs/applications";
-    }
-  ]>;
+  applicationId: string;
 
   @doc("Display Name of the Workload.")
   applicationDisplayName: string;

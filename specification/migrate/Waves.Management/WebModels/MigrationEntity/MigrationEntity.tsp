@@ -35,20 +35,7 @@ model MigrationEntityProperties is AzureResourceProperties {
   targetAzureResourceArmId?: string;
 
   @doc("inventory resource id ")
-  associatedInventoryResourceId: armResourceIdentifier<[
-    {
-      type: "Microsoft.OffAzure/VMwareSites";
-    },
-    {
-      type: "Microsoft.OffAzure/HyperVSites";
-    },
-    {
-      type: "Microsoft.OffAzure/serversites";
-    },
-    {
-      type: "Microsoft.OffAzure/MasterSites";
-    }
-  ]>;
+  associatedInventoryResourceId: string;
 
   @doc("Display Name of the Workload.")
   inventoryDisplayName: string;

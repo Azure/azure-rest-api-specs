@@ -138,16 +138,19 @@ union MigrationEntityExecutionReadiness {
 @doc("Migration Entity Migration Tool.")
 union MigrationEntityMigrationTool {
   @doc("Server Migration Agentless. Indicates that the migration tool is using the server migration agentless approach.")
-  ServerMigrationAgentless: "Server Migration Agentless",
+  ServerMigrationAgentless: "ServerMigrationAgentless",
 
   @doc("Server Migration Agent Based. Indicates that the migration tool is using the server migration agent-based approach.")
-  ServerMigrationAgentBased: "Server Migration Agent Based",
+  ServerMigrationAgentBased: "ServerMigrationAgentBased",
 
-  @doc("Iac ReDeploy. Indicates that the migration tool is using the Iac ReDeploy approach.")
-  IacReDeploy: "IacReDeploy",
+  @doc("Azure Database Migration Service. Indicates that the migration tool is using the Azure Database Migration Service.")
+  AzureDatabaseMigrationService: "AzureDatabaseMigrationService",
 
   @doc("Other tools. Indicates that the migration tool is using other tools.")
   Others: "Others",
+
+  @doc("Not Applicable. Indicates that the migration tool is not applicable.")
+  NotApplicable: "NotApplicable",
 
   string,
 }
@@ -208,9 +211,6 @@ union MigrationEntityGroupExecutionStatus {
 
   @doc("Completed migration entity status. This indicates that the migration process for the entity has been successfully finished and the entity is now in its target environment.")
   Completed: "Completed",
-
-  @doc("None migration entity status")
-  None: "None",
 
   string,
 }
@@ -312,6 +312,9 @@ union MigrationPath {
 
   @doc("The Modernize path")
   Modernize: "Modernize",
+
+  @doc("Lift and Shift")
+  LiftAndShift: "LiftAndShift",
 
   string,
 }

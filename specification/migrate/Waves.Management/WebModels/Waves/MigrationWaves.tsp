@@ -59,27 +59,4 @@ model WaveProperties is AzureResourceProperties {
 model Arg {
   @doc("The query to create workloads within the wave.")
   query: string;
-
-  @doc("The list of discovery site ids which will correspond to the resources returned by the ARG query.")
-  discoverySiteIds: armResourceIdentifier<[
-    {
-      type: "Microsoft.OffAzure/VMwareSites";
-    },
-    {
-      type: "Microsoft.OffAzure/HyperVSites";
-    },
-    {
-      type: "Microsoft.OffAzure/serversites";
-    },
-    {
-      type: "Microsoft.OffAzure/MasterSites";
-    }
-  ]>[];
-
-  @doc("The list of application ids which will correspond to the resources returned by the ARG query.")
-  applicationIds: armResourceIdentifier<[
-    {
-      type: "Microsoft.ApplicationMigration/discoveryHubs/applications";
-    }
-  ]>[];
 }
