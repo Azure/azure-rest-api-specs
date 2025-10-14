@@ -7,11 +7,6 @@
  * Version: 0.10.9
  * Date: 2025-02-17T04:24:54.141Z
  */
-
-import "./models.tsp";
-import "./MongoSite.tsp";
-import "./MongoInstance.tsp";
-import "./MongoDatabase.tsp";
 import "./MongoAgent.tsp";
 import "./MongoCollection.tsp";
 
