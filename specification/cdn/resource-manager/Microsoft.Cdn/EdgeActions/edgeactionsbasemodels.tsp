@@ -22,7 +22,7 @@ model SkuType {
 enum EdgeActionVersionDeploymentType {
   zip,
   file,
-  others
+  others,
 }
 
 enum EdgeActionVersionValidationStatus {
@@ -32,7 +32,7 @@ enum EdgeActionVersionValidationStatus {
 
 enum EdgeActionIsDefaultVersion {
   True,
-  False
+  False,
 }
 
 enum OperationStatus {
@@ -76,7 +76,7 @@ enum ProvisioningState {
   Provisioning,
 
   @doc("Upgrade in progress")
-  Upgrading
+  Upgrading,
 }
 
 model EdgeActionAttachment {
@@ -138,11 +138,11 @@ model EdgeActionExecutionFilterProperties {
   @visibility("read")
   lastUpdateTime: utcDateTime;
 
-  @doc("Custom Header Key associated with the execution filter")  
+  @doc("Custom Header Key associated with the execution filter")
   @visibility("read", "create", "update")
   executionFilterIdentifierHeaderName: string;
 
-  @doc("Custom Header Value associated with the execution filter")  
+  @doc("Custom Header Value associated with the execution filter")
   @visibility("read", "create", "update")
   executionFilterIdentifierHeaderValue: string;
 
@@ -151,7 +151,7 @@ model EdgeActionExecutionFilterProperties {
   provisioningState?: ProvisioningState;
 }
 
-model VersionCode {  
+model VersionCode {
   @doc("The version code deployment content ")
   @visibility("read", "create", "update")
   content: string;
