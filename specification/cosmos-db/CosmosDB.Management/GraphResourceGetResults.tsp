@@ -27,7 +27,7 @@ model GraphResourceGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -41,7 +41,7 @@ interface GraphResources {
   /**
    * Create or update an Azure Cosmos DB Graph.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GraphResourceGetResults,
     Request = GraphResourceCreateUpdateParameters,
@@ -52,7 +52,7 @@ interface GraphResources {
   /**
    * Deletes an existing Azure Cosmos DB Graph Resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteGraphResource is ArmResourceDeleteWithoutOkAsync<
     GraphResourceGetResults,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse

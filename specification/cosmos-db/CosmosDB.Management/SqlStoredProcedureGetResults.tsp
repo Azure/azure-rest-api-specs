@@ -14,7 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB storedProcedure.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlStoredProcedureGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlStoredProcedureGetProperties> {
@@ -28,7 +28,7 @@ model SqlStoredProcedureGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -37,15 +37,15 @@ interface SqlStoredProcedureGetResultsOperationGroup {
   /**
    * Gets the SQL storedProcedure under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_GetSqlStoredProcedure")
   getSqlStoredProcedure is ArmResourceRead<SqlStoredProcedureGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB SQL storedProcedure
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_CreateUpdateSqlStoredProcedure")
   createUpdateSqlStoredProcedure is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlStoredProcedureGetResults,
@@ -57,14 +57,14 @@ interface SqlStoredProcedureGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB SQL storedProcedure.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_DeleteSqlStoredProcedure")
   deleteSqlStoredProcedure is ArmResourceDeleteWithoutOkAsync<SqlStoredProcedureGetResults>;
 
   /**
    * Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_ListSqlStoredProcedures")
   listSqlStoredProcedures is ArmResourceListByParent<
     SqlStoredProcedureGetResults,

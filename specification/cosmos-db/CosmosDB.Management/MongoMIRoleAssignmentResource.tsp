@@ -14,7 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * Parameters to create and update an Azure Cosmos DB MongoMI Role Assignment.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(DatabaseAccountGetResults)
 model MongoMIRoleAssignmentResource
   is Azure.ResourceManager.ProxyResource<MongoMIRoleAssignmentResourceProperties> {
@@ -26,23 +26,23 @@ model MongoMIRoleAssignmentResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface MongoMIRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB MongoMI Role Assignment with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoMIResources_GetMongoMIRoleAssignment")
   getMongoMIRoleAssignment is ArmResourceRead<MongoMIRoleAssignmentResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB MongoMI Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoMIResources_CreateUpdateMongoMIRoleAssignment")
   createUpdateMongoMIRoleAssignment is ArmResourceCreateOrReplaceAsync<
     MongoMIRoleAssignmentResource,
@@ -53,9 +53,9 @@ interface MongoMIRoleAssignmentResources {
   /**
    * Deletes an existing Azure Cosmos DB MongoMI Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoMIResources_DeleteMongoMIRoleAssignment")
   deleteMongoMIRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     MongoMIRoleAssignmentResource,
@@ -65,8 +65,8 @@ interface MongoMIRoleAssignmentResources {
   /**
    * Retrieves the list of all Azure Cosmos DB MongoMI Role Assignments.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoMIResources_ListMongoMIRoleAssignments")
   listMongoMIRoleAssignments is ArmResourceListByParent<MongoMIRoleAssignmentResource>;
 }

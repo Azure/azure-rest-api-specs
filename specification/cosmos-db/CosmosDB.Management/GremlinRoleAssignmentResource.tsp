@@ -30,15 +30,15 @@ interface GremlinRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Assignment with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_GetGremlinRoleAssignment")
   getGremlinRoleAssignment is ArmResourceRead<GremlinRoleAssignmentResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB Gremlin Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_CreateUpdateGremlinRoleAssignment")
   createUpdateGremlinRoleAssignment is ArmResourceCreateOrReplaceAsync<
     GremlinRoleAssignmentResource,
@@ -49,8 +49,8 @@ interface GremlinRoleAssignmentResources {
   /**
    * Deletes an existing Azure Cosmos DB Gremlin Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_DeleteGremlinRoleAssignment")
   deleteGremlinRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     GremlinRoleAssignmentResource,
@@ -60,7 +60,7 @@ interface GremlinRoleAssignmentResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Gremlin Role Assignments.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_ListGremlinRoleAssignments")
   listGremlinRoleAssignments is ArmResourceListByParent<GremlinRoleAssignmentResource>;
 }

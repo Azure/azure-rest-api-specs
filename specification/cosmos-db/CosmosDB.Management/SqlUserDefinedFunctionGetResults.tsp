@@ -14,7 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB userDefinedFunction.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlUserDefinedFunctionGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlUserDefinedFunctionGetProperties> {
@@ -28,7 +28,7 @@ model SqlUserDefinedFunctionGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -37,15 +37,15 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   /**
    * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_GetSqlUserDefinedFunction")
   getSqlUserDefinedFunction is ArmResourceRead<SqlUserDefinedFunctionGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB SQL userDefinedFunction
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_CreateUpdateSqlUserDefinedFunction")
   createUpdateSqlUserDefinedFunction is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlUserDefinedFunctionGetResults,
@@ -57,14 +57,14 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_DeleteSqlUserDefinedFunction")
   deleteSqlUserDefinedFunction is ArmResourceDeleteWithoutOkAsync<SqlUserDefinedFunctionGetResults>;
 
   /**
    * Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_ListSqlUserDefinedFunctions")
   listSqlUserDefinedFunctions is ArmResourceListByParent<
     SqlUserDefinedFunctionGetResults,

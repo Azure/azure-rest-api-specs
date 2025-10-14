@@ -27,7 +27,7 @@ model SqlDatabaseGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -41,7 +41,7 @@ interface SqlResources {
   /**
    * Create or update an Azure Cosmos DB SQL database
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateSqlDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlDatabaseGetResults,
     Request = SqlDatabaseCreateUpdateParameters,

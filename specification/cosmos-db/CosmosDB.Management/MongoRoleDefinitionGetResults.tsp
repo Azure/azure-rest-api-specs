@@ -30,15 +30,15 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Mongo Role Definition with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_GetMongoRoleDefinition")
   getMongoRoleDefinition is ArmResourceRead<MongoRoleDefinitionGetResults>;
 
   /**
    * Creates or updates an Azure Cosmos DB Mongo Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_CreateUpdateMongoRoleDefinition")
   createUpdateMongoRoleDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoRoleDefinitionGetResults,
@@ -50,8 +50,8 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Mongo Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_DeleteMongoRoleDefinition")
   deleteMongoRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     MongoRoleDefinitionGetResults,
@@ -61,7 +61,7 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the list of all Azure Cosmos DB Mongo Role Definitions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_ListMongoRoleDefinitions")
   listMongoRoleDefinitions is ArmResourceListByParent<
     MongoRoleDefinitionGetResults,

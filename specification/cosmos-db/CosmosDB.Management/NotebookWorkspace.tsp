@@ -36,7 +36,7 @@ interface NotebookWorkspaces {
   /**
    * Creates the notebook workspace for a Cosmos DB account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     NotebookWorkspace,
     Request = NotebookWorkspaceCreateUpdateParameters,

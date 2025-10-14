@@ -28,7 +28,7 @@ model ThroughputSettingsGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -66,15 +66,15 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the SQL database under an existing Azure Cosmos DB database account with the provided name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_GetSqlDatabaseThroughput")
   getSqlDatabaseThroughput is ThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB SQL database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_UpdateSqlDatabaseThroughput")
   updateSqlDatabaseThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
@@ -86,7 +86,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB SQL database from manual throughput to autoscale
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_MigrateSqlDatabaseToAutoscale")
   @action("migrateToAutoscale")
   migrateSqlDatabaseToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -98,7 +98,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB SQL database from autoscale to manual throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_MigrateSqlDatabaseToManualThroughput")
   @action("migrateToManualThroughput")
   migrateSqlDatabaseToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -110,7 +110,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_SqlDatabaseRetrieveThroughputDistribution")
   @action("retrieveThroughputDistribution")
   sqlDatabaseRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -122,7 +122,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL database
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_SqlDatabaseRedistributeThroughput")
   @action("redistributeThroughput")
   sqlDatabaseRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -165,22 +165,22 @@ alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Resource
     default: "default";
   }
 >;
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the SQL container under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_GetSqlContainerThroughput")
   getSqlContainerThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB SQL container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_UpdateSqlContainerThroughput")
   updateSqlContainerThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
@@ -192,7 +192,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB SQL container from manual throughput to autoscale
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_MigrateSqlContainerToAutoscale")
   @action("migrateToAutoscale")
   migrateSqlContainerToAutoscale is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -204,7 +204,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB SQL container from autoscale to manual throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_MigrateSqlContainerToManualThroughput")
   @action("migrateToManualThroughput")
   migrateSqlContainerToManualThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -216,7 +216,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB SQL container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_SqlContainerRetrieveThroughputDistribution")
   @action("retrieveThroughputDistribution")
   sqlContainerRetrieveThroughputDistribution is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -228,7 +228,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB SQL container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_SqlContainerRedistributeThroughput")
   @action("redistributeThroughput")
   sqlContainerRedistributeThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -265,19 +265,19 @@ alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     default: "default";
   }
 >;
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface MongoDBResources {
   /**
    * Gets the RUs per second of the MongoDB database under an existing Azure Cosmos DB database account with the provided name.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   getMongoDBDatabaseThroughput is MongoDBResourceOps.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of the an Azure Cosmos DB MongoDB database
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateMongoDBDatabaseThroughput is MongoDBResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -288,7 +288,7 @@ interface MongoDBResources {
   /**
    * Migrate an Azure Cosmos DB MongoDB database from manual throughput to autoscale
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("migrateToAutoscale")
   migrateMongoDBDatabaseToAutoscale is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -299,7 +299,7 @@ interface MongoDBResources {
   /**
    * Migrate an Azure Cosmos DB MongoDB database from autoscale to manual throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("migrateToManualThroughput")
   migrateMongoDBDatabaseToManualThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
@@ -361,23 +361,23 @@ alias MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     default: "default";
   }
 >;
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the MongoDB collection under an existing Azure Cosmos DB database account with the provided name.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_GetMongoDBCollectionThroughput")
   getMongoDBCollectionThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update the RUs per second of an Azure Cosmos DB MongoDB collection
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_UpdateMongoDBCollectionThroughput")
   updateMongoDBCollectionThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
@@ -389,7 +389,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Retrieve throughput distribution for an Azure Cosmos DB MongoDB container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_MongoDBContainerRetrieveThroughputDistribution")
   @action("retrieveThroughputDistribution")
   mongoDBContainerRetrieveThroughputDistribution is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -401,8 +401,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Redistribute throughput for an Azure Cosmos DB MongoDB container
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_MongoDBContainerRedistributeThroughput")
   @action("redistributeThroughput")
   mongoDBContainerRedistributeThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -414,7 +414,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB MongoDB collection from manual throughput to autoscale
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_MigrateMongoDBCollectionToAutoscale")
   @action("migrateToAutoscale")
   migrateMongoDBCollectionToAutoscale is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -426,8 +426,8 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB MongoDB collection from autoscale to manual throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_MigrateMongoDBCollectionToManualThroughput")
   @action("migrateToManualThroughput")
   migrateMongoDBCollectionToManualThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -475,7 +475,7 @@ interface TableResources {
   /**
    * Update RUs per second of an Azure Cosmos DB Table
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateTableThroughput is TableResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -542,7 +542,7 @@ interface CassandraResources {
   /**
    * Update RUs per second of an Azure Cosmos DB Cassandra Keyspace
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateCassandraKeyspaceThroughput is CassandraResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -605,21 +605,21 @@ alias CassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Re
   }
 >;
 
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the Cassandra table under an existing Azure Cosmos DB database account with the provided name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_GetCassandraTableThroughput")
   getCassandraTableThroughput is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB Cassandra table
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_UpdateCassandraTableThroughput")
   updateCassandraTableThroughput is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
@@ -631,7 +631,7 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB Cassandra table from manual throughput to autoscale
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_MigrateCassandraTableToAutoscale")
   @action("migrateToAutoscale")
   migrateCassandraTableToAutoscale is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -643,7 +643,7 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB Cassandra table from autoscale to manual throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_MigrateCassandraTableToManualThroughput")
   @action("migrateToManualThroughput")
   migrateCassandraTableToManualThroughput is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -686,21 +686,21 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
     default: "default";
   }
 >;
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the RUs per second of the Cassandra view under an existing Azure Cosmos DB database account with the provided name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_GetCassandraViewThroughput")
   getCassandraViewThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB Cassandra view
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_UpdateCassandraViewThroughput")
   updateCassandraViewThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
@@ -712,7 +712,7 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB Cassandra view from manual throughput to autoscale
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_MigrateCassandraViewToAutoscale")
   @action("migrateToAutoscale")
   migrateCassandraViewToAutoscale is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -724,7 +724,7 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB Cassandra view from autoscale to manual throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_MigrateCassandraViewToManualThroughput")
   @action("migrateToManualThroughput")
   migrateCassandraViewToManualThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -772,7 +772,7 @@ interface GremlinResources {
   /**
    * Update RUs per second of an Azure Cosmos DB Gremlin database
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   updateGremlinDatabaseThroughput is GremlinResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
@@ -834,22 +834,22 @@ alias GremlinResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     default: "default";
   }
 >;
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Gets the Gremlin graph throughput under an existing Azure Cosmos DB database account with the provided name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_GetGremlinGraphThroughput")
   getGremlinGraphThroughput is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.Read<ThroughputSettingsGetResults>;
 
   /**
    * Update RUs per second of an Azure Cosmos DB Gremlin graph
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_UpdateGremlinGraphThroughput")
   updateGremlinGraphThroughput is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
@@ -861,7 +861,7 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB Gremlin graph from manual throughput to autoscale
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_MigrateGremlinGraphToAutoscale")
   @action("migrateToAutoscale")
   migrateGremlinGraphToAutoscale is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
@@ -873,7 +873,7 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   /**
    * Migrate an Azure Cosmos DB Gremlin graph from autoscale to manual throughput
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("GremlinResources_MigrateGremlinGraphToManualThroughput")
   @action("migrateToManualThroughput")
   migrateGremlinGraphToManualThroughput is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<

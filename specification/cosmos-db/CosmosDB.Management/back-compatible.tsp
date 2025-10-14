@@ -3,10 +3,10 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.DocumentDB;
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseAccountUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseAccountCreateUpdateParameters.properties);
 
 @@clientName(OperationDisplay.Provider, "provider");
@@ -16,7 +16,7 @@ using Microsoft.DocumentDB;
 
 @@clientName(MetricValue._count, "count");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GraphResourceCreateUpdateParameters.properties);
 
 @@clientName(SqlDatabaseGetPropertiesResource._colls, "colls");
@@ -26,76 +26,76 @@ using Microsoft.DocumentDB;
 @@clientName(ExtendedResourceProperties._ts, "ts");
 @@clientName(ExtendedResourceProperties._etag, "etag");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDatabaseCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputSettingsUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClientEncryptionKeyCreateUpdateParameters.properties);
 
 @@clientName(MaterializedViewDetails._rid, "rid");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlContainerCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RetrieveThroughputParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PhysicalPartitionThroughputInfoResult.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RedistributeThroughputParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlStoredProcedureCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlUserDefinedFunctionCreateUpdateParameters.properties
 );
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlTriggerCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoDBDatabaseCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoDBCollectionCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TableCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraKeyspaceCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraTableCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinDatabaseCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinGraphCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraViewCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoRoleDefinitionCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoUserDefinitionCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlRoleDefinitionCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlRoleAssignmentCreateUpdateParameters.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableSqlDatabaseGetResult.properties);
 
 @@clientName(RestorableSqlDatabasePropertiesResource._rid, "rid");
@@ -104,48 +104,48 @@ using Microsoft.DocumentDB;
 @@clientName(RestorableSqlDatabasePropertiesResourceDatabase._users, "users");
 @@clientName(RestorableSqlDatabasePropertiesResourceDatabase._self, "self");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableSqlContainerGetResult.properties);
 
 @@clientName(RestorableSqlContainerPropertiesResource._rid, "rid");
 
 @@clientName(RestorableSqlContainerPropertiesResourceContainer._self, "self");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableMongodbDatabaseGetResult.properties);
 
 @@clientName(RestorableMongodbDatabasePropertiesResource._rid, "rid");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableMongodbCollectionGetResult.properties);
 
 @@clientName(RestorableMongodbCollectionPropertiesResource._rid, "rid");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableGremlinDatabaseGetResult.properties);
 
 @@clientName(RestorableGremlinDatabasePropertiesResource._rid, "rid");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableGremlinGraphGetResult.properties);
 
 @@clientName(RestorableGremlinGraphPropertiesResource._rid, "rid");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableTableGetResult.properties);
 
 @@clientName(RestorableTablePropertiesResource._rid, "rid");
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputPoolUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetResourceUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetspaceUpdate.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputPoolAccountCreateParameters.properties);
 
 @@clientLocation(ChaosFaultResources.get, "ChaosFault");
@@ -154,7 +154,7 @@ using Microsoft.DocumentDB;
   "chaosFaultRequest"
 );
 @@clientLocation(ChaosFaultResources.list, "ChaosFault");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ChaosFaultResource.properties);
 
 @@clientName(CopyJobs.create::parameters.resource, "jobCreateParameters");
@@ -237,19 +237,19 @@ using Microsoft.DocumentDB;
 @@clientName(DatabaseAccounts.partitionKeyRangeIdRegionListMetrics,
   "ListMetrics"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DatabaseAccountGetResults.properties);
 
 @@clientName(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateEndpointConnection.properties);
 
 @@clientName(GraphResources.createUpdateGraph::parameters.resource,
   "createUpdateGraphParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GraphResourceGetResults.properties);
 
 @@clientName(SqlResources.createUpdateSqlDatabase::parameters.resource,
@@ -258,7 +258,7 @@ using Microsoft.DocumentDB;
 @@clientName(SqlResources.sqlDatabasePartitionMerge::parameters.body,
   "mergeParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlDatabaseGetResults.properties);
 
 @@clientLocation(ThroughputSettingsGetResultsOperationGroup.getSqlDatabaseThroughput,
@@ -405,7 +405,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(GremlinResourcesThroughputSettingsGetResultsOperationGroup.migrateGremlinGraphToManualThroughput,
   GremlinResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputSettingsGetResults.properties);
 
 @@clientLocation(ClientEncryptionKeyGetResultsOperationGroup.getClientEncryptionKey,
@@ -420,7 +420,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(ClientEncryptionKeyGetResultsOperationGroup.listClientEncryptionKeys,
   SqlResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClientEncryptionKeyGetResults.properties);
 
 @@clientLocation(SqlContainerGetResultsOperationGroup.getSqlContainer,
@@ -450,7 +450,7 @@ using Microsoft.DocumentDB;
 @@clientName(SqlContainerGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlContainerGetResults.properties);
 
 @@clientLocation(SqlStoredProcedureGetResultsOperationGroup.getSqlStoredProcedure,
@@ -468,7 +468,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(SqlStoredProcedureGetResultsOperationGroup.listSqlStoredProcedures,
   SqlResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlStoredProcedureGetResults.properties);
 
 @@clientLocation(SqlUserDefinedFunctionGetResultsOperationGroup.getSqlUserDefinedFunction,
@@ -486,7 +486,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(SqlUserDefinedFunctionGetResultsOperationGroup.listSqlUserDefinedFunctions,
   SqlResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlUserDefinedFunctionGetResults.properties);
 
 @@clientLocation(SqlTriggerGetResultsOperationGroup.getSqlTrigger,
@@ -504,7 +504,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(SqlTriggerGetResultsOperationGroup.listSqlTriggers,
   SqlResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlTriggerGetResults.properties);
 
 @@clientLocation(MongoDBDatabaseGetResultsOperationGroup.getMongoDBDatabase,
@@ -528,7 +528,7 @@ using Microsoft.DocumentDB;
 @@clientName(MongoDBDatabaseGetResultsOperationGroup.mongoDBDatabasePartitionMerge::parameters.body,
   "mergeParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoDBDatabaseGetResults.properties);
 
 @@clientLocation(MongoDBCollectionGetResultsOperationGroup.getMongoDBCollection,
@@ -558,7 +558,7 @@ using Microsoft.DocumentDB;
 @@clientName(MongoDBCollectionGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoDBCollectionGetResults.properties);
 
 @@clientLocation(TableGetResultsOperationGroup.getTable, TableResources);
@@ -576,7 +576,7 @@ using Microsoft.DocumentDB;
 @@clientName(TableGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TableGetResults.properties);
 
 @@clientLocation(CassandraKeyspaceGetResultsOperationGroup.getCassandraKeyspace,
@@ -594,7 +594,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(CassandraKeyspaceGetResultsOperationGroup.listCassandraKeyspaces,
   CassandraResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraKeyspaceGetResults.properties);
 
 @@clientLocation(CassandraTableGetResultsOperationGroup.getCassandraTable,
@@ -612,7 +612,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(CassandraTableGetResultsOperationGroup.listCassandraTables,
   CassandraResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraTableGetResults.properties);
 
 @@clientLocation(GremlinDatabaseGetResultsOperationGroup.getGremlinDatabase,
@@ -630,7 +630,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(GremlinDatabaseGetResultsOperationGroup.listGremlinDatabases,
   GremlinResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinDatabaseGetResults.properties);
 
 @@clientLocation(GremlinGraphGetResultsOperationGroup.getGremlinGraph,
@@ -654,7 +654,7 @@ using Microsoft.DocumentDB;
 @@clientName(GremlinGraphGetResultsOperationGroup.retrieveContinuousBackupInformation::parameters.body,
   "location"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinGraphGetResults.properties);
 
 @@clientLocation(LocationGetResults.get, "Locations");
@@ -675,13 +675,13 @@ using Microsoft.DocumentDB;
 @@clientLocation(CassandraViewGetResultsOperationGroup.listCassandraViews,
   CassandraResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraViewGetResults.properties);
 
 @@clientName(DataTransferJobs.create::parameters.resource,
   "jobCreateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(DataTransferJobGetResults.properties);
 
 @@clientLocation(ClusterResources.get, "CassandraClusters");
@@ -725,7 +725,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(MongoRoleDefinitionGetResultsOperationGroup.listMongoRoleDefinitions,
   MongoDBResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoRoleDefinitionGetResults.properties);
 
 @@clientLocation(MongoUserDefinitionGetResultsOperationGroup.getMongoUserDefinition,
@@ -743,16 +743,16 @@ using Microsoft.DocumentDB;
 @@clientLocation(MongoUserDefinitionGetResultsOperationGroup.listMongoUserDefinitions,
   MongoDBResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoUserDefinitionGetResults.properties);
 
 @@clientName(NotebookWorkspaces.createOrUpdate::parameters.resource,
   "notebookCreateUpdateParameters"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(NotebookWorkspace.properties);
 
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(PrivateLinkResource.properties);
 
 @@clientLocation(SqlRoleDefinitionGetResultsOperationGroup.getSqlRoleDefinition,
@@ -770,7 +770,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(SqlRoleDefinitionGetResultsOperationGroup.listSqlRoleDefinitions,
   SqlResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlRoleDefinitionGetResults.properties);
 
 @@clientLocation(SqlRoleAssignmentGetResultsOperationGroup.getSqlRoleAssignment,
@@ -788,7 +788,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(SqlRoleAssignmentGetResultsOperationGroup.listSqlRoleAssignments,
   SqlResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlRoleAssignmentGetResults.properties);
 
 @@clientLocation(RestorableDatabaseAccountGetResults.getByLocation,
@@ -858,7 +858,7 @@ using Microsoft.DocumentDB;
 @@clientName(RestorableDatabaseAccountGetResults.restorableTableResourcesList,
   "List"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(RestorableDatabaseAccountGetResult.properties);
 
 @@clientLocation(ServiceResources.get, "Service");
@@ -884,7 +884,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(TableRoleDefinitionResources.listTableRoleDefinitions,
   TableResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TableRoleDefinitionResource.properties);
 
 @@clientLocation(TableRoleAssignmentResources.getTableRoleAssignment,
@@ -902,7 +902,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(TableRoleAssignmentResources.listTableRoleAssignments,
   TableResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(TableRoleAssignmentResource.properties);
 
 @@clientLocation(ThroughputPoolResources.get, "ThroughputPool");
@@ -917,7 +917,7 @@ using Microsoft.DocumentDB;
   "ThroughputPools"
 );
 @@clientLocation(ThroughputPoolResources.list, "ThroughputPools");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputPoolResource.properties);
 
 @@clientLocation(ThroughputPoolAccountResources.get, "ThroughputPoolAccount");
@@ -931,7 +931,7 @@ using Microsoft.DocumentDB;
   "ThroughputPoolAccount"
 );
 @@clientLocation(ThroughputPoolAccountResources.list, "ThroughputPoolAccounts");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ThroughputPoolAccountResource.properties);
 
 @@clientLocation(CassandraRoleDefinitionResources.getCassandraRoleDefinition,
@@ -949,7 +949,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(CassandraRoleDefinitionResources.listCassandraRoleDefinitions,
   CassandraResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraRoleDefinitionResource.properties);
 
 @@clientLocation(CassandraRoleAssignmentResources.getCassandraRoleAssignment,
@@ -967,7 +967,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(CassandraRoleAssignmentResources.listCassandraRoleAssignments,
   CassandraResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(CassandraRoleAssignmentResource.properties);
 
 @@clientLocation(MongoMIRoleDefinitionResources.getMongoMIRoleDefinition,
@@ -985,7 +985,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(MongoMIRoleDefinitionResources.listMongoMIRoleDefinitions,
   "MongoMIResources"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoMIRoleDefinitionResource.properties);
 
 @@clientLocation(MongoMIRoleAssignmentResources.getMongoMIRoleAssignment,
@@ -1003,7 +1003,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(MongoMIRoleAssignmentResources.listMongoMIRoleAssignments,
   "MongoMIResources"
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(MongoMIRoleAssignmentResource.properties);
 
 @@clientLocation(GremlinRoleDefinitionResources.getGremlinRoleDefinition,
@@ -1021,7 +1021,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(GremlinRoleDefinitionResources.listGremlinRoleDefinitions,
   GremlinResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinRoleDefinitionResource.properties);
 
 @@clientLocation(GremlinRoleAssignmentResources.getGremlinRoleAssignment,
@@ -1039,7 +1039,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(GremlinRoleAssignmentResources.listGremlinRoleAssignments,
   GremlinResources
 );
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GremlinRoleAssignmentResource.properties);
 
 @@clientLocation(FleetResources.get, "Fleet");
@@ -1050,7 +1050,7 @@ using Microsoft.DocumentDB;
 @@clientLocation(FleetResources.delete, "Fleet");
 @@clientLocation(FleetResources.listByResourceGroup, "Fleet");
 @@clientLocation(FleetResources.list, "Fleet");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetResource.properties);
 
 @@clientLocation(FleetAnalyticsResources.get, "FleetAnalytics");
@@ -1058,7 +1058,7 @@ using Microsoft.DocumentDB;
 @@clientName(FleetAnalyticsResources.create::parameters.resource, "body");
 @@clientLocation(FleetAnalyticsResources.delete, "FleetAnalytics");
 @@clientLocation(FleetAnalyticsResources.list, "FleetAnalytics");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetAnalyticsResource.properties);
 
 @@clientLocation(FleetspaceResources.get, "Fleetspace");
@@ -1068,7 +1068,7 @@ using Microsoft.DocumentDB;
 @@clientName(FleetspaceResources.update::parameters.properties, "body");
 @@clientLocation(FleetspaceResources.delete, "Fleetspace");
 @@clientLocation(FleetspaceResources.list, "Fleetspace");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetspaceResource.properties);
 
 @@clientLocation(FleetspaceAccountResources.get, "FleetspaceAccount");
@@ -1076,7 +1076,7 @@ using Microsoft.DocumentDB;
 @@clientName(FleetspaceAccountResources.create::parameters.resource, "body");
 @@clientLocation(FleetspaceAccountResources.delete, "FleetspaceAccount");
 @@clientLocation(FleetspaceAccountResources.list, "FleetspaceAccount");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(FleetspaceAccountResource.properties);
 
 @@clientLocation(DatabaseAccountsOperationGroup.checkNameExists,

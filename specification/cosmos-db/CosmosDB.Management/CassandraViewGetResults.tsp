@@ -27,7 +27,7 @@ model CassandraViewGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -36,15 +36,15 @@ interface CassandraViewGetResultsOperationGroup {
   /**
    * Gets the Cassandra view under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_GetCassandraView")
   getCassandraView is ArmResourceRead<CassandraViewGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB Cassandra View
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_CreateUpdateCassandraView")
   createUpdateCassandraView is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraViewGetResults,
@@ -56,8 +56,8 @@ interface CassandraViewGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Cassandra view.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_DeleteCassandraView")
   deleteCassandraView is ArmResourceDeleteWithoutOkAsync<
     CassandraViewGetResults,
@@ -68,7 +68,7 @@ interface CassandraViewGetResultsOperationGroup {
   /**
    * Lists the Cassandra materialized views under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_ListCassandraViews")
   listCassandraViews is ArmResourceListByParent<
     CassandraViewGetResults,

@@ -71,7 +71,7 @@ using TypeSpec.Versioning;
 /**
  * Azure Cosmos DB Throughput Pool REST API
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "Cosmos DB" })
 @versioned(Versions)

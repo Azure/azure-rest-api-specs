@@ -30,15 +30,15 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Mongo User Definition with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_GetMongoUserDefinition")
   getMongoUserDefinition is ArmResourceRead<MongoUserDefinitionGetResults>;
 
   /**
    * Creates or updates an Azure Cosmos DB Mongo User Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_CreateUpdateMongoUserDefinition")
   createUpdateMongoUserDefinition is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoUserDefinitionGetResults,
@@ -50,8 +50,8 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Mongo User Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_DeleteMongoUserDefinition")
   deleteMongoUserDefinition is ArmResourceDeleteWithoutOkAsync<
     MongoUserDefinitionGetResults,
@@ -61,7 +61,7 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the list of all Azure Cosmos DB Mongo User Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("MongoDBResources_ListMongoUserDefinitions")
   listMongoUserDefinitions is ArmResourceListByParent<
     MongoUserDefinitionGetResults,

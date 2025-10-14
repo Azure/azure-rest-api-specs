@@ -30,14 +30,14 @@ interface DataCenterResources {
   /**
    * Get the properties of a managed Cassandra data center.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraDataCenters_Get")
   get is ArmResourceRead<DataCenterResource>;
 
   /**
    * Create or update a managed Cassandra data center. When updating, overwrite all properties. To update only some properties, use PATCH.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraDataCenters_CreateUpdate")
   createUpdate is ArmResourceCreateOrReplaceAsync<
     DataCenterResource,
@@ -48,8 +48,8 @@ interface DataCenterResources {
   /**
    * Update some of the properties of a managed Cassandra data center.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraDataCenters_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
@@ -65,14 +65,14 @@ interface DataCenterResources {
   /**
    * Delete a managed Cassandra data center.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraDataCenters_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<DataCenterResource>;
 
   /**
    * List all data centers in a particular managed Cassandra cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraDataCenters_List")
   list is ArmResourceListByParent<
     DataCenterResource,

@@ -25,13 +25,13 @@ model DatabaseAccountGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 
   /**
    * Indicates the type of database account. This can only be set at database account creation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: DatabaseAccountKind = DatabaseAccountKind.GlobalDocumentDB;
 }
 
@@ -45,7 +45,7 @@ interface DatabaseAccounts {
   /**
    * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     DatabaseAccountGetResults,
     Request = DatabaseAccountCreateUpdateParameters,
@@ -88,7 +88,7 @@ interface DatabaseAccounts {
   /**
    * Changes the failover priority for the Azure Cosmos DB database account. A failover priority of 0 indicates a write region. The maximum value for a failover priority = (total number of regions - 1). Failover priority values must be unique for each of the regions in which the database account exists.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   failoverPriorityChange is ArmResourceActionAsyncBase<
     DatabaseAccountGetResults,
     Request = FailoverPolicies,
@@ -228,7 +228,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account and database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Database_ListMetrics")
   @list
   @get
@@ -256,7 +256,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the usages (most recent data) for the given database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Database_ListUsages")
   @list
   @get
@@ -284,7 +284,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves metric definitions for the given database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Database_ListMetricDefinitions")
   @list
   @get
@@ -306,7 +306,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account and collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Collection_ListMetrics")
   @list
   @get
@@ -341,7 +341,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the usages (most recent storage data) for the given collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Collection_ListUsages")
   @list
   @get
@@ -376,7 +376,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves metric definitions for the given collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Collection_ListMetricDefinitions")
   @list
   @get
@@ -405,7 +405,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account, collection and region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CollectionRegion_ListMetrics")
   @list
   @get
@@ -447,7 +447,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account and region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("DatabaseAccountRegion_ListMetrics")
   @list
   @get
@@ -475,7 +475,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PercentileSourceTarget_ListMetrics")
   @list
   @get
@@ -510,7 +510,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given account target region. This url is only for PBS and Replication Latency data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PercentileTarget_ListMetrics")
   @list
   @get
@@ -538,7 +538,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and Replication Latency data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Percentile_ListMetrics")
   @list
   @get
@@ -559,7 +559,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given collection and region, split by partition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CollectionPartitionRegion_ListMetrics")
   @list
   @get
@@ -601,7 +601,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given collection, split by partition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CollectionPartition_ListMetrics")
   @list
   @get
@@ -636,7 +636,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the usages (most recent storage data) for the given collection, split by partition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CollectionPartition_ListUsages")
   @list
   @get
@@ -671,7 +671,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given partition key range id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PartitionKeyRangeId_ListMetrics")
   @list
   @get
@@ -713,7 +713,7 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given partition key range id and region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("PartitionKeyRangeIdRegion_ListMetrics")
   @list
   @get

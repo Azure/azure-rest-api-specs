@@ -14,7 +14,7 @@ namespace Microsoft.DocumentDB;
 /**
  * An Azure Cosmos DB trigger.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/beyond-nesting-levels" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @parentResource(SqlContainerGetResults)
 model SqlTriggerGetResults
   is Azure.ResourceManager.Legacy.TrackedResourceWithOptionalLocation<SqlTriggerGetProperties> {
@@ -28,7 +28,7 @@ model SqlTriggerGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -37,15 +37,15 @@ interface SqlTriggerGetResultsOperationGroup {
   /**
    * Gets the SQL trigger under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_GetSqlTrigger")
   getSqlTrigger is ArmResourceRead<SqlTriggerGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB SQL trigger
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_CreateUpdateSqlTrigger")
   createUpdateSqlTrigger is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlTriggerGetResults,
@@ -57,14 +57,14 @@ interface SqlTriggerGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB SQL trigger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_DeleteSqlTrigger")
   deleteSqlTrigger is ArmResourceDeleteWithoutOkAsync<SqlTriggerGetResults>;
 
   /**
    * Lists the SQL trigger under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_ListSqlTriggers")
   listSqlTriggers is ArmResourceListByParent<
     SqlTriggerGetResults,

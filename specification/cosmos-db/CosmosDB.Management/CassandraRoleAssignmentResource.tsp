@@ -30,15 +30,15 @@ interface CassandraRoleAssignmentResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Cassandra Role Assignment with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_GetCassandraRoleAssignment")
   getCassandraRoleAssignment is ArmResourceRead<CassandraRoleAssignmentResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB Cassandra Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_CreateUpdateCassandraRoleAssignment")
   createUpdateCassandraRoleAssignment is ArmResourceCreateOrReplaceAsync<
     CassandraRoleAssignmentResource,
@@ -49,8 +49,8 @@ interface CassandraRoleAssignmentResources {
   /**
    * Deletes an existing Azure Cosmos DB Cassandra Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_DeleteCassandraRoleAssignment")
   deleteCassandraRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     CassandraRoleAssignmentResource,
@@ -60,7 +60,7 @@ interface CassandraRoleAssignmentResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Cassandra Role Assignments.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("CassandraResources_ListCassandraRoleAssignments")
   listCassandraRoleAssignments is ArmResourceListByParent<CassandraRoleAssignmentResource>;
 }

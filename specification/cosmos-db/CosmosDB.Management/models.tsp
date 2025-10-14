@@ -22,13 +22,13 @@ model ThroughputPoolAccountsListResult
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -37,17 +37,17 @@ union CreatedByType {
  */
 union CopyJobType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CassandraRUToCassandraRU: "CassandraRUToCassandraRU",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CassandraRUToAzureBlobStorage: "CassandraRUToAzureBlobStorage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureBlobStorageToCassandraRU: "AzureBlobStorageToCassandraRU",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MongoRUToMongoRU: "MongoRUToMongoRU",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MongoRUToMongoVCore: "MongoRUToMongoVCore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NoSqlRUToNoSqlRU: "NoSqlRUToNoSqlRU",
 }
 
@@ -56,19 +56,19 @@ union CopyJobType {
  */
 union CopyJobStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pending: "Pending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Partitioning: "Partitioning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Paused: "Paused",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Faulted: "Faulted",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cancelled: "Cancelled",
 }
 
@@ -77,9 +77,9 @@ union CopyJobStatus {
  */
 union CopyJobMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Offline: "Offline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Online: "Online",
 }
 
@@ -88,11 +88,11 @@ union CopyJobMode {
  */
 union DatabaseAccountKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GlobalDocumentDB: "GlobalDocumentDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MongoDB: "MongoDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Parse: "Parse",
 }
 
@@ -101,7 +101,7 @@ union DatabaseAccountKind {
  */
 union ConnectorOffer {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Small: "Small",
 }
 
@@ -110,11 +110,11 @@ union ConnectorOffer {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SecuredByPerimeter: "SecuredByPerimeter",
 }
 
@@ -123,19 +123,19 @@ union PublicNetworkAccess {
  */
 union ServerVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Three2: "3.2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Three6: "3.6",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Four0: "4.0",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Four2: "4.2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Five0: "5.0",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Six0: "6.0",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Seven0: "7.0",
 }
 
@@ -144,9 +144,9 @@ union ServerVersion {
  */
 union AnalyticalStorageSchemaType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   WellDefined: "WellDefined",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FullFidelity: "FullFidelity",
 }
 
@@ -155,9 +155,9 @@ union AnalyticalStorageSchemaType {
  */
 union CreateMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Default: "Default",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Restore: "Restore",
 }
 
@@ -166,7 +166,7 @@ union CreateMode {
  */
 union RestoreMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PointInTime: "PointInTime",
 }
 
@@ -175,9 +175,9 @@ union RestoreMode {
  */
 union BackupPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Periodic: "Periodic",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Continuous: "Continuous",
 }
 
@@ -186,13 +186,13 @@ union BackupPolicyType {
  */
 union BackupPolicyMigrationStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
@@ -201,11 +201,11 @@ union BackupPolicyMigrationStatus {
  */
 union CapacityMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Provisioned: "Provisioned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Serverless: "Serverless",
 }
 
@@ -214,15 +214,15 @@ union CapacityMode {
  */
 union CapacityModeTransitionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Invalid: "Invalid",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Initialized: "Initialized",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
@@ -231,11 +231,11 @@ union CapacityModeTransitionStatus {
  */
 union MinimalTlsVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Tls: "Tls",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Tls11: "Tls11",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Tls12: "Tls12",
 }
 
@@ -244,9 +244,9 @@ union MinimalTlsVersion {
  */
 union DefaultPriorityLevel {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   High: "High",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Low: "Low",
 }
 
@@ -255,13 +255,13 @@ union DefaultPriorityLevel {
  */
 union Kind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Primary: "Primary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Secondary: "Secondary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PrimaryReadonly: "PrimaryReadonly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SecondaryReadonly: "SecondaryReadonly",
 }
 
@@ -270,23 +270,23 @@ union Kind {
  */
 union Type {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sql: "Sql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Table: "Table",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MongoDB: "MongoDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cassandra: "Cassandra",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CassandraConnectorMetadata: "CassandraConnectorMetadata",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Gremlin: "Gremlin",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SqlDedicatedGateway: "SqlDedicatedGateway",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GremlinV2: "GremlinV2",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Undefined: "Undefined",
 }
 
@@ -295,13 +295,13 @@ union Type {
  */
 union KeyKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Primary: "primary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Secondary: "secondary",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PrimaryReadonly: "primaryReadonly",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SecondaryReadonly: "secondaryReadonly",
 }
 
@@ -310,19 +310,19 @@ union KeyKind {
  */
 union UnitType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Count: "Count",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Bytes: "Bytes",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Seconds: "Seconds",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Percent: "Percent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CountPerSecond: "CountPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BytesPerSecond: "BytesPerSecond",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Milliseconds: "Milliseconds",
 }
 
@@ -331,17 +331,17 @@ union UnitType {
  */
 union PrimaryAggregationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Average: "Average",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Total: "Total",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Minimum: "Minimum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Maximum: "Maximum",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Last: "Last",
 }
 
@@ -350,11 +350,11 @@ union PrimaryAggregationType {
  */
 union IndexingMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Consistent: "consistent",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Lazy: "lazy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "none",
 }
 
@@ -363,17 +363,17 @@ union IndexingMode {
  */
 union DataType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   String: "String",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Number: "Number",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Point: "Point",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Polygon: "Polygon",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   LineString: "LineString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MultiPolygon: "MultiPolygon",
 }
 
@@ -382,11 +382,11 @@ union DataType {
  */
 union IndexKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Hash: "Hash",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Range: "Range",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Spatial: "Spatial",
 }
 
@@ -395,9 +395,9 @@ union IndexKind {
  */
 union CompositePathSortOrder {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Ascending: "ascending",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Descending: "descending",
 }
 
@@ -406,13 +406,13 @@ union CompositePathSortOrder {
  */
 union SpatialType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Point: "Point",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   LineString: "LineString",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Polygon: "Polygon",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MultiPolygon: "MultiPolygon",
 }
 
@@ -421,11 +421,11 @@ union SpatialType {
  */
 union VectorIndexType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Flat: "flat",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DiskANN: "diskANN",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   QuantizedFlat: "quantizedFlat",
 }
 
@@ -434,11 +434,11 @@ union VectorIndexType {
  */
 union PartitionKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Hash: "Hash",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Range: "Range",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MultiHash: "MultiHash",
 }
 
@@ -447,9 +447,9 @@ union PartitionKind {
  */
 union ConflictResolutionMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   LastWriterWins: "LastWriterWins",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Custom: "Custom",
 }
 
@@ -458,11 +458,11 @@ union ConflictResolutionMode {
  */
 union VectorDataType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Float32: "float32",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Uint8: "uint8",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Int8: "int8",
 }
 
@@ -471,11 +471,11 @@ union VectorDataType {
  */
 union DistanceFunction {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Euclidean: "euclidean",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cosine: "cosine",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Dotproduct: "dotproduct",
 }
 
@@ -484,11 +484,11 @@ union DistanceFunction {
  */
 union ThroughputPolicyType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "none",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Equal: "equal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Custom: "custom",
 }
 
@@ -497,9 +497,9 @@ union ThroughputPolicyType {
  */
 union TriggerType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Pre: "Pre",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Post: "Post",
 }
 
@@ -508,15 +508,15 @@ union TriggerType {
  */
 union TriggerOperation {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   All: "All",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Create: "Create",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Update: "Update",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Delete: "Delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Replace: "Replace",
 }
 
@@ -525,11 +525,11 @@ union TriggerOperation {
  */
 union BackupStorageRedundancy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Geo: "Geo",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Local: "Local",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Zone: "Zone",
 }
 
@@ -538,40 +538,40 @@ union BackupStorageRedundancy {
  */
 union Status {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Uninitialized: "Uninitialized",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Initializing: "Initializing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InternallyReady: "InternallyReady",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Online: "Online",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union DataTransferComponent {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosDBCassandra: "CosmosDBCassandra",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosDBMongo: "CosmosDBMongo",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosDBMongoVCore: "CosmosDBMongoVCore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosDBSql: "CosmosDBSql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AzureBlobStorage: "AzureBlobStorage",
 }
 
@@ -580,9 +580,9 @@ union DataTransferComponent {
  */
 union DataTransferJobMode {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Offline: "Offline",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Online: "Online",
 }
 
@@ -591,17 +591,17 @@ union DataTransferJobMode {
  */
 union ManagedCassandraProvisioningState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Canceled: "Canceled",
 }
 
@@ -610,11 +610,11 @@ union ManagedCassandraProvisioningState {
  */
 union AuthenticationMethod {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cassandra: "Cassandra",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Ldap: "Ldap",
 }
 
@@ -623,11 +623,11 @@ union AuthenticationMethod {
  */
 union AutoReplicate {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SystemKeyspaces: "SystemKeyspaces",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AllKeyspaces: "AllKeyspaces",
 }
 
@@ -636,9 +636,9 @@ union AutoReplicate {
  */
 union ClusterType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Production: "Production",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NonProduction: "NonProduction",
 }
 
@@ -647,11 +647,11 @@ union ClusterType {
  */
 union ScheduledEventStrategy {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Ignore: "Ignore",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   StopAny: "StopAny",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   StopByRack: "StopByRack",
 }
 
@@ -660,9 +660,9 @@ union ScheduledEventStrategy {
  */
 union AzureConnectionType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   VPN: "VPN",
 }
 
@@ -671,9 +671,9 @@ union AzureConnectionType {
  */
 union ManagedCassandraResourceIdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
 
@@ -682,17 +682,17 @@ union ManagedCassandraResourceIdentityType {
  */
 union CommandStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Done: "Done",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enqueue: "Enqueue",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Processing: "Processing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Finished: "Finished",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
@@ -701,13 +701,13 @@ union CommandStatus {
  */
 union BackupState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Initiated: "Initiated",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InProgress: "InProgress",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Succeeded: "Succeeded",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
 }
 
@@ -716,17 +716,17 @@ union BackupState {
  */
 union ConnectionState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OK: "OK",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   OperatorToDataCenterNetworkError: "OperatorToDataCenterNetworkError",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DatacenterToDatacenterNetworkError: "DatacenterToDatacenterNetworkError",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InternalOperatorToDataCenterCertificateError: "InternalOperatorToDataCenterCertificateError",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InternalError: "InternalError",
 }
 
@@ -735,15 +735,15 @@ union ConnectionState {
  */
 union NodeState {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Normal: "Normal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Leaving: "Leaving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Joining: "Joining",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Moving: "Moving",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Stopped: "Stopped",
 }
 
@@ -779,16 +779,16 @@ union IssueType {
  */
 union Severity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Warning: "Warning",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Error: "Error",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union NotebookWorkspaceName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Default: "default",
 }
 
@@ -797,17 +797,17 @@ union NotebookWorkspaceName {
  */
 union ApiType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MongoDB: "MongoDB",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Gremlin: "Gremlin",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Cassandra: "Cassandra",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Table: "Table",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Sql: "Sql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GremlinV2: "GremlinV2",
 }
 
@@ -816,15 +816,15 @@ union ApiType {
  */
 union OperationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Create: "Create",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Replace: "Replace",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Delete: "Delete",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Recreate: "Recreate",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SystemOperation: "SystemOperation",
 }
 
@@ -833,11 +833,11 @@ union OperationType {
  */
 union ServiceSize {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosD4S: "Cosmos.D4s",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosD8S: "Cosmos.D8s",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CosmosD16S: "Cosmos.D16s",
 }
 
@@ -846,13 +846,13 @@ union ServiceSize {
  */
 union ServiceType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SqlDedicatedGateway: "SqlDedicatedGateway",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DataTransfer: "DataTransfer",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GraphAPICompute: "GraphAPICompute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   MaterializedViewsBuilder: "MaterializedViewsBuilder",
 }
 
@@ -861,17 +861,17 @@ union ServiceType {
  */
 union ServiceStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Creating: "Creating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Running: "Running",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Updating: "Updating",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Deleting: "Deleting",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Stopped: "Stopped",
 }
 
@@ -880,9 +880,9 @@ union ServiceStatus {
  */
 union FleetAnalyticsPropertiesStorageLocationType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   StorageAccount: "StorageAccount",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   FabricLakehouse: "FabricLakehouse",
 }
 
@@ -891,7 +891,7 @@ union FleetAnalyticsPropertiesStorageLocationType {
  */
 union FleetspacePropertiesFleetspaceApiKind {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NoSQL: "NoSQL",
 }
 
@@ -900,9 +900,9 @@ union FleetspacePropertiesFleetspaceApiKind {
  */
 union FleetspacePropertiesThroughputPoolConfigurationServiceTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GeneralPurpose: "GeneralPurpose",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BusinessCritical: "BusinessCritical",
 }
 
@@ -911,9 +911,9 @@ union FleetspacePropertiesThroughputPoolConfigurationServiceTier {
  */
 union ContinuousTier {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Continuous7Days: "Continuous7Days",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Continuous30Days: "Continuous30Days",
 }
 
@@ -922,9 +922,9 @@ union ContinuousTier {
  */
 union DedicatedGatewayType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IntegratedCache: "IntegratedCache",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DistributedQuery: "DistributedQuery",
 }
 
@@ -933,16 +933,16 @@ union DedicatedGatewayType {
  */
 union NodeStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Up: "Up",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Down: "Down",
 }
 
 /**
  * Indicates whether what action to take for the Chaos Fault.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SupportedActions {
   Enable,
   Disable,
@@ -951,7 +951,7 @@ enum SupportedActions {
 /**
  * The default consistency level and configuration settings of the Cosmos DB account.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum DefaultConsistencyLevel {
   Eventual,
   Session,
@@ -963,7 +963,7 @@ enum DefaultConsistencyLevel {
 /**
  * Indicates what services are allowed to bypass firewall checks.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum NetworkAclBypass {
   None,
   AzureServices,
@@ -972,7 +972,7 @@ enum NetworkAclBypass {
 /**
  * Describe the level of detail with which queries are to be logged.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum EnableFullTextQuery {
   None,
   True,
@@ -982,7 +982,7 @@ enum EnableFullTextQuery {
 /**
  * The type of identity used for the resource. The type 'SystemAssigned,UserAssigned' includes both an implicitly created identity and a set of user assigned identities. The type 'None' will remove any identities from the service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ResourceIdentityType {
   SystemAssigned,
   UserAssigned,
@@ -993,7 +993,7 @@ enum ResourceIdentityType {
 /**
  * Indicates whether the Role Definition was built-in or user created.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum MongoRoleDefinitionType {
   BuiltInRole,
   CustomRole,
@@ -1002,7 +1002,7 @@ enum MongoRoleDefinitionType {
 /**
  * Indicates whether the Role Definition was built-in or user created.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum RoleDefinitionType {
   BuiltInRole,
   CustomRole,
@@ -1040,7 +1040,7 @@ model ChaosFaultProperties {
   /**
    * A provisioning state of the Chaos Fault.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -1048,7 +1048,7 @@ model ChaosFaultProperties {
 /**
  * The properties of a Copy Job
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CopyJobProperties {
   /**
    * Job Properties
@@ -1118,7 +1118,7 @@ model BaseCopyJobProperties {
 /**
  * The resource model definition for a ARM proxy resource. It will have everything other than required location and tags
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ARMProxyResource {
   /**
    * The unique resource identifier of the database account.
@@ -1142,7 +1142,7 @@ model ARMProxyResource {
 /**
  * An error response from the service.
  */
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @error
 @Azure.ResourceManager.Legacy.armExternalType
 model CloudError {
@@ -1164,7 +1164,7 @@ model DatabaseAccountGetProperties {
   /**
    * The provisioning state of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1417,7 +1417,7 @@ model IpAddressOrRange {
   /**
    * A single IPv4 address or a single IPv4 address range in CIDR format. Provided IPs must be well-formatted and cannot be contained in one of the following ranges: 10.0.0.0/8, 100.64.0.0/10, 172.16.0.0/12, 192.168.0.0/16, since these are not enforceable by the IP address filter. Example of valid inputs: “23.40.210.245” or “23.40.210.0/8”.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ipAddressOrRange?: string;
 }
 
@@ -1532,7 +1532,7 @@ model VirtualNetworkRule {
   /**
    * Create firewall rule before the virtual network has vnet service endpoint enabled.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ignoreMissingVNetServiceEndpoint?: boolean;
 }
 
@@ -1558,7 +1558,7 @@ model PrivateEndpointConnectionProperties {
   /**
    * Provisioning state of the private endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: string;
 }
 
@@ -1596,8 +1596,8 @@ model PrivateLinkServiceConnectionStateProperty {
 /**
  * The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyResourceAutoGenerated extends ResourceAutoGenerated {}
 
 /**
@@ -1623,7 +1623,7 @@ model ResourceAutoGenerated {
   type?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiProperties {
   /**
    * Describes the version of the MongoDB account.
@@ -1644,7 +1644,7 @@ model AnalyticalStorageConfiguration {
 /**
  * Parameters to indicate the information about the restore.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RestoreParameters extends RestoreParametersBase {
   /**
    * Describes the mode of the restore.
@@ -1900,7 +1900,7 @@ model AccountKeyMetadata {
 /**
  * The core properties of ARM resources.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ARMResourceProperties {
   /**
    * The unique resource identifier of the ARM resource.
@@ -1928,7 +1928,7 @@ model ARMResourceProperties {
   /**
    * Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with "defaultExperience": "Cassandra". Current "defaultExperience" values also include "Table", "Graph", "DocumentDB", and "MongoDB".
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -1961,11 +1961,11 @@ model ManagedServiceIdentity {
   /**
    * The list of user identities associated with resource. The user identity dictionary key references will be ARM resource ids in the form: '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties>;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Components1Jq1T4ISchemasManagedserviceidentityPropertiesUserassignedidentitiesAdditionalproperties {
   /**
    * The principal id of user assigned identity.
@@ -1987,7 +1987,7 @@ model DatabaseAccountUpdateParameters {
   /**
    * Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with "defaultExperience": "Cassandra". Current "defaultExperience" values also include "Table", "Graph", "DocumentDB", and "MongoDB".
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -2197,14 +2197,14 @@ model DatabaseAccountUpdateProperties {
 /**
  * Parameters to create and update Cosmos DB database accounts.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseAccountCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Indicates the type of database account. This can only be set at database account creation.
    */
   kind?: DatabaseAccountKind = DatabaseAccountKind.GlobalDocumentDB;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 
   /**
@@ -2423,7 +2423,7 @@ model FailoverPolicies {
   /**
    * List of failover policies.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   failoverPolicies: FailoverPolicy[];
 }
@@ -2443,7 +2443,7 @@ model DatabaseAccountsListResult {
 /**
  * The access keys for the given database account.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DatabaseAccountListKeysResult
   extends DatabaseAccountListReadOnlyKeysResult {
   /**
@@ -2558,25 +2558,25 @@ model OperationDisplay {
   /**
    * Service provider: Microsoft.ResourceProvider
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Provider?: string;
 
   /**
    * Resource on which the operation is performed: Profile, endpoint, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Resource?: string;
 
   /**
    * Operation type: Read, write, delete, etc.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Operation?: string;
 
   /**
    * Description of operation
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Description?: string;
 }
 
@@ -2754,54 +2754,54 @@ model PercentileMetric {
 /**
  * Represents percentile metrics values.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PercentileMetricValue extends MetricValue {
   /**
    * The 10th percentile value for the metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   P10?: float64;
 
   /**
    * The 25th percentile value for the metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   P25?: float64;
 
   /**
    * The 50th percentile value for the metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   P50?: float64;
 
   /**
    * The 75th percentile value for the metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   P75?: float64;
 
   /**
    * The 90th percentile value for the metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   P90?: float64;
 
   /**
    * The 95th percentile value for the metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   P95?: float64;
 
   /**
    * The 99th percentile value for the metric.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   P99?: float64;
 }
@@ -2821,7 +2821,7 @@ model PartitionMetricListResult {
 /**
  * The metric values for a single partition.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PartitionMetric extends Metric {
   /**
    * The partition id (GUID identifier) of the metric values.
@@ -2898,7 +2898,7 @@ model PartitionUsagesResult {
 /**
  * The partition level usage data for a usage request.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PartitionUsage extends Usage {
   /**
    * The partition id (GUID identifier) of the usages.
@@ -2993,17 +2993,17 @@ model GraphResourcesListResult {
 /**
  * The properties of an Azure Cosmos DB SQL database
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphResourceGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: GraphResourceGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: GraphResourceGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphResourceGetPropertiesResource extends GraphResource {}
 
 /**
@@ -3015,9 +3015,9 @@ model GraphResource {
    */
   id: string;
 }
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphResourceGetPropertiesOptions extends OptionsResource {}
 
 /**
@@ -3035,7 +3035,7 @@ model OptionsResource {
   autoscaleSettings?: AutoscaleSettings;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AutoscaleSettings {
   /**
    * Represents maximum throughput, the resource can scale up to.
@@ -3046,7 +3046,7 @@ model AutoscaleSettings {
 /**
  * Parameters to create and update Cosmos DB Graph resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphResourceCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Graph resource.
@@ -3099,15 +3099,15 @@ model SqlDatabaseListResult {
 /**
  * The properties of an Azure Cosmos DB SQL database
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlDatabaseGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: SqlDatabaseGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: SqlDatabaseGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlDatabaseGetPropertiesResource {
   ...SqlDatabaseResource;
   ...ExtendedResourceProperties;
@@ -3146,8 +3146,8 @@ model SqlDatabaseResource {
 /**
  * Parameters to indicate the information about the restore.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceRestoreParameters extends RestoreParametersBase {}
 
 /**
@@ -3173,15 +3173,15 @@ model ExtendedResourceProperties {
   _etag?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlDatabaseGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB SQL database.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlDatabaseCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB SQL database.
@@ -3207,13 +3207,13 @@ model SqlDatabaseCreateUpdateProperties {
 /**
  * The properties of an Azure Cosmos DB resource throughput
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ThroughputSettingsGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: ThroughputSettingsGetPropertiesResource;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ThroughputSettingsGetPropertiesResource {
   ...ThroughputSettingsResource;
   ...ExtendedResourceProperties;
@@ -3327,7 +3327,7 @@ model ThroughputBucketResource {
 /**
  * Parameters to update Cosmos DB resource throughput.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ThroughputSettingsUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to update Azure Cosmos DB resource throughput.
@@ -3360,13 +3360,13 @@ model ClientEncryptionKeysListResult {
 /**
  * The properties of a ClientEncryptionKey resource
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClientEncryptionKeyGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: ClientEncryptionKeyGetPropertiesResource;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClientEncryptionKeyGetPropertiesResource {
   ...ClientEncryptionKeyResource;
   ...ExtendedResourceProperties;
@@ -3457,15 +3457,15 @@ model SqlContainerListResult {
 /**
  * The properties of an Azure Cosmos DB container
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlContainerGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: SqlContainerGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: SqlContainerGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlContainerGetPropertiesResource {
   ...SqlContainerResource;
   ...ExtendedResourceProperties;
@@ -3632,7 +3632,7 @@ model Indexes {
   kind?: IndexKind = IndexKind.Hash;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ExcludedPath {
   /**
    * The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)
@@ -3640,7 +3640,7 @@ model ExcludedPath {
   path?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CompositePath {
   /**
    * The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)
@@ -3653,7 +3653,7 @@ model CompositePath {
   order?: CompositePathSortOrder;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SpatialSpec {
   /**
    * The path for which the indexing behavior applies to. Index paths typically start with root and end with wildcard (/path/*)
@@ -3666,7 +3666,7 @@ model SpatialSpec {
   types?: SpatialType[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model VectorIndex {
   /**
    * The path to the vector field in the document.
@@ -3909,15 +3909,15 @@ model FullTextPath {
   language?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlContainerGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB container.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlContainerCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB container.
@@ -3957,7 +3957,7 @@ model PhysicalPartitionStorageInfoCollection {
   /**
    * List of physical partitions and their properties.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   physicalPartitionStorageInfoCollection?: physicalPartitionStorageInfo[];
 }
@@ -3965,7 +3965,7 @@ model PhysicalPartitionStorageInfoCollection {
 /**
  * The storage of a physical partition
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model physicalPartitionStorageInfo {
   /**
    * The unique identifier of the partition.
@@ -3976,7 +3976,7 @@ model physicalPartitionStorageInfo {
   /**
    * The storage in KB for the physical partition.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   storageInKB?: float64;
 }
@@ -3984,7 +3984,7 @@ model physicalPartitionStorageInfo {
 /**
  * Cosmos DB retrieve throughput parameters object
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RetrieveThroughputParameters extends ARMResourceProperties {
   /**
    * Properties to retrieve throughput parameters object
@@ -4025,7 +4025,7 @@ model PhysicalPartitionId {
 /**
  * An Azure Cosmos DB PhysicalPartitionThroughputInfoResult object.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PhysicalPartitionThroughputInfoResult extends ARMResourceProperties {
   /**
    * The properties of an Azure Cosmos DB PhysicalPartitionThroughputInfoResult object
@@ -4046,8 +4046,8 @@ model PhysicalPartitionThroughputInfoResultProperties {
 /**
  * properties of physical partition throughput info
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PhysicalPartitionThroughputInfoResultPropertiesResource
   extends PhysicalPartitionThroughputInfoProperties {}
 
@@ -4084,7 +4084,7 @@ model PhysicalPartitionThroughputInfoResource {
 /**
  * Cosmos DB redistribute throughput parameters object
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RedistributeThroughputParameters extends ARMResourceProperties {
   /**
    * Properties to redistribute throughput parameters object
@@ -4137,13 +4137,13 @@ model SqlStoredProcedureListResult {
 /**
  * The properties of an Azure Cosmos DB StoredProcedure
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlStoredProcedureGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: SqlStoredProcedureGetPropertiesResource;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlStoredProcedureGetPropertiesResource {
   ...SqlStoredProcedureResource;
   ...ExtendedResourceProperties;
@@ -4167,7 +4167,7 @@ model SqlStoredProcedureResource {
 /**
  * Parameters to create and update Cosmos DB storedProcedure.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlStoredProcedureCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB storedProcedure.
@@ -4205,13 +4205,13 @@ model SqlUserDefinedFunctionListResult {
 /**
  * The properties of an Azure Cosmos DB userDefinedFunction
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlUserDefinedFunctionGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: SqlUserDefinedFunctionGetPropertiesResource;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlUserDefinedFunctionGetPropertiesResource {
   ...SqlUserDefinedFunctionResource;
   ...ExtendedResourceProperties;
@@ -4235,7 +4235,7 @@ model SqlUserDefinedFunctionResource {
 /**
  * Parameters to create and update Cosmos DB userDefinedFunction.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlUserDefinedFunctionCreateUpdateParameters
   extends ARMResourceProperties {
   /**
@@ -4274,13 +4274,13 @@ model SqlTriggerListResult {
 /**
  * The properties of an Azure Cosmos DB trigger
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlTriggerGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: SqlTriggerGetPropertiesResource;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlTriggerGetPropertiesResource {
   ...SqlTriggerResource;
   ...ExtendedResourceProperties;
@@ -4314,7 +4314,7 @@ model SqlTriggerResource {
 /**
  * Parameters to create and update Cosmos DB trigger.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlTriggerCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB trigger.
@@ -4340,7 +4340,7 @@ model SqlTriggerCreateUpdateProperties {
 /**
  * The List operation response, that contains the MongoDB databases and their properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBDatabaseListResult {
   /**
    * List of MongoDB databases and their properties.
@@ -4353,16 +4353,16 @@ model MongoDBDatabaseListResult {
 /**
  * The properties of an Azure Cosmos DB MongoDB database
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBDatabaseGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: MongoDBDatabaseGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: MongoDBDatabaseGetPropertiesOptions;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBDatabaseGetPropertiesResource {
   ...MongoDBDatabaseResource;
   ...ExtendedResourceProperties;
@@ -4371,7 +4371,7 @@ model MongoDBDatabaseGetPropertiesResource {
 /**
  * Cosmos DB MongoDB database resource object
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBDatabaseResource {
   /**
    * Name of the Cosmos DB MongoDB database
@@ -4388,29 +4388,29 @@ model MongoDBDatabaseResource {
    */
   createMode?: CreateMode = CreateMode.Default;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBDatabaseGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB MongoDB database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBDatabaseCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB MongoDB database.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: MongoDBDatabaseCreateUpdateProperties;
 }
 
 /**
  * Properties to create and update Azure Cosmos DB MongoDB database.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBDatabaseCreateUpdateProperties {
   /**
    * The standard JSON format of a MongoDB database
@@ -4426,12 +4426,12 @@ model MongoDBDatabaseCreateUpdateProperties {
 /**
  * The List operation response, that contains the MongoDB collections and their properties.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBCollectionListResult {
   /**
    * List of MongoDB collections and their properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @pageItems
   value?: MongoDBCollectionGetResults[];
@@ -4440,16 +4440,16 @@ model MongoDBCollectionListResult {
 /**
  * The properties of an Azure Cosmos DB MongoDB collection
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBCollectionGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: MongoDBCollectionGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: MongoDBCollectionGetPropertiesOptions;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBCollectionGetPropertiesResource {
   ...MongoDBCollectionResource;
   ...ExtendedResourceProperties;
@@ -4458,7 +4458,7 @@ model MongoDBCollectionGetPropertiesResource {
 /**
  * Cosmos DB MongoDB collection resource object
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBCollectionResource {
   /**
    * Name of the Cosmos DB MongoDB collection
@@ -4468,7 +4468,7 @@ model MongoDBCollectionResource {
   /**
    * A key-value pair of shard keys to be applied for the request.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   shardKey?: Record<string>;
 
   /**
@@ -4533,29 +4533,29 @@ model MongoIndexOptions {
   unique?: boolean;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBCollectionGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB MongoDB collection.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBCollectionCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB MongoDB collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties: MongoDBCollectionCreateUpdateProperties;
 }
 
 /**
  * Properties to create and update Azure Cosmos DB MongoDB collection.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoDBCollectionCreateUpdateProperties {
   /**
    * The standard JSON format of a MongoDB collection
@@ -4583,15 +4583,15 @@ model TableListResult {
 /**
  * The properties of an Azure Cosmos Table
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TableGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: TableGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: TableGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TableGetPropertiesResource {
   ...TableResource;
   ...ExtendedResourceProperties;
@@ -4617,15 +4617,15 @@ model TableResource {
   createMode?: CreateMode = CreateMode.Default;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TableGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB Table.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TableCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Table.
@@ -4663,15 +4663,15 @@ model CassandraKeyspaceListResult {
 /**
  * The properties of an Azure Cosmos DB Cassandra keyspace
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraKeyspaceGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: CassandraKeyspaceGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: CassandraKeyspaceGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraKeyspaceGetPropertiesResource {
   ...CassandraKeyspaceResource;
   ...ExtendedResourceProperties;
@@ -4687,15 +4687,15 @@ model CassandraKeyspaceResource {
   id: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraKeyspaceGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB Cassandra keyspace.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraKeyspaceCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Cassandra keyspace.
@@ -4733,15 +4733,15 @@ model CassandraTableListResult {
 /**
  * The properties of an Azure Cosmos DB Cassandra table
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraTableGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: CassandraTableGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: CassandraTableGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraTableGetPropertiesResource {
   ...CassandraTableResource;
   ...ExtendedResourceProperties;
@@ -4832,15 +4832,15 @@ model ClusterKey {
   orderBy?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraTableGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB Cassandra table.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraTableCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Cassandra table.
@@ -4878,15 +4878,15 @@ model GremlinDatabaseListResult {
 /**
  * The properties of an Azure Cosmos DB SQL database
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinDatabaseGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: GremlinDatabaseGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: GremlinDatabaseGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinDatabaseGetPropertiesResource {
   ...GremlinDatabaseResource;
   ...ExtendedResourceProperties;
@@ -4912,15 +4912,15 @@ model GremlinDatabaseResource {
   createMode?: CreateMode = CreateMode.Default;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinDatabaseGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB Gremlin database.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinDatabaseCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Gremlin database.
@@ -4958,15 +4958,15 @@ model GremlinGraphListResult {
 /**
  * The properties of an Azure Cosmos DB Gremlin graph
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinGraphGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: GremlinGraphGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: GremlinGraphGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinGraphGetPropertiesResource {
   ...GremlinGraphResource;
   ...ExtendedResourceProperties;
@@ -5022,15 +5022,15 @@ model GremlinGraphResource {
   createMode?: CreateMode = CreateMode.Default;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinGraphGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB Gremlin graph.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinGraphCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Gremlin graph.
@@ -5068,7 +5068,7 @@ model LocationListResult {
 /**
  * Cosmos DB location metadata
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LocationProperties {
   /**
    * Flag indicating whether the location supports availability zones or not.
@@ -5122,15 +5122,15 @@ model CassandraViewListResult {
 /**
  * The properties of an Azure Cosmos DB Cassandra view
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraViewGetProperties {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   resource?: CassandraViewGetPropertiesResource;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   options?: CassandraViewGetPropertiesOptions;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraViewGetPropertiesResource {
   ...CassandraViewResource;
   ...ExtendedResourceProperties;
@@ -5151,15 +5151,15 @@ model CassandraViewResource {
   viewDefinition: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraViewGetPropertiesOptions extends OptionsResource {}
 
 /**
  * Parameters to create and update Cosmos DB Cassandra view.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraViewCreateUpdateParameters extends ARMResourceProperties {
   /**
    * Properties to create and update Azure Cosmos DB Cassandra view.
@@ -5185,7 +5185,7 @@ model CassandraViewCreateUpdateProperties {
 /**
  * Parameters to create Data Transfer Job
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CreateJobRequest extends ARMProxyResource {
   /**
    * Data Transfer Create Job Properties
@@ -5196,7 +5196,7 @@ model CreateJobRequest extends ARMProxyResource {
 /**
  * The properties of a DataTransfer Job
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataTransferJobProperties {
   /**
    * Job Name
@@ -5268,7 +5268,7 @@ model DataTransferJobProperties {
  */
 @discriminator("component")
 model DataTransferDataSourceSink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   component: DataTransferComponent = DataTransferComponent.CosmosDBCassandra;
 }
 
@@ -5295,7 +5295,7 @@ model ClusterResourceProperties {
   /**
    * The status of the resource at the time the operation was called.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ManagedCassandraProvisioningState;
 
   /**
@@ -5443,7 +5443,7 @@ model ClusterResourceProperties {
   ]>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SeedNode {
   /**
    * IP address of this seed node.
@@ -5451,7 +5451,7 @@ model SeedNode {
   ipAddress?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model Certificate {
   /**
    * PEM formatted public key.
@@ -5459,7 +5459,7 @@ model Certificate {
   pem?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraError {
   /**
    * The code of error that occurred.
@@ -5482,7 +5482,7 @@ model CassandraError {
   additionalErrorInfo?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackupSchedule {
   /**
    * The unique identifier of backup schedule.
@@ -5503,7 +5503,7 @@ model BackupSchedule {
 /**
  * The core properties of ARM resources.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCassandraARMResourceProperties {
   /**
    * The unique resource identifier of the ARM resource.
@@ -5531,7 +5531,7 @@ model ManagedCassandraARMResourceProperties {
   /**
    * Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with "defaultExperience": "Cassandra". Current "defaultExperience" values also include "Table", "Graph", "DocumentDB", and "MongoDB".
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**
@@ -5574,7 +5574,7 @@ model CommandPostBody {
   /**
    * The arguments for the command to be run
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   arguments?: Record<string>;
 
   /**
@@ -5585,7 +5585,7 @@ model CommandPostBody {
   /**
    * If true, stops cassandra before executing the command and then start it again
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `cassandra-stop-start`?: boolean;
 
   /**
@@ -5601,7 +5601,7 @@ model CommandOutput {
   /**
    * Output of the command.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   commandOutput?: string;
 }
 
@@ -5617,7 +5617,7 @@ model CommandAsyncPostBody {
   /**
    * The arguments for the command to be run
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   arguments?: unknown;
 
   /**
@@ -5628,7 +5628,7 @@ model CommandAsyncPostBody {
   /**
    * If true, stops cassandra before executing the command and then start it again
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `cassandra-stop-start`?: boolean;
 
   /**
@@ -5654,7 +5654,7 @@ model CommandPublicResource {
   /**
    * The arguments for the command to be run
    */
-  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   arguments?: unknown;
 
   /**
@@ -5771,7 +5771,7 @@ model DataCenterResourceProperties {
   /**
    * The status of the resource at the time the operation was called.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: ManagedCassandraProvisioningState;
 
   /**
@@ -5888,7 +5888,7 @@ model AuthenticationMethodLdapProperties {
    */
   searchFilterTemplate?: string;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   serverCertificates?: Certificate[];
 
@@ -5902,9 +5902,9 @@ model AuthenticationMethodLdapProperties {
  * Properties of a managed Cassandra cluster public status.
  */
 model CassandraClusterPublicStatus {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   eTag?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   reaperStatus?: ManagedCassandraReaperStatus;
 
   /**
@@ -5925,42 +5925,42 @@ model CassandraClusterPublicStatus {
   dataCenters?: CassandraClusterPublicStatusDataCentersItem[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ManagedCassandraReaperStatus {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   healthy?: boolean;
 
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   repairRunIds?: Record<string>;
 
   /**
    * Dictionary of <string>
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   repairSchedules?: Record<string>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ConnectionError {
   /**
    * The kind of connection error that occurred.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connectionState?: ConnectionState;
 
   /**
    * The IP of host that originated the failed connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   iPFrom?: string;
 
   /**
    * The IP that the connection attempted to reach.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   iPTo?: string;
 
   /**
@@ -5974,7 +5974,7 @@ model ConnectionError {
   exception?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraClusterPublicStatusDataCentersItem {
   /**
    * The name of this Datacenter.
@@ -5987,12 +5987,12 @@ model CassandraClusterPublicStatusDataCentersItem {
   @OpenAPI.extension("x-ms-identifiers", #[])
   seedNodes?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   nodes?: ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersItemsPropertiesNodesItems {
   /**
    * The node's IP address.
@@ -6004,7 +6004,7 @@ model ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersIt
    */
   state?: NodeState;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   status?: string;
 
   /**
@@ -6020,22 +6020,22 @@ model ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersIt
   /**
    * List of tokens this node covers.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tokens?: string[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   size?: int32;
 
   /**
    * The network ID of the node.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hostID?: string;
 
   /**
    * The rack this node is part of.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rack?: string;
 
   /**
@@ -6046,37 +6046,37 @@ model ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersIt
   /**
    * The amount of disk used, in kB, of the directory /var/lib/cassandra.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskUsedKB?: int64;
 
   /**
    * The amount of disk free, in kB, of the directory /var/lib/cassandra.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   diskFreeKB?: int64;
 
   /**
    * Used memory (calculated as total - free - buffers - cache), in kB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryUsedKB?: int64;
 
   /**
    * Memory used by kernel buffers (Buffers in /proc/meminfo) and page cache and slabs (Cached and SReclaimable in /proc/meminfo), in kB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryBuffersAndCachedKB?: int64;
 
   /**
    * Unused memory (MemFree and SwapFree in /proc/meminfo), in kB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryFreeKB?: int64;
 
   /**
    * Total installed memory (MemTotal and SwapTotal in /proc/meminfo), in kB.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   memoryTotalKB?: int64;
 
   /**
@@ -6093,7 +6093,7 @@ model ComponentsM9L909SchemasCassandraclusterpublicstatusPropertiesDatacentersIt
 /**
  * Azure Cosmos DB Mongo Role Definition resource object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoRoleDefinitionResource {
   /**
    * A user-friendly name for the Role Definition. Must be unique for the database account.
@@ -6103,7 +6103,7 @@ model MongoRoleDefinitionResource {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: MongoRoleDefinitionType;
 
   /**
@@ -6166,7 +6166,7 @@ model Role {
   /**
    * The role name.
    */
-  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   role?: string;
 }
 
@@ -6195,7 +6195,7 @@ model MongoRoleDefinitionListResult {
 /**
  * Azure Cosmos DB Mongo User Definition resource object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoUserDefinitionResource {
   /**
    * The user name for User Definition.
@@ -6276,7 +6276,7 @@ model NotebookWorkspaceListResult {
 /**
  * Properties of a notebook workspace resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NotebookWorkspaceProperties {
   /**
    * Specifies the endpoint of Notebook server.
@@ -6294,8 +6294,8 @@ model NotebookWorkspaceProperties {
 /**
  * Parameters to create a notebook workspace resource
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NotebookWorkspaceCreateUpdateParameters extends ARMProxyResource {}
 
 /**
@@ -6325,7 +6325,7 @@ model PrivateEndpointConnectionListResult {
   @pageItems
   value?: PrivateEndpointConnection[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6340,7 +6340,7 @@ model PrivateLinkResourceListResult {
   @pageItems
   value?: PrivateLinkResource[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6348,7 +6348,7 @@ model PrivateLinkResourceListResult {
 /**
  * Properties of a private link resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PrivateLinkResourceProperties {
   /**
    * The private link resource group id.
@@ -6372,7 +6372,7 @@ model PrivateLinkResourceProperties {
 /**
  * Azure Cosmos DB SQL Role Definition resource object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlRoleDefinitionResource {
   /**
    * A user-friendly name for the Role Definition. Must be unique for the database account.
@@ -6382,7 +6382,7 @@ model SqlRoleDefinitionResource {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: RoleDefinitionType;
 
   /**
@@ -6439,7 +6439,7 @@ model SqlRoleDefinitionListResult {
   @pageItems
   value?: SqlRoleDefinitionGetResults[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6447,7 +6447,7 @@ model SqlRoleDefinitionListResult {
 /**
  * Azure Cosmos DB SQL Role Assignment resource object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlRoleAssignmentResource {
   /**
    * The unique identifier for the associated Role Definition.
@@ -6486,7 +6486,7 @@ model SqlRoleAssignmentListResult {
   @pageItems
   value?: SqlRoleAssignmentGetResults[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6502,7 +6502,7 @@ model RestorableDatabaseAccountsListResult {
   @pageItems
   value?: RestorableDatabaseAccountGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6510,7 +6510,7 @@ model RestorableDatabaseAccountsListResult {
 /**
  * The properties of a restorable database account.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RestorableDatabaseAccountProperties {
   /**
    * The name of the global database account
@@ -6622,7 +6622,7 @@ model RestorableSqlDatabasesListResult {
   @pageItems
   value?: RestorableSqlDatabaseGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6754,7 +6754,7 @@ model RestorableSqlContainersListResult {
   @pageItems
   value?: RestorableSqlContainerGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6874,7 +6874,7 @@ model RestorableSqlResourcesListResult {
   @pageItems
   value?: RestorableSqlResourcesGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -6923,7 +6923,7 @@ model RestorableMongodbDatabasesListResult {
   @pageItems
   value?: RestorableMongodbDatabaseGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7024,7 +7024,7 @@ model RestorableMongodbCollectionsListResult {
   @pageItems
   value?: RestorableMongodbCollectionGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7125,7 +7125,7 @@ model RestorableMongodbResourcesListResult {
   @pageItems
   value?: RestorableMongodbResourcesGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7174,7 +7174,7 @@ model RestorableGremlinDatabasesListResult {
   @pageItems
   value?: RestorableGremlinDatabaseGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7275,7 +7275,7 @@ model RestorableGremlinGraphsListResult {
   @pageItems
   value?: RestorableGremlinGraphGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7376,7 +7376,7 @@ model RestorableGremlinResourcesListResult {
   @pageItems
   value?: RestorableGremlinResourcesGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7425,7 +7425,7 @@ model RestorableTablesListResult {
   @pageItems
   value?: RestorableTableGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7526,7 +7526,7 @@ model RestorableTableResourcesListResult {
   @pageItems
   value?: RestorableTableResourcesGetResult[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7565,7 +7565,7 @@ model ServiceResourceListResult {
   @pageItems
   value?: ServiceResource[];
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @nextLink
   nextLink?: string;
 }
@@ -7573,7 +7573,7 @@ model ServiceResourceListResult {
 /**
  * Services response resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @discriminator("serviceType")
 model ServiceResourceProperties {
   ...Record<unknown>;
@@ -7641,12 +7641,12 @@ model ServiceResourceCreateUpdateProperties {
 /**
  * Azure Cosmos DB Table Role Definition resource object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TableRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
 
   /**
@@ -7657,7 +7657,7 @@ model TableRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: RoleDefinitionType;
 
   /**
@@ -7713,7 +7713,7 @@ model TableRoleAssignmentResourceProperties {
   /**
    * Provisioning state of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -7725,7 +7725,7 @@ model ThroughputPoolProperties {
   /**
    * A provisioning state of the ThroughputPool.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   provisioningState?: Status;
 
   /**
@@ -7737,7 +7737,7 @@ model ThroughputPoolProperties {
 /**
  * Represents a throughput pool resource for updates.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ThroughputPoolUpdate {
   /**
    * Properties of the throughput pool.
@@ -7775,12 +7775,12 @@ model ThroughputPoolAccountProperties {
 /**
  * Azure Cosmos DB Cassandra Role Definition resource object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
 
   /**
@@ -7791,7 +7791,7 @@ model CassandraRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: RoleDefinitionType;
 
   /**
@@ -7847,7 +7847,7 @@ model CassandraRoleAssignmentResourceProperties {
   /**
    * Provisioning state of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -7855,13 +7855,13 @@ model CassandraRoleAssignmentResourceProperties {
 /**
  * Azure Cosmos DB MongoMI Role Definition resource object.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoMIRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
 
   /**
@@ -7872,7 +7872,7 @@ model MongoMIRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: RoleDefinitionType;
 
   /**
@@ -7909,7 +7909,7 @@ model PermissionAutoGenerated3 {
 /**
  * Azure Cosmos DB MongoMI Role Assignment resource object.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoMIRoleAssignmentResourceProperties {
   /**
    * The unique identifier for the associated Role Definition.
@@ -7929,7 +7929,7 @@ model MongoMIRoleAssignmentResourceProperties {
   /**
    * Provisioning state of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -7937,12 +7937,12 @@ model MongoMIRoleAssignmentResourceProperties {
 /**
  * Azure Cosmos DB Gremlin Role Definition resource object.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GremlinRoleDefinitionResourceProperties {
   /**
    * The path id for the Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
 
   /**
@@ -7953,7 +7953,7 @@ model GremlinRoleDefinitionResourceProperties {
   /**
    * Indicates whether the Role Definition was built-in or user created.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: RoleDefinitionType;
 
   /**
@@ -8009,7 +8009,7 @@ model GremlinRoleAssignmentResourceProperties {
   /**
    * Provisioning state of the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -8028,12 +8028,12 @@ model FleetResourceProperties {
 /**
  * The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TrackedResourceAutoGenerated extends ResourceAutoGenerated2 {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   tags?: Record<string>;
 
@@ -8076,7 +8076,7 @@ model ResourceAutoGenerated2 {
 /**
  * Represents a fleet resource for updates.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/patch-envelope" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FleetResourceUpdate {
   /**
    * Properties to update Azure Cosmos DB fleet resource.
@@ -8084,7 +8084,7 @@ model FleetResourceUpdate {
   properties?: FleetResourceProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model FleetAnalyticsProperties {
   /**
    * A provisioning state of the FleetAnalytics.
@@ -8106,8 +8106,8 @@ model FleetAnalyticsProperties {
 /**
  * The resource model definition for a Azure Resource Manager proxy resource. It will not have tags and a location
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProxyResourceAutoGenerated2 extends ResourceAutoGenerated2 {}
 
 /**
@@ -8200,7 +8200,7 @@ model FleetspaceAccountPropertiesGlobalDatabaseAccountProperties {
 /**
  * A CosmosDB data source/sink details
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CosmosDBSourceSinkDetails {
   /**
    * Name of remote account in case of cross-account data transfer.
@@ -8211,9 +8211,9 @@ model CosmosDBSourceSinkDetails {
 /**
  * A CosmosDB Mongo vCore data source/sink details
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoVCoreSourceSinkDetails {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hostName?: string;
 
   /**
@@ -8236,7 +8236,7 @@ model AzureBlobSourceSinkDetails {
 /**
  * A CosmosDB Cassandra table
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CosmosDBCassandraTable {
   /**
    * Azure Cosmos DB for Apache Cassandra keyspace.
@@ -8252,7 +8252,7 @@ model CosmosDBCassandraTable {
 /**
  * A CosmosDB Mongo collection
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CosmosDBMongoCollection {
   /**
    * Azure Cosmos DB for MongoDB (RU) database.
@@ -8268,7 +8268,7 @@ model CosmosDBMongoCollection {
 /**
  * A CosmosDB Mongo vCore collection
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CosmosDBMongoVCoreCollection {
   /**
    * Azure Cosmos DB for MongoDB (vCore) database.
@@ -8284,7 +8284,7 @@ model CosmosDBMongoVCoreCollection {
 /**
  * A CosmosDB NoSQL container
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CosmosDBNoSqlContainer {
   /**
    * Azure Cosmos DB for NoSQL database.
@@ -8323,9 +8323,9 @@ model BaseCopyJobTask {
   @visibility(Lifecycle.Read)
   processedCount?: int64;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BlobToCassandraRUCopyJobTask extends BaseCopyJobTask {
   /**
    * Source Azure Blob container
@@ -8337,9 +8337,9 @@ model BlobToCassandraRUCopyJobTask extends BaseCopyJobTask {
    */
   destination: CosmosDBCassandraTable;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraRUToBlobCopyJobTask extends BaseCopyJobTask {
   /**
    * Source Cassandra table
@@ -8351,9 +8351,9 @@ model CassandraRUToBlobCopyJobTask extends BaseCopyJobTask {
    */
   destination: AzureBlobContainer;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraRUToCassandraRUCopyJobTask extends BaseCopyJobTask {
   /**
    * Source Cassandra table
@@ -8365,9 +8365,9 @@ model CassandraRUToCassandraRUCopyJobTask extends BaseCopyJobTask {
    */
   destination: CosmosDBCassandraTable;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoRUToMongoRUCopyJobTask extends BaseCopyJobTask {
   /**
    * Source Mongo (RU) collection
@@ -8379,9 +8379,9 @@ model MongoRUToMongoRUCopyJobTask extends BaseCopyJobTask {
    */
   destination: CosmosDBMongoCollection;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoRUToMongoVCoreCopyJobTask extends BaseCopyJobTask {
   /**
    * Source Mongo (RU) collection
@@ -8393,9 +8393,9 @@ model MongoRUToMongoVCoreCopyJobTask extends BaseCopyJobTask {
    */
   destination: CosmosDBMongoVCoreCollection;
 }
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NoSqlRUToNoSqlRUCopyJobTask extends BaseCopyJobTask {
   /**
    * Source SQL container
@@ -8411,7 +8411,7 @@ model NoSqlRUToNoSqlRUCopyJobTask extends BaseCopyJobTask {
 /**
  * Source Cassandra to Destination Cassandra copy job properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraRUToCassandraRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Source Cassandra DataStore details
@@ -8426,7 +8426,7 @@ model CassandraRUToCassandraRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Copy Job tasks.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   tasks: CassandraRUToCassandraRUCopyJobTask[];
 
@@ -8439,7 +8439,7 @@ model CassandraRUToCassandraRUCopyJobProperties extends BaseCopyJobProperties {
 /**
  * Source Azure Blob Storage to Destination Cassandra copy job properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BlobToCassandraRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Azure Storage container DataStore details
@@ -8466,7 +8466,7 @@ model BlobToCassandraRUCopyJobProperties extends BaseCopyJobProperties {
 /**
  * Source Cassandra to Destination Azure Blob Storage copy job properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CassandraRUToBlobCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Source Cassandra DataStore details
@@ -8481,7 +8481,7 @@ model CassandraRUToBlobCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Copy Job tasks.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   tasks: CassandraRUToBlobCopyJobTask[];
 
@@ -8494,7 +8494,7 @@ model CassandraRUToBlobCopyJobProperties extends BaseCopyJobProperties {
 /**
  * Source Mongo to Destination Mongo copy job properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoRUToMongoRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Source Mongo DataStore details
@@ -8521,7 +8521,7 @@ model MongoRUToMongoRUCopyJobProperties extends BaseCopyJobProperties {
 /**
  * Source Mongo to Destination Mongo vCore copy job properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MongoRUToMongoVCoreCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Source Mongo (RU) DataStore details
@@ -8536,7 +8536,7 @@ model MongoRUToMongoVCoreCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Copy Job tasks.
    */
-  #suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @OpenAPI.extension("x-ms-identifiers", #[])
   tasks: MongoRUToMongoVCoreCopyJobTask[];
 
@@ -8549,7 +8549,7 @@ model MongoRUToMongoVCoreCopyJobProperties extends BaseCopyJobProperties {
 /**
  * Source SQL to Destination SQL copy job properties
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NoSqlRUToNoSqlRUCopyJobProperties extends BaseCopyJobProperties {
   /**
    * Source SQL DataStore details
@@ -8639,7 +8639,7 @@ model ContinuousModeProperties {
  * A base CosmosDB data source/sink
  */
 model BaseCosmosDataTransferDataSourceSink is DataTransferDataSourceSink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   remoteAccountName?: string;
 }
 
@@ -8648,9 +8648,9 @@ model BaseCosmosDataTransferDataSourceSink is DataTransferDataSourceSink {
  */
 model CosmosCassandraDataTransferDataSourceSink
   extends BaseCosmosDataTransferDataSourceSink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   keyspaceName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableName: string;
   component: "CosmosDBCassandra";
 }
@@ -8660,9 +8660,9 @@ model CosmosCassandraDataTransferDataSourceSink
  */
 model CosmosMongoDataTransferDataSourceSink
   extends BaseCosmosDataTransferDataSourceSink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databaseName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   collectionName: string;
   component: "CosmosDBMongo";
 }
@@ -8670,16 +8670,16 @@ model CosmosMongoDataTransferDataSourceSink
 /**
  * A CosmosDB Mongo vCore API data source/sink
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CosmosMongoVCoreDataTransferDataSourceSink
   extends DataTransferDataSourceSink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databaseName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   collectionName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   hostName?: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connectionStringKeyVaultUri?: string;
   component: "CosmosDBMongoVCore";
 }
@@ -8689,9 +8689,9 @@ model CosmosMongoVCoreDataTransferDataSourceSink
  */
 model CosmosSqlDataTransferDataSourceSink
   extends BaseCosmosDataTransferDataSourceSink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   databaseName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
   component: "CosmosDBSql";
 }
@@ -8700,9 +8700,9 @@ model CosmosSqlDataTransferDataSourceSink
  * An Azure Blob Storage data source/sink
  */
 model AzureBlobDataTransferDataSourceSink extends DataTransferDataSourceSink {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpointUrl?: string;
   component: "AzureBlobStorage";
 }
@@ -8736,8 +8736,8 @@ model DataTransferServiceResourceProperties extends ServiceResourceProperties {
 /**
  * Resource for a regional service location.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataTransferRegionalServiceResource extends RegionalServiceResource {}
 
 /**
@@ -8830,7 +8830,7 @@ model SqlDedicatedGatewayServiceResourceProperties
 /**
  * Resource for a regional service location.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SqlDedicatedGatewayRegionalServiceResource
   extends RegionalServiceResource {
   /**
@@ -8843,7 +8843,7 @@ model SqlDedicatedGatewayRegionalServiceResource
 /**
  * Describes the service response property for GraphAPICompute.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphAPIComputeServiceResource {
   /**
    * Properties for GraphAPIComputeServiceResource.
@@ -8854,7 +8854,7 @@ model GraphAPIComputeServiceResource {
 /**
  * Properties for GraphAPIComputeServiceResource.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphAPIComputeServiceResourceProperties
   extends ServiceResourceProperties {
   /**
@@ -8877,8 +8877,8 @@ model GraphAPIComputeServiceResourceProperties
 /**
  * Resource for a regional service location.
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphAPIComputeRegionalServiceResource extends RegionalServiceResource {
   /**
    * The regional endpoint for GraphAPICompute.
@@ -8890,7 +8890,7 @@ model GraphAPIComputeRegionalServiceResource extends RegionalServiceResource {
 /**
  * Properties for Create or Update request for GraphAPIComputeServiceResource
  */
-#suppress "@azure-tools/typespec-azure-core/casing-style" "non-standard operations"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GraphAPIComputeServiceResourceCreateUpdateProperties
   extends ServiceResourceCreateUpdateProperties {
   /**
@@ -8929,8 +8929,8 @@ model MaterializedViewsBuilderServiceResourceProperties
 /**
  * Resource for a regional service location.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "non-standard operations"
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model MaterializedViewsBuilderRegionalServiceResource
   extends RegionalServiceResource {}
 
@@ -8952,7 +8952,7 @@ model ThroughputPoolAccountCreateParameters {
   /**
    * Tags are a list of key-value pairs that describe the resource. These tags can be used in viewing and grouping this resource (across resource groups). A maximum of 15 tags can be provided for a resource. Each tag must have a key no greater than 128 characters and value no greater than 256 characters. For example, the default experience for a template type is set with "defaultExperience": "Cassandra". Current "defaultExperience" values also include "Table", "Graph", "DocumentDB", and "MongoDB".
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 
   /**

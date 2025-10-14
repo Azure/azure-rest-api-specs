@@ -25,20 +25,20 @@ model ChaosFaultResource
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface ChaosFaultResources {
   /**
    * Get Chaos Fault for a CosmosdB account for a particular Chaos Fault.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ChaosFault_Get")
   get is ArmResourceRead<ChaosFaultResource>;
 
   /**
    * Enable, disable Chaos Fault in a CosmosDB account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ChaosFault_EnableDisable")
   enableDisable is ArmResourceCreateOrReplaceAsync<
     ChaosFaultResource,
@@ -49,7 +49,7 @@ interface ChaosFaultResources {
   /**
    * List Chaos Faults for CosmosDB account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ChaosFault_List")
   list is ArmResourceListByParent<
     ChaosFaultResource,

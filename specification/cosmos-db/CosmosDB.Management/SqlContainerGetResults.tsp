@@ -27,7 +27,7 @@ model SqlContainerGetResults
   /**
    * Identity for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: ManagedServiceIdentity;
 }
 
@@ -36,15 +36,15 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Gets the SQL container under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_GetSqlContainer")
   getSqlContainer is ArmResourceRead<SqlContainerGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB SQL container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_CreateUpdateSqlContainer")
   createUpdateSqlContainer is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlContainerGetResults,
@@ -56,14 +56,14 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB SQL container.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_DeleteSqlContainer")
   deleteSqlContainer is ArmResourceDeleteWithoutOkAsync<SqlContainerGetResults>;
 
   /**
    * Lists the SQL container under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_ListSqlContainers")
   listSqlContainers is ArmResourceListByParent<
     SqlContainerGetResults,
@@ -73,7 +73,7 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Merges the partitions of a SQL Container
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_ListSqlContainerPartitionMerge")
   @action("partitionMerge")
   listSqlContainerPartitionMerge is ArmResourceActionAsync<
@@ -85,7 +85,7 @@ interface SqlContainerGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a container resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("SqlResources_RetrieveContinuousBackupInformation")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     SqlContainerGetResults,

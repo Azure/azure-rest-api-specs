@@ -29,7 +29,7 @@ interface LocationGetResults {
   /**
    * Get the properties of an existing Cosmos DB location
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Locations_Get")
   get is ArmResourceRead<
     LocationGetResult,
@@ -39,7 +39,7 @@ interface LocationGetResults {
   /**
    * List Cosmos DB locations and their properties
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Locations_List")
   list is ArmResourceListByParent<
     LocationGetResult,

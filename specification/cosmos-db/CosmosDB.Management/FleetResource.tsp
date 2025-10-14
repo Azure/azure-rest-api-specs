@@ -28,21 +28,21 @@ interface FleetResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB fleet under a subscription
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Fleet_Get")
   get is ArmResourceRead<FleetResource>;
 
   /**
    * Creates an Azure Cosmos DB fleet under a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Fleet_Create")
   create is ArmResourceCreateOrReplaceSync<FleetResource>;
 
   /**
    * Updates the properties of an existing Azure Cosmos DB Fleet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Fleet_Update")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchSync<
@@ -54,8 +54,8 @@ interface FleetResources {
   /**
    * Deletes an existing Azure Cosmos DB Fleet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Fleet_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetResource,
@@ -66,14 +66,14 @@ interface FleetResources {
   /**
    * Lists all the fleets under the specified subscription and resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Fleet_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<FleetResource>;
 
   /**
    * Lists all the fleets under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("Fleet_List")
   list is ArmListBySubscription<FleetResource>;
 }
