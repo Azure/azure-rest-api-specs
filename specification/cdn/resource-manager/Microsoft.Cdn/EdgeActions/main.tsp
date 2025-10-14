@@ -18,6 +18,7 @@ using Azure.ResourceManager;
   title: "Microsoft.Cdn/EdgeAction"
 })
 @versioned(Versions)
+@armCommonTypesVersion("v6")
 namespace Microsoft.Cdn;
 
 enum Versions {
