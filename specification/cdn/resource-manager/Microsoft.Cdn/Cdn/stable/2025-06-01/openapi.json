@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure CDN WebApplicationFirewallManagement",
+    "title": "CdnManagementClient",
     "version": "2025-06-01",
-    "description": "APIs to manage web application firewall rules for Azure CDN",
+    "description": "Use these APIs to manage Azure Front Door and CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -12634,7 +12634,7 @@
     },
     "ManagedRuleEnabledState": {
       "type": "string",
-      "description": "Describes if the managed rule is in enabled or disabled state. Defaults to Disabled if not specified.",
+      "description": "Describes if the managed rule is in enabled or disabled state.",
       "enum": [
         "Disabled",
         "Enabled"
@@ -12893,7 +12893,7 @@
     },
     "MatchVariable": {
       "type": "string",
-      "description": "The name of the condition for the delivery rule.",
+      "description": "Request variable to compare with.",
       "enum": [
         "RemoteAddress",
         "RequestMethod",
@@ -14007,7 +14007,7 @@
     },
     "PolicyEnabledState": {
       "type": "string",
-      "description": "describes if the policy is in enabled state or disabled state",
+      "description": "Describes if the policy is in enabled or disabled state. Defaults to Enabled if not specified.",
       "enum": [
         "Disabled",
         "Enabled"
