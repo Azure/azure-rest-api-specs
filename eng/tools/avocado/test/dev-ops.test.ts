@@ -1,4 +1,4 @@
-import { FileChange, isPRRelatedError } from "./../dev-ops.js";
+import { FileChange, isPRRelatedError } from "../src/dev-ops.js";
 // Copyright (c) Microsoft Corporation. All rights reserved.
 // Licensed under the MIT License. See LICENSE in the project root for license information.
 
@@ -6,9 +6,9 @@ import * as pfs from "@ts-common/fs";
 import * as assert from "assert";
 import * as path from "path";
 import { describe, it } from "vitest";
-import { hasCommonRPFolder } from "../dev-ops.js";
-import * as err from "../errors.js";
-import { avocado, cli, devOps, git } from "../index.js";
+import { hasCommonRPFolder } from "../src/dev-ops.js";
+import * as err from "../src/errors.js";
+import { avocado, cli, devOps, git } from "../src/index.js";
 import * as tmpDir from "./tmp-dir.js";
 
 type MockAction =

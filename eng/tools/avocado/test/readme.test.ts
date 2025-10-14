@@ -6,7 +6,7 @@ import { parse } from "@ts-common/commonmark-to-markdown";
 import * as assert from "assert";
 import * as fs from "fs";
 import { describe, it } from "vitest";
-import * as readme from "../readme.js";
+import * as readme from "../src/readme.js";
 
 describe("readme test", () => {
   it("getTagsToSwaggerFilesMapping", () => {

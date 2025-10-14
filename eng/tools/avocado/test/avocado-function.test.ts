@@ -6,7 +6,7 @@ import * as assert from "assert";
 import { readFileSync } from "fs";
 import * as path from "path";
 import { describe, it } from "vitest";
-import * as avocado from "../index.js";
+import * as avocado from "../src/index.js";
 
 describe("avocado", () => {
   it("get default tag", () => {
