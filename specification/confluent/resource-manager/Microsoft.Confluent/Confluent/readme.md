@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-08-18-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-08-18-preview'
 input-file:
-  - Microsoft.Confluent/preview/2025-08-18-preview/confluent.json
+  - preview/2025-08-18-preview/confluent.json
 ```
 
 ### Tag: package-2025-07-17-preview
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2025-07-17-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-07-17-preview'
 input-file:
-  - Microsoft.Confluent/preview/2025-07-17-preview/confluent.json
+  - preview/2025-07-17-preview/confluent.json
 ```
 
 ### Tag: package-2024-07
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2024-07` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-07'
 input-file:
-  - Microsoft.Confluent/stable/2024-07-01/confluent.json
+  - stable/2024-07-01/confluent.json
 ```
 
 ### Tag: package-2024-02
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2024-02` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-02'
 input-file:
-  - Microsoft.Confluent/stable/2024-02-13/confluent.json
+  - stable/2024-02-13/confluent.json
 ```
 ### Tag: package-2023-08-22
 
@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2023-08-22` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-08-22'
 input-file:
-  - Microsoft.Confluent/stable/2023-08-22/confluent.json
+  - stable/2023-08-22/confluent.json
 
 ```
 
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2021-12-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-12-01'
 input-file:
-  - Microsoft.Confluent/stable/2021-12-01/confluent.json
+  - stable/2021-12-01/confluent.json
 ```
 
 ### Tag: package-preview-2021-09
@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-preview-2021-09` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2021-09'
 input-file:
-  - Microsoft.Confluent/preview/2021-09-01-preview/confluent.json
+  - preview/2021-09-01-preview/confluent.json
 ```
 
 ### Tag: package-2020-03-01
@@ -100,7 +100,7 @@ These settings apply only when `--tag=package-2020-03-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-03-01'
 input-file:
-- Microsoft.Confluent/stable/2020-03-01/confluent.json
+- stable/2020-03-01/confluent.json
 ```
 
 ### Tag: package-2020-03-01-preview
@@ -109,7 +109,7 @@ These settings apply only when `--tag=package-2020-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
-- Microsoft.Confluent/preview/2020-03-01-preview/confluent.json
+- preview/2020-03-01-preview/confluent.json
 ```
 
 ### Tag: package-2021-03-01-preview
@@ -118,7 +118,7 @@ These settings apply only when `--tag=package-2021-03-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2021-03-01-preview'
 input-file:
-- Microsoft.Confluent/preview/2021-03-01-preview/confluent.json
+- preview/2021-03-01-preview/confluent.json
 ```
 
 # Code Generation
