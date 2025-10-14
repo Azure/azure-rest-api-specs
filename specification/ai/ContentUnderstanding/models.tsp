@@ -1,8 +1,11 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
+
 import "@typespec/rest";
 import "@typespec/http";
 
 using Azure.Core;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -174,6 +177,7 @@ model ReferenceKnowledgeSource extends KnowledgeSource {
 }
 
 @doc("Schema of fields to be extracted from documents.")
+@clientName("ContentFieldSchema")
 model FieldSchema {
   @doc("The name of the field schema.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
@@ -185,11 +189,11 @@ model FieldSchema {
 
   @doc("The fields defined in the schema.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  fields: Record<FieldDefinition>;
+  fields: Record<ContentFieldDefinition>;
 
   @doc("Additional definitions referenced by the fields in the schema.")
   @visibility(Lifecycle.Create, Lifecycle.Read)
-  definitions?: Record<FieldDefinition>;
+  definitions?: Record<ContentFieldDefinition>;
 }
 
 @doc("Configuration settings for an analyzer.")
@@ -303,21 +307,21 @@ model BlobDataSource extends DataSource {
 }
 
 @doc("Definition of the field using a JSON Schema like syntax.")
-model FieldDefinition {
+model ContentFieldDefinition {
   @doc("Generation method.")
   method?: GenerationMethod = GenerationMethod.generate;
 
   @doc("Semantic data type of the field value.")
-  type?: FieldType;
+  type?: ContentFieldType;
 
   @doc("Field description.")
   description?: string;
 
   @doc("Field type schema of each array element, if type is array.")
-  items?: FieldDefinition;
+  items?: ContentFieldDefinition;
 
   @doc("Named sub-fields, if type is object.")
-  properties?: Record<FieldDefinition>;
+  properties?: Record<ContentFieldDefinition>;
 
   @doc("Examples of field values.")
   examples?: string[];
@@ -347,7 +351,7 @@ union GenerationMethod {
 }
 
 @doc("Semantic data type of the field value.")
-union FieldType {
+union ContentFieldType {
   string,
 
   @doc("Plain text.")
@@ -539,7 +543,7 @@ scalar SourceExpression extends string;
 @discriminator("type")
 model ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType;
+  type: ContentFieldType;
 
   @doc("Span(s) associated with the field value in the markdown content.")
   spans?: ContentSpan[];
@@ -556,7 +560,7 @@ model ContentField {
 @doc("String field extracted from the content.")
 model StringField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.string;
+  type: ContentFieldType.string;
 
   @doc("String field value.")
   valueString?: string;
@@ -565,7 +569,7 @@ model StringField extends ContentField {
 @doc("Date field extracted from the content.")
 model DateField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.date;
+  type: ContentFieldType.date;
 
   @doc("Date field value, in ISO 8601 (YYYY-MM-DD) format.")
   valueDate?: plainDate;
@@ -574,7 +578,7 @@ model DateField extends ContentField {
 @doc("Time field extracted from the content.")
 model TimeField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.time;
+  type: ContentFieldType.time;
 
   @doc("Time field value, in ISO 8601 (hh:mm:ss) format.")
   valueTime?: plainTime;
@@ -583,7 +587,7 @@ model TimeField extends ContentField {
 @doc("Number field extracted from the content.")
 model NumberField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.number;
+  type: ContentFieldType.number;
 
   @doc("Number field value.")
   valueNumber?: float64;
@@ -592,7 +596,7 @@ model NumberField extends ContentField {
 @doc("Integer field extracted from the content.")
 model IntegerField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.integer;
+  type: ContentFieldType.integer;
 
   @doc("Integer field value.")
   valueInteger?: int64;
@@ -601,7 +605,7 @@ model IntegerField extends ContentField {
 @doc("Boolean field extracted from the content.")
 model BooleanField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.boolean;
+  type: ContentFieldType.boolean;
 
   @doc("Boolean field value.")
   valueBoolean?: boolean;
@@ -610,7 +614,7 @@ model BooleanField extends ContentField {
 @doc("Array field extracted from the content.")
 model ArrayField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.array;
+  type: ContentFieldType.array;
 
   @doc("Array field value.")
   valueArray?: ContentField[];
@@ -619,7 +623,7 @@ model ArrayField extends ContentField {
 @doc("Object field extracted from the content.")
 model ObjectField extends ContentField {
   @doc("Semantic data type of the field value.")
-  type: FieldType.object;
+  type: ContentFieldType.object;
 
   @doc("Object field value.")
   valueObject?: Record<ContentField>;
