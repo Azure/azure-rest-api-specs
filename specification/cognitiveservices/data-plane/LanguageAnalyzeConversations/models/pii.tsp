@@ -180,111 +180,7 @@ model EntityMaskTypePolicyType extends BaseRedactionPolicy {
 @added(Versions.v2024_05_01)
 union ConversationPiiCategories {
   string,
-
-  /** Address category */
-  Address: "Address",
-
-  /** Credit card category */
-  CreditCard: "CreditCard",
-
-  /** Email category */
-  Email: "Email",
-
-  /** Person category */
-  Person: "Person",
-
-  /** Numeric identifier category */
-  NumericIdentifier: "NumericIdentifier",
-
-  /** Phone category */
-  Phone: "Phone",
-
-  /** US social security number category */
-  USSocialSecurityNumber: "USSocialSecurityNumber",
-
-  /** Driver's license number category */
-  @added(Versions.v2025_11_15_preview)
-  DriversLicenseNumber: "DriversLicenseNumber",
-
-  /** Passport number category */
-  @added(Versions.v2025_11_15_preview)
-  PassportNumber: "PassportNumber",
-
-  /** Person type category */
-  @added(Versions.v2025_11_15_preview)
-  PersonType: "PersonType",
-
-  /** Organization category */
-  @added(Versions.v2025_11_15_preview)
-  Organization: "Organization",
-
-  /** ABA routing number category */
-  @added(Versions.v2025_11_15_preview)
-  ABARoutingNumber: "ABARoutingNumber",
-
-  /** Bank account number category */
-  @added(Versions.v2025_11_15_preview)
-  BankAccountNumber: "BankAccountNumber",
-
-  /** Date of birth category */
-  @added(Versions.v2025_11_15_preview)
-  DateOfBirth: "DateOfBirth",
-
-  /** International Bank Account Number category */
-  @added(Versions.v2025_11_15_preview)
-  IBAN: "IBAN",
-
-  /** SWIFT code category */
-  @added(Versions.v2025_11_15_preview)
-  SWIFTCode: "SWIFTCode",
-
-  /** Vehicle identification number category */
-  @added(Versions.v2025_11_15_preview)
-  VehicleIdentificationNumber: "VehicleIdentificationNumber",
-
-  /** Age category */
-  @added(Versions.v2025_11_15_preview)
-  Age: "Age",
-
-  /** Date category */
-  @added(Versions.v2025_11_15_preview)
-  Date: "Date",
-
-  /** Zip code category */
-  @added(Versions.v2025_11_15_preview)
-  ZipCode: "ZipCode",
-
-  /** Government issued ID category */
-  @added(Versions.v2025_11_15_preview)
-  GovernmentIssuedId: "GovernmentIssuedId",
-
-  /** Card verification value category */
-  @added(Versions.v2025_11_15_preview)
-  CVV: "CardVerificationValue",
-
-  /** Health card number category */
-  @added(Versions.v2025_11_15_preview)
-  HealthCardNumber: "HealthCardNumber",
-
-  /** Social insurance number category */
-  @added(Versions.v2025_11_15_preview)
-  SocialInsuranceNumber: "SocialInsuranceNumber",
-
-  /** Medicare beneficiary ID category */
-  @added(Versions.v2025_11_15_preview)
-  MedicareBeneficiaryId: "MedicareBeneficiaryId",
-
-  /** Github account category */
-  @added(Versions.v2025_11_15_preview)
-  GithubAccount: "GithubAccount",
-
-  /** Location category */
-  @added(Versions.v2025_11_15_preview)
-  Location: "Location",
-
-  /** GPE category */
-  @added(Versions.v2025_11_15_preview)
-  GPE: "GPE",
+  ConversationPiiCategoriesExclude,
 
   /** All categories */
   All: "All",
@@ -349,7 +245,7 @@ union ConversationPiiCategoriesExclude {
 
   /** International Bank Account Number category */
   @added(Versions.v2025_11_15_preview)
-  IBAN: "IBAN",
+  InternationalBankingAccountNumber: "InternationalBankingAccountNumber",
 
   /** SWIFT code category */
   @added(Versions.v2025_11_15_preview)
@@ -377,19 +273,19 @@ union ConversationPiiCategoriesExclude {
 
   /** Card verification value category */
   @added(Versions.v2025_11_15_preview)
-  CVV: "CardVerificationValue",
+  CVV: "CVV",
 
   /** Health card number category */
   @added(Versions.v2025_11_15_preview)
   HealthCardNumber: "HealthCardNumber",
 
-  /** Social insurance number category */
+  /** CA Social insurance number category */
   @added(Versions.v2025_11_15_preview)
-  SocialInsuranceNumber: "SocialInsuranceNumber",
+  CASocialInsuranceNumber: "CASocialInsuranceNumber",
 
-  /** Medicare beneficiary ID category */
+  /** US Medicare beneficiery ID category */
   @added(Versions.v2025_11_15_preview)
-  MedicareBeneficiaryId: "MedicareBeneficiaryId",
+  USMedicareBeneficieryId: "USMedicareBeneficieryId",
 
   /** Github account category */
   @added(Versions.v2025_11_15_preview)
