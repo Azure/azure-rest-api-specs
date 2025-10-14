@@ -16,8 +16,7 @@ namespace Microsoft.AzureStackHCI;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 @parentResource(ArcSetting)
-model Extension
-  is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
+model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
   ...ResourceNameParameter<
     Resource = Extension,
     KeyName = "extensionName",

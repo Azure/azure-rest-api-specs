@@ -35,7 +35,10 @@ interface EdgeDevices {
    * Get a EdgeDevice
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Azure.ResourceManager.Extension.Read<Azure.ResourceManager.Extension.ScopeParameter, EdgeDevice>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
+  >;
 
   /**
    * Create a EdgeDevice
@@ -59,7 +62,10 @@ interface EdgeDevices {
    * List EdgeDevice resources by parent
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  list is Azure.ResourceManager.Extension.ListByTarget<Azure.ResourceManager.Extension.ScopeParameter, EdgeDevice>;
+  list is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDevice
+  >;
 
   /**
    * A long-running resource action.

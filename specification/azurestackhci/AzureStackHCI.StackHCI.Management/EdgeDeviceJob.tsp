@@ -37,7 +37,10 @@ interface EdgeDeviceJobs {
    * Get a EdgeDeviceJob
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is Azure.ResourceManager.Extension.Read<Azure.ResourceManager.Extension.ScopeParameter, EdgeDeviceJob>;
+  get is Azure.ResourceManager.Extension.Read<
+    Azure.ResourceManager.Extension.ScopeParameter,
+    EdgeDeviceJob
+  >;
 
   /**
    * Create a EdgeDeviceJob
@@ -61,8 +64,8 @@ interface EdgeDeviceJobs {
    * List EdgeDeviceJob resources by EdgeDevice
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  listByEdgeDevice is  Azure.ResourceManager.Extension.ListByTarget<
-     Azure.ResourceManager.Extension.ScopeParameter,
+  listByEdgeDevice is Azure.ResourceManager.Extension.ListByTarget<
+    Azure.ResourceManager.Extension.ScopeParameter,
     EdgeDeviceJob
   >;
 }
