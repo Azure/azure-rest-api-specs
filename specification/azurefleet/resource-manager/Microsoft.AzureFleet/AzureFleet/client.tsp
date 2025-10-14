@@ -398,3 +398,7 @@ using Microsoft.AzureFleet;
   "ComputeFleetZoneDistributionStrategy",
   "csharp"
 );
+@@clientName(Fleets.listVirtualMachines::parameters.$skiptoken,
+  "skipToken",
+  "csharp"
+);
