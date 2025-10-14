@@ -46,6 +46,7 @@ interface RestorableDatabaseAccountsOperationGroup {
   @autoRoute
   @get
   @action("restorableDatabaseAccounts")
+  @list
   list is ArmProviderActionSync<
     Response = RestorableDatabaseAccountsListResult,
     Scope = SubscriptionActionScope,
