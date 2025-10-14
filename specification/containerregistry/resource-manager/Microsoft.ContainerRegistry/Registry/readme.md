@@ -36,7 +36,6 @@ These settings apply only when `--tag=package-2025-11` is specified on the comma
 ``` yaml $(tag) == 'package-2025-11'
 input-file:
   - stable/2025-11-01/containerregistry.json
-tag: package-2025-06-preview
 ```
 
 ### Tag: package-2025-06-preview
