@@ -279,7 +279,7 @@ Step 3: Validate TypeSpec Specification
 2. If validation succeeds, proceed to Step 4
 3. If validation fails:
     - Display all compilation errors to user
-    - Prompt: "Please fix the TypeSpec compilation errors before proceeding"
+    - Agent should provide suggestions to fix them and prompt the user to verify the fixes. If agent cannot resolve the errors, then prompt the user to fix compilation errors"
     - Wait for user to fix errors and re-run validation. Provide detailed information about all the changes done by copilot and prompt the user before rerunning the validation.
 **Success Criteria**: TypeSpec compilation passes without errors
 
