@@ -598,11 +598,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @action("runCommands")
   @list
   list is ComputeProviderActionSync<
-    Response = RunCommandListResult & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-      @header
-      contentType: "application/json" | "text/json";
-    },
+    Response = RunCommandListResult & ContentTypeResponseHeader,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -624,13 +620,15 @@ interface VirtualMachineRunCommandsOperationGroup {
     commandId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<RunCommandDocument & {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-    @header
-    contentType: "application/json" | "text/json";
-  }> | CloudError;
+  ): ArmResponse<RunCommandDocument & ContentTypeResponseHeader> | CloudError;
 }
 
 @@doc(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
   "Parameters supplied to the LogAnalytics getRequestRateByInterval Api."
 );
+
+alias ContentTypeResponseHeader = {
+  #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
+  @header
+  contentType: "application/json" | "text/json";
+};
