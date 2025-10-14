@@ -37,35 +37,19 @@ model CreditSummary
   tags?: Record<string>;
 }
 
-alias CreditSummariesOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
+alias CreditSummariesParentGroup = Extension.ExternalResource<
+  "Microsoft.Billing",
+  "billingAccounts",
+  "billingAccountId",
+  Description = "BillingAccount ID",
+  ParentType = "Tenant"
+>;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    providerNamespace: "Microsoft.Billing";
-
-    /**
-     * BillingAccount ID
-     */
-    @segment("billingAccounts")
-    @path
-    billingAccountId: string;
-
-    /**
-     * Azure Billing Profile ID.
-     */
-    @segment("billingProfiles")
-    @path
-    billingProfileId: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<CreditSummary>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<CreditSummary>;
-  }
+alias CreditSummariesGroup = Extension.ExternalChildResource<
+  CreditSummariesParentGroup,
+  "billingProfiles",
+  "billingProfileId",
+  Description = "Azure Billing Profile ID."
 >;
 
 @armResourceOperations
@@ -75,10 +59,9 @@ interface CreditSummaries {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @action("credits/balanceSummary")
-  get is CreditSummariesOps.Read<
+  get is Extension.Read<
+    CreditSummariesGroup,
     CreditSummary,
-    ErrorType = ErrorResponse,
     Response = ArmResponse<CreditSummary> | ArmNoContentResponse
   >;
 }
