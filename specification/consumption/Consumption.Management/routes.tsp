@@ -202,6 +202,28 @@ interface ChargesOperationGroup {
   >;
 }
 
+alias BillingGroup = Extension.ExternalResource<
+  "Microsoft.Billing",
+  "billingAccounts",
+  "billingAccountId",
+  Description = "BillingAccount ID",
+  ParentType = "Tenant"
+>;
+
+alias BillingPeriodGroup = Extension.ExternalChildResource<
+  BillingGroup,
+  "billingPeriods",
+  "billingPeriodName",
+  Description = "Billing Period Name."
+>;
+
+alias BillingProfileGroup = Extension.ExternalChildResource<
+  BillingGroup,
+  "billingProfiles",
+  "billingProfileId",
+  Description = "Azure Billing Profile ID."
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface BalancesOperationGroup {
   /**
@@ -213,24 +235,13 @@ interface BalancesOperationGroup {
   @autoRoute
   @get
   @action("balances")
-  getByBillingAccount(
-    ...ApiVersionParameter,
+  getByBillingAccount is Extension.Read<
+    BillingGroup,
+    Balance,
+    Response = Balance,
+    Error = ErrorResponse
+  >;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing",
-
-    /**
-     * BillingAccount ID
-     */
-    @path
-    @segment("billingAccounts")
-    billingAccountId: string,
-
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): Balance | ErrorResponse;
   /**
    * Gets the balances for a scope by billing period and billingAccountId. Balances are available via this API only for May 1, 2014 or later.
    */
@@ -240,31 +251,12 @@ interface BalancesOperationGroup {
   @autoRoute
   @get
   @action("balances")
-  getForBillingPeriodByBillingAccount(
-    ...ApiVersionParameter,
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing",
-
-    /**
-     * BillingAccount ID
-     */
-    @path
-    @segment("billingAccounts")
-    billingAccountId: string,
-
-    /**
-     * Billing Period Name.
-     */
-    @path
-    @segment("billingPeriods")
-    billingPeriodName: string,
-
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): Balance | ErrorResponse;
+  getForBillingPeriodByBillingAccount is Extension.Read<
+    BillingPeriodGroup,
+    Balance,
+    Response = Balance,
+    Error = ErrorResponse
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -632,42 +624,31 @@ interface ReservationTransactionsOperationGroup {
   @list
   @get
   @action("reservationTransactions")
-  list(
-    ...ApiVersionParameter,
+  list is Extension.ListByTarget<
+    BillingGroup,
+    ReservationTransaction,
+    Response = ReservationTransactionsListResult,
+    Parameters = {
+      /**
+       * Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for the entire December 2020 month (i.e. will contain records for dates December 30 and 31)
+       */
+      @query("$filter")
+      $filter?: string;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing",
+      /**
+       * Applies mark up to the transactions if the caller is a partner.
+       */
+      @query("useMarkupIfPartner")
+      useMarkupIfPartner?: boolean;
 
-    /**
-     * BillingAccount ID
-     */
-    @path
-    @segment("billingAccounts")
-    billingAccountId: string,
-
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /**
-     * Filter reservation transactions by date range. The properties/EventDate for start date and end date. The filter supports 'le' and  'ge'. Note: API returns data for the entire start date's and end date's billing month. For example, filter properties/eventDate+ge+2020-01-01+AND+properties/eventDate+le+2020-12-29 will include data for the entire December 2020 month (i.e. will contain records for dates December 30 and 31)
-     */
-    @query("$filter")
-    $filter?: string,
-
-    /**
-     * Applies mark up to the transactions if the caller is a partner.
-     */
-    @query("useMarkupIfPartner")
-    useMarkupIfPartner?: boolean,
-
-    /**
-     * Preview markup percentage to be applied.
-     */
-    @query("previewMarkupPercentage")
-    previewMarkupPercentage?: decimal,
-  ): ReservationTransactionsListResult | ErrorResponse;
+      /**
+       * Preview markup percentage to be applied.
+       */
+      @query("previewMarkupPercentage")
+      previewMarkupPercentage?: decimal;
+    },
+    Error = ErrorResponse
+  >;
   /**
    * List of transactions for reserved instances on billing profile scope. The refund transactions are posted along with its purchase transaction (i.e. in the purchase billing month). For example, The refund is requested in May 2021. This refund transaction will have event date as May 2021 but the billing month as April 2020 when the reservation purchase was made. Note: ARM has a payload size limit of 12MB, so currently callers get 400 when the response size exceeds the ARM limit. In such cases, API call should be made with smaller date ranges.
    */
@@ -711,6 +692,21 @@ interface ReservationTransactionsOperationGroup {
   ): ModernReservationTransactionsListResult | ErrorResponse;
 }
 
+alias ManagementGroup = Extension.ExternalResource<
+  "Microsoft.Management",
+  "managementGroups",
+  "managementGroupId",
+  Description = "Order Id of the reservation",
+  ParentType = "Tenant"
+>;
+
+alias ManagementBillingGroup = Extension.ExternalChildResource<
+  ManagementGroup,
+  "billingPeriods",
+  "billingPeriodName",
+  Description = "Billing Period Name."
+>;
+
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AggregatedCostOperationGroup {
   /**
@@ -722,30 +718,19 @@ interface AggregatedCostOperationGroup {
   @autoRoute
   @get
   @action("aggregatedcost")
-  getByManagementGroup(
-    ...ApiVersionParameter,
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Management",
-
-    /**
-     * Order Id of the reservation
-     */
-    @path
-    @segment("managementGroups")
-    managementGroupId: string,
-
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /**
-     * Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'
-     */
-    @query("$filter")
-    $filter?: string,
-  ): ManagementGroupAggregatedCostResult | ErrorResponse;
+  getByManagementGroup is Extension.Read<
+    ManagementGroup,
+    ManagementGroupAggregatedCostResult,
+    Response = ManagementGroupAggregatedCostResult,
+    Error = ErrorResponse,
+    Parameters = {
+      /**
+       * Required only for daily grain. The properties/UsageDate for start date and end date. The filter supports 'le' and  'ge'
+       */
+      @query("$filter")
+      $filter?: string;
+    }
+  >;
   /**
    * Provides the aggregate cost of a management group and all child management groups by specified billing period
    */
@@ -798,44 +783,25 @@ interface EventsOperationGroup {
   @list
   @get
   @action("events")
-  listByBillingProfile(
-    ...ApiVersionParameter,
+  listByBillingProfile is Extension.ListByTarget<
+    BillingProfileGroup,
+    EventSummary,
+    Response = Events,
+    Parameters = {
+      /**
+       * Start date
+       */
+      @query("startDate")
+      startDate: string;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing",
-
-    /**
-     * BillingAccount ID
-     */
-    @path
-    @segment("billingAccounts")
-    billingAccountId: string,
-
-    /**
-     * Azure Billing Profile ID.
-     */
-    @path
-    @segment("billingProfiles")
-    billingProfileId: string,
-
-    ...Azure.ResourceManager.Legacy.Provider,
-
-    /**
-     * Start date
-     */
-    @query("startDate")
-    startDate: string,
-
-    /**
-     * End date
-     */
-    @query("endDate")
-    endDate: string,
-  ): Events | ErrorResponse;
-
+      /**
+       * End date
+       */
+      @query("endDate")
+      endDate: string;
+    },
+    Error = ErrorResponse
+  >;
   /**
    * Lists the events that decrements Azure credits or Microsoft Azure consumption commitment for a billing account or a billing profile for a given start and end date.
    */

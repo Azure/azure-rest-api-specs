@@ -945,7 +945,7 @@ model ChargeSummary extends ProxyResource {
  * A balance resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Balance extends Resource {
+model Balance extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of the balance.
    */
@@ -1594,7 +1594,8 @@ model HighCasedErrorDetails {
  * Reservation transaction resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ReservationTransaction extends ReservationTransactionResource {
+model ReservationTransaction
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of a legacy reservation transaction.
    */
@@ -2156,7 +2157,8 @@ model OperationDisplay {
  * A management group aggregated cost resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ManagementGroupAggregatedCostResult extends Resource {
+model ManagementGroupAggregatedCostResult
+  extends Azure.ResourceManager.Foundations.Resource {
   /**
    * The properties of the Management Group Aggregated Cost.
    */
@@ -2252,13 +2254,10 @@ model Events {
 /**
  * An event summary resource.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model EventSummary extends ProxyResource {
-  /**
-   * The event properties.
-   */
-  properties?: EventProperties;
-}
+model EventSummary
+  extends Azure.ResourceManager.ProxyResource<EventProperties> {}
 
 /**
  * The event properties.

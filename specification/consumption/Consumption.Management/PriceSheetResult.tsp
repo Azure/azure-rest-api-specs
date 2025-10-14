@@ -39,27 +39,6 @@ model PriceSheetResult is Azure.ResourceManager.ProxyResource<PriceSheetModel> {
   tags?: Record<string>;
 }
 
-alias PriceSheetResultOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Consumption";
-  },
-  {},
-  {
-    /** undefined */
-    @path
-    @segment("pricesheets")
-    @key
-    default: "default";
-  }
->;
-
 @armResourceOperations
 interface PriceSheetResults {
   /**
@@ -67,7 +46,7 @@ interface PriceSheetResults {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  get is PriceSheetResultOps.Read<
+  get is ArmResourceRead<
     PriceSheetResult,
     Parameters = {
       /**
@@ -90,32 +69,16 @@ interface PriceSheetResults {
       @query("$top")
       $top?: int32;
     },
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 }
-alias PriceSheetOps = Azure.ResourceManager.Legacy.ExtensionOperations<
-  {
-    ...ApiVersionParameter;
-    ...SubscriptionIdParameter;
 
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    @key
-    providerNamespace: "Microsoft.Billing";
-
-    /** Billing Period Name. */
-    @path
-    @segment("billingPeriods")
-    @key
-    billingPeriodName: string;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<PriceSheetResult>;
-  },
-  {
-    ...Extension.ExtensionProviderNamespace<PriceSheetResult>;
-  }
+alias PriceSheetGroup = Extension.ExternalResource<
+  "Microsoft.Billing",
+  "billingPeriods",
+  "billingPeriodName",
+  Description = "Billing Period Name.",
+  ParentType = "Subscription"
 >;
 
 @armResourceOperations
@@ -125,8 +88,8 @@ interface PriceSheet {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @action("pricesheets/default")
-  getByBillingPeriod is PriceSheetOps.Read<
+  getByBillingPeriod is Extension.Read<
+    PriceSheetGroup,
     PriceSheetResult,
     Parameters = {
       /**
@@ -149,7 +112,7 @@ interface PriceSheet {
       @query("$top")
       $top?: int32;
     },
-    ErrorType = ErrorResponse
+    Error = ErrorResponse
   >;
 }
 
