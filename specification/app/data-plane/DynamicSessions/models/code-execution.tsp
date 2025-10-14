@@ -75,7 +75,8 @@ model SessionCodeExecutionResource {
   identifier: string;
 
   /** The execution type of the code execution request. */
-  executionType: ExecutionType;
+  @madeOptional(Versions.v2025_10_02_preview)
+  executionType?: ExecutionType;
 
   /** The status of the code execution operation, indicates whether succeeded or not. */
   status: Foundations.OperationState;
