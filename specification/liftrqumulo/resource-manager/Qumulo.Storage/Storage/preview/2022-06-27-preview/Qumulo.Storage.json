@@ -2,12 +2,17 @@
   "swagger": "2.0",
   "info": {
     "title": "Qumulo.Storage",
-    "version": "2022-10-12"
+    "version": "2022-06-27-preview",
+    "x-cadl-generated": [
+      {
+        "emitter": "@azure-tools/cadl-autorest"
+      }
+    ]
   },
-  "host": "management.azure.com",
   "schemes": [
     "https"
   ],
+  "host": "management.azure.com",
   "produces": [
     "application/json"
   ],
@@ -50,20 +55,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "ARM operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -89,10 +94,10 @@
         "description": "List FileSystemResource resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -105,7 +110,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -131,13 +136,13 @@
         "description": "List FileSystemResource resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -150,7 +155,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -176,13 +181,13 @@
         "description": "Get a FileSystemResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FileSystemResource.fileSystemName"
@@ -198,7 +203,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -219,13 +224,13 @@
         "description": "Create a FileSystemResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FileSystemResource.fileSystemName"
@@ -256,7 +261,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -281,13 +286,13 @@
         "description": "Update a FileSystemResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FileSystemResource.fileSystemName"
@@ -312,7 +317,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -333,13 +338,13 @@
         "description": "Delete a FileSystemResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "$ref": "#/parameters/FileSystemResource.fileSystemName"
@@ -358,7 +363,7 @@
           "default": {
             "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -378,6 +383,40 @@
     }
   },
   "definitions": {
+    "CompanyDetails": {
+      "type": "object",
+      "properties": {
+        "companyName": {
+          "type": "string",
+          "description": "Company name"
+        },
+        "officeAddress": {
+          "type": "string",
+          "description": "Office Address"
+        },
+        "countryOrRegion": {
+          "type": "string",
+          "description": "Country or region of operation"
+        },
+        "domain": {
+          "type": "string",
+          "description": "Domain of the company"
+        },
+        "business": {
+          "type": "string",
+          "description": "Business of the company"
+        },
+        "numberOfEmployees": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Number of Employees"
+        }
+      },
+      "description": "Company details of Qumulo FileSystem resource",
+      "required": [
+        "companyName"
+      ]
+    },
     "FileSystemResource": {
       "type": "object",
       "properties": {
@@ -396,7 +435,7 @@
           "readOnly": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
@@ -406,7 +445,7 @@
       ],
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -443,13 +482,13 @@
           "description": "Provisioning State of the resource",
           "readOnly": true
         },
-        "storageSku": {
-          "$ref": "#/definitions/StorageSku",
-          "description": "Storage Sku"
-        },
         "userDetails": {
           "$ref": "#/definitions/UserDetails",
           "description": "User Details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetails",
+          "description": "Company Details"
         },
         "delegatedSubnetId": {
           "type": "string",
@@ -466,37 +505,20 @@
           },
           "x-cadl-name": "string[]",
           "description": "Private IPs of the resource"
-        },
-        "adminPassword": {
-          "type": "string",
-          "x-ms-secret": true,
-          "description": "Initial administrator password of the resource"
-        },
-        "initialCapacity": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Storage capacity in TB"
-        },
-        "availabilityZone": {
-          "type": "string",
-          "description": "Availability zone"
         }
       },
       "description": "Properties specific to the Qumulo File System resource",
       "required": [
         "marketplaceDetails",
         "userDetails",
-        "delegatedSubnetId",
-        "adminPassword",
-        "storageSku",
-        "initialCapacity"
+        "delegatedSubnetId"
       ]
     },
     "FileSystemResourceUpdate": {
       "type": "object",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v4/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -522,6 +544,10 @@
         "userDetails": {
           "$ref": "#/definitions/UserDetails",
           "description": "User Details"
+        },
+        "companyDetails": {
+          "$ref": "#/definitions/CompanyDetails",
+          "description": "Company Details"
         },
         "delegatedSubnetId": {
           "type": "string",
@@ -563,15 +589,15 @@
         },
         "marketplaceSubscriptionStatus": {
           "$ref": "#/definitions/MarketplaceSubscriptionStatus",
-          "description": "Marketplace subscription status",
-          "readOnly": true
+          "description": "Marketplace subscription status"
         }
       },
       "description": "MarketplaceDetails of Qumulo FileSystem resource",
       "required": [
         "planId",
         "offerId",
-        "publisherId"
+        "publisherId",
+        "marketplaceSubscriptionStatus"
       ]
     },
     "MarketplaceSubscriptionStatus": {
@@ -679,40 +705,39 @@
     "UserDetails": {
       "type": "object",
       "properties": {
+        "firstName": {
+          "type": "string",
+          "description": "First name"
+        },
+        "lastName": {
+          "type": "string",
+          "description": "Last name"
+        },
         "email": {
           "type": "string",
-          "x-ms-secret": true,
           "description": "User Email"
+        },
+        "alternateEmail": {
+          "type": "string",
+          "description": "Alternate Email address"
+        },
+        "upn": {
+          "type": "string",
+          "description": "UPN of user"
+        },
+        "address": {
+          "type": "string",
+          "description": "Address of user"
+        },
+        "contactPhoneNumber": {
+          "type": "string",
+          "description": "Contact phone number"
         }
       },
       "description": "User Details of Qumulo FileSystem resource",
       "required": [
         "email"
       ]
-    },
-    "StorageSku": {
-      "type": "string",
-      "description": "Storage Sku",
-      "enum": [
-        "Standard",
-        "Performance"
-      ],
-      "x-ms-enum": {
-        "name": "StorageSku",
-        "modelAsString": false,
-        "values": [
-          {
-            "name": "Standard",
-            "value": "Standard",
-            "description": "Standard Storage Sku"
-          },
-          {
-            "name": "Performance",
-            "value": "Performance",
-            "description": "Performance Storage Sku"
-          }
-        ]
-      }
     }
   },
   "parameters": {
