@@ -3164,15 +3164,28 @@
       "type": "object",
       "description": "An event summary resource.",
       "properties": {
-        "properties": {
-          "$ref": "#/definitions/EventProperties",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
+        "eTag": {
+          "type": "string",
+          "description": "The eTag for the resource.",
+          "readOnly": true
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+          "type": "object",
+          "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
+          "properties": {
+            "properties": {
+              "$ref": "#/definitions/EventProperties",
+              "description": "The resource-specific properties for this resource.",
+              "x-ms-client-flatten": true
+            }
+          },
+          "allOf": [
+            {
+              "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource"
+            }
+          ]
         }
       ]
     },
