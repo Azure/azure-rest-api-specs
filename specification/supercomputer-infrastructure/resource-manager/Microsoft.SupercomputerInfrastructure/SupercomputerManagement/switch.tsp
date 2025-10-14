@@ -34,6 +34,10 @@ model SwitchProperties {
   /** The Azure resource ID of the cluster that the switch is associated with, if any. */
   @visibility(Lifecycle.Read)
   clusterId?: ClusterResourceId;
+
+  /** The Azure resource ID of the rack that the switch is associated with, if any. */
+  @visibility(Lifecycle.Read)
+  rackId?: RackResourceId;
 }
 
 /** The type of the network the switch resides in. */
@@ -62,7 +66,7 @@ model SwitchPacketCaptureRequest {
   interfaces: string[];
 
   /** The match rules to apply to the packet capture. */
-  @identifiers(#[])
+  @OpenAPI.extension("x-ms-identifiers", #[])
   matchRules: SwitchPacketCaptureMatchRule[];
 
   /** The traffic direction to capture. */
@@ -165,7 +169,7 @@ model SwitchRetrieveDataRequest {
 /** The result of a retrieve data action over a switch. */
 model SwitchRetrieveDataResult {
   /** The value of the retrieve data action. */
-  @identifiers(#["path", "value"])
+  @OpenAPI.extension("x-ms-identifiers", #["path", "value"])
   value: SwitchRetrieveDataOutput[];
 }
 
