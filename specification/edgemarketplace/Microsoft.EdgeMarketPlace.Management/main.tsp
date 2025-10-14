@@ -24,4 +24,7 @@ namespace Microsoft.EdgeMarketplace;
 enum Versions {
   @doc("Version 2024-10-01")
   v2024_10_01: "2024-10-01",
+
+  @doc("Version 2025-10-01-preview")
+  v2025_10_01_preview: "2025-10-01-preview",
 }
