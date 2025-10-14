@@ -1,0 +1,26 @@
+{
+  "title": "ProvisionedMachineExtensions_Delete",
+  "operationId": "ProvisionedMachineExtensions_Delete",
+  "parameters": {
+    "subscriptionId": "fd3c3665-1729-4b7b-9a38-238e83b0f98b",
+    "resourceGroupName": "Test-RG",
+    "edgeMachineName": "EdgeMachine01",
+    "extensionName": "CustomScriptExtension",
+    "api-version": "2024-11-01-preview"
+  },
+  "responses": {
+    "200": {
+      "description": "Extension deleted successfully.",
+      "body": {}
+    },
+    "202": {
+      "headers": {
+        "location": "https://foo.com/operationStatuses"
+      }
+    },
+    "204": {
+      "description": "Extension deletion successfully.",
+      "body": {}
+    }
+  }
+}
