@@ -8,25 +8,25 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
   "@azure-tools/typespec-python":
     flavor: azure
-    package-dir: "azure-mgmt-applink"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-applink"
     namespace: "azure.mgmt.applink"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-applink"
     flavor: azure
-    package-dir: "azure-resourcemanager-applink"
     namespace: "com.azure.resourcemanager.applink"
     service-name: "applink"
   "@azure-tools/typespec-ts":
-    package-dir: "arm-applink"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-applink"
     experimental-extensible-enums: true
     flavor: azure
     package-details:
       name: "@azure/arm-applink"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/applink"
-    package-dir: "armapplink"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armapplink"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armapplink"
     fix-const-stuttering: true
     generate-samples: true
     generate-fakes: true

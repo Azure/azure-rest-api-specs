@@ -1,5 +1,6 @@
 emit:
   - "@azure-tools/typespec-autorest"
+  # - "@azure-tools/typespec-csharp"  # Temporarily disabled due to beta emitter bug: 'AzureResourceManagerSaasHubContext' does not contain a definition for 'Default'
 options:
   "@azure-tools/typespec-autorest":
     use-read-only-status-schema: true
@@ -7,27 +8,43 @@ options:
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/openapi.json"
-  "@azure-tools/typespec-go":
-    service-dir: sdk/resourcemanager/placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    package-dir: armplaceholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    module: github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir} #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    fix-const-stuttering: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    generate-fakes: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    head-as-boolean: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    inject-spans: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-  "@azure-tools/typespec-python":
-    package-dir: azure-mgmt-placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    namespace: azure.mgmt.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    generate-test: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    generate-sample: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-java":
-    flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    package-dir: azure-resourcemanager-placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    namespace: com.azure.resourcemanager.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    service-name: Place Holder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-saashub"
+    flavor: azure
+    namespace: "com.azure.resourcemanager.saashub"
+  "@azure-tools/typespec-ts":
+    flavor: azure
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-saashub"
+    package-name: "@azure/arm-saashub"
+    package-details:
+      name: "@azure/arm-saashub"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/saashub"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsaashub"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsaashub"
+    fix-const-stuttering: true
+    generate-examples: true
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+  "@azure-tools/typespec-python":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-saashub"
+    package-name: "azure-mgmt-saashub"
+    namespace: "azure.mgmt.saashub"
+    generate-test: true
+    generate-sample: true
+  # "@azure-tools/typespec-csharp":  # Temporarily disabled due to beta emitter bug (v0.2.0-beta.20250701.1)
+  #   flavor: azure                 # Error: 'AzureResourceManagerSaasHubContext' does not contain a definition for 'Default'
+  #   emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SaasHub"  # Generated code tries to access AzureResourceManagerSaasHubContext.Default which doesn't exist
+  #   namespace: "Azure.ResourceManager.SaasHub"     # Try explicit namespace instead of {package-dir} to avoid context naming issues
+  #   clear-output-folder: true
+  #   # Alternative workaround approaches to try:
+  #   # 1. Use a different package-dir naming pattern to avoid context naming conflicts
+  #   # 2. Wait for a stable version of the C# emitter (current is beta)
+  #   # 3. Report this as a bug to the TypeSpec C# emitter team
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"

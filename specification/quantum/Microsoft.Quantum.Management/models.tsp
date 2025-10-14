@@ -417,6 +417,30 @@ model WorkspaceResourceProperties {
   @added(Versions.v2025_01_01_preview)
   @visibility(Lifecycle.Read)
   managedStorageAccount?: StorageAccountResourceId;
+
+  /**
+   * Quota allocations associated with this workspace. Available only for special providers.
+   */
+  @added(Versions.v2025_08_11_preview)
+  quotas?: QuotaAllocations;
+}
+
+/**
+ * Quota allocations with each field representing different quota type.
+ */
+@added(Versions.v2025_08_11_preview)
+model QuotaAllocations {
+  /**
+   * Lifetime limit for standard priority jobs execution in minutes.
+   */
+  @minValue(0)
+  standardMinutesLifetime: int32;
+
+  /**
+   * Lifetime limit for high priority jobs execution in minutes.
+   */
+  @minValue(0)
+  highMinutesLifetime?: int32;
 }
 
 /**
@@ -521,4 +545,41 @@ model ApiKeys {
    * A list of api key names.
    */
   keys?: KeyType[];
+}
+
+/** A Quantum Suite Offer that is available to a subscription. */
+@added(Versions.v2025_02_15_preview)
+model QuantumSuiteOffer
+  is Azure.ResourceManager.ProxyResource<QuantumSuiteOfferProperties> {
+  ...ResourceNameParameter<
+    Resource = QuantumSuiteOffer,
+    KeyName = "offerName",
+    SegmentName = "suiteOffers"
+  >;
+}
+
+/** Properties of a Quantum Suite Offer */
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Only offers that are fully provisioned as available to subscriptions."
+@added(Versions.v2025_02_15_preview)
+model QuantumSuiteOfferProperties {
+  /** The provider ID of the offer. */
+  providerId: string;
+
+  /** The provider name of the offer. */
+  providerName: string;
+
+  /** The name of the company that is providing this offer. */
+  companyName: string;
+
+  /** The location where this offer is available. */
+  location: string;
+
+  /** Description of the offer. */
+  description: string;
+
+  /**
+   * Quota allocations associated with this offer.
+   */
+  @added(Versions.v2025_08_11_preview)
+  quotas?: QuotaAllocations;
 }

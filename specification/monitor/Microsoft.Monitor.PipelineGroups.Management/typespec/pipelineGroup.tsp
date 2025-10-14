@@ -12,6 +12,7 @@ import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
 import "./processors/TransformLanguageProcessor.tsp";
 import "./actions/executeTransform.tsp";
+import "./ExecutionPlacement.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -59,6 +60,10 @@ model PipelineGroupProperties {
   @Azure.ResourceManager.identifiers(#[])
   networkingConfigurations?: NetworkingConfiguration[];
 
+  @doc("Constraints for guiding the execution environment of the pipeline group.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  executionPlacement?: ExecutionPlacement;
+
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
@@ -94,6 +99,7 @@ union ReceiverType {
   Ama: "Ama",
 
   @doc("Receives data from another pipeline group.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   PipelineGroup: "PipelineGroup",
 
   @doc("Receives data from a OTLP collector.")
@@ -164,6 +170,7 @@ union ExporterType {
   AzureMonitorWorkspaceLogs: "AzureMonitorWorkspaceLogs",
 
   @doc("Export data to another pipeline group instance.")
+  @removed(Microsoft.Monitor.Versions.v2025_03_01_preview)
   PipelineGroup: "PipelineGroup",
 }
 

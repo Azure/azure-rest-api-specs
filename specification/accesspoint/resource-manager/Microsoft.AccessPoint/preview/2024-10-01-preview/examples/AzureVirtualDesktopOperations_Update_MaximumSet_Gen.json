@@ -1,0 +1,37 @@
+{
+  "title": "AzureVirtualDesktopOperations_Update_MaximumSet",
+  "operationId": "AzureVirtualDesktopOperations_Update",
+  "parameters": {
+    "properties": {
+      "properties": {
+        "description": "Updated Azure Virtual Desktop for production",
+        "audioOutputCapability": "Enabled",
+        "cameraCapability": "Enabled"
+      }
+    },
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgopenapi",
+    "accessPointAccountName": "testAccessPointAccount",
+    "azureVirtualDesktopName": "testAzureVirtualDesktop",
+    "api-version": "2024-10-01-preview"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgopenapi/providers/Microsoft.AccessPoint/accessPointAccounts/testAccessPointAccount/azureVirtualDesktops/testAzureVirtualDesktop",
+        "name": "testAzureVirtualDesktop",
+        "type": "microsoft.accesspoint/accesspointaccounts/azurevirtualdesktops",
+        "properties": {
+          "hostNetworkLevel": "AzureSecret",
+          "description": "Test Azure Virtual Desktop for development",
+          "provisioningState": "Succeeded",
+          "audioOutputCapability": "Enabled",
+          "audioInputCapability": "Enabled",
+          "cameraCapability": "Enabled",
+          "applicationId": "12345678-1234-1234-1234-123456789abc",
+          "redirectUrl": "https://login.microsoftonline.com/tenant-id"
+        }
+      }
+    }
+  }
+}

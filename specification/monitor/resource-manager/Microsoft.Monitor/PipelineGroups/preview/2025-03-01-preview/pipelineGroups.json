@@ -269,6 +269,12 @@
           },
           "Create a PipelineGroup instance using an otlp receiver with a custom TransformLanguage manipulation exporting to a custom table": {
             "$ref": "./examples/PipelineGroupCreateOtlpWithTransform.json"
+          },
+          "Create a PipelineGroup instance with execution placement for hero customer use case (node labeling + pod isolation)": {
+            "$ref": "./examples/PipelineGroupCreatePodPlacementWithInOperator.json"
+          },
+          "Create a PipelineGroup instance with execution placement using Exists operator": {
+            "$ref": "./examples/PipelineGroupCreatePodPlacementWithExistsOperator.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -618,6 +624,42 @@
         }
       }
     },
+    "CapabilityOperator": {
+      "type": "string",
+      "description": "The match operator for placement constraints.",
+      "enum": [
+        "In",
+        "NotIn",
+        "Exists",
+        "DoesNotExist"
+      ],
+      "x-ms-enum": {
+        "name": "CapabilityOperator",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "In",
+            "value": "In",
+            "description": "The capability value must be one of the specified values."
+          },
+          {
+            "name": "NotIn",
+            "value": "NotIn",
+            "description": "The capability value must not be one of the specified values."
+          },
+          {
+            "name": "Exists",
+            "value": "Exists",
+            "description": "The capability key must exist (value is ignored)."
+          },
+          {
+            "name": "DoesNotExist",
+            "value": "DoesNotExist",
+            "description": "The capability key must not exist."
+          }
+        ]
+      }
+    },
     "ConcurrencyConfiguration": {
       "type": "object",
       "description": "Concurrent publishing configuration.",
@@ -633,6 +675,17 @@
           "format": "int32",
           "description": "Size of the queue for log batches.",
           "default": 100
+        }
+      }
+    },
+    "DistributionPolicy": {
+      "type": "object",
+      "description": "Distribution policy for spreading instances across compute units.",
+      "properties": {
+        "maxInstancesPerHost": {
+          "type": "integer",
+          "format": "int32",
+          "description": "Maximum number of instances allowed per compute unit (node/VM). If not specified, default scheduling applies."
         }
       }
     },
@@ -678,6 +731,24 @@
         "duration"
       ]
     },
+    "ExecutionPlacement": {
+      "type": "object",
+      "description": "Constraints for guiding the execution environment of the pipeline group.",
+      "properties": {
+        "constraints": {
+          "type": "array",
+          "description": "A list of placement constraints to guide where pipelineGroup instances should run.",
+          "items": {
+            "$ref": "#/definitions/PlacementConstraint"
+          },
+          "x-ms-identifiers": []
+        },
+        "distribution": {
+          "$ref": "#/definitions/DistributionPolicy",
+          "description": "Distribution policy for spreading instances across compute units (nodes/VMs)."
+        }
+      }
+    },
     "Exporter": {
       "type": "object",
       "description": "Exporter Info.",
@@ -709,8 +780,7 @@
       "type": "string",
       "description": "The exporter type.",
       "enum": [
-        "AzureMonitorWorkspaceLogs",
-        "PipelineGroup"
+        "AzureMonitorWorkspaceLogs"
       ],
       "x-ms-enum": {
         "name": "ExporterType",
@@ -720,11 +790,6 @@
             "name": "AzureMonitorWorkspaceLogs",
             "value": "AzureMonitorWorkspaceLogs",
             "description": "Export logs to Azure Monitor Workspace."
-          },
-          {
-            "name": "PipelineGroup",
-            "value": "PipelineGroup",
-            "description": "Export data to another pipeline group instance."
           }
         ]
       }
@@ -1041,6 +1106,10 @@
           },
           "x-ms-identifiers": []
         },
+        "executionPlacement": {
+          "$ref": "#/definitions/ExecutionPlacement",
+          "description": "Constraints for guiding the execution environment of the pipeline group."
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
           "description": "The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.",
@@ -1098,6 +1167,10 @@
             "$ref": "#/definitions/NetworkingConfiguration"
           },
           "x-ms-identifiers": []
+        },
+        "executionPlacement": {
+          "$ref": "#/definitions/ExecutionPlacement",
+          "description": "Constraints for guiding the execution environment of the pipeline group."
         }
       }
     },
@@ -1133,6 +1206,31 @@
           }
         ]
       }
+    },
+    "PlacementConstraint": {
+      "type": "object",
+      "description": "A placement constraint defines requirements for where pipeline group instances can be scheduled.",
+      "properties": {
+        "capability": {
+          "type": "string",
+          "description": "The capability or attribute key used to match compute unit properties."
+        },
+        "operator": {
+          "$ref": "#/definitions/CapabilityOperator",
+          "description": "The match operator, e.g., In, NotIn, Exists, DoesNotExist."
+        },
+        "values": {
+          "type": "array",
+          "description": "The values to match against. Not required for Exists/DoesNotExist.",
+          "items": {
+            "type": "string"
+          }
+        }
+      },
+      "required": [
+        "capability",
+        "operator"
+      ]
     },
     "Processor": {
       "type": "object",
@@ -1277,7 +1375,6 @@
       "enum": [
         "Syslog",
         "Ama",
-        "PipelineGroup",
         "OTLP",
         "UDP"
       ],
@@ -1294,11 +1391,6 @@
             "name": "Ama",
             "value": "Ama",
             "description": "Receives data from azure monitor agent receiver."
-          },
-          {
-            "name": "PipelineGroup",
-            "value": "PipelineGroup",
-            "description": "Receives data from another pipeline group."
           },
           {
             "name": "OTLP",

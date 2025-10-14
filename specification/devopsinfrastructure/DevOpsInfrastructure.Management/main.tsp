@@ -16,7 +16,6 @@ namespace Microsoft.DevOpsInfrastructure;
 
 enum Versions {
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   `2023-10-30-preview`,
 }
 

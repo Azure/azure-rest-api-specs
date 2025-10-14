@@ -5,10 +5,12 @@ import "@typespec/rest";
 import "./models.tsp";
 import "./StorageMover.tsp";
 
+using TypeSpec.Versioning;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager.CommonTypes;
 
 namespace Microsoft.StorageMover;
 /**
@@ -23,6 +25,20 @@ model Endpoint
     SegmentName = "endpoints",
     NamePattern = ""
   >;
+
+  /**
+   * Resource system metadata.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @added(Versions.v2025_07_01)
+  systemData?: SystemData;
+
+  /**
+   * The managed service identity of the resource. This property is only available on the latest version.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  @added(Versions.v2025_07_01)
+  identity?: Foundations.ManagedServiceIdentity;
 }
 
 @armResourceOperations

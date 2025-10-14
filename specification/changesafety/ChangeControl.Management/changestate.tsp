@@ -76,7 +76,13 @@ model ChangeStateProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Internal status of the changestate resource.")
+  @removed(Versions.v2025_09_01_preview)
   state: ChangeStatus;
+
+  @visibility(Lifecycle.Read)
+  @doc("Internal status of the changestate resource.")
+  @added(Versions.v2025_09_01_preview)
+  status: ChangeStatus;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Comments about the last update to the changeState resource.")
@@ -101,14 +107,20 @@ model ChangeStateProperties {
   #suppress "@azure-tools/typespec-autorest/union-unsupported" "Suppressing warning: We need to have a strong type for the stagemap snapshot. So need to provide all the supported types which are string & StageMap for now."
   @added(Versions.v2025_07_01_preview)
   @doc("Referenced stagemap snapshot.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read)
   stageMapSnapshot?: Array<string | StageMap>;
 
   @visibility(Lifecycle.Read, Lifecycle.Create)
   @doc("Reference to the StageMap, defining progression.")
+  @renamedFrom(Versions.v2025_09_01_preview, "stageMap")
   @added(Versions.v2025_07_01_preview)
-  stageMap: NestedStageMap;
+  @removed(Versions.v2025_09_01_preview)
+  stageMapOld: NestedStageMap;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Reference to the StageMap, defining progression.")
+  @added(Versions.v2025_09_01_preview)
+  stageMap?: NestedStageMap;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning of operation parameters should not be of type Record as per ARM."
   @doc("Schema of parameters that will be provided for each stageProgression.")
@@ -123,9 +135,15 @@ model ChangeStateProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Collection of payloads defining what will be deployed.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_09_01_preview)
   changeDefinitions: ChangeDefinition[];
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("change request body and/or resource selection criteria used to identify the targeted resources.")
+  @added(Versions.v2025_09_01_preview)
+  changeDefinition: ChangeDefinition;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Label for the release associated with this change.")
@@ -149,8 +167,15 @@ model ChangeStateProperties {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Collection of related links for the change.")
+  @renamedFrom(Versions.v2025_09_01_preview, "links")
   @added(Versions.v2025_07_01_preview)
-  links?: ChangeLinks;
+  @removed(Versions.v2025_09_01_preview)
+  links0701?: ChangeLinks;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Collection of related links for the change.")
+  @added(Versions.v2025_09_01_preview)
+  links?: Link[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Defines a flexible placeholder for tool-specific metadata for diverse orchestration and change scenarios."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -199,7 +224,13 @@ model RetrieveNextStagesResponseItem {
   @doc("Current state of the stage progression.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_01_preview)
+  @removed(Versions.v2025_09_01_preview)
   state?: StageProgressionState;
+
+  @doc("Current state of the stage progression.")
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_09_01_preview)
+  status?: StageProgressionState;
 
   @visibility(Lifecycle.Read)
   @doc("The sequence of the stageProgression resource.")
@@ -214,13 +245,26 @@ model RetrieveNextStagesResponseItem {
   @doc("Collection of related links for the stageprogression.")
   @visibility(Lifecycle.Read)
   @added(Versions.v2025_07_01_preview)
-  links?: ChangeLinks;
+  @renamedFrom(Versions.v2025_09_01_preview, "links")
+  @removed(Versions.v2025_09_01_preview)
+  links0701?: ChangeLinks;
+
+  @visibility(Lifecycle.Read)
+  @doc("Collection of related links for the change.")
+  @added(Versions.v2025_09_01_preview)
+  links?: Link[];
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Provides flexible object schema for stage-specific orchestration metadata and dynamic tool-specific configuration data."
   @visibility(Lifecycle.Read)
   @doc("Additional metadata related to the StageProgression resource.")
   @added(Versions.v2025_07_01_preview)
   additionalData?: {};
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Parameters can be any type and can have an arbitrary name as key, hence using a Record."
+  @doc("List of Parameters & their schemas for the current Stage that user supposed to provide.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_09_01_preview)
+  parameters?: Record<Parameter>;
 }
 
 @doc("Internal status of the ChangeState resource.")
@@ -245,10 +289,16 @@ union ChangeStatus {
   Cancelled: "Cancelled",
 
   @doc("Resource is in Paused state.")
+  @removed(Versions.v2025_09_01_preview)
   Paused: "Paused",
 
   @doc("Resource is in Failed state.")
+  @removed(Versions.v2025_09_01_preview)
   Failed: "Failed",
+
+  @doc("Resource is in NotApplicable state, when no stagemap is associated with the change.")
+  @added(Versions.v2025_09_01_preview)
+  NotApplicable: "NotApplicable",
 }
 
 @doc("Defines the Kind of the intended Change.")
@@ -421,7 +471,13 @@ model ArmResourceOperation {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("The resource operation content.")
+  @removed(Versions.v2025_09_01_preview)
   content?: OperationContent;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("The resource operation request body.")
+  @added(Versions.v2025_09_01_preview)
+  body?: OperationContent;
 }
 
 @removed(Versions.v2025_03_01_preview)
@@ -479,7 +535,13 @@ model VerifyChangeValidityRequest {
   @added(Versions.v2025_03_01_preview)
   @doc("The stage progression resource Id.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @removed(Versions.v2025_09_01_preview)
   stageProgressionResourceId?: armResourceIdentifier;
+
+  @doc("The change safety resource Id.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_09_01_preview)
+  changeSafetyReferenceId?: armResourceIdentifier;
 
   @doc("The context of the verify change validity request.")
   @added(Versions.v2025_07_01_preview)
@@ -491,7 +553,12 @@ model VerifyChangeValidityRequest {
 @doc("The context object of the verify change validity request.")
 model VerifyChangeValidityRequestContext {
   @doc("The application Id performing the ARM operation.")
+  @removed(Versions.v2025_09_01_preview)
   applicationId: string;
+
+  @doc("The application Id performing the ARM operation.")
+  @added(Versions.v2025_09_01_preview)
+  clientId: string;
 }
 
 @added(Versions.v2025_03_01_preview)
@@ -565,6 +632,10 @@ union ArmOperation {
   @added(Versions.v2025_03_01_preview)
   @doc("PATCH ARM Operation.")
   PATCH: "PATCH",
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("POST ARM Operation.")
+  POST: "POST",
 }
 
 @added(Versions.v2025_03_01_preview)
@@ -674,6 +745,69 @@ interface ChangeStates {
       ...SubscriptionIdParameter;
     }
   >;
+
+  @doc("Retrieve the audit trail action, for a change state.")
+  @action("retrieveAuditTrail")
+  @added(Versions.v2025_09_01_preview)
+  retrieveAuditTrail is ArmResourceActionSync<
+    ChangeState,
+    void,
+    RetrieveAuditTrailResponse
+  >;
+
+  @doc("Retrieve the audit trail action, for a change state at subscription level.")
+  @action("retrieveAuditTrail")
+  @added(Versions.v2025_09_01_preview)
+  retrieveAuditTrailAtSubscriptionLevel is ArmResourceActionSync<
+    ChangeState,
+    void,
+    RetrieveAuditTrailResponse,
+    {
+      ...ApiVersionParameter;
+      ...SubscriptionIdParameter;
+    }
+  >;
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("The retrieve audit trail response model.")
+model RetrieveAuditTrailResponse {
+  @doc("Number of records in the response.")
+  @visibility(Lifecycle.Read)
+  totalRecords: int32;
+
+  @doc("List of Audit trail records")
+  @visibility(Lifecycle.Read)
+  auditRecords: AuditRecord[];
+}
+
+@added(Versions.v2025_09_01_preview)
+@doc("Audit record model.")
+model AuditRecord {
+  @doc("Identifier for event as defined by source in the format of ARM resource Id.")
+  @visibility(Lifecycle.Read)
+  id: string;
+
+  @doc("The ARM formatted type of the record.")
+  @visibility(Lifecycle.Read)
+  type: string;
+
+  @doc("Timestamp indicating when the event occurred.")
+  @visibility(Lifecycle.Read)
+  timestamp: utcDateTime;
+
+  @doc("Identifier of the actor that triggered the event")
+  @visibility(Lifecycle.Read)
+  initiatedBy: string;
+
+  @doc("Categorical type of the initiator \"User\", \"Application\", \"System\", etc.")
+  @visibility(Lifecycle.Read)
+  initiatedByType: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Provides flexible object schema as the The structure varies depending on the record type."
+  @doc("A property bag containing detailed, record-specific data. The structure varies depending on the record type.")
+  @visibility(Lifecycle.Read)
+  properties: {};
 }
 
 @doc("Defines the type of rollout for the change.")
@@ -700,7 +834,13 @@ model ChangeDefinition {
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   @doc("Type of the change definition.")
+  @removed(Versions.v2025_09_01_preview)
   type: ChangeDefinitionType;
+
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @doc("Kind of the change definition.")
+  @added(Versions.v2025_09_01_preview)
+  kind: ChangeDefinitionType;
 
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Allows for an extensible object structure to support diverse change scenarios."
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -714,8 +854,18 @@ union ChangeDefinitionType {
   string,
 
   @doc("ARM operation type.")
+  @removed(Versions.v2025_09_01_preview)
   ArmOperation: "ArmOperation",
 
   @doc("Scope type with ARM resource selectors.")
+  @removed(Versions.v2025_09_01_preview)
   ArmScope: "ArmScope",
+
+  @doc("API operation change definition type.")
+  @added(Versions.v2025_09_01_preview)
+  ApiOperations: "ApiOperations",
+
+  @doc("Target selection criteria change definition type.")
+  @added(Versions.v2025_09_01_preview)
+  Targets: "Targets",
 }

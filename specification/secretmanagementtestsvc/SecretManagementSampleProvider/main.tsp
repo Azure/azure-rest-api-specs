@@ -22,7 +22,6 @@ using OpenAPI;
   title: "Secret Management Test Service",
   version: "2022-08-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.SecretManagementSampleProvider;
 
 @doc("The properties of WeatherForecast")
@@ -67,7 +66,7 @@ model WeatherForecastResourceProperties {
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningState;
 
-  @extension("x-ms-identifiers", #["city"])
+  @identifiers(#["city"])
   @doc("Collection of weather forecasts")
   weatherForecastProperties: WeatherForecastProperties[];
 }

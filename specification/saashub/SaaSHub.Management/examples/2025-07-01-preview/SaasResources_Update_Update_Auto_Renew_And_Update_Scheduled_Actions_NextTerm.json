@@ -1,0 +1,86 @@
+{
+  "parameters": {
+    "saasResourceName": "myResourceName",
+    "api-version": "2025-07-01-preview",
+    "properties": {
+      "properties": {
+        "autoRenew": "On",
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+            "quantity": 9,
+            "resourceTokens": [
+              {
+                "type": "billingToken",
+                "value": "billing-token-value"
+              },
+              {
+                "type": "availabilityToken",
+                "value": "availability-token-value"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "myResourceName",
+        "type": "Microsoft.SaaSHub/SaasResources",
+        "id": "/providers/Microsoft.SaaSHub/saasResources/myResourceName",
+        "properties": {
+          "autoRenew": "On",
+          "billingScope": "/providers/Microsoft.Billing/billingAccounts/{baId}/billingProfiles/{bfId}/invoiceSections/{isId}",
+          "billingSubscriptionId": "/providers/Microsoft.Billing/billingAccounts/1111:2222/billingSubscriptions/Id",
+          "licenseData": "000089d5-0000-0080-2654-64a36bcef7ba",
+          "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+          "productType": "Microsoft 365 E5",
+          "offerType": "Paid",
+          "provisioningState": "Succeeded",
+          "quantity": 20,
+          "scheduleActions": [
+            {
+              "type": "NextTerm",
+              "productCode": "000081e7-0000-0080-1728-3d9b92e2305f",
+              "quantity": 9,
+              "resourceTokens": [
+                {
+                  "type": "billingToken",
+                  "value": "billing-token-value"
+                },
+                {
+                  "type": "availabilityToken",
+                  "value": "availability-token-value"
+                }
+              ]
+            }
+          ],
+          "skuDescription": "Microsoft 365 E5",
+          "status": "Active",
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2022-05-06T07:54:48-07:00",
+            "systemId": "2c1b572c-f003-0011-6ea6-9324a8000000",
+            "systemVersion": "1"
+          },
+          "term": {
+            "billingFrequency": "P1M",
+            "endDate": "2023-04-27T17:00:00-07:00",
+            "startDate": "2022-04-28T17:00:00-07:00",
+            "termUnit": "P1Y"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.SaaSHub/operationStatuses/{operationId}?api-version=2025-07-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "SaasResources_Update",
+  "title": "Update Auto Renew and Update Scheduled Actions at the same time"
+}

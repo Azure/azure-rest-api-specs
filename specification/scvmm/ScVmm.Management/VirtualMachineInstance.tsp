@@ -37,8 +37,8 @@ model VirtualMachineInstanceUpdate
     "properties"
   >> {
   /** The update properties of the VirtualMachineInstance. */
-  #suppress "deprecated" "Legacy flattening"
-  @Azure.ClientGenerator.Core.flattenProperty
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties?: VirtualMachineInstanceUpdateProperties;
 }
 

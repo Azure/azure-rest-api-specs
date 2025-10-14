@@ -17,8 +17,6 @@ using Azure.Core.Traits;
   version: "2024-09-24-preview",
   summary: "Microsoft Enterprise Support Resource Provider",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace Microsoft.EnterpriseSupport;
 
 interface Operations extends Azure.ResourceManager.Operations {}

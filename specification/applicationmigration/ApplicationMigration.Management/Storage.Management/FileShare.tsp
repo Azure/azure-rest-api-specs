@@ -61,7 +61,7 @@ interface FileShares {
   >;
 }
 
-@@maxLength(FileShare.name, 63);
+@@maxLength(FileShare.name, 100);
 @@minLength(FileShare.name, 3);
 @@doc(FileShare.name, "The name of FileShare");
 @@doc(FileShare.properties, "Resource properties.");

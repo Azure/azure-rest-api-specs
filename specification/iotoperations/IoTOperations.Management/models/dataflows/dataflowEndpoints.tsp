@@ -68,6 +68,8 @@ model DataflowEndpointProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("DataflowEndpoint Type properties")
@@ -458,7 +460,6 @@ model ManagedIdentity {
   @doc("User-assigned managed identity authentication.")
   userAssignedManagedIdentitySettings?: DataflowEndpointAuthenticationUserAssignedManagedIdentity;
 }
-
 @doc("DataflowEndpoint Authentication SystemAssignedManagedIdentity properties")
 model DataflowEndpointAuthenticationSystemAssignedManagedIdentity {
   ...BaseSystemAssignedManagedIdentity;

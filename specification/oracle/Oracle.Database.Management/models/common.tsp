@@ -323,3 +323,15 @@ union ShapeFamilyType {
 
   string,
 }
+
+@doc("The type of Exascale storage used for Exadata VM cluster. The default is SMART_STORAGE which supports Oracle Database 23ai and later")
+@added(Versions.v20250801_preview)
+union ShapeAttribute {
+  @doc("Smart storage")
+  SMART_STORAGE: "SMART_STORAGE",
+
+  @doc("block storage")
+  BLOCK_STORAGE: "BLOCK_STORAGE",
+
+  string,
+}

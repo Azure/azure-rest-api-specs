@@ -15,7 +15,9 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["Swagger Avocado - Analyze Code"]
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      ["Swagger Avocado - Analyze Code", "\\[TEST-IGNORE\\] Swagger Avocado - Analyze Code"]
     types: [completed]
 
 permissions:

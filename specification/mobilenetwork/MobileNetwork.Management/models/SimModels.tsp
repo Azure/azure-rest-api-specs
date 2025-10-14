@@ -3,6 +3,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "../common/CommonModels.tsp";
 
 using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -51,7 +52,7 @@ model CommonSimPropertiesFormat {
 
   @doc("A list of static IP addresses assigned to this SIM. Each address is assigned at a defined network scope, made up of {attached data network, slice}.")
   @minItems(1)
-  @extension("x-ms-identifiers", #["attachedDataNetwork", "slice"])
+  @identifiers(#["attachedDataNetwork", "slice"])
   staticIpConfiguration?: SimStaticIpProperties[];
 
   @doc("The name of the SIM vendor who provided this SIM, if any.")
@@ -101,7 +102,7 @@ model SimPropertiesFormat extends CommonSimPropertiesFormat {
 model SimUploadList {
   @doc("A list of SIMs to upload.")
   @minItems(1)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   sims: SimNameAndProperties[];
 }
 
@@ -110,9 +111,9 @@ model SimNameAndProperties {
   @doc("The name of the SIM.")
   name: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("SIM Properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: SimPropertiesFormat;
 }
 
@@ -140,7 +141,7 @@ model EncryptedSimUploadList {
 
   @doc("A list of SIMs to upload, with encrypted properties.")
   @minItems(1)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   sims: SimNameAndEncryptedProperties[];
 }
 
@@ -149,9 +150,9 @@ model SimNameAndEncryptedProperties {
   @doc("The name of the SIM.")
   name: string;
 
-  #suppress "deprecated" "Legacy flattening"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Legacy flattening"
   @doc("Encrypted SIM Properties.")
-  @Azure.ClientGenerator.Core.flattenProperty
+  @Azure.ClientGenerator.Core.Legacy.flattenProperty
   properties: EncryptedSimPropertiesFormat;
 }
 

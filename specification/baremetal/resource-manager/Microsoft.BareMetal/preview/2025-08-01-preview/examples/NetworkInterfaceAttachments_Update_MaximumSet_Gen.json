@@ -1,0 +1,85 @@
+{
+  "title": "NetworkInterfaceAttachments_Update_MaximumSet",
+  "operationId": "NetworkInterfaceAttachments_Update",
+  "parameters": {
+    "api-version": "2025-08-01-preview",
+    "subscriptionId": "5404323C-CFFE-4038-8E19-44AA56AB09CA",
+    "resourceGroupName": "rgBootstrapRP",
+    "networkInterfaceAttachmentName": "networkInterfaceAttachment1",
+    "networkInterfaceAttachmentPatch": {
+      "tags": {
+        "key6906": "zahnxvphkolupbvgyjgljhfwmigvqj"
+      },
+      "properties": {
+        "anchorNics": [
+          {
+            "id": "/subscriptions/5404323C-CFFE-4038-8E19-44AA56AB09CA/resourceGroups/rgBootstrapRP/providers/Microsoft.Network/networkInterfaces/nic2",
+            "ipConfigurations": [
+              {
+                "privateIpAddress": "10.0.0.5",
+                "privateIpAddressVersion": "IPv4",
+                "primary": true
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "subnetResourceId": "/subscriptions/5404323C-CFFE-4038-8E19-44AA56AB09CA/resourceGroups/rgBootstrapRP/providers/Microsoft.Network/virtualNetworks/vnetName/subnets/subnetName",
+          "sddcPhysicalAz": "1",
+          "sddcId": "123e4567-e89b-12d3-a456-426614174000",
+          "bgpNics": [
+            {
+              "id": "/subscriptions/5404323C-CFFE-4038-8E19-44AA56AB09CA/resourceGroups/rgBootstrapRP/providers/Microsoft.Network/networkInterfaces/nic1",
+              "ipConfigurations": [
+                {
+                  "privateIpAddress": "10.0.0.1",
+                  "privateIpAddressVersion": "IPv4",
+                  "primary": true
+                }
+              ]
+            }
+          ],
+          "anchorNics": [
+            {
+              "id": "/subscriptions/5404323C-CFFE-4038-8E19-44AA56AB09CA/resourceGroups/rgBootstrapRP/providers/Microsoft.Network/networkInterfaces/nic2",
+              "ipConfigurations": [
+                {
+                  "privateIpAddress": "10.0.0.5",
+                  "privateIpAddressVersion": "IPv4",
+                  "primary": true
+                }
+              ]
+            }
+          ],
+          "provisioningState": "Creating"
+        },
+        "tags": {
+          "key7962": "lxapqgeplotyrrwunl"
+        },
+        "location": "xiklawxawhspdhl",
+        "id": "/subscriptions/5404323C-CFFE-4038-8E19-44AA56AB09CA/resourceGroups/rgBootstrapRP/providers/Microsoft.BareMetal/NetworkInterfaceAttachments/networkInterfaceAttachment1",
+        "name": "networkInterfaceAttachment1",
+        "type": "spbucztxoej",
+        "systemData": {
+          "createdBy": "uhgdxg",
+          "createdByType": "User",
+          "createdAt": "2025-09-01T05:12:09.779Z",
+          "lastModifiedBy": "ycqvluszjpfchdns",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-09-01T05:12:09.780Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

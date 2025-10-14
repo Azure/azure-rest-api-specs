@@ -1,3 +1,38 @@
+# New TypeSpec projects
+
+Before creating or initializing a TypeSpec project, you must know your org name, service name, and the type of service: data-plane or control-plane (ARM).
+
+Then create a new project directory under the `specification/<orgName>/resource-manager/<RPNamespace>/<ServiceName>` or `specification/<orgName>/data-plane/<ServiceName>` path, following the guidelines below.
+
+```
+specification/
+└── <orgName1>/
+    ├── cspell.yaml
+    └── resource-manager/
+        ├── readme.md			ß NOTE: For ARM schema validation; see bullet #2 below
+        └── <RPNamespace>/		ß NOTE: Control-plane only (not data-plane)
+            └── <ServiceName1>/	ß Customer-facing service name; each version gets Documentation & SDK package
+                ├── tspconfig.yaml	ß TypeSpec files
+                ├── main.tsp
+                ├── models.tsp
+                ├── readme.md		ß autorest readme with YAML blocks
+                └── examples/		ß TypeSpec example folder
+                    └── <api-version>/	ß One folder per service version described in TypeSpec
+                        └── <example .json files>
+                └── preview/ and stable/
+                    └── <api-version>/	ß One folder per service version described in OpenAPI. These folders are created and populated by compiling the TypeSpec folder for the service.
+                        ├── <OpenAPI .json files>
+                        └── examples/	ß OpenAPI example folder
+                            └── <example .json files>
+            └── <ServiceName2>/	// Customer-facing service name; contents identical to above structure
+    └── data-plane/
+        └── <ServiceName3>/	// Customer-facing service name; contents identical to above structure
+```
+
+Use the `./specification/widget` directory as a reference for creating your own project directory.
+
+Only after the project directory is created according to the above guidelines may you run the `azsdk_init_typespec_project` tool to initialize the project.
+
 ## Converting a specification from swagger to typespec
 
 Users can convert a specification from swagger to typespec by using `tsp-client` a CLI designed to help developers throughout various stages of typespec development.
@@ -120,7 +155,6 @@ Examples of common errors and warnings that should be addressed after running th
 /** Service api versions **/
 enum Versions {
   /** The 2023-11-01 api version **/
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_11_01: "2023-11-01",
 }
 
@@ -130,6 +164,10 @@ enum Versions {
 - In order to address warnings raised by the @azure-tools/typespec-azure-core search through this page for relevant solutions to apply: https://azure.github.io/typespec-azure/docs/intro/
 - camelCase fixes only apply to the typespec property names, any corresponding string values you should left as is.
 - String values in typespec files should be left untouched.
+
+## Up-to-date TypeSpec documentation
+
+Follow [typespec docs](../eng/common/instructions/azsdk-tools/typespec-docs.instructions.md) to get the most up-to-date documentation for TypeSpec, including best practices for writing TypeSpec for Azure.
 
 <!-- LINKS -->
 
@@ -141,81 +179,101 @@ enum Versions {
 [ci-fix]: ../documentation/ci-fix.md
 [url-type]: https://typespec.io/docs/language-basics/built-in-types#string-types
 [no-enum]: https://azure.github.io/typespec-azure/docs/libraries/azure-core/rules/no-enum
-
+[typespec-structure-guidelines]: ../documentation/typespec-structure-guidelines.md
 
 # SDK generation from TypeSpec
 
-## Agent context for TypeSpec and SDK process 
-- Check all open files in the editor and check if `main.tsp` or `tspconfig.yaml` are open in the editor. If either of 
-these files are open, then use the parent path of the `main.tsp` or `tspconfig.yaml` as default TypeSpec project root 
-path.
-- If `main.tsp` and `tspconfig.yaml` are not open in the editor, then check if there are any TypeSpec project paths in 
-the context. If there are no TypeSpec project paths in the context, then prompt user to select a TypeSpec project path 
-from the list of paths. If user does not have a TypeSpec project, then prompt user to create a new TypeSpec project.
+## Agent context for TypeSpec and SDK process
 
+- Check all open files in the editor and check if `main.tsp` or `tspconfig.yaml` are open in the editor. If either of
+  these files are open, then use the parent path of the `main.tsp` or `tspconfig.yaml` as default TypeSpec project root
+  path.
+- If `main.tsp` and `tspconfig.yaml` are not open in the editor, then check if there are any TypeSpec project paths in
+  the context. If there are no TypeSpec project paths in the context, then prompt user to select a TypeSpec project path
+  from the list of paths. If user does not have a TypeSpec project, then prompt user to create a new TypeSpec project.
 
-### Pre-requisites
+### Prerequisites
+
 - User should have a GitHub account and should be logged in to GitHub account using GitHub CLI `gh auth login`.
 - run `npm ci` to install the dependencies
-
+- To use Azure MCP tool calls, the user must have PowerShell installed. Provide [PowerShell installation instructions](https://learn.microsoft.com/powershell/scripting/install/installing-powershell) if not installed, and recommend restarting the IDE to start the MCP server.
 
 ### Basic Rules for SDK Generation from TypeSpec
 
 1. **User Guidance**:
-    - Assume the user is unfamiliar with the SDK release process. Provide clear, concise instructions for each step.
+   - Assume the user is unfamiliar with the SDK release process. Provide clear, concise instructions for each step.
 
 2. **File Handling**:
-    - Do not overwrite `tspconfig.yaml` or `main.tsp`. Use existing files and suggest updates if necessary.
-    - Use the path of the `tspconfig.yaml` file already open in the editor or the `.tsp` file path as the project root.
-    - If no `.tsp` file or folder is in the current context, prompt the user to select a valid TypeSpec project root path.
+   - Do not overwrite `tspconfig.yaml` or `main.tsp`. Use existing files and suggest updates if necessary.
+   - Use the path of the `tspconfig.yaml` file already open in the editor or the `.tsp` file path as the project root.
+   - If no `.tsp` file or folder is in the current context, prompt the user to select a valid TypeSpec project root path.
 
 3. **Process Visibility**:
-    - Highlight all steps in the SDK generation process, showing completed and remaining steps.
-    - Do not skip any main steps. Ensure all steps are completed before moving to the next.
+   - Highlight all steps in the SDK generation process, showing completed and remaining steps.
+   - Do not skip any main steps. Ensure all steps are completed before moving to the next.
 
 4. **Git Operations**:
-    - Avoid using the `main` branch for pull requests. Prompt the user to create or switch to a new branch if necessary.
-    - Display git commands (e.g., `git checkout`, `git add`, `git commit`, `git push`) with a "Run" button instead of 
-    asking the user to copy and paste.
-    - Do not run `git diff`
+   - Avoid using the `main` branch for pull requests. Prompt the user to create or switch to a new branch if necessary.
+   - Display git commands (e.g., `git checkout`, `git add`, `git commit`, `git push`) with a "Run" button instead of
+     asking the user to copy and paste.
+   - Do not run `git diff`
 
 5. **Azure-Specific Rules**:
-    - Always use `Azure` as the repo owner in MCP tool calls.
-    - Confirm with the user if they want to change the repo owner or target branch, and prompt for new values if needed.
+   - Always use `Azure` as the repo owner in MCP tool calls.
+   - Confirm with the user if they want to change the repo owner or target branch, and prompt for new values if needed.
 
 6. **Exclusions**:
-    - Exclude changes to the `.gitignore` file and contents within the `.github` and `.vscode` folders from API spec and SDK pull requests.
+   - Exclude changes to the `.gitignore` file and contents within the `.github` and `.vscode` folders from API spec and SDK pull requests.
 
 7. **Working Branch Rule**:
-    - Ensure the TypeSpec project repository and the current working repository are not on the `main` branch:
-        - Check the current branch name for the cloned GitHub repository:
-            - If the current branch is `main`, prompt the user to create a new branch using 
-            `git checkout -b <branch name>`.
-            - If the current branch is not `main`, prompt the user to either select an existing branch or create a 
-            new one.
-        - For branch switching:
-            - If a branch already exists and differs from the current branch, prompt the user to switch using 
-            `git checkout <branch name>`.
-    - GitHub pull requests cannot be created from the `main` branch. Ensure all changes are made on a non-`main` branch.
+   - If the typespec pull request already exists or is merged stay on the `main` branch, otherwise ensure the TypeSpec project repository and the current working repository are not on the `main` branch:
+     - Check the current branch name for the cloned GitHub repository:
+       - If the current branch is `main`, prompt the user to create a new branch using
+         `git checkout -b <branch name>`.
+       - If the current branch is not `main`, prompt the user to either select an existing branch or create a
+         new one.
+     - For branch switching:
+       - If a branch already exists and differs from the current branch, prompt the user to switch using
+         `git checkout <branch name>`.
+   - GitHub pull requests cannot be created from the `main` branch. Ensure all changes are made on a non-`main` branch.
 
 By following these rules, the SDK release process will remain clear, structured, and user-friendly.
 
 ## Steps to generate SDK from TypeSpec API specification
-Follow [typespec to sdk](.\prompts\typespec-to-sdk.prompt.md) to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
-Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps.
+
+Follow [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
+Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps. Before using tools, check if user has Powershell installed.
 
 1. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
 2. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
 3. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
 4. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
 5. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created. This is required only if there are TypeSpec changes in current branch.
-6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline). Only Python is supported for local SDK generation at this time.
-7. **Generate SDKs via Pipeline**:  Generate SDKs using [run sdk gen pipeline](.\prompts\run-sdk-gen-pipeline.prompt.md), monitor the pipeline status and displaying generated SDK PR links.
+6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline).
+7. **Generate SDKs via Pipeline**: Generate SDKs using [run sdk gen pipeline](..\eng\common\instructions\azsdk-tools\run-sdk-gen-pipeline.instructions.md), monitor the pipeline status and displaying generated SDK PR links.
 8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
-9. **Create a release plan**: To create a release plan refer to [create release plan](.\prompts\create-release-plan.prompt.md)
+9. **Create a release plan**: To create a release plan refer to [create release plan](..\eng\common\instructions\azsdk-tools\create-release-plan.instructions.md)
 10. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
-11. **Release package**: Release the SDK package using `ReleaseSdkPackage` tool.
-
+11. **Release package**: Release the SDK package using `azsdk_release_sdk` tool.
 
 ## Release readiness of SDK and information about the release pipeline
-Run [check package readiness](.\prompts\check-package-readiness.prompt.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+
+Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
+
+## Instructions for GitHub coding agent to generate SDKs using GitHub.com
+
+Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when GitHub copilot coding agent is used to generate SDK and if a Release Plan is available in the context. Run SDK generation tool even if release plan already has SDK generation pipeline URL to support regenerating SDK.
+Coding agent must wait until all SDK generation pipeline are in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running Copilot from Visual Studio and VS Code.
+
+### Additional instructions:
+
+- Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description.
+- Identify absolute path of TypeSpec project root path and send it to Run SDK generation MCP tool call.
+- Keep checking the pipeline status until pipeline is in completed or failed status.
+- Find SDK pull request links from the pipeline run.
+
+### Constraints:
+
+- Do not invoke other steps.
+- Do not modify main.tsp file or any files in TypeSpec project.
+- Do not add API version to an existing main.tsp if input API version is not present.

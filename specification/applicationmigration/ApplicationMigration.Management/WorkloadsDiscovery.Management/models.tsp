@@ -738,7 +738,7 @@ model PgsqlInstanceProperties is AzureResourceProperties {
   /**
    * Dictionary of server parameters for the instance
    */
-  @OpenAPI.extension("x-ms-identifiers", #["key", "value"])
+  @identifiers(#["key", "value"])
   serverParameters?: ServerParameter[];
 
   /**
@@ -800,6 +800,11 @@ model PgsqlInstanceProperties is AzureResourceProperties {
    * Indicates whether the system supports IPv4 connections.
    */
   supportsIpv4Connections?: BoolValue;
+
+  /**
+   * Indicates whether Deep Discovery has been performed on the instance.
+   */
+  deepDiscoveryPerformed?: BoolValue;
 
   /**
    * The number of compute IOPS (Input/Output Operations Per Second) collected.
@@ -981,6 +986,11 @@ model PgsqlInstanceResourcePatch {
   supportsIpv4Connections?: BoolValue;
 
   /**
+   * Indicates whether Deep Discovery has been performed on the instance.
+   */
+  deepDiscoveryPerformed?: BoolValue;
+
+  /**
    * The number of compute IOPS (Input/Output Operations Per Second) collected.
    */
   computeIopsCollected?: int32;
@@ -1147,7 +1157,7 @@ model PgsqlDatabaseProperties is AzureResourceProperties {
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -1257,7 +1267,7 @@ model PgsqlDatabaseResourcePatch {
   /**
    * The list of extensions in the database.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name", "version"])
+  @identifiers(#["name", "version"])
   extensions?: Extension[];
 
   /**
@@ -1442,7 +1452,7 @@ model SiteTagsPatch {
 }
 
 /**
- * Represents a Collation in PostgreSQL.
+ * Represents the properties of the machine where the PostgreSQL instance is running.
  */
 model HostMachineProperties {
   /**
@@ -1454,4 +1464,14 @@ model HostMachineProperties {
    * The allocated RAM in Machine.
    */
   allocatedMemoryInMb?: int64;
+
+  /**
+   * The machine storage size in GB.
+   */
+  totalStorageInGb?: int64;
+
+  /**
+   * The number of PostgreSQL instances on the machine.
+   */
+  pgInstanceCount?: int64;
 }

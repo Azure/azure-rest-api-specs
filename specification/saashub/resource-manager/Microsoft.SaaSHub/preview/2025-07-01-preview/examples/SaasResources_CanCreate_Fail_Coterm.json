@@ -1,0 +1,37 @@
+{
+  "parameters": {
+    "api-version": "2025-07-01-preview",
+    "body": {
+      "name": "myResourceName",
+      "type": "Microsoft.SaaSHub/SaasResources",
+      "properties": {
+        "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+        "quantity": 20
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "evaluateResult": "Failed",
+        "reasonCode": "FailedToSatisfyCotermConstraints",
+        "reason": "Failed to satisfy coterm constraints",
+        "additionalInfo": {
+          "addOn": null,
+          "promotion": null,
+          "futurePrice": null,
+          "coTermDates": [
+            {
+              "coTermTarget": "cotermTargetName",
+              "coTermTargetType": "Resource",
+              "termEndDate": "2023-03-12T00:00:00Z",
+              "errorCode": "InvalidCotermEndDate"
+            }
+          ]
+        }
+      }
+    }
+  },
+  "operationId": "ProviderLevelActions_TenantLevelCanCreate",
+  "title": "Purchase with Coterm - Failed"
+}

@@ -149,7 +149,7 @@ model EdgeMachineProperties {
 
   @doc("operation status details for edge machine.")
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   operationDetails?: OperationDetail[];
 
   @doc("Last time data updated to service.")
@@ -576,6 +576,24 @@ model OsProfile {
    */
   @visibility(Lifecycle.Read)
   osVersion?: string;
+
+  /**
+   * OS Build Number
+   */
+  @visibility(Lifecycle.Read)
+  buildNumber?: string;
+
+  /**
+   * OS Base Image Version
+   */
+  @visibility(Lifecycle.Read)
+  baseImageVersion?: string;
+
+  /**
+   * OS Image Version
+   */
+  @visibility(Lifecycle.Read)
+  imageVersion?: string;
 }
 
 /**

@@ -21,7 +21,6 @@ namespace Microsoft.AzureBusinessContinuity;
 @doc("Microsoft.AzureBusinessContinuity Resource Provider supported API versions.")
 enum Versions {
   @doc("Microsoft.AzureBusinessContinuity Resource Provider management API version 2024-03-01-preview.")
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2024_09_01_preview: "2024-09-01-preview",
 }

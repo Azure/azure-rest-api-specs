@@ -25,8 +25,6 @@ interface Operations extends Azure.ResourceManager.Operations {}
 enum Versions {
   @doc("The 2023-09-01-preview version.")
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   v2023_09_01_preview: "2023-09-01-preview",
 }
 @doc("The DatabaseWatcherProviderHub resource.")
@@ -105,6 +103,7 @@ union KustoOfferingType {
 interface Watchers {
   get is ArmResourceRead<Watcher>;
   createOrUpdate is ArmResourceCreateOrReplaceAsync<Watcher>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     Watcher,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

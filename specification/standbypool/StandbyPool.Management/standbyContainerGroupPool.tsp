@@ -112,6 +112,7 @@ interface StandbyContainerGroupPools {
   get is ArmResourceRead<StandbyContainerGroupPoolResource>;
   createOrUpdate is ArmResourceCreateOrUpdateAsync<StandbyContainerGroupPoolResource>;
   delete is ArmResourceDeleteWithoutOkAsync<StandbyContainerGroupPoolResource>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchSync<
     StandbyContainerGroupPoolResource,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

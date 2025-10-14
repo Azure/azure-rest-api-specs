@@ -1,6 +1,6 @@
 import "./InventoryLocalAccount.tsp";
 
-using OpenAPI;
+using Azure.ResourceManager;
 
 @doc("The model representing the BMC")
 model Manager {
@@ -18,6 +18,6 @@ model Manager {
 
   @visibility(Lifecycle.Read)
   @doc("List of BMC accounts")
-  @extension("x-ms-identifiers", #["username"])
+  @identifiers(#["username"])
   accounts?: InventoryLocalAccount[];
 }

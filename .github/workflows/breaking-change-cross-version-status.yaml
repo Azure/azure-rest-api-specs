@@ -15,7 +15,12 @@ on:
       - labeled
       - unlabeled
   workflow_run:
-    workflows: ["Breaking Change(Cross-Version) - Analyze Code"]
+    # Trigger on both old and new names, to handle the rename more gracefully
+    workflows:
+      [
+        "Breaking Change(Cross-Version) - Analyze Code",
+        "\\[TEST-IGNORE\\] Breaking Change(Cross-Version) - Analyze Code",
+      ]
     types: [completed]
 
 permissions:
@@ -32,4 +37,4 @@ jobs:
     with:
       monitored_workflow_name: "Breaking Change(Cross-Version) - Analyze Code"
       required_check_name: "Breaking Change(Cross-Version)"
-      overriding_label: "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact,BreakingChange-Approved-BranchPolicyException,BreakingChange-Approved-Previously,BreakingChange-Approved-Security,Versioning-Approved-Benign,Versioning-Approved-BugFix,Versioning-Approved-PrivatePreview,Versioning-Approved-BranchPolicyException,Versioning-Approved-Previously,Versioning-Approved-Retired"
+      overriding_label: "BreakingChange-Approved-Benign,BreakingChange-Approved-BugFix,BreakingChange-Approved-UserImpact,BreakingChange-Approved-BranchPolicyException,BreakingChange-Approved-Previously,BreakingChange-Approved-Security,BreakingChange-Approved-Retired,Versioning-Approved-Benign,Versioning-Approved-BugFix,Versioning-Approved-PrivatePreview,Versioning-Approved-BranchPolicyException,Versioning-Approved-Previously,Versioning-Approved-Retired,Versioning-Approved-NotReleased"

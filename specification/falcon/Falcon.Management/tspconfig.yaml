@@ -13,27 +13,27 @@ options:
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/falcon.json"
   "@azure-tools/typespec-csharp":
     flavor: azure
-    package-dir: "Azure.ResourceManager.Falcon"
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.Falcon"
     clear-output-folder: true
     model-namespace: false
-    namespace: "{package-dir}"
+    namespace: "Azure.ResourceManager.Falcon"
     # Added to support generic model conversion from compute VM types
     use-model-reader-writer: true
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-falcon"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-falcon"
     namespace: "azure.mgmt.falcon"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-falcon"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-falcon"
     namespace: com.azure.resourcemanager.falcon
     service-name: Falcon
     flavor: azure
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/falcon"
-    package-dir: "armfalcon"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfalcon"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfalcon"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -43,15 +43,12 @@ options:
     remove-unreferenced-types: true
     generate-samples: true #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-ts":
-    azureSdkForJs: true
-    isModularLibrary: true
-    generateMetadata: true
-    hierarchyClient: false
-    experimentalExtensibleEnums: true
-    enableOperationGroup: true
-    package-dir: "arm-falcon"
+    azure-sdk-for-js: true
+    is-modular-library: true
+    experimental-extensible-enums: true
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-falcon"
     flavor: "azure"
-    packageDetails:
+    package-details:
       name: "@azure/arm-falcon"
 linter:
   extends:

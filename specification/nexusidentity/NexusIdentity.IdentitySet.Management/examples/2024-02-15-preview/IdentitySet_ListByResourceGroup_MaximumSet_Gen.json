@@ -25,7 +25,14 @@
                 "/providers/Microsoft.Authorization/roleDefinitions/8e3af657-a8ff-443c-a75c-2fe8c4bcb635"
               ],
               "storageAccountName": "zxranodyxriihljyqceov",
-              "keyVaultId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVaultName"
+              "keyVaultId": "/subscriptions/12345678-1234-1234-1234-123456789012/resourceGroups/myResourceGroup/providers/Microsoft.KeyVault/vaults/myKeyVaultName",
+              "storageAccountConfiguration": {
+                "storageAccountId": "/subscriptions/1234ABCD-0A1B-1234-5678-123456ABCDEF/resourceGroups/example-rg/providers/Microsoft.Storage/storageAccounts/someStorage",
+                "storageAccountIdentity": {
+                  "identityType": "UserAssignedIdentity",
+                  "userAssignedIdentityResourceId": "/subscriptions/12345678-1234-1234-1234-123456789abc/resourceGroups/myResourceGroup/providers/Microsoft.ManagedIdentity/userAssignedIdentities/my-id"
+                }
+              }
             },
             "tags": {},
             "location": "eastus",
@@ -39,6 +46,17 @@
               "lastModifiedBy": "user@mail.com",
               "lastModifiedByType": "User",
               "lastModifiedAt": "2024-01-08T03:52:48.615Z"
+            },
+            "identity": {
+              "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+              "tenantId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+              "type": "None",
+              "userAssignedIdentities": {
+                "key5137": {
+                  "principalId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+                  "clientId": "0000ABCD-0A0B-0000-0000-000000ABCDEF"
+                }
+              }
             }
           }
         ],

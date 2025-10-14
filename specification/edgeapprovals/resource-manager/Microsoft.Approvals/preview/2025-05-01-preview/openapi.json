@@ -1289,12 +1289,16 @@
           "type": "string",
           "format": "arm-id",
           "description": "The resource that the approval request is associated with, if multiple resources are included in the ChangeState."
+        },
+        "resolvedDeploymentPayload": {
+          "type": "string",
+          "description": "The entire deployment payload associated with the approval request, with all parameters resolved."
+        },
+        "deploymentId": {
+          "type": "string",
+          "description": "The deployment ID associated with the approval request."
         }
-      },
-      "required": [
-        "changeStateId",
-        "stageProgression"
-      ]
+      }
     },
     "ApprovalRequestOutput": {
       "type": "object",
@@ -1559,6 +1563,7 @@
         "Started",
         "Approved",
         "Rejected",
+        "Timedout",
         "Faulted"
       ],
       "x-ms-enum": {
@@ -1584,6 +1589,11 @@
             "name": "Rejected",
             "value": "Rejected",
             "description": "The stage has ended with rejected result."
+          },
+          {
+            "name": "Timedout",
+            "value": "Timedout",
+            "description": "The stage has been timed out."
           },
           {
             "name": "Faulted",

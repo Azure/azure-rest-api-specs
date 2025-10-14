@@ -25,7 +25,7 @@ model ClusterServiceResourceProperties {
   clusterTypeSpecificData: ClusterServiceClusterTypeSpecificData;
 
   @doc("Azure for Operators 5G Core Local PaaS component parameters.  One set per component type")
-  @extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   componentParameters: QualifiedComponentDeploymentParameters[];
 
   @added(Versions.v2024_05_15_preview)

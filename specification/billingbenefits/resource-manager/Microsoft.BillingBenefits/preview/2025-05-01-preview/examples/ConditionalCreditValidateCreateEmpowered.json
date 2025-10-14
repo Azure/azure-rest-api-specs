@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2025-05-01-preview",
+    "body": {
+      "benefits": [
+        {
+          "benefitType": "ConditionalCredits",
+          "properties": {
+            "entityType": "Primary",
+            "displayName": "Empowered CACO with Relaxed Rules",
+            "systemId": "CACO-SYSTEM-EMPOWERED",
+            "productCode": "SPECIAL:EMPOWERED:SCENARIO",
+            "startAt": "2024-01-01T00:00:00Z",
+            "allowContributors": "Enabled",
+            "milestones": [
+              {
+                "milestoneId": "550e8400-e29b-41d4-a716-446655440001",
+                "name": "Special Empowered Milestone",
+                "spendTarget": {
+                  "amount": 1000000,
+                  "currencyCode": "USD"
+                },
+                "award": {
+                  "duration": "P3M",
+                  "credit": {
+                    "amount": 200000,
+                    "currencyCode": "USD"
+                  }
+                },
+                "endAt": "2025-06-30T00:00:00Z"
+              }
+            ]
+          }
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "benefits": [
+          {
+            "valid": true,
+            "resourceId": "/subscriptions/eef82110-c91b-4395-9420-fcfcbefc5a47/resourceGroups/myRG/providers/Microsoft.BillingBenefits/conditionalCredits/empoweredCACO"
+          }
+        ]
+      }
+    }
+  }
+}

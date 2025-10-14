@@ -17,17 +17,17 @@ options:
     # examples-directory: "examples"
     output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/footprintProfiles.json"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-footprintprofiles"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-footprintprofiles"
     flavor: azure
-    package-name: "{package-dir}"
+    package-name: "azure-mgmt-footprintprofiles"
     generate-test: true
     generate-sample: true
     examples-directory: "{project-root}/examples"
     namespace: azure.mgmt.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/footprintprofiles"
-    package-dir: "armfootprintprofiles"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armfootprintprofiles"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armfootprintprofiles"
     examples-directory: "{project-root}/examples"
     fix-const-stuttering: true
     flavor: "azure"
@@ -39,7 +39,7 @@ options:
   "@modelerfour":
     lenient-model-deduplication: true
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-placeholder"
     flavor: azure #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
-    package-dir: azure-resourcemanager-placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
     namespace: com.azure.resourcemanager.placeholder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation
     service-name: Place Holder #!!!IMPORTANT!!! To ensure the emitter correctly produces SDK, this configuration is added by Azure SDK Team. Some configurations use placeholder values. For modifications, please refer to https://aka.ms/azsdk/specs/typespec-validation#sdktspconfigvalidation

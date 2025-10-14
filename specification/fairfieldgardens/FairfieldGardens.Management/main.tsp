@@ -18,7 +18,6 @@ using Azure.ResourceManager.Foundations;
   title: "Microsoft.FairfieldGardens",
   version: "2023-12-01-preview",
 })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 namespace Microsoft.FairfieldGardens;
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -130,7 +129,7 @@ model ProvisioningPolicyProperties {
   bootstrapAuthentication: BootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @maxItems(1)
   allocations?: Array<AllocationRule>;
 
@@ -157,7 +156,7 @@ model ProvisioningPolicyPatchProperties {
   bootstrapAuthentication?: BootstrapAuthenticationRule;
 
   @doc("Allocation rules.")
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   @maxItems(1)
   allocations?: Array<AllocationRule>;
 
@@ -378,7 +377,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for geoBased allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", #["resourceId"])
+//  @identifiers(#["resourceId"])
 //  endpoints: Array<GeoBasedAllocationEndpoint>;
 //}
 
@@ -390,7 +389,7 @@ scalar AllocationEndpointResourceId
 //  @doc("List of endpoints for evenly weighted allocation type.")
 //  @maxItems(10)
 //  @minItems(1)
-//  @extension("x-ms-identifiers", #["resourceId"])
+//  @identifiers(#["resourceId"])
 //  endpoints: Array<AllocationEndpoint>;
 //  // todo no optional (to be tested)
 //}
@@ -403,7 +402,7 @@ model EvenlyDistributedAllocationRule extends AllocationRule {
   @doc("List of endpoints for evenly distributed allocation type.")
   @maxItems(10)
   @minItems(1)
-  @extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   endpoints: Array<AllocationEndpoint>;
 }
 
@@ -617,7 +616,7 @@ model DeviceProvisioningStateProperties {
 
   @doc("Array of previously allocated endpoints")
   @maxItems(1)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   allocatedEndpoints?: Array<AllocatedEndpoint>;
 
   @visibility(Lifecycle.Read)

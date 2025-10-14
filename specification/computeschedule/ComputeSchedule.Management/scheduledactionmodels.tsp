@@ -93,7 +93,7 @@ model ResourceListResponse is Azure.Core.Page<ScheduledActionResource>;
 @doc("Request model to attach a list of scheduled action resources.")
 model ResourceAttachRequest {
   @doc("List of resources to be attached/patched")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<ScheduledActionResource>;
 }
 
@@ -108,7 +108,7 @@ model ResourceDetachRequest {
 @doc("Request model perform a resource operation in a list of resources")
 model ResourcePatchRequest {
   @doc("The list of resources we watch to patch")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resources: Array<ScheduledActionResource>;
 }
 
@@ -139,7 +139,7 @@ model ResourceOperationResponse {
   totalResources: int32;
 
   @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 
@@ -176,13 +176,24 @@ model ScheduledActionProperties {
 }
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
+@doc("Scheduled action extension properties")
+model ScheduledActionsExtensionProperties {
+  ...ScheduledActionProperties;
+
+  @doc("The notification settings for the scheduled action at a resource level. Resource level notification settings are scope to specific resources only and submitted through attach requests.")
+  @Azure.ResourceManager.identifiers(#["destination"])
+  @visibility(Lifecycle.Read)
+  resourceNotificationSettings?: Array<NotificationProperties>;
+}
+
+@added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The response from scheduled action resource requests, which contains the status of each resource")
 model ScheduledActionResourceOperationResponse {
   @doc("The total number of resources operated on")
   totalResources: int32;
 
   @doc("The resource status of for each resource")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   resourcesStatuses: Array<ResourceStatus>;
 }
 
@@ -194,7 +205,8 @@ model ScheduledAction is TrackedResource<ScheduledActionProperties> {
 
 @added(Microsoft.ComputeSchedule.Versions.`2025-04-15-preview`)
 @doc("The scheduled action extension")
-model ScheduledActionResources is ExtensionResource<ScheduledActionProperties> {
+model ScheduledActionResources
+  is ExtensionResource<ScheduledActionsExtensionProperties> {
   ...ResourceNameParameter<
     ScheduledActionResources,
     SegmentName = "associatedScheduledActions"

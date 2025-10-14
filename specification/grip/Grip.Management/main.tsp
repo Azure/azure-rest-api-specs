@@ -15,7 +15,6 @@ using OpenAPI;
 
 @armProviderNamespace
 @service(#{ title: "GRIP Service", version: "2023-07-13" })
-@useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
 @armCommonTypesVersion(CommonTypes.Versions.v5)
 namespace Microsoft.Grip;
 

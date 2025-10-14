@@ -1,6 +1,6 @@
 import "./Drive.tsp";
 
-using OpenAPI;
+using Azure.ResourceManager;
 
 @doc("Information regarding collection of disk drives")
 model DriveCollection {
@@ -11,6 +11,6 @@ model DriveCollection {
   totalDriveCapacityBytes: int64;
 
   @doc("Information about individual disk drives")
-  @extension("x-ms-identifiers", #["diskId"])
+  @identifiers(#["diskId"])
   drives: Drive[];
 }

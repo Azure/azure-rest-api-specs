@@ -137,11 +137,9 @@ model ArrayParameter extends Parameter {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Suppressing the warning: We need list of parameters in key:value format of Array types, which can be string, int, or object."
   @doc("Default value for the parameter.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @OpenAPI.extension("x-ms-identifiers", #[])
   defaultValue?: unknown[];
 
   @doc("Allowed list of the values for the parameter.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   allowedValues?: unknown[];
 }
@@ -158,9 +156,9 @@ model ObjectParameter extends Parameter {
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   defaultValue?: {};
 
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "False positive"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Suppressing no-empty-model: Empty object literal required to generate OpenAPI schema with additionalProperties:true for flexible object parameter constraint validation."
   @doc("Allowed list of the values for the parameter.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   allowedValues?: Array<{}>;
 }
@@ -171,11 +169,22 @@ model NestedStageMap {
   @doc("ARM resource ID for the nested stagemap resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   resourceId?: string;
+
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "Key value pairs of parameter names & their values for the stagemap.Value can be any type, hence using Unknown type."
+  @doc("Key value pairs of parameter names & their values for the stageMap referenced by the resourceId field.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  @added(Versions.v2025_09_01_preview)
+  parameters?: Record<unknown>;
 }
 
 @doc("Link model for related resources and references.")
 @added(Versions.v2025_07_01_preview)
 model Link {
+  @added(Versions.v2025_09_01_preview)
+  @doc("name of the link.")
+  @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
+  name: string;
+
   @doc("URL or comma separated URLs for the link.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
   uri: string;
@@ -186,16 +195,19 @@ model Link {
   description?: string;
 
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_09_01_preview)
   @doc("User who last modified this link.")
   lastModifiedBy?: string;
 
   @visibility(Lifecycle.Read)
+  @removed(Versions.v2025_09_01_preview)
   @doc("The date and time when this link was last modified (ISO 8601 format).")
   lastModifiedAt?: utcDateTime;
 }
 
 @doc("Collection of predefined link types for change-related references.")
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_09_01_preview)
 model ChangeLinks {
   @doc("Link to work tracking item.")
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
@@ -229,6 +241,7 @@ model ChangeLinks {
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Intentionally empty model for flexible stage variables storage."
 @doc("Stage variables object type that allows flexible key-value pairs")
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_09_01_preview)
 model StageVariables {
   // Flexible object model for stage variables - allows any properties
 }

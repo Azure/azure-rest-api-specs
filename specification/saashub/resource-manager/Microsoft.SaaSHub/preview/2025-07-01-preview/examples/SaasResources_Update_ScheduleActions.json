@@ -1,0 +1,95 @@
+{
+  "parameters": {
+    "saasResourceName": "mySaasResourceWithScheduleActions",
+    "api-version": "2025-07-01-preview",
+    "properties": {
+      "properties": {
+        "autoRenew": "Once",
+        "scheduleActions": [
+          {
+            "type": "NextTerm",
+            "quantity": 30,
+            "linkedResource": {
+              "billingScope": "/providers/Microsoft.Billing/billingAccounts/1111:2222/billingProfiles/ABCD-EFGH-IJKL/invoiceSections/MNOP-QRST-UVWX",
+              "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/myTargetSaasResource"
+            },
+            "resourceTokens": [
+              {
+                "type": "availabilityToken",
+                "value": "saas-avail-token-98765"
+              },
+              {
+                "type": "billingToken",
+                "value": "saas-billing-token-54321"
+              }
+            ]
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "name": "mySaasResourceWithScheduleActions",
+        "type": "Microsoft.SaaSHub/SaasResources",
+        "id": "/providers/Microsoft.SaaSHub/saasResources/mySaasResourceWithScheduleActions",
+        "properties": {
+          "autoRenew": "Once",
+          "billingScope": "/providers/Microsoft.Billing/billingAccounts/1111:2222/billingProfiles/ABCD-EFGH-IJKL/invoiceSections/MNOP-QRST-UVWX",
+          "billingSubscriptionId": "/providers/Microsoft.Billing/billingAccounts/1111:2222/billingSubscriptions/Id",
+          "licenseData": "000089d5-0000-0080-2654-64a36bcef7ba",
+          "productCode": "000081e7-0000-0080-f976-8a622c8760a3",
+          "productType": "Microsoft 365 E5",
+          "offerType": "Paid",
+          "provisioningState": "Succeeded",
+          "quantity": 60,
+          "skuDescription": "Microsoft 365 E5",
+          "status": "Active",
+          "scheduleActions": [
+            {
+              "type": "NextTerm",
+              "quantity": 30,
+              "linkedResource": {
+                "billingScope": "/providers/Microsoft.Billing/billingAccounts/1111:2222/billingProfiles/ABCD-EFGH-IJKL/invoiceSections/MNOP-QRST-UVWX",
+                "resourceUri": "/providers/Microsoft.SaaSHub/saasResources/myTargetSaasResource"
+              },
+              "resourceTokens": [
+                {
+                  "type": "availabilityToken",
+                  "value": "saas-avail-token-98765"
+                },
+                {
+                  "type": "billingToken",
+                  "value": "saas-billing-token-54321"
+                }
+              ]
+            }
+          ],
+          "systemOverrides": {
+            "cancellationAllowedEndDate": "2025-07-06T07:54:48-07:00",
+            "renewalCount": 0,
+            "startDateOnCurrentProductCode": "2025-06-01T00:00:00Z",
+            "systemId": "3d2e684f-g115-0022-7fb7-a435b9000001",
+            "systemVersion": "2",
+            "licenseReassignmentDuration": "P0D"
+          },
+          "term": {
+            "billingFrequency": "P1M",
+            "endDate": "2026-05-31T23:59:59Z",
+            "startDate": "2025-06-01T00:00:00Z",
+            "termUnit": "P1Y"
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://management.azure.com/providers/Microsoft.SaaSHub/operationStatuses/{operationId}?api-version=2025-07-01-preview",
+        "Retry-After": "60"
+      }
+    }
+  },
+  "operationId": "SaasResources_Update",
+  "title": "Update a SaaSHub saas resource with schedule actions"
+}

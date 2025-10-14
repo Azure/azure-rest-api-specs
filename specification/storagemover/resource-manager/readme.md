@@ -27,7 +27,26 @@ These are the global settings for the storagemover.
 ``` yaml
 openapi-type: arm
 openapi-subtype: providerHub
-tag: package-2024-07
+tag: package-2025-08
+```
+
+### Tag: package-2025-08
+
+These settings apply only when `--tag=package-2025-08` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08'
+input-file:
+  - Microsoft.StorageMover/stable/2025-08-01/storagemover.json
+
+```
+
+### Tag: package-2025-07
+
+These settings apply only when `--tag=package-2025-07` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-07'
+input-file:
+  - Microsoft.StorageMover/stable/2025-07-01/storagemover.json
 ```
 
 ### Tag: package-2025-01
@@ -43,7 +62,6 @@ suppressions:
     where: $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.StorageMover/storageMovers/{storageMoverName}/endpoints/{endpointName}"].patch.parameters[5].schema.properties.identity
     reason: All the properties defined within PATCH payload are optional. The field getting flagged is within ManagedServiceIdentity and is not added by us.
 ```
-
 
 ### Tag: package-2024-07
 

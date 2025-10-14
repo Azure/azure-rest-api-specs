@@ -19,8 +19,6 @@ namespace Microsoft.CloudHealth;
 
 @doc("API Versions")
 enum Versions {
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_2)
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   @doc("2023-10-01-preview")
   v2023_10_01_preview: "2023-10-01-preview",
@@ -552,7 +550,7 @@ union DependenciesAggregationType {
 model SignalAssignmentGroup {
   @doc("Signal definitions which are assigned to this signal group. All assignments are combined with an OR operator.")
   @maxItems(50)
-  @OpenAPI.extension("x-ms-identifiers", #["signalDefinitions"])
+  @identifiers(#["signalDefinitions"])
   signalAssignments?: SignalAssignment[];
 
   @doc("Reference to the name of the authentication setting which is used for querying the data source")
@@ -769,6 +767,7 @@ alias TimestampQueryParam = {
 interface HealthModels {
   get is ArmResourceRead<HealthModel>;
   create is ArmResourceCreateOrUpdateAsync<HealthModel>;
+  @patch(#{ implicitOptionality: true })
   update is ArmCustomPatchAsync<
     HealthModel,
     Azure.ResourceManager.Foundations.ResourceUpdateModel<

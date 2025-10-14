@@ -1,0 +1,49 @@
+emit:
+  - "@azure-tools/typespec-autorest"
+parameters:
+  "service-dir":
+    default: "sdk/dependencymap"
+options:
+  "@azure-tools/typespec-autorest":
+    arm-types-dir: "{project-root}/../../../../common-types/resource-management"
+    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{project-root}"
+    output-file: "{version-status}/{version}/supercomputermanagement.json"
+    use-read-only-status-schema: true
+  "@azure-tools/typespec-csharp":
+    flavor: azure
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.SupercomputerInfrastructure"
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.SupercomputerInfrastructure"
+  "@azure-tools/typespec-python":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-supercomputerinfrastructure"
+    namespace: "azure.mgmt.supercomputerinfrastructure"
+    generate-test: true
+    generate-sample: true
+    flavor: "azure"
+  "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-supercomputerinfrastructure"
+    namespace: "com.azure.resourcemanager.supercomputerinfrastructure"
+    service-name: "supercomputerinfrastructure"
+    flavor: azure
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-supercomputerinfrastructure"
+    is-modular-library: true
+    flavor: "azure"
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-supercomputerinfrastructure"
+  "@azure-tools/typespec-go":
+    service-dir: "sdk/resourcemanager/supercomputerinfrastructure"
+    emitter-output-dir: "{output-dir}/{service-dir}/armsupercomputerinfrastructure"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armsupercomputerinfrastructure"
+    fix-const-stuttering: true
+    flavor: "azure"
+    generate-samples: true
+    generate-fakes: true
+    head-as-boolean: true
+    inject-spans: true
+linter:
+  extends:
+    - "@azure-tools/typespec-azure-rulesets/resource-manager"
