@@ -2244,7 +2244,7 @@
           "Get all projects created in 2018 or 2019": {
             "$ref": "./examples/get_projects_from_2018_and_2019.json"
           },
-          "Get projects by foundry name": {
+          "Get projects with foundry project name": {
             "$ref": "./examples/get_projects_with_foundry.json"
           }
         }
@@ -2300,7 +2300,7 @@
           "Create a project": {
             "$ref": "./examples/create_project.json"
           },
-          "Create a project with foundry name": {
+          "Create a project with foundry project name": {
             "$ref": "./examples/create_project_with_foundry.json"
           }
         }
@@ -2402,7 +2402,7 @@
           "Update a project": {
             "$ref": "./examples/update_project.json"
           },
-          "Update a project with foundry name": {
+          "Update a project with foundry project name": {
             "$ref": "./examples/update_project_with_foundry.json"
           }
         }
@@ -3816,11 +3816,11 @@
             "$ref": "#/definitions/EntityReference"
           }
         },
-        "links": {
-          "$ref": "#/definitions/CustomModelLinks"
-        },
         "project": {
           "$ref": "#/definitions/EntityReference"
+        },
+        "links": {
+          "$ref": "#/definitions/CustomModelLinks"
         },
         "properties": {
           "$ref": "#/definitions/CustomModelProperties"
@@ -5858,10 +5858,6 @@
           "minLength": 1,
           "type": "string"
         },
-        "foundryProjectName": {
-          "description": "AI foundry project name associated with this project.",
-          "type": "string"
-        },
         "createdDateTime": {
           "format": "date-time",
           "description": "The time-stamp when the object was created.\nThe time stamp is encoded as ISO 8601 date and time format\n(\"YYYY-MM-DDThh:mm:ssZ\", see https://en.wikipedia.org/wiki/ISO_8601#Combined_date_and_time_representations).",
@@ -5870,6 +5866,10 @@
         },
         "links": {
           "$ref": "#/definitions/ProjectLinks"
+        },
+        "foundryProjectName": {
+          "description": "The foundry project name.",
+          "type": "string"
         }
       }
     },
@@ -5922,16 +5922,16 @@
           "description": "The description of the object.",
           "type": "string"
         },
-        "foundryProjectName": {
-          "description": "AI foundry project name associated with this project.",
-          "type": "string"
-        },
         "customProperties": {
           "description": "The custom properties of this entity. The maximum allowed key length is 64 characters, the maximum\nallowed value length is 256 characters and the count of allowed entries is 10.",
           "type": "object",
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "foundryProjectName": {
+          "description": "The foundry project name.",
+          "type": "string"
         }
       }
     },
