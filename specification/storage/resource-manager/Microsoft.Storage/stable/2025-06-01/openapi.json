@@ -9020,6 +9020,16 @@
         ]
       }
     },
+    "GeoPriorityReplicationStatus": {
+      "type": "object",
+      "description": "Geo Priority Replication enablement status for the storage account.",
+      "properties": {
+        "isBlobEnabled": {
+          "type": "boolean",
+          "description": "Indicates whether Blob Geo Priority Replication is enabled for the storage account."
+        }
+      }
+    },
     "GeoReplicationStats": {
       "type": "object",
       "description": "Statistics related to replication for storage account's Blob, Table, Queue and File services. It is only available when geo-redundant replication is enabled for the storage account.",
@@ -10986,6 +10996,10 @@
         "metrics": {
           "$ref": "#/definitions/ObjectReplicationPolicyPropertiesMetrics",
           "description": "Optional. The object replication policy metrics feature options."
+        },
+        "priorityReplication": {
+          "$ref": "#/definitions/ObjectReplicationPolicyPropertiesPriorityReplication",
+          "description": "Optional. The object replication policy priority replication feature options."
         }
       },
       "required": [
@@ -11000,6 +11014,16 @@
         "enabled": {
           "type": "boolean",
           "description": "Indicates whether object replication metrics feature is enabled for the policy."
+        }
+      }
+    },
+    "ObjectReplicationPolicyPropertiesPriorityReplication": {
+      "type": "object",
+      "description": "Optional. The object replication policy priority replication feature options.",
+      "properties": {
+        "enabled": {
+          "type": "boolean",
+          "description": "Indicates whether object replication priority replication feature is enabled for the policy."
         }
       }
     },
@@ -13097,6 +13121,10 @@
           "description": "If customer initiated account migration is in progress, the value will be true else it will be null.",
           "readOnly": true,
           "x-ms-client-name": "AccountMigrationInProgress"
+        },
+        "geoPriorityReplicationStatus": {
+          "$ref": "#/definitions/GeoPriorityReplicationStatus",
+          "description": "Status indicating whether Geo Priority Replication is enabled for the account."
         }
       }
     },
@@ -13213,6 +13241,10 @@
         "dnsEndpointType": {
           "$ref": "#/definitions/DnsEndpointType",
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
+        },
+        "geoPriorityReplicationStatus": {
+          "$ref": "#/definitions/GeoPriorityReplicationStatus",
+          "description": "Status indicating whether Geo Priority Replication is enabled for the account."
         }
       }
     },
@@ -13319,6 +13351,10 @@
         "dnsEndpointType": {
           "$ref": "#/definitions/DnsEndpointType",
           "description": "Allows you to specify the type of endpoint. Set this to AzureDNSZone to create a large number of accounts in a single subscription, which creates accounts in an Azure DNS Zone and the endpoint URL will have an alphanumeric DNS Zone identifier."
+        },
+        "geoPriorityReplicationStatus": {
+          "$ref": "#/definitions/GeoPriorityReplicationStatus",
+          "description": "Status indicating whether Geo Priority Replication is enabled for the account."
         }
       }
     },
