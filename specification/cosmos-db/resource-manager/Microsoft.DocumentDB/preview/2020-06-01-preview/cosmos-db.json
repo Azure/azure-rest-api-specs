@@ -4298,6 +4298,78 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations": {
+      "get": {
+        "operationId": "LocationList",
+        "x-ms-examples": {
+          "CosmosDBLocationList": {
+            "$ref": "./examples/CosmosDBLocationList.json"
+          }
+        },
+        "description": "List Cosmos DB locations and their properties",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}": {
+      "get": {
+        "operationId": "LocationGet",
+        "x-ms-examples": {
+          "CosmosDBLocationGet": {
+            "$ref": "./examples/CosmosDBLocationGet.json"
+          }
+        },
+        "description": "Get the properties of an existing Cosmos DB location",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Cosmos DB location properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/LocationGetResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
@@ -7871,6 +7943,71 @@
           "items": {
             "$ref": "#/definitions/RestorableLocationResource"
           }
+        }
+      }
+    },
+    "LocationListResult": {
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/LocationGetResult"
+          },
+          "description": "List of Cosmos DB locations and their properties."
+        }
+      },
+      "description": "The List operation response, that contains Cosmos DB locations and their properties."
+    },
+    "LocationGetResult": {
+      "description": "Cosmos DB location get result",
+      "type": "object",
+      "properties": {
+        "id": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The unique resource identifier of the ARM resource."
+        },
+        "name": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The name of the ARM resource."
+        },
+        "type": {
+          "readOnly": true,
+          "type": "string",
+          "description": "The type of Azure resource."
+        },
+        "properties": {
+          "type": "object",
+          "description": "Cosmos DB location metadata",
+          "$ref": "#/definitions/LocationProperties"
+        }
+      }
+    },
+    "LocationProperties": {
+      "description": "Cosmos DB location metadata",
+      "type": "object",
+      "properties": {
+        "status": {
+          "description": "The current status of location in Azure.",
+          "type": "string"
+        },
+        "supportsAvailabilityZone": {
+          "description": "Flag indicating whether the location supports availability zones or not.",
+          "type": "boolean"
+        },
+        "isResidencyRestricted": {
+          "description": "Flag indicating whether the location is residency sensitive.",
+          "type": "boolean"
+        },
+        "backupStorageRedundancies": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/BackupStorageRedundancy"
+          },
+          "description": "The properties of available backup storage redundancies."
         }
       }
     },
