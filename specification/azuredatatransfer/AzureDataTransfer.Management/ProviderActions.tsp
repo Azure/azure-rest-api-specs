@@ -65,6 +65,16 @@ interface AzureDataTransfer {
     Request = Schema,
     Response = ValidateSchemaResult
   >;
+
+  /**
+   * Retrieves a list of FlowProfile resources associated with a specified pipeline.
+   */
+  @added(Versions.v2025_10_10_preview)
+  @autoRoute
+  listPipelineMetadata is ArmProviderActionSync<
+    Request = ListPipelineMetadataRequest,
+    Response = ListPipelineMetadataResult
+  >;
 }
 
 @@clientName(AzureDataTransfer.listApprovedSchemas::parameters.body,
