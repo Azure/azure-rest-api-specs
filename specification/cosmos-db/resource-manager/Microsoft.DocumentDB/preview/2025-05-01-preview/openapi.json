@@ -4208,8 +4208,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/CassandraViewGetResults"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -17507,9 +17506,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TableRoleDefinitionResourceListResult"
+              "$ref": "#/definitions/TableRoleDefinitionListResult"
             }
           },
           "default": {
@@ -20009,9 +20008,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/ThroughputPoolAccountResourceListResult"
+              "$ref": "#/definitions/ThroughputPoolAccountsListResult"
             }
           },
           "default": {
@@ -28065,50 +28064,43 @@
           "type": "number",
           "format": "double",
           "description": "The 10th percentile value for the metric.",
-          "readOnly": true,
-          "x-ms-client-name": "p10"
+          "readOnly": true
         },
         "P25": {
           "type": "number",
           "format": "double",
           "description": "The 25th percentile value for the metric.",
-          "readOnly": true,
-          "x-ms-client-name": "p25"
+          "readOnly": true
         },
         "P50": {
           "type": "number",
           "format": "double",
           "description": "The 50th percentile value for the metric.",
-          "readOnly": true,
-          "x-ms-client-name": "p50"
+          "readOnly": true
         },
         "P75": {
           "type": "number",
           "format": "double",
           "description": "The 75th percentile value for the metric.",
-          "readOnly": true,
-          "x-ms-client-name": "p75"
+          "readOnly": true
         },
         "P90": {
           "type": "number",
           "format": "double",
           "description": "The 90th percentile value for the metric.",
-          "readOnly": true,
-          "x-ms-client-name": "p90"
+          "readOnly": true
         },
         "P95": {
           "type": "number",
           "format": "double",
           "description": "The 95th percentile value for the metric.",
-          "readOnly": true,
-          "x-ms-client-name": "p95"
+          "readOnly": true
         },
         "P99": {
           "type": "number",
           "format": "double",
           "description": "The 99th percentile value for the metric.",
-          "readOnly": true,
-          "x-ms-client-name": "p99"
+          "readOnly": true
         }
       },
       "allOf": [
@@ -28159,6 +28151,10 @@
       "type": "object",
       "description": "The set of data plane operations permitted through this Role Definition.",
       "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id for the permission."
+        },
         "dataActions": {
           "type": "array",
           "description": "An array of data actions that are allowed.",
@@ -28284,23 +28280,6 @@
         "id"
       ]
     },
-    "PhysicalPartitionStorageInfo": {
-      "type": "object",
-      "description": "The storage of a physical partition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "The unique identifier of the partition.",
-          "readOnly": true
-        },
-        "storageInKB": {
-          "type": "number",
-          "format": "double",
-          "description": "The storage in KB for the physical partition.",
-          "readOnly": true
-        }
-      }
-    },
     "PhysicalPartitionStorageInfoCollection": {
       "type": "object",
       "description": "List of physical partitions and their properties returned by a merge operation.",
@@ -28309,7 +28288,7 @@
           "type": "array",
           "description": "List of physical partitions and their properties.",
           "items": {
-            "$ref": "#/definitions/PhysicalPartitionStorageInfo"
+            "$ref": "#/definitions/physicalPartitionStorageInfo"
           },
           "readOnly": true
         }
@@ -29445,7 +29424,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -29632,7 +29611,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -30462,7 +30441,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -30626,7 +30605,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -30747,7 +30726,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -30865,7 +30844,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -31678,7 +31657,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -31786,7 +31765,7 @@
         },
         "createMode": {
           "type": "string",
-          "description": "Enum to indicate the mode of resource creation.",
+          "description": "Enum to indicate the mode of account creation.",
           "default": "Default",
           "enum": [
             "Default",
@@ -31872,23 +31851,7 @@
         }
       }
     },
-    "TableRoleDefinitionResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB Table Role Definition.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TableRoleDefinitionResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB Table Role Definition.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "TableRoleDefinitionResourceListResult": {
+    "TableRoleDefinitionListResult": {
       "type": "object",
       "description": "The response of a TableRoleDefinitionResource list operation.",
       "properties": {
@@ -31907,6 +31870,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "TableRoleDefinitionResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Table Role Definition.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TableRoleDefinitionResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Table Role Definition.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "TableRoleDefinitionResourceProperties": {
@@ -32043,7 +32022,7 @@
         }
       ]
     },
-    "ThroughputPoolAccountResourceListResult": {
+    "ThroughputPoolAccountsListResult": {
       "type": "object",
       "description": "The response of a ThroughputPoolAccountResource list operation.",
       "properties": {
@@ -32675,6 +32654,23 @@
         "ignoreMissingVNetServiceEndpoint": {
           "type": "boolean",
           "description": "Create firewall rule before the virtual network has vnet service endpoint enabled."
+        }
+      }
+    },
+    "physicalPartitionStorageInfo": {
+      "type": "object",
+      "description": "The storage of a physical partition",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the partition.",
+          "readOnly": true
+        },
+        "storageInKB": {
+          "type": "number",
+          "format": "double",
+          "description": "The storage in KB for the physical partition.",
+          "readOnly": true
         }
       }
     }
