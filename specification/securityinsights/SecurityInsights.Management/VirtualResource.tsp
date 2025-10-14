@@ -13,6 +13,7 @@ alias OperationalInsights = Extension.ExternalResource<
   NamePattern = "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
 >;
 
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 @armVirtualResource
 @singleton("main")
 model ThreatIntelligenceMain {

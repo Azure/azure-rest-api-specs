@@ -5,139 +5,184 @@ using Microsoft.SecurityInsights;
 using Azure.ClientGenerator.Core.Legacy;
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ActionRequest.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(SecurityAlert.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(HuntingBookmark.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MetadataPatch.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(RepositoryAccessProperties.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(RepositoryAccessObject.repositoryAccess);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ThreatIntelligenceIndicatorModel.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(FusionAlertRule.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(FusionAlertRuleTemplate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MicrosoftSecurityIncidentCreationAlertRule.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MicrosoftSecurityIncidentCreationAlertRuleTemplate.properties
 );
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ScheduledAlertRule.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ScheduledAlertRuleTemplate.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(CustomizableConnectorDefinition.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(AADDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(AATPDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ASCDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(AwsCloudTrailDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(RestApiPollerDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MCASDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MDATPDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(TIDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MSTIDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(PremiumMicrosoftDefenderForThreatIntelligence.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(OfficeDataConnector.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(AnomalySecurityMLAnalyticsSettings.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(AccountEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(AzureResourceEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(CloudApplicationEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(DnsEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(FileEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(FileHashEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(HostEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(IoTDeviceEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(IpEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MailboxEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MailClusterEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MailMessageEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MalwareEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ProcessEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(RegistryKeyEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(RegistryValueEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(SecurityGroupEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(SubmissionMailEntity.properties);
 
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(UrlEntity.properties);
 
 @@clientName(AlertRules.createOrUpdate::parameters.resource, "alertRule");
@@ -148,16 +193,19 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientLocation(ActionResponses.delete, "Actions");
 @@clientLocation(ActionResponses.listByAlertRule, "Actions");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ActionResponse.properties);
 
 @@clientName(AutomationRules.createOrUpdate::parameters.resource,
   "automationRuleToUpsert"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(AutomationRule.properties);
 
 @@clientName(Bookmarks.createOrUpdate::parameters.resource, "bookmark");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(Bookmark.properties);
 
 @@clientLocation(PackageModels.get, "ContentPackages");
@@ -168,16 +216,19 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientLocation(PackageModels.uninstall, "ContentPackage");
 @@clientLocation(PackageModels.list, "ContentPackages");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(PackageModel.properties);
 
 @@clientLocation(ProductPackageModels.get, "ProductPackage");
 @@clientLocation(ProductPackageModels.list, "ProductPackages");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ProductPackageModel.properties);
 
 @@clientLocation(ProductTemplateModels.get, "ProductTemplate");
 @@clientLocation(ProductTemplateModels.list, "ProductTemplates");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(ProductTemplateModel.properties);
 
 @@clientLocation(TemplateModels.get, "ContentTemplate");
@@ -188,6 +239,7 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientLocation(TemplateModels.delete, "ContentTemplate");
 @@clientLocation(TemplateModels.list, "ContentTemplates");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(TemplateModel.properties);
 
 @@clientName(DataConnectorDefinitions.createOrUpdate::parameters.resource,
@@ -201,12 +253,14 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(Incidents.createOrUpdate::parameters.resource, "incident");
 @@clientName(Incidents.runPlaybook::parameters.body, "requestBody");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(Incident.properties);
 
 @@clientName(IncidentComments.createOrUpdate::parameters.resource,
   "incidentComment"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(IncidentComment.properties);
 
 @@clientLocation(Relations.get, "IncidentRelations");
@@ -215,10 +269,12 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientLocation(Relations.delete, "IncidentRelations");
 @@clientLocation(Relations.list, "IncidentRelations");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(Relation.properties);
 
 @@clientName(IncidentTasks.createOrUpdate::parameters.resource, "incidentTask");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(IncidentTask.properties);
 
 @@clientLocation(MetadataModels.get, "Metadata");
@@ -229,12 +285,14 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientLocation(MetadataModels.delete, "Metadata");
 @@clientLocation(MetadataModels.list, "Metadata");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(MetadataModel.properties);
 
 @@clientName(SentinelOnboardingStates.create::parameters.resource,
   "sentinelOnboardingStateParameter"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(SentinelOnboardingState.properties);
 
 @@clientName(SecurityMLAnalyticsSettings.createOrUpdate::parameters.resource,
@@ -244,6 +302,7 @@ using Azure.ClientGenerator.Core.Legacy;
 @@clientName(SourceControls.create::parameters.resource, "sourceControl");
 @@clientName(SourceControls.delete::parameters.body, "repositoryAccess");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(SourceControl.properties);
 
 @@clientLocation(ThreatIntelligenceInformations.get,
@@ -276,12 +335,14 @@ using Azure.ClientGenerator.Core.Legacy;
 
 @@clientName(Watchlists.createOrUpdate::parameters.resource, "watchlist");
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(Watchlist.properties);
 
 @@clientName(WatchlistItems.createOrUpdate::parameters.resource,
   "watchlistItem"
 );
 #suppress "deprecated" "@flattenProperty decorator is not recommended to use."
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "For backward compatibility"
 @@flattenProperty(WatchlistItem.properties);
 
 @@clientLocation(EntitiesOperationGroup.runPlaybook, "Entities");

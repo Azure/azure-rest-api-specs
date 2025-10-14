@@ -14,6 +14,7 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.SecurityInsights;
 
+/** Entity resource model */
 @armVirtualResource
 model EntityResource {
   ...ResourceNameParameter<
@@ -48,6 +49,7 @@ interface SourceControlOperationGroup {
    */
   // Due to TypeSpec provider action limitation: https://github.com/Azure/typespec-azure/issues/3224#issuecomment-3257368342
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "For backward compatibility"
   @autoRoute
   @list
   @post
@@ -99,6 +101,7 @@ interface ThreatIntelligenceIndicatorOperationGroup {
    * Create a new threat intelligence indicator.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-post-operation-response-codes" "For backward compatibility"
   @autoRoute
   @action("createIndicator")
   createIndicator is Extension.ActionSync<

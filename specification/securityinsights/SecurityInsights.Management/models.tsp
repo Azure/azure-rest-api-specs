@@ -2543,6 +2543,7 @@ model PackageList is Azure.Core.Page<PackageModel>;
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model PackageProperties extends PackageBaseProperties {}
 
 /**
@@ -2812,6 +2813,7 @@ model ProductPackageAdditionalProperties {
   /**
    * The json of the ARM template to deploy. Expandable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   packagedContent?: unknown;
 }
 
@@ -2967,6 +2969,7 @@ model ProductTemplateAdditionalProperties {
   /**
    * The json of the ARM template to deploy
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   packagedContent?: unknown;
 }
 
@@ -2991,6 +2994,7 @@ model TemplateAdditionalProperties {
   /**
    * The JSON of the ARM template to deploy active content. Expandable.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   mainTemplate?: unknown;
 
   /**
@@ -4006,6 +4010,7 @@ model OperationDisplay {
 /**
  * List all the SecurityMLAnalyticsSettings
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SecurityMLAnalyticsSettingsList
   is Azure.Core.Page<SecurityMLAnalyticsSetting>;
 
@@ -4111,6 +4116,7 @@ model SourceControlProperties {
   /**
    * The id (a Guid) of the source control
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "For backward compatibility"
   @visibility(Lifecycle.Read)
   id?: string;
 
@@ -4421,6 +4427,7 @@ model Warning {
   /**
    * Warning data.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   warning?: WarningBody;
 }
 
@@ -5065,11 +5072,13 @@ model WatchlistItemProperties {
   /**
    * key-value pairs for a watchlist item
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   itemsKeyValue: unknown;
 
   /**
    * key-value pairs for a watchlist item entity mapping
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   entityMapping?: unknown;
 }
 
@@ -5188,6 +5197,7 @@ model FusionAlertRuleTemplateProperties {
   /**
    * The time that this alert rule template has been added.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateUTC?: utcDateTime;
@@ -5195,6 +5205,7 @@ model FusionAlertRuleTemplateProperties {
   /**
    * The time that this alert rule template was last updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateUTC?: utcDateTime;

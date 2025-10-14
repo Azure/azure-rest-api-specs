@@ -14,6 +14,7 @@ namespace Microsoft.SecurityInsights;
 /**
  * Security ML Analytics Setting
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @discriminator("kind")
 model SecurityMLAnalyticsSetting
   is Azure.ResourceManager.Legacy.DiscriminatedExtensionResource<SecurityMLAnalyticsSettingsKind> {
@@ -31,6 +32,7 @@ model SecurityMLAnalyticsSetting
   etag?: string;
 }
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 @armResourceOperations
 interface SecurityMLAnalyticsSettings {
   /**
