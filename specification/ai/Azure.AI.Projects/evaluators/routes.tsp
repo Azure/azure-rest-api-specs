@@ -18,7 +18,7 @@ alias EvaluatorInputParameters = InputParameters<
   "evaluatorVersion"
 >;
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   #suppress "@azure-tools/typespec-azure-core/operation-missing-api-version" "not yet versioned"

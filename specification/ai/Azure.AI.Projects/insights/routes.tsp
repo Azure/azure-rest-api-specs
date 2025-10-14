@@ -49,7 +49,7 @@ alias IncludeCoordinatesQueryTrait = {
   includeCoordinates?: boolean;
 };
 
-@added(Versions.v2025_10_15_preview)
+@added(Versions.v2025_11_15_preview)
 interface Insights {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Generate Insights")
