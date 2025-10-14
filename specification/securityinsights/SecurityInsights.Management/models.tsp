@@ -5357,6 +5357,7 @@ model MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties {
   /**
    * The time that this alert rule template has been added.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateUTC?: utcDateTime;
@@ -5364,6 +5365,7 @@ model MicrosoftSecurityIncidentCreationAlertRuleTemplateProperties {
   /**
    * The time that this alert rule template was last updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateUTC?: utcDateTime;
@@ -5600,6 +5602,7 @@ model ScheduledAlertRuleCommonProperties {
   /**
    * Array of the entity mappings of the alert rule
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   entityMappings?: EntityMapping[];
 
   /**
@@ -5707,6 +5710,7 @@ model ScheduledAlertRuleTemplateProperties {
   /**
    * The time that this alert rule template has been added.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   createdDateUTC?: utcDateTime;
@@ -5714,6 +5718,7 @@ model ScheduledAlertRuleTemplateProperties {
   /**
    * The time that this alert rule template was last updated.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdatedDateUTC?: utcDateTime;
@@ -5799,6 +5804,7 @@ model ScheduledAlertRuleTemplateProperties {
   /**
    * Array of the entity mappings of the alert rule
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/missing-x-ms-identifiers" "For backward compatibility"
   entityMappings?: EntityMapping[];
 
   /**
@@ -6375,6 +6381,7 @@ model InstructionStepDetails {
   /**
    * Gets or sets the instruction type parameters settings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   parameters: unknown;
 
   /**
@@ -6401,6 +6408,7 @@ model CustomizableConnectionsConfig {
 /**
  * Represents AAD (Azure Active Directory) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AADDataConnector extends DataConnector {
   /**
    * AAD (Azure Active Directory) data connector properties.
@@ -6418,6 +6426,7 @@ model AADDataConnector extends DataConnector {
 /**
  * AAD (Azure Active Directory) data connector properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AADDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
@@ -6453,6 +6462,7 @@ model DataConnectorDataTypeCommon {
 /**
  * Represents AATP (Azure Advanced Threat Protection) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AATPDataConnector extends DataConnector {
   /**
    * AATP (Azure Advanced Threat Protection) data connector properties.
@@ -6470,6 +6480,7 @@ model AATPDataConnector extends DataConnector {
 /**
  * AATP (Azure Advanced Threat Protection) data connector properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AATPDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
@@ -6485,6 +6496,7 @@ model AATPDataConnectorProperties {
 /**
  * Represents ASC (Azure Security Center) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ASCDataConnector extends DataConnector {
   /**
    * ASC (Azure Security Center) data connector properties.
@@ -6503,6 +6515,7 @@ model ASCDataConnector extends DataConnector {
  * ASC (Azure Security Center) data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model ASCDataConnectorProperties extends DataConnectorWithAlertsProperties {
   /**
    * The subscription id to connect to, and get the data from.
@@ -6566,6 +6579,7 @@ model AwsCloudTrailDataConnectorDataTypes {
  * Logs data type.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model AwsCloudTrailDataConnectorDataTypesLogs
   extends DataConnectorDataTypeCommon {}
 
@@ -6660,6 +6674,7 @@ model RestApiPollerRequestConfig {
   /**
    * The Rate limit queries per second for the request..
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   rateLimitQPS?: int32;
 
   /**
@@ -6738,6 +6753,7 @@ model RestApiPollerRequestConfig {
 /**
  * The configuration of the destination of the data.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model DCRConfiguration {
   /**
    * Represents the data collection ingestion endpoint in log analytics.
@@ -7001,6 +7017,7 @@ model ApiKeyAuthModel extends CcpAuthConfig {
 /**
  * Model for API authentication with AWS.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AWSAuthModel extends CcpAuthConfig {
   /**
    * AWS STS assume role ARN
@@ -7041,6 +7058,7 @@ model BasicAuthModel extends CcpAuthConfig {
 /**
  * Model for API authentication for all GCP kind connectors.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model GCPAuthModel extends CcpAuthConfig {
   /**
    * GCP Service Account Email
@@ -7168,6 +7186,7 @@ model JwtAuthModel extends CcpAuthConfig {
 /**
  * Model for API authentication with OAuth2.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model OAuthModel extends CcpAuthConfig {
   /**
    * The user's authorization code.
@@ -7351,6 +7370,7 @@ model DataConnectorTenantId {
 /**
  * Represents MCAS (Microsoft Cloud App Security) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MCASDataConnector extends DataConnector {
   /**
    * MCAS (Microsoft Cloud App Security) data connector properties.
@@ -7368,6 +7388,7 @@ model MCASDataConnector extends DataConnector {
 /**
  * MCAS (Microsoft Cloud App Security) data connector properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MCASDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
@@ -7384,6 +7405,7 @@ model MCASDataConnectorProperties {
  * The available data types for MCAS (Microsoft Cloud App Security) data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MCASDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
   /**
    * Alerts log data type connection.
@@ -7399,6 +7421,7 @@ model MCASDataConnectorDataTypes extends AlertsDataTypeOfDataConnector {
 /**
  * Represents MDATP (Microsoft Defender Advanced Threat Protection) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MDATPDataConnector extends DataConnector {
   /**
    * MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
@@ -7416,6 +7439,7 @@ model MDATPDataConnector extends DataConnector {
 /**
  * MDATP (Microsoft Defender Advanced Threat Protection) data connector properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MDATPDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
@@ -7431,6 +7455,7 @@ model MDATPDataConnectorProperties {
 /**
  * Represents threat intelligence data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model TIDataConnector extends DataConnector {
   /**
    * TI (Threat Intelligence) data connector properties.
@@ -7448,6 +7473,7 @@ model TIDataConnector extends DataConnector {
 /**
  * TI (Threat Intelligence) data connector properties.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model TIDataConnectorProperties {
   /**
    * The tenant id to connect to, and get the data from.
@@ -7469,6 +7495,7 @@ model TIDataConnectorProperties {
 /**
  * The available data types for TI (Threat Intelligence) data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model TIDataConnectorDataTypes {
   /**
    * Data type for indicators connection.
@@ -7480,11 +7507,14 @@ model TIDataConnectorDataTypes {
  * Data type for indicators connection.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model TIDataConnectorDataTypesIndicators extends DataConnectorDataTypeCommon {}
 
 /**
  * Represents Microsoft Threat Intelligence data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSTIDataConnector extends DataConnector {
   /**
    * Microsoft Threat Intelligence data connector properties.
@@ -7503,6 +7533,7 @@ model MSTIDataConnector extends DataConnector {
  * Microsoft Threat Intelligence data connector properties.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSTIDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The available data types for the connector.
@@ -7513,6 +7544,7 @@ model MSTIDataConnectorProperties extends DataConnectorTenantId {
 /**
  * The available data types for Microsoft Threat Intelligence data connector.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSTIDataConnectorDataTypes {
   /**
    * Data type for Microsoft Threat Intelligence data connector.
@@ -7524,6 +7556,7 @@ model MSTIDataConnectorDataTypes {
  * Data type for Microsoft Threat Intelligence data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model MSTIDataConnectorDataTypesMicrosoftEmergingThreatFeed
   extends DataConnectorDataTypeCommon {
   /**
@@ -7564,6 +7597,7 @@ model PremiumMdtiDataConnectorProperties extends DataConnectorTenantId {
   /**
    * The flag to indicate whether the tenant has the premium SKU required to access this connector.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   requiredSKUsPresent?: boolean;
 
   /**
@@ -7586,6 +7620,7 @@ model PremiumMdtiDataConnectorDataTypes {
  * Data type for Premium Microsoft Defender for Threat Intelligence data connector.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model PremiumMdtiDataConnectorDataTypesConnector
   extends DataConnectorDataTypeCommon {}
 
@@ -7645,6 +7680,7 @@ model OfficeDataConnectorDataTypes {
  * Exchange data type connection.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model OfficeDataConnectorDataTypesExchange
   extends DataConnectorDataTypeCommon {}
 
@@ -7652,6 +7688,7 @@ model OfficeDataConnectorDataTypesExchange
  * SharePoint data type connection.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model OfficeDataConnectorDataTypesSharePoint
   extends DataConnectorDataTypeCommon {}
 
@@ -7659,11 +7696,13 @@ model OfficeDataConnectorDataTypesSharePoint
  * Teams data type connection.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "For backward compatibility"
 model OfficeDataConnectorDataTypesTeams extends DataConnectorDataTypeCommon {}
 
 /**
  * Represents Anomaly Security ML Analytics Settings
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AnomalySecurityMLAnalyticsSettings extends SecurityMLAnalyticsSetting {
   /**
    * Anomaly Security ML Analytics Settings properties
@@ -7681,6 +7720,7 @@ model AnomalySecurityMLAnalyticsSettings extends SecurityMLAnalyticsSetting {
 /**
  * AnomalySecurityMLAnalytics settings base property bag.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * The description of the SecurityMLAnalyticsSettings.
@@ -7728,6 +7768,7 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
   /**
    * The customizable observations of the AnomalySecurityMLAnalyticsSettings.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   customizableObservations?: unknown;
 
   /**
@@ -7761,6 +7802,7 @@ model AnomalySecurityMLAnalyticsSettingsProperties {
 /**
  * security ml analytics settings data sources
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model SecurityMLAnalyticsSettingsDataSource {
   /**
    * The connector id that provides the following data types
@@ -8149,6 +8191,7 @@ model HostEntityProperties extends EntityCommonProperties {
   /**
    * The azure resource id of the VM.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   azureID?: string;
 
@@ -8185,6 +8228,7 @@ model HostEntityProperties extends EntityCommonProperties {
   /**
    * The OMS agent id, if the host has OMS agent installed.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   omsAgentID?: string;
 
@@ -8203,6 +8247,7 @@ model HostEntityProperties extends EntityCommonProperties {
 /**
  * Represents an IoT device entity.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model IoTDeviceEntity extends Entity {
   /**
    * IoTDevice entity properties
@@ -8221,6 +8266,7 @@ model IoTDeviceEntity extends Entity {
  * IoTDevice entity property bag.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
 model IoTDeviceEntityProperties extends EntityCommonProperties {
   /**
    * The ID of the IoT Device in the IoT Hub
@@ -8493,18 +8539,21 @@ model MailClusterEntityProperties extends EntityCommonProperties {
   /**
    * Count of mail messages by DeliveryStatus string representation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   @visibility(Lifecycle.Read)
   countByDeliveryStatus?: unknown;
 
   /**
    * Count of mail messages by ThreatType string representation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   @visibility(Lifecycle.Read)
   countByThreatType?: unknown;
 
   /**
    * Count of mail messages by ProtectionStatus string representation
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "For backward compatibility"
   @visibility(Lifecycle.Read)
   countByProtectionStatus?: unknown;
 
@@ -8649,6 +8698,7 @@ model MailMessageEntityProperties extends EntityCommonProperties {
   /**
    * The sender's IP address
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
   @visibility(Lifecycle.Read)
   senderIP?: string;
 
