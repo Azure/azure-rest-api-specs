@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft Cognitive Language Service - Text Analysis",
-    "version": "2024-11-15-preview",
+    "version": "2025-11-01",
     "description": "The language service API is a suite of natural language processing (NLP) skills built with best-in-class Microsoft machine learning algorithms.  The API can be used to analyze unstructured text for tasks such as sentiment analysis, key phrase extraction, language detection and question answering. Further documentation can be found in <a href=\\\"https://learn.microsoft.com/azure/cognitive-services/language-service/overview\\\">https://learn.microsoft.com/azure/cognitive-services/language-service/overview</a>.0",
     "x-typespec-generated": [
       {
@@ -106,47 +106,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulEntityLinkingRequest": {
-            "$ref": "./examples/SuccessfulEntityLinkingRequest.json"
-          },
-          "SuccessfulEntityRecognitionExclusionRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionExclusionRequest.json"
-          },
-          "SuccessfulEntityRecognitionInclusionRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionInclusionRequest.json"
-          },
-          "SuccessfulEntityRecognitionInferenceOptionsRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionInferenceOptionsRequest.json"
-          },
-          "SuccessfulEntityRecognitionOverlapPolicy": {
-            "$ref": "./examples/SuccessfulEntityRecognitionOverlapPolicy.json"
-          },
-          "SuccessfulEntityRecognitionRequest": {
-            "$ref": "./examples/SuccessfulEntityRecognitionRequest.json"
-          },
-          "SuccessfulKeyPhraseExtractionRequest": {
-            "$ref": "./examples/SuccessfulKeyPhraseExtractionRequest.json"
-          },
-          "SuccessfulLanguageDetectionRequest": {
-            "$ref": "./examples/SuccessfulLanguageDetectionRequest.json"
-          },
-          "SuccessfulPiiEntityRecognitionExclusionRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionExclusionRequest.json"
-          },
-          "SuccessfulPiiEntityRecognitionMaskedEntitiesRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionMaskedEntities.json"
-          },
-          "SuccessfulPiiEntityRecognitionRedactionPolicyRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionRedactionPolicyRequest.json"
-          },
-          "SuccessfulPiiEntityRecognitionRequest": {
-            "$ref": "./examples/SuccessfulPiiEntityRecognitionRequest.json"
-          },
-          "SuccessfulSentimentAnalysisRequest": {
-            "$ref": "./examples/SuccessfulSentimentAnalysisRequest.json"
-          }
         }
       }
     },
@@ -189,23 +148,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskSubmit": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskSubmit.json"
-          },
-          "SuccessfulAbstractiveSummarizationTaskSubmit": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskSubmit.json"
-          },
-          "SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskSubmitRequest.json"
-          },
-          "SuccessfulHealthcareDocumentTypePostRequest": {
-            "$ref": "./examples/SuccessfulHealthcareDocumentTypePostRequest.json"
-          },
-          "SuccessfulHealthcarePostRequest": {
-            "$ref": "./examples/SuccessfulHealthcarePostRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -271,23 +213,6 @@
               }
             }
           }
-        },
-        "x-ms-examples": {
-          "SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskResult": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationSummaryLengthPromptTaskResult.json"
-          },
-          "SuccessfulAbstractiveSummarizationTaskResult": {
-            "$ref": "./examples/SuccessfulAbstractiveSummarizationTaskResult.json"
-          },
-          "SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsMultipleTaskStatusRequest.json"
-          },
-          "SuccessfulHealthcareDocumentTypeTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulHealthcareDocumentTypeTaskStatusRequest.json"
-          },
-          "SuccessfulHealthcareTaskStatusRequest": {
-            "$ref": "./examples/SuccessfulHealthcareTaskStatusRequest.json"
-          }
         }
       }
     },
@@ -331,11 +256,6 @@
                 "description": "String error code indicating what went wrong."
               }
             }
-          }
-        },
-        "x-ms-examples": {
-          "SuccessfulAnalyzeTextJobsCancelRequest": {
-            "$ref": "./examples/SuccessfulAnalyzeTextJobsCancelRequest.json"
           }
         },
         "x-ms-long-running-operation": true
@@ -401,7 +321,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/AbstractiveSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/AbstractiveSummaryDocumentResult"
           }
         }
       },
@@ -464,10 +384,6 @@
         "summaryLength": {
           "$ref": "#/definitions/SummaryLengthBucket",
           "description": "(NOTE: Recommended to use summaryLength over sentenceCount) Controls the approximate length of the output summaries."
-        },
-        "instruction": {
-          "type": "string",
-          "description": "(Optional) If provided, the query will be used to generate the summary."
         }
       }
     },
@@ -491,9 +407,9 @@
         "text"
       ]
     },
-    "AbstractiveSummaryDocumentResultWithDetectedLanguage": {
+    "AbstractiveSummaryDocumentResult": {
       "type": "object",
-      "description": "An object representing the Abstractive Summarization result of a single document with detected language.",
+      "description": "An object representing the pre-built Abstractive Summarization results of each document.",
       "properties": {
         "id": {
           "type": "string",
@@ -516,10 +432,6 @@
           "items": {
             "$ref": "#/definitions/AbstractiveSummary"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -723,10 +635,6 @@
           "items": {
             "$ref": "#/definitions/AnalyzeTextLROTask"
           }
-        },
-        "defaultLanguage": {
-          "type": "string",
-          "description": "Default language to use for records requesting automatic language detection."
         }
       },
       "required": [
@@ -1334,47 +1242,6 @@
         "metadataKind"
       ]
     },
-    "BaseRedactionPolicy": {
-      "type": "object",
-      "description": "The abstract base class for RedactionPolicy.",
-      "properties": {
-        "policyKind": {
-          "type": "string",
-          "description": "The entity RedactionPolicy object kind.",
-          "default": "characterMask",
-          "enum": [
-            "noMask",
-            "characterMask",
-            "entityMask"
-          ],
-          "x-ms-enum": {
-            "name": "RedactionPolicyKind",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "noMask",
-                "value": "noMask",
-                "description": "Do not redact detected entities."
-              },
-              {
-                "name": "characterMask",
-                "value": "characterMask",
-                "description": "React detected entities with redaction character."
-              },
-              {
-                "name": "entityMask",
-                "value": "entityMask",
-                "description": "Redact detected entities with entity type."
-              }
-            ]
-          }
-        }
-      },
-      "discriminator": "policyKind",
-      "required": [
-        "policyKind"
-      ]
-    },
     "Certainty": {
       "type": "string",
       "description": "Describes the entities certainty and polarity.",
@@ -1417,118 +1284,9 @@
         ]
       }
     },
-    "CharacterMaskPolicyType": {
+    "ClassificationDocumentResult": {
       "type": "object",
-      "description": "Represents the policy of redacting with a redaction character",
-      "properties": {
-        "redactionCharacter": {
-          "type": "string",
-          "description": "Optional parameter to use a Custom Character to be used for redaction in PII responses. Default character will bce * as before. We allow specific ascii characters for redaction.",
-          "default": "*",
-          "enum": [
-            "!",
-            "#",
-            "$",
-            "%",
-            "&",
-            "*",
-            "+",
-            "-",
-            "=",
-            "?",
-            "@",
-            "^",
-            "_",
-            "~"
-          ],
-          "x-ms-enum": {
-            "name": "redactionCharacter",
-            "modelAsString": true,
-            "values": [
-              {
-                "name": "exclamationPoint",
-                "value": "!",
-                "description": "Exclamation point character"
-              },
-              {
-                "name": "numberSign",
-                "value": "#",
-                "description": "Number sign character"
-              },
-              {
-                "name": "dollar",
-                "value": "$",
-                "description": "Dollar sign character"
-              },
-              {
-                "name": "perCent",
-                "value": "%",
-                "description": "Percent sign character"
-              },
-              {
-                "name": "ampersand",
-                "value": "&",
-                "description": "Ampersand character"
-              },
-              {
-                "name": "asterisk",
-                "value": "*",
-                "description": "Asterisk character"
-              },
-              {
-                "name": "plus",
-                "value": "+",
-                "description": "Plus sign character"
-              },
-              {
-                "name": "minus",
-                "value": "-",
-                "description": "Minus sign character"
-              },
-              {
-                "name": "equals",
-                "value": "=",
-                "description": "Equals sign character"
-              },
-              {
-                "name": "questionMark",
-                "value": "?",
-                "description": "Question mark character"
-              },
-              {
-                "name": "atSign",
-                "value": "@",
-                "description": "At sign character"
-              },
-              {
-                "name": "caret",
-                "value": "^",
-                "description": "Caret character"
-              },
-              {
-                "name": "underscore",
-                "value": "_",
-                "description": "Underscore character"
-              },
-              {
-                "name": "tilde",
-                "value": "~",
-                "description": "Tilde character"
-              }
-            ]
-          }
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "characterMask"
-    },
-    "ClassificationDocumentResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the classification doc result for the task with detected language.",
+      "description": "Contains the classification doc result for the task.",
       "properties": {
         "id": {
           "type": "string",
@@ -1551,10 +1309,6 @@
           "items": {
             "$ref": "#/definitions/ClassificationResult"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -1678,7 +1432,7 @@
           "type": "array",
           "description": "Enumeration of the document results.",
           "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/EntitiesDocumentResult"
           }
         }
       },
@@ -1789,7 +1543,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/ClassificationDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/ClassificationDocumentResult"
           }
         }
       },
@@ -2104,9 +1858,9 @@
         "message"
       ]
     },
-    "EntitiesDocumentResultWithDetectedLanguage": {
+    "EntitiesDocumentResult": {
       "type": "object",
-      "description": "Contains the entity recognition task result for the document with detected language.",
+      "description": "Contains the entity recognition task result for the document.",
       "properties": {
         "id": {
           "type": "string",
@@ -2129,10 +1883,6 @@
           "items": {
             "$ref": "#/definitions/Entity"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -2166,43 +1916,6 @@
           "items": {
             "$ref": "#/definitions/EntityWithMetadata"
           }
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities"
-      ]
-    },
-    "EntitiesDocumentResultWithMetadataDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the entity recognition task result for the document with metadata and detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/EntityWithMetadata"
-          }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -2334,7 +2047,7 @@
       "description": "Contains the entity task",
       "properties": {
         "results": {
-          "$ref": "#/definitions/EntitiesWithMetadataAutoResult",
+          "$ref": "#/definitions/EntitiesResult",
           "description": "Results for entity recognition."
         }
       },
@@ -2347,39 +2060,6 @@
         }
       ],
       "x-ms-discriminator-value": "EntityRecognitionResults"
-    },
-    "EntitiesWithMetadataAutoResult": {
-      "type": "object",
-      "description": "Contains the entity recognition task result.",
-      "properties": {
-        "errors": {
-          "type": "array",
-          "description": "Errors by document id.",
-          "items": {
-            "$ref": "#/definitions/DocumentError"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/RequestStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the request payload."
-        },
-        "modelVersion": {
-          "type": "string",
-          "description": "This field indicates which model is used for scoring."
-        },
-        "documents": {
-          "type": "array",
-          "description": "Response by document",
-          "items": {
-            "$ref": "#/definitions/EntitiesDocumentResultWithMetadataDetectedLanguage"
-          }
-        }
-      },
-      "required": [
-        "errors",
-        "modelVersion",
-        "documents"
-      ]
     },
     "Entity": {
       "type": "object",
@@ -2814,7 +2494,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/EntityLinkingResultWithDetectedLanguage"
+            "$ref": "#/definitions/LinkedEntitiesDocumentResult"
           }
         }
       },
@@ -2822,43 +2502,6 @@
         "errors",
         "modelVersion",
         "documents"
-      ]
-    },
-    "EntityLinkingResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "Entity linking document result with auto language detection.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized well known entities in the document.",
-          "items": {
-            "$ref": "#/definitions/LinkedEntity"
-          }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "entities"
       ]
     },
     "EntityLinkingTaskParameters": {
@@ -2926,16 +2569,6 @@
         }
       ],
       "x-ms-discriminator-value": "EntityLinkingResults"
-    },
-    "EntityMaskPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of redacting PII with the entity type.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "entityMask"
     },
     "EntityRecognitionLROResult": {
       "type": "object",
@@ -3195,7 +2828,7 @@
         "error"
       ]
     },
-    "ExtractedSummaryDocumentResultWithDetectedLanguage": {
+    "ExtractedSummaryDocumentResult": {
       "type": "object",
       "description": "A ranked list of sentences representing the extracted summary.",
       "properties": {
@@ -3220,10 +2853,6 @@
           "items": {
             "$ref": "#/definitions/ExtractedSummarySentence"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -3321,7 +2950,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/ExtractedSummaryDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/ExtractedSummaryDocumentResult"
           }
         }
       },
@@ -3406,10 +3035,6 @@
               }
             ]
           }
-        },
-        "query": {
-          "type": "string",
-          "description": "(Optional) If provided, the query will be used to extract most relevant sentences from the document."
         }
       }
     },
@@ -3440,9 +3065,9 @@
         }
       }
     },
-    "HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage": {
+    "HealthcareEntitiesDocumentResult": {
       "type": "object",
-      "description": "Result object for the processed Healthcare document with detected language.",
+      "description": "Result object for the processed Healthcare document.",
       "properties": {
         "id": {
           "type": "string",
@@ -3476,10 +3101,6 @@
         "fhirBundle": {
           "$ref": "#/definitions/FhirBundle",
           "description": "JSON bundle containing a FHIR compatible object for consumption in other Healthcare tools. For additional information see https://www.hl7.org/fhir/overview.html."
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -3664,7 +3285,7 @@
           "type": "array",
           "description": "List of result objects for the processed Healthcare documents.",
           "items": {
-            "$ref": "#/definitions/HealthcareEntitiesDocumentResultWithDocumentDetectedLanguage"
+            "$ref": "#/definitions/HealthcareEntitiesDocumentResult"
           }
         }
       },
@@ -4031,7 +3652,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/KeyPhrasesDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/KeyPhrasesDocumentResult"
           }
         }
       },
@@ -4076,9 +3697,9 @@
       ],
       "x-ms-discriminator-value": "KeyPhraseExtractionResults"
     },
-    "KeyPhrasesDocumentResultWithDetectedLanguage": {
+    "KeyPhrasesDocumentResult": {
       "type": "object",
-      "description": "A ranked list of sentences representing the extracted summary.",
+      "description": "Contains the Key phrase extraction results for a document.",
       "properties": {
         "id": {
           "type": "string",
@@ -4101,10 +3722,6 @@
           "items": {
             "type": "string"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -4385,6 +4002,39 @@
         ]
       }
     },
+    "LinkedEntitiesDocumentResult": {
+      "type": "object",
+      "description": "Entity linking document result.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized well known entities in the document.",
+          "items": {
+            "$ref": "#/definitions/LinkedEntity"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "entities"
+      ]
+    },
     "LinkedEntity": {
       "type": "object",
       "description": "The LinkedEntity object containing the detected entity with the associated sources/links.",
@@ -4619,16 +4269,6 @@
         "text"
       ]
     },
-    "NoMaskPolicyType": {
-      "type": "object",
-      "description": "Represents the policy of not redacting found PII.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/BaseRedactionPolicy"
-        }
-      ],
-      "x-ms-discriminator-value": "noMask"
-    },
     "NumberKind": {
       "type": "string",
       "description": "The type of the extracted number entity.",
@@ -4765,1044 +4405,6 @@
         }
       ],
       "x-ms-discriminator-value": "OrdinalMetadata"
-    },
-    "PiiCategoriesExclude": {
-      "type": "string",
-      "description": "(Optional) describes the PII categories to return",
-      "enum": [
-        "ABARoutingNumber",
-        "ARNationalIdentityNumber",
-        "AUBankAccountNumber",
-        "AUDriversLicenseNumber",
-        "AUMedicalAccountNumber",
-        "AUPassportNumber",
-        "AUTaxFileNumber",
-        "AUBusinessNumber",
-        "AUCompanyNumber",
-        "ATIdentityCard",
-        "ATTaxIdentificationNumber",
-        "ATValueAddedTaxNumber",
-        "AzureDocumentDBAuthKey",
-        "AzureIAASDatabaseConnectionAndSQLString",
-        "AzureIoTConnectionString",
-        "AzurePublishSettingPassword",
-        "AzureRedisCacheString",
-        "AzureSAS",
-        "AzureServiceBusString",
-        "AzureStorageAccountKey",
-        "AzureStorageAccountGeneric",
-        "BENationalNumber",
-        "BENationalNumberV2",
-        "BEValueAddedTaxNumber",
-        "BRCPFNumber",
-        "BRLegalEntityNumber",
-        "BRNationalIDRG",
-        "BGUniformCivilNumber",
-        "CABankAccountNumber",
-        "CADriversLicenseNumber",
-        "CAHealthServiceNumber",
-        "CAPassportNumber",
-        "CAPersonalHealthIdentification",
-        "CASocialInsuranceNumber",
-        "CLIdentityCardNumber",
-        "CNResidentIdentityCardNumber",
-        "CreditCardNumber",
-        "HRIdentityCardNumber",
-        "HRNationalIDNumber",
-        "HRPersonalIdentificationNumber",
-        "HRPersonalIdentificationOIBNumberV2",
-        "CYIdentityCard",
-        "CYTaxIdentificationNumber",
-        "CZPersonalIdentityNumber",
-        "CZPersonalIdentityV2",
-        "DKPersonalIdentificationNumber",
-        "DKPersonalIdentificationV2",
-        "DrugEnforcementAgencyNumber",
-        "EEPersonalIdentificationCode",
-        "EUDebitCardNumber",
-        "EUDriversLicenseNumber",
-        "EUGPSCoordinates",
-        "EUNationalIdentificationNumber",
-        "EUPassportNumber",
-        "EUSocialSecurityNumber",
-        "EUTaxIdentificationNumber",
-        "FIEuropeanHealthNumber",
-        "FINationalID",
-        "FINationalIDV2",
-        "FIPassportNumber",
-        "FRDriversLicenseNumber",
-        "FRHealthInsuranceNumber",
-        "FRNationalID",
-        "FRPassportNumber",
-        "FRSocialSecurityNumber",
-        "FRTaxIdentificationNumber",
-        "FRValueAddedTaxNumber",
-        "DEDriversLicenseNumber",
-        "DEPassportNumber",
-        "DEIdentityCardNumber",
-        "DETaxIdentificationNumber",
-        "DEValueAddedNumber",
-        "GRNationalIDCard",
-        "GRNationalIDV2",
-        "GRTaxIdentificationNumber",
-        "HKIdentityCardNumber",
-        "HUValueAddedNumber",
-        "HUPersonalIdentificationNumber",
-        "HUTaxIdentificationNumber",
-        "INPermanentAccount",
-        "INUniqueIdentificationNumber",
-        "IDIdentityCardNumber",
-        "InternationalBankingAccountNumber",
-        "IEPersonalPublicServiceNumber",
-        "IEPersonalPublicServiceNumberV2",
-        "ILBankAccountNumber",
-        "ILNationalID",
-        "ITDriversLicenseNumber",
-        "ITFiscalCode",
-        "ITValueAddedTaxNumber",
-        "JPBankAccountNumber",
-        "JPDriversLicenseNumber",
-        "JPPassportNumber",
-        "JPResidentRegistrationNumber",
-        "JPSocialInsuranceNumber",
-        "JPMyNumberCorporate",
-        "JPMyNumberPersonal",
-        "JPResidenceCardNumber",
-        "LVPersonalCode",
-        "LTPersonalCode",
-        "LUNationalIdentificationNumberNatural",
-        "LUNationalIdentificationNumberNonNatural",
-        "MYIdentityCardNumber",
-        "MTIdentityCardNumber",
-        "MTTaxIDNumber",
-        "NLCitizensServiceNumber",
-        "NLCitizensServiceNumberV2",
-        "NLTaxIdentificationNumber",
-        "NLValueAddedTaxNumber",
-        "NZBankAccountNumber",
-        "NZDriversLicenseNumber",
-        "NZInlandRevenueNumber",
-        "NZMinistryOfHealthNumber",
-        "NZSocialWelfareNumber",
-        "NOIdentityNumber",
-        "PHUnifiedMultiPurposeIDNumber",
-        "PLIdentityCard",
-        "PLNationalID",
-        "PLNationalIDV2",
-        "PLPassportNumber",
-        "PLTaxIdentificationNumber",
-        "PLREGONNumber",
-        "PTCitizenCardNumber",
-        "PTCitizenCardNumberV2",
-        "PTTaxIdentificationNumber",
-        "ROPersonalNumericalCode",
-        "RUPassportNumberDomestic",
-        "RUPassportNumberInternational",
-        "SANationalID",
-        "SGNationalRegistrationIdentityCardNumber",
-        "SKPersonalNumber",
-        "SITaxIdentificationNumber",
-        "SIUniqueMasterCitizenNumber",
-        "ZAIdentificationNumber",
-        "KRResidentRegistrationNumber",
-        "ESDNI",
-        "ESSocialSecurityNumber",
-        "ESTaxIdentificationNumber",
-        "SQLServerConnectionString",
-        "SENationalID",
-        "SENationalIDV2",
-        "SEPassportNumber",
-        "SETaxIdentificationNumber",
-        "SWIFTCode",
-        "CHSocialSecurityNumber",
-        "TWNationalID",
-        "TWPassportNumber",
-        "TWResidentCertificate",
-        "THPopulationIdentificationCode",
-        "TRNationalIdentificationNumber",
-        "UKDriversLicenseNumber",
-        "UKElectoralRollNumber",
-        "UKNationalHealthNumber",
-        "UKNationalInsuranceNumber",
-        "UKUniqueTaxpayerNumber",
-        "USUKPassportNumber",
-        "USBankAccountNumber",
-        "USDriversLicenseNumber",
-        "USIndividualTaxpayerIdentification",
-        "USSocialSecurityNumber",
-        "UAPassportNumberDomestic",
-        "UAPassportNumberInternational",
-        "Organization",
-        "Email",
-        "URL",
-        "Age",
-        "PhoneNumber",
-        "IPAddress",
-        "Date",
-        "Person",
-        "Address"
-      ],
-      "x-ms-enum": {
-        "name": "PiiCategoriesExclude",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "ABARoutingNumber",
-            "value": "ABARoutingNumber",
-            "description": "ABA Routing number"
-          },
-          {
-            "name": "ARNationalIdentityNumber",
-            "value": "ARNationalIdentityNumber",
-            "description": "AR National Identity Number"
-          },
-          {
-            "name": "AUBankAccountNumber",
-            "value": "AUBankAccountNumber",
-            "description": "AT Bank Account Number"
-          },
-          {
-            "name": "AUDriversLicenseNumber",
-            "value": "AUDriversLicenseNumber",
-            "description": "AU Driver's License Number"
-          },
-          {
-            "name": "AUMedicalAccountNumber",
-            "value": "AUMedicalAccountNumber",
-            "description": "AU Medical Account Number"
-          },
-          {
-            "name": "AUPassportNumber",
-            "value": "AUPassportNumber",
-            "description": "AU Passport Number"
-          },
-          {
-            "name": "AUTaxFileNumber",
-            "value": "AUTaxFileNumber",
-            "description": "AU Tax File Number"
-          },
-          {
-            "name": "AUBusinessNumber",
-            "value": "AUBusinessNumber",
-            "description": "AU Business Number"
-          },
-          {
-            "name": "AUCompanyNumber",
-            "value": "AUCompanyNumber",
-            "description": "AU Company Number"
-          },
-          {
-            "name": "ATIdentityCard",
-            "value": "ATIdentityCard",
-            "description": "AT Identity Card"
-          },
-          {
-            "name": "ATTaxIdentificationNumber",
-            "value": "ATTaxIdentificationNumber",
-            "description": "AT Tax Identification Number"
-          },
-          {
-            "name": "ATValueAddedTaxNumber",
-            "value": "ATValueAddedTaxNumber",
-            "description": "AT Value Added Tax Number"
-          },
-          {
-            "name": "AzureDocumentDBAuthKey",
-            "value": "AzureDocumentDBAuthKey",
-            "description": "Azure Document DB Auth Key"
-          },
-          {
-            "name": "AzureIAASDatabaseConnectionAndSQLString",
-            "value": "AzureIAASDatabaseConnectionAndSQLString",
-            "description": "Azure IAAS Database Connection And SQL String"
-          },
-          {
-            "name": "AzureIoTConnectionString",
-            "value": "AzureIoTConnectionString",
-            "description": "Azure IoT Connection String"
-          },
-          {
-            "name": "AzurePublishSettingPassword",
-            "value": "AzurePublishSettingPassword",
-            "description": "Azure Publish Setting Password"
-          },
-          {
-            "name": "AzureRedisCacheString",
-            "value": "AzureRedisCacheString",
-            "description": "Azure Redis Cache String"
-          },
-          {
-            "name": "AzureSAS",
-            "value": "AzureSAS",
-            "description": "Azure SAS"
-          },
-          {
-            "name": "AzureServiceBusString",
-            "value": "AzureServiceBusString",
-            "description": "Azure Service Bus String"
-          },
-          {
-            "name": "AzureStorageAccountKey",
-            "value": "AzureStorageAccountKey",
-            "description": "Azure Storage Account Key"
-          },
-          {
-            "name": "AzureStorageAccountGeneric",
-            "value": "AzureStorageAccountGeneric",
-            "description": "Azure Storage Account Generic"
-          },
-          {
-            "name": "BENationalNumber",
-            "value": "BENationalNumber",
-            "description": "BE National Number"
-          },
-          {
-            "name": "BENationalNumberV2",
-            "value": "BENationalNumberV2",
-            "description": "BE National Number V2"
-          },
-          {
-            "name": "BEValueAddedTaxNumber",
-            "value": "BEValueAddedTaxNumber",
-            "description": "BE Value Added Tax Number"
-          },
-          {
-            "name": "BRCPFNumber",
-            "value": "BRCPFNumber",
-            "description": "BR CPF Number"
-          },
-          {
-            "name": "BRLegalEntityNumber",
-            "value": "BRLegalEntityNumber",
-            "description": "BR Legal Entity Number"
-          },
-          {
-            "name": "BRNationalIDRG",
-            "value": "BRNationalIDRG",
-            "description": "BR National ID RG"
-          },
-          {
-            "name": "BGUniformCivilNumber",
-            "value": "BGUniformCivilNumber",
-            "description": "BG Uniform Civil Number"
-          },
-          {
-            "name": "CABankAccountNumber",
-            "value": "CABankAccountNumber",
-            "description": "CA Bank Account Number"
-          },
-          {
-            "name": "CADriversLicenseNumber",
-            "value": "CADriversLicenseNumber",
-            "description": "CA Driver's License Number"
-          },
-          {
-            "name": "CAHealthServiceNumber",
-            "value": "CAHealthServiceNumber",
-            "description": "CA Health Service Number"
-          },
-          {
-            "name": "CAPassportNumber",
-            "value": "CAPassportNumber",
-            "description": "CA Passport Number"
-          },
-          {
-            "name": "CAPersonalHealthIdentification",
-            "value": "CAPersonalHealthIdentification",
-            "description": "CA Personal Health Identification"
-          },
-          {
-            "name": "CASocialInsuranceNumber",
-            "value": "CASocialInsuranceNumber",
-            "description": "CA Social Insurance Number"
-          },
-          {
-            "name": "CLIdentityCardNumber",
-            "value": "CLIdentityCardNumber",
-            "description": "CL Identity Card Number"
-          },
-          {
-            "name": "CNResidentIdentityCardNumber",
-            "value": "CNResidentIdentityCardNumber",
-            "description": "CN Resident Identity Card Number"
-          },
-          {
-            "name": "CreditCardNumber",
-            "value": "CreditCardNumber",
-            "description": "Credit Card Number"
-          },
-          {
-            "name": "HRIdentityCardNumber",
-            "value": "HRIdentityCardNumber",
-            "description": "HR Identity Card Number"
-          },
-          {
-            "name": "HRNationalIDNumber",
-            "value": "HRNationalIDNumber",
-            "description": "HR National ID Number"
-          },
-          {
-            "name": "HRPersonalIdentificationNumber",
-            "value": "HRPersonalIdentificationNumber",
-            "description": "HR Personal Identification Number"
-          },
-          {
-            "name": "HRPersonalIdentificationOIBNumberV2",
-            "value": "HRPersonalIdentificationOIBNumberV2",
-            "description": "HR Personal Identification OIB Number V2"
-          },
-          {
-            "name": "CYIdentityCard",
-            "value": "CYIdentityCard",
-            "description": "CY Identity Card"
-          },
-          {
-            "name": "CYTaxIdentificationNumber",
-            "value": "CYTaxIdentificationNumber",
-            "description": "CY Tax Identification Number"
-          },
-          {
-            "name": "CZPersonalIdentityNumber",
-            "value": "CZPersonalIdentityNumber",
-            "description": "CZ Personal Identity Number"
-          },
-          {
-            "name": "CZPersonalIdentityV2",
-            "value": "CZPersonalIdentityV2",
-            "description": "CZ Personal Identity V2"
-          },
-          {
-            "name": "DKPersonalIdentificationNumber",
-            "value": "DKPersonalIdentificationNumber",
-            "description": "DK Personal Identification Number"
-          },
-          {
-            "name": "DKPersonalIdentificationV2",
-            "value": "DKPersonalIdentificationV2",
-            "description": "DK Personal Identification V2"
-          },
-          {
-            "name": "DrugEnforcementAgencyNumber",
-            "value": "DrugEnforcementAgencyNumber",
-            "description": "Drug Enforcement Agency Number"
-          },
-          {
-            "name": "EEPersonalIdentificationCode",
-            "value": "EEPersonalIdentificationCode",
-            "description": "EE Personal Identification Code"
-          },
-          {
-            "name": "EUDebitCardNumber",
-            "value": "EUDebitCardNumber",
-            "description": "EU Debit Card Number"
-          },
-          {
-            "name": "EUDriversLicenseNumber",
-            "value": "EUDriversLicenseNumber",
-            "description": "EU Driver's License Number"
-          },
-          {
-            "name": "EUGPSCoordinates",
-            "value": "EUGPSCoordinates",
-            "description": "EU GPS Coordinates"
-          },
-          {
-            "name": "EUNationalIdentificationNumber",
-            "value": "EUNationalIdentificationNumber",
-            "description": "EU National Identification Number"
-          },
-          {
-            "name": "EUPassportNumber",
-            "value": "EUPassportNumber",
-            "description": "EU Passport Number"
-          },
-          {
-            "name": "EUSocialSecurityNumber",
-            "value": "EUSocialSecurityNumber",
-            "description": "EU Social Security Number"
-          },
-          {
-            "name": "EUTaxIdentificationNumber",
-            "value": "EUTaxIdentificationNumber",
-            "description": "EU Tax Identification Number"
-          },
-          {
-            "name": "FIEuropeanHealthNumber",
-            "value": "FIEuropeanHealthNumber",
-            "description": "FI European Health Number"
-          },
-          {
-            "name": "FINationalID",
-            "value": "FINationalID",
-            "description": "FI National ID"
-          },
-          {
-            "name": "FINationalIDV2",
-            "value": "FINationalIDV2",
-            "description": "FI National ID V2"
-          },
-          {
-            "name": "FIPassportNumber",
-            "value": "FIPassportNumber",
-            "description": "FI Passport Number"
-          },
-          {
-            "name": "FRDriversLicenseNumber",
-            "value": "FRDriversLicenseNumber",
-            "description": "FR Driver's License Number"
-          },
-          {
-            "name": "FRHealthInsuranceNumber",
-            "value": "FRHealthInsuranceNumber",
-            "description": "FR Health Insurance Number"
-          },
-          {
-            "name": "FRNationalID",
-            "value": "FRNationalID",
-            "description": "FR National ID"
-          },
-          {
-            "name": "FRPassportNumber",
-            "value": "FRPassportNumber",
-            "description": "FR Passport Number"
-          },
-          {
-            "name": "FRSocialSecurityNumber",
-            "value": "FRSocialSecurityNumber",
-            "description": "FR Social Security Number"
-          },
-          {
-            "name": "FRTaxIdentificationNumber",
-            "value": "FRTaxIdentificationNumber",
-            "description": "FR Tax Identification Number"
-          },
-          {
-            "name": "FRValueAddedTaxNumber",
-            "value": "FRValueAddedTaxNumber",
-            "description": "FR Value Added Tax Number"
-          },
-          {
-            "name": "DEDriversLicenseNumber",
-            "value": "DEDriversLicenseNumber",
-            "description": "DE Driver's License Number"
-          },
-          {
-            "name": "DEPassportNumber",
-            "value": "DEPassportNumber",
-            "description": "DE Passport Number"
-          },
-          {
-            "name": "DEIdentityCardNumber",
-            "value": "DEIdentityCardNumber",
-            "description": "DE Identity Card Number"
-          },
-          {
-            "name": "DETaxIdentificationNumber",
-            "value": "DETaxIdentificationNumber",
-            "description": "DE Tax Identification Number"
-          },
-          {
-            "name": "DEValueAddedNumber",
-            "value": "DEValueAddedNumber",
-            "description": "DE Value Added Number"
-          },
-          {
-            "name": "GRNationalIDCard",
-            "value": "GRNationalIDCard",
-            "description": "GR National ID Card"
-          },
-          {
-            "name": "GRNationalIDV2",
-            "value": "GRNationalIDV2",
-            "description": "GR National ID V2"
-          },
-          {
-            "name": "GRTaxIdentificationNumber",
-            "value": "GRTaxIdentificationNumber",
-            "description": "GR Tax Identification Number"
-          },
-          {
-            "name": "HKIdentityCardNumber",
-            "value": "HKIdentityCardNumber",
-            "description": "HK Identity Card Number"
-          },
-          {
-            "name": "HUValueAddedNumber",
-            "value": "HUValueAddedNumber",
-            "description": "HU Value Added Number"
-          },
-          {
-            "name": "HUPersonalIdentificationNumber",
-            "value": "HUPersonalIdentificationNumber",
-            "description": "HU Personal Identification Number"
-          },
-          {
-            "name": "HUTaxIdentificationNumber",
-            "value": "HUTaxIdentificationNumber",
-            "description": "HU Tax Identification Number"
-          },
-          {
-            "name": "INPermanentAccount",
-            "value": "INPermanentAccount",
-            "description": "IN Permanent Account"
-          },
-          {
-            "name": "INUniqueIdentificationNumber",
-            "value": "INUniqueIdentificationNumber",
-            "description": "IN Unique Identification Number"
-          },
-          {
-            "name": "IDIdentityCardNumber",
-            "value": "IDIdentityCardNumber",
-            "description": "ID Identity Card Number"
-          },
-          {
-            "name": "InternationalBankingAccountNumber",
-            "value": "InternationalBankingAccountNumber",
-            "description": "International Banking Account Number"
-          },
-          {
-            "name": "IEPersonalPublicServiceNumber",
-            "value": "IEPersonalPublicServiceNumber",
-            "description": "IE Personal Public Service Number"
-          },
-          {
-            "name": "IEPersonalPublicServiceNumberV2",
-            "value": "IEPersonalPublicServiceNumberV2",
-            "description": "IE Personal Public Service Number V2"
-          },
-          {
-            "name": "ILBankAccountNumber",
-            "value": "ILBankAccountNumber",
-            "description": "IL Bank Account Number"
-          },
-          {
-            "name": "ILNationalID",
-            "value": "ILNationalID",
-            "description": "IL National ID"
-          },
-          {
-            "name": "ITDriversLicenseNumber",
-            "value": "ITDriversLicenseNumber",
-            "description": "IT Driver's License Number"
-          },
-          {
-            "name": "ITFiscalCode",
-            "value": "ITFiscalCode",
-            "description": "IT Fiscal Code"
-          },
-          {
-            "name": "ITValueAddedTaxNumber",
-            "value": "ITValueAddedTaxNumber",
-            "description": "IT Value Added Tax Number"
-          },
-          {
-            "name": "JPBankAccountNumber",
-            "value": "JPBankAccountNumber",
-            "description": "JP Bank Account Number"
-          },
-          {
-            "name": "JPDriversLicenseNumber",
-            "value": "JPDriversLicenseNumber",
-            "description": "JP Driver's License Number"
-          },
-          {
-            "name": "JPPassportNumber",
-            "value": "JPPassportNumber",
-            "description": "JP Passport Number"
-          },
-          {
-            "name": "JPResidentRegistrationNumber",
-            "value": "JPResidentRegistrationNumber",
-            "description": "JP Resident Registration Number"
-          },
-          {
-            "name": "JPSocialInsuranceNumber",
-            "value": "JPSocialInsuranceNumber",
-            "description": "JP Social Insurance Number"
-          },
-          {
-            "name": "JPMyNumberCorporate",
-            "value": "JPMyNumberCorporate",
-            "description": "JP My Number Corporate"
-          },
-          {
-            "name": "JPMyNumberPersonal",
-            "value": "JPMyNumberPersonal",
-            "description": "JP My Number Personal"
-          },
-          {
-            "name": "JPResidenceCardNumber",
-            "value": "JPResidenceCardNumber",
-            "description": "JP Residence Card Number"
-          },
-          {
-            "name": "LVPersonalCode",
-            "value": "LVPersonalCode",
-            "description": "LV Personal Code"
-          },
-          {
-            "name": "LTPersonalCode",
-            "value": "LTPersonalCode",
-            "description": "LT Personal Code"
-          },
-          {
-            "name": "LUNationalIdentificationNumberNatural",
-            "value": "LUNationalIdentificationNumberNatural",
-            "description": "LU National Identification Number Natural"
-          },
-          {
-            "name": "LUNationalIdentificationNumberNonNatural",
-            "value": "LUNationalIdentificationNumberNonNatural",
-            "description": "LU National Identification Number Non Natural"
-          },
-          {
-            "name": "MYIdentityCardNumber",
-            "value": "MYIdentityCardNumber",
-            "description": "MY Identity Card Number"
-          },
-          {
-            "name": "MTIdentityCardNumber",
-            "value": "MTIdentityCardNumber",
-            "description": "MT Identity Card Number"
-          },
-          {
-            "name": "MTTaxIDNumber",
-            "value": "MTTaxIDNumber",
-            "description": "MT Tax ID Number"
-          },
-          {
-            "name": "NLCitizensServiceNumber",
-            "value": "NLCitizensServiceNumber",
-            "description": "NL Citizens Service Number"
-          },
-          {
-            "name": "NLCitizensServiceNumberV2",
-            "value": "NLCitizensServiceNumberV2",
-            "description": "NL Citizens Service Number V2"
-          },
-          {
-            "name": "NLTaxIdentificationNumber",
-            "value": "NLTaxIdentificationNumber",
-            "description": "NL Tax Identification Number"
-          },
-          {
-            "name": "NLValueAddedTaxNumber",
-            "value": "NLValueAddedTaxNumber",
-            "description": "NL Value Added Tax Number"
-          },
-          {
-            "name": "NZBankAccountNumber",
-            "value": "NZBankAccountNumber",
-            "description": "NZ Bank Account Number"
-          },
-          {
-            "name": "NZDriversLicenseNumber",
-            "value": "NZDriversLicenseNumber",
-            "description": "NZ Driver's License Number"
-          },
-          {
-            "name": "NZInlandRevenueNumber",
-            "value": "NZInlandRevenueNumber",
-            "description": "NZ Inland Revenue Number"
-          },
-          {
-            "name": "NZMinistryOfHealthNumber",
-            "value": "NZMinistryOfHealthNumber",
-            "description": "NZ Ministry Of Health Number"
-          },
-          {
-            "name": "NZSocialWelfareNumber",
-            "value": "NZSocialWelfareNumber",
-            "description": "NZ Social Welfare Number"
-          },
-          {
-            "name": "NOIdentityNumber",
-            "value": "NOIdentityNumber",
-            "description": "NO Identity Number"
-          },
-          {
-            "name": "PHUnifiedMultiPurposeIDNumber",
-            "value": "PHUnifiedMultiPurposeIDNumber",
-            "description": "PH Unified Multi Purpose ID Number"
-          },
-          {
-            "name": "PLIdentityCard",
-            "value": "PLIdentityCard",
-            "description": "PL Identity Card"
-          },
-          {
-            "name": "PLNationalID",
-            "value": "PLNationalID",
-            "description": "PL National ID"
-          },
-          {
-            "name": "PLNationalIDV2",
-            "value": "PLNationalIDV2",
-            "description": "PL National ID V2"
-          },
-          {
-            "name": "PLPassportNumber",
-            "value": "PLPassportNumber",
-            "description": "PL Passport Number"
-          },
-          {
-            "name": "PLTaxIdentificationNumber",
-            "value": "PLTaxIdentificationNumber",
-            "description": "PL Tax Identification Number"
-          },
-          {
-            "name": "PLREGONNumber",
-            "value": "PLREGONNumber",
-            "description": "PL REGON Number"
-          },
-          {
-            "name": "PTCitizenCardNumber",
-            "value": "PTCitizenCardNumber",
-            "description": "PT Citizen Card Number"
-          },
-          {
-            "name": "PTCitizenCardNumberV2",
-            "value": "PTCitizenCardNumberV2",
-            "description": "PT Citizen Card Number V2"
-          },
-          {
-            "name": "PTTaxIdentificationNumber",
-            "value": "PTTaxIdentificationNumber",
-            "description": "PT Tax Identification Number"
-          },
-          {
-            "name": "ROPersonalNumericalCode",
-            "value": "ROPersonalNumericalCode",
-            "description": "RO Personal Numerical Code"
-          },
-          {
-            "name": "RUPassportNumberDomestic",
-            "value": "RUPassportNumberDomestic",
-            "description": "RU Passport Number Domestic"
-          },
-          {
-            "name": "RUPassportNumberInternational",
-            "value": "RUPassportNumberInternational",
-            "description": "RU Passport Number International"
-          },
-          {
-            "name": "SANationalID",
-            "value": "SANationalID",
-            "description": "SA National ID"
-          },
-          {
-            "name": "SGNationalRegistrationIdentityCardNumber",
-            "value": "SGNationalRegistrationIdentityCardNumber",
-            "description": "SG National Registration Identity Card Number"
-          },
-          {
-            "name": "SKPersonalNumber",
-            "value": "SKPersonalNumber",
-            "description": "SK Personal Number"
-          },
-          {
-            "name": "SITaxIdentificationNumber",
-            "value": "SITaxIdentificationNumber",
-            "description": "SI Tax Identification Number"
-          },
-          {
-            "name": "SIUniqueMasterCitizenNumber",
-            "value": "SIUniqueMasterCitizenNumber",
-            "description": "SI Unique Master Citizen Number"
-          },
-          {
-            "name": "ZAIdentificationNumber",
-            "value": "ZAIdentificationNumber",
-            "description": "ZA Identification Number"
-          },
-          {
-            "name": "KRResidentRegistrationNumber",
-            "value": "KRResidentRegistrationNumber",
-            "description": "KR Resident Registration Number"
-          },
-          {
-            "name": "ESDNI",
-            "value": "ESDNI",
-            "description": "ES DNI"
-          },
-          {
-            "name": "ESSocialSecurityNumber",
-            "value": "ESSocialSecurityNumber",
-            "description": "ES Social Security Number"
-          },
-          {
-            "name": "ESTaxIdentificationNumber",
-            "value": "ESTaxIdentificationNumber",
-            "description": "ES Tax Identification Number"
-          },
-          {
-            "name": "SQLServerConnectionString",
-            "value": "SQLServerConnectionString",
-            "description": "SQL Server Connection String"
-          },
-          {
-            "name": "SENationalID",
-            "value": "SENationalID",
-            "description": "SE National ID"
-          },
-          {
-            "name": "SENationalIDV2",
-            "value": "SENationalIDV2",
-            "description": "SE National ID V2"
-          },
-          {
-            "name": "SEPassportNumber",
-            "value": "SEPassportNumber",
-            "description": "SE Passport Number"
-          },
-          {
-            "name": "SETaxIdentificationNumber",
-            "value": "SETaxIdentificationNumber",
-            "description": "SE Tax Identification Number"
-          },
-          {
-            "name": "SWIFTCode",
-            "value": "SWIFTCode",
-            "description": "SWIFT Code"
-          },
-          {
-            "name": "CHSocialSecurityNumber",
-            "value": "CHSocialSecurityNumber",
-            "description": "CH Social Security Number"
-          },
-          {
-            "name": "TWNationalID",
-            "value": "TWNationalID",
-            "description": "TW National ID"
-          },
-          {
-            "name": "TWPassportNumber",
-            "value": "TWPassportNumber",
-            "description": "TW Passport Number"
-          },
-          {
-            "name": "TWResidentCertificate",
-            "value": "TWResidentCertificate",
-            "description": "TW Resident Certificate"
-          },
-          {
-            "name": "THPopulationIdentificationCode",
-            "value": "THPopulationIdentificationCode",
-            "description": "TH Population Identification Code"
-          },
-          {
-            "name": "TRNationalIdentificationNumber",
-            "value": "TRNationalIdentificationNumber",
-            "description": "TR National Identification Number"
-          },
-          {
-            "name": "UKDriversLicenseNumber",
-            "value": "UKDriversLicenseNumber",
-            "description": "UK Driver's License Number"
-          },
-          {
-            "name": "UKElectoralRollNumber",
-            "value": "UKElectoralRollNumber",
-            "description": "UK Electoral Roll Number"
-          },
-          {
-            "name": "UKNationalHealthNumber",
-            "value": "UKNationalHealthNumber",
-            "description": "UK National Health Number"
-          },
-          {
-            "name": "UKNationalInsuranceNumber",
-            "value": "UKNationalInsuranceNumber",
-            "description": "UK National Insurance Number"
-          },
-          {
-            "name": "UKUniqueTaxpayerNumber",
-            "value": "UKUniqueTaxpayerNumber",
-            "description": "UK Unique Taxpayer Number"
-          },
-          {
-            "name": "USUKPassportNumber",
-            "value": "USUKPassportNumber",
-            "description": "US UK Passport Number"
-          },
-          {
-            "name": "USBankAccountNumber",
-            "value": "USBankAccountNumber",
-            "description": "US Bank Account Number"
-          },
-          {
-            "name": "USDriversLicenseNumber",
-            "value": "USDriversLicenseNumber",
-            "description": "US Driver's License Number"
-          },
-          {
-            "name": "USIndividualTaxpayerIdentification",
-            "value": "USIndividualTaxpayerIdentification",
-            "description": "US Individual Taxpayer Identification"
-          },
-          {
-            "name": "USSocialSecurityNumber",
-            "value": "USSocialSecurityNumber",
-            "description": "US Social Security Number"
-          },
-          {
-            "name": "UAPassportNumberDomestic",
-            "value": "UAPassportNumberDomestic",
-            "description": "UA Passport Number Domestic"
-          },
-          {
-            "name": "UAPassportNumberInternational",
-            "value": "UAPassportNumberInternational",
-            "description": "UA Passport Number International"
-          },
-          {
-            "name": "Organization",
-            "value": "Organization",
-            "description": "Organization"
-          },
-          {
-            "name": "Email",
-            "value": "Email",
-            "description": "Email"
-          },
-          {
-            "name": "URL",
-            "value": "URL",
-            "description": "URL"
-          },
-          {
-            "name": "Age",
-            "value": "Age",
-            "description": "Age"
-          },
-          {
-            "name": "PhoneNumber",
-            "value": "PhoneNumber",
-            "description": "Phone Number"
-          },
-          {
-            "name": "IPAddress",
-            "value": "IPAddress",
-            "description": "IP Address"
-          },
-          {
-            "name": "Date",
-            "value": "Date",
-            "description": "Date"
-          },
-          {
-            "name": "Person",
-            "value": "Person",
-            "description": "Person"
-          },
-          {
-            "name": "Address",
-            "value": "Address",
-            "description": "Address"
-          }
-        ]
-      }
     },
     "PiiCategory": {
       "type": "string",
@@ -5979,6 +4581,14 @@
         "Date",
         "Person",
         "Address",
+        "DateOfBirth",
+        "BankAccountNumber",
+        "PassportNumber",
+        "DriversLicenseNumber",
+        "Neighborhood",
+        "SortCode",
+        "PIN",
+        "VehicleIdentificationNumber",
         "All",
         "Default"
       ],
@@ -6842,6 +5452,46 @@
             "description": "Address"
           },
           {
+            "name": "DateOfBirth",
+            "value": "DateOfBirth",
+            "description": "Date Of Birth"
+          },
+          {
+            "name": "BankAccountNumber",
+            "value": "BankAccountNumber",
+            "description": "Bank Account Number"
+          },
+          {
+            "name": "PassportNumber",
+            "value": "PassportNumber",
+            "description": "Passport Number"
+          },
+          {
+            "name": "DriversLicenseNumber",
+            "value": "DriversLicenseNumber",
+            "description": "Drivers License Number"
+          },
+          {
+            "name": "Neighborhood",
+            "value": "Neighborhood",
+            "description": "Neighborhood"
+          },
+          {
+            "name": "SortCode",
+            "value": "SortCode",
+            "description": "Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held"
+          },
+          {
+            "name": "PIN",
+            "value": "PIN",
+            "description": "PIN"
+          },
+          {
+            "name": "VehicleIdentificationNumber",
+            "value": "VehicleIdentificationNumber",
+            "description": "VIN"
+          },
+          {
             "name": "All",
             "value": "All",
             "description": "All PII categories."
@@ -6853,6 +5503,44 @@
           }
         ]
       }
+    },
+    "PiiEntitiesDocumentResult": {
+      "type": "object",
+      "description": "Contains the PII results.",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "Unique, non-empty document identifier."
+        },
+        "warnings": {
+          "type": "array",
+          "description": "Warnings encountered while processing document.",
+          "items": {
+            "$ref": "#/definitions/DocumentWarning"
+          }
+        },
+        "statistics": {
+          "$ref": "#/definitions/DocumentStatistics",
+          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
+        },
+        "redactedText": {
+          "type": "string",
+          "description": "Returns redacted text."
+        },
+        "entities": {
+          "type": "array",
+          "description": "Recognized entities in the document.",
+          "items": {
+            "$ref": "#/definitions/Entity"
+          }
+        }
+      },
+      "required": [
+        "id",
+        "warnings",
+        "redactedText",
+        "entities"
+      ]
     },
     "PiiEntityRecognitionLROResult": {
       "type": "object",
@@ -6872,71 +5560,6 @@
         }
       ],
       "x-ms-discriminator-value": "PiiEntityRecognitionLROResults"
-    },
-    "PiiEntityWithTags": {
-      "type": "object",
-      "description": "Entity object with tags.",
-      "properties": {
-        "text": {
-          "type": "string",
-          "description": "Entity text as appears in the request."
-        },
-        "category": {
-          "type": "string",
-          "description": "Entity type."
-        },
-        "subcategory": {
-          "type": "string",
-          "description": "(Optional) Entity sub type."
-        },
-        "offset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position for the entity text. Use of different 'stringIndexType' values can affect the offset returned."
-        },
-        "length": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Length for the entity text. Use of different 'stringIndexType' values can affect the length returned."
-        },
-        "confidenceScore": {
-          "type": "number",
-          "format": "double",
-          "description": "Confidence score between 0 and 1 of the extracted entity."
-        },
-        "type": {
-          "type": "string",
-          "description": "An entity type is the lowest (or finest) granularity at which the entity has been detected. The type maps to the specific metadata attributes associated with the entity detected."
-        },
-        "tags": {
-          "type": "array",
-          "description": "List of entity tags. Tags are to express some similarities/affinity between entities.",
-          "items": {
-            "$ref": "#/definitions/EntityTag"
-          }
-        },
-        "mask": {
-          "type": "string",
-          "description": "Optional field which will be returned only when using the redaction policy kind “MaskWithEntityType”.  This field will contain the exact mask text used to mask the PII entity in the original text"
-        },
-        "maskOffset": {
-          "type": "integer",
-          "format": "int32",
-          "description": "Start position of masked text in the redacted text when using the redaction policy kind “MaskWithEntityType”."
-        },
-        "maskLength": {
-          "type": "integer",
-          "format": "int32",
-          "description": "The length of the masked text. Will be present when using the redaction policy kind “MaskWithEntityType”."
-        }
-      },
-      "required": [
-        "text",
-        "category",
-        "offset",
-        "length",
-        "confidenceScore"
-      ]
     },
     "PiiLROTask": {
       "type": "object",
@@ -6977,7 +5600,7 @@
           "type": "array",
           "description": "Response by document",
           "items": {
-            "$ref": "#/definitions/PiiResultWithDetectedLanguage"
+            "$ref": "#/definitions/PiiEntitiesDocumentResult"
           }
         }
       },
@@ -6985,48 +5608,6 @@
         "errors",
         "modelVersion",
         "documents"
-      ]
-    },
-    "PiiResultWithDetectedLanguage": {
-      "type": "object",
-      "description": "Contains the PII results with detected language.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Unique, non-empty document identifier."
-        },
-        "warnings": {
-          "type": "array",
-          "description": "Warnings encountered while processing document.",
-          "items": {
-            "$ref": "#/definitions/DocumentWarning"
-          }
-        },
-        "statistics": {
-          "$ref": "#/definitions/DocumentStatistics",
-          "description": "if showStats=true was specified in the request this field will contain information about the document payload."
-        },
-        "redactedText": {
-          "type": "string",
-          "description": "Returns redacted text."
-        },
-        "entities": {
-          "type": "array",
-          "description": "Recognized entities in the document.",
-          "items": {
-            "$ref": "#/definitions/PiiEntityWithTags"
-          }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
-        }
-      },
-      "required": [
-        "id",
-        "warnings",
-        "redactedText",
-        "entities"
       ]
     },
     "PiiTaskParameters": {
@@ -7105,17 +5686,6 @@
               }
             ]
           }
-        },
-        "excludePiiCategories": {
-          "type": "array",
-          "description": "Enumeration of PII categories to be excluded in the response.",
-          "items": {
-            "$ref": "#/definitions/PiiCategoriesExclude"
-          }
-        },
-        "redactionPolicy": {
-          "$ref": "#/definitions/BaseRedactionPolicy",
-          "description": "RedactionPolicy to be used on the input."
         }
       }
     },
@@ -7996,9 +6566,9 @@
         "negative"
       ]
     },
-    "SentimentDocumentResultWithDetectedLanguage": {
+    "SentimentDocumentResult": {
       "type": "object",
-      "description": "Sentiment analysis per document.",
+      "description": "An object representing the pre-built Sentiment Analysis results of each document.",
       "properties": {
         "id": {
           "type": "string",
@@ -8029,10 +6599,6 @@
           "items": {
             "$ref": "#/definitions/SentenceSentiment"
           }
-        },
-        "detectedLanguage": {
-          "$ref": "#/definitions/DetectedLanguage",
-          "description": "If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document."
         }
       },
       "required": [
@@ -8085,7 +6651,7 @@
           "type": "array",
           "description": "The sentiment analysis results for each document in the input.",
           "items": {
-            "$ref": "#/definitions/SentimentDocumentResultWithDetectedLanguage"
+            "$ref": "#/definitions/SentimentDocumentResult"
           }
         }
       },
