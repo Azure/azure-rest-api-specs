@@ -37,6 +37,7 @@ using Azure.Core;
 @@clientName(RevokeCertificate, "RevokeCertificateContent", "csharp");
 @@clientName(Certificate.createdDate, "CreateOn", "csharp");
 @@clientName(Certificate.expiryDate, "ExpireOn", "csharp");
+@@clientName(Revocation.status, "RevocationStatus", "csharp");
 
 @@clientName(CodeSigningAccounts.checkNameAvailability,
   "CheckTrustedSigningAccountNameAvailability",

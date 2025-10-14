@@ -295,7 +295,7 @@ model Revocation {
   remarks?: string;
 
   @doc("Status of the revocation.")
-  revocationStatus?: RevocationStatus;
+  status?: RevocationStatus;
 
   @doc("Reason for the revocation failure.")
   failureReason?: string;
