@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Managed DevOps Infrastructure",
-    "version": "2024-04-04-preview",
+    "version": "2025-01-21",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -67,20 +67,20 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -94,6 +94,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/checkNameAvailability": {
+      "post": {
+        "operationId": "Pools_CheckNameAvailability",
+        "tags": [
+          "Pools"
+        ],
+        "description": "Checks that the pool name is valid and is not already in use.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "name": "body",
+            "in": "body",
+            "description": "The CheckAvailability request",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailability"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/CheckNameAvailabilityResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Pools_CheckNameAvailability": {
+            "$ref": "./examples/Pools_CheckNameAvailability.json"
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/providers/Microsoft.DevOpsInfrastructure/locations/{locationName}/skus": {
       "get": {
         "operationId": "Sku_ListByLocation",
@@ -103,10 +148,10 @@
         "description": "List ResourceSku resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
             "name": "locationName",
@@ -127,7 +172,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -150,13 +195,13 @@
         "description": "List Quota resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
@@ -169,7 +214,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -192,10 +237,10 @@
         "description": "List Pool resources by subscription ID",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           }
         ],
         "responses": {
@@ -208,7 +253,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -231,13 +276,13 @@
         "description": "List ImageVersion resources by Image",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "imageName",
@@ -258,7 +303,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -281,13 +326,13 @@
         "description": "List Pool resources by resource group",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           }
         ],
         "responses": {
@@ -300,7 +345,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -323,13 +368,13 @@
         "description": "Get a Pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "poolName",
@@ -350,7 +395,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -368,13 +413,13 @@
         "description": "Create a Pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "poolName",
@@ -417,7 +462,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -439,13 +484,13 @@
         "description": "Update a Pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "poolName",
@@ -489,7 +534,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -511,13 +556,13 @@
         "description": "Delete a Pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "poolName",
@@ -549,7 +594,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -573,13 +618,13 @@
         "description": "List ResourceDetailsObject resources by Pool",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
             "name": "poolName",
@@ -600,7 +645,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -653,6 +698,30 @@
         }
       ],
       "x-ms-discriminator-value": "Automatic"
+    },
+    "AvailabilityStatus": {
+      "type": "string",
+      "description": "AvailabilityStatus of a name.",
+      "enum": [
+        "Available",
+        "Unavailable"
+      ],
+      "x-ms-enum": {
+        "name": "AvailabilityStatus",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Available",
+            "value": "Available",
+            "description": "The name is available."
+          },
+          {
+            "name": "Unavailable",
+            "value": "Unavailable",
+            "description": "The name is unavailable"
+          }
+        ]
+      }
     },
     "Azure.Core.azureLocation": {
       "type": "string",
@@ -772,6 +841,100 @@
         ]
       }
     },
+    "CertificateStoreNameOption": {
+      "type": "string",
+      "description": "The certificate store name type",
+      "enum": [
+        "My",
+        "Root"
+      ],
+      "x-ms-enum": {
+        "name": "CertificateStoreNameOption",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "My",
+            "value": "My",
+            "description": "The X.509 certificate store for personal certificates."
+          },
+          {
+            "name": "Root",
+            "value": "Root",
+            "description": "The X.509 certificate store for trusted root certificate authorities (CAs)."
+          }
+        ]
+      }
+    },
+    "CheckNameAvailability": {
+      "type": "object",
+      "description": "The parameters used to check the availability of a resource.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "type": {
+          "$ref": "#/definitions/DevOpsInfrastructureResourceType",
+          "description": "The type of resource that is used as the scope of the availability check."
+        }
+      },
+      "required": [
+        "name",
+        "type"
+      ]
+    },
+    "CheckNameAvailabilityReason": {
+      "type": "string",
+      "description": "The reason code explaining why the name is unavailable. Will be null if the name is available.",
+      "enum": [
+        "Invalid",
+        "AlreadyExists"
+      ],
+      "x-ms-enum": {
+        "name": "CheckNameAvailabilityReason",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Invalid",
+            "value": "Invalid",
+            "description": "The name is invalid."
+          },
+          {
+            "name": "AlreadyExists",
+            "value": "AlreadyExists",
+            "description": "The name already exists."
+          }
+        ]
+      }
+    },
+    "CheckNameAvailabilityResult": {
+      "type": "object",
+      "description": "The CheckNameAvailability operation response.",
+      "properties": {
+        "available": {
+          "$ref": "#/definitions/AvailabilityStatus",
+          "description": "Availability status of the name."
+        },
+        "message": {
+          "type": "string",
+          "description": "A message explaining why the name is unavailable. Will be null if the name is available."
+        },
+        "name": {
+          "type": "string",
+          "description": "The name whose availability was checked."
+        },
+        "reason": {
+          "$ref": "#/definitions/CheckNameAvailabilityReason",
+          "description": "The reason code explaining why the name is unavailable. Will be null if the name is available."
+        }
+      },
+      "required": [
+        "available",
+        "message",
+        "name",
+        "reason"
+      ]
+    },
     "DataDisk": {
       "type": "object",
       "description": "The data disk of the VMSS.",
@@ -807,6 +970,54 @@
       "required": [
         "name"
       ]
+    },
+    "DevOpsInfrastructureResourceType": {
+      "type": "string",
+      "description": "The type of resource.",
+      "enum": [
+        "Microsoft.DevOpsInfrastructure/pools"
+      ],
+      "x-ms-enum": {
+        "name": "DevOpsInfrastructureResourceType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Microsoft.DevOpsInfrastructure/pools",
+            "value": "Microsoft.DevOpsInfrastructure/pools",
+            "description": "DevOpsInfrastructure pool resource."
+          }
+        ]
+      }
+    },
+    "EphemeralType": {
+      "type": "string",
+      "description": "The type of Ephemeral option the pool will use on underlying VMs when loading this image.",
+      "enum": [
+        "Automatic",
+        "CacheDisk",
+        "ResourceDisk"
+      ],
+      "x-ms-enum": {
+        "name": "EphemeralType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Automatic",
+            "value": "Automatic",
+            "description": "Ephemeral is handled by Managed DevOps Pools service."
+          },
+          {
+            "name": "CacheDisk",
+            "value": "CacheDisk",
+            "description": "CacheDisk ephemeral only, requires that the SKU has a cache that is large enough for the image."
+          },
+          {
+            "name": "ResourceDisk",
+            "value": "ResourceDisk",
+            "description": "ResourceDisk ephemeral only, requires only that the SKU supports it."
+          }
+        ]
+      }
     },
     "FabricProfile": {
       "type": "object",
@@ -878,7 +1089,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -983,6 +1194,10 @@
           "type": "integer",
           "format": "int32",
           "description": "How many machines can be created at maximum in this organization out of the maximumConcurrency of the pool."
+        },
+        "openAccess": {
+          "type": "boolean",
+          "description": "Determines if the pool should have open access to all projects in this organization."
         }
       },
       "required": [
@@ -1078,13 +1293,13 @@
           "x-ms-client-flatten": true
         },
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         }
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/TrackedResource"
         }
       ]
     },
@@ -1111,6 +1326,10 @@
           "type": "string",
           "description": "The percentage of the buffer to be allocated to this image.",
           "default": "*"
+        },
+        "ephemeralType": {
+          "$ref": "#/definitions/EphemeralType",
+          "description": "The ephemeral type of the image."
         }
       }
     },
@@ -1180,7 +1399,7 @@
       "description": "The type used for update operations of the Pool.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
+          "$ref": "../../../../../../common-types/resource-management/v5/managedidentity.json#/definitions/ManagedServiceIdentity",
           "description": "The managed service identities assigned to this resource."
         },
         "tags": {
@@ -1388,7 +1607,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1490,7 +1709,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -1833,6 +2052,10 @@
         "certificateStoreLocation": {
           "type": "string",
           "description": "Where to store certificates on the machine."
+        },
+        "certificateStoreName": {
+          "$ref": "#/definitions/CertificateStoreNameOption",
+          "description": "Name of the certificate store to use on the machine, currently 'My' and 'Root' are supported."
         },
         "observedCertificates": {
           "type": "array",
