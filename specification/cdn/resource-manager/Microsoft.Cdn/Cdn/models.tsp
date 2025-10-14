@@ -3129,7 +3129,7 @@ model OriginCapacityResourceProperties {
   originRequestRateThreshold?: int64;
 
   /**
-   * The ingress rate limit threshold for an origin per minute in MB
+   * The ingress rate limit threshold for an origin per minute in bytes
    */
   @minValue(1)
   originIngressRateThreshold?: int64;
@@ -6458,7 +6458,7 @@ model SecurityPolicyWebApplicationFirewallParametersWithEmbeddedWafPolicy
   /**
    * Waf associations
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   associations?: SecurityPolicyWebApplicationFirewallAssociation[];
 
   /**
