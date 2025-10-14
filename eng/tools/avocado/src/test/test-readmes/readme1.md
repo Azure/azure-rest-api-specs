@@ -19,13 +19,13 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information
-``` yaml
+
+```yaml
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
 tag: package-2019-01-01
 ```
-
 
 ### Tag: package-2019-01-01
 
@@ -34,7 +34,6 @@ input-file:
   - specs/2020-05-01/a.json
   - specs/2020-06-01/b.json
 ```
-
 
 ### Tag: package-2019-02
 
