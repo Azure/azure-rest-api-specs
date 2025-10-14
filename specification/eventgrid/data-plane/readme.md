@@ -143,6 +143,7 @@ input-file:
 - Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
 - Microsoft.ResourceNotifications/stable/2018-01-01/ContainerServiceEventResources.json
+- Microsoft.ResourceNotifications/stable/2018-01-01/AKSResources.json
 - Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
 - Microsoft.ApiCenter/stable/2018-01-01/ApiCenter.json
 - Microsoft.Edge/stable/2018-01-01/Edge.json
@@ -292,6 +293,7 @@ input-file:
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/common.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/HealthResources.json
   - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/Resources.json
+  - $(this-folder)/Microsoft.ResourceNotifications/stable/2018-01-01/AKSResources.json
   - $(this-folder)/Microsoft.AVS/stable/2018-01-01/PrivateCloud.json
   - $(this-folder)/Microsoft.Edge/stable/2018-01-01/Edge.json
 ```
