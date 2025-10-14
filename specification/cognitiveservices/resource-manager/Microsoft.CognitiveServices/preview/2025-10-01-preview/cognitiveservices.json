@@ -5994,8 +5994,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -6006,6 +6017,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete OutboundRule": {
@@ -6263,9 +6278,6 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
@@ -6737,8 +6749,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -6749,6 +6772,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete Account Agent Application.": {
@@ -6946,9 +6973,6 @@
           "List Agents for Agent Application.": {
             "$ref": "./examples/AgentApplication/listAgents.json"
           }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7181,8 +7205,19 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "OK"
+          "202": {
+            "description": "Accepted",
+            "headers": {
+              "Location": {
+                "description": "URI to poll for asynchronous operation result.",
+                "type": "string"
+              },
+              "Retry-After": {
+                "description": "Duration the client should wait between requests, in seconds.",
+                "type": "integer",
+                "format": "int32"
+              }
+            }
           },
           "204": {
             "description": "No Content"
@@ -7193,6 +7228,10 @@
               "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
         },
         "x-ms-examples": {
           "Delete Agent Deployment.": {
