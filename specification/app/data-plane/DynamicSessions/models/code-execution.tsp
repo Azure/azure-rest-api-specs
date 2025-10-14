@@ -8,10 +8,12 @@ namespace Microsoft.App.DynamicSessions;
 /** The request to execute code. */
 model SessionCodeExecutionRequest {
   /** The code input type of the code execution request. */
-  codeInputType: CodeInputType;
+  @madeOptional(Versions.v2025_10_02_preview)
+  codeInputType?: CodeInputType;
 
   /** The execution type of the code execution request. */
-  executionType: ExecutionType;
+  @madeOptional(Versions.v2025_10_02_preview)
+  executionType?: ExecutionType;
 
   /** The string of the code to execute, based on CodeInputType. */
   @madeOptional(Versions.v2025_10_02_preview)
