@@ -1,14 +1,30 @@
 {
   "parameters": {
-    "api-version": "2025-01-01",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "subscriptionId": "{subscription-id}",
+    "api-version": "2025-01-01"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "resourceType": "storageAccounts",
             "name": "Premium_LRS",
+            "tier": "Premium",
+            "kind": "FileStorage",
+            "locations": [
+              "centraluseuap"
+            ],
+            "locationInfo": [
+              {
+                "location": "centraluseuap",
+                "zones": [
+                  "1",
+                  "2",
+                  "3"
+                ]
+              }
+            ],
             "capabilities": [
               {
                 "name": "supportschangenotification",
@@ -27,28 +43,10 @@
                 "value": "false"
               }
             ],
-            "kind": "FileStorage",
-            "locationInfo": [
-              {
-                "location": "centraluseuap",
-                "zones": [
-                  "1",
-                  "2",
-                  "3"
-                ]
-              }
-            ],
-            "locations": [
-              "centraluseuap"
-            ],
-            "resourceType": "storageAccounts",
-            "restrictions": [],
-            "tier": "Premium"
+            "restrictions": []
           }
         ]
       }
     }
-  },
-  "operationId": "Skus_List",
-  "title": "SKUListWithLocationInfo"
+  }
 }
