@@ -8,6 +8,10 @@ using Microsoft.ResourceConnector;
   "ResourceConnectorManagementClient",
   "javascript"
 );
+@@clientName(Microsoft.ResourceConnector,
+  "ResourceConnectorMgmtClient",
+  "python"
+);
 
 @@clientName(Microsoft.ResourceConnector.SSHKey, "SshKey", "java");
 
