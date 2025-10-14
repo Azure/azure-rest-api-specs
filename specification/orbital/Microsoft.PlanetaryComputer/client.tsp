@@ -56,8 +56,9 @@ namespace Customizations;
 
 // Generic single-word class names - add descriptive prefixes
 @@clientName(Geometry, "GeoJsonGeometry", "csharp");
-@@clientName(Point, "GeoJsonPoint", "csharp");
-@@clientName(Polygon, "GeoJsonPolygon", "csharp");
+@@clientName(Feature, "GeoJsonFeature", "csharp");
+@@clientName(Point, "PointGeometry", "csharp");
+@@clientName(Polygon, "PolygonGeometry", "csharp");
 @@clientName(Resampling, "ResamplingMethod", "csharp");
 @@clientName(Operation, "LongRunningOperation", "csharp");
 
