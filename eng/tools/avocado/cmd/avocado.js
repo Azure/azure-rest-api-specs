@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
 import yargs from "yargs";
-import { run } from "../dist/cli.js";
-import { avocado, UnifiedPipelineReport } from "../dist/index.js";
+import { run } from "../dist/src/cli.js";
+import { avocado, UnifiedPipelineReport } from "../dist/src/index.js";
 
 var argv = yargs
   .usage("Usage: avocado [options]")
