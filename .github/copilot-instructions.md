@@ -265,7 +265,7 @@ Step 1: Identify TypeSpec Project
 Step 2: Identify API spec status
 **Goal**: Determine if the TypeSpec spec is already merged or if it's being modified.
 **Actions**:
-1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch of  https://github.com/Azure/azure-sdk-tools/releases/tag/azsdk_0.5.2: "Is your TypeSpec specification already merged in the main branch of repository(https://github.com/Azure/azure-sdk-tools/releases/tag/azsdk_0.5.2)? (yes/no)"
+1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch of  https://github.com/Azure/azure-rest-api-specs : "Is your TypeSpec specification already merged in the main branch of repository(https://github.com/Azure/azure-rest-api-specs)? (yes/no)"
 2. If already merged, follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate the SDK
 3. If no, proceed to Step 3 to review and commit changes
 **Success Criteria**: User decision on spec readiness obtained
