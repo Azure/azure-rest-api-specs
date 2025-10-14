@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2025-10-08` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-10-08'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/stable/2025-10-08/PaloAltoNetworks.Cloudngfw.json
+  - stable/2025-10-08/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2025-07-07-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2025-07-07-preview` is specified o
 
 ``` yaml $(tag) == 'package-2025-07-07-preview'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/preview/2025-07-07-preview/PaloAltoNetworks.Cloudngfw.json
+  - preview/2025-07-07-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2025-05-23
@@ -54,7 +54,7 @@ These settings apply only when `--tag=package-2025-05-23` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-05-23'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/stable/2025-05-23/PaloAltoNetworks.Cloudngfw.json
+  - stable/2025-05-23/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2025-02-06-preview
@@ -63,7 +63,7 @@ These settings apply only when `--tag=package-2025-02-06-preview` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-02-06-preview'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/preview/2025-02-06-preview/PaloAltoNetworks.Cloudngfw.json
+  - preview/2025-02-06-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2024-02-07-preview
@@ -72,7 +72,7 @@ These settings apply only when `--tag=package-2024-02-07-preview` is specified o
 
 ```yaml $(tag) == 'package-preview-2024-02-07-preview'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/preview/2024-02-07-preview/PaloAltoNetworks.Cloudngfw.json
+  - preview/2024-02-07-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2024-01-19-preview
@@ -81,7 +81,7 @@ These settings apply only when `--tag=package-2024-01-19-preview` is specified o
 
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/preview/2024-01-19-preview/PaloAltoNetworks.Cloudngfw.json
+  - preview/2024-01-19-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2023-10-10-preview
@@ -90,7 +90,7 @@ These settings apply only when `--tag=package-2023-10-10-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-10-10-preview'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/preview/2023-10-10-preview/PaloAltoNetworks.Cloudngfw.json
+  - preview/2023-10-10-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2022-08-29
@@ -99,7 +99,7 @@ These settings apply only when `--tag=package-2022-08-29` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-08-29'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/stable/2022-08-29/PaloAltoNetworks.Cloudngfw.json
+  - stable/2022-08-29/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2022-08-29-preview
@@ -108,7 +108,7 @@ These settings apply only when `--tag=package-2022-08-29-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-08-29-preview'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/preview/2022-08-29-preview/PaloAltoNetworks.Cloudngfw.json
+  - preview/2022-08-29-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2023-09-01-preview
@@ -117,7 +117,7 @@ These settings apply only when `--tag=package-2023-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-09-01-preview'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/preview/2023-09-01-preview/PaloAltoNetworks.Cloudngfw.json
+  - preview/2023-09-01-preview/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ### Tag: package-2023-09-01
@@ -126,7 +126,7 @@ These settings apply only when `--tag=package-2023-09-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2023-09-01'
 input-file:
-  - PaloAltoNetworks.Cloudngfw/stable/2023-09-01/PaloAltoNetworks.Cloudngfw.json
+  - stable/2023-09-01/PaloAltoNetworks.Cloudngfw.json
 ```
 
 ---
