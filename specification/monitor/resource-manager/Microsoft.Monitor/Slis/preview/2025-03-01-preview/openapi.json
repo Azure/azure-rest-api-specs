@@ -224,56 +224,6 @@
           }
         }
       }
-    },
-    "/providers/Microsoft.Management/serviceGroups/{serviceGroupName}/providers/Microsoft.Monitor/slis/{sliName}/signalPreview": {
-      "post": {
-        "operationId": "Slis_SignalPreview",
-        "tags": [
-          "Slis"
-        ],
-        "description": "Returns preview data for the signal.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/ServiceGroupBaseParameters"
-          },
-          {
-            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "name": "sliName",
-            "in": "path",
-            "description": "Name of the SLI that is given by the user.",
-            "required": true,
-            "type": "string",
-            "pattern": "^[a-zA-Z0-9-_()~]{3,64}$"
-          },
-          {
-            "name": "body",
-            "in": "body",
-            "description": "The content of the action request",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Signal"
-            }
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "Azure operation completed successfully."
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "SignalPreview": {
-            "$ref": "./examples/Slis_SignalPreview.json"
-          }
-        }
-      }
     }
   },
   "definitions": {
@@ -763,7 +713,8 @@
         "metricNamespace",
         "metricName",
         "filters",
-        "spatialAggregation"
+        "spatialAggregation",
+        "temporalAggregation"
       ]
     },
     "Sli": {
@@ -992,8 +943,7 @@
         }
       },
       "required": [
-        "type",
-        "windowSizeMinutes"
+        "type"
       ]
     },
     "TemporalAggregationType": {
