@@ -8350,11 +8350,11 @@
     },
     "IstioEgressGateway": {
       "type": "object",
-      "description": "Istio egress gateway configuration. Visit https://aka.ms/asm-aks-egress-docs for more information.",
+      "description": "Istio egress gateway configuration.",
       "properties": {
         "enabled": {
-            "type": "boolean",
-            "description": "Whether to enable the egress gateway."
+          "type": "boolean",
+          "description": "Whether to enable the egress gateway."
         },
         "name": {
           "type": "string",
@@ -8365,10 +8365,10 @@
           "type": "string",
           "description": "Namespace that the Istio add-on egress gateway should be deployed in. If unspecified, the default is aks-istio-egress."
         },
-        "gatewayConfigurationName": { 
-          "type": "string", 
-          "description": "Name of the gateway configuration custom resource to configure the Istio egress routing. Must be specified when enabling the Istio egress gateway. Must be deployed in the same namespace that the Istio egress gateway will be deployed in." 
-        } 
+        "gatewayConfigurationName": {
+          "type": "string",
+          "description": "Name of the gateway configuration custom resource for the Istio add-on egress gateway. Must be specified when enabling the Istio egress gateway. Must be deployed in the same namespace that the Istio egress gateway will be deployed in."
+        }
       },
       "required": [
         "enabled",
