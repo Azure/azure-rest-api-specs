@@ -4362,11 +4362,20 @@
         "type": {
           "type": "string",
           "description": "The resource type.",
+          "default": "Microsoft.Batch/batchAccounts",
           "enum": [
             "Microsoft.Batch/batchAccounts"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "ResourceType",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "MicrosoftBatchBatchAccounts",
+                "value": "Microsoft.Batch/batchAccounts",
+                "description": "The resource type for Microsoft.Batch/batchAccounts"
+              }
+            ]
           }
         }
       },
@@ -4765,11 +4774,20 @@
         "placement": {
           "type": "string",
           "description": "This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.",
+          "default": "CacheDisk",
           "enum": [
             "CacheDisk"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "DiffDiskPlacement",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "CacheDisk",
+                "value": "CacheDisk",
+                "description": "The OS disk will be placed on the cache disk of the VM."
+              }
+            ]
           }
         }
       }
@@ -5018,11 +5036,20 @@
         "action": {
           "type": "string",
           "description": "Action when client IP address is matched.",
+          "default": "Allow",
           "enum": [
             "Allow"
           ],
           "x-ms-enum": {
-            "modelAsString": false
+            "name": "IPRuleAction",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Allow",
+                "value": "Allow",
+                "description": "Deny client access."
+              }
+            ]
           }
         },
         "value": {
@@ -6878,6 +6905,7 @@
           "type": "integer",
           "format": "int32",
           "description": "The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts. The value of this field should be between 0 and 100, inclusive.",
+          "minimum": 0,
           "maximum": 100
         },
         "pauseTimeBetweenBatches": {
@@ -7058,7 +7086,8 @@
         "maxTaskRetryCount": {
           "type": "integer",
           "format": "int32",
-          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit. Default is 0"
+          "description": "The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit. Default is 0",
+          "default": 0
         },
         "waitForSuccess": {
           "type": "boolean",

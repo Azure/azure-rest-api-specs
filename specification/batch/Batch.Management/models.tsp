@@ -1004,13 +1004,24 @@ model EndpointAccessProfile {
 }
 
 /**
+ * The action when client IP address is matched.
+ */
+union IPRuleAction {
+  /**
+   * Deny client access.
+   */
+  Allow: "Allow",
+
+  string,
+}
+/**
  * Rule to filter client IP address.
  */
 model IPRule {
   /**
    * Action when client IP address is matched.
    */
-  action: "Allow";
+  action: IPRuleAction = IPRuleAction.Allow;
 
   /**
    * IPv4 address, or IPv4 address range in CIDR format.
@@ -1689,6 +1700,18 @@ model OperationDisplay {
 }
 
 /**
+ * The result of the request to list operations.
+ */
+union ResourceType {
+  /**
+   * The resource type for Microsoft.Batch/batchAccounts
+   */
+  MicrosoftBatchBatchAccounts: "Microsoft.Batch/batchAccounts",
+
+  string,
+}
+
+/**
  * Parameters for a check name availability request.
  */
 model CheckNameAvailabilityParameters {
@@ -1700,7 +1723,7 @@ model CheckNameAvailabilityParameters {
   /**
    * The resource type.
    */
-  type: "Microsoft.Batch/batchAccounts";
+  type: ResourceType = ResourceType.MicrosoftBatchBatchAccounts;
 }
 
 /**
@@ -2389,13 +2412,25 @@ model OSDisk {
 }
 
 /**
+ * The location where the OS disk should be placed.
+ */
+union DiffDiskPlacement {
+  /**
+   * The OS disk will be placed on the cache disk of the VM.
+   */
+  CacheDisk: "CacheDisk",
+
+  string,
+}
+
+/**
  * Specifies the ephemeral Disk Settings for the operating system disk used by the virtual machine.
  */
 model DiffDiskSettings {
   /**
    * This property can be used by user in the request to choose which location the operating system should be in. e.g., cache disk space for Ephemeral OS disk provisioning. For more information on Ephemeral OS disk size requirements, please refer to Ephemeral OS disk size requirements for Windows VMs at https://learn.microsoft.com/azure/virtual-machines/windows/ephemeral-os-disks#size-requirements and Linux VMs at https://learn.microsoft.com/azure/virtual-machines/linux/ephemeral-os-disks#size-requirements.
    */
-  placement?: "CacheDisk";
+  placement?: DiffDiskPlacement = DiffDiskPlacement.CacheDisk;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2800,7 +2835,7 @@ model StartTask {
   /**
    * The Batch service retries a task if its exit code is nonzero. Note that this value specifically controls the number of retries. The Batch service will try the task once, and may then retry up to this limit. For example, if the maximum retry count is 3, Batch tries the task up to 4 times (one initial try and 3 retries). If the maximum retry count is 0, the Batch service does not retry the task. If the maximum retry count is -1, the Batch service retries the task without limit. Default is 0
    */
-  maxTaskRetryCount?: int32;
+  maxTaskRetryCount?: int32 = 0;
 
   /**
    * If true and the start task fails on a compute node, the Batch service retries the start task up to its maximum retry count (maxTaskRetryCount). If the task has still not completed successfully after all retries, then the Batch service marks the compute node unusable, and will not schedule tasks to it. This condition can be detected via the node state and scheduling error detail. If false, the Batch service will not wait for the start task to complete. In this case, other tasks can start executing on the compute node while the start task is still running; and even if the start task fails, new tasks will continue to be scheduled on the node. The default is true.
@@ -3267,6 +3302,7 @@ model RollingUpgradePolicy {
    * The maximum percentage of upgraded virtual machine instances that can be found to be in an unhealthy state. This check will happen after each batch is upgraded. If this percentage is ever exceeded, the rolling update aborts. The value of this field should be between 0 and 100, inclusive.
    */
   @maxValue(100)
+  @minValue(0)
   maxUnhealthyUpgradedInstancePercent?: int32;
 
   /**
