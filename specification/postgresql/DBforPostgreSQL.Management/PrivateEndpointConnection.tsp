@@ -23,7 +23,7 @@ interface PrivateEndpointConnections {
   /**
    * Gets a private endpoint connection.
    */
-  get is PrivateEndpointOperations.Read<Server>;
+  get is PrivateEndpointOperations.Read<Server, PrivateEndpointConnection>;
 
   /**
    * Approves or rejects a private endpoint connection.

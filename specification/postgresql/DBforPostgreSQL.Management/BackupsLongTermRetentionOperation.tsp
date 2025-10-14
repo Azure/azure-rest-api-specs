@@ -21,9 +21,31 @@ model BackupsLongTermRetentionOperation
     Resource = BackupsLongTermRetentionOperation,
     KeyName = "backupName",
     SegmentName = "ltrBackupOperations",
-    NamePattern = "^[-\\w\\._]+$"
+    NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*"
   >;
 }
+
+alias BackupsLongTermRetentionOperationAlias = Azure.ResourceManager.Legacy.LegacyOperations<
+  {
+    ...ApiVersionParameter;
+    ...SubscriptionIdParameter;
+    ...ResourceGroupParameter;
+    ...Azure.ResourceManager.Legacy.Provider<BackupsLongTermRetentionOperation>;
+    ...ParentKeysOf<BackupsLongTermRetentionOperation>;
+  },
+  {
+    /**
+     * The name of the backup.
+     */
+    @path
+    @segment("ltrBackupOperations")
+    @minLength(1)
+    @maxLength(128)
+    @pattern("^[-\\w\\._]+$")
+    backupName: string;
+  },
+  ErrorType = ErrorResponse
+>;
 
 @armResourceOperations
 interface BackupsLongTermRetentionOperations {
@@ -45,5 +67,3 @@ interface BackupsLongTermRetentionOperations {
 @@doc(BackupsLongTermRetentionOperation.properties,
   "Long Term Retention Backup Operation Resource Properties"
 );
-@@minLength(BackupsLongTermRetentionOperation.name, 1);
-@@maxLength(BackupsLongTermRetentionOperation.name, 128);

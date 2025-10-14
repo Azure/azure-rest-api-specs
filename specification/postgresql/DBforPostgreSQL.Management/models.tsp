@@ -527,6 +527,8 @@ union IdentityType {
 union PostgresMajorVersion {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  `18`: "18",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `17`: "17",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `16`: "16",
@@ -1902,15 +1904,10 @@ model MigrationSubstateDetails {
   @visibility(Lifecycle.Read)
   currentSubState?: MigrationSubstate;
 
-  /**
-   * Dictionary of <DatabaseMigrationState>
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   dbDetails?: Record<DatabaseMigrationState>;
-
-  /**
-   * Details for the validation for migration.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   validationDetails?: ValidationDetails;
 }
 
@@ -2831,7 +2828,7 @@ model Backup {
  */
 model Network {
   /**
-   * Indicates if public network access is enabled or not.
+   * Indicates if public network access is enabled or not. This is only supported for servers that are not integrated into a virtual network which is owned and provided by customer when server is deployed.
    */
   publicNetworkAccess?: ServerPublicNetworkAccessState;
 
@@ -2998,7 +2995,7 @@ model ServerPropertiesForPatch {
   /**
    * Name of the login designated as the first password based administrator assigned to your instance of PostgreSQL. Must be specified the first time that you enable password based authentication on a server. Once set to a given value, it cannot be changed for the rest of the life of a server. If you disable password based authentication on a server which had it enabled, this password based role isn't deleted.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   administratorLogin?: string;
 
   /**
@@ -3085,7 +3082,7 @@ model BackupForPatch {
   /**
    * Indicates if the server is configured to create geographically redundant backups.
    */
-  @visibility(Lifecycle.Read, Lifecycle.Update)
+  @visibility(Lifecycle.Read)
   geoRedundantBackup?: GeographicallyRedundantBackup;
 
   /**

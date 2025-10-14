@@ -88,3 +88,6 @@ interface VirtualEndpoints {
 @@doc(VirtualEndpoints.update::parameters.properties,
   "Parameters required to update a pair of virtual endpoints."
 );
+@@doc(VirtualEndpoint.properties,
+  "Properties of the pair of virtual endpoints."
+);
