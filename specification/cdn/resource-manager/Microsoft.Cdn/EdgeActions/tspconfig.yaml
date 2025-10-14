@@ -9,11 +9,9 @@ options:
     omit-unreachable-types: true
     emitter-output-dir: "{output-dir}"
     output-file: "edgeaction.json"
-    examples-directory: "{project-root}/examples/2025-09-01-preview"
+    examples-directory: "{output-dir}/examples"
     azure-resource-provider-folder: "../../../.."
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
-    arm-resource-flattening: true
-    emit-lro-options: "all"
     new-line: lf
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-edgeactions"
@@ -54,6 +52,4 @@ options:
     clear-output-folder: true
     generate-sample-project: true
     generate-test-project: true
-linter:
-  extends:
-    - "@azure-tools/typespec-azure-rulesets/resource-manager"
+
