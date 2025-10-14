@@ -1,5 +1,4 @@
-``` yaml $(tag) == 'package-compute-compute'
-service-name: Compute Sku
+``` yaml $(tag) == 'package-2021-07-01'
 input-file:
 - stable/2021-07-01/skus.json
 ```
