@@ -36,25 +36,7 @@ These settings apply only when `--tag=package-preview-2025-05-01` is specified o
 
 ```yaml $(tag) == 'package-preview-2025-05-01'
 input-file:
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/chaosFault.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/copyJobs.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/cosmos-db.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/dataTransferService.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/managedCassandra.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/mongorbac.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/networkSecurityPerimeter.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/notebook.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/privateEndpointConnection.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/privateLinkResources.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/rbac.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/restorable.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/services.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/tablerbac.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/throughputpool.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/cassandrarbac.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/mongoMIrbac.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/gremlinrbac.json
-  - Microsoft.DocumentDB/preview/2025-05-01-preview/fleet.json
+  - Microsoft.DocumentDB/preview/2025-05-01-preview/openapi.json
 ```
 
 ### Tag: package-2025-04-15
