@@ -306,7 +306,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ProviderRegistration"
         },
         "x-ms-long-running-operation": true
       },
@@ -523,7 +524,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/AuthorizedApplication"
         },
         "x-ms-long-running-operation": true
       },
@@ -802,7 +804,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/CustomRollout"
         },
         "x-ms-long-running-operation": true
       },
@@ -1631,7 +1634,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ResourceTypeRegistration"
         },
         "x-ms-long-running-operation": true
       },
@@ -1872,7 +1876,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/DefaultRollout"
         },
         "x-ms-long-running-operation": true
       },
@@ -3063,7 +3068,8 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
+          "final-state-via": "azure-async-operation",
+          "final-state-schema": "#/definitions/ProviderMonitorSetting"
         },
         "x-ms-long-running-operation": true
       },
@@ -3385,8 +3391,7 @@
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/AuthorizedApplicationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/AuthorizedApplicationProperties"
         }
       },
       "allOf": [
@@ -3698,8 +3703,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/CustomRolloutProperties",
-          "description": "Properties of the rollout.",
-          "x-ms-client-flatten": true
+          "description": "Properties of the rollout."
         }
       },
       "required": [
@@ -3910,8 +3914,7 @@
       "properties": {
         "properties": {
           "$ref": "#/definitions/DefaultRolloutProperties",
-          "description": "Properties of the rollout.",
-          "x-ms-client-flatten": true
+          "description": "Properties of the rollout."
         }
       },
       "allOf": [
@@ -5701,8 +5704,7 @@
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/NotificationRegistrationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/NotificationRegistrationProperties"
         }
       },
       "allOf": [
@@ -5841,7 +5843,6 @@
           "items": {
             "$ref": "#/definitions/LocalizedOperationDefinition"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "name"
           ]
@@ -5920,8 +5921,7 @@
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/OperationsPutContentProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/OperationsPutContentProperties"
         }
       },
       "allOf": [
@@ -6181,8 +6181,7 @@
       "description": "Concrete tracked resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ProviderMonitorSettingProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ProviderMonitorSettingProperties"
         }
       },
       "allOf": [
@@ -6227,8 +6226,7 @@
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ProviderRegistrationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ProviderRegistrationProperties"
         },
         "kind": {
           "type": "string",
@@ -6701,7 +6699,6 @@
           "items": {
             "$ref": "#/definitions/ResourceManagementEntity"
           },
-          "x-ms-client-flatten": true,
           "x-ms-identifiers": [
             "resourceId"
           ]
@@ -8106,8 +8103,7 @@
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/ResourceTypeRegistrationProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/ResourceTypeRegistrationProperties"
         },
         "kind": {
           "type": "string",
@@ -9291,8 +9287,7 @@
       "description": "Concrete proxy resource types can be created by aliasing this type using a specific property type.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/SkuResourceProperties",
-          "x-ms-client-flatten": true
+          "$ref": "#/definitions/SkuResourceProperties"
         }
       },
       "allOf": [
