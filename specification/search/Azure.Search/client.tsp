@@ -6,7 +6,7 @@ using TypeSpec.Versioning;
 using Azure.ClientGenerator.Core;
 using Search;
 
-@TypeSpec.Versioning.useDependency(Search.Versions.v2025_08_01_preview)
+@TypeSpec.Versioning.useDependency(Search.Versions.v2025_11_01_preview)
 namespace Customizations;
 
 @client({
@@ -286,6 +286,21 @@ namespace SearchServiceClient {
     #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
     @added(Search.Versions.v2025_08_01_preview)
     getIndexStatsSummary is Search.getIndexStatsSummary;
+  }
+}
+
+@client({
+  name: "KnowledgeBaseRetrievalClient",
+  service: Search,
+})
+@clientNamespace("Azure.Search.Documents.KnowledgeBase")
+namespace KnowledgeBaseRetrievalClient {
+  @operationGroup
+  @added(Search.Versions.v2025_11_01_preview)
+  interface KnowledgeRetrieval {
+    #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
+    #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Pre-existing API contract"
+    retrieve is Search.KnowledgeRetrieval.retrieve;
   }
 }
 
@@ -1169,3 +1184,161 @@ namespace SearchServiceClient {
 @@clientName(VisionVectorizeSkill.`@odata.type`, "odataType");
 @@clientName(PathHierarchyTokenizer.`@odata.type`, "odataType");
 @@clientName(ListIndexStatsSummary.value, "IndexesStatistics");
+
+// Knowledge Base types
+@@clientNamespace(Search.KnowledgeBaseRetrievalRequest,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseRetrievalResponse,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalReasoningEffort,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalMinimalReasoningEffort,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalLowReasoningEffort,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalMediumReasoningEffort,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalHighReasoningEffort,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalReasoningEffortKind,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalOutputMode,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.SearchIndexKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.AzureBlobKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.IndexedSharePointKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.IndexedOneLakeKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.WebKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.RemoteSharePointKnowledgeSourceParams,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalIntent,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalIntentType,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeRetrievalSemanticIntent,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseMessage,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseMessageContent,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseMessageContentType,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseMessageTextContent,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseMessageImageContent,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseImageContent,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseRetrievalActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseSearchIndexActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseSearchIndexActivityArguments,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseAzureBlobActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseAzureBlobActivityArguments,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseIndexedSharePointActivityArguments,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeActivityArguments,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseWebActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseWebActivityArguments,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseRemoteSharePointActivityArguments,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseModelQueryPlanningActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseModelAnswerSynthesisActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseAgenticReasoningActivityRecord,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseReference,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseSearchIndexReference,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseAzureBlobReference,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseIndexedSharePointReference,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseIndexedOneLakeReference,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseWebReference,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseRemoteSharePointReference,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.SharePointSensitivityLabelInfo,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseErrorDetail,
+  "Azure.Search.Documents.KnowledgeBase"
+);
+@@clientNamespace(Search.KnowledgeBaseErrorAdditionalInfo,
+  "Azure.Search.Documents.KnowledgeBase"
+);

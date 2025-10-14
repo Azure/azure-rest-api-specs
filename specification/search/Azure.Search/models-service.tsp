@@ -4462,6 +4462,22 @@ union KnowledgeSourceKind {
 
   @doc("A knowledge source that read and ingest data from Azure Blob Storage to a Search Index.")
   AzureBlob: "azureBlob",
+
+  @doc("A knowledge source that reads data from indexed SharePoint.")
+  @added(Versions.v2025_11_01_preview)
+  IndexedSharePoint: "indexedSharePoint",
+
+  @doc("A knowledge source that reads data from indexed OneLake.")
+  @added(Versions.v2025_11_01_preview)
+  IndexedOneLake: "indexedOneLake",
+
+  @doc("A knowledge source that reads data from the web.")
+  @added(Versions.v2025_11_01_preview)
+  Web: "web",
+
+  @doc("A knowledge source that reads data from remote SharePoint.")
+  @added(Versions.v2025_11_01_preview)
+  RemoteSharePoint: "remoteSharePoint",
 }
 
 @doc("Knowledge Source targeting a search index.")
