@@ -12,7 +12,11 @@ using Azure.ResourceManager.Foundations;
 namespace Microsoft.DocumentDB;
 
 model ThroughputPoolsListResult is ResourceListResult<ThroughputPoolResource>;
+model TableRoleDefinitionListResult
+  is ResourceListResult<TableRoleDefinitionResource>;
 
+model ThroughputPoolAccountsListResult
+  is ResourceListResult<ThroughputPoolAccountResource>;
 /**
  * The type of identity that created the resource.
  */
@@ -3150,7 +3154,7 @@ model SqlDatabaseResource {
   restoreParameters?: ResourceRestoreParameters;
 
   /**
-   * Enum to indicate the mode of resource creation.
+   * Enum to indicate the mode of account creation.
    */
   createMode?: CreateMode = CreateMode.Default;
 }
@@ -3533,7 +3537,7 @@ model SqlContainerResource {
   restoreParameters?: ResourceRestoreParameters;
 
   /**
-   * Enum to indicate the mode of resource creation.
+   * Enum to indicate the mode of account creation.
    */
   createMode?: CreateMode = CreateMode.Default;
 
@@ -3971,13 +3975,14 @@ model PhysicalPartitionStorageInfoCollection {
    */
   #suppress "@azure-tools/typespec-client-generator-core/property-name-conflict" "For backward compatibility"
   @visibility(Lifecycle.Read)
-  physicalPartitionStorageInfoCollection?: PhysicalPartitionStorageInfo[];
+  physicalPartitionStorageInfoCollection?: physicalPartitionStorageInfo[];
 }
 
 /**
  * The storage of a physical partition
  */
-model PhysicalPartitionStorageInfo {
+#suppress "@azure-tools/typespec-azure-core/casing-style" "For backward compatibility"
+model physicalPartitionStorageInfo {
   /**
    * The unique identifier of the partition.
    */
@@ -4623,7 +4628,7 @@ model TableResource {
   restoreParameters?: ResourceRestoreParameters;
 
   /**
-   * Enum to indicate the mode of resource creation.
+   * Enum to indicate the mode of account creation.
    */
   createMode?: CreateMode = CreateMode.Default;
 }
@@ -6404,6 +6409,11 @@ model SqlRoleDefinitionResource {
  * The set of data plane operations permitted through this Role Definition.
  */
 model Permission {
+  /**
+   * The id for the permission.
+   */
+  id?: string;
+
   /**
    * An array of data actions that are allowed.
    */

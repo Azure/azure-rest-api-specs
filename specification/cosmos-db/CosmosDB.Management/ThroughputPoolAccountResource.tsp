@@ -56,7 +56,10 @@ interface ThroughputPoolAccountResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("ThroughputPoolAccounts_List")
-  list is ArmResourceListByParent<ThroughputPoolAccountResource>;
+  list is ArmResourceListByParent<
+    ThroughputPoolAccountResource,
+    Response = ThroughputPoolAccountsListResult
+  >;
 }
 
 @@maxLength(ThroughputPoolAccountResource.name, 50);

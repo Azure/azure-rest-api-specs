@@ -61,7 +61,7 @@ interface CassandraViewGetResultsOperationGroup {
   @operationId("CassandraResources_DeleteCassandraView")
   deleteCassandraView is ArmResourceDeleteWithoutOkAsync<
     CassandraViewGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraViewGetResults> &
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
       Azure.Core.Foundations.RetryAfterHeader> | ArmDeletedNoContentResponse
   >;
 

@@ -63,7 +63,10 @@ interface TableRoleDefinitionResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("TableResources_ListTableRoleDefinitions")
-  listTableRoleDefinitions is ArmResourceListByParent<TableRoleDefinitionResource>;
+  listTableRoleDefinitions is ArmResourceListByParent<
+    TableRoleDefinitionResource,
+    Response = TableRoleDefinitionListResult
+  >;
 }
 
 @@doc(TableRoleDefinitionResource.name, "The GUID for the Role Definition.");

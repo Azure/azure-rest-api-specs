@@ -16,14 +16,6 @@ using Microsoft.DocumentDB;
 
 @@clientName(MetricValue._count, "count");
 
-@@clientName(PercentileMetricValue.P10, "p10");
-@@clientName(PercentileMetricValue.P25, "p25");
-@@clientName(PercentileMetricValue.P50, "p50");
-@@clientName(PercentileMetricValue.P75, "p75");
-@@clientName(PercentileMetricValue.P90, "p90");
-@@clientName(PercentileMetricValue.P95, "p95");
-@@clientName(PercentileMetricValue.P99, "p99");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "Property flatten for SDK backward compatibility."
 @@Legacy.flattenProperty(GraphResourceCreateUpdateParameters.properties);
 
