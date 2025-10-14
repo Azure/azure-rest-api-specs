@@ -9,7 +9,7 @@ using Azure.ClientGenerator.Core;
 namespace ClientCustomizations;
 
 //Java customizations
-@@clientName(KeyVault, "KeyVaultAdministration", "java");
+@@clientName(KeyVault, "KeyVaultAdministrationClient", "java");
 @@clientName(KeyVault.DataAction, "KeyVaultDataAction", "java");
 @@clientName(KeyVault.RoleDefinitionType, "KeyVaultRoleDefinitionType", "java");
 @@clientName(KeyVault.RoleType, "KeyVaultRoleType", "java");
