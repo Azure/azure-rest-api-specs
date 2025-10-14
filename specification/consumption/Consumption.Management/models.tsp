@@ -3,6 +3,9 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using TypeSpec.Rest;
+using TypeSpec.Http;
+using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Consumption;
@@ -10,8 +13,7 @@ namespace Microsoft.Consumption;
 /**
  * The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
  */
-model ResourceScopeActionScope
-  is Azure.ResourceManager.Extension.ScopeParameter;
+model ResourceScopeActionScope is Extension.ScopeParameter;
 
 /**
  * The status of the long running operation.
@@ -412,6 +414,42 @@ model UsageDetail extends Resource {
 }
 
 /**
+ * The Resource model definition.
+ */
+model Resource {
+  /**
+   * The full qualified ARM ID of an event.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * The ID that uniquely identifies an event.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
+}
+
+/**
  * A marketplace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -801,6 +839,34 @@ model ForecastSpend {
    */
   @visibility(Lifecycle.Read)
   unit?: string;
+}
+
+/**
+ * The Resource model definition.
+ */
+model ProxyResource {
+  /**
+   * Resource Id.
+   */
+  @visibility(Lifecycle.Read)
+  id?: string;
+
+  /**
+   * Resource name.
+   */
+  @visibility(Lifecycle.Read)
+  name?: string;
+
+  /**
+   * Resource type.
+   */
+  @visibility(Lifecycle.Read)
+  type?: string;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  eTag?: string;
 }
 
 /**
