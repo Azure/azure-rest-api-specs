@@ -18,7 +18,8 @@ model EntityResource {
   ...ResourceNameParameter<
     Resource = EntityResource,
     KeyName = "entityIdentifier",
-    SegmentName = "entities"
+    SegmentName = "entities",
+    NamePattern = ""
   >;
 }
 
