@@ -10,7 +10,7 @@ describe("child-process", () => {
   it("exec maxBuffer", async () => {
     // call `generate-stdout.print()` as a separate process.
     const { stdout } = await childProcess.exec(
-      "node -e \"import { print } from './dist/src/test/generate-stdout.js'; print();\"",
+      "node -e \"import { print } from './dist/test/generate-stdout.js'; print();\"",
       {},
     );
     const expected = generate()
