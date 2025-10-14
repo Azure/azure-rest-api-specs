@@ -24,14 +24,14 @@ To see additional help and options, run:
 
 These are the global settings for the Authorization API.
 
-``` yaml
+```yaml
 openapi-type: arm
 tag: package-2021-12-01-preview-only
 ```
 
 ### Suppression
 
-``` yaml
+```yaml
 directive:
   - suppress: OperationsAPIImplementation
     reason: we do have a operations api as "/providers/Microsoft.Authorization/operations"
@@ -86,88 +86,88 @@ directive:
 
 These settings apply only when `--tag=package-2021-12-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-12-01-preview-only'
+```yaml $(tag) == 'package-2021-12-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
-- Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+  - Microsoft.Authorization/preview/2021-12-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
 
 ### Tag: package-2020-10-01
 
 These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01'
+```yaml $(tag) == 'package-2020-10-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2020-10-01/common-types.json
-- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2020-10-01/common-types.json
+  - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-only
 
 These settings apply only when `--tag=package-2020-10-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-only'
+```yaml $(tag) == 'package-2020-10-01-only'
 input-file:
-- Microsoft.Authorization/stable/2020-10-01/common-types.json
-- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/stable/2020-10-01/common-types.json
+  - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2022-04-01
 
 These settings apply only when `--tag=package-2022-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-04-01'
+```yaml $(tag) == 'package-2022-04-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
-- Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2022-04-01/common-types.json
-- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/common-types.json
+  - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2022-04-01-only
 
 These settings apply only when `--tag=package-2022-04-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2022-04-01-only'
+```yaml $(tag) == 'package-2022-04-01-only'
 input-file:
-- Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
-- Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2022-04-01/common-types.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-DenyAssignmentCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2022-04-01/common-types.json
 ```
 
 ### Tag: package-2022-04-01-preview-only
@@ -176,8 +176,8 @@ These settings apply only when `--tag=package-2022-04-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2022-04-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2022-04-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2022-04-01-preview/RoleEligibilityScheduleRequest.json
 ```
 
 ### Tag: package-2022-08-01-preview-only
@@ -186,9 +186,8 @@ These settings apply only when `--tag=package-2022-08-01-preview-only` is specif
 
 ```yaml $(tag) == 'package-2022-08-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
+  - Microsoft.Authorization/preview/2022-08-01-preview/RoleManagementAlerts.json
 ```
-
 
 ### Tag: package-preview-2021-11
 
@@ -198,115 +197,116 @@ These settings apply only when `--tag=package-preview-2021-11` is specified on t
 input-file:
   - Microsoft.Authorization/preview/2021-11-16-preview/authorization-AccessReviewCalls.json
 ```
+
 ### Tag: package-2021-07-01-preview-only
 
 These settings apply only when `--tag=package-2021-07-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-07-01-preview-only'
+```yaml $(tag) == 'package-2021-07-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2021-07-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2021-07-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2021-03-01-preview-only
 
 These settings apply only when `--tag=package-2021-03-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-03-01-preview-only'
+```yaml $(tag) == 'package-2021-03-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2021-03-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2021-03-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2021-01-01-preview-only
 
 These settings apply only when `--tag=package-2021-01-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2021-01-01-preview-only'
+```yaml $(tag) == 'package-2021-01-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
+  - Microsoft.Authorization/preview/2021-01-01-preview/authorization-RoleAssignmentApprovalCalls.json
 ```
 
 ### Tag: package-2020-10-01
 
 These settings apply only when `--tag=package-2020-10-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01'
+```yaml $(tag) == 'package-2020-10-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2020-10-01/common-types.json
-- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2020-10-01/common-types.json
+  - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-only
 
 These settings apply only when `--tag=package-2020-10-01-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-only'
+```yaml $(tag) == 'package-2020-10-01-only'
 input-file:
-- Microsoft.Authorization/stable/2020-10-01/common-types.json
-- Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
-- Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/stable/2020-10-01/common-types.json
+  - Microsoft.Authorization/stable/2020-10-01/EligibleChildResources.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicy.json
+  - Microsoft.Authorization/stable/2020-10-01/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-preview
 
 These settings apply only when `--tag=package-2020-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-preview'
+```yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
-- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
-- Microsoft.Authorization/preview/2020-10-01-preview/common-types.json
-- Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: package-2020-10-01-preview-only
 
 These settings apply only when `--tag=package-2020-10-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-10-01-preview-only'
+```yaml $(tag) == 'package-2020-10-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2020-10-01-preview/common-types.json
-- Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
-- Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/common-types.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/EligibleChildResources.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentSchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleAssignmentScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilitySchedule.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleInstance.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleEligibilityScheduleRequest.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicy.json
+  - Microsoft.Authorization/preview/2020-10-01-preview/RoleManagementPolicyAssignment.json
 ```
 
 ### Tag: profile-hybrid-2020-09-01
@@ -314,75 +314,75 @@ input-file:
 These settings apply only when `--tag=profile-hybrid-2020-09-01` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile.
 
-``` yaml $(tag) == 'profile-hybrid-2020-09-01'
+```yaml $(tag) == 'profile-hybrid-2020-09-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-08-01-preview
 
 These settings apply only when `--tag=package-2020-08-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-08-01-preview'
+```yaml $(tag) == 'package-2020-08-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
-- Microsoft.Authorization/preview/2020-08-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - Microsoft.Authorization/preview/2020-08-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-04-01-preview
 
 These settings apply only when `--tag=package-2020-04-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-04-01-preview'
+```yaml $(tag) == 'package-2020-04-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
-- Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-04-01-preview-only
 
 These settings apply only when `--tag=package-2020-04-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-04-01-preview-only'
+```yaml $(tag) == 'package-2020-04-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2020-04-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2020-03-01-preview
 
 These settings apply only when `--tag=package-2020-03-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2020-03-01-preview'
+```yaml $(tag) == 'package-2020-03-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
-- Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2020-03-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 ```
 
 ### Tag: package-2019-08-01-preview-only
 
 These settings apply only when `--tag=package-2019-08-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2019-08-01-preview-only'
+```yaml $(tag) == 'package-2019-08-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
+  - Microsoft.Authorization/preview/2019-08-01-preview/authorization-UsageMetricsCalls.json
 ```
 
 ### Tag: profile-hybrid-2019-03-01
@@ -390,135 +390,135 @@ input-file:
 These settings apply only when `--tag=profile-hybrid-2019-03-01` is specified on the command line.
 Creating this tag to pick proper resources from the hybrid profile.
 
-``` yaml $(tag) == 'profile-hybrid-2019-03-01'
+```yaml $(tag) == 'profile-hybrid-2019-03-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview
 
 These settings apply only when `--tag=package-2018-09-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-01-preview'
+```yaml $(tag) == 'package-2018-09-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
 ### Tag: package-2018-09-01-preview-only
 
 These settings apply only when `--tag=package-2018-09-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-09-01-preview-only'
+```yaml $(tag) == 'package-2018-09-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-09-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2018-07-01-preview
 
 These settings apply only when `--tag=package-2018-07-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-07-01-preview'
+```yaml $(tag) == 'package-2018-07-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
 ### Tag: package-2018-07-01-preview-only
 
 These settings apply only when `--tag=package-2018-07-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-07-01-preview-only'
+```yaml $(tag) == 'package-2018-07-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
+  - Microsoft.Authorization/preview/2018-07-01-preview/authorization-DenyAssignmentGetCalls.json
 ```
 
 ### Tag: package-2018-05-01-preview
 
 These settings apply only when `--tag=package-2018-05-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-05-01-preview'
+```yaml $(tag) == 'package-2018-05-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
+  - Microsoft.Authorization/preview/2018-05-01-preview/authorization-AccessReviewCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview
 
 These settings apply only when `--tag=package-2018-01-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-01-01-preview'
+```yaml $(tag) == 'package-2018-01-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 ```
 
 ### Tag: package-2018-01-01-preview-only
 
 These settings apply only when `--tag=package-2018-01-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2018-01-01-preview-only'
+```yaml $(tag) == 'package-2018-01-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2018-01-01-preview/authorization-RoleDefinitionsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview
 
 These settings apply only when `--tag=package-2017-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-10-01-preview'
+```yaml $(tag) == 'package-2017-10-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2017-10-01-preview-only
 
 These settings apply only when `--tag=package-2017-10-01-preview-only` is specified on the command line.
 
-``` yaml $(tag) == 'package-2017-10-01-preview-only'
+```yaml $(tag) == 'package-2017-10-01-preview-only'
 input-file:
-- Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/preview/2017-10-01-preview/authorization-RoleAssignmentsCalls.json
 ```
 
 ### Tag: package-2015-07-01
 
 These settings apply only when `--tag=package-2015-07-01` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-07-01'
+```yaml $(tag) == 'package-2015-07-01'
 input-file:
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
-- Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleDefinitionsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ProviderOperationsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ElevateAccessCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-RoleAssignmentsCalls.json
+  - Microsoft.Authorization/stable/2015-07-01/authorization-ClassicAdminCalls.json
 ```
 
 ### Tag: package-2015-06-01-preview
 
 These settings apply only when `--tag=package-2015-06-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2015-06-01-preview'
+```yaml $(tag) == 'package-2015-06-01-preview'
 input-file:
-- Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
+  - Microsoft.Authorization/preview/2015-06-01/authorization-ClassicAdminCalls.json
 ```
 
 ---
@@ -530,7 +530,7 @@ input-file:
 This section describes what SDK should be generated by the automatic system.
 This is not used by Autorest itself.
 
-``` yaml $(swagger-to-sdk)
+```yaml $(swagger-to-sdk)
 swagger-to-sdk:
   - repo: azure-sdk-for-net-track2
   - repo: azure-sdk-for-python-track2

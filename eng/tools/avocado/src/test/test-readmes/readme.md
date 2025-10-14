@@ -19,30 +19,34 @@ To see additional help and options, run:
 ## Configuration
 
 ### Basic Information
-``` yaml
+
+```yaml
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
 ```
+
 ### Test
 
 These are the global settings for the ApiManagement API.
 
-``` yaml
+```yaml
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
 ```
 
-### Test1 
-``` yaml $(tag) === 'test'
+### Test1
+
+```yaml $(tag) === 'test'
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
 ```
 
-### Test2 
-``` yaml
+### Test2
+
+```yaml
 title: ApiManagementClient
 description: ApiManagement Client
 openapi-type: arm
@@ -56,7 +60,6 @@ input-file:
   - specs/2020-05-01/a.json
   - specs/2020-06-01/b.json
 ```
-
 
 ### Tag: package-2019-02
 

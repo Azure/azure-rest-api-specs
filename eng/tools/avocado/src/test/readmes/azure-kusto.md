@@ -26,7 +26,7 @@ These are the global settings for the Kusto API.
 
 ```yaml
 title: KustoManagementClient
-description: 'The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases.'
+description: "The Azure Kusto management API provides a RESTful set of web services that interact with Azure Kusto services to manage your clusters and databases. The API enables you to create, update, and delete clusters and databases."
 openapi-type: arm
 tag: package-2022-07
 ```
@@ -263,15 +263,15 @@ directive:
   - suppress: ListInOperationName
     from: kusto.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/addPrincipals"].post.operationId'
-    reason: 'Already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.'
+    reason: "Already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change."
   - suppress: ListInOperationName
     from: kusto.json
     where: '$.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Kusto/clusters/{clusterName}/databases/{databaseName}/removePrincipals"].post.operationId'
-    reason: 'Already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change.'
+    reason: "Already shipped an SDK on top of this spec, fixing this warning may introduce a breaking change."
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: kusto.json
     where: $.definitions.Database
-    reason: 'Action is expected to receive a subclass of Database'
+    reason: "Action is expected to receive a subclass of Database"
   - suppress: OBJECT_ADDITIONAL_PROPERTIES
     from: kusto.json
     where: $.definitions.EventHubDataConnection
