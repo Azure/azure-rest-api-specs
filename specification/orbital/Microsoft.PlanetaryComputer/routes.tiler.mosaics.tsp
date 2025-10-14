@@ -454,6 +454,14 @@ interface MosaicsAssetsForTiles {
       @pattern(".*")
       searchId: string;
 
+      /**
+       * STAC Collection Identifier
+       */
+      @query("collection")
+      @maxLength(500)
+      @pattern(".*")
+      collectionId: string;
+
       ...MosaicSearchQueryParameters;
       ...ZxyPathParameters;
 
