@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2025-08-02` is specified on the co
 
 ```yaml $(tag) == 'package-2025-08-02'
 input-file:
-  - Microsoft.IoTFirmwareDefense/stable/2025-08-02/iotfirmwaredefense.json
+  - stable/2025-08-02/iotfirmwaredefense.json
 ```
 
 ### Tag: package-2025-04-01-preview
@@ -50,7 +50,7 @@ These settings apply only when `--tag=package-2025-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-01-preview'
 input-file:
-  - Microsoft.IoTFirmwareDefense/preview/2025-04-01-preview/iotfirmwaredefense.json
+  - preview/2025-04-01-preview/iotfirmwaredefense.json
 ```
 
 ### Tag: package-2024-01-10
@@ -59,17 +59,17 @@ These settings apply only when `--tag=package-2024-01-10` is specified on the co
 
 ```yaml $(tag) == 'package-2024-01-10'
 input-file:
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/binaryHardeningResults.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/common.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/cryptoCertificates.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/cryptoKeys.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/cves.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/firmwares.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/operations.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/passwordHashes.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/sbomComponents.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/summaries.json
-  - Microsoft.IoTFirmwareDefense/stable/2024-01-10/workspaces.json
+  - stable/2024-01-10/binaryHardeningResults.json
+  - stable/2024-01-10/common.json
+  - stable/2024-01-10/cryptoCertificates.json
+  - stable/2024-01-10/cryptoKeys.json
+  - stable/2024-01-10/cves.json
+  - stable/2024-01-10/firmwares.json
+  - stable/2024-01-10/operations.json
+  - stable/2024-01-10/passwordHashes.json
+  - stable/2024-01-10/sbomComponents.json
+  - stable/2024-01-10/summaries.json
+  - stable/2024-01-10/workspaces.json
 ```
 
 ### Tag: package-2023-02-08-preview
@@ -78,10 +78,10 @@ These settings apply only when `--tag=package-2023-02-08-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-02-08-preview'
 input-file:
-  - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/common.json
-  - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/firmwares.json
-  - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/workspaces.json
-  - Microsoft.IoTFirmwareDefense/preview/2023-02-08-preview/operations.json
+  - preview/2023-02-08-preview/common.json
+  - preview/2023-02-08-preview/firmwares.json
+  - preview/2023-02-08-preview/workspaces.json
+  - preview/2023-02-08-preview/operations.json
 ```
 
 ---
