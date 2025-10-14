@@ -5717,6 +5717,24 @@
       ],
       "x-ms-discriminator-value": "CustomKeys"
     },
+    "CustomInference": {
+      "type": "object",
+      "description": "Custom inference model endpoint for evaluation.",
+      "properties": {
+        "endpointUrl": {
+          "type": "string",
+          "description": "The endpoint URL to be used for inferencing."
+        },
+        "DeploymentId": {
+          "type": "string",
+          "description": "The deployment id to be used for inferencing."
+        }
+      },
+      "required": [
+        "endpointUrl",
+        "DeploymentId"
+      ]
+    },
     "CustomizationParameters": {
       "type": "object",
       "description": "Customization Parameters",
@@ -9120,6 +9138,10 @@
           "additionalProperties": {
             "type": "string"
           }
+        },
+        "customInference": {
+          "$ref": "#/definitions/CustomInference",
+          "description": "Custom inference configuration."
         }
       },
       "required": [

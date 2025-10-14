@@ -91,6 +91,16 @@ model QueryResponseInlineMessage {
   properties?: Record<string>;
 }
 
+/** Custom inference model endpoint for evaluation. */
+@added(Versions.v2025_11_15_preview)
+model CustomInference {
+  /** The endpoint URL to be used for inferencing. */
+  endpointUrl: string;
+
+  /** The deployment id to be used for inferencing. */
+  DeploymentId: string;
+}
+
 /** Query and response excepted input messsage defintion. */
 @added(Versions.v2025_11_15_preview)
 model EvaluatorMessage {
@@ -181,6 +191,9 @@ model SyncEvalInput {
 
   /** Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed. */
   properties?: Record<string>;
+
+  /** Custom inference configuration. */
+  customInference?: CustomInference;
 }
 
 @doc("Evaluator Configuration")
