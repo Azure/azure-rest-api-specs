@@ -1,34 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-06-01-preview",
-    "privateEndpointConnectionName": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
+    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff",
     "resourceGroupName": "exampleresourcegroup",
     "serverName": "exampleserver",
-    "subscriptionId": "ffffffff-ffff-ffff-ffff-ffffffffffff"
+    "privateEndpointConnectionName": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateEndpointConnections/private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
         "name": "private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
         "type": "Microsoft.DBforPostgreSQL/flexibleServers/privateEndpointConnections",
-        "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.DBforPostgreSQL/flexibleServers/exampleserver/privateEndpointConnections/private-endpoint-connection-name.1fa229cd-bf3f-47f0-8c49-afb36723997e",
         "properties": {
-          "groupIds": [
-            "postgresqlServer"
-          ],
+          "provisioningState": "Ready",
           "privateEndpoint": {
             "id": "/subscriptions/ffffffff-ffff-ffff-ffff-ffffffffffff/resourceGroups/exampleresourcegroup/providers/Microsoft.Network/privateEndpoints/private-endpoint-name"
           },
+          "groupIds": [
+            "postgresqlServer"
+          ],
           "privateLinkServiceConnectionState": {
+            "status": "Approved",
             "description": "Auto-approved",
-            "actionsRequired": "None",
-            "status": "Approved"
-          },
-          "provisioningState": "Ready"
+            "actionsRequired": "None"
+          }
         }
       }
     }
-  },
-  "operationId": "PrivateEndpointConnections_Get",
-  "title": "Get a private endpoint connection."
+  }
 }

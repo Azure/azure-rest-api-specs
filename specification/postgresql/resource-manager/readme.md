@@ -41,27 +41,7 @@ These settings apply only when `--tag=package-flexibleserver-2025-08-01` is spec
 
 ``` yaml $(tag) == 'package-flexibleserver-2025-08-01'
 input-file:
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/AdministratorsMicrosoftEntra.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/AdvancedThreatProtectionSettings.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/BackupsAutomaticAndOnDemand.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/Capabilities.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/CapturedLogs.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/Configurations.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/Databases.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/FirewallRules.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/BackupsLongTermRetention.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/Migrations.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/NameAvailability.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/Operations.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/PrivateDnsZoneSuffix.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/PrivateEndpointConnections.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/PrivateLinkResources.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/QuotaUsages.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/Replicas.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/Servers.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/TuningOptions.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/VirtualEndpoints.json
-  - Microsoft.DBforPostgreSQL/stable/2025-08-01/VirtualNetworkSubnetUsage.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/openapi.json
 suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdministratorsMicrosoftEntra.json
@@ -212,7 +192,27 @@ These settings apply only when `--tag=package-flexibleserver-2025-06-01-preview`
 
 ``` yaml $(tag) == 'package-flexibleserver-2025-06-01-preview'
 input-file:
-  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/openapi.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdministratorsMicrosoftEntra.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/AdvancedThreatProtectionSettings.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsAutomaticAndOnDemand.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Capabilities.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/CapturedLogs.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Configurations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Databases.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/FirewallRules.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/BackupsLongTermRetention.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Migrations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/NameAvailability.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Operations.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateDnsZoneSuffix.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateEndpointConnections.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/PrivateLinkResources.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/QuotaUsages.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Replicas.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/Servers.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/TuningOptions.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualEndpoints.json
+  - Microsoft.DBforPostgreSQL/preview/2025-06-01-preview/VirtualNetworkSubnetUsage.json
 suppressions:
   - code: ProvisioningStateSpecifiedForLROPut
     from: AdministratorsMicrosoftEntra.json

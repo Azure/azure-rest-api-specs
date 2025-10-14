@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-08-01"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,56 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections/{privateEndpointConnectionName}": {
-      "get": {
-        "tags": [
-          "PrivateEndpointConnections"
-        ],
-        "description": "Gets a private endpoint connection.",
-        "operationId": "PrivateEndpointConnections_Get",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/PrivateEndpointConnectionNameParameter"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Get a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionsGet.json"
-          }
-        }
-      },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/databases/{databaseName}": {
       "put": {
         "tags": [
-          "PrivateEndpointConnections"
+          "Databases"
         ],
-        "description": "Approves or rejects a private endpoint connection.",
-        "operationId": "PrivateEndpointConnections_Update",
+        "operationId": "Databases_Create",
+        "x-ms-examples": {
+          "Create a database.": {
+            "$ref": "./examples/DatabasesCreate.json"
+          }
+        },
+        "description": "Creates a new database.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -98,16 +60,16 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "../../../types/common-types.json#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "#/parameters/DatabaseNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+              "$ref": "#/definitions/Database"
             },
-            "description": "Parameters required to update a private endpoint connection."
+            "description": "Parameters required to create a new database."
           }
         ],
         "responses": {
@@ -130,18 +92,21 @@
           }
         },
         "x-ms-long-running-operation": true,
-        "x-ms-examples": {
-          "Approve or reject a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionsUpdate.json"
-          }
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "azure-async-operation"
         }
       },
       "delete": {
         "tags": [
-          "PrivateEndpointConnections"
+          "Databases"
         ],
-        "description": "Deletes a private endpoint connection.",
-        "operationId": "PrivateEndpointConnections_Delete",
+        "operationId": "Databases_Delete",
+        "x-ms-examples": {
+          "Delete an existing database": {
+            "$ref": "./examples/DatabasesDelete.json"
+          }
+        },
+        "description": "Deletes an existing database.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -156,7 +121,7 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "../../../types/common-types.json#/parameters/PrivateEndpointConnectionNameParameter"
+            "$ref": "#/parameters/DatabaseNameParameter"
           }
         ],
         "responses": {
@@ -183,22 +148,65 @@
         },
         "x-ms-long-running-operation": true,
         "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        },
+          "final-state-via": "location"
+        }
+      },
+      "get": {
+        "tags": [
+          "Databases"
+        ],
+        "operationId": "Databases_Get",
         "x-ms-examples": {
-          "Delete a private endpoint connection.": {
-            "$ref": "./examples/PrivateEndpointConnectionsDelete.json"
+          "Get information about an existing database.": {
+            "$ref": "./examples/DatabasesGet.json"
+          }
+        },
+        "description": "Gets information about an existing database.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
+          },
+          {
+            "$ref": "#/parameters/DatabaseNameParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/Database"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
           }
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/privateEndpointConnections": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/databases": {
       "get": {
         "tags": [
-          "PrivateEndpointConnections"
+          "Databases"
         ],
-        "description": "Lists all private endpoint connections on a server.",
-        "operationId": "PrivateEndpointConnections_ListByServer",
+        "operationId": "Databases_ListByServer",
+        "x-ms-examples": {
+          "List all databases in a server.": {
+            "$ref": "./examples/DatabasesListByServer.json"
+          }
+        },
+        "description": "Lists all databases in a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -217,7 +225,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/PrivateEndpointConnectionList"
+              "$ref": "#/definitions/DatabaseList"
             }
           },
           "default": {
@@ -229,35 +237,73 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
-        },
-        "x-ms-examples": {
-          "List all private endpoint connections on a server.": {
-            "$ref": "./examples/PrivateEndpointConnectionsList.json"
-          }
         }
       }
     }
   },
   "definitions": {
-    "PrivateEndpointConnectionList": {
-      "description": "List of private endpoint connections.",
+    "DatabaseProperties": {
+      "type": "object",
+      "properties": {
+        "charset": {
+          "type": "string",
+          "description": "Character set of the database.",
+          "pattern": "^[a-zA-Z]+\\w*$"
+        },
+        "collation": {
+          "type": "string",
+          "description": "Collation of the database.",
+          "pattern": "^[a-zA-Z\\-]+([. ]|\\w)*$"
+        }
+      },
+      "description": "Properties of a database."
+    },
+    "Database": {
+      "type": "object",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/DatabaseProperties",
+          "x-ms-client-flatten": true,
+          "description": "Properties of a database."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "description": "Represents a database."
+    },
+    "DatabaseList": {
       "type": "object",
       "properties": {
         "value": {
-          "description": "Array of results.",
           "type": "array",
           "items": {
-            "$ref": "../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateEndpointConnection"
+            "$ref": "#/definitions/Database"
           },
-          "readOnly": true
+          "description": "List of all databases in a server."
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
           "type": "string",
           "format": "uri"
         }
-      }
+      },
+      "description": "List of all databases in a server."
     }
   },
-  "parameters": {}
+  "parameters": {
+    "DatabaseNameParameter": {
+      "name": "databaseName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "description": "Name of the database (case-sensitive). Exact database names can be retrieved by getting the list of all existing databases in a server.",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z_][\\w\\-]{0,62}$",
+      "maxLength": 63,
+      "x-ms-parameter-location": "method"
+    }
+  }
 }

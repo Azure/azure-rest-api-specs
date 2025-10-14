@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-08-01"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints/{virtualEndpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/firewallRules/{firewallRuleName}": {
       "put": {
         "tags": [
-          "VirtualEndpoints"
+          "FirewallRules"
         ],
-        "operationId": "VirtualEndpoints_Create",
+        "operationId": "FirewallRules_CreateOrUpdate",
         "x-ms-examples": {
-          "Create a pair of virtual endpoints for a server.": {
-            "$ref": "./examples/VirtualEndpointCreate.json"
+          "Create a new firewall rule or update an existing firewall rule.": {
+            "$ref": "./examples/FirewallRulesCreateOrUpdate.json"
           }
         },
-        "description": "Creates a pair of virtual endpoints for a server.",
+        "description": "Creates a new firewall rule or updates an existing firewall rule.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -60,77 +60,16 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualEndpointNameParameter"
+            "$ref": "#/parameters/FirewallRuleNameParameter"
           },
           {
             "name": "parameters",
             "in": "body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
+              "$ref": "#/definitions/FirewallRule"
             },
-            "description": "Parameters required to create or update a pair of virtual endpoints."
-          }
-        ],
-        "responses": {
-          "202": {
-            "description": "Accepted.",
-            "headers": {
-              "Location": {
-                "type": "string"
-              },
-              "Azure-AsyncOperation": {
-                "type": "string"
-              }
-            }
-          },
-          "default": {
-            "description": "Error response describing why the operation failed.",
-            "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
-            }
-          }
-        },
-        "x-ms-long-running-operation": true,
-        "x-ms-long-running-operation-options": {
-          "final-state-via": "azure-async-operation"
-        }
-      },
-      "patch": {
-        "tags": [
-          "VirtualEndpoints"
-        ],
-        "operationId": "VirtualEndpoints_Update",
-        "x-ms-examples": {
-          "Update a pair of virtual endpoints for a server.": {
-            "$ref": "./examples/VirtualEndpointUpdate.json"
-          }
-        },
-        "description": "Updates a pair of virtual endpoints for a server.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
-          },
-          {
-            "$ref": "#/parameters/VirtualEndpointNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/VirtualEndpointResourceForPatch"
-            },
-            "description": "Parameters required to update a pair of virtual endpoints."
+            "description": "Parameters required for creating or updating a firewall rule."
           }
         ],
         "responses": {
@@ -159,15 +98,15 @@
       },
       "delete": {
         "tags": [
-          "VirtualEndpoints"
+          "FirewallRules"
         ],
-        "operationId": "VirtualEndpoints_Delete",
+        "operationId": "FirewallRules_Delete",
         "x-ms-examples": {
-          "Delete a pair of virtual endpoints.": {
-            "$ref": "./examples/VirtualEndpointDelete.json"
+          "Delete an existing firewall rule.": {
+            "$ref": "./examples/FirewallRulesDelete.json"
           }
         },
-        "description": "Deletes a pair of virtual endpoints.",
+        "description": "Deletes an existing firewall rule.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -182,7 +121,7 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualEndpointNameParameter"
+            "$ref": "#/parameters/FirewallRuleNameParameter"
           }
         ],
         "responses": {
@@ -214,15 +153,15 @@
       },
       "get": {
         "tags": [
-          "VirtualEndpoints"
+          "FirewallRules"
         ],
-        "operationId": "VirtualEndpoints_Get",
+        "operationId": "FirewallRules_Get",
         "x-ms-examples": {
-          "Get information about a pair of virtual endpoints.": {
-            "$ref": "./examples/VirtualEndpointsGet.json"
+          "Get information about a firewall rule in a server.": {
+            "$ref": "./examples/FirewallRulesGet.json"
           }
         },
-        "description": "Gets information about a pair of virtual endpoints.",
+        "description": "Gets information about a firewall rule in a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -237,14 +176,14 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/VirtualEndpointNameParameter"
+            "$ref": "#/parameters/FirewallRuleNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpoint"
+              "$ref": "#/definitions/FirewallRule"
             }
           },
           "default": {
@@ -256,18 +195,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/virtualendpoints": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/firewallRules": {
       "get": {
         "tags": [
-          "VirtualEndpoints"
+          "FirewallRules"
         ],
-        "operationId": "VirtualEndpoints_ListByServer",
+        "operationId": "FirewallRules_ListByServer",
         "x-ms-examples": {
-          "List pair of virtual endpoints associated to a server.": {
-            "$ref": "./examples/VirtualEndpointsListByServer.json"
+          "List information about all firewall rules in a server.": {
+            "$ref": "./examples/FirewallRulesListByServer.json"
           }
         },
-        "description": "Lists pair of virtual endpoints associated to a server.",
+        "description": "Lists information about all firewall rules in a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -286,7 +225,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/VirtualEndpointsList"
+              "$ref": "#/definitions/FirewallRuleList"
             }
           },
           "default": {
@@ -303,98 +242,74 @@
     }
   },
   "definitions": {
-    "VirtualEndpointResourceProperties": {
+    "FirewallRuleProperties": {
       "type": "object",
       "properties": {
-        "endpointType": {
+        "startIpAddress": {
           "type": "string",
-          "description": "Type of endpoint for the virtual endpoints.",
-          "enum": [
-            "ReadWrite"
-          ],
-          "x-ms-enum": {
-            "name": "VirtualEndpointType",
-            "modelAsString": true,
-            "values": [
-              {
-                "value": "ReadWrite",
-                "description": "Read-write endpoint."
-              }
-            ]
-          }
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+          "description": "IP address defining the start of the range of addresses of a firewall rule. Must be expressed in IPv4 format."
         },
-        "members": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Server that one of the virtual endpoints can refer to."
-          },
-          "description": "List of servers that one of the virtual endpoints can refer to."
-        },
-        "virtualEndpoints": {
-          "type": "array",
-          "items": {
-            "type": "string",
-            "description": "Virtual endpoints for a server."
-          },
-          "description": "List of virtual endpoints for a server.",
-          "readOnly": true
+        "endIpAddress": {
+          "type": "string",
+          "pattern": "^(([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])\\.){3}([0-9]|[1-9][0-9]|1[0-9]{2}|2[0-4][0-9]|25[0-5])$",
+          "description": "IP address defining the end of the range of addresses of a firewall rule. Must be expressed in IPv4 format."
         }
       },
-      "description": "Properties of a pair of virtual endpoints."
-    },
-    "VirtualEndpoint": {
-      "type": "object",
-      "allOf": [
-        {
-          "$ref": "#/definitions/VirtualEndpointResourceForPatch"
-        },
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/Resource"
-        }
+      "required": [
+        "startIpAddress",
+        "endIpAddress"
       ],
-      "description": "Pair of virtual endpoints for a server."
+      "description": "Properties of a firewall rule."
     },
-    "VirtualEndpointResourceForPatch": {
+    "FirewallRule": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/VirtualEndpointResourceProperties",
+          "$ref": "#/definitions/FirewallRuleProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of the pair of virtual endpoints."
+          "description": "Properties of a firewall rule."
         }
       },
-      "description": "Pair of virtual endpoints for a server."
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ],
+      "required": [
+        "properties"
+      ],
+      "description": "Firewall rule."
     },
-    "VirtualEndpointsList": {
+    "FirewallRuleList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/VirtualEndpoint"
+            "$ref": "#/definitions/FirewallRule"
           },
-          "description": "List of virtual endpoints."
+          "description": "List of firewall rules in a server."
         },
         "nextLink": {
-          "description": "Link used to get the next page of results.",
+          "description": "Link to retrieve next page of results.",
           "type": "string",
           "format": "uri"
         }
       },
-      "description": "List of virtual endpoints."
+      "description": "List of firewall rules."
     }
   },
   "parameters": {
-    "VirtualEndpointNameParameter": {
-      "name": "virtualEndpointName",
+    "FirewallRuleNameParameter": {
+      "name": "firewallRuleName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Base name of the virtual endpoints.",
-      "pattern": "^[A-Za-z0-9][A-Za-z0-9-]{0,62}(?<!-)$",
-      "minLength": 3,
-      "maxLength": 63,
+      "description": "Name of the firewall rule.",
+      "minLength": 1,
+      "pattern": "^[a-zA-Z0-9][-_a-zA-Z0-9]{0,79}(?<!-)$",
+      "maxLength": 80,
       "x-ms-parameter-location": "method"
     }
   }

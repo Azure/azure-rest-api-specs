@@ -3,7 +3,7 @@
   "info": {
     "title": "PostgreSQLManagementClient",
     "description": "The Azure Database for PostgreSQL management API provides create, read, update, and delete functionality for Azure PostgreSQL resources including servers, databases, firewall rules, network configuration, security alert policies, log files and configurations with new business model.",
-    "version": "2025-08-01"
+    "version": "2025-06-01-preview"
   },
   "host": "management.azure.com",
   "schemes": [
@@ -34,18 +34,18 @@
     }
   },
   "paths": {
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/databases/{databaseName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups/{backupName}": {
       "put": {
         "tags": [
-          "Databases"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Databases_Create",
+        "operationId": "BackupsAutomaticAndOnDemand_Create",
         "x-ms-examples": {
-          "Create a database.": {
-            "$ref": "./examples/DatabasesCreate.json"
+          "Create an on demand backup of a server.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandCreate.json"
           }
         },
-        "description": "Creates a new database.",
+        "description": "Creates an on demand backup of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -60,16 +60,7 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/DatabaseNameParameter"
-          },
-          {
-            "name": "parameters",
-            "in": "body",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Database"
-            },
-            "description": "Parameters required to create a new database."
+            "$ref": "#/parameters/BackupNameParameter"
           }
         ],
         "responses": {
@@ -98,15 +89,15 @@
       },
       "delete": {
         "tags": [
-          "Databases"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Databases_Delete",
+        "operationId": "BackupsAutomaticAndOnDemand_Delete",
         "x-ms-examples": {
-          "Delete an existing database": {
-            "$ref": "./examples/DatabasesDelete.json"
+          "Delete an on demand backup, given its name.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandDelete.json"
           }
         },
-        "description": "Deletes an existing database.",
+        "description": "Deletes a specific backup, given its name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -121,7 +112,7 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/DatabaseNameParameter"
+            "$ref": "#/parameters/BackupNameParameter"
           }
         ],
         "responses": {
@@ -153,15 +144,15 @@
       },
       "get": {
         "tags": [
-          "Databases"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Databases_Get",
+        "operationId": "BackupsAutomaticAndOnDemand_Get",
         "x-ms-examples": {
-          "Get information about an existing database.": {
-            "$ref": "./examples/DatabasesGet.json"
+          "Get an on demand backup, given its name.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandGet.json"
           }
         },
-        "description": "Gets information about an existing database.",
+        "description": "Gets information of an on demand backup, given its name.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -176,14 +167,14 @@
             "$ref": "../../../types/common-types.json#/parameters/ServerNameParameter"
           },
           {
-            "$ref": "#/parameters/DatabaseNameParameter"
+            "$ref": "#/parameters/BackupNameParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/Database"
+              "$ref": "#/definitions/BackupAutomaticAndOnDemand"
             }
           },
           "default": {
@@ -195,18 +186,18 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/databases": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DBforPostgreSQL/flexibleServers/{serverName}/backups": {
       "get": {
         "tags": [
-          "Databases"
+          "BackupsAutomaticAndOnDemand"
         ],
-        "operationId": "Databases_ListByServer",
+        "operationId": "BackupsAutomaticAndOnDemand_ListByServer",
         "x-ms-examples": {
-          "List all databases in a server.": {
-            "$ref": "./examples/DatabasesListByServer.json"
+          "List all available backups of a server.": {
+            "$ref": "./examples/BackupsAutomaticAndOnDemandListByServer.json"
           }
         },
-        "description": "Lists all databases in a server.",
+        "description": "Lists all available backups of a server.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -225,7 +216,7 @@
           "200": {
             "description": "OK.",
             "schema": {
-              "$ref": "#/definitions/DatabaseList"
+              "$ref": "#/definitions/BackupAutomaticAndOnDemandList"
             }
           },
           "default": {
@@ -242,29 +233,50 @@
     }
   },
   "definitions": {
-    "DatabaseProperties": {
+    "BackupAutomaticAndOnDemandProperties": {
       "type": "object",
       "properties": {
-        "charset": {
+        "backupType": {
           "type": "string",
-          "description": "Character set of the database.",
-          "pattern": "^[a-zA-Z]+\\w*$"
+          "description": "Type of backup.",
+          "enum": [
+            "Full",
+            "Customer On-Demand"
+          ],
+          "x-ms-enum": {
+            "name": "BackupType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "Full",
+                "description": "A full backup taken automatically by the service. These backups are retained for a period of time as defined by the backup retention policy, and they cannot be deleted by the customer."
+              },
+              {
+                "value": "Customer On-Demand",
+                "description": "A full backup triggered by the customer. These backups are retained for a period of time as defined by the backup retention policy, and they can also be deleted by the customer."
+              }
+            ]
+          }
         },
-        "collation": {
+        "completedTime": {
           "type": "string",
-          "description": "Collation of the database.",
-          "pattern": "^[a-zA-Z\\-]+([. ]|\\w)*$"
+          "format": "date-time",
+          "description": "Time(ISO8601 format) at which the backup was completed."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the backup."
         }
       },
-      "description": "Properties of a database."
+      "description": "Properties of a backup."
     },
-    "Database": {
+    "BackupAutomaticAndOnDemand": {
       "type": "object",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DatabaseProperties",
+          "$ref": "#/definitions/BackupAutomaticAndOnDemandProperties",
           "x-ms-client-flatten": true,
-          "description": "Properties of a database."
+          "description": "Properties of a backup."
         }
       },
       "allOf": [
@@ -272,17 +284,17 @@
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ],
-      "description": "Represents a database."
+      "description": "Properties of a backup."
     },
-    "DatabaseList": {
+    "BackupAutomaticAndOnDemandList": {
       "type": "object",
       "properties": {
         "value": {
           "type": "array",
           "items": {
-            "$ref": "#/definitions/Database"
+            "$ref": "#/definitions/BackupAutomaticAndOnDemand"
           },
-          "description": "List of all databases in a server."
+          "description": "List of available backups."
         },
         "nextLink": {
           "description": "Link used to get the next page of results.",
@@ -290,19 +302,19 @@
           "format": "uri"
         }
       },
-      "description": "List of all databases in a server."
+      "description": "List of backups."
     }
   },
   "parameters": {
-    "DatabaseNameParameter": {
-      "name": "databaseName",
+    "BackupNameParameter": {
+      "name": "backupName",
       "in": "path",
       "required": true,
       "type": "string",
-      "description": "Name of the database (case-sensitive). Exact database names can be retrieved by getting the list of all existing databases in a server.",
+      "description": "Name of the backup.",
       "minLength": 1,
-      "pattern": "^[a-zA-Z_][\\w\\-]{0,62}$",
-      "maxLength": 63,
+      "pattern": "^[-\\w\\._]+$",
+      "maxLength": 128,
       "x-ms-parameter-location": "method"
     }
   }
