@@ -127,7 +127,7 @@ describe("cli", () => {
     console.log(process.env);
     try {
       await cli.run(avocado, UnifiedPipelineReport("pipe.log"), {
-        cwd: "test/circular_reference",
+        cwd: "test/fixtures/circular_reference",
         env: {},
       });
     } catch (err) {
@@ -151,7 +151,7 @@ describe("cli", () => {
   it("test unified pipeline report result log", async () => {
     process.env.SYSTEM_PULLREQUEST_TARGETBRANCH = "master";
     await cli.run(avocado, UnifiedPipelineReport("pipe.log"), {
-      cwd: "test/api_version_inconsistent",
+      cwd: "test/fixtures/api_version_inconsistent",
       env: {},
     });
     const expected = {
@@ -185,7 +185,7 @@ describe("cli", () => {
       throw new Error("unknown error");
     }, UnifiedPipelineReport(undefined));
     await cli.run(avocado, UnifiedPipelineReport(undefined), {
-      cwd: "test/api_version_inconsistent",
+      cwd: "test/fixtures/api_version_inconsistent",
       env: {},
     });
   });
