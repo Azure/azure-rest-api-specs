@@ -214,14 +214,9 @@ interface NewRelicMonitorResources {
   @summary("List of all active deployments that are associated with the marketplace subscription linked to the given monitor.")
   list is ArmResourceActionSync<
     NewRelicMonitorResource,
-    {
-      /**
-       * Email Id of the user
-       */
-      @bodyRoot
-      body?: email;
-    },
-    ArmResponse<ConnectedPartnerResourcesListResponse>
+    email,
+    ArmResponse<ConnectedPartnerResourcesListResponse>,
+    OptionalRequestBody = true
   >;
 }
 
@@ -250,3 +245,4 @@ interface NewRelicMonitorResources {
 @@doc(NewRelicMonitorResources.resubscribe::parameters.body,
   "Resubscribe Properties"
 );
+@@doc(NewRelicMonitorResources.list::parameters.body, "Email Id of the user");
