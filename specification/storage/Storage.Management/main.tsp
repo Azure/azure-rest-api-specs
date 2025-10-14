@@ -56,9 +56,9 @@ namespace Microsoft.Storage;
  */
 enum Versions {
   /**
-   * The 2025-01-01 API version.
+   * The 2025-06-01 API version.
    */
-  v2025_01_01: "2025-01-01",
+  v2025_06_01: "2025-06-01",
 }
 
 interface Operations
