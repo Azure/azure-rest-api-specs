@@ -2,7 +2,7 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/http";
 
 import "./main.tsp";
-import "./client.overrides.tsp";
+import "./overrides.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
