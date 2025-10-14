@@ -13,7 +13,7 @@ Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotific
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsAKSResourcesFleetGateCreatedExample)
-model ResourceNotificationsAKSResourcesFleetGateCreatedEventData
+model ResourceNotificationsAksResourcesFleetGateCreatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
 /**
@@ -21,14 +21,14 @@ Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotific
 */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "Maintain compatibility with existing models."
 @example(MicrosoftResourceNotificationsAKSResourcesFleetGateUpdatedExample)
-model ResourceNotificationsAKSResourcesFleetGateUpdatedEventData
+model ResourceNotificationsAksResourcesFleetGateUpdatedEventData
   extends ResourceNotificationsResourceUpdatedEventData {}
 
 /**
 Schema of the Data property of an EventGridEvent for a Microsoft.ResourceNotifications.AKSResources.FleetGateDeleted event.
 */
 @example(MicrosoftAKSResourcesFleetGateDeletedExample)
-model ResourceNotificationsAKSResourcesFleetGateDeletedEventData {
+model ResourceNotificationsAksResourcesFleetGateDeletedEventData {
   /** resourceInfo details for deleted event */
   resourceInfo: {
     /** id of the resource for which the event is being emitted */

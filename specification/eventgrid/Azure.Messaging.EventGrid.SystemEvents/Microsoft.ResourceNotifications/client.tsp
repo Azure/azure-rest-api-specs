@@ -2,22 +2,22 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 //Models
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateCreatedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAksResourcesFleetGateCreatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateCreatedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAksResourcesFleetGateCreatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateUpdatedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAksResourcesFleetGateUpdatedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateUpdatedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAksResourcesFleetGateUpdatedEventData,
   Access.public
 );
-@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateDeletedEventData,
+@@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAksResourcesFleetGateDeletedEventData,
   Usage.output | Usage.json
 );
-@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAKSResourcesFleetGateDeletedEventData,
+@@access(Microsoft.EventGrid.SystemEvents.ResourceNotificationsAksResourcesFleetGateDeletedEventData,
   Access.public
 );
 @@usage(Microsoft.EventGrid.SystemEvents.ResourceNotificationsContainerServiceEventResourcesScheduledEventData,

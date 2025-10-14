@@ -1,7 +1,7 @@
 import "./AKSResources.tsp";
 namespace Microsoft.EventGrid.SystemEvents;
 
-const MicrosoftResourceNotificationsAKSResourcesFleetGateCreatedExample: ResourceNotificationsAKSResourcesFleetGateCreatedEventData = #{
+const MicrosoftResourceNotificationsAKSResourcesFleetGateCreatedExample: ResourceNotificationsAksResourcesFleetGateCreatedEventData = #{
   resourceInfo: #{
     id: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.ContainerService/fleets/{fleet-name}/gates/9i567df1-jh3a-281j-8eb8-123ac2el0t60",
     name: "9i567df1-jh3a-281j-8eb8-123ac2el0t60",
@@ -27,7 +27,7 @@ const MicrosoftResourceNotificationsAKSResourcesFleetGateCreatedExample: Resourc
   apiVersion: "2025-04-01-preview",
 };
 
-const MicrosoftResourceNotificationsAKSResourcesFleetGateUpdatedExample: ResourceNotificationsAKSResourcesFleetGateUpdatedEventData = #{
+const MicrosoftResourceNotificationsAKSResourcesFleetGateUpdatedExample: ResourceNotificationsAksResourcesFleetGateUpdatedEventData = #{
   resourceInfo: #{
     id: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.ContainerService/fleets/{fleet-name}/gates/1k90uy67-e375-4xv6-z220-5197ekk1aka4",
     name: "1k90uy67-e375-4xv6-z220-5197ekk1aka4",
@@ -54,7 +54,7 @@ const MicrosoftResourceNotificationsAKSResourcesFleetGateUpdatedExample: Resourc
   apiVersion: "2025-04-01-preview",
 };
 
-const MicrosoftAKSResourcesFleetGateDeletedExample: ResourceNotificationsAKSResourcesFleetGateDeletedEventData = #{
+const MicrosoftAKSResourcesFleetGateDeletedExample: ResourceNotificationsAksResourcesFleetGateDeletedEventData = #{
   resourceInfo: #{
     id: "/subscriptions/{subscription-id}/resourceGroups/{rg-name}/providers/Microsoft.ContainerService/fleets/{fleet-name}/gates/8a63212d-9dp1-4oa6-8135-14ghghg311ea6",
     name: "8a63212d-9dp1-4oa6-8135-14ghghg311ea6",
