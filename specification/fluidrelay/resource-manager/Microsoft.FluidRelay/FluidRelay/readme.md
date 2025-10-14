@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2021-03-12-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-03-12-preview'
 input-file:
-  - Microsoft.FluidRelay/preview/2021-03-12-preview/fluidrelay.json
+  - preview/2021-03-12-preview/fluidrelay.json
 ```
 
 ### Tag: package-2021-06-15-preview
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2021-06-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-06-15-preview'
 input-file:
-  - Microsoft.FluidRelay/preview/2021-06-15-preview/fluidrelay.json
+  - preview/2021-06-15-preview/fluidrelay.json
 ```
 
 ### Tag: package-2021-08-30-preview
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2021-08-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-08-30-preview'
 input-file:
-  - Microsoft.FluidRelay/preview/2021-08-30-preview/fluidrelay.json
+  - preview/2021-08-30-preview/fluidrelay.json
 ```
 
 ### Tag: package-2021-09-10-preview
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2021-09-10-preview` is specified o
 
 ```yaml $(tag) == 'package-2021-09-10-preview'
 input-file:
-  - Microsoft.FluidRelay/preview/2021-09-10-preview/fluidrelay.json
+  - preview/2021-09-10-preview/fluidrelay.json
 ```
 
 ### Tag: package-2022-02-15
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2022-02-15` is specified on the co
 
 ```yaml $(tag) == 'package-2022-02-15'
 input-file:
-  - Microsoft.FluidRelay/stable/2022-02-15/fluidrelay.json
+  - stable/2022-02-15/fluidrelay.json
 ```
 
 ### Tag: package-2022-04-21
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2022-04-21` is specified on the co
 
 ```yaml $(tag) == 'package-2022-04-21'
 input-file:
-  - Microsoft.FluidRelay/stable/2022-04-21/fluidrelay.json
+  - stable/2022-04-21/fluidrelay.json
 ```
 
 ### Tag: package-2022-05-11
@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-2022-05-11` is specified on the co
 
 ```yaml $(tag) == 'package-2022-05-11'
 input-file:
-  - Microsoft.FluidRelay/stable/2022-05-11/fluidrelay.json
+  - stable/2022-05-11/fluidrelay.json
 ```
 
 ### Tag: package-2022-05-26
@@ -100,7 +100,7 @@ These settings apply only when `--tag=package-2022-05-26` is specified on the co
 
 ```yaml $(tag) == 'package-2022-05-26'
 input-file:
-  - Microsoft.FluidRelay/stable/2022-05-26/fluidrelay.json
+  - stable/2022-05-26/fluidrelay.json
 ```
 
 ### Tag: package-2022-06-01
@@ -109,7 +109,7 @@ These settings apply only when `--tag=package-2022-06-01` is specified on the co
 
 ```yaml $(tag) == 'package-2022-06-01'
 input-file:
-  - Microsoft.FluidRelay/stable/2022-06-01/fluidrelay.json
+  - stable/2022-06-01/fluidrelay.json
 ```
 
 ---
