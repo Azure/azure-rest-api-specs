@@ -534,7 +534,7 @@ model StacCollectionTemporalExtent {
   /**
    * Array of time intervals in format [[start_datetime, end_datetime]].
    */
-  interval: string[][];
+  interval: (utcDateTime | null)[][];
 }
 
 /**
