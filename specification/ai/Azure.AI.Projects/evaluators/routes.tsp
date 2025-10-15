@@ -52,7 +52,7 @@ interface Evaluators {
     "Get the specific version of the {name}. The service returns 404 Not Found error if the {name} does not exist.",
     EvaluatorVersion
   )
-  getEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
+  getVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
       @doc(
@@ -73,7 +73,7 @@ interface Evaluators {
     EvaluatorVersion
   )
   @Http.delete
-  deleteEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
+  deleteVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
       @doc("The version of the {name} to delete.", EvaluatorVersion)
@@ -89,7 +89,7 @@ interface Evaluators {
   @doc("Create a new {name} with auto incremented version id", EvaluatorVersion)
   @Rest.segment("versions")
   @Http.post
-  createEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
+  createVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {},
     Azure.Core.Foundations.ResourceCreatedResponse<EvaluatorVersion>
@@ -100,7 +100,7 @@ interface Evaluators {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations"
   @doc("Update an existing {name} with the given version id", EvaluatorVersion)
   @Http.patch
-  updateEvaluatorVersion is Azure.Core.Foundations.ResourceOperation<
+  updateVersion is Azure.Core.Foundations.ResourceOperation<
     EvaluatorVersion,
     {
       @doc("The version of the {name} to update.", EvaluatorVersion)

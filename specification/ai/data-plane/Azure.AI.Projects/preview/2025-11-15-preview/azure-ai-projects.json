@@ -1490,7 +1490,7 @@
         }
       },
       "post": {
-        "operationId": "Evaluators_CreateEvaluatorVersion",
+        "operationId": "Evaluators_CreateVersion",
         "description": "Create a new EvaluatorVersion with auto incremented version id",
         "parameters": [
           {
@@ -1525,15 +1525,15 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_CreateEvaluatorVersion_MaximumSet": {
-            "$ref": "./examples/Evaluators_CreateEvaluatorVersion_MaximumSet_Gen.json"
+          "Evaluators_CreateVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_CreateVersion_MaximumSet_Gen.json"
           }
         }
       }
     },
     "/evaluators/{name}/versions/{version}": {
       "get": {
-        "operationId": "Evaluators_GetEvaluatorVersion",
+        "operationId": "Evaluators_GetVersion",
         "description": "Get the specific version of the EvaluatorVersion. The service returns 404 Not Found error if the EvaluatorVersion does not exist.",
         "parameters": [
           {
@@ -1575,13 +1575,13 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_GetEvaluatorVersion_MaximumSet": {
-            "$ref": "./examples/Evaluators_GetEvaluatorVersion_MaximumSet_Gen.json"
+          "Evaluators_GetVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_GetVersion_MaximumSet_Gen.json"
           }
         }
       },
       "patch": {
-        "operationId": "Evaluators_UpdateEvaluatorVersion",
+        "operationId": "Evaluators_UpdateVersion",
         "description": "Update an existing EvaluatorVersion with the given version id",
         "parameters": [
           {
@@ -1623,13 +1623,13 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_UpdateEvaluatorVersion_MaximumSet": {
-            "$ref": "./examples/Evaluators_UpdateEvaluatorVersion_MaximumSet_Gen.json"
+          "Evaluators_UpdateVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_UpdateVersion_MaximumSet_Gen.json"
           }
         }
       },
       "delete": {
-        "operationId": "Evaluators_DeleteEvaluatorVersion",
+        "operationId": "Evaluators_DeleteVersion",
         "description": "Delete the specific version of the EvaluatorVersion. The service returns 204 No Content if the EvaluatorVersion was deleted successfully or if the EvaluatorVersion does not exist.",
         "parameters": [
           {
@@ -1668,8 +1668,8 @@
           }
         },
         "x-ms-examples": {
-          "Evaluators_DeleteEvaluatorVersion_MaximumSet": {
-            "$ref": "./examples/Evaluators_DeleteEvaluatorVersion_MaximumSet_Gen.json"
+          "Evaluators_DeleteVersion_MaximumSet": {
+            "$ref": "./examples/Evaluators_DeleteVersion_MaximumSet_Gen.json"
           }
         }
       }
@@ -1937,7 +1937,7 @@
     },
     "/insights": {
       "get": {
-        "operationId": "Insights_ListInsights",
+        "operationId": "Insights_List",
         "description": "List all insights in reverse chronological order (newest first).",
         "parameters": [
           {
@@ -2036,8 +2036,8 @@
           }
         },
         "x-ms-examples": {
-          "Insights_ListInsights": {
-            "$ref": "./examples/Insights_ListInsights_MinimumSet_Gen.json"
+          "Insights_List": {
+            "$ref": "./examples/Insights_List_MinimumSet_Gen.json"
           }
         },
         "x-ms-pageable": {
@@ -2045,7 +2045,7 @@
         }
       },
       "post": {
-        "operationId": "Insights_GenerateInsights",
+        "operationId": "Insights_Generate",
         "description": "Generate Insights",
         "parameters": [
           {
@@ -2099,15 +2099,15 @@
           }
         },
         "x-ms-examples": {
-          "Insights_GenerateInsights": {
-            "$ref": "./examples/Insights_GenerateInsights_MinimumSet_Gen.json"
+          "Insights_Generate": {
+            "$ref": "./examples/Insights_Generate_MinimumSet_Gen.json"
           }
         }
       }
     },
     "/insights/{id}": {
       "get": {
-        "operationId": "Insights_GetInsight",
+        "operationId": "Insights_Get",
         "description": "Get a specific insight by Id.",
         "parameters": [
           {
@@ -2159,8 +2159,8 @@
           }
         },
         "x-ms-examples": {
-          "Insights_GetInsight": {
-            "$ref": "./examples/Insights_GetInsight_MinimumSet_Gen.json"
+          "Insights_Get": {
+            "$ref": "./examples/Insights_Get_MinimumSet_Gen.json"
           }
         }
       }
