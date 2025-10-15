@@ -46,25 +46,25 @@ interface PersonDirectories {
   @doc("List person directories.")
   list is Operations.ResourceList<PersonDirectory>;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @doc("Add a new person and optionally associate with existing faces.")
-  @route("/personDirectories/{personDirectoryId}/persons")
-  @post
-  addPerson is Foundations.Operation<
-    AddPersonParameters &
-      TraitProperties<
-        ServiceTraits,
-        TraitLocation.Parameters,
-        TraitContext.Create
-      >,
-    Foundations.ResourceCreatedResponse<PersonDirectoryPerson> | (Foundations.LocationOfCreatedResourceResponse<PersonDirectoryPerson> &
-      TraitProperties<
-        ServiceTraits,
-        TraitLocation.Response,
-        TraitContext.Create
-      >),
-    ServiceTraits
-  >;
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  // @doc("Add a new person and optionally associate with existing faces.")
+  // @route("/personDirectories/{personDirectoryId}/persons")
+  // @post
+  // addPerson is Foundations.Operation<
+  //   AddPersonParameters &
+  //     TraitProperties<
+  //       ServiceTraits,
+  //       TraitLocation.Parameters,
+  //       TraitContext.Create
+  //     >,
+  //   Foundations.ResourceCreatedResponse<PersonDirectoryPerson> | (Foundations.LocationOfCreatedResourceResponse<PersonDirectoryPerson> &
+  //     TraitProperties<
+  //       ServiceTraits,
+  //       TraitLocation.Response,
+  //       TraitContext.Create
+  //     >),
+  //   ServiceTraits
+  // >;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   @doc("Update person properties.")
