@@ -134,7 +134,8 @@ interface VirtualMachineScaleSetVMS {
       @header("If-None-Match")
       IfNoneMatch?: string;
     },
-    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse & {
+    Response = ArmResourceUpdatedResponse<VirtualMachineScaleSetVM> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVM> &
+      Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot _: VirtualMachineScaleSetVM;
     })
   >;
@@ -207,7 +208,8 @@ interface VirtualMachineScaleSetVMS {
   deallocate is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -237,7 +239,8 @@ interface VirtualMachineScaleSetVMS {
       @bodyRoot
       vmScaleSetVMReimageInput?: VirtualMachineScaleSetVMReimageParameters;
     },
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -249,7 +252,8 @@ interface VirtualMachineScaleSetVMS {
   reimageAll is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -282,7 +286,8 @@ interface VirtualMachineScaleSetVMS {
   performMaintenance is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -300,7 +305,8 @@ interface VirtualMachineScaleSetVMS {
        */
       @query("skipShutdown")
       skipShutdown?: boolean;
-    }
+    },
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -311,7 +317,8 @@ interface VirtualMachineScaleSetVMS {
   redeploy is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -322,7 +329,8 @@ interface VirtualMachineScaleSetVMS {
   restart is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -351,7 +359,8 @@ interface VirtualMachineScaleSetVMS {
   start is ComputeResourceActionAsync<
     VirtualMachineScaleSetVM,
     void,
-    OkResponse
+    OkResponse,
+    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
