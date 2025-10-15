@@ -4777,6 +4777,14 @@
           "$ref": "#/definitions/ModernReservationTransactionProperties",
           "description": "The properties of a modern reservation transaction.",
           "x-ms-client-flatten": true
+        },
+        "tags": {
+          "type": "array",
+          "description": "Resource tags.",
+          "items": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "required": [
@@ -4784,7 +4792,7 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/ReservationTransactionResource"
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
     },
@@ -6373,9 +6381,9 @@
           "readOnly": true
         },
         "tags": {
-          "type": "object",
+          "type": "array",
           "description": "Resource tags.",
-          "additionalProperties": {
+          "items": {
             "type": "string"
           },
           "readOnly": true
@@ -6386,35 +6394,6 @@
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Resource"
         }
       ]
-    },
-    "ReservationTransactionResource": {
-      "type": "object",
-      "description": "The Resource model definition.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Resource Id.",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "Resource name.",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "Resource type.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "array",
-          "description": "Resource tags.",
-          "items": {
-            "type": "string"
-          },
-          "readOnly": true
-        }
-      }
     },
     "ReservationTransactionsListResult": {
       "type": "object",

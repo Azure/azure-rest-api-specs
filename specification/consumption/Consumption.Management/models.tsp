@@ -1644,9 +1644,8 @@ model ReservationTransaction extends Resource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
-  tags?: Record<string>;
+  tags?: string[];
 }
 
 /**
@@ -1800,43 +1799,20 @@ model LegacyReservationTransactionProperties {
 }
 
 /**
- * The Resource model definition.
+ * Modern Reservation transaction resource.
  */
-model ReservationTransactionResource {
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+model ModernReservationTransaction extends Resource {
   /**
-   * Resource Id.
+   * The properties of a modern reservation transaction.
    */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
+  properties: ModernReservationTransactionProperties;
 
   /**
    * Resource tags.
    */
   @visibility(Lifecycle.Read)
   tags?: string[];
-}
-
-/**
- * Modern Reservation transaction resource.
- */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ModernReservationTransaction extends ReservationTransactionResource {
-  /**
-   * The properties of a modern reservation transaction.
-   */
-  properties: ModernReservationTransactionProperties;
 }
 
 /**

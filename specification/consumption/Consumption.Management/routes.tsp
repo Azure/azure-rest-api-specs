@@ -702,7 +702,7 @@ alias ManagementGroup = Extension.ExternalResource<
 
 alias ManagementBillingGroup = Extension.ExternalChildResource<
   ManagementGroup,
-  "billingPeriods",
+  "providers/Microsoft.Billing/billingPeriods",
   "billingPeriodName",
   Description = "Billing Period Name."
 >;
@@ -740,35 +740,12 @@ interface AggregatedCostOperationGroup {
   @autoRoute
   @get
   @action("aggregatedCost")
-  getForBillingPeriodByManagementGroup(
-    ...ApiVersionParameter,
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    providerNamespace: "Microsoft.Management",
-
-    /**
-     * Order Id of the reservation
-     */
-    @path
-    @segment("managementGroups")
-    managementGroupId: string,
-
-    /** the provider namespace */
-    @path
-    @segment("providers")
-    billingproviderNamespace: "Microsoft.Billing",
-
-    /**
-     * Billing Period Name.
-     */
-    @path
-    @segment("billingPeriods")
-    billingPeriodName: string,
-
-    ...Azure.ResourceManager.Legacy.Provider,
-  ): ManagementGroupAggregatedCostResult | ErrorResponse;
+  getForBillingPeriodByManagementGroup is Extension.Read<
+    ManagementBillingGroup,
+    ManagementGroupAggregatedCostResult,
+    Response = ManagementGroupAggregatedCostResult,
+    Error = ErrorResponse
+  >;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
