@@ -37,15 +37,15 @@ model TransliterateParameters {
 }
 
 @doc("Request body for the transliterate API.")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 model TransliterateBody {
   @doc("Array of the input text elements to transliterate.")
   inputs: InputTextItem[];
 }
 
 @doc("Response for the transliteration API.")
-@renamedFrom(APIVersion.v2025_05_01_preview, "TransliterateResult")
-@removed(APIVersion.v2025_05_01_preview)
+@renamedFrom(APIVersion.v2025_10_01_preview, "TransliterateResult")
+@removed(APIVersion.v2025_10_01_preview)
 model TransliterateResultV3 {
   ...CommonResultHeaders;
 
@@ -55,7 +55,7 @@ model TransliterateResultV3 {
 }
 
 @doc("Response for the transliteration API.")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 model TransliterateResult {
   ...CommonResultHeaders;
 

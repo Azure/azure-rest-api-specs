@@ -41,12 +41,12 @@ model ErrorResponse {
 
 @doc("Error details as returned by Translator Service.")
 model ErrorDetails {
-  @removed(APIVersion.v2025_05_01_preview)
-  @renamedFrom(APIVersion.v2025_05_01_preview, "code")
+  @removed(APIVersion.v2025_10_01_preview)
+  @renamedFrom(APIVersion.v2025_10_01_preview, "code")
   @doc("Number identifier of the error.")
   codeV3: int32;
 
-  @added(APIVersion.v2025_05_01_preview)
+  @added(APIVersion.v2025_10_01_preview)
   @doc("String identifier of the error.")
   code: string;
 

@@ -15,7 +15,7 @@ model TranslateParameters {
   ...CommonParameters;
 
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "Existing Spec"
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query(#{ explode: true })
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
@@ -25,7 +25,7 @@ model TranslateParameters {
     """)
   to: string[];
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies the language of the input text. Find which languages are available to translate from by 
@@ -37,7 +37,7 @@ model TranslateParameters {
     """)
   from?: string;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Defines whether the text being translated is plain text or HTML text. Any HTML needs to be a well-formed, 
@@ -45,7 +45,7 @@ model TranslateParameters {
     """)
   textType?: TextType = "Plain";
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     A string specifying the category (domain) of the translation. This parameter is used to get translations 
@@ -54,7 +54,7 @@ model TranslateParameters {
     """)
   category?: string = "general";
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies how profanities should be treated in translations.
@@ -62,7 +62,7 @@ model TranslateParameters {
     """)
   profanityAction?: ProfanityAction = ProfanityAction.NoAction;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies how profanities should be marked in translations.
@@ -70,7 +70,7 @@ model TranslateParameters {
     """)
   profanityMarker?: ProfanityMarker = ProfanityMarker.Asterisk;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies whether to include alignment projection from source text to translated text.
@@ -78,7 +78,7 @@ model TranslateParameters {
     """)
   includeAlignment?: boolean = false;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies whether to include sentence boundaries for the input text and the translated text.
@@ -86,7 +86,7 @@ model TranslateParameters {
     """)
   includeSentenceLength?: boolean = false;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies a fallback language if the language of the input text can't be identified. 
@@ -95,21 +95,21 @@ model TranslateParameters {
     """)
   suggestedFrom?: string;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies the script of the input text.
     """)
   fromScript?: string;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies the script of the translated text.
     """)
   toScript?: string;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @query
   @doc("""
     Specifies that the service is allowed to fall back to a general system when a custom system doesn't exist. 
@@ -125,7 +125,7 @@ model TranslateParameters {
 }
 
 @doc("Translate targets parameters")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 model TranslateTarget {
   @doc("""
     Specifies the language of the output text. The target language must be one of the supported languages included 
@@ -206,14 +206,14 @@ model TranslateTarget {
 }
 
 @doc("Request body for the translate API.")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 model TranslateBody {
   @doc("Array of the input text elements to translate.")
   inputs: TranslateInputItem[];
 }
 
 @doc("Element containing the text for translation.")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 model TranslateInputItem {
   @doc("Text to translate.")
   text: string;
@@ -246,7 +246,7 @@ model TranslateInputItem {
 }
 
 @doc("Reference sentence pair.")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 model ReferenceSentencePair {
   @doc("Source reference sentence.")
   source: string;
@@ -256,8 +256,8 @@ model ReferenceSentencePair {
 }
 
 @doc("Response for the translation API.")
-@renamedFrom(APIVersion.v2025_05_01_preview, "TranslationResult")
-@removed(APIVersion.v2025_05_01_preview)
+@renamedFrom(APIVersion.v2025_10_01_preview, "TranslationResult")
+@removed(APIVersion.v2025_10_01_preview)
 model TranslationResultV3 {
   ...CommonResultHeaders;
 
@@ -285,7 +285,7 @@ model TranslationResultV3 {
 }
 
 @doc("Response for the translation API.")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 model TranslationResult {
   ...CommonResultHeaders;
 
@@ -356,7 +356,7 @@ model TranslatedTextItem {
     """)
   translations: TranslationText[];
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @doc("""
     Input text in the default script of the source language. sourceText property is present only when 
     the input is expressed in a script that's not the usual script for the language. For example, 
@@ -380,57 +380,57 @@ model DetectedLanguage {
 
 @doc("Translation result")
 model TranslationText {
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @doc("A string representing the language code of the target language.")
   to: string;
 
-  @added(APIVersion.v2025_05_01_preview)
+  @added(APIVersion.v2025_10_01_preview)
   @doc("A string representing the language code of the target language.")
   language: string;
 
-  @added(APIVersion.v2025_05_01_preview)
+  @added(APIVersion.v2025_10_01_preview)
   @doc("An interger indicating the number of characters in the source text string")
   sourceCharacters?: int32;
 
-  @added(APIVersion.v2025_05_01_preview)
+  @added(APIVersion.v2025_10_01_preview)
   @doc("An interger indicating the number of tokens used in generating the translated text")
   instructionTokens?: int32;
 
-  @added(APIVersion.v2025_05_01_preview)
+  @added(APIVersion.v2025_10_01_preview)
   @doc("An interger indicating the number of tokens used in the source sentence")
   sourceTokens?: int32;
 
-  @added(APIVersion.v2025_05_01_preview)
+  @added(APIVersion.v2025_10_01_preview)
   @doc("An interger indicating the number of tokens used in the translation response")
   responseTokens?: int32;
 
-  @added(APIVersion.v2025_05_01_preview)
+  @added(APIVersion.v2025_10_01_preview)
   @doc("An interger indicating the number of tokens used in the target sentence")
   targetTokens?: int32;
 
   @doc("A string giving the translated text.")
   text: string;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @doc("""
     An object giving the translated text in the script specified by the toScript parameter.
     """)
   transliteration?: TransliteratedText;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @doc("""
     Alignment information.
     """)
   alignment?: TranslatedTextAlignment;
 
-  @removed(APIVersion.v2025_05_01_preview)
+  @removed(APIVersion.v2025_10_01_preview)
   @doc("""
     Sentence boundaries in the input and output texts.
     """)
   sentLen?: SentenceBoundaries;
 }
 
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Alignment information object.")
 model TranslatedTextAlignment {
   @doc("""
@@ -444,7 +444,7 @@ model TranslatedTextAlignment {
   proj: string;
 }
 
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 @doc("An object returning sentence boundaries in the input and output texts.")
 model SentenceBoundaries {
   @doc("""
@@ -460,7 +460,7 @@ model SentenceBoundaries {
   transSentLen: int32[];
 }
 
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Input text in the default script of the source language. ")
 model SourceText {
   @doc("""

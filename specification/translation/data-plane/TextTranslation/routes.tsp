@@ -53,8 +53,8 @@ op getSupportedLanguages is CustomGetOperation<
 @doc("Translate Text")
 @route("translate")
 @sharedRoute
-@renamedFrom(APIVersion.v2025_05_01_preview, "translate")
-@removed(APIVersion.v2025_05_01_preview)
+@renamedFrom(APIVersion.v2025_10_01_preview, "translate")
+@removed(APIVersion.v2025_10_01_preview)
 op translateV3 is CustomOperation<
   InputTextItem[],
   TranslateParameters,
@@ -68,7 +68,7 @@ op translateV3 is CustomOperation<
 @summary("Translate Text")
 @doc("Translate Text")
 @route("translate")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 op translate is CustomOperation<
   TranslateBody,
   TranslateParameters,
@@ -82,8 +82,8 @@ op translate is CustomOperation<
 @route("transliterate")
 @summary("Transliterate Text")
 @doc("Transliterate Text")
-@renamedFrom(APIVersion.v2025_05_01_preview, "transliterate")
-@removed(APIVersion.v2025_05_01_preview)
+@renamedFrom(APIVersion.v2025_10_01_preview, "transliterate")
+@removed(APIVersion.v2025_10_01_preview)
 op transliterateV3 is CustomOperation<
   InputTextItem[],
   TransliterateParameters,
@@ -97,7 +97,7 @@ op transliterateV3 is CustomOperation<
 @route("transliterate")
 @summary("Transliterate Text")
 @doc("Transliterate Text")
-@added(APIVersion.v2025_05_01_preview)
+@added(APIVersion.v2025_10_01_preview)
 op transliterate is CustomOperation<
   TransliterateBody,
   TransliterateParameters,
@@ -106,7 +106,7 @@ op transliterate is CustomOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 @post
 @route("breaksentence")
 @summary("Find Sentence Boundaries")
@@ -119,7 +119,7 @@ op findSentenceBoundaries is CustomOperation<
 >;
 
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service, we have a non-conforming operation."
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 @post
 @route("dictionary/lookup")
 @summary("Lookup Dictionary Entries")
@@ -136,7 +136,7 @@ op lookupDictionaryEntries is CustomOperation<
 @route("dictionary/examples")
 @summary("Lookup Dictionary Examples")
 @doc("Lookup Dictionary Examples")
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 op lookupDictionaryExamples is CustomOperation<
   DictionaryExampleTextItem[],
   DictionaryExamplesParameters,

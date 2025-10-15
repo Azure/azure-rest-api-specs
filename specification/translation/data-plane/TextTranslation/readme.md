@@ -11,10 +11,10 @@ To see additional help and options, run:
 > `autorest --help`
 ---
 
-The current release is `package-2025-05-01-preview`.
+The current release is `package-2025-10-01-preview`.
 
 ``` yaml
-tag: package-2025-05-01-preview
+tag: package-2025-10-01-preview
 add-credentials: true
 openapi-type: data-plane
 ```
@@ -29,14 +29,14 @@ These settings apply only when `--tag=release_3_0` is specified on the command l
 input-file: stable/3.0/openapi.json
 ```
 
-### Release 2025-05-01-preview
+### Release 2025-10-01-preview
 
-These settings apply only when `--tag=package-2025-05-01-preview` is specified on the command line.
+These settings apply only when `--tag=package-2025-10-01-preview` is specified on the command line.
 
-``` yaml $(tag) == 'package-2025-05-01-preview'
-version: package-2025-05-01-preview
+``` yaml $(tag) == 'package-2025-10-01-preview'
+version: package-2025-10-01-preview
 input-file:
-  - preview/2025-05-01-preview/openapi.json
+  - preview/2025-10-01-preview/openapi.json
 ```
 
 ## Multi-API/Profile support for AutoRest v3 generators
@@ -52,7 +52,7 @@ require: $(this-folder)/../../../../profiles/readme.md
 # all the input files across all versions
 input-file:
   - $(this-folder)/stable/3.0/openapi.json
-  - $(this-folder)/preview/2025-05-01-preview/openapi.json
+  - $(this-folder)/preview/2025-10-01-preview/openapi.json
 ```
 
 If there are files that should not be in the `all-api-versions` set,

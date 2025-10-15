@@ -11,7 +11,7 @@ using Azure.Core;
 namespace TextTranslation;
 
 @doc("Request parameters for the break sentence API.")
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 model BreakSentenceParameters {
   ...CommonParameters;
 
@@ -31,7 +31,7 @@ model BreakSentenceParameters {
 }
 
 @doc("Response for the Break SEntence API.")
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 model BreakSentenceResult {
   ...CommonResultHeaders;
 
@@ -41,7 +41,7 @@ model BreakSentenceResult {
 }
 
 @doc("Item containing break sentence result.")
-@removed(APIVersion.v2025_05_01_preview)
+@removed(APIVersion.v2025_10_01_preview)
 model BreakSentenceItem {
   @doc("The detectedLanguage property is only present in the result object when language auto-detection is requested.")
   detectedLanguage?: DetectedLanguage;
