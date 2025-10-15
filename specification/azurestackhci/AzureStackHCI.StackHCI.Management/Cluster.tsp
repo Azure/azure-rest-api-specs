@@ -243,6 +243,23 @@ model ClusterProperties {
   softwareAssuranceProperties?: SoftwareAssuranceProperties;
 
   /**
+   * Cloud Environment of the cluster. (e.g. AzurePublic, ALDO )
+   */
+  @visibility(Lifecycle.Read)
+  cloudEnvironment?: string;
+
+  /**
+   * Is Management Cluster, when true indicates that the cluster is used for managing other clusters
+   */
+  @visibility(Lifecycle.Read)
+  isManagementCluster?: boolean;
+
+  /**
+   * Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.
+   */
+  clusterWitness?: ClusterWitnessProperties;
+
+  /**
    * Log Collection properties of the cluster.
    */
   logCollectionProperties?: LogCollectionProperties;
@@ -317,7 +334,7 @@ model ClusterProperties {
   /**
    * List of secret locations.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secretsLocations?: SecretsLocationDetails[];
 
   /**
@@ -329,7 +346,7 @@ model ClusterProperties {
   /**
    * Local Availability Zone information for HCI cluster
    */
-  @OpenAPI.extension("x-ms-identifiers", #["localAvailabilityZoneName"])
+  @identifiers(#["localAvailabilityZoneName"])
   localAvailabilityZones?: LocalAvailabilityZones[];
 }
 
@@ -354,6 +371,17 @@ model SoftwareAssuranceProperties {
   @visibility(Lifecycle.Read)
   // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
   lastUpdated?: utcDateTime;
+}
+
+/**
+ * Cluster Witness properties of the cluster. A cluster witness is a resource (such as a storage account or file share) that helps maintain quorum and supports automatic failover in high-availability cluster configurations.
+ */
+model ClusterWitnessProperties {
+  /**
+   * The authentication mode for the cluster witness. An example value 'ManagedIdentity'.
+   */
+  @visibility(Lifecycle.Read)
+  authenticationMode?: string;
 }
 
 /**
@@ -385,7 +413,7 @@ model LogCollectionProperties {
    * Log collection session details for the cluster.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   logCollectionSessionDetails?: ClustersLogCollectionSession[];
 }
 
@@ -496,14 +524,14 @@ model RemoteSupportProperties {
    * Remote support node settings for the cluster.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   remoteSupportNodeSettings?: ClustersRemoteSupportNodeSettings[];
 
   /**
    * Remote support session details for the cluster.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   remoteSupportSessionDetails?: PerNodeRemoteSupportSession[];
 }
 
@@ -891,7 +919,7 @@ model SecretsLocationsChangeRequest {
   /**
    * List of secret locations
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   properties?: SecretsLocationDetails[];
 }
 

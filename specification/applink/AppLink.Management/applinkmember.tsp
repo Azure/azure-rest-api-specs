@@ -18,6 +18,7 @@ model AppLinkMember is TrackedResource<AppLinkMemberProperties> {
 @doc("AppLink Member properties")
 model AppLinkMemberProperties {
   @doc("Cluster type")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   clusterType?: ClusterType;
 
   @doc("AppLink Member Metadata")
@@ -51,6 +52,7 @@ union ClusterType {
 @doc("AppLinkMember metadata")
 model Metadata {
   @doc("Resource ID")
+  @visibility(Lifecycle.Create, Lifecycle.Read)
   resourceId: string;
 }
 

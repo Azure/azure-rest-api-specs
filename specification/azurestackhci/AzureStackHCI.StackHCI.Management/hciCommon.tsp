@@ -105,7 +105,7 @@ model EceActionStatus {
 
   @doc("List of steps of Edge device job.")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: Step[];
 }
 
@@ -137,7 +137,7 @@ model Step {
 
   @doc("List of nested steps during job execution..")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: Step[];
 
   @doc("List of exceptions in job execution.")
@@ -148,11 +148,11 @@ model Step {
 @doc("The HostNetwork of a cluster.")
 model DeploymentHostNetwork {
   @doc("The network intents assigned to the network reference pattern used for the deployment. Each intent will define its own name, traffic type, adapter names, and overrides as recommended by your OEM.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   intents?: DeploymentIntents[];
 
   @doc("List of StorageNetworks config to deploy AzureStackHCI Cluster.")
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   storageNetworks?: DeploymentStorageNetworks[];
 
   @doc("Defines how the storage adapters between nodes are connected either switch or switch less..")

@@ -65,12 +65,12 @@ model ExtensionManagerProperties {
   hostResourceId?: string;
 
   @doc("Scenario profile of the extension manager resource.")
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   scenarioProfile?: ScenarioProfileObject[];
 
   @doc("Extension profile of the extension manager resource")
   @visibility(Lifecycle.Read)
-  @extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   extensionProfile?: ExtensionObject[];
 }
 

@@ -2,10 +2,7 @@ import "@typespec/rest";
 import "@typespec/http";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
 using Azure.ResourceManager;
-using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.ResourceIntelligence;
 
@@ -55,7 +52,7 @@ model QueryGenerationRequest {
   /**
    * A collection of chat history to provide context in query generation
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   history?: HistoryContext[];
 
   /**

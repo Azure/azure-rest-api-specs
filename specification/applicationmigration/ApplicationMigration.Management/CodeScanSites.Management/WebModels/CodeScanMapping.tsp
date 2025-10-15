@@ -18,7 +18,7 @@ model CodeScanMappingConfigurations {
   externalAppName?: string;
 
   @doc("The migration target.")
-  azureTarget: MigrationTarget;
+  azureTarget: AzureTarget;
 }
 
 @doc("Report information for the code scan mapping.")
@@ -45,6 +45,10 @@ model CodeScanMappingReports {
   @doc("Cloud Suitability for Azure.")
   @visibility(Lifecycle.Read)
   cloudSuitability?: CloudSuitability;
+
+  @doc("The status of the report.")
+  @visibility(Lifecycle.Read)
+  reportStatus?: ReportStatus;
 }
 
 @doc("CodeScanMapping properties.")

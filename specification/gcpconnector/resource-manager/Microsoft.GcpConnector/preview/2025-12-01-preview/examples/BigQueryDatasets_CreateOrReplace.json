@@ -1,0 +1,251 @@
+{
+  "title": "BigQueryDatasets_CreateOrReplace",
+  "operationId": "BigQueryDatasets_CreateOrReplace",
+  "parameters": {
+    "api-version": "2025-12-01-preview",
+    "subscriptionId": "1DC4EECF-55F0-4C76-A0C5-348D96DFFBF5",
+    "resourceGroupName": "rgstorageBucket",
+    "name": "valid-resource-name-001",
+    "resource": {
+      "properties": {
+        "gcpProperties": {
+          "kind": "bigquery#dataset",
+          "etag": "abc123def456",
+          "id": "test-project:test-dataset",
+          "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/test-project/datasets/test-dataset",
+          "datasetReference": {
+            "datasetId": "test-dataset",
+            "projectId": "test-project"
+          },
+          "friendlyName": "Test Dataset",
+          "description": "This is a test BigQuery dataset",
+          "labels": {
+            "environment": "test",
+            "department": "engineering"
+          },
+          "location": "US",
+          "defaultTableExpirationMs": "604800000",
+          "defaultPartitionExpirationMs": "259200000",
+          "defaultEncryptionConfiguration": {
+            "kmsKeyName": "projects/test-project/locations/us/keyRings/test-keyring/cryptoKeys/test-key"
+          },
+          "defaultCollation": "und:ci",
+          "defaultRoundingMode": "ROUND_HALF_EVEN",
+          "access": [
+            {
+              "role": "OWNER",
+              "userByEmail": "user@example.com"
+            },
+            {
+              "role": "READER",
+              "groupByEmail": "team@example.com"
+            },
+            {
+              "role": "WRITER",
+              "specialGroup": "projectWriters"
+            }
+          ],
+          "creationTime": "1632150000000",
+          "lastModifiedTime": "1642150000000",
+          "type": "DEFAULT",
+          "linkedDatasetSource": {
+            "sourceDataset": {
+              "datasetId": "source-dataset",
+              "projectId": "source-project"
+            }
+          },
+          "linkedDatasetMetadata": {
+            "status": "SYNCED"
+          },
+          "satisfiesPzs": true,
+          "satisfiesPzi": false,
+          "isCaseInsensitive": true,
+          "maxTimeTravelHours": "168",
+          "tags": [
+            {
+              "key": "tag-key/name",
+              "value": "tag-value"
+            }
+          ],
+          "storageBillingModel": "LOGICAL",
+          "resourceTags": {
+            "project": "testproject",
+            "environment": "development"
+          }
+        },
+        "publicCloudConnectorsResourceId": "dhkwede",
+        "gcpProjectNumber": "dwwjpxudgxrmxnhshqgowpgf",
+        "resourceName": "cctuwniqhjgjyiwatf",
+        "publicCloudResourceName": "loypjtufnnsu",
+        "gcpSourceSchema": "ewziyhomey",
+        "gcpRegion": "hrrgxzyebg",
+        "gcpTags": {},
+        "gcpProjectId": "lvknddutseiexgbnso"
+      },
+      "tags": {},
+      "location": "ljgjmtocpdgzmm"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup/providers/Microsoft.GcpConnector/bigQueryDatasets/testdataset",
+        "name": "testdataset",
+        "type": "Microsoft.GcpConnector/bigQueryDatasets",
+        "location": "global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "gcpProperties": {
+            "kind": "bigquery#dataset",
+            "etag": "abc123def456",
+            "id": "test-project:test-dataset",
+            "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/test-project/datasets/test-dataset",
+            "datasetReference": {
+              "datasetId": "test-dataset",
+              "projectId": "test-project"
+            },
+            "friendlyName": "Test Dataset",
+            "description": "This is a test BigQuery dataset",
+            "labels": {
+              "environment": "test",
+              "department": "engineering"
+            },
+            "location": "US",
+            "defaultTableExpirationMs": "604800000",
+            "defaultPartitionExpirationMs": "259200000",
+            "defaultEncryptionConfiguration": {
+              "kmsKeyName": "projects/test-project/locations/us/keyRings/test-keyring/cryptoKeys/test-key"
+            },
+            "defaultCollation": "und:ci",
+            "defaultRoundingMode": "ROUND_HALF_EVEN",
+            "access": [
+              {
+                "role": "OWNER",
+                "userByEmail": "user@example.com"
+              },
+              {
+                "role": "READER",
+                "groupByEmail": "team@example.com"
+              },
+              {
+                "role": "WRITER",
+                "specialGroup": "projectWriters"
+              }
+            ],
+            "creationTime": "1632150000000",
+            "lastModifiedTime": "1642150000000",
+            "type": "DEFAULT",
+            "linkedDatasetSource": {
+              "sourceDataset": {
+                "datasetId": "source-dataset",
+                "projectId": "source-project"
+              }
+            },
+            "linkedDatasetMetadata": {
+              "status": "SYNCED"
+            },
+            "satisfiesPzs": true,
+            "satisfiesPzi": false,
+            "isCaseInsensitive": true,
+            "maxTimeTravelHours": "168",
+            "tags": [
+              {
+                "key": "tag-key/name",
+                "value": "tag-value"
+              }
+            ],
+            "storageBillingModel": "LOGICAL",
+            "resourceTags": {
+              "project": "testproject",
+              "environment": "development"
+            }
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/testGroup/providers/Microsoft.GcpConnector/bigQueryDatasets/testdataset",
+        "name": "testdataset",
+        "type": "Microsoft.GcpConnector/bigQueryDatasets",
+        "location": "global",
+        "tags": {
+          "key1": "value1",
+          "key2": "value2"
+        },
+        "properties": {
+          "provisioningState": "Accepted",
+          "gcpProperties": {
+            "kind": "bigquery#dataset",
+            "etag": "abc123def456",
+            "id": "test-project:test-dataset",
+            "selfLink": "https://bigquery.googleapis.com/bigquery/v2/projects/test-project/datasets/test-dataset",
+            "datasetReference": {
+              "datasetId": "test-dataset",
+              "projectId": "test-project"
+            },
+            "friendlyName": "Test Dataset",
+            "description": "This is a test BigQuery dataset",
+            "labels": {
+              "environment": "test",
+              "department": "engineering"
+            },
+            "location": "US",
+            "defaultTableExpirationMs": "604800000",
+            "defaultPartitionExpirationMs": "259200000",
+            "defaultEncryptionConfiguration": {
+              "kmsKeyName": "projects/test-project/locations/us/keyRings/test-keyring/cryptoKeys/test-key"
+            },
+            "defaultCollation": "und:ci",
+            "defaultRoundingMode": "ROUND_HALF_EVEN",
+            "access": [
+              {
+                "role": "OWNER",
+                "userByEmail": "user@example.com"
+              },
+              {
+                "role": "READER",
+                "groupByEmail": "team@example.com"
+              },
+              {
+                "role": "WRITER",
+                "specialGroup": "projectWriters"
+              }
+            ],
+            "creationTime": "1632150000000",
+            "lastModifiedTime": "1642150000000",
+            "type": "DEFAULT",
+            "linkedDatasetSource": {
+              "sourceDataset": {
+                "datasetId": "source-dataset",
+                "projectId": "source-project"
+              }
+            },
+            "linkedDatasetMetadata": {
+              "status": "SYNCED"
+            },
+            "satisfiesPzs": true,
+            "satisfiesPzi": false,
+            "isCaseInsensitive": true,
+            "maxTimeTravelHours": "168",
+            "tags": [
+              {
+                "key": "tag-key/name",
+                "value": "tag-value"
+              }
+            ],
+            "storageBillingModel": "LOGICAL",
+            "resourceTags": {
+              "project": "testproject",
+              "environment": "development"
+            }
+          }
+        }
+      }
+    }
+  }
+}
