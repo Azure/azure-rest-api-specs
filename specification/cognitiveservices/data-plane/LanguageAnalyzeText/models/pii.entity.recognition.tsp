@@ -760,7 +760,7 @@ union PiiCategoriesExclude {
   DriversLicenseNumber: "DriversLicenseNumber",
 
   /** Neighborhood */
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   Neighborhood: "Neighborhood",
 
   /** Sort Code. 6-digit number used in the UK to identify a specific bank and branch where a bank account is held */
@@ -768,7 +768,7 @@ union PiiCategoriesExclude {
   SortCode: "SortCode",
 
   /** PIN */
-  @added(Versions.v2025_11_01)
+  @added(Versions.v2025_05_15_preview)
   PIN: "PIN",
 
   /** VIN */
