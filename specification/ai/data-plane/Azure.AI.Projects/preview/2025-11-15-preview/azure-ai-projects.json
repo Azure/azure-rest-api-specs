@@ -4286,6 +4286,46 @@
           }
         }
       }
+    },
+    "/sync_evals:run": {
+      "post": {
+        "operationId": "SyncEvals_Create",
+        "description": "Synchronize evaluation runs from connected resources.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "eval",
+            "in": "body",
+            "description": "Creates a sync eval run.",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SyncEvalInput"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/EvalRunOutputItem"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
     }
   },
   "definitions": {
