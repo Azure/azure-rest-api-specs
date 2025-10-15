@@ -66,7 +66,7 @@ modelerfour:
 
 These settings apply only when `--tag=release_2023-04-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2023_04_01'
+``` yaml $(tag) == 'release_2023-04-01'
 input-file:
   - stable/2023-04-01/analyzetext.json
 title:
@@ -80,7 +80,7 @@ modelerfour:
 
 These settings apply only when `--tag=release_2022-05-01` is specified on the command line.
 
-``` yaml $(tag) == 'release_2022_05_01'
+``` yaml $(tag) == 'release_2022-05-01'
 input-file:
   - stable/2022-05-01/analyzetext.json
 title:
