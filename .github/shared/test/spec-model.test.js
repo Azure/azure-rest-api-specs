@@ -139,6 +139,16 @@ describe("SpecModel", () => {
     await expect(
       mapAsync([...readmes.values()], async (r) => await r.getTags()),
     ).rejects.toThrowError(/multiple.*tag/i);
+
+    await expect(specModel.toJSONAsync()).rejects.toThrowError(/multiple.*tag/i);
+
+    await expect(specModel.toJSONAsync({ embedErrors: true })).resolves.toMatchObject({
+      readmes: [
+        {
+          error: expect.stringMatching(/multiple.*tag/i),
+        },
+      ],
+    });
   });
 
   describe("getAffectedReadmeTags", () => {
@@ -208,9 +218,32 @@ describe("SpecModel", () => {
       );
       const specModel = new SpecModel(folder, options);
 
-      expect(
+      await expect(
         specModel.getAffectedReadmeTags(resolve(folder, "data-plane/a.json")),
       ).rejects.toThrowError(/is not a valid JSON Schema/i);
+
+      await expect(specModel.toJSONAsync({ includeRefs: true })).rejects.toThrowError(
+        /is not a valid JSON Schema/i,
+      );
+
+      await expect(
+        specModel.toJSONAsync({ embedErrors: true, includeRefs: true }),
+      ).resolves.toMatchObject({
+        readmes: [
+          {
+            tags: [
+              {
+                inputFiles: [
+                  {
+                    error: expect.stringMatching(/is not a valid JSON Schema/i),
+                  },
+                ],
+                name: "package-2021-11-01",
+              },
+            ],
+          },
+        ],
+      });
     });
   });
 

@@ -7,7 +7,7 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
 
-@useDependency(Azure.Communication.MessagesService.Versions.c2025_04_01_Preview)
+@useDependency(Azure.Communication.MessagesService.Versions.c2025_09_01_Preview)
 namespace ClientForAcsMessages;
 
 @client({
@@ -20,6 +20,7 @@ interface NotificationMessagesClient
   @access(Access.internal, "csharp")
   @clientName("downloadMediaInternal", "csharp")
   downloadMedia is Azure.Communication.MessagesService.StreamOperations.getMedia;
+  sendReadReceipt is Azure.Communication.MessagesService.ReadReceiptsOperations.send;
 }
 
 @client({
