@@ -30,11 +30,4 @@ using ContentUnderstanding;
   DocumentationMode.replace
 );
 
-// C# emitter workaround: The C# emitter has a limitation where it cannot handle wildcard content types 
-// like "*/*" or "image/*". This is a known issue with AutoRest.CSharp that should be reported to:
-// https://github.com/Azure/autorest.csharp/issues
-//
-// For now, we'll exclude these operations from C# generation to prevent the crash.
-// Alternative: Create C#-specific operations with fixed content types if needed.
-@@access(ContentAnalyzers.getResultFile, Access.internal, "csharp");
-@@access(ContentAnalyzers.getResultImage, Access.internal, "csharp");
+

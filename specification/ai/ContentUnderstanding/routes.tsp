@@ -111,32 +111,36 @@ interface ContentAnalyzers {
     ServiceTraits
   >;
 
-  #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
-  @added(Versions.v2025_05_01_preview)
-  @doc("Get a file associated with the result of an analysis operation.")
-  @route("/analyzerResults/{operationId}/files/{+path}")
-  @get
-  getResultFile is Foundations.Operation<
-    {
-      @doc("Operation identifier.")
-      @path
-      operationId: string;
+  // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
+  // @added(Versions.v2025_05_01_preview)
+  // @doc("Get a file associated with the result of an analysis operation.")
+  // @route("/analyzerResults/{operationId}/files/{+path}")
+  // @get
+  // getResultFile is Foundations.Operation<
+  //   {
+  //     @doc("Operation identifier.")
+  //     @path
+  //     operationId: string;
 
-      @doc("File path.")
-      @path
-      path: string;
-    },
-    {
-      @doc("Response content type.")
-      @header
-      contentType: string;
+  //     @doc("File path.")
+  //     @path
+  //     path: string;
+  //   },
+  //   {
+  //     @doc("Response content type.")
+  //     @header
+  //     contentType: string;
 
-      @doc("Result file content.")
-      @bodyRoot
-      data: bytes;
-    },
-    ServiceTraits
-  >;
+  //     @doc("Result file content.")
+  //     @bodyRoot
+  //     data: bytes;
+  //   },
+  //   ServiceTraits
+  // >;
+  
+  // TEMPORARY: C# emitter cannot handle dynamic content types - operation commented out
+  // TODO: Uncomment when AutoRest.CSharp supports wildcard/dynamic content types
+  // See: https://github.com/Azure/autorest.csharp/issues
 
   // #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Doesn't fit standard ops"
   // @added(Versions.v2025_05_01_preview)
