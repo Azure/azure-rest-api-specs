@@ -1,0 +1,79 @@
+{
+  "parameters": {
+    "subscriptionId": "433a8dfd-e5d5-4e77-ad86-90acdc75eb1a",
+    "resourceGroupName": "SampleResourceGroup",
+    "accountName": "Account1",
+    "shareName": "Share1",
+    "dataSetName": "Dataset1",
+    "api-version": "2020-10-01-preview",
+    "dataSet": {
+      "kind": "BlobStorageAccount",
+      "properties": {
+        "storageAccountResourceId": "/subscriptions/0f3dcfc3-18f8-4099-b381-8353e19d43a7/resourceGroups/resourceGroup1/providers/Microsoft.Storage/storageAccounts/storageAccount1",
+        "paths": [
+          {
+            "containerName": "container1",
+            "providerPath": "samplefile.txt",
+            "consumerPath": "/samplefolder1"
+          }
+        ]
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {
+        "Date": "Wed, 28 Oct 2020 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "storageAccountResourceId": "/subscriptions/0f3dcfc3-18f8-4099-b381-8353e19d43a7/resourceGroups/resourceGroup1/providers/Microsoft.Storage/storageAccounts/storageAccount1",
+          "paths": [
+            {
+              "containerName": "container1",
+              "providerPath": "samplefile.txt",
+              "consumerPath": "/samplefolder1"
+            }
+          ],
+          "location": "centraluseuap",
+          "dataSetId": "66be0fd3-8669-465c-a3d3-2442a7345e48"
+        },
+        "kind": "BlobStorageAccount",
+        "id": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/dataSets/DataSet1",
+        "name": "DataSet1",
+        "type": "Microsoft.DataShare/accounts/shares/dataSets"
+      }
+    },
+    "201": {
+      "headers": {
+        "Date": "Wed, 28 Oct 2020 18:04:32 GMT",
+        "x-ms-request-id": "d5496da4-9c52-402f-b067-83cc9ddea888",
+        "X-Content-Type-Options": "nosniff",
+        "x-ms-ratelimit-remaining-tenant-reads": "14999",
+        "x-ms-correlation-request-id": "25c78f97-0b0a-4fe9-ad39-883a482265cd"
+      },
+      "body": {
+        "properties": {
+          "storageAccountResourceId": "/subscriptions/0f3dcfc3-18f8-4099-b381-8353e19d43a7/resourceGroups/resourceGroup1/providers/Microsoft.Storage/storageAccounts/storageAccount1",
+          "paths": [
+            {
+              "containerName": "container1",
+              "providerPath": "samplefile.txt",
+              "consumerPath": "/samplefolder1"
+            }
+          ],
+          "location": "centraluseuap",
+          "dataSetId": "66be0fd3-8669-465c-a3d3-2442a7345e48"
+        },
+        "kind": "BlobStorageAccount",
+        "id": "/subscriptions/433a8dfd-e5d5-4e77-ad86-90acdc75eb1a/resourceGroups/SampleResourceGroup/providers/Microsoft.DataShare/accounts/Account1/shares/Share1/dataSets/DataSet1",
+        "name": "DataSet1",
+        "type": "Microsoft.DataShare/accounts/shares/dataSets"
+      }
+    }
+  }
+}

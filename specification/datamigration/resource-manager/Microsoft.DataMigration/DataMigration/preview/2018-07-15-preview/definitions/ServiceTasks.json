@@ -1,0 +1,90 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Azure Data Migration Service Resource Provider",
+    "version": "2018-07-15-preview"
+  },
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "impersonate your user account"
+      }
+    }
+  },
+  "paths": {},
+  "definitions": {
+    "CheckOCIDriverTaskProperties": {
+      "x-ms-discriminator-value": "Service.Check.OCI",
+      "type": "object",
+      "description": "Properties for the task that checks for OCI drivers.",
+      "properties": {
+        "input": {
+          "$ref": "./ServiceFeatureOCITask.json#/definitions/CheckOCIDriverTaskInput"
+        },
+        "output": {
+          "type": "array",
+          "description": "Task output. This is ignored if submitted.",
+          "items": {
+            "$ref": "./ServiceFeatureOCITask.json#/definitions/CheckOCIDriverTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "UploadOCIDriverTaskProperties": {
+      "x-ms-discriminator-value": "Service.Upload.OCI",
+      "type": "object",
+      "description": "Properties for the task that uploads an OCI driver.",
+      "properties": {
+        "input": {
+          "$ref": "./ServiceFeatureOCITask.json#/definitions/UploadOCIDriverTaskInput"
+        },
+        "output": {
+          "type": "array",
+          "description": "Task output. This is ignored if submitted.",
+          "items": {
+            "$ref": "./ServiceFeatureOCITask.json#/definitions/UploadOCIDriverTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
+        }
+      ]
+    },
+    "InstallOCIDriverTaskProperties": {
+      "x-ms-discriminator-value": "Service.Install.OCI",
+      "type": "object",
+      "description": "Properties for the task that installs an OCI driver.",
+      "properties": {
+        "input": {
+          "$ref": "./ServiceFeatureOCITask.json#/definitions/InstallOCIDriverTaskInput"
+        },
+        "output": {
+          "type": "array",
+          "description": "Task output. This is ignored if submitted.",
+          "items": {
+            "$ref": "./ServiceFeatureOCITask.json#/definitions/InstallOCIDriverTaskOutput"
+          },
+          "readOnly": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "./Tasks.json#/definitions/ProjectTaskProperties"
+        }
+      ]
+    }
+  }
+}

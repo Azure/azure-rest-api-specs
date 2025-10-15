@@ -1,0 +1,38 @@
+{
+  "parameters": {
+    "subscriptionId": "subscriptionId",
+    "api-version": "2018-07-01-preview",
+    "$filter": "service eq 'Virtual Machines' or region eq 'West US'"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "value": [
+          {
+            "id": "<resourceId>/providers/Microsoft.ResourceHealth/impactedResources/current",
+            "name": "current",
+            "type": "Microsoft.ResourceHealth/impactedResources",
+            "properties": {
+              "availabilityState": "Available",
+              "summary": "Vm is available",
+              "reasonType": "Unplanned",
+              "occuredTime": "2016-03-29T09:12:00Z"
+            }
+          },
+          {
+            "id": "<resourceId>/providers/Microsoft.ResourceHealth/impactedResources/current",
+            "name": "current",
+            "type": "Microsoft.ResourceHealth/impactedResources",
+            "properties": {
+              "availabilityState": "Unavailable",
+              "summary": "We are sorry, we couldn't automatically recovery our virtualmachine",
+              "reasonType": "Unplanned",
+              "occuredTime": "2016-03-29T09:12:00Z"
+            }
+          }
+        ],
+        "nextLink": "{originalRequestUrl}?$skipToken={OpaquePageNumber}"
+      }
+    }
+  }
+}

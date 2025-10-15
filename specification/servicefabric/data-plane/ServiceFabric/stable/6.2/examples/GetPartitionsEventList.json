@@ -1,0 +1,56 @@
+{
+  "operationId": "GetPartitionsEventList",
+  "description": "This example shows how to get all partitions-related events during a certain time window.",
+  "parameters": {
+    "api-version": "6.2-preview",
+    "StartTimeUtc": "2018-04-03T18:00:00Z",
+    "EndTimeUtc": "2018-04-04T18:00:00Z"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": [
+        {
+          "Kind": "PartitionReconfigurationCompleted",
+          "NodeName": "node1",
+          "NodeInstanceId": "ba001a8bb353543e646be031afb10f1e",
+          "ServiceType": "Svc1Type",
+          "CcEpochDataLossVersion": 131672604833413107,
+          "CcEpochConfigVersion": 8589934595,
+          "ReconfigType": "Other",
+          "Result": "Completed",
+          "Phase0DurationMs": 0.0,
+          "Phase1DurationMs": 0.0,
+          "Phase2DurationMs": 203.1935,
+          "Phase3DurationMs": 0.0262,
+          "Phase4DurationMs": 628.8527,
+          "TotalDurationMs": 832.0724,
+          "PartitionId": "f2a6a893-39be-4c7d-b07f-72bc2d36de89",
+          "EventInstanceId": "e00fa5b7-f747-40dd-9e09-f5a031e96de4",
+          "TimeStamp": "2018-04-03T20:21:47.3778996Z",
+          "HasCorrelatedEvents": true
+        },
+        {
+          "Kind": "PartitionReconfigurationCompleted",
+          "NodeName": "node2",
+          "NodeInstanceId": "ba0459d257b028296deba8bd5add33cb",
+          "ServiceType": "Svc1Type",
+          "CcEpochDataLossVersion": 131672604833413107,
+          "CcEpochConfigVersion": 8589934596,
+          "ReconfigType": "Other",
+          "Result": "Completed",
+          "Phase0DurationMs": 0.0,
+          "Phase1DurationMs": 0.0,
+          "Phase2DurationMs": 205.667,
+          "Phase3DurationMs": 407.7781,
+          "Phase4DurationMs": 630.0935,
+          "TotalDurationMs": 1243.5386,
+          "PartitionId": "e12acfb3-2a43-4a1a-a252-aa5388ef1aec",
+          "EventInstanceId": "9aeb234a-16ef-4e8a-974e-26c60d6f2b86",
+          "TimeStamp": "2018-04-03T20:21:49.5155104Z",
+          "HasCorrelatedEvents": false
+        }
+      ]
+    }
+  }
+}

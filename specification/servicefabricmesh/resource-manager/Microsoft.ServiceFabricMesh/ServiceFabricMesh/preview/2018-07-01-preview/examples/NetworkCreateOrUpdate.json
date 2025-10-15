@@ -1,0 +1,76 @@
+{
+  "operationId": "Network_Create",
+  "description": "This example shows how to create a network resource with custom address range and a load balanced public endpoint.",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "sbz_demo",
+    "api-version": "2018-07-01-preview",
+    "networkName": "helloWorldNetworkWindows",
+    "networkResourceDescription": {
+      "properties": {
+        "addressPrefix": "10.0.0.4/22",
+        "ingressConfig": {
+          "layer4": [
+            {
+              "publicPort": "80",
+              "applicationName": "helloWorldAppWindows",
+              "serviceName": "helloWorldService",
+              "endpointName": "helloWorldListener"
+            }
+          ]
+        }
+      },
+      "location": "eastus"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/networks",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetworkWindows",
+        "name": "helloWorldNetworkWindows",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Succeeded",
+          "addressPrefix": "10.0.0.4/22",
+          "ingressConfig": {
+            "qosLevel": "Bronze",
+            "layer4": [
+              {
+                "publicPort": 80,
+                "applicationName": "helloWorldAppWindows",
+                "serviceName": "helloWorldService",
+                "endpointName": "helloWorldListener"
+              }
+            ]
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "type": "Microsoft.ServiceFabricMesh/networks",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/sbz_demo/providers/Microsoft.ServiceFabricMesh/networks/helloWorldNetworkWindows",
+        "name": "helloWorldNetworkWindows",
+        "tags": {},
+        "properties": {
+          "provisioningState": "Updating",
+          "addressPrefix": "10.0.0.4/22",
+          "ingressConfig": {
+            "qosLevel": "Bronze",
+            "layer4": [
+              {
+                "publicPort": 80,
+                "applicationName": "helloWorldAppWindows",
+                "serviceName": "helloWorldService",
+                "endpointName": "helloWorldListener"
+              }
+            ]
+          }
+        }
+      }
+    }
+  }
+}

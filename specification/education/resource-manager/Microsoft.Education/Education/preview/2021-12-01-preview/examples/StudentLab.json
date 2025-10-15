@@ -1,0 +1,29 @@
+{
+  "parameters": {
+    "api-version": "2021-12-01-preview",
+    "studentLabName": "{studentLabName}"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": " /providers/Microsoft.Education/studentLabs/{studentLabName}",
+        "name": "{studentLabName}",
+        "type": "Microsoft.Education/StudentLabs",
+        "properties": {
+          "displayName": "example lab name",
+          "description": "example lab description",
+          "expirationDate": "2022-11-09T21:54:17.438Z",
+          "role": "Student",
+          "budget": {
+            "currency": "USD",
+            "value": 100
+          },
+          "subscriptionId": "000000000-0000-0000-0000-00000000000000",
+          "status": "Active",
+          "effectiveDate": "2021-11-09T21:54:17.438Z",
+          "labScope": "/providers/Microsoft.Billing/billingAccounts/{billingAccountName}/billingProfiles/{billingProfileName}/invoiceSections/{invoiceSectionName}/providers/Microsoft.Education/labs/default"
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,37 @@
+{
+  "operationId": "GetBackupPolicyList",
+  "description": "This example shows how to get list of backup policies. The number of results in a page are limited to maximum of two using the MaxResult parameter. This example uses the ContinuationToken parameter. The value of this parameter is provided from the previous query; in this case the example shown above. The response contains the remaining results and an empty ContinuationToken. The empty ContinuationToken indicates that additional results are not available.",
+  "parameters": {
+    "api-version": "6.2-preview",
+    "MaxResults": 2,
+    "ContinuationToken": "FileShare10MinBackupPolicy"
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "ContinuationToken": "",
+        "Items": [
+          {
+            "AutoRestoreOnDataLoss": false,
+            "Name": "SampleBackupPolicy",
+            "MaxIncrementalBackups": 5,
+            "Schedule": {
+              "ScheduleKind": "FrequencyBased",
+              "Interval": "PT4H5M"
+            },
+            "Storage": {
+              "Path": "\\\\myshare\\BackupStore",
+              "PrimaryUserName": "myuser1",
+              "PrimaryPassword": "****",
+              "SecondaryUserName": "myuser2",
+              "SecondaryPassword": "****",
+              "StorageKind": "FileShare",
+              "FriendlyName": ""
+            }
+          }
+        ]
+      }
+    }
+  }
+}

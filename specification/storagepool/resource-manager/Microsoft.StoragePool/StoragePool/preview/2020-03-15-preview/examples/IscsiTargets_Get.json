@@ -1,0 +1,50 @@
+{
+  "parameters": {
+    "api-version": "2020-03-15-preview",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "myResourceGroup",
+    "diskPoolName": "myDiskPool",
+    "iscsiTargetName": "myIscsiTarget"
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.StoragePool/diskPools/myDiskPool/iscsiTargets/myIscsiTarget",
+        "name": "myIscsiTarget",
+        "type": "Microsoft.StoragePool/diskPools/iscsiTargets",
+        "properties": {
+          "targetIqn": "iqn.2005-03.org.iscsi:server1",
+          "tpgs": [
+            {
+              "luns": [
+                {
+                  "managedDiskAzureResourceId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/myResourceGroup/providers/Microsoft.Compute/disks/vm-name_DataDisk_1",
+                  "name": "lun0"
+                }
+              ],
+              "acls": [
+                {
+                  "initiatorIqn": "iqn.2005-03.org.iscsi:client",
+                  "mappedLuns": [
+                    "lun0"
+                  ]
+                }
+              ],
+              "attributes": {
+                "authentication": true,
+                "prodModeWriteProtect": false
+              },
+              "endpoints": [
+                "10.0.0.1:3260"
+              ],
+              "tag": 1,
+              "port": 3260
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "status": "Healthy"
+        }
+      }
+    }
+  }
+}

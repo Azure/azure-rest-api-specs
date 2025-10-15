@@ -1,0 +1,278 @@
+{
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "resRg",
+    "clusterName": "myCluster",
+    "api-version": "2018-02-01",
+    "parameters": {
+      "tags": {
+        "a": "b"
+      },
+      "properties": {
+        "nodeTypes": [
+          {
+            "name": "nt1vm",
+            "clientConnectionEndpointPort": 19000,
+            "httpGatewayEndpointPort": 19007,
+            "applicationPorts": {
+              "startPort": 20000,
+              "endPort": 30000
+            },
+            "ephemeralPorts": {
+              "startPort": 49000,
+              "endPort": 64000
+            },
+            "isPrimary": true,
+            "vmInstanceCount": 5,
+            "durabilityLevel": "Bronze"
+          },
+          {
+            "name": "testnt1",
+            "clientConnectionEndpointPort": 0,
+            "httpGatewayEndpointPort": 0,
+            "applicationPorts": {
+              "startPort": 1000,
+              "endPort": 2000
+            },
+            "ephemeralPorts": {
+              "startPort": 3000,
+              "endPort": 4000
+            },
+            "isPrimary": false,
+            "vmInstanceCount": 3,
+            "durabilityLevel": "Bronze"
+          }
+        ],
+        "reliabilityLevel": "Bronze"
+      }
+    }
+  },
+  "responses": {
+    "202": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2018-02-01"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/clusters",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "name": "myCluster",
+        "tags": {
+          "a": "b"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterCodeVersion": "6.1.480.9494",
+          "clusterState": "WaitingForNodes",
+          "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "clientCertificateThumbprints": [],
+          "clientCertificateCommonNames": [],
+          "fabricSettings": [
+            {
+              "name": "UpgradeService",
+              "parameters": [
+                {
+                  "name": "AppPollIntervalInSeconds",
+                  "value": "60"
+                }
+              ]
+            }
+          ],
+          "upgradeDescription": {
+            "forceRestart": false,
+            "upgradeReplicaSetCheckTimeout": "00:10:00",
+            "healthCheckWaitDuration": "00:00:30",
+            "healthCheckStableDuration": "00:00:30",
+            "healthCheckRetryTimeout": "00:05:00",
+            "upgradeTimeout": "01:00:00",
+            "upgradeDomainTimeout": "00:15:00",
+            "healthPolicy": {
+              "maxPercentUnhealthyNodes": 0,
+              "maxPercentUnhealthyApplications": 0
+            },
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
+              "maxPercentDeltaUnhealthyApplications": 0
+            }
+          },
+          "diagnosticsStorageAccountConfig": {
+            "storageAccountName": "diag",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "blobEndpoint": "https://diag.blob.core.windows.net/",
+            "queueEndpoint": "https://diag.queue.core.windows.net/",
+            "tableEndpoint": "https://diag.table.core.windows.net/"
+          },
+          "nodeTypes": [
+            {
+              "name": "nt1vm",
+              "clientConnectionEndpointPort": 19000,
+              "httpGatewayEndpointPort": 19007,
+              "applicationPorts": {
+                "startPort": 20000,
+                "endPort": 30000
+              },
+              "ephemeralPorts": {
+                "startPort": 49000,
+                "endPort": 64000
+              },
+              "isPrimary": true,
+              "vmInstanceCount": 5,
+              "durabilityLevel": "Bronze"
+            },
+            {
+              "name": "testnt1",
+              "clientConnectionEndpointPort": 0,
+              "httpGatewayEndpointPort": 0,
+              "applicationPorts": {
+                "startPort": 1000,
+                "endPort": 2000
+              },
+              "ephemeralPorts": {
+                "startPort": 3000,
+                "endPort": 4000
+              },
+              "isPrimary": false,
+              "vmInstanceCount": 3,
+              "durabilityLevel": "Bronze"
+            }
+          ],
+          "reliabilityLevel": "Bronze",
+          "upgradeMode": "Automatic",
+          "availableClusterVersions": [
+            {
+              "codeVersion": "6.1.480.9494",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999",
+              "environment": "Windows"
+            }
+          ]
+        }
+      }
+    },
+    "200": {
+      "headers": {
+        "Retry-After": "10",
+        "Location": "http://10.91.140.224/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/operationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2018-02-01"
+      },
+      "body": {
+        "type": "Microsoft.ServiceFabric/clusters",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/clusters/myCluster",
+        "name": "myCluster",
+        "tags": {
+          "a": "b"
+        },
+        "properties": {
+          "provisioningState": "Succeeded",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterCodeVersion": "6.1.480.9494",
+          "clusterState": "WaitingForNodes",
+          "managementEndpoint": "http://myCluster.eastus.cloudapp.azure.com:19080",
+          "clusterEndpoint": "https://eastus.servicefabric.azure.com",
+          "certificateCommonNames": {
+            "commonNames": [
+              {
+                "certificateCommonName": "abc.com",
+                "certificateIssuerThumbprint": "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+              }
+            ],
+            "x509StoreName": "My"
+          },
+          "clientCertificateThumbprints": [],
+          "clientCertificateCommonNames": [],
+          "fabricSettings": [
+            {
+              "name": "UpgradeService",
+              "parameters": [
+                {
+                  "name": "AppPollIntervalInSeconds",
+                  "value": "60"
+                }
+              ]
+            }
+          ],
+          "upgradeDescription": {
+            "forceRestart": false,
+            "upgradeReplicaSetCheckTimeout": "00:10:00",
+            "healthCheckWaitDuration": "00:00:30",
+            "healthCheckStableDuration": "00:00:30",
+            "healthCheckRetryTimeout": "00:05:00",
+            "upgradeTimeout": "01:00:00",
+            "upgradeDomainTimeout": "00:15:00",
+            "healthPolicy": {
+              "maxPercentUnhealthyNodes": 0,
+              "maxPercentUnhealthyApplications": 0
+            },
+            "deltaHealthPolicy": {
+              "maxPercentDeltaUnhealthyNodes": 0,
+              "maxPercentUpgradeDomainDeltaUnhealthyNodes": 0,
+              "maxPercentDeltaUnhealthyApplications": 0
+            }
+          },
+          "diagnosticsStorageAccountConfig": {
+            "storageAccountName": "diag",
+            "protectedAccountKeyName": "StorageAccountKey1",
+            "blobEndpoint": "https://diag.blob.core.windows.net/",
+            "queueEndpoint": "https://diag.queue.core.windows.net/",
+            "tableEndpoint": "https://diag.table.core.windows.net/"
+          },
+          "nodeTypes": [
+            {
+              "name": "nt1vm",
+              "clientConnectionEndpointPort": 19000,
+              "httpGatewayEndpointPort": 19007,
+              "applicationPorts": {
+                "startPort": 20000,
+                "endPort": 30000
+              },
+              "ephemeralPorts": {
+                "startPort": 49000,
+                "endPort": 64000
+              },
+              "isPrimary": true,
+              "vmInstanceCount": 5,
+              "durabilityLevel": "Bronze"
+            },
+            {
+              "name": "testnt1",
+              "clientConnectionEndpointPort": 0,
+              "httpGatewayEndpointPort": 0,
+              "applicationPorts": {
+                "startPort": 1000,
+                "endPort": 2000
+              },
+              "ephemeralPorts": {
+                "startPort": 3000,
+                "endPort": 4000
+              },
+              "isPrimary": false,
+              "vmInstanceCount": 3,
+              "durabilityLevel": "Bronze"
+            }
+          ],
+          "reliabilityLevel": "Bronze",
+          "upgradeMode": "Automatic",
+          "availableClusterVersions": [
+            {
+              "codeVersion": "6.1.480.9494",
+              "supportExpiryUtc": "2018-06-15T23:59:59.9999999",
+              "environment": "Windows"
+            }
+          ]
+        }
+      }
+    }
+  }
+}

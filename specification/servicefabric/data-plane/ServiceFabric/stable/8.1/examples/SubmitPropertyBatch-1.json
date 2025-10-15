@@ -1,0 +1,71 @@
+{
+  "operationId": "SubmitPropertyBatch",
+  "description": "This example shows how to submit a property batch. This batch ensures that a property exists, checks that the property has the expected sequence number, and edits the property only if the previous conditions succeed. It then performs a get operation to get the property's current info. \r\n If all of the operations succeed, the batch is committed in a transactional manner and a success response is returned with 200 status code. \r\n If the batch fails then a failed response is returned with 409 status code. The failed response below shows batch failure because the property does not have expected sequence number.",
+  "parameters": {
+    "api-version": "6.0",
+    "nameId": "samples/apps",
+    "PropertyBatchDescriptionList": {
+      "Operations": [
+        {
+          "Kind": "CheckExists",
+          "PropertyName": "PersistentQueueAppData",
+          "Exists": true
+        },
+        {
+          "Kind": "CheckSequence",
+          "PropertyName": "PersistentQueueAppData",
+          "SequenceNumber": "12"
+        },
+        {
+          "Kind": "Put",
+          "PropertyName": "PersistentQueueAppData",
+          "Value": {
+            "Kind": "Binary",
+            "Data": [
+              1,
+              2,
+              3,
+              4,
+              5
+            ]
+          },
+          "CustomTypeId": "InitializationData"
+        },
+        {
+          "Kind": "Get",
+          "PropertyName": "PersistentQueueAppData",
+          "IncludeValue": false
+        }
+      ]
+    }
+  },
+  "responses": {
+    "200": {
+      "headers": {},
+      "body": {
+        "Kind": "Successful",
+        "Properties": {
+          "3": {
+            "Name": "PersistentQueueAppData",
+            "Metadata": {
+              "TypeId": "Binary",
+              "CustomTypeId": "InitializationData",
+              "Parent": "fabric:/samples/apps",
+              "SizeInBytes": 5,
+              "LastModifiedUtcTimestamp": "2017-07-17T05:01:19.049Z",
+              "SequenceNumber": "13"
+            }
+          }
+        }
+      }
+    },
+    "409": {
+      "headers": {},
+      "body": {
+        "Kind": "Failed",
+        "ErrorMessage": "FABRIC_E_PROPERTY_CHECK_FAILED",
+        "OperationIndex": 1
+      }
+    }
+  }
+}
