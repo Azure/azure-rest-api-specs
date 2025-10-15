@@ -28,26 +28,26 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
 @armResourceOperations
 interface Extensions {
   /**
-   * Get particular Arc Extension of HCI Cluster.
+   * Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Extension>;
 
   /**
-   * Create Extension for HCI cluster.
+   * Create Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   create is ArmResourceCreateOrReplaceAsync<Extension>;
 
   /**
-   * Update Extension for HCI cluster.
+   * Update Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Extension, PatchModel = ExtensionPatch>;
 
   /**
-   * Delete particular Arc Extension of HCI Cluster.
+   * Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
@@ -60,7 +60,7 @@ interface Extensions {
   >;
 
   /**
-   * List all Extensions under ArcSetting resource.
+   * List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByArcSetting is ArmResourceListByParent<
@@ -69,7 +69,7 @@ interface Extensions {
   >;
 
   /**
-   * Upgrade a particular Arc Extension of HCI Cluster.
+   * Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   upgrade is ArmResourceActionAsyncBase<
@@ -95,13 +95,13 @@ interface Extensions {
 // Models
 
 /**
- * List of Extensions in HCI cluster.
+ * List of Extensions in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model ExtensionList is Azure.Core.Page<Extension>;
 
 /**
- * Status of Arc Extension for a particular node in HCI Cluster.
+ * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model ExtensionProperties {
@@ -118,16 +118,16 @@ model ExtensionProperties {
   extensionParameters?: ExtensionParametersContent;
 
   /**
-   * Aggregate state of Arc Extensions across the nodes in this HCI cluster.
+   * Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   aggregateState?: ExtensionAggregateState;
 
   /**
-   * State of Arc Extension in each of the nodes.
+   * State of Arc Extension in each of the nodes/machines.
    */
   @visibility(Lifecycle.Read)
-  perNodeExtensionDetails?: HCIPerNodeExtensionState[];
+  perNodeExtensionDetails?: PerNodeExtensionState[];
 
   /**
    * Indicates if the extension is managed by azure or the user.
@@ -185,18 +185,18 @@ model ExtensionParametersContent {
 }
 
 /**
- * Status of Arc Extension for a particular node in HCI Cluster.
+ * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIPerNodeExtensionState {
+model PerNodeExtensionState {
   /**
-   * Name of the node in HCI Cluster.
+   * Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   name?: string;
 
   /**
-   * Fully qualified resource ID for the particular Arc Extension on this node.
+   * Fully qualified resource ID for the particular Arc Extension on this node/machine.
    */
   @visibility(Lifecycle.Read)
   extension?: string;
@@ -208,7 +208,7 @@ model HCIPerNodeExtensionState {
   typeHandlerVersion?: string;
 
   /**
-   * State of Arc Extension in this node.
+   * State of Arc Extension in this node/machine.
    */
   @visibility(Lifecycle.Read)
   state?: NodeExtensionState;
