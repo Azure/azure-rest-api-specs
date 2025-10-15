@@ -11,30 +11,6 @@ using Azure.Core;
 namespace Search;
 
 @added(Versions.v2025_11_01_preview)
-@doc("Successful retrieval response.")
-model KnowledgeBaseRetrievalSuccessResponse {
-  @doc("The retrieval response is successfully returned.")
-  @statusCode
-  code: 200;
-
-  @doc("The retrieval response body.")
-  @body
-  body: KnowledgeBaseRetrievalResponse;
-}
-
-@added(Versions.v2025_11_01_preview)
-@doc("Partial retrieval response.")
-model KnowledgeBaseRetrievalPartialResponse {
-  @doc("A partial retrieval response is returned.")
-  @statusCode
-  code: 206;
-
-  @doc("The partial retrieval response body.")
-  @body
-  body: KnowledgeBaseRetrievalResponse;
-}
-
-@added(Versions.v2025_11_01_preview)
 @route("/knowledgebases('{knowledgeBaseName}')")
 interface KnowledgeRetrieval {
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "Pre-existing API contract"
