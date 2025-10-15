@@ -22,7 +22,7 @@ model EvaluationTaxonomy {
   taxonomyInput: EvaluationTaxonomyInput;
 
   @doc("List of taxonomy categories.")
-  taxonomyCategories: TaxonomyCategory[];
+  taxonomyCategories?: TaxonomyCategory[];
 
   @doc("Additional properties for the evaluation taxonomy.")
   properties?: Record<string>;
@@ -67,7 +67,7 @@ union TargetType {
   string,
 
   @doc("Azure AI Agent Target")
-  azureAIAgent: "AzureAIAgent",
+  azureAIAgent: "azure_ai_agent",
 }
 
 @added(Versions.v2025_11_15_preview)
@@ -83,7 +83,7 @@ model AzureAIAgentTarget {
   version: string;
 
   @doc("Tool description.")
-  tools: ToolDescription[];
+  tool_descriptions: ToolDescription[];
 }
 
 @added(Versions.v2025_11_15_preview)

@@ -3491,7 +3491,7 @@
           "type": "string",
           "description": "Type of the target.",
           "enum": [
-            "AzureAIAgent"
+            "azure_ai_agent"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -3505,7 +3505,7 @@
           "type": "string",
           "description": "Version of the Azure AI Agent."
         },
-        "tools": {
+        "tool_descriptions": {
           "type": "array",
           "description": "Tool description.",
           "items": {
@@ -3517,7 +3517,7 @@
         "type",
         "name",
         "version",
-        "tools"
+        "tool_descriptions"
       ]
     },
     "AzureAIAgentTargetUpdate": {
@@ -3528,7 +3528,7 @@
           "type": "string",
           "description": "Type of the target.",
           "enum": [
-            "AzureAIAgent"
+            "azure_ai_agent"
           ],
           "x-ms-enum": {
             "modelAsString": false
@@ -3542,7 +3542,7 @@
           "type": "string",
           "description": "Version of the Azure AI Agent."
         },
-        "tools": {
+        "tool_descriptions": {
           "type": "array",
           "description": "Tool description.",
           "items": {
@@ -4851,8 +4851,7 @@
       "required": [
         "name",
         "version",
-        "taxonomyInput",
-        "taxonomyCategories"
+        "taxonomyInput"
       ]
     },
     "EvaluationTaxonomyInput": {
@@ -6717,8 +6716,7 @@
       },
       "discriminator": "type",
       "required": [
-        "type",
-        "configuration"
+        "type"
       ]
     },
     "ScheduleTaskType": {
@@ -6816,7 +6814,7 @@
       "type": "string",
       "description": "Target type.",
       "enum": [
-        "AzureAIAgent"
+        "azure_ai_agent"
       ],
       "x-ms-enum": {
         "name": "TargetType",
@@ -6824,7 +6822,7 @@
         "values": [
           {
             "name": "azureAIAgent",
-            "value": "AzureAIAgent",
+            "value": "azure_ai_agent",
             "description": "Azure AI Agent Target"
           }
         ]
