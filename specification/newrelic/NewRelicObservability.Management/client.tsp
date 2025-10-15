@@ -8,7 +8,7 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-@@clientName(NewRelic.NewRelicAccountProperties,
+@@clientName(NewRelic.Observability.NewRelicAccountProperties,
   "AccountPropertiesForNewRelic",
   "go"
 );
