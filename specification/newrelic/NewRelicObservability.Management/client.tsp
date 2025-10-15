@@ -8,15 +8,6 @@ using Azure.ClientGenerator.Core;
   "python"
 );
 
-@@clientName(NewRelic.Observability.NewRelicMonitorResources.latestLinkedSaaS,
-  "latestLinkedSaas",
-  "python"
-);
-@@clientLocation(NewRelic.Observability.NewRelicMonitorResources.linkSaaS,
-  "linkSaas",
-  "python"
-);
-
 @@clientName(NewRelic.NewRelicAccountProperties,
   "AccountPropertiesForNewRelic",
   "go"
