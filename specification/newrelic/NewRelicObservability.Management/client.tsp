@@ -16,3 +16,8 @@ using Azure.ClientGenerator.Core;
   "linkSaas",
   "python"
 );
+
+@@clientName(NewRelic.NewRelicAccountProperties,
+  "AccountPropertiesForNewRelic",
+  "go"
+);
