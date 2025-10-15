@@ -7,6 +7,7 @@ info:
   version: preview
 tags:
   - name: Chat
+  - name: Containers
   - name: Embeddings
   - name: Evals
   - name: Files
@@ -70,6 +71,521 @@ paths:
       x-ms-examples:
         Create a chat completion:
           $ref: ./examples/chat_completions.yaml
+  /containers:
+    get:
+      operationId: ListContainers
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerListResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+    post:
+      operationId: CreateContainer
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+      requestBody:
+        required: true
+        content:
+          application/json:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateContainerBody'
+  /containers/{container_id}:
+    get:
+      operationId: RetrieveContainer
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+    delete:
+      operationId: DeleteContainer
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - object
+                  - deleted
+                properties:
+                  id:
+                    type: string
+                  object:
+                    type: string
+                    enum:
+                      - container.deleted
+                  deleted:
+                    type: boolean
+                    enum:
+                      - true
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+  /containers/{container_id}/files:
+    post:
+      operationId: CreateContainerFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerFileResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+      requestBody:
+        required: true
+        content:
+          multipart/form-data:
+            schema:
+              $ref: '#/components/schemas/OpenAI.CreateContainerFileBodyMultiPart'
+    get:
+      operationId: ListContainerFiles
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: limit
+          in: query
+          required: false
+          description: |-
+            A limit on the number of objects to be returned. Limit can range between 1 and 100, and the
+            default is 20.
+          schema:
+            type: integer
+            format: int32
+            default: 20
+          explode: false
+        - name: order
+          in: query
+          required: false
+          description: |-
+            Sort order by the `created_at` timestamp of the objects. `asc` for ascending order and`desc`
+            for descending order.
+          schema:
+            type: string
+            enum:
+              - asc
+              - desc
+          explode: false
+        - name: after
+          in: query
+          required: false
+          description: |-
+            A cursor for use in pagination. `after` is an object ID that defines your place in the list.
+            For instance, if you make a list request and receive 100 objects, ending with obj_foo, your
+            subsequent call can include after=obj_foo in order to fetch the next page of the list.
+          schema:
+            type: string
+          explode: false
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerFileListResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+  /containers/{container_id}/files/{file_id}:
+    get:
+      operationId: RetrieveContainerFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/OpenAI.ContainerFileResource'
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+    delete:
+      operationId: DeleteContainerFile
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                type: object
+                required:
+                  - id
+                  - object
+                  - deleted
+                properties:
+                  id:
+                    type: string
+                  object:
+                    type: string
+                    enum:
+                      - container.file.deleted
+                  deleted:
+                    type: boolean
+                    enum:
+                      - true
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
+  /containers/{container_id}/files/{file_id}/content:
+    get:
+      operationId: RetrieveContainerFileContent
+      parameters:
+        - name: api-version
+          in: query
+          required: false
+          description: |-
+            The explicit Azure AI Foundry Models API version to use for this request.
+            `v1` if not otherwise specified.
+          schema:
+            $ref: '#/components/schemas/AzureAIFoundryModelsApiVersion'
+            default: v1
+        - name: container_id
+          in: path
+          required: true
+          schema:
+            type: string
+        - name: file_id
+          in: path
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          description: The request has succeeded.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/octet-stream:
+              schema:
+                type: string
+                format: binary
+        default:
+          description: An unexpected error response.
+          headers:
+            apim-request-id:
+              required: false
+              description: A request ID used for troubleshooting purposes.
+              schema:
+                type: string
+          content:
+            application/json:
+              schema:
+                $ref: '#/components/schemas/AzureErrorResponse'
+      tags:
+        - Containers
   /embeddings:
     post:
       operationId: createEmbedding
@@ -2141,6 +2657,14 @@ paths:
           required: true
           schema:
             type: string
+        - name: include_obfuscation
+          in: query
+          required: false
+          description: When true, stream obfuscation will be enabled. Stream obfuscation adds random characters to an `obfuscation` field on streaming delta events to normalize payload sizes as a mitigation to certain side-channel attacks. These obfuscation fields are included by default, but add a small amount of overhead to the data stream. You can set `include_obfuscation` to false to optimize for bandwidth if you trust the network links between your application and the OpenAI API.
+          schema:
+            type: boolean
+            default: true
+          explode: false
         - name: include[]
           in: query
           required: false
@@ -4250,6 +4774,20 @@ components:
             A content filter category that describes language related to physical actions intended to purposely hurt, injure,
             damage one's body or kill oneself.
       description: A content filter result for an image generation operation's output response content.
+    AzureContentFilterPersonallyIdentifiableInformationResult:
+      type: object
+      properties:
+        redacted_text:
+          type: string
+          description: The redacted text with PII information removed or masked.
+        sub_categories:
+          type: array
+          items:
+            $ref: '#/components/schemas/AzurePiiSubCategoryResult'
+          description: Detailed results for individual PIIHarmSubCategory(s).
+      allOf:
+        - $ref: '#/components/schemas/AzureContentFilterDetectionResult'
+      description: A content filter detection result for Personally Identifiable Information that includes harm extensions.
     AzureContentFilterResultForChoice:
       type: object
       properties:
@@ -4339,6 +4877,10 @@ components:
           description: A detection result that describes a match against licensed code or other protected source material.
         ungrounded_material:
           $ref: '#/components/schemas/AzureContentFilterCompletionTextSpanDetectionResult'
+        personally_identifiable_information:
+          allOf:
+            - $ref: '#/components/schemas/AzureContentFilterPersonallyIdentifiableInformationResult'
+          description: A detection result that describes matches against Personal Identifiable Information with configurable subcategories.
       description: A content filter result for a single response item produced by a generative AI system.
     AzureContentFilterResultForPrompt:
       type: object
@@ -5734,6 +6276,27 @@ components:
             error_details:
               description: The content filter result details associated with the inner error.
           description: If applicable, an upstream error that originated this error.
+    AzurePiiSubCategoryResult:
+      type: object
+      required:
+        - sub_category
+        - filtered
+        - detected
+        - redacted
+      properties:
+        sub_category:
+          type: string
+          description: The PIIHarmSubCategory that was evaluated.
+        filtered:
+          type: boolean
+          description: Whether the content detection resulted in a content filtering action for this subcategory.
+        detected:
+          type: boolean
+          description: Whether the labeled content subcategory was detected in the content.
+        redacted:
+          type: boolean
+          description: Whether the content was redacted for this subcategory.
+      description: Result details for individual PIIHarmSubCategory(s).
     AzureResponse:
       type: object
       required:
@@ -8113,6 +8676,137 @@ components:
       allOf:
         - $ref: '#/components/schemas/OpenAI.Tool'
       description: A tool that controls a virtual computer. Learn more about the [computer tool](https://platform.openai.com/docs/guides/tools-computer-use).
+    OpenAI.ContainerFileListResource:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of object returned, must be 'list'.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ContainerFileResource'
+          description: A list of container files.
+        first_id:
+          type: string
+          description: The ID of the first file in the list.
+        last_id:
+          type: string
+          description: The ID of the last file in the list.
+        has_more:
+          type: boolean
+          description: Whether there are more files available.
+    OpenAI.ContainerFileResource:
+      type: object
+      required:
+        - id
+        - object
+        - container_id
+        - created_at
+        - bytes
+        - path
+        - source
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the file.
+        object:
+          type: string
+          description: The type of this object (`container.file`).
+        container_id:
+          type: string
+          description: The container this file belongs to.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (in seconds) when the file was created.
+        bytes:
+          type: integer
+          format: int32
+          description: Size of the file in bytes.
+        path:
+          type: string
+          description: Path of the file in the container.
+        source:
+          type: string
+          description: Source of the file (e.g., `user`, `assistant`).
+    OpenAI.ContainerListResource:
+      type: object
+      required:
+        - object
+        - data
+        - first_id
+        - last_id
+        - has_more
+      properties:
+        object:
+          type: string
+          enum:
+            - list
+          description: The type of object returned, must be 'list'.
+        data:
+          type: array
+          items:
+            $ref: '#/components/schemas/OpenAI.ContainerResource'
+          description: A list of containers.
+        first_id:
+          type: string
+          description: The ID of the first container in the list.
+        last_id:
+          type: string
+          description: The ID of the last container in the list.
+        has_more:
+          type: boolean
+          description: Whether there are more containers available.
+    OpenAI.ContainerResource:
+      type: object
+      required:
+        - id
+        - object
+        - name
+        - created_at
+        - status
+      properties:
+        id:
+          type: string
+          description: Unique identifier for the container.
+        object:
+          type: string
+          description: The type of this object.
+        name:
+          type: string
+          description: Name of the container.
+        created_at:
+          type: integer
+          format: unixtime
+          description: Unix timestamp (in seconds) when the container was created.
+        status:
+          type: string
+          description: Status of the container (e.g., active, deleted).
+        expires_after:
+          type: object
+          properties:
+            anchor:
+              type: string
+              enum:
+                - last_active_at
+              description: The reference point for the expiration.
+            minutes:
+              type: integer
+              format: int32
+              description: The number of minutes after the anchor before the container expires.
+          description: |-
+            The container will expire after this time period.
+            The anchor is the reference point for the expiration.
+            The minutes is the number of minutes after the anchor before the container expires.
     OpenAI.Coordinate:
       type: object
       required:
@@ -8128,6 +8822,43 @@ components:
           format: int32
           description: The y-coordinate.
       description: 'An x/y coordinate pair, e.g. `{ x: 100, y: 200 }`.'
+    OpenAI.CreateContainerBody:
+      type: object
+      required:
+        - name
+      properties:
+        name:
+          type: string
+          description: Name of the container to create.
+        file_ids:
+          type: array
+          items:
+            type: string
+          description: IDs of files to copy to the container.
+        expires_after:
+          type: object
+          properties:
+            anchor:
+              type: string
+              enum:
+                - last_active_at
+              description: Time anchor for the expiration time. Currently only 'last_active_at' is supported.
+            minutes:
+              type: integer
+              format: int32
+          required:
+            - anchor
+            - minutes
+          description: Container expiration time in seconds relative to the 'anchor' time.
+    OpenAI.CreateContainerFileBodyMultiPart:
+      type: object
+      properties:
+        file_id:
+          type: string
+          description: Name of the file to create.
+        file:
+          type: string
+          format: binary
     OpenAI.CreateEmbeddingResponse:
       type: object
       required:
@@ -12527,6 +13258,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -12543,6 +13275,9 @@ components:
         delta:
           type: string
           description: The partial code snippet being streamed by the code interpreter.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a partial code snippet is streamed by the code interpreter.
@@ -12987,6 +13722,7 @@ components:
         - item_id
         - output_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13003,6 +13739,9 @@ components:
         delta:
           type: string
           description: The function-call arguments delta that is added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial function-call arguments delta.
@@ -13200,6 +13939,7 @@ components:
         - output_index
         - item_id
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13215,6 +13955,9 @@ components:
           description: The unique identifier of the MCP tool call item being processed.
         delta:
           description: The partial update to the arguments for the MCP tool call.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the arguments of an MCP tool call.
@@ -13412,6 +14155,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13431,6 +14175,9 @@ components:
           description: The index of the reasoning content part within the output item.
         delta:
           description: The partial update to the reasoning content.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning content.
@@ -13473,6 +14220,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13492,6 +14240,9 @@ components:
           description: The index of the summary part within the output item.
         delta:
           description: The partial update to the reasoning summary content.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a delta (partial update) to the reasoning summary content.
@@ -13598,6 +14349,7 @@ components:
         - output_index
         - summary_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13618,6 +14370,9 @@ components:
         delta:
           type: string
           description: The text delta that was added to the summary.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when a delta is added to a reasoning summary text.
@@ -13660,6 +14415,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13680,6 +14436,9 @@ components:
         delta:
           type: string
           description: The refusal text that is added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is a partial refusal text.
@@ -13843,6 +14602,7 @@ components:
         - output_index
         - content_index
         - delta
+        - obfuscation
       properties:
         type:
           type: string
@@ -13863,6 +14623,9 @@ components:
         delta:
           type: string
           description: The text delta that was added.
+        obfuscation:
+          type: string
+          description: A field of random characters introduced by stream obfuscation. Stream obfuscation is a mechanism that mitigates certain side-channel attacks.
       allOf:
         - $ref: '#/components/schemas/OpenAI.ResponseStreamEvent'
       description: Emitted when there is an additional text delta.
