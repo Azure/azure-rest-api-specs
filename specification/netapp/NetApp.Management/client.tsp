@@ -2,11 +2,15 @@ import "@azure-tools/typespec-client-generator-core";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
+using Microsoft.NetApp;
 
 @@clientName(Microsoft.NetApp,
   "NetAppManagementClient",
   "java,python,javascript"
 );
+
+// Snapshot is not updatable
+@@scope(Microsoft.NetApp.Snapshots.update, "!java");
 
 // Fix property name case changes
 @@clientName(Microsoft.NetApp.AccountProperties.nfsV4IDDomain,
