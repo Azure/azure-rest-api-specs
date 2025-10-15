@@ -54,7 +54,8 @@ interface CapacityReservations {
    */
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     CapacityReservation,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -64,7 +65,8 @@ interface CapacityReservations {
   update is ComputeCustomPatchAsync<
     CapacityReservation,
     CapacityReservationUpdate,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = CapacityReservation> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

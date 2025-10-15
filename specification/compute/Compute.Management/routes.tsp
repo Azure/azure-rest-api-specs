@@ -562,7 +562,7 @@ interface LogAnalyticsOperationGroup {
   @action("logAnalytics/apiAccess/getRequestRateByInterval")
   exportRequestRateByInterval is ComputeProviderActionAsync<
     Response = LogAnalyticsOperationResult,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
@@ -578,7 +578,7 @@ interface LogAnalyticsOperationGroup {
   @action("logAnalytics/apiAccess/getThrottledRequests")
   exportThrottledRequests is ComputeProviderActionAsync<
     Response = LogAnalyticsOperationResult,
-    LroHeaders = ArmAsyncOperationHeader &
+    LroHeaders = ArmAsyncOperationHeader<FinalResult = LogAnalyticsOperationResult> &
       Azure.Core.Foundations.RetryAfterHeader,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter,
@@ -598,11 +598,7 @@ interface VirtualMachineRunCommandsOperationGroup {
   @action("runCommands")
   @list
   list is ComputeProviderActionSync<
-    Response = RunCommandListResult & {
-      #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-      @header
-      contentType: "application/json" | "text/json";
-    },
+    Response = RunCommandListResult,
     Scope = SubscriptionActionScope,
     Parameters = LocationParameter
   >;
@@ -624,11 +620,7 @@ interface VirtualMachineRunCommandsOperationGroup {
     commandId: string,
 
     ...SubscriptionIdParameter,
-  ): ArmResponse<RunCommandDocument & {
-    #suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-    @header
-    contentType: "application/json" | "text/json";
-  }> | CloudError;
+  ): ArmResponse<RunCommandDocument> | CloudError;
 }
 
 @@doc(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
