@@ -1,28 +1,28 @@
 ---
-description: "Guide the user to define and update TypeSpec based API spec for a service"
+description: "Guide the user to define and update TypeSpec based API spec for an azure service"
 ---
 
 # Goal
 
-Help the user define or update TypeSpec API specifications using the `azsdk-qa-bot` tools.
+Help the user define or update TypeSpec API specifications using the `azure-sdk-mcp` tools.
 
 ## 🧩 Context
 This instruction applies to all tasks involving **TypeSpec**, including:
-- Writing new TypeSpec definitions
-- Editing or refactoring existing TypeSpec files
+- Writing new TypeSpec definitions: service, api version, resource, models, operations
+- Editing or refactoring existing TypeSpec files, editing service, resource, models, or operations
 - Resolving TypeSpec-related issues
 
 ## ⚙️ Workflow Guidance
 
 When encountering a TypeSpec-related task, follow this process:
 
-### Step 1: Call the `azsdk-qa-bot` tool
+### Step 1: Call the `azure-sdk-mcp/azsdk_ai_qa_completion` tool
 
 Use this tool to retrieve validated solutions, suggestions, or fixes for TypeSpec issues.
 
 ### Step 2: Extract the solution from the tool result
 
-Parse the response from `azsdk-qa-bot` to identify the recommended fix or implementation.
+Parse the response from `azure-sdk-mcp/azsdk_ai_qa_completion` to identify the recommended fix or implementation.
 
 ### Step 3: Execute the solution
 
