@@ -1251,7 +1251,7 @@ model MonitoredSubscription {
   /**
    * The subscriptionId to be monitored.
    */
-  subscriptionId: string;
+  subscriptionId?: string;
 
   /**
    * The state of monitoring.
