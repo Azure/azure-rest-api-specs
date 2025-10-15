@@ -8,14 +8,30 @@
   "responses": {
     "200": {
       "body": {
-        "input": {
-          "type": "EvaluationTaxonomyInput"
+        "taxonomyInput": {
+          "type": "agent",
+          "target": {
+            "type": "azure_ai_agent",
+            "name": "agent-123",
+            "version": "1.0",
+            "tool_descriptions": [
+              {
+                "name": "tool1",
+                "description": "some tool"
+              }
+            ]
+          },
+          "riskCategories": [
+            "ProhibitedActions"
+          ]
         },
         "taxonomyCategories": [
           {
+            "id": "vdrdx",
             "name": "vdrdx",
             "subCategories": [
               {
+                "id": "vdrdx",
                 "name": "nasvionthinld",
                 "enabled": true
               }

@@ -99,6 +99,9 @@ model ToolDescription {
 @added(Versions.v2025_11_15_preview)
 @doc("Taxonomy category definition.")
 model TaxonomyCategory {
+  @doc("Unique identifier of the taxonomy category.")
+  id: string;
+
   @doc("Name of the taxonomy category.")
   name: string;
 
@@ -118,6 +121,9 @@ model TaxonomyCategory {
 @added(Versions.v2025_11_15_preview)
 @doc("Taxonomy sub-category definition.")
 model TaxonomySubCategory {
+  @doc("Unique identifier of the taxonomy sub-category.")
+  id: string;
+
   @doc("Name of the taxonomy sub-category.")
   name: string;
 
