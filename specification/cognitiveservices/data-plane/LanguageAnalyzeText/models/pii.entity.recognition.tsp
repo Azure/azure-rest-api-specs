@@ -90,7 +90,7 @@ model ConfidenceScoreThresholdOverride {
   value: float32;
 
   /** The 2 letter ISO 639-1 language for which the override applies. If not specified, the override applies to all languages. */
-  language: string
+  language: string;
 }
 
 /** The entity synonyms used to enhance pii entity detection */
@@ -883,6 +883,7 @@ union PiiCategoriesExclude {
   /** Card Verification Value */
   @added(Versions.v2025_11_15_preview)
   CVV: "CVV",
+
   /** Expiration Date */
   @added(Versions.v2025_11_15_preview)
   ExpirationDate: "ExpirationDate",
