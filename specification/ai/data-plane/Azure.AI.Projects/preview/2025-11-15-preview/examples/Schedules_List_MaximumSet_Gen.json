@@ -14,11 +14,33 @@
             "displayName": "ctemaebrtmbgavhzxjxwflxaqn",
             "provisioningStatus": "Creating",
             "trigger": {
-              "type": "Trigger"
+              "type": "Cron",
+              "expression": "*/10 * * * *",
+              "endTime": "2025-10-10T20:00:00.000"
             },
             "task": {
               "type": "Evaluation",
-              "configuration": {}
+              "evalId": "eval_c1534631-8c5d-4db4-bdb4-c0254bf473e8",
+              "evalRun": {
+                "name": "Bullet Bike",
+                "data_source": {
+                  "type": "azure_ai_red_team",
+                  "item_generation_params": {
+                    "type": "red_team",
+                    "attack_strategies": [
+                      "Flip",
+                      "Base64",
+                      "Morse"
+                    ],
+                    "num_turns": 5
+                  },
+                  "target": {
+                    "type": "azure_ai_model",
+                    "model": "lion214/gpt-4o-mini",
+                    "sampling_params": null
+                  }
+                }
+              }
             },
             "tags": {},
             "properties": {},

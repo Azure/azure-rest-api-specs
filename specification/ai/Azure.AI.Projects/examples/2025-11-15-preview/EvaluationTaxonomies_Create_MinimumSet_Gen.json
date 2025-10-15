@@ -3,21 +3,25 @@
   "operationId": "EvaluationTaxonomies_Create",
   "parameters": {
     "api-version": "2025-11-15-preview",
+    "name": "vrniafbawnfmywdfipyvou",
     "body": {
-      "input": {
-        "type": "EvaluationTaxonomyInput"
-      },
-      "taxonomyCategories": [
-        {
-          "name": "vdrdx",
-          "subCategories": [
+      "taxonomyInput": {
+        "type": "agent",
+        "target": {
+          "type": "azure_ai_agent",
+          "name": "agent-123",
+          "version": "1.0",
+          "tool_descriptions": [
             {
-              "name": "nasvionthinld",
-              "enabled": true
+              "name": "tool1",
+              "description": "some tool"
             }
           ]
-        }
-      ]
+        },
+        "riskCategories": [
+          "ProhibitedActions"
+        ]
+      }
     }
   },
   "responses": {
@@ -25,18 +29,39 @@
       "body": {
         "name": "ifnpaopxtrmzengzcoizygnsjmzc",
         "version": "jucnyltljzmbcxzihdr",
-        "input": {
-          "type": "EvaluationTaxonomyInput"
+        "taxonomyInput": {
+          "type": "agent",
+          "target": {
+            "type": "azure_ai_agent",
+            "name": "agent-123",
+            "version": "1.0",
+            "tool_descriptions": [
+              {
+                "name": "tool1",
+                "description": "some tool"
+              }
+            ]
+          },
+          "riskCategories": [
+            "ProhibitedActions"
+          ]
         },
         "taxonomyCategories": [
           {
+            "id": "vdrdx",
             "name": "vdrdx",
             "subCategories": [
               {
+                "id": "nasvionthinld",
                 "name": "nasvionthinld",
-                "enabled": true
+                "enabled": true,
+                "properties": {},
+                "description": "ccxhkfcqw"
               }
-            ]
+            ],
+            "properties": {},
+            "description": "eiopiwstxy",
+            "riskCategory": "ProhibitedActions"
           }
         ]
       }

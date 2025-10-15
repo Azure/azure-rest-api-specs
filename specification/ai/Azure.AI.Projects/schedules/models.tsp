@@ -217,7 +217,7 @@ model ScheduleTask {
   type: ScheduleTaskType;
 
   @doc("Configuration for the task.")
-  configuration: Record<string>;
+  configuration?: Record<string>;
 }
 
 @doc("Evaluation task for the schedule.")
