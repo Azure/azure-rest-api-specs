@@ -700,13 +700,6 @@ alias ManagementGroup = Extension.ExternalResource<
   ParentType = "Tenant"
 >;
 
-alias ManagementBillingGroup = Extension.ExternalChildResource<
-  ManagementGroup,
-  "providers/Microsoft.Billing/billingPeriods",
-  "billingPeriodName",
-  Description = "Billing Period Name."
->;
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface AggregatedCostOperationGroup {
   /**
@@ -737,15 +730,26 @@ interface AggregatedCostOperationGroup {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/consumption/")
-  @autoRoute
+  @route("/providers/Microsoft.Management/managementGroups/{managementGroupId}/providers/Microsoft.Billing/billingPeriods/{billingPeriodName}/providers/Microsoft.Consumption/aggregatedCost")
   @get
   @action("aggregatedCost")
-  getForBillingPeriodByManagementGroup is Extension.Read<
-    ManagementBillingGroup,
-    ManagementGroupAggregatedCostResult,
-    Response = ManagementGroupAggregatedCostResult,
-    Error = ErrorResponse
-  >;
+  getForBillingPeriodByManagementGroup(
+    ...ApiVersionParameter,
+
+    /**
+     * Order Id of the reservation
+     */
+    @path
+    @segment("managementGroups")
+    managementGroupId: string,
+
+    /**
+     * Billing Period Name.
+     */
+    @path
+    @segment("billingPeriods")
+    billingPeriodName: string,
+  ): ManagementGroupAggregatedCostResult | ErrorResponse;
 }
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
