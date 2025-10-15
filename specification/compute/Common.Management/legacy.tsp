@@ -13,6 +13,7 @@ using Azure.ResourceManager;
 
 namespace Azure.ResourceManager.Legacy {
   interface ComputeOperations {
+    #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "LEGACY - DO NOT COPY - FIX ME"
     #suppress "@azure-tools/typespec-azure-core/no-private-usage"
     @tag("Operations")
     @autoRoute
@@ -47,10 +48,7 @@ namespace Azure.ResourceManager.Legacy {
     @autoRoute
     @doc("Create a {name}", Resource)
     @armResourceCreateOrUpdate(Resource)
-    @Azure.Core.Foundations.Private.defaultFinalStateVia(#[
-      "location",
-      "azure-async-operation"
-    ])
+    @Azure.Core.Foundations.Private.defaultFinalStateVia(#["location", "azure-async-operation"])
     @put
     CreateOrUpdateAsync<
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
@@ -164,11 +162,7 @@ namespace Azure.ResourceManager.Legacy {
         Azure.Core.Foundations.RetryAfterHeader,
       Parameters extends {} = {},
       Response extends {} = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders> | ArmDeletedNoContentResponse
-    >(
-      ...ParentParameters,
-      ...ResourceTypeParameter,
-      ...Parameters,
-    ): Response | ErrorType;
+    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters): Response | ErrorType;
 
     /**
      * @dev Delete a resource synchronously
@@ -185,11 +179,7 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
       Response extends {} = ArmDeletedResponse | ArmDeletedNoContentResponse
-    >(
-      ...ParentParameters,
-      ...ResourceTypeParameter,
-      ...Parameters,
-    ): Response | ErrorType;
+    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters): Response | ErrorType;
 
     /**
      * @dev Get a resource
@@ -206,11 +196,7 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
       Response extends {} = ArmResponse<Resource>
-    >(
-      ...ParentParameters,
-      ...ResourceTypeParameter,
-      ...Parameters,
-    ): Response | ErrorType;
+    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters): Response | ErrorType;
 
     /**
      * @dev Get a resource
@@ -226,11 +212,7 @@ namespace Azure.ResourceManager.Legacy {
       Resource extends Azure.ResourceManager.CommonTypes.Resource,
       Parameters extends {} = {},
       Response extends {} = ArmResponse<Resource>
-    >(
-      ...ParentParameters,
-      ...ResourceTypeParameter,
-      ...Parameters,
-    ): Response | ErrorType;
+    >(...ParentParameters, ...ResourceTypeParameter, ...Parameters): Response | ErrorType;
 
     /**
      * @dev List a resource
@@ -350,12 +332,7 @@ namespace Azure.ResourceManager.Legacy {
     @list
     @listsResource(Resource)
     @segmentOf(Resource)
-    @Private.armRenameListByOperation(
-      Resource,
-      ParentName,
-      ParentFriendlyName,
-      false
-    ) // This must come before @armResourceList!
+    @Private.armRenameListByOperation(Resource, ParentName, ParentFriendlyName, false) // This must come before @armResourceList!
     @armResourceList(Resource)
     ArmResourceListByParent<
       Resource extends {},
@@ -404,11 +381,7 @@ namespace Azure.ResourceManager.Legacy {
     #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
     @doc("The name of the {name}", Resource)
     @pattern(NamePattern)
-    @Azure.ResourceManager.Private.defaultResourceKeySegmentName(
-      Resource,
-      KeyName,
-      SegmentName
-    )
+    @Azure.ResourceManager.Private.defaultResourceKeySegmentName(Resource, KeyName, SegmentName)
     @path
     @visibility(Lifecycle.Read)
     name: Type;
