@@ -2031,6 +2031,11 @@ model VirtualHardDiskProperties {
   @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Absolute path of the VHD. This is only applicable when createFromLocal is true.")
+  @secret
+  localVhdPath?: string;
+
   @doc("Provisioning state of the virtual hard disk.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
@@ -2196,6 +2201,10 @@ model VirtualMachineInstanceProperties {
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("HyperV name of the VM. This is only applicable when createFromLocal is true.")
+  localVmName?: string;
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility(Lifecycle.Read)

@@ -9406,6 +9406,12 @@
           "description": "Boolean indicating whether it is an existing local hard disk or if one should be created.",
           "default": false
         },
+        "localVhdPath": {
+          "type": "string",
+          "format": "password",
+          "description": "Absolute path of the VHD. This is only applicable when createFromLocal is true.",
+          "x-ms-secret": true
+        },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
           "description": "Provisioning state of the virtual hard disk.",
@@ -9706,6 +9712,10 @@
           "type": "boolean",
           "description": "Boolean indicating whether this is an existing local virtual machine or if one should be created.",
           "default": false
+        },
+        "localVmName": {
+          "type": "string",
+          "description": "HyperV name of the VM. This is only applicable when createFromLocal is true."
         },
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningStateEnum",
