@@ -548,7 +548,8 @@
         "operationId": "Benefit_Validate",
         "tags": [
           "Savings plan",
-          "Macc"
+          "Macc",
+          "ConditionalCredits"
         ],
         "x-ms-examples": {
           "SavingsPlanValidatePurchase": {
@@ -628,6 +629,21 @@
           },
           "MaccValidateWriteOffWithMilestones": {
             "$ref": "./examples/MaccValidateWriteOffWithMilestones.json"
+          },
+          "ConditionalCreditValidateCreate": {
+            "$ref": "./examples/ConditionalCreditValidateCreate.json"
+          },
+          "ConditionalCreditValidateCreateContributor": {
+            "$ref": "./examples/ConditionalCreditValidateCreateContributor.json"
+          },
+          "ConditionalCreditValidateCreateEmpowered": {
+            "$ref": "./examples/ConditionalCreditValidateCreateEmpowered.json"
+          },
+          "ConditionalCreditValidateCreateError": {
+            "$ref": "./examples/ConditionalCreditValidateCreateError.json"
+          },
+          "ConditionalCreditValidateCreateMultiple": {
+            "$ref": "./examples/ConditionalCreditValidateCreateMultiple.json"
           }
         },
         "parameters": [
@@ -6181,9 +6197,6 @@
         },
         "benefitResourceId": {
           "$ref": "#/definitions/BenefitResourceId"
-        },
-        "commitment": {
-          "$ref": "#/definitions/Commitment"
         }
       }
     },
