@@ -44,7 +44,9 @@ interface ProvisionedMachineExtensions {
    */
   delete is ArmResourceDeleteWithoutOkAsync<
     ProvisionedMachineExtension,
-    Response = ArmDeletedResponse
+    Response = ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
+      Azure.Core.Foundations.RetryAfterHeader &
+      ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**

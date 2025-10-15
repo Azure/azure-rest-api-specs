@@ -1619,7 +1619,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "List all Extensions under ArcSetting resource.",
+        "description": "List all Extensions under the Parent Entity(HCI Cluster/Provisioned Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1678,7 +1678,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Get particular Arc Extension of HCI Cluster.",
+        "description": "Get particular Arc Extension of the Parent Entity(HCI Cluster/Provisioned Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1739,7 +1739,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Create Extension for HCI cluster.",
+        "description": "Create Extension for the Parent Entity(HCI Cluster/Provisioned Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1830,7 +1830,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Update Extension for HCI cluster.",
+        "description": "Update Extension for the Parent Entity(HCI Cluster/Provisioned Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1918,7 +1918,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Delete particular Arc Extension of HCI Cluster.",
+        "description": "Delete particular Arc Extension of the Parent Entity(HCI Cluster/Provisioned Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -2006,7 +2006,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Upgrade a particular Arc Extension of HCI Cluster.",
+        "description": "Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Provisioned Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -7934,7 +7934,7 @@
     },
     "ExtensionList": {
       "type": "object",
-      "description": "List of Extensions in HCI cluster.",
+      "description": "List of Extensions in the Parent Entity(HCI Cluster/Provisioned Machine).",
       "properties": {
         "value": {
           "type": "array",
@@ -8056,7 +8056,7 @@
     },
     "ExtensionProperties": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
+      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -8069,14 +8069,14 @@
         },
         "aggregateState": {
           "$ref": "#/definitions/ExtensionAggregateState",
-          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+          "description": "Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Provisioned Machine).",
           "readOnly": true
         },
         "perNodeExtensionDetails": {
           "type": "array",
-          "description": "State of Arc Extension in each of the nodes.",
+          "description": "State of Arc Extension in each of the nodes/machines.",
           "items": {
-            "$ref": "#/definitions/HCIPerNodeExtensionState"
+            "$ref": "#/definitions/PerNodeExtensionState"
           },
           "readOnly": true
         },
@@ -8094,37 +8094,6 @@
         "targetVersion": {
           "type": "string",
           "description": "Extension Upgrade Target Version."
-        }
-      }
-    },
-    "HCIPerNodeExtensionState": {
-      "type": "object",
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the node in HCI Cluster.",
-          "readOnly": true
-        },
-        "extension": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the particular Arc Extension on this node.",
-          "readOnly": true
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/NodeExtensionState",
-          "description": "State of Arc Extension in this node.",
-          "readOnly": true
-        },
-        "instanceView": {
-          "$ref": "#/definitions/ExtensionInstanceView",
-          "description": "The extension instance view.",
-          "readOnly": true
         }
       }
     },
@@ -9704,6 +9673,37 @@
           "type": "string",
           "format": "date-time",
           "description": "The end date and time of the password validity."
+        }
+      }
+    },
+    "PerNodeExtensionState": {
+      "type": "object",
+      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).",
+          "readOnly": true
+        },
+        "extension": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the particular Arc Extension on this node/machine.",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/NodeExtensionState",
+          "description": "State of Arc Extension in this node/machine.",
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/ExtensionInstanceView",
+          "description": "The extension instance view.",
+          "readOnly": true
         }
       }
     },

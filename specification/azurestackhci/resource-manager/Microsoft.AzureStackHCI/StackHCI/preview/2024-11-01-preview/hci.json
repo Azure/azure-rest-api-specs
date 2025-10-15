@@ -1047,6 +1047,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ProvisionedMachineExtensions_ListByProvisionedMachine": {
+            "$ref": "./examples/ProvisionedMachineExtensions_ListByProvisionedMachine.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -1097,6 +1102,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ProvisionedMachineExtensions_Get": {
+            "$ref": "./examples/ProvisionedMachineExtensions_Get.json"
           }
         }
       },
@@ -1172,6 +1182,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ProvisionedMachineExtensions_Create": {
+            "$ref": "./examples/ProvisionedMachineExtensions_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "azure-async-operation"
         },
@@ -1210,8 +1225,26 @@
           }
         ],
         "responses": {
-          "200": {
-            "description": "Resource deleted successfully."
+          "202": {
+            "description": "Resource deletion accepted.",
+            "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              },
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
+          },
+          "204": {
+            "description": "Resource does not exist."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -1219,7 +1252,16 @@
               "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
             }
           }
-        }
+        },
+        "x-ms-examples": {
+          "ProvisionedMachineExtensions_Delete": {
+            "$ref": "./examples/ProvisionedMachineExtensions_Delete.json"
+          }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/jobs": {
@@ -3298,9 +3340,7 @@
         }
       },
       "required": [
-        "intent",
-        "source",
-        "type"
+        "intent"
       ],
       "allOf": [
         {
