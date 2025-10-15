@@ -194,7 +194,7 @@ model GuestConfigurationAssignmentProperties {
    * The list of VM Compliance data for VMSS
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["vmId"])
+  @identifiers(#["vmId"])
   vmssVMList?: VmssvmInfo[];
 }
 
@@ -254,13 +254,13 @@ model GuestConfigurationNavigation {
   /**
    * The configuration parameters for the guest configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   configurationParameter?: ConfigurationParameter[];
 
   /**
    * The protected configuration parameters for the guest configuration.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   configurationProtectedParameter?: ConfigurationParameter[];
 
   /**
@@ -377,7 +377,7 @@ model AssignmentReport {
   /**
    * The list of resources for which guest configuration assignment compliance is checked.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resources?: AssignmentReportResource[];
 }
 
@@ -450,7 +450,7 @@ model AssignmentReportResource {
   /**
    * Compliance reason and reason code for a resource.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["phrase", "code"])
+  @identifiers(#["phrase", "code"])
   reasons?: AssignmentReportResourceComplianceReason[];
 
   /**
@@ -682,7 +682,7 @@ model AssignmentReportDetails {
   /**
    * The list of resources for which guest configuration assignment compliance is checked.
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   resources?: AssignmentReportResource[];
 }
 
@@ -694,7 +694,7 @@ model OperationList {
    * List of Automation operations supported by the Automation resource provider.
    */
   @pageItems
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   value: Operation[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
