@@ -102,9 +102,9 @@ namespace Microsoft.Web;
  */
 enum Versions {
   /**
-   * The 2024-11-01 API version.
+   * The 2025-03-01 API version.
    */
-  v2024_11_01: "2024-11-01",
+  v2025_03_01: "2025-03-01",
 }
 
 interface Operations
