@@ -409,6 +409,19 @@ model UsageDetail extends Resource {
    * Specifies the kind of usage details.
    */
   kind: UsageDetailsKind;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -420,6 +433,19 @@ model Marketplace extends Resource {
    * The properties of the marketplace usage detail.
    */
   properties?: MarketplaceProperties;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -640,11 +666,6 @@ model BudgetProperties {
    */
   @visibility(Lifecycle.Read)
   forecastSpend?: ForecastSpend;
-
-  /**
-   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
-   */
-  eTag?: string;
 }
 
 /**
@@ -817,6 +838,11 @@ model TagsResult extends ProxyResource {
    * The properties of the tag.
    */
   properties?: TagProperties;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  eTag?: string;
 }
 
 /**
@@ -828,11 +854,6 @@ model TagProperties {
    */
   @OpenAPI.extension("x-ms-identifiers", #["key"])
   tags?: Tag[];
-
-  /**
-   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
-   */
-  eTag?: string;
 
   /**
    * The link (url) to the next page of results.
@@ -899,6 +920,19 @@ model Balance extends Azure.ResourceManager.Foundations.Resource {
    * The properties of the balance.
    */
   properties?: BalanceProperties;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -1012,19 +1046,6 @@ model BalanceProperties {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   adjustmentDetails?: BalancePropertiesAdjustmentDetailsItem[];
-
-  /**
-   * The etag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1068,6 +1089,19 @@ model ReservationSummary extends Resource {
    * The properties of the reservation summary.
    */
   properties?: ReservationSummaryProperties;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -1185,6 +1219,19 @@ model ReservationDetail extends Resource {
    * The properties of the reservation detail.
    */
   properties?: ReservationDetailProperties;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -1271,6 +1318,19 @@ model ReservationRecommendation {
   ...ResourceAttributes;
 
   /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
+
+  /**
    * Specifies the kind of reservation recommendation.
    */
   kind: ReservationRecommendationKind;
@@ -1312,6 +1372,19 @@ model ReservationRecommendationDetailsModel extends Resource {
    * The properties of the reservation recommendation.
    */
   properties?: ReservationRecommendationDetailsProperties;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -1561,6 +1634,19 @@ model ReservationTransaction extends Resource {
    * The properties of a legacy reservation transaction.
    */
   properties?: LegacyReservationTransactionProperties;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -1711,19 +1797,6 @@ model LegacyReservationTransactionProperties {
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   overage?: decimal;
-
-  /**
-   * The etag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
 }
 
 /**
@@ -2136,6 +2209,19 @@ model ManagementGroupAggregatedCostResult extends Resource {
    * The properties of the Management Group Aggregated Cost.
    */
   properties?: ManagementGroupAggregatedCostProperties;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -2203,19 +2289,6 @@ model ManagementGroupAggregatedCostProperties {
    * List of subscription Guids excluded from the calculation of aggregated cost
    */
   excludedSubscriptions?: string[];
-
-  /**
-   * The etag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
 }
 
 /**
@@ -2672,13 +2745,6 @@ model CreditSummaryProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   eTag?: string;
-
-  /**
-   * A list of Tag.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
-  tags?: Record<string>;
 }
 
 /**

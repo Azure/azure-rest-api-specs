@@ -20,6 +20,12 @@ model Budget is Azure.ResourceManager.ExtensionResource<BudgetProperties> {
     SegmentName = "budgets",
     NamePattern = ""
   >;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  eTag?: string;
 }
 
 @armResourceOperations

@@ -2320,6 +2320,19 @@
           "$ref": "#/definitions/BalanceProperties",
           "description": "The properties of the balance.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -2433,19 +2446,6 @@
           "x-ms-identifiers": [
             "name"
           ]
-        },
-        "etag": {
-          "type": "string",
-          "description": "The etag for the resource.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
         }
       }
     },
@@ -2516,6 +2516,10 @@
           "$ref": "#/definitions/BudgetProperties",
           "description": "The properties of the budget.",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
         }
       },
       "allOf": [
@@ -2646,10 +2650,6 @@
           "$ref": "#/definitions/ForecastSpend",
           "description": "The forecasted cost which is being tracked for a budget.",
           "readOnly": true
-        },
-        "eTag": {
-          "type": "string",
-          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
         }
       },
       "required": [
@@ -2802,6 +2802,17 @@
           "$ref": "#/definitions/CreditSummaryProperties",
           "description": "The properties of the credit summary.",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
+        },
+        "tags": {
+          "type": "object",
+          "description": "A list of Tag.",
+          "additionalProperties": {
+            "type": "string"
+          }
         }
       },
       "allOf": [
@@ -2858,13 +2869,6 @@
           "type": "string",
           "description": "The eTag for the resource.",
           "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "A list of Tag.",
-          "additionalProperties": {
-            "type": "string"
-          }
         }
       }
     },
@@ -3657,19 +3661,6 @@
           "format": "decimal",
           "description": "The overage amount at the enrollment scope.",
           "readOnly": true
-        },
-        "etag": {
-          "type": "string",
-          "description": "The etag for the resource.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          },
-          "readOnly": true
         }
       }
     },
@@ -4219,6 +4210,17 @@
           "items": {
             "type": "string"
           }
+        }
+      }
+    },
+    "ManagementGroupAggregatedCostResult": {
+      "type": "object",
+      "description": "A management group aggregated cost resource.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ManagementGroupAggregatedCostProperties",
+          "description": "The properties of the Management Group Aggregated Cost.",
+          "x-ms-client-flatten": true
         },
         "etag": {
           "type": "string",
@@ -4232,17 +4234,6 @@
             "type": "string"
           },
           "readOnly": true
-        }
-      }
-    },
-    "ManagementGroupAggregatedCostResult": {
-      "type": "object",
-      "description": "A management group aggregated cost resource.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ManagementGroupAggregatedCostProperties",
-          "description": "The properties of the Management Group Aggregated Cost.",
-          "x-ms-client-flatten": true
         }
       },
       "allOf": [
@@ -4259,6 +4250,19 @@
           "$ref": "#/definitions/MarketplaceProperties",
           "description": "The properties of the marketplace usage detail.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -5769,6 +5773,19 @@
           "$ref": "#/definitions/ReservationDetailProperties",
           "description": "The properties of the reservation detail.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -5895,6 +5912,19 @@
           "description": "Resource sku",
           "readOnly": true
         },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
+        },
         "kind": {
           "$ref": "#/definitions/ReservationRecommendationKind",
           "description": "Specifies the kind of reservation recommendation."
@@ -5968,6 +5998,19 @@
           "$ref": "#/definitions/ReservationRecommendationDetailsProperties",
           "description": "The properties of the reservation recommendation.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -6202,6 +6245,19 @@
           "$ref": "#/definitions/ReservationSummaryProperties",
           "description": "The properties of the reservation summary.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -6310,6 +6366,19 @@
           "$ref": "#/definitions/LegacyReservationTransactionProperties",
           "description": "The properties of a legacy reservation transaction.",
           "x-ms-client-flatten": true
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "allOf": [
@@ -6529,10 +6598,6 @@
             "key"
           ]
         },
-        "eTag": {
-          "type": "string",
-          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
-        },
         "nextLink": {
           "type": "string",
           "description": "The link (url) to the next page of results.",
@@ -6553,6 +6618,10 @@
           "$ref": "#/definitions/TagProperties",
           "description": "The properties of the tag.",
           "x-ms-client-flatten": true
+        },
+        "eTag": {
+          "type": "string",
+          "description": "eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not."
         }
       },
       "allOf": [
@@ -6663,6 +6732,19 @@
         "kind": {
           "$ref": "#/definitions/UsageDetailsKind",
           "description": "Specifies the kind of usage details."
+        },
+        "etag": {
+          "type": "string",
+          "description": "The etag for the resource.",
+          "readOnly": true
+        },
+        "tags": {
+          "type": "object",
+          "description": "Resource tags.",
+          "additionalProperties": {
+            "type": "string"
+          },
+          "readOnly": true
         }
       },
       "discriminator": "kind",
