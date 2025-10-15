@@ -12,3 +12,8 @@ using Azure.ClientGenerator.Core;
   "AccountPropertiesForNewRelic",
   "go"
 );
+
+@@clientName(NewRelic.Observability.MonitoredSubscriptions.createOrUpdate,
+  "createorUpdate",
+  "go"
+);
