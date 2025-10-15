@@ -1,8 +1,10 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
@@ -24,6 +26,9 @@ model ProvisionedMachineExtension
   >;
 }
 
+@@clientName(ProvisionedMachineExtensions.create::parameters.resource,
+  "extension"
+);
 /**
  * CRUD + List operations for Provisioned Machine Extensions.
  */
