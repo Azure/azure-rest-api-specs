@@ -7,3 +7,12 @@ using Azure.ClientGenerator.Core;
   "NewRelicObservabilityMgmtClient",
   "python"
 );
+
+@@clientName(NewRelic.Observability.NewRelicMonitorResources.latestLinkedSaaS,
+  "latestLinkedSaas",
+  "python"
+);
+@@clientLocation(NewRelic.Observability.NewRelicMonitorResources.linkSaaS,
+  "linkSaas",
+  "python"
+);
