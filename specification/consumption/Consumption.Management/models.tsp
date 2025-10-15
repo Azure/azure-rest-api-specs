@@ -3,9 +3,6 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
-using TypeSpec.Rest;
-using TypeSpec.Http;
-using Azure.ResourceManager;
 using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.Consumption;
@@ -13,7 +10,8 @@ namespace Microsoft.Consumption;
 /**
  * The scope associated with reservations details operations. This includes '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope (legacy), and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for BillingProfile scope (modern).
  */
-model ResourceScopeActionScope is Extension.ScopeParameter;
+model ResourceScopeActionScope
+  is Azure.ResourceManager.Extension.ScopeParameter;
 
 /**
  * The status of the long running operation.
@@ -414,42 +412,6 @@ model UsageDetail extends Resource {
 }
 
 /**
- * The Resource model definition.
- */
-model Resource {
-  /**
-   * The full qualified ARM ID of an event.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * The ID that uniquely identifies an event.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * The etag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
-   * Resource tags.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  tags?: Record<string>;
-}
-
-/**
  * A marketplace resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -678,6 +640,11 @@ model BudgetProperties {
    */
   @visibility(Lifecycle.Read)
   forecastSpend?: ForecastSpend;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  eTag?: string;
 }
 
 /**
@@ -842,34 +809,6 @@ model ForecastSpend {
 }
 
 /**
- * The Resource model definition.
- */
-model ProxyResource {
-  /**
-   * Resource Id.
-   */
-  @visibility(Lifecycle.Read)
-  id?: string;
-
-  /**
-   * Resource name.
-   */
-  @visibility(Lifecycle.Read)
-  name?: string;
-
-  /**
-   * Resource type.
-   */
-  @visibility(Lifecycle.Read)
-  type?: string;
-
-  /**
-   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
-   */
-  eTag?: string;
-}
-
-/**
  * A resource listing all tags.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -889,6 +828,11 @@ model TagProperties {
    */
   @OpenAPI.extension("x-ms-identifiers", #["key"])
   tags?: Tag[];
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  eTag?: string;
 
   /**
    * The link (url) to the next page of results.
@@ -939,6 +883,11 @@ model ChargeSummary extends ProxyResource {
    * Specifies the kind of charge summary.
    */
   kind: ChargeSummaryKind;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  eTag?: string;
 }
 
 /**
@@ -1063,6 +1012,19 @@ model BalanceProperties {
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #["name"])
   adjustmentDetails?: BalancePropertiesAdjustmentDetailsItem[];
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -1594,8 +1556,7 @@ model HighCasedErrorDetails {
  * Reservation transaction resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ReservationTransaction
-  extends Azure.ResourceManager.Foundations.Resource {
+model ReservationTransaction extends Resource {
   /**
    * The properties of a legacy reservation transaction.
    */
@@ -1750,6 +1711,19 @@ model LegacyReservationTransactionProperties {
   #suppress "@azure-tools/typespec-azure-core/no-generic-numeric" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   overage?: decimal;
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -2157,8 +2131,7 @@ model OperationDisplay {
  * A management group aggregated cost resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model ManagementGroupAggregatedCostResult
-  extends Azure.ResourceManager.Foundations.Resource {
+model ManagementGroupAggregatedCostResult extends Resource {
   /**
    * The properties of the Management Group Aggregated Cost.
    */
@@ -2230,6 +2203,19 @@ model ManagementGroupAggregatedCostProperties {
    * List of subscription Guids excluded from the calculation of aggregated cost
    */
   excludedSubscriptions?: string[];
+
+  /**
+   * The etag for the resource.
+   */
+  @visibility(Lifecycle.Read)
+  etag?: string;
+
+  /**
+   * Resource tags.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  tags?: Record<string>;
 }
 
 /**
@@ -2509,6 +2495,11 @@ model LotSummary extends ProxyResource {
    * The lot properties.
    */
   properties?: LotProperties;
+
+  /**
+   * eTag of the resource. To handle concurrent update scenario, this field will be used to determine whether the user is updating the latest version or not.
+   */
+  eTag?: string;
 }
 
 /**
@@ -2681,6 +2672,13 @@ model CreditSummaryProperties {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   eTag?: string;
+
+  /**
+   * A list of Tag.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record"
+  tags?: Record<string>;
 }
 
 /**
