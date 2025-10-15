@@ -97,7 +97,11 @@ interface RaiBlocklistPropertiesBasicResources {
   addBulk is ArmResourceActionAsync<
     RaiBlocklistPropertiesBasicResource,
     RaiBlocklistItemsBulkAddRequest,
-    ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>
+    {
+      @body
+      @OpenAPI.extension("x-ms-identifiers", #[])
+      _?: RaiBlocklistItemPropertiesBasicResource[];
+    }
   >;
 
   /**

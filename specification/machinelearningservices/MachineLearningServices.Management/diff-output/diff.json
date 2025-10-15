@@ -10687,22 +10687,6 @@
         }
       }
     },
-    "Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>__added": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "The body type of the operation request or response.",
-          "items": {
-            "$ref": "#/definitions/RaiBlocklistItemPropertiesBasicResource"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
     "BatchDeploymentProperties__added": {
       "type": "object",
       "description": "Batch inference settings per deployment.",
@@ -10725,7 +10709,7 @@
         },
         "loggingLevel": {
           "type": "string",
-          "description": "Logging level for batch inference operation.",
+          "description": "Log verbosity for batch inferencing.\nIncreasing verbosity order for logging is : Warning, Info and Debug.\nThe default value is Info.",
           "default": "Info",
           "enum": [
             "Info",
@@ -10756,7 +10740,7 @@
         },
         "outputAction": {
           "type": "string",
-          "description": "Indicates how the output will be organized.",
+          "description": "Enum to determine how batch inferencing will handle output",
           "default": "AppendRow",
           "enum": [
             "SummaryOnly",
@@ -10813,7 +10797,8 @@
       "properties": {
         "defaults": {
           "$ref": "#/definitions/BatchEndpointDefaults",
-          "description": "Default values for Batch Endpoint"
+          "description": "Default values for Batch Endpoint",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -11009,10 +10994,8 @@
       "description": "Definition of a component version: defines resources that span component types.",
       "properties": {
         "componentSpec": {
-          "type": "object",
           "description": "Defines Component definition details.\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command\" />",
           "x-nullable": true,
-          "additionalProperties": {},
           "x-ms-mutability": [
             "create",
             "read"
@@ -12693,12 +12676,6 @@
         "__new": "AutoML vertical class.\nBase class for AutoML verticals - TableVertical/ImageVertical/NLPVertical"
       },
       "properties": {
-        "logVerbosity": {
-          "description": {
-            "__old": "Enum for setting log verbosity.",
-            "__new": "Log verbosity for the job."
-          }
-        },
         "targetColumnName": {
           "description": {
             "__old": "Target column name: This is prediction values column.\r\nAlso known as label column name in context of classification tasks.",
@@ -12971,7 +12948,7 @@
         },
         "identity__added": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind__added": {
           "type": "string",
@@ -12979,7 +12956,7 @@
         },
         "sku__added": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "allOf": [
@@ -13050,7 +13027,7 @@
         },
         "identity__added": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind__added": {
           "type": "string",
@@ -13058,7 +13035,7 @@
         },
         "sku__added": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "allOf": [
@@ -13095,13 +13072,6 @@
               "__new": "#/definitions/BatchEndpoint"
             }
           }
-        }
-      }
-    },
-    "BatchRetrySettings": {
-      "properties": {
-        "timeout": {
-          "default__deleted": "PT30S"
         }
       }
     },
@@ -13284,12 +13254,6 @@
           "type": "string",
           "description": "The name of the sample weight column. Automated ML supports a weighted column as an input, causing rows in the data to be weighted up or down.",
           "x-nullable": true
-        },
-        "primaryMetric": {
-          "description": {
-            "__old": "Primary metrics for classification tasks.",
-            "__new": "Primary metric for the task."
-          }
         }
       },
       "allOf": [
@@ -13659,19 +13623,9 @@
     "ComputeInstanceProperties": {
       "properties": {
         "computeInstanceAuthorizationType": {
-          "x-nullable__deleted": true
-        },
-        "enableOSPatching": {
-          "x-nullable__deleted": true
-        },
-        "enableRootAccess": {
-          "x-nullable__deleted": true
-        },
-        "enableSSO": {
-          "x-nullable__deleted": true
-        },
-        "releaseQuotaOnStop": {
-          "x-nullable__deleted": true
+          "x-ms-enum": {
+            "name__deleted": "ComputeInstanceAuthorizationType"
+          }
         }
       }
     },
@@ -13703,7 +13657,7 @@
           "x-nullable__deleted": true,
           "description": {
             "__old": "The sku of the workspace.",
-            "__new": "The SKU (Stock Keeping Unit) assigned to this resource."
+            "__new": "The SKU of the resource."
           }
         }
       },
@@ -13818,13 +13772,6 @@
         }
       }
     },
-    "CustomKeys": {
-      "properties": {
-        "keys": {
-          "description__added": "Dictionary of <string>"
-        }
-      }
-    },
     "CustomKeysWorkspaceConnectionProperties": {
       "description": {
         "__old": "Category:= CustomKeys\r\nAuthType:= CustomKeys (as type discriminator)\r\nCredentials:= {CustomKeys} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.CustomKeys\r\nTarget:= {any value}\r\nUse Metadata property bag for ApiVersion and other metadata fields",
@@ -13840,7 +13787,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -13890,7 +13837,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -14133,8 +14080,7 @@
       "type__added": "object",
       "properties__added": {
         "properties": {
-          "$ref": "#/definitions/DatabricksProperties",
-          "description": "Properties of Databricks"
+          "$ref": "#/definitions/DatabricksProperties"
         }
       },
       "allOf": [
@@ -16639,7 +16585,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -16689,7 +16635,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -16740,7 +16686,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -16790,7 +16736,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -18827,7 +18773,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -18877,7 +18823,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -18935,7 +18881,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -18985,7 +18931,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -19036,7 +18982,7 @@
       "properties__added": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -19086,7 +19032,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",

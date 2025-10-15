@@ -16700,7 +16700,7 @@
       "properties": {
         "logVerbosity": {
           "type": "string",
-          "description": "Log verbosity for the job.",
+          "description": "Enum for setting log verbosity.",
           "default": "Info",
           "enum": [
             "NotSet",
@@ -16863,22 +16863,6 @@
           "description": "The number of available quota"
         }
       }
-    },
-    "Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>": {
-      "type": "object",
-      "description": "Azure operation completed successfully.",
-      "properties": {
-        "body": {
-          "type": "array",
-          "description": "The body type of the operation request or response.",
-          "items": {
-            "$ref": "#/definitions/RaiBlocklistItemPropertiesBasicResource"
-          }
-        }
-      },
-      "required": [
-        "body"
-      ]
     },
     "AzureBlobDatastore": {
       "type": "object",
@@ -17257,7 +17241,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -17265,7 +17249,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -17321,7 +17305,7 @@
         },
         "loggingLevel": {
           "type": "string",
-          "description": "Logging level for batch inference operation.",
+          "description": "Log verbosity for batch inferencing.\nIncreasing verbosity order for logging is : Warning, Info and Debug.\nThe default value is Info.",
           "default": "Info",
           "enum": [
             "Info",
@@ -17352,7 +17336,7 @@
         },
         "outputAction": {
           "type": "string",
-          "description": "Indicates how the output will be organized.",
+          "description": "Enum to determine how batch inferencing will handle output",
           "default": "AppendRow",
           "enum": [
             "SummaryOnly",
@@ -17434,7 +17418,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -17442,7 +17426,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -17471,7 +17455,8 @@
       "properties": {
         "defaults": {
           "$ref": "#/definitions/BatchEndpointDefaults",
-          "description": "Default values for Batch Endpoint"
+          "description": "Default values for Batch Endpoint",
+          "x-nullable": true
         },
         "provisioningState": {
           "type": "string",
@@ -17571,7 +17556,8 @@
         "timeout": {
           "type": "string",
           "format": "duration",
-          "description": "Invocation timeout for a mini-batch, in ISO 8601 format."
+          "description": "Invocation timeout for a mini-batch, in ISO 8601 format.",
+          "default": "PT30S"
         }
       }
     },
@@ -17971,7 +17957,7 @@
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric for the task.",
+          "description": "Primary metrics for classification tasks.",
           "default": "AUCWeighted",
           "enum": [
             "AUCWeighted",
@@ -18550,10 +18536,8 @@
       "description": "Definition of a component version: defines resources that span component types.",
       "properties": {
         "componentSpec": {
-          "type": "object",
           "description": "Defines Component definition details.\n<see href=\"https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command\" />",
           "x-nullable": true,
-          "additionalProperties": {},
           "x-ms-mutability": [
             "create",
             "read"
@@ -19174,33 +19158,37 @@
             "personal"
           ],
           "x-ms-enum": {
-            "name": "ComputeInstanceAuthorizationType",
             "modelAsString": true
-          }
+          },
+          "x-nullable": true
         },
         "enableOSPatching": {
           "type": "boolean",
           "title": "Enable Auto OS Patching.",
           "description": "Enable Auto OS Patching. Possible values are: true, false.",
-          "default": false
+          "default": false,
+          "x-nullable": true
         },
         "enableRootAccess": {
           "type": "boolean",
           "title": "Enable root access.",
           "description": "Enable root access. Possible values are: true, false.",
-          "default": true
+          "default": true,
+          "x-nullable": true
         },
         "enableSSO": {
           "type": "boolean",
           "title": "Enable SSO (single sign on).",
           "description": "Enable SSO (single sign on). Possible values are: true, false.",
-          "default": true
+          "default": true,
+          "x-nullable": true
         },
         "releaseQuotaOnStop": {
           "type": "boolean",
           "title": "Release quota if compute instance stopped.",
           "description": "Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.",
-          "default": false
+          "default": false,
+          "x-nullable": true
         },
         "personalComputeInstanceSettings": {
           "$ref": "#/definitions/PersonalComputeInstanceSettings",
@@ -19387,7 +19375,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "The SKU of the resource."
         }
       },
       "allOf": [
@@ -19743,7 +19731,6 @@
       "properties": {
         "keys": {
           "type": "object",
-          "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
           }
@@ -19818,7 +19805,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -19864,7 +19851,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -20638,8 +20625,7 @@
       "description": "A DataFactory compute.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/DatabricksProperties",
-          "description": "Properties of Databricks"
+          "$ref": "#/definitions/DatabricksProperties"
         }
       },
       "allOf": [
@@ -25969,7 +25955,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -26015,7 +26001,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -26073,7 +26059,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -26119,7 +26105,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -32828,7 +32814,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -32874,7 +32860,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -33016,7 +33002,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -33062,7 +33048,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",
@@ -33106,7 +33092,7 @@
       "properties": {
         "mode": {
           "type": "string",
-          "description": "Input Asset Delivery Mode.",
+          "description": "Enum to determine the input data delivery mode.",
           "default": "ReadOnlyMount",
           "enum": [
             "ReadOnlyMount",
@@ -33152,7 +33138,7 @@
         },
         "mode": {
           "type": "string",
-          "description": "Output Asset Delivery Mode.",
+          "description": "Output data delivery mode enums.",
           "default": "ReadWriteMount",
           "enum": [
             "ReadWriteMount",

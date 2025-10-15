@@ -235,3 +235,4 @@ interface ComputeResources {
 @@doc(ComputeResources.resize::parameters.body,
   "The object for updating VM size setting of specified Compute Instance."
 );
+@@doc(ComputeResource.sku, "The SKU of the resource.");

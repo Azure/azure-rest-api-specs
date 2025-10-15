@@ -133,3 +133,9 @@ interface BatchEndpoints {
 @@doc(BatchEndpoints.update::parameters.properties,
   "Mutable batch inference endpoint definition object."
 );
+@@doc(BatchEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(BatchEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
+);

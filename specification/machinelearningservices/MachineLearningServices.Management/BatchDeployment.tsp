@@ -132,3 +132,5 @@ interface BatchDeployments {
 @@doc(BatchDeployments.update::parameters.properties,
   "Batch inference deployment definition object."
 );
+@@doc(BatchDeployment.identity, "Managed service identity (system assigned and/or user assigned identities)");
+@@doc(BatchDeployment.sku, "Sku details required for ARM contract for Autoscaling.");

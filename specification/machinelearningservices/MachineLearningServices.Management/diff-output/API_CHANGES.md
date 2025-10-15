@@ -10,7 +10,6 @@
 | `definitions.CapabilityHost.description__added` | added | `Azure Resource Manager resource envelope.` |
 | `definitions.CommandJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.CommandJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
-| `definitions.CustomKeys.properties.keys.description__added` | added | `Dictionary of <string>` |
 | `definitions.CustomMonitoringSignal.properties.inputAssets.additionalProperties.description__deleted` | deleted | `Monitoring input data base definition.` |
 | `definitions.CustomMonitoringSignal.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.DistillationJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
@@ -375,6 +374,7 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 
 | Path | Change Type | Value |
 |------|------------|-------|
+| `definitions.ComputeInstanceProperties.properties.computeInstanceAuthorizationType['x-ms-enum'].name__deleted` | deleted | `ComputeInstanceAuthorizationType` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota'].get.parameters[1].name__added` | added | `$skip` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/quotaAndUsage'].get.parameters[1].name__added` | added | `$skip` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/registries/{registryName}/codes'].get.parameters[0].name__added` | added | `registryName` |
@@ -1039,12 +1039,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 |------|------------|-------|
 | `definitions.AKSSchemaProperties__added` | added | `{"type":"object","description":"AKS properties","properties":{"clusterFqdn":{"type":"string","descri...` |
 
-### Changes for `Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions['Azure.ResourceManager.ArmResponse<RaiBlocklistItemPropertiesBasicResource[]>__added']` | added | `{"type":"object","description":"Azure operation completed successfully.","properties":{"body":{"type...` |
-
 ### Changes for `BatchDeploymentProperties`
 
 | Path | Change Type | Value |
@@ -1284,9 +1278,9 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.ComputeInstance.properties__added` | added | `{"properties":{"$ref":"#/definitions/ComputeInstanceProperties","description":"Properties of Compute...` |
 | `definitions.ComputeResource.properties.properties__added` | added | `{"$ref":"#/definitions/ComputeResourceSchema","description":"The resource-specific properties for th...` |
 | `definitions.ContentSafetyEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel","description":"Model used for the endpoint ...` |
-| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.CustomModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Enum to determine the input data delivery mode.","default":"...` |
 | `definitions.CustomModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
-| `definitions.Databricks.properties__added` | added | `{"properties":{"$ref":"#/definitions/DatabricksProperties","description":"Properties of Databricks"}...` |
+| `definitions.Databricks.properties__added` | added | `{"properties":{"$ref":"#/definitions/DatabricksProperties"}}` |
 | `definitions.DatabricksComputeSecrets.properties__added` | added | `{"databricksAccessToken":{"type":"string","description":"access token for databricks account."}}` |
 | `definitions.DataContainer.properties.properties__added` | added | `{"$ref":"#/definitions/DataContainerProperties","description":"[Required] Additional attributes of t...` |
 | `definitions.DataLakeAnalytics.properties__added` | added | `{"properties":{"$ref":"#/definitions/DataLakeAnalyticsSchemaProperties"}}` |
@@ -1308,9 +1302,9 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.JobBase.properties.properties__added` | added | `{"$ref":"#/definitions/JobBaseProperties","description":"[Required] Additional attributes of the ent...` |
 | `definitions.Kubernetes.properties__added` | added | `{"properties":{"$ref":"#/definitions/KubernetesProperties","description":"Properties of Kubernetes"}...` |
 | `definitions.MarketplaceSubscription.properties.properties__added` | added | `{"$ref":"#/definitions/MarketplaceSubscriptionProperties","description":"[Required] Additional attri...` |
-| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.MLFlowModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Enum to determine the input data delivery mode.","default":"...` |
 | `definitions.MLFlowModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
-| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.MLTableJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Enum to determine the input data delivery mode.","default":"...` |
 | `definitions.MLTableJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
 | `definitions.ModelContainer.properties.properties__added` | added | `{"$ref":"#/definitions/ModelContainerProperties","description":"[Required] Additional attributes of ...` |
 | `definitions.ModelVersion.properties.properties__added` | added | `{"$ref":"#/definitions/ModelVersionProperties","description":"[Required] Additional attributes of th...` |
@@ -1322,11 +1316,11 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.ServerlessEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/ServerlessEndpointProperties","description":"[Required] Additional attributes...` |
 | `definitions.SpeechEndpointDeploymentResourceProperties.properties__added` | added | `{"model":{"$ref":"#/definitions/EndpointDeploymentModel","description":"Model used for the endpoint ...` |
 | `definitions.SynapseSpark.properties.properties.properties__deleted` | deleted | `{"autoScaleProperties":{"$ref":"#/definitions/AutoScaleProperties","description":"Auto scale propert...` |
-| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.TritonModelJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Enum to determine the input data delivery mode.","default":"...` |
 | `definitions.TritonModelJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
-| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.UriFileJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Enum to determine the input data delivery mode.","default":"...` |
 | `definitions.UriFileJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
-| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Input Asset Delivery Mode.","default":"ReadOnlyMount","enum"...` |
+| `definitions.UriFolderJobInput.properties__added` | added | `{"mode":{"type":"string","description":"Enum to determine the input data delivery mode.","default":"...` |
 | `definitions.UriFolderJobOutput.properties__added` | added | `{"assetName":{"type":"string","description":"Output Asset Name.","x-nullable":true},"mode":{"type":"...` |
 | `definitions.VirtualMachine.properties__added` | added | `{"properties":{"$ref":"#/definitions/VirtualMachineSchemaProperties"}}` |
 | `definitions.VirtualMachineSecrets.properties__added` | added | `{"administratorAccount":{"$ref":"#/definitions/VirtualMachineSshCredentials","description":"Admin cr...` |
@@ -1413,7 +1407,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.AutoMLJob.properties.resources.default__deleted` | deleted | `{}` |
-| `definitions.BatchRetrySettings.properties.timeout.default__deleted` | deleted | `PT30S` |
 | `definitions.CommandJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.DistillationJob.properties.resources.default__deleted` | deleted | `{}` |
 | `definitions.FineTuningJob.properties.resources.default__deleted` | deleted | `{}` |
@@ -1850,24 +1843,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.PipelineJob.properties.settings.additionalProperties__added` | added | `{}` |
 | `definitions.SweepJob.properties.searchSpace.additionalProperties__added` | added | `{}` |
 
-### Changes for `x-nullable`
-
-| Path | Change Type | Value |
-|------|------------|-------|
-| `definitions.ComputeInstanceProperties.properties.computeInstanceAuthorizationType['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.enableOSPatching['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.enableRootAccess['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.enableSSO['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeInstanceProperties.properties.releaseQuotaOnStop['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Forecasting.properties.forecastingSettings['x-nullable__deleted']` | deleted | `true` |
-| `definitions.HDInsightProperties.properties.administratorAccount['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ManagedResourceGroupAssignedIdentities.properties.principalId['x-nullable__deleted']` | deleted | `false` |
-| `definitions.PartialMinimalTrackedResource.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.PartialMinimalTrackedResource.properties.tags['x-nullable__added']` | added | `true` |
-| `definitions.RegistryPrivateEndpointConnection.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-nullable__added']` | added | `true` |
-
 ### Changes for `location`
 
 | Path | Change Type | Value |
@@ -1879,6 +1854,19 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ComputeResource.properties.tags__deleted` | deleted | `{"type":"object","description":"Contains resource tags defined as key/value pairs.","x-nullable":tru...` |
+
+### Changes for `x-nullable`
+
+| Path | Change Type | Value |
+|------|------------|-------|
+| `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
+| `definitions.Forecasting.properties.forecastingSettings['x-nullable__deleted']` | deleted | `true` |
+| `definitions.HDInsightProperties.properties.administratorAccount['x-nullable__deleted']` | deleted | `true` |
+| `definitions.ManagedResourceGroupAssignedIdentities.properties.principalId['x-nullable__deleted']` | deleted | `false` |
+| `definitions.PartialMinimalTrackedResource.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
+| `definitions.PartialMinimalTrackedResource.properties.tags['x-nullable__added']` | added | `true` |
+| `definitions.RegistryPrivateEndpointConnection.properties.properties['x-nullable__deleted']` | deleted | `true` |
+| `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-nullable__added']` | added | `true` |
 
 ### Changes for `dataType`
 
@@ -2469,7 +2457,6 @@ This is optional value to provide, if not provided, AutoML will default this to 
 | `definitions.AutoMLVertical.description` | `AutoML vertical class.
 Base class for AutoML verticals - TableVertical/ImageVertical/NLPVertical` | `AutoML vertical class.
 Base class for AutoML verticals - TableVertical/ImageVertical/NLPVertical` |
-| `definitions.AutoMLVertical.properties.logVerbosity.description` | `Enum for setting log verbosity.` | `Log verbosity for the job.` |
 | `definitions.AutoMLVertical.properties.targetColumnName.description` | `Target column name: This is prediction values column.
 Also known as label column name in context of classification tasks.` | `Target column name: This is prediction values column.
 Also known as label column name in context of classification tasks.` |
@@ -2496,7 +2483,6 @@ Example: https://blob.windows.core.net/Container/Path` |
 <seealso href="https://docs.docker.com/engine/reference/builder/" />` | `Path to the Dockerfile in the build context.
 <seealso href="https://docs.docker.com/engine/reference/builder/" />` |
 | `definitions.CapabilityHost.allOf[0].$ref` | `#/definitions/ResourceBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
-| `definitions.Classification.properties.primaryMetric.description` | `Primary metrics for classification tasks.` | `Primary metric for the task.` |
 | `definitions.CodeContainer.allOf[0].$ref` | `#/definitions/AssetContainer` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` |
 | `definitions.CodeContainer.description` | `Container for code asset versions.` | `Azure Resource Manager resource envelope.` |
 | `definitions.CodeContainerResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/CodeContainerResource` | `#/definitions/CodeContainer` |
@@ -2516,7 +2502,7 @@ Input expected is dictionary of key,value pairs in JSON format.` |
 | `definitions.ComponentVersionResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/ComponentVersionResource` | `#/definitions/ComponentVersion` |
 | `definitions.ComputeResource.allOf[0].$ref` | `../../../../../common-types/resource-management/v3/types.json#/definitions/ProxyResource` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
 | `definitions.ComputeResource.properties.identity.description` | `The identity of the resource.` | `The managed service identities assigned to this resource.` |
-| `definitions.ComputeResource.properties.sku.description` | `The sku of the workspace.` | `The SKU (Stock Keeping Unit) assigned to this resource.` |
+| `definitions.ComputeResource.properties.sku.description` | `The sku of the workspace.` | `The SKU of the resource.` |
 | `definitions.ContainerResourceSettings.properties.cpu.description` | `Number of vCPUs request/limit for container. More info:
 https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` | `Number of vCPUs request/limit for container. More info:
 https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/` |

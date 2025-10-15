@@ -4849,7 +4849,7 @@ model ComponentVersionProperties extends AssetBase {
    * <see href="https://docs.microsoft.com/en-us/azure/machine-learning/reference-yaml-component-command" />
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  componentSpec?: Record<unknown> | null;
+  componentSpec?: unknown | null;
 
   /**
    * Provisioning state for the component version.
@@ -5398,7 +5398,7 @@ model BatchEndpointProperties extends EndpointPropertiesBase {
   /**
    * Default values for Batch Endpoint
    */
-  defaults?: BatchEndpointDefaults;
+  defaults?: BatchEndpointDefaults | null;
 
   /**
    * Provisioning state for the endpoint.
@@ -5545,7 +5545,9 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   errorThreshold?: int32 = -1;
 
   /**
-   * Logging level for batch inference operation.
+   * Log verbosity for batch inferencing.
+   * Increasing verbosity order for logging is : Warning, Info and Debug.
+   * The default value is Info.
    */
   loggingLevel?: BatchLoggingLevel = BatchLoggingLevel.Info;
 
@@ -5567,7 +5569,7 @@ model BatchDeploymentProperties extends EndpointDeploymentPropertiesBase {
   `model`?: AssetReferenceBase | null;
 
   /**
-   * Indicates how the output will be organized.
+   * Enum to determine how batch inferencing will handle output
    */
   outputAction?: BatchOutputAction = BatchOutputAction.AppendRow;
 
@@ -5655,7 +5657,7 @@ model BatchRetrySettings {
   /**
    * Invocation timeout for a mini-batch, in ISO 8601 format.
    */
-  timeout?: duration;
+  timeout?: duration = duration.fromISO("PT30S");
 }
 
 /**
@@ -5813,7 +5815,7 @@ model DatastoreProperties extends ResourceBase {
   credentials: DatastoreCredentials;
 
   /**
-   * [Required] Storage type backing the datastore.
+   * Enum to determine the datastore contents type.
    */
   datastoreType: DatastoreType;
 
@@ -9908,31 +9910,31 @@ model ComputeInstanceProperties {
    * The Compute Instance Authorization type. Available values are personal (default).
    */
   @summary("Compute Instance Authorization type.")
-  computeInstanceAuthorizationType?: ComputeInstanceAuthorizationType = ComputeInstanceAuthorizationType.personal;
+  computeInstanceAuthorizationType?: ComputeInstanceAuthorizationType | null = ComputeInstanceAuthorizationType.personal;
 
   /**
    * Enable Auto OS Patching. Possible values are: true, false.
    */
   @summary("Enable Auto OS Patching.")
-  enableOSPatching?: boolean = false;
+  enableOSPatching?: boolean | null = false;
 
   /**
    * Enable root access. Possible values are: true, false.
    */
   @summary("Enable root access.")
-  enableRootAccess?: boolean = true;
+  enableRootAccess?: boolean | null = true;
 
   /**
    * Enable SSO (single sign on). Possible values are: true, false.
    */
   @summary("Enable SSO (single sign on).")
-  enableSSO?: boolean = true;
+  enableSSO?: boolean | null = true;
 
   /**
    * Release quota if compute instance stopped. Possible values are: true - release quota if compute instance stopped. false - don't release quota when compute instance stopped.
    */
   @summary("Release quota if compute instance stopped.")
-  releaseQuotaOnStop?: boolean = false;
+  releaseQuotaOnStop?: boolean | null = false;
 
   /**
    * Settings for a personal compute instance.
@@ -10666,9 +10668,6 @@ model Databricks extends Compute {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model DatabricksSchema {
-  /**
-   * Properties of Databricks
-   */
   properties?: DatabricksProperties;
 }
 
@@ -10966,7 +10965,7 @@ model AnonymousAccessCredential extends DataReferenceCredential {
  */
 model AssetJobInput {
   /**
-   * Input Asset Delivery Mode.
+   * Enum to determine the input data delivery mode.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: InputDeliveryMode = InputDeliveryMode.ReadOnlyMount;
@@ -10989,7 +10988,7 @@ model AssetJobOutput {
   assetName?: string | null;
 
   /**
-   * Output Asset Delivery Mode.
+   * Output data delivery mode enums.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   mode?: OutputDeliveryMode = OutputDeliveryMode.ReadWriteMount;
@@ -11129,7 +11128,7 @@ model JobResourceConfiguration extends ResourceConfiguration {
 @discriminator("taskType")
 model AutoMLVertical {
   /**
-   * Log verbosity for the job.
+   * Enum for setting log verbosity.
    */
   logVerbosity?: LogVerbosity = LogVerbosity.Info;
 
@@ -11800,7 +11799,7 @@ model Classification extends AutoMLVertical {
   positiveLabel?: string | null;
 
   /**
-   * Primary metric for the task.
+   * Primary metrics for classification tasks.
    */
   primaryMetric?: ClassificationPrimaryMetrics = ClassificationPrimaryMetrics.AUCWeighted;
 
@@ -15358,9 +15357,6 @@ model ContentSafetyEndpointResourceProperties
  * Custom Keys credential object
  */
 model CustomKeys {
-  /**
-   * Dictionary of <string>
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   keys?: Record<string>;
 }
