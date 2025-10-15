@@ -1619,6 +1619,13 @@
             "description": "Specify <code>true</code> if you want to filter to only regions that support Linux Consumption Workers.",
             "required": false,
             "type": "boolean"
+          },
+          {
+            "name": "customModeWorkersEnabled",
+            "in": "query",
+            "description": "Specify <code>true</code> if you want to filter to only regions that support App Service Plans with <code>IsCustomMode</code> set to <code>true</code>.",
+            "required": false,
+            "type": "boolean"
           }
         ],
         "responses": {
@@ -6720,6 +6727,51 @@
         }
       }
     },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/getrdppassword": {
+      "post": {
+        "operationId": "AppServicePlans_GetServerFarmRdpPassword",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get the RDP password for an IsCustomMode ServerFarm.",
+        "description": "Description for Get the RDP password for an IsCustomMode ServerFarm.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerFarmRdpDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/hybridConnectionNamespaces/{namespaceName}/relays/{relayName}": {
       "get": {
         "operationId": "AppServicePlans_GetHybridConnection",
@@ -7047,6 +7099,51 @@
         },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/listinstances": {
+      "post": {
+        "operationId": "AppServicePlans_GetServerFarmInstanceDetails",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Get the instance details for an app service plan.",
+        "description": "Description for Get the instance details for an app service plan.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/ServerFarmInstanceDetails"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
         }
       }
     },
@@ -7861,6 +7958,59 @@
         "responses": {
           "204": {
             "description": "There is no content to send for this request, but the headers may be useful."
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/DefaultErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/serverfarms/{name}/workers/{workerName}/recycleinstance": {
+      "post": {
+        "operationId": "AppServicePlans_RecycleManagedInstanceWorker",
+        "tags": [
+          "AppServicePlans"
+        ],
+        "summary": "Recycles a managed instance worker machine.",
+        "description": "Description for Recycles a managed instance worker machine.",
+        "produces": [
+          "application/json"
+        ],
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "name",
+            "in": "path",
+            "description": "Name of the App Service plan.",
+            "required": true,
+            "type": "string"
+          },
+          {
+            "name": "workerName",
+            "in": "path",
+            "description": "Name of worker machine.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[a-zA-Z0-9]+$"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/Operation"
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -41993,6 +42143,10 @@
         "kind": {
           "type": "string",
           "description": "Kind of resource. If the resource is an app, you can refer to https://github.com/Azure/app-service-linux-docs/blob/master/Things_You_Should_Know/kind_property.md#app-service-resource-kind-reference for details supported values for kind."
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity."
         }
       },
       "allOf": [
@@ -42033,6 +42187,10 @@
           "$ref": "#/definitions/AppServicePlanPatchResourceProperties",
           "description": "AppServicePlanPatchResource resource specific properties",
           "x-ms-client-flatten": true
+        },
+        "identity": {
+          "$ref": "#/definitions/ManagedServiceIdentity",
+          "description": "Managed service identity."
         }
       },
       "allOf": [
@@ -42221,8 +42379,7 @@
         },
         "perSiteScaling": {
           "type": "boolean",
-          "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.",
-          "default": false
+          "description": "If <code>true</code>, apps assigned to this App Service plan can be scaled independently.\nIf <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan."
         },
         "elasticScaleEnabled": {
           "type": "boolean",
@@ -42261,7 +42418,6 @@
         "reserved": {
           "type": "boolean",
           "description": "If Linux app service plan <code>true</code>, <code>false</code> otherwise.",
-          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -42270,7 +42426,6 @@
         "isXenon": {
           "type": "boolean",
           "description": "Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
-          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -42279,7 +42434,6 @@
         "hyperV": {
           "type": "boolean",
           "description": "If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.",
-          "default": false,
           "x-ms-mutability": [
             "read",
             "create"
@@ -42306,12 +42460,58 @@
         },
         "zoneRedundant": {
           "type": "boolean",
-          "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing.",
-          "default": false
+          "description": "If <code>true</code>, this App Service Plan will perform availability zone balancing.\nIf <code>false</code>, this App Service Plan will not perform availability zone balancing."
         },
         "asyncScalingEnabled": {
           "type": "boolean",
           "description": "If <code>true</code>, this App Service Plan will attempt to scale asynchronously if there are insufficient workers to scale synchronously.\nIf <code>false</code>, this App Service Plan will only attempt sync scaling."
+        },
+        "planDefaultIdentity": {
+          "$ref": "#/definitions/DefaultIdentity",
+          "description": "Identity to use by platform for various features and integrations using managed identity."
+        },
+        "isCustomMode": {
+          "type": "boolean",
+          "description": "Whether this server farm is in custom mode."
+        },
+        "registryAdapters": {
+          "type": "array",
+          "description": "Registry adapters associated with this App Service plan.",
+          "items": {
+            "$ref": "#/definitions/RegistryAdapter"
+          },
+          "xml": {
+            "wrapped": true
+          },
+          "x-ms-identifiers": []
+        },
+        "installScripts": {
+          "type": "array",
+          "description": "Install scripts associated with this App Service plan.",
+          "items": {
+            "$ref": "#/definitions/InstallScript"
+          },
+          "xml": {
+            "wrapped": true
+          }
+        },
+        "network": {
+          "$ref": "#/definitions/ServerFarmNetworkSettings",
+          "description": "All network settings for the server farm."
+        },
+        "storageMounts": {
+          "type": "array",
+          "description": "Storage mounts associated with this App Service plan.",
+          "items": {
+            "$ref": "#/definitions/StorageMount"
+          },
+          "xml": {
+            "wrapped": true
+          }
+        },
+        "rdpEnabled": {
+          "type": "boolean",
+          "description": "If <code>true</code>, RDP access is enabled for this App Service plan. Only applicable for IsCustomMode ASPs.\nIf <code>false</code>, RDP access is disabled."
         }
       }
     },
@@ -45774,6 +45974,17 @@
         }
       }
     },
+    "DefaultIdentity": {
+      "type": "object",
+      "properties": {
+        "identityType": {
+          "$ref": "#/definitions/ManagedServiceIdentityType"
+        },
+        "userAssignedIdentityResourceId": {
+          "type": "string"
+        }
+      }
+    },
     "DeletedAppRestoreRequest": {
       "type": "object",
       "description": "Details about restoring a deleted app.",
@@ -48763,6 +48974,56 @@
         "modelAsString": false
       }
     },
+    "InstallScript": {
+      "type": "object",
+      "description": "Server farm install script configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the install script."
+        },
+        "source": {
+          "$ref": "#/definitions/InstallScriptSource",
+          "description": "Source of the install script."
+        }
+      }
+    },
+    "InstallScriptSource": {
+      "type": "object",
+      "description": "Object to hold install script reference.",
+      "properties": {
+        "sourceUri": {
+          "type": "string",
+          "description": "Install script source URI where the install script file will be fetched from."
+        },
+        "type": {
+          "$ref": "#/definitions/InstallScriptType",
+          "description": "Type of the install script."
+        }
+      }
+    },
+    "InstallScriptType": {
+      "type": "string",
+      "description": "Type of the install script.",
+      "enum": [
+        "RemoteAzureBlob",
+        "PlatformStorage"
+      ],
+      "x-ms-enum": {
+        "name": "InstallScriptType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "RemoteAzureBlob",
+            "value": "RemoteAzureBlob"
+          },
+          {
+            "name": "PlatformStorage",
+            "value": "PlatformStorage"
+          }
+        ]
+      }
+    },
     "IpAddress": {
       "type": "object",
       "description": "The ip address.",
@@ -48978,6 +49239,20 @@
         "value": {
           "description": "Any object",
           "readOnly": true
+        }
+      }
+    },
+    "KeyVaultReferenceWithStatus": {
+      "type": "object",
+      "description": "Object to hold key vault reference and the resolution status",
+      "properties": {
+        "secretUri": {
+          "type": "string",
+          "description": "Key vault secret URI."
+        },
+        "referenceStatus": {
+          "type": "string",
+          "description": "Reference status of the key vault secret."
         }
       }
     },
@@ -52114,6 +52389,66 @@
         }
       }
     },
+    "RegistryAdapter": {
+      "type": "object",
+      "description": "Server farm registry adapter configuration.",
+      "properties": {
+        "registryKey": {
+          "type": "string",
+          "description": "Registry key for the adapter."
+        },
+        "type": {
+          "$ref": "#/definitions/RegistryAdapterType",
+          "description": "Type of the registry adapter."
+        },
+        "keyVaultSecretReference": {
+          "$ref": "#/definitions/KeyVaultReferenceWithStatus",
+          "description": "Key vault reference to the value that will be placed in the registry location"
+        }
+      }
+    },
+    "RegistryAdapterType": {
+      "type": "string",
+      "description": "Type of the registry adapter.",
+      "enum": [
+        "Binary",
+        "String",
+        "Expand_String",
+        "Multi_String",
+        "DWord",
+        "QWord"
+      ],
+      "x-ms-enum": {
+        "name": "RegistryAdapterType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Binary",
+            "value": "Binary"
+          },
+          {
+            "name": "String",
+            "value": "String"
+          },
+          {
+            "name": "Expand_String",
+            "value": "Expand_String"
+          },
+          {
+            "name": "Multi_String",
+            "value": "Multi_String"
+          },
+          {
+            "name": "DWord",
+            "value": "DWord"
+          },
+          {
+            "name": "QWord",
+            "value": "QWord"
+          }
+        ]
+      }
+    },
     "RelayServiceConnectionEntity": {
       "type": "object",
       "description": "Hybrid Connection for an App Service app.",
@@ -53138,6 +53473,93 @@
             "value": "VSTSRM"
           }
         ]
+      }
+    },
+    "ServerFarmInstance": {
+      "type": "object",
+      "description": "Represents details of a single instance in a server farm.",
+      "properties": {
+        "instanceName": {
+          "type": "string",
+          "description": "The instance name.",
+          "minLength": 1,
+          "maxLength": 64,
+          "pattern": "^[a-zA-Z0-9]+$"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The instance IP address."
+        },
+        "status": {
+          "type": "string",
+          "description": "The instance status."
+        }
+      }
+    },
+    "ServerFarmInstanceDetails": {
+      "type": "object",
+      "description": "Represents instance details for an app service plan.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ServerFarmInstanceDetailsProperties",
+          "description": "ServerFarmInstanceDetails resource specific properties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "#/definitions/ProxyOnlyResource"
+        }
+      ]
+    },
+    "ServerFarmInstanceDetailsProperties": {
+      "type": "object",
+      "description": "ServerFarmInstanceDetails resource specific properties",
+      "properties": {
+        "serverFarmName": {
+          "type": "string",
+          "description": "The server farm name."
+        },
+        "instances": {
+          "type": "array",
+          "description": "The list of server farm instances.",
+          "items": {
+            "$ref": "#/definitions/ServerFarmInstance"
+          },
+          "xml": {
+            "wrapped": true
+          },
+          "x-ms-identifiers": []
+        },
+        "instanceCount": {
+          "type": "integer",
+          "format": "int32",
+          "description": "The total number of instances."
+        }
+      }
+    },
+    "ServerFarmNetworkSettings": {
+      "type": "object",
+      "description": "Network settings for an app service plan.",
+      "properties": {
+        "virtualNetworkSubnetId": {
+          "type": "string",
+          "description": "Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration. This must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}"
+        }
+      }
+    },
+    "ServerFarmRdpDetails": {
+      "type": "object",
+      "description": "Server Farm RDP connection details.",
+      "properties": {
+        "rdpPassword": {
+          "type": "string",
+          "description": "The RDP password for the server farm."
+        },
+        "rdpPasswordExpiry": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The RDP password expiry date."
+        }
       }
     },
     "ServiceSpecification": {
@@ -57225,6 +57647,59 @@
           "description": "When server starts the migration process, it will return an operation ID identifying that particular migration operation.",
           "readOnly": true
         }
+      }
+    },
+    "StorageMount": {
+      "type": "object",
+      "description": "Server farm storage mount configuration.",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the storage mount."
+        },
+        "type": {
+          "$ref": "#/definitions/StorageMountType",
+          "description": "Type of the storage mount."
+        },
+        "source": {
+          "type": "string",
+          "description": "Source of the fileshare/storage."
+        },
+        "destinationPath": {
+          "type": "string",
+          "description": "Path on worker where storage will be mounted."
+        },
+        "credentialsKeyVaultReference": {
+          "$ref": "#/definitions/KeyVaultReferenceWithStatus",
+          "description": "KV reference to the credentials to connect to the share."
+        }
+      }
+    },
+    "StorageMountType": {
+      "type": "string",
+      "description": "Type of the storage mount.",
+      "enum": [
+        "AzureFiles",
+        "LocalStorage",
+        "FileShare"
+      ],
+      "x-ms-enum": {
+        "name": "StorageMountType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "AzureFiles",
+            "value": "AzureFiles"
+          },
+          {
+            "name": "LocalStorage",
+            "value": "LocalStorage"
+          },
+          {
+            "name": "FileShare",
+            "value": "FileShare"
+          }
+        ]
       }
     },
     "StorageType": {

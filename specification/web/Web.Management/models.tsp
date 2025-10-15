@@ -4468,7 +4468,7 @@ model AppServicePlanProperties {
    * If <code>true</code>, apps assigned to this App Service plan can be scaled independently.
    * If <code>false</code>, apps assigned to this App Service plan will scale to all instances of the plan.
    */
-  perSiteScaling?: boolean = false;
+  perSiteScaling?: boolean;
 
   /**
    * ServerFarm supports ElasticScale. Apps in this plan will scale as if the ServerFarm was ElasticPremium sku
@@ -4513,19 +4513,19 @@ model AppServicePlanProperties {
    * If Linux app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  reserved?: boolean = false;
+  reserved?: boolean;
 
   /**
    * Obsolete: If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  isXenon?: boolean = false;
+  isXenon?: boolean;
 
   /**
    * If Hyper-V container app service plan <code>true</code>, <code>false</code> otherwise.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  hyperV?: boolean = false;
+  hyperV?: boolean;
 
   /**
    * Scaling worker count.
@@ -4552,13 +4552,50 @@ model AppServicePlanProperties {
    * If <code>true</code>, this App Service Plan will perform availability zone balancing.
    * If <code>false</code>, this App Service Plan will not perform availability zone balancing.
    */
-  zoneRedundant?: boolean = false;
+  zoneRedundant?: boolean;
 
   /**
    * If <code>true</code>, this App Service Plan will attempt to scale asynchronously if there are insufficient workers to scale synchronously.
    * If <code>false</code>, this App Service Plan will only attempt sync scaling.
    */
   asyncScalingEnabled?: boolean;
+
+  /**
+   * Identity to use by platform for various features and integrations using managed identity.
+   */
+  planDefaultIdentity?: DefaultIdentity;
+
+  /**
+   * Whether this server farm is in custom mode.
+   */
+  isCustomMode?: boolean;
+
+  /**
+   * Registry adapters associated with this App Service plan.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  registryAdapters?: RegistryAdapter[];
+
+  /**
+   * Install scripts associated with this App Service plan.
+   */
+  installScripts?: InstallScript[];
+
+  /**
+   * All network settings for the server farm.
+   */
+  network?: ServerFarmNetworkSettings;
+
+  /**
+   * Storage mounts associated with this App Service plan.
+   */
+  storageMounts?: StorageMount[];
+
+  /**
+   * If <code>true</code>, RDP access is enabled for this App Service plan. Only applicable for IsCustomMode ASPs.
+   * If <code>false</code>, RDP access is disabled.
+   */
+  rdpEnabled?: boolean;
 }
 
 /**
@@ -4645,6 +4682,11 @@ model AppServicePlanPatchResource extends ProxyOnlyResource {
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: AppServicePlanPatchResourceProperties;
+
+  /**
+   * Managed service identity.
+   */
+  identity?: ManagedServiceIdentity;
 }
 
 /**
@@ -15634,4 +15676,226 @@ model WorkflowTriggerHistoryFilter {
    * The status of workflow trigger history.
    */
   status?: WorkflowStatus;
+}
+
+/**
+ * Type of the registry adapter.
+ */
+union RegistryAdapterType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Binary: "Binary",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  String: "String",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Expand_String: "Expand_String",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  Multi_String: "Multi_String",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  DWord: "DWord",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  QWord: "QWord",
+}
+
+/**
+ * Type of the install script.
+ */
+union InstallScriptType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  RemoteAzureBlob: "RemoteAzureBlob",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  PlatformStorage: "PlatformStorage",
+}
+
+/**
+ * Type of the storage mount.
+ */
+union StorageMountType {
+  string,
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  AzureFiles: "AzureFiles",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  LocalStorage: "LocalStorage",
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  FileShare: "FileShare",
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+model DefaultIdentity {
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  identityType?: ManagedServiceIdentityType;
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  userAssignedIdentityResourceId?: string;
+}
+
+/**
+ * Represents instance details for an app service plan.
+ */
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+model ServerFarmInstanceDetails extends ProxyOnlyResource {
+  /**
+   * ServerFarmInstanceDetails resource specific properties
+   */
+  properties?: ServerFarmInstanceDetailsProperties;
+}
+
+/**
+ * Represents details of a single instance in a server farm.
+ */
+model ServerFarmInstance {
+  /**
+   * The instance name.
+   */
+  @maxLength(64)
+  @minLength(1)
+  @pattern("^[a-zA-Z0-9]+$")
+  instanceName?: string;
+
+  /**
+   * The instance IP address.
+   */
+  ipAddress?: string;
+
+  /**
+   * The instance status.
+   */
+  status?: string;
+}
+
+/**
+ * Server Farm RDP connection details.
+ */
+model ServerFarmRdpDetails {
+  /**
+   * The RDP password for the server farm.
+   */
+  rdpPassword?: string;
+
+  /**
+   * The RDP password expiry date.
+   */
+  // FIXME: (utcDateTime) Please double check that this is the correct type for your scenario.
+  rdpPasswordExpiry?: utcDateTime;
+}
+
+/**
+ * ServerFarmInstanceDetails resource specific properties
+ */
+model ServerFarmInstanceDetailsProperties {
+  /**
+   * The server farm name.
+   */
+  serverFarmName?: string;
+
+  /**
+   * The list of server farm instances.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #[])
+  instances?: ServerFarmInstance[];
+
+  /**
+   * The total number of instances.
+   */
+  instanceCount?: int32;
+}
+
+/**
+ * Server farm registry adapter configuration.
+ */
+model RegistryAdapter {
+  /**
+   * Registry key for the adapter.
+   */
+  registryKey?: string;
+
+  /**
+   * Type of the registry adapter.
+   */
+  type?: RegistryAdapterType;
+
+  /**
+   * Key vault reference to the value that will be placed in the registry location
+   */
+  keyVaultSecretReference?: KeyVaultReferenceWithStatus;
+}
+/**
+ * Object to hold key vault reference and the resolution status
+ */
+model KeyVaultReferenceWithStatus {
+  /**
+   * Key vault secret URI.
+   */
+  secretUri?: string;
+
+  /**
+   * Reference status of the key vault secret.
+   */
+  referenceStatus?: string;
+}
+/**
+ * Server farm install script configuration.
+ */
+model InstallScript {
+  /**
+   * Name of the install script.
+   */
+  name?: string;
+
+  /**
+   * Source of the install script.
+   */
+  source?: InstallScriptSource;
+}
+/**
+ * Object to hold install script reference.
+ */
+model InstallScriptSource {
+  /**
+   * Install script source URI where the install script file will be fetched from.
+   */
+  sourceUri?: string;
+
+  /**
+   * Type of the install script.
+   */
+  type?: InstallScriptType;
+}
+/**
+ * Network settings for an app service plan.
+ */
+model ServerFarmNetworkSettings {
+  /**
+   * Azure Resource Manager ID of the Virtual network and subnet to be joined by Regional VNET Integration. This must be of the form /subscriptions/{subscriptionName}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/virtualNetworks/{vnetName}/subnets/{subnetName}
+   */
+  virtualNetworkSubnetId?: string;
+}
+/**
+ * Server farm storage mount configuration.
+ */
+model StorageMount {
+  /**
+   * Name of the storage mount.
+   */
+  name?: string;
+
+  /**
+   * Type of the storage mount.
+   */
+  type?: StorageMountType;
+
+  /**
+   * Source of the fileshare/storage.
+   */
+  source?: string;
+
+  /**
+   * Path on worker where storage will be mounted.
+   */
+  destinationPath?: string;
+
+  /**
+   * KV reference to the credentials to connect to the share.
+   */
+  credentialsKeyVaultReference?: KeyVaultReferenceWithStatus;
 }

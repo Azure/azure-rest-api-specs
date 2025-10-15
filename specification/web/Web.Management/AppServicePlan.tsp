@@ -37,10 +37,61 @@ model AppServicePlan
   /** Kind of resource. If the resource is an app, you can refer to https://github.com/Azure/app-service-linux-docs/blob/master/Things_You_Should_Know/kind_property.md#app-service-resource-kind-reference for details supported values for kind. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   kind?: string;
+
+  /**
+   * Managed service identity.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  identity?: ManagedServiceIdentity;
 }
 
 @armResourceOperations
 interface AppServicePlans {
+  /**
+   * Description for Get the RDP password for an IsCustomMode ServerFarm.
+   */
+  @summary("Get the RDP password for an IsCustomMode ServerFarm.")
+  @action("getrdppassword")
+  getServerFarmRdpPassword is ArmResourceActionSync<
+    AppServicePlan,
+    void,
+    ArmResponse<ServerFarmRdpDetails>,
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Recycles a managed instance worker machine.
+   */
+  @summary("Recycles a managed instance worker machine.")
+  @action("recycleinstance")
+  recycleManagedInstanceWorker is ArmResourceActionSync<
+    AppServicePlan,
+    void,
+    ArmResponse<Operation>,
+    Parameters = {
+      /**
+       * Name of worker machine.
+       */
+      @pattern("^[a-zA-Z0-9]+$")
+      @path
+      @segment("workers")
+      workerName: string;
+    },
+    Error = DefaultErrorResponse
+  >;
+
+  /**
+   * Description for Get the instance details for an app service plan.
+   */
+  @summary("Get the instance details for an app service plan.")
+  @action("listinstances")
+  getServerFarmInstanceDetails is ArmResourceActionSync<
+    AppServicePlan,
+    void,
+    ArmResponse<ServerFarmInstanceDetails>,
+    Error = DefaultErrorResponse
+  >;
+
   /**
    * Description for Get an App Service plan.
    */

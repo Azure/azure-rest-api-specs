@@ -185,6 +185,12 @@ op listGeoRegions is ArmProviderActionSync<
      */
     @query("linuxDynamicWorkersEnabled")
     linuxDynamicWorkersEnabled?: boolean;
+
+    /**
+     * Specify <code>true</code> if you want to filter to only regions that support App Service Plans with <code>IsCustomMode</code> set to <code>true</code>.
+     */
+    @query("customModeWorkersEnabled")
+    customModeWorkersEnabled?: boolean;
   },
   Error = DefaultErrorResponse
 >;
