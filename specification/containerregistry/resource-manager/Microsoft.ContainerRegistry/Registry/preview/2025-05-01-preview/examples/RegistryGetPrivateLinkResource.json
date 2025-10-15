@@ -1,17 +1,17 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "groupName": "registry",
-    "registryName": "myRegistry",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "registryName": "myRegistry",
+    "groupName": "registry"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/privateLinkResources/registry",
         "name": "registry",
         "type": "Microsoft.ContainerRegistry/registries/privateLinkResources",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/privateLinkResources/registry",
         "properties": {
           "groupId": "registry",
           "requiredMembers": [
@@ -24,7 +24,5 @@
         }
       }
     }
-  },
-  "operationId": "Registries_GetPrivateLinkResource",
-  "title": "RegistryGetPrivateLinkResource"
+  }
 }

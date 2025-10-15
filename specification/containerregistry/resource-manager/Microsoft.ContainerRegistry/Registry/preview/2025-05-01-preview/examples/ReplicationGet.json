@@ -1,34 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "registryName": "myRegistry",
-    "replicationName": "myReplication",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "registryName": "myRegistry",
+    "replicationName": "myReplication"
   },
   "responses": {
     "200": {
       "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/replications/myReplication",
         "name": "myReplication",
         "type": "Microsoft.ContainerRegistry/registries/replications",
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/replications/myReplication",
         "location": "eastus",
+        "tags": {
+          "key": "value"
+        },
         "properties": {
           "provisioningState": "Succeeded",
-          "regionEndpointEnabled": true,
           "status": {
             "displayStatus": "Ready",
             "message": "The replication is ready.",
             "timestamp": "2017-03-01T23:15:37.0707808Z"
           },
+          "regionEndpointEnabled": true,
           "zoneRedundancy": "Disabled"
-        },
-        "tags": {
-          "key": "value"
         }
       }
     }
-  },
-  "operationId": "Replications_Get",
-  "title": "ReplicationGet"
+  }
 }

@@ -1,34 +1,32 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "archiveName": "myArchiveName",
-    "archiveVersionName": "myArchiveVersionName",
-    "packageType": "rpm",
-    "registryName": "myRegistry",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "registryName": "myRegistry",
+    "packageType": "rpm",
+    "archiveName": "myArchiveName",
+    "archiveVersionName": "myArchiveVersionName"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "myArchiveName",
         "type": "Microsoft.ContainerRegistry/registries/packages/archives",
         "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/packages/rpm/archives/myArchiveName/versions/myArchiveVersionName",
-        "properties": {
-          "archiveVersionErrorMessage": "string",
-          "provisioningState": "Creating"
-        },
+        "name": "myArchiveName",
         "systemData": {
-          "createdAt": "2023-02-24T00:13:46.836Z",
           "createdBy": "string",
           "createdByType": "User",
-          "lastModifiedAt": "2023-02-24T00:13:46.836Z",
+          "createdAt": "2023-02-24T00:13:46.836Z",
           "lastModifiedBy": "string",
-          "lastModifiedByType": "User"
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2023-02-24T00:13:46.836Z"
+        },
+        "properties": {
+          "provisioningState": "Creating",
+          "archiveVersionErrorMessage": "string"
         }
       }
     }
-  },
-  "operationId": "ArchiveVersions_Get",
-  "title": "ArchiveVersionGet"
+  }
 }

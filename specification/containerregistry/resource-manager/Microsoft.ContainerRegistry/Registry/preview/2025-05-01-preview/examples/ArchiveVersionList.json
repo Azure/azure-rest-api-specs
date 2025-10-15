@@ -1,38 +1,36 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "archiveName": "myArchiveName",
-    "packageType": "myPackageType",
-    "registryName": "myRegistry",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "registryName": "myRegistry",
+    "packageType": "myPackageType",
+    "archiveName": "myArchiveName"
   },
   "responses": {
     "200": {
       "body": {
-        "nextLink": "string",
         "value": [
           {
+            "id": "string",
             "name": "string",
             "type": "string",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/packages/myPackageType/archives/myArchiveName/versions/string",
-            "properties": {
-              "archiveVersionErrorMessage": "string",
-              "provisioningState": "Creating"
-            },
             "systemData": {
-              "createdAt": "2023-02-24T00:22:47.311Z",
               "createdBy": "string",
               "createdByType": "User",
-              "lastModifiedAt": "2023-02-24T00:22:47.311Z",
+              "createdAt": "2023-02-24T00:22:47.311Z",
               "lastModifiedBy": "string",
-              "lastModifiedByType": "User"
+              "lastModifiedByType": "User",
+              "lastModifiedAt": "2023-02-24T00:22:47.311Z"
+            },
+            "properties": {
+              "provisioningState": "Creating",
+              "archiveVersionErrorMessage": "string"
             }
           }
-        ]
+        ],
+        "nextLink": "string"
       }
     }
-  },
-  "operationId": "ArchiveVersions_List",
-  "title": "ArchiveVersionList"
+  }
 }

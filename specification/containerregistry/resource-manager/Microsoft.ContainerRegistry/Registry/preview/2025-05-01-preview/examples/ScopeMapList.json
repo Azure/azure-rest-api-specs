@@ -1,32 +1,30 @@
 {
   "parameters": {
     "api-version": "2025-05-01-preview",
-    "registryName": "myRegistry",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "resourceGroupName": "myResourceGroup",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000"
+    "registryName": "myRegistry"
   },
   "responses": {
     "200": {
       "body": {
         "value": [
           {
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/scopeMaps/myScopeMap",
             "name": "myScopeMap",
             "type": "Microsoft.ContainerRegistry/registries/scopeMaps",
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/myResourceGroup/providers/Microsoft.ContainerRegistry/registries/myRegistry/scopeMaps/myScopeMap",
             "properties": {
+              "creationDate": "2017-03-01T23:14:37.0707808Z",
               "type": "IsUserDefined",
               "actions": [
                 "repositories/myrepository/contentWrite",
                 "repositories/myrepository/delete"
               ],
-              "creationDate": "2017-03-01T23:14:37.0707808Z",
               "provisioningState": "Succeeded"
             }
           }
         ]
       }
     }
-  },
-  "operationId": "ScopeMaps_List",
-  "title": "ScopeMapList"
+  }
 }
