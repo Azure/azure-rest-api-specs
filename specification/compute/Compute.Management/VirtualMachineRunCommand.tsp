@@ -70,7 +70,8 @@ interface VirtualMachineRunCommands {
    */
   createOrUpdate is VirtualMachineRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -165,7 +166,8 @@ interface VirtualMachineScaleSetVMRunCommands {
   @operationId("VirtualMachineScaleSetVMRunCommands_CreateOrUpdate")
   createOrUpdate is VirtualMachineScaleSetVMRunCommandOps.CreateOrUpdateAsync<
     VirtualMachineRunCommand,
-    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineRunCommand> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

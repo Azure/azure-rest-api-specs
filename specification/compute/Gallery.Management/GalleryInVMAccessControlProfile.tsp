@@ -41,7 +41,8 @@ interface GalleryInVMAccessControlProfiles {
   @operationId("GalleryInVMAccessControlProfiles_CreateOrUpdate")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     GalleryInVMAccessControlProfile,
-    LroHeaders = ArmLroLocationHeader<FinalResult = GalleryInVMAccessControlProfile> & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = GalleryInVMAccessControlProfile> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
