@@ -1709,236 +1709,9 @@
       "description": "Common error response for all Azure Resource Manager APIs to return error details for failed operations.",
       "properties": {
         "error": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ErrorDetail",
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorDetail",
           "description": "The error object."
         }
-      }
-    },
-    "Azure.ResourceManager.Foundations.AzureEntityResource": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager resource with an etag.",
-      "properties": {
-        "etag": {
-          "type": "string",
-          "description": "Resource Etag.",
-          "readOnly": true
-        }
-      },
-      "required": [
-        "etag"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
-        }
-      ]
-    },
-    "Azure.ResourceManager.Foundations.ErrorAdditionalInfo": {
-      "type": "object",
-      "description": "The resource management error additional info.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "The additional info type.",
-          "readOnly": true
-        },
-        "info": {
-          "type": "object",
-          "description": "The additional info.",
-          "readOnly": true
-        }
-      }
-    },
-    "Azure.ResourceManager.Foundations.ErrorDetail": {
-      "type": "object",
-      "description": "The error detail.",
-      "properties": {
-        "code": {
-          "type": "string",
-          "description": "The error code.",
-          "readOnly": true
-        },
-        "message": {
-          "type": "string",
-          "description": "The error message.",
-          "readOnly": true
-        },
-        "target": {
-          "type": "string",
-          "description": "The error target.",
-          "readOnly": true
-        },
-        "details": {
-          "type": "array",
-          "description": "The error details.",
-          "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.ErrorDetail"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
-        },
-        "additionalInfo": {
-          "type": "array",
-          "description": "The error additional info.",
-          "items": {
-            "$ref": "#/definitions/Azure.ResourceManager.Foundations.ErrorAdditionalInfo"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "message",
-            "target"
-          ]
-        }
-      }
-    },
-    "Azure.ResourceManager.Foundations.ExtensionResource": {
-      "type": "object",
-      "description": "The base extension resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
-        }
-      ]
-    },
-    "Azure.ResourceManager.Foundations.ProxyResource": {
-      "type": "object",
-      "description": "The base proxy resource.",
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
-        }
-      ]
-    },
-    "Azure.ResourceManager.Foundations.Resource": {
-      "type": "object",
-      "description": "Common properties for all Azure Resource Manager resources.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the resource. Ex - /subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/{resourceProviderNamespace}/{resourceType}/{resourceName}",
-          "readOnly": true
-        },
-        "name": {
-          "type": "string",
-          "description": "The name of the resource",
-          "readOnly": true
-        },
-        "type": {
-          "type": "string",
-          "description": "The type of the resource. E.g. \"Microsoft.Compute/virtualMachines\" or \"Microsoft.Storage/storageAccounts\"",
-          "readOnly": true
-        },
-        "systemData": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.SystemData",
-          "description": "Azure Resource Manager metadata containing createdBy and modifiedBy information.",
-          "readOnly": true
-        }
-      }
-    },
-    "Azure.ResourceManager.Foundations.SystemData": {
-      "type": "object",
-      "description": "Metadata pertaining to creation and last modification of the resource.",
-      "properties": {
-        "createdBy": {
-          "type": "string",
-          "description": "The identity that created the resource.",
-          "readOnly": true
-        },
-        "createdByType": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.createdByType",
-          "description": "The type of identity that created the resource.",
-          "readOnly": true
-        },
-        "createdAt": {
-          "type": "string",
-          "format": "date",
-          "description": "The type of identity that created the resource.",
-          "readOnly": true
-        },
-        "lastModifiedBy": {
-          "type": "string",
-          "description": "The identity that last modified the resource.",
-          "readOnly": true
-        },
-        "lastModifiedByType": {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.createdByType",
-          "description": "The type of identity that last modified the resource.",
-          "readOnly": true
-        },
-        "lastModifiedAt": {
-          "type": "string",
-          "format": "date",
-          "description": "The timestamp of resource last modification (UTC)",
-          "readOnly": true
-        }
-      }
-    },
-    "Azure.ResourceManager.Foundations.TrackedResource": {
-      "type": "object",
-      "description": "The resource model definition for an Azure Resource Manager tracked top level resource which has 'tags' and a 'location'",
-      "properties": {
-        "location": {
-          "type": "string",
-          "description": "The geo-location where the resource lives",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
-        },
-        "tags": {
-          "type": "object",
-          "description": "Resource tags.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "location"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.Resource"
-        }
-      ]
-    },
-    "Azure.ResourceManager.Foundations.createdByType": {
-      "type": "string",
-      "description": "The kind of entity that created the resource.",
-      "enum": [
-        "User",
-        "Application",
-        "ManagedIdentity",
-        "Key"
-      ],
-      "x-ms-enum": {
-        "name": "createdByType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "The entity was created by a user."
-          },
-          {
-            "name": "Application",
-            "value": "Application",
-            "description": "The entity was created by an application."
-          },
-          {
-            "name": "ManagedIdentity",
-            "value": "ManagedIdentity",
-            "description": "The entity was created by a managed identity."
-          },
-          {
-            "name": "Key",
-            "value": "Key",
-            "description": "The entity was created by a key."
-          }
-        ]
       }
     },
     "Azure.ResourceManager.PrivateEndpoint": {
@@ -1970,7 +1743,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2085,7 +1858,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2156,9 +1929,10 @@
       ],
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "EdgeActionAttachment": {
       "type": "object",
@@ -2212,9 +1986,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "EdgeActionExecutionFilterListResult": {
       "type": "object",
@@ -2384,7 +2159,7 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.ProxyResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -2505,9 +2280,10 @@
       },
       "allOf": [
         {
-          "$ref": "#/definitions/Azure.ResourceManager.Foundations.TrackedResource"
+          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
-      ]
+      ],
+      "x-ms-azure-resource": true
     },
     "EdgeActionVersionDeploymentType": {
       "type": "string",
