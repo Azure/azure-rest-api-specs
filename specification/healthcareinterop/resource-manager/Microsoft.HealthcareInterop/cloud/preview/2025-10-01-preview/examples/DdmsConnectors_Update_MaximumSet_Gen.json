@@ -1,0 +1,56 @@
+{
+  "title": "DdmsConnectors_Update_MaximumSet",
+  "operationId": "DdmsConnectors_Update",
+  "parameters": {
+    "api-version": "2025-10-01-preview",
+    "subscriptionId": "486949B6-5A50-4884-B12D-271498C14DE3",
+    "resourceGroupName": "rgcloud",
+    "ddmsConnectorName": "ddmsConnector1",
+    "properties": {
+      "properties": {
+        "baseUrl": "https://ddms-updated.healthcare.microsoft.com",
+        "dacEnvironmentId": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+      },
+      "tags": {
+        "environment": "staging",
+        "department": "healthcare",
+        "updated": "true"
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "properties": {
+          "provisioningState": "Succeeded",
+          "hubResourceId": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/hubs/testhub",
+          "baseUrl": "https://ddms-updated.healthcare.microsoft.com",
+          "dacCategoryName": "Diagnostics",
+          "dacEnvironmentId": "f47ac10b-58cc-4372-a567-0e02b2c3d479"
+        },
+        "tags": {
+          "environment": "staging",
+          "department": "healthcare",
+          "updated": "true"
+        },
+        "location": "eastus2",
+        "id": "/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/resourceGroups/rgcloud/providers/Microsoft.HealthcareInterop/ddmsConnectors/ddmsConnector1",
+        "name": "ddmsConnector1",
+        "type": "Microsoft.HealthcareInterop/ddmsConnectors",
+        "systemData": {
+          "createdBy": "admin@healthcare.com",
+          "createdByType": "User",
+          "createdAt": "2025-07-18T22:23:10.008Z",
+          "lastModifiedBy": "admin@healthcare.com",
+          "lastModifiedByType": "User",
+          "lastModifiedAt": "2025-07-19T10:15:30.245Z"
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Azure-AsyncOperation": "https://eastus2euap.management.azure.com/subscriptions/486949B6-5A50-4884-B12D-271498C14DE3/providers/Microsoft.HealthcareInterop/locations/EASTUS2/operationStatuses/04afacb4-b78c-42c8-b11d-f6708dad7aac"
+      }
+    }
+  }
+}

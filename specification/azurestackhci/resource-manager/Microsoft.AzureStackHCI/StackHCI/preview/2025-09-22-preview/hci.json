@@ -1619,7 +1619,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "List all Extensions under ArcSetting resource.",
+        "description": "List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1649,7 +1649,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HCIExtensionList"
+              "$ref": "#/definitions/ExtensionList"
             }
           },
           "default": {
@@ -1678,7 +1678,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Get particular Arc Extension of HCI Cluster.",
+        "description": "Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1715,7 +1715,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           },
           "default": {
@@ -1739,7 +1739,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Create Extension for HCI cluster.",
+        "description": "Create Extension for the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1777,21 +1777,21 @@
             "description": "Details of the Machine Extension to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'HCIExtension' update operation succeeded",
+            "description": "Resource 'Extension' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           },
           "201": {
-            "description": "Resource 'HCIExtension' create operation succeeded",
+            "description": "Resource 'Extension' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1830,7 +1830,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Update Extension for HCI cluster.",
+        "description": "Update Extension for the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -1868,7 +1868,7 @@
             "description": "Details of the Machine Extension to be created.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HCIExtensionPatch"
+              "$ref": "#/definitions/ExtensionPatch"
             }
           }
         ],
@@ -1876,7 +1876,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/HCIExtension"
+              "$ref": "#/definitions/Extension"
             }
           },
           "202": {
@@ -1918,7 +1918,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Delete particular Arc Extension of HCI Cluster.",
+        "description": "Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -2006,7 +2006,7 @@
         "tags": [
           "Extensions"
         ],
-        "description": "Upgrade a particular Arc Extension of HCI Cluster.",
+        "description": "Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v4/types.json#/parameters/ApiVersionParameter"
@@ -2044,7 +2044,7 @@
             "description": "Parameters supplied to the Upgrade Extensions operation.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/HCIExtensionUpgradeParameters"
+              "$ref": "#/definitions/ExtensionUpgradeParameters"
             }
           }
         ],
@@ -7747,6 +7747,21 @@
         ]
       }
     },
+    "Extension": {
+      "type": "object",
+      "description": "Details of a particular extension in HCI Cluster.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "Describes Machine Extension Properties."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
     "ExtensionAggregateState": {
       "type": "string",
       "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
@@ -7868,63 +7883,7 @@
       },
       "readOnly": true
     },
-    "ExtensionManagedBy": {
-      "type": "string",
-      "description": "Extension managed by user or Azure.",
-      "enum": [
-        "User",
-        "Azure"
-      ],
-      "x-ms-enum": {
-        "name": "ExtensionManagedBy",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "User",
-            "value": "User",
-            "description": "Extension is managed by user."
-          },
-          {
-            "name": "Azure",
-            "value": "Azure",
-            "description": "Extension is managed by Azure."
-          }
-        ]
-      }
-    },
-    "ExtensionProfile": {
-      "type": "object",
-      "description": "Extensions details for edge device.",
-      "properties": {
-        "extensions": {
-          "type": "array",
-          "description": "List of Arc extensions installed on edge device.",
-          "items": {
-            "$ref": "#/definitions/EdgeDevicesExtension"
-          },
-          "readOnly": true,
-          "x-ms-identifiers": [
-            "extensionName"
-          ]
-        }
-      }
-    },
-    "HCIExtension": {
-      "type": "object",
-      "description": "Details of a particular extension in HCI Cluster.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/HCIExtensionProperties",
-          "description": "Describes Machine Extension Properties."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v4/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "HCIExtensionInstanceView": {
+    "ExtensionInstanceView": {
       "type": "object",
       "description": "Describes the Extension Instance View.",
       "properties": {
@@ -7941,12 +7900,12 @@
           "description": "Specifies the version of the script handler."
         },
         "status": {
-          "$ref": "#/definitions/HCIExtensionInstanceViewStatus",
+          "$ref": "#/definitions/ExtensionInstanceViewStatus",
           "description": "Instance view status."
         }
       }
     },
-    "HCIExtensionInstanceViewStatus": {
+    "ExtensionInstanceViewStatus": {
       "type": "object",
       "description": "Instance view status.",
       "properties": {
@@ -7973,15 +7932,15 @@
         }
       }
     },
-    "HCIExtensionList": {
+    "ExtensionList": {
       "type": "object",
-      "description": "List of Extensions in HCI cluster.",
+      "description": "List of Extensions in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The HCIExtension items on this page",
+          "description": "The Extension items on this page",
           "items": {
-            "$ref": "#/definitions/HCIExtension"
+            "$ref": "#/definitions/Extension"
           }
         },
         "nextLink": {
@@ -7994,7 +7953,31 @@
         "value"
       ]
     },
-    "HCIExtensionParametersContent": {
+    "ExtensionManagedBy": {
+      "type": "string",
+      "description": "Extension managed by user or Azure.",
+      "enum": [
+        "User",
+        "Azure"
+      ],
+      "x-ms-enum": {
+        "name": "ExtensionManagedBy",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "User",
+            "value": "User",
+            "description": "Extension is managed by user."
+          },
+          {
+            "name": "Azure",
+            "value": "Azure",
+            "description": "Extension is managed by Azure."
+          }
+        ]
+      }
+    },
+    "ExtensionParametersContent": {
       "type": "object",
       "description": "Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.",
       "properties": {
@@ -8034,17 +8017,17 @@
         }
       }
     },
-    "HCIExtensionPatch": {
+    "ExtensionPatch": {
       "type": "object",
       "description": "Extension Details to update",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HCIExtensionPatchProperties",
+          "$ref": "#/definitions/ExtensionPatchProperties",
           "description": "Describes Machine Extension Properties that can be updated."
         }
       }
     },
-    "HCIExtensionPatchProperties": {
+    "ExtensionPatchProperties": {
       "type": "object",
       "description": "Describes Machine Extension Properties that can be updated.",
       "properties": {
@@ -8054,9 +8037,26 @@
         }
       }
     },
-    "HCIExtensionProperties": {
+    "ExtensionProfile": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
+      "description": "Extensions details for edge device.",
+      "properties": {
+        "extensions": {
+          "type": "array",
+          "description": "List of Arc extensions installed on edge device.",
+          "items": {
+            "$ref": "#/definitions/EdgeDevicesExtension"
+          },
+          "readOnly": true,
+          "x-ms-identifiers": [
+            "extensionName"
+          ]
+        }
+      }
+    },
+    "ExtensionProperties": {
+      "type": "object",
+      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -8064,19 +8064,19 @@
           "readOnly": true
         },
         "extensionParameters": {
-          "$ref": "#/definitions/HCIExtensionParametersContent",
+          "$ref": "#/definitions/ExtensionParametersContent",
           "description": "Parameters specific to this extension type."
         },
         "aggregateState": {
           "$ref": "#/definitions/ExtensionAggregateState",
-          "description": "Aggregate state of Arc Extensions across the nodes in this HCI cluster.",
+          "description": "Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Edge Machine).",
           "readOnly": true
         },
         "perNodeExtensionDetails": {
           "type": "array",
-          "description": "State of Arc Extension in each of the nodes.",
+          "description": "State of Arc Extension in each of the nodes/machines.",
           "items": {
-            "$ref": "#/definitions/HCIPerNodeExtensionState"
+            "$ref": "#/definitions/PerNodeExtensionState"
           },
           "readOnly": true
         },
@@ -8087,44 +8087,13 @@
         }
       }
     },
-    "HCIExtensionUpgradeParameters": {
+    "ExtensionUpgradeParameters": {
       "type": "object",
       "description": "Describes the parameters for Extension upgrade.",
       "properties": {
         "targetVersion": {
           "type": "string",
           "description": "Extension Upgrade Target Version."
-        }
-      }
-    },
-    "HCIPerNodeExtensionState": {
-      "type": "object",
-      "description": "Status of Arc Extension for a particular node in HCI Cluster.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the node in HCI Cluster.",
-          "readOnly": true
-        },
-        "extension": {
-          "type": "string",
-          "description": "Fully qualified resource ID for the particular Arc Extension on this node.",
-          "readOnly": true
-        },
-        "typeHandlerVersion": {
-          "type": "string",
-          "description": "Specifies the version of the script handler.",
-          "readOnly": true
-        },
-        "state": {
-          "$ref": "#/definitions/NodeExtensionState",
-          "description": "State of Arc Extension in this node.",
-          "readOnly": true
-        },
-        "instanceView": {
-          "$ref": "#/definitions/HCIExtensionInstanceView",
-          "description": "The extension instance view.",
-          "readOnly": true
         }
       }
     },
@@ -9704,6 +9673,37 @@
           "type": "string",
           "format": "date-time",
           "description": "The end date and time of the password validity."
+        }
+      }
+    },
+    "PerNodeExtensionState": {
+      "type": "object",
+      "description": "Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
+          "readOnly": true
+        },
+        "extension": {
+          "type": "string",
+          "description": "Fully qualified resource ID for the particular Arc Extension on this node/machine.",
+          "readOnly": true
+        },
+        "typeHandlerVersion": {
+          "type": "string",
+          "description": "Specifies the version of the script handler.",
+          "readOnly": true
+        },
+        "state": {
+          "$ref": "#/definitions/NodeExtensionState",
+          "description": "State of Arc Extension in this node/machine.",
+          "readOnly": true
+        },
+        "instanceView": {
+          "$ref": "#/definitions/ExtensionInstanceView",
+          "description": "The extension instance view.",
+          "readOnly": true
         }
       }
     },

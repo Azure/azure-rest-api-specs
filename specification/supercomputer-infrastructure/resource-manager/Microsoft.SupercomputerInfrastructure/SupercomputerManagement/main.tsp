@@ -8,6 +8,7 @@ import "./link.tsp";
 import "./nic.tsp";
 import "./node.tsp";
 import "./device-logical-port.tsp";
+import "./maintenance-request.tsp";
 import "./rack.tsp";
 import "./supercomputer.tsp";
 import "./switch.tsp";
