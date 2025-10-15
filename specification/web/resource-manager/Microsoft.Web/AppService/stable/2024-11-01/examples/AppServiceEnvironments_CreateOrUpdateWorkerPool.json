@@ -1,27 +1,25 @@
 {
   "parameters": {
-    "name": "test-ase",
-    "api-version": "2024-11-01",
-    "resourceGroupName": "test-rg",
     "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "resourceGroupName": "test-rg",
+    "name": "test-ase",
+    "workerPoolName": "0",
     "workerPoolEnvelope": {
       "properties": {
-        "workerCount": 3,
-        "workerSize": "Small"
+        "workerSize": "Small",
+        "workerCount": 3
       }
     },
-    "workerPoolName": "0"
+    "api-version": "2024-11-01"
   },
   "responses": {
-    "200": {
-      "body": {},
-      "headers": {}
-    },
     "202": {
-      "body": {},
-      "headers": {}
+      "headers": {},
+      "body": {}
+    },
+    "200": {
+      "headers": {},
+      "body": {}
     }
-  },
-  "operationId": "AppServiceEnvironments_UpdateWorkerPool",
-  "title": "Get properties of a worker pool."
+  }
 }

@@ -1,40 +1,38 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "nextLink": null,
         "value": [
           {
+            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0",
             "name": "testStaticSite0",
             "type": "Microsoft.Web/staticSites",
-            "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0",
             "location": "West US 2",
             "properties": {
-              "allowConfigFileUpdates": true,
-              "branch": "demo",
-              "contentDistributionEndpoint": "",
-              "customDomains": [],
               "defaultHostname": "happy-sea-15afae3e.azurestaticwebsites.net",
-              "keyVaultReferenceIdentity": "SystemAssigned",
-              "privateEndpointConnections": [],
               "repositoryUrl": "https://github.com/username/repo",
+              "branch": "demo",
+              "customDomains": [],
+              "privateEndpointConnections": [],
+              "contentDistributionEndpoint": "",
+              "keyVaultReferenceIdentity": "SystemAssigned",
+              "userProvidedFunctionApps": [],
               "stagingEnvironmentPolicy": "Enabled",
-              "userProvidedFunctionApps": []
+              "allowConfigFileUpdates": true
             },
             "sku": {
               "name": "Standard",
               "tier": "Standard"
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "nextLink": null
+      }
     }
-  },
-  "operationId": "StaticSites_List",
-  "title": "Get all static sites in a subscription"
+  }
 }

@@ -1,48 +1,46 @@
 {
   "parameters": {
-    "name": "testSite",
-    "api-version": "2024-11-01",
-    "deploymentStatusId": "eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
+    "name": "testSite",
     "slot": "stage",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "deploymentStatusId": "eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/slots/stage/deploymentStatus/eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
         "name": "eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
         "type": "Microsoft.Web/sites/slots/deploymentStatus",
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/slots/stage/deploymentStatus/eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
         "properties": {
           "deploymentId": "eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
-          "errors": null,
-          "failedInstancesLogs": [],
-          "numberOfInstancesFailed": 0,
+          "status": "RuntimeSuccessful",
           "numberOfInstancesInProgress": 0,
           "numberOfInstancesSuccessful": 1,
-          "status": "RuntimeSuccessful"
+          "numberOfInstancesFailed": 0,
+          "failedInstancesLogs": [],
+          "errors": null
         }
-      },
-      "headers": {}
+      }
     },
     "202": {
+      "headers": {},
       "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/slots/stage/deploymentStatus/eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
         "name": "eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
         "type": "Microsoft.Web/sites/slots/deploymentStatus",
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/slots/stage/deploymentStatus/eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
         "properties": {
           "deploymentId": "eacfd68b-3bbd-4ad9-99c5-98614d89c8e5",
-          "errors": null,
-          "failedInstancesLogs": [],
-          "numberOfInstancesFailed": 0,
+          "status": "RuntimeStarting",
           "numberOfInstancesInProgress": 1,
           "numberOfInstancesSuccessful": 0,
-          "status": "RuntimeStarting"
+          "numberOfInstancesFailed": 0,
+          "failedInstancesLogs": [],
+          "errors": null
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "WebApps_GetSlotSiteDeploymentStatusSlot",
-  "title": "Get Deployment Status Slot"
+  }
 }

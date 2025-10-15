@@ -1,49 +1,50 @@
 {
   "parameters": {
-    "name": "SampleAppServiceEnvironment",
-    "api-version": "2024-11-01",
-    "detectorName": "runtimeavailability",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "Sample-WestUSResourceGroup",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "name": "SampleAppServiceEnvironment",
+    "detectorName": "runtimeavailability",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
       "body": {
-        "name": "runtimeavailability",
         "id": "/subscriptions/ef90e930-9d7f-4a60-8a99-748e0eea69de/resourceGroups/Build2015DemoRG/providers/Microsoft.Web/hostingEnvironments/SampleAppServiceEnvironment/detectors/runtimeavailability",
+        "name": "runtimeavailability",
         "properties": {
+          "metadata": {
+            "description": "This detector analyzes all the requests to all applications running on this app service environment.",
+            "category": "Availability and Performance"
+          },
           "dataset": [
             {
-              "renderingProperties": {
-                "description": "This detector breaks down the number of requests that your apps on this app service environment received for each status code.",
-                "title": "Requests by Status Code"
-              },
               "table": {
+                "tableName": "Table_0",
                 "columns": [
                   {
                     "columnName": "PreciseTimeStamp",
-                    "columnType": "datetime",
-                    "dataType": "DateTime"
+                    "dataType": "DateTime",
+                    "columnType": "datetime"
                   },
                   {
                     "columnName": "count_Http2xx",
-                    "columnType": "long",
-                    "dataType": "Int64"
+                    "dataType": "Int64",
+                    "columnType": "long"
                   },
                   {
                     "columnName": "count_Http3xx",
-                    "columnType": "long",
-                    "dataType": "Int64"
+                    "dataType": "Int64",
+                    "columnType": "long"
                   },
                   {
                     "columnName": "count_Http4xx",
-                    "columnType": "long",
-                    "dataType": "Int64"
+                    "dataType": "Int64",
+                    "columnType": "long"
                   },
                   {
                     "columnName": "count_Http5xx",
-                    "columnType": "long",
-                    "dataType": "Int64"
+                    "dataType": "Int64",
+                    "columnType": "long"
                   }
                 ],
                 "rows": [
@@ -117,19 +118,16 @@
                     "0",
                     "0"
                   ]
-                ],
-                "tableName": "Table_0"
+                ]
+              },
+              "renderingProperties": {
+                "title": "Requests by Status Code",
+                "description": "This detector breaks down the number of requests that your apps on this app service environment received for each status code."
               }
             }
-          ],
-          "metadata": {
-            "description": "This detector analyzes all the requests to all applications running on this app service environment.",
-            "category": "Availability and Performance"
-          }
+          ]
         }
       }
     }
-  },
-  "operationId": "Diagnostics_GetHostingEnvironmentDetectorResponse",
-  "title": "Get App Service Environment Detector Responses"
+  }
 }

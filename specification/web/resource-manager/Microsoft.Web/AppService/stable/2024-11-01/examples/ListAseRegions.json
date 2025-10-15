@@ -1,56 +1,54 @@
 {
   "parameters": {
-    "api-version": "2024-11-01",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
         "value": [
           {
-            "type": "Microsoft.Web/aseRegions",
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/aseRegions",
+            "type": "Microsoft.Web/aseRegions",
             "properties": {
-              "availableOS": [
-                "Windows",
-                "Linux",
-                "HyperV"
-              ],
+              "displayName": "southcentralus",
+              "standard": true,
+              "dedicatedHost": true,
+              "zoneRedundant": true,
               "availableSku": [
                 "I1v2",
                 "I2v2",
                 "I3v2"
               ],
-              "dedicatedHost": true,
-              "displayName": "southcentralus",
-              "standard": true,
-              "zoneRedundant": true
+              "availableOS": [
+                "Windows",
+                "Linux",
+                "HyperV"
+              ]
             }
           },
           {
-            "type": "Microsoft.Web/aseRegions",
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/providers/Microsoft.Web/aseRegions",
+            "type": "Microsoft.Web/aseRegions",
             "properties": {
-              "availableOS": [
-                "Windows",
-                "Linux"
-              ],
+              "displayName": "northcentralus",
+              "standard": true,
+              "dedicatedHost": true,
+              "zoneRedundant": true,
               "availableSku": [
                 "I1v4",
                 "I2v2",
                 "I3v2"
               ],
-              "dedicatedHost": true,
-              "displayName": "northcentralus",
-              "standard": true,
-              "zoneRedundant": true
+              "availableOS": [
+                "Windows",
+                "Linux"
+              ]
             }
           }
         ]
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "ListAseRegions",
-  "title": "List aseregions"
+  }
 }

@@ -1,27 +1,25 @@
 {
   "parameters": {
-    "name": "testStaticSite0",
-    "api-version": "2024-11-01",
-    "databaseConnectionName": "default",
-    "environmentName": "default",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "name": "testStaticSite0",
+    "environmentName": "default",
+    "databaseConnectionName": "default",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
+        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0/builds/default/databaseConnections/default",
         "name": "default",
         "type": "Microsoft.Web/staticSites/builds/databaseConnections",
-        "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/staticSites/testStaticSite0/builds/default/databaseConnections/default",
         "properties": {
+          "resourceId": "/subscription/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/databaseRG/providers/Microsoft.DocumentDB/databaseAccounts/exampleDatabaseName",
           "connectionIdentity": "SystemAssigned",
-          "region": "West US 2",
-          "resourceId": "/subscription/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/databaseRG/providers/Microsoft.DocumentDB/databaseAccounts/exampleDatabaseName"
+          "region": "West US 2"
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "StaticSites_GetBuildDatabaseConnection",
-  "title": "Get overview of database connections for the static site build."
+  }
 }

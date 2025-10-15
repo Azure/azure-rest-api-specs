@@ -1,31 +1,29 @@
 {
   "parameters": {
-    "name": "testSite",
-    "api-version": "2024-11-01",
-    "privateEndpointConnectionName": "connection",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
+    "name": "testSite",
     "slot": "stage",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "privateEndpointConnectionName": "connection",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
         "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/slot/stage/privateEndpointConnections/connection",
         "properties": {
+          "provisioningState": "Succeeded",
           "privateEndpoint": {
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
           },
           "privateLinkServiceConnectionState": {
+            "status": "Approved",
             "description": "Approved by admin.",
-            "actionsRequired": "",
-            "status": "Approved"
-          },
-          "provisioningState": "Succeeded"
+            "actionsRequired": ""
+          }
         }
-      },
-      "headers": {}
+      }
     }
-  },
-  "operationId": "WebApps_GetPrivateEndpointConnectionSlot",
-  "title": "Get a private endpoint connection for a site."
+  }
 }

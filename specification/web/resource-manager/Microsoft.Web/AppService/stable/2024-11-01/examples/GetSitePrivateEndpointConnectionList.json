@@ -1,34 +1,32 @@
 {
   "parameters": {
-    "name": "testStaticSite0",
-    "api-version": "2024-11-01",
+    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345",
     "resourceGroupName": "rg",
-    "subscriptionId": "34adfa4f-cedf-4dc0-ba29-b6d1a69ab345"
+    "name": "testStaticSite0",
+    "api-version": "2024-11-01"
   },
   "responses": {
     "200": {
+      "headers": {},
       "body": {
-        "nextLink": null,
         "value": [
           {
             "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Web/sites/testSite/privateEndpointConnections/connection",
             "properties": {
+              "provisioningState": "Succeeded",
               "privateEndpoint": {
                 "id": "/subscriptions/34adfa4f-cedf-4dc0-ba29-b6d1a69ab345/resourceGroups/rg/providers/Microsoft.Network/privateEndpoints/myPrivateEndpoint"
               },
               "privateLinkServiceConnectionState": {
+                "status": "Approved",
                 "description": "Approved by admin.",
-                "actionsRequired": "",
-                "status": "Approved"
-              },
-              "provisioningState": "Succeeded"
+                "actionsRequired": ""
+              }
             }
           }
-        ]
-      },
-      "headers": {}
+        ],
+        "nextLink": null
+      }
     }
-  },
-  "operationId": "StaticSites_GetPrivateEndpointConnectionList",
-  "title": "Get a list of private endpoint connections associated with a site."
+  }
 }
