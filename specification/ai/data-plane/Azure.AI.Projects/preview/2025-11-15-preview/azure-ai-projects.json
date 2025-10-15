@@ -1325,302 +1325,6 @@
         }
       }
     },
-    "/evaluations/runs": {
-      "get": {
-        "operationId": "Evaluations_List",
-        "description": "List evaluation runs",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/PagedEvaluation"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_List_MaximumSet": {
-            "$ref": "./examples/Evaluations_List_MaximumSet_Gen.json"
-          }
-        },
-        "x-ms-pageable": {
-          "nextLinkName": "nextLink"
-        }
-      }
-    },
-    "/evaluations/runs/{name}": {
-      "get": {
-        "operationId": "Evaluations_Get",
-        "description": "Get an evaluation run by name.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Identifier of the evaluation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "The request has succeeded.",
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            },
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Get_MaximumSet": {
-            "$ref": "./examples/Evaluations_Get_MaximumSet_Gen.json"
-          }
-        }
-      },
-      "delete": {
-        "operationId": "Evaluations_Delete",
-        "description": "Delete an evaluation run by name",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Identifier of the evaluation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Delete_MaximumSet": {
-            "$ref": "./examples/Evaluations_Delete_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/evaluations/runs/{name}:cancel": {
-      "post": {
-        "operationId": "Evaluations_Cancel",
-        "description": "Cancel an evaluation run by name",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "name",
-            "in": "path",
-            "description": "Identifier of the evaluation.",
-            "required": true,
-            "type": "string"
-          },
-          {
-            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
-          }
-        ],
-        "responses": {
-          "204": {
-            "description": "There is no content to send for this request, but the headers may be useful. ",
-            "headers": {
-              "x-ms-client-request-id": {
-                "type": "string",
-                "format": "uuid",
-                "description": "An opaque, globally-unique, client-generated string identifier for the request."
-              }
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Cancel_MaximumSet": {
-            "$ref": "./examples/Evaluations_Cancel_MaximumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/evaluations/runs:run": {
-      "post": {
-        "operationId": "Evaluations_Create",
-        "description": "Creates an evaluation run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "evaluation",
-            "in": "body",
-            "description": "Evaluation to be run",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/Evaluation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_Create_MaximumSet": {
-            "$ref": "./examples/Evaluations_Create_MaximumSet_Gen.json"
-          },
-          "Evaluations_Create_MinimumSet": {
-            "$ref": "./examples/Evaluations_Create_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
-    "/evaluations/runs:runAgent": {
-      "post": {
-        "operationId": "Evaluations_CreateAgentEvaluation",
-        "description": "Creates an agent evaluation run.",
-        "parameters": [
-          {
-            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
-          },
-          {
-            "name": "evaluation",
-            "in": "body",
-            "description": "Agent evaluation to be run",
-            "required": true,
-            "schema": {
-              "$ref": "#/definitions/AgentEvaluationRequest"
-            }
-          }
-        ],
-        "responses": {
-          "201": {
-            "description": "The request has succeeded and a new resource has been created as a result.",
-            "schema": {
-              "$ref": "#/definitions/AgentEvaluation"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
-            },
-            "headers": {
-              "x-ms-error-code": {
-                "type": "string",
-                "description": "String error code indicating what went wrong."
-              }
-            }
-          }
-        },
-        "x-ms-examples": {
-          "Evaluations_CreateAgentEvaluation_MaximumSet": {
-            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MaximumSet_Gen.json"
-          },
-          "Evaluations_CreateAgentEvaluation_MinimumSet": {
-            "$ref": "./examples/Evaluations_CreateAgentEvaluation_MinimumSet_Gen.json"
-          }
-        }
-      }
-    },
     "/evaluators": {
       "get": {
         "operationId": "Evaluators_ListLatestVersions",
@@ -2962,165 +2666,6 @@
       ],
       "x-ms-discriminator-value": "AgentClusterInsight"
     },
-    "AgentEvaluation": {
-      "type": "object",
-      "description": "Evaluation response for agent evaluation run.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the agent evaluation run."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the agent evaluation. Options: Running, Completed, Failed."
-        },
-        "error": {
-          "type": "string",
-          "description": "The reason of the request failure for the long running process, if applicable."
-        },
-        "result": {
-          "type": "array",
-          "description": "The agent evaluation result.",
-          "items": {
-            "$ref": "#/definitions/AgentEvaluationResult"
-          }
-        }
-      },
-      "required": [
-        "id",
-        "status"
-      ]
-    },
-    "AgentEvaluationRedactionConfiguration": {
-      "type": "object",
-      "description": "The redaction configuration will allow the user to control what is redacted.",
-      "properties": {
-        "redactScoreProperties": {
-          "type": "boolean",
-          "description": "Redact score properties. If not specified, the default is to redact in production."
-        }
-      }
-    },
-    "AgentEvaluationRequest": {
-      "type": "object",
-      "description": "Evaluation request for agent run.",
-      "properties": {
-        "runId": {
-          "type": "string",
-          "description": "Identifier of the agent run."
-        },
-        "threadId": {
-          "type": "string",
-          "description": "Identifier of the agent thread. This field is mandatory currently, but it will be optional in the future."
-        },
-        "evaluators": {
-          "type": "object",
-          "description": "Evaluators to be used for the evaluation.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorConfiguration"
-          }
-        },
-        "samplingConfiguration": {
-          "$ref": "#/definitions/AgentEvaluationSamplingConfiguration",
-          "description": "Sampling configuration for the evaluation."
-        },
-        "redactionConfiguration": {
-          "$ref": "#/definitions/AgentEvaluationRedactionConfiguration",
-          "description": "Redaction configuration for the evaluation."
-        },
-        "appInsightsConnectionString": {
-          "type": "string",
-          "description": "Pass the AppInsights connection string to the agent evaluation for the evaluation results and the errors logs."
-        }
-      },
-      "required": [
-        "runId",
-        "evaluators",
-        "appInsightsConnectionString"
-      ]
-    },
-    "AgentEvaluationResult": {
-      "type": "object",
-      "description": "Result for the agent evaluation evaluator run.",
-      "properties": {
-        "evaluator": {
-          "type": "string",
-          "description": "Evaluator's name. This is the name of the evaluator that was used to evaluate the agent's completion."
-        },
-        "evaluatorId": {
-          "type": "string",
-          "description": "Identifier of the evaluator."
-        },
-        "score": {
-          "type": "number",
-          "format": "float",
-          "description": "Score of the given evaluator. No restriction on range."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the evaluator result. Options: Running, Completed, Failed, NotApplicable."
-        },
-        "reason": {
-          "type": "string",
-          "description": "Reasoning for the evaluation result."
-        },
-        "version": {
-          "type": "string",
-          "description": "Version of the evaluator that was used to evaluate the agent's completion."
-        },
-        "threadId": {
-          "type": "string",
-          "description": "The unique identifier of the thread."
-        },
-        "runId": {
-          "type": "string",
-          "description": "The unique identifier of the run."
-        },
-        "error": {
-          "type": "string",
-          "description": "A string explaining why there was an error, if applicable."
-        },
-        "additionalDetails": {
-          "type": "object",
-          "description": "Additional properties relevant to the evaluator. These will differ between evaluators.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "evaluator",
-        "evaluatorId",
-        "score",
-        "status",
-        "runId"
-      ]
-    },
-    "AgentEvaluationSamplingConfiguration": {
-      "type": "object",
-      "description": "Definition for sampling strategy.",
-      "properties": {
-        "name": {
-          "type": "string",
-          "description": "Name of the sampling strategy."
-        },
-        "samplingPercent": {
-          "type": "number",
-          "format": "float",
-          "description": "Percentage of sampling per hour (0-100)."
-        },
-        "maxRequestRate": {
-          "type": "number",
-          "format": "float",
-          "description": "Maximum request rate per hour (0 to 1000)."
-        }
-      },
-      "required": [
-        "name",
-        "samplingPercent",
-        "maxRequestRate"
-      ]
-    },
     "AgentTaxonomyInput": {
       "type": "object",
       "description": "Input configuration for the evaluation taxonomy when the input type is agent.",
@@ -3205,25 +2750,6 @@
     "AssetId": {
       "type": "string",
       "description": "Identifier of a saved asset."
-    },
-    "AssistantMessage": {
-      "type": "object",
-      "description": "A message generated by the assistant in response to previous messages.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "Response content generated by the assistant."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Message"
-        }
-      ],
-      "x-ms-discriminator-value": "assistant"
     },
     "AttackStrategy": {
       "type": "string",
@@ -4240,25 +3766,6 @@
         ]
       }
     },
-    "DeveloperMessage": {
-      "type": "object",
-      "description": "A message authored by a developer to guide the model during evaluation.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "Content provided by a developer to guide model behavior in an evaluation context."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Message"
-        }
-      ],
-      "x-ms-discriminator-value": "developer"
-    },
     "EmbeddingConfiguration": {
       "type": "object",
       "description": "Embedding configuration class",
@@ -4449,65 +3956,6 @@
         "sampleCount",
         "average",
         "standardDeviation"
-      ]
-    },
-    "Evaluation": {
-      "type": "object",
-      "description": "Evaluation Definition",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the evaluation.",
-          "readOnly": true,
-          "x-ms-client-name": "name"
-        },
-        "data": {
-          "$ref": "#/definitions/InputData",
-          "description": "Data for evaluation."
-        },
-        "displayName": {
-          "type": "string",
-          "description": "Display Name for evaluation. It helps to find the evaluation easily in AI Foundry. It does not need to be unique."
-        },
-        "description": {
-          "type": "string",
-          "description": "Description of the evaluation. It can be used to store additional information about the evaluation and is mutable."
-        },
-        "status": {
-          "type": "string",
-          "description": "Status of the evaluation. It is set by service and is read-only.",
-          "readOnly": true
-        },
-        "tags": {
-          "type": "object",
-          "description": "Evaluation's tags. Unlike properties, tags are fully mutable.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "properties": {
-          "type": "object",
-          "description": "Evaluation's properties. Unlike tags, properties are add-only. Once added, a property cannot be removed.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        },
-        "evaluators": {
-          "type": "object",
-          "description": "Evaluators to be used for the evaluation.",
-          "additionalProperties": {
-            "$ref": "#/definitions/EvaluatorConfiguration"
-          }
-        },
-        "target": {
-          "$ref": "#/definitions/EvaluationTarget",
-          "description": "Specifies the type and configuration of the entity used for this evaluation."
-        }
-      },
-      "required": [
-        "id",
-        "data",
-        "evaluators"
       ]
     },
     "EvaluationComparisonRequest": {
@@ -4759,38 +4207,6 @@
       ],
       "x-ms-discriminator-value": "Evaluation"
     },
-    "EvaluationTarget": {
-      "type": "object",
-      "description": "Abstract base model for defining evaluation targets.",
-      "properties": {
-        "type": {
-          "$ref": "#/definitions/EvaluationTargetType",
-          "description": "Discriminator that defines the type of the evaluation target."
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "EvaluationTargetType": {
-      "type": "string",
-      "description": "Allowed types of evaluation targets.",
-      "enum": [
-        "modelResponseGeneration"
-      ],
-      "x-ms-enum": {
-        "name": "EvaluationTargetType",
-        "modelAsString": true,
-        "values": [
-          {
-            "name": "modelResponseGeneration",
-            "value": "modelResponseGeneration",
-            "description": "Evaluation target that uses a model for response generation."
-          }
-        ]
-      }
-    },
     "EvaluationTaxonomy": {
       "type": "object",
       "description": "Evaluation Taxonomy Definition",
@@ -4979,31 +4395,6 @@
           }
         ]
       }
-    },
-    "EvaluatorConfiguration": {
-      "type": "object",
-      "description": "Evaluator Configuration",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Identifier of the evaluator."
-        },
-        "initParams": {
-          "type": "object",
-          "description": "Initialization parameters of the evaluator.",
-          "additionalProperties": {}
-        },
-        "dataMapping": {
-          "type": "object",
-          "description": "Data parameters of the evaluator.",
-          "additionalProperties": {
-            "type": "string"
-          }
-        }
-      },
-      "required": [
-        "id"
-      ]
     },
     "EvaluatorDefinition": {
       "type": "object",
@@ -5467,39 +4858,6 @@
         ]
       }
     },
-    "InputData": {
-      "type": "object",
-      "description": "Abstract data class.",
-      "properties": {
-        "type": {
-          "type": "string",
-          "description": "Type of the data"
-        }
-      },
-      "discriminator": "type",
-      "required": [
-        "type"
-      ]
-    },
-    "InputDataset": {
-      "type": "object",
-      "description": "Dataset as source for evaluation.",
-      "properties": {
-        "id": {
-          "type": "string",
-          "description": "Evaluation input data"
-        }
-      },
-      "required": [
-        "id"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/InputData"
-        }
-      ],
-      "x-ms-discriminator-value": "dataset"
-    },
     "Insight": {
       "type": "object",
       "description": "The response body for cluster insights.",
@@ -5787,29 +5145,6 @@
       ],
       "x-ms-discriminator-value": "ManagedAzureSearch"
     },
-    "Message": {
-      "type": "object",
-      "description": "Abstract base model representing a single message in a conversation.",
-      "properties": {
-        "role": {
-          "type": "string",
-          "description": "The role of the message author. Known values: 'system', 'assistant', 'developer', 'user'.",
-          "enum": [
-            "system",
-            "assistant",
-            "developer",
-            "user"
-          ],
-          "x-ms-enum": {
-            "modelAsString": true
-          }
-        }
-      },
-      "discriminator": "role",
-      "required": [
-        "role"
-      ]
-    },
     "ModelDeployment": {
       "type": "object",
       "description": "Model Deployment Definition",
@@ -5970,27 +5305,6 @@
           "description": "The Deployment items on this page",
           "items": {
             "$ref": "#/definitions/Deployment"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "PagedEvaluation": {
-      "type": "object",
-      "description": "Paged collection of Evaluation items",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The Evaluation items on this page",
-          "items": {
-            "$ref": "#/definitions/Evaluation"
           }
         },
         "nextLink": {
@@ -6779,25 +6093,6 @@
         "tier"
       ]
     },
-    "SystemMessage": {
-      "type": "object",
-      "description": "A message authored by the system to guide model behavior.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "Plain text instructions provided by the system to steer model behavior."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Message"
-        }
-      ],
-      "x-ms-discriminator-value": "system"
-    },
     "TargetConfig": {
       "type": "object",
       "description": "Abstract class for target configuration.",
@@ -7000,25 +6295,6 @@
         ]
       }
     },
-    "UserMessage": {
-      "type": "object",
-      "description": "A message authored by the end user as input to the model.",
-      "properties": {
-        "content": {
-          "type": "string",
-          "description": "Input content or question provided by the end user."
-        }
-      },
-      "required": [
-        "content"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/Message"
-        }
-      ],
-      "x-ms-discriminator-value": "user"
-    },
     "WeeklyRecurrenceSchedule": {
       "type": "object",
       "description": "Weekly recurrence schedule.",
@@ -7040,39 +6316,6 @@
         }
       ],
       "x-ms-discriminator-value": "Weekly"
-    },
-    "modelResponseGenerationTarget": {
-      "type": "object",
-      "description": "Evaluation target for generating responses using a given model and dataset.",
-      "properties": {
-        "baseMessages": {
-          "type": "array",
-          "description": "A list of messages comprising the conversation so far.",
-          "items": {
-            "$ref": "#/definitions/Message"
-          }
-        },
-        "modelDeploymentName": {
-          "type": "string",
-          "description": "The model deployment to be evaluated. Accepts either the deployment name alone or with the connection name as '{connectionName}/modelDeploymentName'."
-        },
-        "modelParams": {
-          "type": "object",
-          "description": "Optional parameters passed to the model for evaluation.",
-          "additionalProperties": {}
-        }
-      },
-      "required": [
-        "baseMessages",
-        "modelDeploymentName",
-        "modelParams"
-      ],
-      "allOf": [
-        {
-          "$ref": "#/definitions/EvaluationTarget"
-        }
-      ],
-      "x-ms-discriminator-value": "modelResponseGeneration"
     }
   },
   "parameters": {
