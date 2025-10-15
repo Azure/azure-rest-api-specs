@@ -2,12 +2,14 @@ import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 import "@typespec/openapi";
 import "@typespec/rest";
+import "@typespec/versioning";
 import "./models.tsp";
 import "./Archive.tsp";
 
 using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
+using TypeSpec.Versioning;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
@@ -115,6 +117,7 @@ interface ArchiveVersionListOps
 /**
  * An object that represents an export pipeline for a container registry.
  */
+@removed(Versions.v2025_11_01)
 @parentResource(Archive)
 model ArchiveVersion
   is Azure.ResourceManager.ProxyResource<ArchiveVersionProperties> {
@@ -126,6 +129,7 @@ model ArchiveVersion
   >;
 }
 
+@removed(Versions.v2025_11_01)
 @armResourceOperations
 interface ArchiveVersions {
   /**
