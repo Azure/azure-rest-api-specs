@@ -55,7 +55,7 @@ interface Insights {
   @doc("Generate Insights")
   @post
   @route("insights")
-  generateInsights is Azure.Core.Foundations.Operation<
+  generate is Azure.Core.Foundations.Operation<
     {
       @header("Repeatability-Request-ID")
       @doc("Unique, client-generated identifier for ensuring request idempotency. Use the same ID for retries to prevent duplicate evaluations.")
@@ -74,14 +74,14 @@ interface Insights {
 
   @doc("Get a specific insight by Id.")
   @get
-  getInsight is InsightsOperations.ResourceRead<
+  get is InsightsOperations.ResourceRead<
     Insight,
     QueryParametersTrait<IncludeCoordinatesTrait, TraitContext.Read>
   >;
 
   @doc("List all insights in reverse chronological order (newest first).")
   @get
-  listInsights is InsightsOperations.ResourceList<
+  list is InsightsOperations.ResourceList<
     Insight,
     ListQueryParametersTrait<FilterQueryParamsTraits>
   >;
