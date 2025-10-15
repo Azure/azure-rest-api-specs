@@ -29,9 +29,13 @@ Parse the response from `azure-sdk-mcp/azsdk_ai_qa_completion` to identify the r
 Apply the extracted solution to update the TypeSpec file accordingly.
 
 
+### Step 4: Summary the solution
+
+Summary the solution taken, and display the reference doc url from the response from `azure-sdk-mcp/azsdk_ai_qa_completion` tool
+
 **When the task is to add a new api version, add following extra step:**
 
-### Step 4: Suggestion follow up action
+### Step 5: Suggestion follow up action
 
 ask user whether he want to perform following actions:
 - Add new operations (create, update, delete, list, etc.)
