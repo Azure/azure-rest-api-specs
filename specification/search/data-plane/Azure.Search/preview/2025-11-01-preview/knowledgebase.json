@@ -179,23 +179,12 @@
       ],
       "description": "Run knowledge retrieval with medium reasoning effort."
     },
-    "KnowledgeRetrievalHighReasoningEffort": {
-      "type": "object",
-      "x-ms-discriminator-value": "high",
-      "allOf": [
-        {
-          "$ref": "#/definitions/KnowledgeRetrievalReasoningEffort"
-        }
-      ],
-      "description": "Run knowledge retrieval with high reasoning effort."
-    },
     "KnowledgeRetrievalReasoningEffortKind": {
       "type": "string",
       "enum": [
         "minimal",
         "low",
-        "medium",
-        "high"
+        "medium"
       ],
       "x-ms-enum": {
         "name": "KnowledgeRetrievalReasoningEffortKind",
@@ -215,11 +204,6 @@
             "value": "medium",
             "name": "Medium",
             "description": "Use a moderate amount of reasoning during retrieval."
-          },
-          {
-            "value": "high",
-            "name": "High",
-            "description": "Use a high amount of reasoning during retrieval."
           }
         ]
       },
