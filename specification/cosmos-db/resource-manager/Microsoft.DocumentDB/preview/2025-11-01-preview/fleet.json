@@ -1173,6 +1173,25 @@
           },
           "description": "The kind of API this fleetspace belongs to. Acceptable values: 'NoSQL'"
         },
+        "serviceTier": {
+          "type": "string",
+          "enum": [
+            "GeneralPurpose",
+            "BusinessCritical"
+          ],
+          "x-ms-enum": {
+            "modelAsString": true
+          },
+          "description": "Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region."
+        },
+        "dataRegions": {
+          "type": "array",
+          "description": "List of data regions assigned to the fleetspace. Eg [westus2]",
+          "items": {
+            "type": "string"
+          },
+          "minItems": 1
+        },
         "throughputPoolConfiguration": {
           "type": "object",
           "description": "Configuration for throughput pool in the fleetspace.",
@@ -1187,25 +1206,6 @@
               "format": "int32",
               "description": "Maximum throughput for the pool."
             },
-            "serviceTier": {
-              "type": "string",
-              "enum": [
-                "GeneralPurpose",
-                "BusinessCritical"
-              ],
-              "x-ms-enum": {
-                "modelAsString": true
-              },
-              "description": "Service Tier for the fleetspace. GeneralPurpose types refers to single write region accounts that can be added to this fleetspace, whereas BusinessCritical refers to multi write region."
-            },
-            "dataRegions": {
-              "type": "array",
-              "description": "List of data regions assigned to the fleetspace. Eg [westus2]",
-              "items": {
-                "type": "string"
-              },
-              "minItems": 1
-            },
             "dedicatedRUs": {
               "type": "integer",
               "format": "int64",
@@ -1214,7 +1214,7 @@
             "maxConsumableRUs": {
               "type": "integer",
               "format": "int64",
-              "description": "When this fleetspace is enabled with pooling, this is the maximum additional throughput (RU/s) that can be consumed from the pool, summed across all shared throughput databases and dedicated throughput containers across all accounts in the fleetspace for 1 region."
+              "description": "Maximum consumable throughput (RU/s) for fleetspace. Represents the maximum throughput that can be consumed by the fleetspace."
             }
           }
         }
