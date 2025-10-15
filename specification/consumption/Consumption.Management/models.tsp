@@ -1636,12 +1636,6 @@ model ReservationTransaction extends Resource {
   properties?: LegacyReservationTransactionProperties;
 
   /**
-   * The etag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  etag?: string;
-
-  /**
    * Resource tags.
    */
   @visibility(Lifecycle.Read)
@@ -2454,12 +2448,6 @@ model EventProperties {
    */
   @visibility(Lifecycle.Read)
   isEstimatedBalance?: boolean;
-
-  /**
-   * The eTag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
 }
 
 /**
@@ -2643,12 +2631,6 @@ model LotProperties {
   isEstimatedBalance?: boolean;
 
   /**
-   * The eTag for the resource.
-   */
-  @visibility(Lifecycle.Read)
-  eTag?: string;
-
-  /**
    * The organization type of the lot.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -2714,13 +2696,6 @@ model CreditSummaryProperties {
    */
   @visibility(Lifecycle.Read)
   isEstimatedBalance?: boolean;
-
-  /**
-   * The eTag for the resource.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @visibility(Lifecycle.Read)
-  eTag?: string;
 }
 
 /**
