@@ -2,6 +2,8 @@ import "@azure-tools/typespec-azure-core";
 import "@typespec/rest";
 import "@typespec/http";
 
+#suppress "AZC0031" "ClassifierCategoryDefinition is the correct name for this model"
+
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;

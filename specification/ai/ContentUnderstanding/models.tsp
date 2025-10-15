@@ -4,6 +4,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 
+#suppress "AZC0034" "ContentUnderstanding is the next version of the service with these type names"
+
 using Azure.Core;
 using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;

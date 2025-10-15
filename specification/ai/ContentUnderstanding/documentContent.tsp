@@ -3,6 +3,8 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./models.tsp";
 
+#suppress "AZC0034" "ContentUnderstanding is the next version of the service with these type names"
+
 using Azure.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;

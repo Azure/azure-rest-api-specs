@@ -3,6 +3,8 @@ import "@typespec/rest";
 import "@typespec/http";
 import "./personDirectoryModels.tsp";
 
+#suppress "AZC0012" "Faces is a specific domain term in ContentUnderstanding"
+
 using Azure.Core;
 using Azure.Core.Traits;
 using Azure.Core.Traits.Private;
