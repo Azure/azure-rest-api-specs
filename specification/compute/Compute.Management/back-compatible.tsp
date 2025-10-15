@@ -3,82 +3,104 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetNetworkConfiguration.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetIPConfiguration.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetPublicIPAddressConfiguration.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetNetworkConfiguration.properties
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdate.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdateNetworkConfiguration.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdateIPConfiguration.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetIPConfiguration.properties
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetExtensionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetPublicIPAddressConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NetworkInterfaceReference.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineNetworkInterfaceConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetUpdateNetworkConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineNetworkInterfaceIPConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetUpdateIPConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachinePublicIPAddressConfiguration.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetUpdatePublicIPAddressConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetVMExtensionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetExtensionUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NetworkInterfaceReference.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineExtensionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineNetworkInterfaceConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineImage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineNetworkInterfaceIPConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AvailabilitySetUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachinePublicIPAddressConfiguration.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHostGroupUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetVMExtensionUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHostUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SshPublicKeyUpdateResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineExtensionUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ImageUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineImage.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RestorePointCollectionUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AvailabilitySetUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservationGroupUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHostGroupUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservationUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHostUpdate.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineRunCommandUpdate.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SshPublicKeyUpdateResource.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ImageUpdate.properties);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RestorePointCollectionUpdate.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapacityReservationGroupUpdate.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapacityReservationUpdate.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineRunCommandUpdate.properties
+);
 
 @@clientName(VirtualMachineScaleSets.update::parameters.properties,
   "parameters"
@@ -101,6 +123,7 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSets.performMaintenance::parameters.body,
   "vmInstanceIDs"
 );
+@@clientName(VirtualMachineScaleSets.scaleOut::parameters.body, "parameters");
 @@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
   "vmInstanceIDs"
 );
@@ -118,17 +141,20 @@ using Microsoft.Compute;
   "parameters"
 );
 @@clientName(VirtualMachineScaleSets.start::parameters.body, "vmInstanceIDs");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSet.properties
+);
 
 @@clientName(VirtualMachineScaleSetExtensions.update::parameters.properties,
   "extensionParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetExtension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetExtension.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RollingUpgradeStatusInfo.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RollingUpgradeStatusInfo.properties
+);
 
 @@clientName(VirtualMachineScaleSetVMS.reimage::parameters.body,
   "vmScaleSetVMReimageInput"
@@ -139,20 +165,23 @@ using Microsoft.Compute;
 @@clientName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetVM.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetVM.properties
+);
 
 @@clientName(VirtualMachineExtensions.update::parameters.properties,
   "extensionParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineExtension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineExtension.properties
+);
 
 @@clientName(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
   "extensionParameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineScaleSetVMExtension.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetVMExtension.properties
+);
 
 @@clientName(VirtualMachines.update::parameters.properties, "parameters");
 @@clientName(VirtualMachines.attachDetachDataDisks::parameters.body,
@@ -164,15 +193,16 @@ using Microsoft.Compute;
 );
 @@clientName(VirtualMachines.reimage::parameters.body, "parameters");
 @@clientName(VirtualMachines.runCommand::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachine.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachine.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineExtensionImage.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineExtensionImage.properties
+);
 
 @@clientName(AvailabilitySets.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AvailabilitySet.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AvailabilitySet.properties);
 
 @@clientName(AvailabilitySets.validateMigrationToVirtualMachineScaleSet::parameters.body,
   "parameters"
@@ -184,50 +214,57 @@ using Microsoft.Compute;
 @@clientName(ProximityPlacementGroups.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProximityPlacementGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProximityPlacementGroup.properties
+);
 
 @@clientName(DedicatedHostGroups.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHostGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHostGroup.properties
+);
 
 @@clientName(DedicatedHosts.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DedicatedHost.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHost.properties);
 
 @@clientName(SshPublicKeyResources.update::parameters.properties, "parameters");
 @@clientName(SshPublicKeyResources.generateKeyPair::parameters.body,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SshPublicKeyResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SshPublicKeyResource.properties
+);
 
 @@clientName(Images.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Image.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties);
 
 @@clientName(RestorePointCollections.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RestorePointCollection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RestorePointCollection.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RestorePoint.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RestorePoint.properties);
 
 @@clientName(CapacityReservationGroups.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservationGroup.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapacityReservationGroup.properties
+);
 
 @@clientName(CapacityReservations.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CapacityReservation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapacityReservation.properties
+);
 
 @@clientName(VirtualMachineRunCommands.update::parameters.body, "runCommand");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(VirtualMachineRunCommand.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineRunCommand.properties
+);
 
 @@clientName(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
   "parameters"

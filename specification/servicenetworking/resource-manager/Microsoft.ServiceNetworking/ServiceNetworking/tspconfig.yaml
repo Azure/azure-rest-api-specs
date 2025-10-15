@@ -21,20 +21,20 @@ options:
     use-read-only-status-schema: true
   "@azure-tools/typespec-ts":
     experimental-extensible-enums: true
-    package-dir: "arm-servicenetworking"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-servicenetworking"
     flavor: azure
     package-details:
       name: "@azure/arm-servicenetworking"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-servicenetworking"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-servicenetworking"
     namespace: "azure.mgmt.servicenetworking"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/servicenetworking"
-    package-dir: "armservicenetworking"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armservicenetworking"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armservicenetworking"
     fix-const-stuttering: true
     flavor: "azure"
     generate-samples: true
