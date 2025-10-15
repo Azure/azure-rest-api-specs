@@ -75,7 +75,7 @@ model TranscriptionOptions {
   phraseList?: PhraseListProperties;
 }
 
-@doc("The Speaker Identification settings. Diarization settings must be specified to enable speaker identification.")
+@doc("The Speaker Diarization settings. Diarization settings must be specified to enable speaker diarization.")
 model TranscriptionDiarizationOptions {
   @doc("Gets or sets a value indicating whether speaker diarization is enabled.")
   enabled?: boolean;

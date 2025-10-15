@@ -130,7 +130,7 @@ model TranscriptionProperties {
   @doc("EntityError")
   error?: EntityError;
 
-  @doc("Speaker Identification")
+  @doc("Speaker Diarization")
   diarization?: DiarizationProperties;
 
   @doc("LanguageIdentificationProperties")
@@ -164,9 +164,9 @@ model TranscriptionLinks {
   files?: url;
 }
 
-@doc("Speaker Identification Properties")
+@doc("Speaker Diarization Properties")
 model DiarizationProperties {
-  @doc("A value indicating whether speaker identification is enabled.")
+  @doc("A value indicating whether speaker diarization is enabled.")
   enabled: boolean;
 
   @minValue(2)
