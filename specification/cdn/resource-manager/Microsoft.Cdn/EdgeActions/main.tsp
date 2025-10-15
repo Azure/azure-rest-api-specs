@@ -26,11 +26,6 @@ enum Versions {
   `2025-09-01-preview`,
 }
 
-interface Operations extends Azure.ResourceManager.Operations {
-  @Autorest.example("./examples/Operations_List.json", "List Operations")
-  list is Azure.ResourceManager.Operations.list;
-}
-
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-path-segment-invalid-chars" "Existing Template"
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-key-invalid-chars" "Existing template"
 model EdgeAction is TrackedResource<EdgeActionProperties> {
