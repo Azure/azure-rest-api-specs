@@ -156,6 +156,7 @@ suppressions:
       - updateRuns.json
       - updates.json
       - updateSummaries.json
+      - edgeDevices.json
       - hci.json
   
   - code: LroLocationHeader
@@ -234,6 +235,13 @@ suppressions:
     from: 
       - clusters.json
     reason: Making the body optional now would cause a breaking change in backward compatibility
+
+  - code: ProvisioningStateMustBeReadOnly
+    from:
+      - deploymentSettings.json
+      - edgeDevices.json
+      - securitySettings.json
+    reason: Changing it will break backward compatibility
 ```
 
 ### Tag: package-preview-2025-09-22-preview
@@ -508,13 +516,43 @@ This is not used by Autorest itself.
 
 ``` yaml $(swagger-to-sdk)
 swagger-to-sdk:
-  - repo: azure-sdk-for-python-track2
-  #- repo: azure-sdk-for-java
-  #- repo: azure-sdk-for-go
-  #- repo: azure-sdk-for-js
+  - repo: azure-sdk-for-python
+#  - repo: azure-sdk-for-java
+#  - repo: azure-sdk-for-go
+  - repo: azure-sdk-for-js
+  - repo: azure-sdk-for-ruby
     after_scripts:
       - bundle install && rake arm:regen_all_profiles['azure_mgmt_azurestackhci']
   - repo: azure-resource-manager-schemas
     after_scripts:
       - node sdkauto_afterscript.js azurestackhci/resource-manager
   - repo: azure-powershell
+```
+
+## Go
+
+See configuration in [readme.go.md](./readme.go.md)
+
+## Java
+
+See configuration in [readme.java.md](./readme.java.md)
+
+## Python
+
+See configuration in [readme.python.md](./readme.python.md)
+
+## Ruby
+
+See configuration in [readme.ruby.md](./readme.ruby.md)
+
+## TypeScript
+
+See configuration in [readme.typescript.md](./readme.typescript.md)
+
+## CSharp
+
+See configuration in [readme.csharp.md](./readme.csharp.md)
+
+## AzureResourceSchema
+
+See configuration in [readme.azureresourceschema.md](./readme.azureresourceschema.md)

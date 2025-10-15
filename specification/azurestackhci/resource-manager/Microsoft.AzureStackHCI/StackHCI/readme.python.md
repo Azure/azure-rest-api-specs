@@ -17,8 +17,7 @@ no-namespace-folders: true
 output-folder: $(python-sdks-folder)/azurestackhci/azure-mgmt-azurestackhci/azure/mgmt/azurestackhci
 ```
 
-
-``` yaml $(python)
+```yaml $(python)
 modelerfour:
   lenient-model-deduplication: true
 ```
