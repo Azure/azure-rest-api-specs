@@ -3819,7 +3819,7 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources/{groupName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ContainerRegistry/registries/{registryName}/privateLinkResources/{privateLinkResourceName}": {
       "get": {
         "operationId": "Registries_GetPrivateLinkResource",
         "tags": [
@@ -3847,9 +3847,9 @@
             "pattern": "^[a-zA-Z0-9]*$"
           },
           {
-            "name": "groupName",
+            "name": "privateLinkResourceName",
             "in": "path",
-            "description": "The name of the private link resource.",
+            "description": "The name of the private link associated with the Azure resource.",
             "required": true,
             "type": "string"
           }
@@ -3858,7 +3858,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PrivateLinkResource"
+              "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
             }
           },
           "default": {
@@ -7761,22 +7761,6 @@
         }
       }
     },
-    "PrivateLinkResource": {
-      "type": "object",
-      "description": "A resource that supports private link capabilities.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/PrivateLinkResourceProperties",
-          "description": "A resource that supports private link capabilities.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
     "PrivateLinkResourceListResult": {
       "type": "object",
       "description": "The result of a request to list private link resources for a container registry.",
@@ -7785,36 +7769,12 @@
           "type": "array",
           "description": "The list of private link resources. Since this list may be incomplete, the nextLink field should be used to request the next list of private link resources.",
           "items": {
-            "$ref": "#/definitions/PrivateLinkResource"
+            "$ref": "../../../../../../common-types/resource-management/v6/privatelinks.json#/definitions/PrivateLinkResource"
           }
         },
         "nextLink": {
           "type": "string",
           "description": "The URI that can be used to request the next list of private link resources."
-        }
-      }
-    },
-    "PrivateLinkResourceProperties": {
-      "type": "object",
-      "description": "The properties of a private link resource.",
-      "properties": {
-        "groupId": {
-          "type": "string",
-          "description": "The private link resource group id."
-        },
-        "requiredMembers": {
-          "type": "array",
-          "description": "The private link resource required member names.",
-          "items": {
-            "type": "string"
-          }
-        },
-        "requiredZoneNames": {
-          "type": "array",
-          "description": "The private link resource Private link DNS zone name.",
-          "items": {
-            "type": "string"
-          }
         }
       }
     },
@@ -9592,10 +9552,12 @@
         },
         "customHeaders": {
           "type": "object",
+          "format": "password",
           "description": "Custom headers that will be added to the webhook notifications.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "$ref": "#/definitions/WebhookStatus",
@@ -9630,10 +9592,12 @@
         },
         "customHeaders": {
           "type": "object",
+          "format": "password",
           "description": "Custom headers that will be added to the webhook notifications.",
           "additionalProperties": {
             "type": "string"
-          }
+          },
+          "x-ms-secret": true
         },
         "status": {
           "$ref": "#/definitions/WebhookStatus",

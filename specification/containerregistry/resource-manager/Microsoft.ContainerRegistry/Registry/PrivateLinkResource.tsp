@@ -11,33 +11,23 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ContainerRegistry;
-/**
- * A resource that supports private link capabilities.
- */
-@parentResource(Registry)
-model PrivateLinkResource
-  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateLinkResource,
-    KeyName = "groupName",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
-}
+
+model MyPrivateLinkResource is PrivateLink;
+alias PrivateLinkOperations = PrivateLinks<MyPrivateLinkResource>;
 
 @armResourceOperations
 interface PrivateLinkResources {
   /**
    * Gets a private link resource by a specified group name for a container registry.
    */
-  getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
+  getPrivateLinkResource is PrivateLinkOperations.Read<Registry>;
 
   /**
    * Lists the private link resources for a container registry.
    */
   @list
-  listPrivateLinkResources is ArmResourceListByParent<
-    PrivateLinkResource,
+  listPrivateLinkResources is PrivateLinkOperations.ListByParent<
+    Registry,
     Response = ArmResponse<PrivateLinkResourceListResult>
   >;
 }
