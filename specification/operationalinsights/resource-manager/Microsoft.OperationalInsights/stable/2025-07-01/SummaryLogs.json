@@ -37,7 +37,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs": {
       "get": {
         "tags": [
-          "SummaryLogs"
+          "SummaryRules"
         ],
         "x-ms-examples": {
           "SummaryLogsListByWorkspace": {
@@ -82,7 +82,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}": {
       "put": {
         "tags": [
-          "SummaryLogs"
+          "SummaryRules"
         ],
         "x-ms-examples": {
           "SummaryLogsUpsert": {
@@ -90,7 +90,7 @@
           }
         },
         "operationId": "SummaryLogs_CreateOrUpdate",
-        "description": "Updates or creates Log Analytics workspace summary rules.",
+        "description": "Creates or updates Log Analytics workspace Summary rules.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -164,7 +164,7 @@
       },
       "get": {
         "tags": [
-          "SummaryLogs"
+          "SummaryRules"
         ],
         "x-ms-examples": {
           "SummaryLogsGet": {
@@ -172,7 +172,7 @@
           }
         },
         "operationId": "SummaryLogs_Get",
-        "description": "Gets Log Analytics workspace summary rules.",
+        "description": "Gets Log Analytics workspace Summary rules.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -207,7 +207,7 @@
       },
       "delete": {
         "tags": [
-          "SummaryLogs"
+          "SummaryRules"
         ],
         "x-ms-examples": {
           "SummaryLogsDelete": {
@@ -215,7 +215,7 @@
           }
         },
         "operationId": "SummaryLogs_Delete",
-        "description": "Deletes Log Analytics workspace summary rules.",
+        "description": "Deletes Log Analytics workspace Summary rules.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -266,7 +266,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/start": {
       "post": {
         "tags": [
-          "SummaryLogs"
+          "SummaryRules"
         ],
         "x-ms-examples": {
           "SummaryLogsStart": {
@@ -274,7 +274,7 @@
           }
         },
         "operationId": "SummaryLogs_Start",
-        "description": "Starts a summary rule.",
+        "description": "Starts an inactive Summary rule.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -322,7 +322,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/stop": {
       "post": {
         "tags": [
-          "SummaryLogs"
+          "SummaryRules"
         ],
         "x-ms-examples": {
           "SummaryLogsStop": {
@@ -330,7 +330,7 @@
           }
         },
         "operationId": "SummaryLogs_Stop",
-        "description": "Stops a running summary rule.",
+        "description": "Stops an active Summary rule.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -364,7 +364,7 @@
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.OperationalInsights/workspaces/{workspaceName}/summaryLogs/{summaryLogsName}/retrybin": {
       "post": {
         "tags": [
-          "SummaryLogs"
+          "SummaryRules"
         ],
         "x-ms-examples": {
           "SummaryLogsRetryBin": {
@@ -372,7 +372,7 @@
           }
         },
         "operationId": "SummaryLogs_RetryBin",
-        "description": "Retries a failed summary logs bin.",
+        "description": "Retries a failed Summary rule bin.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
@@ -396,7 +396,7 @@
             "schema": {
               "$ref": "#/definitions/SummaryLogsRetryBin"
             },
-            "description": "The parameters required to retry a summary logs bin."
+            "description": "The parameters required to retry a Summary rule bin."
           }
         ],
         "responses": {
@@ -433,7 +433,7 @@
       "properties": {
         "query": {
           "type": "string",
-          "description": "SummaryRules rule query."
+          "description": "Summary rule query."
         },
         "binSize": {
           "type": "integer",
@@ -443,19 +443,19 @@
         "binDelay": {
           "type": "integer",
           "format": "int32",
-          "description": "The minimum delay before bin processing."
+          "description": "The minimum delay in seconds before bin processing."
         },
         "binStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The time when the first bin will start (UTC)."
+          "description": "The start time (UTC) when Summary rule execution starts."
         },
         "timeSelector": {
           "type": "string",
           "enum": [
             "TimeGenerated"
           ],
-          "description": "Determines which cursor is used in the rule.",
+          "description": "The time cursor used in Summary rules bins processing, e.g. TimeGenerated.",
           "x-ms-enum": {
             "name": "TimeSelectorEnum",
             "modelAsString": true,
@@ -470,7 +470,7 @@
         "destinationTable": {
           "readOnly": true,
           "type": "string",
-          "description": "The destination table for rule results."
+          "description": "The destination table used for the Summary rule results."
         }
       },
       "description": "Rule definition parameters."
@@ -490,23 +490,23 @@
             "values": [
               {
                 "value": "User",
-                "description": "User defined summary rule."
+                "description": "User defined summary rule. This is the definition for rules created and defined by users."
               }
             ]
           }
         },
         "displayName": {
           "type": "string",
-          "description": "The display name of the summary rule."
+          "description": "The display name of the Summary rule."
         },
         "description": {
           "type": "string",
-          "description": "The description of the summary rule."
+          "description": "The description of the Summary rule."
         },
         "isActive": {
           "readOnly": true,
           "type": "boolean",
-          "description": "Indicates if the summary rule is active. If not active, the periodic query will not run."
+          "description": "Indicates if Summary rule is active. If not, Summary rule execution stops."
         },
         "statusCode": {
           "readOnly": true,
@@ -534,7 +534,7 @@
         "provisioningState": {
           "type": "string",
           "readOnly": true,
-          "description": "SummaryRules current provisioning state. If set to 'updating' or 'deleting', indicates a resource lock due to an ongoing operation, preventing any update to the summary rules until the operation is complete.",
+          "description": "Summary rule is in provisioning state. If set to 'updating' or 'deleting', indicates a resource lock due to an ongoing operation, preventing any update to the Summary rule until the operation is complete.",
           "enum": [
             "Updating",
             "Succeeded",
@@ -574,7 +574,7 @@
           "description": "Rule definition parameters."
         }
       },
-      "description": "SummaryRules properties."
+      "description": "Summary rule properties."
     },
     "SummaryLogs": {
       "type": "object",
@@ -582,7 +582,7 @@
         "properties": {
           "x-ms-client-flatten": true,
           "$ref": "#/definitions/SummaryLogsProperties",
-          "description": "Summary Rules properties."
+          "description": "Summary rule properties."
         },
         "systemData": {
           "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/systemData",
@@ -604,7 +604,7 @@
           "items": {
             "$ref": "#/definitions/SummaryLogs"
           },
-          "description": "A list of summary logs."
+          "description": "A list of Summary rules."
         },
         "nextLink": {
           "type": "string",
@@ -612,7 +612,7 @@
           "description": "URL to retrieve the next set of operation list results, if available."
         }
       },
-      "description": "The list summary logs operation response."
+      "description": "The list Summary rule operation response."
     },
     "SummaryLogsRetryBin": {
       "type": "object",
@@ -630,13 +630,13 @@
         "retryBinStartTime": {
           "type": "string",
           "format": "date-time",
-          "description": "The UTC time of the bin to retry."
+          "description": "The time (UTC) of the bin to retry."
         }
       },
       "required": [
         "retryBinStartTime"
       ],
-      "description": "Properties for retrying a summary logs bin."
+      "description": "Properties for retrying a Summary rule bin."
     }
   },
   "parameters": {
