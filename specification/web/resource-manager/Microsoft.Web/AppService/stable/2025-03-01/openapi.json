@@ -11658,9 +11658,10 @@
               "$ref": "#/definitions/CsmDeploymentStatus"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -11675,7 +11676,8 @@
           "Get Deployment Status": {
             "$ref": "./examples/GetSiteDeploymentStatus.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/deployments": {
@@ -24912,9 +24914,10 @@
               "$ref": "#/definitions/CsmDeploymentStatus"
             },
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -24929,7 +24932,8 @@
           "Get Deployment Status Slot": {
             "$ref": "./examples/GetSiteDeploymentStatusSlot.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Web/sites/{name}/slots/{slot}/deployments": {

@@ -54,11 +54,14 @@ interface CsmDeploymentStatuses {
   /**
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the deployment status for an app (or deployment slot, if specified).")
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   getProductionSiteDeploymentStatus is CsmDeploymentStatusOps.Read<
     CsmDeploymentStatus,
-    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CsmDeploymentStatus>> & {
+    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedResponse & {
       @bodyRoot
       _: CsmDeploymentStatus;
     }),
@@ -110,11 +113,14 @@ interface CsmDeploymentStatusOperationGroup {
   /**
    * Gets the deployment status for an app (or deployment slot, if specified).
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @summary("Gets the deployment status for an app (or deployment slot, if specified).")
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   getSlotSiteDeploymentStatusSlot is CsmDeploymentStatusOperationGroupOps.Read<
     CsmDeploymentStatus,
-    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CsmDeploymentStatus>> & {
+    Response = ArmResponse<CsmDeploymentStatus> | (ArmAcceptedResponse & {
       @bodyRoot
       _: CsmDeploymentStatus;
     }),
