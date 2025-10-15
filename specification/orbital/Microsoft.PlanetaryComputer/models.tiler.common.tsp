@@ -8,18 +8,6 @@ using TypeSpec.Http;
 namespace Microsoft.PlanetaryComputer;
 
 /**
- * Type identifying Feature Polygon objects containing rio-tiler model information
- */
-union FeaturePolygonDictStrRioTilerModelsInfoType {
-  string,
-
-  /**
-   * Standard GeoJSON Feature type identifier
-   */
-  Feature: "Feature",
-}
-
-/**
  * Resampling algorithm to use when reading source raster data at different resolutions
  */
 union Resampling {
@@ -74,7 +62,7 @@ union Resampling {
 /**
  * Image format specifier for tile and image requests
  */
-union ImageType {
+union TilerImageFormat {
   string,
 
   /**
@@ -125,7 +113,7 @@ union ImageType {
 /**
  * Standard identifier for a coordinate reference system and tiling scheme used for serving map tiles
  */
-union Tilematrixsetid {
+union TileMatrixSetId {
   string,
 
   /**
@@ -187,7 +175,7 @@ union Tilematrixsetid {
 /**
  * Scheme for tile addressing in TileJSON specification
  */
-union TileJsonScheme {
+union TileAddressingScheme {
   string,
 
   /**
@@ -204,7 +192,7 @@ union TileJsonScheme {
 /**
  * Type of metadata resource in the system
  */
-union MetadataType {
+union MosaicMetadataType {
   string,
 
   /**
@@ -260,60 +248,43 @@ union PixelSelection {
   /**
    * Calculate standard deviation of available pixels
    */
-  stdev: "stdev",
+  standardDeviation: "stdev",
 
   /**
    * Select image with lowest value in the last band
    */
-  lastbandlow: "lastbandlow",
+  lastBandLow: "lastbandlow",
 
   /**
    * Select image with highest value in the last band
    */
-  lastbandhight: "lastbandhight",
-}
-
-/**
- * Format specification for image request outputs
- */
-union ImageRequestFormat {
-  string,
-
-  /**
-   * Portable Network Graphics format
-   */
-  png: "png",
-
-  /**
-   * Cloud Optimized GeoTIFF format
-   */
-  cog: "cog",
+  lastBandHigh: "lastbandhigh",
 }
 
 /**
  * Geographic extent of a dataset expressed as a bounding box
  */
-model BoundsResponse {
+model StacItemBounds {
   /**
    * Array of coordinates defining the bounding box [west, south, east, north]
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  bounds: float64[];
+  bounds: float32[];
 }
 
 /**
  * GeoJSON Feature object containing rio-tiler model information
  */
-model FeaturePolygonDictStrRioTilerModelsInfo {
+model TilerInfoGeoJsonFeature {
   /**
    * GeoJSON type identifier
    */
-  type: FeaturePolygonDictStrRioTilerModelsInfoType;
+  type: FeatureType;
 
   /**
    * Geometry object defining the feature's shape
    */
-  geometry: GeoJson;
+  geometry: Geometry;
 
   /**
    * Properties
@@ -328,7 +299,8 @@ model FeaturePolygonDictStrRioTilerModelsInfo {
   /**
    * Bounding box coordinates for the feature
    */
-  bbox?: float64;
+  @encodedName("application/json", "bbox")
+  boundingBox?: float32;
 }
 
 /**
@@ -339,12 +311,13 @@ model FeaturePolygonDictStrRioTilerModelsInfo {
 /**
  * TileJSON metadata describing a tile set according to the TileJSON specification
  */
-model TileJsonResponse {
+model TileJsonMetaData {
   /**
-   * Tilejson
+   * TileJson
    */
   #suppress "@azure-tools/typespec-azure-core/property-name-conflict" ""
-  tilejson?: string = "2.2.0";
+  @encodedName("application/json", "tilejson")
+  tileJson?: string = "2.2.0";
 
   /**
    * Human-readable name of the tile set
@@ -379,7 +352,7 @@ model TileJsonResponse {
   /**
    * Tile addressing scheme (xyz or tms)
    */
-  scheme?: TileJsonScheme = TileJsonScheme.xyz;
+  scheme?: TileAddressingScheme = TileAddressingScheme.xyz;
 
   /**
    * Array of tile URL templates
@@ -400,13 +373,15 @@ model TileJsonResponse {
    * Minimum zoom level available in the tile set
    */
   @maxValue(30)
-  minzoom?: int32;
+  @encodedName("application/json", "minzoom")
+  minZoom?: int32;
 
   /**
    * Maximum zoom level available in the tile set
    */
   @maxValue(30)
-  maxzoom?: int32 = 30;
+  @encodedName("application/json", "maxzoom")
+  maxZoom?: int32 = 30;
 
   /**
    * Bounds
@@ -431,7 +406,7 @@ model WmtsCapabilitiesXmlResponse {
   /**
    * body for WMTSCapabilitiesXmlResponse
    */
-  @bodyRoot body: string;
+  @body body: bytes;
 
   /**
    * content type for WMTSCapabilitiesXmlResponse
@@ -460,9 +435,9 @@ model AssetQueryParameters {
    * Per asset band indexes (coma separated indexes)
    */
   #suppress "@azure-tools/typespec-azure-core/no-query-explode" "This is an existing service operation."
-  @query(#{ explode: true })
   @query("asset_bidx")
-  assetBidx?: string[];
+  @query(#{ explode: true })
+  assetBandIndices?: string[];
 
   /**
    * Asset as Band
@@ -474,7 +449,7 @@ model AssetQueryParameters {
    * Overwrite internal Nodata value
    */
   @query("nodata")
-  nodata?: float32;
+  noData?: float32;
 
   /**
    * Apply internal Scale or Offset
@@ -486,15 +461,15 @@ model AssetQueryParameters {
 /**
  * Parameters for specifying which algorithm to apply to raster data and its configuration
  */
-model AlgorithmQueryParameters {
+model TerrainAlgorithmQueryParameters {
   /**
-   * Algorithm name
+   * Terrain algorithm name
    */
   @query("algorithm")
-  algorithm?: Algorithm;
+  algorithm?: TerrainAlgorithm;
 
   /**
-   * Algorithm parameter
+   * Terrain algorithm parameters
    */
   @query("algorithm_params")
   algorithmParams?: string;
@@ -515,13 +490,13 @@ model MiscTileQueryParameters {
    * Colormap name
    */
   @query("colormap_name")
-  colormapName?: ColorMapNames;
+  colorMapName?: ColorMapNames;
 
   /**
    * JSON encoded custom Colormap
    */
   @query("colormap")
-  colormap?: string;
+  colorMap?: string;
 
   /**
    * Add mask to the output data.
@@ -564,13 +539,13 @@ model ZoomQueryParameters {
    * Overwrite default minzoom.
    */
   @query("minzoom")
-  minzoom?: int32;
+  minZoom?: int32;
 
   /**
    * Overwrite default maxzoom.
    */
   @query("maxzoom")
-  maxzoom?: int32;
+  maxZoom?: int32;
 }
 
 alias TileResponse =
