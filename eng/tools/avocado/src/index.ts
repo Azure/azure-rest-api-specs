@@ -757,16 +757,21 @@ const getInputFilesFromReadme = (readMePath: string): asyncIt.AsyncIterableEx<Sp
     const m = md.parse(file.toString());
     const dir = path.dirname(readMePath);
 
-    yield* openApiMd
-      .getInputFiles(m.markDown)
-      .map((f) => f.replace("$(this-folder)", "."))
-      .uniq()
-      .map((f) => path.resolve(path.join(dir, ...f.split("\\"))))
-      .map<Specification>((f) => ({
-        path: f,
-        readMePath,
-        kind: isExample(f) ? "EXAMPLE" : "SWAGGER",
-      }));
+    try {
+      yield* openApiMd
+        .getInputFiles(m.markDown)
+        .map((f) => f.replace("$(this-folder)", "."))
+        .uniq()
+        .map((f) => path.resolve(path.join(dir, ...f.split("\\"))))
+        .map<Specification>((f) => ({
+          path: f,
+          readMePath,
+          kind: isExample(f) ? "EXAMPLE" : "SWAGGER",
+        }));
+    } catch {
+      // Return no files if anything throws.  Similar to how utils.load() returns "undefined" if YAML.load() throws.
+      // Required to avoid crashing when getInputFiles() throws on an invalid readme.md file.
+    }
   });
 
 const getAllInputFilesUnderReadme = (readMePath: string): asyncIt.AsyncIterableEx<Specification> =>
