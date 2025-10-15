@@ -1394,7 +1394,7 @@ model JobStages {
    * Delay information for the job stages.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   delayInformation?: JobDelayDetails[];
 }
 
@@ -2239,7 +2239,7 @@ model DeviceCapabilityResponse {
    * List of device capabilities available for a given region and a given sku
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   deviceCapabilityDetails?: DeviceCapabilityDetails[];
 }
 
@@ -3609,14 +3609,14 @@ model DataBoxDiskJobDetails extends JobDetails {
    * Copy progress per disk.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   granularCopyProgress?: DataBoxDiskGranularCopyProgress[];
 
   /**
    * Copy progress per disk.
    */
   @visibility(Lifecycle.Read)
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   granularCopyLogDetails?: DataBoxDiskGranularCopyLogDetails[];
 
   /**
