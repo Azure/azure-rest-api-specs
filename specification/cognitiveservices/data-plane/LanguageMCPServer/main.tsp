@@ -27,7 +27,7 @@ alias AADToken = OAuth2Auth<[
   }
 ]>;
 
-@useAuth(AzureKey | AADToken | BearerAuth)
+@useAuth(AzureKey | AADToken)
 @service(#{ title: "Language MCP Server" })
 @server(
   "{Endpoint}/language",
