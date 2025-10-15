@@ -1306,6 +1306,28 @@
           "description": "The deletion time of the thread",
           "format": "date-time",
           "type": "string"
+        },
+        "reason": {
+          "description": "The chat thread deletion reason.",
+          "type": "string",
+          "enum": [
+            "DeletedByUser",
+            "DeletedByPolicy"
+          ],
+          "x-ms-enum": {
+            "name": "AcsChatThreadDeletedReasonType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "deletedByUser",
+                "description": "Deleted by user."
+              },
+              {
+                "value": "deletedByPolicy",
+                "description": "Deleted by policy."
+              }
+            ]
+          }
         }
       },
       "required": [
