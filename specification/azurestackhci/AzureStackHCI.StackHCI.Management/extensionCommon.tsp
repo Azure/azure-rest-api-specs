@@ -15,7 +15,7 @@ namespace Microsoft.AzureStackHCI;
 
 //TODO: Use the common models in Extension.tsp
 /**
- * Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Provisioned Machine).
+ * Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model ExtensionProperties {
@@ -32,7 +32,7 @@ model ExtensionProperties {
   extensionParameters?: ExtensionParametersContent;
 
   /**
-   * Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   aggregateState?: ExtensionAggregateState;
@@ -99,12 +99,12 @@ model ExtensionParametersContent {
 }
 
 /**
- * Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Provisioned Machine).
+ * Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model PerNodeExtensionState {
   /**
-   * Name of the node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   name?: string;

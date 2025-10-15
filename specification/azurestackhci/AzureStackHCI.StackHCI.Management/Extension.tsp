@@ -28,26 +28,26 @@ model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
 @armResourceOperations
 interface Extensions {
   /**
-   * Get particular Arc Extension of the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   get is ArmResourceRead<Extension>;
 
   /**
-   * Create Extension for the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Create Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   create is ArmResourceCreateOrReplaceAsync<Extension>;
 
   /**
-   * Update Extension for the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Update Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<Extension, PatchModel = ExtensionPatch>;
 
   /**
-   * Delete particular Arc Extension of the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
@@ -60,7 +60,7 @@ interface Extensions {
   >;
 
   /**
-   * List all Extensions under the Parent Entity(HCI Cluster/Provisioned Machine).
+   * List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByArcSetting is ArmResourceListByParent<
@@ -69,7 +69,7 @@ interface Extensions {
   >;
 
   /**
-   * Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   upgrade is ArmResourceActionAsyncBase<
@@ -95,13 +95,13 @@ interface Extensions {
 // Models
 
 /**
- * List of Extensions in the Parent Entity(HCI Cluster/Provisioned Machine).
+ * List of Extensions in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model ExtensionList is Azure.Core.Page<Extension>;
 
 /**
- * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).
+ * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model ExtensionProperties {
@@ -118,7 +118,7 @@ model ExtensionProperties {
   extensionParameters?: ExtensionParametersContent;
 
   /**
-   * Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   aggregateState?: ExtensionAggregateState;
@@ -185,12 +185,12 @@ model ExtensionParametersContent {
 }
 
 /**
- * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).
+ * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 model PerNodeExtensionState {
   /**
-   * Name of the node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).
+   * Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   name?: string;

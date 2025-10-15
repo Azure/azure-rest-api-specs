@@ -40,7 +40,7 @@
   },
   "tags": [
     {
-      "name": "ProvisionedMachineExtensions"
+      "name": "EdgeMachineExtensions"
     },
     {
       "name": "DevicePools"
@@ -1009,11 +1009,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/extensions": {
       "get": {
-        "operationId": "ProvisionedMachineExtensions_ListByProvisionedMachine",
+        "operationId": "EdgeMachineExtensions_ListByEdgeMachine",
         "tags": [
-          "ProvisionedMachineExtensions"
+          "EdgeMachineExtensions"
         ],
-        "description": "List all Extensions on an Provisioned Machine.",
+        "description": "List all Extensions on an Edge Machine.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1037,7 +1037,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProvisionedMachineExtensionList"
+              "$ref": "#/definitions/EdgeMachineExtensionList"
             }
           },
           "default": {
@@ -1048,8 +1048,8 @@
           }
         },
         "x-ms-examples": {
-          "ProvisionedMachineExtensions_ListByProvisionedMachine": {
-            "$ref": "./examples/ProvisionedMachineExtensions_ListByProvisionedMachine.json"
+          "EdgeMachineExtensions_ListByEdgeMachine": {
+            "$ref": "./examples/EdgeMachineExtensions_ListByProvisionedMachine.json"
           }
         },
         "x-ms-pageable": {
@@ -1059,11 +1059,11 @@
     },
     "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.AzureStackHCI/edgeMachines/{edgeMachineName}/extensions/{extensionName}": {
       "get": {
-        "operationId": "ProvisionedMachineExtensions_Get",
+        "operationId": "EdgeMachineExtensions_Get",
         "tags": [
-          "ProvisionedMachineExtensions"
+          "EdgeMachineExtensions"
         ],
-        "description": "Get a specific Extension on an Provisioned Machine.",
+        "description": "Get a specific Extension on an Edge Machine.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1085,7 +1085,7 @@
           {
             "name": "extensionName",
             "in": "path",
-            "description": "The name of the ProvisionedMachineExtension",
+            "description": "The name of the EdgeMachineExtension",
             "required": true,
             "type": "string"
           }
@@ -1094,7 +1094,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/ProvisionedMachineExtension"
+              "$ref": "#/definitions/EdgeMachineExtension"
             }
           },
           "default": {
@@ -1105,17 +1105,17 @@
           }
         },
         "x-ms-examples": {
-          "ProvisionedMachineExtensions_Get": {
-            "$ref": "./examples/ProvisionedMachineExtensions_Get.json"
+          "EdgeMachineExtensions_Get": {
+            "$ref": "./examples/EdgeMachineExtensions_Get.json"
           }
         }
       },
       "put": {
-        "operationId": "ProvisionedMachineExtensions_Create",
+        "operationId": "EdgeMachineExtensions_Create",
         "tags": [
-          "ProvisionedMachineExtensions"
+          "EdgeMachineExtensions"
         ],
-        "description": "Create or replace an Extension on an Provisioned Machine.",
+        "description": "Create or replace an Extension on an Edge Machine.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1137,7 +1137,7 @@
           {
             "name": "extensionName",
             "in": "path",
-            "description": "The name of the ProvisionedMachineExtension",
+            "description": "The name of the EdgeMachineExtension",
             "required": true,
             "type": "string"
           },
@@ -1147,21 +1147,21 @@
             "description": "Resource create parameters.",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ProvisionedMachineExtension"
+              "$ref": "#/definitions/EdgeMachineExtension"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ProvisionedMachineExtension' update operation succeeded",
+            "description": "Resource 'EdgeMachineExtension' update operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ProvisionedMachineExtension"
+              "$ref": "#/definitions/EdgeMachineExtension"
             }
           },
           "201": {
-            "description": "Resource 'ProvisionedMachineExtension' create operation succeeded",
+            "description": "Resource 'EdgeMachineExtension' create operation succeeded",
             "schema": {
-              "$ref": "#/definitions/ProvisionedMachineExtension"
+              "$ref": "#/definitions/EdgeMachineExtension"
             },
             "headers": {
               "Azure-AsyncOperation": {
@@ -1183,8 +1183,8 @@
           }
         },
         "x-ms-examples": {
-          "ProvisionedMachineExtensions_Create": {
-            "$ref": "./examples/ProvisionedMachineExtensions_Create.json"
+          "EdgeMachineExtensions_Create": {
+            "$ref": "./examples/EdgeMachineExtensions_Create.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1193,11 +1193,11 @@
         "x-ms-long-running-operation": true
       },
       "delete": {
-        "operationId": "ProvisionedMachineExtensions_Delete",
+        "operationId": "EdgeMachineExtensions_Delete",
         "tags": [
-          "ProvisionedMachineExtensions"
+          "EdgeMachineExtensions"
         ],
-        "description": "Delete Extension on an Provisioned Machine.",
+        "description": "Delete Extension on an Edge Machine.",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -1219,7 +1219,7 @@
           {
             "name": "extensionName",
             "in": "path",
-            "description": "The name of the ProvisionedMachineExtension",
+            "description": "The name of the EdgeMachineExtension",
             "required": true,
             "type": "string"
           }
@@ -1254,8 +1254,8 @@
           }
         },
         "x-ms-examples": {
-          "ProvisionedMachineExtensions_Delete": {
-            "$ref": "./examples/ProvisionedMachineExtensions_Delete.json"
+          "EdgeMachineExtensions_Delete": {
+            "$ref": "./examples/EdgeMachineExtensions_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2254,6 +2254,42 @@
         ]
       }
     },
+    "EdgeMachineExtension": {
+      "type": "object",
+      "description": "Details of a particular extension in EdgeMachine.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/ExtensionProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "EdgeMachineExtensionList": {
+      "type": "object",
+      "description": "List of Extensions in Edge Machine.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The EdgeMachineExtension items on this page",
+          "items": {
+            "$ref": "#/definitions/EdgeMachineExtension"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "EdgeMachineJob": {
       "type": "object",
       "description": "Cluster Jobs resource",
@@ -2977,7 +3013,7 @@
     },
     "ExtensionProperties": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Provisioned Machine).",
+      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "provisioningState": {
           "$ref": "#/definitions/ProvisioningState",
@@ -2990,7 +3026,7 @@
         },
         "aggregateState": {
           "$ref": "#/definitions/ExtensionAggregateState",
-          "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Provisioned Machine).",
+          "description": "Aggregate state of Arc Extensions across the nodes in the Parent Entity(HCI Cluster/Edge Machine).",
           "readOnly": true
         },
         "perNodeExtensionDetails": {
@@ -3941,11 +3977,11 @@
     },
     "PerNodeExtensionState": {
       "type": "object",
-      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Provisioned Machine).",
+      "description": "Status of Arc Extension for a particular node in the Parent Entity(HCI Cluster/Edge Machine).",
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the node/machine in the Parent Entity(HCI Cluster/Provisioned Machine).",
+          "description": "Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).",
           "readOnly": true
         },
         "extension": {
@@ -4012,52 +4048,6 @@
           "$ref": "#/definitions/EceActionStatus",
           "description": "Deployment status of job.",
           "readOnly": true
-        }
-      }
-    },
-    "ProvisionedMachineExtension": {
-      "type": "object",
-      "description": "Details of a particular extension in EdgeMachine.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/ExtensionProperties",
-          "description": "The resource-specific properties for this resource."
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "ProvisionedMachineExtensionList": {
-      "type": "object",
-      "description": "List of Extensions in Provisioned Machine.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The ProvisionedMachineExtension items on this page",
-          "items": {
-            "$ref": "#/definitions/ProvisionedMachineExtension"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
-      ]
-    },
-    "ProvisionedMachineExtensionUpgradeParameters": {
-      "type": "object",
-      "description": "Describes the parameters for Extension upgrade.",
-      "properties": {
-        "targetVersion": {
-          "type": "string",
-          "description": "Extension Upgrade Target Version."
         }
       }
     },
