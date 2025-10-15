@@ -127,16 +127,11 @@ interface AvailabilitySets {
    */
   convertToVirtualMachineScaleSet is ArmResourceActionAsyncBase<
     AvailabilitySet,
-    {
-      /**
-       * Parameters supplied to the migrate operation on the availability set.
-       */
-      @bodyRoot
-      parameters?: ConvertToVirtualMachineScaleSetInput;
-    },
+    ConvertToVirtualMachineScaleSetInput,
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<AvailabilitySet>,
-    Error = CloudError
+    Error = CloudError,
+    OptionalRequestBody = true
   >;
 }
 

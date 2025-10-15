@@ -387,16 +387,11 @@ interface VirtualMachines {
   @operationId("VirtualMachines_migrateToVMScaleSet")
   migrateToVMScaleSet is ArmResourceActionAsyncBase<
     VirtualMachine,
-    {
-      /**
-       * Parameters supplied to the Migrate Virtual Machine operation.
-       */
-      @bodyRoot
-      parameters?: MigrateVMToVirtualMachineScaleSetInput;
-    },
+    MigrateVMToVirtualMachineScaleSetInput,
     ArmAcceptedLroResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<VirtualMachine>,
-    Error = CloudError
+    Error = CloudError,
+    OptionalRequestBody = true
   >;
 }
 
