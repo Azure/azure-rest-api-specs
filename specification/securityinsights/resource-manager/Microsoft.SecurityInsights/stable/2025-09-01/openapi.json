@@ -865,15 +865,14 @@
           {
             "name": "workspaceName",
             "in": "path",
-            "description": "The name of the monitor workspace.",
+            "description": "The name of the workspace.",
             "required": true,
-            "type": "string",
-            "pattern": "^[A-Za-z0-9][A-Za-z0-9-]+[A-Za-z0-9]$"
+            "type": "string"
           },
           {
             "name": "automationRuleId",
             "in": "path",
-            "description": "Automation rule ID",
+            "description": "The incident identifier.",
             "required": true,
             "type": "string"
           },
@@ -881,7 +880,7 @@
             "name": "automationRuleToUpsert",
             "in": "body",
             "description": "The automation rule",
-            "required": true,
+            "required": false,
             "schema": {
               "$ref": "#/definitions/AutomationRule"
             }
