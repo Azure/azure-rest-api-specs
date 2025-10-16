@@ -90,3 +90,20 @@ using Microsoft.Compute;
 );
 @@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
 @@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
+
+@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+  DiskAccesses,
+  "!csharp"
+);

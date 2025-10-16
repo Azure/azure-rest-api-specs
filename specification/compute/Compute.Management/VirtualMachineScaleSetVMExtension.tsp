@@ -49,6 +49,32 @@ model VirtualMachineScaleSetVMExtension
 }
 
 @armResourceOperations
+interface VirtualMachineScaleSetVMExtensionsOps
+  extends Azure.ResourceManager.Legacy.ComputeLegacyOperations<
+      {
+        ...Azure.ResourceManager.Legacy.BasePath,
+
+        @doc("The name of the VM scale set.")
+        @path
+        @segment("virtualMachineScaleSets")
+        vmScaleSetName: string,
+
+        @doc("The instance ID of the virtual machine.")
+        @path
+        @segment("virtualMachines")
+        instanceId: string,
+      },
+      KeysOf<{
+        ...ResourceNameParameter<
+          VirtualMachineScaleSetVMExtension,
+          SegmentName = "extensions",
+          KeyName = "vmssExtensionName",
+          NamePattern = ""
+        >,
+      }>
+    > {}
+
+@armResourceOperations
 interface VirtualMachineScaleSetVMExtensions {
   /**
    * The operation to get the VMSS VM extension.
@@ -73,7 +99,8 @@ interface VirtualMachineScaleSetVMExtensions {
   @operationId("VirtualMachineScaleSetVMExtensions_CreateOrUpdate")
   createOrUpdate is ComputeResourceCreateOrReplaceAsync<
     VirtualMachineScaleSetVMExtension,
-    LroHeaders = ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVMExtension> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -86,7 +113,7 @@ interface VirtualMachineScaleSetVMExtensions {
     VirtualMachineScaleSetVMExtension,
     VirtualMachineScaleSetVMExtensionUpdate,
     Response = ArmResponse<VirtualMachineScaleSetVMExtension> &
-      ArmLroLocationHeader &
+      ArmLroLocationHeader<FinalResult = VirtualMachineScaleSetVMExtension> &
       Azure.Core.Foundations.RetryAfterHeader
   >;
 
@@ -105,7 +132,7 @@ interface VirtualMachineScaleSetVMExtensions {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("VirtualMachineScaleSetVMExtensions_List")
-  list is ComputeResourceListByParent<
+  list is VirtualMachineScaleSetVMExtensionsOps.ListSinglePage<
     VirtualMachineScaleSetVMExtension,
     Parameters = {
       /**

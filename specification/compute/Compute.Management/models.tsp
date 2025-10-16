@@ -1245,39 +1245,6 @@ union RestorePointExpandOptions {
   instanceView: "instanceView",
 }
 
-/**
- * The state of snapshot which determines the access availability of the snapshot.
- */
-@added(Versions.v2025_04_01)
-union SnapshotAccessState {
-  string,
-
-  /**
-   * Default value.
-   */
-  Unknown: "Unknown",
-
-  /**
-   * The snapshot cannot be used for restore, copy or download to offline.
-   */
-  Pending: "Pending",
-
-  /**
-   * The snapshot can be used for restore, copy to different region, and download to offline.
-   */
-  Available: "Available",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance but cannot be copied or downloaded.
-   */
-  InstantAccess: "InstantAccess",
-
-  /**
-   * The snapshot can be used for restoring disks with fast performance, copied and downloaded.
-   */
-  AvailableWithInstantAccess: "AvailableWithInstantAccess",
-}
-
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 union ExpandTypesForGetCapacityReservationGroups {
   string,
@@ -2175,7 +2142,7 @@ model AdditionalUnattendContent {
   /**
    * The pass name. Currently, the only allowable value is OobeSystem.
    */
-  passName?: PassNames;
+  passName?: "OobeSystem";
 
   /**
    * The component name. Currently, the only allowable value is Microsoft-Windows-Shell-Setup.
@@ -2191,13 +2158,6 @@ model AdditionalUnattendContent {
    * Specifies the XML formatted content that is added to the unattend.xml file for the specified path and component. The XML must be less than 4KB and must include the root element for the setting or feature that is being inserted.
    */
   content?: string;
-}
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required"
-#suppress "@azure-tools/typespec-azure-core/no-closed-literal-union"
-union PassNames {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required"
-  "OobeSystem",
 }
 
 /**
@@ -3342,12 +3302,6 @@ model AdditionalCapabilities {
    * The flag that enables or disables hibernation capability on the VM.
    */
   hibernationEnabled?: boolean;
-
-  /**
-   * The flag enables the usage of FIPS 140-3 compliant cryptography on the protectedSettings of an extension. Learn more at: https://aka.ms/linuxagentfipssupport.
-   */
-  @added(Versions.v2025_04_01)
-  enableFips1403Encryption?: boolean;
 }
 
 /**
@@ -5294,29 +5248,13 @@ model DataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
-  @renamedFrom(Versions.v2025_04_01, "diskIOPSReadWrite")
-  @removed(Versions.v2025_04_01)
   @visibility(Lifecycle.Read)
-  DiskIOPSReadWrite?: int64;
-
-  /**
-   * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS.
-   */
-  @added(Versions.v2025_04_01)
   diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
-  @renamedFrom(Versions.v2025_04_01, "diskMBpsReadWrite")
-  @removed(Versions.v2025_04_01)
   @visibility(Lifecycle.Read)
-  DiskMBpsReadWrite?: int64;
-
-  /**
-   * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS.
-   */
-  @added(Versions.v2025_04_01)
   diskMBpsReadWrite?: int64;
 
   /**
@@ -7800,12 +7738,6 @@ model RestorePointCollectionProperties {
    */
   @visibility(Lifecycle.Read)
   restorePoints?: RestorePoint[];
-
-  /**
-   * This property determines whether instant access snapshot is enabled for restore points created under this restore point collection for Premium SSD v2 or Ultra disk. Instant access snapshot for Premium SSD v2 or Ultra disk is instantaneously available for restoring disk with fast restore performance.
-   */
-  @added(Versions.v2025_04_01)
-  instantAccess?: boolean;
 }
 
 /**
@@ -7865,12 +7797,6 @@ model RestorePointProperties {
    */
   @visibility(Lifecycle.Read)
   instanceView?: RestorePointInstanceView;
-
-  /**
-   * This property determines the time in minutes the snapshot is retained as instant access for restoring Premium SSD v2 or Ultra disk with fast restore performance in this restore point.
-   */
-  @added(Versions.v2025_04_01)
-  instantAccessDurationMinutes?: int32;
 }
 
 /**
@@ -8110,12 +8036,6 @@ model DiskRestorePointInstanceView {
    * Disk restore point Id.
    */
   id?: string;
-
-  /**
-   * The state of snapshot which determines the access availability of the snapshot.
-   */
-  @added(Versions.v2025_04_01)
-  snapshotAccessState?: SnapshotAccessState;
 
   /**
    * The disk restore point replication status information.
