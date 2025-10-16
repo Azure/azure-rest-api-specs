@@ -30,16 +30,12 @@ interface TableRoleDefinitionResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Table Role Definition with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_GetTableRoleDefinition")
   getTableRoleDefinition is ArmResourceRead<TableRoleDefinitionResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB Table Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_CreateUpdateTableRoleDefinition")
   createUpdateTableRoleDefinition is ArmResourceCreateOrReplaceAsync<
     TableRoleDefinitionResource,
     Response = ArmResourceUpdatedResponse<TableRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableRoleDefinitionResource>>,
@@ -50,9 +46,7 @@ interface TableRoleDefinitionResources {
   /**
    * Deletes an existing Azure Cosmos DB Table Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_DeleteTableRoleDefinition")
   deleteTableRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     TableRoleDefinitionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
@@ -61,8 +55,6 @@ interface TableRoleDefinitionResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Table Role Definitions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_ListTableRoleDefinitions")
   listTableRoleDefinitions is ArmResourceListByParent<
     TableRoleDefinitionResource,
     Response = TableRoleDefinitionListResult

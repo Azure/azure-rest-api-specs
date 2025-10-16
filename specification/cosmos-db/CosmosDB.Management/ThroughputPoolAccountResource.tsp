@@ -30,22 +30,16 @@ interface ThroughputPoolAccountResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Throughput Pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPoolAccount_Get")
   get is ArmResourceRead<ThroughputPoolAccountResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB ThroughputPool account. The "Update" method is preferred when performing updates on an account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPoolAccount_Create")
   create is ArmResourceCreateOrReplaceAsync<ThroughputPoolAccountResource>;
 
   /**
    * Removes an existing Azure Cosmos DB database account from a throughput pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPoolAccount_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolAccountResource,
     Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
@@ -54,8 +48,6 @@ interface ThroughputPoolAccountResources {
   /**
    * Lists all the Azure Cosmos DB accounts available under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPoolAccounts_List")
   list is ArmResourceListByParent<
     ThroughputPoolAccountResource,
     Response = ThroughputPoolAccountsListResult

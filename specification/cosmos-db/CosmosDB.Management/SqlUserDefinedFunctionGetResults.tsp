@@ -37,16 +37,12 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   /**
    * Gets the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_GetSqlUserDefinedFunction")
   getSqlUserDefinedFunction is ArmResourceRead<SqlUserDefinedFunctionGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB SQL userDefinedFunction
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_CreateUpdateSqlUserDefinedFunction")
   createUpdateSqlUserDefinedFunction is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlUserDefinedFunctionGetResults,
     Request = SqlUserDefinedFunctionCreateUpdateParameters,
@@ -57,15 +53,11 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_DeleteSqlUserDefinedFunction")
   deleteSqlUserDefinedFunction is ArmResourceDeleteWithoutOkAsync<SqlUserDefinedFunctionGetResults>;
 
   /**
    * Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_ListSqlUserDefinedFunctions")
   listSqlUserDefinedFunctions is ArmResourceListByParent<
     SqlUserDefinedFunctionGetResults,
     Response = ArmResponse<SqlUserDefinedFunctionListResult>

@@ -30,23 +30,17 @@ interface FleetspaceAccountResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB fleetspace account under a fleetspace
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetspaceAccount_Get")
   get is ArmResourceRead<FleetspaceAccountResource>;
 
   /**
    * Creates an Azure Cosmos DB fleetspace account under a fleetspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetspaceAccount_Create")
   create is ArmResourceCreateOrReplaceAsync<FleetspaceAccountResource>;
 
   /**
    * Removes an existing Azure Cosmos DB fleetspace account from a fleetspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetspaceAccount_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetspaceAccountResource,
     LroHeaders = ArmAsyncOperationHeader &
@@ -56,8 +50,6 @@ interface FleetspaceAccountResources {
   /**
    * Lists all the fleetspaces accounts  under a fleetspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetspaceAccount_List")
   list is ArmResourceListByParent<FleetspaceAccountResource>;
 }
 

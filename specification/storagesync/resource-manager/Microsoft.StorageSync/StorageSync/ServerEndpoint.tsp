@@ -157,8 +157,6 @@ interface ServerEndpoints {
   /**
    * Recall a server endpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ServerEndpoints_recallAction")
   recallAction is ArmResourceActionSync<
     ServerEndpoint,
     RecallActionParameters,

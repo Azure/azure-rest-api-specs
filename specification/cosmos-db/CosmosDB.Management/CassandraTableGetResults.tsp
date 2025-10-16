@@ -36,16 +36,12 @@ interface CassandraTableGetResultsOperationGroup {
   /**
    * Gets the Cassandra table under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraResources_GetCassandraTable")
   getCassandraTable is ArmResourceRead<CassandraTableGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB Cassandra Table
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraResources_CreateUpdateCassandraTable")
   createUpdateCassandraTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraTableGetResults,
     Request = CassandraTableCreateUpdateParameters,
@@ -56,15 +52,11 @@ interface CassandraTableGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Cassandra table.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraResources_DeleteCassandraTable")
   deleteCassandraTable is ArmResourceDeleteWithoutOkAsync<CassandraTableGetResults>;
 
   /**
    * Lists the Cassandra table under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraResources_ListCassandraTables")
   listCassandraTables is ArmResourceListByParent<
     CassandraTableGetResults,
     Response = ArmResponse<CassandraTableListResult>

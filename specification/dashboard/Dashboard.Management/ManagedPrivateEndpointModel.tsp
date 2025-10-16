@@ -30,8 +30,6 @@ interface ManagedPrivateEndpointModels {
   /**
    * Get a specific managed private endpoint of a grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedPrivateEndpoints_Get")
   get is ArmResourceRead<ManagedPrivateEndpointModel>;
 
   /**
@@ -83,8 +81,6 @@ interface ManagedPrivateEndpointModels {
   /**
    * List all managed private endpoints of a grafana resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ManagedPrivateEndpoints_List")
   list is ArmResourceListByParent<
     ManagedPrivateEndpointModel,
     Response = ArmResponse<ManagedPrivateEndpointModelListResponse>

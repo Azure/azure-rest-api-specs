@@ -30,16 +30,12 @@ interface GremlinRoleDefinitionResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Definition with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_GetGremlinRoleDefinition")
   getGremlinRoleDefinition is ArmResourceRead<GremlinRoleDefinitionResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB Gremlin Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_CreateUpdateGremlinRoleDefinition")
   createUpdateGremlinRoleDefinition is ArmResourceCreateOrReplaceAsync<
     GremlinRoleDefinitionResource,
     Response = ArmResourceUpdatedResponse<GremlinRoleDefinitionResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GremlinRoleDefinitionResource> &
@@ -49,9 +45,7 @@ interface GremlinRoleDefinitionResources {
   /**
    * Deletes an existing Azure Cosmos DB Gremlin Role Definition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_DeleteGremlinRoleDefinition")
   deleteGremlinRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     GremlinRoleDefinitionResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
@@ -60,8 +54,6 @@ interface GremlinRoleDefinitionResources {
   /**
    * Retrieves the list of all Azure Cosmos DB Gremlin Role Definitions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_ListGremlinRoleDefinitions")
   listGremlinRoleDefinitions is ArmResourceListByParent<GremlinRoleDefinitionResource>;
 }
 

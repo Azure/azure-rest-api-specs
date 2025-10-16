@@ -37,8 +37,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB restorable database account.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read/*' permission.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableDatabaseAccounts_GetByLocation")
   getByLocation is ArmResourceRead<
     RestorableDatabaseAccountGetResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
@@ -48,7 +46,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Lists all the restorable Azure Cosmos DB database accounts available under the subscription and in a region.  This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @list
   listByLocation is ArmResourceListByParent<
     RestorableDatabaseAccountGetResult,
@@ -60,8 +57,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Show the event feed of all mutations done on all the Azure Cosmos DB SQL databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableSqlDatabases_List")
   @list
   @get
   @action("restorableSqlDatabases")
@@ -76,8 +71,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Show the event feed of all mutations done on all the Azure Cosmos DB SQL containers under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableSqlContainers_List")
   @list
   @get
   @action("restorableSqlContainers")
@@ -111,8 +104,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Return a list of database and container combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableSqlResources_List")
   @list
   @get
   @action("restorableSqlResources")
@@ -140,8 +131,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB databases under the restorable account.  This helps in scenario where database was accidentally deleted to get the deletion time.  This API requires  'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableMongodbDatabases_List")
   @list
   @get
   @action("restorableMongodbDatabases")
@@ -156,8 +145,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Show the event feed of all mutations done on all the Azure Cosmos DB MongoDB collections under a specific database.  This helps in scenario where container was accidentally deleted.  This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableMongodbCollections_List")
   @list
   @get
   @action("restorableMongodbCollections")
@@ -191,8 +178,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Return a list of database and collection combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableMongodbResources_List")
   @list
   @get
   @action("restorableMongodbResources")
@@ -220,8 +205,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Show the event feed of all mutations done on all the Azure Cosmos DB Gremlin databases under the restorable account. This helps in scenario where database was accidentally deleted to get the deletion time. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableGremlinDatabases_List")
   @list
   @get
   @action("restorableGremlinDatabases")
@@ -236,8 +219,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Show the event feed of all mutations done on all the Azure Cosmos DB Gremlin graphs under a specific database. This helps in scenario where container was accidentally deleted. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableGremlinGraphs_List")
   @list
   @get
   @action("restorableGraphs")
@@ -271,8 +252,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Return a list of gremlin database and graphs combo that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableGremlinResources_List")
   @list
   @get
   @action("restorableGremlinResources")
@@ -300,8 +279,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Show the event feed of all mutations done on all the Azure Cosmos DB Tables. This helps in scenario where table was accidentally deleted. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableTables_List")
   @list
   @get
   @action("restorableTables")
@@ -329,8 +306,6 @@ interface RestorableDatabaseAccountGetResults {
   /**
    * Return a list of tables that exist on the account at the given timestamp and location. This helps in scenarios to validate what resources exist at given timestamp and location. This API requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/.../read' permission.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableTableResources_List")
   @list
   @get
   @action("restorableTableResources")

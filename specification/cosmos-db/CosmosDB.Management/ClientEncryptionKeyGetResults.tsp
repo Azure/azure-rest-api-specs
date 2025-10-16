@@ -31,16 +31,12 @@ interface ClientEncryptionKeyGetResultsOperationGroup {
   /**
    * Gets the ClientEncryptionKey under an existing Azure Cosmos DB SQL database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_GetClientEncryptionKey")
   getClientEncryptionKey is ArmResourceRead<ClientEncryptionKeyGetResults>;
 
   /**
    * Create or update a ClientEncryptionKey. This API is meant to be invoked via tools such as the Azure Powershell (instead of directly).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_CreateUpdateClientEncryptionKey")
   createUpdateClientEncryptionKey is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ClientEncryptionKeyGetResults,
     Request = ClientEncryptionKeyCreateUpdateParameters,
@@ -51,8 +47,6 @@ interface ClientEncryptionKeyGetResultsOperationGroup {
   /**
    * Lists the ClientEncryptionKeys under an existing Azure Cosmos DB SQL database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_ListClientEncryptionKeys")
   listClientEncryptionKeys is ArmResourceListByParent<
     ClientEncryptionKeyGetResults,
     Response = ArmResponse<ClientEncryptionKeysListResult>

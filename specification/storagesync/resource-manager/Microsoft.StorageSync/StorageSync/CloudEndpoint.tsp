@@ -209,8 +209,6 @@ interface CloudEndpoints {
   /**
    * Restore Heartbeat a given CloudEndpoint.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CloudEndpoints_restoreheartbeat")
   restoreheartbeat is ArmResourceActionSync<
     CloudEndpoint,
     void,

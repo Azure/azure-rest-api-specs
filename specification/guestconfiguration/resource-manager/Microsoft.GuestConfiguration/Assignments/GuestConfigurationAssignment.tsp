@@ -193,8 +193,6 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Get information about a guest configuration assignment
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GuestConfigurationHCRPAssignments_Get")
   get is GuestConfigurationHCRPAssignmentOps.Read<
     GuestConfigurationAssignment,
     ErrorType = ErrorResponse
@@ -203,8 +201,6 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * Creates an association between a ARC machine and guest configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GuestConfigurationHCRPAssignments_CreateOrUpdate")
   createOrUpdate is GuestConfigurationHCRPAssignmentOps.CreateOrUpdateSync<
     GuestConfigurationAssignment,
     ErrorType = ErrorResponse
@@ -225,8 +221,6 @@ interface GuestConfigurationHCRPAssignments {
   /**
    * List all guest configuration assignments for an ARC machine.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GuestConfigurationHCRPAssignments_List")
   list is Extension.ListByTarget<
     HybridCompute,
     GuestConfigurationAssignment,
@@ -284,8 +278,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Get information about a guest configuration assignment for VMSS
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GuestConfigurationAssignmentsVMSS_Get")
   get is Extension.Read<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -295,8 +287,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Creates an association between a VMSS and guest configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GuestConfigurationAssignmentsVMSS_CreateOrUpdate")
   createOrUpdate is Extension.CreateOrReplaceSync<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -307,8 +297,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * Delete a guest configuration assignment for VMSS
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GuestConfigurationAssignmentsVMSS_Delete")
   delete is Extension.DeleteSync<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,
@@ -320,8 +308,6 @@ interface GuestConfigurationAssignmentsVMSS {
   /**
    * List all guest configuration assignments for VMSS.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GuestConfigurationAssignmentsVMSS_List")
   list is Extension.ListByTarget<
     VirtualMachineScaleSets,
     GuestConfigurationAssignment,

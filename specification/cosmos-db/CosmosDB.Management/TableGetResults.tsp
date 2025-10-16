@@ -36,16 +36,12 @@ interface TableGetResultsOperationGroup {
   /**
    * Gets the Tables under an existing Azure Cosmos DB database account with the provided name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_GetTable")
   getTable is ArmResourceRead<TableGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB Table
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_CreateUpdateTable")
   createUpdateTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     TableGetResults,
     Request = TableCreateUpdateParameters,
@@ -56,15 +52,11 @@ interface TableGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Table.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_DeleteTable")
   deleteTable is ArmResourceDeleteWithoutOkAsync<TableGetResults>;
 
   /**
    * Lists the Tables under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_ListTables")
   listTables is ArmResourceListByParent<
     TableGetResults,
     Response = ArmResponse<TableListResult>
@@ -73,8 +65,6 @@ interface TableGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a table.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("TableResources_RetrieveContinuousBackupInformation")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     TableGetResults,
     ContinuousBackupRestoreLocation,

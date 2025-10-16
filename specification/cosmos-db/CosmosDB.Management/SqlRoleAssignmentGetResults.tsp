@@ -30,8 +30,6 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB SQL Role Assignment with the given Id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_GetSqlRoleAssignment")
   getSqlRoleAssignment is ArmResourceRead<
     SqlRoleAssignmentGetResults,
     Error = CloudError
@@ -40,9 +38,7 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   /**
    * Creates or updates an Azure Cosmos DB SQL Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_CreateUpdateSqlRoleAssignment")
   createUpdateSqlRoleAssignment is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlRoleAssignmentGetResults,
     Request = SqlRoleAssignmentCreateUpdateParameters,
@@ -54,9 +50,7 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB SQL Role Assignment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_DeleteSqlRoleAssignment")
   deleteSqlRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     SqlRoleAssignmentGetResults,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -66,8 +60,6 @@ interface SqlRoleAssignmentGetResultsOperationGroup {
   /**
    * Retrieves the list of all Azure Cosmos DB SQL Role Assignments.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("SqlResources_ListSqlRoleAssignments")
   listSqlRoleAssignments is ArmResourceListByParent<
     SqlRoleAssignmentGetResults,
     Response = ArmResponse<SqlRoleAssignmentListResult>,

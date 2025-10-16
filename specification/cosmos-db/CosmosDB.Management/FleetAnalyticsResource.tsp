@@ -30,23 +30,17 @@ interface FleetAnalyticsResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB FleetAnalytics under a fleet
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetAnalytics_Get")
   get is ArmResourceRead<FleetAnalyticsResource>;
 
   /**
    * Creates an Azure Cosmos DB FleetAnalytics under a fleet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetAnalytics_Create")
   create is ArmResourceCreateOrReplaceSync<FleetAnalyticsResource>;
 
   /**
    * Deletes an existing Azure Cosmos DB FleetAnalytics.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetAnalytics_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetAnalyticsResource,
     LroHeaders = ArmAsyncOperationHeader &
@@ -56,8 +50,6 @@ interface FleetAnalyticsResources {
   /**
    * Lists all the FleetAnalytics under a fleet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("FleetAnalytics_List")
   list is ArmResourceListByParent<FleetAnalyticsResource>;
 }
 

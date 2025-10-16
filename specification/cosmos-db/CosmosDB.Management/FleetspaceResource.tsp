@@ -30,23 +30,17 @@ interface FleetspaceResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB fleetspace under a fleet
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Fleetspace_Get")
   get is ArmResourceRead<FleetspaceResource>;
 
   /**
    * Creates an Azure Cosmos DB fleetspace under a fleet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Fleetspace_Create")
   create is ArmResourceCreateOrReplaceAsync<FleetspaceResource>;
 
   /**
    * Update the properties of an existing Azure Cosmos DB fleetspace under a fleet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Fleetspace_Update")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     FleetspaceResource,
@@ -59,9 +53,7 @@ interface FleetspaceResources {
   /**
    * Deletes an existing Azure Cosmos DB Fleetspace.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Fleetspace_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetspaceResource,
     LroHeaders = ArmAsyncOperationHeader &
@@ -71,8 +63,6 @@ interface FleetspaceResources {
   /**
    * Lists all the fleetspaces under a fleet.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Fleetspace_List")
   list is ArmResourceListByParent<FleetspaceResource>;
 }
 

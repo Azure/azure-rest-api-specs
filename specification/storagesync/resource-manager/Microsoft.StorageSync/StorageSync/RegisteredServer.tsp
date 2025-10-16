@@ -151,8 +151,6 @@ interface RegisteredServers {
   /**
    * Triggers Server certificate rollover.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RegisteredServers_triggerRollover")
   triggerRollover is ArmResourceActionSync<
     RegisteredServer,
     TriggerRolloverRequest,

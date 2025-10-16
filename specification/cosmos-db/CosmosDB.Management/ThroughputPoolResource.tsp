@@ -28,22 +28,16 @@ interface ThroughputPoolResources {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Throughput Pool
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPool_Get")
   get is ArmResourceRead<ThroughputPoolResource>;
 
   /**
    * Creates or updates an Azure Cosmos DB ThroughputPool account. The "Update" method is preferred when performing updates on an account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPool_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ThroughputPoolResource>;
 
   /**
    * Updates the properties of an existing Azure Cosmos DB Throughput Pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPool_Update")
   @patch(#{ implicitOptionality: false })
   @Azure.Core.useFinalStateVia("azure-async-operation")
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
@@ -57,8 +51,6 @@ interface ThroughputPoolResources {
   /**
    * Deletes an existing Azure Cosmos DB Throughput Pool.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPool_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ThroughputPoolResource,
     Response = ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
@@ -67,8 +59,6 @@ interface ThroughputPoolResources {
   /**
    * List all the ThroughputPools in a given resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPools_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ThroughputPoolResource,
     Response = ArmResponse<ThroughputPoolsListResult>
@@ -77,8 +67,6 @@ interface ThroughputPoolResources {
   /**
    * Lists all the Azure Cosmos DB Throughput Pools available under the subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("ThroughputPools_List")
   list is ArmListBySubscription<
     ThroughputPoolResource,
     Response = ArmResponse<ThroughputPoolsListResult>

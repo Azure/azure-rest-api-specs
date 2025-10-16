@@ -34,15 +34,11 @@ interface ClusterResources {
   /**
    * Get the properties of a managed Cassandra cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_Get")
   get is ArmResourceRead<ClusterResource>;
 
   /**
    * Create or update a managed Cassandra cluster. When updating, you must specify all writable properties. To update only some properties, use PATCH.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_CreateUpdate")
   createUpdate is ArmResourceCreateOrReplaceAsync<
     ClusterResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ClusterResource> &
@@ -52,9 +48,7 @@ interface ClusterResources {
   /**
    * Updates some of the properties of a managed Cassandra cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ClusterResource,
@@ -69,15 +63,11 @@ interface ClusterResources {
   /**
    * Deletes a managed Cassandra cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<ClusterResource>;
 
   /**
    * List all managed Cassandra clusters in this resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_ListByResourceGroup")
   listByResourceGroup is ArmResourceListByParent<
     ClusterResource,
     Response = ArmResponse<ListClusters>
@@ -86,8 +76,6 @@ interface ClusterResources {
   /**
    * List all managed Cassandra clusters in this subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_ListBySubscription")
   listBySubscription is ArmListBySubscription<
     ClusterResource,
     Response = ArmResponse<ListClusters>
@@ -97,8 +85,6 @@ interface ClusterResources {
    * Invoke a command like nodetool for cassandra maintenance
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_InvokeCommand")
   invokeCommand is ArmResourceActionAsyncBase<
     ClusterResource,
     CommandPostBody,
@@ -112,8 +98,6 @@ interface ClusterResources {
   /**
    * Invoke a command like nodetool for cassandra maintenance asynchronously
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_InvokeCommandAsync")
   invokeCommandAsync is ArmResourceActionAsync<
     ClusterResource,
     CommandAsyncPostBody,
@@ -123,8 +107,6 @@ interface ClusterResources {
   /**
    * List all commands currently running on ring info
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_ListCommand")
   @list
   @get
   @action("commands")
@@ -137,8 +119,6 @@ interface ClusterResources {
   /**
    * Get details about a specified command that was run asynchronously.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_GetCommandAsync")
   @get
   getCommandAsync is ArmResourceRead<
     ClusterResource,
@@ -160,8 +140,6 @@ interface ClusterResources {
   /**
    * List the backups of this cluster that are available to restore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_ListBackups")
   @list
   @get
   @action("backups")
@@ -174,8 +152,6 @@ interface ClusterResources {
   /**
    * Get the properties of an individual backup of this cluster that is available to restore.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_GetBackup")
   @get
   getBackup is ArmResourceRead<
     ClusterResource,
@@ -197,8 +173,6 @@ interface ClusterResources {
   /**
    * Deallocate the Managed Cassandra Cluster and Associated Data Centers. Deallocation will deallocate the host virtual machine of this cluster, and reserved the data disk. This won't do anything on an already deallocated cluster. Use Start to restart the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_Deallocate")
   deallocate is ArmResourceActionAsyncBase<
     ClusterResource,
     void,
@@ -216,8 +190,6 @@ interface ClusterResources {
   /**
    * Start the Managed Cassandra Cluster and Associated Data Centers. Start will start the host virtual machine of this cluster with reserved data disk. This won't do anything on an already running cluster. Use Deallocate to deallocate the cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_Start")
   start is ArmResourceActionAsyncBase<
     ClusterResource,
     void,
@@ -228,8 +200,6 @@ interface ClusterResources {
   /**
    * Gets the CPU, memory, and disk usage statistics for each Cassandra node in a cluster.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CassandraClusters_Status")
   @get
   status is ArmResourceActionSync<
     ClusterResource,

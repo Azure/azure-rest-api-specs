@@ -36,16 +36,12 @@ interface GremlinGraphGetResultsOperationGroup {
   /**
    * Gets the Gremlin graph under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_GetGremlinGraph")
   getGremlinGraph is ArmResourceRead<GremlinGraphGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB Gremlin graph
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_CreateUpdateGremlinGraph")
   createUpdateGremlinGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinGraphGetResults,
     Request = GremlinGraphCreateUpdateParameters,
@@ -56,15 +52,11 @@ interface GremlinGraphGetResultsOperationGroup {
   /**
    * Deletes an existing Azure Cosmos DB Gremlin graph.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_DeleteGremlinGraph")
   deleteGremlinGraph is ArmResourceDeleteWithoutOkAsync<GremlinGraphGetResults>;
 
   /**
    * Lists the Gremlin graph under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_ListGremlinGraphs")
   listGremlinGraphs is ArmResourceListByParent<
     GremlinGraphGetResults,
     Response = ArmResponse<GremlinGraphListResult>
@@ -73,8 +65,6 @@ interface GremlinGraphGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a gremlin graph.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("GremlinResources_RetrieveContinuousBackupInformation")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     GremlinGraphGetResults,
     ContinuousBackupRestoreLocation,

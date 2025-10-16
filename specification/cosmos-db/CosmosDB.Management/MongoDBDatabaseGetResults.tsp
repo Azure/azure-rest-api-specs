@@ -38,17 +38,13 @@ interface MongoDBDatabaseGetResultsOperationGroup {
    * Gets the MongoDB databases under an existing Azure Cosmos DB database account with the provided name.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_GetMongoDBDatabase")
   getMongoDBDatabase is ArmResourceRead<MongoDBDatabaseGetResults>;
 
   /**
    * Create or updates Azure Cosmos DB MongoDB database
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_CreateUpdateMongoDBDatabase")
   createUpdateMongoDBDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBDatabaseGetResults,
     Request = MongoDBDatabaseCreateUpdateParameters,
@@ -60,16 +56,12 @@ interface MongoDBDatabaseGetResultsOperationGroup {
    * Deletes an existing Azure Cosmos DB MongoDB database.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_DeleteMongoDBDatabase")
   deleteMongoDBDatabase is ArmResourceDeleteWithoutOkAsync<MongoDBDatabaseGetResults>;
 
   /**
    * Lists the MongoDB databases under an existing Azure Cosmos DB database account.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_ListMongoDBDatabases")
   listMongoDBDatabases is ArmResourceListByParent<
     MongoDBDatabaseGetResults,
     Response = ArmResponse<MongoDBDatabaseListResult>
@@ -79,8 +71,6 @@ interface MongoDBDatabaseGetResultsOperationGroup {
    * Merges the partitions of a MongoDB database
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_MongoDBDatabasePartitionMerge")
   @action("partitionMerge")
   mongoDBDatabasePartitionMerge is ArmResourceActionAsync<
     MongoDBDatabaseGetResults,

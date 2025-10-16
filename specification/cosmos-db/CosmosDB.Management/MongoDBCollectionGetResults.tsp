@@ -38,16 +38,12 @@ interface MongoDBCollectionGetResultsOperationGroup {
   /**
    * Gets the MongoDB collection under an existing Azure Cosmos DB database account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_GetMongoDBCollection")
   getMongoDBCollection is ArmResourceRead<MongoDBCollectionGetResults>;
 
   /**
    * Create or update an Azure Cosmos DB MongoDB Collection
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_CreateUpdateMongoDBCollection")
   createUpdateMongoDBCollection is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBCollectionGetResults,
     Request = MongoDBCollectionCreateUpdateParameters,
@@ -59,16 +55,12 @@ interface MongoDBCollectionGetResultsOperationGroup {
    * Deletes an existing Azure Cosmos DB MongoDB Collection.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_DeleteMongoDBCollection")
   deleteMongoDBCollection is ArmResourceDeleteWithoutOkAsync<MongoDBCollectionGetResults>;
 
   /**
    * Lists the MongoDB collection under an existing Azure Cosmos DB database account.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_ListMongoDBCollections")
   listMongoDBCollections is ArmResourceListByParent<
     MongoDBCollectionGetResults,
     Response = ArmResponse<MongoDBCollectionListResult>
@@ -78,8 +70,6 @@ interface MongoDBCollectionGetResultsOperationGroup {
    * Merges the partitions of a MongoDB Collection
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_ListMongoDBCollectionPartitionMerge")
   @action("partitionMerge")
   listMongoDBCollectionPartitionMerge is ArmResourceActionAsync<
     MongoDBCollectionGetResults,
@@ -90,8 +80,6 @@ interface MongoDBCollectionGetResultsOperationGroup {
   /**
    * Retrieves continuous backup information for a Mongodb collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("MongoDBResources_RetrieveContinuousBackupInformation")
   retrieveContinuousBackupInformation is ArmResourceActionAsync<
     MongoDBCollectionGetResults,
     ContinuousBackupRestoreLocation,

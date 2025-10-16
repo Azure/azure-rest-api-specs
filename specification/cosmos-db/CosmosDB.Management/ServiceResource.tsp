@@ -30,16 +30,12 @@ interface ServiceResources {
   /**
    * Gets the status of service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_Get")
   get is ArmResourceRead<ServiceResource, Error = CloudError>;
 
   /**
    * Creates a service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_Create")
   create is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     ServiceResource,
     Request = ServiceResourceCreateUpdateParameters,
@@ -51,9 +47,7 @@ interface ServiceResources {
   /**
    * Deletes service with the given serviceName.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ServiceResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse,
@@ -63,8 +57,6 @@ interface ServiceResources {
   /**
    * Gets the status of service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Service_List")
   list is ArmResourceListByParent<
     ServiceResource,
     Response = ArmResponse<ServiceResourceListResult>,

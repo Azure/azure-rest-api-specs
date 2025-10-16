@@ -228,8 +228,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account and database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Database_ListMetrics")
   @list
   @get
   @action("metrics")
@@ -256,8 +254,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the usages (most recent data) for the given database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Database_ListUsages")
   @list
   @get
   @action("usages")
@@ -284,8 +280,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves metric definitions for the given database.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Database_ListMetricDefinitions")
   @list
   @get
   @action("metricDefinitions")
@@ -306,8 +300,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account and collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Collection_ListMetrics")
   @list
   @get
   @action("metrics")
@@ -341,8 +333,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the usages (most recent storage data) for the given collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Collection_ListUsages")
   @list
   @get
   @action("usages")
@@ -376,8 +366,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves metric definitions for the given collection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Collection_ListMetricDefinitions")
   @list
   @get
   @action("metricDefinitions")
@@ -405,8 +393,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account, collection and region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CollectionRegion_ListMetrics")
   @list
   @get
   @action("metrics")
@@ -447,8 +433,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account and region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseAccountRegion_ListMetrics")
   @list
   @get
   @action("metrics")
@@ -475,8 +459,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given account, source and target region. This url is only for PBS and Replication Latency data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PercentileSourceTarget_ListMetrics")
   @list
   @get
   @action("percentile/metrics")
@@ -510,8 +492,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given account target region. This url is only for PBS and Replication Latency data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PercentileTarget_ListMetrics")
   @list
   @get
   @action("percentile/metrics")
@@ -538,8 +518,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given database account. This url is only for PBS and Replication Latency data
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Percentile_ListMetrics")
   @list
   @get
   @action("percentile/metrics")
@@ -559,8 +537,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given collection and region, split by partition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CollectionPartitionRegion_ListMetrics")
   @list
   @get
   @action("partitions/metrics")
@@ -601,8 +577,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given collection, split by partition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CollectionPartition_ListMetrics")
   @list
   @get
   @action("partitions/metrics")
@@ -636,8 +610,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the usages (most recent storage data) for the given collection, split by partition.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("CollectionPartition_ListUsages")
   @list
   @get
   @action("partitions/usages")
@@ -671,8 +643,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given partition key range id.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PartitionKeyRangeId_ListMetrics")
   @list
   @get
   @action("metrics")
@@ -713,8 +683,6 @@ interface DatabaseAccounts {
   /**
    * Retrieves the metrics determined by the given filter for the given partition key range id and region.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PartitionKeyRangeIdRegion_ListMetrics")
   @list
   @get
   @action("metrics")

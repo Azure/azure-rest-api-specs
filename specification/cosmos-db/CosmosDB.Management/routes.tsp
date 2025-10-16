@@ -18,8 +18,6 @@ interface DatabaseAccountsOperationGroup {
   /**
    * Checks that the Azure Cosmos DB account name already exists. A valid account name may contain only lowercase letters, numbers, and the '-' character, and must be between 3 and 50 characters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("DatabaseAccounts_CheckNameExists")
   @route("/providers/Microsoft.DocumentDB/databaseAccountNames/{accountName}")
   @head
   checkNameExists(
@@ -41,8 +39,6 @@ interface RestorableDatabaseAccountsOperationGroup {
   /**
    * Lists all the restorable Azure Cosmos DB database accounts available under the subscription. This call requires 'Microsoft.DocumentDB/locations/restorableDatabaseAccounts/read' permission.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("RestorableDatabaseAccounts_List")
   @autoRoute
   @get
   @action("restorableDatabaseAccounts")
