@@ -460,8 +460,10 @@ suppressions:
   
   - code: PatchResponseCodes
     reason: Managed cluster and application PATCH LRO 202 bodies have had response body schema since Day 0. This is a bug fix to make the specification accurately describe service behavior.
+    from: servicefabricmanagedclusters.json
     where:
-      - servicefabricmanagedclusters.json
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}"].patch
+      - $.paths["/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ServiceFabric/managedClusters/{clusterName}/applications/{applicationName}"].patch
 ```
 
 ---
