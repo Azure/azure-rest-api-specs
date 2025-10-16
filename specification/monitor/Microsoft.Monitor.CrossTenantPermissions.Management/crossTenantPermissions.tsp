@@ -48,7 +48,7 @@ union CrossTenantPermissionEnforcementType {
 @doc("The properties for Cross Tenant Permissions.")
 model CrossTenantPermissionsProperties {
   @doc("The list of tenants any Azure resource can send the monitoring data it owns or generates to.")
-  @OpenAPI.extension("x-ms-identifiers", #["tenantId"])
+  @identifiers(#["tenantId"])
   allowedOutbound: AllowedOutboundTenant[];
 
   @doc("The enforcement type for cross-tenant permissions.")

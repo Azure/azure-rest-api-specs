@@ -5,7 +5,6 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using TypeSpec.OpenAPI;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 
@@ -58,7 +57,7 @@ model ManualSoftwareManifestProperties extends SoftwareManifestProperties {
   osType: OSType;
 
   @doc("List of software versions.")
-  @extension("x-ms-identifiers", #["version"])
+  @identifiers(#["version"])
   versions?: SoftwareVersion[];
 }
 
@@ -78,7 +77,7 @@ model SoftwareVersion {
   version: string;
 
   @doc("List of installers for this version.")
-  @extension("x-ms-identifiers", #["architecture"])
+  @identifiers(#["architecture"])
   installers: SoftwareInstaller[];
 }
 

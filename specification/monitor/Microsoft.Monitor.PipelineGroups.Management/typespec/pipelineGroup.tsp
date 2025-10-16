@@ -12,6 +12,7 @@ import "./receivers/SyslogReceiver.tsp";
 import "./processors/BatchProcessor.tsp";
 import "./processors/TransformLanguageProcessor.tsp";
 import "./actions/executeTransform.tsp";
+import "./ExecutionPlacement.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
@@ -58,6 +59,10 @@ model PipelineGroupProperties {
   @doc("Networking configurations for the pipeline group instance.")
   @Azure.ResourceManager.identifiers(#[])
   networkingConfigurations?: NetworkingConfiguration[];
+
+  @doc("Constraints for guiding the execution environment of the pipeline group.")
+  @added(Microsoft.Monitor.Versions.v2025_03_01_preview)
+  executionPlacement?: ExecutionPlacement;
 
   @doc("The provisioning state of a pipeline group instance. Set to Succeeded if everything is healthy.")
   @visibility(Lifecycle.Read)

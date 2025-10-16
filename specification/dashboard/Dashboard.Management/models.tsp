@@ -347,7 +347,7 @@ model Resource {
  */
 model GrafanaIntegrations {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   azureMonitorWorkspaceIntegrations?: AzureMonitorWorkspaceIntegration[];
 }
 
@@ -749,7 +749,7 @@ model MarketplaceTrialQuota {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GrafanaAvailablePluginListResponse {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @OpenAPI.extension("x-ms-identifiers", #["pluginId"])
+  @identifiers(#["pluginId"])
   value?: GrafanaAvailablePlugin[];
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
@@ -964,4 +964,27 @@ model ResourceSku {
    */
   @added(Versions.v2025_08_01)
   size?: Size;
+}
+
+/**
+ * The list response for dashboard definitions.
+ */
+@added(Versions.v2025_09_01_preview)
+model DashboardDefinitionListResponse is Azure.Core.Page<DashboardDefinition>;
+
+/**
+ * Properties specific to the dashboard definition.
+ */
+@added(Versions.v2025_09_01_preview)
+model DashboardDefinitionProperties {
+  /**
+   * The dashboard definition data in JSON format.
+   */
+  serializedData?: string;
+
+  /**
+   * The provisioning state of the dashboard definition resource.
+   */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
 }

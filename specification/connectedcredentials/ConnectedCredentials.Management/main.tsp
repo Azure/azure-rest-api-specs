@@ -92,7 +92,7 @@ model CredentialProperties {
   target?: Target;
 
   @visibility(Lifecycle.Read, Lifecycle.Create, Lifecycle.Update)
-  @extension("x-ms-identifiers", #["remoteRef"])
+  @identifiers(#["remoteRef"])
   @doc(" Data defines the connection between the Kubernetes Secret keys and the Provider data, Array.")
   data?: Data[];
 

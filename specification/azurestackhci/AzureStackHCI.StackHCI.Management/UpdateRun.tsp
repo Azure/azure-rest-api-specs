@@ -181,6 +181,6 @@ model UpdateRunsStep {
   /**
    * Recursive model for child steps of this step.
    */
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   steps?: UpdateRunsStep[];
 }

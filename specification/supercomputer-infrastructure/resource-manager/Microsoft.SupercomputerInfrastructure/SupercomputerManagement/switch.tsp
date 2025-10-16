@@ -34,6 +34,10 @@ model SwitchProperties {
   /** The Azure resource ID of the cluster that the switch is associated with, if any. */
   @visibility(Lifecycle.Read)
   clusterId?: ClusterResourceId;
+
+  /** The Azure resource ID of the rack that the switch is associated with, if any. */
+  @visibility(Lifecycle.Read)
+  rackId?: RackResourceId;
 }
 
 /** The type of the network the switch resides in. */

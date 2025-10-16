@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -58,7 +58,7 @@ model PacketCoreControlPlaneVersionPropertiesFormat {
   provisioningState?: ProvisioningState;
 
   @doc("Platform specific packet core control plane version properties.")
-  @extension("x-ms-identifiers", #["platformType"])
+  @identifiers(#["platformType"])
   platforms?: Platform[];
 }
 

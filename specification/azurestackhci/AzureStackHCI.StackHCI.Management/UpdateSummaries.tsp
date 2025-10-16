@@ -134,7 +134,7 @@ model UpdateSummariesProperties {
    * Current version of each updatable component.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["version"])
+  @identifiers(#["version"])
   packageVersions?: PackageVersionInfo[];
 
   /**
@@ -169,7 +169,7 @@ model UpdateSummariesProperties {
    * An array of pre-check result objects.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @identifiers(#["name"])
   healthCheckResult?: PrecheckResult[];
 
   /**
