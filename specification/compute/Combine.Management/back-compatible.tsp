@@ -4,6 +4,10 @@ import "./main.tsp";
 using Azure.ClientGenerator.Core;
 using Microsoft.Compute;
 
+
+
+
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetNetworkConfiguration.properties
 );
@@ -330,6 +334,216 @@ using Microsoft.Compute;
 // @@clientName(VirtualMachineScaleSetVMExtension.vmName, "name");
 @@clientName(VirtualMachineScaleSetVMExtension.vmType, "type");
 
+@@clientLocation(VirtualMachineScaleSetVMS.approveRollingUpgrade,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.deallocate,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.getInstanceView,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.reimage,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.reimageAll,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.simulateEviction,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.attachDetachDataDisks,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.performMaintenance,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetVMS.powerOff,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.redeploy,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.restart,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetVMS.start,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.runCommand,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.restart,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.retrieveBootDiagnosticsData,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetVMS.get,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.update,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.delete,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSetVMS.list,
+  "VirtualMachineScaleSetVMs",
+  "!csharp"
+);
+
+@@clientLocation(SshPublicKeyResources.get, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.create, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.update, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.delete, "SshPublicKeys", "!csharp");
+@@clientLocation(SshPublicKeyResources.generateKeyPair,
+  "SshPublicKeys",
+  "!csharp"
+);
+@@clientLocation(SshPublicKeyResources.listBySubscription,
+  "SshPublicKeys",
+  "!csharp"
+);
+@@clientLocation(SshPublicKeyResources.listByResourceGroup,
+  "SshPublicKeys",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listPublishers,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listOffers,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.listSkus,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.list,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesEdgeZoneOperationGroup.get,
+  "VirtualMachineImagesEdgeZone",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineImagesOperationGroup.listPublishers,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listOffers,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listSkus,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.list,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.get,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listByEdgeZone,
+  "VirtualMachineImages",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineImagesOperationGroup.listWithProperties,
+  "VirtualMachineImages",
+  "!csharp"
+);
+
+@@clientLocation(UsageOperationGroup.list, "Usage", "!csharp");
+
+@@clientLocation(VirtualMachineSizesOperationGroup.list,
+  "VirtualMachineSizes",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachinesOperationGroup.listByLocation,
+  VirtualMachines,
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSetsOperationGroup.listByLocation,
+  VirtualMachineScaleSets,
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineScaleSets.startExtensionUpgrade,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSets.cancel,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+@@clientLocation(VirtualMachineScaleSets.startOSUpgrade,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+
+@@clientLocation(LogAnalyticsOperationGroup.exportThrottledRequests,
+  "LogAnalytics",
+  "!csharp"
+);
+@@clientLocation(LogAnalyticsOperationGroup.exportRequestRateByInterval,
+  "LogAnalytics",
+  "!csharp"
+);
+
+@@clientLocation(RollingUpgradeStatusInfos.getLatest,
+  "VirtualMachineScaleSetRollingUpgrades",
+  "!csharp"
+);
+
+@@clientLocation(VirtualMachineRunCommandsOperationGroup.list,
+  VirtualMachineRunCommands,
+  "!csharp"
+);
+@@clientLocation(VirtualMachineRunCommandsOperationGroup.get,
+  VirtualMachineRunCommands,
+  "!csharp"
+);
+
+
+import "./main.tsp";
+
+
+
+
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskUpdate.properties);
 
@@ -408,6 +622,36 @@ using Microsoft.Compute;
 @@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
 @@clientName(Snapshots.update::parameters.properties, "snapshot");
 @@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
+
+@@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.listByRestorePoint,
+  "DiskRestorePoint",
+  "!csharp"
+);
+@@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
+@@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
+
+@@clientLocation(PrivateEndpointConnections.getAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.updateAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.deleteAPrivateEndpointConnection,
+  DiskAccesses,
+  "!csharp"
+);
+@@clientLocation(PrivateEndpointConnections.listPrivateEndpointConnections,
+  DiskAccesses,
+  "!csharp"
+);
+import "./main.tsp";
+
+
+
+
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryUpdate.properties);
@@ -527,350 +771,13 @@ using Microsoft.Compute;
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGalleryImageVersion.properties
 );
 
-@@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
-@@clientLocation(DiskRestorePoints.listByRestorePoint,
-  "DiskRestorePoint",
+@@clientLocation(Galleries.listByArtifactName,
+  "SoftDeletedResource",
   "!csharp"
 );
-@@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
-@@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
-
-
-@@clientName(VirtualMachineScaleSets.update::parameters.properties,
-  "parameters"
-);
-@@clientName(VirtualMachineScaleSets.approveRollingUpgrade::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.convertToSinglePlacementGroup::parameters.body,
-  "parameters"
-);
-@@clientName(VirtualMachineScaleSets.deallocate::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.deleteInstances::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.updateInstances::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.performMaintenance::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.scaleOut::parameters.body, "parameters");
-@@clientName(VirtualMachineScaleSets.powerOff::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.redeploy::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.reimage::parameters.body,
-  "vmScaleSetReimageInput"
-);
-@@clientName(VirtualMachineScaleSets.reimageAll::parameters.body,
-  "vmInstanceIDs"
-);
-@@clientName(VirtualMachineScaleSets.restart::parameters.body, "vmInstanceIDs");
-@@clientName(VirtualMachineScaleSets.setOrchestrationServiceState::parameters.body,
-  "parameters"
-);
-@@clientName(VirtualMachineScaleSets.start::parameters.body, "vmInstanceIDs");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSet.properties
-);
-
-@@clientName(VirtualMachineScaleSetExtensions.update::parameters.properties,
-  "extensionParameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetExtension.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RollingUpgradeStatusInfo.properties
-);
-
-@@clientName(VirtualMachineScaleSetVMS.reimage::parameters.body,
-  "vmScaleSetVMReimageInput"
-);
-@@clientName(VirtualMachineScaleSetVMS.attachDetachDataDisks::parameters.body,
-  "parameters"
-);
-@@clientName(VirtualMachineScaleSetVMS.runCommand::parameters.body,
-  "parameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetVM.properties
-);
-
-@@clientName(VirtualMachineExtensions.update::parameters.properties,
-  "extensionParameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineExtension.properties
-);
-
-@@clientName(VirtualMachineScaleSetVMExtensions.update::parameters.properties,
-  "extensionParameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineScaleSetVMExtension.properties
-);
-
-@@clientName(VirtualMachines.update::parameters.properties, "parameters");
-@@clientName(VirtualMachines.attachDetachDataDisks::parameters.body,
-  "parameters"
-);
-@@clientName(VirtualMachines.capture::parameters.body, "parameters");
-@@clientName(VirtualMachines.installPatches::parameters.body,
-  "installPatchesInput"
-);
-@@clientName(VirtualMachines.reimage::parameters.body, "parameters");
-@@clientName(VirtualMachines.runCommand::parameters.body, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachine.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineExtensionImage.properties
-);
-
-@@clientName(AvailabilitySets.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AvailabilitySet.properties);
-
-@@clientName(AvailabilitySets.validateMigrationToVirtualMachineScaleSet::parameters.body,
-  "parameters"
-);
-@@clientName(AvailabilitySets.startMigrationToVirtualMachineScaleSet::parameters.body,
-  "parameters"
-);
-
-@@clientName(ProximityPlacementGroups.update::parameters.properties,
-  "parameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProximityPlacementGroup.properties
-);
-
-@@clientName(DedicatedHostGroups.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHostGroup.properties
-);
-
-@@clientName(DedicatedHosts.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DedicatedHost.properties);
-
-@@clientName(SshPublicKeyResources.update::parameters.properties, "parameters");
-@@clientName(SshPublicKeyResources.generateKeyPair::parameters.body,
-  "parameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SshPublicKeyResource.properties
-);
-
-@@clientName(Images.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Image.properties);
-
-@@clientName(RestorePointCollections.update::parameters.properties,
-  "parameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RestorePointCollection.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RestorePoint.properties);
-
-@@clientName(CapacityReservationGroups.update::parameters.properties,
-  "parameters"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapacityReservationGroup.properties
-);
-
-@@clientName(CapacityReservations.update::parameters.properties, "parameters");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CapacityReservation.properties
-);
-
-@@clientName(VirtualMachineRunCommands.update::parameters.body, "runCommand");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(VirtualMachineRunCommand.properties
-);
-
-@@clientName(LogAnalyticsOperationGroup.exportRequestRateByInterval::parameters.body,
-  "parameters"
-);
-
-@@clientName(VirtualMachineScaleSetVMRunCommands.update::parameters.body,
-  "runCommand"
-);
-@@clientName(AvailabilitySets.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(CapacityReservationGroups.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(CapacityReservations.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(DedicatedHostGroups.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(DedicatedHosts.createOrUpdate::parameters.resource, "parameters");
-@@clientName(Images.createOrUpdate::parameters.resource, "parameters");
-@@clientName(ProximityPlacementGroups.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(RestorePointCollections.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(RestorePoints.create::parameters.resource, "parameters");
-@@clientName(SshPublicKeyResources.create::parameters.resource, "parameters");
-@@clientName(VirtualMachineScaleSets.createOrUpdate::parameters.resource,
-  "parameters"
-);
-@@clientName(VirtualMachineScaleSetExtensions.createOrUpdate::parameters.resource,
-  "extensionParameters"
-);
-@@clientName(VirtualMachineScaleSetVMS.update::parameters.resource,
-  "parameters"
-);
-@@clientName(AvailabilitySetSkuTypes, "AvailabilitySetSkuType", "java");
-@@clientName(VirtualMachineExtensions.createOrUpdate::parameters.resource,
-  "extensionParameters"
-);
-@@clientName(VirtualMachineScaleSetVMExtensions.createOrUpdate::parameters.resource,
-  "extensionParameters"
-);
-@@clientName(VirtualMachineScaleSetVMRunCommands.createOrUpdate::parameters.body,
-  "runCommand"
-);
-@@clientName(VirtualMachineRunCommands.createOrUpdate::parameters.body,
-  "runCommand"
-);
-@@clientName(VirtualMachines.createOrUpdate::parameters.resource, "parameters");
-
-@@clientName(LogAnalyticsOperationGroup.exportThrottledRequests::parameters.body,
-  "parameters"
-);
-
-// @@clientName(VirtualMachineScaleSetExtension.vmName, "name");
-@@clientName(VirtualMachineScaleSetExtension.vmType, "type");
-
-// @@clientName(VirtualMachineScaleSetVMExtension.vmName, "name");
-@@clientName(VirtualMachineScaleSetVMExtension.vmType, "type");
-
-
-@@clientName(DiskAccesses.createOrUpdate::parameters.resource, "diskAccess");
-@@clientName(DiskAccesses.update::parameters.properties, "diskAccess");
-@@clientName(PrivateEndpointConnections.updateAPrivateEndpointConnection::parameters.resource,
-  "privateEndpointConnection"
-);
-@@clientName(DiskEncryptionSets.createOrUpdate::parameters.resource,
-  "diskEncryptionSet"
-);
-@@clientName(DiskEncryptionSets.update::parameters.properties,
-  "diskEncryptionSet"
-);
-@@clientName(Disks.createOrUpdate::parameters.resource, "disk");
-@@clientName(Disks.update::parameters.properties, "disk");
-@@clientName(Disks.grantAccess::parameters.body, "grantAccessData");
-@@clientName(DiskRestorePoints.grantAccess::parameters.body, "grantAccessData");
-@@clientName(Snapshots.createOrUpdate::parameters.resource, "snapshot");
-@@clientName(Snapshots.update::parameters.properties, "snapshot");
-@@clientName(Snapshots.grantAccess::parameters.body, "grantAccessData");
-
-@@clientLocation(DiskRestorePoints.get, "DiskRestorePoint", "!csharp");
-@@clientLocation(DiskRestorePoints.listByRestorePoint,
-  "DiskRestorePoint",
+@@clientLocation(Galleries.gallerySharingProfileUpdate,
+  "GallerySharingProfile",
   "!csharp"
 );
-@@clientLocation(DiskRestorePoints.grantAccess, "DiskRestorePoint", "!csharp");
-@@clientLocation(DiskRestorePoints.revokeAccess, "DiskRestorePoint", "!csharp");
+@@clientName(Galleries.gallerySharingProfileUpdate, "update", "!csharp");
 
-
-@@clientName(Galleries.createOrUpdate::parameters.resource, "gallery");
-@@clientName(Galleries.update::parameters.properties, "gallery");
-@@clientName(Galleries.gallerySharingProfileUpdate::parameters.body,
-  "sharingUpdate"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Gallery.properties);
-
-@@clientName(GalleryImages.createOrUpdate::parameters.resource, "galleryImage");
-@@clientName(GalleryImages.update::parameters.properties, "galleryImage");
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImage.properties);
-
-@@clientName(GalleryImageVersions.createOrUpdate::parameters.resource,
-  "galleryImageVersion"
-);
-@@clientName(GalleryImageVersions.update::parameters.properties,
-  "galleryImageVersion"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryImageVersion.properties
-);
-
-@@clientName(GalleryApplications.createOrUpdate::parameters.resource,
-  "galleryApplication"
-);
-@@clientName(GalleryApplications.update::parameters.properties,
-  "galleryApplication"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplication.properties
-);
-
-@@clientName(GalleryApplicationVersions.createOrUpdate::parameters.resource,
-  "galleryApplicationVersion"
-);
-@@clientName(GalleryApplicationVersions.update::parameters.properties,
-  "galleryApplicationVersion"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryApplicationVersion.properties
-);
-
-@@clientName(GalleryInVMAccessControlProfiles.createOrUpdate::parameters.resource,
-  "galleryInVMAccessControlProfile"
-);
-@@clientName(GalleryInVMAccessControlProfiles.update::parameters.properties,
-  "galleryInVMAccessControlProfile"
-);
-
-@@clientName(GalleryInVMAccessControlProfileVersions.createOrUpdate::parameters.resource,
-  "galleryInVMAccessControlProfileVersion"
-);
-@@clientName(GalleryInVMAccessControlProfileVersions.update::parameters.properties,
-  "galleryInVMAccessControlProfileVersion"
-);
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryInVMAccessControlProfileVersion.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedGallery.properties);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedGalleryImage.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SharedGalleryImageVersion.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGallery.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGalleryImage.properties
-);
-
-#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
-@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CommunityGalleryImageVersion.properties
-);
