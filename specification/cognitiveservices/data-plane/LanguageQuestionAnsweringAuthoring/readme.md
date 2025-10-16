@@ -4,6 +4,10 @@ This is the AutoRest configuration file the Cognitive Services Language - Questi
 
 > see https://aka.ms/autorest
 
+## SDK package updates
+
+The authoring client continues to ship from the existing .NET package `Azure.AI.Language.QuestionAnswering`. Inference models and clients now live in the companion package `Azure.AI.Language.QuestionAnswering.Inference`, and the original package type-forwards those types so existing code keeps working after the split.
+
 ## Releases
 
 The current preview release of Language is 2025-05-15-preview.
