@@ -930,6 +930,11 @@
           "description": "Software Defined Networking Properties of the cluster",
           "$ref": "./hciCommon.json#/definitions/SdnProperties"
         },
+        "arcGatewayProperties": {
+          "description": "Azure Arc Gateway properties of the cluster.",
+          "$ref": "#/definitions/ArcGatewayProperties",
+          "readOnly": true
+        },
         "localAvailabilityZones": {
           "type": "array",
           "description": "Local Availability Zone information for HCI cluster",
@@ -1770,6 +1775,38 @@
       "additionalProperties": false,
       "readOnly": true
     },
+    "ArcGatewayProperties": {
+      "type": "object",
+      "description": "Azure Arc Gateway properties of the cluster.",
+      "properties": {
+        "arcGatewayStatus": {
+          "type": "string",
+          "description": "Status of the Azure Arc Gateway on the cluster.",
+          "enum": [
+            "Enabled",
+            "Disabled"
+          ],
+          "default": "Disabled",
+          "readOnly": true,
+          "x-ms-enum": {
+            "name": "ArcGatewayStatus",
+            "modelAsString": true,
+            "values": [
+              {
+                "name": "Enabled",
+                "value": "Enabled",
+                "description": "Azure Arc Gateway is enabled on the cluster."
+              },
+              {
+                "name": "Disabled",
+                "value": "Disabled",
+                "description": "Azure Arc Gateway is disabled on the cluster."
+              }
+            ]
+          }
+        }
+      }
+    },
     "ConfidentialVmProperties": {
       "type": "object",
       "description": "Represents the Confidential Virtual Machine (CVM) support intent and current status for the cluster resource.",
@@ -1786,6 +1823,7 @@
             "Disabled"
           ],
           "default": "Disabled",
+          "readOnly": true,
           "x-ms-enum": {
             "name": "ConfidentialVmStatus",
             "modelAsString": true,
@@ -1806,8 +1844,7 @@
                 "description": "Confidential VM support is disabled. None of the nodes in the cluster are CVM capable."
               }
             ]
-          },
-          "readOnly": true
+          }
         }
       }
     }
