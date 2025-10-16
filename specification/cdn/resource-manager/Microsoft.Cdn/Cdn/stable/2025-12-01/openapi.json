@@ -1,9 +1,9 @@
 {
   "swagger": "2.0",
   "info": {
-    "title": "Azure CDN WebApplicationFirewallManagement",
+    "title": "CdnManagementClient",
     "version": "2025-12-01",
-    "description": "APIs to manage web application firewall rules for Azure CDN",
+    "description": "Use these APIs to manage Azure Front Door and CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.",
     "x-typespec-generated": [
       {
         "emitter": "@azure-tools/typespec-autorest"
@@ -434,6 +434,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Web Agents in a Subscription": {
+            "$ref": "./examples/WebAgentsListBySubscription.json"
           }
         },
         "x-ms-pageable": {
@@ -2232,6 +2237,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ProfileAgents_ListByProfile": {
+            "$ref": "./examples/ProfileAgents_ListByProfile.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -2284,6 +2294,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ProfileAgents_Get": {
+            "$ref": "./examples/ProfileAgents_Get.json"
           }
         }
       },
@@ -2369,6 +2384,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ProfileAgents_CreateOrUpdate": {
+            "$ref": "./examples/ProfileAgents_CreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/ProfileAgent"
@@ -2444,6 +2464,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "ProfileAgents_Update": {
+            "$ref": "./examples/ProfileAgents_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -2504,6 +2529,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "ProfileAgents_Delete": {
+            "$ref": "./examples/ProfileAgents_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3311,6 +3341,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "DeploymentVersions_ListByProfile": {
+            "$ref": "./examples/DeploymentVersions_ListByProfile.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -3366,6 +3401,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Get": {
+            "$ref": "./examples/DeploymentVersions_Get.json"
           }
         }
       },
@@ -3427,6 +3467,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Update": {
+            "$ref": "./examples/DeploymentVersions_Update.json"
           }
         }
       }
@@ -3490,6 +3535,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Approve": {
+            "$ref": "./examples/DeploymentVersions_Approve.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -3557,6 +3607,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "DeploymentVersions_Compare": {
+            "$ref": "./examples/DeploymentVersions_Compare.json"
           }
         }
       }
@@ -6466,6 +6521,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "KeyGroups_ListByProfile": {
+            "$ref": "./examples/KeyGroups_ListByProfile.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -6521,6 +6581,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Get": {
+            "$ref": "./examples/KeyGroups_Get.json"
           }
         }
       },
@@ -6609,6 +6674,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "KeyGroups_Create": {
+            "$ref": "./examples/KeyGroups_Create.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -6686,6 +6756,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "KeyGroups_Update": {
+            "$ref": "./examples/KeyGroups_Update.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -6746,6 +6821,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "KeyGroups_Delete": {
+            "$ref": "./examples/KeyGroups_Delete.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8189,6 +8269,9 @@
         "x-ms-examples": {
           "Rules_Create": {
             "$ref": "./examples/Rules_Create.json"
+          },
+          "Rules_Create_AfdUrlSigningAction": {
+            "$ref": "./examples/Rules_Create_AfdUrlSigningAction.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -8627,6 +8710,15 @@
         "x-ms-examples": {
           "Secrets_Create": {
             "$ref": "./examples/Secrets_Create.json"
+          },
+          "Secrets_CreateCustomerCertificateType": {
+            "$ref": "./examples/Secrets_CreateCustomerCertificateType.json"
+          },
+          "Secrets_CreateMtlsCertificateChainType": {
+            "$ref": "./examples/Secrets_CreateMtlsCertificateChainType.json"
+          },
+          "Secrets_CreateUrlSigningKeyType": {
+            "$ref": "./examples/Secrets_CreateUrlSigningKeyType.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -9294,6 +9386,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "List Web Agents in a Resource Group": {
+            "$ref": "./examples/WebAgentsListByResourceGroup.json"
+          }
+        },
         "x-ms-pageable": {
           "nextLinkName": "nextLink"
         }
@@ -9338,6 +9435,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Web Agent": {
+            "$ref": "./examples/WebAgentGet.json"
           }
         }
       },
@@ -9415,6 +9517,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or Update Web Agent": {
+            "$ref": "./examples/WebAgentCreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/WebAgent"
@@ -9482,6 +9589,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update Web Agent": {
+            "$ref": "./examples/WebAgentUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9536,6 +9648,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Web Agent": {
+            "$ref": "./examples/WebAgentDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9581,6 +9698,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "List Knowledge Sources in a Web Agent": {
+            "$ref": "./examples/KnowledgeSourcesListByWebAgent.json"
           }
         },
         "x-ms-pageable": {
@@ -9637,6 +9759,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Get Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceGet.json"
           }
         }
       },
@@ -9724,6 +9851,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Create or Update Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceCreateOrUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
           "final-state-schema": "#/definitions/KnowledgeSource"
@@ -9801,6 +9933,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Update Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceUpdate.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9865,6 +10002,11 @@
             }
           }
         },
+        "x-ms-examples": {
+          "Delete Knowledge Source": {
+            "$ref": "./examples/KnowledgeSourceDelete.json"
+          }
+        },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location"
         },
@@ -9926,6 +10068,11 @@
             "schema": {
               "$ref": "../../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "Purge Knowledge Source Cache": {
+            "$ref": "./examples/KnowledgeSourcePurge.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -19775,10 +19922,7 @@
         "batchMode": {
           "type": "boolean",
           "description": "Indicates whether rule set is in batch mode. When batch mode is enabled, rules will be processed in a batch along with the rule set.\nWhen batch mode is disabled, rules would need to be processed independently.\nThis property can only be set during rule set creation and cannot be updated later.\nFor switching modes, a new rule set needs to be created with the desired mode and rules need to be migrated to the new rule set.",
-          "x-ms-mutability": [
-            "read",
-            "create"
-          ]
+          "readOnly": true
         },
         "rules": {
           "type": "array",
