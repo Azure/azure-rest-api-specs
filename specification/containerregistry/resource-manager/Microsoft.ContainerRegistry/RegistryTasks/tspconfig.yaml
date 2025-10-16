@@ -13,22 +13,28 @@ options:
     arm-resource-flattening: true
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.containerregistrytasks"
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerregistry"
-    package-dir: "azure-mgmt-containerregistrytasks"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerregistrytasks"
     namespace: "azure.mgmt.containerregistry"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
     service-dir: "sdk/containerregistry"
-    package-dir: "azure-resourcemanager-containerregistrytasks"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerregistrytasks"
     namespace: "com.azure.resourcemanager.containerregistrytasks"
     service-name: "ContainerRegistryTasks"
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
-    package-dir: "arm-containerregistrytasks"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerregistrytasks"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

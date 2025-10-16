@@ -13,15 +13,21 @@ options:
     arm-resource-flattening: true
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     emit-lro-options: "all"
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    clear-output-folder: true
+    model-namespace: true
+    namespace: "Azure.ResourceManager.ContainerRegistry"
   "@azure-tools/typespec-python":
     service-dir: "sdk/containerregistry"
-    package-dir: "azure-mgmt-containerregistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-containerregistry"
     namespace: "azure.mgmt.containerregistry"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
-    package-dir: "azure-resourcemanager-containerregistry-generated"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-containerregistry-generated"
     namespace: "com.azure.resourcemanager.containerregistry.generated"
     service-name: "ContainerRegistry"
     flavor: azure
@@ -29,7 +35,7 @@ options:
     premium: false
     enable-sync-stack: false
   "@azure-tools/typespec-ts":
-    package-dir: "arm-containerregistry"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-containerregistry"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
