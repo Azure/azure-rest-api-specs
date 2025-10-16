@@ -1520,6 +1520,30 @@ model RelocateVolumeRequest {
 }
 
 /**
+ * Body for the list replications endpoint. If supplied, the body will be used as a filter for example to exclude deleted replications. If omitted, the endpoint returns all replications
+ */
+@added(Versions.v2025_08_01)
+model ListReplicationsRequest {
+  /**
+   * Exclude Replications filter. 'None' returns all replications, 'Deleted' excludes deleted replications. Default is 'None'
+   */
+  exclude?: Exclude = Exclude.None;
+}
+
+/**
+ * An option to filter out replications. 'None' returns all replications, 'Deleted' excludes deleted replications. Default is 'None'
+ */
+union Exclude {
+  string,
+
+  /** 'None' returns all replications */
+  None: "None",
+
+  /** 'Deleted' excludes deleted replications */
+  Deleted: "Deleted",
+}
+
+/**
  * Status of the volume restore relationship
  */
 union VolumeRestoreRelationshipStatus {
@@ -2058,11 +2082,32 @@ interface Volumes {
   /**
    * Returns the list of group Ids for a specific LDAP User
    */
+  @removed(Versions.v2025_08_01)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_08_01, "listGetGroupIdListForLdapUser")
+  @action("getGroupIdListForLdapUser")
+  listGetGroupIdListForLdapUser20250601 is ArmResourceActionAsync<
+    Volume,
+    /**
+     * Returns the list of group Ids for a specific LDAP User
+     */
+    GetGroupIdListForLdapUserRequest,
+    GetGroupIdListForLdapUserResponse
+  >;
+
+  /**
+   * Returns the list of group Ids for a specific LDAP User
+   */
+  @added(Versions.v2025_08_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("getGroupIdListForLdapUser")
   listGetGroupIdListForLdapUser is ArmResourceActionAsync<
     Volume,
     GetGroupIdListForLdapUserRequest,
-    GetGroupIdListForLdapUserResponse
+    GetGroupIdListForLdapUserResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = GetGroupIdListForLdapUserResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -2102,11 +2147,29 @@ interface Volumes {
   /**
    * List all replications for a specified volume
    */
+  @removed(Versions.v2025_08_01)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_08_01, "listReplications")
+  @list
+  oldlistReplications is ArmResourceActionSync<
+    Volume,
+    void,
+    ArmResponse<ListReplications>,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * List all replications for a specified volume
+   */
+  @added(Versions.v2025_08_01)
+  @sharedRoute
   @list
   listReplications is ArmResourceActionSync<
     Volume,
-    void,
-    ArmResponse<ListReplications>
+    /** Body for the list replications endpoint. If supplied, the body will be used as a filter for example to exclude deleted replications. If omitted, the endpoint returns all replications */
+    ListReplicationsRequest,
+    ArmResponse<ListReplications>,
+    OptionalRequestBody = true
   >;
 
   /**
