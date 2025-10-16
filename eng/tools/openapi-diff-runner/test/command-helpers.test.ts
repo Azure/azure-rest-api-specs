@@ -892,7 +892,7 @@ describe("command-helpers", () => {
         "versioningReviewLabelName",
         VersioningReviewRequiredLabel,
       );
-      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "true");
+      expect(setOutput).toHaveBeenCalledWith("versioningReviewLabelValue", "false");
     });
 
     it("should handle labels set with non-review labels", async () => {

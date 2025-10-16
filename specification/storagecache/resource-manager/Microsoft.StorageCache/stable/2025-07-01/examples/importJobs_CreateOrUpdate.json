@@ -1,0 +1,94 @@
+{
+  "parameters": {
+    "resourceGroupName": "scgroup",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "api-version": "2025-07-01",
+    "amlFilesystemName": "fs1",
+    "importJobName": "job1",
+    "importJob": {
+      "tags": {
+        "Dept": "ContosoAds"
+      },
+      "location": "eastus",
+      "properties": {
+        "importPrefixes": [
+          "/"
+        ],
+        "conflictResolutionMode": "OverwriteAlways",
+        "maximumErrors": 0
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "name": "job1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/importJobs/job1",
+        "type": "Microsoft.StorageCache/amlFilesystem/importJob",
+        "properties": {
+          "adminStatus": "Active",
+          "provisioningState": "Succeeded",
+          "importPrefixes": [
+            "/"
+          ],
+          "conflictResolutionMode": "OverwriteAlways",
+          "maximumErrors": 0,
+          "status": {
+            "state": "Completed",
+            "statusMessage": "Import job completed successfully",
+            "totalBlobsWalked": 1000000,
+            "blobsWalkedPerSecond": 10000,
+            "totalBlobsImported": 1000000,
+            "blobsImportedPerSecond": 4000,
+            "totalErrors": 1,
+            "totalConflicts": 1,
+            "lastCompletionTime": "2019-04-21T18:25:43.511Z",
+            "lastStartedTime": "2019-04-21T17:25:43.511Z"
+          }
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "tags": {
+          "Dept": "ContosoAds"
+        },
+        "name": "job1",
+        "location": "eastus",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/scgroup/providers/Microsoft.StorageCache/amlfilesystems/fs1/importJobs/job1",
+        "type": "Microsoft.StorageCache/amlFilesystem/importJob",
+        "properties": {
+          "adminStatus": "Active",
+          "provisioningState": "Succeeded",
+          "importPrefixes": [
+            "/"
+          ],
+          "conflictResolutionMode": "OverwriteAlways",
+          "maximumErrors": 0,
+          "status": {
+            "state": "Completed",
+            "statusMessage": "Import job completed successfully",
+            "totalBlobsWalked": 1000000,
+            "blobsWalkedPerSecond": 10000,
+            "totalBlobsImported": 1000000,
+            "importedFiles": 1000,
+            "importedDirectories": 500,
+            "importedSymlinks": 1000,
+            "preexistingFiles": 500,
+            "preexistingDirectories": 100,
+            "preexistingSymlinks": 200,
+            "blobsImportedPerSecond": 4000,
+            "totalErrors": 1,
+            "totalConflicts": 1,
+            "lastCompletionTime": "2019-04-21T18:25:43.511Z",
+            "lastStartedTime": "2019-04-21T17:25:43.511Z"
+          }
+        }
+      }
+    }
+  }
+}
