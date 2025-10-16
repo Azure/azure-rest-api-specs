@@ -279,38 +279,99 @@ By following these rules, the SDK release process will remain clear, structured,
 
 ## Steps to generate SDK from TypeSpec API specification
 
-Follow [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
+Follow below steps to generate and release SDK from TypeSpec API specification. The process is divided into several steps, each with specific actions to ensure a smooth SDK generation and release process.
 Do not skip the step that choose SDK generation method to ensure the user selects the appropriate method for SDK generation, either locally or using the SDK generation pipeline. Do not repeat the steps. Before using tools, check if user has Powershell installed.
 
-1. **Identify TypeSpec Project**: Locate the TypeSpec project root path by checking for `tspconfig.yaml` or `main.tsp` files.
-2. **Validate TypeSpec Specification**: Ensure the TypeSpec specification compiles without errors.
-3. **Verify Authentication and Repository Status**: Ensure user is authenticated and working in the correct public Azure repository.
-4. **Review and Commit Changes**: Stage and commit TypeSpec modifications, ensuring the current branch is not "main". Do not create pull request yet.
-5. **Create Specification Pull Request**: Create a pull request for TypeSpec changes if not already created. This is required only if there are TypeSpec changes in current branch.
-6. **Choose SDK Generation Method**: Determine how to generate SDKs (locally or via pipeline).
-7. **Generate SDKs via Pipeline**: Generate SDKs using [run sdk gen pipeline](..\eng\common\instructions\azsdk-tools\run-sdk-gen-pipeline.instructions.md), monitor the pipeline status and displaying generated SDK PR links.
-8. **Show generated SDK PR**: Display the generated SDK pull request links for review.
-9. **Create a release plan**: To create a release plan refer to [create release plan](..\eng\common\instructions\azsdk-tools\create-release-plan.instructions.md)
-10. **Prompt user to change spec pull request to ready for review from draft status**: Update spec pull request to change it to ready for review.
-11. **Release package**: Release the SDK package using `azsdk_release_sdk` tool.
+Your goal is to guide the user through the process of generating SDKs from TypeSpec projects. **Before starting**, show all the high level steps to the user and ask: 
 
-## Release readiness of SDK and information about the release pipeline
+> "Would you like to begin the SDK generation process now? (yes/no)"
+
+Wait for the user to respond with a confirmation before proceeding to Step 1. Use the provided tools to perform actions and gather information as needed.
+
+### Verify API spec
+Step 1: Identify TypeSpec Project
+**Goal**: Locate the TypeSpec project root path
+**Actions**:
+1. Check if `tspconfig.yaml` or `main.tsp` files are open in editor
+2. If found, use the parent directory as project root
+3. If not found, prompt user: "Please provide the path to your TypeSpec project root directory"
+4. Validate the provided path contains required TypeSpec files main.tsp and tspconfig.yaml
+5. Run `azsdk_typespec_check_project_in_public_repo` to verify repository
+6. If not in public repo, inform: "Please make spec changes in Azure/azure-rest-api-specs public repo to generate SDKs"
+**Success Criteria**: Valid TypeSpec project path identified
+
+Step 2: Identify API spec status
+**Goal**: Determine if the TypeSpec spec is already merged or if it's being modified.
+**Actions**:
+1. Prompt user to confirm if the TypeSpec spec is already merged in the main branch of  https://github.com/Azure/azure-rest-api-specs : "Is your TypeSpec specification already merged in the main branch of repository(https://github.com/Azure/azure-rest-api-specs)? (yes/no)"
+2. If already merged, follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate the SDK
+3. If no, proceed to Step 3 to review and commit changes
+**Success Criteria**: User decision on spec readiness obtained
+
+Step 3: Validate TypeSpec Specification
+**Goal**: Ensure TypeSpec specification compiles without errors. Povide a complete summary after running the tool. Highlight any errors and help user fix them.
+**Condition**: Only if the spec is not already merged (from Step 2)
+**Message to user**: "TypeSpec validation takes around 20 - 30 seconds."
+**Actions**:
+1. Run `azsdk_run_typespec_validation` to validate the TypeSpec project.
+2. If validation succeeds, proceed to Step 4
+3. If validation fails:
+    - Display all compilation errors to user
+    - Agent should provide suggestions to fix them and prompt the user to verify the fixes. If agent cannot resolve the errors, then prompt the user to fix compilation errors"
+    - Wait for user to fix errors and re-run validation. Provide detailed information about all the changes done by copilot and prompt the user before rerunning the validation.
+**Success Criteria**: TypeSpec compilation passes without errors
+
+Step 4: Review and Commit Changes
+**Goal**: Stage and commit TypeSpec modifications
+**Condition**: Only if the TypeSpec validation succeeds (from Step 3)
+**Actions**:
+1. Run `azsdk_get_modified_typespec_projects` to identify changes
+2. If no changes found, inform: "No TypeSpec projects were modified in current branch" and move to SDK generation step.
+3. Display all modified files (excluding `.github` and `.vscode` folders)
+4. Prompt user: "Please review the modified files. Do you want to commit these changes? (yes/no)"
+5. If yes:
+    - If on main branch, prompt user: "You are currently on the main branch. Please create a new branch using `git checkout -b <branch-name>` before proceeding."
+    - Wait for user confirmation before continuing
+    - Run `git add <modified-files>`
+    - Prompt for commit message
+    - Run `git commit -m "<user-provided-message>"`
+    - Run `git push -u origin <current-branch-name>`
+**Success Criteria**: Changes committed and pushed to remote branch
+
+Step 5: Create Specification Pull Request
+**Goal**: Create PR for TypeSpec changes if not already created
+**Condition**: Only if there are committed changes (from Step 4)
+**Actions**:
+1. Prompt the user to confirm if a pull request already exists for API spec changes. If answer is no or unsure then check if spec PR already exists using `azsdk_get_pull_request_link_for_current_branch`
+2. If PR exists, display PR details and proceed to next steps in SDK generation.
+3. If no PR exists:
+    - Inform user: "No pull request found for the current branch. Proceeding to create a new pull request."
+    - Create a pull request using `azsdk_create_pull_request_for_current_branch`
+    - Prompt for PR title and description
+    - Display PR creation progress
+    - Wait for PR creation confirmation
+    - Display created PR details
+**Success Criteria**: Specification pull request exists
+
+Follow the steps in [typespec to sdk](..\eng\common\instructions\azsdk-tools\typespec-to-sdk.instructions.md) to generate the SDK.
+
+# Release readiness of SDK and information about the release pipeline
 
 Run [check package readiness](..\eng\common\instructions\azsdk-tools\check-package-readiness.instructions.md) to check the release readiness of an SDK package. This prompt will collect the required information from the user, execute the readiness check, and present the results.
 
-## Instructions for GitHub coding agent to generate SDKs using GitHub.com
+# Instructions for GitHub coding agent to generate SDKs using GitHub.com
 
 Run only SDK generation step and Update SDK details back in issue description and release plan. Do not run TypeSpec validation, or service label check. This is applicable only when GitHub copilot coding agent is used to generate SDK and if a Release Plan is available in the context. Run SDK generation tool even if release plan already has SDK generation pipeline URL to support regenerating SDK.
 Coding agent must wait until all SDK generation pipeline are in completed status and then fetch the SDK details from pipeline run. This is applicable only when a GitHub issue is assigned to GitHub coding agent to generate SDK from a TypeSpec project. This is not applicable when running Copilot from Visual Studio and VS Code.
 
-### Additional instructions:
+## Additional instructions:
 
 - Run SDK generation pipeline for the given TypeSpec path for all languages mentioned in the description.
 - Identify absolute path of TypeSpec project root path and send it to Run SDK generation MCP tool call.
 - Keep checking the pipeline status until pipeline is in completed or failed status.
 - Find SDK pull request links from the pipeline run.
 
-### Constraints:
+## Constraints:
 
 - Do not invoke other steps.
 - Do not modify main.tsp file or any files in TypeSpec project.

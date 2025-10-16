@@ -5303,13 +5303,29 @@ model DataDisk {
   /**
    * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
+  @renamedFrom(Versions.v2025_04_01, "diskIOPSReadWrite")
+  @removed(Versions.v2025_04_01)
   @visibility(Lifecycle.Read)
+  DiskIOPSReadWrite?: int64;
+
+  /**
+   * Specifies the Read-Write IOPS for the managed disk when StorageAccountType is UltraSSD_LRS.
+   */
+  @added(Versions.v2025_04_01)
   diskIOPSReadWrite?: int64;
 
   /**
    * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS. Returned only for VirtualMachine ScaleSet VM disks. Can be updated only via updates to the VirtualMachine Scale Set.
    */
+  @renamedFrom(Versions.v2025_04_01, "diskMBpsReadWrite")
+  @removed(Versions.v2025_04_01)
   @visibility(Lifecycle.Read)
+  DiskMBpsReadWrite?: int64;
+
+  /**
+   * Specifies the bandwidth in MB per second for the managed disk when StorageAccountType is UltraSSD_LRS.
+   */
+  @added(Versions.v2025_04_01)
   diskMBpsReadWrite?: int64;
 
   /**
