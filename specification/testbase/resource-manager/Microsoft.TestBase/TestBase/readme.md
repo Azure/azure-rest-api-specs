@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2020-12-16-preview` is specified o
 
 ```yaml $(tag) == 'package-2020-12-16-preview'
 input-file:
-  - TestBase/preview/2020-12-16-preview/testbase.json
+  - preview/2020-12-16-preview/testbase.json
 ```
 
 ### Tag: package-2022-04-01-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2022-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2022-04-01-preview'
 input-file:
-  - TestBase/preview/2022-04-01-preview/testbase.json
+  - preview/2022-04-01-preview/testbase.json
 ```
 
 ### Tag: package-2023-11-01-preview
@@ -54,12 +54,12 @@ These settings apply only when `--tag=package-2023-11-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2023-11-01-preview'
 input-file:
-  - TestBase/preview/2023-11-01-preview/actionrequest.json
-  - TestBase/preview/2023-11-01-preview/chat.json
-  - TestBase/preview/2023-11-01-preview/customimage.json
-  - TestBase/preview/2023-11-01-preview/draftpackage.json
-  - TestBase/preview/2023-11-01-preview/testbase.json
-  - TestBase/preview/2023-11-01-preview/credential.json
+  - preview/2023-11-01-preview/actionrequest.json
+  - preview/2023-11-01-preview/chat.json
+  - preview/2023-11-01-preview/customimage.json
+  - preview/2023-11-01-preview/draftpackage.json
+  - preview/2023-11-01-preview/testbase.json
+  - preview/2023-11-01-preview/credential.json
 ```
 
 ---
