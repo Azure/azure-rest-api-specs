@@ -112,3 +112,63 @@ using Microsoft.Compute;
   "ultraSsdEnabled",
   "java"
 );
+
+// Scale set IP configuration properties
+@@clientName(VirtualMachineScaleSetIPConfigurationProperties.publicIPAddressConfiguration,
+  "publicIpAddressConfiguration",
+  "java"
+);
+@@clientName(VirtualMachineScaleSetIPConfigurationProperties.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+
+// Scale set public IP configuration properties
+@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties.publicIPAddressVersion,
+  "publicIpAddressVersion",
+  "java"
+);
+@@clientName(VirtualMachineScaleSetPublicIPAddressConfigurationProperties.publicIPPrefix,
+  "publicIpPrefix",
+  "java"
+);
+
+// Scale set UPDATE IP configuration properties
+@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.publicIPAddressConfiguration,
+  "publicIpAddressConfiguration",
+  "java"
+);
+@@clientName(VirtualMachineScaleSetUpdateIPConfigurationProperties.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+
+// Scale set UPDATE public IP configuration properties
+@@clientName(VirtualMachineScaleSetUpdatePublicIPAddressConfigurationProperties.publicIPPrefix,
+  "publicIpPrefix",
+  "java"
+);
+
+// Network interface IP configuration properties
+@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.publicIPAddressConfiguration,
+  "publicIpAddressConfiguration",
+  "java"
+);
+@@clientName(VirtualMachineNetworkInterfaceIPConfigurationProperties.privateIPAddressVersion,
+  "privateIpAddressVersion",
+  "java"
+);
+
+// VM-level public IP address configuration properties
+@@clientName(VirtualMachinePublicIPAddressConfigurationProperties.publicIPAddressVersion,
+  "publicIpAddressVersion",
+  "java"
+);
+@@clientName(VirtualMachinePublicIPAddressConfigurationProperties.publicIPPrefix,
+  "publicIpPrefix",
+  "java"
+);
+@@clientName(VirtualMachinePublicIPAddressConfigurationProperties.publicIPAllocationMethod,
+  "publicIpAllocationMethod",
+  "java"
+);
