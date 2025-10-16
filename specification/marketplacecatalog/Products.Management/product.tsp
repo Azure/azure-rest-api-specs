@@ -3,6 +3,8 @@ import "@typespec/http";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
+using Azure.ResourceManager;
+
 namespace Microsoft.Marketplace;
 
 #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "Read-only metadata resource."
@@ -86,7 +88,7 @@ model ProductSummary {
   ratingCount?: int32;
 
   @doc("Full set of plan/SKU attributes")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   plans?: PlanSummary[];
 
   @doc("Maps to the list of compatible products")
@@ -117,7 +119,7 @@ model ProductSummary {
   hasMarketplaceFootprint?: boolean;
 
   @doc("Set of products attributes")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   attributes?: Attribute[];
 }
 
@@ -126,11 +128,11 @@ model ProductSummary {
 @doc("Summary description of the product")
 model ProductDetails extends ProductSummary {
   @doc("List of product videos")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   videos?: ProductVideo[];
 
   @doc("List of Images")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   images?: ImageGroup[];
 
   @doc("List of linked add ins provided for the item")
@@ -206,7 +208,7 @@ model ProductDetails extends ProductSummary {
   marketingMaterial?: MarketingMaterial;
 
   @doc("List of artifacts")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: Artifact[];
 
   // Override properties that differ from base class
@@ -293,7 +295,7 @@ model PlanDetails extends PlanSummary {
   uiDefinitionUri?: string;
 
   @doc("Files related to the marketplace item")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   artifacts?: Artifact[];
 
   @doc("Version of the marketplace item")
@@ -318,11 +320,11 @@ model PlanDetails extends PlanSummary {
   isQuantifiable: boolean;
 
   @doc("Billing components")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   billingComponents?: BillingComponent[];
 
   @doc("List of purchase duration discounts")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   purchaseDurationDiscounts?: PurchaseDurationDiscount[];
 
   @doc("A value indicating whether the plan is used as hidden private offer requiring a quote")
@@ -371,14 +373,14 @@ model PlanDetails extends PlanSummary {
   serviceType?: string;
 
   @doc("Set of SKU attributes (varies per sku type), where each attribute is represented by a pair of key (attribute name) and value(attribute value)")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   skuAttributes?: Attribute[];
 
   @doc("The sku properties")
   skuProperties?: SkuProperties;
 
   @doc("SKU price related properties.")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   offeringProperties?: OfferingProperties[];
 }
 
@@ -532,7 +534,7 @@ model Meter {
   type?: string;
 
   @doc("Included quantity properties")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   includedQuantityProperties?: IncludedQuantityProperty[];
 }
 
@@ -575,7 +577,7 @@ model BillingComponent {
 @doc("Applicable term")
 model Term {
   @doc("Term description parameters")
-  @OpenAPI.extension("x-ms-identifiers", #["parameter", "value"])
+  @identifiers(#["parameter", "value"])
   termDescriptionParameters?: TermDescriptionParameter[];
 
   @doc("Term id")
@@ -624,7 +626,7 @@ model Availability {
   pricingAudience: string;
 
   @doc("List of applicable terms")
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   terms?: Term[];
 
   @doc("A value indicating whether it has free trials")
