@@ -14,8 +14,6 @@ using Microsoft.DocumentDB;
 @@clientName(OperationDisplay.Operation, "operation");
 @@clientName(OperationDisplay.Description, "description");
 
-@@clientName(MetricValue._count, "count");
-
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(GraphResourceCreateUpdateParameters.properties);
 
@@ -34,8 +32,6 @@ using Microsoft.DocumentDB;
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(ClientEncryptionKeyCreateUpdateParameters.properties);
-
-@@clientName(MaterializedViewDetails._rid, "rid");
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @@Legacy.flattenProperty(SqlContainerCreateUpdateParameters.properties);
