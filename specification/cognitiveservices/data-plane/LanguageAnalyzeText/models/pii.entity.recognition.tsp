@@ -35,10 +35,6 @@ model PiiTaskParameters is PreBuiltTaskParametersLoggingOptOut {
   @added(Versions.v2025_11_15_preview)
   excludePiiCategories?: PiiCategoriesExclude[];
 
-  /** RedactionPolicy to be used on the input. */
-  @added(Versions.v2025_11_15_preview)
-  redactionPolicy?: BaseRedactionPolicy;
-
   /** Policy for specific words and terms that should be excluded from detection by the PII detection service */
   @added(Versions.v2025_11_15_preview)
   valueExclusionPolicy?: ValueExclusionPolicy;
