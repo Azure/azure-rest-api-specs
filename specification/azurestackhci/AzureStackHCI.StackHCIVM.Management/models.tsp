@@ -617,18 +617,6 @@ model LogicalNetworkArmReference {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
     },
     {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
-    },
-    {
       type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";
     }
   ]>;
