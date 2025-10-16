@@ -94,6 +94,13 @@ interface ConfigTemplates {
     HierarchySelector
   >;
 
+  @added(Versions.v2025_08_01)
+  @doc("Remove a Config Template from a particular hierarchy node")
+  unLinkFromHierarchies is ArmResourceActionNoResponseContentAsync<
+    ConfigTemplate,
+    HierarchySelector
+  >;
+
   @doc("Create or update a Config Template Version Resource with the specified UpdateType")
   createVersion is ArmResourceActionAsync<
     ConfigTemplate,
