@@ -1,11 +1,11 @@
-output-dir: "{project-root}/../"
+output-dir: "{project-root}"
 emit:
   - "@azure-tools/typespec-autorest"
 #  - "@azure-tools/typespec-providerhub-controller"
 options:
   "@azure-tools/typespec-autorest":
-    emitter-output-dir: "{project-root}"
-    azure-resource-provider-folder: "resource-manager"
+    emitter-output-dir: "{output-dir}"
+    azure-resource-provider-folder: ./resource-manager
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
     new-line: lf
     output-file: "{version-status}/{version}/manufacturingplatform.json"
