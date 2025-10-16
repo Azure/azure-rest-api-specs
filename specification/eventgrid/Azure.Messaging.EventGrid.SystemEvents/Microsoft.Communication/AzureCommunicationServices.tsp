@@ -144,6 +144,9 @@ model AcsChatMessageDeletedInThreadEventData
 model AcsChatThreadCreatedWithUserEventData
   extends AcsChatThreadEventBaseProperties {
   ...AcsChatThreadBaseEventData;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatThreadCreatedExample)
@@ -152,6 +155,9 @@ model AcsChatThreadCreatedWithUserEventData
 model AcsChatThreadCreatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadBaseEventData;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatThreadWithUserDeletedExample)
@@ -168,6 +174,9 @@ model AcsChatThreadWithUserDeletedEventData
 model AcsChatThreadDeletedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadDeletedBaseEventData;
+
+  /** The chat thread deletion reason. */
+  reason?: AcsChatThreadDeletedReasonType;
 }
 
 // @example(MicrosoftCommunicationChatThreadPropertiesUpdatedPerUserExample)
@@ -189,6 +198,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
   /** The updated thread properties */
   #suppress "@azure-tools/typespec-azure-core/bad-record-type" "The type of properties is object with additionalProperties: object"
   properties: Record<unknown>;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(AcsChatThreadPropertiesUpdatedExample)
@@ -197,6 +209,9 @@ model AcsChatThreadPropertiesUpdatedPerUserEventData
 model AcsChatThreadPropertiesUpdatedEventData
   extends AcsChatThreadEventInThreadBaseProperties {
   ...AcsChatThreadPropertiesBaseEventData;
+
+  /** The retention policy for the chat. */
+  retentionPolicy?: AcsChatRetentionPolicy;
 }
 
 // @example(MicrosoftCommunicationChatParticipantAddedToThreadWithUserExample)
@@ -1561,6 +1576,15 @@ model AcsMessageChannelEventError {
   channelMessage?: string;
 }
 
+/** Schema of common properties of all chat retention policy */
+model AcsChatRetentionPolicy {
+  /** The chat retention policy kind. */
+  kind?: AcsChatRetentionPolicyKind;
+
+  /** The delete thread after number of days. */
+  deleteThreadAfterDays?: int32;
+}
+
 /** Interactive reply kind */
 union AcsInteractiveReplyKind {
   /** Messaged interactive reply type is ButtonReply */
@@ -1571,6 +1595,28 @@ union AcsInteractiveReplyKind {
 
   /** Messaged interactive reply type is Unknown */
   "unknown",
+
+  string,
+}
+
+/** Chat Retention Policy kind */
+union AcsChatRetentionPolicyKind {
+  /** None */
+  "none",
+
+  /** ThreadCreationDate */
+  "threadCreationDate",
+
+  string,
+}
+
+/** Chat Thread Deletion Reason Type */
+union AcsChatThreadDeletedReasonType {
+  /** DeletedByUser */
+  "deletedByUser",
+
+  /** DeletedByPolicy */
+  "deletedByPolicy",
 
   string,
 }

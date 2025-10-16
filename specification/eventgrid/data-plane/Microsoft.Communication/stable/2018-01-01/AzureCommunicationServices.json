@@ -1253,6 +1253,11 @@
           "items": {
             "$ref": "#/definitions/AcsChatThreadParticipantProperties"
           }
+        },
+        "retentionPolicy": {
+          "description": "The retention policy for the chat.",
+          "type": "object",
+          "$ref": "#/definitions/AcsChatRetentionPolicy"
         }
       },
       "required": [
@@ -1301,6 +1306,28 @@
           "description": "The deletion time of the thread",
           "format": "date-time",
           "type": "string"
+        },
+        "reason": {
+          "description": "The chat thread deletion reason.",
+          "type": "string",
+          "enum": [
+            "DeletedByUser",
+            "DeletedByPolicy"
+          ],
+          "x-ms-enum": {
+            "name": "AcsChatThreadDeletedReasonType",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "deletedByUser",
+                "description": "Deleted by user."
+              },
+              {
+                "value": "deletedByPolicy",
+                "description": "Deleted by policy."
+              }
+            ]
+          }
         }
       },
       "required": [
@@ -1355,7 +1382,7 @@
       "type": "object",
       "properties": {
         "editedByCommunicationIdentifier": {
-          "description": "The communication identifier of the user who updated the thread properties",
+          "description": "The communication identifier of the user who updated the thread properties.",
           "$ref": "../../../../../communication/data-plane/Common/stable/2023-11-15/common.json#/definitions/CommunicationIdentifierModel"
         },
         "editTime": {
@@ -2362,6 +2389,39 @@
         "threadId": {
           "description": "The chat thread id",
           "type": "string"
+        }
+      }
+    },
+    "AcsChatRetentionPolicy": {
+      "description": "Schema of common properties of all chat retention policy",
+      "type": "object",
+      "properties": {
+        "kind": {
+          "description": "The chat retention policy kind.",
+          "type": "string",
+          "enum": [
+            "None",
+            "ThreadCreationDate"
+          ],
+          "x-ms-enum": {
+            "name": "AcsChatRetentionPolicyKind",
+            "modelAsString": true,
+            "values": [
+              {
+                "value": "none",
+                "description": "None Policy Kind."
+              },
+              {
+                "value": "threadCreationDate",
+                "description": "Thread Creation Date Kind."
+              }
+            ]
+          }
+        },
+        "deleteThreadAfterDays": {
+          "description": "The delete thread after number of days.",
+          "type": "integer",
+          "format": "int32"
         }
       }
     },
