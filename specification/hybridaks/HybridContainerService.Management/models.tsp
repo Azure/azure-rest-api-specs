@@ -444,7 +444,7 @@ model SecurityProfile {
 }
 
 /**
- * The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided. Certificates will be added to trust stores of all the nodes in the cluster. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. Updating the value of this field will result in nodes being reimaged.
+ * The list of base64 encoded certificate strings that will be added to the node trust store. At most 10 certificates can be provided. Certificates will be added to trust stores of all the nodes in the cluster. If updated, the new list of certificates will be installed in the trust store in place of the old certificates. Updating the value of this field will result in nodes being re-imaged.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "Initial suppression to prevent breaking change, CA is an acronym"
 #suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "Initial suppression to prevent breaking change"
