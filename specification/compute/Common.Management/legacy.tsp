@@ -251,6 +251,23 @@ namespace Azure.ResourceManager.Legacy {
     >(...ParentParameters, ...Parameters): Response | ErrorType;
 
     /**
+     * @dev List a single page of the resource
+     * @template Resource The resource being listed
+     * @template Parameters Optional. Additional parameters after the path parameters
+     * @template Response Optional. The response returned by the list
+     */
+    @segmentOf(ResourceTypeParameter)
+    @doc("List a {name}", Resource)
+    @get
+    @listsResource(Resource)
+    @armResourceList(Resource)
+    ListSinglePage<
+      Resource extends Azure.ResourceManager.CommonTypes.Resource,
+      Parameters extends {} = {},
+      Response extends {} = ArmResponse<ResourceListResult<Resource>>
+    >(...ParentParameters, ...Parameters): Response | ErrorType;
+
+    /**
      * @dev List a resource
      * @template Resource The resource being listed
      * @template Parameters Optional. Additional parameters after the path parameters
