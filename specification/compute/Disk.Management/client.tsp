@@ -1,9 +1,7 @@
 import "@azure-tools/typespec-client-generator-core";
-import "@typespec/http";
 import "./main.tsp";
 
 using Azure.ClientGenerator.Core;
-using TypeSpec.Http;
 using Microsoft.Compute;
 
 // Mitigate breaking changes for Java SDK migration from Swagger to TypeSpec
@@ -29,4 +27,9 @@ using Microsoft.Compute;
 @@clientName(GrantAccessData.getSecureVMGuestStateSAS,
   "getSecureVMGuestStateSas",
   "java"
+);
+
+@@clientName(DiskSecurityTypes.ConfidentialVM_VMGuestStateOnlyEncryptedWithPlatformKey,
+  "ConfidentialVMVmguestStateOnlyEncryptedWithPlatformKey",
+  "go"
 );
