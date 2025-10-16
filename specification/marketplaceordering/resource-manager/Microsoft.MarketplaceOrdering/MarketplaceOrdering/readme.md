@@ -57,7 +57,7 @@ These settings apply only when `--tag=package-2021-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-01-01'
 input-file:
-- Microsoft.MarketplaceOrdering/stable/2021-01-01/Agreements.json
+- stable/2021-01-01/Agreements.json
 ```
 
 ### Tag: package-2015-06-01
@@ -66,7 +66,7 @@ These settings apply only when `--tag=package-2015-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2015-06-01'
 input-file:
-- Microsoft.MarketplaceOrdering/stable/2015-06-01/Agreements.json
+- stable/2015-06-01/Agreements.json
 directive:
   # suppress each RPC 3016 error
 - where: $.definitions.UnsupportedMediaTypeErrorResponse.properties.Message
