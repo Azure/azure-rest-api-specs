@@ -8,7 +8,7 @@ using TypeSpec.Versioning;
 @versioned(KeyVault.Versions)
 namespace Customizations;
 
-@@clientName(KeyVault, "Secret", "java");
+@@clientName(KeyVault, "SecretClient", "java");
 @@clientName(KeyVault, "Secret", "rust");
 @@clientName(KeyVault, "Client", "go");
 
