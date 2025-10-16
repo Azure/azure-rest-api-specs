@@ -8,7 +8,7 @@ This is the AutoRest configuration file the Cognitive Services Language SDK.
 
 The current preview release of Language - Text is 2025-05-15-preview.
 
-The current stable release of Language - Text is 2024-11-01.
+The current stable release of Language - Text is 2025-11-01.
 
 ```yaml
 tag: release_2025-05-15-preview
