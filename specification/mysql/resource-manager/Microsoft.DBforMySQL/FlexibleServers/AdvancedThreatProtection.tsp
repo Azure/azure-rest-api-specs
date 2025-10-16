@@ -64,6 +64,8 @@ interface AdvancedThreatProtectionSettings {
   /**
    * Gets a list of server's Advanced Threat Protection states.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("AdvancedThreatProtectionSettings_List")
   list is ArmResourceListByParent<
     AdvancedThreatProtection,
     Response = ArmResponse<AdvancedThreatProtectionListResult>

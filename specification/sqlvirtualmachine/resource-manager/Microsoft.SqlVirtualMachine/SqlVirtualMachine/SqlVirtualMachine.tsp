@@ -93,7 +93,9 @@ interface SqlVirtualMachines {
   /**
    * Starts SQL best practices Assessment with Disk Config rules on SQL virtual machine
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @operationId("SqlVirtualMachines_FetchDCAssessment")
   fetchDCAssessment is ArmResourceActionAsyncBase<
     SqlVirtualMachine,
     DiskConfigAssessmentRequest,
