@@ -60,12 +60,17 @@ interface Applications {
   >;
 
   /**
-   * Updates the tags of an application resource of a given managed cluster.
+   * Updates the tags or parameters of an application resource of a given managed cluster.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchSync<
+  update is ArmCustomPatchAsync<
     ApplicationResource,
-    PatchModel = ApplicationUpdateParameters
+    PatchModel = ApplicationUpdateParameters,
+    Response = ArmResourceUpdatedResponse<ApplicationResource> | (ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ApplicationResource>> & {
+      @bodyRoot
+      _: ApplicationResource;
+    })
   >;
 
   /**
