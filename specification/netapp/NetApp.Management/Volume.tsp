@@ -1456,6 +1456,49 @@ model Replication {
    * The remote region for the other end of the Volume Replication.
    */
   remoteVolumeRegion?: string;
+
+  /**
+   * The status of the replication
+   */
+  @added(Versions.v2025_08_01)
+  @visibility(Lifecycle.Read)
+  mirrorState?: ReplicationMirrorState;
+
+  /**
+   * Replication creation time
+   */
+  @added(Versions.v2025_08_01)
+  @visibility(Lifecycle.Read)
+  replicationCreationTime?: utcDateTime;
+
+  /**
+   * Replication deletion time
+   */
+  @added(Versions.v2025_08_01)
+  @visibility(Lifecycle.Read)
+  replicationDeletionTime?: utcDateTime;
+}
+
+/**
+ * The status of the replication
+ */
+union ReplicationMirrorState {
+  string,
+
+  /**
+   * Destination volume has not been initialized
+   */
+  Uninitialized: "Uninitialized",
+
+  /**
+   * Destination volume has been initialized and is ready
+   */
+  Mirrored: "Mirrored",
+
+  /**
+   * 	Destination volume is RW, replication relationship has been broken off
+   */
+  Broken: "Broken",
 }
 
 /**

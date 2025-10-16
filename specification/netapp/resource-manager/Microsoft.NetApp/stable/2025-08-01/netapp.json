@@ -11562,11 +11562,58 @@
         "remoteVolumeRegion": {
           "type": "string",
           "description": "The remote region for the other end of the Volume Replication."
+        },
+        "mirrorState": {
+          "$ref": "#/definitions/ReplicationMirrorState",
+          "description": "The status of the replication",
+          "readOnly": true
+        },
+        "replicationCreationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Replication creation time",
+          "readOnly": true
+        },
+        "replicationDeletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "Replication deletion time",
+          "readOnly": true
         }
       },
       "required": [
         "remoteVolumeResourceId"
       ]
+    },
+    "ReplicationMirrorState": {
+      "type": "string",
+      "description": "The status of the replication",
+      "enum": [
+        "Uninitialized",
+        "Mirrored",
+        "Broken"
+      ],
+      "x-ms-enum": {
+        "name": "ReplicationMirrorState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Uninitialized",
+            "value": "Uninitialized",
+            "description": "Destination volume has not been initialized"
+          },
+          {
+            "name": "Mirrored",
+            "value": "Mirrored",
+            "description": "Destination volume has been initialized and is ready"
+          },
+          {
+            "name": "Broken",
+            "value": "Broken",
+            "description": "Destination volume is RW, replication relationship has been broken off"
+          }
+        ]
+      }
     },
     "ReplicationObject": {
       "type": "object",
