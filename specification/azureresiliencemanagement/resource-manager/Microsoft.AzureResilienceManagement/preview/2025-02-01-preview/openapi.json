@@ -5884,6 +5884,10 @@
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrill",
           "description": "Chaos Experiment properties."
         },
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrill",
+          "description": "HealthModel properties."
+        },
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
@@ -6767,6 +6771,10 @@
           "$ref": "#/definitions/ChaosExperimentPropertiesOfDrillUpdate",
           "description": "Chaos Experiment properties."
         },
+        "healthModelProperties": {
+          "$ref": "#/definitions/HealthModelPropertiesOfDrillUpdate",
+          "description": "HealthModel properties."
+        },
         "rbacSetupMode": {
           "$ref": "#/definitions/RBACSetupMode",
           "description": "RBAC setup mode."
@@ -7605,6 +7613,28 @@
         "identity",
         "healthModelId"
       ]
+    },
+    "HealthModelPropertiesOfDrillUpdate": {
+      "type": "object",
+      "description": "Health Model properties.",
+      "properties": {
+        "identity": {
+          "$ref": "#/definitions/AssociatedIdentityUpdate",
+          "description": "Identity to use for Health Model operations."
+        },
+        "healthModelId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Full ARM Id of the Health Model.",
+          "x-ms-arm-id-details": {
+            "allowedResources": [
+              {
+                "type": "Microsoft.CloudHealth/healthmodels"
+              }
+            ]
+          }
+        }
+      }
     },
     "HealthStatus": {
       "type": "string",
