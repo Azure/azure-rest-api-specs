@@ -60,7 +60,7 @@ interface Applications {
   >;
 
   /**
-   * Updates the tags or parameters of an application resource of a given managed cluster.
+   * Updates an application resource of a given managed cluster.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "Day 0 Property"
   @patch(#{ implicitOptionality: false })
