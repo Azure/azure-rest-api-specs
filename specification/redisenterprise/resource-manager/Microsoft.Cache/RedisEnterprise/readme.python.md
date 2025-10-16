@@ -21,9 +21,10 @@ output-folder: $(python-sdks-folder)/redisenterprise/azure-mgmt-redisenterprise/
 
 ```yaml $(python)
 directive:
-- rename-model:
-  from: 'ClusterCommonPropertiesEncryption'
-  to: 'ClusterPropertiesEncryption'
+- from: redisenterprise.json
+  where: "$.definitions.ClusterCommonProperties.properties.encryption"
+  transform: >
+    $["x-ms-client-name"] = "ClusterPropertiesEncryption";
 - from: redisenterprise.json
   where: "$.definitions.ClusterCommonProperties.properties.encryption.properties.customerManagedKeyEncryption"
   transform: >
