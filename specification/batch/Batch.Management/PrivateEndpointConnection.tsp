@@ -30,15 +30,11 @@ interface PrivateEndpointConnections {
   /**
    * Gets information about the specified private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnection_Get")
   get is ArmResourceRead<PrivateEndpointConnection>;
 
   /**
    * Updates the properties of an existing private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnection_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PrivateEndpointConnection,
@@ -55,16 +51,12 @@ interface PrivateEndpointConnections {
   /**
    * Deletes the specified private endpoint connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnection_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<PrivateEndpointConnection>;
 
   /**
    * Lists all of the private endpoint connections in the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("PrivateEndpointConnection_ListByBatchAccount")
   listByBatchAccount is ArmResourceListByParent<
     PrivateEndpointConnection,
     Parameters = {

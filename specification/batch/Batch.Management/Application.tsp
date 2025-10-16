@@ -30,16 +30,12 @@ interface Applications {
   /**
    * Gets information about the specified application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Application_Get")
   get is ArmResourceRead<Application>;
 
   /**
    * Adds an application to the specified Batch account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Application_Create")
   create is ArmResourceCreateOrReplaceSync<
     Application,
     Response = ArmResourceUpdatedResponse<Application>
@@ -48,23 +44,17 @@ interface Applications {
   /**
    * Updates settings for the specified application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Application_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<Application, PatchModel = Application>;
 
   /**
    * Deletes an application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Application_Delete")
   delete is ArmResourceDeleteSync<Application>;
 
   /**
    * Lists all of the applications in the specified account.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Application_List")
   list is ArmResourceListByParent<
     Application,
     Parameters = {

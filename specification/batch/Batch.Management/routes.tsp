@@ -18,8 +18,6 @@ interface LocationOperationGroup {
   /**
    * Gets the Batch service quotas for the specified subscription at the given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Location_GetQuotas")
   @autoRoute
   @get
   @action("quotas")
@@ -38,8 +36,6 @@ interface LocationOperationGroup {
   /**
    * Gets the list of Batch supported Virtual Machine VM sizes available at the given location.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  @operationId("Location_ListSupportedVirtualMachineSkus")
   @autoRoute
   @list
   @get
