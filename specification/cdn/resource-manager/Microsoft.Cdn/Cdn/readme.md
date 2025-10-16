@@ -39,7 +39,10 @@ These settings apply only when `--tag=package-preview-2025-09` is specified on t
 ```yaml $(tag) == 'package-preview-2025-09'
 input-file:
   - preview/2025-09-01-preview/openapi.json
+  - preview/2025-09-01-preview/edgeaction.json
 suppressions:
+  - code: OperationsAPIImplementation
+    reason: Operation APIs for Microsoft.Cdn are to be defined in cdn swagger
   - code: PatchBodyParametersSchema
     reason: This is the API design and therefore exempted
   - code: ProvisioningStateMustBeReadOnly
