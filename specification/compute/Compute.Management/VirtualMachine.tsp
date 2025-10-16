@@ -318,7 +318,7 @@ interface VirtualMachines {
       /**
        * Parameters supplied to the Reimage Virtual Machine operation.
        */
-      @bodyRoot parameters?: VirtualMachineReimageParameters;
+      @body parameters?: VirtualMachineReimageParameters;
     },
     OkResponse
   >;

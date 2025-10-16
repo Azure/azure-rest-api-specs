@@ -89,7 +89,7 @@ interface SshPublicKeyResources {
       /**
        * Parameters supplied to generate the SSH public key.
        */
-      @bodyRoot parameters?: SshGenerateKeyPairInputParameters;
+      @body parameters?: SshGenerateKeyPairInputParameters;
     },
     SshPublicKeyGenerateKeyPairResult
   >;

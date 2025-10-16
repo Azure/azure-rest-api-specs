@@ -234,7 +234,7 @@ interface VirtualMachineScaleSetVMS {
       /**
        * Parameters for the Reimaging Virtual machine in ScaleSet.
        */
-      @bodyRoot
+      @body
       vmScaleSetVMReimageInput?: VirtualMachineScaleSetVMReimageParameters;
     },
     OkResponse
