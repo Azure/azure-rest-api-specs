@@ -3306,6 +3306,7 @@ model ExportPipelineListResult {
 /**
  * The result of a request to list import pipelines for a container registry.
  */
+@removed(Versions.v2025_11_01)
 model ImportPipelineListResult {
   /**
    * The list of import pipelines. Since this list may be incomplete, the nextLink field should be used to request the next list of import pipelines.

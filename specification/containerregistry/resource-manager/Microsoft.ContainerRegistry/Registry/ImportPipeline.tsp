@@ -16,6 +16,7 @@ namespace Microsoft.ContainerRegistry;
 /**
  * An object that represents an import pipeline for a container registry.
  */
+@removed(Versions.v2025_11_01)
 @parentResource(Registry)
 model ImportPipeline
   is Azure.ResourceManager.ProxyResource<ImportPipelineProperties> {
@@ -29,13 +30,13 @@ model ImportPipeline
   /**
    * The location of the import pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   location?: string;
 
   /**
    * The identity of the import pipeline.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   identity?: IdentityProperties;
 }
 
@@ -55,7 +56,7 @@ interface ImportPipelines {
   /**
    * Deletes an import pipeline from a container registry.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ImportPipeline,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
