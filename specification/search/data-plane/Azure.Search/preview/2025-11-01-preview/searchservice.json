@@ -2917,30 +2917,14 @@
         "sourceDataFields": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name"
-            ]
+            "$ref": "#/definitions/SearchIndexFieldReference"
           },
           "description": "Used to request additional fields for referenced source data."
         },
         "searchFields": {
           "type": "array",
           "items": {
-            "type": "object",
-            "properties": {
-              "name": {
-                "type": "string"
-              }
-            },
-            "required": [
-              "name"
-            ]
+            "$ref": "#/definitions/SearchIndexFieldReference"
           },
           "description": "Used to restrict which fields to search on the search index."
         },
@@ -2953,6 +2937,17 @@
         "searchIndexName"
       ],
       "description": "Parameters for search index knowledge source."
+    },
+    "SearchIndexFieldReference": {
+      "type": "object",
+      "properties": {
+        "name": {
+          "type": "string"
+        }
+      },
+      "required": [
+        "name"
+      ]
     },
     "AzureBlobKnowledgeSource": {
       "type": "object",

@@ -621,6 +621,24 @@
         "filter": {
           "type": "string",
           "description": "The filter string."
+        },
+        "sourceDataFields": {
+          "type": "array",
+          "items": {
+            "$ref": "searchservice.json#/definitions/SearchIndexFieldReference"
+          },
+          "description": "What fields were selected for search."
+        },
+        "searchFields": {
+          "type": "array",
+          "items": {
+            "$ref": "searchservice.json#/definitions/SearchIndexFieldReference"
+          },
+          "description": "What fields were searched against."
+        },
+        "semanticConfigurationName": {
+          "type": "string",
+          "description": "What semantic configuration was used from the search index."
         }
       },
       "description": "Represents the arguments the search index retrieval activity was run with."
