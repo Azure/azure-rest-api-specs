@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2025-05-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2025-05-01'
 input-file:
-  - Microsoft.Peering/stable/2025-05-01/peering.json
+  - stable/2025-05-01/peering.json
 ```
 
 ### Tag: package-2022-10-01
@@ -46,7 +46,7 @@ These settings apply only when `--tag=package-2022-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-10-01'
 input-file:
-  - Microsoft.Peering/stable/2022-10-01/peering.json
+  - stable/2022-10-01/peering.json
 ```
 
 ### Tag: package-2022-06-01
@@ -55,7 +55,7 @@ These settings apply only when `--tag=package-2022-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-06-01'
 input-file:
-  - Microsoft.Peering/stable/2022-06-01/peering.json
+  - stable/2022-06-01/peering.json
 ```
 
 ### Tag: package-2022-01-01
@@ -64,7 +64,7 @@ These settings apply only when `--tag=package-2022-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2022-01-01'
 input-file:
-- Microsoft.Peering/stable/2022-01-01/peering.json
+- stable/2022-01-01/peering.json
 ```
 
 ### Tag: package-2021-06-01
@@ -73,7 +73,7 @@ These settings apply only when `--tag=package-2021-06-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-06-01'
 input-file:
-- Microsoft.Peering/stable/2021-06-01/peering.json
+- stable/2021-06-01/peering.json
 ```
 
 ### Tag: package-2021-01-01
@@ -82,7 +82,7 @@ These settings apply only when `--tag=package-2021-01-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2021-01-01'
 input-file:
-- Microsoft.Peering/stable/2021-01-01/peering.json
+- stable/2021-01-01/peering.json
 ```
 
 ### Tag: package-2020-10-01
@@ -91,7 +91,7 @@ These settings apply only when `--tag=package-2020-10-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-10-01'
 input-file:
-- Microsoft.Peering/stable/2020-10-01/peering.json
+- stable/2020-10-01/peering.json
 ```
 
 ### Tag: package-2020-04-01
@@ -100,7 +100,7 @@ These settings apply only when `--tag=package-2020-04-01` is specified on the co
 
 ``` yaml $(tag) == 'package-2020-04-01'
 input-file:
-- Microsoft.Peering/stable/2020-04-01/peering.json
+- stable/2020-04-01/peering.json
 ```
 
 ### Tag: package-2020-01-01-preview
@@ -109,7 +109,7 @@ These settings apply only when `--tag=package-2020-01-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-01-01-preview'
 input-file:
-- Microsoft.Peering/preview/2020-01-01-preview/peering.json
+- preview/2020-01-01-preview/peering.json
 ```
 
 ### Tag: package-2019-09-01-preview
@@ -118,7 +118,7 @@ These settings apply only when `--tag=package-2019-09-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-09-01-preview'
 input-file:
-- Microsoft.Peering/preview/2019-09-01-preview/peering.json
+- preview/2019-09-01-preview/peering.json
 ```
 
 ### Tag: package-2019-08-01-preview
@@ -127,7 +127,7 @@ These settings apply only when `--tag=package-2019-08-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2019-08-01-preview'
 input-file:
-- Microsoft.Peering/preview/2019-08-01-preview/peering.json
+- preview/2019-08-01-preview/peering.json
 ```
 
 # Code Generation
