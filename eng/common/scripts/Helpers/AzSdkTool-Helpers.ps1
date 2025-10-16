@@ -183,7 +183,7 @@ function Install-Standalone-Tool (
 
         # Set executable permissions if on macOS (Darwin)
         if ($IsMacOS) {
-            chmod 755 $executable_path
+            & /bin/chmod 755 $executable_path
         }
     }
     else {

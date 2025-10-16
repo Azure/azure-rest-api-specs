@@ -16,6 +16,29 @@ param(
 )
 
 $ErrorActionPreference = "Stop"
+
+# Disable PowerShell's colored output for cleaner MCP logs
+$env:NO_COLOR = "1"
+$env:TERM = "dumb"
+
+# Fix Azure Identity authentication issues with Conditional Access policies
+$env:AZURE_CLI_DISABLE_CONNECTION_VERIFICATION = "true"
+$env:AZURE_IDENTITY_DISABLE_CP1 = "true"
+$env:AZURE_IDENTITY_USE_CLI_CREDENTIAL = "true"
+$env:USER_AGENT = "azsdk-net-Azure.Identity/1.0.0 (.NET 8.0.0; macOS 15.0.0)"
+$env:AZURE_CLIENT_USER_AGENT = "azsdk-net-Azure.Identity/1.0.0 (.NET 8.0.0; macOS 15.0.0)"
+$env:DOTNET_SYSTEM_GLOBALIZATION_INVARIANT = "false"
+$env:DOTNET_SYSTEM_NET_HTTP_USESOCKETSHTTPHANDLER = "true"
+
+# Disable colored output if PSStyle is available (PowerShell 7+)
+try {
+    if ($PSStyle -and $PSStyle.OutputRendering) {
+        $PSStyle.OutputRendering = 'PlainText'
+    }
+}
+catch {
+    # Ignore if PSStyle is not available
+}
 . (Join-Path $PSScriptRoot '..' 'scripts' 'Helpers' 'AzSdkTool-Helpers.ps1')
 
 $toolInstallDirectory = $InstallDirectory ? $InstallDirectory : (Get-CommonInstallDirectory)
@@ -140,6 +163,34 @@ $exeName = Split-Path $tempExe -Leaf
 $exeDestination = Join-Path $toolInstallDirectory $exeName
 Copy-Item -Path $tempExe -Destination $exeDestination -Force
 
+# Ensure executable permissions on macOS
+if ($IsMacOS) {
+    try {
+        # Try PowerShell native approach first
+        if (Get-Command "chmod" -ErrorAction SilentlyContinue) {
+            & chmod 755 $exeDestination
+        } else {
+            # Use full path to chmod directly
+            & /bin/chmod 755 $exeDestination
+        }
+        
+        # Verify the file is now executable
+        if (-not (Test-Path $exeDestination -PathType Leaf)) {
+            throw "File not found after chmod"
+        }
+    }
+    catch {
+        log -warn "Failed to set executable permissions on $exeDestination : $_"
+        # As a last resort, try to use Invoke-Expression
+        try {
+            Invoke-Expression "/bin/chmod 755 '$exeDestination'"
+        }
+        catch {
+            log -warn "All chmod attempts failed: $_"
+        }
+    }
+}
+
 log "Package $package is installed at $exeDestination"
 if (!$UpdatePathInProfile) {
     log -warn "To add the tool to PATH for new shell sessions, re-run with -UpdatePathInProfile to modify the shell profile file."
@@ -150,5 +201,41 @@ else {
 }
 
 if ($Run) {
-    Start-Process -WorkingDirectory $RunDirectory -FilePath $exeDestination -ArgumentList 'start' -NoNewWindow -Wait
+    try {
+        # Verify the file is executable before trying to run it
+        if (-not (Test-Path $exeDestination)) {
+            throw "Executable not found at $exeDestination"
+        }
+        
+        log "Starting $exeDestination with arguments 'start'"
+        Start-Process -WorkingDirectory $RunDirectory -FilePath $exeDestination -ArgumentList 'start' -NoNewWindow -Wait
+    }
+    catch {
+        log -err "Failed to start process: $_"
+        # Try to fix permissions and retry once
+        if ($IsMacOS) {
+            log "Attempting to fix permissions and retry..."
+            try {
+                if (Get-Command "chmod" -ErrorAction SilentlyContinue) {
+                    & chmod 755 $exeDestination
+                } else {
+                    & /bin/chmod 755 $exeDestination
+                }
+            }
+            catch {
+                log -warn "Could not set permissions: $_"
+            }
+            
+            try {
+                Start-Process -WorkingDirectory $RunDirectory -FilePath $exeDestination -ArgumentList 'start' -NoNewWindow -Wait
+            }
+            catch {
+                log -err "Retry failed: $_"
+                throw
+            }
+        }
+        else {
+            throw
+        }
+    }
 }
