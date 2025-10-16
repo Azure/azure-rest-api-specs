@@ -104,6 +104,104 @@
           "a": "b"
         }
       }
+    },
+    "202": {
+      "body": {
+        "name": "myCluster",
+        "type": "Microsoft.ServiceFabric/managedClusters",
+        "etag": "W/\"636462502169240745\"",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourcegroups/resRg/providers/Microsoft.ServiceFabric/managedClusters/myCluster",
+        "location": "eastus",
+        "properties": {
+          "addonFeatures": [
+            "DnsService",
+            "BackupRestoreService",
+            "ResourceMonitorService"
+          ],
+          "adminUserName": "vmadmin",
+          "allowRdpAccess": true,
+          "clientConnectionPort": 19001,
+          "clusterCertificateThumbprints": [
+            "12599211F8F14C90AFA9532AD79A6F2CA1C00622"
+          ],
+          "clusterCodeVersion": "7.1.168.9494",
+          "clusterId": "92584666-9889-4ae8-8d02-91902923d37f",
+          "clusterState": "WaitingForNodes",
+          "clusterUpgradeCadence": "Wave0",
+          "clusterUpgradeMode": "Automatic",
+          "dnsName": "myCluster",
+          "enableAutoOSUpgrade": true,
+          "fabricSettings": [
+            {
+              "name": "ManagedIdentityTokenService",
+              "parameters": [
+                {
+                  "name": "IsEnabled",
+                  "value": "false"
+                }
+              ]
+            }
+          ],
+          "fqdn": "MyCluster.eastus.cloudapp.azure.com",
+          "httpGatewayConnectionPort": 19081,
+          "loadBalancingRules": [
+            {
+              "backendPort": 80,
+              "frontendPort": 80,
+              "probePort": 80,
+              "probeProtocol": "http",
+              "protocol": "http"
+            },
+            {
+              "backendPort": 443,
+              "frontendPort": 443,
+              "probePort": 443,
+              "probeProtocol": "http",
+              "protocol": "http"
+            },
+            {
+              "backendPort": 10000,
+              "frontendPort": 10000,
+              "probePort": 10000,
+              "probeProtocol": "http",
+              "protocol": "tcp"
+            }
+          ],
+          "networkSecurityRules": [
+            {
+              "name": "TestName",
+              "description": "Test description",
+              "access": "allow",
+              "destinationAddressPrefixes": [
+                "*"
+              ],
+              "destinationPortRanges": [
+                "*"
+              ],
+              "direction": "inbound",
+              "priority": 1010,
+              "sourceAddressPrefixes": [
+                "*"
+              ],
+              "sourcePortRanges": [
+                "*"
+              ],
+              "protocol": "tcp"
+            }
+          ],
+          "provisioningState": "Succeeded"
+        },
+        "sku": {
+          "name": "Standard"
+        },
+        "tags": {
+          "a": "b"
+        }
+      },
+      "headers": {
+        "Azure-AsyncOperation": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationStatus/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2025-06-01-preview",
+        "Location": "http://management.azure.com/subscriptions/00000000-0000-0000-0000-000000000000/providers/Microsoft.ServiceFabric/locations/eastus/managedClusterOperationResults/1ca6e48d-70ca-4e43-b652-3b0522f64d67?api-version=2025-06-01-preview"
+      }
     }
   },
   "operationId": "ManagedClusters_Update",
