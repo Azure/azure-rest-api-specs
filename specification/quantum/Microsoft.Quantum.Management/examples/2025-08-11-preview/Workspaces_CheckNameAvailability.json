@@ -1,0 +1,22 @@
+{
+  "operationId": "Workspaces_CheckNameAvailability",
+  "title": "Workspaces_CheckNameAvailability",
+  "parameters": {
+    "subscriptionId": "00000000-1111-2222-3333-444444444444",
+    "api-version": "2025-08-11-preview",
+    "location": "westus2",
+    "body": {
+      "name": "sample-workspace-name",
+      "type": "Microsoft.Quantum/Workspaces"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "nameAvailable": false,
+        "reason": "AlreadyExists",
+        "message": "Resource name already exists"
+      }
+    }
+  }
+}
