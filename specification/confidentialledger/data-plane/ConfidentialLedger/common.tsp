@@ -2,7 +2,6 @@ import "@azure-tools/typespec-azure-core";
 
 using TypeSpec.Versioning;
 
-@useDependency(Azure.Core.Versions.v1_0_Preview_2)
 namespace ConfidentialLedgerCommon;
 
 op LedgerOperation<
