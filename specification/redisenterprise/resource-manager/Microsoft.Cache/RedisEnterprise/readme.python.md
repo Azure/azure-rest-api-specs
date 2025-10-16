@@ -22,19 +22,11 @@ output-folder: $(python-sdks-folder)/redisenterprise/azure-mgmt-redisenterprise/
 ```yaml $(python)
 directive:
 - from: redisenterprise.json
-  where: "$.definitions.ClusterCommonProperties.properties.encryption"
+  where: "$.definitions.ClusterCommonProperties"
   transform: >
-    $["x-ms-client-name"] = "ClusterPropertiesEncryption";
+    $["x-ms-client-name"] = "ClusterProperties";
 - from: redisenterprise.json
-  where: "$.definitions.ClusterCommonProperties.properties.encryption.properties.customerManagedKeyEncryption"
+  where: "$.definitions.DatabaseCommonProperties"
   transform: >
-    $["x-ms-client-name"] = "ClusterPropertiesEncryptionCustomerManagedKeyEncryption";
-- from: redisenterprise.json
-  where: "$.definitions.ClusterCommonProperties.properties.encryption.properties.customerManagedKeyEncryption.properties.keyEncryptionKeyIdentity"
-  transform: >
-    $["x-ms-client-name"] = "ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity";
-- from: redisenterprise.json
-  where: "$.definitions.DatabaseCommonProperties.properties.geoReplication"
-  transform: >
-    $["x-ms-client-name"] = "DatabasePropertiesGeoReplication";
+    $["x-ms-client-name"] = "DatabaseProperties";
 ```
