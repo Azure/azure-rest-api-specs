@@ -17,7 +17,7 @@ options:
     model-namespace: true
     namespace: "Azure.ResourceManager.Resources.Bicep"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-resource-bicep"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-resource-bicep"
     namespace: "azure.mgmt.resource.bicep"
     generate-test: true
     generate-sample: true
@@ -28,7 +28,7 @@ options:
     service-name: "Bicep Provider"
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-resourcesbicep"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-resourcesbicep"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

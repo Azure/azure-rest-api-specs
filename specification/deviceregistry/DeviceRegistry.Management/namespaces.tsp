@@ -79,7 +79,7 @@ model NamespaceMigrateRequest {
 @doc("Response for the migrate asset resources operation into Namespace resource.")
 model NamespaceMigrateResponse {
   @doc("List of migrate results containing result of each asset migrate operation.")
-  @OpenAPI.extension("x-ms-identifiers", #["resourceId"])
+  @identifiers(#["resourceId"])
   migrateResults?: MigrateResult[];
 }
 
