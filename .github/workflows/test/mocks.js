@@ -1,5 +1,11 @@
+// @ts-check
+
 import { RequestError } from "@octokit/request-error";
 import { vi } from "vitest";
+
+/**
+ * @typedef {import('@actions/github-script').AsyncFunctionArguments["github"]} GitHub
+ */
 
 // Partial mock of `github` parameter passed into github-script actions
 export function createMockGithub() {
@@ -17,6 +23,7 @@ export function createMockGithub() {
     },
     rest: {
       actions: {
+        downloadArtifact: vi.fn().mockResolvedValue({ data: new ArrayBuffer(0) }),
         listJobsForWorkflowRun: vi.fn().mockResolvedValue({ data: [] }),
         listWorkflowRunArtifacts: vi.fn().mockResolvedValue({ data: { artifacts: [] } }),
         listWorkflowRunsForRepo: vi.fn().mockResolvedValue({ data: { workflow_runs: [] } }),
@@ -49,6 +56,14 @@ export function createMockGithub() {
   };
 }
 
+/**
+ * @returns {GitHub}
+ * @param {any} mockGithub
+ */
+export function asGitHub(mockGithub) {
+  return /** @type {GitHub} */ mockGithub;
+}
+
 // Partial mock of `core` parameter passed into to github-script actions
 export function createMockCore() {
   return {
@@ -70,10 +85,14 @@ export function createMockCore() {
   };
 }
 
+/**
+ * @param {number} status
+ * @returns {RequestError}
+ */
 export function createMockRequestError(status) {
   return new RequestError(`mock RequestError with status '${status}'`, status, {
     // request properties "url" and "headers" must be defined to prevent errors
-    request: { url: "test url", headers: {} },
+    request: { method: "GET", url: "test url", headers: {} },
   });
 }
 
@@ -85,5 +104,15 @@ export function createMockContext() {
       owner: "owner",
       repo: "repo",
     },
+  };
+}
+
+export function createMockLogger() {
+  return {
+    debug: vi.fn(),
+    error: vi.fn(),
+    info: vi.fn(),
+    isDebug: vi.fn().mockReturnValue(false),
+    warning: vi.fn(),
   };
 }

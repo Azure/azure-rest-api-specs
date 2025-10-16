@@ -45,10 +45,7 @@ namespace Microsoft.EventGrid {
   using Azure;
 
   enum ServiceApiVersions {
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2023_11_01: "2023-11-01",
-
-    @useDependency(Azure.Core.Versions.v1_0_Preview_2)
     v2024_06_01: "2024-06-01",
   }
 
