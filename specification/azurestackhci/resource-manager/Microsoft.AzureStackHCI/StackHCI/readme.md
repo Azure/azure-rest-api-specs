@@ -614,14 +614,6 @@ input-file:
   - preview/2023-11-01-preview/updates.json
 ```
 
-### Tag: package-2023-09
-
-These settings apply only when `--tag=package-preview-2023-09` is specified on the command line.
-
-``` yaml $(tag) == 'package-preview-2023-09'
-input-file:
-```
-
 ### Tag: package-2023-08
 
 These settings apply only when `--tag=package-2023-08` is specified on the command line.

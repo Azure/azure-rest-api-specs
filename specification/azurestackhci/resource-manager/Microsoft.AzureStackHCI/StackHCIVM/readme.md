@@ -175,23 +175,6 @@ input-file:
   - preview/2024-02-01-preview/stackhcivm.json
 ```
 
-### Tag: package-preview-2024-03
-
-These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-03'
-input-file:
-  - preview/2024-03-15-preview/operations.json
-  - preview/2024-01-15-preview/common.json
-  - preview/2024-01-15-preview/galleryImages.json
-  - preview/2024-01-15-preview/logicalNetworks.json
-  - preview/2024-01-15-preview/marketplaceGalleryImages.json
-  - preview/2024-01-15-preview/networkInterfaces.json
-  - preview/2024-01-15-preview/storageContainers.json
-  - preview/2024-01-15-preview/virtualHardDisks.json
-  - preview/2024-01-15-preview/virtualMachineInstances.json
-```
-
 ### Tag: package-preview-2024-01-15
 
 These settings apply only when `--tag=package-preview-2024-01-15` is specified on the command line.
