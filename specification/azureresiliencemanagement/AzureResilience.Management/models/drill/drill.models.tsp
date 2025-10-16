@@ -458,7 +458,7 @@ model DrillPatchProperties {
 
   @doc("HealthModel properties.")
   healthModelProperties?: HealthModelPropertiesOfDrill;
-  
+
   @doc("RBAC setup mode.")
   rbacSetupMode?: RBACSetupMode;
 }
