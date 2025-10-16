@@ -18,7 +18,7 @@ import "./Cluster.tsp";
 import "./DeploymentSetting.tsp";
 import "./EdgeDeviceJob.tsp";
 import "./EdgeDevice.tsp";
-import "./HCIExtension.tsp";
+import "./Extension.tsp";
 import "./Offer.tsp";
 import "./Publisher.tsp";
 import "./SecuritySetting.tsp";

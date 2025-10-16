@@ -617,18 +617,6 @@ model LogicalNetworkArmReference {
       type: "Microsoft.AzureStackHCI/logicalNetworks";
     },
     {
-      type: "Microsoft.NetworkCloud/cloudServicesNetworks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l2Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/l3Networks";
-    },
-    {
-      type: "Microsoft.NetworkCloud/trunkedNetworks";
-    },
-    {
       type: "Microsoft.AzureStackHCI/virtualNetwork/subnets";
     }
   ]>;
@@ -1513,6 +1501,10 @@ model PublicIPAddressProperties {
   @visibility(Lifecycle.Read)
   ipConfiguration?: IPConfigurationArmReference;
 
+  @doc("natGateway using this public IP")
+  @visibility(Lifecycle.Read)
+  natGateway?: NatGatewayArmReference;
+
   @doc("Provisioning state of the public IP")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
@@ -1545,6 +1537,8 @@ model InboundNATRuleProperties {
 @doc("Inbound nat rule properties")
 model InboundNATRule {
   @doc("name of the inbound nat rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties of the inbound nat rule")
@@ -1563,6 +1557,11 @@ model NatGatewayProperties {
   @doc("List of subnets associated with the nat gateway. These can only be vnet subnets and must be from the same vnet")
   @identifiers(#[])
   subnets?: VirtualNetworkSubnetArmReference[];
+
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "NAT is a short form. The casing is correct."
+  @doc("List of inbound NAT rules. InboundNATRules can only be set after the NAT Gateway has been associated with a vnet")
+  @extension("x-ms-identifiers", #[])
+  inboundNATRules?: InboundNATRule[];
 
   @doc("Provisioning state of the public IP")
   @visibility(Lifecycle.Read)
@@ -1601,6 +1600,8 @@ model NatGatewayStatusProvisioningStatus {
 @doc("FrontendIP Configuration object for a load balancer.")
 model FrontendIPConfiguration {
   @doc("name for the frontend IP configuration.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties for this frontendIPConfiguration")
@@ -1645,6 +1646,8 @@ model BackendAddressPoolProperties {
 @doc("Backend address pool for the load balancer.")
 model BackendAddressPool {
   @doc("name of the backend pool.")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("properties for the backend pool")
@@ -1682,10 +1685,11 @@ model LoadBalancerBackendAddressProperties {
 @doc("LoadBalancer Backend Address")
 model LoadBalancerBackendAddress {
   @doc("name of the backend address")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("backend address properties")
-  @visibility(Lifecycle.Read)
   properties: LoadBalancerBackendAddressProperties;
 }
 
@@ -1712,7 +1716,7 @@ model LoadBalancerRuleProperties {
   probe?: LoadBalancerProbeReference;
 
   @doc("SessionPersistence: Default (5-tuple), SourceIP(2-tuple), sourceIPProtocol(3-tuple)")
-  loadDistribution?: LoadBalancerRuleSessionPersistenceType;
+  loadDistribution?: LoadBalancerRuleSessionPersistenceType = LoadBalancerRuleSessionPersistenceType.Default;
 
   @doc("Time for which connections are preserved before being torn down.")
   idleTimeoutInMinutes?: int32;
@@ -1722,6 +1726,8 @@ model LoadBalancerRuleProperties {
 @doc("LoadBalancer Rules")
 model LoadBalancerRule {
   @doc("name of the load balancer rule")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("load balancer rule properties")
@@ -1741,16 +1747,18 @@ model ProbeProperties {
   requestPath?: string;
 
   @doc("Probe interval in seconds (5-300) default 15")
-  intervalInSeconds: int32;
+  intervalInSeconds?: int32 = 15;
 
   @doc("number of consecutive probe failures before marking unhealthy (1-20) default 2")
-  numberOfProbes: int32;
+  numberOfProbes?: int32 = 2;
 }
 
 @added(Versions.v2025_09_01_preview)
 @doc("Load balancer health probes")
 model Probe {
   @doc("name of the load balancer health probe")
+  @visibility(Lifecycle.Read, Lifecycle.Create)
+  @pattern("^[a-zA-Z0-9]$|^[a-zA-Z0-9][-._a-zA-Z0-9]{0,62}[a-zA-Z0-9]$")
   name: string;
 
   @doc("load balancer rule properties")
@@ -2011,6 +2019,11 @@ model VirtualHardDiskProperties {
   @doc("Boolean indicating whether it is an existing local hard disk or if one should be created.")
   createFromLocal?: boolean = false;
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Absolute path of the VHD. This is only applicable when createFromLocal is true.")
+  @secret
+  localVhdPath?: string;
+
   @doc("Provisioning state of the virtual hard disk.")
   @visibility(Lifecycle.Read)
   provisioningState?: ProvisioningStateEnum;
@@ -2176,6 +2189,10 @@ model VirtualMachineInstanceProperties {
   @added(Versions.v2025_02_01_preview)
   @doc("Boolean indicating whether this is an existing local virtual machine or if one should be created.")
   createFromLocal?: boolean = false;
+
+  @added(Versions.v2025_09_01_preview)
+  @doc("HyperV name of the VM. This is only applicable when createFromLocal is true.")
+  localVmName?: string;
 
   @doc("Provisioning state of the virtual machine instance.")
   @visibility(Lifecycle.Read)

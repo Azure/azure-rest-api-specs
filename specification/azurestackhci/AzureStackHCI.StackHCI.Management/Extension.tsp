@@ -16,10 +16,9 @@ namespace Microsoft.AzureStackHCI;
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
 @parentResource(ArcSetting)
-model HCIExtension
-  is Azure.ResourceManager.ProxyResource<HCIExtensionProperties> {
+model Extension is Azure.ResourceManager.ProxyResource<ExtensionProperties> {
   ...ResourceNameParameter<
-    Resource = HCIExtension,
+    Resource = Extension,
     KeyName = "extensionName",
     SegmentName = "extensions",
     NamePattern = ""
@@ -29,60 +28,60 @@ model HCIExtension
 @armResourceOperations
 interface Extensions {
   /**
-   * Get particular Arc Extension of HCI Cluster.
+   * Get particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  get is ArmResourceRead<HCIExtension>;
+  get is ArmResourceRead<Extension>;
 
   /**
-   * Create Extension for HCI cluster.
+   * Create Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  create is ArmResourceCreateOrReplaceAsync<HCIExtension>;
+  create is ArmResourceCreateOrReplaceAsync<Extension>;
 
   /**
-   * Update Extension for HCI cluster.
+   * Update Extension for the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @patch(#{ implicitOptionality: false })
-  update is ArmCustomPatchAsync<HCIExtension, PatchModel = HCIExtensionPatch>;
+  update is ArmCustomPatchAsync<Extension, PatchModel = ExtensionPatch>;
 
   /**
-   * Delete particular Arc Extension of HCI Cluster.
+   * Delete particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "For backward compatibility"
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
   delete is ArmResourceDeleteWithoutOkAsync<
-    HCIExtension,
+    Extension,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<ArmAsyncOperationHeader &
       Azure.Core.Foundations.RetryAfterHeader &
       ArmLroLocationHeader> | ArmDeletedNoContentResponse
   >;
 
   /**
-   * List all Extensions under ArcSetting resource.
+   * List all Extensions under the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   listByArcSetting is ArmResourceListByParent<
-    HCIExtension,
-    Response = ArmResponse<HCIExtensionList>
+    Extension,
+    Response = ArmResponse<ExtensionList>
   >;
 
   /**
-   * Upgrade a particular Arc Extension of HCI Cluster.
+   * Upgrade a particular Arc Extension of the Parent Entity(HCI Cluster/Edge Machine).
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   upgrade is ArmResourceActionAsyncBase<
-    HCIExtension,
-    HCIExtensionUpgradeParameters,
+    Extension,
+    ExtensionUpgradeParameters,
     Response = ArmAcceptedLroResponse<"azure-asyncoperation">,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<HCIExtension>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<Extension>
   >;
 }
 
-@@doc(HCIExtension.name, "The name of the machine extension.");
-@@doc(HCIExtension.properties, "Describes Machine Extension Properties.");
+@@doc(Extension.name, "The name of the machine extension.");
+@@doc(Extension.properties, "Describes Machine Extension Properties.");
 @@doc(Extensions.create::parameters.resource,
   "Details of the Machine Extension to be created."
 );
@@ -96,16 +95,16 @@ interface Extensions {
 // Models
 
 /**
- * List of Extensions in HCI cluster.
+ * List of Extensions in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionList is Azure.Core.Page<HCIExtension>;
+model ExtensionList is Azure.Core.Page<Extension>;
 
 /**
- * Status of Arc Extension for a particular node in HCI Cluster.
+ * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionProperties {
+model ExtensionProperties {
   /**
    * Provisioning state of the Extension proxy resource.
    */
@@ -116,19 +115,19 @@ model HCIExtensionProperties {
    * Parameters specific to this extension type.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  extensionParameters?: HCIExtensionParametersContent;
+  extensionParameters?: ExtensionParametersContent;
 
   /**
-   * Aggregate state of Arc Extensions across the nodes in this HCI cluster.
+   * Aggregate state of Arc Extensions across the node/machines in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   aggregateState?: ExtensionAggregateState;
 
   /**
-   * State of Arc Extension in each of the nodes.
+   * State of Arc Extension in each of the nodes/machines.
    */
   @visibility(Lifecycle.Read)
-  perNodeExtensionDetails?: HCIPerNodeExtensionState[];
+  perNodeExtensionDetails?: PerNodeExtensionState[];
 
   /**
    * Indicates if the extension is managed by azure or the user.
@@ -141,7 +140,7 @@ model HCIExtensionProperties {
  * Describes the properties of a Machine Extension. This object mirrors the definition in HybridCompute.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionParametersContent {
+model ExtensionParametersContent {
   /**
    * How the extension handler should be forced to update even if the extension configuration has not changed.
    */
@@ -186,18 +185,18 @@ model HCIExtensionParametersContent {
 }
 
 /**
- * Status of Arc Extension for a particular node in HCI Cluster.
+ * Status of Arc Extension for a particular node/machine in the Parent Entity(HCI Cluster/Edge Machine).
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIPerNodeExtensionState {
+model PerNodeExtensionState {
   /**
-   * Name of the node in HCI Cluster.
+   * Name of the node/machine in the Parent Entity(HCI Cluster/Edge Machine).
    */
   @visibility(Lifecycle.Read)
   name?: string;
 
   /**
-   * Fully qualified resource ID for the particular Arc Extension on this node.
+   * Fully qualified resource ID for the particular Arc Extension on this node/machine.
    */
   @visibility(Lifecycle.Read)
   extension?: string;
@@ -209,7 +208,7 @@ model HCIPerNodeExtensionState {
   typeHandlerVersion?: string;
 
   /**
-   * State of Arc Extension in this node.
+   * State of Arc Extension in this node/machine.
    */
   @visibility(Lifecycle.Read)
   state?: NodeExtensionState;
@@ -218,14 +217,14 @@ model HCIPerNodeExtensionState {
    * The extension instance view.
    */
   @visibility(Lifecycle.Read)
-  instanceView?: HCIExtensionInstanceView;
+  instanceView?: ExtensionInstanceView;
 }
 
 /**
  * Describes the Extension Instance View.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionInstanceView {
+model ExtensionInstanceView {
   /**
    * The extension name.
    */
@@ -244,14 +243,14 @@ model HCIExtensionInstanceView {
   /**
    * Instance view status.
    */
-  status?: HCIExtensionInstanceViewStatus;
+  status?: ExtensionInstanceViewStatus;
 }
 
 /**
  * Instance view status.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionInstanceViewStatus {
+model ExtensionInstanceViewStatus {
   /**
    * The status code.
    */
@@ -283,19 +282,19 @@ model HCIExtensionInstanceViewStatus {
  * Extension Details to update
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionPatch {
+model ExtensionPatch {
   /**
    * Describes Machine Extension Properties that can be updated.
    */
   #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  properties?: HCIExtensionPatchProperties;
+  properties?: ExtensionPatchProperties;
 }
 
 /**
  * Describes Machine Extension Properties that can be updated.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionPatchProperties {
+model ExtensionPatchProperties {
   /**
    * Describes the properties of a Machine Extension that can be updated.
    */
@@ -334,7 +333,7 @@ model StackHCIHciExtensionPatchParametersContent {
  * Describes the parameters for Extension upgrade.
  */
 #suppress "@azure-tools/typespec-azure-core/casing-style" "model nomenclature"
-model HCIExtensionUpgradeParameters {
+model ExtensionUpgradeParameters {
   /**
    * Extension Upgrade Target Version.
    */
