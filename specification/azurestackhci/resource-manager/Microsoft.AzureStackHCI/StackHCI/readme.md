@@ -268,7 +268,7 @@ input-file:
   - preview/2025-09-15-preview/extensions.json
   - preview/2025-09-15-preview/hciCommon.json
   - preview/2025-09-15-preview/offers.json
-  - ../operations/preview/2025-09-15-preview/operations.json
+  - preview/2025-09-15-preview/operations.json
   - preview/2025-09-15-preview/publishers.json
   - preview/2025-09-15-preview/securitySettings.json
   - preview/2025-09-15-preview/skus.json
@@ -293,7 +293,7 @@ input-file:
   - preview/2025-08-01-preview/hci.json
   - preview/2025-08-01-preview/hciCommon.json
   - preview/2025-08-01-preview/offers.json
-  - ../operations/preview/2025-08-01-preview/operations.json
+  - preview/2025-08-01-preview/operations.json
   - preview/2025-08-01-preview/publishers.json
   - preview/2025-08-01-preview/securitySettings.json
   - preview/2025-08-01-preview/skus.json
@@ -318,7 +318,7 @@ input-file:
   - preview/2025-06-01-preview/extensions.json
   - preview/2025-06-01-preview/hciCommon.json
   - preview/2025-06-01-preview/offers.json
-  - ../operations/preview/2025-06-01-preview/operations.json
+  - preview/2025-06-01-preview/operations.json
   - preview/2025-06-01-preview/publishers.json
   - preview/2025-06-01-preview/securitySettings.json
   - preview/2025-06-01-preview/skus.json
@@ -342,7 +342,7 @@ input-file:
   - preview/2025-02-01-preview/extensions.json
   - preview/2025-02-01-preview/hciCommon.json
   - preview/2025-02-01-preview/offers.json
-  - ../operations/preview/2025-02-01-preview/operations.json
+  - preview/2025-02-01-preview/operations.json
   - preview/2025-02-01-preview/publishers.json
   - preview/2025-02-01-preview/securitySettings.json
   - preview/2025-02-01-preview/skus.json
@@ -367,7 +367,7 @@ input-file:
   - preview/2024-11-01-preview/extensions.json
   - preview/2024-11-01-preview/hciCommon.json
   - preview/2024-11-01-preview/offers.json
-  - ../operations/preview/2024-11-01-preview/operations.json
+  - preview/2024-11-01-preview/operations.json
   - preview/2024-11-01-preview/publishers.json
   - preview/2024-11-01-preview/securitySettings.json
   - preview/2024-11-01-preview/skus.json
@@ -390,7 +390,7 @@ input-file:
   - preview/2024-12-01-preview/extensions.json
   - preview/2024-12-01-preview/hciCommon.json
   - preview/2024-12-01-preview/offers.json
-  - ../operations/preview/2024-12-01-preview/operations.json
+  - preview/2024-12-01-preview/operations.json
   - preview/2024-12-01-preview/publishers.json
   - preview/2024-12-01-preview/securitySettings.json
   - preview/2024-12-01-preview/skus.json
@@ -413,7 +413,7 @@ input-file:
   - preview/2024-09-01-preview/extensions.json
   - preview/2024-09-01-preview/hciCommon.json
   - preview/2024-09-01-preview/offers.json
-  - ../operations/preview/2024-09-01-preview/operations.json
+  - preview/2024-09-01-preview/operations.json
   - preview/2024-09-01-preview/publishers.json
   - preview/2024-09-01-preview/securitySettings.json
   - preview/2024-09-01-preview/skus.json
@@ -432,7 +432,7 @@ input-file:
   - preview/2024-07-01-preview/edgeDevices.json
   - preview/2024-07-01-preview/extensions.json
   - preview/2024-07-01-preview/offers.json
-  - ../operations/preview/2024-07-01-preview/operations.json
+  - preview/2024-07-01-preview/operations.json
   - preview/2024-07-01-preview/publishers.json
   - preview/2024-07-01-preview/skus.json
   - preview/2024-07-01-preview/updateRuns.json
@@ -454,7 +454,7 @@ input-file:
   - preview/2024-03-01-preview/edgeDevices.json
   - preview/2024-03-01-preview/extensions.json
   - preview/2024-03-01-preview/offers.json
-  - ../operations/preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/operations.json
   - preview/2024-03-01-preview/publishers.json
   - preview/2024-03-01-preview/skus.json
   - preview/2024-03-01-preview/updateRuns.json
@@ -476,7 +476,7 @@ input-file:
   - stable/2024-04-01/extensions.json
   - stable/2024-04-01/hciCommon.json
   - stable/2024-04-01/offers.json
-  - ../operations/stable/2024-04-01/operations.json
+  - stable/2024-04-01/operations.json
   - stable/2024-04-01/publishers.json
   - stable/2024-04-01/securitySettings.json
   - stable/2024-04-01/skus.json
@@ -496,7 +496,7 @@ input-file:
   - preview/2024-03-01-preview/edgeDevices.json
   - preview/2024-03-01-preview/extensions.json
   - preview/2024-03-01-preview/offers.json
-  - ../operations/preview/2024-03-01-preview/operations.json
+  - preview/2024-03-01-preview/operations.json
   - preview/2024-03-01-preview/publishers.json
   - preview/2024-03-01-preview/skus.json
   - preview/2024-03-01-preview/updateRuns.json
