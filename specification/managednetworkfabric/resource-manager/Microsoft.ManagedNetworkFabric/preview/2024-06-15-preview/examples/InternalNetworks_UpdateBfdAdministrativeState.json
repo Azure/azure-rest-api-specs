@@ -1,0 +1,46 @@
+{
+  "title": "InternalNetworks_UpdateBfdAdministrativeState",
+  "operationId": "InternalNetworks_UpdateBfdAdministrativeState",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "l3IsolationDomainName": "example-l3isd",
+    "internalNetworkName": "example-internalnetwork",
+    "body": {
+      "routeType": "Static",
+      "neighborAddress": "10.10.1.10",
+      "administrativeState": "Enable"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "neighborAddressAdministrativeStatus": [
+          {
+            "neighborAddress": "10.10.1.10",
+            "administrativeState": "Enable",
+            "error": ""
+          }
+        ],
+        "error": {
+          "code": "bidbvvmy",
+          "message": "ekbarfd",
+          "target": "wpnbisaqlnidiilkhaadmu",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "qakayuauodscmplibrcmvrnvfnia",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

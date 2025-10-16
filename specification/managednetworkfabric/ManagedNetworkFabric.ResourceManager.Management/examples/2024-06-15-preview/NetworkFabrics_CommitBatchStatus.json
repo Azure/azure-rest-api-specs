@@ -1,0 +1,43 @@
+{
+  "title": "NetworkFabrics_CommitBatchStatus_MaximumSet",
+  "operationId": "NetworkFabrics_CommitBatchStatus",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-fabric",
+    "body": {
+      "commitBatchId": "batch-id"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "commitBatchId": "batch-id",
+        "commitBatchState": "Processing",
+        "commitBatchDetails": {
+          "failedDevices": [
+            "device-id-1"
+          ]
+        },
+        "error": {
+          "code": "",
+          "message": "",
+          "target": "",
+          "details": [],
+          "additionalInfo": [
+            {
+              "type": "",
+              "info": {}
+            }
+          ]
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}

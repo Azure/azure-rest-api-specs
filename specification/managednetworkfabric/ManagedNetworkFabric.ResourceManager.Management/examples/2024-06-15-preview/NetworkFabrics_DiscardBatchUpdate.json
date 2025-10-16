@@ -1,0 +1,25 @@
+{
+  "title": "NetworkFabrics_DiscardBatchUpdate",
+  "operationId": "NetworkFabrics_DiscardBatchUpdate",
+  "parameters": {
+    "api-version": "2024-06-15-preview",
+    "subscriptionId": "0000ABCD-0A0B-0000-0000-000000ABCDEF",
+    "resourceGroupName": "example-rg",
+    "networkFabricName": "example-fabric",
+    "body": {
+      "batchId": "batchid1"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "configurationState": "Succeeded"
+      }
+    },
+    "202": {
+      "headers": {
+        "location": "https://contoso.com/operationstatus"
+      }
+    }
+  }
+}
