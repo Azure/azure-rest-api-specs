@@ -62,7 +62,10 @@ interface TableRoleAssignmentResources {
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("TableResources_ListTableRoleAssignments")
-  listTableRoleAssignments is ArmResourceListByParent<TableRoleAssignmentResource>;
+  listTableRoleAssignments is ArmResourceListByParent<
+    TableRoleAssignmentResource,
+    Response = TableRoleAssignmentListResult
+  >;
 }
 
 @@doc(TableRoleAssignmentResource.name, "The GUID for the Role Assignment.");

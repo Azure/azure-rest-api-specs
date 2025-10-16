@@ -17,6 +17,9 @@ model TableRoleDefinitionListResult
 
 model ThroughputPoolAccountsListResult
   is ResourceListResult<ThroughputPoolAccountResource>;
+
+model TableRoleAssignmentListResult
+  is ResourceListResult<TableRoleAssignmentResource>;
 /**
  * The type of identity that created the resource.
  */

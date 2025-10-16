@@ -17293,9 +17293,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TableRoleAssignmentResourceListResult"
+              "$ref": "#/definitions/TableRoleAssignmentListResult"
             }
           },
           "default": {
@@ -31884,23 +31884,7 @@
         "id"
       ]
     },
-    "TableRoleAssignmentResource": {
-      "type": "object",
-      "description": "Parameters to create and update an Azure Cosmos DB Table Role Assignment.",
-      "properties": {
-        "properties": {
-          "$ref": "#/definitions/TableRoleAssignmentResourceProperties",
-          "description": "Properties to create and update an Azure Cosmos DB Table Role Assignment.",
-          "x-ms-client-flatten": true
-        }
-      },
-      "allOf": [
-        {
-          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
-        }
-      ]
-    },
-    "TableRoleAssignmentResourceListResult": {
+    "TableRoleAssignmentListResult": {
       "type": "object",
       "description": "The response of a TableRoleAssignmentResource list operation.",
       "properties": {
@@ -31919,6 +31903,22 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "TableRoleAssignmentResource": {
+      "type": "object",
+      "description": "Parameters to create and update an Azure Cosmos DB Table Role Assignment.",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/TableRoleAssignmentResourceProperties",
+          "description": "Properties to create and update an Azure Cosmos DB Table Role Assignment.",
+          "x-ms-client-flatten": true
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
       ]
     },
     "TableRoleAssignmentResourceProperties": {
