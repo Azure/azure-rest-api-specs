@@ -35,9 +35,6 @@ model DstsManagedServiceClientIdentityGroupResourceProperties {
   @doc("Cloud identifier for the service client identity group. Optional.")
   cloudId?: CloudId;
 
-  @doc("Account version for the service client identity group. Optional.")
-  accountVersion?: string;
-
   @doc("List of claim expansions for the service client identity group. Optional.")
   @Azure.ResourceManager.identifiers(#[])
   claimExpansions?: Array<ClaimExpansion>;
