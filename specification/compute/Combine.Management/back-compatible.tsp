@@ -539,10 +539,6 @@ using Microsoft.Compute;
 );
 
 
-import "./main.tsp";
-
-
-
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiskUpdate.properties);
@@ -647,11 +643,6 @@ import "./main.tsp";
   DiskAccesses,
   "!csharp"
 );
-import "./main.tsp";
-
-
-
-
 
 #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "@flattenProperty decorator is not recommended to use."
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(GalleryUpdate.properties);
