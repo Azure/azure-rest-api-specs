@@ -9988,9 +9988,9 @@
         "x-ms-long-running-operation": true
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources/{knowledgeSourceName}/purge": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Cdn/webAgents/{webAgentName}/knowledgeSources/{knowledgeSourceName}/rebuild": {
       "post": {
-        "operationId": "KnowledgeSources_Purge",
+        "operationId": "KnowledgeSources_Rebuild",
         "tags": [
           "KnowledgeSources"
         ],
@@ -10046,8 +10046,8 @@
           }
         },
         "x-ms-examples": {
-          "Purge Knowledge Source Cache": {
-            "$ref": "./examples/KnowledgeSourcePurge.json"
+          "Rebuild Knowledge Source Cache": {
+            "$ref": "./examples/KnowledgeSourceRebuild.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -15342,14 +15342,6 @@
       "type": "object",
       "description": "Defines properties of a knowledge source that can be updated.",
       "properties": {
-        "description": {
-          "type": "string",
-          "description": "Description of the knowledge source."
-        },
-        "url": {
-          "type": "string",
-          "description": "Endpoint or location of the knowledge source."
-        },
         "updateFrequency": {
           "$ref": "#/definitions/KnowledgeSourceUpdateFrequency",
           "description": "Specifies the units of time for scheduling update intervals for the knowledge source."
