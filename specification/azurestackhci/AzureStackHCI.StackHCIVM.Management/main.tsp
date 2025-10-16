@@ -21,6 +21,7 @@ import "./VirtualNetworkSubnets.tsp";
 import "./PublicIPAddresses.tsp";
 import "./NatGateways.tsp";
 import "./LoadBalancers.tsp";
+import "./Operations.tsp";
 
 using TypeSpec.Rest;
 using TypeSpec.Http;
