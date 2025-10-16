@@ -79,3 +79,33 @@ using Microsoft.DocumentDB;
   "MongoClusterConnectionStringsResult",
   "csharp"
 );
+@@clientName(User, "MongoClusterUser", "csharp");
+@@clientName(UserProperties, "MongoClusterUserProperties", "csharp");
+@@clientName(AuthenticationMode, "MongoClusterAuthenticationMode", "csharp");
+@@clientName(CustomerManagedKeyEncryptionProperties,
+  "MongoClusterCmkEncryptionProperties",
+  "csharp"
+);
+@@clientName(DataApiMode, "MongoClusterDataApiMode", "csharp");
+@@clientName(DatabaseRole, "MongoClusterDatabaseRole", "csharp");
+@@clientName(EntraIdentityProvider,
+  "MongoClusterEntraIdentityProvider",
+  "csharp"
+);
+@@clientName(EntraIdentityProviderProperties,
+  "MongoClusterEntraIdentityProviderProperties",
+  "csharp"
+);
+@@clientName(EntraPrincipalType, "MongoClusterEntraPrincipalType", "csharp");
+@@clientName(IdentityProvider, "MongoClusterIdentityProvider", "csharp");
+@@clientName(Microsoft.DocumentDB.KeyEncryptionKeyIdentity,
+  "MongoClusterKeyEncryptionKeyIdentity",
+  "csharp"
+);
+@@clientName(Microsoft.DocumentDB.KeyEncryptionKeyIdentityType,
+  "MongoClusterKeyEncryptionKeyIdentityType",
+  "csharp"
+);
+@@clientName(StorageProperties, "MongoClusterStorageProperties", "csharp");
+@@clientName(StorageType, "MongoClusterStorageType", "csharp");
+@@clientName(UserRole, "MongoClusterUserRole", "csharp");

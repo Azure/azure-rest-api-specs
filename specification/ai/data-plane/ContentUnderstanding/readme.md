@@ -45,7 +45,7 @@ swagger-to-sdk: []
 suppressions:
   - code: EnumMustHaveType
     from: ContentUnderstanding.json
-    where: $.definitions.FieldDefinition.properties
+    where: $.definitions.ContentFieldDefinition.properties
     reason: False alert.  'enum' is a custom property name here, not the Swagger property
   - code: AvoidAnonymousTypes
     from: ContentUnderstanding.json

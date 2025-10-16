@@ -56,7 +56,7 @@ model EntitiesTaskResult extends AnalyzeTextTaskResult {
   kind: AnalyzeTextTaskResultsKind.EntityRecognitionResults;
 
   /** Results for entity recognition. */
-  @typeChangedFrom(Versions.v2024_11_15_preview, EntitiesResult)
+  @typeChangedFrom(Versions.v2025_05_15_preview, EntitiesResult)
   results: EntitiesWithMetadataAutoResult;
 }
 
@@ -68,7 +68,7 @@ model EntitiesResult is PreBuiltResult {
 }
 
 /** Contains the entity recognition task result. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntitiesWithMetadataAutoResult is PreBuiltResult {
   /** Response by document */
   documents: EntitiesDocumentResultWithMetadataDetectedLanguage[];
@@ -81,7 +81,7 @@ model EntitiesDocumentResult is DocumentResult {
 }
 
 /** Contains the entity recognition task result for the document with metadata and detected language. */
-@added(Versions.v2024_11_15_preview)
+@added(Versions.v2025_05_15_preview)
 model EntitiesDocumentResultWithMetadataDetectedLanguage
   is EntitiesDocumentResultWithMetadata {
   ...DocumentDetectedLanguage;

@@ -82,5 +82,4 @@ More on `@example` can be found [here](https://typespec.io/docs/standard-library
     - Under `/Azure.Messaging.EventGrid.SystemEvents/`:
         - Run `tsp compile .`
 1) Verify the generated swaggers `/data-plane/Microsoft.EventGrid/2018-01-01/GeneratedSystemEvents.json` and `/data-plane/Microsoft.EventGrid/2024-01-01/GeneratedSystemEvents.json` accurately depicts your system events.
-1) Copy the delta from `/data-plane/Microsoft.EventGrid/2018-01-01/GeneratedSystemEvents.json` into your resource provider-specific swagger, e.g. `data-plane/Microsoft.Communication/stable/2018-01-01/AzureCommunicationServices.json`. Make any manual adjustments as needed.
 1) Final PR must contain the TypeSpec and the Swagger generated from the TypeSpec.

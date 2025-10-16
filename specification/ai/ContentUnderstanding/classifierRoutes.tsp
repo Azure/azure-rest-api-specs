@@ -1,10 +1,11 @@
 import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/rest";
 import "@typespec/http";
 import "./classifierModels.tsp";
 
 using Azure.Core;
-using Azure.Core.Traits;
+using Azure.ClientGenerator.Core;
 using TypeSpec.Rest;
 using TypeSpec.Http;
 using TypeSpec.Versioning;
@@ -67,6 +68,11 @@ interface ContentClassifiers {
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is a custom operation status endpoint."
   @doc("Get the result of a classifier operation.")
+  // This operation is marked as internal because client generators automatically handle
+  // the polling pattern for long-running operations. When users call classify(), the
+  // generated SDK returns a poller that internally uses this endpoint to check status
+  // and retrieve results, eliminating the need for manual operation ID management.
+  @access(Access.internal)
   @route("/classifierResults/{operationId}")
   getResult is Foundations.GetOperationStatus<{}, ClassifyResult>;
 

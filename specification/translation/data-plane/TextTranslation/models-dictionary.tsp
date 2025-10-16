@@ -4,10 +4,12 @@ import "./models-shared.tsp";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
+using TypeSpec.Versioning;
 using Azure.Core;
 
 namespace TextTranslation;
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Request parameters for the dictionary lookup API.")
 model DictionaryLookupParameters {
   ...CommonParameters;
@@ -27,6 +29,7 @@ model DictionaryLookupParameters {
   to: string;
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Request parameters for the dictionary examples API.")
 model DictionaryExamplesParameters {
   ...CommonParameters;
@@ -46,6 +49,7 @@ model DictionaryExamplesParameters {
   to: string;
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Response for the dictionary lookup API.")
 model DictionaryLookupResult {
   ...CommonResultHeaders;
@@ -55,6 +59,7 @@ model DictionaryLookupResult {
   result: DictionaryLookupItem[];
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Response for the dictionary examples API.")
 model DictionaryExamplesResult {
   ...CommonResultHeaders;
@@ -65,6 +70,7 @@ model DictionaryExamplesResult {
 }
 
 @doc("Element containing the text with translation.")
+@removed(APIVersion.v2025_10_01_preview)
 model DictionaryExampleTextItem extends InputTextItem {
   @doc("""
     A string specifying the translated text previously returned by the Dictionary lookup operation. 
@@ -74,6 +80,7 @@ model DictionaryExampleTextItem extends InputTextItem {
   translation: string;
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Dictionary Lookup Element")
 model DictionaryLookupItem {
   @doc("""
@@ -96,6 +103,7 @@ model DictionaryLookupItem {
   translations: DictionaryTranslation[];
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Translation source term.")
 model DictionaryTranslation {
   @doc("""
@@ -142,6 +150,7 @@ model DictionaryTranslation {
   backTranslations: BackTranslation[];
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Back Translation")
 model BackTranslation {
   @doc("""
@@ -174,6 +183,7 @@ model BackTranslation {
   frequencyCount: int32;
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Dictionary Example element")
 model DictionaryExampleItem {
   @doc("""
@@ -194,6 +204,7 @@ model DictionaryExampleItem {
   examples: DictionaryExample[];
 }
 
+@removed(APIVersion.v2025_10_01_preview)
 @doc("Dictionary Example")
 model DictionaryExample {
   @doc("""

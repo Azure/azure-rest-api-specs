@@ -128,6 +128,10 @@ namespace Customizations;
   "csharp"
 );
 
+// Make client names less generic for C#
+@@clientName(Trigger, "LoadTestingTrigger", "csharp");
+@@clientName(Recurrence, "LoadTestingRecurrence", "csharp");
+
 // Renames for properties that had unit of duration in name but will get converted to duration type
 @@clientName(AutoStopCriteria.errorRateTimeWindowInSeconds,
   "errorRateTimeWindow",

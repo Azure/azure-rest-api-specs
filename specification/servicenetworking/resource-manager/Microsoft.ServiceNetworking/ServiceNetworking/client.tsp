@@ -60,6 +60,11 @@ using Microsoft.ServiceNetworking;
   "TrafficControllerProvisioningState",
   "csharp"
 );
+@@clientName(IpAccessRule, "ServiceNetworkingIPAccessRule", "csharp");
+@@clientName(IpAccessRuleAction,
+  "ServiceNetworkingIPAccessRuleAction",
+  "csharp"
+);
 @@clientName(Versions.v2023_11_01,
   "$DO_NOT_NORMALIZE$V2023_11_01",
   "javascript"
