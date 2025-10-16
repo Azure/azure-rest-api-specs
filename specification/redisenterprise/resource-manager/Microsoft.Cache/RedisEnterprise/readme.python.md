@@ -20,29 +20,5 @@ output-folder: $(python-sdks-folder)/redisenterprise/azure-mgmt-redisenterprise/
 ```
 
 ```yaml $(python)
-directive:
-- from: redisenterprise.json
-  where: "$.definitions.ClusterCommonProperties"
-  transform: >
-    $["x-ms-client-name"] = "ClusterProperties";
-- from: redisenterprise.json
-  where: "$.definitions.DatabaseCommonProperties"
-  transform: >
-    $["x-ms-client-name"] = "DatabaseProperties";
-- from: redisenterprise.json
-  where: "$.definitions.ClusterCommonProperties.properties.encryption"
-  transform: >
-    $["x-ms-client-name"] = "ClusterPropertiesEncryption";
-- from: redisenterprise.json
-  where: "$.definitions.ClusterCommonProperties.properties.encryption.properties.customerManagedKeyEncryption"
-  transform: >
-    $["x-ms-client-name"] = "ClusterPropertiesEncryptionCustomerManagedKeyEncryption";
-- from: redisenterprise.json
-  where: "$.definitions.ClusterCommonProperties.properties.encryption.properties.customerManagedKeyEncryption.properties.keyEncryptionKeyIdentity"
-  transform: >
-    $["x-ms-client-name"] = "ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity";
-- from: redisenterprise.json
-  where: "$.definitions.DatabaseCommonProperties.properties.geoReplication"
-  transform: >
-    $["x-ms-client-name"] = "DatabasePropertiesGeoReplication";
+rename-model: ClusterCommonPropertiesEncryption:ClusterPropertiesEncryption,DatabaseCommonPropertiesGeoReplication:DatabasePropertiesGeoReplication,ClusterCommonPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity:ClusterPropertiesEncryptionCustomerManagedKeyEncryptionKeyIdentity,ClusterCommonPropertiesEncryptionCustomerManagedKeyEncryption:ClusterPropertiesEncryptionCustomerManagedKeyEncryption,ClusterCreateProperties:ClusterProperties
 ```
