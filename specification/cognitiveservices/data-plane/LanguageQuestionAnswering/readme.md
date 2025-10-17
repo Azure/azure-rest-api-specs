@@ -1,8 +1,12 @@
-# Cognitive Services Language - Question Answering SDK
+# Cognitive Services Language - Question Answering Inference SDK
 
-This is the AutoRest configuration file the Cognitive Services Language - Question Answering SDK.
+This is the AutoRest configuration file for the Cognitive Services Language - Question Answering Inference SDK.
 
 > see https://aka.ms/autorest
+
+## SDK package updates
+
+The inference-related client and models are generated for the new .NET package `Azure.AI.Language.QuestionAnswering.Inference`. The existing `Azure.AI.Language.QuestionAnswering` package now type-forwards these types and has been bumped to the next major version.
 
 ## Releases
 

@@ -26,7 +26,7 @@ using TypeSpec.Versioning;
     Endpoint: url,
   }
 )
-namespace Language.QuestionAnswering;
+namespace Language.QuestionAnswering.Inference;
 
 /**
  * The available API versions.
