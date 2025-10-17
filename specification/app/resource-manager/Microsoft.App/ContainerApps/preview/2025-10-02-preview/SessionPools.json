@@ -437,7 +437,7 @@
   },
   "definitions": {
     "McpServerSettings": {
-      "description": "The status of pods in the pool of this template.",
+      "description": "The settings of the MCP server for this session pool.",
       "type": "object",
       "properties": {
         "isMcpServerEnabled": {
@@ -1121,7 +1121,8 @@
         "apiKey": {
           "description": "The API key for the MCP server.",
           "type": "string",
-          "readOnly": true
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     }
