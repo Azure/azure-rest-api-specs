@@ -1353,6 +1353,162 @@
         }
       }
     },
+    "/notifications": {
+      "get": {
+        "operationId": "Notifications_List",
+        "description": "List notifications of a specific project.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "name": "includeDismissed",
+            "in": "query",
+            "description": "Whether dismissed notifications should be included",
+            "required": false,
+            "type": "boolean"
+          },
+          {
+            "name": "agentName",
+            "in": "query",
+            "description": "Only notifications with the given agentName will be returned",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "evaluatorName",
+            "in": "query",
+            "description": "Only notifications with the given evaluator name will be returned",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "top",
+            "in": "query",
+            "description": "Top count of notifications. All notifications will be returned if not specified",
+            "required": false,
+            "type": "integer",
+            "format": "int32"
+          },
+          {
+            "name": "filter",
+            "in": "query",
+            "description": "The expression evaluates to true are included in the response",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "name": "orderby",
+            "in": "query",
+            "description": "The list of resource properties to use for sorting the requested resources",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "string"
+            },
+            "collectionFormat": "csv"
+          },
+          {
+            "name": "sortorder",
+            "in": "query",
+            "description": "Sort order",
+            "required": false,
+            "type": "string",
+            "enum": [
+              "asc",
+              "desc"
+            ],
+            "x-ms-enum": {
+              "name": "SortOrder",
+              "modelAsString": true,
+              "values": [
+                {
+                  "name": "asc",
+                  "value": "asc",
+                  "description": "Ascending order"
+                },
+                {
+                  "name": "desc",
+                  "value": "desc",
+                  "description": "Descending order"
+                }
+              ]
+            }
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "schema": {
+              "$ref": "#/definitions/PagedFoundryNotificationDto"
+            },
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/notifications/dismiss": {
+      "post": {
+        "operationId": "Notifications_Dismiss",
+        "description": "Dismiss all notifications of a specific project for a given user.",
+        "parameters": [
+          {
+            "$ref": "#/parameters/Azure.Core.Foundations.ApiVersionParameter"
+          },
+          {
+            "$ref": "#/parameters/Azure.Core.ClientRequestIdHeader"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The request has succeeded.",
+            "headers": {
+              "x-ms-client-request-id": {
+                "type": "string",
+                "format": "uuid",
+                "description": "An opaque, globally-unique, client-generated string identifier for the request."
+              }
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/Azure.Core.Foundations.ErrorResponse"
+            },
+            "headers": {
+              "x-ms-error-code": {
+                "type": "string",
+                "description": "String error code indicating what went wrong."
+              }
+            }
+          }
+        }
+      }
+    },
     "/redTeams/runs": {
       "get": {
         "operationId": "RedTeams_List",
@@ -2636,6 +2792,96 @@
       ],
       "x-ms-discriminator-value": "uri_folder"
     },
+    "FoundryNotificationDto": {
+      "type": "object",
+      "description": "Foundry notification data transfer object",
+      "properties": {
+        "ngncVersion": {
+          "type": "string",
+          "description": "NGNC version",
+          "default": "0.0.1"
+        },
+        "time": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time of the notification"
+        },
+        "title": {
+          "$ref": "#/definitions/NotificationTitle",
+          "description": "The notification title"
+        },
+        "id": {
+          "type": "string",
+          "description": "The unique identifier of the notification",
+          "readOnly": true
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The subscription ID"
+        },
+        "foundryResourceName": {
+          "type": "string",
+          "description": "The foundry resource name"
+        },
+        "scope": {
+          "type": "string",
+          "description": "The scope of the notification"
+        },
+        "source": {
+          "type": "string",
+          "description": "The source of the notification"
+        },
+        "type": {
+          "type": "string",
+          "description": "The type of the notification"
+        },
+        "dataschema": {
+          "type": "string",
+          "description": "The data schema"
+        },
+        "severity": {
+          "type": "string",
+          "description": "The severity of the notification"
+        },
+        "status": {
+          "type": "string",
+          "description": "The status of the notification"
+        },
+        "viewSource": {
+          "$ref": "#/definitions/ViewSourceAction",
+          "description": "The view source action"
+        },
+        "data": {
+          "type": "object",
+          "description": "Additional data for the notification"
+        },
+        "quickActions": {
+          "type": "object",
+          "description": "Quick actions for the notification"
+        },
+        "additionalProperties": {
+          "type": "object",
+          "description": "Additional properties",
+          "additionalProperties": {
+            "type": "object"
+          }
+        }
+      },
+      "required": [
+        "ngncVersion",
+        "title",
+        "id",
+        "subscriptionId",
+        "foundryResourceName",
+        "scope",
+        "source",
+        "type",
+        "dataschema",
+        "severity",
+        "status",
+        "viewSource"
+      ]
+    },
     "Index": {
       "type": "object",
       "description": "Index resource Definition",
@@ -2855,6 +3101,24 @@
       ],
       "x-ms-discriminator-value": "None"
     },
+    "NotificationTitle": {
+      "type": "object",
+      "description": "Notification title information",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "The name of the notification"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the notification"
+        }
+      },
+      "required": [
+        "name",
+        "description"
+      ]
+    },
     "PagedConnection": {
       "type": "object",
       "description": "Paged collection of Connection items",
@@ -2927,6 +3191,27 @@
           "description": "The Evaluation items on this page",
           "items": {
             "$ref": "#/definitions/Evaluation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PagedFoundryNotificationDto": {
+      "type": "object",
+      "description": "Paged collection of FoundryNotificationDto items",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FoundryNotificationDto items on this page",
+          "items": {
+            "$ref": "#/definitions/FoundryNotificationDto"
           }
         },
         "nextLink": {
@@ -3268,6 +3553,30 @@
         "tier"
       ]
     },
+    "SortOrder": {
+      "type": "string",
+      "description": "Sort order for notifications",
+      "enum": [
+        "asc",
+        "desc"
+      ],
+      "x-ms-enum": {
+        "name": "SortOrder",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "asc",
+            "value": "asc",
+            "description": "Ascending order"
+          },
+          {
+            "name": "desc",
+            "value": "desc",
+            "description": "Descending order"
+          }
+        ]
+      }
+    },
     "SystemMessage": {
       "type": "object",
       "description": "A message authored by the system to guide model behavior.",
@@ -3319,6 +3628,55 @@
         }
       ],
       "x-ms-discriminator-value": "user"
+    },
+    "ViewSourceAction": {
+      "type": "object",
+      "description": "View source action",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The ID of the action"
+        },
+        "displayName": {
+          "type": "string",
+          "description": "The display name of the action",
+          "default": "View Source"
+        },
+        "description": {
+          "type": "string",
+          "description": "The description of the action",
+          "default": "Go to the source of this notification"
+        },
+        "action": {
+          "$ref": "#/definitions/ViewSourceActionDetail",
+          "description": "The action details"
+        }
+      },
+      "required": [
+        "id",
+        "displayName",
+        "description",
+        "action"
+      ]
+    },
+    "ViewSourceActionDetail": {
+      "type": "object",
+      "description": "View source action detail",
+      "properties": {
+        "type": {
+          "type": "string",
+          "description": "The type of action",
+          "default": "DEEPLINK"
+        },
+        "target": {
+          "type": "string",
+          "description": "The target of the action"
+        }
+      },
+      "required": [
+        "type",
+        "target"
+      ]
     },
     "modelResponseGenerationTarget": {
       "type": "object",
