@@ -80,8 +80,8 @@ interface InferencePools {
   /**
    * Delete InferencePool (asynchronous).
    */
-  @summary("Delete InferencePool (asynchronous).")
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
+  @summary("Delete InferencePool (asynchronous).")
   delete is ArmResourceDeleteWithoutOkAsync<
     InferencePool,
     Response = ArmDeletedResponse | (ArmDeleteAcceptedLroResponse & {
@@ -143,4 +143,10 @@ interface InferencePools {
 );
 @@doc(InferencePools.update::parameters.properties,
   "Inference Pool entity to apply during operation."
+);
+@@doc(InferencePool.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(InferencePool.sku,
+  "Sku details required for ARM contract for Autoscaling."
 );

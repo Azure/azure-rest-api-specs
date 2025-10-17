@@ -14,7 +14,6 @@
 | `definitions.CustomMonitoringSignal.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.DistillationJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
 | `definitions.EndpointDeploymentResourcePropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
-| `definitions.EndpointModelProperties.properties.systemData.description__added` | added | `Metadata pertaining to creation and last modification of the resource.` |
 | `definitions.EndpointModelSkuProperties.properties.connectionIds.items.description__added` | added | `A type definition that refers the id to an Azure Resource Manager resource.` |
 | `definitions.EndpointResourcePropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.FeatureAttributionDriftMonitoringSignal.properties.productionData.items.description__deleted` | deleted | `Monitoring input data base definition.` |
@@ -23,13 +22,9 @@
 | `definitions.ManagedNetworkSettings.properties.outboundRules.additionalProperties.description__deleted` | deleted | `Outbound Rule for the managed network of a machine learning workspace.` |
 | `definitions.ManagedNetworkSettings.properties.outboundRules.description__added` | added | `Dictionary of <OutboundRule>` |
 | `definitions.ManagedNetworkSettingsPropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
-| `definitions.ManagedOnlineEndpointResourceProperties.properties.mirrorTraffic.description__added` | added | `Dictionary of <integer>` |
-| `definitions.ManagedOnlineEndpointResourceProperties.properties.traffic.description__added` | added | `Dictionary of <integer>` |
 | `definitions.MarketplaceSubscription.description__added` | added | `Azure Resource Manager resource envelope.` |
 | `definitions.ModelContainer.description__added` | added | `Azure Resource Manager resource envelope.` |
 | `definitions.NotificationSetting.properties.webhooks.additionalProperties.description__deleted` | deleted | `Webhook base` |
-| `definitions.OAuth2AuthTypeWorkspaceConnectionProperties.properties.credentials.description__added` | added | `ClientId and ClientSecret are required. Other properties are optional
-depending on each OAuth2 provider's implementation.` |
 | `definitions.OnlineDeployment.description__added` | added | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.OutboundRuleBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.PipelineJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
@@ -1294,7 +1289,7 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.FeaturesetVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturesetVersionProperties","description":"[Required] Additional attributes ...` |
 | `definitions.FeaturestoreEntityContainer.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityContainerProperties","description":"[Required] Additional a...` |
 | `definitions.FeaturestoreEntityVersion.properties.properties__added` | added | `{"$ref":"#/definitions/FeaturestoreEntityVersionProperties","description":"[Required] Additional att...` |
-| `definitions.HDInsight.properties__added` | added | `{"properties":{"$ref":"#/definitions/HDInsightProperties","description":"HDInsight compute propertie...` |
+| `definitions.HDInsight.properties__added` | added | `{"properties":{"$ref":"#/definitions/HDInsightProperties"}}` |
 | `definitions.InferenceEndpoint.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceEndpointProperties","description":"[Required] Additional attributes ...` |
 | `definitions.InferenceGroup.properties.properties__added` | added | `{"$ref":"#/definitions/InferenceGroupProperties","description":"[Required] Additional attributes of ...` |
 | `definitions.InferencePool.properties.properties__added` | added | `{"$ref":"#/definitions/InferencePoolProperties","description":"[Required] Additional attributes of t...` |
@@ -1860,7 +1855,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | Path | Change Type | Value |
 |------|------------|-------|
 | `definitions.ComputeResource.properties.sku['x-nullable__deleted']` | deleted | `true` |
-| `definitions.Forecasting.properties.forecastingSettings['x-nullable__deleted']` | deleted | `true` |
 | `definitions.HDInsightProperties.properties.administratorAccount['x-nullable__deleted']` | deleted | `true` |
 | `definitions.ManagedResourceGroupAssignedIdentities.properties.principalId['x-nullable__deleted']` | deleted | `false` |
 | `definitions.PartialMinimalTrackedResource.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
@@ -2603,6 +2597,7 @@ we won't let customer specify the endpoint resource location since we will creat
 | `definitions.FineTuningJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.FineTuningJob.properties.fineTuningDetails.description` | `[Required] ` | `[Required]` |
 | `definitions.FineTuningJob.properties.outputs.description` | `[Required] ` | `[Required]` |
+| `definitions.Forecasting.properties.forecastingSettings.description` | `Forecasting task specific inputs.` | `Primary metrics for Forecasting task.` |
 | `definitions.Forecasting.properties.primaryMetric.description` | `Primary metrics for Forecasting task.` | `Primary metric for forecasting task.` |
 | `definitions.ForecastingSettings.properties.countryOrRegionForHolidays.description` | `Country or region for holidays for forecasting tasks.
 These should be ISO 3166 two-letter country/region codes, for example 'US' or 'GB'.` | `Country or region for holidays for forecasting tasks.
@@ -2612,29 +2607,22 @@ example, if \`CVStepSize\` = 3 for daily data, the origin time for each fold wil
 three days apart.` | `Number of periods between the origin time of one CV fold and the next fold. For
 example, if \`CVStepSize\` = 3 for daily data, the origin time for each fold will be
 three days apart.` |
-| `definitions.ForecastingSettings.properties.featureLags.description` | `Flag for generating lags for the numeric features.` | `Flag for generating lags for the numeric features with 'auto' or null.` |
 | `definitions.ForecastingSettings.properties.seasonality.description` | `Set time series seasonality as an integer multiple of the series frequency.
 If seasonality is set to 'auto', it will be inferred.` | `Set time series seasonality as an integer multiple of the series frequency.
 If seasonality is set to 'auto', it will be inferred.` |
-| `definitions.ForecastingSettings.properties.targetAggregateFunction.description` | `Target aggregate function.` | `The function to be used to aggregate the time series target column to conform to a user specified frequency.
-If the TargetAggregateFunction is set i.e. not 'None', but the freq parameter is not set, the error is raised. The possible target aggregation functions are: "sum", "max", "min" and "mean".` |
 | `definitions.ForecastingSettings.properties.timeSeriesIdColumnNames.description` | `The names of columns used to group a timeseries. It can be used to create multiple series.
 If grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.` | `The names of columns used to group a timeseries. It can be used to create multiple series.
 If grain is not defined, the data set is assumed to be one time-series. This parameter is used with task type forecasting.` |
 | `definitions.Image.additionalProperties` | `true` | `{}` |
-| `definitions.Image.properties.type.title` | `Type of the image` | `Type of the Image` |
 | `definitions.ImageClassification.description` | `Image Classification. Multi-class image classification is used when an image is classified with only a single label
 from a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'.` | `Image Classification. Multi-class image classification is used when an image is classified with only a single label
 from a set of classes - e.g. each image is classified as either an image of a 'cat' or a 'dog' or a 'duck'.` |
-| `definitions.ImageClassification.properties.primaryMetric.description` | `Primary metrics for classification tasks.` | `Primary metric to optimize for this task.` |
 | `definitions.ImageClassificationMultilabel.description` | `Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels
 from a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'.` | `Image Classification Multilabel. Multi-label image classification is used when an image could have one or more labels
 from a set of labels - e.g. an image could be labeled with both 'cat' and 'dog'.` |
-| `definitions.ImageClassificationMultilabel.properties.primaryMetric.description` | `Primary metrics for classification multilabel tasks.` | `Primary metric to optimize for this task.` |
 | `definitions.ImageInstanceSegmentation.description` | `Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,
 drawing a polygon around each object in the image.` | `Image Instance Segmentation. Instance segmentation is used to identify objects in an image at the pixel level,
 drawing a polygon around each object in the image.` |
-| `definitions.ImageInstanceSegmentation.properties.primaryMetric.description` | `Primary metrics for InstanceSegmentation tasks.` | `Primary metric to optimize for this task.` |
 | `definitions.ImageModelDistributionSettings.description` | `Distribution expressions to sweep over values of model settings.
 <example>
 Some examples are:
@@ -2803,13 +2791,11 @@ see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-i
 For instance, passing 2 as value for 'seresnext' means
 freezing layer0 and layer1. For a full list of models supported and details on layer freeze, please
 see: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
-| `definitions.ImageModelSettings.properties.learningRateScheduler.description` | `Learning rate scheduler enum.` | `Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.` |
 | `definitions.ImageModelSettings.properties.modelName.description` | `Name of the model to use for training.
 For more information on the available models please visit the official documentation:
 https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Name of the model to use for training.
 For more information on the available models please visit the official documentation:
 https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` |
-| `definitions.ImageModelSettings.properties.optimizer.description` | `Stochastic optimizer for image models.` | `Type of optimizer.` |
 | `definitions.ImageModelSettingsClassification.description` | `Settings used for training the model.
 For more information on the available settings please visit the official documentation:
 https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.` | `Settings used for training the model.
@@ -2844,9 +2830,6 @@ Must be a positive integer. Note: training run may get into CUDA OOM if the size
 Note: This settings is not supported for the 'yolov5' algorithm.` | `Minimum size of the image to be rescaled before feeding it to the backbone.
 Must be a positive integer. Note: training run may get into CUDA OOM if the size is too big.
 Note: This settings is not supported for the 'yolov5' algorithm.` |
-| `definitions.ImageModelSettingsObjectDetection.properties.modelSize.description` | `Image model size.` | `Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
-Note: training run may get into CUDA OOM if the model size is too big.
-Note: This settings is only supported for the 'yolov5' algorithm.` |
 | `definitions.ImageModelSettingsObjectDetection.properties.multiScale.description` | `Enable multi-scale image by varying image size by +/- 50%.
 Note: training run may get into CUDA OOM if no sufficient GPU memory.
 Note: This settings is only supported for the 'yolov5' algorithm.` | `Enable multi-scale image by varying image size by +/- 50%.
@@ -2865,11 +2848,9 @@ Used in validation/ inference. Must be float in the range [0, 1].
 Note: This settings is not supported for the 'yolov5' algorithm.` | `The IOU threshold to use to perform NMS while merging predictions from tiles and image.
 Used in validation/ inference. Must be float in the range [0, 1].
 Note: This settings is not supported for the 'yolov5' algorithm.` |
-| `definitions.ImageModelSettingsObjectDetection.properties.validationMetricType.description` | `Metric computation method to use for validation metrics in image tasks.` | `Metric computation method to use for validation metrics.` |
 | `definitions.ImageObjectDetection.description` | `Image Object Detection. Object detection is used to identify objects in an image and locate each object with a
 bounding box e.g. locate all dogs and cats in an image and draw a bounding box around each.` | `Image Object Detection. Object detection is used to identify objects in an image and locate each object with a
 bounding box e.g. locate all dogs and cats in an image and draw a bounding box around each.` |
-| `definitions.ImageObjectDetection.properties.primaryMetric.description` | `Primary metrics for Image ObjectDetection task.` | `Primary metric to optimize for this task.` |
 | `definitions.InferenceEndpoint.allOf[0].$ref` | `#/definitions/PropertiesBase` | `../../../../../common-types/resource-management/v3/types.json#/definitions/TrackedResource` |
 | `definitions.InferenceEndpoint.description` | `InferenceEndpoint configuration` | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.InferenceEndpointTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/InferenceEndpointTrackedResource` | `#/definitions/InferenceEndpoint` |
@@ -2912,11 +2893,9 @@ Defaults to 500ms.
 | `definitions.OnlineRequestSettings.properties.requestTimeout.description` | `The scoring timeout in ISO 8601 format.
 Defaults to 5000ms.` | `The scoring timeout in ISO 8601 format.
 Defaults to 5000ms.` |
-| `definitions.PendingUploadRequestDto.properties.pendingUploadType.description` | `Type of storage to use for the pending upload location` | `TemporaryBlobReference is the only supported type` |
 | `definitions.PendingUploadResponseDto.properties.pendingUploadType.description` | `Type of storage to use for the pending upload location` | `TemporaryBlobReference is the only supported type` |
 | `definitions.PipelineJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.PrivateEndpointConnection.properties.location.description` | `Same as workspace location.` | `*Same as workspace location.` |
-| `definitions.PrivateEndpointConnection.properties.sku.description` | `Optional. This field is required to be implemented by the RP because AML is supporting more than one tier` | `The SKU (Stock Keeping Unit) assigned to this resource.` |
 | `definitions.PrivateEndpointConnectionListResult.description` | `List of private endpoint connection associated with the specified workspace` | `[Placeholder] Discription for page model` |
 | `definitions.PrivateEndpointConnectionListResult.properties.value.description` | `Array of private endpoint connections` | `[Placeholder] Discription for value property` |
 | `definitions.PrivateLinkResourceListResult.description` | `A list of private link resources` | `[Placeholder] Discription for page model` |

@@ -76,3 +76,6 @@ interface PrivateEndpointConnections {
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource,
   "PrivateEndpointConnection object"
 );
+@@doc(PrivateEndpointConnection.sku,
+  "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier"
+);

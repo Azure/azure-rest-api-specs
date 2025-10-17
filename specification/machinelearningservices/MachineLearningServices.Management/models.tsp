@@ -4264,7 +4264,7 @@ model Image {
   /**
    * Type of the image. Possible values are: docker - For docker images. azureml - For AzureML Environment images (custom and curated)
    */
-  @summary("Type of the Image")
+  @summary("Type of the image")
   type?: ImageType = ImageType.docker;
 
   /**
@@ -4763,7 +4763,7 @@ model PendingUploadRequestDto {
   pendingUploadId?: string | null;
 
   /**
-   * TemporaryBlobReference is the only supported type
+   * Type of storage to use for the pending upload location
    */
   pendingUploadType?: PendingUploadType = PendingUploadType.TemporaryBlobReference;
 }
@@ -4988,7 +4988,7 @@ model EnvironmentVersionResourceArmPaginatedResult
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model EnvironmentVersionProperties extends AssetBase {
   /**
-   * Defines if image needs to be rebuilt based on base image changes.
+   * AutoRebuild setting for the derived image
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   autoRebuild?: AutoRebuildSetting = AutoRebuildSetting.Disabled;
@@ -5032,7 +5032,7 @@ model EnvironmentVersionProperties extends AssetBase {
   inferenceConfig?: InferenceContainerProperties;
 
   /**
-   * The OS type of the environment.
+   * The type of operating system.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   osType?: OperatingSystemType = OperatingSystemType.Linux;
@@ -6997,7 +6997,7 @@ model OnlineEndpointProperties extends EndpointPropertiesBase {
   provisioningState?: EndpointProvisioningState;
 
   /**
-   * Set to "Enabled" for endpoints that should allow public access when Private Link is enabled.
+   * Enum to determine whether PublicNetworkAccess is Enabled or Disabled.
    */
   publicNetworkAccess?: PublicNetworkAccessType = PublicNetworkAccessType.Enabled;
 
@@ -7029,7 +7029,7 @@ model OnlineDeploymentProperties extends EndpointDeploymentPropertiesBase {
   dataCollector?: DataCollector | null;
 
   /**
-   * If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.
+   * Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.
    */
   egressPublicNetworkAccess?: EgressPublicNetworkAccessType = EgressPublicNetworkAccessType.Enabled;
 
@@ -8590,9 +8590,6 @@ model EndpointModelProperties {
    */
   skus?: EndpointModelSkuProperties[];
 
-  /**
-   * Metadata pertaining to creation and last modification of the resource.
-   */
   systemData?: SystemData;
 
   /**
@@ -10623,9 +10620,6 @@ model HDInsight extends Compute {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model HDInsightSchema {
-  /**
-   * HDInsight compute properties
-   */
   properties?: HDInsightProperties;
 }
 
@@ -12951,9 +12945,9 @@ model Forecasting extends AutoMLVertical {
   ...TableVertical;
 
   /**
-   * Forecasting task specific inputs.
+   * Primary metrics for Forecasting task.
    */
-  forecastingSettings?: ForecastingSettings;
+  forecastingSettings?: ForecastingSettings | null;
 
   /**
    * Primary metric for forecasting task.
@@ -12989,7 +12983,7 @@ model ForecastingSettings {
   cvStepSize?: int32 | null;
 
   /**
-   * Flag for generating lags for the numeric features with 'auto' or null.
+   * Flag for generating lags for the numeric features.
    */
   featureLags?: FeatureLags = FeatureLags.None;
 
@@ -13015,8 +13009,7 @@ model ForecastingSettings {
   shortSeriesHandlingConfig?: ShortSeriesHandlingConfiguration = ShortSeriesHandlingConfiguration.Auto;
 
   /**
-   * The function to be used to aggregate the time series target column to conform to a user specified frequency.
-   * If the TargetAggregateFunction is set i.e. not 'None', but the freq parameter is not set, the error is raised. The possible target aggregation functions are: "sum", "max", "min" and "mean".
+   * Target aggregate function.
    */
   targetAggregateFunction?: TargetAggregationFunction = TargetAggregationFunction.None;
 
@@ -13081,7 +13074,7 @@ model ImageClassification extends AutoMLVertical {
   ...ImageClassificationBase;
 
   /**
-   * Primary metric to optimize for this task.
+   * Primary metrics for classification tasks.
    */
   primaryMetric?: ClassificationPrimaryMetrics = ClassificationPrimaryMetrics.Accuracy;
 
@@ -13234,7 +13227,7 @@ model ImageModelSettings {
   learningRate?: float32 | null;
 
   /**
-   * Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.
+   * Learning rate scheduler enum.
    */
   learningRateScheduler?: LearningRateScheduler = LearningRateScheduler.None;
 
@@ -13266,7 +13259,7 @@ model ImageModelSettings {
   numberOfWorkers?: int32 | null;
 
   /**
-   * Type of optimizer.
+   * Stochastic optimizer for image models.
    */
   optimizer?: StochasticOptimizer = StochasticOptimizer.None;
 
@@ -13598,7 +13591,7 @@ model ImageClassificationMultilabel extends AutoMLVertical {
   ...ImageClassificationBase;
 
   /**
-   * Primary metric to optimize for this task.
+   * Primary metrics for classification multilabel tasks.
    */
   primaryMetric?: ClassificationMultilabelPrimaryMetrics = ClassificationMultilabelPrimaryMetrics.IOU;
 
@@ -13616,7 +13609,7 @@ model ImageInstanceSegmentation extends AutoMLVertical {
   ...ImageObjectDetectionBase;
 
   /**
-   * Primary metric to optimize for this task.
+   * Primary metrics for InstanceSegmentation tasks.
    */
   primaryMetric?: InstanceSegmentationPrimaryMetrics = InstanceSegmentationPrimaryMetrics.MeanAveragePrecision;
 
@@ -13682,9 +13675,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
   minSize?: int32 | null;
 
   /**
-   * Model size. Must be 'small', 'medium', 'large', or 'xlarge'.
-   * Note: training run may get into CUDA OOM if the model size is too big.
-   * Note: This settings is only supported for the 'yolov5' algorithm.
+   * Image model size.
    */
   modelSize?: ModelSize = ModelSize.None;
 
@@ -13726,7 +13717,7 @@ model ImageModelSettingsObjectDetection extends ImageModelSettings {
   validationIouThreshold?: float32 | null;
 
   /**
-   * Metric computation method to use for validation metrics.
+   * Metric computation method to use for validation metrics in image tasks.
    */
   validationMetricType?: ValidationMetricType = ValidationMetricType.None;
 }
@@ -13840,7 +13831,7 @@ model ImageObjectDetection extends AutoMLVertical {
   ...ImageObjectDetectionBase;
 
   /**
-   * Primary metric to optimize for this task.
+   * Primary metrics for Image ObjectDetection task.
    */
   primaryMetric?: ObjectDetectionPrimaryMetrics = ObjectDetectionPrimaryMetrics.MeanAveragePrecision;
 
@@ -15443,19 +15434,10 @@ model ManagedOnlineEndpointResourceProperties
   compute?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   description?: string;
-
-  /**
-   * Dictionary of <integer>
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   mirrorTraffic?: Record<int32>;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   scoringUri?: url;
-
-  /**
-   * Dictionary of <integer>
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   traffic?: Record<int32>;
 
@@ -15485,10 +15467,6 @@ model NoneAuthTypeWorkspaceConnectionProperties
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model OAuth2AuthTypeWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  /**
-   * ClientId and ClientSecret are required. Other properties are optional
-   * depending on each OAuth2 provider's implementation.
-   */
   credentials?: WorkspaceConnectionOAuth2;
 
   /**

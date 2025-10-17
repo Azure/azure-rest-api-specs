@@ -11268,7 +11268,7 @@
       "properties": {
         "autoRebuild": {
           "type": "string",
-          "description": "Defines if image needs to be rebuilt based on base image changes.",
+          "description": "AutoRebuild setting for the derived image",
           "default": "Disabled",
           "enum": [
             "Disabled",
@@ -11334,7 +11334,7 @@
         },
         "osType": {
           "type": "string",
-          "description": "The OS type of the environment.",
+          "description": "The type of operating system.",
           "default": "Linux",
           "enum": [
             "Linux",
@@ -12021,7 +12021,7 @@
         },
         "egressPublicNetworkAccess": {
           "type": "string",
-          "description": "If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.",
+          "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -12156,7 +12156,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Set to \"Enabled\" for endpoints that should allow public access when Private Link is enabled.",
+          "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -14422,13 +14422,6 @@
         }
       }
     },
-    "EndpointModelProperties": {
-      "properties": {
-        "systemData": {
-          "description__added": "Metadata pertaining to creation and last modification of the resource."
-        }
-      }
-    },
     "EndpointModelSkuProperties": {
       "properties": {
         "connectionIds": {
@@ -15209,7 +15202,10 @@
           "x-nullable": true
         },
         "forecastingSettings": {
-          "x-nullable__deleted": true
+          "description": {
+            "__old": "Forecasting task specific inputs.",
+            "__new": "Primary metrics for Forecasting task."
+          }
         },
         "primaryMetric": {
           "description": {
@@ -15244,12 +15240,6 @@
             "__new": "Number of periods between the origin time of one CV fold and the next fold. For\nexample, if `CVStepSize` = 3 for daily data, the origin time for each fold will be\nthree days apart."
           }
         },
-        "featureLags": {
-          "description": {
-            "__old": "Flag for generating lags for the numeric features.",
-            "__new": "Flag for generating lags for the numeric features with 'auto' or null."
-          }
-        },
         "forecastHorizon": {
           "default__deleted": "{\"Mode\": \"Custom\", \"Value\": 1}"
         },
@@ -15258,12 +15248,6 @@
           "description": {
             "__old": "Set time series seasonality as an integer multiple of the series frequency.\r\nIf seasonality is set to 'auto', it will be inferred.",
             "__new": "Set time series seasonality as an integer multiple of the series frequency.\nIf seasonality is set to 'auto', it will be inferred."
-          }
-        },
-        "targetAggregateFunction": {
-          "description": {
-            "__old": "Target aggregate function.",
-            "__new": "The function to be used to aggregate the time series target column to conform to a user specified frequency.\nIf the TargetAggregateFunction is set i.e. not 'None', but the freq parameter is not set, the error is raised. The possible target aggregation functions are: \"sum\", \"max\", \"min\" and \"mean\"."
           }
         },
         "timeSeriesIdColumnNames": {
@@ -15278,8 +15262,7 @@
       "type__added": "object",
       "properties__added": {
         "properties": {
-          "$ref": "#/definitions/HDInsightProperties",
-          "description": "HDInsight compute properties"
+          "$ref": "#/definitions/HDInsightProperties"
         }
       },
       "allOf": [
@@ -15302,14 +15285,6 @@
       }
     },
     "Image": {
-      "properties": {
-        "type": {
-          "title": {
-            "__old": "Type of the image",
-            "__new": "Type of the Image"
-          }
-        }
-      },
       "additionalProperties": {
         "__old": true,
         "__new": {}
@@ -15356,12 +15331,6 @@
           "format": "double",
           "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
           "x-nullable": true
-        },
-        "primaryMetric": {
-          "description": {
-            "__old": "Primary metrics for classification tasks.",
-            "__new": "Primary metric to optimize for this task."
-          }
         }
       },
       "allOf": [
@@ -15417,12 +15386,6 @@
           "format": "double",
           "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
           "x-nullable": true
-        },
-        "primaryMetric": {
-          "description": {
-            "__old": "Primary metrics for classification multilabel tasks.",
-            "__new": "Primary metric to optimize for this task."
-          }
         }
       },
       "allOf": [
@@ -15478,12 +15441,6 @@
           "format": "double",
           "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
           "x-nullable": true
-        },
-        "primaryMetric": {
-          "description": {
-            "__old": "Primary metrics for InstanceSegmentation tasks.",
-            "__new": "Primary metric to optimize for this task."
-          }
         }
       },
       "allOf": [
@@ -15757,22 +15714,10 @@
             "__new": "Number of layers to freeze for the model. Must be a positive integer.\nFor instance, passing 2 as value for 'seresnext' means\nfreezing layer0 and layer1. For a full list of models supported and details on layer freeze, please\nsee: https://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models."
           }
         },
-        "learningRateScheduler": {
-          "description": {
-            "__old": "Learning rate scheduler enum.",
-            "__new": "Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'."
-          }
-        },
         "modelName": {
           "description": {
             "__old": "Name of the model to use for training.\r\nFor more information on the available models please visit the official documentation:\r\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models.",
             "__new": "Name of the model to use for training.\nFor more information on the available models please visit the official documentation:\nhttps://docs.microsoft.com/en-us/azure/machine-learning/how-to-auto-train-image-models."
-          }
-        },
-        "optimizer": {
-          "description": {
-            "__old": "Stochastic optimizer for image models.",
-            "__new": "Type of optimizer."
           }
         }
       }
@@ -15827,12 +15772,6 @@
             "__new": "Minimum size of the image to be rescaled before feeding it to the backbone.\nMust be a positive integer. Note: training run may get into CUDA OOM if the size is too big.\nNote: This settings is not supported for the 'yolov5' algorithm."
           }
         },
-        "modelSize": {
-          "description": {
-            "__old": "Image model size.",
-            "__new": "Model size. Must be 'small', 'medium', 'large', or 'xlarge'.\nNote: training run may get into CUDA OOM if the model size is too big.\nNote: This settings is only supported for the 'yolov5' algorithm."
-          }
-        },
         "multiScale": {
           "description": {
             "__old": "Enable multi-scale image by varying image size by +/- 50%.\r\nNote: training run may get into CUDA OOM if no sufficient GPU memory.\r\nNote: This settings is only supported for the 'yolov5' algorithm.",
@@ -15856,12 +15795,6 @@
           "description": {
             "__old": "The IOU threshold to use to perform NMS while merging predictions from tiles and image.\r\nUsed in validation/ inference. Must be float in the range [0, 1].\r\nNote: This settings is not supported for the 'yolov5' algorithm.",
             "__new": "The IOU threshold to use to perform NMS while merging predictions from tiles and image.\nUsed in validation/ inference. Must be float in the range [0, 1].\nNote: This settings is not supported for the 'yolov5' algorithm."
-          }
-        },
-        "validationMetricType": {
-          "description": {
-            "__old": "Metric computation method to use for validation metrics in image tasks.",
-            "__new": "Metric computation method to use for validation metrics."
           }
         }
       }
@@ -15907,12 +15840,6 @@
           "format": "double",
           "description": "The fraction of training dataset that needs to be set aside for validation purpose.\nValues between (0.0 , 1.0)\nApplied when validation dataset is not provided.",
           "x-nullable": true
-        },
-        "primaryMetric": {
-          "description": {
-            "__old": "Primary metrics for Image ObjectDetection task.",
-            "__new": "Primary metric to optimize for this task."
-          }
         }
       },
       "allOf": [
@@ -15992,7 +15919,7 @@
         },
         "identity__added": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind__added": {
           "type": "string",
@@ -16000,7 +15927,7 @@
         },
         "sku__added": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -16100,7 +16027,7 @@
         },
         "identity__added": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind__added": {
           "type": "string",
@@ -16108,7 +16035,7 @@
         },
         "sku__added": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "allOf": [
@@ -16179,7 +16106,7 @@
         },
         "identity__added": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind__added": {
           "type": "string",
@@ -16187,7 +16114,7 @@
         },
         "sku__added": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "allOf": [
@@ -16820,16 +16747,6 @@
         ]
       ]
     },
-    "ManagedOnlineEndpointResourceProperties": {
-      "properties": {
-        "mirrorTraffic": {
-          "description__added": "Dictionary of <integer>"
-        },
-        "traffic": {
-          "description__added": "Dictionary of <integer>"
-        }
-      }
-    },
     "ManagedResourceGroupAssignedIdentities": {
       "properties": {
         "principalId": {
@@ -17161,13 +17078,6 @@
         }
       }
     },
-    "OAuth2AuthTypeWorkspaceConnectionProperties": {
-      "properties": {
-        "credentials": {
-          "description__added": "ClientId and ClientSecret are required. Other properties are optional\ndepending on each OAuth2 provider's implementation."
-        }
-      }
-    },
     "OneLakeDatastore": {
       "properties": {
         "endpoint": {
@@ -17299,7 +17209,7 @@
         },
         "identity__added": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind__added": {
           "type": "string",
@@ -17307,7 +17217,7 @@
         },
         "sku__added": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -17419,7 +17329,7 @@
         },
         "identity__added": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind__added": {
           "type": "string",
@@ -17427,7 +17337,7 @@
         },
         "sku__added": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "allOf": [
@@ -17577,16 +17487,6 @@
         }
       }
     },
-    "PendingUploadRequestDto": {
-      "properties": {
-        "pendingUploadType": {
-          "description": {
-            "__old": "Type of storage to use for the pending upload location",
-            "__new": "TemporaryBlobReference is the only supported type"
-          }
-        }
-      }
-    },
     "PendingUploadResponseDto": {
       "properties": {
         "pendingUploadType": {
@@ -17639,12 +17539,6 @@
           "description": {
             "__old": "Same as workspace location.",
             "__new": "*Same as workspace location."
-          }
-        },
-        "sku": {
-          "description": {
-            "__old": "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier",
-            "__new": "The SKU (Stock Keeping Unit) assigned to this resource."
           }
         }
       }

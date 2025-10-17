@@ -29475,8 +29475,7 @@
           }
         },
         "systemData": {
-          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData",
-          "description": "Metadata pertaining to creation and last modification of the resource."
+          "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/systemData"
         },
         "version": {
           "type": "string",
@@ -30032,7 +30031,7 @@
       "properties": {
         "autoRebuild": {
           "type": "string",
-          "description": "Defines if image needs to be rebuilt based on base image changes.",
+          "description": "AutoRebuild setting for the derived image",
           "default": "Disabled",
           "enum": [
             "Disabled",
@@ -30100,7 +30099,7 @@
         },
         "osType": {
           "type": "string",
-          "description": "The OS type of the environment.",
+          "description": "The type of operating system.",
           "default": "Linux",
           "enum": [
             "Linux",
@@ -31265,7 +31264,8 @@
         },
         "forecastingSettings": {
           "$ref": "#/definitions/ForecastingSettings",
-          "description": "Forecasting task specific inputs."
+          "description": "Primary metrics for Forecasting task.",
+          "x-nullable": true
         },
         "primaryMetric": {
           "type": "string",
@@ -31460,7 +31460,7 @@
         },
         "featureLags": {
           "type": "string",
-          "description": "Flag for generating lags for the numeric features with 'auto' or null.",
+          "description": "Flag for generating lags for the numeric features.",
           "default": "None",
           "enum": [
             "None",
@@ -31535,7 +31535,7 @@
         },
         "targetAggregateFunction": {
           "type": "string",
-          "description": "The function to be used to aggregate the time series target column to conform to a user specified frequency.\nIf the TargetAggregateFunction is set i.e. not 'None', but the freq parameter is not set, the error is raised. The possible target aggregation functions are: \"sum\", \"max\", \"min\" and \"mean\".",
+          "description": "Target aggregate function.",
           "default": "None",
           "enum": [
             "None",
@@ -31821,8 +31821,7 @@
       "description": "A HDInsight compute.",
       "properties": {
         "properties": {
-          "$ref": "#/definitions/HDInsightProperties",
-          "description": "HDInsight compute properties"
+          "$ref": "#/definitions/HDInsightProperties"
         }
       },
       "allOf": [
@@ -31952,7 +31951,7 @@
       "properties": {
         "type": {
           "type": "string",
-          "title": "Type of the Image",
+          "title": "Type of the image",
           "description": "Type of the image. Possible values are: docker - For docker images. azureml - For AzureML Environment images (custom and curated)",
           "default": "docker",
           "enum": [
@@ -32025,7 +32024,7 @@
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric to optimize for this task.",
+          "description": "Primary metrics for classification tasks.",
           "default": "Accuracy",
           "enum": [
             "AUCWeighted",
@@ -32117,7 +32116,7 @@
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric to optimize for this task.",
+          "description": "Primary metrics for classification multilabel tasks.",
           "default": "IOU",
           "enum": [
             "AUCWeighted",
@@ -32259,7 +32258,7 @@
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric to optimize for this task.",
+          "description": "Primary metrics for InstanceSegmentation tasks.",
           "default": "MeanAveragePrecision",
           "enum": [
             "MeanAveragePrecision"
@@ -32687,7 +32686,7 @@
         },
         "learningRateScheduler": {
           "type": "string",
-          "description": "Type of learning rate scheduler. Must be 'warmup_cosine' or 'step'.",
+          "description": "Learning rate scheduler enum.",
           "default": "None",
           "enum": [
             "None",
@@ -32746,7 +32745,7 @@
         },
         "optimizer": {
           "type": "string",
-          "description": "Type of optimizer.",
+          "description": "Stochastic optimizer for image models.",
           "default": "None",
           "enum": [
             "None",
@@ -32902,7 +32901,7 @@
         },
         "modelSize": {
           "type": "string",
-          "description": "Model size. Must be 'small', 'medium', 'large', or 'xlarge'.\nNote: training run may get into CUDA OOM if the model size is too big.\nNote: This settings is only supported for the 'yolov5' algorithm.",
+          "description": "Image model size.",
           "default": "None",
           "enum": [
             "None",
@@ -32979,7 +32978,7 @@
         },
         "validationMetricType": {
           "type": "string",
-          "description": "Metric computation method to use for validation metrics.",
+          "description": "Metric computation method to use for validation metrics in image tasks.",
           "default": "None",
           "enum": [
             "None",
@@ -33061,7 +33060,7 @@
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric to optimize for this task.",
+          "description": "Primary metrics for Image ObjectDetection task.",
           "default": "MeanAveragePrecision",
           "enum": [
             "MeanAveragePrecision"
@@ -33203,7 +33202,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -33211,7 +33210,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -33296,7 +33295,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -33304,7 +33303,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -33383,7 +33382,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -33391,7 +33390,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -35099,7 +35098,6 @@
         },
         "mirrorTraffic": {
           "type": "object",
-          "description": "Dictionary of <integer>",
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -35111,7 +35109,6 @@
         },
         "traffic": {
           "type": "object",
-          "description": "Dictionary of <integer>",
           "additionalProperties": {
             "format": "int32",
             "type": "integer"
@@ -36854,8 +36851,7 @@
       "type": "object",
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionOAuth2",
-          "description": "ClientId and ClientSecret are required. Other properties are optional\ndepending on each OAuth2 provider's implementation."
+          "$ref": "#/definitions/WorkspaceConnectionOAuth2"
         }
       },
       "allOf": [
@@ -37015,7 +37011,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -37023,7 +37019,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -37050,7 +37046,7 @@
         },
         "egressPublicNetworkAccess": {
           "type": "string",
-          "description": "If Enabled, allow egress public network access. If Disabled, this will create secure egress. Default: Enabled.",
+          "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled for egress of a deployment.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -37167,7 +37163,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -37175,7 +37171,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -37212,7 +37208,7 @@
         },
         "publicNetworkAccess": {
           "type": "string",
-          "description": "Set to \"Enabled\" for endpoints that should allow public access when Private Link is enabled.",
+          "description": "Enum to determine whether PublicNetworkAccess is Enabled or Disabled.",
           "default": "Enabled",
           "enum": [
             "Enabled",
@@ -37945,7 +37941,7 @@
         },
         "pendingUploadType": {
           "type": "string",
-          "description": "TemporaryBlobReference is the only supported type",
+          "description": "Type of storage to use for the pending upload location",
           "default": "TemporaryBlobReference",
           "enum": [
             "None",
@@ -38225,7 +38221,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier"
         },
         "location": {
           "type": "string",

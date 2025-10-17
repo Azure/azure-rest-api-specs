@@ -176,3 +176,9 @@ interface InferenceEndpoints {
 @@doc(InferenceEndpoints.update::parameters.properties,
   "Online Endpoint entity to apply during operation."
 );
+@@doc(InferenceEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(InferenceEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
+);

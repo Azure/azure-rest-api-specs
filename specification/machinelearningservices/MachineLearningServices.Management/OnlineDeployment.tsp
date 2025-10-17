@@ -170,3 +170,9 @@ interface OnlineDeployments {
 @@doc(OnlineDeployments.getLogs::parameters.body,
   "The request containing parameters for retrieving logs."
 );
+@@doc(OnlineDeployment.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(OnlineDeployment.sku,
+  "Sku details required for ARM contract for Autoscaling."
+);

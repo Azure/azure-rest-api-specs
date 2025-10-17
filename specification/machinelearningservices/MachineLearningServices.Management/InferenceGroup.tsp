@@ -255,3 +255,9 @@ interface InferenceGroups {
 @@doc(InferenceGroups.modifyDeltaModelsAsync::parameters.body,
   "DeltaModelModifyRequest."
 );
+@@doc(InferenceGroup.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(InferenceGroup.sku,
+  "Sku details required for ARM contract for Autoscaling."
+);

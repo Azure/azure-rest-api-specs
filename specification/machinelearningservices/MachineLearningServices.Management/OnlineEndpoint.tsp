@@ -185,3 +185,9 @@ interface OnlineEndpoints {
 @@doc(OnlineEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
 );
+@@doc(OnlineEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(OnlineEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
+);
