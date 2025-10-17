@@ -510,7 +510,91 @@
         }
       }
     },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/{endpointType}/{endpointName}": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/heatMaps/{heatMapType}": {
+      "get": {
+        "operationId": "HeatMap_Get",
+        "description": "Gets latest heatmap for Traffic Manager profile.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "heatMapType",
+            "in": "path",
+            "description": "The type of the heatmap.",
+            "required": true,
+            "type": "string",
+            "enum": [
+              "default"
+            ],
+            "x-ms-enum": {
+              "name": "HeatMapType",
+              "modelAsString": false
+            }
+          },
+          {
+            "name": "topLeft",
+            "in": "query",
+            "description": "The top left latitude,longitude pair of the rectangular viewport to query for.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2
+          },
+          {
+            "name": "botRight",
+            "in": "query",
+            "description": "The bottom right latitude,longitude pair of the rectangular viewport to query for.",
+            "required": false,
+            "type": "array",
+            "items": {
+              "type": "number",
+              "format": "double"
+            },
+            "collectionFormat": "csv",
+            "minItems": 2,
+            "maxItems": 2
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/HeatMapModel"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "HeatMap-GET": {
+            "$ref": "./examples/HeatMap-GET.json"
+          },
+          "HeatMap-GET-With-Null-Values": {
+            "$ref": "./examples/HeatMap-GET-With-Null-Values.json"
+          },
+          "HeatMap-GET-With-TopLeft-BotRight": {
+            "$ref": "./examples/HeatMap-GET-With-TopLeft-BotRight.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/trafficmanagerprofiles/{profileName}/{endpointType}/{endpointName}": {
       "get": {
         "operationId": "Endpoints_Get",
         "description": "Gets a Traffic Manager endpoint.",
@@ -523,6 +607,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "endpointType",
@@ -586,6 +677,13 @@
           },
           {
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
           },
           {
             "name": "endpointType",
@@ -672,6 +770,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointType",
             "in": "path",
             "description": "The type of the Traffic Manager endpoint.",
@@ -738,6 +843,13 @@
             "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
           },
           {
+            "name": "profileName",
+            "in": "path",
+            "description": "The name of the Traffic Manager profile.",
+            "required": true,
+            "type": "string"
+          },
+          {
             "name": "endpointType",
             "in": "path",
             "description": "The type of the Traffic Manager endpoint.",
@@ -781,90 +893,6 @@
         "x-ms-examples": {
           "Endpoint-DELETE-External": {
             "$ref": "./examples/Endpoint-DELETE-External.json"
-          }
-        }
-      }
-    },
-    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.Network/heatMaps/{heatMapType}": {
-      "get": {
-        "operationId": "HeatMap_Get",
-        "description": "Gets latest heatmap for Traffic Manager profile.",
-        "parameters": [
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
-          },
-          {
-            "$ref": "../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
-          },
-          {
-            "name": "heatMapType",
-            "in": "path",
-            "description": "The type of the heatmap.",
-            "required": true,
-            "type": "string",
-            "enum": [
-              "default"
-            ],
-            "x-ms-enum": {
-              "name": "HeatMapType",
-              "modelAsString": false
-            }
-          },
-          {
-            "name": "topLeft",
-            "in": "query",
-            "description": "The top left latitude,longitude pair of the rectangular viewport to query for.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2
-          },
-          {
-            "name": "botRight",
-            "in": "query",
-            "description": "The bottom right latitude,longitude pair of the rectangular viewport to query for.",
-            "required": false,
-            "type": "array",
-            "items": {
-              "type": "number",
-              "format": "double"
-            },
-            "collectionFormat": "csv",
-            "minItems": 2,
-            "maxItems": 2
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "Azure operation completed successfully.",
-            "schema": {
-              "$ref": "#/definitions/HeatMapModel"
-            }
-          },
-          "default": {
-            "description": "An unexpected error response.",
-            "schema": {
-              "$ref": "#/definitions/CloudError"
-            }
-          }
-        },
-        "x-ms-examples": {
-          "HeatMap-GET": {
-            "$ref": "./examples/HeatMap-GET.json"
-          },
-          "HeatMap-GET-With-Null-Values": {
-            "$ref": "./examples/HeatMap-GET-With-Null-Values.json"
-          },
-          "HeatMap-GET-With-TopLeft-BotRight": {
-            "$ref": "./examples/HeatMap-GET-With-TopLeft-BotRight.json"
           }
         }
       }
