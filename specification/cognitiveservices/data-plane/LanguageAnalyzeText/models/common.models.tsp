@@ -188,11 +188,11 @@ model AnalyzeTextJobsInput {
   tasks: AnalyzeTextLROTask[];
 
   /** Default language to use for records requesting automatic language detection. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   defaultLanguage?: string;
 
   /** Optional duration in seconds after which the job will be canceled if not completed. */
-  @added(Versions.v2025_05_15_preview)
+  @added(Versions.v2025_11_15_preview)
   cancelAfter?: float32;
 }
 
@@ -358,7 +358,7 @@ model MultiLanguageInput {
 }
 
 /** Defines the detected language for the document. */
-@added(Versions.v2025_05_15_preview)
+@added(Versions.v2025_11_15_preview)
 model DocumentDetectedLanguage {
   /** If 'language' is set to 'auto' for the document in the request this field will contain a 2 letter ISO 639-1 representation of the language detected for this document. */
   detectedLanguage?: DetectedLanguage;
