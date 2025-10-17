@@ -39,12 +39,16 @@ interface ProductApiLinkContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -53,6 +57,8 @@ interface ProductApiLinkContractOps
         @segment("apiLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         apiLinkId: string,
       }
     > {}
@@ -62,29 +68,30 @@ interface ProductApiLinkContracts {
   /**
    * Gets the API link for the product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApiLink_Get")
-  get is ProductApiLinkContractOps.Read<ProductApiLinkContract>;
+  get is ProductApiLinkContractOps.Read<
+    ProductApiLinkContract,
+    Response = ArmResponse<ProductApiLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an API to the specified product via link.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApiLink_CreateOrUpdate")
   createOrUpdate is ProductApiLinkContractOps.CreateOrUpdateSync<ProductApiLinkContract>;
 
   /**
    * Deletes the specified API from the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApiLink_Delete")
   delete is ProductApiLinkContractOps.DeleteSync<ProductApiLinkContract>;
 
   /**
    * Lists a collection of the API links associated with a product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApiLink_ListByProduct")
   listByProduct is ProductApiLinkContractOps.List<
     ProductApiLinkContract,
     Parameters = {
@@ -104,6 +111,7 @@ interface ProductApiLinkContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -124,6 +132,8 @@ interface WorkspaceProductApiLinkOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -131,12 +141,16 @@ interface WorkspaceProductApiLinkOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -145,6 +159,8 @@ interface WorkspaceProductApiLinkOps
         @segment("apiLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         apiLinkId: string,
       }
     > {}
@@ -154,7 +170,16 @@ interface WorkspaceProductApiLink {
   /**
    * Gets the API link for the product.
    */
-  get is WorkspaceProductApiLinkOps.Read<ProductApiLinkContract>;
+  get is WorkspaceProductApiLinkOps.Read<
+    ProductApiLinkContract,
+    Response = ArmResponse<ProductApiLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an API to the specified product via link.
@@ -188,6 +213,7 @@ interface WorkspaceProductApiLink {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

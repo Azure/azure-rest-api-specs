@@ -30,38 +30,62 @@ interface DocumentationContracts {
   /**
    * Gets the details of the Documentation specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Documentation_Get")
-  get is ArmResourceRead<DocumentationContract>;
+  get is ArmResourceRead<
+    DocumentationContract,
+    Response = ArmResponse<DocumentationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Documentation by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Documentation_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<DocumentationContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    DocumentationContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Documentation or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Documentation_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     DocumentationContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<DocumentationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<DocumentationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the Documentation for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Documentation_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     DocumentationContract,
@@ -70,23 +94,30 @@ interface DocumentationContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<DocumentationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes the specified Documentation from an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Documentation_Delete")
   delete is ArmResourceDeleteSync<
     DocumentationContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -94,8 +125,6 @@ interface DocumentationContracts {
   /**
    * Lists all Documentations of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Documentation_ListByService")
   listByService is ArmResourceListByParent<
     DocumentationContract,
     Parameters = {
@@ -115,6 +144,7 @@ interface DocumentationContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

@@ -39,6 +39,8 @@ interface ApiVersionSetContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -47,6 +49,8 @@ interface ApiVersionSetContractOps
         @segment("apiVersionSets")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         versionSetId: string,
       }
     > {}
@@ -56,38 +60,62 @@ interface ApiVersionSetContracts {
   /**
    * Gets the details of the Api Version Set specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_Get")
-  get is ApiVersionSetContractOps.Read<ApiVersionSetContract>;
+  get is ApiVersionSetContractOps.Read<
+    ApiVersionSetContract,
+    Response = ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Api Version Set specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_GetEntityTag")
-  getEntityTag is ApiVersionSetContractOps.CheckExistence<ApiVersionSetContract>;
+  getEntityTag is ApiVersionSetContractOps.CheckExistence<
+    ApiVersionSetContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a Api Version Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_CreateOrUpdate")
   createOrUpdate is ApiVersionSetContractOps.CreateOrUpdateSync<
     ApiVersionSetContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the Api VersionSet specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_Update")
   @patch(#{ implicitOptionality: false })
   update is ApiVersionSetContractOps.CustomPatchSync<
     ApiVersionSetContract,
@@ -96,23 +124,30 @@ interface ApiVersionSetContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific Api Version Set.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_Delete")
   delete is ApiVersionSetContractOps.DeleteSync<
     ApiVersionSetContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -120,8 +155,6 @@ interface ApiVersionSetContracts {
   /**
    * Lists a collection of API Version Sets in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiVersionSet_ListByService")
   listByService is ApiVersionSetContractOps.List<
     ApiVersionSetContract,
     Parameters = {
@@ -142,6 +175,7 @@ interface ApiVersionSetContracts {
        * Number of records to skip.
        */
       @query("$skip")
+      @minValue(0)
       $skip?: int32;
     },
     Response = ArmResponse<ApiVersionSetCollection>
@@ -161,6 +195,8 @@ interface WorkspaceApiVersionSetOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -168,6 +204,8 @@ interface WorkspaceApiVersionSetOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -176,6 +214,8 @@ interface WorkspaceApiVersionSetOps
         @segment("apiVersionSets")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         versionSetId: string,
       }
     > {}
@@ -185,12 +225,30 @@ interface WorkspaceApiVersionSet {
   /**
    * Gets the details of the Api Version Set specified by its identifier.
    */
-  get is WorkspaceApiVersionSetOps.Read<ApiVersionSetContract>;
+  get is WorkspaceApiVersionSetOps.Read<
+    ApiVersionSetContract,
+    Response = ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Api Version Set specified by its identifier.
    */
-  getEntityTag is WorkspaceApiVersionSetOps.CheckExistence<ApiVersionSetContract>;
+  getEntityTag is WorkspaceApiVersionSetOps.CheckExistence<
+    ApiVersionSetContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a Api Version Set.
@@ -201,9 +259,23 @@ interface WorkspaceApiVersionSet {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -217,8 +289,16 @@ interface WorkspaceApiVersionSet {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ApiVersionSetContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -231,7 +311,8 @@ interface WorkspaceApiVersionSet {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -258,6 +339,7 @@ interface WorkspaceApiVersionSet {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -267,6 +349,7 @@ interface WorkspaceApiVersionSet {
 
 @@maxLength(ApiVersionSetContract.name, 80);
 @@minLength(ApiVersionSetContract.name, 1);
+
 @@doc(ApiVersionSetContract.name,
   "Api Version Set identifier. Must be unique in the current API Management service instance."
 );

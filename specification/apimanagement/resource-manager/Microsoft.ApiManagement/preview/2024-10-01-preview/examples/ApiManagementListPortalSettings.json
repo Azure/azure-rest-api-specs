@@ -1,52 +1,54 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "count": 3,
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/delegation",
-            "type": "Microsoft.ApiManagement/service/portalsettings",
             "name": "delegation",
+            "type": "Microsoft.ApiManagement/service/portalsettings",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/delegation",
             "properties": {
+              "enabled": false,
               "subscriptions": {
                 "enabled": false
               },
               "userRegistration": {
                 "enabled": false
-              },
-              "enabled": false
+              }
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/signin",
-            "type": "Microsoft.ApiManagement/service/portalsettings",
             "name": "signin",
+            "type": "Microsoft.ApiManagement/service/portalsettings",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/signin",
             "properties": {
               "enabled": false
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/signup",
-            "type": "Microsoft.ApiManagement/service/portalsettings",
             "name": "signup",
+            "type": "Microsoft.ApiManagement/service/portalsettings",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/portalsettings/signup",
             "properties": {
               "enabled": true,
               "termsOfService": {
-                "text": "Terms of service",
+                "consentRequired": false,
                 "enabled": false,
-                "consentRequired": false
+                "text": "Terms of service"
               }
             }
           }
-        ],
-        "count": 3
+        ]
       }
     }
-  }
+  },
+  "operationId": "PortalSettings_ListByService",
+  "title": "ApiManagementListPortalSettings"
 }

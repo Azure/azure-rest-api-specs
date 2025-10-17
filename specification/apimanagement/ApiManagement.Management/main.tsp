@@ -84,13 +84,14 @@ using Azure.Core;
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
 /**
- * ApiManagement Client
+ * Resource provider operation status.
  */
+#suppress "@azure-tools/typespec-azure-resource-manager/missing-operations-endpoint" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armProviderNamespace
 @service(#{ title: "ApiManagementClient" })
 @versioned(Versions)
 // FIXME: Common type version v2 is not supported for now. Set to v3.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.ApiManagement;
 
 /**
@@ -100,9 +101,14 @@ enum Versions {
   /**
    * The 2024-10-01-preview API version.
    */
-  @useDependency(Azure.ResourceManager.Versions.v1_0_Preview_1)
-  @useDependency(Azure.Core.Versions.v1_0_Preview_1)
   v2024_10_01_preview: "2024-10-01-preview",
 }
-
-interface Operations extends Azure.ResourceManager.Operations {}
+@armResourceOperations
+interface ApiManagementOperations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}
+@@doc(ApiManagementOperations.list,
+  "Lists all of the available REST API operations of the Microsoft.ApiManagement provider."
+);

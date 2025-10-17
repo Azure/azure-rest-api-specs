@@ -30,38 +30,67 @@ interface CacheContracts {
   /**
    * Gets the details of the Cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_Get")
-  get is ArmResourceRead<CacheContract>;
+  get is ArmResourceRead<
+    CacheContract,
+    Response = ArmResponse<CacheContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<CacheContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    CacheContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates an External Cache to be used in Api Management instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs(
+    "https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-cache-external",
+    "Use an external cache in Azure API Management"
+  )
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     CacheContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<CacheContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<CacheContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the cache specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     CacheContract,
@@ -70,23 +99,30 @@ interface CacheContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<CacheContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific Cache.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_Delete")
   delete is ArmResourceDeleteSync<
     CacheContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -94,8 +130,6 @@ interface CacheContracts {
   /**
    * Lists a collection of all external Caches in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Cache_ListByService")
   listByService is ArmResourceListByParent<
     CacheContract,
     Parameters = {
@@ -109,6 +143,7 @@ interface CacheContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

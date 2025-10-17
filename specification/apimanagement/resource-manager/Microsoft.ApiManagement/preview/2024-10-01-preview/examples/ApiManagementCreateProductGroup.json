@@ -1,38 +1,40 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "groupId": "templateGroup",
     "productId": "testproduct",
-    "groupId": "templateGroup"
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
-        "type": "Microsoft.ApiManagement/service/products/groups",
         "name": "templateGroup",
+        "type": "Microsoft.ApiManagement/service/products/groups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
         "properties": {
-          "displayName": "Template Group",
+          "type": "custom",
           "description": "group created via Template",
           "builtIn": false,
-          "type": "custom"
+          "displayName": "Template Group"
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
-        "type": "Microsoft.ApiManagement/service/products/groups",
         "name": "templateGroup",
+        "type": "Microsoft.ApiManagement/service/products/groups",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/templateGroup",
         "properties": {
-          "displayName": "Template Group",
+          "type": "custom",
           "description": "group created via Template",
           "builtIn": false,
-          "type": "custom"
+          "displayName": "Template Group"
         }
       }
     }
-  }
+  },
+  "operationId": "ProductGroup_CreateOrUpdate",
+  "title": "ApiManagementCreateProductGroup"
 }

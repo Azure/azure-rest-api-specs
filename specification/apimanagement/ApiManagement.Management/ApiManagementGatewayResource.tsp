@@ -28,10 +28,15 @@ model ApiManagementGatewayResource
   /**
    * SKU properties of the API Management gateway.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   sku: ApiManagementGatewaySkuProperties;
 
-  ...Azure.ResourceManager.EntityTagProperty;
+  /**
+   * ETag of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: Azure.Core.eTag;
 }
 
 @armResourceOperations
@@ -39,15 +44,11 @@ interface ApiManagementGatewayResources {
   /**
    * Gets an API Management gateway resource description.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGateway_Get")
   get is ArmResourceRead<ApiManagementGatewayResource>;
 
   /**
    * Creates or updates an API Management gateway. This is long running operation and could take several minutes to complete.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGateway_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     ApiManagementGatewayResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ApiManagementGatewayResource> &
@@ -57,8 +58,6 @@ interface ApiManagementGatewayResources {
   /**
    * Updates an existing API Management gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGateway_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     ApiManagementGatewayResource,
@@ -68,10 +67,8 @@ interface ApiManagementGatewayResources {
   /**
    * Deletes an existing API Management gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("ApiGateway_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   delete is ArmResourceDeleteWithoutOkAsync<
     ApiManagementGatewayResource,
     Response = (ArmDeleteAcceptedLroResponse & {
@@ -83,24 +80,26 @@ interface ApiManagementGatewayResources {
   /**
    * List all API Management gateways within a resource group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGateway_ListByResourceGroup")
-  listByResourceGroup is ArmResourceListByParent<ApiManagementGatewayResource>;
+  listByResourceGroup is ArmResourceListByParent<
+    ApiManagementGatewayResource,
+    Response = ArmResponse<ApiManagementGatewayListResult>
+  >;
 
   /**
    * List all API Management gateways within a subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGateway_List")
-  list is ArmListBySubscription<ApiManagementGatewayResource>;
+  list is ArmListBySubscription<
+    ApiManagementGatewayResource,
+    Response = ArmResponse<ApiManagementGatewayListResult>
+  >;
 
   /**
    * Gets all available SKU for a given API Management gateway
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementGatewaySkus_ListAvailableSkus")
   @get
   @action("skus")
+  @list
+  @summary("Gets available SKUs for API Management gateway")
   listAvailableSkus is ArmResourceActionSync<
     ApiManagementGatewayResource,
     void,
@@ -113,7 +112,7 @@ interface ApiManagementGatewayResources {
 @@doc(ApiManagementGatewayResource.name,
   "The name of the API Management gateway."
 );
-@@encodedName(ApiManagementGatewayResource.eTag, "application/json", "etag");
+@@encodedName(ApiManagementGatewayResource.etag, "application/json", "etag");
 @@doc(ApiManagementGatewayResource.properties,
   "Properties of the API Management gateway."
 );

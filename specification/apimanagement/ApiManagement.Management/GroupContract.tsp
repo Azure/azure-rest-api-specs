@@ -39,6 +39,8 @@ interface GroupContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -46,47 +48,151 @@ interface GroupContractOps
         @path
         @segment("groups")
         @key
+        @minLength(1)
+        @maxLength(256)
         groupId: string,
       }
     > {}
+
+alias GroupUserParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
+
+  /** The name of the API Management service. */
+  @path
+  @segment("service")
+  @key
+  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  serviceName: string;
+
+  /** Group identifier. Must be unique in the current API Management service instance. */
+  @path
+  @segment("groups")
+  @key
+  @minLength(1)
+  @maxLength(256)
+  groupId: string;
+
+  /**
+   * User identifier. Must be unique in the current API Management service instance.
+   */
+  @path
+  @segment("users")
+  @key
+  @minLength(1)
+  @maxLength(80)
+  userId: string;
+};
+
+alias WorkspaceGroupUserParameters = {
+  ...ApiVersionParameter;
+  ...SubscriptionIdParameter;
+  ...ResourceGroupParameter;
+  ...Azure.ResourceManager.Legacy.Provider;
+
+  /** The name of the API Management service. */
+  @path
+  @segment("service")
+  @key
+  @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+  @minLength(1)
+  @maxLength(50)
+  serviceName: string;
+
+  /**
+   * Workspace identifier. Must be unique in the current API Management service instance.
+   */
+  @path
+  @key
+  @segment("workspaces")
+  @minLength(1)
+  @maxLength(80)
+  @pattern("^[^*#&+:<>?]+$")
+  workspaceId: string;
+
+  /** Group identifier. Must be unique in the current API Management service instance. */
+  @path
+  @segment("groups")
+  @key
+  @minLength(1)
+  @maxLength(256)
+  groupId: string;
+
+  /**
+   * User identifier. Must be unique in the current API Management service instance.
+   */
+  @path
+  @key
+  @segment("users")
+  @minLength(1)
+  @maxLength(80)
+  userId: string;
+};
 
 @armResourceOperations
 interface GroupContracts {
   /**
    * Gets the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_Get")
-  get is GroupContractOps.Read<GroupContract>;
+  get is GroupContractOps.Read<
+    GroupContract,
+    Response = ArmResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_GetEntityTag")
-  getEntityTag is GroupContractOps.CheckExistence<GroupContract>;
+  getEntityTag is GroupContractOps.CheckExistence<
+    GroupContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_CreateOrUpdate")
   createOrUpdate is GroupContractOps.CreateOrUpdateSync<
     GroupContract,
+    Request = GroupCreateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the group specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_Update")
   @patch(#{ implicitOptionality: false })
   update is GroupContractOps.CustomPatchSync<
     GroupContract,
@@ -95,23 +201,30 @@ interface GroupContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific group of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_Delete")
   delete is GroupContractOps.DeleteSync<
     GroupContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -119,8 +232,8 @@ interface GroupContracts {
   /**
    * Lists a collection of groups defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Group_ListByService")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-groups")
   listByService is GroupContractOps.List<
     GroupContract,
     Parameters = {
@@ -140,6 +253,7 @@ interface GroupContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -149,10 +263,9 @@ interface GroupContracts {
   /**
    * Lists a collection of user entities associated with the group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_List")
   @get
   @action("users")
+  @list
   list is GroupContractOps.ActionSync<
     GroupContract,
     void,
@@ -174,6 +287,7 @@ interface GroupContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -182,36 +296,19 @@ interface GroupContracts {
   /**
    * Checks that user entity specified by identifier is associated with the group entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_CheckEntityExists")
   @head
-  @action("{userId}")
-  checkEntityExists is GroupContractOps.ActionSync<
-    GroupContract,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      userId: string;
-    }
-  >;
+  checkEntityExists(
+    ...GroupUserParameters,
+  ): NoContentResponse | NotFoundResponse | ErrorResponse;
 
   /**
    * Add existing user to existing group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_Create")
   @put
-  @action("{userId}")
-  create is GroupContractOps.ActionSync<
+  create is GroupContractOps.CreateOrUpdateSync<
     GroupContract,
-    void,
-    ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
+    Request = void,
+    Response = ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -219,6 +316,7 @@ interface GroupContracts {
       @maxLength(80)
       @minLength(1)
       @path
+      @segment("users")
       userId: string;
     }
   >;
@@ -226,24 +324,11 @@ interface GroupContracts {
   /**
    * Remove existing user from existing group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GroupUser_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  @action("{userId}")
-  groupUserDelete is GroupContractOps.ActionSync<
-    GroupContract,
-    void,
-    OkResponse | NoContentResponse,
-    Parameters = {
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      userId: string;
-    }
-  >;
+  groupUserDelete(
+    ...GroupUserParameters,
+  ): OkResponse | NoContentResponse | ErrorResponse;
 }
 @armResourceOperations
 interface WorkspaceGroupOps
@@ -259,6 +344,8 @@ interface WorkspaceGroupOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -266,6 +353,8 @@ interface WorkspaceGroupOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -273,6 +362,8 @@ interface WorkspaceGroupOps
         @path
         @segment("groups")
         @key
+        @minLength(1)
+        @maxLength(256)
         groupId: string,
       }
     > {}
@@ -282,25 +373,58 @@ interface WorkspaceGroup {
   /**
    * Gets the details of the group specified by its identifier.
    */
-  get is WorkspaceGroupOps.Read<GroupContract>;
+  get is WorkspaceGroupOps.Read<
+    GroupContract,
+    Response = ArmResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the group specified by its identifier.
    */
-  getEntityTag is WorkspaceGroupOps.CheckExistence<GroupContract>;
+  getEntityTag is WorkspaceGroupOps.CheckExistence<
+    GroupContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a group.
    */
   createOrUpdate is WorkspaceGroupOps.CreateOrUpdateSync<
     GroupContract,
+    Request = GroupCreateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -314,8 +438,16 @@ interface WorkspaceGroup {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<GroupContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -328,7 +460,8 @@ interface WorkspaceGroup {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -336,6 +469,8 @@ interface WorkspaceGroup {
   /**
    * Lists a collection of groups defined within a workspace in a service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-groups")
   listByService is WorkspaceGroupOps.List<
     GroupContract,
     Parameters = {
@@ -355,6 +490,7 @@ interface WorkspaceGroup {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -364,10 +500,9 @@ interface WorkspaceGroup {
   /**
    * Lists a collection of user entities associated with the group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspaceGroupUser_List")
   @get
   @action("users")
+  @list
   list is WorkspaceGroupOps.ActionSync<
     GroupContract,
     void,
@@ -389,6 +524,7 @@ interface WorkspaceGroup {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -397,36 +533,20 @@ interface WorkspaceGroup {
   /**
    * Checks that user entity specified by identifier is associated with the group entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspaceGroupUser_CheckEntityExists")
   @head
-  @action("{userId}")
-  checkEntityExists is WorkspaceGroupOps.ActionSync<
-    GroupContract,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      userId: string;
-    }
-  >;
+  checkEntityExists(
+    ...WorkspaceGroupUserParameters,
+  ): NoContentResponse | NotFoundResponse | ErrorResponse;
 
   /**
    * Add existing user to existing group
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspaceGroupUser_Create")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation-response" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  @action("{userId}")
-  create is WorkspaceGroupOps.ActionSync<
+  create is WorkspaceGroupOps.CreateOrUpdateSync<
     GroupContract,
-    void,
-    ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
+    Request = void,
+    Response = ArmResponse<UserContract> | ArmResourceCreatedSyncResponse<UserContract>,
     Parameters = {
       /**
        * User identifier. Must be unique in the current API Management service instance.
@@ -434,6 +554,7 @@ interface WorkspaceGroup {
       @maxLength(80)
       @minLength(1)
       @path
+      @segment("users")
       userId: string;
     }
   >;
@@ -441,24 +562,11 @@ interface WorkspaceGroup {
   /**
    * Remove existing user from existing group.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspaceGroupUser_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  @action("{userId}")
-  workspaceGroupUserDelete is WorkspaceGroupOps.ActionSync<
-    GroupContract,
-    void,
-    OkResponse | NoContentResponse,
-    Parameters = {
-      /**
-       * User identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      userId: string;
-    }
-  >;
+  workspaceGroupUserDelete(
+    ...WorkspaceGroupUserParameters,
+  ): OkResponse | NoContentResponse | ErrorResponse;
 }
 
 @@maxLength(GroupContract.name, 256);

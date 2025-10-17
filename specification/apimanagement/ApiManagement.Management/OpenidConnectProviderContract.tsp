@@ -30,38 +30,62 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets specific OpenID Connect Provider without secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_Get")
-  get is ArmResourceRead<OpenidConnectProviderContract>;
+  get is ArmResourceRead<
+    OpenidConnectProviderContract,
+    Response = ArmResponse<OpenidConnectProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the openIdConnectProvider specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<OpenidConnectProviderContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    OpenidConnectProviderContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates the OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     OpenidConnectProviderContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<OpenidConnectProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<OpenidConnectProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the specific OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     OpenidConnectProviderContract,
@@ -70,23 +94,30 @@ interface OpenidConnectProviderContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<OpenidConnectProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific OpenID Connect Provider of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_Delete")
   delete is ArmResourceDeleteSync<
     OpenidConnectProviderContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -94,8 +125,6 @@ interface OpenidConnectProviderContracts {
   /**
    * Lists of all the OpenId Connect Providers.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_ListByService")
   listByService is ArmResourceListByParent<
     OpenidConnectProviderContract,
     Parameters = {
@@ -115,6 +144,7 @@ interface OpenidConnectProviderContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -124,12 +154,16 @@ interface OpenidConnectProviderContracts {
   /**
    * Gets the client secret details of the OpenID Connect Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OpenIdConnectProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     OpenidConnectProviderContract,
     void,
-    ArmResponse<ClientSecretContract>
+    ArmResponse<ClientSecretContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 

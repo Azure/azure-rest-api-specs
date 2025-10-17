@@ -31,15 +31,22 @@ interface TenantSettingsContracts {
   /**
    * Get tenant settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TenantSettings_Get")
-  get is ArmResourceRead<TenantSettingsContract>;
+  #deprecated "deprecated"
+  get is ArmResourceRead<
+    TenantSettingsContract,
+    Response = ArmResponse<TenantSettingsContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Public settings.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TenantSettings_ListByService")
+  #deprecated "deprecated"
   listByService is ArmResourceListByParent<
     TenantSettingsContract,
     Parameters = {

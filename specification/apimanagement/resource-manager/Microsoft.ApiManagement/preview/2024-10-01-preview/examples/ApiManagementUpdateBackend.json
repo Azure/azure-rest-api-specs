@@ -1,11 +1,8 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
-    "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "backendId": "proxybackend",
     "If-Match": "*",
+    "api-version": "2024-10-01-preview",
+    "backendId": "proxybackend",
     "parameters": {
       "properties": {
         "description": "description5308",
@@ -14,25 +11,23 @@
           "validateCertificateName": true
         }
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
-        "type": "Microsoft.ApiManagement/service/backends",
         "name": "proxybackend",
+        "type": "Microsoft.ApiManagement/service/backends",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/backends/proxybackend",
         "properties": {
           "description": "description5308",
-          "url": "https://backendname2644/",
-          "protocol": "http",
           "credentials": {
-            "query": {
-              "sv": [
-                "xx",
-                "bb",
-                "cc"
-              ]
+            "authorization": {
+              "parameter": "opensesma",
+              "scheme": "Basic"
             },
             "header": {
               "x-my-1": [
@@ -40,22 +35,29 @@
                 "val2"
               ]
             },
-            "authorization": {
-              "scheme": "Basic",
-              "parameter": "opensesma"
+            "query": {
+              "sv": [
+                "xx",
+                "bb",
+                "cc"
+              ]
             }
           },
           "proxy": {
+            "password": "<password>",
             "url": "http://192.168.1.1:8080",
-            "username": "Contoso\\admin",
-            "password": "<password>"
+            "username": "Contoso\\admin"
           },
           "tls": {
             "validateCertificateChain": false,
             "validateCertificateName": true
-          }
+          },
+          "url": "https://backendname2644/",
+          "protocol": "http"
         }
       }
     }
-  }
+  },
+  "operationId": "Backend_Update",
+  "title": "ApiManagementUpdateBackend"
 }

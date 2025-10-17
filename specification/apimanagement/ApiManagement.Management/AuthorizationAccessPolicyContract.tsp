@@ -30,38 +30,56 @@ interface AuthorizationAccessPolicyContracts {
   /**
    * Gets the details of the authorization access policy specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationAccessPolicy_Get")
-  get is ArmResourceRead<AuthorizationAccessPolicyContract>;
+  get is ArmResourceRead<
+    AuthorizationAccessPolicyContract,
+    Response = ArmResponse<AuthorizationAccessPolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates Authorization Access Policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationAccessPolicy_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationAccessPolicyContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<AuthorizationAccessPolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<AuthorizationAccessPolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes specific access policy from the Authorization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationAccessPolicy_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationAccessPolicyContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -69,8 +87,6 @@ interface AuthorizationAccessPolicyContracts {
   /**
    * Lists a collection of authorization access policy defined within a authorization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationAccessPolicy_ListByAuthorization")
   listByAuthorization is ArmResourceListByParent<
     AuthorizationAccessPolicyContract,
     Parameters = {
@@ -90,6 +106,7 @@ interface AuthorizationAccessPolicyContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

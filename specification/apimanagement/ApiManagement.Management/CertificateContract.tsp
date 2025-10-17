@@ -39,6 +39,8 @@ interface CertificateContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -47,6 +49,8 @@ interface CertificateContractOps
         @segment("certificates")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         certificateId: string,
       }
     > {}
@@ -56,45 +60,76 @@ interface CertificateContracts {
   /**
    * Gets the details of the certificate specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificate_Get")
-  get is CertificateContractOps.Read<CertificateContract>;
+  get is CertificateContractOps.Read<
+    CertificateContract,
+    Response = ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the certificate specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificate_GetEntityTag")
-  getEntityTag is CertificateContractOps.CheckExistence<CertificateContract>;
+  getEntityTag is CertificateContractOps.CheckExistence<
+    CertificateContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates the certificate being used for authentication with the backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificate_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs(
+    "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
+    "How to secure back-end services using client certificate authentication in Azure API Management"
+  )
   createOrUpdate is CertificateContractOps.CreateOrUpdateSync<
     CertificateContract,
+    Request = CertificateCreateOrUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes specific certificate.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificate_Delete")
   delete is CertificateContractOps.DeleteSync<
     CertificateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -102,8 +137,6 @@ interface CertificateContracts {
   /**
    * Lists a collection of all certificates in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificate_ListByService")
   listByService is CertificateContractOps.List<
     CertificateContract,
     Parameters = {
@@ -123,6 +156,7 @@ interface CertificateContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -138,12 +172,21 @@ interface CertificateContracts {
   /**
    * From KeyVault, Refresh the certificate being used for authentication with the backend.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Certificate_RefreshSecret")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs(
+    "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
+    "How to secure back-end services using client certificate authentication in Azure API Management"
+  )
   refreshSecret is CertificateContractOps.ActionSync<
     CertificateContract,
     void,
-    ArmResponse<CertificateContract>
+    Response = ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 @armResourceOperations
@@ -160,6 +203,8 @@ interface WorkspaceCertificateOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -167,6 +212,8 @@ interface WorkspaceCertificateOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -175,6 +222,8 @@ interface WorkspaceCertificateOps
         @segment("certificates")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         certificateId: string,
       }
     > {}
@@ -184,25 +233,63 @@ interface WorkspaceCertificate {
   /**
    * Gets the details of the certificate specified by its identifier.
    */
-  get is WorkspaceCertificateOps.Read<CertificateContract>;
+  get is WorkspaceCertificateOps.Read<
+    CertificateContract,
+    Response = ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the certificate specified by its identifier.
    */
-  getEntityTag is WorkspaceCertificateOps.CheckExistence<CertificateContract>;
+  getEntityTag is WorkspaceCertificateOps.CheckExistence<
+    CertificateContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates the certificate being used for authentication with the backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs(
+    "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
+    "How to secure back-end services using client certificate authentication in Azure API Management"
+  )
   createOrUpdate is WorkspaceCertificateOps.CreateOrUpdateSync<
     CertificateContract,
+    Request = CertificateCreateOrUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -214,7 +301,8 @@ interface WorkspaceCertificate {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -241,6 +329,7 @@ interface WorkspaceCertificate {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -256,10 +345,21 @@ interface WorkspaceCertificate {
   /**
    * From KeyVault, Refresh the certificate being used for authentication with the backend.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs(
+    "https://azure.microsoft.com/en-us/documentation/articles/api-management-howto-mutual-certificates/",
+    "How to secure back-end services using client certificate authentication in Azure API Management"
+  )
   refreshSecret is WorkspaceCertificateOps.ActionSync<
     CertificateContract,
     void,
-    ArmResponse<CertificateContract>
+    Response = ArmResponse<CertificateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 

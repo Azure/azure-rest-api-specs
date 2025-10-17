@@ -30,38 +30,62 @@ interface AuthorizationServerContracts {
   /**
    * Gets the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_Get")
-  get is ArmResourceRead<AuthorizationServerContract>;
+  get is ArmResourceRead<
+    AuthorizationServerContract,
+    Response = ArmResponse<AuthorizationServerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the authorizationServer specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<AuthorizationServerContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    AuthorizationServerContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates new authorization server or updates an existing authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationServerContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<AuthorizationServerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<AuthorizationServerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the authorization server specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     AuthorizationServerContract,
@@ -70,23 +94,30 @@ interface AuthorizationServerContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<AuthorizationServerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific authorization server instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationServerContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -94,8 +125,6 @@ interface AuthorizationServerContracts {
   /**
    * Lists a collection of authorization servers defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_ListByService")
   listByService is ArmResourceListByParent<
     AuthorizationServerContract,
     Parameters = {
@@ -115,6 +144,7 @@ interface AuthorizationServerContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -124,12 +154,16 @@ interface AuthorizationServerContracts {
   /**
    * Gets the client secret details of the authorization server.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationServer_ListSecrets")
   listSecrets is ArmResourceActionSync<
     AuthorizationServerContract,
     void,
-    ArmResponse<AuthorizationServerSecretsContract>
+    Response = ArmResponse<AuthorizationServerSecretsContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 

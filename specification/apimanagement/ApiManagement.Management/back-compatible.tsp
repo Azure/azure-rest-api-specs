@@ -3,184 +3,237 @@ import "@azure-tools/typespec-client-generator-core";
 using Azure.ClientGenerator.Core;
 using Microsoft.ApiManagement;
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementGatewayUpdateParameters.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AllPoliciesContract.properties);
-
-@@clientName(ApiEntityBaseContract.type, "apiType");
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiCreateOrUpdateParameter.properties);
-
-@@clientName(ApiCreateOrUpdateProperties.apiType, "soapApiType");
-@@clientName(ApiCreateOrUpdateProperties.translateRequiredQueryParameters,
-  "translateRequiredQueryParametersConduct"
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementGatewayUpdateParameters.properties
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AllPoliciesContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationUpdateContract.properties);
+@@clientName(ApiEntityBaseContract.type, "ApiType");
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ResolverUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiCreateOrUpdateParameter.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SchemaContractProperties.document);
+@@clientName(ApiCreateOrUpdateProperties.apiType, "SoapApiType");
+@@clientName(ApiCreateOrUpdateProperties.translateRequiredQueryParameters,
+  "TranslateRequiredQueryParametersConduct"
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagDescriptionCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(WikiUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResolverUpdateContract.properties
+);
 
-@@clientName(ApiExportResult.format, "exportResultFormat");
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SchemaContractProperties.document
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiVersionSetUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IssueUpdateContract.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagDescriptionCreateParameters.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WikiUpdateContract.properties
+);
+
+@@clientName(ApiExportResult.format, "ExportResultFormat");
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiVersionSetUpdateParameters.properties
+);
 
 @@clientName(AuthorizationContractProperties.oauth2grantType,
-  "oAuth2GrantType"
+  "OAuth2GrantType"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationServerUpdateContract.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BackendUpdateParameters.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BackendReconnectContract.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CacheUpdateParameters.properties);
-
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CertificateCreateOrUpdateParameters.properties);
-
-@@clientName(ConnectivityCheckRequestProtocolConfiguration.HTTPConfiguration,
-  "httpConfiguration"
+@@clientName(AuthorizationContractProperties.authorizationType,
+  "AuthorizationType"
 );
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(Operation.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationServerUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RemotePrivateEndpointConnectionWrapper.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementServiceUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendReconnectContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DocumentationUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CacheUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EmailTemplateUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CertificateCreateOrUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AssociationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(Operation.properties);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RemotePrivateEndpointConnectionWrapper.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementServiceUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IdentityProviderCreateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DocumentationUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IdentityProviderUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EmailTemplateUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LoggerUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AssociationContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NamedValueCreateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupCreateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NamedValueUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RecipientUserContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityProviderCreateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(RecipientEmailContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityProviderUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OpenidConnectProviderUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoggerUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyDescriptionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamedValueCreateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyRestrictionUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamedValueUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationResultContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RecipientUserContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalSettingsContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(RecipientEmailContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProductUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OpenidConnectProviderUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaCounterValueUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyDescriptionContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GlobalSchemaContractProperties.document);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyRestrictionUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationResultContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalSettingsContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagCreateUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AccessInformationCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaCounterValueUpdateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AccessInformationUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalSchemaContractProperties.document
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DeployConfigurationParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionCreateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SaveConfigurationParameter.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TenantConfigurationSyncStateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagCreateUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserCreateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccessInformationCreateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserUpdateParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccessInformationUpdateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserTokenParameters.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeployConfigurationParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiagnosticUpdateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SaveConfigurationParameter.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyWithComplianceContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TenantConfigurationSyncStateContract.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(QuotaCounterValueContract.value);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserCreateParameters.properties
+);
 
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ResolverResultContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserUpdateParameters.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserTokenParameters.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticUpdateContract.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyWithComplianceContract.properties
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(QuotaCounterValueContract.value
+);
+
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResolverResultContract.properties
+);
 
 @@clientLocation(ApiManagementGatewayResources.get, "ApiGateway");
 @@clientLocation(ApiManagementGatewayResources.createOrUpdate, "ApiGateway");
@@ -199,8 +252,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiManagementGatewayResources.listAvailableSkus,
   "ApiManagementGatewaySkus"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementGatewayResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementGatewayResource.properties
+);
 
 @@clientLocation(ApiContracts.get, "Api");
 @@clientLocation(ApiContracts.getEntityTag, "Api");
@@ -220,8 +274,8 @@ using Microsoft.ApiManagement;
   "WorkspaceApiRevision"
 );
 @@clientName(WorkspaceApi.workspaceApiRevisionListByService, "ListByService");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiContract.properties);
 
 @@clientLocation(ApiReleaseContracts.get, "ApiRelease");
 @@clientLocation(ApiReleaseContracts.getEntityTag, "ApiRelease");
@@ -237,8 +291,9 @@ using Microsoft.ApiManagement;
   "parameters"
 );
 @@clientName(WorkspaceApiRelease.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiReleaseContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiReleaseContract.properties
+);
 
 @@clientLocation(OperationContracts.get, "ApiOperation");
 @@clientLocation(OperationContracts.getEntityTag, "ApiOperation");
@@ -254,8 +309,9 @@ using Microsoft.ApiManagement;
   "parameters"
 );
 @@clientName(WorkspaceApiOperation.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OperationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OperationContract.properties
+);
 
 @@clientLocation(PolicyContracts.get, "ApiOperationPolicy");
 @@clientLocation(PolicyContracts.getEntityTag, "ApiOperationPolicy");
@@ -279,19 +335,19 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceProductPolicy.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyContract.properties);
 
 @@clientLocation(TagContracts.getByOperation, Tag);
 @@clientLocation(TagContracts.getEntityStateByOperation, Tag);
 @@clientLocation(TagContracts.assignToOperation, Tag);
 @@clientLocation(TagContracts.detachFromOperation, Tag);
 @@clientLocation(TagContracts.listByOperation, Tag);
-@@clientLocation(TagContractOperationGroup.getByProduct, Tag);
-@@clientLocation(TagContractOperationGroup.getEntityStateByProduct, Tag);
-@@clientLocation(TagContractOperationGroup.assignToProduct, Tag);
-@@clientLocation(TagContractOperationGroup.detachFromProduct, Tag);
-@@clientLocation(TagContractOperationGroup.listByProduct, Tag);
+@@clientLocation(TagContractOperation.getByProduct, Tag);
+@@clientLocation(TagContractOperation.getEntityStateByProduct, Tag);
+@@clientLocation(TagContractOperation.assignToProduct, Tag);
+@@clientLocation(TagContractOperation.detachFromProduct, Tag);
+@@clientLocation(TagContractOperation.listByProduct, Tag);
 @@clientLocation(TagContractOperationGroup.get, Tag);
 @@clientLocation(TagContractOperationGroup.getEntityState, Tag);
 @@clientLocation(TagContractOperationGroup.createOrUpdate, Tag);
@@ -306,8 +362,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(TagContractOperationGroup.listByService, Tag);
 @@clientName(WorkspaceTag.createOrUpdate::parameters.resource, "parameters");
 @@clientName(WorkspaceTag.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagContract.properties);
 
 @@clientLocation(ResolverContracts.get, "GraphQLApiResolver");
 @@clientLocation(ResolverContracts.getEntityTag, "GraphQLApiResolver");
@@ -319,8 +375,9 @@ using Microsoft.ApiManagement;
 @@clientName(ResolverContracts.update::parameters.properties, "parameters");
 @@clientLocation(ResolverContracts.delete, "GraphQLApiResolver");
 @@clientLocation(ResolverContracts.listByApi, "GraphQLApiResolver");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ResolverContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ResolverContract.properties
+);
 
 @@clientLocation(ProductContracts.get, "Product");
 @@clientLocation(ProductContracts.getEntityTag, "Product");
@@ -355,8 +412,8 @@ using Microsoft.ApiManagement;
   "parameters"
 );
 @@clientName(WorkspaceProduct.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProductContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductContract.properties);
 
 @@clientLocation(SchemaContracts.get, "ApiSchema");
 @@clientLocation(SchemaContracts.getEntityTag, "ApiSchema");
@@ -367,8 +424,8 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceApiSchema.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SchemaContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SchemaContract.properties);
 
 @@clientLocation(DiagnosticContracts.get, "ApiDiagnostic");
 @@clientLocation(DiagnosticContracts.getEntityTag, "ApiDiagnostic");
@@ -392,8 +449,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceApiDiagnostic.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DiagnosticContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DiagnosticContract.properties
+);
 
 @@clientLocation(IssueContracts.get, "ApiIssue");
 @@clientLocation(IssueContracts.getEntityTag, "ApiIssue");
@@ -403,8 +461,8 @@ using Microsoft.ApiManagement;
 @@clientName(IssueContracts.update::parameters.properties, "parameters");
 @@clientLocation(IssueContracts.delete, "ApiIssue");
 @@clientLocation(IssueContracts.listByService, "ApiIssue");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IssueContract.properties);
 
 @@clientLocation(IssueCommentContracts.get, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.getEntityTag, "ApiIssueComment");
@@ -414,8 +472,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(IssueCommentContracts.delete, "ApiIssueComment");
 @@clientLocation(IssueCommentContracts.listByService, "ApiIssueComment");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueCommentContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IssueCommentContract.properties
+);
 
 @@clientLocation(IssueAttachmentContracts.get, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.getEntityTag, "ApiIssueAttachment");
@@ -425,8 +484,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(IssueAttachmentContracts.delete, "ApiIssueAttachment");
 @@clientLocation(IssueAttachmentContracts.listByService, "ApiIssueAttachment");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IssueAttachmentContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IssueAttachmentContract.properties
+);
 
 @@clientLocation(TagDescriptionContracts.get, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.getEntityTag, "ApiTagDescription");
@@ -436,8 +496,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(TagDescriptionContracts.delete, "ApiTagDescription");
 @@clientLocation(TagDescriptionContracts.listByService, "ApiTagDescription");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagDescriptionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagDescriptionContract.properties
+);
 
 @@clientLocation(WikiContracts.get, "ApiWiki");
 @@clientLocation(WikiContracts.getEntityTag, "ApiWiki");
@@ -451,8 +512,8 @@ using Microsoft.ApiManagement;
 @@clientName(ProductWiki.update::parameters.properties, "parameters");
 @@clientLocation(ProductWiki.list, "ProductWikis");
 @@clientName(ProductWiki.list, "list");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(WikiContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WikiContract.properties);
 
 @@clientLocation(ApiVersionSetContracts.get, "ApiVersionSet");
 @@clientLocation(ApiVersionSetContracts.getEntityTag, "ApiVersionSet");
@@ -472,8 +533,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceApiVersionSet.update::parameters.properties,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiVersionSetContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiVersionSetContract.properties
+);
 
 @@clientLocation(AuthorizationProviderContracts.get, "AuthorizationProvider");
 @@clientLocation(AuthorizationProviderContracts.createOrUpdate,
@@ -488,8 +550,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(AuthorizationProviderContracts.listByService,
   "AuthorizationProvider"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationProviderContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationProviderContract.properties
+);
 
 @@clientLocation(AuthorizationContracts.get, "Authorization");
 @@clientLocation(AuthorizationContracts.createOrUpdate, "Authorization");
@@ -506,8 +569,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(AuthorizationContracts.post, "AuthorizationLoginLinks");
 @@clientName(AuthorizationContracts.post::parameters.body, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationContract.properties
+);
 
 @@clientLocation(AuthorizationAccessPolicyContracts.get,
   "AuthorizationAccessPolicy"
@@ -524,8 +588,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(AuthorizationAccessPolicyContracts.listByAuthorization,
   "AuthorizationAccessPolicy"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationAccessPolicyContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationAccessPolicyContract.properties
+);
 
 @@clientLocation(AuthorizationServerContracts.get, "AuthorizationServer");
 @@clientLocation(AuthorizationServerContracts.getEntityTag,
@@ -548,8 +613,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(AuthorizationServerContracts.listSecrets,
   "AuthorizationServer"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AuthorizationServerContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AuthorizationServerContract.properties
+);
 
 @@clientLocation(BackendContracts.get, "Backend");
 @@clientLocation(BackendContracts.getEntityTag, "Backend");
@@ -567,8 +633,8 @@ using Microsoft.ApiManagement;
   "parameters"
 );
 @@clientName(WorkspaceBackend.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(BackendContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(BackendContract.properties);
 
 @@clientLocation(CacheContracts.get, "Cache");
 @@clientLocation(CacheContracts.getEntityTag, "Cache");
@@ -578,8 +644,8 @@ using Microsoft.ApiManagement;
 @@clientName(CacheContracts.update::parameters.properties, "parameters");
 @@clientLocation(CacheContracts.delete, "Cache");
 @@clientLocation(CacheContracts.listByService, "Cache");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CacheContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CacheContract.properties);
 
 @@clientLocation(CertificateContracts.get, "Certificate");
 @@clientLocation(CertificateContracts.getEntityTag, "Certificate");
@@ -593,8 +659,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceCertificate.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(CertificateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(CertificateContract.properties
+);
 
 @@clientLocation(ContentTypeContracts.get, "ContentType");
 @@clientLocation(ContentTypeContracts.createOrUpdate, "ContentType");
@@ -603,8 +670,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(ContentTypeContracts.delete, "ContentType");
 @@clientLocation(ContentTypeContracts.listByService, "ContentType");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ContentTypeContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ContentTypeContract.properties
+);
 
 @@clientLocation(ContentItemContracts.get, "ContentItem");
 @@clientLocation(ContentItemContracts.getEntityTag, "ContentItem");
@@ -614,13 +682,15 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(ContentItemContracts.delete, "ContentItem");
 @@clientLocation(ContentItemContracts.listByService, "ContentItem");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ContentItemContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ContentItemContract.properties
+);
 
 @@clientLocation(DeletedServiceContracts.getByName, "DeletedServices");
 @@clientLocation(DeletedServiceContracts.purge, "DeletedServices");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DeletedServiceContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DeletedServiceContract.properties
+);
 
 @@clientLocation(ApiManagementServiceResources.get, "ApiManagementService");
 @@clientLocation(ApiManagementServiceResources.createOrUpdate,
@@ -712,9 +782,7 @@ using Microsoft.ApiManagement;
   "QuotaByCounterKeys"
 );
 @@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate, "Update");
-@@clientName(ApiManagementServiceResources.quotaByCounterKeysUpdate::parameters.body,
-  "parameters"
-);
+
 @@clientLocation(ApiManagementServiceResources.quotaByPeriodKeysGet,
   "QuotaByPeriodKeys"
 );
@@ -744,8 +812,9 @@ using Microsoft.ApiManagement;
 @@clientName(ApiManagementServiceResources.tagResourceListByService,
   "ListByService"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementServiceResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementServiceResource.properties
+);
 
 @@clientLocation(DocumentationContracts.get, "Documentation");
 @@clientLocation(DocumentationContracts.getEntityTag, "Documentation");
@@ -759,8 +828,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(DocumentationContracts.delete, "Documentation");
 @@clientLocation(DocumentationContracts.listByService, "Documentation");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(DocumentationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(DocumentationContract.properties
+);
 
 @@clientLocation(EmailTemplateContracts.get, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.getEntityTag, "EmailTemplate");
@@ -774,8 +844,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(EmailTemplateContracts.delete, "EmailTemplate");
 @@clientLocation(EmailTemplateContracts.listByService, "EmailTemplate");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(EmailTemplateContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(EmailTemplateContract.properties
+);
 
 @@clientLocation(ApiManagementGatewayConfigConnectionResources.get,
   "ApiGatewayConfigConnection"
@@ -792,8 +863,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiManagementGatewayConfigConnectionResources.listByGateway,
   "ApiGatewayConfigConnection"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementGatewayConfigConnectionResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementGatewayConfigConnectionResource.properties
+);
 
 @@clientLocation(GatewayContracts.get, "Gateway");
 @@clientLocation(GatewayContracts.getEntityTag, "Gateway");
@@ -828,8 +900,8 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(GatewayContracts.gatewayApiDelete, "GatewayApi");
 @@clientName(GatewayContracts.gatewayApiDelete, "Delete");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GatewayContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayContract.properties);
 
 @@clientLocation(GatewayHostnameConfigurationContracts.get,
   "GatewayHostnameConfiguration"
@@ -849,8 +921,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(GatewayHostnameConfigurationContracts.listByService,
   "GatewayHostnameConfiguration"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GatewayHostnameConfigurationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayHostnameConfigurationContract.properties
+);
 
 @@clientLocation(GatewayCertificateAuthorityContracts.get,
   "GatewayCertificateAuthority"
@@ -870,8 +943,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(GatewayCertificateAuthorityContracts.listByService,
   "GatewayCertificateAuthority"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GatewayCertificateAuthorityContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GatewayCertificateAuthorityContract.properties
+);
 
 @@clientLocation(GroupContracts.get, "Group");
 @@clientLocation(GroupContracts.getEntityTag, "Group");
@@ -893,8 +967,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(WorkspaceGroup.create, "WorkspaceGroupUser");
 @@clientLocation(WorkspaceGroup.workspaceGroupUserDelete, "WorkspaceGroupUser");
 @@clientName(WorkspaceGroup.workspaceGroupUserDelete, "Delete");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GroupContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GroupContract.properties);
 
 @@clientLocation(UserContracts.get, "User");
 @@clientLocation(UserContracts.getEntityTag, "User");
@@ -911,8 +985,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(UserContracts.userIdentitiesList, "UserIdentities");
 @@clientName(UserContracts.userIdentitiesList, "List");
 @@clientLocation(UserContracts.send, "UserConfirmationPassword");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(UserContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(UserContract.properties);
 
 @@clientLocation(IdentityProviderContracts.get, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.getEntityTag, "IdentityProvider");
@@ -927,8 +1001,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(IdentityProviderContracts.delete, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.listByService, "IdentityProvider");
 @@clientLocation(IdentityProviderContracts.listSecrets, "IdentityProvider");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(IdentityProviderContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(IdentityProviderContract.properties
+);
 
 @@clientLocation(LoggerContracts.get, "Logger");
 @@clientLocation(LoggerContracts.getEntityTag, "Logger");
@@ -940,8 +1015,8 @@ using Microsoft.ApiManagement;
 @@clientLocation(LoggerContracts.listByService, "Logger");
 @@clientName(WorkspaceLogger.createOrUpdate::parameters.resource, "parameters");
 @@clientName(WorkspaceLogger.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(LoggerContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(LoggerContract.properties);
 
 @@clientLocation(NamedValueContracts.get, "NamedValue");
 @@clientLocation(NamedValueContracts.getEntityTag, "NamedValue");
@@ -959,8 +1034,9 @@ using Microsoft.ApiManagement;
   "parameters"
 );
 @@clientName(WorkspaceNamedValue.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NamedValueContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NamedValueContract.properties
+);
 
 @@clientLocation(NotificationContracts.get, "Notification");
 @@clientLocation(NotificationContracts.createOrUpdate, "Notification");
@@ -1039,8 +1115,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceNotification.workspaceNotificationRecipientEmailDelete,
   "Delete"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(NotificationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(NotificationContract.properties
+);
 
 @@clientLocation(OpenidConnectProviderContracts.get, "OpenIdConnectProvider");
 @@clientLocation(OpenidConnectProviderContracts.getEntityTag,
@@ -1067,8 +1144,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(OpenidConnectProviderContracts.listSecrets,
   "OpenIdConnectProvider"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(OpenidConnectProviderContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(OpenidConnectProviderContract.properties
+);
 
 @@clientLocation(PolicyFragmentContracts.get, "PolicyFragment");
 @@clientLocation(PolicyFragmentContracts.getEntityTag, "PolicyFragment");
@@ -1082,8 +1160,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspacePolicyFragment.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyFragmentContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyFragmentContract.properties
+);
 
 @@clientLocation(PolicyRestrictionContracts.get, "PolicyRestriction");
 @@clientLocation(PolicyRestrictionContracts.getEntityTag, "PolicyRestriction");
@@ -1099,8 +1178,9 @@ using Microsoft.ApiManagement;
 );
 @@clientLocation(PolicyRestrictionContracts.delete, "PolicyRestriction");
 @@clientLocation(PolicyRestrictionContracts.listByService, "PolicyRestriction");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PolicyRestrictionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PolicyRestrictionContract.properties
+);
 
 @@clientLocation(PortalConfigContracts.get, "PortalConfig");
 @@clientLocation(PortalConfigContracts.getEntityTag, "PortalConfig");
@@ -1111,8 +1191,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(PortalConfigContracts.update, "PortalConfig");
 @@clientName(PortalConfigContracts.update::parameters.properties, "parameters");
 @@clientLocation(PortalConfigContracts.listByService, "PortalConfig");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalConfigContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalConfigContract.properties
+);
 
 @@clientLocation(ClientApplicationContracts.get, "ClientApplication");
 @@clientLocation(ClientApplicationContracts.getEntityTag, "ClientApplication");
@@ -1125,8 +1206,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(ClientApplicationContracts.delete, "ClientApplication");
 @@clientLocation(ClientApplicationContracts.listByService, "ClientApplication");
 @@clientLocation(ClientApplicationContracts.listSecrets, "ClientApplication");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClientApplicationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClientApplicationContract.properties
+);
 
 @@clientLocation(ClientApplicationProductLinkContracts.get,
   "ClientApplicationProductLink"
@@ -1143,8 +1225,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(ClientApplicationProductLinkContracts.listByClientApplications,
   "ClientApplicationProductLink"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ClientApplicationProductLinkContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ClientApplicationProductLinkContract.properties
+);
 
 @@clientLocation(PortalRevisionContracts.get, "PortalRevision");
 @@clientLocation(PortalRevisionContracts.getEntityTag, "PortalRevision");
@@ -1157,25 +1240,29 @@ using Microsoft.ApiManagement;
   "parameters"
 );
 @@clientLocation(PortalRevisionContracts.listByService, "PortalRevision");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalRevisionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalRevisionContract.properties
+);
 
 @@clientName(SignInSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignInSettings.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalSigninSettings.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalSigninSettings.properties
+);
 
 @@clientName(SignUpSettings.createOrUpdate::parameters.resource, "parameters");
 @@clientName(SignUpSettings.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalSignupSettings.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalSignupSettings.properties
+);
 
 @@clientName(DelegationSettings.createOrUpdate::parameters.resource,
   "parameters"
 );
 @@clientName(DelegationSettings.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PortalDelegationSettings.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PortalDelegationSettings.properties
+);
 
 @@clientLocation(PrivateEndpointConnections.getByName,
   "PrivateEndpointConnection"
@@ -1192,8 +1279,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(PrivateEndpointConnections.listByService,
   "PrivateEndpointConnection"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateEndpointConnection.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateEndpointConnection.properties
+);
 
 @@clientLocation(PrivateLinkResources.getPrivateLinkResource,
   "PrivateEndpointConnection"
@@ -1201,8 +1289,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(PrivateLinkResources.listPrivateLinkResources,
   "PrivateEndpointConnection"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(PrivateLinkResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(PrivateLinkResource.properties
+);
 
 @@clientLocation(SubscriptionContracts.get, "Subscription");
 @@clientLocation(SubscriptionContracts.getEntityTag, "Subscription");
@@ -1221,8 +1310,9 @@ using Microsoft.ApiManagement;
   "parameters"
 );
 @@clientName(WorkspaceSubscription.update::parameters.properties, "parameters");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(SubscriptionContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(SubscriptionContract.properties
+);
 
 @@clientLocation(ProductApiLinkContracts.get, "ProductApiLink");
 @@clientLocation(ProductApiLinkContracts.createOrUpdate, "ProductApiLink");
@@ -1234,8 +1324,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceProductApiLink.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProductApiLinkContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductApiLinkContract.properties
+);
 
 @@clientLocation(ProductGroupLinkContracts.get, "ProductGroupLink");
 @@clientLocation(ProductGroupLinkContracts.createOrUpdate, "ProductGroupLink");
@@ -1247,8 +1338,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceProductGroupLink.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ProductGroupLinkContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ProductGroupLinkContract.properties
+);
 
 @@clientLocation(GlobalSchemaContracts.get, "GlobalSchema");
 @@clientLocation(GlobalSchemaContracts.getEntityTag, "GlobalSchema");
@@ -1261,13 +1353,15 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceGlobalSchema.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(GlobalSchemaContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(GlobalSchemaContract.properties
+);
 
 @@clientLocation(TenantSettingsContracts.get, "TenantSettings");
 @@clientLocation(TenantSettingsContracts.listByService, "TenantSettings");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TenantSettingsContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TenantSettingsContract.properties
+);
 
 @@clientLocation(TagApiLinkContracts.get, "TagApiLink");
 @@clientLocation(TagApiLinkContracts.createOrUpdate, "TagApiLink");
@@ -1279,8 +1373,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceTagApiLink.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagApiLinkContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagApiLinkContract.properties
+);
 
 @@clientLocation(TagOperationLinkContracts.get, "TagOperationLink");
 @@clientLocation(TagOperationLinkContracts.createOrUpdate, "TagOperationLink");
@@ -1292,8 +1387,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceTagOperationLink.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagOperationLinkContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagOperationLinkContract.properties
+);
 
 @@clientLocation(TagProductLinkContracts.get, "TagProductLink");
 @@clientLocation(TagProductLinkContracts.createOrUpdate, "TagProductLink");
@@ -1305,8 +1401,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceTagProductLink.createOrUpdate::parameters.resource,
   "parameters"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(TagProductLinkContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(TagProductLinkContract.properties
+);
 
 @@clientLocation(AccessInformationContracts.get, "TenantAccess");
 @@clientLocation(AccessInformationContracts.getEntityTag, "TenantAccess");
@@ -1349,8 +1446,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(AccessInformationContracts.getSyncState,
   "TenantConfiguration"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(AccessInformationContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(AccessInformationContract.properties
+);
 
 @@clientLocation(ApiManagementWorkspaceLinksResources.get,
   "ApiManagementWorkspaceLink"
@@ -1358,8 +1456,9 @@ using Microsoft.ApiManagement;
 @@clientLocation(ApiManagementWorkspaceLinksResources.listByService,
   "ApiManagementWorkspaceLinks"
 );
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(ApiManagementWorkspaceLinksResource.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(ApiManagementWorkspaceLinksResource.properties
+);
 
 @@clientLocation(WorkspaceContracts.get, "Workspace");
 @@clientLocation(WorkspaceContracts.getEntityTag, "Workspace");
@@ -1371,8 +1470,9 @@ using Microsoft.ApiManagement;
 @@clientName(WorkspaceContracts.update::parameters.properties, "parameters");
 @@clientLocation(WorkspaceContracts.delete, "Workspace");
 @@clientLocation(WorkspaceContracts.listByService, "Workspace");
-#suppress "deprecated" "@flattenProperty decorator is not recommended to use."
-@@flattenProperty(WorkspaceContract.properties);
+#suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@@Azure.ClientGenerator.Core.Legacy.flattenProperty(WorkspaceContract.properties
+);
 
 @@clientLocation(ApiExportOperationGroup.get, "ApiExport");
 
@@ -1394,3 +1494,26 @@ using Microsoft.ApiManagement;
 @@clientLocation(OperationStatusOperationGroup.get, "OperationStatus");
 
 @@clientLocation(OperationsResultsOperationGroup.get, "OperationsResults");
+
+@@clientName(ApiManagementServiceOperationGroup.checkNameAvailability::parameters.body,
+  "parameters"
+);
+@@doc(Azure.ResourceManager.ArmLroLocationHeader.location, "Location header");
+@@TypeSpec.Http.header(Azure.ResourceManager.ArmLroLocationHeader.location,
+  "location"
+);
+@@TypeSpec.Http.header(Azure.ResourceManager.ArmCombinedLroHeaders.location,
+  "location"
+);
+@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location,
+  "Location header contains the URL where the status of the long running operation can be checked"
+);
+@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.azureAsyncOperation,
+  "Azure-AsyncOperation header contains the URL where the status of the long running operation can be checked"
+);
+@@doc(Azure.ResourceManager.ArmCombinedLroHeaders.location, "Location header");
+@@clientName(BackendSessionIdSource, "Backend-sessionId-source");
+@@clientName(HttpHeader, "HTTPHeader");
+@@clientName(GlobalSchemaContractProperties.schemaType, "SchemaType");
+@@clientName(LlmDiagnosticSettings, "Llm-diagnostic-settings");
+@@clientName(LlmMessageLogTypes, "Llm-message-log-types");

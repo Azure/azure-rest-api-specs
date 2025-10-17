@@ -39,6 +39,8 @@ interface PolicyFragmentContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -47,6 +49,8 @@ interface PolicyFragmentContractOps
         @segment("policyFragments")
         @key
         @pattern("(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)")
+        @minLength(1)
+        @maxLength(80)
         id: string,
       }
     > {}
@@ -56,8 +60,6 @@ interface PolicyFragmentContracts {
   /**
    * Gets a policy fragment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyFragment_Get")
   get is PolicyFragmentContractOps.Read<
     PolicyFragmentContract,
     Parameters = {
@@ -66,46 +68,73 @@ interface PolicyFragmentContracts {
        */
       @query("format")
       format?: PolicyFragmentContentFormat;
+    },
+    Response = ArmResponse<PolicyFragmentContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of a policy fragment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyFragment_GetEntityTag")
-  getEntityTag is PolicyFragmentContractOps.CheckExistence<PolicyFragmentContract>;
+  getEntityTag is PolicyFragmentContractOps.CheckExistence<
+    PolicyFragmentContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates a policy fragment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyFragment_CreateOrUpdate")
   createOrUpdate is PolicyFragmentContractOps.CreateOrUpdateAsync<
     PolicyFragmentContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = PolicyFragmentContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<PolicyFragmentContract> &
+      ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<
+      PolicyFragmentContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes a policy fragment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyFragment_Delete")
   delete is PolicyFragmentContractOps.DeleteSync<
     PolicyFragmentContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -113,8 +142,6 @@ interface PolicyFragmentContracts {
   /**
    * Gets all policy fragments.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyFragment_ListByService")
   listByService is PolicyFragmentContractOps.List<
     PolicyFragmentContract,
     Parameters = {
@@ -140,6 +167,7 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -149,8 +177,6 @@ interface PolicyFragmentContracts {
   /**
    * Lists policy resources that reference the policy fragment.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PolicyFragment_ListReferences")
   listReferences is PolicyFragmentContractOps.ActionSync<
     PolicyFragmentContract,
     void,
@@ -166,6 +192,7 @@ interface PolicyFragmentContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -185,6 +212,8 @@ interface WorkspacePolicyFragmentOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -192,6 +221,8 @@ interface WorkspacePolicyFragmentOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -200,6 +231,8 @@ interface WorkspacePolicyFragmentOps
         @segment("policyFragments")
         @key
         @pattern("(^[\\w]+$)|(^[\\w][\\w\\-]+[\\w]$)")
+        @minLength(1)
+        @maxLength(80)
         id: string,
       }
     > {}
@@ -217,13 +250,29 @@ interface WorkspacePolicyFragment {
        */
       @query("format")
       format?: PolicyFragmentContentFormat;
+    },
+    Response = ArmResponse<PolicyFragmentContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of a policy fragment.
    */
-  getEntityTag is WorkspacePolicyFragmentOps.CheckExistence<PolicyFragmentContract>;
+  getEntityTag is WorkspacePolicyFragmentOps.CheckExistence<
+    PolicyFragmentContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates a policy fragment.
@@ -234,11 +283,27 @@ interface WorkspacePolicyFragment {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = PolicyFragmentContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<PolicyFragmentContract> &
+      ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract> & {
+        /**
+         * Current entity state version
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<
+      PolicyFragmentContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = PolicyFragmentContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -250,7 +315,8 @@ interface WorkspacePolicyFragment {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -283,6 +349,7 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -307,6 +374,7 @@ interface WorkspacePolicyFragment {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }

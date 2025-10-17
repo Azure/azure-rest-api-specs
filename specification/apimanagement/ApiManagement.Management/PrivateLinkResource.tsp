@@ -14,36 +14,25 @@ namespace Microsoft.ApiManagement;
 /**
  * A private link resource
  */
-@parentResource(ApiManagementServiceResource)
-model PrivateLinkResource
-  is Azure.ResourceManager.ProxyResource<PrivateLinkResourceProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateLinkResource,
-    KeyName = "privateLinkSubResourceName",
-    SegmentName = "privateLinkResources",
-    NamePattern = ""
-  >;
-}
+model PrivateLinkResource is PrivateLink;
+alias PrivateLinkOperations = PrivateLinks<PrivateLinkResource>;
 
 @armResourceOperations
 interface PrivateLinkResources {
   /**
    * Gets the private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_GetPrivateLinkResource")
-  getPrivateLinkResource is ArmResourceRead<PrivateLinkResource>;
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ResourceManager.Legacy.renamePathParameter(
+    "privateLinkResourceName",
+    "privateLinkSubResourceName"
+  )
+  getPrivateLinkResource is PrivateLinkOperations.Read<ApiManagementServiceResource>;
 
   /**
    * Gets the private link resources
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_ListPrivateLinkResources")
-  listPrivateLinkResources is ArmResourceListByParent<
-    PrivateLinkResource,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateLinkResourceListResultV5>
-  >;
+  #suppress "@azure-tools/typespec-azure-resource-manager/legacy-type-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  listPrivateLinkResources is PrivateLinkOperations.ListSinglePageByParent<ApiManagementServiceResource>;
 }
-
-@@doc(PrivateLinkResource.name, "Name of the private link resource.");
 @@doc(PrivateLinkResource.properties, "Resource properties.");

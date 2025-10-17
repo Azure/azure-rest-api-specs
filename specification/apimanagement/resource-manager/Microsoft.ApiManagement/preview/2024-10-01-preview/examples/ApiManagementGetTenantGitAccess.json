@@ -1,22 +1,24 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
+    "accessName": "gitAccess",
     "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "accessName": "gitAccess"
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/gitAccess",
-        "type": "Microsoft.ApiManagement/service/tenant",
         "name": "gitAccess",
+        "type": "Microsoft.ApiManagement/service/tenant",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/tenant/gitAccess",
         "properties": {
-          "principalId": "git",
-          "enabled": true
+          "enabled": true,
+          "principalId": "git"
         }
       }
     }
-  }
+  },
+  "operationId": "TenantAccess_Get",
+  "title": "ApiManagementGetTenantGitAccess"
 }

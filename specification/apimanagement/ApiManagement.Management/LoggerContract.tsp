@@ -39,6 +39,8 @@ interface LoggerContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -47,6 +49,7 @@ interface LoggerContractOps
         @segment("loggers")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
         loggerId: string,
       }
     > {}
@@ -56,38 +59,62 @@ interface LoggerContracts {
   /**
    * Gets the details of the logger specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_Get")
-  get is LoggerContractOps.Read<LoggerContract>;
+  get is LoggerContractOps.Read<
+    LoggerContract,
+    Response = ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the logger specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_GetEntityTag")
-  getEntityTag is LoggerContractOps.CheckExistence<LoggerContract>;
+  getEntityTag is LoggerContractOps.CheckExistence<
+    LoggerContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Creates or Updates a logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_CreateOrUpdate")
   createOrUpdate is LoggerContractOps.CreateOrUpdateSync<
     LoggerContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }) | (ArmCreatedResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    })
   >;
 
   /**
    * Updates an existing logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_Update")
   @patch(#{ implicitOptionality: false })
   update is LoggerContractOps.CustomPatchSync<
     LoggerContract,
@@ -96,23 +123,30 @@ interface LoggerContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
     }
   >;
 
   /**
    * Deletes the specified logger.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_Delete")
   delete is LoggerContractOps.DeleteSync<
     LoggerContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -120,8 +154,8 @@ interface LoggerContracts {
   /**
    * Lists a collection of loggers in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Logger_ListByService")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-log-event-hubs")
   listByService is LoggerContractOps.List<
     LoggerContract,
     Parameters = {
@@ -141,6 +175,7 @@ interface LoggerContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -161,6 +196,8 @@ interface WorkspaceLoggerOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -168,6 +205,8 @@ interface WorkspaceLoggerOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -176,6 +215,7 @@ interface WorkspaceLoggerOps
         @segment("loggers")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
         loggerId: string,
       }
     > {}
@@ -185,12 +225,30 @@ interface WorkspaceLogger {
   /**
    * Gets the details of the logger specified by its identifier.
    */
-  get is WorkspaceLoggerOps.Read<LoggerContract>;
+  get is WorkspaceLoggerOps.Read<
+    LoggerContract,
+    Response = ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the logger specified by its identifier.
    */
-  getEntityTag is WorkspaceLoggerOps.CheckExistence<LoggerContract>;
+  getEntityTag is WorkspaceLoggerOps.CheckExistence<
+    LoggerContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a logger.
@@ -201,9 +259,23 @@ interface WorkspaceLogger {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -217,8 +289,16 @@ interface WorkspaceLogger {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<LoggerContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -231,7 +311,8 @@ interface WorkspaceLogger {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -239,6 +320,8 @@ interface WorkspaceLogger {
   /**
    * Lists a collection of loggers in the specified workspace.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-log-event-hubs")
   listByWorkspace is WorkspaceLoggerOps.List<
     LoggerContract,
     Parameters = {
@@ -258,6 +341,7 @@ interface WorkspaceLogger {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

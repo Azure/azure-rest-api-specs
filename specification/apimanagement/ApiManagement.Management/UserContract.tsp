@@ -26,28 +26,70 @@ model UserContract
 }
 
 @armResourceOperations
+interface UserContractOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+        @path
+        @segment("users")
+        @key
+        @minLength(1)
+        @maxLength(80)
+        userId: string,
+      }
+    > {}
+
+@armResourceOperations
 interface UserContracts {
   /**
    * Gets the details of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_Get")
-  get is ArmResourceRead<UserContract>;
+  get is ArmResourceRead<
+    UserContract,
+    Response = ArmResponse<UserContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<UserContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    UserContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is UserContractOps.CreateOrUpdateSync<
     UserContract,
+    Request = UserCreateParameters,
     Parameters = {
       /**
        * Send an Email notification to the User.
@@ -58,16 +100,28 @@ interface UserContracts {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<UserContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<UserContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the user specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     UserContract,
@@ -76,16 +130,22 @@ interface UserContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<UserContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific user.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     UserContract,
     Parameters = {
@@ -104,7 +164,8 @@ interface UserContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
 
       /**
@@ -112,14 +173,13 @@ interface UserContracts {
        */
       @query("appType")
       appType?: AppType;
-    }
+    },
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> | NoContentResponse
   >;
 
   /**
    * Lists a collection of registered users in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_ListByService")
   listByService is ArmResourceListByParent<
     UserContract,
     Parameters = {
@@ -139,6 +199,7 @@ interface UserContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -154,8 +215,6 @@ interface UserContracts {
   /**
    * Retrieves a redirection URL containing an authentication token for signing a given user into the developer portal.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_GenerateSsoUrl")
   generateSsoUrl is ArmResourceActionSync<
     UserContract,
     void,
@@ -165,8 +224,6 @@ interface UserContracts {
   /**
    * Gets the Shared Access Authorization Token for the User.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("User_GetSharedAccessToken")
   @action("token")
   getSharedAccessToken is ArmResourceActionSync<
     UserContract,
@@ -177,10 +234,9 @@ interface UserContracts {
   /**
    * Lists all user groups.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserGroup_List")
   @get
   @action("groups")
+  @list
   list is ArmResourceActionSync<
     UserContract,
     void,
@@ -202,6 +258,7 @@ interface UserContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -210,10 +267,9 @@ interface UserContracts {
   /**
    * List of all user identities.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserIdentities_List")
   @get
   @action("identities")
+  @list
   userIdentitiesList is ArmResourceActionSync<
     UserContract,
     void,
@@ -223,8 +279,7 @@ interface UserContracts {
   /**
    * Sends confirmation
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("UserConfirmationPassword_Send")
+  @action("confirmations/password/send")
   send is ArmResourceActionSync<
     UserContract,
     void,

@@ -30,45 +30,70 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Get assigned Gateway Certificate Authority details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayCertificateAuthority_Get")
-  get is ArmResourceRead<GatewayCertificateAuthorityContract>;
+  get is ArmResourceRead<
+    GatewayCertificateAuthorityContract,
+    Response = ArmResponse<GatewayCertificateAuthorityContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Checks if Certificate entity is assigned to Gateway entity as Certificate Authority.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayCertificateAuthority_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<GatewayCertificateAuthorityContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    GatewayCertificateAuthorityContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Assign Certificate entity to Gateway entity as Certificate Authority.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayCertificateAuthority_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayCertificateAuthorityContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<GatewayCertificateAuthorityContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<GatewayCertificateAuthorityContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Remove relationship between Certificate Authority and Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayCertificateAuthority_Delete")
   delete is ArmResourceDeleteSync<
     GatewayCertificateAuthorityContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -76,8 +101,6 @@ interface GatewayCertificateAuthorityContracts {
   /**
    * Lists the collection of Certificate Authorities for the specified Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayCertificateAuthority_ListByService")
   listByService is ArmResourceListByParent<
     GatewayCertificateAuthorityContract,
     Parameters = {
@@ -97,6 +120,7 @@ interface GatewayCertificateAuthorityContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

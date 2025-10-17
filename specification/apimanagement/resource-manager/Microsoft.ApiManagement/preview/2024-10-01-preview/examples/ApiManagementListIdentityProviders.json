@@ -1,53 +1,55 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "count": 3,
+        "nextLink": "",
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Google",
-            "type": "Microsoft.ApiManagement/service/identityProviders",
             "name": "Google",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Google",
             "properties": {
-              "clientId": "googleId",
-              "type": "google"
+              "type": "google",
+              "clientId": "googleId"
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Aad",
-            "type": "Microsoft.ApiManagement/service/identityProviders",
             "name": "Aad",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/Aad",
             "properties": {
-              "clientId": "aadapplicationid",
               "type": "aad",
               "allowedTenants": [
                 "samiraad.onmicrosoft.com"
-              ]
+              ],
+              "clientId": "aadapplicationid"
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
-            "type": "Microsoft.ApiManagement/service/identityProviders",
             "name": "AadB2C",
+            "type": "Microsoft.ApiManagement/service/identityProviders",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/identityProviders/AadB2C",
             "properties": {
-              "clientId": "aadb2clientId",
               "type": "aadB2C",
               "allowedTenants": [
                 "samirtestbc.onmicrosoft.com"
               ],
-              "signupPolicyName": "B2C_1_Signup_Default",
-              "signinPolicyName": "B2C_1_Signin_Default"
+              "clientId": "aadb2clientId",
+              "signinPolicyName": "B2C_1_Signin_Default",
+              "signupPolicyName": "B2C_1_Signup_Default"
             }
           }
-        ],
-        "count": 3,
-        "nextLink": ""
+        ]
       }
     }
-  }
+  },
+  "operationId": "IdentityProvider_ListByService",
+  "title": "ApiManagementListIdentityProviders"
 }

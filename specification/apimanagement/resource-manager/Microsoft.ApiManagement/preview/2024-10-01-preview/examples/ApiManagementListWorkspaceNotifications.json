@@ -1,21 +1,22 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "workspaceId": "wks1"
   },
   "responses": {
     "200": {
       "body": {
+        "count": 2,
+        "nextLink": "",
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/RequestPublisherNotificationMessage",
-            "type": "Microsoft.ApiManagement/service/workspaces/notifications",
             "name": "RequestPublisherNotificationMessage",
+            "type": "Microsoft.ApiManagement/service/workspaces/notifications",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/RequestPublisherNotificationMessage",
             "properties": {
-              "title": "Subscription requests (requiring approval)",
               "description": "The following email recipients and users will receive email notifications about subscription requests for API products requiring approval.",
               "recipients": {
                 "emails": [
@@ -26,15 +27,15 @@
                 "users": [
                   "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/576823d0a40f7e74ec07d642"
                 ]
-              }
+              },
+              "title": "Subscription requests (requiring approval)"
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/PurchasePublisherNotificationMessage",
-            "type": "Microsoft.ApiManagement/service/workspaces/notifications",
             "name": "PurchasePublisherNotificationMessage",
+            "type": "Microsoft.ApiManagement/service/workspaces/notifications",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/notifications/PurchasePublisherNotificationMessage",
             "properties": {
-              "title": "New subscriptions",
               "description": "The following email recipients and users will receive email notifications about new API product subscriptions.",
               "recipients": {
                 "emails": [
@@ -43,13 +44,14 @@
                 "users": [
                   "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/users/1"
                 ]
-              }
+              },
+              "title": "New subscriptions"
             }
           }
-        ],
-        "count": 2,
-        "nextLink": ""
+        ]
       }
     }
-  }
+  },
+  "operationId": "WorkspaceNotification_ListByService",
+  "title": "ApiManagementListWorkspaceNotifications"
 }

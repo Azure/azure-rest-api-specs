@@ -1,68 +1,70 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "contentTypeId": "page"
+    "contentTypeId": "page",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/contentTypes/page",
-        "type": "Microsoft.ApiManagement/service/contentTypes",
         "name": "page",
+        "type": "Microsoft.ApiManagement/service/contentTypes",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/contentTypes/page",
         "properties": {
           "name": "Page",
-          "description": "A regular page",
           "schema": {
+            "additionalProperties": false,
             "properties": {
               "en_us": {
                 "type": "object",
+                "additionalProperties": false,
                 "properties": {
-                  "title": {
-                    "title": "Title",
-                    "description": "Page title. This property gets included in SEO attributes.",
-                    "type": "string",
-                    "indexed": true
-                  },
                   "description": {
-                    "title": "Description",
+                    "type": "string",
                     "description": "Page description. This property gets included in SEO attributes.",
-                    "type": "string",
-                    "indexed": true
-                  },
-                  "keywords": {
-                    "title": "Keywords",
-                    "description": "Page keywords. This property gets included in SEO attributes.",
-                    "type": "string",
-                    "indexed": true
-                  },
-                  "permalink": {
-                    "title": "Permalink",
-                    "description": "Page permalink, e.g. '/about'.",
-                    "type": "string",
-                    "indexed": true
+                    "indexed": true,
+                    "title": "Description"
                   },
                   "documentId": {
-                    "title": "Document ID",
+                    "type": "string",
                     "description": "Reference to page content document.",
-                    "type": "string"
+                    "title": "Document ID"
+                  },
+                  "keywords": {
+                    "type": "string",
+                    "description": "Page keywords. This property gets included in SEO attributes.",
+                    "indexed": true,
+                    "title": "Keywords"
+                  },
+                  "permalink": {
+                    "type": "string",
+                    "description": "Page permalink, e.g. '/about'.",
+                    "indexed": true,
+                    "title": "Permalink"
+                  },
+                  "title": {
+                    "type": "string",
+                    "description": "Page title. This property gets included in SEO attributes.",
+                    "indexed": true,
+                    "title": "Title"
                   }
                 },
-                "additionalProperties": false,
                 "required": [
                   "title",
                   "permalink",
                   "documentId"
                 ]
               }
-            },
-            "additionalProperties": false
+            }
           },
+          "description": "A regular page",
           "version": "1.0.0"
         }
       }
     }
-  }
+  },
+  "operationId": "ContentType_Get",
+  "title": "ApiManagementGetContentType"
 }

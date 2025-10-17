@@ -26,7 +26,13 @@ model ApiManagementGatewayConfigConnectionResource
     SegmentName = "configConnections",
     NamePattern = "^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: Azure.Core.eTag;
 }
 
 @armResourceOperations
@@ -34,29 +40,24 @@ interface ApiManagementGatewayConfigConnectionResources {
   /**
    * Gets an API Management gateway config connection resource description.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGatewayConfigConnection_Get")
   get is ArmResourceRead<ApiManagementGatewayConfigConnectionResource>;
 
   /**
    * Creates or updates an API Management gateway config connection. This is long running operation and could take several minutes to complete.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGatewayConfigConnection_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<ApiManagementGatewayConfigConnectionResource>;
 
   /**
    * Deletes an existing API Management gateway config connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGatewayConfigConnection_Delete")
   delete is ArmResourceDeleteWithoutOkAsync<
     ApiManagementGatewayConfigConnectionResource,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -64,9 +65,10 @@ interface ApiManagementGatewayConfigConnectionResources {
   /**
    * List all API Management gateway config connections within a gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiGatewayConfigConnection_ListByGateway")
-  listByGateway is ArmResourceListByParent<ApiManagementGatewayConfigConnectionResource>;
+  listByGateway is ArmResourceListByParent<
+    ApiManagementGatewayConfigConnectionResource,
+    Response = ArmResponse<ApiManagementGatewayConfigConnectionListResult>
+  >;
 }
 
 @@maxLength(ApiManagementGatewayConfigConnectionResource.name, 30);
@@ -74,7 +76,7 @@ interface ApiManagementGatewayConfigConnectionResources {
 @@doc(ApiManagementGatewayConfigConnectionResource.name,
   "The name of the API Management gateway config connection."
 );
-@@encodedName(ApiManagementGatewayConfigConnectionResource.eTag,
+@@encodedName(ApiManagementGatewayConfigConnectionResource.etag,
   "application/json",
   "etag"
 );

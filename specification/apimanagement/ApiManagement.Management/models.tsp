@@ -60,13 +60,13 @@ union ApiGatewaySkuType {
  */
 union CreatedByType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   User: "User",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Application: "Application",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ManagedIdentity: "ManagedIdentity",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Key: "Key",
 }
 
@@ -114,16 +114,16 @@ union PolicyComplianceState {
   Compliant: "Compliant",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union Protocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   http: "http",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   https: "https",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ws: "ws",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   wss: "wss",
 }
 
@@ -171,17 +171,17 @@ union BearerTokenSendingMethods {
  */
 union ApiType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   http: "http",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   soap: "soap",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   websocket: "websocket",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   graphql: "graphql",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   odata: "odata",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   grpc: "grpc",
 }
 
@@ -353,14 +353,14 @@ union PolicyContentFormat {
   `rawxml-link`: "rawxml-link",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PolicyIdName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   policy: "policy",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PolicyExportFormat {
   string,
 
@@ -375,12 +375,12 @@ union PolicyExportFormat {
   rawxml: "rawxml",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ProductAuthType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `subscription-key`: "subscription-key",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `application-token`: "application-token",
 }
 
@@ -425,7 +425,7 @@ union DataMaskingMode {
   Hide: "Hide",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union LlmDiagnosticSettings {
   string,
 
@@ -440,7 +440,7 @@ union LlmDiagnosticSettings {
   disabled: "disabled",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union LlmMessageLogTypes {
   string,
 
@@ -543,7 +543,7 @@ union State {
   closed: "closed",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ExportFormat {
   string,
 
@@ -573,10 +573,10 @@ union ExportFormat {
   OpenapiJson: "openapi+json-link",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ExportApi {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `true`: "true",
 }
 
@@ -592,14 +592,14 @@ union ExportResultFormat {
   Swagger: "swagger-link-json",
 
   /**
-   * The API Definition is exported in WSDL Schema to Storage Blob. This is only supported for APIs of Type `soap`
-   */
-  Wsdl: "wsdl-link+xml",
-
-  /**
    * Export the API Definition in WADL Schema to Storage Blob.
    */
   Wadl: "wadl-link-json",
+
+  /**
+   * The API Definition is exported in WSDL Schema to Storage Blob. This is only supported for APIs of Type `soap`
+   */
+  Wsdl: "wsdl-link+xml",
 
   /**
    * Export the API Definition in OpenAPI Specification 3.0 to Storage Blob.
@@ -636,7 +636,7 @@ union OAuth2GrantType {
   ClientCredentials: "ClientCredentials",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union GrantType {
   string,
 
@@ -661,7 +661,7 @@ union GrantType {
   clientCredentials: "clientCredentials",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ClientAuthenticationMethod {
   string,
 
@@ -676,12 +676,12 @@ union ClientAuthenticationMethod {
   Body: "Body",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union BearerTokenSendingMethod {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationHeader: "authorizationHeader",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   query: "query",
 }
 
@@ -736,7 +736,7 @@ union BackendType {
  */
 union PreferredIPVersion {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   IPv4: "IPv4",
 }
 
@@ -745,11 +745,11 @@ union PreferredIPVersion {
  */
 union ConnectivityCheckProtocol {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   TCP: "TCP",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HTTP: "HTTP",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HTTPS: "HTTPS",
 }
 
@@ -758,9 +758,9 @@ union ConnectivityCheckProtocol {
  */
 union Method {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GET: "GET",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   POST: "POST",
 }
 
@@ -769,11 +769,11 @@ union Method {
  */
 union Origin {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Local: "Local",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Inbound: "Inbound",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Outbound: "Outbound",
 }
 
@@ -782,9 +782,9 @@ union Origin {
  */
 union Severity {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Error: "Error",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Warning: "Warning",
 }
 
@@ -793,23 +793,23 @@ union Severity {
  */
 union IssueType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   AgentStopped: "AgentStopped",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   GuestFirewall: "GuestFirewall",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DnsResolution: "DnsResolution",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SocketBind: "SocketBind",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   NetworkSecurityRule: "NetworkSecurityRule",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserDefinedRoute: "UserDefinedRoute",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   PortThrottled: "PortThrottled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Platform: "Platform",
 }
 
@@ -818,13 +818,13 @@ union IssueType {
  */
 union ConnectionStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Unknown: "Unknown",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Connected: "Connected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disconnected: "Disconnected",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Degraded: "Degraded",
 }
 
@@ -924,17 +924,17 @@ union AccessType {
  */
 union HostnameType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Proxy: "Proxy",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Portal: "Portal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Management: "Management",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Scm: "Scm",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   DeveloperPortal: "DeveloperPortal",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   ConfigurationApi: "ConfigurationApi",
 }
 
@@ -943,13 +943,13 @@ union HostnameType {
  */
 union CertificateSource {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Managed: "Managed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   KeyVault: "KeyVault",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Custom: "Custom",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   BuiltIn: "BuiltIn",
 }
 
@@ -958,11 +958,11 @@ union CertificateSource {
  */
 union CertificateStatus {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Completed: "Completed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Failed: "Failed",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   InProgress: "InProgress",
 }
 
@@ -971,9 +971,9 @@ union CertificateStatus {
  */
 union PublicNetworkAccess {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Enabled: "Enabled",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Disabled: "Disabled",
 }
 
@@ -1048,9 +1048,9 @@ union PlatformVersion {
  */
 union CertificateConfigurationStoreName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   CertificateAuthority: "CertificateAuthority",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   Root: "Root",
 }
 
@@ -1115,13 +1115,13 @@ union ReleaseChannel {
  */
 union ApimIdentityType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   SystemAssigned: "SystemAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   UserAssigned: "UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   `SystemAssigned, UserAssigned`: "SystemAssigned, UserAssigned",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   None: "None",
 }
 
@@ -1142,36 +1142,36 @@ union MigrateToStv2Mode {
   NewIP: "NewIP",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union TemplateName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   applicationApprovedNotificationMessage: "applicationApprovedNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   accountClosedDeveloper: "accountClosedDeveloper",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   quotaLimitApproachingDeveloperNotificationMessage: "quotaLimitApproachingDeveloperNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   newDeveloperNotificationMessage: "newDeveloperNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   emailChangeIdentityDefault: "emailChangeIdentityDefault",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   inviteUserNotificationMessage: "inviteUserNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   newCommentNotificationMessage: "newCommentNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   confirmSignUpIdentityDefault: "confirmSignUpIdentityDefault",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   newIssueNotificationMessage: "newIssueNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purchaseDeveloperNotificationMessage: "purchaseDeveloperNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   passwordResetIdentityDefault: "passwordResetIdentityDefault",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   passwordResetByAdminNotificationMessage: "passwordResetByAdminNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   rejectDeveloperNotificationMessage: "rejectDeveloperNotificationMessage",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   requestDeveloperNotificationMessage: "requestDeveloperNotificationMessage",
 }
 
@@ -1214,7 +1214,7 @@ union UserState {
   deleted: "deleted",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union IdentityProviderType {
   string,
 
@@ -1276,15 +1276,15 @@ union LoggerType {
  */
 union ConnectivityStatusType {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   initializing: "initializing",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   success: "success",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   failure: "failure",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union NotificationName {
   string,
 
@@ -1324,7 +1324,7 @@ union NotificationName {
   QuotaLimitApproachingPublisherNotificationMessage: "QuotaLimitApproachingPublisherNotificationMessage",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union PolicyFragmentContentFormat {
   string,
 
@@ -1449,14 +1449,14 @@ union SchemaType {
   Json: "json",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union SettingsTypeName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   public: "public",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AppType {
   string,
 
@@ -1471,19 +1471,19 @@ union AppType {
   developerPortal: "developerPortal",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union AccessIdName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   access: "access",
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   gitAccess: "gitAccess",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union ConfigurationIdName {
   string,
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   configuration: "configuration",
 }
 
@@ -1504,7 +1504,7 @@ union Confirmation {
   invite: "invite",
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 union KeyVaultRefreshState {
   string,
 
@@ -1522,14 +1522,14 @@ union KeyVaultRefreshState {
 /**
  * whether product is published or not. Published products are discoverable by users of developer portal. Non published products are visible only to administrators. Default state of Product is notPublished.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ProductState {
   notPublished,
   published,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AuthorizationMethod {
   HEAD,
   OPTIONS,
@@ -1544,7 +1544,7 @@ enum AuthorizationMethod {
 /**
  * Invalid indicates the name provided does not match the resource provider’s naming requirements (incorrect length, unsupported characters, etc.)  AlreadyExists indicates that the name is already in use and is therefore unavailable.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum NameAvailabilityReason {
   Valid,
   Invalid,
@@ -1554,7 +1554,7 @@ enum NameAvailabilityReason {
 /**
  * The Key to be used to generate token for user.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum KeyType {
   primary,
   secondary,
@@ -1563,15 +1563,15 @@ enum KeyType {
 /**
  * Group type.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum GroupType {
   custom,
   system,
   external,
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum PolicyScopeContract {
   Tenant,
   Product,
@@ -1583,7 +1583,7 @@ enum PolicyScopeContract {
 /**
  * Status of an async operation.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AsyncOperationStatus {
   Started,
   InProgress,
@@ -1594,7 +1594,7 @@ enum AsyncOperationStatus {
 /**
  * Subscription state. Possible states are * active – the subscription is active, * suspended – the subscription is blocked, and the subscriber cannot call any APIs of the product, * submitted – the subscription request has been made by the developer, but has not yet been approved or rejected, * rejected – the subscription request has been denied by an administrator, * cancelled – the subscription has been cancelled by the developer or administrator, * expired – the subscription reached its expiration date and was deactivated.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum SubscriptionState {
   suspended,
   active,
@@ -1607,7 +1607,7 @@ enum SubscriptionState {
 /**
  * The scale type applicable to the sku.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ApiManagementSkuCapacityScaleType {
   Automatic,
   Manual,
@@ -1617,7 +1617,7 @@ enum ApiManagementSkuCapacityScaleType {
 /**
  * The type of restrictions.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ApiManagementSkuRestrictionsType {
   Location,
   Zone,
@@ -1626,7 +1626,7 @@ enum ApiManagementSkuRestrictionsType {
 /**
  * The reason for restriction.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum ApiManagementSkuRestrictionsReasonCode {
   QuotaId,
   NotAvailableForSubscription,
@@ -1635,7 +1635,7 @@ enum ApiManagementSkuRestrictionsReasonCode {
 /**
  * Status of an async resolver.
  */
-#suppress "@azure-tools/typespec-azure-core/no-enum" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/no-enum" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 enum AsyncResolverStatus {
   Started,
   InProgress,
@@ -1646,8 +1646,9 @@ enum AsyncResolverStatus {
 /**
  * Properties of an API Management gateway resource description.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementGatewayProperties
   extends ApiManagementGatewayBaseProperties {}
 
@@ -1658,6 +1659,7 @@ model ApiManagementGatewayBaseProperties {
   /**
    * The current provisioning state of the API Management gateway which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -1777,20 +1779,18 @@ model ApimResource {
   /**
    * Resource tags.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tags?: Record<string>;
 }
 
 /**
  * Parameter supplied to Update API Management gateway.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementGatewayUpdateParameters extends ApimResource {
   /**
    * Properties of the API Management gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiManagementGatewayUpdateProperties;
 
   /**
@@ -1808,7 +1808,8 @@ model ApiManagementGatewayUpdateParameters extends ApimResource {
 /**
  * Properties of an API Management gateway resource description.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementGatewayUpdateProperties
   extends ApiManagementGatewayBaseProperties {}
 
@@ -1830,7 +1831,20 @@ model ApiManagementGatewaySkuPropertiesForPatch {
 /**
  * The API Management gateway SKUs operation response.
  */
-model GatewayResourceSkuResults is Azure.Core.Page<GatewayResourceSkuResult>;
+model GatewayResourceSkuResults {
+  /**
+   * The list of skus available for the gateway.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["resourceType", "sku/name"])
+  value: GatewayResourceSkuResult[];
+
+  /**
+   * The uri to fetch the next page of API Management gateway Skus.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Describes an available API Management gateway SKU.
@@ -1862,6 +1876,8 @@ model GatewaySku {
   /**
    * Name of the Sku.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("https://azure.microsoft.com/en-us/pricing/details/api-management/")
   name?: ApiGatewaySkuType;
 }
 
@@ -1897,19 +1913,29 @@ model GatewaySkuCapacity {
 /**
  * The response of All Policies.
  */
-model AllPoliciesCollection is Azure.Core.Page<AllPoliciesContract>;
+model AllPoliciesCollection {
+  /**
+   * AllPolicies Contract value.
+   */
+  @pageItems
+  value?: AllPoliciesContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * AllPolicies Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AllPoliciesContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Properties of the All Policies.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AllPoliciesContractProperties;
 }
 
@@ -1925,23 +1951,37 @@ model AllPoliciesContractProperties {
   /**
    * Policy Restriction Compliance State
    */
-  complianceState?: PolicyComplianceState;
+  complianceState?: PolicyComplianceState = PolicyComplianceState.Pending;
 }
 
 /**
  * Paged API list representation.
  */
-model ApiCollection is Azure.Core.Page<ApiContract> {
+model ApiCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ApiContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
  * API Entity Properties
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiContractProperties extends ApiEntityBaseContract {
   /**
    * API identifier of the source API.
@@ -1959,12 +1999,14 @@ model ApiContractProperties extends ApiEntityBaseContract {
    * Absolute URL of the backend service implementing this API. Cannot be more than 2000 characters long.
    */
   @maxLength(2000)
+  @minLength(0)
   serviceUrl?: string;
 
   /**
    * Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
    */
   @maxLength(400)
+  @minLength(0)
   path: string;
 
   /**
@@ -1980,7 +2022,7 @@ model ApiContractProperties extends ApiEntityBaseContract {
   /**
    * The provisioning state
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -2042,6 +2084,7 @@ model ApiEntityBaseContract {
   /**
    * Type of API.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: ApiType;
 
   /**
@@ -2136,6 +2179,7 @@ model AuthenticationSettingsContract {
 /**
  * API OAuth2 Authentication settings details.
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OAuth2AuthenticationSettingsContract {
   /**
    * OAuth authorization server identifier.
@@ -2220,15 +2264,13 @@ model ApiCreateOrUpdateParameter {
   /**
    * API entity create of update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiCreateOrUpdateProperties;
 }
 
 /**
  * API Create or Update Properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiCreateOrUpdateProperties extends ApiContractProperties {
   /**
    * Content value when Importing an API.
@@ -2283,15 +2325,13 @@ model ApiUpdateContract {
   /**
    * Properties of the API entity that can be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiContractUpdateProperties;
 }
 
 /**
  * API update contract properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiContractUpdateProperties extends ApiEntityBaseContract {
   /**
    * API name.
@@ -2311,6 +2351,7 @@ model ApiContractUpdateProperties extends ApiEntityBaseContract {
    * Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
    */
   @maxLength(400)
+  @minLength(0)
   path?: string;
 
   /**
@@ -2322,11 +2363,26 @@ model ApiContractUpdateProperties extends ApiEntityBaseContract {
 /**
  * Paged API Revision list representation.
  */
-model ApiRevisionCollection is Azure.Core.Page<ApiRevisionContract> {
+model ApiRevisionCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["apiId"])
+  value?: ApiRevisionContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
@@ -2390,17 +2446,30 @@ model ApiRevisionContract {
 /**
  * Paged ApiRelease list representation.
  */
-model ApiReleaseCollection is Azure.Core.Page<ApiReleaseContract> {
+model ApiReleaseCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ApiReleaseContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
-}
 
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 /**
  * API Release details
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiReleaseContractProperties {
   /**
    * Identifier of the API the release belongs to.
@@ -2430,18 +2499,31 @@ model ApiReleaseContractProperties {
 /**
  * Paged Operation list representation.
  */
-model OperationCollection is Azure.Core.Page<OperationContract> {
+model OperationCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: OperationContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
-}
 
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 /**
  * Operation Contract Properties
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationContractProperties extends OperationEntityBaseContract {
   /**
    * Operation Name.
@@ -2453,6 +2535,11 @@ model OperationContractProperties extends OperationEntityBaseContract {
   /**
    * A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs(
+    "http://www.rfc-editor.org/rfc/rfc7230.txt",
+    "As defined by RFC."
+  )
   method: string;
 
   /**
@@ -2543,7 +2630,7 @@ model ParameterContract {
   /**
    * Exampled defined for the parameter.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   examples?: Record<ParameterExampleContract>;
 }
 
@@ -2564,6 +2651,7 @@ model ParameterExampleContract {
   /**
    * Example value. May be a primitive value, or an object.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: unknown;
 
   /**
@@ -2628,7 +2716,7 @@ model RepresentationContract {
   /**
    * Exampled defined for the representation.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   examples?: Record<ParameterExampleContract>;
 }
 
@@ -2666,15 +2754,18 @@ model OperationUpdateContract {
   /**
    * Properties of the API Operation entity that can be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs(
+    "http://www.rfc-editor.org/rfc/rfc7230.txt",
+    "As defined by RFC."
+  )
   properties?: OperationUpdateContractProperties;
 }
 
 /**
  * Operation Update Contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationUpdateContractProperties extends OperationEntityBaseContract {
   /**
    * Operation Name.
@@ -2699,17 +2790,29 @@ model OperationUpdateContractProperties extends OperationEntityBaseContract {
 /**
  * The response of the list policy operation.
  */
-model PolicyCollection is Azure.Core.Page<PolicyContract> {
+model PolicyCollection {
+  /**
+   * Policy Contract value.
+   */
+  @pageItems
+  value?: PolicyContract[];
+
   /**
    * Total record count number.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Policy contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PolicyContractProperties {
   /**
    * Contents of the Policy as defined by the format.
@@ -2725,17 +2828,29 @@ model PolicyContractProperties {
 /**
  * Paged Tag list representation.
  */
-model TagCollection is Azure.Core.Page<TagContract> {
+model TagCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: TagContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Tag contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TagContractProperties {
   /**
    * Tag name.
@@ -2748,17 +2863,31 @@ model TagContractProperties {
 /**
  * Paged Resolver list representation.
  */
-model ResolverCollection is Azure.Core.Page<ResolverContract> {
+model ResolverCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ResolverContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
  * GraphQL API Resolver Entity Base Contract details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResolverEntityBaseContract {
   /**
    * Resolver Name.
@@ -2788,8 +2917,6 @@ model ResolverUpdateContract {
   /**
    * Properties of the GraphQL API Resolver entity that can be updated.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ResolverUpdateContractProperties;
 }
 
@@ -2821,18 +2948,30 @@ model ResolverUpdateContractProperties {
 /**
  * Paged Products list representation.
  */
-model ProductCollection is Azure.Core.Page<ProductContract> {
+model ProductCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: ProductContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Product profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductContractProperties extends ProductEntityBaseParameters {
   /**
    * Product name.
@@ -2850,6 +2989,7 @@ model ProductEntityBaseParameters {
    * Product description. May include HTML formatting tags.
    */
   @maxLength(1000)
+  @minLength(0)
   description?: string;
 
   /**
@@ -2891,7 +3031,8 @@ model ProductEntityBaseParameters {
 /**
  * Specifies identity provider settings needed to authorize applications API calls.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductEntityBaseParametersApplication
   extends ProductApplicationContract {}
 
@@ -2923,13 +3064,26 @@ model ProductApplicationContractEntra {
 /**
  * The response of the list schema operation.
  */
-model SchemaCollection is Azure.Core.Page<SchemaContract> {
+model SchemaCollection {
+  /**
+   * API Schema Contract value.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: SchemaContract[];
+
   /**
    * Total record count number.
    */
   count?: int64;
-}
 
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 /**
  * API Schema create or update contract Properties.
  */
@@ -2942,14 +3096,12 @@ model SchemaContractProperties {
   /**
    * Create or update Properties of the API Schema Document.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   document: SchemaDocumentProperties;
 
   /**
    * The provisioning state
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -2966,28 +3118,42 @@ model SchemaDocumentProperties {
   /**
    * Types definitions. Used for Swagger/OpenAPI v1 schemas only, null otherwise.
    */
-  definitions?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  definitions?: unknown;
 
   /**
    * Types definitions. Used for Swagger/OpenAPI v2/v3 schemas only, null otherwise.
    */
-  components?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  components?: unknown;
 }
 
 /**
  * Paged Diagnostic list representation.
  */
-model DiagnosticCollection is Azure.Core.Page<DiagnosticContract> {
+model DiagnosticCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: DiagnosticContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Diagnostic Entity Properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnosticContractProperties {
   /**
    * Specifies for what type of messages sampling settings should not apply.
@@ -3058,6 +3224,7 @@ model SamplingSettings {
    * Rate of sampling for fixed-rate sampling.
    */
   @maxValue(100)
+  @minValue(0)
   percentage?: float64;
 }
 
@@ -3107,7 +3274,7 @@ model BodyDiagnosticSettings {
   bytes?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataMasking {
   /**
    * Masking settings for Url query parameters
@@ -3122,7 +3289,7 @@ model DataMasking {
   headers?: DataMaskingEntity[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DataMaskingEntity {
   /**
    * The name of an entity to mask (e.g. a name of a header or a query parameter).
@@ -3138,6 +3305,7 @@ model DataMaskingEntity {
 /**
  * Diagnostic settings for Large Language Models
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LLMDiagnosticSettings {
   /**
    * Specifies whether default diagnostic should be enabled for Large Language Models or not.
@@ -3158,6 +3326,7 @@ model LLMDiagnosticSettings {
 /**
  * Diagnostic settings for Large Language Models Messages
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LLMMessageDiagnosticSettings {
   /**
    * Specifies which message should be logged. Currently there is only 'all' option.
@@ -3175,18 +3344,31 @@ model LLMMessageDiagnosticSettings {
 /**
  * Paged Issue list representation.
  */
-model IssueCollection is Azure.Core.Page<IssueContract> {
+model IssueCollection {
+  /**
+   * Issue values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: IssueContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
-}
 
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 /**
  * Issue contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IssueContractProperties extends IssueContractBaseProperties {
   /**
    * The issue title.
@@ -3232,15 +3414,13 @@ model IssueUpdateContract {
   /**
    * Issue entity Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IssueUpdateContractProperties;
 }
 
 /**
  * Issue contract Update Properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IssueUpdateContractProperties extends IssueContractBaseProperties {
   /**
    * The issue title.
@@ -3261,17 +3441,31 @@ model IssueUpdateContractProperties extends IssueContractBaseProperties {
 /**
  * Paged Issue Comment list representation.
  */
-model IssueCommentCollection is Azure.Core.Page<IssueCommentContract> {
+model IssueCommentCollection {
+  /**
+   * Issue Comment values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: IssueCommentContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
  * Issue Comment contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IssueCommentContractProperties {
   /**
    * Comment text.
@@ -3293,17 +3487,31 @@ model IssueCommentContractProperties {
 /**
  * Paged Issue Attachment list representation.
  */
-model IssueAttachmentCollection is Azure.Core.Page<IssueAttachmentContract> {
+model IssueAttachmentCollection {
+  /**
+   * Issue Attachment values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: IssueAttachmentContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
  * Issue Attachment contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IssueAttachmentContractProperties {
   /**
    * Filename by which the binary data will be saved.
@@ -3324,18 +3532,30 @@ model IssueAttachmentContractProperties {
 /**
  * Paged TagDescription list representation.
  */
-model TagDescriptionCollection is Azure.Core.Page<TagDescriptionContract> {
+model TagDescriptionCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: TagDescriptionContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * TagDescription contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TagDescriptionContractProperties extends TagDescriptionBaseProperties {
   /**
    * Identifier of the tag in the form of /tags/{tagId}
@@ -3378,19 +3598,30 @@ model TagDescriptionCreateParameters {
   /**
    * Properties supplied to Create TagDescription operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TagDescriptionBaseProperties;
 }
 
 /**
  * Paged Tag list representation.
  */
-model TagResourceCollection is Azure.Core.Page<TagResourceContract> {
+model TagResourceCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["tag/id"])
+  value?: TagResourceContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -3438,7 +3669,7 @@ model TagTagResourceContractProperties {
 /**
  * API contract properties for the Tag Resources.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiTagResourceContractProperties extends ApiEntityBaseContract {
   /**
    * API identifier in the form /apis/{apiId}.
@@ -3463,6 +3694,7 @@ model ApiTagResourceContractProperties extends ApiEntityBaseContract {
    * Relative URL uniquely identifying this API and all of its resource paths within the API Management service instance. It is appended to the API endpoint base URL specified during the service instance creation to form a public URL for this API.
    */
   @maxLength(400)
+  @minLength(0)
   path?: string;
 
   /**
@@ -3513,7 +3745,12 @@ model OperationTagResourceContractProperties {
   /**
    * A Valid HTTP Operation Method. Typical Http Methods like GET, PUT, POST but not limited by only them.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
+  @OpenAPI.externalDocs(
+    "http://www.rfc-editor.org/rfc/rfc7230.txt",
+    "As defined by RFC."
+  )
   method?: string;
 
   /**
@@ -3526,7 +3763,7 @@ model OperationTagResourceContractProperties {
 /**
  * Product profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductTagResourceContractProperties extends ProductEntityBaseParameters {
   /**
    * Identifier of the product in the form of /products/{productId}
@@ -3544,7 +3781,7 @@ model ProductTagResourceContractProperties extends ProductEntityBaseParameters {
 /**
  * Wiki contract details
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WikiContractProperties {
   /**
    * Collection wiki documents included into this wiki.
@@ -3570,15 +3807,28 @@ model WikiUpdateContract {
   /**
    * Wiki details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: WikiContractProperties;
 }
 
 /**
  * Paged Wiki list representation.
  */
-model WikiCollection is Azure.Core.Page<WikiContract>;
+model WikiCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @visibility(Lifecycle.Read)
+  value?: WikiContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * API Export result.
@@ -3613,18 +3863,30 @@ model ApiExportResultValue {
 /**
  * Paged API Version Set list representation.
  */
-model ApiVersionSetCollection is Azure.Core.Page<ApiVersionSetContract> {
+model ApiVersionSetCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: ApiVersionSetContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Properties of an API Version Set.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiVersionSetContractProperties extends ApiVersionSetEntityBase {
   /**
    * Name of API Version Set
@@ -3670,15 +3932,13 @@ model ApiVersionSetUpdateParameters {
   /**
    * Parameters to update or create an API Version Set Contract.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiVersionSetUpdateParametersProperties;
 }
 
 /**
  * Properties used to create or update an API Version Set.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiVersionSetUpdateParametersProperties extends ApiVersionSetEntityBase {
   /**
    * Name of API Version Set
@@ -3696,13 +3956,24 @@ model ApiVersionSetUpdateParametersProperties extends ApiVersionSetEntityBase {
 /**
  * Paged Authorization Provider list representation.
  */
-model AuthorizationProviderCollection
-  is Azure.Core.Page<AuthorizationProviderContract>;
+model AuthorizationProviderCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: AuthorizationProviderContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Authorization Provider details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationProviderContractProperties {
   /**
    * Authorization Provider name. Must be 1 to 300 characters long.
@@ -3725,6 +3996,7 @@ model AuthorizationProviderContractProperties {
 /**
  * OAuth2 settings details
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationProviderOAuth2Settings {
   /**
    * Redirect URL to be set in the OAuth application.
@@ -3740,34 +4012,47 @@ model AuthorizationProviderOAuth2Settings {
 /**
  * Authorization Provider oauth2 grant types settings
  */
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationProviderOAuth2GrantTypes {
   /**
    * OAuth2 authorization code grant parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   authorizationCode?: Record<string>;
 
   /**
    * OAuth2 client credential grant parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   clientCredentials?: Record<string>;
 }
 
 /**
  * Paged Authorization list representation.
  */
-model AuthorizationCollection is Azure.Core.Page<AuthorizationContract> {
+model AuthorizationCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: AuthorizationContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Authorization details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationContractProperties {
   /**
    * Authorization type options
@@ -3782,7 +4067,7 @@ model AuthorizationContractProperties {
   /**
    * Authorization parameters
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   parameters?: Record<string>;
 
   /**
@@ -3844,18 +4129,28 @@ model AuthorizationConfirmConsentCodeRequestContract {
 /**
  * Paged Authorization Access Policy list representation.
  */
-model AuthorizationAccessPolicyCollection
-  is Azure.Core.Page<AuthorizationAccessPolicyContract> {
+model AuthorizationAccessPolicyCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: AuthorizationAccessPolicyContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
-}
 
+  /**
+   * Paged Authorization Access Policy list representation.
+   */
+  @nextLink
+  nextLink?: string;
+}
 /**
  * Authorization Access Policy details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationAccessPolicyContractProperties {
   /**
    * The allowed Azure Active Directory Application IDs
@@ -3876,19 +4171,30 @@ model AuthorizationAccessPolicyContractProperties {
 /**
  * Paged OAuth2 Authorization Servers list representation.
  */
-model AuthorizationServerCollection
-  is Azure.Core.Page<AuthorizationServerContract> {
+model AuthorizationServerCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: AuthorizationServerContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * External OAuth authorization server settings Properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationServerContractProperties
   extends AuthorizationServerContractBaseProperties {
   /**
@@ -3921,6 +4227,8 @@ model AuthorizationServerContractProperties
   /**
    * Form of an authorization grant, which the client uses to request the access token.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("http://tools.ietf.org/html/rfc6749#section-4")
   grantTypes: GrantType[];
 
   /**
@@ -3931,6 +4239,7 @@ model AuthorizationServerContractProperties
   /**
    * Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
+  @secret
   clientSecret?: string;
 }
 
@@ -3962,21 +4271,29 @@ model AuthorizationServerContractBaseProperties {
   /**
    * OAuth token endpoint. Contains absolute URI to entity being referenced.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("http://tools.ietf.org/html/rfc6749#section-3.1")
   tokenEndpoint?: string;
 
   /**
    * If true, authorization server will include state parameter from the authorization request to its response. Client may use state parameter to raise protocol security.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("http://tools.ietf.org/html/rfc6749#section-3.1")
   supportState?: boolean;
 
   /**
    * Access token scope that is going to be requested by default. Can be overridden at the API level. Should be provided in the form of a string containing space-delimited values.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("http://tools.ietf.org/html/rfc6749#section-3.3")
   defaultScope?: string;
 
   /**
    * Specifies the mechanism by which access token is passed to the API.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("http://tools.ietf.org/html/rfc6749#section-4")
   bearerTokenSendingMethods?: BearerTokenSendingMethod[];
 
   /**
@@ -4008,21 +4325,19 @@ model TokenBodyParameterContract {
 /**
  * External OAuth authorization server settings.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationServerUpdateContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Properties of the External OAuth authorization server update Contract.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AuthorizationServerUpdateContractProperties;
 }
 
 /**
  * External OAuth authorization server Update settings contract.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AuthorizationServerUpdateContractProperties
   extends AuthorizationServerContractBaseProperties {
   /**
@@ -4055,6 +4370,8 @@ model AuthorizationServerUpdateContractProperties
   /**
    * Form of an authorization grant, which the client uses to request the access token.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("http://tools.ietf.org/html/rfc6749#section-4")
   grantTypes?: GrantType[];
 
   /**
@@ -4065,6 +4382,7 @@ model AuthorizationServerUpdateContractProperties
   /**
    * Client or app secret registered with this authorization server. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
+  @secret
   clientSecret?: string;
 }
 
@@ -4075,6 +4393,7 @@ model AuthorizationServerSecretsContract {
   /**
    * oAuth Authorization Server Secrets.
    */
+  @secret
   clientSecret?: string;
 
   /**
@@ -4091,18 +4410,30 @@ model AuthorizationServerSecretsContract {
 /**
  * Paged Backend list representation.
  */
-model BackendCollection is Azure.Core.Page<BackendContract> {
+model BackendCollection {
+  /**
+   * Backend values.
+   */
+  @pageItems
+  value?: BackendContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Parameters supplied to the Create Backend operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackendContractProperties extends BackendBaseParameters {
   /**
    * Runtime Url of the Backend. Required when backend type is 'Single'.
@@ -4145,6 +4476,7 @@ model BackendBaseParameters {
   /**
    * Backend Properties contract
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   properties?: BackendProperties;
 
   /**
@@ -4167,12 +4499,15 @@ model BackendBaseParameters {
    */
   circuitBreaker?: BackendCircuitBreaker;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Backend Pool Properties
+   */
   pool?: BackendBaseParametersPool;
 
   /**
    * Type of the backend. A backend can be either Single or Pool.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: BackendType;
 }
 
@@ -4225,6 +4560,8 @@ model BackendServiceFabricClusterProperties {
 /**
  * Properties of server X509Names.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.externalDocs("https://docs.microsoft.com/en-us/azure/service-fabric/service-fabric-windows-cluster-x509-security")
 model X509CertificateName {
   /**
    * Common Name of the Certificate.
@@ -4244,23 +4581,25 @@ model BackendCredentialsContract {
   /**
    * List of Client Certificate Ids.
    */
+  @maxItems(32)
   certificateIds?: string[];
 
   /**
    * List of Client Certificate Thumbprints. Will be ignored if certificatesIds are provided.
    */
+  @maxItems(32)
   certificate?: string[];
 
   /**
    * Query Parameter description.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   query?: Record<string[]>;
 
   /**
    * Header Parameter description.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   header?: Record<string[]>;
 
   /**
@@ -4291,6 +4630,11 @@ model BackendAuthorizationHeaderCredentials {
 /**
  * Details of the Backend WebProxy Server to use in the Request to Backend.
  */
+#suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+@OpenAPI.externalDocs(
+  "https://msdn.microsoft.com/en-us/library/system.net.webproxy(v=vs.110).aspx",
+  "Backend entity uses these details to connect to a WebProxy."
+)
 model BackendProxyContract {
   /**
    * WebProxy Server AbsoluteUri property which includes the entire URI stored in the Uri instance, including all fragments and query strings.
@@ -4389,12 +4733,14 @@ model CircuitBreakerFailureCondition {
    * The status code ranges which are considered as failure.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @maxItems(10)
   statusCodeRanges?: FailureStatusCodeRange[];
 
   /**
    * The error reasons which are considered as failure.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @maxItems(10)
   errorReasons?: string[];
 }
 
@@ -4429,8 +4775,11 @@ model BackendFailureResponse {
   statusCode?: int32;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+/**
+ * Backend Pool Properties
+ */
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackendBaseParametersPool extends BackendPool {}
 
 /**
@@ -4441,6 +4790,7 @@ model BackendPool {
    * The list of backend entities belonging to a pool.
    */
   @OpenAPI.extension("x-ms-identifiers", #[])
+  @minItems(1)
   services?: BackendPoolItem[];
 
   /**
@@ -4467,12 +4817,14 @@ model BackendPoolItem {
    * The weight of the backend entity in the backend pool. Must be between 0 and 100. It can be also null if the value not specified.
    */
   @maxValue(100)
+  @minValue(0)
   weight?: int32;
 
   /**
    * The priority of the backend entity in the backend pool. Must be between 0 and 100. It can be also null if the value not specified.
    */
   @maxValue(100)
+  @minValue(0)
   priority?: int32;
 }
 
@@ -4508,15 +4860,13 @@ model BackendUpdateParameters {
   /**
    * Backend entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BackendUpdateParameterProperties;
 }
 
 /**
  * Parameters supplied to the Update Backend operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackendUpdateParameterProperties extends BackendBaseParameters {
   /**
    * Runtime Url of the Backend. Required when backend type is 'Single'.
@@ -4534,14 +4884,12 @@ model BackendUpdateParameterProperties extends BackendBaseParameters {
 /**
  * Reconnect request parameters.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model BackendReconnectContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Reconnect request properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: BackendReconnectProperties;
 }
 
@@ -4558,17 +4906,29 @@ model BackendReconnectProperties {
 /**
  * Paged Caches list representation.
  */
-model CacheCollection is Azure.Core.Page<CacheContract> {
+model CacheCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: CacheContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Properties of the Cache contract.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CacheContractProperties {
   /**
    * Cache description
@@ -4602,8 +4962,6 @@ model CacheUpdateParameters {
   /**
    * Cache update properties details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CacheUpdateProperties;
 }
 
@@ -4639,17 +4997,29 @@ model CacheUpdateProperties {
 /**
  * Paged Certificates list representation.
  */
-model CertificateCollection is Azure.Core.Page<CertificateContract> {
+model CertificateCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: CertificateContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Properties of the Certificate contract.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model CertificateContractProperties {
   /**
    * Subject attribute of the certificate.
@@ -4677,7 +5047,7 @@ model CertificateContractProperties {
 /**
  * KeyVault contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model KeyVaultContractProperties extends KeyVaultContractCreateProperties {
   /**
    * Last time sync and refresh status of secret from key vault.
@@ -4729,8 +5099,6 @@ model CertificateCreateOrUpdateParameters {
   /**
    * Certificate create or update properties details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: CertificateCreateOrUpdateProperties;
 }
 
@@ -4771,6 +5139,7 @@ model ConnectivityCheckRequest {
   /**
    * The IP version to be used. Only IPv4 is supported for now.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   preferredIPVersion?: PreferredIPVersion;
 
   /**
@@ -4821,6 +5190,7 @@ model ConnectivityCheckRequestProtocolConfiguration {
   /**
    * Configuration for HTTP or HTTPS requests.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   HTTPConfiguration?: ConnectivityCheckRequestProtocolConfigurationHttpConfiguration;
 }
 
@@ -4982,19 +5352,35 @@ model ConnectivityIssue {
 /**
  * Paged list of content types.
  */
-model ContentTypeCollection is Azure.Core.Page<ContentTypeContract>;
+model ContentTypeCollection {
+  /**
+   * Collection of content items.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ContentTypeContract[];
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Next page link, if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ContentTypeContractProperties {
   /**
    * Content type identifier
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
 
   /**
    * Content type name. Must be 1 to 250 characters long.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   name?: string;
 
   /**
@@ -5005,7 +5391,8 @@ model ContentTypeContractProperties {
   /**
    * Content type schema.
    */
-  schema?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  schema?: unknown;
 
   /**
    * Content type version.
@@ -5016,15 +5403,43 @@ model ContentTypeContractProperties {
 /**
  * Paged list of content items.
  */
-model ContentItemCollection is Azure.Core.Page<ContentItemContract>;
+model ContentItemCollection {
+  /**
+   * Collection of content items.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: ContentItemContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Paged deleted API Management Services List Representation.
  */
-model DeletedServicesCollection is Azure.Core.Page<DeletedServiceContract>;
+model DeletedServicesCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: DeletedServiceContract[];
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DeletedServiceContractProperties {
   /**
    * Fully-qualified API Management Service Resource ID
@@ -5066,9 +5481,8 @@ model Operation {
   /**
    * The operation properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  properties?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  properties?: unknown;
 }
 
 /**
@@ -5099,7 +5513,20 @@ model OperationDisplay {
 /**
  * The API Management service SKUs operation response.
  */
-model ResourceSkuResults is Azure.Core.Page<ResourceSkuResult>;
+model ResourceSkuResults {
+  /**
+   * The list of skus available for the service.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["resourceType", "sku/name"])
+  value: ResourceSkuResult[];
+
+  /**
+   * The uri to fetch the next page of API Management service Skus.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Describes an available API Management service SKU.
@@ -5131,6 +5558,8 @@ model ResourceSku {
   /**
    * Name of the Sku.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("https://azure.microsoft.com/en-us/pricing/details/api-management/")
   name?: SkuType;
 }
 
@@ -5201,8 +5630,8 @@ model ApiManagementServiceBackupRestoreParameters {
 /**
  * Properties of an API Management service resource description.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementServiceProperties
   extends ApiManagementServiceBaseProperties {
   /**
@@ -5231,6 +5660,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * The current provisioning state of the API Management service which can be one of the following: Created/Activating/Succeeded/Updating/Failed/Stopped/Terminating/TerminationFailed/Deleted.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -5292,12 +5722,14 @@ model ApiManagementServiceBaseProperties {
   /**
    * Public Static Load Balanced IP addresses of the API Management service in Primary region. Available only for Basic, Standard, Premium and Isolated SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   publicIPAddresses?: string[];
 
   /**
    * Private Static Load Balanced IP addresses of the API Management service in Primary region which is deployed in an Internal Virtual Network. Available only for Basic, Standard, Premium and Isolated SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   privateIPAddresses?: string[];
 
@@ -5330,7 +5762,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Custom properties of the API Management service.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TripleDes168` will disable the cipher TLS_RSA_WITH_3DES_EDE_CBC_SHA for all TLS(1.0, 1.1 and 1.2).</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls11` can be used to disable just TLS 1.1.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Protocols.Tls10` can be used to disable TLS 1.0 on an API Management service.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls11` can be used to disable just TLS 1.1 for communications with backends.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Backend.Protocols.Tls10` can be used to disable TLS 1.0 for communications with backends.</br>Setting `Microsoft.WindowsAzure.ApiManagement.Gateway.Protocols.Server.Http2` can be used to enable HTTP2 protocol on an API Management service.</br>Not specifying any of these properties on PATCH operation will reset omitted properties' values to their defaults. For all the settings except Http2 the default value is `True` if the service was created on or before April 1, 2018 and `False` otherwise. Http2 setting's default value is `False`.</br></br>You can disable any of the following ciphers by using settings `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.[cipher_name]`: TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA, TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA, TLS_RSA_WITH_AES_128_GCM_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA256, TLS_RSA_WITH_AES_128_CBC_SHA256, TLS_RSA_WITH_AES_256_CBC_SHA, TLS_RSA_WITH_AES_128_CBC_SHA. For example, `Microsoft.WindowsAzure.ApiManagement.Gateway.Security.Ciphers.TLS_RSA_WITH_AES_128_CBC_SHA256`:`false`. The default value is `true` for them.</br> Note: The following ciphers can't be disabled since they are required by internal platform components: TLS_AES_256_GCM_SHA384,TLS_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_RSA_WITH_AES_256_GCM_SHA384,TLS_ECDHE_RSA_WITH_AES_128_GCM_SHA256,TLS_ECDHE_ECDSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_ECDSA_WITH_AES_128_CBC_SHA256,TLS_ECDHE_RSA_WITH_AES_256_CBC_SHA384,TLS_ECDHE_RSA_WITH_AES_128_CBC_SHA256
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   customProperties?: Record<string>;
 
   /**
@@ -5342,28 +5774,29 @@ model ApiManagementServiceBaseProperties {
   /**
    * Property only meant to be used for Consumption SKU Service. This enforces a client certificate to be presented on each request to the gateway. This also enables the ability to authenticate the certificate in the policy on the gateway.
    */
-  enableClientCertificate?: boolean;
+  enableClientCertificate?: boolean = false;
 
   /**
    * Property can be used to enable NAT Gateway for this API Management service.
    */
-  natGatewayState?: NatGatewayState;
+  natGatewayState?: NatGatewayState = NatGatewayState.Disabled;
 
   /**
    * Outbound public IPV4 address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU on stv2 platform.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   outboundPublicIPAddresses?: string[];
 
   /**
    * Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in master region.
    */
-  disableGateway?: boolean;
+  disableGateway?: boolean = false;
 
   /**
    * The type of VPN in which API Management service needs to be configured in. None (Default Value) means the API Management service is not part of any Virtual Network, External means the API Management deployment is set up inside a Virtual Network having an Internet Facing Endpoint, and Internal means that API Management deployment is setup inside a Virtual Network having an Intranet Facing Endpoint only.
    */
-  virtualNetworkType?: VirtualNetworkType;
+  virtualNetworkType?: VirtualNetworkType = VirtualNetworkType.None;
 
   /**
    * Control Plane Apis version constraint for the API Management service.
@@ -5373,7 +5806,7 @@ model ApiManagementServiceBaseProperties {
   /**
    * Undelete Api Management Service if it was previously soft-deleted. If this flag is specified and set to True all other properties will be ignored.
    */
-  restore?: boolean;
+  restore?: boolean = false;
 
   /**
    * List of Private Endpoint Connections of this service.
@@ -5439,12 +5872,12 @@ model HostnameConfiguration {
   /**
    * Specify true to setup the certificate associated with this Hostname as the Default SSL Certificate. If a client does not send the SNI header, then this will be the certificate that will be challenged. The property is useful if a service has multiple custom hostname enabled and it needs to decide on the default ssl certificate. The setting only applied to gateway Hostname Type.
    */
-  defaultSslBinding?: boolean;
+  defaultSslBinding?: boolean = false;
 
   /**
    * Specify true to always negotiate client certificate on the hostname. Default Value is false.
    */
-  negotiateClientCertificate?: boolean;
+  negotiateClientCertificate?: boolean = false;
 
   /**
    * Certificate information.
@@ -5538,12 +5971,14 @@ model AdditionalLocation {
   /**
    * Public Static Load Balanced IP addresses of the API Management service in the additional location. Available only for Basic, Standard, Premium and Isolated SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   publicIPAddresses?: string[];
 
   /**
    * Private Static Load Balanced IP addresses of the API Management service which is deployed in an Internal Virtual Network in a particular additional location. Available only for Basic, Standard, Premium and Isolated SKU.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   privateIPAddresses?: string[];
 
@@ -5566,18 +6001,19 @@ model AdditionalLocation {
   /**
    * Property can be used to enable NAT Gateway for this API Management service.
    */
-  natGatewayState?: NatGatewayState;
+  natGatewayState?: NatGatewayState = NatGatewayState.Disabled;
 
   /**
    * Outbound public IPV4 address prefixes associated with NAT Gateway deployed service. Available only for Premium SKU on stv2 platform.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   outboundPublicIPAddresses?: string[];
 
   /**
    * Property only valid for an Api Management service deployed in multiple locations. This can be used to disable the gateway in this additional location.
    */
-  disableGateway?: boolean;
+  disableGateway?: boolean = false;
 
   /**
    * Compute Platform Version running the service.
@@ -5658,8 +6094,6 @@ model RemotePrivateEndpointConnectionWrapper {
   /**
    * Resource properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PrivateEndpointConnectionWrapperProperties;
 }
 
@@ -5694,7 +6128,7 @@ model PrivateEndpointConnectionWrapperProperties {
  * A wrapper for an ARM resource id
  */
 model ArmIdWrapper {
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   id?: string;
 }
@@ -5711,7 +6145,7 @@ model ApiManagementServiceIdentity {
   /**
    * The principal id of the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   principalId?: string;
@@ -5719,7 +6153,7 @@ model ApiManagementServiceIdentity {
   /**
    * The client tenant id of the identity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-format"
+  #suppress "@azure-tools/typespec-azure-core/no-format" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   @format("uuid")
   tenantId?: string;
@@ -5730,11 +6164,11 @@ model ApiManagementServiceIdentity {
    * '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/
    *     providers/Microsoft.ManagedIdentity/userAssignedIdentities/{identityName}'.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   userAssignedIdentities?: Record<UserIdentityProperties>;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UserIdentityProperties {
   /**
    * The principal id of user assigned identity.
@@ -5750,13 +6184,11 @@ model UserIdentityProperties {
 /**
  * Parameter supplied to Update Api Management Service.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementServiceUpdateParameters extends ApimResource {
   /**
    * Properties of the API Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ApiManagementServiceUpdateProperties;
 
   /**
@@ -5784,7 +6216,7 @@ model ApiManagementServiceUpdateParameters extends ApimResource {
 /**
  * Properties of an API Management service resource description.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementServiceUpdateProperties
   extends ApiManagementServiceBaseProperties {
   /**
@@ -5807,6 +6239,8 @@ model MigrateToStv2Contract {
   /**
    * Mode of Migration to stv2. Default is PreserveIp.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @OpenAPI.externalDocs("https://aka.ms/apim-migrate-stv2")
   mode?: MigrateToStv2Mode;
 }
 
@@ -5876,12 +6310,27 @@ model ApiManagementServiceApplyNetworkConfigurationParameters {
 /**
  * Paged Documentation list representation.
  */
-model DocumentationCollection is Azure.Core.Page<DocumentationContract>;
+model DocumentationCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: DocumentationContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Markdown documentation details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DocumentationContractProperties {
   /**
    * documentation title.
@@ -5901,25 +6350,35 @@ model DocumentationUpdateContract {
   /**
    * Markdown Documentation details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DocumentationContractProperties;
 }
 
 /**
  * Paged email template list representation.
  */
-model EmailTemplateCollection is Azure.Core.Page<EmailTemplateContract> {
+model EmailTemplateCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: EmailTemplateContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Email Template Contract properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model EmailTemplateContractProperties {
   /**
    * Subject of the Template.
@@ -5992,8 +6451,6 @@ model EmailTemplateUpdateParameters {
   /**
    * Email Template Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: EmailTemplateUpdateParameterProperties;
 }
 
@@ -6031,12 +6488,12 @@ model EmailTemplateUpdateParameterProperties {
   parameters?: EmailTemplateParametersContractProperties[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GatewayConfigConnectionBaseProperties {
   /**
    * The current provisioning state of the API Management gateway config connection
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 
@@ -6064,17 +6521,31 @@ model GatewayConfigConnectionBaseProperties {
 /**
  * Paged Gateway list representation.
  */
-model GatewayCollection is Azure.Core.Page<GatewayContract> {
+model GatewayCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: GatewayContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
  * Properties of the Gateway contract.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GatewayContractProperties {
   /**
    * Gateway location.
@@ -6149,7 +6620,7 @@ model GatewayTokenRequestContract {
   /**
    * The Key to be used to generate gateway token.
    */
-  keyType: KeyType;
+  keyType: KeyType = KeyType.primary;
 
   /**
    * The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
@@ -6172,13 +6643,26 @@ model GatewayTokenContract {
 /**
  * Paged Gateway hostname configuration list representation.
  */
-model GatewayHostnameConfigurationCollection
-  is Azure.Core.Page<GatewayHostnameConfigurationContract>;
+model GatewayHostnameConfigurationCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: GatewayHostnameConfigurationContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Gateway hostname configuration details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GatewayHostnameConfigurationContractProperties {
   /**
    * Hostname value. Supports valid domain name, partial or full wildcard
@@ -6214,14 +6698,12 @@ model GatewayHostnameConfigurationContractProperties {
 /**
  * Association entity details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AssociationContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Association entity contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AssociationContractProperties;
 }
 
@@ -6238,13 +6720,26 @@ model AssociationContractProperties {
 /**
  * Paged Gateway certificate authority list representation.
  */
-model GatewayCertificateAuthorityCollection
-  is Azure.Core.Page<GatewayCertificateAuthorityContract>;
+model GatewayCertificateAuthorityCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: GatewayCertificateAuthorityContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Gateway certificate authority details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GatewayCertificateAuthorityContractProperties {
   /**
    * Determines whether certificate authority is trusted.
@@ -6286,6 +6781,7 @@ model GatewayDebugCredentialsContract {
   /**
    * Gateway debug token.
    */
+  @secret
   token?: string;
 }
 
@@ -6302,17 +6798,29 @@ model GatewayListTraceContract {
 /**
  * Paged Group list representation.
  */
-model GroupCollection is Azure.Core.Page<GroupContract> {
+model GroupCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: GroupContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Group contract Properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model GroupContractProperties {
   /**
    * Group name.
@@ -6336,6 +6844,7 @@ model GroupContractProperties {
   /**
    * Group type.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: GroupType;
 
   /**
@@ -6351,8 +6860,6 @@ model GroupCreateParameters {
   /**
    * Properties supplied to Create Group operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GroupCreateParametersProperties;
 }
 
@@ -6390,8 +6897,6 @@ model GroupUpdateParameters {
   /**
    * Group entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: GroupUpdateParametersProperties;
 }
 
@@ -6425,18 +6930,30 @@ model GroupUpdateParametersProperties {
 /**
  * Paged Users list representation.
  */
-model UserCollection is Azure.Core.Page<UserContract> {
+model UserCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: UserContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * User profile.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UserContractProperties extends UserEntityBaseParameters {
   /**
    * First name.
@@ -6506,18 +7023,30 @@ model UserIdentityContract {
 /**
  * List of all the Identity Providers configured on the service instance.
  */
-model IdentityProviderList is Azure.Core.Page<IdentityProviderContract> {
+model IdentityProviderList {
+  /**
+   * Identity Provider configuration values.
+   */
+  @pageItems
+  value?: IdentityProviderContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IdentityProviderContractProperties
   extends IdentityProviderBaseParameters {
   /**
@@ -6530,6 +7059,7 @@ model IdentityProviderContractProperties
    * Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
   @minLength(1)
+  @secret
   clientSecret?: string;
 
   /**
@@ -6549,6 +7079,7 @@ model IdentityProviderBaseParameters {
   /**
    * Identity Provider Type identifier.
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   type?: IdentityProviderType;
 
   /**
@@ -6559,6 +7090,7 @@ model IdentityProviderBaseParameters {
   /**
    * List of Allowed Tenants when configuring Azure Active Directory login.
    */
+  @maxItems(32)
   allowedTenants?: string[];
 
   /**
@@ -6594,27 +7126,26 @@ model IdentityProviderBaseParameters {
    * The client library to be used in the developer portal. Only applies to AAD and AAD B2C Identity Provider.
    */
   @maxLength(16)
+  @minLength(0)
   clientLibrary?: string;
 }
 
 /**
  * Identity Provider details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IdentityProviderCreateContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Identity Provider contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IdentityProviderCreateContractProperties;
 }
 
 /**
  * The external Identity Providers like Facebook, Google, Microsoft, Twitter or Azure Active Directory which can be used to enable access to the API Management service developer portal for all users.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IdentityProviderCreateContractProperties
   extends IdentityProviderBaseParameters {
   /**
@@ -6627,6 +7158,7 @@ model IdentityProviderCreateContractProperties
    * Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
   @minLength(1)
+  @secret
   clientSecret: string;
 
   /**
@@ -6646,15 +7178,13 @@ model IdentityProviderUpdateParameters {
   /**
    * Identity Provider update properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: IdentityProviderUpdateProperties;
 }
 
 /**
  * Parameters supplied to the Update Identity Provider operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model IdentityProviderUpdateProperties extends IdentityProviderBaseParameters {
   /**
    * Client Id of the Application in the external Identity Provider. It is App ID for Facebook login, Client ID for Google login, App ID for Microsoft.
@@ -6666,6 +7196,7 @@ model IdentityProviderUpdateProperties extends IdentityProviderBaseParameters {
    * Client secret of the Application in external Identity Provider, used to authenticate login request. For example, it is App Secret for Facebook login, API Key for Google login, Public Key for Microsoft.
    */
   @minLength(1)
+  @secret
   clientSecret?: string;
 
   /**
@@ -6685,23 +7216,36 @@ model ClientSecretContract {
   /**
    * Client or app secret used in IdentityProviders, Aad, OpenID or OAuth.
    */
+  @secret
   clientSecret?: string;
 }
 
 /**
  * Paged Logger list representation.
  */
-model LoggerCollection is Azure.Core.Page<LoggerContract> {
+model LoggerCollection {
+  /**
+   * Logger values.
+   */
+  @pageItems
+  value?: LoggerContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * The Logger entity in API Management represents an event sink that you can use to log API Management events. Currently the Logger entity supports logging API Management events to Azure Event Hubs.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model LoggerContractProperties {
   /**
    * Logger type.
@@ -6718,7 +7262,7 @@ model LoggerContractProperties {
    * The name and SendRule connection string of the event hub for azureEventHub logger.
    * Instrumentation key for applicationInsights logger.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: Record<string>;
 
   /**
@@ -6739,8 +7283,6 @@ model LoggerUpdateContract {
   /**
    * Logger entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: LoggerUpdateParameters;
 }
 
@@ -6761,7 +7303,7 @@ model LoggerUpdateParameters {
   /**
    * Logger credentials.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   credentials?: Record<string>;
 
   /**
@@ -6773,17 +7315,29 @@ model LoggerUpdateParameters {
 /**
  * Paged NamedValue list representation.
  */
-model NamedValueCollection is Azure.Core.Page<NamedValueContract> {
+model NamedValueCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: NamedValueContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * NamedValue Contract properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NamedValueContractProperties extends NamedValueEntityBaseParameters {
   /**
    * Unique name of NamedValue. It may contain only letters, digits, period, dash, and underscore characters.
@@ -6807,7 +7361,7 @@ model NamedValueContractProperties extends NamedValueEntityBaseParameters {
   /**
    * The provisioning state
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -6819,6 +7373,7 @@ model NamedValueEntityBaseParameters {
   /**
    * Optional tags that when provided can be used to filter the NamedValue list.
    */
+  @maxItems(32)
   tags?: string[];
 
   /**
@@ -6830,21 +7385,19 @@ model NamedValueEntityBaseParameters {
 /**
  * NamedValue details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NamedValueCreateContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * NamedValue entity contract properties for PUT operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NamedValueCreateContractProperties;
 }
 
 /**
  * NamedValue Contract properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NamedValueCreateContractProperties
   extends NamedValueEntityBaseParameters {
   /**
@@ -6874,15 +7427,13 @@ model NamedValueUpdateParameters {
   /**
    * NamedValue entity Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: NamedValueUpdateParameterProperties;
 }
 
 /**
  * NamedValue Contract properties.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NamedValueUpdateParameterProperties
   extends NamedValueEntityBaseParameters {
   /**
@@ -6996,17 +7547,29 @@ model ConnectivityStatusContract {
 /**
  * Paged Notification list representation.
  */
-model NotificationCollection is Azure.Core.Page<NotificationContract> {
+model NotificationCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: NotificationContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Notification Contract properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model NotificationContractProperties {
   /**
    * Title of the Notification.
@@ -7064,14 +7627,12 @@ model RecipientUserCollection {
 /**
  * Recipient User details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecipientUserContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Recipient User entity contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RecipientUsersContractProperties;
 }
 
@@ -7108,14 +7669,12 @@ model RecipientEmailCollection {
 /**
  * Recipient Email details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model RecipientEmailContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Recipient Email contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: RecipientEmailContractProperties;
 }
 
@@ -7132,18 +7691,29 @@ model RecipientEmailContractProperties {
 /**
  * Paged OpenIdProviders list representation.
  */
-model OpenIdConnectProviderCollection
-  is Azure.Core.Page<OpenidConnectProviderContract> {
+model OpenIdConnectProviderCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: OpenidConnectProviderContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * OpenID Connect Providers Contract.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OpenidConnectProviderContractProperties {
   /**
    * User-friendly OpenID Connect Provider name.
@@ -7169,6 +7739,7 @@ model OpenidConnectProviderContractProperties {
   /**
    * Client Secret of developer console which is the client application.
    */
+  @secret
   clientSecret?: string;
 
   /**
@@ -7189,8 +7760,6 @@ model OpenidConnectProviderUpdateContract {
   /**
    * OpenId Connect Provider Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OpenidConnectProviderUpdateContractProperties;
 }
 
@@ -7222,6 +7791,7 @@ model OpenidConnectProviderUpdateContractProperties {
   /**
    * Client Secret of developer console which is the client application.
    */
+  @secret
   clientSecret?: string;
 
   /**
@@ -7317,14 +7887,12 @@ model PolicyDescriptionCollection {
 /**
  * Policy description details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PolicyDescriptionContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Policy description contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PolicyDescriptionContractProperties;
 }
 
@@ -7348,11 +7916,23 @@ model PolicyDescriptionContractProperties {
 /**
  * The response of the get policy fragments operation.
  */
-model PolicyFragmentCollection is Azure.Core.Page<PolicyFragmentContract> {
+model PolicyFragmentCollection {
+  /**
+   * Policy fragment contract value.
+   */
+  @pageItems
+  value?: PolicyFragmentContract[];
+
   /**
    * Total record count number.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -7368,17 +7948,18 @@ model PolicyFragmentContractProperties {
    * Policy fragment description.
    */
   @maxLength(1000)
+  @minLength(0)
   description?: string;
 
   /**
    * Format of the policy fragment content.
    */
-  format?: PolicyFragmentContentFormat;
+  format?: PolicyFragmentContentFormat = PolicyFragmentContentFormat.xml;
 
   /**
    * The provisioning state
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -7403,20 +7984,33 @@ model ResourceCollection {
   nextLink?: string;
 }
 
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResourceCollectionValueItem
   extends Azure.ResourceManager.CommonTypes.ProxyResource {}
 
 /**
  * The response of the get policy restrictions operation.
  */
-model PolicyRestrictionCollection is Azure.Core.Page<PolicyRestrictionContract>;
+model PolicyRestrictionCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: PolicyRestrictionContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Policy restrictions contract properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PolicyRestrictionContractProperties {
   /**
    * Path to the policy document.
@@ -7436,22 +8030,18 @@ model PolicyRestrictionUpdateContract {
   /**
    * Properties of the Policy Restriction.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PolicyRestrictionContractProperties;
 }
 
 /**
  * Long Running Git Operation Results.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model OperationResultContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Properties of the Operation Contract.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: OperationResultContractProperties;
 }
 
@@ -7565,21 +8155,34 @@ model OperationResultLogItemContract {
 /**
  * The collection of the developer portal configurations.
  */
-model PortalConfigCollection is Azure.Core.Page<PortalConfigContract>;
+model PortalConfigCollection {
+  /**
+   * The developer portal configurations.
+   */
+  @pageItems
+  value?: PortalConfigContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * The developer portal configuration contract properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalConfigProperties {
   /**
    * Enable or disable Basic authentication method.
    */
   enableBasicAuth?: boolean = true;
 
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   signin?: PortalConfigPropertiesSignin;
-  #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   signup?: PortalConfigPropertiesSignup;
 
   /**
@@ -7598,15 +8201,15 @@ model PortalConfigProperties {
   csp?: PortalConfigCspProperties;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalConfigPropertiesSignin {
   /**
    * Redirect anonymous users to the sign-in page.
    */
-  require?: boolean;
+  require?: boolean = false;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalConfigPropertiesSignup {
   /**
    * Terms of service settings.
@@ -7626,20 +8229,20 @@ model PortalConfigTermsOfServiceProperties {
   /**
    * Ask user for consent to the terms of service.
    */
-  requireConsent?: boolean;
+  requireConsent?: boolean = false;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalConfigDelegationProperties {
   /**
    * Enable or disable delegation for user registration.
    */
-  delegateRegistration?: boolean;
+  delegateRegistration?: boolean = false;
 
   /**
    * Enable or disable delegation for product subscriptions.
    */
-  delegateSubscription?: boolean;
+  delegateSubscription?: boolean = false;
 
   /**
    * A delegation endpoint URL.
@@ -7649,6 +8252,7 @@ model PortalConfigDelegationProperties {
   /**
    * A base64-encoded validation key to ensure requests originate from Azure API Management service.
    */
+  @secret
   validationKey?: string;
 }
 
@@ -7685,23 +8289,37 @@ model PortalConfigCspProperties {
 /**
  * Paged ClientApplication list representation.
  */
-model ClientApplicationCollection is Azure.Core.Page<ClientApplicationContract>;
+model ClientApplicationCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: ClientApplicationContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Client Application Entity Properties
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClientApplicationContractProperties {
   /**
    * Client application name.
    */
   @maxLength(300)
+  @minLength(0)
   displayName: string;
 
   /**
    * Client application description.
    */
   @maxLength(1000)
+  @minLength(0)
   description?: string;
 
   /**
@@ -7745,6 +8363,7 @@ model ClientApplicationSecretsContractEntra {
   /**
    * EntraID client application secret
    */
+  @secret
   clientSecret?: string;
 
   /**
@@ -7758,11 +8377,22 @@ model ClientApplicationSecretsContractEntra {
 /**
  * Paged ClientApplicationProductLinkContract list representation.
  */
-model ClientApplicationProductLinkCollection
-  is Azure.Core.Page<ClientApplicationProductLinkContract>;
+model ClientApplicationProductLinkCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: ClientApplicationProductLinkContract[];
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ClientApplicationProductLinkContractProperties {
   /**
    * The unique resource identifier of the Product.
@@ -7773,9 +8403,23 @@ model ClientApplicationProductLinkContractProperties {
 /**
  * Paged list of portal revisions.
  */
-model PortalRevisionCollection is Azure.Core.Page<PortalRevisionContract>;
+model PortalRevisionCollection {
+  /**
+   * Collection of portal revisions.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: PortalRevisionContract[];
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  /**
+   * Next page link, if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
+
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalRevisionContractProperties {
   /**
    * Portal revision description.
@@ -7818,7 +8462,7 @@ model PortalRevisionContractProperties {
   /**
    * The provisioning state
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -7841,14 +8485,12 @@ model PortalSettingsCollection {
 /**
  * Portal Settings for the Developer Portal.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalSettingsContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Portal Settings contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PortalSettingsContractProperties;
 }
 
@@ -7864,6 +8506,7 @@ model PortalSettingsContractProperties {
   /**
    * A base64-encoded validation key to validate, that a request is coming from Azure API Management.
    */
+  @secret
   validationKey?: string;
 
   /**
@@ -7930,7 +8573,7 @@ model TermsOfServiceProperties {
 /**
  * Sign-in settings contract properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalSigninSettingProperties {
   /**
    * Redirect Anonymous users to the Sign-In page.
@@ -7941,7 +8584,7 @@ model PortalSigninSettingProperties {
 /**
  * Sign-up settings contract properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalSignupSettingsProperties {
   /**
    * Allow users to sign up on a developer portal.
@@ -7957,7 +8600,7 @@ model PortalSignupSettingsProperties {
 /**
  * Delegation settings contract properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PortalDelegationSettingsProperties {
   /**
    * A delegation Url.
@@ -7967,6 +8610,7 @@ model PortalDelegationSettingsProperties {
   /**
    * A base64-encoded validation key to validate, that a request is coming from Azure API Management.
    */
+  @secret
   validationKey?: string;
 
   /**
@@ -7987,6 +8631,7 @@ model PortalSettingValidationKeyContract {
   /**
    * This is secret value of the validation key in portal settings.
    */
+  @secret
   validationKey?: string;
 }
 
@@ -8022,15 +8667,13 @@ model ProductUpdateParameters {
   /**
    * Product entity Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ProductUpdateProperties;
 }
 
 /**
  * Parameters supplied to the Update Product operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductUpdateProperties extends ProductEntityBaseParameters {
   /**
    * Product name.
@@ -8043,17 +8686,29 @@ model ProductUpdateProperties extends ProductEntityBaseParameters {
 /**
  * Paged Subscriptions list representation.
  */
-model SubscriptionCollection is Azure.Core.Page<SubscriptionContract> {
+model SubscriptionCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: SubscriptionContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Subscription details.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model SubscriptionContractProperties {
   /**
    * The user resource identifier of the subscription owner. The value is a valid relative URL in the format of /users/{userId} where {userId} is a user identifier.
@@ -8069,6 +8724,7 @@ model SubscriptionContractProperties {
    * The name of the subscription, or null if the subscription has no name.
    */
   @maxLength(100)
+  @minLength(0)
   displayName?: string;
 
   /**
@@ -8117,6 +8773,7 @@ model SubscriptionContractProperties {
    */
   @maxLength(256)
   @minLength(1)
+  @secret
   primaryKey?: string;
 
   /**
@@ -8124,6 +8781,7 @@ model SubscriptionContractProperties {
    */
   @maxLength(256)
   @minLength(1)
+  @secret
   secondaryKey?: string;
 
   /**
@@ -8140,17 +8798,29 @@ model SubscriptionContractProperties {
 /**
  * Paged Product-API link list representation.
  */
-model ProductApiLinkCollection is Azure.Core.Page<ProductApiLinkContract> {
+model ProductApiLinkCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: ProductApiLinkContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Product-API link entity properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductApiLinkContractProperties {
   /**
    * Full resource Id of an API.
@@ -8161,17 +8831,29 @@ model ProductApiLinkContractProperties {
 /**
  * Paged Product-group link list representation.
  */
-model ProductGroupLinkCollection is Azure.Core.Page<ProductGroupLinkContract> {
+model ProductGroupLinkCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: ProductGroupLinkContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Product-group link entity properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ProductGroupLinkContractProperties {
   /**
    * Full resource Id of a group.
@@ -8258,19 +8940,30 @@ model QuotaCounterValueUpdateContract {
   /**
    * Quota counter value details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: QuotaCounterValueContractProperties;
 }
 
 /**
  * Lists Regions operation response details.
  */
-model RegionListResult is Azure.Core.Page<RegionContract> {
+model RegionListResult {
+  /**
+   * Lists of Regions.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  value?: RegionContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -8297,11 +8990,24 @@ model RegionContract {
 /**
  * Paged Report records list representation.
  */
-model ReportCollection is Azure.Core.Page<ReportRecordContract> {
+model ReportCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name", "userId"])
+  value?: ReportRecordContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -8446,12 +9152,11 @@ model ReportRecordContract {
 /**
  * Paged Report records list representation.
  */
-@pagedResult
 model RequestReportCollection {
   /**
    * Page values.
    */
-  @items
+  @pageItems
   @OpenAPI.extension("x-ms-identifiers", #["url"])
   value?: RequestReportRecordContract[];
 
@@ -8459,6 +9164,12 @@ model RequestReportCollection {
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -8562,11 +9273,25 @@ model RequestReportRecordContract {
 /**
  * The response of the list schema operation.
  */
-model GlobalSchemaCollection is Azure.Core.Page<GlobalSchemaContract> {
+model GlobalSchemaCollection {
+  /**
+   * Global Schema Contract value.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: GlobalSchemaContract[];
+
   /**
    * Total record count number.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
@@ -8586,19 +9311,19 @@ model GlobalSchemaContractProperties {
   /**
    * Json-encoded string for non json-based schema.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   value?: unknown;
 
   /**
    * Global Schema document object for json-based schema formats(e.g. json schema).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
-  document?: Record<unknown>;
+  #suppress "@azure-tools/typespec-azure-core/no-unknown" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  document?: unknown;
 
   /**
    * The provisioning state
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   provisioningState?: string;
 }
@@ -8606,24 +9331,52 @@ model GlobalSchemaContractProperties {
 /**
  * Paged AccessInformation list representation.
  */
-model TenantSettingsCollection is Azure.Core.Page<TenantSettingsContract>;
+model TenantSettingsCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: TenantSettingsContract[];
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
+}
 
 /**
  * Tenant access information contract of the API Management service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TenantSettingsContractProperties {
   /**
    * Tenant settings
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   settings?: Record<string>;
 }
 
 /**
  * The List Resource Skus operation response.
  */
-model ApiManagementSkusResult is Azure.Core.Page<ApiManagementSku>;
+model ApiManagementSkusResult {
+  /**
+   * The list of skus available for the subscription.
+   */
+  @pageItems
+  @OpenAPI.extension("x-ms-identifiers", #["name", "resourceType"])
+  value: ApiManagementSku[];
+
+  /**
+   * The URI to fetch the next page of Resource Skus. Call ListNext() with this URI to fetch the next page of Resource Skus
+   */
+  @visibility(Lifecycle.Read)
+  @nextLink
+  nextLink?: string;
+}
 
 /**
  * Describes an available ApiManagement SKU.
@@ -8741,7 +9494,7 @@ model ApiManagementSkuCapacity {
   scaleType?: ApiManagementSkuCapacityScaleType;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementSkuLocationInfo {
   /**
    * Location of the SKU
@@ -8805,6 +9558,7 @@ model ApiManagementSkuCosts {
   /**
    * Used for querying price from commerce.
    */
+  #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   meterID?: string;
 
@@ -8850,7 +9604,7 @@ model ApiManagementSkuRestrictions {
   reasonCode?: ApiManagementSkuRestrictionsReasonCode;
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementSkuRestrictionInfo {
   /**
    * Locations where the SKU is restricted
@@ -8872,8 +9626,6 @@ model SubscriptionCreateParameters {
   /**
    * Subscription contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubscriptionCreateParameterProperties;
 }
 
@@ -8930,8 +9682,6 @@ model SubscriptionUpdateParameters {
   /**
    * Subscription Update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SubscriptionUpdateParameterProperties;
 }
 
@@ -9016,25 +9766,35 @@ model TagCreateUpdateParameters {
   /**
    * Properties supplied to Create Tag operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TagContractProperties;
 }
 
 /**
  * Paged Tag-API link list representation.
  */
-model TagApiLinkCollection is Azure.Core.Page<TagApiLinkContract> {
+model TagApiLinkCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: TagApiLinkContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Tag-API link entity properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TagApiLinkContractProperties {
   /**
    * Full resource Id of an API.
@@ -9045,17 +9805,29 @@ model TagApiLinkContractProperties {
 /**
  * Paged Tag-operation link list representation.
  */
-model TagOperationLinkCollection is Azure.Core.Page<TagOperationLinkContract> {
+model TagOperationLinkCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: TagOperationLinkContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Tag-operation link entity properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TagOperationLinkContractProperties {
   /**
    * Full resource Id of an API operation.
@@ -9066,17 +9838,29 @@ model TagOperationLinkContractProperties {
 /**
  * Paged Tag-product link list representation.
  */
-model TagProductLinkCollection is Azure.Core.Page<TagProductLinkContract> {
+model TagProductLinkCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: TagProductLinkContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Tag-product link entity properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TagProductLinkContractProperties {
   /**
    * Full resource Id of a product.
@@ -9087,22 +9871,36 @@ model TagProductLinkContractProperties {
 /**
  * Paged AccessInformation list representation.
  */
-model AccessInformationCollection
-  is Azure.Core.Page<AccessInformationContract> {
+model AccessInformationCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  @visibility(Lifecycle.Read)
+  value?: AccessInformationContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  @visibility(Lifecycle.Read)
+  nextLink?: string;
 }
 
 /**
  * Tenant access information contract of the API Management service.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model AccessInformationContractProperties {
   /**
    * Access Information type ('access' or 'gitAccess')
    */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-duplicate-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   id?: string;
 
   /**
@@ -9123,8 +9921,6 @@ model AccessInformationCreateParameters {
   /**
    * Tenant access information update parameter properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AccessInformationCreateParameterProperties;
 }
 
@@ -9140,11 +9936,13 @@ model AccessInformationCreateParameterProperties {
   /**
    * Primary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
+  @secret
   primaryKey?: string;
 
   /**
    * Secondary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
+  @secret
   secondaryKey?: string;
 
   /**
@@ -9160,8 +9958,6 @@ model AccessInformationUpdateParameters {
   /**
    * Tenant access information update parameter properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: AccessInformationUpdateParameterProperties;
 }
 
@@ -9192,11 +9988,13 @@ model AccessInformationSecretsContract {
   /**
    * Primary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
+  @secret
   primaryKey?: string;
 
   /**
    * Secondary access key. This property will not be filled on 'GET' operations! Use '/listSecrets' POST request to get the value.
    */
+  @secret
   secondaryKey?: string;
 
   /**
@@ -9212,8 +10010,6 @@ model DeployConfigurationParameters {
   /**
    * Deploy Configuration Parameter contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DeployConfigurationParameterProperties;
 }
 
@@ -9239,8 +10035,6 @@ model SaveConfigurationParameter {
   /**
    * Properties of the Save Configuration Parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: SaveConfigurationParameterProperties;
 }
 
@@ -9262,14 +10056,12 @@ model SaveConfigurationParameterProperties {
 /**
  * Result of Tenant Configuration Sync State.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model TenantConfigurationSyncStateContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Properties returned Tenant Configuration Sync State check.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: TenantConfigurationSyncStateContractProperties;
 }
 
@@ -9329,15 +10121,13 @@ model UserCreateParameters {
   /**
    * User entity create contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserCreateParameterProperties;
 }
 
 /**
  * Parameters supplied to the Create User operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UserCreateParameterProperties extends UserEntityBaseParameters {
   /**
    * Email address. Must not be empty and must be unique within the service instance.
@@ -9383,15 +10173,13 @@ model UserUpdateParameters {
   /**
    * User entity update contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserUpdateParametersProperties;
 }
 
 /**
  * Parameters supplied to the Update User operation.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model UserUpdateParametersProperties extends UserEntityBaseParameters {
   /**
    * Email address. Must not be empty and must be unique within the service instance.
@@ -9433,11 +10221,23 @@ model GenerateSsoUrlResult {
 /**
  * List of Users Identity list representation.
  */
-model UserIdentityCollection is Azure.Core.Page<UserIdentityContract> {
+model UserIdentityCollection {
+  /**
+   * User Identity values.
+   */
+  @pageItems
+  value?: UserIdentityContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -9447,8 +10247,6 @@ model UserTokenParameters {
   /**
    * User Token Parameter contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: UserTokenParameterProperties;
 }
 
@@ -9459,7 +10257,7 @@ model UserTokenParameterProperties {
   /**
    * The Key to be used to generate token for user.
    */
-  keyType: KeyType;
+  keyType: KeyType = KeyType.primary;
 
   /**
    * The Expiry time of the Token. Maximum token expiry time is set to 30 days. The date conforms to the following format: `yyyy-MM-ddTHH:mm:ssZ` as specified by the ISO 8601 standard.
@@ -9482,14 +10280,12 @@ model UserTokenResult {
 /**
  * Diagnostic details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model DiagnosticUpdateContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Diagnostic entity contract properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: DiagnosticContractUpdateProperties;
 }
 
@@ -9551,12 +10347,13 @@ model DiagnosticContractUpdateProperties {
 /**
  * Properties of an API Management workspaceLinks resource.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ApiManagementWorkspaceLinksProperties
   extends WorkspaceLinksBaseProperties {}
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspaceLinksBaseProperties {
   /**
    * The link to the API Management service workspace.
@@ -9573,7 +10370,7 @@ model WorkspaceLinksBaseProperties {
   gateways?: WorkspaceLinksGateway[];
 }
 
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspaceLinksGateway {
   /**
    * The link to the API Management gateway.
@@ -9588,17 +10385,29 @@ model WorkspaceLinksGateway {
 /**
  * Paged workspace list representation.
  */
-model WorkspaceCollection is Azure.Core.Page<WorkspaceContract> {
+model WorkspaceCollection {
+  /**
+   * Page values.
+   */
+  @pageItems
+  value?: WorkspaceContract[];
+
   /**
    * Total record count number across all pages.
    */
   count?: int64;
+
+  /**
+   * Next page link if any.
+   */
+  @nextLink
+  nextLink?: string;
 }
 
 /**
  * Workspace entity properties.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model WorkspaceContractProperties {
   /**
    * Name of the workspace.
@@ -9656,14 +10465,12 @@ model PolicyWithComplianceCollection {
 /**
  * Policy Contract details.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model PolicyWithComplianceContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Properties of the Policy.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: PolicyWithComplianceContractProperties;
 }
 
@@ -9679,7 +10486,7 @@ model PolicyWithComplianceContractProperties {
   /**
    * Policy Restriction Compliance State
    */
-  complianceState?: PolicyComplianceState;
+  complianceState?: PolicyComplianceState = PolicyComplianceState.Pending;
 }
 
 /**
@@ -9689,22 +10496,18 @@ model QuotaCounterValueContract {
   /**
    * Quota counter Value Properties.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   value?: QuotaCounterValueContractProperties;
 }
 
 /**
  * Long Running Git Resolver Results.
  */
-#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ResolverResultContract
   extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Properties of the Resolver Contract.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-private-usage" "For backward compatibility"
-  @Azure.ResourceManager.Private.conditionalClientFlatten
   properties?: ResolverResultContractProperties;
 }
 
@@ -9772,4 +10575,97 @@ model ResolverResultLogItemContract {
    * Identifier of the entity being created/updated/deleted.
    */
   objectKey?: string;
+}
+
+/**
+ * Trace collected in gateway.
+ */
+model GatewayTraceContract {
+  ...Record<unknown>;
+}
+
+/**
+ * Result of the request to list REST API operations. It contains a list of operations and a URL nextLink to get the next set of results.
+ */
+model OperationListResult {
+  /**
+   * List of operations supported by the resource provider.
+   */
+  @OpenAPI.extension("x-ms-identifiers", #["name"])
+  @pageItems
+  value?: Operation[];
+
+  /**
+   * URL to get the next set of operation list results if there are any.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The response of the List API Management gateway operation.
+ */
+model ApiManagementGatewayListResult {
+  /**
+   * Result of the List API Management gateway operation.
+   */
+  @pageItems
+  value: ApiManagementGatewayResource[];
+
+  /**
+   * Link to the next set of results. Not empty if Value contains incomplete list of API Management services.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The response of the List API Management services operation.
+ */
+model ApiManagementServiceListResult {
+  /**
+   * Result of the List API Management services operation.
+   */
+  @pageItems
+  value: ApiManagementServiceResource[];
+
+  /**
+   * Link to the next set of results. Not empty if Value contains incomplete list of API Management services.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The response of the List API Management gateway operation.
+ */
+model ApiManagementGatewayConfigConnectionListResult {
+  /**
+   * Result of the List API Management gateway config connection operation.
+   */
+  @pageItems
+  value: ApiManagementGatewayConfigConnectionResource[];
+
+  /**
+   * Link to the next set of results. Not empty if Value contains incomplete list of API Management services.
+   */
+  @nextLink
+  nextLink?: string;
+}
+
+/**
+ * The response of the List API Management WorkspaceLink operation.
+ */
+model ApiManagementWorkspaceLinksListResult {
+  /**
+   * Result of the List API Management WorkspaceLinks operation.
+   */
+  @pageItems
+  value: ApiManagementWorkspaceLinksResource[];
+
+  /**
+   * Link to the next set of results. Not empty if Value contains incomplete list of API Management services.
+   */
+  @nextLink
+  nextLink?: string;
 }

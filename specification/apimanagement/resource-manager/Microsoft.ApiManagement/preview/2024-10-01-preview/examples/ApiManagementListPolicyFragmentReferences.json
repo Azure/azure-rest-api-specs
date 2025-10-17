@@ -1,24 +1,26 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "id": "policyFragment1"
+    "id": "policyFragment1",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "count": 1,
+        "nextLink": "",
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policies/policy",
+            "name": "policy",
             "type": "Microsoft.ApiManagement/service/policies",
-            "name": "policy"
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/policies/policy"
           }
-        ],
-        "count": 1,
-        "nextLink": ""
+        ]
       }
     }
-  }
+  },
+  "operationId": "PolicyFragment_ListReferences",
+  "title": "ApiManagementListPolicyFragmentReferences"
 }

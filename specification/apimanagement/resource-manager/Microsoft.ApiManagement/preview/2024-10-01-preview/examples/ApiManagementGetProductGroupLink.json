@@ -1,22 +1,24 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "groupLinkId": "link1",
     "productId": "testproduct",
-    "groupLinkId": "link1"
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/testproduct/groupLinks/link1",
-        "type": "Microsoft.ApiManagement/service/products/groupLinks",
         "name": "link1",
+        "type": "Microsoft.ApiManagement/service/products/groupLinks",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/products/testproduct/groupLinks/link1",
         "properties": {
           "groupId": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/groups/group1"
         }
       }
     }
-  }
+  },
+  "operationId": "ProductGroupLink_Get",
+  "title": "ApiManagementGetProductGroupLink"
 }

@@ -39,6 +39,8 @@ interface SubscriptionContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -47,6 +49,7 @@ interface SubscriptionContractOps
         @segment("subscriptions")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
         sid: string,
       }
     > {}
@@ -56,24 +59,37 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_Get")
-  get is SubscriptionContractOps.Read<SubscriptionContract>;
+  get is SubscriptionContractOps.Read<
+    SubscriptionContract,
+    Response = ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_GetEntityTag")
-  getEntityTag is SubscriptionContractOps.CheckExistence<SubscriptionContract>;
+  getEntityTag is SubscriptionContractOps.CheckExistence<
+    SubscriptionContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_CreateOrUpdate")
   createOrUpdate is SubscriptionContractOps.CreateOrUpdateSync<
     SubscriptionContract,
+    Request = SubscriptionCreateParameters,
     Parameters = {
       /**
        * Notify change in Subscription State.
@@ -86,7 +102,8 @@ interface SubscriptionContracts {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
@@ -94,14 +111,25 @@ interface SubscriptionContracts {
        */
       @query("appType")
       appType?: AppType;
-    }
+    },
+    Response = (ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of a subscription specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_Update")
   @patch(#{ implicitOptionality: false })
   update is SubscriptionContractOps.CustomPatchSync<
     SubscriptionContract,
@@ -118,7 +146,8 @@ interface SubscriptionContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
 
       /**
@@ -126,21 +155,27 @@ interface SubscriptionContracts {
        */
       @query("appType")
       appType?: AppType;
+    },
+    Response = ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes the specified subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_Delete")
   delete is SubscriptionContractOps.DeleteSync<
     SubscriptionContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -148,8 +183,6 @@ interface SubscriptionContracts {
   /**
    * Lists all subscriptions of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_List")
   list is SubscriptionContractOps.List<
     SubscriptionContract,
     Parameters = {
@@ -169,6 +202,7 @@ interface SubscriptionContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -178,8 +212,6 @@ interface SubscriptionContracts {
   /**
    * Regenerates primary key of existing subscription of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_RegeneratePrimaryKey")
   regeneratePrimaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
@@ -189,8 +221,6 @@ interface SubscriptionContracts {
   /**
    * Regenerates secondary key of existing subscription of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_RegenerateSecondaryKey")
   regenerateSecondaryKey is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
@@ -200,12 +230,16 @@ interface SubscriptionContracts {
   /**
    * Gets the specified Subscription keys.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Subscription_ListSecrets")
   listSecrets is SubscriptionContractOps.ActionSync<
     SubscriptionContract,
     void,
-    ArmResponse<SubscriptionKeysContract>
+    Response = ArmResponse<SubscriptionKeysContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 @armResourceOperations
@@ -222,12 +256,16 @@ interface UserSubscriptionOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** User identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("users")
         @key
+        @minLength(1)
+        @maxLength(80)
         userId: string,
       },
       {
@@ -236,6 +274,7 @@ interface UserSubscriptionOps
         @segment("subscriptions")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
         sid: string,
       }
     > {}
@@ -245,7 +284,16 @@ interface UserSubscription {
   /**
    * Gets the specified Subscription entity associated with a particular user.
    */
-  get is UserSubscriptionOps.Read<SubscriptionContract>;
+  get is UserSubscriptionOps.Read<
+    SubscriptionContract,
+    Response = ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Lists the collection of subscriptions of the specified user.
@@ -269,6 +317,7 @@ interface UserSubscription {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -289,6 +338,8 @@ interface WorkspaceSubscriptionOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -296,6 +347,8 @@ interface WorkspaceSubscriptionOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -304,6 +357,7 @@ interface WorkspaceSubscriptionOps
         @segment("subscriptions")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
         sid: string,
       }
     > {}
@@ -313,18 +367,37 @@ interface WorkspaceSubscription {
   /**
    * Gets the specified Subscription entity.
    */
-  get is WorkspaceSubscriptionOps.Read<SubscriptionContract>;
+  get is WorkspaceSubscriptionOps.Read<
+    SubscriptionContract,
+    Response = ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the apimanagement subscription specified by its identifier.
    */
-  getEntityTag is WorkspaceSubscriptionOps.CheckExistence<SubscriptionContract>;
+  getEntityTag is WorkspaceSubscriptionOps.CheckExistence<
+    SubscriptionContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates the subscription of specified user to the specified product.
    */
   createOrUpdate is WorkspaceSubscriptionOps.CreateOrUpdateSync<
     SubscriptionContract,
+    Request = SubscriptionCreateParameters,
     Parameters = {
       /**
        * Notify change in Subscription State.
@@ -337,7 +410,8 @@ interface WorkspaceSubscription {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
 
       /**
@@ -345,7 +419,20 @@ interface WorkspaceSubscription {
        */
       @query("appType")
       appType?: AppType;
-    }
+    },
+    Response = (ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -367,7 +454,8 @@ interface WorkspaceSubscription {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
 
       /**
@@ -375,6 +463,13 @@ interface WorkspaceSubscription {
        */
       @query("appType")
       appType?: AppType;
+    },
+    Response = ArmResponse<SubscriptionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -387,7 +482,8 @@ interface WorkspaceSubscription {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -414,6 +510,7 @@ interface WorkspaceSubscription {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -444,7 +541,13 @@ interface WorkspaceSubscription {
   listSecrets is WorkspaceSubscriptionOps.ActionSync<
     SubscriptionContract,
     void,
-    ArmResponse<SubscriptionKeysContract>
+    Response = ArmResponse<SubscriptionKeysContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 

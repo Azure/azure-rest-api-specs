@@ -40,6 +40,8 @@ interface PolicyContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
@@ -47,12 +49,16 @@ interface PolicyContractOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
 
         /** Operation identifier within an API. Must be unique in the current API Management service instance. */
         @path
         @segment("operations")
         @key
+        @minLength(1)
+        @maxLength(80)
         operationId: string,
       },
       {
@@ -60,7 +66,7 @@ interface PolicyContractOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -69,8 +75,6 @@ interface PolicyContracts {
   /**
    * Get the policy configuration at the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_Get")
   get is PolicyContractOps.Read<
     PolicyContract,
     Parameters = {
@@ -79,44 +83,69 @@ interface PolicyContracts {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the API operation policy specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_GetEntityTag")
-  getEntityTag is PolicyContractOps.CheckExistence<PolicyContract>;
+  getEntityTag is PolicyContractOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_CreateOrUpdate")
   createOrUpdate is PolicyContractOps.CreateOrUpdateSync<
     PolicyContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes the policy configuration at the Api Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_Delete")
   delete is PolicyContractOps.DeleteSync<
     PolicyContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -124,13 +153,12 @@ interface PolicyContracts {
   /**
    * Get the list of policy configuration at the API Operation level.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiOperationPolicy_ListByOperation")
-  listByOperation is PolicyContractOps.List<
+  listByOperation is PolicyContractOps.ListSinglePage<
     PolicyContract,
     Response = ArmResponse<PolicyCollection>
   >;
 }
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface GraphQLApiResolverPolicyOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -145,6 +173,8 @@ interface GraphQLApiResolverPolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
@@ -152,12 +182,16 @@ interface GraphQLApiResolverPolicyOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
 
         /** Resolver identifier within a GraphQL API. Must be unique in the current API Management service instance. */
         @path
         @segment("resolvers")
         @key
+        @minLength(1)
+        @maxLength(80)
         resolverId: string,
       },
       {
@@ -165,10 +199,11 @@ interface GraphQLApiResolverPolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
+#suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface GraphQLApiResolverPolicy {
   /**
@@ -182,13 +217,29 @@ interface GraphQLApiResolverPolicy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the GraphQL API resolver policy specified by its identifier.
    */
-  getEntityTag is GraphQLApiResolverPolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is GraphQLApiResolverPolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the GraphQL API Resolver level.
@@ -199,9 +250,23 @@ interface GraphQLApiResolverPolicy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -213,7 +278,8 @@ interface GraphQLApiResolverPolicy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -240,6 +306,8 @@ interface ApiPolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
@@ -247,6 +315,8 @@ interface ApiPolicyOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
       },
       {
@@ -254,7 +324,7 @@ interface ApiPolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -271,13 +341,29 @@ interface ApiPolicy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the API policy specified by its identifier.
    */
-  getEntityTag is ApiPolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is ApiPolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the API.
@@ -288,9 +374,23 @@ interface ApiPolicy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -302,7 +402,8 @@ interface ApiPolicy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -310,7 +411,7 @@ interface ApiPolicy {
   /**
    * Get the policy configuration at the API level.
    */
-  listByApi is ApiPolicyOps.List<
+  listByApi is ApiPolicyOps.ListSinglePage<
     PolicyContract,
     Response = ArmResponse<PolicyCollection>
   >;
@@ -329,6 +430,8 @@ interface PolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -336,7 +439,7 @@ interface PolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -353,13 +456,29 @@ interface Policy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the Global policy definition in the Api Management service.
    */
-  getEntityTag is PolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is PolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates the global policy configuration of the Api Management service.
@@ -370,9 +489,23 @@ interface Policy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -384,7 +517,8 @@ interface Policy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -411,12 +545,16 @@ interface ProductPolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -424,7 +562,7 @@ interface ProductPolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -441,13 +579,29 @@ interface ProductPolicy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Get the ETag of the policy configuration at the Product level.
    */
-  getEntityTag is ProductPolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is ProductPolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the Product.
@@ -458,9 +612,23 @@ interface ProductPolicy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -472,7 +640,8 @@ interface ProductPolicy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -499,6 +668,8 @@ interface WorkspacePolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -506,6 +677,8 @@ interface WorkspacePolicyOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -513,7 +686,7 @@ interface WorkspacePolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -530,13 +703,29 @@ interface WorkspacePolicy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the workspace policy specified by its identifier.
    */
-  getEntityTag is WorkspacePolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is WorkspacePolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the workspace.
@@ -547,9 +736,23 @@ interface WorkspacePolicy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -561,7 +764,8 @@ interface WorkspacePolicy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -588,6 +792,8 @@ interface WorkspaceApiOperationPolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -595,6 +801,8 @@ interface WorkspaceApiOperationPolicyOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
@@ -602,12 +810,16 @@ interface WorkspaceApiOperationPolicyOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
 
         /** Operation identifier within an API. Must be unique in the current API Management service instance. */
         @path
         @segment("operations")
         @key
+        @minLength(1)
+        @maxLength(80)
         operationId: string,
       },
       {
@@ -615,7 +827,7 @@ interface WorkspaceApiOperationPolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -632,13 +844,29 @@ interface WorkspaceApiOperationPolicy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the API operation policy specified by its identifier.
    */
-  getEntityTag is WorkspaceApiOperationPolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is WorkspaceApiOperationPolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the API Operation level.
@@ -649,9 +877,23 @@ interface WorkspaceApiOperationPolicy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -663,7 +905,8 @@ interface WorkspaceApiOperationPolicy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -690,6 +933,8 @@ interface WorkspaceApiPolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -697,6 +942,8 @@ interface WorkspaceApiPolicyOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
@@ -704,6 +951,8 @@ interface WorkspaceApiPolicyOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
       },
       {
@@ -711,7 +960,7 @@ interface WorkspaceApiPolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -728,13 +977,29 @@ interface WorkspaceApiPolicy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the API policy specified by its identifier.
    */
-  getEntityTag is WorkspaceApiPolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is WorkspaceApiPolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the API.
@@ -745,9 +1010,23 @@ interface WorkspaceApiPolicy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -759,7 +1038,8 @@ interface WorkspaceApiPolicy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -786,6 +1066,8 @@ interface WorkspaceProductPolicyOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -793,12 +1075,16 @@ interface WorkspaceProductPolicyOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -806,7 +1092,7 @@ interface WorkspaceProductPolicyOps
         @path
         @segment("policies")
         @key
-        policyId: string,
+        policyId: PolicyIdName,
       }
     > {}
 
@@ -823,13 +1109,29 @@ interface WorkspaceProductPolicy {
        */
       @query("format")
       format?: PolicyExportFormat = PolicyExportFormat.xml;
+    },
+    Response = ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Get the ETag of the policy configuration at the Product level.
    */
-  getEntityTag is WorkspaceProductPolicyOps.CheckExistence<PolicyContract>;
+  getEntityTag is WorkspaceProductPolicyOps.CheckExistence<
+    PolicyContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates policy configuration for the Product.
@@ -840,9 +1142,23 @@ interface WorkspaceProductPolicy {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<PolicyContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -854,7 +1170,8 @@ interface WorkspaceProductPolicy {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -862,7 +1179,7 @@ interface WorkspaceProductPolicy {
   /**
    * Get the policy configuration at the Product level.
    */
-  listByProduct is WorkspaceProductPolicyOps.List<
+  listByProduct is WorkspaceProductPolicyOps.ListSinglePage<
     PolicyContract,
     Response = ArmResponse<PolicyCollection>
   >;

@@ -25,6 +25,33 @@ model ProductContract
   >;
 }
 
+alias ProductApiParameters = {
+  ...ResourceInstanceParameters<ProductContract>;
+
+  /**
+   * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
+   */
+  @maxLength(256)
+  @minLength(1)
+  @pattern("^[^*#&+:<>?]+$")
+  @path
+  @segment("apis")
+  apiId: string;
+};
+
+alias ProductGroupParameters = {
+  ...ResourceInstanceParameters<ProductContract>;
+
+  /**
+   * Group identifier. Must be unique in the current API Management service instance.
+   */
+  @maxLength(256)
+  @minLength(1)
+  @path
+  @segment("groups")
+  groupId: string;
+};
+
 @armResourceOperations
 interface ProductContractOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
@@ -39,6 +66,8 @@ interface ProductContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -46,6 +75,8 @@ interface ProductContractOps
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       }
     > {}
@@ -55,38 +86,62 @@ interface ProductContracts {
   /**
    * Gets the details of the product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_Get")
-  get is ProductContractOps.Read<ProductContract>;
+  get is ProductContractOps.Read<
+    ProductContract,
+    Response = ArmResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_GetEntityTag")
-  getEntityTag is ProductContractOps.CheckExistence<ProductContract>;
+  getEntityTag is ProductContractOps.CheckExistence<
+    ProductContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_CreateOrUpdate")
   createOrUpdate is ProductContractOps.CreateOrUpdateSync<
     ProductContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Update existing product details.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_Update")
   @patch(#{ implicitOptionality: false })
   update is ProductContractOps.CustomPatchSync<
     ProductContract,
@@ -95,23 +150,30 @@ interface ProductContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Delete product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_Delete")
   delete is ProductContractOps.DeleteSync<
     ProductContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
 
       /**
@@ -125,8 +187,6 @@ interface ProductContracts {
   /**
    * Lists a collection of products in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Product_ListByService")
   listByService is ProductContractOps.List<
     ProductContract,
     Parameters = {
@@ -146,6 +206,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -167,10 +228,9 @@ interface ProductContracts {
   /**
    * Lists a collection of the APIs associated with a product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApi_ListByProduct")
   @get
   @action("apis")
+  @list
   listByProduct is ProductContractOps.ActionSync<
     ProductContract,
     void,
@@ -192,6 +252,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -200,37 +261,17 @@ interface ProductContracts {
   /**
    * Checks that API entity specified by identifier is associated with the Product entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApi_CheckEntityExists")
   @head
-  @action("{apiId}")
-  checkEntityExists is ProductContractOps.ActionSync<
-    ProductContract,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @pattern("^[^*#&+:<>?]+$")
-      @path
-      apiId: string;
-    }
-  >;
+  checkEntityExists(...ProductApiParameters): NoContentResponse | ErrorResponse;
 
   /**
    * Adds an API to the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApi_CreateOrUpdate")
   @put
-  @action("{apiId}")
-  productApiCreateOrUpdate is ProductContractOps.ActionSync<
+  productApiCreateOrUpdate is ProductContractOps.CreateOrUpdateSync<
     ProductContract,
-    void,
-    ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract>,
+    Request = void,
+    Response = ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract>,
     Parameters = {
       /**
        * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
@@ -239,6 +280,7 @@ interface ProductContracts {
       @minLength(1)
       @pattern("^[^*#&+:<>?]+$")
       @path
+      @segment("apis")
       apiId: string;
     }
   >;
@@ -246,33 +288,18 @@ interface ProductContracts {
   /**
    * Deletes the specified API from the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductApi_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  @action("{apiId}")
-  productApiDelete is ProductContractOps.ActionSync<
-    ProductContract,
-    void,
-    OkResponse | NoContentResponse,
-    Parameters = {
-      /**
-       * API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @pattern("^[^*#&+:<>?]+$")
-      @path
-      apiId: string;
-    }
-  >;
+  productApiDelete(
+    ...ProductApiParameters,
+  ): OkResponse | NoContentResponse | ErrorResponse;
 
   /**
    * Lists the collection of developer groups associated with the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroup_ListByProduct")
   @get
   @action("groups")
+  @list
   productGroupListByProduct is ProductContractOps.ActionSync<
     ProductContract,
     void,
@@ -294,6 +321,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -302,36 +330,19 @@ interface ProductContracts {
   /**
    * Checks that Group entity specified by identifier is associated with the Product entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroup_CheckEntityExists")
   @head
-  @action("{groupId}")
-  productGroupCheckEntityExists is ProductContractOps.ActionSync<
-    ProductContract,
-    void,
-    NoContentResponse,
-    Parameters = {
-      /**
-       * Group identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @path
-      groupId: string;
-    }
-  >;
+  productGroupCheckEntityExists(
+    ...ProductGroupParameters,
+  ): NoContentResponse | ErrorResponse;
 
   /**
    * Adds the association between the specified developer group with the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroup_CreateOrUpdate")
   @put
-  @action("{groupId}")
-  productGroupCreateOrUpdate is ProductContractOps.ActionSync<
+  productGroupCreateOrUpdate is ProductContractOps.CreateOrUpdateSync<
     ProductContract,
-    void,
-    ArmResponse<GroupContract> | ArmResourceCreatedSyncResponse<GroupContract>,
+    Request = void,
+    Response = ArmResponse<GroupContract> | ArmResourceCreatedSyncResponse<GroupContract>,
     Parameters = {
       /**
        * Group identifier. Must be unique in the current API Management service instance.
@@ -339,6 +350,7 @@ interface ProductContracts {
       @maxLength(256)
       @minLength(1)
       @path
+      @segment("groups")
       groupId: string;
     }
   >;
@@ -346,32 +358,18 @@ interface ProductContracts {
   /**
    * Deletes the association between the specified group and product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroup_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  @action("{groupId}")
-  productGroupDelete is ProductContractOps.ActionSync<
-    ProductContract,
-    void,
-    OkResponse | NoContentResponse,
-    Parameters = {
-      /**
-       * Group identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(256)
-      @minLength(1)
-      @path
-      groupId: string;
-    }
-  >;
+  productGroupDelete(
+    ...ProductGroupParameters,
+  ): OkResponse | NoContentResponse | ErrorResponse;
 
   /**
    * Lists the collection of subscriptions to the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductSubscriptions_List")
   @get
   @action("subscriptions")
+  @list
   list is ProductContractOps.ActionSync<
     ProductContract,
     void,
@@ -393,6 +391,7 @@ interface ProductContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -412,6 +411,8 @@ interface WorkspaceProductOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -419,6 +420,8 @@ interface WorkspaceProductOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -426,6 +429,8 @@ interface WorkspaceProductOps
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       }
     > {}
@@ -435,12 +440,30 @@ interface WorkspaceProduct {
   /**
    * Gets the details of the product specified by its identifier.
    */
-  get is WorkspaceProductOps.Read<ProductContract>;
+  get is WorkspaceProductOps.Read<
+    ProductContract,
+    Response = ArmResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the product specified by its identifier.
    */
-  getEntityTag is WorkspaceProductOps.CheckExistence<ProductContract>;
+  getEntityTag is WorkspaceProductOps.CheckExistence<
+    ProductContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a product.
@@ -451,9 +474,23 @@ interface WorkspaceProduct {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -467,8 +504,16 @@ interface WorkspaceProduct {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ProductContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -481,7 +526,8 @@ interface WorkspaceProduct {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
 
       /**
@@ -514,6 +560,7 @@ interface WorkspaceProduct {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 

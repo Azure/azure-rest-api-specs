@@ -39,12 +39,16 @@ interface DiagnosticContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("apis")
         @key
+        @minLength(1)
+        @maxLength(80)
         apiId: string,
       },
       {
@@ -53,6 +57,8 @@ interface DiagnosticContractOps
         @segment("diagnostics")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         diagnosticId: string,
       }
     > {}
@@ -62,38 +68,62 @@ interface DiagnosticContracts {
   /**
    * Gets the details of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_Get")
-  get is DiagnosticContractOps.Read<DiagnosticContract>;
+  get is DiagnosticContractOps.Read<
+    DiagnosticContract,
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_GetEntityTag")
-  getEntityTag is DiagnosticContractOps.CheckExistence<DiagnosticContract>;
+  getEntityTag is DiagnosticContractOps.CheckExistence<
+    DiagnosticContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Diagnostic for an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_CreateOrUpdate")
   createOrUpdate is DiagnosticContractOps.CreateOrUpdateSync<
     DiagnosticContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the Diagnostic for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_Update")
   @patch(#{ implicitOptionality: false })
   update is DiagnosticContractOps.CustomPatchSync<
     DiagnosticContract,
@@ -102,23 +132,30 @@ interface DiagnosticContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes the specified Diagnostic from an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_Delete")
   delete is DiagnosticContractOps.DeleteSync<
     DiagnosticContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -126,8 +163,6 @@ interface DiagnosticContracts {
   /**
    * Lists all diagnostics of an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiDiagnostic_ListByService")
   listByService is DiagnosticContractOps.List<
     DiagnosticContract,
     Parameters = {
@@ -148,6 +183,7 @@ interface DiagnosticContracts {
        * Number of records to skip.
        */
       @query("$skip")
+      @minValue(0)
       $skip?: int32;
     },
     Response = ArmResponse<DiagnosticCollection>
@@ -167,6 +203,8 @@ interface DiagnosticOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -175,6 +213,8 @@ interface DiagnosticOps
         @segment("diagnostics")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         diagnosticId: string,
       }
     > {}
@@ -184,12 +224,30 @@ interface Diagnostic {
   /**
    * Gets the details of the Diagnostic specified by its identifier.
    */
-  get is DiagnosticOps.Read<DiagnosticContract>;
+  get is DiagnosticOps.Read<
+    DiagnosticContract,
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic specified by its identifier.
    */
-  getEntityTag is DiagnosticOps.CheckExistence<DiagnosticContract>;
+  getEntityTag is DiagnosticOps.CheckExistence<
+    DiagnosticContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Diagnostic or updates an existing one.
@@ -200,9 +258,23 @@ interface Diagnostic {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -216,8 +288,16 @@ interface Diagnostic {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -230,7 +310,8 @@ interface Diagnostic {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -277,6 +358,8 @@ interface WorkspaceDiagnosticOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -284,6 +367,8 @@ interface WorkspaceDiagnosticOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -292,6 +377,8 @@ interface WorkspaceDiagnosticOps
         @segment("diagnostics")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         diagnosticId: string,
       }
     > {}
@@ -301,12 +388,30 @@ interface WorkspaceDiagnostic {
   /**
    * Gets the details of the Diagnostic specified by its identifier.
    */
-  get is WorkspaceDiagnosticOps.Read<DiagnosticContract>;
+  get is WorkspaceDiagnosticOps.Read<
+    DiagnosticContract,
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic specified by its identifier.
    */
-  getEntityTag is WorkspaceDiagnosticOps.CheckExistence<DiagnosticContract>;
+  getEntityTag is WorkspaceDiagnosticOps.CheckExistence<
+    DiagnosticContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Diagnostic or updates an existing one.
@@ -317,9 +422,23 @@ interface WorkspaceDiagnostic {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -333,8 +452,16 @@ interface WorkspaceDiagnostic {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -347,7 +474,8 @@ interface WorkspaceDiagnostic {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -394,6 +522,8 @@ interface WorkspaceApiDiagnosticOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -401,12 +531,16 @@ interface WorkspaceApiDiagnosticOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** API identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("apis")
         @key
+        @minLength(1)
+        @maxLength(80)
         apiId: string,
       },
       {
@@ -415,6 +549,8 @@ interface WorkspaceApiDiagnosticOps
         @segment("diagnostics")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         diagnosticId: string,
       }
     > {}
@@ -424,12 +560,30 @@ interface WorkspaceApiDiagnostic {
   /**
    * Gets the details of the Diagnostic for an API specified by its identifier.
    */
-  get is WorkspaceApiDiagnosticOps.Read<DiagnosticContract>;
+  get is WorkspaceApiDiagnosticOps.Read<
+    DiagnosticContract,
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Diagnostic for an API specified by its identifier.
    */
-  getEntityTag is WorkspaceApiDiagnosticOps.CheckExistence<DiagnosticContract>;
+  getEntityTag is WorkspaceApiDiagnosticOps.CheckExistence<
+    DiagnosticContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Diagnostic for an API or updates an existing one.
@@ -440,9 +594,23 @@ interface WorkspaceApiDiagnostic {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -456,8 +624,16 @@ interface WorkspaceApiDiagnostic {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<DiagnosticContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -470,7 +646,8 @@ interface WorkspaceApiDiagnostic {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;

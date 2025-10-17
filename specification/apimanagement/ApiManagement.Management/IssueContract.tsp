@@ -39,12 +39,16 @@ interface IssueContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("apis")
         @key
+        @minLength(1)
+        @maxLength(80)
         apiId: string,
       },
       {
@@ -53,6 +57,8 @@ interface IssueContractOps
         @segment("issues")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         issueId: string,
       }
     > {}
@@ -62,8 +68,6 @@ interface IssueContracts {
   /**
    * Gets the details of the Issue for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssue_Get")
   get is IssueContractOps.Read<
     IssueContract,
     Parameters = {
@@ -72,37 +76,61 @@ interface IssueContracts {
        */
       @query("expandCommentsAttachments")
       expandCommentsAttachments?: boolean;
+    },
+    Response = ArmResponse<IssueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Gets the entity state (Etag) version of the Issue for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssue_GetEntityTag")
-  getEntityTag is IssueContractOps.CheckExistence<IssueContract>;
+  getEntityTag is IssueContractOps.CheckExistence<
+    IssueContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Issue for an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssue_CreateOrUpdate")
   createOrUpdate is IssueContractOps.CreateOrUpdateSync<
     IssueContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<IssueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<IssueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates an existing issue for an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssue_Update")
   @patch(#{ implicitOptionality: false })
   update is IssueContractOps.CustomPatchSync<
     IssueContract,
@@ -111,23 +139,30 @@ interface IssueContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<IssueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes the specified Issue from an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssue_Delete")
   delete is IssueContractOps.DeleteSync<
     IssueContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -135,8 +170,6 @@ interface IssueContracts {
   /**
    * Lists all issues associated with the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssue_ListByService")
   listByService is IssueContractOps.List<
     IssueContract,
     Parameters = {
@@ -163,6 +196,7 @@ interface IssueContracts {
        * Number of records to skip.
        */
       @query("$skip")
+      @minValue(0)
       $skip?: int32;
     },
     Response = ArmResponse<IssueCollection>
@@ -182,6 +216,8 @@ interface IssueOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -190,6 +226,8 @@ interface IssueOps
         @segment("issues")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         issueId: string,
       }
     > {}
@@ -199,7 +237,16 @@ interface Issue {
   /**
    * Gets API Management issue details
    */
-  get is IssueOps.Read<IssueContract>;
+  get is IssueOps.Read<
+    IssueContract,
+    Response = ArmResponse<IssueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Lists a collection of issues in the specified service instance.
@@ -223,6 +270,7 @@ interface Issue {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

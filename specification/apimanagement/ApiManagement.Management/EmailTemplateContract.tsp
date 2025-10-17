@@ -27,33 +27,74 @@ model EmailTemplateContract
 }
 
 @armResourceOperations
+interface EmailTemplateContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+        @path
+        @segment("templates")
+        @key
+        templateName: TemplateName,
+      }
+    > {}
+
+@armResourceOperations
 interface EmailTemplateContracts {
   /**
    * Gets the details of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_Get")
-  get is ArmResourceRead<EmailTemplateContract>;
+  get is ArmResourceRead<
+    EmailTemplateContract,
+    Response = ArmResponse<EmailTemplateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the email template specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<EmailTemplateContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    EmailTemplateContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Updates an Email Template.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is EmailTemplateContractsOps.CreateOrUpdateSync<
     EmailTemplateContract,
+    Request = EmailTemplateUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     }
   >;
@@ -61,8 +102,6 @@ interface EmailTemplateContracts {
   /**
    * Updates API Management email template
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     EmailTemplateContract,
@@ -71,23 +110,30 @@ interface EmailTemplateContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<EmailTemplateContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Reset the Email Template to default template provided by the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_Delete")
   delete is ArmResourceDeleteSync<
     EmailTemplateContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -95,8 +141,6 @@ interface EmailTemplateContracts {
   /**
    * Gets all email templates
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("EmailTemplate_ListByService")
   listByService is ArmResourceListByParent<
     EmailTemplateContract,
     Parameters = {
@@ -116,6 +160,7 @@ interface EmailTemplateContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

@@ -1,48 +1,61 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
+    "operationId": "loginUser",
     "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "apiId": "swagger-petstore",
-    "operationId": "loginUser"
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/swagger-petstore/operations/loginUser",
-        "type": "Microsoft.ApiManagement/service/apis/operations",
         "name": "loginUser",
+        "type": "Microsoft.ApiManagement/service/apis/operations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/swagger-petstore/operations/loginUser",
         "properties": {
-          "displayName": "Logs user into the system",
           "method": "GET",
-          "urlTemplate": "/user/login?username={username}&password={password}",
+          "description": "",
+          "displayName": "Logs user into the system",
           "templateParameters": [
             {
               "name": "username",
-              "description": "The user name for login",
               "type": "string",
+              "description": "The user name for login",
               "required": true,
               "values": []
             },
             {
               "name": "password",
-              "description": "The password for login in clear text",
               "type": "string",
+              "description": "The password for login in clear text",
               "required": true,
               "values": []
             }
           ],
-          "description": "",
+          "urlTemplate": "/user/login?username={username}&password={password}",
           "request": {
-            "queryParameters": [],
             "headers": [],
+            "queryParameters": [],
             "representations": []
           },
           "responses": [
             {
-              "statusCode": 200,
               "description": "successful operation",
+              "headers": [
+                {
+                  "name": "X-Rate-Limit",
+                  "type": "integer",
+                  "description": "calls per hour allowed by the user",
+                  "values": []
+                },
+                {
+                  "name": "X-Expires-After",
+                  "type": "string",
+                  "description": "date in UTC when token expires",
+                  "values": []
+                }
+              ],
               "representations": [
                 {
                   "contentType": "application/xml",
@@ -55,24 +68,11 @@
                   "typeName": "UserLoginGet200ApplicationJsonResponse"
                 }
               ],
-              "headers": [
-                {
-                  "name": "X-Rate-Limit",
-                  "description": "calls per hour allowed by the user",
-                  "type": "integer",
-                  "values": []
-                },
-                {
-                  "name": "X-Expires-After",
-                  "description": "date in UTC when token expires",
-                  "type": "string",
-                  "values": []
-                }
-              ]
+              "statusCode": 200
             },
             {
-              "statusCode": 400,
               "description": "Invalid username/password supplied",
+              "headers": [],
               "representations": [
                 {
                   "contentType": "application/xml"
@@ -81,11 +81,13 @@
                   "contentType": "application/json"
                 }
               ],
-              "headers": []
+              "statusCode": 400
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "ApiOperation_Get",
+  "title": "ApiManagementGetApiOperationPetStore"
 }

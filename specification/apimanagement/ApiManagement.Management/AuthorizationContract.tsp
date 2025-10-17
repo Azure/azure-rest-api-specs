@@ -30,38 +30,56 @@ interface AuthorizationContracts {
   /**
    * Gets the details of the authorization specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Authorization_Get")
-  get is ArmResourceRead<AuthorizationContract>;
+  get is ArmResourceRead<
+    AuthorizationContract,
+    Response = ArmResponse<AuthorizationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates authorization.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Authorization_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     AuthorizationContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<AuthorizationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<AuthorizationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes specific Authorization from the Authorization provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Authorization_Delete")
   delete is ArmResourceDeleteSync<
     AuthorizationContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -69,8 +87,6 @@ interface AuthorizationContracts {
   /**
    * Lists a collection of authorization providers defined within a authorization provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Authorization_ListByAuthorizationProvider")
   listByAuthorizationProvider is ArmResourceListByParent<
     AuthorizationContract,
     Parameters = {
@@ -90,6 +106,7 @@ interface AuthorizationContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -99,24 +116,32 @@ interface AuthorizationContracts {
   /**
    * Confirm valid consent code to suppress Authorizations anti-phishing page.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Authorization_ConfirmConsentCode")
   confirmConsentCode is ArmResourceActionSync<
     AuthorizationContract,
     AuthorizationConfirmConsentCodeRequestContract,
-    OkResponse
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 
   /**
    * Gets authorization login links.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("AuthorizationLoginLinks_Post")
   @action("getLoginLinks")
   post is ArmResourceActionSync<
     AuthorizationContract,
     AuthorizationLoginRequestContract,
-    ArmResponse<AuthorizationLoginResponseContract>
+    Response = ArmResponse<AuthorizationLoginResponseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 

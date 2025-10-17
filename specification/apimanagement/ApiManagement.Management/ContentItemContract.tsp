@@ -30,45 +30,70 @@ interface ContentItemContracts {
   /**
    * Returns the developer portal's content item specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_Get")
-  get is ArmResourceRead<ContentItemContract>;
+  get is ArmResourceRead<
+    ContentItemContract,
+    Response = ArmResponse<ContentItemContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Returns the entity state (ETag) version of the developer portal's content item specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<ContentItemContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    ContentItemContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new developer portal's content item specified by the provided content type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     ContentItemContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<ContentItemContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ContentItemContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Removes the specified developer portal's content item.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_Delete")
   delete is ArmResourceDeleteSync<
     ContentItemContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -76,8 +101,6 @@ interface ContentItemContracts {
   /**
    * Lists developer portal's content items specified by the provided content type.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ContentItem_ListByService")
   listByService is ArmResourceListByParent<
     ContentItemContract,
     Response = ArmResponse<ContentItemCollection>

@@ -30,45 +30,70 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Get details of a hostname configuration
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayHostnameConfiguration_Get")
-  get is ArmResourceRead<GatewayHostnameConfigurationContract>;
+  get is ArmResourceRead<
+    GatewayHostnameConfigurationContract,
+    Response = ArmResponse<GatewayHostnameConfigurationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Checks that hostname configuration entity specified by identifier exists for specified Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayHostnameConfiguration_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<GatewayHostnameConfigurationContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    GatewayHostnameConfigurationContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates of updates hostname configuration for a Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayHostnameConfiguration_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayHostnameConfigurationContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<GatewayHostnameConfigurationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<GatewayHostnameConfigurationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes the specified hostname configuration from the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayHostnameConfiguration_Delete")
   delete is ArmResourceDeleteSync<
     GatewayHostnameConfigurationContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -76,8 +101,6 @@ interface GatewayHostnameConfigurationContracts {
   /**
    * Lists the collection of hostname configurations for the specified gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayHostnameConfiguration_ListByService")
   listByService is ArmResourceListByParent<
     GatewayHostnameConfigurationContract,
     Parameters = {
@@ -97,6 +120,7 @@ interface GatewayHostnameConfigurationContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

@@ -27,42 +27,94 @@ model IdentityProviderContract
 }
 
 @armResourceOperations
+interface IdentityProviderContractsOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** Identity Provider Type identifier. */
+        @path
+        @segment("identityProviders")
+        @key
+        identityProviderName: IdentityProviderType,
+      }
+    > {}
+
+@armResourceOperations
 interface IdentityProviderContracts {
   /**
    * Gets the configuration details of the identity Provider configured in specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_Get")
-  get is ArmResourceRead<IdentityProviderContract>;
+  get is ArmResourceRead<
+    IdentityProviderContract,
+    Response = ArmResponse<IdentityProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the identityProvider specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<IdentityProviderContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    IdentityProviderContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Creates or Updates the IdentityProvider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<
+  createOrUpdate is IdentityProviderContractsOps.CreateOrUpdateSync<
     IdentityProviderContract,
+    Request = IdentityProviderCreateContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<IdentityProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }) | (ArmCreatedResponse<IdentityProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    })
   >;
 
   /**
    * Updates an existing IdentityProvider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     IdentityProviderContract,
@@ -71,23 +123,30 @@ interface IdentityProviderContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<IdentityProviderContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
     }
   >;
 
   /**
    * Deletes the specified identity provider configuration.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_Delete")
   delete is ArmResourceDeleteSync<
     IdentityProviderContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -95,8 +154,8 @@ interface IdentityProviderContracts {
   /**
    * Lists a collection of Identity Provider configured in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_ListByService")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-aad#how-to-authorize-developer-accounts-using-azure-active-directory")
   listByService is ArmResourceListByParent<
     IdentityProviderContract,
     Response = ArmResponse<IdentityProviderList>
@@ -105,12 +164,16 @@ interface IdentityProviderContracts {
   /**
    * Gets the client secret details of the Identity Provider.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("IdentityProvider_ListSecrets")
   listSecrets is ArmResourceActionSync<
     IdentityProviderContract,
     void,
-    ArmResponse<ClientSecretContract>
+    Response = ArmResponse<ClientSecretContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
   >;
 }
 

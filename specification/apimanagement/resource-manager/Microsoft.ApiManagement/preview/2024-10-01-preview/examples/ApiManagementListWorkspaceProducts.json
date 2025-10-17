@@ -1,57 +1,59 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000",
     "workspaceId": "wks1"
   },
   "responses": {
     "200": {
       "body": {
+        "count": 3,
+        "nextLink": "",
         "value": [
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/kjoshiarmtemplateCert1",
-            "type": "Microsoft.ApiManagement/service/workspaces/products",
             "name": "kjoshiarmtemplateCert1",
+            "type": "Microsoft.ApiManagement/service/workspaces/products",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/kjoshiarmtemplateCert1",
             "properties": {
-              "displayName": "Dev",
               "description": "Development Product",
-              "subscriptionRequired": false,
-              "state": "published"
+              "displayName": "Dev",
+              "state": "published",
+              "subscriptionRequired": false
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/starter",
-            "type": "Microsoft.ApiManagement/service/workspaces/products",
             "name": "starter",
+            "type": "Microsoft.ApiManagement/service/workspaces/products",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/starter",
             "properties": {
-              "displayName": "Starter",
               "description": "Subscribers will be able to run 5 calls/minute up to a maximum of 100 calls/week.",
-              "terms": "",
-              "subscriptionRequired": true,
               "approvalRequired": false,
+              "displayName": "Starter",
+              "state": "published",
+              "subscriptionRequired": true,
               "subscriptionsLimit": 1,
-              "state": "published"
+              "terms": ""
             }
           },
           {
-            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/unlimited",
-            "type": "Microsoft.ApiManagement/service/workspaces/products",
             "name": "unlimited",
+            "type": "Microsoft.ApiManagement/service/workspaces/products",
+            "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/products/unlimited",
             "properties": {
-              "displayName": "Unlimited",
               "description": "Subscribers have completely unlimited access to the API. Administrator approval is required.",
-              "subscriptionRequired": true,
               "approvalRequired": true,
-              "subscriptionsLimit": 1,
-              "state": "published"
+              "displayName": "Unlimited",
+              "state": "published",
+              "subscriptionRequired": true,
+              "subscriptionsLimit": 1
             }
           }
-        ],
-        "count": 3,
-        "nextLink": ""
+        ]
       }
     }
-  }
+  },
+  "operationId": "WorkspaceProduct_ListByService",
+  "title": "ApiManagementListWorkspaceProducts"
 }

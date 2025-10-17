@@ -30,29 +30,30 @@ interface ClientApplicationProductLinkContracts {
   /**
    * Gets the product link for the client application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplicationProductLink_Get")
-  get is ArmResourceRead<ClientApplicationProductLinkContract>;
+  get is ArmResourceRead<
+    ClientApplicationProductLinkContract,
+    Response = ArmResponse<ClientApplicationProductLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an Product to the specified Client Application via link.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplicationProductLink_Create")
   create is ArmResourceCreateOrReplaceSync<ClientApplicationProductLinkContract>;
 
   /**
    * Deletes the specified Product from the specified client application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplicationProductLink_Delete")
   delete is ArmResourceDeleteSync<ClientApplicationProductLinkContract>;
 
   /**
    * Lists a collection of product links associated with the specified client application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplicationProductLink_ListByClientApplications")
   listByClientApplications is ArmResourceListByParent<
     ClientApplicationProductLinkContract,
     Parameters = {
@@ -66,6 +67,7 @@ interface ClientApplicationProductLinkContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

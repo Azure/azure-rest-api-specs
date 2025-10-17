@@ -39,6 +39,8 @@ interface TagApiLinkContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Tag identifier. Must be unique in the current API Management service instance. */
@@ -46,6 +48,8 @@ interface TagApiLinkContractOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       },
       {
@@ -54,6 +58,8 @@ interface TagApiLinkContractOps
         @segment("apiLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         apiLinkId: string,
       }
     > {}
@@ -63,29 +69,30 @@ interface TagApiLinkContracts {
   /**
    * Gets the API link for the tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagApiLink_Get")
-  get is TagApiLinkContractOps.Read<TagApiLinkContract>;
+  get is TagApiLinkContractOps.Read<
+    TagApiLinkContract,
+    Response = ArmResponse<TagApiLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an API to the specified tag via link.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagApiLink_CreateOrUpdate")
   createOrUpdate is TagApiLinkContractOps.CreateOrUpdateSync<TagApiLinkContract>;
 
   /**
    * Deletes the specified API from the specified tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagApiLink_Delete")
   delete is TagApiLinkContractOps.DeleteSync<TagApiLinkContract>;
 
   /**
    * Lists a collection of the API links associated with a tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagApiLink_ListByProduct")
   listByProduct is TagApiLinkContractOps.List<
     TagApiLinkContract,
     Parameters = {
@@ -105,6 +112,7 @@ interface TagApiLinkContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -125,6 +133,8 @@ interface WorkspaceTagApiLinkOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -132,6 +142,8 @@ interface WorkspaceTagApiLinkOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** Tag identifier. Must be unique in the current API Management service instance. */
@@ -139,6 +151,8 @@ interface WorkspaceTagApiLinkOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       },
       {
@@ -147,6 +161,8 @@ interface WorkspaceTagApiLinkOps
         @segment("apiLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         apiLinkId: string,
       }
     > {}
@@ -156,7 +172,16 @@ interface WorkspaceTagApiLink {
   /**
    * Gets the API link for the tag.
    */
-  get is WorkspaceTagApiLinkOps.Read<TagApiLinkContract>;
+  get is WorkspaceTagApiLinkOps.Read<
+    TagApiLinkContract,
+    Response = ArmResponse<TagApiLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an API to the specified tag via link.
@@ -190,6 +215,7 @@ interface WorkspaceTagApiLink {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

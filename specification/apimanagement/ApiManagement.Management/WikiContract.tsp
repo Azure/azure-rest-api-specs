@@ -40,12 +40,16 @@ interface WikiContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("apis")
         @key
+        @minLength(1)
+        @maxLength(80)
         apiId: string,
       },
       {
@@ -53,7 +57,7 @@ interface WikiContractOps
         @path
         @segment("wikis")
         @key
-        default: string,
+        default: "default",
       }
     > {}
 
@@ -62,38 +66,62 @@ interface WikiContracts {
   /**
    * Gets the details of the Wiki for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiWiki_Get")
-  get is WikiContractOps.Read<WikiContract>;
+  get is WikiContractOps.Read<
+    WikiContract,
+    Response = ArmResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Wiki for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiWiki_GetEntityTag")
-  getEntityTag is WikiContractOps.CheckExistence<WikiContract>;
+  getEntityTag is WikiContractOps.CheckExistence<
+    WikiContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }
+  >;
 
   /**
    * Creates a new Wiki for an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiWiki_CreateOrUpdate")
   createOrUpdate is WikiContractOps.CreateOrUpdateSync<
     WikiContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }) | (ArmCreatedResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    })
   >;
 
   /**
    * Updates the details of the Wiki for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiWiki_Update")
   @patch(#{ implicitOptionality: false })
   update is WikiContractOps.CustomPatchSync<
     WikiContract,
@@ -102,32 +130,38 @@ interface WikiContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 
   /**
    * Deletes the specified Wiki from an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiWiki_Delete")
   delete is WikiContractOps.DeleteSync<
     WikiContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
-    }
+    },
+    Response = OkResponse | NoContentResponse
   >;
 
   /**
    * Gets the wikis for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiWikis_List")
   list is WikiContractOps.List<
     WikiContract,
     Parameters = {
@@ -147,6 +181,7 @@ interface WikiContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -167,12 +202,16 @@ interface ProductWikiOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -180,7 +219,7 @@ interface ProductWikiOps
         @path
         @segment("wikis")
         @key
-        default: string,
+        default: "default",
       }
     > {}
 
@@ -189,12 +228,30 @@ interface ProductWiki {
   /**
    * Gets the details of the Wiki for a Product specified by its identifier.
    */
-  get is ProductWikiOps.Read<WikiContract>;
+  get is ProductWikiOps.Read<
+    WikiContract,
+    Response = ArmResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Wiki for a Product specified by its identifier.
    */
-  getEntityTag is ProductWikiOps.CheckExistence<WikiContract>;
+  getEntityTag is ProductWikiOps.CheckExistence<
+    WikiContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }
+  >;
 
   /**
    * Creates a new Wiki for a Product or updates an existing one.
@@ -205,9 +262,23 @@ interface ProductWiki {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    }) | (ArmCreatedResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
+    })
   >;
 
   /**
@@ -221,8 +292,16 @@ interface ProductWiki {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<WikiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      eTag: string;
     }
   >;
 
@@ -235,7 +314,8 @@ interface ProductWiki {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -243,7 +323,7 @@ interface ProductWiki {
   /**
    * Gets the details of the Wiki for a Product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @operationId("ProductWikis_list")
   list is ProductWikiOps.List<
     WikiContract,
@@ -264,10 +344,17 @@ interface ProductWiki {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
-    Response = ArmResponse<WikiCollection>
+    Response = ArmResponse<WikiCollection> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 }
 

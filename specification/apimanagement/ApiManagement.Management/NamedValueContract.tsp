@@ -39,6 +39,8 @@ interface NamedValueContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -47,6 +49,7 @@ interface NamedValueContractOps
         @segment("namedValues")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
         namedValueId: string,
       }
     > {}
@@ -56,40 +59,67 @@ interface NamedValueContracts {
   /**
    * Gets the details of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_Get")
-  get is NamedValueContractOps.Read<NamedValueContract>;
+  get is NamedValueContractOps.Read<
+    NamedValueContract,
+    Response = ArmResponse<NamedValueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_GetEntityTag")
-  getEntityTag is NamedValueContractOps.CheckExistence<NamedValueContract>;
+  getEntityTag is NamedValueContractOps.CheckExistence<
+    NamedValueContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag?: string;
+    }
+  >;
 
   /**
    * Creates or updates named value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_CreateOrUpdate")
   createOrUpdate is NamedValueContractOps.CreateOrUpdateAsync<
     NamedValueContract,
+    Request = NamedValueCreateContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = NamedValueContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<NamedValueContract> &
+      ArmCombinedLroHeaders<FinalResult = NamedValueContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<
+      NamedValueContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the specific named value.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_Update")
   @patch(#{ implicitOptionality: false })
   update is NamedValueContractOps.CustomPatchAsync<
     NamedValueContract,
@@ -98,23 +128,30 @@ interface NamedValueContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
-    }
+    },
+    Response = (ArmResponse<NamedValueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 
   /**
    * Deletes specific named value from the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_Delete")
   delete is NamedValueContractOps.DeleteSync<
     NamedValueContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -122,8 +159,8 @@ interface NamedValueContracts {
   /**
    * Lists a collection of named values defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_ListByService")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-properties")
   listByService is NamedValueContractOps.List<
     NamedValueContract,
     Parameters = {
@@ -143,6 +180,7 @@ interface NamedValueContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -158,23 +196,32 @@ interface NamedValueContracts {
   /**
    * Gets the secret of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_ListValue")
   listValue is NamedValueContractOps.ActionSync<
     NamedValueContract,
     void,
-    ArmResponse<NamedValueSecretContract>
+    Response = ArmResponse<NamedValueSecretContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 
   /**
    * Refresh the secret of the named value specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("NamedValue_RefreshSecret")
   refreshSecret is NamedValueContractOps.ActionAsync<
     NamedValueContract,
-    void,
-    ArmResponse<NamedValueContract>
+    Request = void,
+    Result = void,
+    Response = (ArmResponse<NamedValueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 }
 @armResourceOperations
@@ -191,6 +238,8 @@ interface WorkspaceNamedValueOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -198,6 +247,8 @@ interface WorkspaceNamedValueOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -206,6 +257,7 @@ interface WorkspaceNamedValueOps
         @segment("namedValues")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @maxLength(256)
         namedValueId: string,
       }
     > {}
@@ -215,27 +267,60 @@ interface WorkspaceNamedValue {
   /**
    * Gets the details of the named value specified by its identifier.
    */
-  get is WorkspaceNamedValueOps.Read<NamedValueContract>;
+  get is WorkspaceNamedValueOps.Read<
+    NamedValueContract,
+    Response = ArmResponse<NamedValueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the named value specified by its identifier.
    */
-  getEntityTag is WorkspaceNamedValueOps.CheckExistence<NamedValueContract>;
+  getEntityTag is WorkspaceNamedValueOps.CheckExistence<
+    NamedValueContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates named value.
    */
   createOrUpdate is WorkspaceNamedValueOps.CreateOrUpdateAsync<
     NamedValueContract,
+    Request = NamedValueCreateContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = NamedValueContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<NamedValueContract> &
+      ArmCombinedLroHeaders<FinalResult = NamedValueContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<NamedValueContract> &
+      ArmCombinedLroHeaders<FinalResult = NamedValueContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      })
   >;
 
   /**
@@ -249,9 +334,17 @@ interface WorkspaceNamedValue {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
-    }
+    },
+    Response = (ArmResponse<NamedValueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 
   /**
@@ -263,7 +356,8 @@ interface WorkspaceNamedValue {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -271,6 +365,8 @@ interface WorkspaceNamedValue {
   /**
    * Lists a collection of named values defined within a workspace in a service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-properties")
   listByService is WorkspaceNamedValueOps.List<
     NamedValueContract,
     Parameters = {
@@ -290,6 +386,7 @@ interface WorkspaceNamedValue {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -308,7 +405,13 @@ interface WorkspaceNamedValue {
   listValue is WorkspaceNamedValueOps.ActionSync<
     NamedValueContract,
     void,
-    ArmResponse<NamedValueSecretContract>
+    ArmResponse<NamedValueSecretContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 
   /**
@@ -316,8 +419,15 @@ interface WorkspaceNamedValue {
    */
   refreshSecret is WorkspaceNamedValueOps.ActionAsync<
     NamedValueContract,
-    void,
-    ArmResponse<NamedValueContract>
+    Request = void,
+    Result = void,
+    Response = (ArmResponse<NamedValueContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = NamedValueContract>>
   >;
 }
 

@@ -26,7 +26,13 @@ model ApiManagementWorkspaceLinksResource
     SegmentName = "workspaceLinks",
     NamePattern = "^[^*#&+:<>?]+$"
   >;
-  ...Azure.ResourceManager.EntityTagProperty;
+
+  /**
+   * ETag of the resource.
+   */
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @visibility(Lifecycle.Read)
+  etag?: Azure.Core.eTag;
 }
 
 @armResourceOperations
@@ -34,16 +40,15 @@ interface ApiManagementWorkspaceLinksResources {
   /**
    * Gets an API Management WorkspaceLink resource description.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementWorkspaceLink_Get")
   get is ArmResourceRead<ApiManagementWorkspaceLinksResource>;
 
   /**
    * List all API Management workspaceLinks for a service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementWorkspaceLinks_ListByService")
-  listByService is ArmResourceListByParent<ApiManagementWorkspaceLinksResource>;
+  listByService is ArmResourceListByParent<
+    ApiManagementWorkspaceLinksResource,
+    Response = ArmResponse<ApiManagementWorkspaceLinksListResult>
+  >;
 }
 
 @@maxLength(ApiManagementWorkspaceLinksResource.name, 80);
@@ -51,7 +56,7 @@ interface ApiManagementWorkspaceLinksResources {
 @@doc(ApiManagementWorkspaceLinksResource.name,
   "Workspace identifier. Must be unique in the current API Management service instance."
 );
-@@encodedName(ApiManagementWorkspaceLinksResource.eTag,
+@@encodedName(ApiManagementWorkspaceLinksResource.etag,
   "application/json",
   "etag"
 );

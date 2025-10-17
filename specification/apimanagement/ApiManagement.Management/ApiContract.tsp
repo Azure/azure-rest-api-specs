@@ -39,6 +39,8 @@ interface ApiContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -46,7 +48,8 @@ interface ApiContractOps
         @path
         @segment("apis")
         @key
-        @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         apiId: string,
       }
     > {}
@@ -56,40 +59,67 @@ interface ApiContracts {
   /**
    * Gets the details of the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_Get")
-  get is ApiContractOps.Read<ApiContract>;
+  get is ApiContractOps.Read<
+    ApiContract,
+    Response = ArmResponse<ApiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_GetEntityTag")
-  getEntityTag is ApiContractOps.CheckExistence<ApiContract>;
+  getEntityTag is ApiContractOps.CheckExistence<
+    ApiContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates new or updates existing specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_CreateOrUpdate")
   createOrUpdate is ApiContractOps.CreateOrUpdateAsync<
     ApiContract,
+    Request = ApiCreateOrUpdateParameter,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = ApiContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<ApiContract> &
+      ArmCombinedLroHeaders<FinalResult = ApiContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<
+      ApiContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_Update")
   @patch(#{ implicitOptionality: false })
   update is ApiContractOps.CustomPatchSync<
     ApiContract,
@@ -98,16 +128,22 @@ interface ApiContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ApiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes the specified API of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_Delete")
   delete is ApiContractOps.DeleteWithoutOkAsync<
     ApiContract,
     Parameters = {
@@ -120,16 +156,18 @@ interface ApiContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
-    }
+    },
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = void>> | ArmNoContentResponse
   >;
 
   /**
    * Lists all APIs of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Api_ListByService")
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-apis")
   listByService is ApiContractOps.List<
     ApiContract,
     Parameters = {
@@ -149,6 +187,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -170,10 +209,9 @@ interface ApiContracts {
   /**
    * Lists all revisions of an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRevision_ListByService")
   @get
   @action("revisions")
+  @list
   apiRevisionListByService is ApiContractOps.ActionSync<
     ApiContract,
     void,
@@ -195,6 +233,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -203,10 +242,9 @@ interface ApiContracts {
   /**
    * Lists all Products, which the API is part of.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiProduct_ListByApis")
   @get
   @action("products")
+  @list
   listByApis is ApiContractOps.ActionSync<
     ApiContract,
     void,
@@ -228,6 +266,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -236,10 +275,9 @@ interface ApiContracts {
   /**
    * Lists a collection of operations associated with tags.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Operation_ListByTags")
   @get
   @action("operationsByTags")
+  @list
   listByTags is ApiContractOps.ActionSync<
     ApiContract,
     void,
@@ -261,6 +299,7 @@ interface ApiContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -286,6 +325,8 @@ interface WorkspaceApiOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -293,6 +334,8 @@ interface WorkspaceApiOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -301,6 +344,8 @@ interface WorkspaceApiOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
       }
     > {}
@@ -310,27 +355,62 @@ interface WorkspaceApi {
   /**
    * Gets the details of the API specified by its identifier.
    */
-  get is WorkspaceApiOps.Read<ApiContract>;
+  get is WorkspaceApiOps.Read<
+    ApiContract,
+    Response = ArmResponse<ApiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the API specified by its identifier.
    */
-  getEntityTag is WorkspaceApiOps.CheckExistence<ApiContract>;
+  getEntityTag is WorkspaceApiOps.CheckExistence<
+    ApiContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates new or updates existing specified API of the workspace in an API Management service instance.
    */
   createOrUpdate is WorkspaceApiOps.CreateOrUpdateAsync<
     ApiContract,
+    Request = ApiCreateOrUpdateParameter,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = ApiContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<ApiContract> &
+      ArmCombinedLroHeaders<FinalResult = ApiContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<
+      ApiContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = ApiContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -344,8 +424,16 @@ interface WorkspaceApi {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ApiContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -364,7 +452,8 @@ interface WorkspaceApi {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -372,6 +461,8 @@ interface WorkspaceApi {
   /**
    * Lists all APIs of the workspace in an API Management service instance.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @externalDocs("https://docs.microsoft.com/en-us/azure/api-management/api-management-howto-create-apis")
   listByService is WorkspaceApiOps.List<
     ApiContract,
     Parameters = {
@@ -391,6 +482,7 @@ interface WorkspaceApi {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -412,10 +504,9 @@ interface WorkspaceApi {
   /**
    * Lists all revisions of an API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspaceApiRevision_ListByService")
   @get
   @action("revisions")
+  @list
   workspaceApiRevisionListByService is WorkspaceApiOps.ActionSync<
     ApiContract,
     void,
@@ -437,6 +528,7 @@ interface WorkspaceApi {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }

@@ -30,36 +30,59 @@ interface ClientApplicationContracts {
   /**
    * Gets the details of the client application specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplication_Get")
-  get is ArmResourceRead<ClientApplicationContract>;
+  get is ArmResourceRead<
+    ClientApplicationContract,
+    Response = ArmResponse<ClientApplicationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the product specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplication_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<ClientApplicationContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    ClientApplicationContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or Updates a client application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplication_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceSync<ClientApplicationContract>;
+  createOrUpdate is ArmResourceCreateOrReplaceSync<
+    ClientApplicationContract,
+    Response = (ArmResponse<ClientApplicationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ClientApplicationContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
+  >;
 
   /**
    * Delete client application.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplication_Delete")
   delete is ArmResourceDeleteSync<ClientApplicationContract>;
 
   /**
    * Lists a collection of client applications in the specified service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplication_ListByService")
   listByService is ArmResourceListByParent<
     ClientApplicationContract,
     Parameters = {
@@ -79,6 +102,7 @@ interface ClientApplicationContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -88,8 +112,6 @@ interface ClientApplicationContracts {
   /**
    * Retrived client application secrets.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ClientApplication_ListSecrets")
   listSecrets is ArmResourceActionSync<
     ClientApplicationContract,
     void,

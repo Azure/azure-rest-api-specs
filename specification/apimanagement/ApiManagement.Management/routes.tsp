@@ -13,17 +13,16 @@ using TypeSpec.OpenAPI;
 
 namespace Microsoft.ApiManagement;
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ApiExportOperationGroup {
   /**
    * Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiExport_Get")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/apis/{apiId}?export=true")
   @get
   get(
     ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
     /**
@@ -55,21 +54,18 @@ interface ApiExportOperationGroup {
      */
     @query("export")
     export: ExportApi,
-
-    ...SubscriptionIdParameter,
   ): ArmResponse<ApiExportResult> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface DeletedServicesOperationGroup {
   /**
    * Lists all soft-deleted services available for undelete for the given subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeletedServices_ListBySubscription")
   @autoRoute
   @get
   @action("deletedservices")
+  @list
   listBySubscription is ArmProviderActionSync<
     Response = DeletedServicesCollection,
     Scope = SubscriptionActionScope,
@@ -77,13 +73,11 @@ interface DeletedServicesOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ApiManagementServiceOperationGroup {
   /**
    * Checks availability and correctness of a name for an API Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementService_CheckNameAvailability")
   @autoRoute
   checkNameAvailability is ArmProviderActionSync<
     Request = ApiManagementServiceCheckNameAvailabilityParameters,
@@ -94,8 +88,6 @@ interface ApiManagementServiceOperationGroup {
   /**
    * Get the custom domain ownership identifier for an API Management service.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementService_GetDomainOwnershipIdentifier")
   @autoRoute
   getDomainOwnershipIdentifier is ArmProviderActionSync<
     Response = ApiManagementServiceGetDomainOwnershipIdentifierResult,
@@ -104,34 +96,32 @@ interface ApiManagementServiceOperationGroup {
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface ApiManagementSkusOperationGroup {
   /**
    * Gets the list of Microsoft.ApiManagement SKUs available for your Subscription.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiManagementSkus_List")
   @autoRoute
   @get
   @action("skus")
+  @list
   list is ArmProviderActionSync<
-    Response = ApiManagementSkusResult,
+    Response = ArmResponse<ApiManagementSkusResult>,
     Scope = SubscriptionActionScope,
     Parameters = {}
   >;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface WorkspaceApiExportOperationGroup {
   /**
    * Gets the details of the API specified by its identifier in the format specified to the Storage Blob with SAS Key valid for 5 minutes.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("WorkspaceApiExport_Get")
-  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}")
+  @route("/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.ApiManagement/service/{serviceName}/workspaces/{workspaceId}/apis/{apiId}?export=true")
   @get
   get(
     ...ApiVersionParameter,
+    ...SubscriptionIdParameter,
     ...ResourceGroupParameter,
 
     /**
@@ -172,18 +162,14 @@ interface WorkspaceApiExportOperationGroup {
      */
     @query("export")
     export: ExportApi,
-
-    ...SubscriptionIdParameter,
   ): ArmResponse<ApiExportResult> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationStatusOperationGroup {
   /**
    * Returns the current status of an async operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationStatus_Get")
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/operationStatuses/{operationId}")
   @get
   get(
@@ -194,19 +180,19 @@ interface OperationStatusOperationGroup {
     /**
      * The ID of an ongoing async operation.
      */
-    @minLength(1)
     @path
+    @minLength(1)
+    @maxLength(80)
     operationId: string,
-  ): ArmResponse<OperationStatusResult> | ErrorResponse;
+  ): ArmResponse<CommonTypes.OperationStatusResult> | ErrorResponse;
 }
 
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "For backward compatibility"
+#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-interface-requires-decorator" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 interface OperationsResultsOperationGroup {
   /**
    * Returns operation results for long running operations executing DELETE or PATCH on the resource.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("OperationsResults_Get")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @route("/subscriptions/{subscriptionId}/providers/Microsoft.ApiManagement/locations/{location}/operationResults/{operationId}")
   @get
   get(
@@ -217,8 +203,15 @@ interface OperationsResultsOperationGroup {
     /**
      * The ID of an ongoing async operation.
      */
-    @minLength(1)
     @path
+    @minLength(1)
+    @maxLength(80)
     operationId: string,
-  ): OkResponse | ArmAcceptedResponse | ErrorResponse;
+  ): OkResponse | (ArmAcceptedResponse & {
+    /**
+     * URL for determining when an operation has completed.
+     **/
+    @header("Location")
+    location: string;
+  }) | ErrorResponse;
 }

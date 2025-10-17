@@ -27,7 +27,7 @@ model DeletedServiceContract
   /**
    * API Management Service Master Location.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "For backward compatibility"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   location?: string;
 }
@@ -37,8 +37,6 @@ interface DeletedServiceContracts {
   /**
    * Get soft-deleted Api Management Service by name.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("DeletedServices_GetByName")
   getByName is ArmResourceRead<
     DeletedServiceContract,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
@@ -47,10 +45,8 @@ interface DeletedServiceContracts {
   /**
    * Purges Api Management Service (deletes it with no option to undelete).
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "For backward compatibility"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("DeletedServices_Purge")
+  #suppress "@azure-tools/typespec-azure-resource-manager/no-response-body" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   purge is ArmResourceDeleteWithoutOkAsync<
     DeletedServiceContract,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,

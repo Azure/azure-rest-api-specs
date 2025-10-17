@@ -1,26 +1,28 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
     "api-version": "2024-10-01-preview",
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
     "subscriptionId": "00000000-0000-0000-0000-000000000000"
   },
   "responses": {
     "200": {
       "body": {
+        "nextLink": "",
         "value": [
           {
-            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/allpolicies/allpolicies1",
-            "type": "Microsoft.ApiManagement/service/allpolicies",
             "name": "allpolicies1",
+            "type": "Microsoft.ApiManagement/service/allpolicies",
+            "id": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/allpolicies/allpolicies1",
             "properties": {
-              "referencePolicyId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/policies/policy",
-              "complianceState": "Compliant"
+              "complianceState": "Compliant",
+              "referencePolicyId": "/subscriptions/subid/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/apis/a1/policies/policy"
             }
           }
-        ],
-        "nextLink": ""
+        ]
       }
     }
-  }
+  },
+  "operationId": "AllPolicies_ListByService",
+  "title": "ApiManagementListPolicyRestrictions"
 }

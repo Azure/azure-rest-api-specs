@@ -25,43 +25,80 @@ model GatewayContract
   >;
 }
 
+alias GatewayApiParameter = {
+  ...ResourceInstanceParameters<GatewayContract>;
+
+  /**
+   * API identifier. Must be unique in the current API Management service instance.
+   */
+  @maxLength(80)
+  @minLength(1)
+  @path
+  @segment("apis")
+  apiId: string;
+};
+
 @armResourceOperations
 interface GatewayContracts {
   /**
    * Gets the details of the Gateway specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_Get")
-  get is ArmResourceRead<GatewayContract>;
+  get is ArmResourceRead<
+    GatewayContract,
+    Response = ArmResponse<GatewayContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Gateway specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<GatewayContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    GatewayContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates or updates a Gateway to be used in Api Management instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     GatewayContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<GatewayContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmResourceCreatedSyncResponse<GatewayContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the gateway specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchSync<
     GatewayContract,
@@ -70,23 +107,30 @@ interface GatewayContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<GatewayContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_Delete")
   delete is ArmResourceDeleteSync<
     GatewayContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -94,8 +138,6 @@ interface GatewayContracts {
   /**
    * Lists a collection of gateways registered with service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_ListByService")
   listByService is ArmResourceListByParent<
     GatewayContract,
     Parameters = {
@@ -115,6 +157,7 @@ interface GatewayContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -124,19 +167,21 @@ interface GatewayContracts {
   /**
    * Retrieves gateway keys.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_ListKeys")
   listKeys is ArmResourceActionSync<
     GatewayContract,
     void,
-    ArmResponse<GatewayKeysContract>
+    Response = ArmResponse<GatewayKeysContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 
   /**
    * Regenerates specified gateway key invalidating any tokens created with it.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_RegenerateKey")
   regenerateKey is ArmResourceActionSync<
     GatewayContract,
     GatewayKeyRegenerationRequestContract,
@@ -146,8 +191,6 @@ interface GatewayContracts {
   /**
    * Gets the Shared Access Authorization Token for the gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_GenerateToken")
   generateToken is ArmResourceActionSync<
     GatewayContract,
     GatewayTokenRequestContract,
@@ -157,8 +200,6 @@ interface GatewayContracts {
   /**
    * Action is invalidating all debug credentials issued for gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_InvalidateDebugCredentials")
   invalidateDebugCredentials is ArmResourceActionSync<
     GatewayContract,
     void,
@@ -168,8 +209,6 @@ interface GatewayContracts {
   /**
    * Create new debug credentials for gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_ListDebugCredentials")
   listDebugCredentials is ArmResourceActionSync<
     GatewayContract,
     GatewayListDebugCredentialsContract,
@@ -179,8 +218,6 @@ interface GatewayContracts {
   /**
    * Fetches trace collected by gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Gateway_ListTrace")
   listTrace is ArmResourceActionSync<
     GatewayContract,
     GatewayListTraceContract,
@@ -190,10 +227,9 @@ interface GatewayContracts {
   /**
    * Lists a collection of the APIs associated with a gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_ListByService")
   @get
   @action("apis")
+  @list
   gatewayApiListByService is ArmResourceActionSync<
     GatewayContract,
     void,
@@ -215,6 +251,7 @@ interface GatewayContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     }
@@ -223,69 +260,35 @@ interface GatewayContracts {
   /**
    * Checks that API entity specified by identifier is associated with the Gateway entity.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_GetEntityTag")
   @head
-  @action("{apiId}")
-  gatewayApiGetEntityTag is ArmResourceActionSync<
-    GatewayContract,
-    void,
-    OkResponse,
-    Parameters = {
-      /**
-       * API identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      apiId: string;
-    }
-  >;
+  gatewayApiGetEntityTag(...GatewayApiParameter): (OkResponse & {
+    /**
+     * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+     */
+    @header("ETag") etag: string;
+  }) | ErrorResponse;
 
   /**
    * Adds an API to the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @put
-  @action("{apiId}")
-  gatewayApiCreateOrUpdate is ArmResourceActionSync<
-    GatewayContract,
-    AssociationContract,
-    ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract>,
-    Parameters = {
-      /**
-       * API identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      apiId: string;
-    },
-    OptionalRequestBody = true
-  >;
+  gatewayApiCreateOrUpdate(
+    ...GatewayApiParameter,
+
+    #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+    @body
+    body?: AssociationContract,
+  ): ArmResponse<ApiContract> | ArmResourceCreatedSyncResponse<ApiContract> | ErrorResponse;
 
   /**
    * Deletes the specified API from the specified Gateway.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GatewayApi_Delete")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @delete
-  @action("{apiId}")
-  gatewayApiDelete is ArmResourceActionSync<
-    GatewayContract,
-    void,
-    OkResponse | NoContentResponse,
-    Parameters = {
-      /**
-       * API identifier. Must be unique in the current API Management service instance.
-       */
-      @maxLength(80)
-      @minLength(1)
-      @path
-      apiId: string;
-    }
-  >;
+  gatewayApiDelete(
+    ...GatewayApiParameter,
+  ): OkResponse | NoContentResponse | ErrorResponse;
 }
 
 @@maxLength(GatewayContract.name, 80);

@@ -11,66 +11,69 @@ using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 
 namespace Microsoft.ApiManagement;
-/**
- * The Private Endpoint Connection resource.
- */
-@parentResource(ApiManagementServiceResource)
-model PrivateEndpointConnection
-  is Azure.ResourceManager.ProxyResource<PrivateEndpointConnectionProperties> {
-  ...ResourceNameParameter<
-    Resource = PrivateEndpointConnection,
-    KeyName = "privateEndpointConnectionName",
-    SegmentName = "privateEndpointConnections",
-    NamePattern = ""
-  >;
-}
+
+model PrivateEndpointConnection is PrivateEndpointConnectionResource;
+alias PrivateEndpointOperations = PrivateEndpoints<PrivateEndpointConnection>;
+
+@armResourceOperations
+interface PrivateEndpointConnectionOps
+  extends Azure.ResourceManager.Legacy.LegacyOperations<
+      {
+        ...ApiVersionParameter,
+        ...SubscriptionIdParameter,
+        ...ResourceGroupParameter,
+        ...Azure.ResourceManager.Legacy.Provider,
+
+        /** The name of the API Management service. */
+        @path
+        @segment("service")
+        @key
+        @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
+        serviceName: string,
+      },
+      {
+        /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
+        @path
+        @segment("privateEndpointConnections")
+        @key
+        privateEndpointConnectionName: string,
+      }
+    > {}
 
 @armResourceOperations
 interface PrivateEndpointConnections {
   /**
    * Gets the details of the Private Endpoint Connection specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_GetByName")
-  getByName is ArmResourceRead<PrivateEndpointConnection>;
+  getByName is PrivateEndpointOperations.Read<ApiManagementServiceResource>;
 
   /**
    * Creates a new Private Endpoint Connection or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnection_CreateOrUpdate")
-  createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    PrivateEndpointConnection,
-    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse,
-    LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
-      Azure.Core.Foundations.RetryAfterHeader
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  createOrUpdate is PrivateEndpointConnectionOps.CreateOrUpdateAsync<
+    ApiManagementServiceResource,
+    Request = PrivateEndpointConnectionRequest,
+    Response = ArmResourceUpdatedResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnection> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = PrivateEndpointConnection> &
+      Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes the specified Private Endpoint Connection.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "For backward compatibility"
-  @operationId("PrivateEndpointConnection_Delete")
-  delete is ArmResourceDeleteWithoutOkAsync<
-    PrivateEndpointConnection,
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  delete is PrivateEndpointOperations.DeleteAsync<
+    ApiManagementServiceResource,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
   >;
 
   /**
    * Lists all private endpoint connections of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PrivateEndpointConnection_ListByService")
-  listByService is ArmResourceListByParent<
-    PrivateEndpointConnection,
-    Response = ArmResponse<Azure.ResourceManager.CommonTypes.PrivateEndpointConnectionListResultV5>
-  >;
+  listByService is PrivateEndpointOperations.ListByParent<ApiManagementServiceResource>;
 }
 
-@@doc(PrivateEndpointConnection.name,
-  "Name of the private endpoint connection."
-);
 @@doc(PrivateEndpointConnection.properties, "Resource properties.");
 @@doc(PrivateEndpointConnections.createOrUpdate::parameters.resource, "");

@@ -39,12 +39,16 @@ interface ApiReleaseContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("apis")
         @key
+        @minLength(1)
+        @maxLength(80)
         apiId: string,
       },
       {
@@ -53,6 +57,8 @@ interface ApiReleaseContractOps
         @segment("releases")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         releaseId: string,
       }
     > {}
@@ -62,38 +68,62 @@ interface ApiReleaseContracts {
   /**
    * Returns the details of an API release.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRelease_Get")
-  get is ApiReleaseContractOps.Read<ApiReleaseContract>;
+  get is ApiReleaseContractOps.Read<
+    ApiReleaseContract,
+    Response = ArmResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Returns the etag of an API release.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRelease_GetEntityTag")
-  getEntityTag is ApiReleaseContractOps.CheckExistence<ApiReleaseContract>;
+  getEntityTag is ApiReleaseContractOps.CheckExistence<
+    ApiReleaseContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Release for the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRelease_CreateOrUpdate")
   createOrUpdate is ApiReleaseContractOps.CreateOrUpdateSync<
     ApiReleaseContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the release of the API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRelease_Update")
   @patch(#{ implicitOptionality: false })
   update is ApiReleaseContractOps.CustomPatchSync<
     ApiReleaseContract,
@@ -102,23 +132,30 @@ interface ApiReleaseContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes the specified release in the API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRelease_Delete")
   delete is ApiReleaseContractOps.DeleteSync<
     ApiReleaseContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -126,8 +163,6 @@ interface ApiReleaseContracts {
   /**
    * Lists all releases of an API. An API release is created when making an API Revision current. Releases are also used to rollback to previous revisions. Results will be paged and can be constrained by the $top and $skip parameters.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiRelease_ListByService")
   listByService is ApiReleaseContractOps.List<
     ApiReleaseContract,
     Parameters = {
@@ -147,6 +182,7 @@ interface ApiReleaseContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -167,6 +203,8 @@ interface WorkspaceApiReleaseOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -174,12 +212,16 @@ interface WorkspaceApiReleaseOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** API identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("apis")
         @key
+        @minLength(1)
+        @maxLength(80)
         apiId: string,
       },
       {
@@ -188,6 +230,8 @@ interface WorkspaceApiReleaseOps
         @segment("releases")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         releaseId: string,
       }
     > {}
@@ -197,12 +241,30 @@ interface WorkspaceApiRelease {
   /**
    * Returns the details of an API release.
    */
-  get is WorkspaceApiReleaseOps.Read<ApiReleaseContract>;
+  get is WorkspaceApiReleaseOps.Read<
+    ApiReleaseContract,
+    Response = ArmResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Returns the etag of an API release.
    */
-  getEntityTag is WorkspaceApiReleaseOps.CheckExistence<ApiReleaseContract>;
+  getEntityTag is WorkspaceApiReleaseOps.CheckExistence<
+    ApiReleaseContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Release for the API.
@@ -213,9 +275,23 @@ interface WorkspaceApiRelease {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -229,8 +305,16 @@ interface WorkspaceApiRelease {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<ApiReleaseContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -243,7 +327,8 @@ interface WorkspaceApiRelease {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -270,6 +355,7 @@ interface WorkspaceApiRelease {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

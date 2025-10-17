@@ -39,6 +39,8 @@ interface TagOperationLinkContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Tag identifier. Must be unique in the current API Management service instance. */
@@ -46,6 +48,8 @@ interface TagOperationLinkContractOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       },
       {
@@ -54,6 +58,8 @@ interface TagOperationLinkContractOps
         @segment("operationLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         operationLinkId: string,
       }
     > {}
@@ -63,29 +69,30 @@ interface TagOperationLinkContracts {
   /**
    * Gets the operation link for the tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagOperationLink_Get")
-  get is TagOperationLinkContractOps.Read<TagOperationLinkContract>;
+  get is TagOperationLinkContractOps.Read<
+    TagOperationLinkContract,
+    Response = ArmResponse<TagOperationLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an operation to the specified tag via link.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagOperationLink_CreateOrUpdate")
   createOrUpdate is TagOperationLinkContractOps.CreateOrUpdateSync<TagOperationLinkContract>;
 
   /**
    * Deletes the specified operation from the specified tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagOperationLink_Delete")
   delete is TagOperationLinkContractOps.DeleteSync<TagOperationLinkContract>;
 
   /**
    * Lists a collection of the operation links associated with a tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagOperationLink_ListByProduct")
   listByProduct is TagOperationLinkContractOps.List<
     TagOperationLinkContract,
     Parameters = {
@@ -105,6 +112,7 @@ interface TagOperationLinkContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -125,6 +133,8 @@ interface WorkspaceTagOperationLinkOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -132,6 +142,8 @@ interface WorkspaceTagOperationLinkOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** Tag identifier. Must be unique in the current API Management service instance. */
@@ -139,6 +151,8 @@ interface WorkspaceTagOperationLinkOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       },
       {
@@ -147,6 +161,8 @@ interface WorkspaceTagOperationLinkOps
         @segment("operationLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         operationLinkId: string,
       }
     > {}
@@ -156,7 +172,16 @@ interface WorkspaceTagOperationLink {
   /**
    * Gets the operation link for the tag.
    */
-  get is WorkspaceTagOperationLinkOps.Read<TagOperationLinkContract>;
+  get is WorkspaceTagOperationLinkOps.Read<
+    TagOperationLinkContract,
+    Response = ArmResponse<TagOperationLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds an operation to the specified tag via link.
@@ -190,6 +215,7 @@ interface WorkspaceTagOperationLink {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

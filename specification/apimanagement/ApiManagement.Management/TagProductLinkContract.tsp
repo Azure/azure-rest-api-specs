@@ -39,6 +39,8 @@ interface TagProductLinkContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Tag identifier. Must be unique in the current API Management service instance. */
@@ -46,6 +48,8 @@ interface TagProductLinkContractOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       },
       {
@@ -54,6 +58,8 @@ interface TagProductLinkContractOps
         @segment("productLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         productLinkId: string,
       }
     > {}
@@ -63,29 +69,30 @@ interface TagProductLinkContracts {
   /**
    * Gets the product link for the tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagProductLink_Get")
-  get is TagProductLinkContractOps.Read<TagProductLinkContract>;
+  get is TagProductLinkContractOps.Read<
+    TagProductLinkContract,
+    Response = ArmResponse<TagProductLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds a product to the specified tag via link.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagProductLink_CreateOrUpdate")
   createOrUpdate is TagProductLinkContractOps.CreateOrUpdateSync<TagProductLinkContract>;
 
   /**
    * Deletes the specified product from the specified tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagProductLink_Delete")
   delete is TagProductLinkContractOps.DeleteSync<TagProductLinkContract>;
 
   /**
    * Lists a collection of the product links associated with a tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("TagProductLink_ListByProduct")
   listByProduct is TagProductLinkContractOps.List<
     TagProductLinkContract,
     Parameters = {
@@ -105,6 +112,7 @@ interface TagProductLinkContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -125,6 +133,8 @@ interface WorkspaceTagProductLinkOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -132,6 +142,8 @@ interface WorkspaceTagProductLinkOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** Tag identifier. Must be unique in the current API Management service instance. */
@@ -139,6 +151,8 @@ interface WorkspaceTagProductLinkOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       },
       {
@@ -147,6 +161,8 @@ interface WorkspaceTagProductLinkOps
         @segment("productLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         productLinkId: string,
       }
     > {}
@@ -156,7 +172,16 @@ interface WorkspaceTagProductLink {
   /**
    * Gets the product link for the tag.
    */
-  get is WorkspaceTagProductLinkOps.Read<TagProductLinkContract>;
+  get is WorkspaceTagProductLinkOps.Read<
+    TagProductLinkContract,
+    Response = ArmResponse<TagProductLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds a product to the specified tag via link.
@@ -190,6 +215,7 @@ interface WorkspaceTagProductLink {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

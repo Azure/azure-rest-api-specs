@@ -30,45 +30,70 @@ interface IssueCommentContracts {
   /**
    * Gets the details of the issue Comment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_Get")
-  get is ArmResourceRead<IssueCommentContract>;
+  get is ArmResourceRead<
+    IssueCommentContract,
+    Response = ArmResponse<IssueCommentContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the issue Comment for an API specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<IssueCommentContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    IssueCommentContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new Comment for the Issue in an API or updates an existing one.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_CreateOrUpdate")
   createOrUpdate is ArmResourceCreateOrReplaceSync<
     IssueCommentContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<IssueCommentContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<IssueCommentContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes the specified comment from an Issue.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_Delete")
   delete is ArmResourceDeleteSync<
     IssueCommentContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -76,8 +101,6 @@ interface IssueCommentContracts {
   /**
    * Lists all comments for the Issue associated with the specified API.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ApiIssueComment_ListByService")
   listByService is ArmResourceListByParent<
     IssueCommentContract,
     Parameters = {
@@ -97,6 +120,7 @@ interface IssueCommentContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

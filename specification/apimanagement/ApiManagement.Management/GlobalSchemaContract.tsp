@@ -39,6 +39,8 @@ interface GlobalSchemaContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -46,6 +48,8 @@ interface GlobalSchemaContractOps
         @path
         @segment("schemas")
         @key
+        @minLength(1)
+        @maxLength(80)
         schemaId: string,
       }
     > {}
@@ -55,47 +59,74 @@ interface GlobalSchemaContracts {
   /**
    * Gets the details of the Schema specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_Get")
-  get is GlobalSchemaContractOps.Read<GlobalSchemaContract>;
+  get is GlobalSchemaContractOps.Read<
+    GlobalSchemaContract,
+    Response = ArmResponse<GlobalSchemaContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Schema specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_GetEntityTag")
-  getEntityTag is GlobalSchemaContractOps.CheckExistence<GlobalSchemaContract>;
+  getEntityTag is GlobalSchemaContractOps.CheckExistence<
+    GlobalSchemaContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates new or updates existing specified Schema of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_CreateOrUpdate")
   createOrUpdate is GlobalSchemaContractOps.CreateOrUpdateAsync<
     GlobalSchemaContract,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = GlobalSchemaContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<GlobalSchemaContract> &
+      ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<
+      GlobalSchemaContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Deletes specific Schema.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_Delete")
   delete is GlobalSchemaContractOps.DeleteSync<
     GlobalSchemaContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -103,8 +134,6 @@ interface GlobalSchemaContracts {
   /**
    * Lists a collection of schemas registered with service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("GlobalSchema_ListByService")
   listByService is GlobalSchemaContractOps.List<
     GlobalSchemaContract,
     Parameters = {
@@ -124,6 +153,7 @@ interface GlobalSchemaContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -144,6 +174,8 @@ interface WorkspaceGlobalSchemaOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -151,6 +183,8 @@ interface WorkspaceGlobalSchemaOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -158,6 +192,8 @@ interface WorkspaceGlobalSchemaOps
         @path
         @segment("schemas")
         @key
+        @minLength(1)
+        @maxLength(80)
         schemaId: string,
       }
     > {}
@@ -167,12 +203,30 @@ interface WorkspaceGlobalSchema {
   /**
    * Gets the details of the Schema specified by its identifier.
    */
-  get is WorkspaceGlobalSchemaOps.Read<GlobalSchemaContract>;
+  get is WorkspaceGlobalSchemaOps.Read<
+    GlobalSchemaContract,
+    Response = ArmResponse<GlobalSchemaContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state (Etag) version of the Schema specified by its identifier.
    */
-  getEntityTag is WorkspaceGlobalSchemaOps.CheckExistence<GlobalSchemaContract>;
+  getEntityTag is WorkspaceGlobalSchemaOps.CheckExistence<
+    GlobalSchemaContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates new or updates existing specified Schema of the workspace in an API Management service instance.
@@ -183,11 +237,27 @@ interface WorkspaceGlobalSchema {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
     },
-    LroHeaders = ArmLroLocationHeader<FinalResult = GlobalSchemaContract> &
-      Azure.Core.Foundations.RetryAfterHeader
+    Response = (ArmResponse<GlobalSchemaContract> &
+      ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract> & {
+        /**
+         * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+         */
+        @header("ETag")
+        etag: string;
+      }) | (ArmResourceCreatedResponse<
+      GlobalSchemaContract,
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = GlobalSchemaContract>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -199,7 +269,8 @@ interface WorkspaceGlobalSchema {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -226,6 +297,7 @@ interface WorkspaceGlobalSchema {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

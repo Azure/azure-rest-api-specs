@@ -39,12 +39,16 @@ interface ProductGroupLinkContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -53,6 +57,8 @@ interface ProductGroupLinkContractOps
         @segment("groupLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         groupLinkId: string,
       }
     > {}
@@ -62,29 +68,30 @@ interface ProductGroupLinkContracts {
   /**
    * Gets the group link for the product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroupLink_Get")
-  get is ProductGroupLinkContractOps.Read<ProductGroupLinkContract>;
+  get is ProductGroupLinkContractOps.Read<
+    ProductGroupLinkContract,
+    Response = ArmResponse<ProductGroupLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds a group to the specified product via link.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroupLink_CreateOrUpdate")
   createOrUpdate is ProductGroupLinkContractOps.CreateOrUpdateSync<ProductGroupLinkContract>;
 
   /**
    * Deletes the specified group from the specified product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroupLink_Delete")
   delete is ProductGroupLinkContractOps.DeleteSync<ProductGroupLinkContract>;
 
   /**
    * Lists a collection of the group links associated with a product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("ProductGroupLink_ListByProduct")
   listByProduct is ProductGroupLinkContractOps.List<
     ProductGroupLinkContract,
     Parameters = {
@@ -104,6 +111,7 @@ interface ProductGroupLinkContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -124,6 +132,8 @@ interface WorkspaceProductGroupLinkOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -131,12 +141,16 @@ interface WorkspaceProductGroupLinkOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -145,6 +159,8 @@ interface WorkspaceProductGroupLinkOps
         @segment("groupLinks")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         groupLinkId: string,
       }
     > {}
@@ -154,7 +170,16 @@ interface WorkspaceProductGroupLink {
   /**
    * Gets the group link for the product.
    */
-  get is WorkspaceProductGroupLinkOps.Read<ProductGroupLinkContract>;
+  get is WorkspaceProductGroupLinkOps.Read<
+    ProductGroupLinkContract,
+    Response = ArmResponse<ProductGroupLinkContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Adds a group to the specified product via link.
@@ -188,6 +213,7 @@ interface WorkspaceProductGroupLink {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

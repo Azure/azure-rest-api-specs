@@ -1,23 +1,19 @@
 {
   "parameters": {
-    "serviceName": "apimService1",
-    "resourceGroupName": "rg1",
-    "api-version": "2024-10-01-preview",
-    "subscriptionId": "00000000-0000-0000-0000-000000000000",
-    "workspaceId": "wks1",
-    "apiId": "PetStoreTemplate2",
     "operationId": "newoperations",
+    "api-version": "2024-10-01-preview",
+    "apiId": "PetStoreTemplate2",
     "parameters": {
       "properties": {
-        "displayName": "createUser2",
         "method": "POST",
-        "urlTemplate": "/user1",
-        "templateParameters": [],
         "description": "This can only be done by the logged in user.",
+        "displayName": "createUser2",
+        "templateParameters": [],
+        "urlTemplate": "/user1",
         "request": {
           "description": "Created user object",
-          "queryParameters": [],
           "headers": [],
+          "queryParameters": [],
           "representations": [
             {
               "contentType": "application/json",
@@ -28,8 +24,8 @@
         },
         "responses": [
           {
-            "statusCode": 200,
             "description": "successful operation",
+            "headers": [],
             "representations": [
               {
                 "contentType": "application/xml"
@@ -38,28 +34,32 @@
                 "contentType": "application/json"
               }
             ],
-            "headers": []
+            "statusCode": 200
           }
         ]
       }
-    }
+    },
+    "resourceGroupName": "rg1",
+    "serviceName": "apimService1",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "workspaceId": "wks1"
   },
   "responses": {
-    "201": {
+    "200": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apis/PetStoreTemplate2/operations/newoperations",
-        "type": "Microsoft.ApiManagement/service/workspaces/apis/operations",
         "name": "newoperations",
+        "type": "Microsoft.ApiManagement/service/workspaces/apis/operations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apis/PetStoreTemplate2/operations/newoperations",
         "properties": {
-          "displayName": "createUser2",
           "method": "POST",
-          "urlTemplate": "/user1",
-          "templateParameters": [],
           "description": "This can only be done by the logged in user.",
+          "displayName": "createUser2",
+          "templateParameters": [],
+          "urlTemplate": "/user1",
           "request": {
             "description": "Created user object",
-            "queryParameters": [],
             "headers": [],
+            "queryParameters": [],
             "representations": [
               {
                 "contentType": "application/json",
@@ -70,8 +70,8 @@
           },
           "responses": [
             {
-              "statusCode": 200,
               "description": "successful operation",
+              "headers": [],
               "representations": [
                 {
                   "contentType": "application/xml"
@@ -80,27 +80,27 @@
                   "contentType": "application/json"
                 }
               ],
-              "headers": []
+              "statusCode": 200
             }
           ]
         }
       }
     },
-    "200": {
+    "201": {
       "body": {
-        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apis/PetStoreTemplate2/operations/newoperations",
-        "type": "Microsoft.ApiManagement/service/workspaces/apis/operations",
         "name": "newoperations",
+        "type": "Microsoft.ApiManagement/service/workspaces/apis/operations",
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rg1/providers/Microsoft.ApiManagement/service/apimService1/workspaces/wks1/apis/PetStoreTemplate2/operations/newoperations",
         "properties": {
-          "displayName": "createUser2",
           "method": "POST",
-          "urlTemplate": "/user1",
-          "templateParameters": [],
           "description": "This can only be done by the logged in user.",
+          "displayName": "createUser2",
+          "templateParameters": [],
+          "urlTemplate": "/user1",
           "request": {
             "description": "Created user object",
-            "queryParameters": [],
             "headers": [],
+            "queryParameters": [],
             "representations": [
               {
                 "contentType": "application/json",
@@ -111,8 +111,8 @@
           },
           "responses": [
             {
-              "statusCode": 200,
               "description": "successful operation",
+              "headers": [],
               "representations": [
                 {
                   "contentType": "application/xml"
@@ -121,11 +121,13 @@
                   "contentType": "application/json"
                 }
               ],
-              "headers": []
+              "statusCode": 200
             }
           ]
         }
       }
     }
-  }
+  },
+  "operationId": "WorkspaceApiOperation_CreateOrUpdate",
+  "title": "ApiManagementCreateWorkspaceApiOperation"
 }

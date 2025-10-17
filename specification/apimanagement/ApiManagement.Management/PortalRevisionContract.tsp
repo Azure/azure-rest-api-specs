@@ -25,41 +25,58 @@ model PortalRevisionContract
   >;
 }
 
+#suppress "@azure-tools/typespec-azure-resource-manager/no-resource-delete-operation" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 @armResourceOperations
 interface PortalRevisionContracts {
   /**
    * Gets the developer portal's revision specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_Get")
-  get is ArmResourceRead<PortalRevisionContract>;
+  get is ArmResourceRead<
+    PortalRevisionContract,
+    Response = ArmResponse<PortalRevisionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the developer portal revision specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_GetEntityTag")
-  getEntityTag is ArmResourceCheckExistence<PortalRevisionContract>;
+  getEntityTag is ArmResourceCheckExistence<
+    PortalRevisionContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a new developer portal's revision by running the portal's publishing. The `isCurrent` property indicates if the revision is publicly accessible.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "For backward compatibility"
-  @operationId("PortalRevision_CreateOrUpdate")
+  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     PortalRevisionContract,
     Response = ArmResourceCreatedResponse<
       PortalRevisionContract,
-      ArmLroLocationHeader & Azure.Core.Foundations.RetryAfterHeader
-    >
+      LroHeaders = ArmCombinedLroHeaders<FinalResult = void>
+    > & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
   >;
 
   /**
    * Updates the description of specified portal revision or makes it current.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_Update")
   @patch(#{ implicitOptionality: false })
   update is ArmCustomPatchAsync<
     PortalRevisionContract,
@@ -68,16 +85,22 @@ interface PortalRevisionContracts {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
-    }
+    },
+    Response = (ArmResponse<PortalRevisionContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PortalRevisionContract>>
   >;
 
   /**
    * Lists developer portal's revisions.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("PortalRevision_ListByService")
   listByService is ArmResourceListByParent<
     PortalRevisionContract,
     Parameters = {
@@ -103,6 +126,7 @@ interface PortalRevisionContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },

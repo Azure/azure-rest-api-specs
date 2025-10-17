@@ -39,6 +39,8 @@ interface TagContractOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
@@ -46,12 +48,16 @@ interface TagContractOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
 
         /** Operation identifier within an API. Must be unique in the current API Management service instance. */
         @path
         @segment("operations")
         @key
+        @minLength(1)
+        @maxLength(80)
         operationId: string,
       },
       {
@@ -60,6 +66,8 @@ interface TagContractOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       }
     > {}
@@ -69,37 +77,48 @@ interface TagContracts {
   /**
    * Get tag associated with the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_GetByOperation")
-  getByOperation is TagContractOps.Read<TagContract>;
+  getByOperation is TagContractOps.Read<
+    TagContract,
+    Response = ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_GetEntityStateByOperation")
-  getEntityStateByOperation is TagContractOps.CheckExistence<TagContract>;
+  getEntityStateByOperation is TagContractOps.CheckExistence<
+    TagContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_AssignToOperation")
-  assignToOperation is TagContractOps.CreateOrUpdateSync<TagContract>;
+  assignToOperation is TagContractOps.CreateOrUpdateSync<
+    TagContract,
+    Request = void
+  >;
 
   /**
    * Detach the tag from the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_DetachFromOperation")
   detachFromOperation is TagContractOps.DeleteSync<TagContract>;
 
   /**
    * Lists all Tags associated with the Operation.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_ListByOperation")
   listByOperation is TagContractOps.List<
     TagContract,
     Parameters = {
@@ -119,6 +138,7 @@ interface TagContracts {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -139,6 +159,8 @@ interface TagOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** API revision identifier. Must be unique in the current API Management service instance. Non-current revision has ;rev=n as a suffix where n is the revision number. */
@@ -146,6 +168,8 @@ interface TagOps
         @segment("apis")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(256)
         apiId: string,
       },
       {
@@ -154,6 +178,8 @@ interface TagOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       }
     > {}
@@ -163,18 +189,52 @@ interface Tag {
   /**
    * Get tag associated with the API.
    */
-  getByApi is TagOps.Read<TagContract>;
+  getByApi is TagOps.Read<
+    TagContract,
+    Response = ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  getEntityStateByApi is TagOps.CheckExistence<TagContract>;
+  getEntityStateByApi is TagOps.CheckExistence<
+    TagContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Api.
    */
-  assignToApi is TagOps.CreateOrUpdateSync<TagContract>;
+  assignToApi is TagOps.CreateOrUpdateSync<
+    TagContract,
+    Request = void,
+    Response = (ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
+  >;
 
   /**
    * Detach the tag from the Api.
@@ -203,6 +263,7 @@ interface Tag {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -210,7 +271,7 @@ interface Tag {
   >;
 }
 @armResourceOperations
-interface TagContractOperationGroupOps
+interface TagContractOperationOps
   extends Azure.ResourceManager.Legacy.LegacyOperations<
       {
         ...ApiVersionParameter,
@@ -223,12 +284,16 @@ interface TagContractOperationGroupOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Product identifier. Must be unique in the current API Management service instance. */
         @path
         @segment("products")
         @key
+        @minLength(1)
+        @maxLength(256)
         productId: string,
       },
       {
@@ -237,47 +302,60 @@ interface TagContractOperationGroupOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       }
     > {}
 
 @armResourceOperations
-interface TagContractOperationGroup {
+interface TagContractOperation {
   /**
    * Get tag associated with the Product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_GetByProduct")
-  getByProduct is TagContractOperationGroupOps.Read<TagContract>;
+  getByProduct is TagContractOperationOps.Read<
+    TagContract,
+    Response = ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_GetEntityStateByProduct")
-  getEntityStateByProduct is TagContractOperationGroupOps.CheckExistence<TagContract>;
+  getEntityStateByProduct is TagContractOperationOps.CheckExistence<
+    TagContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   // FIXME: (ArmResourceCreateOrReplace): ArmResourceCreateOrReplaceAsync/ArmResourceCreateOrReplaceSync should have a body parameter.
   /**
    * Assign tag to the Product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_AssignToProduct")
-  assignToProduct is TagContractOperationGroupOps.CreateOrUpdateSync<TagContract>;
+  assignToProduct is TagContractOperationOps.CreateOrUpdateSync<
+    TagContract,
+    Request = void
+  >;
 
   /**
    * Detach the tag from the Product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_DetachFromProduct")
-  detachFromProduct is TagContractOperationGroupOps.DeleteSync<TagContract>;
+  detachFromProduct is TagContractOperationOps.DeleteSync<TagContract>;
 
   /**
    * Lists all Tags associated with the Product.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_ListByProduct")
-  listByProduct is TagContractOperationGroupOps.List<
+  listByProduct is TagContractOperationOps.List<
     TagContract,
     Parameters = {
       /**
@@ -296,6 +374,7 @@ interface TagContractOperationGroup {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
     },
@@ -316,6 +395,8 @@ interface TagContractOperationGroupOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
       },
       {
@@ -324,6 +405,8 @@ interface TagContractOperationGroupOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       }
     > {}
@@ -333,38 +416,63 @@ interface TagContractOperationGroup {
   /**
    * Gets the details of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_Get")
-  get is TagContractOperationGroupOps.Read<TagContract>;
+  get is TagContractOperationGroupOps.Read<
+    TagContract,
+    Response = ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_GetEntityState")
-  getEntityState is TagContractOperationGroupOps.CheckExistence<TagContract>;
+  getEntityState is TagContractOperationGroupOps.CheckExistence<
+    TagContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a tag.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_CreateOrUpdate")
   createOrUpdate is TagContractOperationGroupOps.CreateOrUpdateSync<
     TagContract,
+    Request = TagCreateUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
    * Updates the details of the tag specified by its identifier.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_Update")
   @patch(#{ implicitOptionality: false })
   update is TagContractOperationGroupOps.CustomPatchSync<
     TagContract,
@@ -373,23 +481,30 @@ interface TagContractOperationGroup {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
   /**
    * Deletes specific tag of the API Management service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_Delete")
   delete is TagContractOperationGroupOps.DeleteSync<
     TagContract,
     Parameters = {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -397,8 +512,6 @@ interface TagContractOperationGroup {
   /**
    * Lists a collection of tags defined within a service instance.
    */
-  #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
-  @operationId("Tag_ListByService")
   listByService is TagContractOperationGroupOps.List<
     TagContract,
     Parameters = {
@@ -418,6 +531,7 @@ interface TagContractOperationGroup {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
@@ -444,6 +558,8 @@ interface WorkspaceTagOps
         @segment("service")
         @key
         @pattern("^[a-zA-Z](?:[a-zA-Z0-9-]*[a-zA-Z0-9])?$")
+        @minLength(1)
+        @maxLength(50)
         serviceName: string,
 
         /** Workspace identifier. Must be unique in the current API Management service instance. */
@@ -451,6 +567,8 @@ interface WorkspaceTagOps
         @segment("workspaces")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         workspaceId: string,
       },
       {
@@ -459,6 +577,8 @@ interface WorkspaceTagOps
         @segment("tags")
         @key
         @pattern("^[^*#&+:<>?]+$")
+        @minLength(1)
+        @maxLength(80)
         tagId: string,
       }
     > {}
@@ -468,25 +588,58 @@ interface WorkspaceTag {
   /**
    * Gets the details of the tag specified by its identifier.
    */
-  get is WorkspaceTagOps.Read<TagContract>;
+  get is WorkspaceTagOps.Read<
+    TagContract,
+    Response = ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Gets the entity state version of the tag specified by its identifier.
    */
-  getEntityState is WorkspaceTagOps.CheckExistence<TagContract>;
+  getEntityState is WorkspaceTagOps.CheckExistence<
+    TagContract,
+    Response = OkResponse & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }
+  >;
 
   /**
    * Creates a tag.
    */
   createOrUpdate is WorkspaceTagOps.CreateOrUpdateSync<
     TagContract,
+    Request = TagCreateUpdateParameters,
     Parameters = {
       /**
        * ETag of the Entity. Not required when creating an entity, but required when updating an entity.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`?: string;
-    }
+    },
+    Response = (ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    }) | (ArmCreatedResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
+    })
   >;
 
   /**
@@ -500,8 +653,16 @@ interface WorkspaceTag {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
+    },
+    Response = ArmResponse<TagContract> & {
+      /**
+       * Current entity state version. Should be treated as opaque and used to make conditional HTTP requests.
+       */
+      @header("ETag")
+      etag: string;
     }
   >;
 
@@ -514,7 +675,8 @@ interface WorkspaceTag {
       /**
        * ETag of the Entity. ETag should match the current entity state from the header response of the GET request or it should be * for unconditional update.
        */
-      @header
+      #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+      @header("If-Match")
       `If-Match`: string;
     }
   >;
@@ -541,6 +703,7 @@ interface WorkspaceTag {
       /**
        * Number of records to skip.
        */
+      @minValue(0)
       @query("$skip")
       $skip?: int32;
 
