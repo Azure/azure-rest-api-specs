@@ -14,7 +14,7 @@ namespace Customizations;
 @@clientNamespace(Storage.Blob.BlockBlob, "Azure.Storage.Blobs");
 @@clientNamespace(Storage.Blob.PageBlob, "Azure.Storage.Blobs");
 
-@@clientName(Storage.Blob, "BlobServiceClient", "rust");
+@@clientName(Storage.Blob.Service, "BlobServiceClient", "rust");
 @@clientName(Storage.Blob.Container, "BlobContainerClient", "rust");
 @@clientName(Storage.Blob.Blob, "BlobClient", "rust");
 @@clientName(Storage.Blob.AppendBlob, "AppendBlobClient", "rust");
