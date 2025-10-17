@@ -37,6 +37,7 @@ import "./routes.tsp";
 
 using Azure.ResourceManager;
 using TypeSpec.Versioning;
+using Azure.Core;
 /**
  * Use these APIs to manage Azure Front Door and CDN resources through the Azure Resource Manager. You must make sure that requests made to these resources are secure.
  */
@@ -56,14 +57,15 @@ enum Versions {
   v2025_06_01: "2025-06-01",
 
   /**
-   * The 2025-09-01-preview API version.
-   */
-  v2025_09_01_preview: "2025-09-01-preview",
-
-  /**
    * The 2025-12-01 API version.
    */
   v2025_12_01: "2025-12-01",
+
+  /**
+   * The 2025-09-01-preview API version.
+   */
+  @previewVersion
+  v2025_09_01_preview: "2025-09-01-preview",
 }
 
 interface Operations
