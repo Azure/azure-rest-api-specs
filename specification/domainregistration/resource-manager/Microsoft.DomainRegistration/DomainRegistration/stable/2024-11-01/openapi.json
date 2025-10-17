@@ -1997,23 +1997,23 @@
       "properties": {
         "name": {
           "type": "string",
-          "description": "Name of the object."
+          "description": "Name of the object.",
+          "x-ms-identifiers": [
+            "name"
+          ]
         }
       }
     },
     "NameIdentifierCollection": {
       "type": "object",
-      "description": "Paged collection of NameIdentifier items",
+      "description": "Collection of domain name identifiers.",
       "properties": {
         "value": {
           "type": "array",
           "description": "The NameIdentifier items on this page",
           "items": {
             "$ref": "#/definitions/NameIdentifier"
-          },
-          "x-ms-identifiers": [
-            "name"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
@@ -2097,7 +2097,10 @@
       "properties": {
         "agreementKey": {
           "type": "string",
-          "description": "Unique identifier for the agreement."
+          "description": "Unique identifier for the agreement.",
+          "x-ms-identifiers": [
+            "agreementKey"
+          ]
         },
         "title": {
           "type": "string",
@@ -2120,17 +2123,14 @@
     },
     "TldLegalAgreementCollection": {
       "type": "object",
-      "description": "Paged collection of TldLegalAgreement items",
+      "description": "Collection of top-level domain legal agreements.",
       "properties": {
         "value": {
           "type": "array",
           "description": "The TldLegalAgreement items on this page",
           "items": {
             "$ref": "#/definitions/TldLegalAgreement"
-          },
-          "x-ms-identifiers": [
-            "agreementKey"
-          ]
+          }
         },
         "nextLink": {
           "type": "string",
