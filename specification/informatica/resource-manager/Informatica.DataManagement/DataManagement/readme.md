@@ -41,7 +41,7 @@ These settings apply only when `--tag=package-2024-05-08` is specified on the co
 
 ```yaml $(tag) == 'package-2024-05-08'
 input-file:
-  - Informatica.DataManagement/stable/2024-05-08/openapi.json
+  - stable/2024-05-08/openapi.json
 
 ```
 
