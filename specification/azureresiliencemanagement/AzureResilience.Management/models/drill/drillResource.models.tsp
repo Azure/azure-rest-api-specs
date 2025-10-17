@@ -78,7 +78,7 @@ model DrillResourceProperties {
 
   @doc("Recommendation Type Id for the recommendation.")
   @visibility(Lifecycle.Read)
-  recommendationTypeId?: string;
+  advisorRecommendationTypeId?: string;
 
   @doc("Associated Advisor Recommendation link, if HA is not enabled on this resource.")
   @visibility(Lifecycle.Read)
