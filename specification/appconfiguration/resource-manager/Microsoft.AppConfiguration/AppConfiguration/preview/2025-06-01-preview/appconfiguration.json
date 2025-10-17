@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "AppConfigurationManagementClient",
-    "version": "2025-02-01-preview",
+    "version": "2025-06-01-preview",
     "description": "// (missing-service-description) Add service description",
     "x-typespec-generated": [
       {
@@ -578,6 +578,9 @@
           },
           "ConfigurationStores_Create_With_Telemetry": {
             "$ref": "./examples/ConfigurationStoresCreateWithTelemetry.json"
+          },
+          "ConfigurationStores_Create_With_AzureFrontDoor": {
+            "$ref": "./examples/ConfigurationStoresCreateWithAzureFrontDoor.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -2127,6 +2130,10 @@
           "$ref": "../../../../../../common-types/resource-management/v5/mobo.json#/definitions/ManagedOnBehalfOfConfiguration",
           "description": "Managed On Behalf Of Configuration.",
           "readOnly": true
+        },
+        "azureFrontDoor": {
+          "$ref": "#/definitions/AzureFrontDoorProperties",
+          "description": "Property specifying the configuration of Azure Front Door for this configuration store"
         }
       }
     },
@@ -2162,6 +2169,10 @@
         "telemetry": {
           "$ref": "#/definitions/TelemetryProperties",
           "description": "Property specifying the configuration of telemetry to update for this configuration store"
+        },
+        "azureFrontDoor": {
+          "$ref": "#/definitions/AzureFrontDoorProperties",
+          "description": "Property specifying the configuration of Azure Front Door for this configuration store"
         }
       }
     },
@@ -3236,6 +3247,17 @@
           "type": "string",
           "description": "The client ID of the user-assigned identity.",
           "readOnly": true
+        }
+      }
+    },
+    "AzureFrontDoorProperties": {
+      "description": "Azure Front Door settings",
+      "type": "object",
+      "properties": {
+        "resourceId": {
+          "description": "Resource ID of an Azure Front Door profile",
+          "type": "string",
+          "format": "arm-id"
         }
       }
     }
