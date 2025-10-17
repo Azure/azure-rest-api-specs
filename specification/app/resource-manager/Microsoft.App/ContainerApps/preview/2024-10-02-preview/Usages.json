@@ -1,0 +1,188 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "version": "2024-10-02-preview",
+    "title": "ContainerApps API Client"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "paths": {
+    "/subscriptions/{subscriptionId}/providers/Microsoft.App/locations/{location}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "operationId": "Usages_List",
+        "description": "Gets, for the specified location, the current resource usage information as well as the limits under the subscription.",
+        "parameters": [
+          {
+            "name": "location",
+            "in": "path",
+            "required": true,
+            "type": "string",
+            "description": "The location for which resource usage is queried.",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List usages": {
+            "$ref": "./examples/Usages_List.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/managedEnvironments/{environmentName}/usages": {
+      "get": {
+        "tags": [
+          "Usages"
+        ],
+        "operationId": "ManagedEnvironmentUsages_List",
+        "description": "Gets the current usage information as well as the limits for environment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "name": "environmentName",
+            "in": "path",
+            "description": "Name of the Environment.",
+            "required": true,
+            "type": "string",
+            "pattern": "^[-\\w\\._]+$"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v3/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "$ref": "#/definitions/ListUsagesResult"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "./CommonDefinitions.json#/definitions/DefaultErrorResponse"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        },
+        "x-ms-examples": {
+          "List managed environment usages": {
+            "$ref": "./examples/ManagedEnvironmentUsages_List.json"
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "UsageName": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "string",
+          "description": "The name of the resource."
+        },
+        "localizedValue": {
+          "type": "string",
+          "description": "The localized name of the resource."
+        }
+      },
+      "description": "The Usage Names."
+    },
+    "Usage": {
+      "type": "object",
+      "properties": {
+        "unit": {
+          "type": "string",
+          "description": "An enum describing the unit of usage measurement.",
+          "enum": [
+            "Count"
+          ],
+          "x-ms-enum": {
+            "name": "UsageUnit",
+            "modelAsString": false
+          }
+        },
+        "currentValue": {
+          "type": "number",
+          "format": "float",
+          "description": "The current usage of the resource."
+        },
+        "limit": {
+          "type": "number",
+          "format": "float",
+          "description": "The maximum permitted usage of the resource."
+        },
+        "name": {
+          "$ref": "#/definitions/UsageName",
+          "description": "The name of the type of usage."
+        }
+      },
+      "required": [
+        "unit",
+        "currentValue",
+        "limit",
+        "name"
+      ],
+      "description": "Describes Compute Resource Usage."
+    },
+    "ListUsagesResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Usage"
+          },
+          "x-ms-identifiers": [
+            "name"
+          ],
+          "description": "The list of compute resource usages."
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "The URI to fetch the next page of compute resource usage information. Call ListNext() with this to fetch the next page of compute resource usage information."
+        }
+      }
+    }
+  }
+}
