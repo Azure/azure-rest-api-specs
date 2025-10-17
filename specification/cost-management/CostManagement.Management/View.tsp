@@ -143,7 +143,7 @@ interface ViewOperationGroup {
   >;
 
   /**
-   * Lists all views by tenant and object.
+   * Lists all views at the given scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/en-us/rest/api/costmanagement/")

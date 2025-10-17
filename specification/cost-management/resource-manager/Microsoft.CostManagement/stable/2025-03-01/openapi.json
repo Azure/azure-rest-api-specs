@@ -700,9 +700,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -717,7 +718,8 @@
           "Get details of the operation result": {
             "$ref": "./examples/CostDetailsOperationResultsBySubscriptionScope.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{scope}/providers/Microsoft.CostManagement/dimensions": {
@@ -1596,9 +1598,10 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
-              "Location": {
-                "type": "string",
-                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -1613,7 +1616,8 @@
           "Get details of the operation result": {
             "$ref": "./examples/GenerateDetailedCostReportOperationResultsBySubscriptionScope.json"
           }
-        }
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/{scope}/providers/Microsoft.CostManagement/operationStatus/{operationId}": {
@@ -1780,7 +1784,7 @@
         "tags": [
           "ScheduledActionOperationGroup"
         ],
-        "description": "List all private scheduled actions.",
+        "description": "List all shared scheduled actions within the given scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },
@@ -2291,7 +2295,7 @@
         "tags": [
           "ViewOperationGroup"
         ],
-        "description": "Lists all views by tenant and object.",
+        "description": "Lists all views at the given scope.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/en-us/rest/api/costmanagement/"
         },
@@ -2904,7 +2908,7 @@
         "tags": [
           "ScheduledActions"
         ],
-        "description": "List a ScheduledAction",
+        "description": "List all private scheduled actions.",
         "externalDocs": {
           "url": "https://docs.microsoft.com/rest/api/cost-management/"
         },

@@ -54,10 +54,14 @@ interface GenerateCostDetailsReport {
   /**
    * Get the result of the specified operation. This link is provided in the CostDetails creation request response Location header.
    */
+  #suppress "@azure-tools/typespec-client-generator-core/mark-as-lro-ineffective" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   getOperationResults is Extension.Read<
     Extension.ScopeParameter,
     CostDetailsOperationResults,
-    Response = ArmResponse<CostDetailsOperationResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CostDetailsOperationResults>>,
+    Response = ArmResponse<CostDetailsOperationResults> | ArmAcceptedResponse,
     Error = ErrorResponse
   >;
 }

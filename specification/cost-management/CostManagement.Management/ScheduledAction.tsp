@@ -96,6 +96,9 @@ interface ScheduledActions {
     ErrorType = ErrorResponseWithNestedDetails
   >;
 
+  /**
+   * List all private scheduled actions.
+   */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")
   list is ScheduledActionOps.List<
@@ -190,7 +193,7 @@ interface ScheduledActionOperationGroup {
   >;
 
   /**
-   * List all private scheduled actions.
+   * List all shared scheduled actions within the given scope.
    */
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @externalDocs("https://docs.microsoft.com/rest/api/cost-management/")

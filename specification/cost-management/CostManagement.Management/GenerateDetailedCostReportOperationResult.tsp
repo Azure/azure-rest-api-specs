@@ -28,10 +28,13 @@ interface GenerateDetailedCostReportOperationResults {
   /**
    * Gets the result of the specified operation. The link with this operationId is provided as a response header of the initial request.
    */
+  #suppress "@azure-tools/typespec-azure-core/no-legacy-usage" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.ClientGenerator.Core.Legacy.markAsLro
   get is Extension.Read<
     Extension.ScopeParameter,
     GenerateDetailedCostReportOperationResult,
-    Response = ArmResponse<GenerateDetailedCostReportOperationResult> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GenerateDetailedCostReportOperationResult>>,
+    Response = ArmResponse<GenerateDetailedCostReportOperationResult> | ArmAcceptedResponse,
     Error = ErrorResponse
   >;
 }
