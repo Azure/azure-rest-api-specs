@@ -99,8 +99,8 @@ export async function getLabelAndActionImpl({ details_url, core, retryOptions = 
     }
   }
 
-  if (!labelAction) {
-    core.info("No label action found, defaulting to None");
+  if (!labelAction || !labelName) {
+    core.info("No label action or name found, defaulting to None");
     labelAction = LabelAction.None;
   }
 
