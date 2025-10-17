@@ -567,6 +567,9 @@
           "ConfigurationStores_Create": {
             "$ref": "./examples/ConfigurationStoresCreate.json"
           },
+          "ConfigurationStores_Create_With_AzureFrontDoor": {
+            "$ref": "./examples/ConfigurationStoresCreateWithAzureFrontDoor.json"
+          },
           "ConfigurationStores_Create_With_Data_Plane_Proxy": {
             "$ref": "./examples/ConfigurationStoresCreateWithDataPlaneProxy.json"
           },
@@ -578,9 +581,6 @@
           },
           "ConfigurationStores_Create_With_Telemetry": {
             "$ref": "./examples/ConfigurationStoresCreateWithTelemetry.json"
-          },
-          "ConfigurationStores_Create_With_AzureFrontDoor": {
-            "$ref": "./examples/ConfigurationStoresCreateWithAzureFrontDoor.json"
           }
         },
         "x-ms-long-running-operation-options": {
@@ -1949,6 +1949,17 @@
         ]
       }
     },
+    "AzureFrontDoorProperties": {
+      "type": "object",
+      "description": "Azure Front Door settings",
+      "properties": {
+        "resourceId": {
+          "type": "string",
+          "format": "arm-id",
+          "description": "Resource ID of an Azure Front Door profile"
+        }
+      }
+    },
     "CheckNameAvailabilityParameters": {
       "type": "object",
       "description": "Parameters used for checking whether a resource name is available.",
@@ -3247,17 +3258,6 @@
           "type": "string",
           "description": "The client ID of the user-assigned identity.",
           "readOnly": true
-        }
-      }
-    },
-    "AzureFrontDoorProperties": {
-      "description": "Azure Front Door settings",
-      "type": "object",
-      "properties": {
-        "resourceId": {
-          "description": "Resource ID of an Azure Front Door profile",
-          "type": "string",
-          "format": "arm-id"
         }
       }
     }
