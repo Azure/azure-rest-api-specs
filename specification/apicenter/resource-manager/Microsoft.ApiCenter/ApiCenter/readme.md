@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-06-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-06-01-preview'
 input-file:
-  - Microsoft.ApiCenter/preview/2024-06-01-preview/apicenter.json
+  - preview/2024-06-01-preview/apicenter.json
 ```
 
 ### Tag: package-2024-03-15-preview
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2024-03-15-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-03-15-preview'
 input-file:
-  - Microsoft.ApiCenter/preview/2024-03-15-preview/apicenter.json
+  - preview/2024-03-15-preview/apicenter.json
 ```
 ### Tag: package-2024-03
 
@@ -53,7 +53,7 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 
 ``` yaml $(tag) == 'package-2024-03'
 input-file:
-  - Microsoft.ApiCenter/stable/2024-03-01/apicenter.json
+  - stable/2024-03-01/apicenter.json
 ```
 
 ### Tag: package-2023-07-01-preview
@@ -62,7 +62,7 @@ These settings apply only when `--tag=package-2023-07-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-07-01-preview'
 input-file:
-  - Microsoft.ApiCenter/preview/2023-07-01-preview/apicenter.json
+  - preview/2023-07-01-preview/apicenter.json
 ```
 
 ---

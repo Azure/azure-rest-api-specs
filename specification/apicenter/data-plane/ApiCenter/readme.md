@@ -35,7 +35,7 @@ These settings apply only when `--tag=package-2024-02-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-02-01-preview'
 input-file:
-  - ApiCenter.DataApi/preview/2024-02-01-preview/azure.apicenter.dataapi.json
+  - preview/2024-02-01-preview/azure.apicenter.dataapi.json
 ```
 
 ---
