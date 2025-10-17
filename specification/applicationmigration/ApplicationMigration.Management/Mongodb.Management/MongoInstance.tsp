@@ -36,7 +36,7 @@ interface MongoInstances {
    * Patch the MongoInstances resource.
    */
   @patch(#{ implicitOptionality: false })
-  @Azure.ClientGenerator.Core.convenientAPI(false, "!javascript")
+  @Azure.ClientGenerator.Core.convenientAPI(false, "!javascript, !csharp")
   update is ArmCustomPatchSync<
     MongoInstance,
     MongoInstanceResourcePatchProperties

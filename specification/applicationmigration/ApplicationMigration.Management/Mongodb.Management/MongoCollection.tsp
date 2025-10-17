@@ -39,7 +39,7 @@ interface MongoCollections {
    * Patch the MongoCollection resource.
    */
   @patch(#{ implicitOptionality: false })
-  @Azure.ClientGenerator.Core.convenientAPI(false, "!javascript")
+  @Azure.ClientGenerator.Core.convenientAPI(false, "!javascript, !csharp")
   update is ArmCustomPatchSync<MongoCollection, MongoCollectionResourcePatch>;
 
   /**

@@ -35,7 +35,7 @@ interface MongoSites {
    * Patch the MongoSites resource.
    */
   @patch(#{ implicitOptionality: false })
-  @Azure.ClientGenerator.Core.convenientAPI(false, "!javascript")
+  @Azure.ClientGenerator.Core.convenientAPI(false, "!javascript, !csharp")
   update is ArmCustomPatchAsync<MongoSite, SiteTagsPatch>;
 
   /**
