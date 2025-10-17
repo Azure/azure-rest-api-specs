@@ -1093,7 +1093,6 @@
       "description": "Defines the sensitivity for the rule.",
       "type": "string",
       "enum": [
-        "None",
         "Low",
         "Medium",
         "High"
@@ -1101,7 +1100,21 @@
       "x-ms-enum": {
         "name": "SensitivityType",
         "modelAsString": true
-      }
+      },
+      "values": [
+        {
+          "value": "Low",
+          "description": "Low Sensitivity - triggers the rule by larger spikes in traffic"
+        },
+        {
+          "value": "Medium",
+          "description": "Medium Sensitivity - triggers the rule by moderate spikes in traffic"
+        },
+        {
+          "value": "High",
+          "description": "High Sensitivity - triggers the rule by smaller spikes in traffic"
+        }
+      ]
     },
     "WebApplicationFirewallScrubbingRules": {
       "description": "Allow certain variables to be scrubbed on WAF logs",
