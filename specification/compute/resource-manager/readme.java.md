@@ -3,6 +3,12 @@
 These settings apply only when `--java` is specified on the command line.
 
 ```yaml $(java)
+modelerfor:
+  lenient-model-deduplication: true
+rename-model: UserAssignedIdentitiesValue:VirtualMachineIdentityUserAssignedIdentities,VirtualMachineScaleSetIdentityUserAssignedIdentitiesValue:VirtualMachineScaleSetIdentityUserAssignedIdentities
+preserve-model: AvailabilitySetSkuTypes
+remove-inner: StorageProfile
+enable-sync-stack: false
 directive:
   - from: virtualMachineScaleSet.json
     where: $.definitions.VirtualMachineScaleSetVMProperties.properties

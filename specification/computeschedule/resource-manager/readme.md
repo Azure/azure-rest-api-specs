@@ -30,6 +30,25 @@ openapi-type: arm
 tag: package-2025-05-01
 ```
 
+### Tag: package-2025-04-15-preview
+
+These settings apply only when `--tag=package-2025-04-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-04-15-preview'
+input-file:
+  - Microsoft.ComputeSchedule/preview/2025-04-15-preview/computeschedule.json
+suppressions:  
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.baseProfile
+  - code: AvoidAdditionalProperties
+    reason: Record unknown because we are a passthrough API to compute and we can't take dependency on VirtualMachine properties for updating with version change.
+    from: computeschedule.json
+    where: $.definitions.ResourceProvisionPayload.properties.resourceOverrides.items
+
+```
+
 ### Tag: package-2025-05-01
 
 These settings apply only when `--tag=package-2025-05-01` is specified on the command line.
@@ -57,6 +76,16 @@ These settings apply only when `--tag=package-2024-10-01` is specified on the co
 ```yaml $(tag) == 'package-2024-10-01'
 input-file:
   - Microsoft.ComputeSchedule/stable/2024-10-01/computeschedule.json
+```
+
+
+### Tag: package-2024-08-15-preview
+
+These settings apply only when `--tag=package-2024-08-15-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2024-08-15-preview'
+input-file:
+  - Microsoft.ComputeSchedule/preview/2024-08-15-preview/computeschedule.json
 ```
 
 ---

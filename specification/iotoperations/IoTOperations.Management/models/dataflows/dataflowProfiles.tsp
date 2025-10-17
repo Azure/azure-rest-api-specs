@@ -4,7 +4,7 @@ import "@azure-tools/typespec-azure-resource-manager";
 
 using TypeSpec.Http;
 using TypeSpec.Rest;
-using OpenAPI;
+using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 namespace Microsoft.IoTOperations;
@@ -29,7 +29,8 @@ model DataflowProfileResource is ProxyResource<DataflowProfileProperties> {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property"
   @doc("Edge location of the resource.")
   @visibility(Lifecycle.Read, Lifecycle.Create)
-  extendedLocation: ExtendedLocation;
+  @madeOptional(Versions.`2025-07-01-preview`)
+  extendedLocation?: ExtendedLocation;
 }
 
 @doc("DataflowProfile Resource properties")
@@ -45,6 +46,8 @@ model DataflowProfileProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
   provisioningState?: ProvisioningState;
+
+  ...ResourceHealth;
 }
 
 @doc("DataflowProfile Diagnostics properties")

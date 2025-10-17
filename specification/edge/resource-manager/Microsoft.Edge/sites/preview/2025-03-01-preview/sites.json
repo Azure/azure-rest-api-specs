@@ -58,7 +58,7 @@
             "description": "The name of the service group",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
           }
         ],
         "responses": {
@@ -99,12 +99,12 @@
             "description": "The name of the service group",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -143,12 +143,12 @@
             "description": "The name of the service group",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -156,7 +156,7 @@
           {
             "name": "resource",
             "in": "body",
-            "description": "The properties of the site",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/Site"
@@ -217,12 +217,12 @@
             "description": "The name of the service group",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -230,7 +230,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The properties of the site",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -270,12 +270,12 @@
             "description": "The name of the service group",
             "required": true,
             "type": "string",
-            "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
+            "pattern": "^[a-zA-Z0-9\\-_().]{1,90}$"
           },
           {
             "name": "siteName",
             "in": "path",
-            "description": "The name of the site",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -352,7 +352,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -391,7 +391,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -460,7 +460,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -468,7 +468,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -508,7 +508,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -541,7 +541,7 @@
         "tags": [
           "Sites"
         ],
-        "description": "List Site resources by resource group",
+        "description": "List a Site",
         "parameters": [
           {
             "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
@@ -597,7 +597,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -642,7 +642,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -717,7 +717,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
@@ -725,7 +725,7 @@
           {
             "name": "properties",
             "in": "body",
-            "description": "The resource properties to be updated.",
+            "description": "Resource create parameters.",
             "required": true,
             "schema": {
               "$ref": "#/definitions/SiteUpdate"
@@ -771,7 +771,7 @@
           {
             "name": "siteName",
             "in": "path",
-            "description": "Name of Site resource",
+            "description": "The name of the Site",
             "required": true,
             "type": "string",
             "pattern": "^[a-zA-Z0-9][a-zA-Z0-9-_]{2,22}[a-zA-Z0-9]$"
