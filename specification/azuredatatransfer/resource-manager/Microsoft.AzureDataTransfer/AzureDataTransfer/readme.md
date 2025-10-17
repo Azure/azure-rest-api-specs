@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2025-10-10-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-10-10-preview'
 input-file:
-  - Microsoft.AzureDataTransfer/preview/2025-10-10-preview/azuredatatransfer.json
+  - preview/2025-10-10-preview/azuredatatransfer.json
 ```
 
 ### Tag: package-2025-05-30-preview
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2025-05-30-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-05-30-preview'
 input-file:
-  - Microsoft.AzureDataTransfer/preview/2025-05-30-preview/azuredatatransfer.json
+  - preview/2025-05-30-preview/azuredatatransfer.json
 ```
 
 ### Tag: package-2025-05-21
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2025-05-21` is specified on the co
 
 ```yaml $(tag) == 'package-2025-05-21'
 input-file:
-  - Microsoft.AzureDataTransfer/stable/2025-05-21/azuredatatransfer.json
+  - stable/2025-05-21/azuredatatransfer.json
 ```
 
 ### Tag: package-2025-04-11-preview
@@ -65,7 +65,7 @@ These settings apply only when `--tag=package-2025-04-11-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-04-11-preview'
 input-file:
-  - Microsoft.AzureDataTransfer/preview/2025-04-11-preview/azuredatatransfer.json
+  - preview/2025-04-11-preview/azuredatatransfer.json
 ```
 
 ### Tag: package-2025-03-01-preview
@@ -74,7 +74,7 @@ These settings apply only when `--tag=package-2025-03-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2025-03-01-preview'
 input-file:
-  - Microsoft.AzureDataTransfer/preview/2025-03-01-preview/azuredatatransfer.json
+  - preview/2025-03-01-preview/azuredatatransfer.json
 ```
 
 ### Tag: package-2024-09-11
@@ -83,7 +83,7 @@ These settings apply only when `--tag=package-2024-09-11` is specified on the co
 
 ```yaml $(tag) == 'package-2024-09-11'
 input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-09-11/azuredatatransfer.json
+  - stable/2024-09-11/azuredatatransfer.json
 ```
 
 ### Tag: package-2024-09-27
@@ -92,7 +92,7 @@ These settings apply only when `--tag=package-2024-09-27` is specified on the co
 
 ```yaml $(tag) == 'package-2024-09-27'
 input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-09-27/azuredatatransfer.json
+  - stable/2024-09-27/azuredatatransfer.json
 ```
 
 ### Tag: package-2024-05-07
@@ -101,7 +101,7 @@ These settings apply only when `--tag=package-2024-05-07` is specified on the co
 
 ```yaml $(tag) == 'package-2024-05-07'
 input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-05-07/azuredatatransfer.json
+  - stable/2024-05-07/azuredatatransfer.json
 ```
 
 ### Tag: package-preview-2024-01-25
@@ -110,7 +110,7 @@ These settings apply only when `--tag=package-2024-01-25` is specified on the co
 
 ```yaml $(tag) == 'package-2024-01-25'
 input-file:
-  - Microsoft.AzureDataTransfer/stable/2024-01-25/azuredatatransfer.json
+  - stable/2024-01-25/azuredatatransfer.json
 ```
 
 ### Tag: package-2023-10-11-preview
@@ -119,7 +119,7 @@ These settings apply only when `--tag=package-2023-10-11-preview` is specified o
 
 ``` yaml $(tag) == 'package-2023-10-11-preview'
 input-file:
-  - Microsoft.AzureDataTransfer/preview/2023-10-11-preview/azuredatatransfer.json
+  - preview/2023-10-11-preview/azuredatatransfer.json
 ```
 
 ## Suppressions
