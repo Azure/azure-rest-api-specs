@@ -1242,6 +1242,23 @@ union DiffDiskPlacement {
 }
 
 /**
+ * DeploymentScope type
+ */
+union DeploymentScope {
+  string,
+
+  /**
+   * For geographical Broker and ArmProvider talking to Geographical SQL DB
+   */
+  Geographical: "Geographical",
+
+  /**
+   * For regional Broker and ArmProvider talking to regional SQL DB
+   */
+  Regional: "Regional",
+}
+
+/**
  * Day of the week. Modeled as string
  */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Service already defined this as non-extensible"
@@ -1422,6 +1439,12 @@ model AppAttachPackageProperties {
    * Field that can be populated with custom data and filtered on in list GET calls
    */
   customData?: string;
+
+  /**
+   * DeploymentScope type for App Attach Package.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2213,6 +2236,19 @@ model ApplicationGroupProperties {
    * Boolean representing whether the applicationGroup is show in the feed.
    */
   showInFeed?: boolean;
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for Application Group.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2523,6 +2559,18 @@ model HostPoolProperties {
    * The type of management for this hostpool, Automated or Standard. The default value is Automated.
    */
   managementType?: ManagementType;
+
+  /**
+   * DeploymentScope type for HostPool.
+   */
+  @added(Versions.v2025_08_01_preview)
+  deploymentScope?: DeploymentScope;
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
 }
 
 /**
@@ -2944,6 +2992,18 @@ model WorkspaceProperties {
    */
   @visibility(Lifecycle.Read)
   privateEndpointConnections?: PrivateEndpointConnection[];
+
+  /**
+   * Tenant that the resource is being requested on behalf of.
+   */
+  @added(Versions.v2025_08_01_preview)
+  oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for Workspace.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
