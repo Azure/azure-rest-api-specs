@@ -35,6 +35,12 @@ options:
     service-name: sdk/azurestackhci
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
+  "@azure-tools/typespec-ts":
+    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    flavor: azure
+    experimental-extensible-enums: true
+    package-details:
+      name: "@azure/arm-{service-name}"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
