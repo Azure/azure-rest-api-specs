@@ -77,22 +77,22 @@ using Azure.Core;
 
 @@clientLocation(MhsmPrivateEndpointConnections.get,
   "MHSMPrivateEndpointConnections",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(MhsmPrivateEndpointConnections.put,
   "MHSMPrivateEndpointConnections",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientName(MhsmPrivateEndpointConnections.put::parameters.resource,
   "properties"
 );
 @@clientLocation(MhsmPrivateEndpointConnections.delete,
   "MHSMPrivateEndpointConnections",
-  "!csharp"
+  "!csharp,!java"
 );
 @@clientLocation(MhsmPrivateEndpointConnections.listByResource,
   "MHSMPrivateEndpointConnections",
-  "!csharp"
+  "!csharp,!java"
 );
 @@Azure.ClientGenerator.Core.Legacy.flattenProperty(MhsmPrivateEndpointConnection.properties
 );
@@ -166,7 +166,7 @@ using Azure.Core;
   "python"
 );
 @@clientName(VaultListResult, "ResourceListResult");
-@@clientName(MhsmServiceTagRule, "MHSMServiceTagRule", "!java,!csharp,java");
+@@clientName(MhsmServiceTagRule, "MHSMServiceTagRule", "!java,!csharp");
 
 @@clientName(JsonWebKeyCurveName.`P-256`, "P256", "python");
 @@clientName(JsonWebKeyCurveName.`P-384`, "P384", "python");
