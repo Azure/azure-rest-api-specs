@@ -36,7 +36,7 @@ These settings apply only when `--tag=package-2024-02-09-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-02-09-preview'
 input-file:
-  - Azure.ProgrammableConnectivity/preview/2024-02-09-preview/openapi.json
+  - preview/2024-02-09-preview/openapi.json
 suppressions:
   - code: ValidResponseCodeRequired
     reason: APC must return a 302 as part of a non-standard frontend authentication flow
