@@ -505,11 +505,11 @@ input-file:
   - preview/2024-03-01-preview/securitySettings.json
 ```
 
-### Tag: package-preview-2024-03
+### Tag: package-preview-2024-03-15
+`
+These settings apply only when `--tag=package-preview-2024-03-15` is specified on the command line.
 
-These settings apply only when `--tag=package-preview-2024-03` is specified on the command line.
-
-```yaml $(tag) == 'package-preview-2024-03'
+```yaml $(tag) == 'package-preview-2024-03-15'
 input-file:
   - preview/2024-03-15-preview/arcSettings.json
   - preview/2024-03-15-preview/clusters.json
