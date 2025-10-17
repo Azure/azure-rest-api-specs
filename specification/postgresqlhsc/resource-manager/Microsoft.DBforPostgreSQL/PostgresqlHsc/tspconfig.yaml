@@ -14,7 +14,7 @@ options:
     arm-types-dir: "{project-root}/../../../../common-types/resource-management"
   "@azure-tools/typespec-python":
     service-dir: "sdk/cosmosdbforpostgresql"
-    package-dir: "azure-mgmt-cosmosdbforpostgresql"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-cosmosdbforpostgresql"
     namespace: "azure.mgmt.cosmosdbforpostgresql"
     generate-test: true
     generate-sample: true
@@ -26,7 +26,7 @@ options:
     service-name: "Cosmos DB for PostgreSql" # human-readable service name, whitespace allowed
     flavor: azure
   "@azure-tools/typespec-ts":
-    package-dir: "arm-postgresqlhsc"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-postgresqlhsc"
     flavor: azure
     experimental-extensible-enums: true
     package-details:

@@ -8,7 +8,7 @@ options:
     omit-unreachable-types: true
     emitter-output-dir: "{project-root}/.."
     azure-resource-provider-folder: "resource-manager"
-    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/devcenter.json"
+    output-file: "{azure-resource-provider-folder}/{service-name}/{version-status}/{version}/DevCenterRP.json"
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
@@ -19,12 +19,13 @@ options:
     clear-output-folder: true
     flavor: "azure"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-devcenter"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-devcenter"
     namespace: "azure.mgmt.devcenter"
     generate-test: true
     generate-sample: true
     flavor: "azure"
   "@azure-tools/typespec-java":
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-devcenter"
     package-dir: "azure-resourcemanager-devcenter"
     namespace: "com.azure.resourcemanager.devcenter"
     service-name: "DevCenter" # human-readable service name, whitespace allowed
@@ -33,7 +34,7 @@ options:
       - resource: Catalog
         collection: ProjectCatalogs
   "@azure-tools/typespec-ts":
-    package-dir: "arm-devcenter"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-devcenter"
     is-modular-library: true
     flavor: "azure"
     experimental-extensible-enums: true
@@ -41,7 +42,6 @@ options:
       name: "@azure/arm-devcenter"
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/devcenter"
-    package-dir: "armdevcenter"
     emitter-output-dir: "{output-dir}/{service-dir}/armdevcenter"
     module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armdevcenter"
     fix-const-stuttering: true
