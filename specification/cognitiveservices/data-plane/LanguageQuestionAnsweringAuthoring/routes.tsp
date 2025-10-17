@@ -19,58 +19,6 @@ alias ServiceTraits = NoRepeatableRequests &
 
 alias LanguageOperations = ResourceOperations<ServiceTraits, ErrorResponse>;
 
-/** Parameters for the export project operation. */
-model ExportJobParameters {
-  /**
-   * The name of the project to use.
-   */
-  @maxLength(100)
-  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
-  @path
-  projectName: string;
-
-  /**
-   * Knowledge base Import or Export format.
-   */
-  @query("format")
-  format?: format = format.json;
-
-  /**
-   * Kind of the asset of the project.
-   */
-  @query("assetKind")
-  assetKind?: AssestKind;
-}
-
-/** Parameters for the import project operation. */
-model ImportJobParameters {
-  /**
-   * The name of the project to use.
-   */
-  @maxLength(100)
-  @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
-  @path
-  projectName: string;
-
-  /**
-   * Knowledge base Import or Export format.
-   */
-  @query("format")
-  format?: format = format.json;
-
-  /**
-   * Kind of the asset of the project.
-   */
-  @query("assetKind")
-  assetKind?: AssestKind;
-
-  /**
-   * Project assets the needs to be imported.
-   */
-  @bodyRoot
-  body?: ImportJobOptions;
-}
-
 interface QuestionAnsweringProjects {
   /**
    * Gets all projects for a user.
@@ -131,7 +79,27 @@ interface QuestionAnsweringProjects {
   @post
   @pollingOperation(QuestionAnsweringProjects.getExportStatus)
   export is Foundations.LongRunningOperation<
-    ExportJobParameters,
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
+      @path
+      projectName: string;
+
+      /**
+       * Knowledge base Import or Export format.
+       */
+      @query("file_format")
+      file_format?: format = format.json;
+
+      /**
+       * Kind of the asset of the project.
+       */
+      @query("assetKind")
+      assetKind?: AssestKind;
+    },
     ExportJobResponse,
     {},
     ErrorResponse
@@ -153,7 +121,33 @@ interface QuestionAnsweringProjects {
   @post
   @pollingOperation(QuestionAnsweringProjects.getImportStatus)
   `import` is Foundations.LongRunningOperation<
-    ImportJobParameters,
+    {
+      /**
+       * The name of the project to use.
+       */
+      @maxLength(100)
+      @pattern("^(?=[a-zA-Z0-9])[a-zA-Z0-9-]{0,98}[a-zA-Z0-9]$")
+      @path
+      projectName: string;
+
+      /**
+       * Knowledge base Import or Export format.
+       */
+      @query("file_format")
+      file_format?: format = format.json;
+
+      /**
+       * Kind of the asset of the project.
+       */
+      @query("assetKind")
+      assetKind?: AssestKind;
+
+      /**
+       * Project assets the needs to be imported.
+       */
+      @bodyRoot
+      body?: ImportJobOptions;
+    },
     AcceptedResponse,
     {},
     ErrorResponse
