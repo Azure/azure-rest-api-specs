@@ -915,7 +915,7 @@ model ChargeSummary extends ProxyResource {
  * A balance resource.
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model Balance extends Azure.ResourceManager.Foundations.Resource {
+model Balance extends Resource {
   /**
    * The properties of the balance.
    */
@@ -2283,14 +2283,16 @@ model Events {
 /**
  * An event summary resource.
  */
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model EventSummary
-  extends Azure.ResourceManager.ProxyResource<EventProperties> {
+model EventSummary extends ProxyResource {
+  /**
+   * The event properties.
+   */
+  properties?: EventProperties;
+
   /**
    * The eTag for the resource.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @visibility(Lifecycle.Read)
   eTag?: string;
 }
