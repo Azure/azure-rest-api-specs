@@ -88,6 +88,7 @@ interface Jobs {
   /**
    * Gets the details of a specified job on a Data Box Edge/Data Box Gateway device.
    */
+  @summary("Gets the details of a specified job on a Data Box Edge/Data Box Gateway device.")
   get is JobOps.Read<Job, OverrideErrorType = CloudError>;
 }
 alias OperationsStatusOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -117,6 +118,7 @@ interface OperationsStatus {
   /**
    * Gets the details of a specified job on a Data Box Edge/Data Box Gateway device.
    */
+  @summary("Gets the details of a specified job on a Data Box Edge/Data Box Gateway device.")
   get is OperationsStatusOps.Read<Job, OverrideErrorType = CloudError>;
 }
 

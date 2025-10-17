@@ -62,3 +62,4 @@ interface Operations
       OperationsList,
       Error = CloudError
     > {}
+@@summary(Operations.list, "List all the supported operations.");

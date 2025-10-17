@@ -1170,9 +1170,7 @@ model MetricSpecification_V1 {
    */
   supportedTimeGrainTypes?: TimeGrain[];
 
-  /**
-   * Support metric aggregation type.
-   */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   supportedAggregationTypes?: MetricAggregationType[];
 }
 

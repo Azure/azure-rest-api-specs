@@ -17,19 +17,14 @@ namespace Microsoft.DataBoxEdge;
  */
 @discriminator("kind")
 @parentResource(DataBoxEdgeDevice)
-model Role is Azure.ResourceManager.ProxyResource<{}> {
+model Role
+  is Azure.ResourceManager.Legacy.DiscriminatedProxyResource<RoleTypes> {
   ...ResourceNameParameter<
     Resource = Role,
     KeyName = "name",
     SegmentName = "roles",
     NamePattern = ""
   >;
-
-  /**
-   * Role type.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kind: RoleTypes;
 }
 
 @armResourceOperations
@@ -72,3 +67,4 @@ interface Roles {
 
 @@doc(Role.name, "The role name.");
 @@doc(Roles.createOrUpdate::parameters.resource, "The role properties.");
+@@doc(Role.kind, "Role type.");

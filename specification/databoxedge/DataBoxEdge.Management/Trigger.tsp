@@ -17,19 +17,14 @@ namespace Microsoft.DataBoxEdge;
  */
 @discriminator("kind")
 @parentResource(DataBoxEdgeDevice)
-model Trigger is Azure.ResourceManager.ProxyResource<{}> {
+model Trigger
+  is Azure.ResourceManager.Legacy.DiscriminatedProxyResource<TriggerEventType> {
   ...ResourceNameParameter<
     Resource = Trigger,
     KeyName = "name",
     SegmentName = "triggers",
     NamePattern = ""
   >;
-
-  /**
-   * Trigger Kind.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kind: TriggerEventType;
 }
 
 @armResourceOperations
@@ -79,3 +74,4 @@ interface Triggers {
 
 @@doc(Trigger.name, "The trigger name.");
 @@doc(Triggers.createOrUpdate::parameters.resource, "The trigger.");
+@@doc(Trigger.kind, "Trigger Kind.");

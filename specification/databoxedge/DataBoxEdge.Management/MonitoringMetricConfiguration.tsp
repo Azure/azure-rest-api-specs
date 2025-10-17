@@ -35,6 +35,7 @@ interface MonitoringMetricConfigurations {
    * Gets a  metric configuration of a role.
    */
   @action("monitoringConfig/default")
+  @summary("Gets a  metric configuration of a role.")
   get is MonitoringMetricConfigurationsNonListOps.Read<
     MonitoringMetricConfiguration,
     OverrideErrorType = CloudError
@@ -45,6 +46,7 @@ interface MonitoringMetricConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("monitoringConfig/default")
+  @summary("Creates a new metric configuration or updates an existing one for a role.")
   createOrUpdate is MonitoringMetricConfigurationsNonListOps.CreateOrUpdateAsync<
     MonitoringMetricConfiguration,
     Response = ArmResourceUpdatedResponse<MonitoringMetricConfiguration> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MonitoringMetricConfiguration> &
@@ -57,6 +59,7 @@ interface MonitoringMetricConfigurations {
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("monitoringConfig/default")
+  @summary("deletes a new metric configuration for a role.")
   delete is MonitoringMetricConfigurationsNonListOps.DeleteWithoutOkAsync<
     MonitoringMetricConfiguration,
     Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
@@ -66,6 +69,7 @@ interface MonitoringMetricConfigurations {
   /**
    * Lists metric configurations in a role.
    */
+  @summary("Lists metric configurations in a role.")
   list is MonitoringMetricConfigurationsListOps.List<
     MonitoringMetricConfiguration,
     Response = ArmResponse<MonitoringMetricConfigurationList>,

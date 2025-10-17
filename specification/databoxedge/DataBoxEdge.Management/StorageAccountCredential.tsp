@@ -59,6 +59,7 @@ interface StorageAccountCredentials {
   /**
    * Gets all the storage account credentials in a Data Box Edge/Data Box Gateway device.
    */
+  @summary("Gets all the storage account credentials in a Data Box Edge/Data Box Gateway device.")
   listByDataBoxEdgeDevice is ArmResourceListByParent<
     StorageAccountCredential,
     Response = ArmResponse<StorageAccountCredentialList>,

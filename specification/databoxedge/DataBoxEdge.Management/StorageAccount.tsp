@@ -30,12 +30,14 @@ interface StorageAccounts {
   /**
    * Gets a StorageAccount by name.
    */
+  @summary("Gets a StorageAccount by name.")
   get is ArmResourceRead<StorageAccount, Error = CloudError>;
 
   /**
    * Creates a new StorageAccount or updates an existing StorageAccount on the device.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new StorageAccount or updates an existing StorageAccount on the device.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     StorageAccount,
     Response = ArmResourceUpdatedResponse<StorageAccount> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = StorageAccount> &
@@ -51,6 +53,7 @@ interface StorageAccounts {
   /**
    * Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.
    */
+  @summary("Lists all the StorageAccounts in a Data Box Edge/Data Box Gateway device.")
   listByDataBoxEdgeDevice is ArmResourceListByParent<
     StorageAccount,
     Response = ArmResponse<StorageAccountList>,

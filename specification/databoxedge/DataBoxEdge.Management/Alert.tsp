@@ -29,6 +29,7 @@ interface Alerts {
   /**
    * Gets an alert by name.
    */
+  @summary("Gets an alert by name.")
   get is ArmResourceRead<Alert, Error = CloudError>;
 
   /**

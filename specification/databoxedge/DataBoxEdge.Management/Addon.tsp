@@ -18,19 +18,14 @@ namespace Microsoft.DataBoxEdge;
  */
 @discriminator("kind")
 @parentResource(Role)
-model Addon is Azure.ResourceManager.ProxyResource<{}> {
+model Addon
+  is Azure.ResourceManager.Legacy.DiscriminatedProxyResource<AddonType> {
   ...ResourceNameParameter<
     Resource = Addon,
     KeyName = "addonName",
     SegmentName = "addons",
     NamePattern = ""
   >;
-
-  /**
-   * Addon type.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kind: AddonType;
 }
 
 @armResourceOperations
@@ -106,3 +101,4 @@ interface AddonsOps
 
 @@doc(Addon.name, "The addon name.");
 @@doc(Addons.createOrUpdate::parameters.resource, "The addon properties.");
+@@doc(Addon.kind, "Addon type.");

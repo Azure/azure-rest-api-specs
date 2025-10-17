@@ -31,6 +31,7 @@ interface UpdateSummaries {
   /**
    * Gets information about the availability of updates based on the last scan of the device. It also gets information about any ongoing download or install jobs on the device.
    */
+  @summary("Gets information about the availability of updates based on the last scan of the device. It also gets information about any ongoing download or install jobs on the device.")
   getUpdateSummary is ArmResourceRead<UpdateSummary, Error = CloudError>;
 }
 

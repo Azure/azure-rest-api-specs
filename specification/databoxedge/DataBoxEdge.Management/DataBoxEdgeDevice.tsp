@@ -120,6 +120,7 @@ interface DataBoxEdgeDevices {
   /**
    * Downloads the updates on a Data Box Edge/Data Box Gateway device.
    */
+  @summary("Downloads the updates on a Data Box Edge/Data Box Gateway device.")
   downloadUpdates is ArmResourceActionAsync<
     DataBoxEdgeDevice,
     void,
@@ -152,6 +153,7 @@ interface DataBoxEdgeDevices {
   /**
    * Installs the updates on the Data Box Edge/Data Box Gateway device.
    */
+  @summary("Installs the updates on the Data Box Edge/Data Box Gateway device.")
   installUpdates is ArmResourceActionAsync<
     DataBoxEdgeDevice,
     void,
@@ -245,6 +247,7 @@ interface DataBoxEdgeDevices {
   /**
    * Triggers support package on the device
    */
+  @summary("Triggers support package on the device")
   triggerSupportPackage is ArmResourceActionAsync<
     DataBoxEdgeDevice,
     TriggerSupportPackageRequest,

@@ -29,12 +29,14 @@ interface Shares {
   /**
    * Gets a share by name.
    */
+  @summary("Gets a share by name.")
   get is ArmResourceRead<Share, Error = CloudError>;
 
   /**
    * Creates a new share or updates an existing share on the device.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new share or updates an existing share on the device.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Share,
     Response = ArmResourceUpdatedResponse<Share> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Share> &
@@ -55,6 +57,7 @@ interface Shares {
   /**
    * Lists all the shares in a Data Box Edge/Data Box Gateway device.
    */
+  @summary("Lists all the shares in a Data Box Edge/Data Box Gateway device.")
   listByDataBoxEdgeDevice is ArmResourceListByParent<
     Share,
     Response = ArmResponse<ShareList>,
@@ -64,6 +67,7 @@ interface Shares {
   /**
    * Refreshes the share metadata with the data from the cloud.
    */
+  @summary("Refreshes the share metadata with the data from the cloud.")
   refresh is ArmResourceActionAsync<
     Share,
     void,

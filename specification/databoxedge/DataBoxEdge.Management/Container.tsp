@@ -30,12 +30,14 @@ interface Containers {
   /**
    * Gets a container by name.
    */
+  @summary("Gets a container by name.")
   get is ArmResourceRead<Container, Error = CloudError>;
 
   /**
    * Creates a new container or updates an existing container on the device.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @summary("Creates a new container or updates an existing container on the device.")
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
     Container,
     Response = ArmResourceUpdatedResponse<Container> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = Container> &
@@ -51,6 +53,7 @@ interface Containers {
   /**
    * Lists all the containers of a storage Account in a Data Box Edge/Data Box Gateway device.
    */
+  @summary("Lists all the containers of a storage Account in a Data Box Edge/Data Box Gateway device.")
   listByStorageAccount is ArmResourceListByParent<
     Container,
     Response = ArmResponse<ContainerList>,
@@ -60,6 +63,7 @@ interface Containers {
   /**
    * Refreshes the container metadata with the data from the cloud.
    */
+  @summary("Refreshes the container metadata with the data from the cloud.")
   refresh is ArmResourceActionAsync<
     Container,
     void,
