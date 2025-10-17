@@ -16,7 +16,7 @@ namespace Microsoft.DocumentDB;
  */
 @parentResource(DatabaseAccountGetResults)
 model NetworkSecurityPerimeterConfiguration
-  is Azure.ResourceManager.ProxyResource<NetworkSecurityPerimeterConfigurationProperties> {
+  is Azure.ResourceManager.ProxyResource<Azure.ResourceManager.CommonTypes.NetworkSecurityPerimeterConfigurationProperties> {
   ...ResourceNameParameter<
     Resource = NetworkSecurityPerimeterConfiguration,
     KeyName = "networkSecurityPerimeterConfigurationName",

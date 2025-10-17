@@ -20,12 +20,6 @@ model ThroughputPoolAccountsListResult
 
 model TableRoleAssignmentListResult
   is ResourceListResult<TableRoleAssignmentResource>;
-
-#suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-provisioning-state" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-#suppress "@azure-tools/typespec-azure-resource-manager/no-empty-model" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-model NetworkSecurityPerimeterConfigurationProperties {}
-
 /**
  * The type of identity that created the resource.
  */

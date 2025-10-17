@@ -75,8 +75,8 @@ using TypeSpec.Versioning;
 @armProviderNamespace
 @service(#{ title: "Cosmos DB" })
 @versioned(Versions)
-// FIXME: Common type version v1 is not supported for now. Set to v5.
-@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v3)
+// FIXME: Common type version v1 is not supported for now. Set to v6.
+@armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v6)
 namespace Microsoft.DocumentDB;
 
 /**
