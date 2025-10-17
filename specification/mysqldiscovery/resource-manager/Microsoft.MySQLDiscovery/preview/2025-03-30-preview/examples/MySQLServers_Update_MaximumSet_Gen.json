@@ -1,0 +1,114 @@
+{
+  "title": "MySQLServers_Update_MaximumSet",
+  "operationId": "MySQLServers_Update",
+  "parameters": {
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "rgmysqldiscovery",
+    "siteName": "testSite",
+    "serverName": "testServer",
+    "api-version": "2025-03-30-preview",
+    "body": {
+      "properties": {
+        "hostName": "mysql-primary.internal.contoso",
+        "hostIp": [
+          "10.1.0.10",
+          "10.1.0.11"
+        ],
+        "machineId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/demoRG/providers/Microsoft.OffAzure/serverSites/siteA/machines/machine1",
+        "portNumber": "3306",
+        "mysqlVersion": "8.0",
+        "numberOfDatabase": 42,
+        "supportStatus": "Mainstream",
+        "edition": "Community",
+        "supportEndIn": "2027-12-31",
+        "totalDbSizeInGb": 512,
+        "errors": [
+          {
+            "id": "err-1",
+            "code": "WarnIndexFragmentation",
+            "summaryMessage": "High index fragmentation detected",
+            "runAsAccountId": "svcacct1",
+            "message": "Indexes > 30% fragmented",
+            "possibleCause": "Heavy write workload",
+            "recommendedAction": "Rebuild or reorganize indexes",
+            "severity": "Warning",
+            "updatedTimeStamp": "2025-03-21T09:10:00Z"
+          }
+        ],
+        "deepDiscoveryPerformed": "True",
+        "tags": {
+          "role": "primary",
+          "env": "prod"
+        },
+        "labels": {
+          "workload": "payments",
+          "tier": "gold"
+        },
+        "hostMachineProperties": {
+          "vCores": 16,
+          "memoryInMb": 65536,
+          "totalStorageInGb": 2048,
+          "mySqlServersCount": 3
+        }
+      }
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/rgmysqldiscovery/providers/Microsoft.MySQLDiscovery/MySQLSites/testSite/MySQLServers/testServer",
+        "name": "testServer",
+        "type": "Microsoft.MySQLDiscovery/MySQLSites/MySQLServers",
+        "properties": {
+          "hostName": "mysql-primary.internal.contoso",
+          "hostIp": [
+            "10.1.0.10",
+            "10.1.0.11"
+          ],
+          "machineId": "/subscriptions/11111111-1111-1111-1111-111111111111/resourceGroups/demoRG/providers/Microsoft.OffAzure/serverSites/siteA/machines/machine1",
+          "portNumber": "3306",
+          "mysqlVersion": "8.0",
+          "numberOfDatabase": 42,
+          "supportStatus": "Mainstream",
+          "edition": "Community",
+          "supportEndIn": "2027-12-31",
+          "totalDbSizeInGb": 512,
+          "errors": [
+            {
+              "id": "err-1",
+              "code": "WarnIndexFragmentation",
+              "summaryMessage": "High index fragmentation detected",
+              "runAsAccountId": "svcacct1",
+              "message": "Indexes > 30% fragmented",
+              "possibleCause": "Heavy write workload",
+              "recommendedAction": "Rebuild or reorganize indexes",
+              "severity": "Warning",
+              "updatedTimeStamp": "2025-03-21T09:10:00Z"
+            }
+          ],
+          "provisioningState": "Succeeded",
+          "deepDiscoveryPerformed": "True",
+          "tags": {
+            "role": "primary",
+            "env": "prod"
+          },
+          "labels": {
+            "workload": "payments",
+            "tier": "gold"
+          },
+          "hostMachineProperties": {
+            "vCores": 16,
+            "memoryInMb": 65536,
+            "totalStorageInGb": 2048,
+            "mySqlServersCount": 3
+          }
+        }
+      }
+    },
+    "202": {
+      "headers": {
+        "Location": "https://management.azure.com/providers/Microsoft.MySQLDiscovery/operationResults/xyz123?api-version=2025-03-30-preview"
+      }
+    }
+  }
+}
