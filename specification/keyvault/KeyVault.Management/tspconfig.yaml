@@ -29,8 +29,14 @@ options:
     namespace: "com.azure.resourcemanager.keyvault.generated"
     service-name: "KeyVault" # human-readable service name, whitespace allowed
     flavor: azure
-    premium: false
     enable-sync-stack: false
+    # emitter-output-dir: "{output-dir}/{service-dir}/azure-resourcemanager-keyvault"
+    # namespace: "com.azure.resourcemanager.keyvault"
+    # premium: true
+    # customization-class: customization/src/main/java/KeyVaultCustomization.java
+    rename-model:
+      TrackedResource: Resource
+    client-side-validations: true
   "@azure-tools/typespec-ts":
     emitter-output-dir: "{output-dir}/{service-dir}/arm-keyvault"
     flavor: azure
