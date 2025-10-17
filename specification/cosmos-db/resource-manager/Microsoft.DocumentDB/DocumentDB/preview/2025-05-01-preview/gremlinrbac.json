@@ -1,0 +1,617 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Role Based Access Control Resource Provider REST API",
+    "version": "2025-05-01-preview"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleDefinitions/{roleDefinitionId}": {
+      "get": {
+        "operationId": "GremlinResources_GetGremlinRoleDefinition",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionGet": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Definition with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Role Definition was successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "GremlinResources_CreateUpdateGremlinRoleDefinition",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionCreateUpdate": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates an Azure Cosmos DB Gremlin Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateGremlinRoleDefinitionParameters",
+            "in": "body",
+            "required": true,
+            "description": "The properties required to create or update a Role Definition.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Role Definition create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionResource"
+            }
+          },
+          "202": {
+            "description": "The Role Definition create or update request was accepted and will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GremlinResources_DeleteGremlinRoleDefinition",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionDelete": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes an existing Azure Cosmos DB Gremlin Role Definition.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleDefinitionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Role Definition delete operation was completed successfully."
+          },
+          "202": {
+            "description": "The Role Definition delete request was accepted and will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "204": {
+            "description": "The requested Role Definition does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleDefinitions": {
+      "get": {
+        "operationId": "GremlinResources_ListGremlinRoleDefinitions",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleDefinitionList": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleDefinitionList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the list of all Azure Cosmos DB Gremlin Role Definitions.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleDefinitionListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleAssignments/{roleAssignmentId}": {
+      "get": {
+        "operationId": "GremlinResources_GetGremlinRoleAssignment",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentGet": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentGet.json"
+          }
+        },
+        "description": "Retrieves the properties of an existing Azure Cosmos DB Gremlin Role Assignment with the given Id.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleAssignmentIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Role Assignment was successfully retrieved.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentResource"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "put": {
+        "operationId": "GremlinResources_CreateUpdateGremlinRoleAssignment",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentCreateUpdate": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentCreateUpdate.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Creates or updates an Azure Cosmos DB Gremlin Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleAssignmentIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "createUpdateGremlinRoleAssignmentParameters",
+            "in": "body",
+            "required": true,
+            "description": "The properties required to create or update a Role Assignment.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentResource"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Role Assignment create or update operation was completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentResource"
+            }
+          },
+          "202": {
+            "description": "The Role Assignment create or update request was accepted and will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      },
+      "delete": {
+        "operationId": "GremlinResources_DeleteGremlinRoleAssignment",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentDelete": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentDelete.json"
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "description": "Deletes an existing Azure Cosmos DB Gremlin Role Assignment.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "#/parameters/roleAssignmentIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The Role Assignment delete operation was completed successfully."
+          },
+          "202": {
+            "description": "The Role Assignment delete request was accepted and will complete asynchronously.",
+            "headers": {
+              "azure-AsyncOperation": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              },
+              "location": {
+                "type": "string",
+                "description": "URI to poll for completion status."
+              }
+            }
+          },
+          "204": {
+            "description": "The requested Role Assignment does not exist."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/databaseAccounts/{accountName}/gremlinRoleAssignments": {
+      "get": {
+        "operationId": "GremlinResources_ListGremlinRoleAssignments",
+        "x-ms-examples": {
+          "CosmosDBGremlinRoleAssignmentList": {
+            "$ref": "./examples/gremlinrbac/CosmosDBGremlinRoleAssignmentList.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        },
+        "description": "Retrieves the list of all Azure Cosmos DB Gremlin Role Assignments.",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "cosmos-db.json#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The list operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/GremlinRoleAssignmentListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        }
+      }
+    }
+  },
+  "definitions": {
+    "GremlinRoleDefinitionResourceProperties": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The path id for the Role Definition."
+        },
+        "roleName": {
+          "type": "string",
+          "description": "A user-friendly name for the Role Definition. Must be unique for the database account."
+        },
+        "type": {
+          "type": "string",
+          "enum": [
+            "BuiltInRole",
+            "CustomRole"
+          ],
+          "description": "Indicates whether the Role Definition was built-in or user created.",
+          "x-ms-enum": {
+            "name": "RoleDefinitionType",
+            "modelAsString": false
+          }
+        },
+        "assignableScopes": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "A set of fully qualified Scopes at or below which Gremlin Role Assignments may be created using this Role Definition. This will allow application of this Role Definition on the entire database account or any underlying Database / Collection. Must have at least one element. Scopes higher than Database account are not enforceable as assignable Scopes. Note that resources referenced in assignable Scopes need not exist."
+        },
+        "permissions": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/Permission"
+          },
+          "description": "The set of operations allowed through this Role Definition."
+        }
+      },
+      "description": "Azure Cosmos DB Gremlin Role Definition resource object."
+    },
+    "GremlinRoleDefinitionResource": {
+      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Definition.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Definition.",
+          "$ref": "#/definitions/GremlinRoleDefinitionResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "Permission": {
+      "type": "object",
+      "properties": {
+        "id": {
+          "type": "string",
+          "description": "The id for the permission."
+        },
+        "dataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of data actions that are allowed."
+        },
+        "notDataActions": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "An array of data actions that are denied."
+        }
+      },
+      "description": "The set of data plane operations permitted through this Role Definition."
+    },
+    "GremlinRoleDefinitionListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GremlinRoleDefinitionResource"
+          },
+          "description": "List of Role Definitions and their properties."
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "The relevant Role Definitions."
+    },
+    "GremlinRoleAssignmentResourceProperties": {
+      "type": "object",
+      "properties": {
+        "roleDefinitionId": {
+          "type": "string",
+          "description": "The unique identifier for the associated Role Definition."
+        },
+        "scope": {
+          "type": "string",
+          "description": "The data plane resource path for which access is being granted through this Gremlin Role Assignment."
+        },
+        "principalId": {
+          "type": "string",
+          "description": "The unique identifier for the associated AAD principal in the AAD graph to which access is being granted through this Gremlin Role Assignment. Tenant ID for the principal is inferred using the tenant associated with the subscription."
+        },
+        "provisioningState": {
+          "type": "string",
+          "description": "Provisioning state of the resource.",
+          "readOnly": true
+        }
+      },
+      "description": "Azure Cosmos DB Gremlin Role Assignment resource object."
+    },
+    "GremlinRoleAssignmentResource": {
+      "description": "Parameters to create and update an Azure Cosmos DB Gremlin Role Assignment.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "description": "Properties to create and update an Azure Cosmos DB Gremlin Role Assignment.",
+          "$ref": "#/definitions/GremlinRoleAssignmentResourceProperties"
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "GremlinRoleAssignmentListResult": {
+      "type": "object",
+      "properties": {
+        "value": {
+          "type": "array",
+          "readOnly": true,
+          "items": {
+            "$ref": "#/definitions/GremlinRoleAssignmentResource"
+          },
+          "description": "List of Role Assignments and their properties"
+        },
+        "nextLink": {
+          "description": "The link used to get the next page of results.",
+          "type": "string",
+          "readOnly": true
+        }
+      },
+      "description": "The relevant Role Assignments."
+    }
+  },
+  "parameters": {
+    "roleDefinitionIdParameter": {
+      "name": "roleDefinitionId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The GUID for the Role Definition."
+    },
+    "roleAssignmentIdParameter": {
+      "name": "roleAssignmentId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The GUID for the Role Assignment."
+    }
+  }
+}
