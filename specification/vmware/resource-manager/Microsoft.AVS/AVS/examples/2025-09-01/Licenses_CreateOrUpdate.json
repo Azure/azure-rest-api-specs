@@ -1,0 +1,52 @@
+{
+  "title": "Licenses_CreateOrUpdate",
+  "operationId": "Licenses_CreateOrUpdate",
+  "parameters": {
+    "api-version": "2025-09-01",
+    "subscriptionId": "00000000-0000-0000-0000-000000000000",
+    "resourceGroupName": "group1",
+    "privateCloudName": "cloud1",
+    "licenseName": "VmwareFirewall",
+    "resource": {},
+    "license": {
+      "kind": "VmwareFirewall",
+      "licenseKey": "12345-12345-12345-12345-12345",
+      "endDate": "2025-12-31T23:59:59Z",
+      "cores": 16,
+      "broadcomSiteId": "123456",
+      "broadcomContractNumber": "123456"
+    }
+  },
+  "responses": {
+    "200": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/licenses/VmwareFirewall",
+        "name": "VmwareFirewall",
+        "type": "Microsoft.AVS/privateClouds/licenses",
+        "properties": {
+          "kind": "VmwareFirewall",
+          "endDate": "2025-12-31T23:59:59Z",
+          "cores": 16,
+          "broadcomSiteId": "123456",
+          "broadcomContractNumber": "123456",
+          "provisioningState": "Succeeded"
+        }
+      }
+    },
+    "201": {
+      "body": {
+        "id": "/subscriptions/00000000-0000-0000-0000-000000000000/resourceGroups/group1/providers/Microsoft.AVS/privateClouds/cloud1/licenses/VmwareFirewall",
+        "name": "VmwareFirewall",
+        "type": "Microsoft.AVS/privateClouds/licenses",
+        "properties": {
+          "kind": "VmwareFirewall",
+          "endDate": "2025-12-31T23:59:59Z",
+          "cores": 16,
+          "broadcomSiteId": "123456",
+          "broadcomContractNumber": "123456",
+          "provisioningState": "Succeeded"
+        }
+      }
+    }
+  }
+}
