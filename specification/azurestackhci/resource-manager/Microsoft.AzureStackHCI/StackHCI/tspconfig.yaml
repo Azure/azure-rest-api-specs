@@ -36,13 +36,13 @@ options:
     emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
     clear-output-folder: true
   "@azure-tools/typespec-ts":
-    namespace: "azure-arm-stack-hci"
-    service-name: "stack-hci"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    service-dir: "sdk/azurestackhci"
+    package-dir: "azure-arm-stack-hci"
+    emitter-output-dir: "{output-dir}/{service-dir}/{package-dir}"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
-      name: "@azure/arm-{service-name}"
+      name: "@azure/arm-stack-hci"
 linter:
   extends:
     - "@azure-tools/typespec-azure-rulesets/resource-manager"
