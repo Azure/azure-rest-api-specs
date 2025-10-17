@@ -9825,14 +9825,13 @@
       "type": "object",
       "description": "Setting definition.",
       "properties": {
-        "properties": {
-          "type": "object",
-          "description": "The resource-specific properties for this resource.",
-          "x-ms-client-flatten": true
-        },
         "kind": {
           "$ref": "#/definitions/SettingsKind",
-          "description": "Specifies the kind of settings."
+          "description": "Metadata used by portal/tooling/etc to render different UX experiences for resources of the same type; e.g. ApiApps are a kind of Microsoft.Web/sites type.  If supported, the resource provider must validate and persist this value.",
+          "x-ms-mutability": [
+            "read",
+            "create"
+          ]
         }
       },
       "discriminator": "kind",

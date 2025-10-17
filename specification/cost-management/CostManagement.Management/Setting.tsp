@@ -15,7 +15,8 @@ namespace Microsoft.CostManagement;
  * Setting definition.
  */
 @discriminator("kind")
-model Setting is Azure.ResourceManager.ExtensionResource<{}> {
+model Setting
+  is Azure.ResourceManager.Legacy.DiscriminatedProxyResource<SettingsKind> {
   ...ResourceNameParameter<
     Resource = Setting,
     KeyName = "type",
@@ -23,12 +24,6 @@ model Setting is Azure.ResourceManager.ExtensionResource<{}> {
     NamePattern = "",
     Type = SettingType
   >;
-
-  /**
-   * Specifies the kind of settings.
-   */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  kind: SettingsKind;
 }
 
 @armResourceOperations
