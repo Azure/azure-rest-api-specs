@@ -897,7 +897,7 @@ model BlobItemInternal {
   @Xml.name("OrMetadata")
   objectReplicationMetadata?: ObjectReplicationMetadata;
 
-  /** Whether the blog has versions only. */
+  /** Whether the blob has versions only. */
   @Xml.name("HasVersionsOnly") hasVersionsOnly?: boolean;
 }
 
@@ -916,7 +916,7 @@ model BlobPropertiesInternal {
   @Xml.name("Last-Modified")
   lastModified: utcDateTime;
 
-  /** The blog ETag. */
+  /** The blob ETag. */
   @Xml.name("Etag") eTag: string;
 
   /** The content length of the blob. */
@@ -976,10 +976,10 @@ model BlobPropertiesInternal {
   /** The copy status description of the blob. */
   @Xml.name("CopyStatusDescription") copyStatusDescription?: string;
 
-  /** Whether the blog is encrypted on the server. */
+  /** Whether the blob is encrypted on the server. */
   @Xml.name("ServerEncrypted") serverEncrypted?: boolean;
 
-  /** Whether the blog is incremental copy. */
+  /** Whether the blob is incremental copy. */
   @Xml.name("IncrementalCopy") incrementalCopy?: boolean;
 
   /** The name of the destination snapshot. */
@@ -2241,16 +2241,6 @@ union PremiumPageBlobAccessTier {
   string,
 }
 
-/** The blob name parameter. */
-alias BlobPathParameter = {
-  /** The name of the blob. */
-  @minLength(1)
-  @maxLength(1024)
-  @pattern("^[a-zA-Z0-9]+(?:/[a-zA-Z0-9]+)*(?:\\.[a-zA-Z0-9]+){0,1}$")
-  @path
-  blobName: string;
-};
-
 /** The type of blob deletions. */
 #suppress "@azure-tools/typespec-azure-core/no-enum" "Existing API"
 enum BlobDeleteType {
@@ -2473,13 +2463,6 @@ alias LeaseDurationHeaderParameter = {
   /** Specifies the duration of the lease, in seconds, or negative one (-1) for a lease that never expires. A non-infinite lease can be between 15 and 60 seconds. A lease duration cannot be changed using renew or change. */
   @header("x-ms-lease-duration")
   duration: int32;
-};
-
-/** The container name path parameter */
-alias ContainerNamePathParameter = {
-  /** The name of the container. */
-  @path
-  containerName: string;
 };
 
 // NOTE: This does not explicitly let emitters know that this is a collection header for metadata. Logic should be handwritten to handle this.
