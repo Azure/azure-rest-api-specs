@@ -235,6 +235,9 @@
           "200": {
             "description": "The request has succeeded."
           },
+          "404": {
+            "description": "The server cannot find the requested resource."
+          },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
@@ -13056,6 +13059,11 @@
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
+        },
+        "x-ms-examples": {
+          "CosmosDBDatabaseAccountListReadOnlyKeys": {
+            "$ref": "./examples/CosmosDBDatabaseAccountListReadOnlyKeys_GetReadOnlyKeys.json"
+          }
         }
       },
       "post": {
@@ -18563,6 +18571,11 @@
             "schema": {
               "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
+          }
+        },
+        "x-ms-examples": {
+          "CosmosDB Fleet List by Resource Group": {
+            "$ref": "./examples/fleet/CosmosDBFleetList_ListByResourceGroup.json"
           }
         },
         "x-ms-pageable": {
