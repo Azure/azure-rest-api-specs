@@ -5259,6 +5259,30 @@
         ]
       }
     },
+    "AutoFailover": {
+      "type": "string",
+      "description": "Enum for AutoFailover",
+      "enum": [
+        "Enable",
+        "Disable"
+      ],
+      "x-ms-enum": {
+        "name": "AutoFailover",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Enable",
+            "value": "Enable",
+            "description": "Enable AutoFailover."
+          },
+          {
+            "name": "Disable",
+            "value": "Disable",
+            "description": "Disable AutoFailover."
+          }
+        ]
+      }
+    },
     "Azure.ResourceManager.ArmResponse<Azure.ResourceManager.CommonTypes.ErrorResponse>": {
       "type": "object",
       "description": "Azure operation completed successfully.",
@@ -6384,12 +6408,17 @@
       "type": "object",
       "description": "Request body for Failover API.",
       "properties": {
+        "autoFailover": {
+          "$ref": "#/definitions/AutoFailover",
+          "description": "AutoFailover - whether to pause between Fault and Failover for manual input."
+        },
         "failoverProperties": {
           "$ref": "#/definitions/FailoverRequest",
           "description": "The failover properties."
         }
       },
       "required": [
+        "autoFailover",
         "failoverProperties"
       ]
     },
