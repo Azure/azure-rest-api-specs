@@ -785,6 +785,7 @@ union VolumeLanguage {
 /**
  * Set of export policy rules
  */
+@clientName("NetAppVolumeExportPolicyRule", "csharp")
 model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
@@ -1143,6 +1144,7 @@ model VolumeRelocationProperties {
 /**
  * Application specific parameters for the placement of volumes in the volume group
  */
+@clientName("NetAppVolumePlacementRule", "csharp")
 model PlacementKeyValuePairs {
   /**
    * Key for an application specific parameter for the placement of volumes in the volume group
@@ -1632,6 +1634,7 @@ union VolumeReplicationRelationshipStatus {
 /**
  * Restore status
  */
+@clientName("NetAppRestoreStatus", "csharp")
 model RestoreStatus {
   /**
    * Restore health status
@@ -1673,6 +1676,7 @@ model RestoreStatus {
 /**
  * Backup status
  */
+@clientName("NetAppVolumeBackupStatus", "csharp")
 model BackupStatus {
   /**
    * Backup health status
@@ -1770,6 +1774,7 @@ union VolumeStorageToNetworkProximity {
 /**
  * Indicates whether the local volume is the source or destination for the Volume Replication
  */
+@clientName("NetAppEndpointType", "csharp")
 union EndpointType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1785,7 +1790,7 @@ union ReplicationSchedule {
   string,
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
-  @clientName("renamedProp", "csharp")
+  @clientName("TenMinutely", "csharp")
   _10minutely: "_10minutely",
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
