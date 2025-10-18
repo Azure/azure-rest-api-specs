@@ -15,6 +15,7 @@ namespace Microsoft.NetApp;
 /**
  * Bucket resource
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 @parentResource(Volume)
 model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
@@ -29,12 +30,14 @@ model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
 /**
  * List of volume bucket resources
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketList is Azure.Core.Page<Bucket>;
 
 /**
  * Bucket resource properties
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketProperties {
   /**
@@ -77,6 +80,7 @@ model BucketProperties {
 /**
  * File System user having access to volume data. For Unix, this is the user's uid and gid. For Windows, this is the user's username. Note that the Unix and Windows user details are mutually exclusive, meaning one or other must be supplied, but not both.
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model FileSystemUser {
   /**
@@ -93,6 +97,7 @@ model FileSystemUser {
 /**
  * The effective NFS User ID and Group ID when accessing the volume data.
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model NfsUser {
   /**
@@ -109,6 +114,7 @@ model NfsUser {
 /**
  * The effective CIFS username when accessing the volume data.
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model CifsUser {
   /**
@@ -120,6 +126,7 @@ model CifsUser {
 /**
  * Properties of the server managing the lifecycle of volume buckets
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketServerProperties {
   /**
@@ -161,6 +168,7 @@ model BucketServerProperties {
  * Bucket resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
@@ -172,6 +180,7 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
 /**
  * Bucket resource properties for a Patch operation
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketPatchProperties {
   /**
@@ -204,6 +213,7 @@ model BucketPatchProperties {
 /**
  * Properties of the server managing the lifecycle of volume buckets
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketServerPatchProperties {
   /**
@@ -223,6 +233,7 @@ model BucketServerPatchProperties {
 /**
  * The bucket's Access and Secret key pair Expiry Time expressed as the number of days from now.
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketCredentialsExpiry {
   /**
@@ -235,6 +246,7 @@ model BucketCredentialsExpiry {
 /**
  * Bucket Access Key, Secret Key, and Expiry date and time of the key pair
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 model BucketGenerateCredentials {
   /**
@@ -264,6 +276,7 @@ model BucketGenerateCredentials {
  * "CredentialsExpired": Access and Secret key pair have expired.
  * "Active": The certificate has been installed and credentials are unexpired.
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 union CredentialsStatus {
   string,
@@ -287,6 +300,7 @@ union CredentialsStatus {
 /**
  * Access permissions for the bucket. Either ReadOnly or ReadWrite. The default is ReadOnly if no value is provided during bucket creation.
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 union BucketPermissions {
   string,
@@ -305,6 +319,7 @@ union BucketPermissions {
 /**
  * Access permissions for the bucket. Either ReadOnly or ReadWrite.
  */
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 union BucketPatchPermissions {
   string,
@@ -320,6 +335,7 @@ union BucketPatchPermissions {
   ReadWrite: "ReadWrite",
 }
 
+@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
 @armResourceOperations
 interface Buckets {

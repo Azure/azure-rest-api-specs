@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -10,6 +11,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
 /**
@@ -783,6 +785,7 @@ union VolumeLanguage {
 /**
  * Set of export policy rules
  */
+@clientName("NetAppVolumeExportPolicyRule", "csharp")
 model VolumePropertiesExportPolicy {
   /**
    * Export policy rule
@@ -1141,6 +1144,7 @@ model VolumeRelocationProperties {
 /**
  * Application specific parameters for the placement of volumes in the volume group
  */
+@clientName("NetAppVolumePlacementRule", "csharp")
 model PlacementKeyValuePairs {
   /**
    * Key for an application specific parameter for the placement of volumes in the volume group
@@ -1456,6 +1460,49 @@ model Replication {
    * The remote region for the other end of the Volume Replication.
    */
   remoteVolumeRegion?: string;
+
+  /**
+   * The status of the replication
+   */
+  @added(Versions.v2025_08_01)
+  @visibility(Lifecycle.Read)
+  mirrorState?: ReplicationMirrorState;
+
+  /**
+   * Replication creation time
+   */
+  @added(Versions.v2025_08_01)
+  @visibility(Lifecycle.Read)
+  replicationCreationTime?: utcDateTime;
+
+  /**
+   * Replication deletion time
+   */
+  @added(Versions.v2025_08_01)
+  @visibility(Lifecycle.Read)
+  replicationDeletionTime?: utcDateTime;
+}
+
+/**
+ * The status of the replication
+ */
+union ReplicationMirrorState {
+  string,
+
+  /**
+   * Destination volume has not been initialized
+   */
+  Uninitialized: "Uninitialized",
+
+  /**
+   * Destination volume has been initialized and is ready
+   */
+  Mirrored: "Mirrored",
+
+  /**
+   * 	Destination volume is RW, replication relationship has been broken off
+   */
+  Broken: "Broken",
 }
 
 /**
@@ -1520,6 +1567,30 @@ model RelocateVolumeRequest {
 }
 
 /**
+ * Body for the list replications endpoint. If supplied, the body will be used as a filter for example to exclude deleted replications. If omitted, the endpoint returns all replications
+ */
+@added(Versions.v2025_08_01)
+model ListReplicationsRequest {
+  /**
+   * Exclude Replications filter. 'None' returns all replications, 'Deleted' excludes deleted replications. Default is 'None'
+   */
+  exclude?: Exclude = Exclude.None;
+}
+
+/**
+ * An option to filter out replications. 'None' returns all replications, 'Deleted' excludes deleted replications. Default is 'None'
+ */
+union Exclude {
+  string,
+
+  /** 'None' returns all replications */
+  None: "None",
+
+  /** 'Deleted' excludes deleted replications */
+  Deleted: "Deleted",
+}
+
+/**
  * Status of the volume restore relationship
  */
 union VolumeRestoreRelationshipStatus {
@@ -1563,6 +1634,7 @@ union VolumeReplicationRelationshipStatus {
 /**
  * Restore status
  */
+@clientName("NetAppRestoreStatus", "csharp")
 model RestoreStatus {
   /**
    * Restore health status
@@ -1604,6 +1676,7 @@ model RestoreStatus {
 /**
  * Backup status
  */
+@clientName("NetAppVolumeBackupStatus", "csharp")
 model BackupStatus {
   /**
    * Backup health status
@@ -1701,6 +1774,7 @@ union VolumeStorageToNetworkProximity {
 /**
  * Indicates whether the local volume is the source or destination for the Volume Replication
  */
+@clientName("NetAppEndpointType", "csharp")
 union EndpointType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -1714,8 +1788,11 @@ union EndpointType {
  */
 union ReplicationSchedule {
   string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @clientName("TenMinutely", "csharp")
   _10minutely: "_10minutely",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   hourly: "hourly",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -2058,11 +2135,32 @@ interface Volumes {
   /**
    * Returns the list of group Ids for a specific LDAP User
    */
+  @removed(Versions.v2025_08_01)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_08_01, "listGetGroupIdListForLdapUser")
+  @action("getGroupIdListForLdapUser")
+  listGetGroupIdListForLdapUser20250601 is ArmResourceActionAsync<
+    Volume,
+    /**
+     * Returns the list of group Ids for a specific LDAP User
+     */
+    GetGroupIdListForLdapUserRequest,
+    GetGroupIdListForLdapUserResponse
+  >;
+
+  /**
+   * Returns the list of group Ids for a specific LDAP User
+   */
+  @added(Versions.v2025_08_01)
+  @sharedRoute
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @action("getGroupIdListForLdapUser")
   listGetGroupIdListForLdapUser is ArmResourceActionAsync<
     Volume,
     GetGroupIdListForLdapUserRequest,
-    GetGroupIdListForLdapUserResponse
+    GetGroupIdListForLdapUserResponse,
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = GetGroupIdListForLdapUserResponse> &
+      Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
@@ -2102,11 +2200,29 @@ interface Volumes {
   /**
    * List all replications for a specified volume
    */
+  @removed(Versions.v2025_08_01)
+  @sharedRoute
+  @renamedFrom(Versions.v2025_08_01, "listReplications")
+  @list
+  oldlistReplications is ArmResourceActionSync<
+    Volume,
+    void,
+    ArmResponse<ListReplications>,
+    OptionalRequestBody = true
+  >;
+
+  /**
+   * List all replications for a specified volume
+   */
+  @added(Versions.v2025_08_01)
+  @sharedRoute
   @list
   listReplications is ArmResourceActionSync<
     Volume,
-    void,
-    ArmResponse<ListReplications>
+    /** Body for the list replications endpoint. If supplied, the body will be used as a filter for example to exclude deleted replications. If omitted, the endpoint returns all replications */
+    ListReplicationsRequest,
+    ArmResponse<ListReplications>,
+    OptionalRequestBody = true
   >;
 
   /**

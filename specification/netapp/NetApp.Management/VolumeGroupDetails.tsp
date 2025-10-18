@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -9,6 +10,7 @@ using TypeSpec.Rest;
 using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
 /**
@@ -122,6 +124,7 @@ model VolumeGroupMetaData {
 /**
  * Application Type
  */
+@clientName("NetAppApplicationType", "csharp")
 union ApplicationType {
   string,
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
