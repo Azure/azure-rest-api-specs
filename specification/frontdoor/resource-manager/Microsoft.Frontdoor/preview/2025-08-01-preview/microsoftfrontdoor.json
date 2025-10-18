@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Microsoft.Frontdoor management service",
-    "version": "2024-01-01-preview",
+    "version": "2025-08-01-preview",
     "description": "Azure Frontdoor VM management API.",
     "x-typespec-generated": [
       {
@@ -47,9 +47,184 @@
     },
     {
       "name": "PublicIpAddresses"
+    },
+    {
+      "name": "PublicNetworkAddresses"
+    },
+    {
+      "name": "PrivateNetworkAddresses"
+    },
+    {
+      "name": "LogicalDatacenters"
     }
   ],
   "paths": {
+    "/providers/Microsoft.Frontdoor/locations/{location}/logicalDatacenters": {
+      "get": {
+        "operationId": "LogicalDatacenters_ListByTenant",
+        "tags": [
+          "LogicalDatacenters"
+        ],
+        "description": "List LogicalDatacenter resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogicalDatacenterListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogicalDatacenters_ListByTenant": {
+            "$ref": "./examples/LogicalDatacenters_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/logicalDatacenters/{logicalDatacenterName}": {
+      "get": {
+        "operationId": "LogicalDatacenters_Get",
+        "tags": [
+          "LogicalDatacenters"
+        ],
+        "description": "Get a LogicalDatacenter",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "logicalDatacenterName",
+            "in": "path",
+            "description": "Datacenter",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9]+[-_]*"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/LogicalDatacenter"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "LogicalDatacenters_Get": {
+            "$ref": "./examples/LogicalDatacenters_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/privateNetworkAddresses": {
+      "get": {
+        "operationId": "PrivateNetworkAddresses_ListByTenant",
+        "tags": [
+          "PrivateNetworkAddresses"
+        ],
+        "description": "List PrivateNetworkAddress resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateNetworkAddressListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateNetworkAddresses_ListByTenant": {
+            "$ref": "./examples/PrivateNetworkAddresses_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/privateNetworkAddresses/{ipAddress}": {
+      "get": {
+        "operationId": "PrivateNetworkAddresses_Get",
+        "tags": [
+          "PrivateNetworkAddresses"
+        ],
+        "description": "Get a PrivateNetworkAddress",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "ipAddress",
+            "in": "path",
+            "description": "Ip Address",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9.:]+-[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PrivateNetworkAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PrivateNetworkAddresses_Get": {
+            "$ref": "./examples/PrivateNetworkAddresses_Get.json"
+          }
+        }
+      }
+    },
     "/providers/Microsoft.Frontdoor/locations/{location}/publicIpAddresses": {
       "get": {
         "operationId": "PublicIpAddresses_List",
@@ -59,10 +234,10 @@
         "description": "List PublicIpAddress resources by TenantLocationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -75,7 +250,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -98,10 +273,10 @@
         "description": "Get a PublicIpAddress",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "publicIpAddress",
@@ -122,13 +297,96 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
           "PublicIpAddresses_Get": {
             "$ref": "./examples/PublicIpAddresses_Get.json"
+          }
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/publicNetworkAddresses": {
+      "get": {
+        "operationId": "PublicNetworkAddresses_ListByTenant",
+        "tags": [
+          "PublicNetworkAddresses"
+        ],
+        "description": "List PublicNetworkAddress resources by TenantLocationResource",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicNetworkAddressListResult"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicNetworkAddresses_ListByTenant": {
+            "$ref": "./examples/PublicNetworkAddresses_ListByTenant.json"
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
+        }
+      }
+    },
+    "/providers/Microsoft.Frontdoor/locations/{location}/publicNetworkAddresses/{ipAddress}": {
+      "get": {
+        "operationId": "PublicNetworkAddresses_Get",
+        "tags": [
+          "PublicNetworkAddresses"
+        ],
+        "description": "Get a PublicNetworkAddress",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
+          },
+          {
+            "name": "ipAddress",
+            "in": "path",
+            "description": "Ip Address",
+            "required": true,
+            "type": "string",
+            "pattern": "[a-zA-Z0-9.:]+-[a-zA-Z0-9]"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "Azure operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/PublicNetworkAddress"
+            }
+          },
+          "default": {
+            "description": "An unexpected error response.",
+            "schema": {
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "PublicNetworkAddresses_Get": {
+            "$ref": "./examples/PublicNetworkAddresses_Get.json"
           }
         }
       }
@@ -142,10 +400,10 @@
         "description": "List VmResource resources by TenantLocationResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           }
         ],
         "responses": {
@@ -158,7 +416,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -181,10 +439,10 @@
         "description": "Get a VmResource",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           },
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/LocationParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/LocationParameter"
           },
           {
             "name": "virtualMachineName",
@@ -205,7 +463,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
@@ -225,29 +483,26 @@
         "description": "List the operations for the provider",
         "parameters": [
           {
-            "$ref": "../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+            "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
           }
         ],
         "responses": {
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/OperationListResult"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
             }
           }
         },
         "x-ms-examples": {
-          "Operations_List_MaximumSet_Gen": {
-            "$ref": "./examples/Operations_List_MaximumSet_Gen.json"
-          },
-          "Operations_List_MinimumSet_Gen": {
-            "$ref": "./examples/Operations_List_MinimumSet_Gen.json"
+          "Operations_List": {
+            "$ref": "./examples/Operations_List.json"
           }
         },
         "x-ms-pageable": {
@@ -257,11 +512,37 @@
     }
   },
   "definitions": {
+    "AssetType": {
+      "type": "string",
+      "description": "Enum for AssetType",
+      "enum": [
+        "Physical",
+        "Logical"
+      ],
+      "x-ms-enum": {
+        "name": "AssetType",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Physical",
+            "value": "Physical",
+            "description": "Physical AssetType"
+          },
+          {
+            "name": "Logical",
+            "value": "Logical",
+            "description": "Logical AssetType"
+          }
+        ]
+      }
+    },
     "AssetTypeVM": {
       "type": "string",
       "description": "AssetTypeVM enum",
       "enum": [
-        "BaremetalVM"
+        "BaremetalVM",
+        "NonAzureVM",
+        "PilotFishVM"
       ],
       "x-ms-enum": {
         "name": "AssetTypeVM",
@@ -271,9 +552,37 @@
             "name": "BaremetalVM",
             "value": "BaremetalVM",
             "description": "AssetType enum BaremetalVM"
+          },
+          {
+            "name": "NonAzureVM",
+            "value": "NonAzureVM",
+            "description": "AssetType enum NonAzureVM"
+          },
+          {
+            "name": "PilotFishVM",
+            "value": "PilotFishVM",
+            "description": "AssetType enum PilotFishVM"
           }
         ]
       }
+    },
+    "AssignedResource": {
+      "type": "object",
+      "description": "Metadata that describes the asset to which the resource is assigned",
+      "properties": {
+        "resourceType": {
+          "$ref": "#/definitions/AssetType",
+          "description": "The type of the resource"
+        },
+        "resourceId": {
+          "type": "string",
+          "description": "Unique identifier for the asset"
+        }
+      },
+      "required": [
+        "resourceType",
+        "resourceId"
+      ]
     },
     "Azure.Core.ipV4Address": {
       "type": "string",
@@ -373,6 +682,143 @@
           }
         ]
       }
+    },
+    "IpAddressState": {
+      "type": "string",
+      "description": "Enum for State",
+      "enum": [
+        "Managed",
+        "Allocated",
+        "Active",
+        "Retired"
+      ],
+      "x-ms-enum": {
+        "name": "IpAddressState",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "Managed",
+            "value": "Managed",
+            "description": "Managed State"
+          },
+          {
+            "name": "Allocated",
+            "value": "Allocated",
+            "description": "Allocated State"
+          },
+          {
+            "name": "Active",
+            "value": "Active",
+            "description": "Active State"
+          },
+          {
+            "name": "Retired",
+            "value": "Retired",
+            "description": "Retired State"
+          }
+        ]
+      }
+    },
+    "IpVersion": {
+      "type": "string",
+      "description": "Enum for the IP Version",
+      "enum": [
+        "IPv4",
+        "IPv6"
+      ],
+      "x-ms-enum": {
+        "name": "IpVersion",
+        "modelAsString": true,
+        "values": [
+          {
+            "name": "IPv4",
+            "value": "IPv4",
+            "description": "Internet Protocol version 4 address"
+          },
+          {
+            "name": "IPv6",
+            "value": "IPv6",
+            "description": "Internet Protocol version 6 address"
+          }
+        ]
+      }
+    },
+    "LogicalDatacenter": {
+      "type": "object",
+      "description": "Azure Frontdoor Logical Datacenter resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/LogicalDatacenterProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "LogicalDatacenterListResult": {
+      "type": "object",
+      "description": "The response of a LogicalDatacenter list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The LogicalDatacenter items on this page",
+          "items": {
+            "$ref": "#/definitions/LogicalDatacenter"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "LogicalDatacenterProperties": {
+      "type": "object",
+      "description": "Datacenter Properties",
+      "properties": {
+        "logicalDatacenterName": {
+          "type": "string",
+          "description": "The logical datacenter name"
+        },
+        "geography": {
+          "type": "string",
+          "description": "Geography of the logical datacenter"
+        },
+        "facilityCodes": {
+          "type": "array",
+          "description": "Facility Codes for physical datacenters attached to this logical datacenter",
+          "items": {
+            "type": "string"
+          }
+        },
+        "regionResourceId": {
+          "type": "string",
+          "description": "Azure Region Id"
+        },
+        "availabilityZoneResourceId": {
+          "type": "string",
+          "description": "Azure Availability Zone Id"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "Provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "logicalDatacenterName",
+        "geography",
+        "facilityCodes",
+        "regionResourceId",
+        "availabilityZoneResourceId"
+      ]
     },
     "Microsoft.Inventory.CommonTypes.AllocationType": {
       "type": "string",
@@ -740,6 +1186,107 @@
         ]
       }
     },
+    "Ownership": {
+      "type": "object",
+      "description": "Metadata that describes the ownership of the resource",
+      "properties": {
+        "serviceTreeId": {
+          "type": "string",
+          "description": "The owning service tree ID"
+        },
+        "subscriptionId": {
+          "type": "string",
+          "description": "The owning subscription ID"
+        }
+      }
+    },
+    "PrivateNetworkAddress": {
+      "type": "object",
+      "description": "Azure Frontdoor PrivateNetworkAddress resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PrivateNetworkAddressProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PrivateNetworkAddressListResult": {
+      "type": "object",
+      "description": "The response of a PrivateNetworkAddress list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PrivateNetworkAddress items on this page",
+          "items": {
+            "$ref": "#/definitions/PrivateNetworkAddress"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PrivateNetworkAddressProperties": {
+      "type": "object",
+      "description": "Properties for private ip address resources",
+      "properties": {
+        "ipVersion": {
+          "$ref": "#/definitions/IpVersion",
+          "description": "Specifies the IP Version"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP Address (IPv4/IPv6). This can also be represented as a block address range in CIDR notation."
+        },
+        "state": {
+          "$ref": "#/definitions/IpAddressState",
+          "description": "Managed, Allocated, Active, Retired"
+        },
+        "cloud": {
+          "$ref": "#/definitions/Cloud",
+          "description": "Cloud where the asset exists"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where the IP address exists"
+        },
+        "isReuse": {
+          "type": "boolean",
+          "description": "Determines whether the private IP address is used across regions"
+        },
+        "ownership": {
+          "$ref": "#/definitions/Ownership",
+          "description": "Indicates the ownership of the private IP address"
+        },
+        "assignedResource": {
+          "$ref": "#/definitions/AssignedResource",
+          "description": "Metadata that describes the resource to which this private IP address is assigned"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ipVersion",
+        "ipAddress",
+        "state",
+        "cloud",
+        "region",
+        "assignedResource"
+      ]
+    },
     "ProvisioningState": {
       "type": "string",
       "description": "Provisioning state enum",
@@ -824,7 +1371,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
@@ -847,6 +1394,93 @@
       },
       "required": [
         "value"
+      ]
+    },
+    "PublicNetworkAddress": {
+      "type": "object",
+      "description": "Azure Frontdoor PublicNetworkAddress resource",
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/PublicNetworkAddressProperties",
+          "description": "The resource-specific properties for this resource."
+        }
+      },
+      "allOf": [
+        {
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
+        }
+      ]
+    },
+    "PublicNetworkAddressListResult": {
+      "type": "object",
+      "description": "The response of a PublicNetworkAddress list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The PublicNetworkAddress items on this page",
+          "items": {
+            "$ref": "#/definitions/PublicNetworkAddress"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
+    "PublicNetworkAddressProperties": {
+      "type": "object",
+      "description": "Properties for public network address resources",
+      "properties": {
+        "ipVersion": {
+          "$ref": "#/definitions/IpVersion",
+          "description": "Specifies the IP Version"
+        },
+        "ipAddress": {
+          "type": "string",
+          "description": "The IP Address (IPv4/IPv6). This can also be represented as a block address range in CIDR notation."
+        },
+        "state": {
+          "$ref": "#/definitions/IpAddressState",
+          "description": "Managed, Allocated, Active, Retired"
+        },
+        "cloud": {
+          "$ref": "#/definitions/Cloud",
+          "description": "Cloud where the asset exists"
+        },
+        "region": {
+          "type": "string",
+          "description": "Region where the IP address exists"
+        },
+        "isReuse": {
+          "type": "boolean",
+          "description": "Determines whether the public network address is used across regions"
+        },
+        "ownership": {
+          "$ref": "#/definitions/Ownership",
+          "description": "Indicates the ownership of the public network address"
+        },
+        "assignedResource": {
+          "$ref": "#/definitions/AssignedResource",
+          "description": "Metadata that describes the resource to which this public network address is assigned"
+        },
+        "provisioningState": {
+          "$ref": "#/definitions/ProvisioningState",
+          "description": "The provisioning state",
+          "readOnly": true
+        }
+      },
+      "required": [
+        "ipVersion",
+        "ipAddress",
+        "state",
+        "cloud",
+        "region",
+        "assignedResource"
       ]
     },
     "Status": {
@@ -998,7 +1632,7 @@
       },
       "allOf": [
         {
-          "$ref": "../../../../../common-types/resource-management/v5/types.json#/definitions/ProxyResource"
+          "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ProxyResource"
         }
       ]
     },
