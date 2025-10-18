@@ -1,5 +1,6 @@
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
+import "@azure-tools/typespec-client-generator-core";
 import "@typespec/openapi";
 import "@typespec/rest";
 import "./models.tsp";
@@ -10,6 +11,7 @@ using Azure.ResourceManager;
 using TypeSpec.Http;
 using TypeSpec.OpenAPI;
 using TypeSpec.Versioning;
+using Azure.ClientGenerator.Core;
 
 namespace Microsoft.NetApp;
 /**
@@ -1781,8 +1783,11 @@ union EndpointType {
  */
 union ReplicationSchedule {
   string,
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @clientName("renamedProp", "csharp")
   _10minutely: "_10minutely",
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   hourly: "hourly",
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
