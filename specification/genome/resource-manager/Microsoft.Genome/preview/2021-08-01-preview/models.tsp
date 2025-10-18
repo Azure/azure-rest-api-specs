@@ -1,0 +1,211 @@
+import "@typespec/http";
+import "@typespec/rest";
+import "@typespec/openapi";
+import "@azure-tools/typespec-azure-core";
+import "@azure-tools/typespec-azure-resource-manager";
+
+using TypeSpec.Http;
+using TypeSpec.OpenAPI;
+using Azure.Core;
+using Azure.ResourceManager;
+
+namespace Microsoft.Genome;
+
+/** SKU tier of a resource. */
+union SkuTier {
+  string,
+
+  /** Free tier */
+  Free: "Free",
+
+  /** Basic tier */
+  Basic: "Basic",
+
+  /** Standard tier */
+  Standard: "Standard",
+
+  /** Premium tier */
+  Premium: "Premium",
+
+  /** Enterprise tier */
+  Enterprise: "Enterprise",
+}
+
+/** The resource model definition representing SKU */
+model Sku {
+  /** The name of the SKU. Ex - P3. It is typically a letter+number code */
+  name: string;
+
+  /** This field is required to be implemented by the Resource Provider if the service has more than one tier, but is not required on a PUT. */
+  tier?: SkuTier;
+
+  /** The SKU size. When the name field is the combination of tier and some other value, this would be the standalone code. */
+  size?: string;
+
+  /** If the service has different generations of hardware, for the same SKU, then that can be captured here. */
+  family?: string;
+
+  /** If the SKU supports scale out/in then the capacity integer should be included. If scale out/in is not possible for the resource this may be omitted. */
+  capacity?: int32;
+}
+
+/** The identity type. */
+union ResourceIdentityType {
+  string,
+
+  /** None */
+  None: "None",
+
+  /** SystemAssigned */
+  SystemAssigned: "SystemAssigned",
+
+  /** UserAssigned */
+  UserAssigned: "UserAssigned",
+
+  /** SystemAssigned, UserAssigned */
+  "SystemAssigned, UserAssigned": "SystemAssigned, UserAssigned",
+}
+
+/** User-assigned managed identity. */
+model UserAssignedIdentity {
+  /** Azure Active Directory principal ID associated with this Identity. */
+  principalId?: string;
+
+  /** Client App Id associated with this identity. */
+  clientId?: string;
+}
+
+/** Identity for the resource. */
+model Identity {
+  /** The identity type. */
+  type?: ResourceIdentityType;
+
+  /** The tenant ID of resource. */
+  tenantId?: string;
+
+  /** The principal ID of resource identity. */
+  principalId?: string;
+
+  /** The list of user assigned identities associated with the resource. */
+  userAssignedIdentities?: Record<UserAssignedIdentity>;
+}
+
+/** The provisioning state of the genome account. */
+union ProvisioningState {
+  string,
+
+  /** Provisioning */
+  Provisioning: "Provisioning",
+
+  /** Active */
+  Active: "Active",
+
+  /** Updating */
+  Updating: "Updating",
+
+  /** Suspended */
+  Suspended: "Suspended",
+
+  /** Deleting */
+  Deleting: "Deleting",
+}
+
+/** Network rule action type. */
+union NetworkRuleAction {
+  string,
+
+  /** Allow */
+  Allow: "Allow",
+
+  /** Deny */
+  Deny: "Deny",
+}
+
+/** IP rule for network access control. */
+model IpRule {
+  /** An IPv4 address range in CIDR notation. */
+  value: string;
+}
+
+/** Virtual network rule for network access control. */
+model VirtualNetworkRule {
+  /** Full resource id of a vnet subnet. */
+  id: string;
+
+  /** Gets the state of virtual network rule. */
+  state?: string;
+
+  /** Ignore missing vnet service endpoint or not. */
+  ignoreMissingVnetServiceEndpoint?: boolean;
+}
+
+/** Network access control rules. */
+model NetworkRuleSet {
+  /** The default action when no rule matches. */
+  defaultAction?: NetworkRuleAction;
+
+  /** The list of IP address rules. */
+  @OpenAPI.extension("x-ms-identifiers", #["value"])
+  ipRules?: IpRule[];
+
+  /** The list of virtual network rules. */
+  virtualNetworkRules?: VirtualNetworkRule[];
+}
+
+/** Key source for encryption. */
+union KeySource {
+  string,
+
+  /** Microsoft.Genome */
+  MicrosoftGenome: "Microsoft.Genome",
+
+  /** Microsoft.KeyVault */
+  MicrosoftKeyVault: "Microsoft.KeyVault",
+}
+
+/** Key Vault properties for encryption. */
+model KeyVaultProperties {
+  /** Name of the Key from KeyVault */
+  keyName?: string;
+
+  /** Version of the Key from KeyVault */
+  keyVersion?: string;
+
+  /** Uri of KeyVault */
+  keyVaultUri?: string;
+
+  /** Identity client ID */
+  identityClientId?: string;
+}
+
+/** Encryption configuration. */
+model Encryption {
+  /** Properties of KeyVault */
+  keyVaultProperties?: KeyVaultProperties;
+
+  /** Key source for encryption */
+  keySource?: KeySource = KeySource.MicrosoftKeyVault;
+}
+
+/** Properties of Genome account. */
+model GenomeAccountProperties {
+  /** The provisioning state of the account. */
+  @visibility(Lifecycle.Read)
+  provisioningState?: ProvisioningState;
+
+  /** Endpoint of the created account. */
+  @visibility(Lifecycle.Read)
+  endpoint?: string;
+
+  /** Network access control rules. */
+  networkAcls?: NetworkRuleSet;
+
+  /** Encryption properties for this resource. */
+  encryption?: Encryption;
+}
+
+/** Parameters for updating a Genome Account. */
+model GenomeAccountUpdate {
+  /** Resource tags. */
+  tags?: Record<string>;
+}
