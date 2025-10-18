@@ -18,25 +18,25 @@ namespace Microsoft.Resources.DeploymentStacks;
 interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Model> {
   /** Gets the Deployment stack with the given name. */
   get is ArmResourceRead<
-    DeploymentStackWhatIfResult,
+    DeploymentStacksWhatIfResult,
     BaseParameters = TBaseParams
   >;
 
   /** Lists Deployment stacks at the specified scope. */
   list is ArmResourceListByParent<
-    DeploymentStackWhatIfResult,
+    DeploymentStacksWhatIfResult,
     BaseParameters = TBaseParams
   >;
 
   /** Creates or updates a Deployment stack at the specified scope. */
   createOrUpdate is ArmResourceCreateOrReplaceAsync<
-    DeploymentStackWhatIfResult,
+    DeploymentStacksWhatIfResult,
     BaseParameters = TBaseParams
   >;
 
   /** Deletes a Deployment stack by name at the specified scope. When operation completes, status code 200 returned without content. */
   delete is ArmResourceDeleteWithoutOkAsync<
-    DeploymentStackWhatIfResult,
+    DeploymentStacksWhatIfResult,
     BaseParameters = TBaseParams,
     Parameters = ActionOnUnmanageDeleteParameters,
     Response = ArmDeletedResponse | ArmDeletedNoContentResponse
@@ -45,9 +45,9 @@ interface DeploymentStackWhatIfCommon<TBaseParams extends TypeSpec.Reflection.Mo
   /** Returns property-level changes that will be made by the deployment if executed. */
   @action("whatIf")
   whatIf is ArmResourceActionSync<
-    DeploymentStackWhatIfResult,
+    DeploymentStacksWhatIfResult,
     void,
-    ArmResponse<DeploymentStackWhatIfResult>,
+    ArmResponse<DeploymentStacksWhatIfResult>,
     BaseParameters = TBaseParams
   >;
 }

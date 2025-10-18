@@ -15,9 +15,9 @@ namespace Microsoft.Resources.DeploymentStacks;
 
 /** Deployment stack object. */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfResult
-  is Azure.ResourceManager.ProxyResource<DeploymentStackWhatIfResultProperties> {
-  ...DeploymentStackWhatIfResultNameParameter;
+model DeploymentStacksWhatIfResult
+  is Azure.ResourceManager.ProxyResource<DeploymentStacksWhatIfResultProperties> {
+  ...DeploymentStacksWhatIfResultNameParameter;
 
   /** The geo-location where the resource lives. Required for subscription and management group scoped stacks. The location is inherited from the resource group for resource group scoped stacks. */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-resource-invalid-envelope-property" "Model is shared between resource group, subscription, and management group scope."
@@ -30,28 +30,28 @@ model DeploymentStackWhatIfResult
   tags?: Record<string>;
 }
 
-alias DeploymentStackWhatIfResultNameParameter = ResourceNameParameter<
-  Resource = DeploymentStackWhatIfResult,
-  KeyName = "deploymentStackWhatIfResultName",
-  SegmentName = "deploymentStackWhatIfResults",
+alias DeploymentStacksWhatIfResultNameParameter = ResourceNameParameter<
+  Resource = DeploymentStacksWhatIfResult,
+  KeyName = "deploymentStacksWhatIfResultName",
+  SegmentName = "deploymentStacksWhatIfResults",
   NamePattern = "^[-\\w\\._\\(\\)]+$"
 >;
 
-@@maxLength(DeploymentStackWhatIfResult.name, 90);
-@@minLength(DeploymentStackWhatIfResult.name, 1);
-@@doc(DeploymentStackWhatIfResult.name, "Name of the deployment stack what-if result.");
+@@maxLength(DeploymentStacksWhatIfResult.name, 90);
+@@minLength(DeploymentStacksWhatIfResult.name, 1);
+@@doc(DeploymentStacksWhatIfResult.name, "Name of the deployment stack what-if result.");
 
 /**
  * DeploymentStack WhatIfResult Properties
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfResultProperties is DeploymentStacksError {
+model DeploymentStacksWhatIfResultProperties is DeploymentStacksError {
   ...DeploymentStackSharedProperties;
 
   /**
    * The deployment stack id to use as the basis for comparison.
    */
-  deploymentStackId: string;
+  deploymentStackResourceId: string;
 
   /**
    * The timestamp for when the deployment stack was last modified. This can be used to determine if the what-if data is still current. 
@@ -68,43 +68,43 @@ model DeploymentStackWhatIfResultProperties is DeploymentStacksError {
    * All of the changes predicted by the deployment stack what-if operation.
    */
   @visibility(Lifecycle.Read)
-  changes?: DeploymentStackWhatIfChange;
+  changes?: DeploymentStacksWhatIfChange;
 
   /**
    * List of resource diagnostics detected by What-If operation.
    */
   @visibility(Lifecycle.Read)
   @OpenAPI.extension("x-ms-identifiers", #[])
-  diagnostics?: DeploymentStackDiagnostics[];
+  diagnostics?: DeploymentStacksDiagnostics[];
 }
 
 /**
  * Changes predicted to the deployment stack as a result of the what-if operation.
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfChange {
+model DeploymentStacksWhatIfChange {
   /**
    * List of resource changes predicted by What-If operation.
    */
   @OpenAPI.extension("x-ms-identifiers", #["identifiers", "resourceId"])
-  resourceChanges: DeploymentStackWhatIfResourceChange[];
+  resourceChanges: DeploymentStacksWhatIfResourceChange[];
 
   /**
    * Predicted changes to the deployment stack deny settings.
    */
-  denySettingsChange: DeploymentStackChangeDelta<DenySettings>;
+  denySettingsChange: DeploymentStacksChangeDelta<DenySettings>;
 
   /**
    * Predicted changes to the deployment scope for the deployment stack.
    */
-  deploymentScopeChange: DeploymentStackChangeBase<string>;
+  deploymentScopeChange: DeploymentStacksChangeBase<string>;
 }
 
 /**
  * Information about a single resource change predicted by What-If operation.
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackWhatIfResourceChange {
+model DeploymentStacksWhatIfResourceChange {
   ...ResourceChangeDelta;
 
   /**
@@ -131,22 +131,22 @@ model DeploymentStackWhatIfResourceChange {
   /**
    * Type of change that will be made to the resource when the deployment is executed.
    */
-  changeType: DeploymentStackWhatIfChangeType;
+  changeType: DeploymentStacksWhatIfChangeType;
 
   /**
    * The confidence level of the predicted change.
    */
-  changeCertainty: DeploymentStackWhatIfChangeCertainty;
+  changeCertainty: DeploymentStacksWhatIfChangeCertainty;
 
   /**
    * The predicted changes to the deployment stack management status of the resource.
    */
-  managementStatusChange: DeploymentStackChangeBase<DeploymentStackManagementStatus>;
+  managementStatusChange: DeploymentStacksChangeBase<DeploymentStacksManagementStatus>;
 
   /**
    * The predicted changes to the deployment stack deny status of the resource.
    */
-  denyStatusChange: DeploymentStackChangeBase<DenyStatusMode>;
+  denyStatusChange: DeploymentStacksChangeBase<DenyStatusMode>;
 
   /**
    * The explanation about why the resource is unsupported by What-If.
@@ -158,7 +158,7 @@ model DeploymentStackWhatIfResourceChange {
  * Denotes the confidence level of the predicted change.
  */
 @added(Versions.v2025_07_01)
-union DeploymentStackWhatIfChangeCertainty {
+union DeploymentStacksWhatIfChangeCertainty {
   string,
 
   /**
@@ -176,7 +176,7 @@ union DeploymentStackWhatIfChangeCertainty {
  * Base model for properties with the before-and-after property values.
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackChangeBase<T> {
+model DeploymentStacksChangeBase<T> {
   /**
    * The predicted value before the deployment is executed.
    */
@@ -193,31 +193,31 @@ model DeploymentStackChangeBase<T> {
 /**
  * Model for resource changes to show the before-and-after property values for resource properties.
  */
-model ResourceChangeBase is DeploymentStackChangeBase<Record<unknown>>;
+model ResourceChangeBase is DeploymentStacksChangeBase<Record<unknown>>;
 
 /**
  * Model for resource changes to show the before-and-after property values, along with the delta between them.
  */
-model ResourceChangeDelta is DeploymentStackChangeDelta<Record<unknown>>;
+model ResourceChangeDelta is DeploymentStacksChangeDelta<Record<unknown>>;
 
 /**
  * Model to show the before-and-after property values, along with the delta between them.
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackChangeDelta<T> {
-  ...DeploymentStackChangeBase<T>;
+model DeploymentStacksChangeDelta<T> {
+  ...DeploymentStacksChangeBase<T>;
 
   /**
    * The predicted changes to the properties."
    */
   @OpenAPI.extension("x-ms-identifiers", #["path"])
-  delta?: DeploymentStackWhatIfPropertyChange[];
+  delta?: DeploymentStacksWhatIfPropertyChange[];
 }
 
 /**
  * The predicted change to the resource property.
  */
-model DeploymentStackWhatIfPropertyChange {
+model DeploymentStacksWhatIfPropertyChange {
   ...ResourceChangeBase;
 
   /**
@@ -228,24 +228,24 @@ model DeploymentStackWhatIfPropertyChange {
   /**
    * Type of change that will be made to the resource when the deployment is executed.
    */
-  changeType: DeploymentStackWhatIfPropertyChangeType;
+  changeType: DeploymentStacksWhatIfPropertyChangeType;
 
   /**
    * Nested property changes.
    */
   @OpenAPI.extension("x-ms-identifiers", #["path"])
-  children?: DeploymentStackWhatIfPropertyChange[];
+  children?: DeploymentStacksWhatIfPropertyChange[];
 }
 
 /**
  * The error additional info
  */
 @added(Versions.v2025_07_01)
-model DeploymentStackDiagnostics {
+model DeploymentStacksDiagnostics {
   /**
    * Denotes the additional response level.
    */
-  level: DeploymentStackDiagnosticLevel;
+  level: DeploymentStacksDiagnosticLevel;
 
   /**
    * The error code.
@@ -273,7 +273,7 @@ model DeploymentStackDiagnostics {
  * The management status of the deployment stack resource.
  */
 @added(Versions.v2025_07_01)
-union DeploymentStackManagementStatus {
+union DeploymentStacksManagementStatus {
   string,
 
   /**
@@ -296,7 +296,7 @@ union DeploymentStackManagementStatus {
  * Type of change that will be made to the resource when the deployment is executed.
  */
 @added(Versions.v2025_07_01)
-union DeploymentStackWhatIfChangeType {
+union DeploymentStacksWhatIfChangeType {
   string,
 
   /**
@@ -334,7 +334,7 @@ union DeploymentStackWhatIfChangeType {
 /**
  * The type of property change.
  */
-union DeploymentStackWhatIfPropertyChangeType {
+union DeploymentStacksWhatIfPropertyChangeType {
   string,
 
   /**
@@ -367,7 +367,7 @@ union DeploymentStackWhatIfPropertyChangeType {
  * Denotes the additional response level.
  */
 @added(Versions.v2025_07_01)
-union DeploymentStackDiagnosticLevel {
+union DeploymentStacksDiagnosticLevel {
   string,
 
   /**
