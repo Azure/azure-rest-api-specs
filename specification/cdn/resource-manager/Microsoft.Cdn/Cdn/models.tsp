@@ -3343,9 +3343,9 @@ model BatchRuleProperties {
   @maxLength(60)
   @minLength(1)
   @pattern("^[a-zA-Z][a-zA-Z0-9]{0,59}$")
-  ruleName: string;
+  name: string;
 
-  ...RuleProperties;
+  ...RuleUpdatePropertiesParameters;
 }
 
 /**
