@@ -12,9 +12,9 @@ using Azure.ResourceManager;
 
 /** Microsoft.EntraidGovernance Resource Provider management API. */
 @armProviderNamespace("Microsoft.EntraidGovernance")
-@service(#{ title: "Microsoft.EntraidGovernance.ScimApiConsumption management service" })
+@service(#{ title: "Microsoft.EntraidGovernance management service" })
 @versioned(Microsoft.EntraidGovernance.Versions)
-@doc("Microsoft Entraid Governance ScimApiConsumption Resource Provider management API.")
+@doc("Microsoft Entraid Governance Resource Provider management API.")
 @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
 namespace Microsoft.EntraidGovernance;
 
