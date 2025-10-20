@@ -12,7 +12,7 @@ namespace Microsoft.ProviderHub;
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
 model ArmCreatedResponse {
-  ...TypeSpec.Http.Response<201>;
+  ...ArmResourceCreatedResponse<DefaultRollout>;
 }
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"

@@ -2077,7 +2077,17 @@
             }
           },
           "201": {
-            "description": "The request has succeeded and a new resource has been created as a result."
+            "description": "The request has succeeded and a new resource has been created as a result.",
+            "schema": {
+              "$ref": "#/definitions/DefaultRollout"
+            },
+            "headers": {
+              "Retry-After": {
+                "type": "integer",
+                "format": "int32",
+                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
+              }
+            }
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2090,7 +2100,12 @@
           "NewRegionFrontloadRelease_CreateOrUpdate": {
             "$ref": "./examples/NewRegionFrontloadRelease_CreateOrUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "original-uri",
+          "final-state-schema": "#/definitions/FrontloadPayload"
+        },
+        "x-ms-long-running-operation": true
       }
     },
     "/subscriptions/{subscriptionId}/providers/microsoft.ProviderHub/providerRegistrations/{providerNamespace}/newRegionFrontloadRelease/{releaseName}/stop": {
