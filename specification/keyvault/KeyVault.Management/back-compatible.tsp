@@ -261,7 +261,8 @@ op ManagedHsmsPurgeDeletedCustomized(
   ManagedHsmsPurgeDeletedCustomized,
   "python"
 );
-
+@@override(DeletedVaults.getDeleted, VaultsGetDeletedCustomized, "go");
+@@override(DeletedVaults.purgeDeleted, VaultsPurgeDeletedCustomized, "go");
 @@override(DeletedManagedHsms.getDeleted,
   ManagedHsmsGetDeletedCustomized,
   "go"
