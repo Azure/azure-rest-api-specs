@@ -1439,6 +1439,12 @@ model AppAttachPackageProperties {
    * Field that can be populated with custom data and filtered on in list GET calls
    */
   customData?: string;
+
+  /**
+   * DeploymentScope type for AppAttachPackage.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2236,6 +2242,13 @@ model ApplicationGroupProperties {
    */
   @added(Versions.v2025_08_01_preview)
   oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for ApplicationGroup.
+   */
+  @visibility(Lifecycle.Read)
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
@@ -2550,7 +2563,6 @@ model HostPoolProperties {
   /**
    * DeploymentScope type for HostPool.
    */
-  @visibility(Lifecycle.Read)
   @added(Versions.v2025_08_01_preview)
   deploymentScope?: DeploymentScope;
 
@@ -2986,6 +2998,12 @@ model WorkspaceProperties {
    */
   @added(Versions.v2025_08_01_preview)
   oboTenantId?: string;
+
+  /**
+   * DeploymentScope type for Workspace.
+   */
+  @added(Versions.v2025_11_01_preview)
+  deploymentScope?: DeploymentScope;
 }
 
 /**
