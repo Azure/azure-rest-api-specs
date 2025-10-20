@@ -261,3 +261,12 @@ op ManagedHsmsPurgeDeletedCustomized(
   ManagedHsmsPurgeDeletedCustomized,
   "python"
 );
+
+@@override(DeletedManagedHsms.getDeleted,
+  ManagedHsmsGetDeletedCustomized,
+  "go"
+);
+@@override(DeletedManagedHsms.purgeDeleted,
+  ManagedHsmsPurgeDeletedCustomized,
+  "go"
+);
