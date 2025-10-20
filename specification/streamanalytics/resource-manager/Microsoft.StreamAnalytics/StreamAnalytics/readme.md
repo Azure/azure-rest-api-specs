@@ -39,14 +39,14 @@ This section contains the composite set of APIs. Stream Analytics Cluster and Pr
 
 ```yaml $(tag) == 'package-2021-10-preview'
 input-file:
-  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/functions.json
-  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/inputs.json
-  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/outputs.json
-  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/streamingjobs.json
-  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/subscriptions.json
-  - Microsoft.StreamAnalytics/preview/2021-10-01-preview/transformations.json
-  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
-  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
+  - preview/2021-10-01-preview/functions.json
+  - preview/2021-10-01-preview/inputs.json
+  - preview/2021-10-01-preview/outputs.json
+  - preview/2021-10-01-preview/streamingjobs.json
+  - preview/2021-10-01-preview/subscriptions.json
+  - preview/2021-10-01-preview/transformations.json
+  - preview/2020-03-01-preview/clusters.json
+  - preview/2020-03-01-preview/privateEndpoints.json
 ```
 
 ### Tag: package-2020-03-preview
@@ -57,15 +57,15 @@ This section contains the composite set of APIs. Stream Analytics Cluster and Pr
 
 ```yaml $(tag) == 'package-2020-03-preview'
 input-file:
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/outputs.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/streamingjobs.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/subscriptions.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/transformations.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/operations.json
-  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
-  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
+  - preview/2017-04-01-preview/functions.json
+  - preview/2017-04-01-preview/inputs.json
+  - preview/2017-04-01-preview/outputs.json
+  - preview/2017-04-01-preview/streamingjobs.json
+  - preview/2017-04-01-preview/subscriptions.json
+  - preview/2017-04-01-preview/transformations.json
+  - preview/2017-04-01-preview/operations.json
+  - preview/2020-03-01-preview/clusters.json
+  - preview/2020-03-01-preview/privateEndpoints.json
 ```
 
 ### Tag: package-pure-2020-03
@@ -74,14 +74,14 @@ These settings apply only when `--tag=package-pure-2020-03` is specified on the 
 
 ``` yaml $(tag) == 'package-pure-2020-03'
 input-file:
-- Microsoft.StreamAnalytics/stable/2020-03-01/streamingjobs.json
-- Microsoft.StreamAnalytics/stable/2020-03-01/inputs.json
-- Microsoft.StreamAnalytics/stable/2020-03-01/outputs.json
-- Microsoft.StreamAnalytics/stable/2020-03-01/transformations.json
-- Microsoft.StreamAnalytics/stable/2020-03-01/functions.json
-- Microsoft.StreamAnalytics/stable/2020-03-01/subscriptions.json
-- Microsoft.StreamAnalytics/stable/2020-03-01/clusters.json
-- Microsoft.StreamAnalytics/stable/2020-03-01/privateEndpoints.json
+- stable/2020-03-01/streamingjobs.json
+- stable/2020-03-01/inputs.json
+- stable/2020-03-01/outputs.json
+- stable/2020-03-01/transformations.json
+- stable/2020-03-01/functions.json
+- stable/2020-03-01/subscriptions.json
+- stable/2020-03-01/clusters.json
+- stable/2020-03-01/privateEndpoints.json
 ```
 
 ### Tag: package-pure-2020-03-preview
@@ -92,8 +92,8 @@ This section only contains input swagger files for version 2020-03-01-preview, i
 
 ```yaml $(tag) == 'package-pure-2020-03-preview'
 input-file:
-  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/clusters.json
-  - Microsoft.StreamAnalytics/preview/2020-03-01-preview/privateEndpoints.json
+  - preview/2020-03-01-preview/clusters.json
+  - preview/2020-03-01-preview/privateEndpoints.json
 ```
 
 ### Tag: package-pure-2017-04-preview
@@ -104,13 +104,13 @@ This section only contains input swagger files for version 2017-04-01-preview, i
 
 ```yaml $(tag) == 'package-pure-2017-04-preview'
 input-file:
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/functions.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/inputs.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/outputs.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/streamingjobs.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/subscriptions.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/transformations.json
-  - Microsoft.StreamAnalytics/preview/2017-04-01-preview/operations.json
+  - preview/2017-04-01-preview/functions.json
+  - preview/2017-04-01-preview/inputs.json
+  - preview/2017-04-01-preview/outputs.json
+  - preview/2017-04-01-preview/streamingjobs.json
+  - preview/2017-04-01-preview/subscriptions.json
+  - preview/2017-04-01-preview/transformations.json
+  - preview/2017-04-01-preview/operations.json
 ```
 
 ### Tag: package-pure-2016-03
@@ -119,12 +119,12 @@ These settings apply only when `--tag=package-pure-2016-03` is specified on the 
 
 ``` yaml $(tag) == 'package-pure-2016-03'
 input-file:
-- Microsoft.StreamAnalytics/stable/2016-03-01/streamingjobs.json
-- Microsoft.StreamAnalytics/stable/2016-03-01/inputs.json
-- Microsoft.StreamAnalytics/stable/2016-03-01/outputs.json
-- Microsoft.StreamAnalytics/stable/2016-03-01/transformations.json
-- Microsoft.StreamAnalytics/stable/2016-03-01/functions.json
-- Microsoft.StreamAnalytics/stable/2016-03-01/subscriptions.json
+- stable/2016-03-01/streamingjobs.json
+- stable/2016-03-01/inputs.json
+- stable/2016-03-01/outputs.json
+- stable/2016-03-01/transformations.json
+- stable/2016-03-01/functions.json
+- stable/2016-03-01/subscriptions.json
 ```
 
 ---
