@@ -45,14 +45,17 @@ interface GremlinDatabaseGetResultsOperationGroup {
   createUpdateGremlinDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinDatabaseGetResults,
     Request = GremlinDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GremlinDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GremlinDatabaseGetResults> &
+    Response = ArmResourceUpdatedResponse<GremlinDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinDatabaseGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB Gremlin database.
    */
-  deleteGremlinDatabase is ArmResourceDeleteWithoutOkAsync<GremlinDatabaseGetResults>;
+  deleteGremlinDatabase is ArmResourceDeleteWithoutOkAsync<
+    GremlinDatabaseGetResults,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+  >;
 
   /**
    * Lists the Gremlin databases under an existing Azure Cosmos DB database account.

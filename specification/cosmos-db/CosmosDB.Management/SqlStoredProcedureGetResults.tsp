@@ -46,21 +46,25 @@ interface SqlStoredProcedureGetResultsOperationGroup {
   createUpdateSqlStoredProcedure is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlStoredProcedureGetResults,
     Request = SqlStoredProcedureCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlStoredProcedureGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlStoredProcedureGetResults> &
+    Response = ArmResourceUpdatedResponse<SqlStoredProcedureGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlStoredProcedureGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB SQL storedProcedure.
    */
-  deleteSqlStoredProcedure is ArmResourceDeleteWithoutOkAsync<SqlStoredProcedureGetResults>;
+  deleteSqlStoredProcedure is ArmResourceDeleteWithoutOkAsync<
+    SqlStoredProcedureGetResults,
+    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+  >;
 
   /**
    * Lists the SQL storedProcedure under an existing Azure Cosmos DB database account.
    */
   listSqlStoredProcedures is ArmResourceListByParent<
     SqlStoredProcedureGetResults,
-    Response = ArmResponse<SqlStoredProcedureListResult>
+    Response = ArmResponse<SqlStoredProcedureListResult>,
+    Error = CloudError
   >;
 }
 

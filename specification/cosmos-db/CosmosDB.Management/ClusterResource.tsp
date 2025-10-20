@@ -34,7 +34,7 @@ interface ClusterResources {
   /**
    * Get the properties of a managed Cassandra cluster.
    */
-  get is ArmResourceRead<ClusterResource>;
+  get is ArmResourceRead<ClusterResource, Error = CloudError>;
 
   /**
    * Create or update a managed Cassandra cluster. When updating, you must specify all writable properties. To update only some properties, use PATCH.
@@ -42,7 +42,8 @@ interface ClusterResources {
   createUpdate is ArmResourceCreateOrReplaceAsync<
     ClusterResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = ClusterResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -57,20 +58,25 @@ interface ClusterResources {
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: ClusterResource;
-    })
+    }),
+    Error = CloudError
   >;
 
   /**
    * Deletes a managed Cassandra cluster.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<ClusterResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    ClusterResource,
+    Error = CloudError
+  >;
 
   /**
    * List all managed Cassandra clusters in this resource group.
    */
   listByResourceGroup is ArmResourceListByParent<
     ClusterResource,
-    Response = ArmResponse<ListClusters>
+    Response = ArmResponse<ListClusters>,
+    Error = CloudError
   >;
 
   /**
@@ -78,7 +84,8 @@ interface ClusterResources {
    */
   listBySubscription is ArmListBySubscription<
     ClusterResource,
-    Response = ArmResponse<ListClusters>
+    Response = ArmResponse<ListClusters>,
+    Error = CloudError
   >;
 
   /**
@@ -92,16 +99,20 @@ interface ClusterResources {
       @bodyRoot
       _: CommandOutput;
     },
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
+    Error = CloudError
   >;
 
   /**
    * Invoke a command like nodetool for cassandra maintenance asynchronously
    */
-  invokeCommandAsync is ArmResourceActionAsync<
+  invokeCommandAsync is ArmResourceActionAsyncBase<
     ClusterResource,
     CommandAsyncPostBody,
-    CommandPublicResource
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<CommandPublicResource>,
+    Response = ArmResponse<CommandPublicResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CommandPublicResource> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
   >;
 
   /**
@@ -113,7 +124,8 @@ interface ClusterResources {
   listCommand is ArmResourceActionSync<
     ClusterResource,
     void,
-    ArmResponse<ListCommands>
+    ArmResponse<ListCommands>,
+    Error = CloudError
   >;
 
   /**
@@ -134,7 +146,8 @@ interface ClusterResources {
       @path
       @segment("commands")
       commandId: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -146,7 +159,8 @@ interface ClusterResources {
   listBackups is ArmResourceActionSync<
     ClusterResource,
     void,
-    ArmResponse<ListBackups>
+    ArmResponse<ListBackups>,
+    Error = CloudError
   >;
 
   /**
@@ -167,7 +181,8 @@ interface ClusterResources {
       @path
       @segment("backups")
       backupId: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -184,7 +199,8 @@ interface ClusterResources {
        */
       @header
       xMsForceDeallocate?: string;
-    }
+    },
+    Error = CloudError
   >;
 
   /**
@@ -194,7 +210,8 @@ interface ClusterResources {
     ClusterResource,
     void,
     ArmAcceptedLroResponse,
-    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<ClusterResource>,
+    Error = CloudError
   >;
 
   /**
@@ -204,7 +221,8 @@ interface ClusterResources {
   status is ArmResourceActionSync<
     ClusterResource,
     void,
-    ArmResponse<CassandraClusterPublicStatus>
+    ArmResponse<CassandraClusterPublicStatus>,
+    Error = CloudError
   >;
 }
 

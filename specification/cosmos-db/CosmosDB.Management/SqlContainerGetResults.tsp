@@ -45,14 +45,17 @@ interface SqlContainerGetResultsOperationGroup {
   createUpdateSqlContainer is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlContainerGetResults,
     Request = SqlContainerCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlContainerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlContainerGetResults> &
+    Response = ArmResourceUpdatedResponse<SqlContainerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlContainerGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB SQL container.
    */
-  deleteSqlContainer is ArmResourceDeleteWithoutOkAsync<SqlContainerGetResults>;
+  deleteSqlContainer is ArmResourceDeleteWithoutOkAsync<
+    SqlContainerGetResults,
+    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+  >;
 
   /**
    * Lists the SQL container under an existing Azure Cosmos DB database account.
@@ -66,10 +69,12 @@ interface SqlContainerGetResultsOperationGroup {
    * Merges the partitions of a SQL Container
    */
   @action("partitionMerge")
-  listSqlContainerPartitionMerge is ArmResourceActionAsync<
+  listSqlContainerPartitionMerge is ArmResourceActionAsyncBase<
     SqlContainerGetResults,
     MergeParameters,
-    PhysicalPartitionStorageInfoCollection
+    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection>>,
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SqlContainerGetResults>,
+    Error = CloudError
   >;
 
   /**

@@ -49,21 +49,24 @@ interface FleetResources {
    * Deletes an existing Azure Cosmos DB Fleet.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetResource,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Lists all the fleets under the specified subscription and resource group.
    */
-  listByResourceGroup is ArmResourceListByParent<FleetResource>;
+  listByResourceGroup is ArmResourceListByParent<
+    FleetResource,
+    Response = FleetListResult
+  >;
 
   /**
    * Lists all the fleets under the subscription.
    */
-  list is ArmListBySubscription<FleetResource>;
+  list is ArmListBySubscription<FleetResource, Response = FleetListResult>;
 }
 
 @@maxLength(FleetResource.name, 50);

@@ -11,6 +11,7 @@ using Azure.ResourceManager.Foundations;
 
 namespace Microsoft.DocumentDB;
 
+model FleetListResult is ResourceListResult<FleetResource>;
 model ThroughputPoolsListResult is ResourceListResult<ThroughputPoolResource>;
 model TableRoleDefinitionListResult
   is ResourceListResult<TableRoleDefinitionResource>;
@@ -20,6 +21,22 @@ model ThroughputPoolAccountsListResult
 
 model TableRoleAssignmentListResult
   is ResourceListResult<TableRoleAssignmentResource>;
+
+model FleetAnalyticsListResult is ResourceListResult<FleetAnalyticsResource>;
+/**
+ * Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.
+ */
+model OperationListResult {
+  /** List of operations supported by the Resource Provider. */
+  @pageItems
+  value: Operation[];
+
+  /** URL to get the next set of operation list results if there are any. */
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
+}
+
 /**
  * The type of identity that created the resource.
  */
@@ -2411,6 +2428,10 @@ model DatabaseAccountsListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: DatabaseAccountGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2563,6 +2584,10 @@ model MetricListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: Metric[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2678,6 +2703,10 @@ model PercentileMetricListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: PercentileMetric[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2789,6 +2818,10 @@ model PartitionMetricListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: PartitionMetric[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2819,6 +2852,10 @@ model UsagesResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: Usage[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2866,6 +2903,10 @@ model PartitionUsagesResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: PartitionUsage[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2896,6 +2937,10 @@ model MetricDefinitionsListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: MetricDefinition[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -2961,6 +3006,10 @@ model GraphResourcesListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: GraphResourceGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -3067,6 +3116,10 @@ model SqlDatabaseListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: SqlDatabaseGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -3328,6 +3381,10 @@ model ClientEncryptionKeysListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: ClientEncryptionKeyGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -3425,6 +3482,10 @@ model SqlContainerListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: SqlContainerGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4105,6 +4166,10 @@ model SqlStoredProcedureListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: SqlStoredProcedureGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4173,6 +4238,10 @@ model SqlUserDefinedFunctionListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: SqlUserDefinedFunctionGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4242,6 +4311,10 @@ model SqlTriggerListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: SqlTriggerGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4321,6 +4394,10 @@ model MongoDBDatabaseListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: MongoDBDatabaseGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4408,6 +4485,10 @@ model MongoDBCollectionListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: MongoDBCollectionGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4551,6 +4632,10 @@ model TableListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: TableGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4631,6 +4716,10 @@ model CassandraKeyspaceListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: CassandraKeyspaceGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4701,6 +4790,10 @@ model CassandraTableListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: CassandraTableGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4846,6 +4939,10 @@ model GremlinDatabaseListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: GremlinDatabaseGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -4926,6 +5023,10 @@ model GremlinGraphListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: GremlinGraphGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5036,6 +5137,10 @@ model LocationListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: LocationGetResult[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5090,6 +5195,10 @@ model CassandraViewListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: CassandraViewGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5259,6 +5368,10 @@ model ListClusters {
    */
   @pageItems
   value?: ClusterResource[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5677,6 +5790,10 @@ model ListCommands {
   @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value?: CommandPublicResource[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5690,6 +5807,10 @@ model ListBackups {
   @pageItems
   @OpenAPI.extension("x-ms-identifiers", #[])
   value?: BackupResource[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -5735,6 +5856,10 @@ model ListDataCenters {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: DataCenterResource[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -6163,6 +6288,10 @@ model MongoRoleDefinitionListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: MongoRoleDefinitionGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -6223,6 +6352,10 @@ model MongoUserDefinitionListResult {
   @visibility(Lifecycle.Read)
   @pageItems
   value?: MongoUserDefinitionGetResults[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**
@@ -6244,6 +6377,10 @@ model NotebookWorkspaceListResult {
    */
   @pageItems
   value?: NotebookWorkspace[];
+
+  #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @nextLink
+  nextLink?: string;
 }
 
 /**

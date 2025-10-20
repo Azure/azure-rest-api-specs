@@ -45,14 +45,17 @@ interface CassandraTableGetResultsOperationGroup {
   createUpdateCassandraTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraTableGetResults,
     Request = CassandraTableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraTableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraTableGetResults> &
+    Response = ArmResourceUpdatedResponse<CassandraTableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraTableGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB Cassandra table.
    */
-  deleteCassandraTable is ArmResourceDeleteWithoutOkAsync<CassandraTableGetResults>;
+  deleteCassandraTable is ArmResourceDeleteWithoutOkAsync<
+    CassandraTableGetResults,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+  >;
 
   /**
    * Lists the Cassandra table under an existing Azure Cosmos DB database account.

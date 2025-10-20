@@ -45,14 +45,17 @@ interface TableGetResultsOperationGroup {
   createUpdateTable is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     TableGetResults,
     Request = TableCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<TableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = TableGetResults> &
+    Response = ArmResourceUpdatedResponse<TableGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = TableGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB Table.
    */
-  deleteTable is ArmResourceDeleteWithoutOkAsync<TableGetResults>;
+  deleteTable is ArmResourceDeleteWithoutOkAsync<
+    TableGetResults,
+    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+  >;
 
   /**
    * Lists the Tables under an existing Azure Cosmos DB database account.

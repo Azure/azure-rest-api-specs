@@ -45,14 +45,17 @@ interface SqlResources {
   createUpdateSqlDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlDatabaseGetResults,
     Request = SqlDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlDatabaseGetResults> &
+    Response = ArmResourceUpdatedResponse<SqlDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlDatabaseGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB SQL database.
    */
-  deleteSqlDatabase is ArmResourceDeleteWithoutOkAsync<SqlDatabaseGetResults>;
+  deleteSqlDatabase is ArmResourceDeleteWithoutOkAsync<
+    SqlDatabaseGetResults,
+    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+  >;
 
   /**
    * Lists the SQL databases under an existing Azure Cosmos DB database account.
@@ -66,10 +69,13 @@ interface SqlResources {
    * Merges the partitions of a SQL database
    */
   @action("partitionMerge")
-  sqlDatabasePartitionMerge is ArmResourceActionAsync<
+  sqlDatabasePartitionMerge is ArmResourceActionAsyncBase<
     SqlDatabaseGetResults,
     MergeParameters,
-    PhysicalPartitionStorageInfoCollection
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<SqlDatabaseGetResults>,
+    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionStorageInfoCollection> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
   >;
 }
 

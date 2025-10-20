@@ -45,13 +45,13 @@ interface DatabaseAccounts {
   /**
    * Creates or updates an Azure Cosmos DB database account. The "Update" method is preferred when performing updates on an account.
    */
-  #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  createOrUpdate is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
-    DatabaseAccountGetResults,
-    Request = DatabaseAccountCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<DatabaseAccountGetResults>,
-    LroHeaders = ArmLroLocationHeader<FinalResult = DatabaseAccountGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader
+  @put
+  createOrUpdate is Azure.ResourceManager.Foundations.ArmCreateOperation<
+    ResourceInstanceParameters<DatabaseAccountGetResults>,
+    DatabaseAccountCreateUpdateParameters,
+    Response = ArmResponse<DatabaseAccountGetResults> &
+      ArmLroLocationHeader<FinalResult = DatabaseAccountGetResults>,
+    ErrorResponse = ErrorResponse
   >;
 
   /**
@@ -61,13 +61,17 @@ interface DatabaseAccounts {
   update is ArmCustomPatchAsync<
     DatabaseAccountGetResults,
     PatchModel = DatabaseAccountUpdateParameters,
-    Response = ArmResponse<DatabaseAccountGetResults>
+    Response = ArmResponse<DatabaseAccountGetResults> &
+      ArmLroLocationHeader<FinalResult = DatabaseAccountGetResults>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB database account.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<DatabaseAccountGetResults>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DatabaseAccountGetResults,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+  >;
 
   /**
    * Lists all the Azure Cosmos DB database accounts available under the given resource group.
@@ -92,7 +96,7 @@ interface DatabaseAccounts {
   failoverPriorityChange is ArmResourceActionAsyncBase<
     DatabaseAccountGetResults,
     Request = FailoverPolicies,
-    Response = ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader &
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders &
       Azure.Core.Foundations.RetryAfterHeader> | NoContentResponse,
     BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<DatabaseAccountGetResults>
   >;
@@ -125,7 +129,7 @@ interface DatabaseAccounts {
       @body body: void;
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+      ArmCombinedLroHeaders<FinalResult = void>
   >;
 
   /**
@@ -138,7 +142,7 @@ interface DatabaseAccounts {
       @body body: void;
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+      ArmCombinedLroHeaders<FinalResult = void>
   >;
 
   /**
@@ -172,7 +176,7 @@ interface DatabaseAccounts {
       @body body: void;
     },
     LroHeaders = Azure.Core.Foundations.RetryAfterHeader &
-      ArmLroLocationHeader<FinalResult = void>
+      ArmCombinedLroHeaders<FinalResult = void>
   >;
 
   /**

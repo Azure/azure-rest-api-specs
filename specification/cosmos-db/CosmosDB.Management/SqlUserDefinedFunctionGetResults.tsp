@@ -46,14 +46,17 @@ interface SqlUserDefinedFunctionGetResultsOperationGroup {
   createUpdateSqlUserDefinedFunction is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlUserDefinedFunctionGetResults,
     Request = SqlUserDefinedFunctionCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlUserDefinedFunctionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlUserDefinedFunctionGetResults> &
+    Response = ArmResourceUpdatedResponse<SqlUserDefinedFunctionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlUserDefinedFunctionGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB SQL userDefinedFunction.
    */
-  deleteSqlUserDefinedFunction is ArmResourceDeleteWithoutOkAsync<SqlUserDefinedFunctionGetResults>;
+  deleteSqlUserDefinedFunction is ArmResourceDeleteWithoutOkAsync<
+    SqlUserDefinedFunctionGetResults,
+    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+  >;
 
   /**
    * Lists the SQL userDefinedFunction under an existing Azure Cosmos DB database account.

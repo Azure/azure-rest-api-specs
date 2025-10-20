@@ -31,7 +31,8 @@ interface LocationGetResults {
    */
   get is ArmResourceRead<
     LocationGetResult,
-    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters
+    BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
+    Error = CloudError
   >;
 
   /**
@@ -40,7 +41,8 @@ interface LocationGetResults {
   list is ArmResourceListByParent<
     LocationGetResult,
     BaseParameters = Azure.ResourceManager.Foundations.SubscriptionBaseParameters,
-    Response = ArmResponse<LocationListResult>
+    Response = ArmResponse<LocationListResult>,
+    Error = CloudError
   >;
 }
 

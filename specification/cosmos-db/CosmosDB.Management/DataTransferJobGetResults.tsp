@@ -31,7 +31,7 @@ interface DataTransferJobs {
   /**
    * Get a Data Transfer Job.
    */
-  get is ArmResourceRead<DataTransferJobGetResults>;
+  get is ArmResourceRead<DataTransferJobGetResults, Error = CloudError>;
 
   /**
    * Creates a Data Transfer Job.
@@ -40,7 +40,8 @@ interface DataTransferJobs {
   create is Azure.ResourceManager.Legacy.CreateOrUpdateSync<
     DataTransferJobGetResults,
     Request = CreateJobRequest,
-    Response = ArmResourceUpdatedResponse<DataTransferJobGetResults>
+    Response = ArmResourceUpdatedResponse<DataTransferJobGetResults>,
+    Error = CloudError
   >;
 
   /**
@@ -48,7 +49,8 @@ interface DataTransferJobs {
    */
   listByDatabaseAccount is ArmResourceListByParent<
     DataTransferJobGetResults,
-    Response = ArmResponse<DataTransferJobFeedResults>
+    Response = ArmResponse<DataTransferJobFeedResults>,
+    Error = CloudError
   >;
 
   /**
@@ -57,7 +59,8 @@ interface DataTransferJobs {
   pause is ArmResourceActionSync<
     DataTransferJobGetResults,
     void,
-    ArmResponse<DataTransferJobGetResults>
+    ArmResponse<DataTransferJobGetResults>,
+    Error = CloudError
   >;
 
   /**
@@ -66,7 +69,8 @@ interface DataTransferJobs {
   resume is ArmResourceActionSync<
     DataTransferJobGetResults,
     void,
-    ArmResponse<DataTransferJobGetResults>
+    ArmResponse<DataTransferJobGetResults>,
+    Error = CloudError
   >;
 
   /**
@@ -75,7 +79,8 @@ interface DataTransferJobs {
   cancel is ArmResourceActionSync<
     DataTransferJobGetResults,
     void,
-    ArmResponse<DataTransferJobGetResults>
+    ArmResponse<DataTransferJobGetResults>,
+    Error = CloudError
   >;
 
   /**
@@ -84,7 +89,8 @@ interface DataTransferJobs {
   complete is ArmResourceActionSync<
     DataTransferJobGetResults,
     void,
-    ArmResponse<DataTransferJobGetResults>
+    ArmResponse<DataTransferJobGetResults>,
+    Error = CloudError
   >;
 }
 

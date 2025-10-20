@@ -31,19 +31,23 @@ interface CopyJobs {
   /**
    * Get a Copy Job.
    */
-  get is ArmResourceRead<CopyJobGetResults>;
+  get is ArmResourceRead<CopyJobGetResults, Error = CloudError>;
 
   /**
    * Creates a Copy Job.
    */
-  create is ArmResourceCreateOrReplaceSync<CopyJobGetResults>;
+  create is ArmResourceCreateOrReplaceSync<
+    CopyJobGetResults,
+    Error = CloudError
+  >;
 
   /**
    * Get a list of Copy jobs.
    */
   listByDatabaseAccount is ArmResourceListByParent<
     CopyJobGetResults,
-    Response = ArmResponse<CopyJobFeedResults>
+    Response = ArmResponse<CopyJobFeedResults>,
+    Error = CloudError
   >;
 
   /**
@@ -52,7 +56,8 @@ interface CopyJobs {
   pause is ArmResourceActionSync<
     CopyJobGetResults,
     void,
-    ArmResponse<CopyJobGetResults>
+    ArmResponse<CopyJobGetResults>,
+    Error = CloudError
   >;
 
   /**
@@ -61,7 +66,8 @@ interface CopyJobs {
   resume is ArmResourceActionSync<
     CopyJobGetResults,
     void,
-    ArmResponse<CopyJobGetResults>
+    ArmResponse<CopyJobGetResults>,
+    Error = CloudError
   >;
 
   /**
@@ -70,7 +76,8 @@ interface CopyJobs {
   cancel is ArmResourceActionSync<
     CopyJobGetResults,
     void,
-    ArmResponse<CopyJobGetResults>
+    ArmResponse<CopyJobGetResults>,
+    Error = CloudError
   >;
 
   /**
@@ -79,7 +86,8 @@ interface CopyJobs {
   complete is ArmResourceActionSync<
     CopyJobGetResults,
     void,
-    ArmResponse<CopyJobGetResults>
+    ArmResponse<CopyJobGetResults>,
+    Error = CloudError
   >;
 }
 

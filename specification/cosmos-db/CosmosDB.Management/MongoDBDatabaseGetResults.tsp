@@ -48,7 +48,7 @@ interface MongoDBDatabaseGetResultsOperationGroup {
   createUpdateMongoDBDatabase is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     MongoDBDatabaseGetResults,
     Request = MongoDBDatabaseCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<MongoDBDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoDBDatabaseGetResults> &
+    Response = ArmResourceUpdatedResponse<MongoDBDatabaseGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = MongoDBDatabaseGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -56,7 +56,10 @@ interface MongoDBDatabaseGetResultsOperationGroup {
    * Deletes an existing Azure Cosmos DB MongoDB database.
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
-  deleteMongoDBDatabase is ArmResourceDeleteWithoutOkAsync<MongoDBDatabaseGetResults>;
+  deleteMongoDBDatabase is ArmResourceDeleteWithoutOkAsync<
+    MongoDBDatabaseGetResults,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+  >;
 
   /**
    * Lists the MongoDB databases under an existing Azure Cosmos DB database account.
@@ -72,10 +75,13 @@ interface MongoDBDatabaseGetResultsOperationGroup {
    */
   #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   @action("partitionMerge")
-  mongoDBDatabasePartitionMerge is ArmResourceActionAsync<
+  mongoDBDatabasePartitionMerge is ArmResourceActionAsyncBase<
     MongoDBDatabaseGetResults,
     MergeParameters,
-    PhysicalPartitionStorageInfoCollection
+    BaseParameters = Azure.ResourceManager.Foundations.DefaultBaseParameters<PhysicalPartitionStorageInfoCollection>,
+    Response = ArmResponse<PhysicalPartitionStorageInfoCollection> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
   >;
 }
 

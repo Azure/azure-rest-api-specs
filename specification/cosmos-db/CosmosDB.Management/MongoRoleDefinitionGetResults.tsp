@@ -30,7 +30,10 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Mongo Role Definition with the given Id.
    */
-  getMongoRoleDefinition is ArmResourceRead<MongoRoleDefinitionGetResults>;
+  getMongoRoleDefinition is ArmResourceRead<
+    MongoRoleDefinitionGetResults,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates an Azure Cosmos DB Mongo Role Definition.
@@ -40,7 +43,8 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
     MongoRoleDefinitionGetResults,
     Request = MongoRoleDefinitionCreateUpdateParameters,
     Response = ArmResourceUpdatedResponse<MongoRoleDefinitionGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = MongoRoleDefinitionGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+      Azure.Core.Foundations.RetryAfterHeader>,
+    Error = CloudError
   >;
 
   /**
@@ -49,7 +53,8 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoRoleDefinition is ArmResourceDeleteWithoutOkAsync<
     MongoRoleDefinitionGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -57,7 +62,8 @@ interface MongoRoleDefinitionGetResultsOperationGroup {
    */
   listMongoRoleDefinitions is ArmResourceListByParent<
     MongoRoleDefinitionGetResults,
-    Response = ArmResponse<MongoRoleDefinitionListResult>
+    Response = ArmResponse<MongoRoleDefinitionListResult>,
+    Error = CloudError
   >;
 }
 

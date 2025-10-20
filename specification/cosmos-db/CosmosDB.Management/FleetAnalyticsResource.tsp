@@ -41,16 +41,19 @@ interface FleetAnalyticsResources {
    * Deletes an existing Azure Cosmos DB FleetAnalytics.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetAnalyticsResource,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**
    * Lists all the FleetAnalytics under a fleet.
    */
-  list is ArmResourceListByParent<FleetAnalyticsResource>;
+  list is ArmResourceListByParent<
+    FleetAnalyticsResource,
+    Response = FleetAnalyticsListResult
+  >;
 }
 
 @@maxLength(FleetAnalyticsResource.name, 50);

@@ -41,11 +41,12 @@ interface FleetspaceResources {
    * Update the properties of an existing Azure Cosmos DB fleetspace under a fleet.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   @patch(#{ implicitOptionality: false })
   update is Azure.ResourceManager.Legacy.CustomPatchAsync<
     FleetspaceResource,
     PatchModel = FleetspaceUpdate,
-    LroHeaders = ArmAsyncOperationHeader<FinalResult = FleetspaceResource> &
+    LroHeaders = ArmCombinedLroHeaders<FinalResult = FleetspaceResource> &
       Azure.Core.Foundations.RetryAfterHeader,
     OptionalRequestBody = true
   >;
@@ -54,10 +55,10 @@ interface FleetspaceResources {
    * Deletes an existing Azure Cosmos DB Fleetspace.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/lro-location-header" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
+  @Azure.Core.useFinalStateVia("azure-async-operation")
   delete is ArmResourceDeleteWithoutOkAsync<
     FleetspaceResource,
-    LroHeaders = ArmAsyncOperationHeader &
-      Azure.Core.Foundations.RetryAfterHeader
+    LroHeaders = ArmCombinedLroHeaders & Azure.Core.Foundations.RetryAfterHeader
   >;
 
   /**

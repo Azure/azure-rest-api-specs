@@ -38,7 +38,7 @@ interface CassandraRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateCassandraRoleAssignment is ArmResourceCreateOrReplaceAsync<
     CassandraRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<CassandraRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraRoleAssignmentResource> &
+    Response = ArmResourceUpdatedResponse<CassandraRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraRoleAssignmentResource> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -48,7 +48,7 @@ interface CassandraRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteCassandraRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     CassandraRoleAssignmentResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**

@@ -45,14 +45,17 @@ interface CassandraKeyspaceGetResultsOperationGroup {
   createUpdateCassandraKeyspace is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     CassandraKeyspaceGetResults,
     Request = CassandraKeyspaceCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<CassandraKeyspaceGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = CassandraKeyspaceGetResults> &
+    Response = ArmResourceUpdatedResponse<CassandraKeyspaceGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = CassandraKeyspaceGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB Cassandra keyspace.
    */
-  deleteCassandraKeyspace is ArmResourceDeleteWithoutOkAsync<CassandraKeyspaceGetResults>;
+  deleteCassandraKeyspace is ArmResourceDeleteWithoutOkAsync<
+    CassandraKeyspaceGetResults,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+  >;
 
   /**
    * Lists the Cassandra keyspaces under an existing Azure Cosmos DB database account.

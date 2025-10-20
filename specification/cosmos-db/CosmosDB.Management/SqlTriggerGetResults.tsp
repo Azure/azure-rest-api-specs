@@ -46,14 +46,17 @@ interface SqlTriggerGetResultsOperationGroup {
   createUpdateSqlTrigger is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     SqlTriggerGetResults,
     Request = SqlTriggerCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<SqlTriggerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = SqlTriggerGetResults> &
+    Response = ArmResourceUpdatedResponse<SqlTriggerGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = SqlTriggerGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB SQL trigger.
    */
-  deleteSqlTrigger is ArmResourceDeleteWithoutOkAsync<SqlTriggerGetResults>;
+  deleteSqlTrigger is ArmResourceDeleteWithoutOkAsync<
+    SqlTriggerGetResults,
+    Response = NoContentResponse | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders>
+  >;
 
   /**
    * Lists the SQL trigger under an existing Azure Cosmos DB database account.

@@ -30,7 +30,10 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   /**
    * Retrieves the properties of an existing Azure Cosmos DB Mongo User Definition with the given Id.
    */
-  getMongoUserDefinition is ArmResourceRead<MongoUserDefinitionGetResults>;
+  getMongoUserDefinition is ArmResourceRead<
+    MongoUserDefinitionGetResults,
+    Error = CloudError
+  >;
 
   /**
    * Creates or updates an Azure Cosmos DB Mongo User Definition.
@@ -49,7 +52,8 @@ interface MongoUserDefinitionGetResultsOperationGroup {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteMongoUserDefinition is ArmResourceDeleteWithoutOkAsync<
     MongoUserDefinitionGetResults,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse,
+    Error = CloudError
   >;
 
   /**
@@ -57,7 +61,8 @@ interface MongoUserDefinitionGetResultsOperationGroup {
    */
   listMongoUserDefinitions is ArmResourceListByParent<
     MongoUserDefinitionGetResults,
-    Response = ArmResponse<MongoUserDefinitionListResult>
+    Response = ArmResponse<MongoUserDefinitionListResult>,
+    Error = CloudError
   >;
 }
 

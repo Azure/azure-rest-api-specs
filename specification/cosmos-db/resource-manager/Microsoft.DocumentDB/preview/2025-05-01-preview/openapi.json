@@ -258,7 +258,7 @@
         "tags": [
           "Operations"
         ],
-        "description": "List the operations for the provider",
+        "description": "Lists all of the available Cosmos DB Resource Provider operations.",
         "parameters": [
           {
             "$ref": "../../../../../common-types/resource-management/v6/types.json#/parameters/ApiVersionParameter"
@@ -268,7 +268,7 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/OperationListResult"
+              "$ref": "#/definitions/OperationListResult"
             }
           },
           "default": {
@@ -313,7 +313,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -321,6 +321,9 @@
           "CosmosDBManagedCassandraClusterListBySubscription": {
             "$ref": "./examples/CosmosDBManagedCassandraClusterListBySubscription.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -357,6 +360,9 @@
           "CosmosDBDatabaseAccountList": {
             "$ref": "./examples/CosmosDBDatabaseAccountList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -377,9 +383,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FleetResourceListResult"
+              "$ref": "#/definitions/FleetListResult"
             }
           },
           "default": {
@@ -424,7 +430,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -432,6 +438,9 @@
           "CosmosDBLocationList": {
             "$ref": "./examples/CosmosDBLocationList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -467,7 +476,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1393,7 +1402,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1401,6 +1410,9 @@
           "CosmosDBManagedCassandraClusterListByResourceGroup": {
             "$ref": "./examples/CosmosDBManagedCassandraClusterListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1442,7 +1454,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1515,7 +1527,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1593,7 +1605,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1656,7 +1668,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1709,7 +1721,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1717,6 +1729,9 @@
           "CosmosDBManagedCassandraBackupsList": {
             "$ref": "./examples/CosmosDBManagedCassandraBackupsList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1768,7 +1783,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1817,7 +1832,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1825,6 +1840,9 @@
           "CosmosDBManagedCassandraListCommand": {
             "$ref": "./examples/CosmosDBManagedCassandraListCommand.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1876,7 +1894,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1925,7 +1943,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -1933,6 +1951,9 @@
           "CosmosDBManagedCassandraDataCenterList": {
             "$ref": "./examples/CosmosDBManagedCassandraDataCenterList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -1984,7 +2005,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2067,7 +2088,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2155,7 +2176,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2228,7 +2249,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2297,7 +2318,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2370,7 +2391,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2432,6 +2453,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -2446,7 +2472,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2508,7 +2534,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2561,7 +2587,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -2608,6 +2634,9 @@
           "CosmosDBDatabaseAccountListByResourceGroup": {
             "$ref": "./examples/CosmosDBDatabaseAccountListByResourceGroup.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2697,9 +2726,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'DatabaseAccountGetResults' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountGetResults"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -2719,7 +2754,12 @@
           "CosmosDBRestoreDatabaseAccountCreateUpdate.json": {
             "$ref": "./examples/CosmosDBRestoreDatabaseAccountCreateUpdate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DatabaseAccountGetResults"
+        },
+        "x-ms-long-running-operation": true
       },
       "patch": {
         "operationId": "DatabaseAccounts_Update",
@@ -2759,9 +2799,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/DatabaseAccountGetResults"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -2775,7 +2821,12 @@
           "CosmosDBDatabaseAccountPatch": {
             "$ref": "./examples/CosmosDBDatabaseAccountPatch.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/DatabaseAccountGetResults"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "DatabaseAccounts_Delete",
@@ -2806,21 +2857,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -2886,6 +2937,9 @@
           "CosmosDBCassandraKeyspaceList": {
             "$ref": "./examples/CosmosDBCassandraKeyspaceList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -2997,6 +3051,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3062,21 +3121,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3149,6 +3208,9 @@
           "CosmosDBCassandraTableList": {
             "$ref": "./examples/CosmosDBCassandraTableList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -3274,6 +3336,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3346,21 +3413,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -3403,6 +3470,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3462,6 +3531,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3490,7 +3561,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'ThroughputSettingsGetResults' update operation succeeded",
+            "description": "Azure operation completed successfully.",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -3498,6 +3569,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3551,6 +3627,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3578,6 +3656,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3592,7 +3675,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3631,6 +3714,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3658,6 +3743,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3672,7 +3762,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3711,6 +3801,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3763,6 +3855,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3792,6 +3886,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3845,6 +3944,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3857,7 +3958,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ThroughputSettingsGetResults' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -3865,6 +3966,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3879,7 +3985,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -3918,6 +4024,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -3930,7 +4038,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ThroughputSettingsGetResults' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -3938,6 +4046,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -3952,7 +4065,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4021,6 +4134,9 @@
           "CosmosDBCassandraViewList": {
             "$ref": "./examples/CosmosDBCassandraViewList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -4146,6 +4262,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4223,6 +4344,11 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4278,6 +4404,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -4337,6 +4465,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -4373,6 +4503,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4426,6 +4561,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -4453,6 +4590,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4467,7 +4609,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4506,6 +4648,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -4533,6 +4677,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4547,7 +4696,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -4723,6 +4872,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -4793,14 +4947,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -4985,6 +5139,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -5055,14 +5214,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -5318,7 +5477,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5378,7 +5537,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5448,7 +5607,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5505,7 +5664,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5562,7 +5721,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5619,7 +5778,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5676,7 +5835,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5725,7 +5884,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5784,7 +5943,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5847,7 +6006,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5903,7 +6062,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -5959,7 +6118,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -6015,7 +6174,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -6071,7 +6230,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -6142,6 +6301,9 @@
           "CosmosDBCollectionGetMetricDefinitions": {
             "$ref": "./examples/CosmosDBCollectionGetMetricDefinitions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6213,6 +6375,9 @@
           "CosmosDBCollectionGetMetrics": {
             "$ref": "./examples/CosmosDBCollectionGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6291,6 +6456,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBPKeyRangeIdGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6362,6 +6530,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBCollectionPartitionGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6433,6 +6604,9 @@
           "CosmosDBCollectionGetUsages": {
             "$ref": "./examples/CosmosDBCollectionPartitionGetUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6504,6 +6678,9 @@
           "CosmosDBCollectionGetUsages": {
             "$ref": "./examples/CosmosDBCollectionGetUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6560,6 +6737,9 @@
           "CosmosDBDatabaseGetMetricDefinitions": {
             "$ref": "./examples/CosmosDBDatabaseGetMetricDefinitions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6624,6 +6804,9 @@
           "CosmosDBDatabaseGetMetrics": {
             "$ref": "./examples/CosmosDBDatabaseGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6688,6 +6871,9 @@
           "CosmosDBDatabaseGetUsages": {
             "$ref": "./examples/CosmosDBDatabaseGetUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6732,6 +6918,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -6810,6 +7001,9 @@
           "CosmosDBSqlDatabaseList": {
             "$ref": "./examples/CosmosDBGraphResourceList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -6921,6 +7115,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -6991,14 +7190,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -7069,6 +7268,9 @@
           "CosmosDBGremlinDatabaseList": {
             "$ref": "./examples/CosmosDBGremlinDatabaseList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7180,6 +7382,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -7245,21 +7452,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7332,6 +7539,9 @@
           "CosmosDBGremlinGraphList": {
             "$ref": "./examples/CosmosDBGremlinGraphList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -7457,6 +7667,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -7529,21 +7744,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -7677,6 +7892,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -7736,6 +7953,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -7772,6 +7991,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -7825,6 +8049,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -7852,6 +8078,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -7866,7 +8097,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -7905,6 +8136,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -7932,6 +8165,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -7946,7 +8184,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -7985,6 +8223,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -8037,6 +8277,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -8066,6 +8308,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -8119,6 +8366,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -8131,7 +8380,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ThroughputSettingsGetResults' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -8139,6 +8388,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -8153,7 +8407,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -8192,6 +8446,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -8204,7 +8460,7 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "Resource 'ThroughputSettingsGetResults' update operation succeeded",
             "schema": {
               "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
@@ -8212,6 +8468,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -8226,7 +8487,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -8402,6 +8663,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -8472,14 +8738,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -8664,6 +8930,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -8734,14 +9005,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -8913,6 +9184,9 @@
           "CosmosDBDatabaseAccountGetMetricDefinitions": {
             "$ref": "./examples/CosmosDBDatabaseAccountGetMetricDefinitions.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -8970,6 +9244,9 @@
           "CosmosDBDatabaseAccountGetMetrics": {
             "$ref": "./examples/CosmosDBDatabaseAccountGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -9133,6 +9410,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -9203,14 +9485,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -9395,6 +9677,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -9465,14 +9752,14 @@
           "202": {
             "description": "Resource deletion accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
@@ -9543,6 +9830,9 @@
           "CosmosDBMongoDBDatabaseList": {
             "$ref": "./examples/CosmosDBMongoDBDatabaseList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -9654,6 +9944,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -9722,21 +10017,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -9809,6 +10104,9 @@
           "CosmosDBMongoDBCollectionList": {
             "$ref": "./examples/CosmosDBMongoDBCollectionList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -9934,6 +10232,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10009,21 +10312,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -10104,6 +10407,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10118,7 +10426,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -10129,7 +10437,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/PhysicalPartitionStorageInfoCollection"
+          "final-state-schema": "#/definitions/MongoDBCollectionGetResults"
         },
         "x-ms-long-running-operation": true
       }
@@ -10248,6 +10556,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10307,6 +10617,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10343,6 +10655,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10396,6 +10713,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10423,6 +10742,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10437,7 +10761,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -10476,6 +10800,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10503,6 +10829,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10517,7 +10848,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -10556,6 +10887,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10592,6 +10925,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10606,7 +10944,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -10645,6 +10983,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10681,6 +11021,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10695,7 +11040,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -10765,6 +11110,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10779,7 +11129,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -10790,7 +11140,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/PhysicalPartitionStorageInfoCollection"
+          "final-state-schema": "#/definitions/ThroughputSettingsGetResults"
         },
         "x-ms-long-running-operation": true
       }
@@ -10818,6 +11168,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10870,6 +11222,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10899,6 +11253,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10913,7 +11272,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -10952,6 +11311,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -10972,6 +11333,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -10986,7 +11352,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11025,6 +11391,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -11045,6 +11413,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -11059,7 +11432,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11098,6 +11471,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -11127,6 +11502,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -11141,7 +11521,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11180,6 +11560,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -11209,6 +11591,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -11223,7 +11610,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11277,7 +11664,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11285,6 +11672,9 @@
           "CosmosDBMongoDBRoleDefinitionList": {
             "$ref": "./examples/CosmosDBMongoDBRoleDefinitionList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -11333,7 +11723,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11410,7 +11800,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11483,7 +11873,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11536,7 +11926,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11544,6 +11934,9 @@
           "CosmosDBMongoDBUserDefinitionList": {
             "$ref": "./examples/CosmosDBMongoDBUserDefinitionList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -11592,7 +11985,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11742,7 +12135,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -11981,6 +12374,9 @@
           "CosmosDBNotebookWorkspaceList": {
             "$ref": "./examples/CosmosDBNotebookWorkspaceList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -12110,9 +12506,15 @@
         ],
         "responses": {
           "200": {
-            "description": "Resource 'NotebookWorkspace' update operation succeeded",
+            "description": "The request has succeeded.",
             "schema": {
               "$ref": "#/definitions/NotebookWorkspace"
+            },
+            "headers": {
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
+              }
             }
           },
           "default": {
@@ -12126,7 +12528,12 @@
           "CosmosDBNotebookWorkspaceCreate": {
             "$ref": "./examples/CosmosDBNotebookWorkspaceCreate.json"
           }
-        }
+        },
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location",
+          "final-state-schema": "#/definitions/NotebookWorkspace"
+        },
+        "x-ms-long-running-operation": true
       },
       "delete": {
         "operationId": "NotebookWorkspaces_Delete",
@@ -12492,6 +12899,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -12565,6 +12977,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -12648,6 +13065,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBPercentileGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13158,6 +13578,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -13262,6 +13687,9 @@
           "CosmosDBRegionCollectionGetMetrics": {
             "$ref": "./examples/CosmosDBRegionCollectionGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13347,6 +13775,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBPKeyRangeIdRegionGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13425,6 +13856,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBCollectionPartitionRegionGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13489,6 +13923,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBDatabaseAccountRegionGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13855,6 +14292,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBPercentileSourceTargetGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -13904,6 +14344,9 @@
           "CosmosDBSqlDatabaseList": {
             "$ref": "./examples/CosmosDBSqlDatabaseList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14015,6 +14458,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -14083,21 +14531,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -14170,6 +14618,9 @@
           "CosmosDBClientEncryptionKeysList": {
             "$ref": "./examples/CosmosDBSqlClientEncryptionKeysList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14295,6 +14746,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -14378,6 +14834,9 @@
           "CosmosDBSqlContainerList": {
             "$ref": "./examples/CosmosDBSqlContainerList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14503,6 +14962,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -14581,21 +15045,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -14676,21 +15140,21 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -14849,7 +15313,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -14857,6 +15321,9 @@
           "CosmosDBSqlStoredProcedureList": {
             "$ref": "./examples/CosmosDBSqlStoredProcedureList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -14996,6 +15463,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -15075,21 +15547,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -15132,6 +15604,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -15191,6 +15665,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -15227,6 +15703,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -15280,6 +15761,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -15307,21 +15790,21 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -15360,6 +15843,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -15387,21 +15872,21 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -15440,6 +15925,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -15476,21 +15963,21 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -15529,6 +16016,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -15565,21 +16054,21 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -15655,6 +16144,9 @@
           "CosmosDBSqlTriggerList": {
             "$ref": "./examples/CosmosDBSqlTriggerList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -15794,6 +16286,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -15873,21 +16370,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -15967,6 +16464,9 @@
           "CosmosDBSqlUserDefinedFunctionList": {
             "$ref": "./examples/CosmosDBSqlUserDefinedFunctionList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -16106,6 +16606,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -16185,21 +16690,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -16273,6 +16778,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -16287,7 +16797,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -16326,6 +16836,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -16378,6 +16890,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -16407,6 +16921,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -16460,6 +16979,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -16480,6 +17001,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -16494,7 +17020,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -16533,6 +17059,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -16553,6 +17081,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -16567,7 +17100,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -16606,6 +17139,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -16629,12 +17164,17 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -16649,7 +17189,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -16660,7 +17200,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/PhysicalPartitionThroughputInfoResult"
+          "final-state-schema": "#/definitions/ThroughputSettingsGetResults"
         },
         "x-ms-long-running-operation": true
       }
@@ -16688,6 +17228,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -16711,12 +17253,17 @@
           "200": {
             "description": "Azure operation completed successfully.",
             "schema": {
-              "$ref": "#/definitions/PhysicalPartitionThroughputInfoResult"
+              "$ref": "#/definitions/ThroughputSettingsGetResults"
             }
           },
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -16731,7 +17278,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -16742,7 +17289,7 @@
         },
         "x-ms-long-running-operation-options": {
           "final-state-via": "location",
-          "final-state-schema": "#/definitions/PhysicalPartitionThroughputInfoResult"
+          "final-state-schema": "#/definitions/ThroughputSettingsGetResults"
         },
         "x-ms-long-running-operation": true
       }
@@ -17846,6 +18393,9 @@
           "CosmosDBTableList": {
             "$ref": "./examples/CosmosDBTableList.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -17957,6 +18507,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -18022,21 +18577,21 @@
         ],
         "responses": {
           "202": {
-            "description": "Resource deletion accepted.",
+            "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
-              },
-              "Retry-After": {
-                "type": "integer",
-                "format": "int32",
-                "description": "The Retry-After header can indicate how long the client should wait before polling the operation status."
               }
             }
           },
           "204": {
-            "description": "Resource does not exist."
+            "description": "There is no content to send for this request, but the headers may be useful."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -18163,6 +18718,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -18215,6 +18772,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -18244,6 +18803,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -18297,6 +18861,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -18317,6 +18883,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -18331,7 +18902,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -18370,6 +18941,8 @@
             "description": "Cosmos DB database account name.",
             "required": true,
             "type": "string",
+            "minLength": 3,
+            "maxLength": 50,
             "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
           },
           {
@@ -18390,6 +18963,11 @@
           "202": {
             "description": "Resource operation accepted.",
             "headers": {
+              "Azure-AsyncOperation": {
+                "type": "string",
+                "format": "uri",
+                "description": "A link to the status monitor"
+              },
               "Location": {
                 "type": "string",
                 "description": "The Location header contains the URL where the status of the long running operation can be checked."
@@ -18404,7 +18982,7 @@
           "default": {
             "description": "An unexpected error response.",
             "schema": {
-              "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/ErrorResponse"
+              "$ref": "#/definitions/CloudError"
             }
           }
         },
@@ -18481,6 +19059,9 @@
           "CosmosDBDatabaseAccountRegionGetMetrics": {
             "$ref": "./examples/CosmosDBPercentileTargetGetMetrics.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -18538,6 +19119,9 @@
           "CosmosDBDatabaseAccountGetUsages": {
             "$ref": "./examples/CosmosDBDatabaseAccountGetUsages.json"
           }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": "nextLink"
         }
       }
     },
@@ -18561,9 +19145,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FleetResourceListResult"
+              "$ref": "#/definitions/FleetListResult"
             }
           },
           "default": {
@@ -18782,7 +19366,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -18842,9 +19431,9 @@
         ],
         "responses": {
           "200": {
-            "description": "Azure operation completed successfully.",
+            "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/FleetAnalyticsResourceListResult"
+              "$ref": "#/definitions/FleetAnalyticsListResult"
             }
           },
           "default": {
@@ -19037,7 +19626,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -19323,7 +19917,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -19393,7 +19992,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -19704,7 +20308,12 @@
             "headers": {
               "Azure-AsyncOperation": {
                 "type": "string",
+                "format": "uri",
                 "description": "A link to the status monitor"
+              },
+              "Location": {
+                "type": "string",
+                "description": "The Location header contains the URL where the status of the long running operation can be checked."
               },
               "Retry-After": {
                 "type": "integer",
@@ -21349,6 +21958,9 @@
             "$ref": "#/definitions/CassandraKeyspaceGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -21785,6 +22397,9 @@
             "$ref": "#/definitions/CassandraTableGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -21953,6 +22568,9 @@
             "$ref": "#/definitions/CassandraViewGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -22202,6 +22820,9 @@
             "$ref": "#/definitions/ClientEncryptionKeyGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -24635,6 +25256,9 @@
             "$ref": "#/definitions/DatabaseAccountGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -24811,6 +25435,27 @@
         }
       }
     },
+    "FleetAnalyticsListResult": {
+      "type": "object",
+      "description": "The response of a FleetAnalyticsResource list operation.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "The FleetAnalyticsResource items on this page",
+          "items": {
+            "$ref": "#/definitions/FleetAnalyticsResource"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "format": "uri",
+          "description": "The link to the next page of items"
+        }
+      },
+      "required": [
+        "value"
+      ]
+    },
     "FleetAnalyticsProperties": {
       "type": "object",
       "properties": {
@@ -24866,15 +25511,15 @@
         }
       ]
     },
-    "FleetAnalyticsResourceListResult": {
+    "FleetListResult": {
       "type": "object",
-      "description": "The response of a FleetAnalyticsResource list operation.",
+      "description": "The response of a FleetResource list operation.",
       "properties": {
         "value": {
           "type": "array",
-          "description": "The FleetAnalyticsResource items on this page",
+          "description": "The FleetResource items on this page",
           "items": {
-            "$ref": "#/definitions/FleetAnalyticsResource"
+            "$ref": "#/definitions/FleetResource"
           }
         },
         "nextLink": {
@@ -24901,27 +25546,6 @@
         {
           "$ref": "../../../../../common-types/resource-management/v6/types.json#/definitions/TrackedResource"
         }
-      ]
-    },
-    "FleetResourceListResult": {
-      "type": "object",
-      "description": "The response of a FleetResource list operation.",
-      "properties": {
-        "value": {
-          "type": "array",
-          "description": "The FleetResource items on this page",
-          "items": {
-            "$ref": "#/definitions/FleetResource"
-          }
-        },
-        "nextLink": {
-          "type": "string",
-          "format": "uri",
-          "description": "The link to the next page of items"
-        }
-      },
-      "required": [
-        "value"
       ]
     },
     "FleetResourceProperties": {
@@ -25353,6 +25977,9 @@
             "$ref": "#/definitions/GraphResourceGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -25516,6 +26143,9 @@
             "$ref": "#/definitions/GremlinDatabaseGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -25762,6 +26392,9 @@
             "$ref": "#/definitions/GremlinGraphGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -26249,6 +26882,9 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -26262,6 +26898,9 @@
           "items": {
             "$ref": "#/definitions/ClusterResource"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -26277,6 +26916,9 @@
           },
           "readOnly": true,
           "x-ms-identifiers": []
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -26291,6 +26933,9 @@
             "$ref": "#/definitions/DataCenterResource"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -26355,6 +27000,9 @@
             "$ref": "#/definitions/LocationGetResult"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -26720,6 +27368,9 @@
             "$ref": "#/definitions/MetricDefinition"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -26734,6 +27385,9 @@
             "$ref": "#/definitions/Metric"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -27002,6 +27656,9 @@
             "$ref": "#/definitions/MongoDBCollectionGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -27225,6 +27882,9 @@
             "$ref": "#/definitions/MongoDBDatabaseGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -27584,6 +28244,9 @@
             "$ref": "#/definitions/MongoRoleDefinitionGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -27671,6 +28334,9 @@
             "$ref": "#/definitions/MongoUserDefinitionGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -27912,6 +28578,9 @@
           "items": {
             "$ref": "#/definitions/NotebookWorkspace"
           }
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -27930,6 +28599,66 @@
           "readOnly": true
         }
       }
+    },
+    "Operation": {
+      "type": "object",
+      "description": "REST API operation",
+      "properties": {
+        "name": {
+          "type": "string",
+          "description": "Operation name: {provider}/{resource}/{operation}"
+        },
+        "display": {
+          "$ref": "#/definitions/OperationDisplay",
+          "description": "The object that represents the operation."
+        }
+      }
+    },
+    "OperationDisplay": {
+      "type": "object",
+      "description": "The object that represents the operation.",
+      "properties": {
+        "Provider": {
+          "type": "string",
+          "description": "Service provider: Microsoft.ResourceProvider",
+          "x-ms-client-name": "provider"
+        },
+        "Resource": {
+          "type": "string",
+          "description": "Resource on which the operation is performed: Profile, endpoint, etc.",
+          "x-ms-client-name": "resource"
+        },
+        "Operation": {
+          "type": "string",
+          "description": "Operation type: Read, write, delete, etc.",
+          "x-ms-client-name": "operation"
+        },
+        "Description": {
+          "type": "string",
+          "description": "Description of operation",
+          "x-ms-client-name": "description"
+        }
+      }
+    },
+    "OperationListResult": {
+      "type": "object",
+      "description": "Result of the request to list Resource Provider operations. It contains a list of operations and a URL link to get the next set of results.",
+      "properties": {
+        "value": {
+          "type": "array",
+          "description": "List of operations supported by the Resource Provider.",
+          "items": {
+            "$ref": "#/definitions/Operation"
+          }
+        },
+        "nextLink": {
+          "type": "string",
+          "description": "URL to get the next set of operation list results if there are any."
+        }
+      },
+      "required": [
+        "value"
+      ]
     },
     "OperationType": {
       "type": "string",
@@ -28015,6 +28744,9 @@
             "$ref": "#/definitions/PartitionMetric"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -28050,6 +28782,9 @@
             "$ref": "#/definitions/PartitionUsage"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -28106,6 +28841,9 @@
             "$ref": "#/definitions/PercentileMetric"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -30560,6 +31298,9 @@
             "$ref": "#/definitions/SqlContainerGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -30829,6 +31570,9 @@
             "$ref": "#/definitions/SqlDatabaseGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -31194,6 +31938,9 @@
             "$ref": "#/definitions/SqlStoredProcedureGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -31348,6 +32095,9 @@
             "$ref": "#/definitions/SqlTriggerGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -31502,6 +32252,9 @@
             "$ref": "#/definitions/SqlUserDefinedFunctionGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -31756,6 +32509,9 @@
             "$ref": "#/definitions/TableGetResults"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },
@@ -32526,6 +33282,9 @@
             "$ref": "#/definitions/Usage"
           },
           "readOnly": true
+        },
+        "nextLink": {
+          "type": "string"
         }
       }
     },

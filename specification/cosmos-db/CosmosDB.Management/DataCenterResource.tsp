@@ -30,7 +30,7 @@ interface DataCenterResources {
   /**
    * Get the properties of a managed Cassandra data center.
    */
-  get is ArmResourceRead<DataCenterResource>;
+  get is ArmResourceRead<DataCenterResource, Error = CloudError>;
 
   /**
    * Create or update a managed Cassandra data center. When updating, overwrite all properties. To update only some properties, use PATCH.
@@ -38,7 +38,8 @@ interface DataCenterResources {
   createUpdate is ArmResourceCreateOrReplaceAsync<
     DataCenterResource,
     LroHeaders = ArmLroLocationHeader<FinalResult = DataCenterResource> &
-      Azure.Core.Foundations.RetryAfterHeader
+      Azure.Core.Foundations.RetryAfterHeader,
+    Error = CloudError
   >;
 
   /**
@@ -53,20 +54,25 @@ interface DataCenterResources {
       Azure.Core.Foundations.RetryAfterHeader> & {
       @bodyRoot
       _: DataCenterResource;
-    })
+    }),
+    Error = CloudError
   >;
 
   /**
    * Delete a managed Cassandra data center.
    */
-  delete is ArmResourceDeleteWithoutOkAsync<DataCenterResource>;
+  delete is ArmResourceDeleteWithoutOkAsync<
+    DataCenterResource,
+    Error = CloudError
+  >;
 
   /**
    * List all data centers in a particular managed Cassandra cluster.
    */
   list is ArmResourceListByParent<
     DataCenterResource,
-    Response = ArmResponse<ListDataCenters>
+    Response = ArmResponse<ListDataCenters>,
+    Error = CloudError
   >;
 }
 

@@ -44,6 +44,8 @@ alias ThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Lega
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB database name. */
@@ -75,7 +77,7 @@ interface ThroughputSettingsGetResultsOperationGroup {
   updateSqlDatabaseThroughput is ThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -86,7 +88,10 @@ interface ThroughputSettingsGetResultsOperationGroup {
   migrateSqlDatabaseToAutoscale is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -96,7 +101,10 @@ interface ThroughputSettingsGetResultsOperationGroup {
   migrateSqlDatabaseToManualThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -106,7 +114,10 @@ interface ThroughputSettingsGetResultsOperationGroup {
   sqlDatabaseRetrieveThroughputDistribution is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -116,7 +127,10 @@ interface ThroughputSettingsGetResultsOperationGroup {
   sqlDatabaseRedistributeThroughput is ThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -131,6 +145,8 @@ alias SqlResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Resource
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB database name. */
@@ -169,7 +185,7 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   updateSqlContainerThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -180,7 +196,9 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   migrateSqlContainerToAutoscale is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults>>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -190,7 +208,9 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   migrateSqlContainerToManualThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults>>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -200,7 +220,9 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   sqlContainerRetrieveThroughputDistribution is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -210,7 +232,9 @@ interface SqlResourcesThroughputSettingsGetResultsOperationGroup {
   sqlContainerRedistributeThroughput is SqlResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult>>,
+    OverrideErrorType = CloudError
   >;
 }
 alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -225,6 +249,8 @@ alias MongoDBResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB database name. */
@@ -257,8 +283,9 @@ interface MongoDBResources {
   updateMongoDBDatabaseThroughput is MongoDBResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
-      Azure.Core.Foundations.RetryAfterHeader>
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -269,7 +296,10 @@ interface MongoDBResources {
   migrateMongoDBDatabaseToAutoscale is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -280,7 +310,10 @@ interface MongoDBResources {
   migrateMongoDBDatabaseToManualThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -290,7 +323,10 @@ interface MongoDBResources {
   mongoDBDatabaseRetrieveThroughputDistribution is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -300,7 +336,10 @@ interface MongoDBResources {
   mongoDBDatabaseRedistributeThroughput is MongoDBResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -315,6 +354,8 @@ alias MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB database name. */
@@ -354,7 +395,7 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   updateMongoDBCollectionThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -365,7 +406,10 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   mongoDBContainerRetrieveThroughputDistribution is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RetrieveThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -376,7 +420,10 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   mongoDBContainerRedistributeThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     RedistributeThroughputParameters,
-    PhysicalPartitionThroughputInfoResult
+    PhysicalPartitionThroughputInfoResult,
+    Response = ArmResponse<PhysicalPartitionThroughputInfoResult> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = PhysicalPartitionThroughputInfoResult> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -386,7 +433,10 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   migrateMongoDBCollectionToAutoscale is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -397,7 +447,10 @@ interface MongoDBResourcesThroughputSettingsGetResultsOperationGroup {
   migrateMongoDBCollectionToManualThroughput is MongoDBResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias TableResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -412,6 +465,8 @@ alias TableResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB table name. */
@@ -443,7 +498,7 @@ interface TableResources {
   updateTableThroughput is TableResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -454,7 +509,10 @@ interface TableResources {
   migrateTableToAutoscale is TableResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -464,7 +522,10 @@ interface TableResources {
   migrateTableToManualThroughput is TableResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias CassandraResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -479,6 +540,8 @@ alias CassandraResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB keyspace name. */
@@ -510,7 +573,7 @@ interface CassandraResources {
   updateCassandraKeyspaceThroughput is CassandraResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -521,7 +584,10 @@ interface CassandraResources {
   migrateCassandraKeyspaceToAutoscale is CassandraResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -531,7 +597,10 @@ interface CassandraResources {
   migrateCassandraKeyspaceToManualThroughput is CassandraResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias CassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -546,6 +615,8 @@ alias CassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Re
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB keyspace name. */
@@ -584,7 +655,7 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   updateCassandraTableThroughput is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -595,7 +666,10 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   migrateCassandraTableToAutoscale is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -605,7 +679,10 @@ interface CassandraResourcesThroughputSettingsGetResultsOperationGroup {
   migrateCassandraTableToManualThroughput is CassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -620,6 +697,8 @@ alias ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps = Azur
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB keyspace name. */
@@ -657,7 +736,7 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   updateCassandraViewThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -668,7 +747,10 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   migrateCassandraViewToAutoscale is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -678,7 +760,10 @@ interface ViewCassandraResourcesThroughputSettingsGetResultsOperationGroup {
   migrateCassandraViewToManualThroughput is ViewCassandraResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -693,6 +778,8 @@ alias GremlinResourceOps = Azure.ResourceManager.Legacy.LegacyOperations<
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB database name. */
@@ -724,7 +811,7 @@ interface GremlinResources {
   updateGremlinDatabaseThroughput is GremlinResourceOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -735,7 +822,10 @@ interface GremlinResources {
   migrateGremlinDatabaseToAutoscale is GremlinResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -745,7 +835,10 @@ interface GremlinResources {
   migrateGremlinDatabaseToManualThroughput is GremlinResourceOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 alias GremlinResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.ResourceManager.Legacy.LegacyOperations<
@@ -760,6 +853,8 @@ alias GremlinResourcesThroughputSettingsGetResultsOperationGroupOps = Azure.Reso
     @segment("databaseAccounts")
     @key
     @pattern("^[a-z0-9]+(-[a-z0-9]+)*")
+    @minLength(3)
+    @maxLength(50)
     accountName: string;
 
     /** Cosmos DB database name. */
@@ -798,7 +893,7 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   updateGremlinGraphThroughput is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.CreateOrUpdateAsync<
     ThroughputSettingsGetResults,
     Request = ThroughputSettingsUpdateParameters,
-    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = ThroughputSettingsGetResults> &
+    Response = ArmResourceUpdatedResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -809,7 +904,10 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   migrateGremlinGraphToAutoscale is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 
   /**
@@ -819,7 +917,10 @@ interface GremlinResourcesThroughputSettingsGetResultsOperationGroup {
   migrateGremlinGraphToManualThroughput is GremlinResourcesThroughputSettingsGetResultsOperationGroupOps.ActionAsync<
     ThroughputSettingsGetResults,
     void,
-    ThroughputSettingsGetResults
+    ThroughputSettingsGetResults,
+    Response = ArmResponse<ThroughputSettingsGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = ThroughputSettingsGetResults> &
+      Azure.Core.Foundations.RetryAfterHeader>,
+    OverrideErrorType = CloudError
   >;
 }
 

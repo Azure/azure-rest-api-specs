@@ -38,7 +38,7 @@ interface GremlinRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-put-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   createUpdateGremlinRoleAssignment is ArmResourceCreateOrReplaceAsync<
     GremlinRoleAssignmentResource,
-    Response = ArmResourceUpdatedResponse<GremlinRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GremlinRoleAssignmentResource> &
+    Response = ArmResourceUpdatedResponse<GremlinRoleAssignmentResource> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinRoleAssignmentResource> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
@@ -48,7 +48,7 @@ interface GremlinRoleAssignmentResources {
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-delete-operation-response-codes" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   deleteGremlinRoleAssignment is ArmResourceDeleteWithoutOkAsync<
     GremlinRoleAssignmentResource,
-    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse | ArmDeletedNoContentResponse
+    Response = ArmDeletedResponse | ArmDeleteAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | ArmDeletedNoContentResponse
   >;
 
   /**

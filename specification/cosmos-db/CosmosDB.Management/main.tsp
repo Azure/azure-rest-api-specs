@@ -89,4 +89,11 @@ enum Versions {
   v2025_05_01_preview: "2025-05-01-preview",
 }
 
-interface Operations extends Azure.ResourceManager.Operations {}
+interface Operations
+  extends Azure.ResourceManager.Legacy.Operations<
+      ArmResponse<OperationListResult>,
+      ErrorResponse
+    > {}
+@@doc(Operations.list,
+  "Lists all of the available Cosmos DB Resource Provider operations."
+);

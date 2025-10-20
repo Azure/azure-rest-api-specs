@@ -45,14 +45,17 @@ interface GremlinGraphGetResultsOperationGroup {
   createUpdateGremlinGraph is Azure.ResourceManager.Legacy.CreateOrUpdateAsync<
     GremlinGraphGetResults,
     Request = GremlinGraphCreateUpdateParameters,
-    Response = ArmResourceUpdatedResponse<GremlinGraphGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmLroLocationHeader<FinalResult = GremlinGraphGetResults> &
+    Response = ArmResourceUpdatedResponse<GremlinGraphGetResults> | ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders<FinalResult = GremlinGraphGetResults> &
       Azure.Core.Foundations.RetryAfterHeader>
   >;
 
   /**
    * Deletes an existing Azure Cosmos DB Gremlin graph.
    */
-  deleteGremlinGraph is ArmResourceDeleteWithoutOkAsync<GremlinGraphGetResults>;
+  deleteGremlinGraph is ArmResourceDeleteWithoutOkAsync<
+    GremlinGraphGetResults,
+    Response = ArmAcceptedLroResponse<LroHeaders = ArmCombinedLroHeaders> | NoContentResponse
+  >;
 
   /**
    * Lists the Gremlin graph under an existing Azure Cosmos DB database account.
