@@ -26,7 +26,7 @@ model DecompileOperationSuccessResponse {
   /**
    * An array of key-value pairs containing the entryPoint string as the key for the Bicep file decompiled from the ARM json template
    */
-  @OpenAPI.extension("x-ms-identifiers", #["path"])
+  @identifiers(#["path"])
   files: FileDefinition[];
 
   /**
