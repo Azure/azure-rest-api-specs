@@ -38,7 +38,7 @@ These settings apply only when `--tag=package-2024-04-02` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-02'
 input-file:
-  - GitHub.Network/stable/2024-04-02/GitHub.Network.json
+  - stable/2024-04-02/GitHub.Network.json
 ```
 
 ### Tag: package-2024-04-01
@@ -47,7 +47,7 @@ These settings apply only when `--tag=package-2024-04-01` is specified on the co
 
 ```yaml $(tag) == 'package-2024-04-01'
 input-file:
-  - GitHub.Network/stable/2024-04-01/GitHub.Network.json
+  - stable/2024-04-01/GitHub.Network.json
 ```
 
 ### Tag: package-2024-04-01-preview
@@ -56,7 +56,7 @@ These settings apply only when `--tag=package-2024-04-01-preview` is specified o
 
 ```yaml $(tag) == 'package-2024-04-01-preview'
 input-file:
-  - GitHub.Network/preview/2024-04-01-preview/GitHub.Network.json
+  - preview/2024-04-01-preview/GitHub.Network.json
 ```
 
 # Code Generation
