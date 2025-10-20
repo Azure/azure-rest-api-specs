@@ -253,7 +253,9 @@ interface CodeVersionOperationGroup {
   publish is CodeVersionOperationGroupOps.ActionAsync<
     CodeVersion,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 
   /**

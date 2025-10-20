@@ -106,7 +106,9 @@ interface ComputeResources {
   updateCustomServices is ArmResourceActionSync<
     ComputeResource,
     CustomService[],
-    OkResponse
+    Response = {
+      @body body: void;
+    }
   >;
 
   /**
@@ -141,7 +143,9 @@ interface ComputeResources {
   updateDataMounts is ArmResourceActionSync<
     ComputeResource,
     ComputeInstanceDataMount[],
-    OkResponse
+    Response = {
+      @body body: void;
+    }
   >;
 
   /**
@@ -188,7 +192,9 @@ interface ComputeResources {
   updateIdleShutdownSetting is ArmResourceActionSync<
     ComputeResource,
     IdleShutdownSetting,
-    OkResponse
+    Response = {
+      @body body: void;
+    }
   >;
 
   /**

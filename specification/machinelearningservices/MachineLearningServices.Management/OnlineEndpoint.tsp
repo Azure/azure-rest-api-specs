@@ -157,7 +157,9 @@ interface OnlineEndpoints {
   regenerateKeys is ArmResourceActionAsync<
     OnlineEndpoint,
     RegenerateEndpointKeysRequest,
-    OkResponse
+    Response = {
+      @body body: void;
+    }
   >;
 
   /**

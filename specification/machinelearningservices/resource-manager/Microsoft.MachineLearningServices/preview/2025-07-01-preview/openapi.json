@@ -6458,7 +6458,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -6487,8 +6487,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -7189,7 +7188,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -7218,8 +7217,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -7670,7 +7668,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -8181,7 +8179,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -8242,7 +8240,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "default": {
             "description": "An unexpected error response.",
@@ -10872,7 +10870,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -10901,8 +10899,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -13133,7 +13130,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -13162,8 +13159,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -17079,7 +17075,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -17108,8 +17104,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -18945,7 +18940,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -18974,8 +18969,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -19518,7 +19512,7 @@
         "tags": [
           "OnlineDeployments"
         ],
-        "summary": "Get Inference Deployment.",
+        "summary": "Get Inference Deployment Deployment.",
         "description": "Get Inference Deployment Deployment.",
         "parameters": [
           {
@@ -20103,7 +20097,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -20132,8 +20126,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -20945,7 +20938,7 @@
         ],
         "responses": {
           "200": {
-            "description": "The request has succeeded."
+            "description": "Azure operation completed successfully."
           },
           "202": {
             "description": "Resource operation accepted.",
@@ -20974,8 +20967,7 @@
           }
         },
         "x-ms-long-running-operation-options": {
-          "final-state-via": "location",
-          "final-state-schema": "#/definitions/TypeSpec.Http.OkResponse"
+          "final-state-via": "location"
         },
         "x-ms-long-running-operation": true
       }
@@ -22441,8 +22433,7 @@
       "description": "This connection type covers the generic ApiKey auth connection categories, for examples:\nAzureOpenAI:\nCategory:= AzureOpenAI\nAuthType:= ApiKey (as type discriminator)\nCredentials:= {ApiKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\nTarget:= {ApiBase}\n\nCognitiveService:\nCategory:= CognitiveService\nAuthType:= ApiKey (as type discriminator)\nCredentials:= {SubscriptionKey} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\nTarget:= ServiceRegion={serviceRegion}\n\nCognitiveSearch:\nCategory:= CognitiveSearch\nAuthType:= ApiKey (as type discriminator)\nCredentials:= {Key} as Microsoft.MachineLearning.AccountRP.Contracts.WorkspaceConnection.ApiKey\nTarget:= {Endpoint}\n\nUse Metadata property bag for ApiType, ApiVersion, Kind and other metadata fields",
       "properties": {
         "credentials": {
-          "$ref": "#/definitions/WorkspaceConnectionApiKey",
-          "description": "Api key object for workspace connection credential."
+          "$ref": "#/definitions/WorkspaceConnectionApiKey"
         }
       },
       "allOf": [
@@ -43101,10 +43092,6 @@
     "TypeSpec.Http.NoContentResponse": {
       "type": "object",
       "description": "There is no content to send for this request, but the headers may be useful."
-    },
-    "TypeSpec.Http.OkResponse": {
-      "type": "object",
-      "description": "The request has succeeded."
     },
     "UnitOfMeasure": {
       "type": "string",

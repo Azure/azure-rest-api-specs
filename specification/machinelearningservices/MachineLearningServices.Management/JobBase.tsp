@@ -109,7 +109,13 @@ interface JobBases {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("Jobs_Cancel")
   @summary("Cancels a Job (asynchronous).")
-  cancel is ArmResourceActionAsync<JobBase, void, OkResponse>;
+  cancel is ArmResourceActionAsync<
+    JobBase,
+    void,
+    Response = {
+      @body body: void;
+    }
+  >;
 }
 
 @@doc(JobBase.name,

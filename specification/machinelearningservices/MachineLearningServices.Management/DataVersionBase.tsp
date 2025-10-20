@@ -294,7 +294,9 @@ interface DataVersions {
   publish is DataVersionOps.ActionAsync<
     DataVersionBase,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 

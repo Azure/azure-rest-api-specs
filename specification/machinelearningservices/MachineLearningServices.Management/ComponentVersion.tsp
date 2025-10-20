@@ -234,7 +234,9 @@ interface ComponentVersionOperationGroup {
   publish is ComponentVersionOperationGroupOps.ActionAsync<
     ComponentVersion,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 

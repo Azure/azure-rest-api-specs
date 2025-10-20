@@ -7817,7 +7817,6 @@ model WorkspaceProperties {
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   keyVaults?: string[];
-
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -15195,9 +15194,6 @@ model WorkspaceConnectionAccountKey {
  */
 model ApiKeyAuthWorkspaceConnectionProperties
   extends WorkspaceConnectionPropertiesV2 {
-  /**
-   * Api key object for workspace connection credential.
-   */
   credentials?: WorkspaceConnectionApiKey;
 
   /**
@@ -15631,9 +15627,7 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
   inferenceEndpoint?: ServerlessEndpointInferenceEndpoint;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   marketplaceSubscriptionId?: string;
-
   metadata?: unknown;
-
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   modelSettings?: ServerlessEndpointModelSettings;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -15685,9 +15679,11 @@ model ServicePrincipalAuthTypeWorkspaceConnectionProperties
 model WorkspaceConnectionServicePrincipal {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   clientId?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @secret
   clientSecret?: string;
+
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   tenantId?: string;
 }

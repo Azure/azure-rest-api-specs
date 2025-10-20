@@ -217,7 +217,13 @@ interface Workspaces {
    * Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry
    */
   @summary("Resync all the keys associated with this workspace.This includes keys for the storage account, app insights and password for container registry")
-  resyncKeys is ArmResourceActionAsync<Workspace, void, OkResponse>;
+  resyncKeys is ArmResourceActionAsync<
+    Workspace,
+    void,
+    Response = {
+      @body body: void;
+    }
+  >;
 
   /**
    * Get models under the Azure ML workspace for all Azure OpenAI connections that the user can deploy.

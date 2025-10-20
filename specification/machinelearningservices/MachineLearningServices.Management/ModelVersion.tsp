@@ -307,7 +307,9 @@ interface ModelVersionOperationGroup {
   publish is ModelVersionOperationGroupOps.ActionAsync<
     ModelVersion,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 

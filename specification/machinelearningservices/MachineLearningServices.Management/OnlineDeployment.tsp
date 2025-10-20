@@ -37,7 +37,7 @@ interface OnlineDeployments {
   /**
    * Get Inference Deployment Deployment.
    */
-  @summary("Get Inference Deployment.")
+  @summary("Get Inference Deployment Deployment.")
   get is ArmResourceRead<OnlineDeployment>;
 
   /**

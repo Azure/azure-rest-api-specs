@@ -240,7 +240,9 @@ interface EnvironmentVersionOperationGroup {
   publish is EnvironmentVersionOperationGroupOps.ActionAsync<
     EnvironmentVersion,
     DestinationAsset,
-    OkResponse
+    {
+      @body body: void;
+    }
   >;
 }
 
