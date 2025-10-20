@@ -37,7 +37,7 @@ These settings apply only when `--tag=package-2023-12` is specified on the comma
 
 ```yaml $(tag) == 'package-2023-12'
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/stable/2023-12-01/connectedvmware.json
+  - stable/2023-12-01/connectedvmware.json
 ```
 ### Tag: package-2023-10
 
@@ -45,7 +45,7 @@ These settings apply only when `--tag=package-2023-10` is specified on the comma
 
 ``` yaml $(tag) == 'package-2023-10'
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/stable/2023-10-01/connectedvmware.json
+  - stable/2023-10-01/connectedvmware.json
 suppressions:    
   - code:  TopLevelResourcesListBySubscription
     reason: VirtualMachineInstance resource is an ARM extension resource and does not support List by subscription API.  
@@ -59,7 +59,7 @@ These settings apply only when `--tag=package-preview-2023-03` is specified on t
 
 ``` yaml $(tag) == 'package-preview-2023-03'
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2023-03-01-preview/connectedvmware.json
+  - preview/2023-03-01-preview/connectedvmware.json
 suppressions:    
   - code: LroPostReturn
     reason: All POST actions are long running operations and never return 200 in the response.
@@ -87,7 +87,7 @@ These settings apply only when `--tag=package-2020-10-01-preview` is specified o
 
 ``` yaml $(tag) == 'package-2020-10-01-preview'
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2020-10-01-preview/connectedvmware.json
+  - preview/2020-10-01-preview/connectedvmware.json
 ```
 
 ### Tag: package-2022-01-10-preview
@@ -96,7 +96,7 @@ These settings apply only when `--tag=package-2022-01-10-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-01-10-preview'
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2022-01-10-preview/connectedvmware.json
+  - preview/2022-01-10-preview/connectedvmware.json
 ```
 
 ### Tag: package-2022-07-15-preview
@@ -105,7 +105,7 @@ These settings apply only when `--tag=package-2022-07-15-preview` is specified o
 
 ``` yaml $(tag) == 'package-2022-07-15-preview'
 input-file:
-  - Microsoft.ConnectedVMwarevSphere/preview/2022-07-15-preview/connectedvmware.json
+  - preview/2022-07-15-preview/connectedvmware.json
 ```
 
 ---
