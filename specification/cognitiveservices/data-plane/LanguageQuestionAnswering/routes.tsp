@@ -9,7 +9,7 @@ using TypeSpec.Http;
 using Azure.Core;
 using Azure.Core.Traits;
 
-namespace Language.QuestionAnswering.Inference;
+namespace Language.QuestionAnswering;
 
 alias ServiceTraits = NoRepeatableRequests &
   NoConditionalRequests &
