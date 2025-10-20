@@ -12,13 +12,13 @@ using TypeSpec.Versioning;
 using Azure.ResourceManager;
 
 @armProviderNamespace
-@service(#{ title: "Microsoft Azure Frontdoor Inventory" })
+@service(#{ title: "Microsoft.Frontdoor management service" })
 @versioned(Microsoft.Frontdoor.Versions)
 @doc("Azure Frontdoor VM management API.")
 namespace Microsoft.Frontdoor;
 
 @doc("AFD VM resource")
-@tenantResource
+@parentResource(TenantLocationResource)
 model VmResource is ProxyResource<VmProperties> {
   @pattern("[a-zA-Z0-9]+[-_]*")
   @key("virtualMachineName")
@@ -30,6 +30,6 @@ model VmResource is ProxyResource<VmProperties> {
 
 @armResourceOperations
 interface VmResources {
-  get is ArmLocResourceRead<VmResource>;
-  listByTenant is ArmLocResourceListByParent<VmResource>;
+  get is ArmResourceRead<VmResource>;
+  listByTenant is ArmResourceListByParent<VmResource>;
 }
