@@ -162,9 +162,6 @@ interface Stac {
   getItemCollection is StacItems.getFeatures;
   updateItem is StacItems.update;
 
-  // STAC Landing Pages
-  getStacLandingPage is StacLandingPages.get;
-
   // STAC Queryables
   createQueryables is StacQueryables.create;
   createOrReplaceQueryable is StacQueryables.createOrReplace;
