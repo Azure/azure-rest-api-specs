@@ -68,7 +68,6 @@ These settings apply only when `--tag=package-preview-2025-06-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-06-01-preview'
 input-file:
   - preview/2025-06-01-preview/stackhcivm.json
-  - ../operations/preview/2025-06-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2025-04-01-preview
@@ -78,7 +77,6 @@ These settings apply only when `--tag=package-preview-2025-04-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-04-01-preview'
 input-file:
   - preview/2025-04-01-preview/stackhcivm.json
-  - ../operations/preview/2025-04-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2025-02-01-preview
@@ -88,7 +86,6 @@ These settings apply only when `--tag=package-preview-2025-02-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2025-02-01-preview'
 input-file:
   - preview/2025-02-01-preview/stackhcivm.json
-  - ../operations/preview/2025-02-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2024-10-01-preview
@@ -98,7 +95,6 @@ These settings apply only when `--tag=package-preview-2024-10-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-10-01-preview'
 input-file:
   - preview/2024-10-01-preview/stackhcivm.json
-  - ../operations/preview/2024-10-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2024-08
@@ -108,7 +104,6 @@ These settings apply only when `--tag=package-preview-2024-08` is specified on t
 ```yaml $(tag) == 'package-preview-2024-08'
 input-file:
   - preview/2024-08-01-preview/stackhcivm.json
-  - ../operations/preview/2024-08-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2024-05
@@ -118,7 +113,6 @@ These settings apply only when `--tag=package-preview-2024-05-01-preview` is spe
 ```yaml $(tag) == 'package-preview-2024-05-01-preview'
 input-file:
   - preview/2024-05-01-preview/stackhcivm.json
-  - ../operations/preview/2024-05-01-preview/operations.json
 ```
 
 ### Tag: package-preview-2024-02
@@ -128,5 +122,4 @@ These settings apply only when `--tag=package-preview-2024-02-01` is specified o
 ```yaml $(tag) == 'package-preview-2024-02-01'
 input-file:
   - preview/2024-02-01-preview/stackhcivm.json
-  - ../operations/preview/2024-02-01-preview/operations.json
 ```
