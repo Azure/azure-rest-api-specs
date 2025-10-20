@@ -38,7 +38,6 @@ namespace Customizations;
 @@alternateType(RegisterMosaic.filter, string, "csharp,java");
 
 // Address naming convention violations for C# SDK
-@@clientName(InfoOperationResponse, "InfoOperationResult", "csharp");
 @@clientName(TilerMosaicSearchRegistrationResponse,
   "TilerMosaicSearchRegistrationResult",
   "csharp"

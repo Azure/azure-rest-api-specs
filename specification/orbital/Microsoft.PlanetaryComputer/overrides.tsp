@@ -3,6 +3,8 @@ import "@azure-tools/typespec-client-generator-core";
 import "./models.tiler.common.tsp";
 import "./models.tiler.items.tsp";
 import "./models.tiler.mosaics.tsp";
+import "./routes.tiler.items.tsp";
+import "./routes.tiler.mosaics.tsp";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Http;
@@ -699,7 +701,7 @@ op listStatisticsCustomized(
    * Options for statistics including asset selection and statistical calculation parameters
    */
   options: GetStatisticsOptions,
-): StatisticsResponse;
+): TilerStacItemStatistics;
 
 @@override(TilerStatistics.getAll, listStatisticsCustomized, "!python,!csharp");
 
@@ -719,7 +721,7 @@ op getTileJsonCustomized(
    * Options for TileJSON generation including asset selection, terrain algorithms, and tile formatting
    */
   options: GetTileJsonOptions,
-): TileJsonMetaData;
+): TileJsonMetadata;
 
 @@override(TilerTileJsonTileMatrixSets.get,
   getTileJsonCustomized,
@@ -742,7 +744,7 @@ op getMosaicsTileJsonCustomized(
    * Options for mosaic TileJSON generation including asset selection, terrain algorithms, and tile formatting
    */
   options: GetMosaicTileJsonOptions,
-): TileJsonMetaData;
+): TileJsonMetadata;
 
 @@override(MosaicsTileMatrixSetsTileJson.get,
   getMosaicsTileJsonCustomized,
