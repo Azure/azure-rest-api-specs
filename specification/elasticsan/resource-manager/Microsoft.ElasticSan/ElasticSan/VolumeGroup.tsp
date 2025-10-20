@@ -85,10 +85,10 @@ interface VolumeGroups {
       /**
        * Optional, returns only soft deleted volume groups if set to true. If set to false or if not specified, returns only active volume groups.
        */
+      @added(Versions.v2024_07_01_preview)
       #suppress "@azure-tools/typespec-azure-core/casing-style" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
       @header
       @clientName("accessSoftDeletedResources", "csharp") // this could be temporary because we cannot reference this parameter through ::parameter syntax.
-      @added(Versions.v2024_07_01_preview)
       `x-ms-access-soft-deleted-resources`?: `x-ms-access-soft-deleted-resources`;
     },
     Response = ArmResponse<VolumeGroupList>
