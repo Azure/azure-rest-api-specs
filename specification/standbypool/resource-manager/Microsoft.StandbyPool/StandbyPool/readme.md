@@ -49,7 +49,7 @@ These settings apply only when `--tag=package-2025-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2025-03'
 input-file:
-  - Microsoft.StandbyPool/stable/2025-03-01/standbypool.json
+  - stable/2025-03-01/standbypool.json
 ```
 
 ### Tag: package-2024-03
@@ -58,7 +58,7 @@ These settings apply only when `--tag=package-2024-03` is specified on the comma
 
 ```yaml $(tag) == 'package-2024-03'
 input-file:
-  - Microsoft.StandbyPool/stable/2024-03-01/standbypool.json
+  - stable/2024-03-01/standbypool.json
 ```
 
 ### Tag: package-preview-2024-03
@@ -67,7 +67,7 @@ These settings apply only when `--tag=package-preview-2024-03` is specified on t
 
 ```yaml $(tag) == 'package-preview-2024-03'
 input-file:
-  - Microsoft.StandbyPool/preview/2024-03-01-preview/standbypool.json
+  - preview/2024-03-01-preview/standbypool.json
 ```
 
 ### Tag: package-preview-2023-12
@@ -76,7 +76,7 @@ These settings apply only when `--tag=package-preview-2023-12` is specified on t
 
 ```yaml $(tag) == 'package-preview-2023-12'
 input-file:
-  - Microsoft.StandbyPool/preview/2023-12-01-preview/standbypool.json
+  - preview/2023-12-01-preview/standbypool.json
 ```
 
 ---
