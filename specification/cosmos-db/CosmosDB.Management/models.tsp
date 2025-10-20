@@ -8627,7 +8627,7 @@ model CosmosCassandraDataTransferDataSourceSink
   keyspaceName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   tableName: string;
-  component: "CosmosDBCassandra";
+  component: DataTransferComponent.CosmosDBCassandra;
 }
 
 /**
@@ -8639,7 +8639,7 @@ model CosmosMongoDataTransferDataSourceSink
   databaseName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   collectionName: string;
-  component: "CosmosDBMongo";
+  component: DataTransferComponent.CosmosDBMongo;
 }
 
 /**
