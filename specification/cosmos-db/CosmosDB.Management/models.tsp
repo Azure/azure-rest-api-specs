@@ -8656,7 +8656,7 @@ model CosmosMongoVCoreDataTransferDataSourceSink
   hostName?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   connectionStringKeyVaultUri?: string;
-  component: "CosmosDBMongoVCore";
+  component: DataTransferComponent.CosmosDBMongoVCore;
 }
 
 /**
@@ -8668,7 +8668,7 @@ model CosmosSqlDataTransferDataSourceSink
   databaseName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   containerName: string;
-  component: "CosmosDBSql";
+  component: DataTransferComponent.CosmosDBSql;
 }
 
 /**
@@ -8679,7 +8679,7 @@ model AzureBlobDataTransferDataSourceSink extends DataTransferDataSourceSink {
   containerName: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "FIXME: Update justification, follow aka.ms/tsp/conversion-fix for details"
   endpointUrl?: string;
-  component: "AzureBlobStorage";
+  component: DataTransferComponent.AzureBlobStorage;
 }
 
 /**
