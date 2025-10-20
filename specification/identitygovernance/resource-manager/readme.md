@@ -37,6 +37,7 @@ These settings apply only when `--tag=package-2025-06-13-preview` is specified o
 ```yaml $(tag) == 'package-2025-06-13-preview'
 input-file:
   - Microsoft.EntraidGovernance/GuestGovernanceUsage/preview/2025-06-13-preview/openapi.json
+  - Microsoft.EntraidGovernance/ScimApiConsumption/preview/2025-10-17-preview/openapi.json
 ```
 
 ```yaml
