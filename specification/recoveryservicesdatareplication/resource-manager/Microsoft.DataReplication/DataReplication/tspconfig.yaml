@@ -17,17 +17,17 @@ options:
     clear-output-folder: true
     model-namespace: false
     namespace: "Azure.ResourceManager.RecoveryServicesDataReplication"
-    emitter-output-dir: "{output-dir}/{service-dir}/{namespace}"
+    emitter-output-dir: "{output-dir}/sdk/recoveryservices-datareplication/{namespace}"
   "@azure-tools/typespec-python":
-    package-dir: "azure-mgmt-recoveryservicesdatareplication"
+    emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-recoveryservicesdatareplication"
     namespace: "azure.mgmt.recoveryservicesdatareplication"
     flavor: "azure"
     generate-test: true
     generate-sample: true
   "@azure-tools/typespec-go":
     service-dir: "sdk/resourcemanager/recoveryservicesdatareplication"
-    package-dir: "armrecoveryservicesdatareplication"
-    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/{package-dir}"
+    emitter-output-dir: "{output-dir}/{service-dir}/armrecoveryservicesdatareplication"
+    module: "github.com/Azure/azure-sdk-for-go/{service-dir}/armrecoveryservicesdatareplication"
     fix-const-stuttering: true
     flavor: "azure"
     generate-examples: true
@@ -48,7 +48,7 @@ options:
     typespec-title-map:
       DataReplicationClient: AzureSiteRecoveryManagementServiceAPI
     experimental-extensible-enums: true
-    package-dir: "arm-recoveryservicesdatareplication"
+    emitter-output-dir: "{output-dir}/{service-dir}/arm-recoveryservicesdatareplication"
     flavor: "azure"
     package-details:
       name: "@azure/arm-recoveryservicesdatareplication"
