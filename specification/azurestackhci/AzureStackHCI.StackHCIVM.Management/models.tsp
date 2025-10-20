@@ -32,6 +32,10 @@ union HyperVGeneration {
   @doc("Generation 2 (V2) hypervisor")
   V2: "V2",
 
+  @added(Versions.v2025_09_01_preview)
+  @doc("Not applicable/determined by platform")
+  NA: "NA",
+
   string,
 }
 

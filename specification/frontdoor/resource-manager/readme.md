@@ -2,7 +2,7 @@
 
 > see https://aka.ms/autorest
 
-This is the AutoRest configuration file for Microsoft.Inventory.
+This is the AutoRest configuration file for Microsoft.Frontdoor.
 
 ## Getting Started
 
@@ -22,12 +22,21 @@ For other options on installation see [Installing AutoRest](https://aka.ms/autor
 
 ### Basic Information
 
-These are the global settings for the microsoftinventory.
+These are the global settings for the Microsoft.Frontdoor.
 
 ```yaml
 openapi-type: arm
 openapi-subtype: rpaas
-tag: package-2024-01-01-preview
+tag: package-2025-08-01-preview
+```
+
+### Tag: package-2025-08-01-preview
+
+These settings apply only when `--tag=package-2025-08-01-preview` is specified on the command line.
+
+```yaml $(tag) == 'package-2025-08-01-preview'
+input-file:
+  - Microsoft.Frontdoor/preview/2025-08-01-preview/microsoftfrontdoor.json
 ```
 
 ### Tag: package-preview-2024-01
@@ -37,3 +46,4 @@ These settings apply only when `--tag=package-preview-2024-01` is specified on t
 ```yaml $(tag) == 'package-preview-2024-01'
 input-file:
   - Microsoft.Frontdoor/preview/2024-01-01-preview/microsoftfrontdoor.json
+```
