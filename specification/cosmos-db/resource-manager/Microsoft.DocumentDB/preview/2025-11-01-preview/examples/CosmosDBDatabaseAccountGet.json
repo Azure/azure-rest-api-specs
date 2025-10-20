@@ -133,7 +133,9 @@
           "enablePriorityBasedExecution": true,
           "defaultPriorityLevel": "Low",
           "enablePerRegionPerPartitionAutoscale": true,
-          "enableAllVersionsAndDeletesChangeFeed": true
+          "enableAllVersionsAndDeletesChangeFeed": true,
+          "throughputPoolDedicatedRUs": 300000,
+          "throughputPoolMaxConsumableRUs": 700000
         },
         "identity": {
           "type": "SystemAssigned,UserAssigned",
@@ -145,9 +147,7 @@
               "principalId": "33e01921-4d64-4f8c-a055-5bdaffd5e33d"
             }
           }
-        },
-        "throughputPoolDedicatedRUs": 300000,
-        "throughputPoolMaxConsumableRUs": 700000
+        }
       }
     }
   }
