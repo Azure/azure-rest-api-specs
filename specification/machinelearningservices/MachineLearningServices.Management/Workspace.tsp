@@ -307,4 +307,6 @@ interface Workspaces {
 @@doc(Workspaces.provisionManagedNetwork::parameters.body,
   "Managed Network Provisioning Options for a machine learning workspace."
 );
-@@doc(Workspace.sku, "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier");
+@@doc(Workspace.sku,
+  "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier"
+);

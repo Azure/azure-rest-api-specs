@@ -140,5 +140,9 @@ interface ServerlessEndpoints {
 @@doc(ServerlessEndpoints.regenerateKeys::parameters.body,
   "RegenerateKeys request ."
 );
-@@doc(ServerlessEndpoint.identify, "Managed service identity (system assigned and/or user assigned identities)");
-@@doc(ServerlessEndpoint.sku, "Sku details required for ARM contract for Autoscaling.");
+@@doc(ServerlessEndpoint.identity,
+  "Managed service identity (system assigned and/or user assigned identities)"
+);
+@@doc(ServerlessEndpoint.sku,
+  "Sku details required for ARM contract for Autoscaling."
+);

@@ -30,18 +30,12 @@
 | `definitions.PipelineJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.PipelineJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
 | `definitions.PrivateEndpointConnection.properties.identity.description__added` | added | `The managed service identities assigned to this resource.` |
-| `definitions.PrivateEndpointConnectionProperties.properties.privateEndpoint.description__added` | added | `The Private Endpoint resource.` |
 | `definitions.PrivateEndpointDestination.properties.serviceResourceId.description__added` | added | `A type definition that refers the id to an Azure Resource Manager resource.` |
-| `definitions.PrivateLinkResource.properties.identity.description__added` | added | `Managed service identity (system assigned and/or user assigned identities)` |
-| `definitions.PrivateLinkResource.properties.tags.description__added` | added | `Dictionary of <string>` |
 | `definitions.PrivateLinkResourceListResult.properties.value.description__added` | added | `[Placeholder] Discription for value property` |
 | `definitions.RaiBlocklistItemPropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.RaiBlocklistPropertiesBasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
 | `definitions.RaiPolicyPropertiesBasicResource.properties.properties.description__added` | added | `Azure OpenAI Content Filters properties.` |
-| `definitions.ScaleSettingsInformation.properties.scaleSettings.description__added` | added | `scale settings for AML Compute` |
 | `definitions.ServerlessEndpoint.description__added` | added | `Concrete tracked resource types can be created by aliasing this type using a specific property type.` |
-| `definitions.ServerlessEndpointInferenceEndpoint.properties.headers.description__added` | added | `Dictionary of <string>` |
-| `definitions.ServerlessEndpointResourceProperties.properties.metadata.description__added` | added | `Anything` |
 | `definitions.SparkJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
 | `definitions.SparkJob.properties.outputs.additionalProperties.description__deleted` | deleted | `Job output definition container information on where to find job output/logs.` |
 | `definitions.SweepJob.properties.inputs.additionalProperties.description__deleted` | deleted | `Command job definition.` |
@@ -49,9 +43,6 @@
 | `definitions.Workspace.properties.identity.description__added` | added | `The managed service identities assigned to this resource.` |
 | `definitions.WorkspaceConnectionPropertiesV2.properties.createdByWorkspaceArmId.description__added` | added | `A type definition that refers the id to an Azure Resource Manager resource.` |
 | `definitions.WorkspaceConnectionPropertiesV2BasicResource.description__added` | added | `Concrete proxy resource types can be created by aliasing this type using a specific property type.` |
-| `definitions.WorkspaceProperties.properties.managedNetwork.description__added` | added | `Managed Network settings for a machine learning workspace.` |
-| `definitions.WorkspacePropertiesUpdateParameters.properties.managedNetwork.description__added` | added | `Managed Network settings for a machine learning workspace.` |
-| `definitions.WorkspaceUpdateParameters.properties.identity.description__added` | added | `Managed service identity (system assigned and/or user assigned identities)` |
 | `paths['/providers/microsoft.MachineLearningServices/operations'].get.description__added` | added | `List the operations for the provider` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota'].get.description__added` | added | `List available MaaS PTU quota.` |
 | `paths['/subscriptions/{subscriptionId}/providers/microsoft.MachineLearningServices/locations/{location}/availableQuota/default'].get.description__added` | added | `Get available MaaS PTU quota.` |
@@ -688,8 +679,16 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.Password.properties.value.format__added` | added | `password` |
 | `definitions.SslConfiguration.properties.cert.format__added` | added | `password` |
 | `definitions.SslConfiguration.properties.key.format__added` | added | `password` |
+| `definitions.UserAccountCredentials.properties.adminUserPassword.format__added` | added | `password` |
+| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey.format__added` | added | `password` |
 | `definitions.VirtualMachineSshCredentials.properties.privateKeyData.format__added` | added | `password` |
 | `definitions.VirtualMachineSshCredentials.properties.publicKeyData.format__added` | added | `password` |
+| `definitions.WorkspaceConnectionOAuth2.properties.clientSecret.format__added` | added | `password` |
+| `definitions.WorkspaceConnectionOAuth2.properties.developerToken.format__added` | added | `password` |
+| `definitions.WorkspaceConnectionOAuth2.properties.password.format__added` | added | `password` |
+| `definitions.WorkspaceConnectionOAuth2.properties.refreshToken.format__added` | added | `password` |
+| `definitions.WorkspaceConnectionServicePrincipal.properties.clientSecret.format__added` | added | `password` |
+| `definitions.WorkspaceConnectionUsernamePassword.properties.securityToken.format__added` | added | `password` |
 | `paths['/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/microsoft.MachineLearningServices/workspaces/{workspaceName}/computes/{computeName}'].delete.responses.202.headers['Azure-AsyncOperation'].format__added` | added | `uri` |
 
 ### Changes for `items`
@@ -1330,14 +1329,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.EndpointPropertiesBase.properties.keys['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.SasDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
 | `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.UserAccountCredentials.properties.adminUserPassword['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.UserAccountCredentials.properties.adminUserSshPublicKey['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.WorkspaceConnectionOAuth2.properties.clientSecret['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.WorkspaceConnectionOAuth2.properties.developerToken['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.WorkspaceConnectionOAuth2.properties.password['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.WorkspaceConnectionOAuth2.properties.refreshToken['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.WorkspaceConnectionServicePrincipal.properties.clientSecret['x-ms-secret__deleted']` | deleted | `true` |
-| `definitions.WorkspaceConnectionUsernamePassword.properties.securityToken['x-ms-secret__deleted']` | deleted | `true` |
 
 ### Changes for `x-ms-mutability`
 
@@ -1827,7 +1818,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.ComputeInstanceCreatedBy.readOnly__deleted` | deleted | `true` |
 | `definitions.ServerlessEndpointInferenceEndpoint.properties.uri.readOnly__added` | added | `true` |
 | `definitions.ServerlessInferenceEndpoint.properties.uri.readOnly__added` | added | `true` |
-| `definitions.UpdateWorkspaceQuotas.properties.status.readOnly__deleted` | deleted | `false` |
 
 ### Changes for `additionalProperties`
 
@@ -1860,7 +1850,6 @@ Defined in the "[NRP] Private Endpoint Design" doc, topic "GET API for GroupIds"
 | `definitions.PartialMinimalTrackedResource.properties.tags.additionalProperties['x-nullable__deleted']` | deleted | `true` |
 | `definitions.PartialMinimalTrackedResource.properties.tags['x-nullable__added']` | added | `true` |
 | `definitions.RegistryPrivateEndpointConnection.properties.properties['x-nullable__deleted']` | deleted | `true` |
-| `definitions.ServicePrincipalDatastoreCredentials.properties.secrets['x-nullable__added']` | added | `true` |
 
 ### Changes for `dataType`
 
@@ -2908,7 +2897,6 @@ Approved -> Rejected (Service provider rejects the approved connection)
 Approved -> Disconnected (Service provider deletes the connection)
 Rejected -> Pending (Service consumer re-initiates the connection request that was rejected)
 Rejected -> Disconnected (Service provider deletes the connection)` | `Connection status of the service consumer with the service provider` |
-| `definitions.QueueSettings.properties.jobTier.description` | `Enum to determine the job tier.` | `Controls the compute job tier` |
 | `definitions.Recurrence.properties.timeZone.description` | `Specifies time zone in which the schedule runs.
 TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` | `Specifies time zone in which the schedule runs.
 TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` |
@@ -2917,7 +2905,6 @@ TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.c
 Full resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}` | `This is the private endpoint connection name created on SRP
 Full resource id: /subscriptions/{subId}/resourceGroups/{rgName}/providers/Microsoft.MachineLearningServices/{resourceType}/{resourceName}/registryPrivateEndpointConnections/{peConnectionName}` |
 | `definitions.RegistryTrackedResourceArmPaginatedResult.properties.value.items.$ref` | `#/definitions/RegistryTrackedResource` | `#/definitions/Registry` |
-| `definitions.Regression.properties.primaryMetric.description` | `Primary metrics for Regression task.` | `Primary metric for regression task.` |
 | `definitions.RequestConfiguration.properties.requestTimeout.description` | `The scoring timeout in ISO 8601 format.
 Defaults to 5000ms.` | `The scoring timeout in ISO 8601 format.
 Defaults to 5000ms.` |
@@ -2938,11 +2925,10 @@ Approved -> Rejected (Service provider rejects the approved connection)
 Approved -> Disconnected (Service provider deletes the connection)
 Rejected -> Pending (Service consumer re-initiates the connection request that was rejected)
 Rejected -> Disconnected (Service provider deletes the connection)` | `Connection status of the service consumer with the service provider` |
-| `definitions.SkuCapacity.properties.scaleType.description` | `Node scaling setting for the compute sku.` | `Gets or sets the type of the scale.` |
 | `definitions.SparkJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.StackEnsembleSettings.properties.stackMetaLearnerType.description` | `The meta-learner is a model trained on the output of the individual heterogeneous models.
 Default meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).
-This parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression` | `The meta-learner is a model trained on the output of the individual heterogeneous models.` |
+This parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression` | `The meta-learner is a model trained on the output of the individual heterogeneous models.\\r\\nDefault meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).\\r\\nThis parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression` |
 | `definitions.SweepJob.allOf[0].$ref` | `#/definitions/JobBase` | `#/definitions/JobBaseProperties` |
 | `definitions.SystemCreatedStorageAccount.properties.storageAccountType.description` | `Allowed values:
 "Standard_LRS",
@@ -2967,7 +2953,6 @@ If 'Custom' is selected then user can specify additional inputs to customize how
 | `definitions.TextClassification.description` | `Text Classification task in AutoML NLP vertical.
 NLP - Natural Language Processing.` | `Text Classification task in AutoML NLP vertical.
 NLP - Natural Language Processing.` |
-| `definitions.TextClassification.properties.primaryMetric.description` | `Primary metrics for classification tasks.` | `Primary metric for Text-Classification task.` |
 | `definitions.TextClassificationMultilabel.description` | `Text Classification Multilabel task in AutoML NLP vertical.
 NLP - Natural Language Processing.` | `Text Classification Multilabel task in AutoML NLP vertical.
 NLP - Natural Language Processing.` |
@@ -2988,9 +2973,9 @@ If not present, the schedule will run indefinitely` |
 TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` | `Specifies time zone in which the schedule runs.
 TimeZone should follow Windows time zone format. Refer: https://docs.microsoft.com/en-us/windows-hardware/manufacture/desktop/default-time-zones?view=windows-11` |
 | `definitions.TriggerBase.properties.triggerType.description` | `[Required] ` | `[Required]` |
+| `definitions.UpdateWorkspaceQuotas.properties.status.readOnly` | `false` | `true` |
 | `definitions.UriFileDataVersion.allOf[0].$ref` | `#/definitions/DataVersionBase` | `#/definitions/DataVersionBaseProperties` |
 | `definitions.UriFolderDataVersion.allOf[0].$ref` | `#/definitions/DataVersionBase` | `#/definitions/DataVersionBaseProperties` |
-| `definitions.Workspace.properties.sku.description` | `Optional. This field is required to be implemented by the RP because AML is supporting more than one tier` | `The SKU (Stock Keeping Unit) assigned to this resource.` |
 | `definitions.WorkspaceConnectionOAuth2.description` | `ClientId and ClientSecret are required. Other properties are optional
 depending on each OAuth2 provider's implementation.` | `ClientId and ClientSecret are required. Other properties are optional
 depending on each OAuth2 provider's implementation.` |

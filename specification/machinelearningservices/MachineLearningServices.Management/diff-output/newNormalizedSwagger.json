@@ -28959,8 +28959,7 @@
       "description": "Private endpoint connection properties.",
       "properties": {
         "privateEndpoint": {
-          "$ref": "#/definitions/WorkspacePrivateEndpointResource",
-          "description": "The Private Endpoint resource."
+          "$ref": "#/definitions/WorkspacePrivateEndpointResource"
         },
         "privateLinkServiceConnectionState": {
           "$ref": "#/definitions/PrivateLinkServiceConnectionState",
@@ -29058,8 +29057,7 @@
       "description": "A private link resource",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "location": {
           "type": "string",
@@ -29076,7 +29074,6 @@
         },
         "tags": {
           "type": "object",
-          "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
           }
@@ -29252,7 +29249,7 @@
       "properties": {
         "jobTier": {
           "type": "string",
-          "description": "Controls the compute job tier",
+          "description": "Enum to determine the job tier.",
           "default": "Null",
           "enum": [
             "Null",
@@ -29813,7 +29810,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -29821,7 +29818,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -29991,7 +29988,7 @@
         "publicNetworkAccess": {
           "type": "string",
           "description": "Is the Registry accessible from the internet?\nPossible values: \"Enabled\" or \"Disabled\"",
-          "default": "Enabled"
+          "x-nullable": true
         },
         "regionDetails": {
           "type": "array",
@@ -30107,7 +30104,7 @@
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric for regression task.",
+          "description": "Primary metrics for Regression task.",
           "default": "NormalizedRootMeanSquaredError",
           "enum": [
             "SpearmanCorrelation",
@@ -30580,8 +30577,7 @@
       "properties": {
         "scaleSettings": {
           "$ref": "#/definitions/ScaleSettings",
-          "title": "Scale settings.",
-          "description": "scale settings for AML Compute"
+          "title": "Scale settings."
         }
       }
     },
@@ -30877,7 +30873,7 @@
         },
         "identity": {
           "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "The managed service identities assigned to this resource."
+          "description": "Managed service identity (system assigned and/or user assigned identities)"
         },
         "kind": {
           "type": "string",
@@ -30885,7 +30881,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Sku details required for ARM contract for Autoscaling."
         }
       },
       "required": [
@@ -30939,7 +30935,6 @@
       "properties": {
         "headers": {
           "type": "object",
-          "description": "Dictionary of <string>",
           "additionalProperties": {
             "type": "string"
           },
@@ -31094,9 +31089,7 @@
         "marketplaceSubscriptionId": {
           "type": "string"
         },
-        "metadata": {
-          "description": "Anything"
-        },
+        "metadata": {},
         "modelSettings": {
           "$ref": "#/definitions/ServerlessEndpointModelSettings"
         },
@@ -31219,7 +31212,6 @@
         "secrets": {
           "$ref": "#/definitions/ServicePrincipalDatastoreSecrets",
           "description": "[Required] Service principal secrets.",
-          "x-nullable": true,
           "x-ms-mutability": [
             "create",
             "update"
@@ -31391,7 +31383,7 @@
         },
         "scaleType": {
           "type": "string",
-          "description": "Gets or sets the type of the scale.",
+          "description": "Node scaling setting for the compute sku.",
           "default": "Automatic",
           "enum": [
             "Automatic",
@@ -31857,7 +31849,7 @@
         },
         "stackMetaLearnerType": {
           "type": "string",
-          "description": "The meta-learner is a model trained on the output of the individual heterogeneous models.",
+          "description": "The meta-learner is a model trained on the output of the individual heterogeneous models.\\r\\nDefault meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).\\r\\nThis parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression",
           "default": "None",
           "enum": [
             "None",
@@ -32517,7 +32509,7 @@
         },
         "primaryMetric": {
           "type": "string",
-          "description": "Primary metric for Text-Classification task.",
+          "description": "Primary metrics for classification tasks.",
           "default": "Accuracy",
           "enum": [
             "AUCWeighted",
@@ -32960,7 +32952,8 @@
           "x-ms-enum": {
             "name": "Status",
             "modelAsString": true
-          }
+          },
+          "readOnly": true
         }
       }
     },
@@ -33284,13 +33277,17 @@
         },
         "adminUserSshPublicKey": {
           "type": "string",
+          "format": "password",
           "title": "SSH public key.",
-          "description": "SSH public key of the administrator user account."
+          "description": "SSH public key of the administrator user account.",
+          "x-ms-secret": true
         },
         "adminUserPassword": {
           "type": "string",
+          "format": "password",
           "title": "Password.",
-          "description": "Password of the administrator user account."
+          "description": "Password of the administrator user account.",
+          "x-ms-secret": true
         }
       },
       "required": [
@@ -33777,7 +33774,7 @@
         },
         "sku": {
           "$ref": "../../../../../common-types/resource-management/v3/types.json#/definitions/Sku",
-          "description": "The SKU (Stock Keeping Unit) assigned to this resource."
+          "description": "Optional. This field is required to be implemented by the RP because AML is supporting more than one tier"
         },
         "tags": {
           "type": "object",
@@ -33850,18 +33847,26 @@
           "description": "Client id in the format of UUID"
         },
         "clientSecret": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "developerToken": {
           "type": "string",
-          "description": "Required by GoogleAdWords connection category"
+          "format": "password",
+          "description": "Required by GoogleAdWords connection category",
+          "x-ms-secret": true
         },
         "password": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "refreshToken": {
           "type": "string",
-          "description": "Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho\nwhere user needs to get RefreshToken offline"
+          "format": "password",
+          "description": "Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho\nwhere user needs to get RefreshToken offline",
+          "x-ms-secret": true
         },
         "tenantId": {
           "type": "string",
@@ -34149,7 +34154,9 @@
           "type": "string"
         },
         "clientSecret": {
-          "type": "string"
+          "type": "string",
+          "format": "password",
+          "x-ms-secret": true
         },
         "tenantId": {
           "type": "string"
@@ -34182,7 +34189,9 @@
         },
         "securityToken": {
           "type": "string",
-          "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword"
+          "format": "password",
+          "description": "Optional, required by connections like SalesForce for extra security in addition to UsernamePassword",
+          "x-ms-secret": true
         },
         "username": {
           "type": "string"
@@ -34347,8 +34356,7 @@
           }
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettings",
-          "description": "Managed Network settings for a machine learning workspace."
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "mlFlowTrackingUri": {
           "type": "string",
@@ -34544,8 +34552,7 @@
           }
         },
         "managedNetwork": {
-          "$ref": "#/definitions/ManagedNetworkSettings",
-          "description": "Managed Network settings for a machine learning workspace."
+          "$ref": "#/definitions/ManagedNetworkSettings"
         },
         "networkAcls": {
           "$ref": "#/definitions/NetworkAcls",
@@ -34604,8 +34611,7 @@
       "description": "The parameters for updating a machine learning workspace.",
       "properties": {
         "identity": {
-          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity",
-          "description": "Managed service identity (system assigned and/or user assigned identities)"
+          "$ref": "../../../../../common-types/resource-management/v3/managedidentity.json#/definitions/ManagedServiceIdentity"
         },
         "properties": {
           "$ref": "#/definitions/WorkspacePropertiesUpdateParameters",

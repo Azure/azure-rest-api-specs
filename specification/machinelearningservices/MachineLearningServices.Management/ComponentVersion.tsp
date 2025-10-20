@@ -73,13 +73,16 @@ interface ComponentVersions {
   #suppress "@azure-tools/typespec-azure-core/no-openapi" "non-standard operations"
   @operationId("RegistryComponentVersions_CreateOrUpdate")
   @summary("Create or update version.")
-  createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<ComponentVersion, Response = ArmResourceUpdatedResponse<ComponentVersion> | (ArmResourceCreatedResponse<ComponentVersion> & {
+  createOrUpdate is ComponentVersionOps.CreateOrUpdateAsync<
+    ComponentVersion,
+    Response = ArmResourceUpdatedResponse<ComponentVersion> | (ArmResourceCreatedResponse<ComponentVersion> & {
       /**
        * Timeout for the client to use when polling the asynchronous operation.
        */
       @header("x-ms-async-operation-timeout")
       timeout: duration;
-    })>;
+    })
+  >;
 
   /**
    * Delete version.
