@@ -231,6 +231,9 @@
           },
           "Create or Update Session Pool with lifecycle OnContainerExit Timed": {
             "$ref": "./examples/SessionPools_LifecycleOnContainerExit_CreateOrUpdate.json"
+          },
+          "Create or Update Session Pool with MCP server": {
+            "$ref": "./examples/SessionPools_McpServer_CreateOrUpdate.json"
           }
         }
       },
@@ -346,9 +349,114 @@
           }
         }
       }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/fetchMcpServerCredentials": {
+      "post": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Fetch the MCP server credentials of a session pool.",
+        "operationId": "ContainerAppsSessionPools_FetchMcpServerCredentials",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/McpServerCredential"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Fetch Session Pool MCP server credentials": {
+            "$ref": "./examples/SessionPools_FetchMcpServerCredentials.json"
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.App/sessionPools/{sessionPoolName}/rotateMcpServerCredentials": {
+      "post": {
+        "tags": [
+          "ContainerAppsSessionPools"
+        ],
+        "summary": "Rotate and fetch the rotated MCP server credentials of a session pool.",
+        "operationId": "ContainerAppsSessionPools_RotateMcpServerCredentials",
+        "parameters": [
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/SessionPoolNameParameter"
+          },
+          {
+            "$ref": "../../../../../../common-types/resource-management/v5/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK.",
+            "schema": {
+              "$ref": "#/definitions/McpServerCredential"
+            }
+          },
+          "default": {
+            "description": "Common error response.",
+            "schema": {
+              "$ref": "../../../../../../common-types/resource-management/v5/types.json#/definitions/ErrorResponse"
+            }
+          }
+        },
+        "x-ms-examples": {
+          "Rotate Session Pool MCP server credentials": {
+            "$ref": "./examples/SessionPools_RotateMcpServerCredentials.json"
+          }
+        }
+      }
     }
   },
   "definitions": {
+    "McpServerSettings": {
+      "description": "The settings of the MCP server for this session pool.",
+      "type": "object",
+      "properties": {
+        "isMcpServerEnabled": {
+          "description": "Indicates whether the MCP server is enabled.",
+          "type": "boolean",
+          "default": false
+        },
+        "isMcpServerApiKeyDisabled": {
+          "description": "Indicates whether the MCP server API key is disabled.",
+          "type": "boolean",
+          "default": false
+        },
+        "mcpServerEndpoint": {
+          "description": "The endpoint of the MCP server.",
+          "type": "string",
+          "readOnly": true
+        }
+      }
+    },
     "TemplatePoolStatus": {
       "description": "The status of pods in the pool of this template.",
       "type": "object",
@@ -899,6 +1007,10 @@
               "x-ms-identifiers": [
                 "identity"
               ]
+            },
+            "mcpServerSettings": {
+              "description": "The MCP server settings of the session pool.",
+              "$ref": "#/definitions/McpServerSettings"
             }
           },
           "x-ms-client-flatten": true
@@ -1004,6 +1116,18 @@
           "description": "Link to next page of resources.",
           "type": "string",
           "readOnly": true
+        }
+      }
+    },
+    "McpServerCredential": {
+      "description": "The credentials used for the MCP server endpoint authentication.",
+      "type": "object",
+      "properties": {
+        "apiKey": {
+          "description": "The API key for the MCP server.",
+          "type": "string",
+          "readOnly": true,
+          "x-ms-secret": true
         }
       }
     }
