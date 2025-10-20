@@ -3,10 +3,10 @@ import "@azure-tools/typespec-client-generator-core";
 
 using Azure.ClientGenerator.Core;
 using TypeSpec.Versioning;
-using Language.QuestionAnswering.Inference;
+using Language.QuestionAnswering;
 
 @useDependency(Versions.v2025_05_15_preview)
-namespace Language.QuestionAnswering.InferenceClientCustomizations;
+namespace Language.QuestionAnsweringClientCustomizations;
 
 @@clientName(AnswersOptions.confidenceScoreThreshold, "confidenceThreshold");
 @@clientName(AnswersOptions.context, "answerContext");
@@ -33,10 +33,10 @@ namespace Language.QuestionAnswering.InferenceClientCustomizations;
 
 @client({
   name: "QuestionAnsweringClient",
-  service: Language.QuestionAnswering.Inference,
+  service: Language.QuestionAnswering,
 })
 interface QuestionAnsweringClientOperations {
-  getAnswers is Language.QuestionAnswering.Inference.QuestionAnswering.getAnswers;
+  getAnswers is Language.QuestionAnswering.QuestionAnswering.getAnswers;
 
-  getAnswersFromText is Language.QuestionAnswering.Inference.QuestionAnswering.getAnswersFromText;
+  getAnswersFromText is Language.QuestionAnswering.QuestionAnswering.getAnswersFromText;
 }

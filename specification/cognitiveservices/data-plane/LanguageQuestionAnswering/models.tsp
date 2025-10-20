@@ -5,8 +5,8 @@ import "@typespec/versioning";
 using TypeSpec.Versioning;
 using TypeSpec.Http;
 
-@versioned(Language.QuestionAnswering.Inference.Versions)
-namespace Language.QuestionAnswering.Inference;
+@versioned(Language.QuestionAnswering.Versions)
+namespace Language.QuestionAnswering;
 
 /** The secret key for your Azure AI Language resource. */
 alias AzureKey = ApiKeyAuth<ApiKeyLocation.header, "Ocp-Apim-Subscription-Key">;
