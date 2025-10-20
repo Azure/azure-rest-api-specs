@@ -1,0 +1,447 @@
+{
+  "swagger": "2.0",
+  "info": {
+    "title": "Cosmos DB",
+    "description": "Azure Cosmos DB Database Service Resource Provider REST API",
+    "version": "2025-04-15"
+  },
+  "host": "management.azure.com",
+  "schemes": [
+    "https"
+  ],
+  "consumes": [
+    "application/json"
+  ],
+  "produces": [
+    "application/json"
+  ],
+  "security": [
+    {
+      "azure_auth": [
+        "user_impersonation"
+      ]
+    }
+  ],
+  "securityDefinitions": {
+    "azure_auth": {
+      "type": "oauth2",
+      "authorizationUrl": "https://login.microsoftonline.com/common/oauth2/authorize",
+      "flow": "implicit",
+      "description": "Azure Active Directory OAuth2 Flow",
+      "scopes": {
+        "user_impersonation": "Impersonate your user account"
+      }
+    }
+  },
+  "paths": {
+    "/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}/providers/Microsoft.DocumentDB/softDeletedDatabaseAccounts/{accountName}": {
+      "put": {
+        "operationId": "SoftDeletedDatabaseAccounts_Update",
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountPurge": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountPurge.json"
+          },
+          "CosmosDBSoftDeletedDatabaseAccountRestore": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountRestore.json"
+          }
+        },
+        "description": "Performs an action on a soft-deleted Azure Cosmos DB database account. Supported actions are 'Purge' (permanently delete) and 'Restore' (restore to active state).",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ResourceGroupNameParameter"
+          },
+          {
+            "$ref": "#/parameters/accountNameParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "name": "updateSoftDeletedAccountParameters",
+            "in": "body",
+            "required": true,
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountUpdateParameters"
+            },
+            "description": "The parameters to update the soft-deleted database account."
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccount"
+            }
+          },
+          "202": {
+            "description": "The operation will complete asynchronously."
+          },
+          "204": {
+            "description": "The soft-deleted database account was not found or the purge operation completed successfully."
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-long-running-operation": true,
+        "x-ms-long-running-operation-options": {
+          "final-state-via": "location"
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts/{instanceId}": {
+      "get": {
+        "operationId": "SoftDeletedDatabaseAccounts_GetByLocation",
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountGet": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountGet.json"
+          }
+        },
+        "description": "Retrieves the properties of a soft-deleted Azure Cosmos DB database account by location and instanceId. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          },
+          {
+            "$ref": "#/parameters/instanceIdParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The soft-deleted database account properties were retrieved successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccount"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/locations/{location}/softDeletedDatabaseAccounts": {
+      "get": {
+        "operationId": "SoftDeletedDatabaseAccounts_ListByLocation",
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountListByLocation": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountListByLocation.json"
+          }
+        },
+        "description": "Lists all the soft-deleted Azure Cosmos DB database accounts available under the subscription and in a region. This call requires 'Microsoft.DocumentDB/locations/softDeletedDatabaseAccounts/read' permission.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "#/parameters/locationParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    },
+    "/subscriptions/{subscriptionId}/providers/Microsoft.DocumentDB/softDeletedDatabaseAccounts": {
+      "get": {
+        "operationId": "SoftDeletedDatabaseAccounts_List",
+        "x-ms-examples": {
+          "CosmosDBSoftDeletedDatabaseAccountList": {
+            "$ref": "./examples/CosmosDBSoftDeletedDatabaseAccountList.json"
+          }
+        },
+        "description": "Lists all the soft-deleted Azure Cosmos DB database accounts in a subscription.",
+        "parameters": [
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/SubscriptionIdParameter"
+          },
+          {
+            "$ref": "../../../../../common-types/resource-management/v1/types.json#/parameters/ApiVersionParameter"
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "The operation completed successfully.",
+            "schema": {
+              "$ref": "#/definitions/SoftDeletedDatabaseAccountListResult"
+            }
+          },
+          "default": {
+            "description": "Error response describing why the operation failed.",
+            "schema": {
+              "$ref": "cosmos-db.json#/definitions/CloudError"
+            }
+          }
+        },
+        "x-ms-pageable": {
+          "nextLinkName": null
+        }
+      }
+    }
+  },
+  "definitions": {
+    "SoftDeletedDatabaseAccount": {
+      "description": "A soft-deleted Azure Cosmos DB database account.",
+      "type": "object",
+      "allOf": [
+        {
+          "$ref": "cosmos-db.json#/definitions/ARMProxyResource"
+        }
+      ],
+      "properties": {
+        "properties": {
+          "$ref": "#/definitions/SoftDeletedDatabaseAccountProperties",
+          "description": "Properties of the soft-deleted database account.",
+          "x-ms-client-flatten": true
+        }
+      }
+    },
+    "SoftDeletedDatabaseAccountProperties": {
+      "description": "Properties of a soft-deleted database account.",
+      "type": "object",
+      "properties": {
+        "accountName": {
+          "type": "string",
+          "description": "The name of the original database account.",
+          "readOnly": true
+        },
+        "accountId": {
+          "type": "string",
+          "description": "The unique identifier of the original database account.",
+          "readOnly": true
+        },
+        "accountType": {
+          "type": "string",
+          "description": "The type of the original database account.",
+          "readOnly": true
+        },
+        "creationTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the original database account was created.",
+          "readOnly": true
+        },
+        "deletionTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the database account was soft-deleted.",
+          "readOnly": true
+        },
+        "scheduledPurgeTime": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The time when the database account is scheduled to be automatically purged.",
+          "readOnly": true
+        },
+        "canUndelete": {
+          "type": "boolean",
+          "description": "Indicates whether the soft-deleted database account can be restored.",
+          "readOnly": true
+        },
+        "location": {
+          "type": "string",
+          "description": "The primary location of the original database account.",
+          "readOnly": true
+        },
+        "restoreParameters": {
+          "$ref": "#/definitions/RestoreParameters",
+          "description": "Parameters required for restoring the soft-deleted database account."
+        }
+      }
+    },
+    "RestoreParameters": {
+      "description": "Parameters for restoring a soft-deleted database account.",
+      "type": "object",
+      "properties": {
+        "restoreMode": {
+          "type": "string",
+          "description": "The restore mode for the database account.",
+          "enum": [
+            "PointInTime"
+          ],
+          "x-ms-enum": {
+            "name": "RestoreMode",
+            "modelAsString": true
+          }
+        },
+        "restoreSource": {
+          "type": "string",
+          "description": "The source database account from which to restore."
+        },
+        "restoreTimestampInUtc": {
+          "type": "string",
+          "format": "date-time",
+          "description": "The timestamp to which the database account should be restored."
+        },
+        "databasesToRestore": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/DatabaseRestoreResource"
+          },
+          "description": "List of specific databases to restore."
+        },
+        "gremlinDatabasesToRestore": {
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/GremlinDatabaseRestoreResource"
+          },
+          "description": "List of specific Gremlin databases to restore."
+        },
+        "tablesToRestore": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "List of specific tables to restore."
+        }
+      }
+    },
+    "DatabaseRestoreResource": {
+      "description": "Specific database restore resource.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the database to restore."
+        },
+        "collectionNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of the collections to restore."
+        }
+      }
+    },
+    "GremlinDatabaseRestoreResource": {
+      "description": "Specific Gremlin database restore resource.",
+      "type": "object",
+      "properties": {
+        "databaseName": {
+          "type": "string",
+          "description": "The name of the Gremlin database to restore."
+        },
+        "graphNames": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          },
+          "description": "The names of the graphs to restore."
+        }
+      }
+    },
+    "SoftDeletedDatabaseAccountUpdateParameters": {
+      "description": "Parameters to update soft-deleted Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "properties": {
+          "x-ms-client-flatten": true,
+          "$ref": "#/definitions/SoftDeletedDatabaseAccountUpdateProperties"
+        }
+      },
+      "required": [
+        "properties"
+      ]
+    },
+    "SoftDeletedDatabaseAccountUpdateProperties": {
+      "description": "Properties to update soft-deleted Azure Cosmos DB database accounts.",
+      "type": "object",
+      "properties": {
+        "softDeleteAction": {
+          "description": "Enum to indicate the action to perform on the soft-deleted database account.",
+          "type": "string",
+          "$ref": "#/definitions/SoftDeleteAction"
+        }
+      },
+      "required": [
+        "softDeleteAction"
+      ]
+    },
+    "SoftDeleteAction": {
+      "description": "Enum to indicate the action to perform on the soft-deleted database account.",
+      "type": "string",
+      "enum": [
+        "Restore",
+        "Purge"
+      ],
+      "x-ms-enum": {
+        "name": "SoftDeleteAction",
+        "modelAsString": true
+      }
+    },
+    "SoftDeletedDatabaseAccountListResult": {
+      "description": "The list of soft-deleted database accounts.",
+      "type": "object",
+      "properties": {
+        "value": {
+          "readOnly": true,
+          "type": "array",
+          "items": {
+            "$ref": "#/definitions/SoftDeletedDatabaseAccount"
+          },
+          "description": "List of soft-deleted database accounts."
+        }
+      }
+    }
+  },
+  "parameters": {
+    "accountNameParameter": {
+      "name": "accountName",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB database account name.",
+      "maxLength": 50,
+      "minLength": 3,
+      "pattern": "^[a-z0-9]+(-[a-z0-9]+)*"
+    },
+    "locationParameter": {
+      "name": "location",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "Cosmos DB region, with spaces between words and each word capitalized."
+    },
+    "instanceIdParameter": {
+      "name": "instanceId",
+      "in": "path",
+      "required": true,
+      "type": "string",
+      "x-ms-parameter-location": "method",
+      "description": "The instanceId GUID of a soft-deleted database account."
+    }
+  }
+}
