@@ -21,7 +21,7 @@ model DataTransferJobGetResults
     Resource = DataTransferJobGetResults,
     KeyName = "jobName",
     SegmentName = "dataTransferJobs",
-    NamePattern = ""
+    NamePattern = "^[a-zA-Z0-9]+(-[a-zA-Z0-9]+)*$"
   >;
 }
 
