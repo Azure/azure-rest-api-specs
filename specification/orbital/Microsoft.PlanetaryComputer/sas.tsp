@@ -120,7 +120,7 @@ interface Sas {
   @tag("Shared Access Signature (SAS) Tokens to use with Azure SDKs")
   @route("/sas/token/revoke")
   @post
-  @summary("revoke a SAS Token for the given Azure Blob storage account")
+  @summary("Revoke SAS token for the managed storage account of this GeoCatalog.")
   revokeToken(
     /**
      * The API version to use.
@@ -143,7 +143,7 @@ interface Sas {
   @tag("Sign an HREF for read access")
   @route("/sas/sign")
   @get
-  @summary("sign an HREF in the format of a URL and returns a SingedLink")
+  @summary("sign an HREF in the format of a URL and returns a SharedAccessSignatureSignedHrefResponse")
   getSign(
     /**
      * The API version to use.

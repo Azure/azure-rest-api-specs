@@ -2050,7 +2050,7 @@
           "200": {
             "description": "Return dataset's basic info or the list of available assets.",
             "schema": {
-              "$ref": "#/definitions/InfoOperationResponse"
+              "$ref": "#/definitions/StacItemAssetDetails"
             }
           },
           "default": {
@@ -8297,7 +8297,7 @@
         "tags": [
           "Sign an HREF for read access"
         ],
-        "summary": "sign an HREF in the format of a URL and returns a SingedLink",
+        "summary": "sign an HREF in the format of a URL and returns a SharedAccessSignatureSignedHrefResponse",
         "description": "Signs a HREF (a link URL) by appending a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works).\nIf the HREF is not a Azure Blob Storage HREF, then pass back the HREF unsigned.",
         "parameters": [
           {
@@ -8410,7 +8410,7 @@
         "tags": [
           "Shared Access Signature (SAS) Tokens to use with Azure SDKs"
         ],
-        "summary": "revoke a SAS Token for the given Azure Blob storage account",
+        "summary": "Revoke SAS token for the managed storage account of this GeoCatalog.",
         "description": "Revoke a [SAS Token](https://docs.microsoft.com/en-us/azure/storage/common/storage-sas-overview#how-a-shared-access-signature-works)\nfor managed storage account of this GeoCatalog.",
         "parameters": [
           {
@@ -12733,20 +12733,6 @@
         "body"
       ]
     },
-    "InfoOperationResponse": {
-      "type": "object",
-      "description": "Return dataset's basic info or the list of available assets.",
-      "properties": {
-        "data": {
-          "$ref": "#/definitions/TilerInfo",
-          "title": "Response Info Api Collections  Collection Id  Items  Item Id  Info Get",
-          "description": "body for info operation response"
-        }
-      },
-      "required": [
-        "data"
-      ]
-    },
     "IngestionDefinition": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
@@ -14715,6 +14701,20 @@
         }
       ],
       "x-ms-discriminator-value": "Feature"
+    },
+    "StacItemAssetDetails": {
+      "type": "object",
+      "description": "Return dataset's basic info or the list of available assets.",
+      "properties": {
+        "data": {
+          "$ref": "#/definitions/TilerInfo",
+          "title": "Response Info Api Collections  Collection Id  Items  Item Id  Info Get",
+          "description": "body for info operation response"
+        }
+      },
+      "required": [
+        "data"
+      ]
     },
     "StacItemBounds": {
       "type": "object",

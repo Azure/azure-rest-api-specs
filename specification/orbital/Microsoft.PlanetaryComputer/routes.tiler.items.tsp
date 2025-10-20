@@ -74,7 +74,7 @@ interface TilerInfoOperations {
       @query(#{ explode: true })
       assets?: string[];
     },
-    InfoOperationResponse
+    StacItemAssetDetails
   >;
 }
 

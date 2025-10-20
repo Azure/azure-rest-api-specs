@@ -213,7 +213,7 @@ interface Tiler {
 
   // Basic Info and Assets
   getInfoGeoJson is TilerInfoGeoJsonOperations.get;
-  getAssetsInfo is TilerInfoOperations.get;
+  getItemAssetDetails is TilerInfoOperations.get;
 
   // Parts/Crops
   getPart is TilerParts.getCroppedToBoundingBox;

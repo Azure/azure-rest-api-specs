@@ -196,7 +196,7 @@ model TilerCoreModelsResponsesPoint {
 /**
  * Return dataset's basic info or the list of available assets.
  */
-model InfoOperationResponse {
+model StacItemAssetDetails {
   /**
    * status code for info operation response
    */
