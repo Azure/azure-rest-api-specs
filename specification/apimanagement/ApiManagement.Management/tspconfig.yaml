@@ -11,6 +11,12 @@ options:
     emit-lro-options: "all"
     examples-dir: "{project-root}/examples"
     arm-resource-flattening: true
+  "@azure-tools/typespec-csharp":
+    emitter-output-dir: "{output-dir}/{service-dir}/Azure.ResourceManager.ApiManagement"
+    clear-output-folder: true
+    model-namespace: false
+    namespace: "Azure.ResourceManager.ApiManagement"
+    flavor: azure
   "@azure-tools/typespec-python":
     emitter-output-dir: "{output-dir}/{service-dir}/azure-mgmt-apimanagement"
     namespace: "azure.mgmt.apimanagement"
@@ -24,7 +30,7 @@ options:
     flavor: azure
     use-object-for-unknown: true
   "@azure-tools/typespec-ts":
-    emitter-output-dir: "{output-dir}/sdk/arm-apimanagement"
+    emitter-output-dir: "{output-dir}/sdk/template/template"
     flavor: azure
     experimental-extensible-enums: true
     package-details:
