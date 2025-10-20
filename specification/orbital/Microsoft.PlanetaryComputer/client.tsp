@@ -43,13 +43,9 @@ namespace Customizations;
   "TilerMosaicSearchRegistrationResult",
   "csharp"
 );
-@@clientName(StatisticsResponse, "StatisticsResult", "csharp");
-
-// Models ending with "Request" - rename to "Content"
-@@clientName(ImageRequest, "ImageContent", "csharp");
 
 // Models ending with "Definition" - rename appropriately
-@@clientName(Ingestion, "IngestionDefinition", "csharp");
+@@clientName(IngestionDefinition, "IngestionDefinition", "csharp");
 
 // Models ending with "Operation" - rename to "Info"
 @@clientName(IngestionRunOperation, "IngestionRunInformation", "csharp");
@@ -72,8 +68,8 @@ namespace Customizations;
 #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
 #suppress "@azure-tools/typespec-azure-core/use-standard-names" "These operations return collections."
 @operationGroup
-@clientName("IngestionManagementClient", "csharp")
-interface IngestionManagement {
+@clientName("IngestionClient", "csharp")
+interface Ingestion {
   // Ingestion operations management
   cancelOperation is IngestionOperations.delete;
   cancelAllOperations is IngestionOperations.deleteAll;
@@ -89,7 +85,7 @@ interface IngestionManagement {
   create is Ingestions.create;
   delete is Ingestions.delete;
   get is Ingestions.get;
-  lists is Ingestions.list;
+  list is Ingestions.list;
   update is Ingestions.update;
 
   // Ingestion sources
@@ -163,7 +159,7 @@ interface Stac {
   getItem is StacItems.get;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listItems is StacItems.getFeatures;
+  getItemCollection is StacItems.getFeatures;
   updateItem is StacItems.update;
 
   // STAC Landing Pages
@@ -178,7 +174,7 @@ interface Stac {
   listQueryables is StacQueryables.getAll;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listCollectionQueryables is StacQueryables.getAllByCollection;
+  getCollectionQueryables is StacQueryables.getAllByCollection;
 
   // STAC Search
   search is StacSearch.create;
@@ -205,7 +201,7 @@ interface Tiler {
 
   // Basic Info and Assets
   #suppress "@azure-tools/typespec-azure-core/use-standard-names" "Standardize list operation naming."
-  listBounds is TilerBound.getAll;
+  getBounds is TilerBound.getAll;
 
   // Parts/Crops
   cropGeoJson is TilerGeoJsons.cropFormat;

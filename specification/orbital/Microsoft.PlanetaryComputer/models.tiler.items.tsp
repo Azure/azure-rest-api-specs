@@ -489,7 +489,7 @@ model BandStatistics {
 /**
  * Return dataset's statistics.
  */
-model StatisticsResponse is Record<BandStatistics>;
+model TilerStacItemStatistics is Record<BandStatistics>;
 
 /**
  * Successful Response

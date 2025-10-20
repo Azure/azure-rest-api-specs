@@ -98,7 +98,7 @@
             "description": "Image request body",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/ImageRequest"
+              "$ref": "#/definitions/ImageParameters"
             }
           }
         ],
@@ -557,7 +557,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TileJsonMetaData"
+              "$ref": "#/definitions/TileJsonMetadata"
             }
           },
           "default": {
@@ -2870,7 +2870,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/StatisticsResponse"
+              "$ref": "#/definitions/TilerStacItemStatistics"
             }
           },
           "default": {
@@ -3247,7 +3247,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TileJsonMetaData"
+              "$ref": "#/definitions/TileJsonMetadata"
             }
           },
           "default": {
@@ -4340,7 +4340,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TileJsonMetaData"
+              "$ref": "#/definitions/TileJsonMetadata"
             }
           },
           "default": {
@@ -6444,7 +6444,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/TileJsonMetaData"
+              "$ref": "#/definitions/TileJsonMetadata"
             }
           },
           "default": {
@@ -7281,7 +7281,7 @@
                   "type": "array",
                   "description": "The items on the page",
                   "items": {
-                    "$ref": "#/definitions/Ingestion"
+                    "$ref": "#/definitions/IngestionDefinition"
                   }
                 },
                 "nextLink": {
@@ -7336,7 +7336,7 @@
             "description": "Definition of the ingestion",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/Ingestion"
+              "$ref": "#/definitions/IngestionDefinition"
             }
           }
         ],
@@ -7344,7 +7344,7 @@
           "201": {
             "description": "The request has succeeded and a new resource has been created as a result.",
             "schema": {
-              "$ref": "#/definitions/Ingestion"
+              "$ref": "#/definitions/IngestionDefinition"
             },
             "headers": {
               "location": {
@@ -7396,7 +7396,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Ingestion"
+              "$ref": "#/definitions/IngestionDefinition"
             }
           },
           "default": {
@@ -7443,7 +7443,7 @@
             "description": "Ingestion properties to update",
             "required": true,
             "schema": {
-              "$ref": "#/definitions/IngestionUpdate"
+              "$ref": "#/definitions/IngestionDefinitionUpdate"
             }
           }
         ],
@@ -7451,7 +7451,7 @@
           "200": {
             "description": "The request has succeeded.",
             "schema": {
-              "$ref": "#/definitions/Ingestion"
+              "$ref": "#/definitions/IngestionDefinition"
             }
           },
           "default": {
@@ -12625,21 +12625,7 @@
         "body"
       ]
     },
-    "ImagePngResponse": {
-      "type": "object",
-      "description": "Return an image.",
-      "properties": {
-        "body": {
-          "type": "string",
-          "format": "byte",
-          "description": "The image data in PNG format."
-        }
-      },
-      "required": [
-        "body"
-      ]
-    },
-    "ImageRequest": {
+    "ImageParameters": {
       "type": "object",
       "description": "Parameters for requesting a rendered image from a collection",
       "properties": {
@@ -12689,6 +12675,20 @@
         "render_params",
         "cols",
         "rows"
+      ]
+    },
+    "ImagePngResponse": {
+      "type": "object",
+      "description": "Return an image.",
+      "properties": {
+        "body": {
+          "type": "string",
+          "format": "byte",
+          "description": "The image data in PNG format."
+        }
+      },
+      "required": [
+        "body"
       ]
     },
     "ImageResponse": {
@@ -12747,7 +12747,7 @@
         "data"
       ]
     },
-    "Ingestion": {
+    "IngestionDefinition": {
       "type": "object",
       "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
       "properties": {
@@ -12799,6 +12799,29 @@
         "creationTime",
         "status"
       ]
+    },
+    "IngestionDefinitionUpdate": {
+      "type": "object",
+      "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
+      "properties": {
+        "displayName": {
+          "type": "string",
+          "description": "Ingestion name"
+        },
+        "sourceCatalogUrl": {
+          "type": "string",
+          "format": "uri",
+          "description": "Source catalog URL. Required for StaticCatalog ingestion type"
+        },
+        "skipExistingItems": {
+          "type": "boolean",
+          "description": "Skip processing existing items in the catalog"
+        },
+        "keepOriginalAssets": {
+          "type": "boolean",
+          "description": "Keep original source assets"
+        }
+      }
     },
     "IngestionRun": {
       "type": "object",
@@ -13026,29 +13049,6 @@
             "description": "Static STAC Catalog"
           }
         ]
-      }
-    },
-    "IngestionUpdate": {
-      "type": "object",
-      "description": "Microsoft Planetary Computer Pro geo-catalog ingestion creation model",
-      "properties": {
-        "displayName": {
-          "type": "string",
-          "description": "Ingestion name"
-        },
-        "sourceCatalogUrl": {
-          "type": "string",
-          "format": "uri",
-          "description": "Source catalog URL. Required for StaticCatalog ingestion type"
-        },
-        "skipExistingItems": {
-          "type": "boolean",
-          "description": "Skip processing existing items in the catalog"
-        },
-        "keepOriginalAssets": {
-          "type": "boolean",
-          "description": "Keep original source assets"
-        }
       }
     },
     "IntervalLegendsElement": {},
@@ -15870,13 +15870,6 @@
         "direction"
       ]
     },
-    "StatisticsResponse": {
-      "type": "object",
-      "description": "Return dataset's statistics.",
-      "additionalProperties": {
-        "$ref": "#/definitions/BandStatistics"
-      }
-    },
     "TerrainAlgorithm": {
       "type": "string",
       "description": "Supported algorithms for terrain and index-based analysis",
@@ -15943,7 +15936,7 @@
         ]
       }
     },
-    "TileJsonMetaData": {
+    "TileJsonMetadata": {
       "type": "object",
       "description": "TileJSON model.\n\nBased on https://github.com/mapbox/tilejson-spec/tree/master/2.2.0TileJSON metadata describing a tile set according to the TileJSON specification",
       "properties": {
@@ -16668,6 +16661,13 @@
       "required": [
         "searchid"
       ]
+    },
+    "TilerStacItemStatistics": {
+      "type": "object",
+      "description": "Return dataset's statistics.",
+      "additionalProperties": {
+        "$ref": "#/definitions/BandStatistics"
+      }
     },
     "TilerStacSearchDefinition": {
       "type": "object",

@@ -269,7 +269,7 @@ interface MosaicsTileJsonOperations {
       @query("return_mask")
       returnMask?: boolean = true;
     },
-    TileJsonMetaData
+    TileJsonMetadata
   >;
 }
 
@@ -307,7 +307,7 @@ interface MosaicsTileMatrixSetsTileJson {
       ...MosaicTileQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonMetaData
+    TileJsonMetadata
   >;
 }
 

@@ -8,7 +8,7 @@ namespace Microsoft.PlanetaryComputer;
 /**
  * Parameters for requesting a rendered image from a collection
  */
-model ImageRequest {
+model ImageParameters {
   /**
    * Cql
    */

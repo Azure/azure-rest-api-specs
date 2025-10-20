@@ -311,7 +311,7 @@ model TilerInfoGeoJsonFeature {
 /**
  * TileJSON metadata describing a tile set according to the TileJSON specification
  */
-model TileJsonMetaData {
+model TileJsonMetadata {
   /**
    * TileJson
    */

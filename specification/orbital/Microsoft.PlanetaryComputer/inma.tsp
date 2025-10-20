@@ -28,13 +28,16 @@ interface Ingestions {
   @route("/inma/collections/{collectionId}/ingestions")
   @get
   @list
-  list(...CollectionParameters, ...OdataQuery): Page<Ingestion> | ErrorResponse;
+  list(
+    ...CollectionParameters,
+    ...OdataQuery,
+  ): Page<IngestionDefinition> | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Get the definition of an ingestion")
   @route("/inma/collections/{collectionId}/ingestions/{ingestionId}")
   @get
-  get(...IngestionParameters): Ingestion | ErrorResponse;
+  get(...IngestionParameters): IngestionDefinition | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
   @doc("Create a new ingestion")
@@ -45,7 +48,7 @@ interface Ingestions {
 
     @doc("Definition of the ingestion")
     @body
-    definition: Ingestion,
+    definition: IngestionDefinition,
   ): {
     @doc("Url of the created ingestion")
     @header
@@ -55,7 +58,7 @@ interface Ingestions {
 
     @doc("Ingestion definition")
     @body
-    _: Ingestion;
+    _: IngestionDefinition;
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -71,12 +74,12 @@ interface Ingestions {
 
     @doc("Ingestion properties to update")
     @body
-    definition: Ingestion,
+    definition: IngestionDefinition,
   ): {
     @statusCode statusCode: 200;
 
     @body
-    _: Ingestion;
+    _: IngestionDefinition;
   } | ErrorResponse;
 
   #suppress "@azure-tools/typespec-azure-core/use-standard-operations" "This is an existing service operation."
@@ -106,7 +109,7 @@ interface Ingestions {
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion creation model")
 @parentResource(StacCollection)
 @resource("ingestions")
-model Ingestion {
+model IngestionDefinition {
   @doc("Ingestion id")
   @visibility(Lifecycle.Read)
   @key("ingestionId")
@@ -203,7 +206,7 @@ interface IngestionRuns {
 
 @doc("Microsoft Planetary Computer Pro geo-catalog ingestion run")
 @resource("runs")
-@parentResource(Ingestion)
+@parentResource(IngestionDefinition)
 model IngestionRun {
   @doc("Run id")
   @key("runId")

@@ -30,7 +30,7 @@ interface TilerStaticImages {
        * Image request body
        */
       @body
-      body: ImageRequest;
+      body: ImageParameters;
     },
     ImageResponse
   >;

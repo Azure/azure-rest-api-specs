@@ -355,7 +355,7 @@ model DefaultLocation {
 /**
  * FormContent model for file upload.
  */
-model FormContent {
+model StacAssetData {
   /**
    * Asset metadata
    */

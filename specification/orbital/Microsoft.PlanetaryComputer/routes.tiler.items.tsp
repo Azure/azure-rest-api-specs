@@ -181,7 +181,7 @@ interface TilerStatistics {
       ...listStatisticsCustomizedCommonSignatures;
       ...StatisticsQueryParameters;
     },
-    StatisticsResponse
+    TilerStacItemStatistics
   >;
 }
 
@@ -355,7 +355,7 @@ interface TilerTileJsonOperations {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonMetaData
+    TileJsonMetadata
   >;
 }
 
@@ -392,7 +392,7 @@ interface TilerTileJsonTileMatrixSets {
       ...TileMatrixSetQueryParameters;
       ...MiscTileQueryParameters;
     },
-    TileJsonMetaData
+    TileJsonMetadata
   >;
 }
 
