@@ -20,7 +20,6 @@ namespace Microsoft.EntraidGovernance;
 
 /** The available API versions. */
 enum Versions {
-
   /** 2025-10-17-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_10_17_preview: "2025-10-17-preview",
