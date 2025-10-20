@@ -27,6 +27,11 @@ enum Versions {
   /** 2025-02-01-preview version */
   @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
   v2025_06_13_preview: "2025-06-13-preview",
+
+  /** 2025-10-17-preview version */
+  @armCommonTypesVersion(Azure.ResourceManager.CommonTypes.Versions.v5)
+  v2025_10_17_preview: "2025-10-17-preview",
+
 }
 
 interface Operations extends Azure.ResourceManager.Operations {}
@@ -52,6 +57,7 @@ union ProvisioningState {
 
 @doc("Entraid Guest Governance Usage resource")
 @added(Versions.v2025_06_13_preview)
+@added(Versions.v2025_10_17_preview)
 model GuestGovernanceUsage is TrackedResource<GuestGovernanceUsageProperties> {
   @doc("Singleton Guest Governance resource")
   @key
@@ -63,6 +69,7 @@ model GuestGovernanceUsage is TrackedResource<GuestGovernanceUsageProperties> {
 
 @doc("Details of the Entraid Governance Guest Governance Usage resource.")
 @added(Versions.v2025_06_13_preview)
+@added(Versions.v2025_10_17_preview)
 model GuestGovernanceUsageProperties {
   @visibility(Lifecycle.Read)
   @doc("The status of the last operation.")
@@ -70,6 +77,7 @@ model GuestGovernanceUsageProperties {
 }
 
 @added(Versions.v2025_06_13_preview)
+@added(Versions.v2025_10_17_preview)
 @armResourceOperations(GuestGovernanceUsage)
 interface GuestGovernanceUsages {
   get is ArmResourceRead<GuestGovernanceUsage>;
