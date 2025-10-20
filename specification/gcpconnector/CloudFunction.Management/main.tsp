@@ -175,7 +175,7 @@ model EventTrigger {
   /**
    * Criteria used to filter events.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   eventFilters?: EventFilter[];
 
   /**
@@ -289,7 +289,7 @@ model GcpFunctionProperties {
   /**
    * Output only. State Messages for this Cloud Function.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   stateMessages?: GoogleCloudFunctionsV2StateMessage[];
 
   /**
@@ -435,7 +435,7 @@ model SecretVolume {
   /**
    * List of secret versions to mount for this secret. If empty, the `latest` version of the secret will be made available in a file named after the secret under the mount point.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   versions?: SecretVersion[];
 }
 
@@ -497,13 +497,13 @@ model ServiceConfig {
   /**
    * Secret environment variables configuration.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secretEnvironmentVariables?: SecretEnvVar[];
 
   /**
    * Secret volumes configuration.
    */
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   secretVolumes?: SecretVolume[];
 
   /**

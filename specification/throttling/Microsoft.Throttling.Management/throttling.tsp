@@ -1,6 +1,5 @@
 import "@typespec/rest";
 import "@typespec/versioning";
-import "@azure-tools/typespec-autorest";
 import "@azure-tools/typespec-azure-core";
 import "@azure-tools/typespec-azure-resource-manager";
 
@@ -21,7 +20,6 @@ enum Versions {
 using TypeSpec.Http;
 using TypeSpec.Rest;
 using TypeSpec.Versioning;
-using Autorest;
 using Azure.Core;
 using Azure.ResourceManager;
 using OpenAPI;
@@ -86,7 +84,7 @@ model ProxyAccountProperties {
 @doc("Proxy account authentication properties")
 model ProxyAccountAuthenticationProperties {
   @doc("Certificate-based authentication properties")
-  @extension("x-ms-identifiers", #["subjectName"])
+  @identifiers(#["subjectName"])
   certificates?: CertificateProperties[];
 }
 
@@ -142,11 +140,11 @@ model ThrottlingAccountProperties {
 @doc("Account authentication properties")
 model AccountAuthenticationProperties {
   @doc("Certificate-based authentication properties")
-  @extension("x-ms-identifiers", #["subjectName"])
+  @identifiers(#["subjectName"])
   certificates?: CertificateProperties[];
 
   @doc("Microsoft Entra-based authentication properties")
-  @extension("x-ms-identifiers", #["tenantId", "objectId"])
+  @identifiers(#["tenantId", "objectId"])
   entra?: EntraProperties[];
 }
 

@@ -102,6 +102,6 @@ model SkuProperties {
   /**
    * Array of SKU mappings
    */
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   skuMappings?: SkuMappings[];
 }

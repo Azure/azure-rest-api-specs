@@ -43,7 +43,7 @@ model OrderProperties {
   status?: OrderStatus;
 
   @doc("Order line details")
-  @OpenAPI.extension("x-ms-identifiers", #["id"])
+  @identifiers(#["id"])
   orderLines: OrderLine[];
 
   @doc("Currency for the order")
@@ -157,7 +157,7 @@ model Price {
   taxes?: Tax[];
 
   @doc("Fees for this line")
-  @OpenAPI.extension("x-ms-identifiers", #["type"])
+  @identifiers(#["type"])
   fees?: Fee[];
 }
 

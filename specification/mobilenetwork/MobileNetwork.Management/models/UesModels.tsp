@@ -2,7 +2,7 @@ import "@typespec/openapi";
 
 import "../common/CommonModels.tsp";
 
-using TypeSpec.OpenAPI;
+using Azure.ResourceManager;
 
 namespace Microsoft.MobileNetwork;
 
@@ -17,7 +17,7 @@ model UeInfoPropertiesFormat {
 
   @doc("List of DNN and UE IP addresses.")
   @minItems(1)
-  @extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   ueIpAddresses?: DnnIpPair[];
 
   @doc("The timestamp of last list UEs call to the packet core (UTC).")

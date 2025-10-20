@@ -6,11 +6,7 @@ import "../../main.tsp";
 import "../../recoveryPlans.tsp";
 import "./recoveryResource.tsp";
 
-using Azure.Core;
-using TypeSpec.Http;
-using TypeSpec.Rest;
 using Azure.ResourceManager;
-using OpenAPI;
 
 @armProviderNamespace("Microsoft.AzureResilienceManagement")
 namespace Microsoft.AzureResilienceManagement;
@@ -80,7 +76,6 @@ model OperationQualificationDetails {
   @doc("Resource qualification state for the operation.")
   qualificationState: QualificationState;
 
-  @OpenAPI.extension("x-ms-identifiers", #[])
   @doc("Reasons for resource not qualified for the operation.")
   notQualifiedReasons?: string[];
 }
@@ -96,7 +91,7 @@ model RecoveryResourceQualification {
 
 @doc("ValidateForRecoveryOperation post action response.")
 model ValidateForRecoveryOperationBaseResponse {
-  @OpenAPI.extension("x-ms-identifiers", #[])
+  @identifiers(#[])
   @doc("Qualification details of resources for the operation.")
   recoveryResourceQualifications: RecoveryResourceQualification[];
 }
