@@ -134,3 +134,5 @@ interface Registries {
 @@doc(Registries.removeRegions::parameters.body,
   "Details required to create the registry."
 );
+@@doc(Registry.identify, "Managed service identity (system assigned and/or user assigned identities)")
+@@doc(Registry.sku, "Sku details required for ARM contract for Autoscaling.")

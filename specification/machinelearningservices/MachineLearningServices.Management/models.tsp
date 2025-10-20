@@ -4013,6 +4013,7 @@ model UpdateWorkspaceQuotas {
    * Status of update workspace quota.
    */
   @summary("Update Workspace Quota Status.")
+  @visibility(Lifecycle.Read)
   status?: Status;
 }
 
@@ -4185,9 +4186,6 @@ model ClusterUpdateProperties {
  * Desired scale settings for the amlCompute.
  */
 model ScaleSettingsInformation {
-  /**
-   * scale settings for AML Compute
-   */
   @summary("Scale settings.")
   scaleSettings?: ScaleSettings;
 }
@@ -6739,7 +6737,7 @@ model SkuCapacity {
   minimum?: int32 = 0;
 
   /**
-   * Gets or sets the type of the scale.
+   * Node scaling setting for the compute sku.
    */
   scaleType?: SkuScaleType = SkuScaleType.Automatic;
 }
@@ -7329,7 +7327,7 @@ model ServerlessEndpointProperties {
   modelSettings?: ModelSettings | null;
 
   /**
-   * Provisioning state for the endpoint.
+   * State of endpoint provisioning.
    */
   @visibility(Lifecycle.Read)
   provisioningState?: EndpointProvisioningState;
@@ -7416,7 +7414,7 @@ model RegistryProperties {
    * Is the Registry accessible from the internet?
    * Possible values: "Enabled" or "Disabled"
    */
-  publicNetworkAccess?: string = "Enabled";
+  publicNetworkAccess?: string | null;
 
   /**
    * Details of each region the registry is in
@@ -7820,9 +7818,6 @@ model WorkspaceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   keyVaults?: string[];
 
-  /**
-   * Managed Network settings for a machine learning workspace.
-   */
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -8176,9 +8171,6 @@ model NotebookPreparationError {
  * Private endpoint connection properties.
  */
 model PrivateEndpointConnectionProperties {
-  /**
-   * The Private Endpoint resource.
-   */
   privateEndpoint?: WorkspacePrivateEndpointResource;
 
   /**
@@ -8225,7 +8217,7 @@ model PrivateLinkServiceConnectionState {
   description?: string;
 
   /**
-   * Connection status of the service consumer with the service provider
+   * Connection status of the service consumer with the service provider\r\nPossible state transitions\r\nPending -> Approved (Service provider approves the connection request)\r\nPending -> Rejected (Service provider rejects the connection request)\r\nPending -> Disconnected (Service provider deletes the connection)\r\nApproved -> Rejected (Service provider rejects the approved connection)\r\nApproved -> Disconnected (Service provider deletes the connection)\r\nRejected -> Pending (Service consumer re-initiates the connection request that was rejected)\r\nRejected -> Disconnected (Service provider deletes the connection)
    */
   status?: EndpointServiceConnectionStatus;
 }
@@ -8290,7 +8282,7 @@ model SharedPrivateLinkResourceProperty {
   requestMessage?: string;
 
   /**
-   * Connection status of the service consumer with the service provider
+   * Connection status of the service consumer with the service provider\r\nPossible state transitions\r\nPending -> Approved (Service provider approves the connection request)\r\nPending -> Rejected (Service provider rejects the connection request)\r\nPending -> Disconnected (Service provider deletes the connection)\r\nApproved -> Rejected (Service provider rejects the approved connection)\r\nApproved -> Disconnected (Service provider deletes the connection)\r\nRejected -> Pending (Service consumer re-initiates the connection request that was rejected)\r\nRejected -> Disconnected (Service provider deletes the connection)
    */
   status?: EndpointServiceConnectionStatus;
 }
@@ -8309,9 +8301,6 @@ model WorkspaceHubConfig {
  * The parameters for updating a machine learning workspace.
  */
 model WorkspaceUpdateParameters {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
@@ -8386,9 +8375,6 @@ model WorkspacePropertiesUpdateParameters {
    */
   ipAllowlist?: string[];
 
-  /**
-   * Managed Network settings for a machine learning workspace.
-   */
   managedNetwork?: ManagedNetworkSettings;
 
   /**
@@ -9240,6 +9226,9 @@ model PrivateEndpointConnectionListResult {
  * A list of private link resources
  */
 model PrivateLinkResourceListResult {
+  /**
+   * A list of private link resources
+   */
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   @pageItems
   value?: PrivateLinkResource[];
@@ -9253,9 +9242,6 @@ model PrivateLinkResourceListResult {
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
 model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
-  /**
-   * Managed service identity (system assigned and/or user assigned identities)
-   */
   identity?: Azure.ResourceManager.CommonTypes.ManagedServiceIdentity;
 
   /**
@@ -9275,9 +9261,6 @@ model PrivateLinkResource extends Azure.ResourceManager.CommonTypes.Resource {
    */
   sku?: Azure.ResourceManager.CommonTypes.Sku;
 
-  /**
-   * Dictionary of <string>
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   tags?: Record<string>;
 }
@@ -9749,12 +9732,14 @@ model UserAccountCredentials {
    * SSH public key of the administrator user account.
    */
   @summary("SSH public key.")
+  @secret
   adminUserSshPublicKey?: string;
 
   /**
    * Password of the administrator user account.
    */
   @summary("Password.")
+  @secret
   adminUserPassword?: string;
 }
 
@@ -11086,7 +11071,7 @@ model JobOutput {
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model QueueSettings {
   /**
-   * Controls the compute job tier
+   * Enum to determine the job tier.
    */
   @visibility(Lifecycle.Read, Lifecycle.Create)
   jobTier?: JobTier = JobTier.Null;
@@ -11880,7 +11865,7 @@ model StackEnsembleSettings {
   stackMetaLearnerTrainPercentage?: float64 = 0.2;
 
   /**
-   * The meta-learner is a model trained on the output of the individual heterogeneous models.
+   * The meta-learner is a model trained on the output of the individual heterogeneous models.\r\nDefault meta-learners are LogisticRegression for classification tasks (or LogisticRegressionCV if cross-validation is enabled) and ElasticNet for regression/forecasting tasks (or ElasticNetCV if cross-validation is enabled).\r\nThis parameter can be one of the following strings: LogisticRegression, LogisticRegressionCV, LightGBMClassifier, ElasticNet, ElasticNetCV, LightGBMRegressor, or LinearRegression
    */
   stackMetaLearnerType?: StackMetaLearnerType = StackMetaLearnerType.None;
 }
@@ -11972,6 +11957,7 @@ model TableVerticalFeaturizationSettings extends FeaturizationSettings {
    * User can specify additional transformers to be used along with the columns to which it would be applied and parameters for the transformer constructor.
    */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
+  @OpenAPI.extension("x-ms-identifiers", #[])
   transformerParams?: Record<ColumnTransformer[] | null> | null;
 }
 
@@ -14408,7 +14394,7 @@ model Regression extends AutoMLVertical {
   ...TableVertical;
 
   /**
-   * Primary metric for regression task.
+   * Primary metrics for Regression task.
    */
   primaryMetric?: RegressionPrimaryMetrics = RegressionPrimaryMetrics.NormalizedRootMeanSquaredError;
 
@@ -14552,7 +14538,7 @@ model ServicePrincipalDatastoreCredentials extends DatastoreCredentials {
    * [Required] Service principal secrets.
    */
   @visibility(Lifecycle.Create, Lifecycle.Update)
-  secrets: ServicePrincipalDatastoreSecrets | null;
+  secrets: ServicePrincipalDatastoreSecrets;
 
   /**
    * [Required] ID of the tenant to which the service principal belongs.
@@ -14960,7 +14946,7 @@ model TextClassification extends AutoMLVertical {
   ...NlpVertical;
 
   /**
-   * Primary metric for Text-Classification task.
+   * Primary metrics for classification tasks.
    */
   primaryMetric?: ClassificationPrimaryMetrics = ClassificationPrimaryMetrics.Accuracy;
 
@@ -15493,20 +15479,24 @@ model WorkspaceConnectionOAuth2 {
   clientId?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   clientSecret?: string;
 
   /**
    * Required by GoogleAdWords connection category
    */
+  @secret
   developerToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   password?: string;
 
   /**
    * Required by GoogleBigQuery, GoogleAdWords, Hubspot, QuickBooks, Square, Xero, Zoho
    * where user needs to get RefreshToken offline
    */
+  @secret
   refreshToken?: string;
 
   /**
@@ -15642,9 +15632,6 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   marketplaceSubscriptionId?: string;
 
-  /**
-   * Anything
-   */
   metadata?: unknown;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
@@ -15660,9 +15647,6 @@ model ServerlessEndpointResourceProperties extends EndpointResourceProperties {
 
 #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
 model ServerlessEndpointInferenceEndpoint {
-  /**
-   * Dictionary of <string>
-   */
   #suppress "@azure-tools/typespec-azure-resource-manager/arm-no-record" "For backward compatibility"
   @visibility(Lifecycle.Read)
   headers?: Record<string>;
@@ -15702,6 +15686,7 @@ model WorkspaceConnectionServicePrincipal {
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   clientId?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
+  @secret
   clientSecret?: string;
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
   tenantId?: string;
@@ -15783,6 +15768,7 @@ model WorkspaceConnectionUsernamePassword {
   /**
    * Optional, required by connections like SalesForce for extra security in addition to UsernamePassword
    */
+  @secret
   securityToken?: string;
 
   #suppress "@azure-tools/typespec-azure-core/documentation-required" "For backward compatibility"
