@@ -43,7 +43,7 @@ input-file:
 
 These settings apply only when `--tag=package-2025-06-13-preview` is specified on the command lines.
 
-```yaml $(tag) == 'package-2025-02-01-preview'
+```yaml $(tag) == 'package-2025-06-13-preview'
 input-file:
   - Microsoft.EntraidGovernance/GuestGovernanceUsage/preview/2025-06-13-preview/openapi.json
 ```
