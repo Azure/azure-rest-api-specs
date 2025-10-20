@@ -15,8 +15,9 @@ namespace Microsoft.NetApp;
 /**
  * Bucket resource
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 @parentResource(Volume)
 model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
   ...ResourceNameParameter<
@@ -30,15 +31,17 @@ model Bucket is Azure.ResourceManager.ProxyResource<BucketProperties> {
 /**
  * List of volume bucket resources
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketList is Azure.Core.Page<Bucket>;
 
 /**
  * Bucket resource properties
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketProperties {
   /**
    * The volume path mounted inside the bucket. The default is the root path '/' if no value is provided when the bucket is created.
@@ -80,8 +83,9 @@ model BucketProperties {
 /**
  * File System user having access to volume data. For Unix, this is the user's uid and gid. For Windows, this is the user's username. Note that the Unix and Windows user details are mutually exclusive, meaning one or other must be supplied, but not both.
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model FileSystemUser {
   /**
    * The effective NFS User ID and Group ID when accessing the volume data.
@@ -97,8 +101,9 @@ model FileSystemUser {
 /**
  * The effective NFS User ID and Group ID when accessing the volume data.
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model NfsUser {
   /**
    * The NFS user's UID
@@ -114,8 +119,9 @@ model NfsUser {
 /**
  * The effective CIFS username when accessing the volume data.
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model CifsUser {
   /**
    * The CIFS user's username
@@ -126,8 +132,9 @@ model CifsUser {
 /**
  * Properties of the server managing the lifecycle of volume buckets
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketServerProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -168,8 +175,9 @@ model BucketServerProperties {
  * Bucket resource
  */
 #suppress "@azure-tools/typespec-azure-core/composition-over-inheritance" "For backward compatibility"
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
   /**
    * Bucket properties
@@ -180,8 +188,9 @@ model BucketPatch extends Azure.ResourceManager.CommonTypes.ProxyResource {
 /**
  * Bucket resource properties for a Patch operation
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketPatchProperties {
   /**
    * The volume path mounted inside the bucket.
@@ -213,8 +222,9 @@ model BucketPatchProperties {
 /**
  * Properties of the server managing the lifecycle of volume buckets
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketServerPatchProperties {
   /**
    * The host part of the bucket URL, resolving to the bucket IP address and allowed by the server certificate.
@@ -233,8 +243,9 @@ model BucketServerPatchProperties {
 /**
  * The bucket's Access and Secret key pair Expiry Time expressed as the number of days from now.
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketCredentialsExpiry {
   /**
    * The number of days from now until the newly generated Access and Secret key pair will expire.
@@ -246,8 +257,9 @@ model BucketCredentialsExpiry {
 /**
  * Bucket Access Key, Secret Key, and Expiry date and time of the key pair
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 model BucketGenerateCredentials {
   /**
    * The Access Key that is required along with the Secret Key to access the bucket.
@@ -276,8 +288,9 @@ model BucketGenerateCredentials {
  * "CredentialsExpired": Access and Secret key pair have expired.
  * "Active": The certificate has been installed and credentials are unexpired.
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 union CredentialsStatus {
   string,
 
@@ -300,8 +313,9 @@ union CredentialsStatus {
 /**
  * Access permissions for the bucket. Either ReadOnly or ReadWrite. The default is ReadOnly if no value is provided during bucket creation.
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 union BucketPermissions {
   string,
 
@@ -319,8 +333,9 @@ union BucketPermissions {
 /**
  * Access permissions for the bucket. Either ReadOnly or ReadWrite.
  */
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 union BucketPatchPermissions {
   string,
 
@@ -335,8 +350,9 @@ union BucketPatchPermissions {
   ReadWrite: "ReadWrite",
 }
 
-@removed(Versions.v2025_08_01)
 @added(Versions.v2025_07_01_preview)
+@removed(Versions.v2025_08_01)
+@added(Versions.v2025_08_01_preview)
 @armResourceOperations
 interface Buckets {
   /**
