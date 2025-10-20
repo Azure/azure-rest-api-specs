@@ -566,7 +566,7 @@
           {
             "name": "resourceScope",
             "in": "path",
-            "description": "The scope associated with reservation recommendation details operations. This includes '/subscriptions/{subscriptionId}/' for subscription scope, '/subscriptions/{subscriptionId}/resourceGroups/{resourceGroupName}' for resource group scope, /providers/Microsoft.Billing/billingAccounts/{billingAccountId}' for BillingAccount scope, and '/providers/Microsoft.Billing/billingAccounts/{billingAccountId}/billingProfiles/{billingProfileId}' for billingProfile scope",
+            "description": "The fully qualified Azure Resource manager identifier of the resource.",
             "required": true,
             "type": "string",
             "x-ms-skip-url-encoding": true
@@ -594,7 +594,8 @@
                   "value": "Shared"
                 }
               ]
-            }
+            },
+            "x-ms-client-name": "reservationScope"
           },
           {
             "name": "region",
